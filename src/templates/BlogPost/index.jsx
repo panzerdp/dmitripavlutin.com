@@ -3,6 +3,8 @@ import Helmet from 'react-helmet';
 import Link from 'gatsby-link';
 import get from 'lodash/get';
 
+import styles from './index.module.scss';
+
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark;
@@ -10,7 +12,7 @@ class BlogPostTemplate extends React.Component {
     const { previous, next } = this.props.pathContext;
 
     return (
-      <div>
+      <article>
         <Helmet title={`${post.frontmatter.title} | ${siteTitle}`} />
         <h1>{post.frontmatter.title}</h1>
         <p>{post.frontmatter.date}</p>
@@ -41,7 +43,7 @@ class BlogPostTemplate extends React.Component {
             </li>
           )}
         </ul>
-      </div>
+      </article>
     );
   }
 }
