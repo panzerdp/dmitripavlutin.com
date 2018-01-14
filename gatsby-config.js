@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: 'Dmitri Pavlutin Blog',
+    title: 'Dmitri Pavlutin: JavaScript and React thoughts',
     author: 'Dmitri Pavlutin',
-    description: 'Posts on JavaScript and React',
+    description: 'Posts by Dmitri Pavlutin about JavaScript and React',
     siteUrl: 'https://dmitripavlutin.com',
   },
   pathPrefix: '/',
