@@ -1,4 +1,21 @@
 .container {
+  display: flex;
+  flex-flow: column;
+}
+
+html, body, .container {
+  height: 100%;
+}
+
+:global {
+  #___gatsby {
+    height: 100%;
+  }
+}
+
+.main {
   max-width: 50rem;
-  margin: 5rem auto 0 auto;
+  margin: 0 auto;
+  flex: 1 0 auto;
+  padding: 1rem;
 }
