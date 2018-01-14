@@ -1,32 +1,25 @@
 import React from 'react';
-import Link from 'gatsby-link';
 import get from 'lodash/get';
 import Helmet from 'react-helmet';
+
+import ArticleExcerpt from '../components/ArticleExcerpt';
 
 class BlogIndex extends React.Component {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title');
-    const posts = get(this, 'props.data.allMarkdownRemark.edges');
-
     return (
       <div>
         <Helmet title={siteTitle} />
-        {posts.map(({ node }) => {
-          const title = get(node, 'frontmatter.title') || node.fields.slug;
-          return (
-            <div key={node.fields.slug}>
-              <h3>
-                <Link style={{ boxShadow: 'none' }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-              <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-            </div>
-          );
-        })}
+        {this.getArticleExcerpts()}
       </div>
     );
+  }
+
+  getArticleExcerpts() {
+    const posts = get(this, 'props.data.allMarkdownRemark.edges');
+    return posts.map(function({ node }) {
+      return <ArticleExcerpt key={node.fields.slug} node={node} />;
+    });
   }
 }
 

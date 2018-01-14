@@ -1,0 +1,11 @@
+.articleExcerpt {
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px #dae4ed, 0 5px 15px -5px rgba(0,0,0,.1);
+  padding: 2rem;
+  margin-top: 1.2rem;
+  background: #fff;  
+}
+
+.articleExcerpt:first-of-type {
+  margin: 0;
+}

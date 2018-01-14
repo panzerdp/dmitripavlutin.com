@@ -7,6 +7,10 @@ html, body, .container {
   height: 100%;
 }
 
+body {
+  background-color: #fafbfc;
+}
+
 :global {
   #___gatsby {
     height: 100%;
@@ -17,5 +21,5 @@ html, body, .container {
   max-width: 50rem;
   margin: 0 auto;
   flex: 1 0 auto;
-  padding: 1rem;
+  padding: 1.2rem;
 }
