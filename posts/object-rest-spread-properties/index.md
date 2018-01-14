@@ -77,6 +77,7 @@ Here comes the interesting part. *Object spread copies from the source **enumera
   <a target="_blank" href="https://repl.it/@panzerdp/DependentUnevenIberianmidwifetoad">Run demo</a>
   <div class="clear"></div>
 </div>
+
 ```javascript
 console.log({ ...person }; // => { name: 'Dave', surname: 'Bowman' }
 ```
@@ -575,6 +576,7 @@ Using object spread is fairly simple to fill the configuration object with defau
   <a target="_blank" href="https://repl.it/@panzerdp/FrankFirsthandBullfrog">Run demo</a>
   <div class="clear"></div>
 </div>
+
 ```javascript
 function multiline(str, config = {}) {
   const defaultConfig = {
@@ -659,6 +661,7 @@ What about changing the color to `black`, increase the width to `400` and add a 
   <a target="_blank" href="https://repl.it/@panzerdp/ElectricLinearMayfly">Run demo</a>
   <div class="clear"></div>
 </div>
+
 ```javascript
 const blackBox = {
   ...box,
@@ -693,6 +696,7 @@ When spreading properties an of `undefined`, `null` or a primitive value no prop
   <a target="_blank" href="https://repl.it/@panzerdp/ForcefulFeminineKissingbug">Run demo</a>
   <div class="clear"></div>
 </div>
+
 ```javascript
 const nothing = undefined;
 const missingObject = null;
@@ -717,6 +721,7 @@ This is what object rest properties does nicely:
   <a target="_blank" href="https://repl.it/@panzerdp/PrimaryRawHagfish">Run demo</a>
   <div class="clear"></div>
 </div>
+
 ```javascript
 const style = {
   width: 300,
