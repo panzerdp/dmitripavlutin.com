@@ -1,0 +1,25 @@
+.autor {
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px #dae4ed, 0 5px 15px -5px rgba(0,0,0,.1);
+  margin: 0 auto;
+  max-width: 45rem;
+  padding: 1.2rem;
+  width: 100%;
+}
+
+.specialist {
+  display: table;
+  box-sizing: border-box;
+}
+
+.picture {
+  float: left;
+  width: 8.2rem;
+}
+
+.software, .speciality {
+  padding-left: 10rem;
+  font-size: 1.5rem;
+  margin: 0rem;
+  color: #004c67;
+}
