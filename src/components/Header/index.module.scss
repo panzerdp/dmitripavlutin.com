@@ -1,22 +1,37 @@
-.autor {
-  box-shadow: inset 0 0 0 1px #dae4ed, 0 5px 15px -5px rgba(0,0,0,.1);
-  padding: 1.2rem;
+header {
+  position: fixed;
   width: 100%;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 0 1px #dae4ed, 0 5px 15px -5px rgba(0,0,0,.1);
+  background-color: white;
+  height: 5rem;
 }
 
-.specialist {
-  display: table;
-  box-sizing: border-box;
+.headerContent {
+  max-width: 55rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .picture {
   float: left;
-  width: 8.2rem;
+  width: 3.6rem;
+  border-radius: 3.6rem;
 }
 
-.software, .speciality {
-  padding-left: 10rem;
-  font-size: 1.5rem;
-  margin: 0rem;
+.name, .speciality {
+  padding-left: 1rem;
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.speciality {
+  font-size: 1rem;
   color: #004c67;
+  margin-top: -0.4rem;
 }
