@@ -1,6 +1,7 @@
 import React from 'react';
 import get from 'lodash/get';
 import Helmet from 'react-helmet';
+import Img from "gatsby-image";
 
 import ArticleExcerpt from '../components/ArticleExcerpt';
 

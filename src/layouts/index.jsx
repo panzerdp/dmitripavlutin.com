@@ -16,12 +16,27 @@ export default function Template({ children, data }) {
         <link href="//fonts.googleapis.com/css?family=Rosario:700|Crimson+Text:400,400i,600" rel="stylesheet" type="text/css" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
       </Helmet>
-      <Header />
+      <Header 
+        pictureResolutions={data.file.childImageSharp.resolutions}
+      />
       <main className={styles.main}>
         {children()}
       </main>
       <Footer />
     </div>
-
   );
 }
+
+export const query = graphql`
+  query GatsbyImageSampleQuery {
+    file(relativePath: { eq: "DmitriPavlutin.jpg" }) {
+      childImageSharp {
+        # Specify the image processing steps right in the query
+        # Makes it trivial to update as your page's design changes.
+        resolutions(width: 64, height: 64) {
+          ...GatsbyImageSharpResolutions
+        }
+      }
+    }
+  }
+`;
