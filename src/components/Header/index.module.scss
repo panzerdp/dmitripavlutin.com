@@ -1,10 +1,14 @@
 header {
-  position: fixed;
   width: 100%;
   box-sizing: border-box;
-  box-shadow: inset 0 0 0 1px #dae4ed, 0 5px 15px -5px rgba(0,0,0,.1);
   background-color: white;
   height: 5rem;
+  box-shadow: 0 0 0 1px #dae4ed, 0 5px 15px -5px rgba(0,0,0,.1);
+}
+
+.line {
+  flex: 1 0 1px;
+  width: 100%;
 }
 
 .headerContent {
@@ -13,6 +17,8 @@ header {
   display: flex;
   align-items: center;
   height: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
 
   &:hover {
     text-decoration: none;

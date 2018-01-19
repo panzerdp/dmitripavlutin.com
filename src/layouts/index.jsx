@@ -29,11 +29,11 @@ export default function Template({ children, data }) {
 
 export const query = graphql`
   query GatsbyImageSampleQuery {
-    file(relativePath: { eq: "DmitriPavlutin.jpg" }) {
+    file(relativePath: { eq: "profile-picture.jpg" }) {
       childImageSharp {
         # Specify the image processing steps right in the query
         # Makes it trivial to update as your page's design changes.
-        resolutions(width: 64, height: 64) {
+        resolutions(width: 64, height: 64, quality: 100) {
           ...GatsbyImageSharpResolutions
         }
       }
