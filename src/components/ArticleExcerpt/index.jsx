@@ -8,10 +8,11 @@ import styles from './index.module.scss';
 export default function ArticleExcerpt({ node }) {
   const slug = node.fields.slug;
   const title = get(node, 'frontmatter.title') || slug;
+  const resolutions = node.frontmatter.thumbnail.childImageSharp.resolutions;
   return (
     <article key={slug} className={styles.excerpt}>
       <Link to={slug} className={styles.thumbnailAnchor}>
-        <img src={node.frontmatter.thumbnail.childImageSharp.resize.src} className={styles.thumbnail} />
+        <img src={resolutions.src} srcSet={resolutions.srcSet} />
       </Link>
       <div className={styles.content} >
         <h4>
