@@ -9,7 +9,7 @@ import styles from './index.module.scss';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-export default function Template({ children }) {
+export default function Template({ children, data }) {
   return (
     <div className={styles.container}>
       <Helmet>
