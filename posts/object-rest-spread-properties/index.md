@@ -1,6 +1,7 @@
 ---
 title: An easy guide to object rest/spread properties in JavaScript
 date: "2018-01-03"
+thumbnail: "./future-car.jpg"
 ---
 
 Merging multiple JavaScript objects is a frequent task. Unfortunately JavaScript is sloppy at providing a convenient syntax to do the merge. At least until now.  

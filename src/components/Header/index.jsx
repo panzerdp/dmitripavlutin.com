@@ -9,16 +9,20 @@ export default function Header({ pictureResolutions }) {
   return (
     <header>
       <div className={styles.headerContent}>
-          <Link to="/">
-            <Img 
-              title="Profile picture"
-              resolutions={pictureResolutions} 
-              className={styles.picture} 
-            />
-          </Link>
-        <div>
+        <Link to="/">
+          <Img 
+            title="Profile picture"
+            resolutions={pictureResolutions} 
+            className={styles.picture} 
+          />
+        </Link>
+        <div class={styles.profileInfo}>
           <Link to="/" className={styles.name}>Dmitri Pavlutin</Link>
           <div className={styles.speciality}>JavaScript &amp; React developer</div>
+        </div>
+        <div className={styles.links}>
+          <Link to="/all-posts/">All posts</Link>
+          <Link to="/about/">About</Link>
         </div>
       </div>
     </header>
