@@ -6,17 +6,23 @@ import Img from 'gatsby-image';
 import styles from './index.module.scss';
 
 export default function ArticleExcerpt({ node }) {
-  const title = get(node, 'frontmatter.title') || node.fields.slug;
+  const slug = node.fields.slug;
+  const title = get(node, 'frontmatter.title') || slug;
   return (
-    <article key={node.fields.slug} className={styles.excerpt}>
-      <img src={node.frontmatter.thumbnail.childImageSharp.resize.src} className={styles.thumbnail} />
+    <article key={slug} className={styles.excerpt}>
+      <Link to={slug} className={styles.thumbnailAnchor}>
+        <img src={node.frontmatter.thumbnail.childImageSharp.resize.src} className={styles.thumbnail} />
+      </Link>
       <div className={styles.content} >
         <h4>
-          <Link to={node.fields.slug}>
+          <Link to={slug}>
             {title}
           </Link>
         </h4>
-        <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+        <p>
+          <span dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+          &nbsp; <Link to={slug}>Continue reading</Link>
+        </p>
         <div className={styles.date}>
           <small>{node.frontmatter.date}</small>
         </div>
