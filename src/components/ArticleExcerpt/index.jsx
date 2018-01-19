@@ -16,8 +16,10 @@ export default function ArticleExcerpt({ node }) {
             {title}
           </Link>
         </h4>
-        <small>{node.frontmatter.date}</small>
         <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+        <div className={styles.date}>
+          <small>{node.frontmatter.date}</small>
+        </div>
       </div>
     </article>
   );

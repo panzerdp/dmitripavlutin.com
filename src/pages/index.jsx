@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import get from 'lodash/get';
 import Helmet from 'react-helmet';
 import Img from "gatsby-image";
@@ -9,10 +9,10 @@ class BlogIndex extends React.Component {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title');
     return (
-      <div>
+      <Fragment>
         <Helmet title={siteTitle} />
         {this.getArticleExcerpts()}
-      </div>
+      </Fragment>
     );
   }
 
@@ -36,7 +36,7 @@ export const pageQuery = graphql`
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
-          excerpt
+          excerpt(pruneLength: 200)
           fields {
             slug
           }
@@ -45,7 +45,7 @@ export const pageQuery = graphql`
             title
             thumbnail {
               childImageSharp {
-                resize(width: 800, height: 300) {
+                resize(width: 800, height: 300, quality: 90) {
                   src
                 }
               }
