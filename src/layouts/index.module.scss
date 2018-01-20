@@ -1,3 +1,48 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #fff;
+  font-size: 1.35rem;
+  line-height: 1.4;
+  font-family: Crimson Text, serif;
+  font-weight: 400;
+  color: #373D3F; // Raven
+}
+
+code {
+  font-size: 1.15rem;
+}
+
+pre {
+  overflow: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Rosario, sans-serif;
+  color: #131515; // Jet
+}
+
+:global {
+  #___gatsby {
+    height: 100%;
+  }
+}
+
+a {
+  color: #33805b;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: #33805b;
+  }
+}
+
 .main {
   max-width: 45rem;
   margin: 0 auto;

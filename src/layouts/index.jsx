@@ -3,7 +3,6 @@ import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
 
 import 'normalize.css/normalize.css';
-import './global.scss';
 import styles from './index.module.scss';
 
 import Header from '../components/Header';
