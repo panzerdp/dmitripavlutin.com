@@ -16,7 +16,7 @@ export default function Header({ pictureResolutions }) {
             className={styles.picture} 
           />
         </Link>
-        <div class={styles.profileInfo}>
+        <div className={styles.profileInfo}>
           <Link to="/" className={styles.name}>Dmitri Pavlutin</Link>
           <div className={styles.speciality}>JavaScript &amp; React developer</div>
         </div>

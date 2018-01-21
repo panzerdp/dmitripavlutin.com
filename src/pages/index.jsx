@@ -45,8 +45,8 @@ export const pageQuery = graphql`
             title
             thumbnail {
               childImageSharp {
-                resolutions(width: 800, height: 300, quality: 90) {
-                  ...GatsbyImageSharpResolutions
+                sizes(maxWidth: 800, maxHeight: 300, quality: 90) {
+                  ...GatsbyImageSharpSizes
                 }
               }
             }
