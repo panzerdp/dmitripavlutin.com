@@ -11,3 +11,9 @@ code[class*="language-"], pre[class*="language-"] {
 pre code {
   font-weight: normal;
 }
+
+:global {
+  .token.property, .token.tag, .token.constant, .token.symbol, .token.deleted {
+    color: #fc929e;
+  }
+}

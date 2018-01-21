@@ -6,7 +6,7 @@ import Img from 'gatsby-image';
 import styles from './index.module.scss';
 
 export default function ArticleExcerpt({ node }) {
-  const slug = node.fields.slug;
+  const slug = node.frontmatter.slug;
   const title = get(node, 'frontmatter.title') || slug;
   const sizes = node.frontmatter.thumbnail.childImageSharp.sizes;
   return (

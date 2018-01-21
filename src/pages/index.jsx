@@ -19,7 +19,7 @@ class BlogIndex extends React.Component {
   getArticleExcerpts() {
     const posts = get(this, 'props.data.allMarkdownRemark.edges');
     return posts.map(function({ node }) {
-      return <ArticleExcerpt key={node.fields.slug} node={node} />;
+      return <ArticleExcerpt key={node.frontmatter.slug} node={node} />;
     });
   }
 }
@@ -37,12 +37,10 @@ export const pageQuery = graphql`
       edges {
         node {
           excerpt(pruneLength: 200)
-          fields {
-            slug
-          }
           frontmatter {
             date(formatString: "DD MMMM, YYYY")
             title
+            slug
             thumbnail {
               childImageSharp {
                 sizes(maxWidth: 800, maxHeight: 300, quality: 90) {

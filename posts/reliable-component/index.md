@@ -2,6 +2,7 @@
 title: 7 architectural attributes of a reliable React component
 date: "2017-09-26"
 thumbnail: "./temple.jpg"
+slug: 7-architectural-attributes-of-a-reliable-react-component
 ---
 
 I like how React embraces component-based architecture. You can compose complex user interfaces from smaller pieces, take advantage of components reusability and abstracted DOM manipulations.  
@@ -384,7 +385,7 @@ Now `<PersistentForm>` conforms to SRP. Its only reason to change is the form fi
 
 The responsibility of querying and saving to local storage goes to `withPersistence()` HOC: 
 
-```javascript
+```jsx
 function withPersistence(storageKey, storage) {
   return function(WrappedComponent) {
     return class PersistentComponent extends Component {

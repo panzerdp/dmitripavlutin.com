@@ -2,6 +2,7 @@
 title: An easy guide to object rest/spread properties in JavaScript
 date: "2018-01-03"
 thumbnail: "./future-car.jpg"
+slug: object-rest-spread-properties-javascript
 ---
 
 Merging multiple JavaScript objects is a frequent task. Unfortunately JavaScript is sloppy at providing a convenient syntax to do the merge. At least until now.  
@@ -9,6 +10,9 @@ Merging multiple JavaScript objects is a frequent task. Unfortunately JavaScript
 In ES5 your solution is `_.extend(target, [sources])` from Lodash (or any alternative), and ES2015 introduces `Object.assign(target, [sources])`. 
 
 Luckily [object spread syntax](https://github.com/tc39/proposal-object-rest-spread) (an ECMASript proposal at stage 3) is a step forward how to manipulate objects, providing a short and easy to follow syntax.  
+
+<!-- before -->
+[Try it on ramda](ramda://object-rest-spread/examples/0.extend.js)
 
 <div class="try-it-container">
   <a target="_blank" href="https://repl.it/@panzerdp/FearlessLovableUintagroundsquirrel">Run demo</a>

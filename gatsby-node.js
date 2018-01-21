@@ -15,11 +15,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
               edges {
                 node {
-                  fields {
-                    slug
-                  }
                   frontmatter {
                     title
+                    slug
                   }
                 }
               }
@@ -40,10 +38,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           const next = index === 0 ? false : posts[index - 1].node;
 
           createPage({
-            path: post.node.fields.slug,
+            path: post.node.frontmatter.slug,
             component: blogPost,
             context: {
-              slug: post.node.fields.slug,
+              slug: post.node.frontmatter.slug,
               previous,
               next,
             },
@@ -52,17 +50,4 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
       })
     )
   })
-}
-
-exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
-  const { createNodeField } = boundActionCreators
-
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
-    })
-  }
 }
