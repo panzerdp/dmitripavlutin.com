@@ -5,10 +5,15 @@ import Img from 'gatsby-image';
 
 import styles from './index.module.scss';
 
+import Tag from '../Tag';
+
 export default function ArticleExcerpt({ node }) {
   const slug = node.frontmatter.slug;
   const title = get(node, 'frontmatter.title') || slug;
   const sizes = node.frontmatter.thumbnail.childImageSharp.sizes;
+  const tags = node.frontmatter.tags.map(function(tagName) {
+    return <Tag name={tagName} />;
+  });
   return (
     <article key={slug} className={styles.excerpt}>
       <Link to={slug} className={styles.thumbnailAnchor}>
@@ -25,6 +30,7 @@ export default function ArticleExcerpt({ node }) {
           &nbsp; <Link to={slug}>Continue reading</Link>
         </p>
         <div className={styles.date}>
+          <div className={styles.tags}>{tags}</div>
           <small>{node.frontmatter.date}</small>
         </div>
       </div>

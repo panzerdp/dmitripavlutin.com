@@ -3,6 +3,7 @@ title: 7 architectural attributes of a reliable React component
 date: "2017-09-26"
 thumbnail: "./temple.jpg"
 slug: 7-architectural-attributes-of-a-reliable-react-component
+tags: ['react', 'component', 'architecture']
 ---
 
 I like how React embraces component-based architecture. You can compose complex user interfaces from smaller pieces, take advantage of components reusability and abstracted DOM manipulations.  

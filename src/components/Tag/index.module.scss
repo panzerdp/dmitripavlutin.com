@@ -1,0 +1,15 @@
+.tag {
+  font-size: 1.2rem;
+  float: left;
+  margin-right: 0.5rem;
+  background-color: #e7eef3;
+  height: 2rem;
+  border-radius: 1rem;
+  padding: 0 0.8rem;
+  color: #4e7aa1;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
