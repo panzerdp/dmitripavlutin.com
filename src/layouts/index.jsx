@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
-
 import 'normalize.css/normalize.css';
+
 import styles from './index.module.scss';
 
 import Header from '../components/Header';

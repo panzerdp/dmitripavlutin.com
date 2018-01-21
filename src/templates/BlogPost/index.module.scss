@@ -1,0 +1,13 @@
+code {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+code[class*="language-"], pre[class*="language-"] {
+  line-height: 1.3;
+  font-size: 1rem;
+}
+
+pre code {
+  font-weight: normal;
+}
