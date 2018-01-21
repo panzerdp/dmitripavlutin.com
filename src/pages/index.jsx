@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import get from 'lodash/get';
 import Helmet from 'react-helmet';
-import Img from "gatsby-image";
 
 import ArticleExcerpt from '../components/ArticleExcerpt';
 
@@ -43,7 +42,7 @@ export const pageQuery = graphql`
             slug
             thumbnail {
               childImageSharp {
-                sizes(maxWidth: 800, maxHeight: 300, quality: 90) {
+                sizes(maxWidth: 720, maxHeight: 270, quality: 90) {
                   ...GatsbyImageSharpSizes
                 }
               }
