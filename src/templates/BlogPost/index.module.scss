@@ -1,3 +1,7 @@
+.date {
+  font-style: italic;
+}
+
 code {
   font-size: 1rem;
   font-weight: bold;
@@ -15,5 +19,21 @@ pre code {
 :global {
   .token.property, .token.tag, .token.constant, .token.symbol, .token.deleted {
     color: #fc929e;
+  }
+
+  // Compatibility with old style of posts
+  .try-it-container {
+    a {
+      float: right;
+      font-size: 1rem;
+      line-height: 1.0;
+
+      &::before {
+        content: 	'\25b6 ';
+      }
+    }
+    .clear {
+      clear: both;
+    }
   }
 }

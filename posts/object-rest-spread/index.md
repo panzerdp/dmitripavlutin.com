@@ -11,9 +11,6 @@ In ES5 your solution is `_.extend(target, [sources])` from Lodash (or any altern
 
 Luckily [object spread syntax](https://github.com/tc39/proposal-object-rest-spread) (an ECMASript proposal at stage 3) is a step forward how to manipulate objects, providing a short and easy to follow syntax.  
 
-<!-- before -->
-[Try it on ramda](ramda://object-rest-spread/examples/0.extend.js)
-
 <div class="try-it-container">
   <a target="_blank" href="https://repl.it/@panzerdp/FearlessLovableUintagroundsquirrel">Run demo</a>
   <div class="clear"></div>
@@ -38,7 +35,7 @@ This article guides through object spread and rest syntax. Including how object 
 
 What follows is a short recap on enumerable properties, and how to distinguish own from inherited properties. These are necessary basics to understand how object spread and rest works.  
 
-### 1. Enumberable and own properties
+## 1. Enumberable and own properties
 
 An object in JavaScript is an association between keys and values.  
 
@@ -55,7 +52,7 @@ const person = {
 
 `person` object describes a person's name and surname.  
 
-#### 1.1 Enumerable properties
+### 1.1 Enumerable properties
 
 A property has several attributes to describe the value, also writable, enumerable and configurable states. See [Object properties in JavaScript](http://2ality.com/2012/10/javascript-properties.html) for more details.  
 
@@ -84,7 +81,7 @@ Here comes the interesting part. *Object spread copies from the source **enumera
 </div>
 
 ```javascript
-console.log({ ...person }; // => { name: 'Dave', surname: 'Bowman' }
+console.log({ ...person };// => { name: 'Dave', surname: 'Bowman' }
 ```
 
 Now let's create a non-enumerable property `.age` on `person` object. Then see how spread behaves:   
