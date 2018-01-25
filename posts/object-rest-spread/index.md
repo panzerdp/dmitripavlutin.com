@@ -4,6 +4,7 @@ date: "2018-01-03"
 thumbnail: "./future-car.jpg"
 slug: object-rest-spread-properties-javascript
 tags: ["javascript", "spread properties", "rest properties"]
+draft: false
 ---
 
 Merging multiple JavaScript objects is a frequent task. Unfortunately JavaScript is sloppy at providing a convenient syntax to do the merge. At least until now.  

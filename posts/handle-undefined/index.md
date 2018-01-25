@@ -4,6 +4,7 @@ date: "2017-04-15"
 thumbnail: "./blade-runner-rachel.png"
 slug: 7-tips-to-handle-undefined-in-javascript
 tags: ["javascript", "undefined"]
+draft: false
 ---
 
 When I started to learn JavaScript about eight years ago, a bizarre situation for me was the existence of both `undefined` and `null` that represent empty values. What is the clear difference between them? They both seem to define empty values, and moreover the comparison `null == undefined` evaluates to `true`.  
