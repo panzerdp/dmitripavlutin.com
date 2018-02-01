@@ -11,8 +11,8 @@ export default function ArticleExcerpt({ node }) {
   const slug = node.frontmatter.slug;
   const title = get(node, 'frontmatter.title') || slug;
   const sizes = node.frontmatter.thumbnail.childImageSharp.sizes;
-  const tags = node.frontmatter.tags.map(function(tagName) {
-    return <Tag name={tagName} />;
+  const tags = node.frontmatter.tags.map(function(tagName, index) {
+    return <Tag name={tagName} key={index} />;
   });
   return (
     <article key={slug} className={styles.excerpt}>
