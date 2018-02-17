@@ -21,8 +21,8 @@ export default function Header({ pictureResolutions }) {
           <div className={styles.speciality}>JavaScript &amp; React developer</div>
         </div>
         <div className={styles.links}>
-          <Link to="/all-posts/">All posts</Link>
-          <Link to="/about/">About</Link>
+            <Link to="/all-posts/">All posts</Link>
+            <Link to="/about/">About</Link>
         </div>
       </div>
     </header>
