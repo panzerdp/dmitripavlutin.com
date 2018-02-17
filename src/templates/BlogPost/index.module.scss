@@ -3,7 +3,12 @@
 }
 
 .postCover {
-  margin-top: 2rem;
+  margin: 90px 0;
+  transform: scale(1.5);
+
+  img {
+    border-radius: 4px;
+  }
 }
 
 code {
@@ -44,5 +49,12 @@ pre code {
     .clear {
       clear: both;
     }
+  }
+}
+
+@media (max-width: 1080px) {
+  .postCover {
+    margin: 1rem 0;
+    transform: none;
   }
 }
