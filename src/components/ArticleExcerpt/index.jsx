@@ -25,10 +25,10 @@ export default function ArticleExcerpt({ node }) {
             {title}
           </Link>
         </h4>
-        <p>
+        <div>
           <span dangerouslySetInnerHTML={{ __html: node.excerpt }} />
           &nbsp; <Link to={slug}>Continue reading</Link>
-        </p>
+        </div>
         <div className={styles.date}>
           <div className={styles.tags}>{tags}</div>
           <small>{node.frontmatter.date}</small>
