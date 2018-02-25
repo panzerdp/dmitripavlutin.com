@@ -12,7 +12,7 @@ export default function Template({ children, data }) {
   return (
     <div className={styles.container}>
       <Helmet>
-        <link href="//fonts.googleapis.com/css?family=Open+Sans:700|EB+Garamond:400,400i,600,700" rel="stylesheet" type="text/css" />
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:700|EB+Garamond:400,400i,600,700|Roboto+Mono:400" rel="stylesheet" type="text/css" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
       </Helmet>
       <Header
