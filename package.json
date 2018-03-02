@@ -18,6 +18,7 @@
     "gatsby-plugin-react-next": "1.0.9",
     "gatsby-plugin-sass": "1.0.17",
     "gatsby-plugin-sharp": "1.6.30",
+    "gatsby-remark-autolink-headers": "1.4.13",
     "gatsby-remark-code-repls": "1.0.9",
     "gatsby-remark-copy-linked-files": "1.5.27",
     "gatsby-remark-images": "1.5.46",

@@ -46,7 +46,8 @@ module.exports = {
               html: '',
               target: '_blank',
             },
-          }
+          },
+          'gatsby-remark-autolink-headers'
         ],
       },
     },
