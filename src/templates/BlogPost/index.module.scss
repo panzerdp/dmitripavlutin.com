@@ -29,6 +29,28 @@ code[class*="language-"], pre[class*="language-"] {
   }
 }
 
+blockquote {
+  background-position: left center;
+  background-image: url('/column.svg');
+  background-repeat: no-repeat;
+  background-size: 3rem;
+  margin: 0;
+  padding: 0.5rem;
+  padding-left: 4rem;
+  // background-color: rgba(55, 61, 63, 0.05);
+  border-radius: 3px;
+  
+  p {
+    quotes: "“" "”" "‘" "’";
+  }
+  p:before {
+    content: open-quote;
+  }
+  p:after {
+    content: close-quote;
+  }
+}
+
 :global {
   .token.function {
     color: #883f44;
