@@ -13,7 +13,8 @@ Component-based development is productive: a complex system is built from specia
 
 Despite the application complexity, hurry to meet the deadlines and unexpectedly changing requirements, you must constantly walk on *the thin line of architectural correctness*. Make your components decoupled, focused on a single task, well tested.  
 
-![The thin line of correctness](./images/work-life-balance.jpg)
+[[size34]]
+| ![The thin line of correctness](./images/work-life-balance.jpg)
 
 Unfortunately, it's tempting to follow the wrong path: write big components with many responsibilities, tightly couple components, forget about unit tests. These increase [technical debt](https://www.nczonline.net/blog/2012/02/22/understanding-technical-debt/), making progressively hard to modify existing or create new functionality.  
 
@@ -108,7 +109,8 @@ Such naive structuring is easy to code at the beginning. Difficulties will appea
 
 A component that implements simultaneously multiple responsibilities has *many reasons to change*. Now emerges the main problem: changing the component for one reason *unintentionally* influences how other responsibilities are implemented by the same component.  
 
-![The pitfall of multiple responsibilities](./images/multiple-responsibilities.jpg)
+[[size12]]
+| ![The pitfall of multiple responsibilities](./images/multiple-responsibilities.jpg)
 
 Such design is fragile. Unintentional side effects of are *hard to predict and control*.  
 
@@ -462,7 +464,8 @@ Based on the degree of components dependence, 2 coupling types are distinguishab
 
 Loose coupling is the goal when designing application's structure and the relationship between components.  
 
-![Tightly coupled application, low cohesion and non-encapsulated components](./images/loosely-coupled.png)
+[[size34]]
+| ![Tightly coupled application, low cohesion and non-encapsulated components](./images/loosely-coupled.png)
 
 Loose coupling leads to the following benefits:  
 
@@ -473,7 +476,8 @@ Loose coupling leads to the following benefits:
 
 Contrary, a tightly coupled system looses the benefits described above. The main drawback is the difficulty to modify a component that is highly dependent on other components. Even a single modification might lead to a cascade of  dependency *echo* modifications.  
 
-![Tightly coupled application, low cohesion and non-encapsulated components](./images/tighly-coupled.png)
+[[size34]]
+| ![Tightly coupled application, low cohesion and non-encapsulated components](./images/tighly-coupled.png)
 
 **Encapsulation**, or **Information Hiding**, is a fundamental principle of how to design components, and is the key to loose coupling.  
 
@@ -658,7 +662,8 @@ Composition is a way to combine components to create a bigger (composed) compone
 
 Fortunately, composition is easy to understand. Take a set of small pieces, combine them, and create a bigger thing.  
 
-![Composable React components](./images/composable.jpg)
+[[size34]]
+| ![Composable React components](./images/composable.jpg)
 
 Let's look at a common frontend application composition pattern. The application is composed of a header at the top, footer at the bottom, sidebar on the left and payload content in the middle:  
 
@@ -899,7 +904,8 @@ class InputField extends Component {
 
 Impure code is a necessary evil. Most of the applications require global state, network requests, local storage and alike. What you can do is *isolate impure code from pure*, a.k.a. apply purification on your components.  
 
-![React components purification](./images/purification.png)
+[[size34]]
+| ![React components purification](./images/purification.png)
 
 Isolated impure code explicitly shows it has side effects, or rely on global state. Being in isolation, impure code has less unpredictability effect on the rest of the system.  
 
@@ -1266,7 +1272,8 @@ A component is hard to test because it has a lot of props, dependencies, require
 
 When the component has *weak architectural design*, it becomes *untestable*. When the component is untestable, you simply skip writing unit tests: as result it remains *untested*.  
 
-![React components testability chain](./images/testability.png)
+[[size34]]
+| ![React components testability chain](./images/testability.png)
 
 In conclusion, the reason why many applications are untested is incorrectly designed components. Even if *you want* to test such an application, *you can't*.  
 
@@ -1460,7 +1467,8 @@ Don't explain yourself with comments. Write code that is self-explanatory and se
 
 I distinguish 4 expressiveness stairs of a component. The lower you move on the stairs, the more effort you need to understand the component.  
 
-![Expressiveness stairs of components naming](./images/expressiveness.png)
+[[size34]]
+| ![Expressiveness stairs of components naming](./images/expressiveness.png)
 
 You can understand what the component does from:  
 
@@ -1500,7 +1508,9 @@ Sometimes it's hardly possible to create the right components structure at the f
 
 Finding the right organization is a series of trials and reviews. The more complex  a component is, the more often it requires verification and refactoring.  
 
-![Continuous improvement of components](./images/improvement.png)
+<div class="size-3-4">
+  ![Continuous improvement of components](./images/improvement.png)
+</div>
 
 *Does the component implement a single responsibility, is it well encapsulated, is it enough tested?* If you can't answer a certain *yes*, determine the weak part (by comparing against presented above 7 attributes) and refactor the component.  
 

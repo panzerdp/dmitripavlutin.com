@@ -22,8 +22,8 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 800,
-              linkImagesToOriginal: true,
+              maxWidth: 740,
+              linkImagesToOriginal: false,
               sizeByPixelDensity: false
             },
           },
@@ -47,7 +47,16 @@ module.exports = {
               target: '_blank',
             },
           },
-          'gatsby-remark-autolink-headers'
+          'gatsby-remark-autolink-headers',
+          {
+            resolve: "gatsby-remark-custom-blocks",
+            options: {
+              blocks: {
+                size34: "size34", // 3/4 of the image
+                size12: "size12"  // 1/2 of the image
+              },
+            },
+          }
         ],
       },
     },

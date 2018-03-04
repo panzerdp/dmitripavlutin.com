@@ -21,6 +21,7 @@
     "gatsby-remark-autolink-headers": "1.4.13",
     "gatsby-remark-code-repls": "1.0.10",
     "gatsby-remark-copy-linked-files": "1.5.30",
+    "gatsby-remark-custom-blocks": "1.0.4",
     "gatsby-remark-images": "1.5.54",
     "gatsby-remark-prismjs": "1.2.17",
     "gatsby-remark-responsive-iframe": "1.4.18",
