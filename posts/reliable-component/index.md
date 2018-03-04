@@ -308,7 +308,8 @@ The component `<PersistentForm>` consists of an input field and a button *Save t
 
 Let's look at the demo:
 
-<p style="min-height: 265px;" data-height="265" data-theme-id="light" data-slug-hash="NaGgVw" data-default-tab="result" data-user="dmitri_pavlutin" data-embed-version="2" data-pen-title="Persistent form" class="codepen">See the Pen <a href="https://codepen.io/dmitri_pavlutin/pen/NaGgVw/">Persistent form</a> by Dmitri Pavlutin (<a href="https://codepen.io/dmitri_pavlutin">@dmitri_pavlutin</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<iframe width="100%" height='265' scrolling='no' title='Persistent form' src='//codepen.io/dmitri_pavlutin/embed/NaGgVw/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/dmitri_pavlutin/pen/NaGgVw/'>Persistent form</a> by Dmitri Pavlutin (<a href='https://codepen.io/dmitri_pavlutin'>@dmitri_pavlutin</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 On input field change component's state gets updated inside `handleChange(event)` method. On button click the value is saved to local storage in `handleClick()`:  
 
@@ -535,7 +536,8 @@ Let's study such a situation.
 
 A simple application shows a number and 2 buttons. First button increases and second button decreases the number:  
 
-<p style="min-height: 265px;" data-height="265" data-theme-id="light" data-slug-hash="BdWRpq" data-default-tab="result" data-user="dmitri_pavlutin" data-embed-version="2" data-pen-title="Increase or decrease the number" class="codepen">See the Pen <a href="https://codepen.io/dmitri_pavlutin/pen/BdWRpq/">Increase or decrease the number</a> by Dmitri Pavlutin (<a href="https://codepen.io/dmitri_pavlutin">@dmitri_pavlutin</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<iframe width="100%" height='265' scrolling='no' title='Increase or decrease the number' src='//codepen.io/dmitri_pavlutin/embed/BdWRpq/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/dmitri_pavlutin/pen/BdWRpq/'>Increase or decrease the number</a> by Dmitri Pavlutin (<a href='https://codepen.io/dmitri_pavlutin'>@dmitri_pavlutin</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 The application consists of two components: `<App>` and `<Controls>`.
 
@@ -1508,9 +1510,8 @@ Sometimes it's hardly possible to create the right components structure at the f
 
 Finding the right organization is a series of trials and reviews. The more complex  a component is, the more often it requires verification and refactoring.  
 
-<div class="size-3-4">
-  ![Continuous improvement of components](./images/improvement.png)
-</div>
+[[size34]]
+| ![Continuous improvement of components](./images/improvement.png)
 
 *Does the component implement a single responsibility, is it well encapsulated, is it enough tested?* If you can't answer a certain *yes*, determine the weak part (by comparing against presented above 7 attributes) and refactor the component.  
 
@@ -1555,5 +1556,3 @@ Side effects like network requests or global variables make components depend on
 A quality, extensible and maintainable, thus successful application stands on shoulders of reliable components.  
 
 *What principles do you find useful when writing React components?*
-
-<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>

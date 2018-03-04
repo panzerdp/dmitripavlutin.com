@@ -21,6 +21,7 @@ code {
 code[class*="language-"], pre[class*="language-"] {
   border-radius: 3px;
   line-height: 1.2;
+  padding: 0;
   code {
     font-family: Roboto Mono, monospace;
   }
@@ -34,7 +35,7 @@ blockquote {
   background-position: left center;
   background-image: url('/column.svg');
   background-repeat: no-repeat;
-  background-size: 3rem;
+  background-size: 2.8rem;
   margin: 0;
   padding: 0.5rem;
   padding-left: 4rem;
