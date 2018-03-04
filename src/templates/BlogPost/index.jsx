@@ -1,16 +1,18 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import Link from 'gatsby-link';
-import get from 'lodash/get';
+import R from 'ramda';
 import Img from "gatsby-image";
 
 import 'prismjs/themes/prism.css';
 import styles from './index.module.scss';
 
+const getTitle = R.path(['data', 'site', 'siteMetadata', 'title']);
+
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark;
-    const siteTitle = get(this.props, 'data.site.siteMetadata.title');
+    const siteTitle = getTitle(this.props);
     const { previous, next } = this.props.pathContext;
     const sizes = post.frontmatter.thumbnail.childImageSharp.sizes;
     return (

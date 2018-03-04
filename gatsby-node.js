@@ -1,7 +1,7 @@
-const _ = require('lodash')
-const Promise = require('bluebird')
-const path = require('path')
-const { createFilePath } = require('gatsby-source-filesystem')
+const R = require('ramda');
+const Promise = require('bluebird');
+const path = require('path');
+const { createFilePath } = require('gatsby-source-filesystem');
 
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators
@@ -33,10 +33,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         // Create blog posts pages.
         const posts = result.data.allMarkdownRemark.edges;
 
-        _.each(posts, (post, index) => {
+        R.addIndex(R.forEach)((post, index) => {
           const previous = index === posts.length - 1 ? false : posts[index + 1].node;
           const next = index === 0 ? false : posts[index - 1].node;
-
           createPage({
             path: post.node.frontmatter.slug,
             component: blogPost,
@@ -46,8 +45,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               next,
             },
           })
-        })
+        }, posts);
       })
     )
   })
-}
+};

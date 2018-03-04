@@ -1,12 +1,15 @@
 import React, { Fragment } from 'react';
-import get from 'lodash/get';
+import R from 'ramda';
 import Helmet from 'react-helmet';
 
 import ArticleExcerpt from '../components/ArticleExcerpt';
 
+const  getPosts = R.path(['data', 'allMarkdownRemark', 'edges']);
+const getSiteTitle = R.path(['data', 'site', 'siteMetadata', 'title']);
+
 class BlogIndex extends React.Component {
   render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title');
+    const siteTitle = getSiteTitle(this.props);
     return (
       <Fragment>
         <Helmet title={siteTitle} />
@@ -16,7 +19,7 @@ class BlogIndex extends React.Component {
   }
 
   getArticleExcerpts() {
-    const posts = get(this, 'props.data.allMarkdownRemark.edges');
+    const posts = getPosts(this.props);
     return posts.map(function({ node }) {
       return <ArticleExcerpt key={node.frontmatter.slug} node={node} />;
     });

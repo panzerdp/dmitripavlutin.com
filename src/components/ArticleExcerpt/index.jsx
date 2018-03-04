@@ -1,15 +1,17 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import get from 'lodash/get';
+import R from 'ramda';
 import Img from 'gatsby-image';
 
 import styles from './index.module.scss';
 
 import Tag from '../Tag';
 
+const getTitle = R.flip(R.pathOr)(['frontmatter', 'title']);
+
 export default function ArticleExcerpt({ node }) {
   const slug = node.frontmatter.slug;
-  const title = get(node, 'frontmatter.title') || slug;
+  const title = getTitle(slug, node);
   const sizes = node.frontmatter.thumbnail.childImageSharp.sizes;
   const tags = node.frontmatter.tags.map(function(tagName, index) {
     return <Tag name={tagName} key={index} />;

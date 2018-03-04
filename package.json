@@ -29,8 +29,8 @@
     "gatsby-source-filesystem": "1.5.26",
     "gatsby-transformer-remark": "1.7.34",
     "gatsby-transformer-sharp": "1.6.22",
-    "lodash": "4.17.5",
     "normalize.css": "8.0.0",
+    "ramda": "0.25.0",
     "react-helmet": "5.2.0",
     "voca": "1.4.0"
   },
