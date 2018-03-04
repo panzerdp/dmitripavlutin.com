@@ -28,32 +28,32 @@ Luckily, reliable components have common characteristics. Let's study these 7 us
 
 Table of contents:  
 
-1. ["Single responsibility"](#1singleresponsibility)  
-  1.1 [The pitfall of multiple responsibilities](#11thepitfallofmultipleresponsibilities)  
-  1.2 [Case study: make component have one responsibility](#12casestudymakecomponenthaveoneresponsibility)  
-  1.3 [Case study: HOC favors single responsibility principle](#13casestudyhocfavorssingleresponsibilityprinciple)  
-2. ["Encapsulated"](#2encapsulated)  
-  2.1 [Information hiding](#21informationhiding)  
-  2.2 [Communication](#22communication)  
-  2.3 [Case study: encapsulation restoration](#23casestudyencapsulationrestoration)  
-3. ["Composable"](#3composable)  
-  3.1 [Composition benefits](#31compositionbenefits)  
-4. ["Reusable"](#4reusable)  
-  4.1 [Reuse across application](#41reuseacrossapplication)  
-  4.2 [Reuse of 3rd party libraries](#42reuseof3rdpartylibraries)  
-5. ["Pure" or "Almost-pure"](#5pureoralmostpure)
-  5.1 [Case study: purification from global variables](#51casestudypurificationfromglobalvariables)  
-  5.2 [Case study: purification from network requests](#52casestudypurificationfromnetworkrequests)  
-  5.3 [Transform almost-pure into pure](#53transformalmostpureintopure)  
-6. ["Testable" and "Tested"](#6testableandtested)  
-  6.1 [Case study: testable means well designed](#61casestudytestablemeanswelldesigned)
-7. ["Meaningful"](#7meaningful)  
-  7.1 [Component naming](#71componentnaming)  
-  7.2 [Case study: write self-explanatory code](#72casestudywriteselfexplanatorycode)  
-  7.3 [Expressiveness stairs](#73expressivenessstairs)  
-8. [Do continuous improvement](#8docontinuousimprovement)  
-9. [Reliability is important](#9reliabilityisimportant)  
-10. [Conclusion](#10conclusion)  
+1. ["Single responsibility"](#1-single-responsibility)  
+  1.1 [The pitfall of multiple responsibilities](#11-the-pitfall-of-multiple-responsibilities)  
+  1.2 [Case study: make component have one responsibility](#12-case-study-make-component-have-one-responsibility)  
+  1.3 [Case study: HOC favors single responsibility principle](#13-case-study-hoc-favors-single-responsibility-principle)  
+2. ["Encapsulated"](#2-encapsulated)  
+  2.1 [Information hiding](#21-information-hiding)  
+  2.2 [Communication](#22-communication)  
+  2.3 [Case study: encapsulation restoration](#23-case-study-encapsulation-restoration)  
+3. ["Composable"](#3-composable)  
+  3.1 [Composition benefits](#31-composition-benefits)  
+4. ["Reusable"](#4-reusable)  
+  4.1 [Reuse across application](#41-reuse-across-application)  
+  4.2 [Reuse of 3rd party libraries](#42-reuse-of-3rd-party-libraries)  
+5. ["Pure" or "Almost-pure"](#5-pure-or-almost-pure)  
+  5.1 [Case study: purification from global variables](#51-case-study-purification-from-global-variables)  
+  5.2 [Case study: purification from network requests](#52-case-study-purification-from-network-requests)  
+  5.3 [Transform almost-pure into pure](#53-transform-almost-pure-into-pure)  
+6. ["Testable" and "Tested"](#6-testable-and-tested)  
+  6.1 [Case study: testable means well designed](#61-case-study-testable-means-well-designed)  
+7. ["Meaningful"](#7-meaningful)  
+  7.1 [Component naming](#71-component-naming)  
+  7.2 [Case study: write self-explanatory code](#72-case-study-write-self-explanatory-code)  
+  7.3 [Expressiveness stairs](#73-expressiveness-stairs)  
+8. [Do continuous improvement](#8-do-continuous-improvement)  
+9. [Reliability is important](#9-reliability-is-important)  
+10. [Conclusion](#10-conclusion)  
 
 ##1. "Single responsibility"
 
@@ -669,7 +669,8 @@ Fortunately, composition is easy to understand. Take a set of small pieces, comb
 
 Let's look at a common frontend application composition pattern. The application is composed of a header at the top, footer at the bottom, sidebar on the left and payload content in the middle:  
 
-<p style="min-height: 412px;" data-height="412" data-theme-id="light" data-slug-hash="EvQJZx" data-default-tab="result" data-user="dmitri_pavlutin" data-embed-version="2" data-pen-title="The composition of a modern Frontend application" class="codepen">See the Pen <a href="https://codepen.io/dmitri_pavlutin/pen/EvQJZx/">The composition of a modern Frontend application</a> by Dmitri Pavlutin (<a href="https://codepen.io/dmitri_pavlutin">@dmitri_pavlutin</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<iframe width="100%" height='400' scrolling='no' title='The composition of a modern Frontend application' src='//codepen.io/dmitri_pavlutin/embed/EvQJZx/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/dmitri_pavlutin/pen/EvQJZx/'>The composition of a modern Frontend application</a> by Dmitri Pavlutin (<a href='https://codepen.io/dmitri_pavlutin'>@dmitri_pavlutin</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 The application skeleton demonstrates how well composition builds the application. Such organization is expressive and open for understanding.  
 

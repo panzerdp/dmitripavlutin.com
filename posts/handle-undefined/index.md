@@ -65,14 +65,14 @@ Let's detail the exploration of `undefined` and its effect on code safety.
 
 JavaScript has 6 primitive types: 
 
-* *Boolean*: `true` or `false`
-* *Number*: `1`, `6.7`, `0xFF`
-* *String*: `"Gorilla and banana"` 
-* *Symbol*: `Symbol("name")` (starting ES2015)
-* *Null*: `null`
-* *Undefined*: `undefined`.
+* Boolean: `true` or `false`
+* Number: `1`, `6.7`, `0xFF`
+* String: `"Gorilla and banana"` 
+* Symbol: `Symbol("name")` (starting ES2015)
+* Null: `null`
+* Undefined: `undefined`.
 
-And a separated *object type*: `{name: "Dmitri"}`, `["apple", "orange"]`.
+And a separated object type: `{name: "Dmitri"}`, `["apple", "orange"]`.
 
 From 6 primitive types `undefined` is a special value with its own type Undefined. According to [ECMAScript specification](https://www.ecma-international.org/ecma-262/7.0/#sec-undefined-value):
 
