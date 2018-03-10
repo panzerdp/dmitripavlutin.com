@@ -3,7 +3,9 @@ const Promise = require('bluebird');
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
 
-const blogPostComponentPath = path.resolve('./src/templates/BlogPost/index.jsx');
+const config = require('./gatsby-config');
+const postComponentPath = path.resolve('./src/templates/BlogPost/index.jsx');
+const pagesComponentPath = path.resolve('./src/pages/index.jsx');
 const query = `
 {
   allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
@@ -17,6 +19,7 @@ const query = `
     }
   }
 }`;
+const forEach = R.addIndex(R.forEach);
 
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators;
@@ -28,21 +31,23 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         return;
       }
       // Create blog posts pages.
-      const posts = result.data.allMarkdownRemark.edges;
-      R.addIndex(R.forEach)(R.partial(createPost, [createPage]))(posts);
+      const edges = result.data.allMarkdownRemark.edges;
+      createPagination(createPage, edges, '/page');
+      forEach(R.partial(createPost, [createPage]), edges);
     });
     resolve(queryResult);
   });
 };
 
-function createPost(createPage, post, index, posts) {
-  const previous = index === posts.length - 1 ? false : posts[index + 1].node;
-  const next = index === 0 ? false : posts[index - 1].node;
+function createPost(createPage, post, index, edges) {
+  const previous = index === edges.length - 1 ? false : edges[index + 1].node;
+  const next = index === 0 ? false : edges[index - 1].node;
+  const slug = post.node.frontmatter.slug;
   createPage({
-    path: post.node.frontmatter.slug,
-    component: blogPostComponentPath,
+    path: slug,
+    component: postComponentPath,
     context: {
-      slug: post.node.frontmatter.slug,
+      slug,
       previous,
       next,
     },
@@ -53,17 +58,14 @@ function createPost(createPage, post, index, posts) {
  * Create pagination for posts
  */
 function createPagination(createPage, edges, pathPrefix) {
-  const pageTemplate = path.resolve(`src/templates/page.js`);
-
-  const pageSize = 5;
-  const pagesSum = Math.ceil(edges.length / pageSize);
+  const pagesSum = Math.ceil(edges.length / config.siteMetadata.postsPerPage);
 
   for (let page = 1; page <= pagesSum; page++) {
     createPage({
       path: `${pathPrefix}/${page}`,
-      component: pageTemplate,
+      component: pagesComponentPath,
       context: {
-        posts: paginate(edges, pageSize, page).map(({ node }) => node),
+        posts: paginate(edges, config.siteMetadata.postsPerPage, page).map(({ node }) => node),
         page,
         pagesSum,
         prevPath: page - 1 > 0 ? `${pathPrefix}/${page - 1}` : null,

@@ -4,6 +4,7 @@ module.exports = {
     author: 'Dmitri Pavlutin',
     description: 'Posts by Dmitri Pavlutin about JavaScript and React',
     siteUrl: 'https://dmitripavlutin.com/',
+    postsPerPage: 2
   },
   pathPrefix: '/',
   plugins: [
