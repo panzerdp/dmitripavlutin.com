@@ -13,7 +13,6 @@ class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark;
     const siteTitle = getTitle(this.props);
-    const { previous, next } = this.props.pathContext;
     const sizes = post.frontmatter.thumbnail.childImageSharp.sizes;
     return (
       <article>
