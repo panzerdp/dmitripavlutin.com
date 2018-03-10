@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 
 import ArticleExcerpt from '../components/ArticleExcerpt';
 
-const  getPosts = R.path(['data', 'allMarkdownRemark', 'edges']);
+const getPosts = R.path(['data', 'allMarkdownRemark', 'edges']);
 const getSiteTitle = R.path(['data', 'site', 'siteMetadata', 'title']);
 
 class BlogIndex extends React.Component {
