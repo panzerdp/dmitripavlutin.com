@@ -1,15 +1,18 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import R from 'ramda';
 import Helmet from 'react-helmet';
 
-import ArticleExcerpt from '../components/ArticleExcerpt';
+import ArticleExcerpt from '../../components/ArticleExcerpt';
 
 const getPosts = R.path(['data', 'allMarkdownRemark', 'edges']);
 const getSiteTitle = R.path(['data', 'site', 'siteMetadata', 'title']);
+const getSlug = R.path(['node', 'frontmatter', 'slug']);
+const getNode = R.path(['node']);
 
-class BlogIndex extends React.Component {
+class Page extends Component {
   render() {
     const siteTitle = getSiteTitle(this.props);
+    console.log(this.props.pathContext);
     return (
       <Fragment>
         <Helmet title={siteTitle} />
@@ -19,14 +22,21 @@ class BlogIndex extends React.Component {
   }
 
   getArticleExcerpts() {
-    const posts = getPosts(this.props);
-    return posts.map(function({ node }) {
-      return <ArticleExcerpt key={node.frontmatter.slug} node={node} />;
-    });
+    const { pathContext: { slugs } } = this.props;
+    const containsSlug = R.partial(R.flip(R.contains), [slugs]);
+    return R.pipe(
+      getPosts,
+      R.filter(R.pipe(getSlug, containsSlug)),
+      R.map(this.edsgeToArticleExcerpt)
+    )(this.props);
+  }
+
+  edsgeToArticleExcerpt(edge) {
+    return <ArticleExcerpt key={getSlug(edge)} node={getNode(edge)} />;
   }
 }
 
-export default BlogIndex;
+export default Page;
 
 export const pageQuery = graphql`
   query IndexQuery {

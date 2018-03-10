@@ -29,7 +29,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
       }
       // Create blog posts pages.
       const edges = result.data.allMarkdownRemark.edges;
-      // createPaginationPages(createPage, '/page', edges);
+      createPaginationPages(createPage, '/page', edges);
       createPosts(createPage, edges);
     });
     resolve(queryResult);

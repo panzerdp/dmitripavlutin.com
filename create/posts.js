@@ -1,7 +1,7 @@
 const path = require('path');
 const R = require('ramda');
 
-const postComponentPath = path.resolve('./src/templates/BlogPost/index.jsx');
+const postComponentPath = path.resolve(__dirname, '../src/templates/BlogPost/index.jsx');
 
 module.exports = function createPosts(createPage, edges) {
   R.forEach(function (post) {

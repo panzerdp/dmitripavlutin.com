@@ -1,20 +1,19 @@
 const path = require('path');
+const R = require('ramda');
 
 const config = require('../gatsby-config');
-const pagesComponentPath = path.resolve('../src/pages/index.jsx');
+const pageComponentPath = path.resolve(__dirname, '../src/templates/Page/index.jsx');
 
-/**
- * Create pagination for posts
- */
-function createPaginationPages(createPage, edges, pathPrefix) {
+module.exports = function createPaginationPages(createPage, pathPrefix, edges) {
   const pagesSum = Math.ceil(edges.length / config.siteMetadata.postsPerPage);
 
   for (let page = 1; page <= pagesSum; page++) {
+    const path = page === 1 ? '/' : `${pathPrefix}/${page}`;
     createPage({
-      path: `${pathPrefix}/${page}`,
-      component: pagesComponentPath,
+      path,
+      component: pageComponentPath,
       context: {
-        posts: paginate(edges, config.siteMetadata.postsPerPage, page).map(({ node }) => node),
+        slugs: paginateToSlugs(config.siteMetadata.postsPerPage, page)(edges),
         page,
         pagesSum,
         prevPath: page - 1 > 0 ? `${pathPrefix}/${page - 1}` : null,
@@ -24,6 +23,9 @@ function createPaginationPages(createPage, edges, pathPrefix) {
   }
 }
 
-function paginate(array, page_size, page_number) {
-  return array.slice(0).slice((page_number - 1) * page_size, page_number * page_size);
+function paginateToSlugs(pageSize, pageNumber) {
+  return R.pipe(
+    R.slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
+    R.map(R.path(['node', 'frontmatter', 'slug']))
+  );
 }
