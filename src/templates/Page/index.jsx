@@ -8,28 +8,19 @@ const getPosts = R.path(['data', 'allMarkdownRemark', 'edges']);
 const getSiteTitle = R.path(['data', 'site', 'siteMetadata', 'title']);
 const getSlug = R.path(['node', 'frontmatter', 'slug']);
 const getNode = R.path(['node']);
+const toArticleExcerpts = R.pipe(
+  R.path(['data', 'allMarkdownRemark', 'edges']),
+  R.map(edge => <ArticleExcerpt key={getSlug(edge)} node={getNode(edge)} />)
+);
 
-class Page extends Component {
-  render() {
-    const siteTitle = getSiteTitle(this.props);
-    return (
-      <Fragment>
-        <Helmet title={siteTitle} />
-        {this.getArticleExcerpts()}
-      </Fragment>
-    );
-  }
-
-  getArticleExcerpts() {
-    return getPosts(this.props).map(this.edgeToArticleExcerpt);
-  }
-
-  edgeToArticleExcerpt(edge) {
-    return <ArticleExcerpt key={getSlug(edge)} node={getNode(edge)} />;
-  }
+export default function Page(props) {
+  return (
+    <Fragment>
+      <Helmet title={getSiteTitle(props)} />
+      {toArticleExcerpts(props)}
+    </Fragment>
+  );
 }
-
-export default Page;
 
 export const pageQuery = graphql`
   query IndexQuery($skip: Int, $limit: Int) {
