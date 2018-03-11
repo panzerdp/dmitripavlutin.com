@@ -9,7 +9,7 @@ import Paginator from '../../components/Paginator';
 const getSiteTitle = R.path(['data', 'site', 'siteMetadata', 'title']);
 const getSlug = R.path(['node', 'frontmatter', 'slug']);
 const getNode = R.path(['node']);
-const getPaginator = R.pipe(R.path(['pathContext']), R.pick(['page', 'pagesSum', 'pathPrefix']));
+const getPaginator = R.pipe(R.path(['pathContext']), R.pick(['currentPage', 'pagesSum', 'pathPrefix']));
 const toArticleExcerpts = R.pipe(
   R.path(['data', 'allMarkdownRemark', 'edges']),
   R.map(edge => <ArticleExcerpt key={getSlug(edge)} node={getNode(edge)} />)

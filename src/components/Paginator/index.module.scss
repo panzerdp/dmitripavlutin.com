@@ -1,3 +1,40 @@
 .paginator {
-  margin: 1rem auto;
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a, div {
+    font-size: 1.5rem;
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    margin: 0 0.3rem;
+  }
+
+  a:not(.nextPrev) {
+    background-color: white;
+    text-decoration: none;
+    border-radius: 2px;
+
+    &.selected {
+      color: white;
+      background-color: #33805b;
+    }
+
+    &:hover:not(.selected) {
+      color: white;
+      background-color: rgba(51, 128, 91, 0.5);
+    }
+  }
+
+  .nextPrev {
+    width: auto;
+    padding: 0 0.2rem;
+  }
+
+  div {
+    color: lightgray;
+  }
 }

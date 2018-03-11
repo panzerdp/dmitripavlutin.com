@@ -11,14 +11,14 @@ module.exports = function createPaginationPages(createPage, pathPrefix, edges) {
   const pageToPath = R.ifElse(R.equals(1), R.always('/'), R.pipe(R.toString, R.concat(pathPrefix)));
   R.pipe(
     R.range,
-    R.forEach(function(page) {
+    R.forEach(function(currentPage) {
       createPage({
-        path: pageToPath(page),
+        path: pageToPath(currentPage),
         component: pageComponentPath,
         context: {
-          skip: (page - 1) * postsPerPage,
+          skip: (currentPage - 1) * postsPerPage,
           limit: postsPerPage,
-          page,
+          currentPage,
           pagesSum,
           pathPrefix
         }

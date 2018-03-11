@@ -1,30 +1,76 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 import R from 'ramda';
 
 import styles from './index.module.scss';
 
-export default function Paginator({ pagesSum, page, pathPrefix }) {
-  const pageToPath = R.ifElse(R.equals(1), R.always('/'), R.pipe(R.toString, R.concat(pathPrefix)));
-  const links = R.pipe(
-    R.range,
-    R.map(function(pageIteration) {
-      return (
-        <Link 
-          to={pageToPath(pageIteration)}
-          key={pageIteration}
-        >
-          {pageIteration}
-        </Link>
-      );
-    })
-  )(1, pagesSum + 1);
-  return <div className={styles.paginator}>{links}</div>;
+export default class Paginator extends Component {
+  constructor(props) {
+    super(props);
+    this.mapPageToLink = this.mapPageToLink.bind(this);
+    this.toPrevLink = this.toPrevLink.bind(this);
+    this.toNextLink = this.toNextLink.bind(this);
+  }
+
+  render() {
+    const { pagesSum } = this.props;
+    const links = R.pipe(
+      R.range,
+      R.map(this.mapPageToLink),
+      R.prepend(this.toPrevLink()),
+      R.append(this.toNextLink())
+    )(1, pagesSum + 1);
+    return <div className={styles.paginator}>{links}</div>;
+  }
+
+  mapPageToLink(page) {
+    const { pagesSum, currentPage } = this.props;
+    return (
+      <Link 
+        to={this.pageToPath(page)}
+        key={page}
+        className={page === currentPage ? styles.selected : ''}
+      >
+        {page}
+      </Link>
+    );
+  }
+  
+  toPrevLink() {
+    const { currentPage } = this.props;
+    if (currentPage === 1) {
+      return <div key="prev" className={styles.nextPrev}>prev</div>;
+    }
+    return (
+      <Link to={this.pageToPath(currentPage - 1)} key="prev" className={styles.nextPrev}>
+        prev
+      </Link>
+    );
+  }
+  
+  toNextLink() {
+    const { pagesSum, currentPage } = this.props;
+    if (currentPage === pagesSum) {
+      return <div key="next" className={styles.nextPrev}>next</div>;
+    }
+    return (
+      <Link to={this.pageToPath(currentPage + 1)} key="next" className={styles.nextPrev}>
+        next
+      </Link>
+    );
+  }
+
+  pageToPath(page) {
+    if (page === 1) {
+      return '/';
+    }
+    return this.props.pathPrefix + page;
+  }
 }
 
 Paginator.propTypes = {
   pagesSum: PropTypes.number,
-  page: PropTypes.number,
-  pageToPath: PropTypes.func
+  currentPage: PropTypes.number,
+  pathPrefix: PropTypes.string
 };
