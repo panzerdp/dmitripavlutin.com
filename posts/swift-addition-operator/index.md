@@ -1,6 +1,6 @@
 ---
 title: "Make your Swift code expressive: addition operator use cases"
-date: "2016-12-14"
+date: "2016-11-16"
 thumbnail: "./images/cover.jpg"
 slug: make-your-swift-code-expressive-addition-operator-use-cases
 tags: ["swift"]
