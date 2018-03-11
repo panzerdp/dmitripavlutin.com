@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'gatsby-link';
+import Link, { withPrefix } from 'gatsby-link';
 import R from 'ramda';
 import Img from 'gatsby-image';
 
@@ -16,20 +16,21 @@ export default function ArticleExcerpt({ node }) {
   const tags = node.frontmatter.tags.map(function(tagName, index) {
     return <Tag name={tagName} key={index} />;
   });
+  const to = `/${slug}/`;
   return (
     <article key={slug} className={styles.excerpt}>
-      <Link to={slug} className={styles.thumbnailAnchor}>
+      <Link exact to={to} className={styles.thumbnailAnchor}>
         <Img sizes={sizes} />
       </Link>
       <div className={styles.content} >
         <h4>
-          <Link to={slug}>
+          <Link exact to={to}>
             {title}
           </Link>
         </h4>
         <div>
           <span dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-          &nbsp; <Link to={slug}>Continue reading</Link>
+          &nbsp; <Link exact to={to}>Continue reading</Link>
         </div>
         <div className={styles.date}>
           <div className={styles.tags}>{tags}</div>
