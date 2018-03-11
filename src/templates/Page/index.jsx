@@ -1,13 +1,15 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import R from 'ramda';
 import Helmet from 'react-helmet';
 
 import ArticleExcerpt from '../../components/ArticleExcerpt';
+import Paginator from '../../components/Paginator';
 
-const getPosts = R.path(['data', 'allMarkdownRemark', 'edges']);
 const getSiteTitle = R.path(['data', 'site', 'siteMetadata', 'title']);
 const getSlug = R.path(['node', 'frontmatter', 'slug']);
 const getNode = R.path(['node']);
+const getPaginator = R.pick(['page', 'pagesSum', 'pageToPath']);
 const toArticleExcerpts = R.pipe(
   R.path(['data', 'allMarkdownRemark', 'edges']),
   R.map(edge => <ArticleExcerpt key={getSlug(edge)} node={getNode(edge)} />)
@@ -18,9 +20,17 @@ export default function Page(props) {
     <Fragment>
       <Helmet title={getSiteTitle(props)} />
       {toArticleExcerpts(props)}
+      <Paginator {...getPaginator(props)} />
     </Fragment>
   );
 }
+
+Page.propTypes = {
+  data: PropTypes.object,
+  page: PropTypes.number,
+  pagesSum: PropTypes.number,
+  pageToPath: PropTypes.func
+};
 
 export const pageQuery = graphql`
   query IndexQuery($skip: Int, $limit: Int) {

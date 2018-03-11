@@ -8,20 +8,21 @@ const postsPerPage = config.siteMetadata.postsPerPage;
 
 module.exports = function createPaginationPages(createPage, pathPrefix, edges) {
   const pagesSum = Math.ceil(edges.length / postsPerPage);
-
-  for (let page = 1; page <= pagesSum; page++) {
-    const path = page === 1 ? '/' : `${pathPrefix}/${page}`;
-    createPage({
-      path,
-      component: pageComponentPath,
-      context: {
-        skip: (page - 1) * postsPerPage,
-        limit: postsPerPage,
-        page,
-        pagesSum,
-        prevPath: page - 1 > 0 ? `${pathPrefix}/${page - 1}` : null,
-        nextPath: page + 1 <= pagesSum ? `${pathPrefix}/${page + 1}` : null,
-      },
-    });
-  }
+  const pageToPath = R.ifElse(R.equals(1), R.always('/'), R.pipe(R.toString, R.concat(pathPrefix)));
+  R.pipe(
+    R.range,
+    R.forEach(function(page) {
+      createPage({
+        path: pageToPath(page),
+        component: pageComponentPath,
+        context: {
+          skip: (page - 1) * postsPerPage,
+          limit: postsPerPage,
+          page,
+          pagesSum,
+          pageToPath
+        }
+      });
+    })
+  )(1, pagesSum + 1);
 }
