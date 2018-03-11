@@ -20,7 +20,7 @@ module.exports = function createPaginationPages(createPage, pathPrefix, edges) {
           limit: postsPerPage,
           page,
           pagesSum,
-          pageToPath
+          pathPrefix
         }
       });
     })
