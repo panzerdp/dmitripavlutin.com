@@ -4,8 +4,10 @@ const R = require('ramda');
 const config = require('../gatsby-config');
 const pageComponentPath = path.resolve(__dirname, '../src/templates/Page/index.jsx');
 
+const postsPerPage = config.siteMetadata.postsPerPage;
+
 module.exports = function createPaginationPages(createPage, pathPrefix, edges) {
-  const pagesSum = Math.ceil(edges.length / config.siteMetadata.postsPerPage);
+  const pagesSum = Math.ceil(edges.length / postsPerPage);
 
   for (let page = 1; page <= pagesSum; page++) {
     const path = page === 1 ? '/' : `${pathPrefix}/${page}`;
@@ -13,7 +15,8 @@ module.exports = function createPaginationPages(createPage, pathPrefix, edges) {
       path,
       component: pageComponentPath,
       context: {
-        slugs: paginateToSlugs(config.siteMetadata.postsPerPage, page)(edges),
+        skip: (page - 1) * postsPerPage,
+        limit: postsPerPage,
         page,
         pagesSum,
         prevPath: page - 1 > 0 ? `${pathPrefix}/${page - 1}` : null,
@@ -21,11 +24,4 @@ module.exports = function createPaginationPages(createPage, pathPrefix, edges) {
       },
     });
   }
-}
-
-function paginateToSlugs(pageSize, pageNumber) {
-  return R.pipe(
-    R.slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
-    R.map(R.path(['node', 'frontmatter', 'slug']))
-  );
 }

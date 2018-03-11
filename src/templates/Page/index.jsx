@@ -12,7 +12,6 @@ const getNode = R.path(['node']);
 class Page extends Component {
   render() {
     const siteTitle = getSiteTitle(this.props);
-    console.log(this.props.pathContext);
     return (
       <Fragment>
         <Helmet title={siteTitle} />
@@ -22,16 +21,10 @@ class Page extends Component {
   }
 
   getArticleExcerpts() {
-    const { pathContext: { slugs } } = this.props;
-    const containsSlug = R.partial(R.flip(R.contains), [slugs]);
-    return R.pipe(
-      getPosts,
-      R.filter(R.pipe(getSlug, containsSlug)),
-      R.map(this.edsgeToArticleExcerpt)
-    )(this.props);
+    return getPosts(this.props).map(this.edgeToArticleExcerpt);
   }
 
-  edsgeToArticleExcerpt(edge) {
+  edgeToArticleExcerpt(edge) {
     return <ArticleExcerpt key={getSlug(edge)} node={getNode(edge)} />;
   }
 }
@@ -39,13 +32,13 @@ class Page extends Component {
 export default Page;
 
 export const pageQuery = graphql`
-  query IndexQuery {
+  query IndexQuery($skip: Int, $limit: Int) {
     site {
       siteMetadata {
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, skip: $skip, limit: $limit) {
       edges {
         node {
           excerpt(pruneLength: 200)
