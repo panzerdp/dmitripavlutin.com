@@ -18,14 +18,14 @@
     text-decoration: none;
     border-radius: 2px;
 
+    &:hover {
+      color: white;
+      background-color: rgba(#33805b, 0.5);
+    }
+
     &.selected {
       color: white;
       background-color: #33805b;
-    }
-
-    &:hover:not(.selected) {
-      color: white;
-      background-color: rgba(51, 128, 91, 0.5);
     }
   }
 
