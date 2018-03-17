@@ -1,8 +1,8 @@
 ---
-title: Useful suggestions on React server-side rendering
+title: Useful techniques to facilitate React server-side rendering
 date: "2018-03-17"
 thumbnail: "./images/cover.jpg"
-slug: making-react-application-server-side-renderable
+slug: useful-techniques-react-server-side-rendering
 tags: ['react', 'server-side rendering']
 draft: false
 ---
