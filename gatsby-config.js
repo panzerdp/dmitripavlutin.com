@@ -85,8 +85,8 @@ module.exports = {
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sass',
     'gatsby-plugin-react-next',
-    require('./gatsby-configs/gatsby-plugin-feed.js')
+    require('./gatsby-configs/gatsby-plugin-sass'),
+    require('./gatsby-configs/gatsby-plugin-feed')
   ],
 }

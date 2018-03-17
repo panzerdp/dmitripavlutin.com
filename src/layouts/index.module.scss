@@ -1,3 +1,5 @@
+@import 'styles/variables.scss';
+
 html, body {
   height: 100%;
   line-height: normal;
@@ -8,7 +10,7 @@ body {
   font-size: 1.4rem;
   font-family: "EB Garamond", serif;
   font-weight: normal;
-  color: #373D3F; // Raven
+  color: $body-color;
   min-height: 100%;
 }
 
