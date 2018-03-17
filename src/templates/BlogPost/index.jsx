@@ -6,6 +6,7 @@ import Img from "gatsby-image";
 
 import 'prismjs/themes/prism.css';
 import styles from './index.module.scss';
+import Subheader from 'components/Subheader';
 
 const getTitle = R.path(['data', 'site', 'siteMetadata', 'title']);
 
@@ -21,7 +22,7 @@ class BlogPostTemplate extends React.Component {
           <Img sizes={sizes} />
         </div>
         <h1>{post.frontmatter.title}</h1>
-        <div className={styles.date}>{post.frontmatter.date}</div>
+        <Subheader node={post} />
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </article>
     );
@@ -44,6 +45,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
+        tags
         thumbnail {
           childImageSharp {
             sizes(maxWidth: 720, maxHeight: 400, quality: 90) {
