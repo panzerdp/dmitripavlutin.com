@@ -1,4 +1,5 @@
 const Promise = require('bluebird');
+const path = require('path');
 
 const createPaginationPages = require('./create/pagination-pages');
 const createPosts = require('./create/posts');
@@ -17,7 +18,6 @@ const query = `
   }
 }`;
 
-
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators;
   return new Promise(function(resolve, reject) {
@@ -35,3 +35,11 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     resolve(queryResult);
   });
 };
+
+exports.modifyWebpackConfig = ({ config, _stage }) => {
+  return config.merge({
+    resolve: {
+      root: path.resolve(config._config.context, 'src'),
+    },
+  })
+}

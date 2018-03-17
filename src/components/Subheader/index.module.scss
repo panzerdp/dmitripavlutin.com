@@ -1,0 +1,17 @@
+.subheader {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+
+  .tags {
+    display: flex;
+  }
+
+  small {
+    float: right;
+    font-style: italic;
+    margin-right: 0.5rem;
+  }
+}

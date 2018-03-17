@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import R from 'ramda';
 import Helmet from 'react-helmet';
 
-import ArticleExcerpt from '../../components/ArticleExcerpt';
-import Paginator from '../../components/Paginator';
+import ArticleExcerpt from 'components/ArticleExcerpt';
+import Paginator from 'components/Paginator';
 
 const getSiteTitle = R.path(['data', 'site', 'siteMetadata', 'title']);
 const getSlug = R.path(['node', 'frontmatter', 'slug']);

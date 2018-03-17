@@ -28,21 +28,3 @@
     border-radius: 4px;
   }
 }
-
-.tags {
-  display: flex;
-}
-
-.date {
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 2rem;
-
-  small {
-    float: right;
-    font-style: italic;
-    margin-right: 0.5rem;
-  }
-}
