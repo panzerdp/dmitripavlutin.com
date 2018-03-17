@@ -11,7 +11,7 @@ export default function Header({ pictureResolutions }) {
       <div className={styles.headerContent}>
         <Link to="/">
           <Img 
-            title="Profile picture"
+            title="Home"
             resolutions={pictureResolutions} 
             className={styles.picture} 
           />
