@@ -10,8 +10,8 @@ draft: false
 At the beginning of 2017 I was planning the development of a web application. Because UI interactivity was an important
 requirement, the decision was to use the single-page application approach.  
 
-As for technical stack was selected React to power the user interface, Redux to control the state,
-Express to server assets and HTML, and a separated GraphQL service.  
+React was selected to power the user interface, Redux to control the state, Express to serve assets and HTML, 
+and a GraphQL service to fetch data.  
 
 ## 1. SSR mind from day one
 
