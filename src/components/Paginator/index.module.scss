@@ -1,3 +1,5 @@
+@import '~styles/variables';
+
 .paginator {
   margin: 2rem 0;
   display: flex;
@@ -20,12 +22,12 @@
 
     &:hover {
       color: white;
-      background-color: rgba(#33805b, 0.5);
+      background-color: rgba($anchor-color, 0.5);
     }
 
     &.selected {
       color: white;
-      background-color: #33805b;
+      background-color: $anchor-color;
     }
   }
 
@@ -35,6 +37,6 @@
   }
 
   div {
-    color: lightgray;
+    color: $disabled-color;
   }
 }
