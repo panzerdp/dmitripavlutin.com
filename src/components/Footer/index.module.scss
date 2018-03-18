@@ -1,0 +1,16 @@
+footer {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+  padding: 0.5rem;
+}
+
+.footerContent {
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
