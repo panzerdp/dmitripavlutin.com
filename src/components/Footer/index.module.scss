@@ -3,7 +3,6 @@ footer {
   box-sizing: border-box;
   background-color: white;
   padding: 0.5rem;
-  font-size: 1.3rem;
   box-shadow: 0 0 0 1px #dae4ed, 0 5px 15px -5px rgba(0,0,0,.1);
 }
 
@@ -37,12 +36,13 @@ footer {
     justify-content: flex-end;
   
     a {
+      box-sizing: border-box;
       margin-right: 0.8rem;
-      width: 1.6rem;
-      height: 1.6rem;
+      width: 1.8rem;
+      height: 1.8rem;
       display: inline-block;
-      // background-color: #33805b;
-      border-radius: 3px;
+      background-color: #33805b;
+      border-radius: 4px;
       padding: 0.2rem;
   
       &:last-child {
@@ -54,12 +54,7 @@ footer {
       }
   
       img {
-        width: 1.6rem;
-        opacity: 0.5;
-  
-        &:hover {
-          opacity: 0.8;
-        }
+        width: 1.4rem;
       }
     }
   }
