@@ -7,11 +7,13 @@
 
   .tags {
     display: flex;
+    flex-wrap: wrap;
   }
 
   small {
-    float: right;
     font-style: italic;
     margin-right: 0.5rem;
+    text-align: right;
+    flex: 1 0 10rem;
   }
 }
