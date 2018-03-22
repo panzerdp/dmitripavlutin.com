@@ -1,69 +1,56 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512.002 512.002" style="enable-background:new 0 0 512.002 512.002;" xml:space="preserve" width="512px" height="512px">
-<g>
-	<g>
-		<path d="M367.984,320.002c-8.832,0-16,7.168-16,16v144h-256v-144c0-8.832-7.168-16-16-16c-8.832,0-16,7.168-16,16v160    c0,8.832,7.168,16,16,16h288c8.832,0,16-7.168,16-16v-160C383.984,327.17,376.816,320.002,367.984,320.002z" fill="#006DF0"/>
-	</g>
-</g>
-<g>
-	<g>
-		<path d="M303.984,416.002h-160c-8.832,0-16,7.168-16,16c0,8.832,7.168,16,16,16h160c8.832,0,16-7.168,16-16    C319.984,423.17,312.816,416.002,303.984,416.002z" fill="#006DF0"/>
-	</g>
-</g>
-<g>
-	<g>
-		<path d="M305.552,352.098l-160-16c-8.928-0.864-16.608,5.536-17.504,14.304c-0.864,8.8,5.536,16.64,14.336,17.504l160,16    c0.544,0.064,1.088,0.096,1.632,0.096c8.096,0,15.072-6.144,15.84-14.4C320.784,360.802,314.32,352.962,305.552,352.098z" fill="#006DF0"/>
-	</g>
-</g>
-<g>
-	<g>
-		<path d="M324.592,288.674l-160-48c-8.544-2.56-17.408,2.272-19.936,10.72c-2.528,8.48,2.272,17.376,10.72,19.936l160,48    c1.536,0.448,3.072,0.672,4.608,0.672c6.88,0,13.248-4.48,15.328-11.424C337.872,300.098,333.072,291.202,324.592,288.674z" fill="#006DF0"/>
-	</g>
-</g>
-<g>
-	<g>
-		<path d="M343.76,226.018l-144-80c-7.712-4.352-17.472-1.504-21.76,6.208c-4.32,7.744-1.536,17.472,6.208,21.76l144,80    c2.464,1.376,5.12,2.016,7.776,2.016c5.6,0,11.072-2.976,13.984-8.224C354.256,240.034,351.472,230.306,343.76,226.018z" fill="#006DF0"/>
-	</g>
-</g>
-<g>
-	<g>
-		<path d="M381.552,199.522l-80-128c-4.672-7.52-14.56-9.728-22.048-5.088c-7.488,4.672-9.76,14.56-5.088,22.048l80,128    c3.04,4.864,8.256,7.52,13.568,7.52c2.912,0,5.856-0.768,8.48-2.432C383.952,216.898,386.224,207.01,381.552,199.522z" fill="#006DF0"/>
-	</g>
-</g>
-<g>
-	<g>
-		<path d="M447.696,172.866l-32-160c-1.76-8.672-10.528-14.304-18.816-12.544c-8.704,1.728-14.336,10.144-12.576,18.816l32,160    c1.536,7.616,8.192,12.864,15.648,12.864c1.056,0,2.112-0.096,3.168-0.32C443.824,189.954,449.456,181.538,447.696,172.866z" fill="#006DF0"/>
-	</g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-</svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 120 120"
+   style="enable-background:new 0 0 120 120;"
+   xml:space="preserve"
+   id="svg2"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="stackoverflow.svg"><metadata
+     id="metadata14"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+     id="defs12" /><sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1029"
+     id="namedview10"
+     showgrid="false"
+     inkscape:zoom="5.5625733"
+     inkscape:cx="0.80836867"
+     inkscape:cy="57.438651"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" /><style
+     type="text/css"
+     id="style4">
+	.st0{fill:#BCBBBB;}
+	.st1{fill:#F48023;}
+</style><polygon
+     class="st0"
+     points="84.4,70.6 92.1,70.6 92.1,101.5 22.6,101.5 22.6,70.6 30.3,70.6 30.3,93.8 84.4,93.8 "
+     id="polygon6"
+     style="fill:#000000"
+     transform="matrix(1.4651047,0,0,1.373662,-26.511366,-19.567562)" /><path
+     class="st1"
+     d="m 30.334696,74.390913 55.380956,10.85193 2.344168,-10.43983 -55.380956,-10.85193 -2.344168,10.43983 z M 37.660218,49.664999 88.938883,72.055688 93.627218,62.440054 42.348554,39.911998 37.660218,49.664999 Z M 51.871735,26.038014 95.385346,59.967463 102.56436,51.862857 59.050748,17.933407 51.871735,26.038014 Z M 80.001744,0.9 70.918096,7.2188438 104.6155,49.802365 113.69916,43.483521 80.001744,0.9 Z m -50.839133,97.667364 56.553041,0 0,-10.577198 -56.553041,0 0,10.577198 z"
+     id="path8"
+     style="fill:#000000"
+     inkscape:connector-curvature="0" /></svg>

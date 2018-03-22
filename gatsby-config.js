@@ -3,6 +3,7 @@ module.exports = {
     title: 'Dmitri Pavlutin: JavaScript and React thoughts',
     author: 'Dmitri Pavlutin',
     description: 'Posts by Dmitri Pavlutin about JavaScript and React',
+    speciality: 'JavaScript & React developer',
     siteUrl: 'https://dmitripavlutin.com/',
     postsPerPage: 5,
     profiles: {

@@ -9,6 +9,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 export default function Template({ children, data }) {
+  const { site: { siteMetadata } } = data;
   return (
     <div className={styles.container}>
       <Helmet>
@@ -17,11 +18,12 @@ export default function Template({ children, data }) {
       </Helmet>
       <Header
         pictureResolutions={data.file.childImageSharp.resolutions}
+        speciality={siteMetadata.speciality}
       />
       <main className={styles.main}>
         {children()}
       </main>
-      <Footer profiles={data.site.siteMetadata.profiles} />
+      <Footer profiles={siteMetadata.profiles} author={siteMetadata.author} />
     </div>
   );
 }
@@ -39,6 +41,8 @@ export const query = graphql`
     }
     site {
       siteMetadata {
+        author
+        speciality
         profiles {
           stackoverflow
           twitter 

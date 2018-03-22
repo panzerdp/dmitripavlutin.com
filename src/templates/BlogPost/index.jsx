@@ -10,26 +10,22 @@ import Subheader from 'components/Subheader';
 
 const getTitle = R.path(['data', 'site', 'siteMetadata', 'title']);
 
-class BlogPostTemplate extends React.Component {
-  render() {
-    const post = this.props.data.markdownRemark;
-    const siteTitle = getTitle(this.props);
-    const sizes = post.frontmatter.thumbnail.childImageSharp.sizes;
-    return (
-      <article>
-        <Helmet title={`${post.frontmatter.title} | ${siteTitle}`} />
-        <div className={styles.postCover}>
-          <Img sizes={sizes} />
-        </div>
-        <h1>{post.frontmatter.title}</h1>
-        <Subheader node={post} />
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
-      </article>
-    );
-  }
+export default function BlogPostTemplate(props) {
+  const post = props.data.markdownRemark;
+  const siteTitle = getTitle(this.props);
+  const sizes = post.frontmatter.thumbnail.childImageSharp.sizes;
+  return (
+    <article>
+      <Helmet title={`${post.frontmatter.title} | ${siteTitle}`} />
+      <div className={styles.postCover}>
+        <Img sizes={sizes} />
+      </div>
+      <h1>{post.frontmatter.title}</h1>
+      <Subheader node={post} />
+      <div dangerouslySetInnerHTML={{ __html: post.html }} />
+    </article>
+  );
 }
-
-export default BlogPostTemplate;
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {

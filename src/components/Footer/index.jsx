@@ -3,22 +3,26 @@ import Link from 'gatsby-link';
 
 import styles from './index.module.scss';
 
-export default function Footer({ profiles }) {
+const year = new Date().getFullYear();
+
+export default function Footer({ profiles, author }) {
   return (
     <footer>
       <div className={styles.footerContent}>
-        <div className={styles.left}>
-          © 2018 Dmitri Pavlutin
+        <div>
+          © {year} {author}
         </div>
-        <div className={styles.right}>
-          <div class={styles.footerNavigation}>
+        <div>
+          <div className={styles.footerNavigation}>
             <Link to="/">Home</Link>
             <Link to="/all-posts">All posts</Link>
             <Link to="/about">About</Link>
           </div>
-          <div class={styles.follow}>
-            <span className={styles.followMe}>Follow me:</span>
-            <a href={profiles.stackoverflow}><img src="/stackoverflow.svg" /></a>
+          <div className={styles.follow}>
+            <a href={profiles.twitter}><img alt={`${author} Twitter profile`} src="/twitter.svg" /></a>
+            <a href={profiles.github}><img alt={`${author} Github profile`} src="/github.svg" /></a>
+            <a href={profiles.stackoverflow}><img alt={`${author} Stackoverflow profile`} src="/stackoverflow.svg" /></a>
+            <a href={profiles.linkedin}><img alt={`${author} LinkedIn profile`} src="/linkedin.svg" /></a>
           </div>
         </div>
       </div>

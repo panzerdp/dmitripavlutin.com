@@ -5,7 +5,7 @@ import Img from "gatsby-image";
 
 import styles from './index.module.scss';
 
-export default function Header({ pictureResolutions }) {
+export default function Header({ pictureResolutions, speciality }) {
   return (
     <header>
       <div className={styles.headerContent}>
