@@ -21,7 +21,7 @@ export default function Template({ children, data }) {
       <main className={styles.main}>
         {children()}
       </main>
-      <Footer />
+      <Footer profiles={data.site.siteMetadata.profiles} />
     </div>
   );
 }
@@ -34,6 +34,16 @@ export const query = graphql`
         # Makes it trivial to update as your page's design changes.
         resolutions(width: 64, height: 64, quality: 100) {
           ...GatsbyImageSharpResolutions
+        }
+      }
+    }
+    site {
+      siteMetadata {
+        profiles {
+          stackoverflow
+          twitter 
+          github
+          linkedin
         }
       }
     }

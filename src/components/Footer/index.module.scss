@@ -3,14 +3,36 @@ footer {
   box-sizing: border-box;
   background-color: white;
   padding: 0.5rem;
+  font-size: 1.2rem;
 }
 
 .footerContent {
+  min-height: 4rem;
   max-width: 880px;
   margin: 0 auto;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 100%;
   padding: 0 1rem;
   box-sizing: border-box;
+}
+
+.footerNavigation {
+  a {
+    margin-right: 0.8rem;
+  }
+  a:last-child {
+    margin-right: 0;
+  }
+}
+
+.follow {
+  .followMe {
+    font-style: italic;
+  }
+
+  img {
+    width: 1.5rem;
+  }
 }
