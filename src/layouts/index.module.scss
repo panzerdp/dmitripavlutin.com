@@ -47,3 +47,9 @@ a {
   flex-flow: column;
   height: 100%;
 }
+
+@media (max-width: $small-device-width) {
+  .main {
+    padding: 0 0.5rem;
+  } 
+}

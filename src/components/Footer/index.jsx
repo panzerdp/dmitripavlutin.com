@@ -9,10 +9,10 @@ export default function Footer({ profiles, author }) {
   return (
     <footer>
       <div className={styles.footerContent}>
-        <div>
+        <div className={styles.copyright}>
           © {year} {author}
         </div>
-        <div>
+        <div className={styles.links}>
           <div className={styles.footerNavigation}>
             <Link to="/">Home</Link>
             <Link to="/all-posts">All posts</Link>

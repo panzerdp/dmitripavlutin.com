@@ -1,3 +1,5 @@
+@import '~styles/variables';
+
 footer {
   width: 100%;
   box-sizing: border-box;
@@ -56,6 +58,31 @@ footer {
   
       img {
         width: 1.3rem;
+      }
+    }
+  }
+}
+
+@media (max-width: $small-device-width) {
+  .footerContent {
+    flex-wrap: wrap-reverse;
+
+    .links, .copyright {
+      width: 100%;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .links {
+      .footerNavigation {
+        text-align: center;
+      }
+      
+      .follow {
+        justify-content: center;
       }
     }
   }

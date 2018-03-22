@@ -12,7 +12,7 @@ const getTitle = R.path(['data', 'site', 'siteMetadata', 'title']);
 
 export default function BlogPostTemplate(props) {
   const post = props.data.markdownRemark;
-  const siteTitle = getTitle(this.props);
+  const siteTitle = getTitle(props);
   const sizes = post.frontmatter.thumbnail.childImageSharp.sizes;
   return (
     <article>
