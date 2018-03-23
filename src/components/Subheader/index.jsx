@@ -8,11 +8,11 @@ const mapTags = R.addIndex(R.map)(function mapTag(tagName, index) {
   return <Tag name={tagName} key={index} />;
 });
 
-export default function Subheader({ node }) {
+export default function Subheader({ post }) {
   return (
     <div className={styles.subheader}>
-      <div className={styles.tags}>{mapTags(node.frontmatter.tags)}</div>
-      <small>{node.frontmatter.date}</small>
+      <div className={styles.tags}>{mapTags(post.frontmatter.tags)}</div>
+      <small>{post.frontmatter.date}</small>
     </div>
   );
 };

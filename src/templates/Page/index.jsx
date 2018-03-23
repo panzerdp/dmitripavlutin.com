@@ -12,7 +12,7 @@ const getNode = R.path(['node']);
 const getPaginator = R.pipe(R.path(['pathContext']), R.pick(['currentPage', 'pagesSum', 'pathPrefix']));
 const toArticleExcerpts = R.pipe(
   R.path(['data', 'allMarkdownRemark', 'edges']),
-  R.map(edge => <ArticleExcerpt key={getSlug(edge)} node={getNode(edge)} />)
+  R.map(edge => <ArticleExcerpt key={getSlug(edge)} post={getNode(edge)} />)
 );
 
 export default function Page(props) {

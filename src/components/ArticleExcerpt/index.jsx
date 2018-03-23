@@ -7,10 +7,10 @@ import Img from 'gatsby-image';
 import Subheader from 'components/Subheader';
 import styles from './index.module.scss';
 
-export default function ArticleExcerpt({ node }) {
-  const slug = node.frontmatter.slug;
-  const title = node.frontmatter.title;
-  const sizes = node.frontmatter.thumbnail.childImageSharp.sizes;
+export default function ArticleExcerpt({ post }) {
+  const slug = post.frontmatter.slug;
+  const title = post.frontmatter.title;
+  const sizes = post.frontmatter.thumbnail.childImageSharp.sizes;
   const to = `/${slug}/`;
   return (
     <article key={slug} className={styles.excerpt}>
@@ -23,9 +23,9 @@ export default function ArticleExcerpt({ node }) {
             {title}
           </Link>
         </h4>
-        <Subheader node={node} />
+        <Subheader post={post} />
         <div>
-          <span dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+          <span dangerouslySetInnerHTML={{ __html: post.excerpt }} />
           &nbsp; <Link exact to={to}>Continue reading</Link>
         </div>
       </div>
@@ -34,5 +34,5 @@ export default function ArticleExcerpt({ node }) {
 }
 
 ArticleExcerpt.propTypes = {
-  node: PropTypes.object
+  post: PropTypes.object
 };

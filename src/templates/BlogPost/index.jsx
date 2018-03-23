@@ -1,5 +1,4 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import Link from 'gatsby-link';
 import R from 'ramda';
 import Img from "gatsby-image";
@@ -7,6 +6,7 @@ import Img from "gatsby-image";
 import 'prismjs/themes/prism.css';
 import styles from './index.module.scss';
 import Subheader from 'components/Subheader';
+import BlogPostMetadata from 'components/BlogPostMetadata';
 
 const getTitle = R.path(['data', 'site', 'siteMetadata', 'title']);
 
@@ -16,12 +16,12 @@ export default function BlogPostTemplate(props) {
   const sizes = post.frontmatter.thumbnail.childImageSharp.sizes;
   return (
     <article>
-      <Helmet title={`${post.frontmatter.title} | ${siteTitle}`} />
+      <BlogPostMetadata {...props} />
       <div className={styles.postCover}>
         <Img sizes={sizes} />
       </div>
       <h1>{post.frontmatter.title}</h1>
-      <Subheader node={post} />
+      <Subheader post={post} />
       <div dangerouslySetInnerHTML={{ __html: post.html }} />
     </article>
   );
@@ -33,6 +33,7 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         author
+        siteUrl
       }
     }
     markdownRemark(frontmatter: { slug: { eq: $slug } }) {
@@ -40,6 +41,7 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
+        slug
         date(formatString: "MMMM DD, YYYY")
         tags
         thumbnail {
