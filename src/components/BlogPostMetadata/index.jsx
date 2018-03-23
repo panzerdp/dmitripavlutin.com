@@ -3,18 +3,19 @@ import Helmet from 'react-helmet';
 
 export default function BlogPostMetadata(props) {
   const { data: { markdownRemark: { frontmatter }, site: { siteMetadata } } } = props;
+  const postUrl = `${siteMetadata.siteUrl}${frontmatter.slug}/`;
   return (
     <Helmet>
       <title>{frontmatter.title}</title>
       <link rel="shortcut icon" href="/favicon.ico" />
-      <link rel="canonical" href="https://dmitripavlutin.com/object-rest-spread-properties-javascript/" />
+      <link rel="canonical" href={postUrl} />
       <meta name="referrer" content="no-referrer-when-downgrade" />
 
-      <meta property="og:site_name" content="Dmitri Pavlutin Blog" />
+      <meta property="og:site_name" content={siteMetadata.title} />
       <meta property="og:type" content="article" />
-      <meta property="og:title" content="An easy guide to object rest/spread properties in JavaScript" />
-      <meta property="og:description" content="Object spread allows easily to clone, merge, extend objects. While object rest collects rest of properties after destructuring." />
-      <meta property="og:url" content="https://dmitripavlutin.com/object-rest-spread-properties-javascript/" />
+      <meta property="og:title" content={frontmatter.title} />
+      <meta property="og:description" content={frontmatter.description} />
+      <meta property="og:url" content={postUrl} />
       <meta property="og:image" content="https://dmitripavlutin.com/content/images/2017/08/07d5ecc752ef92b61669bb51150f8285-1.jpg" />
       <meta property="article:published_time" content="2018-01-03T14:46:18.000Z" />
       <meta property="article:modified_time" content="2018-01-09T17:49:58.000Z" />

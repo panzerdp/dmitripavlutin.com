@@ -1,5 +1,6 @@
 ---
 title: An easy guide to object rest/spread properties in JavaScript
+description: Object spread allows easily to clone, merge, extend objects. While object rest collects rest of properties after destructuring.
 date: "2018-01-03"
 thumbnail: "./future-car.jpg"
 slug: object-rest-spread-properties-javascript
