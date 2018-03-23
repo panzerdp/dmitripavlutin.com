@@ -1,9 +1,17 @@
 import React, { Fragment } from 'react';
 import Helmet from 'react-helmet';
+import R from 'ramda';
+
+
+const toMetaArticleTag = R.map(function(tag) {
+  return <meta property="article:tag" content={tag} key={tag} />;
+});
+
 
 export default function BlogPostMetadata(props) {
   const { data: { markdownRemark: { frontmatter }, site: { siteMetadata } } } = props;
   const postUrl = `${siteMetadata.siteUrl}${frontmatter.slug}/`;
+  console.log(frontmatter);
   return (
     <Helmet>
       <title>{frontmatter.title}</title>
@@ -17,12 +25,10 @@ export default function BlogPostMetadata(props) {
       <meta property="og:description" content={frontmatter.description} />
       <meta property="og:url" content={postUrl} />
       <meta property="og:image" content="https://dmitripavlutin.com/content/images/2017/08/07d5ecc752ef92b61669bb51150f8285-1.jpg" />
-      <meta property="article:published_time" content="2018-01-03T14:46:18.000Z" />
-      <meta property="article:modified_time" content="2018-01-09T17:49:58.000Z" />
-      <meta property="article:tag" content="object literal" />
-      <meta property="article:tag" content="object initializer" />
-      <meta property="article:tag" content="object spread" />
-      <meta property="article:tag" content="object rest" />
+      <meta property="article:published_time" content={frontmatter.published} />
+      <meta property="article:modified_time" content={frontmatter.modified} />
+      
+      {toMetaArticleTag(frontmatter.tags)}
 
       <meta property="article:author" content="https://www.facebook.com/dmitri.pavlutin" />
       <meta name="twitter:card" content="summary_large_image" />

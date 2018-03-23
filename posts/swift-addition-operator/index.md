@@ -1,8 +1,8 @@
 ---
 title: "Make your Swift code expressive: addition operator use cases"
 description: "Check + and += operators use cases for writing short and concise expressions: sum numbers & measurements, concat strings & arrays, date manipulations."
-publishedDate: "2016-11-16"
-modifiedDate: "2016-11-16"
+published: "2016-11-16"
+modified: "2016-11-16"
 thumbnail: "./images/cover.jpg"
 slug: make-your-swift-code-expressive-addition-operator-use-cases
 tags: ["swift"]

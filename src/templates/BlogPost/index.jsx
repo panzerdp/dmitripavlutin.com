@@ -39,7 +39,9 @@ export const pageQuery = graphql`
       frontmatter {
         title
         slug
-        publishedDate(formatString: "MMMM DD, YYYY")
+        publishedDate: published(formatString: "MMMM DD, YYYY")
+        published(formatString: "YYYY-MM-DDTHH:mm:ssZ")
+        modified(formatString: "YYYY-MM-DDTHH:mm:ssZ")
         tags
         thumbnail {
           childImageSharp {

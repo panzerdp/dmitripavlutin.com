@@ -1,8 +1,8 @@
 ---
 title: 7 architectural attributes of a reliable React component
 description: A detailed explanation of how to architecture React components based on single responsibility principle, encapsulation and composition.
-publishedDate: "2017-09-26"
-modifiedDate: "2017-09-26"
+published: "2017-09-26"
+modified: "2017-09-26"
 thumbnail: "./images/temple.jpg"
 slug: 7-architectural-attributes-of-a-reliable-react-component
 tags: ['react', 'component', 'architecture']
