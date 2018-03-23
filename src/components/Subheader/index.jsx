@@ -12,7 +12,7 @@ export default function Subheader({ post }) {
   return (
     <div className={styles.subheader}>
       <div className={styles.tags}>{mapTags(post.frontmatter.tags)}</div>
-      <small>{post.frontmatter.date}</small>
+      <small>{post.frontmatter.publishedDate}</small>
     </div>
   );
 };

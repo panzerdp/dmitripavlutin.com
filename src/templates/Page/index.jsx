@@ -37,12 +37,12 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, skip: $skip, limit: $limit) {
+    allMarkdownRemark(sort: { fields: [frontmatter___publishedDate], order: DESC }, skip: $skip, limit: $limit) {
       edges {
         node {
           excerpt(pruneLength: 200)
           frontmatter {
-            date(formatString: "DD MMMM, YYYY")
+            publishedDate(formatString: "DD MMMM, YYYY")
             title
             slug
             tags

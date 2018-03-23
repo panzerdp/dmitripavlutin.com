@@ -1,7 +1,8 @@
 ---
 title: Tips on shortening arrow functions
 description: Tips on shortening arrow functions
-date: "2018-03-04"
+publishedDate: "2018-03-04"
+modifiedDate: "2018-03-04"
 thumbnail: "./images/runner.jpg"
 slug: tips-on-shortening-arrow-functions
 tags: ['javascript', 'arrow function']

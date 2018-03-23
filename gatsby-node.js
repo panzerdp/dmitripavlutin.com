@@ -6,7 +6,7 @@ const createPosts = require('./create/posts');
 
 const query = `
 {
-  allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
+  allMarkdownRemark(sort: { fields: [frontmatter___publishedDate], order: DESC }, limit: 1000) {
     edges {
       node {
         frontmatter {

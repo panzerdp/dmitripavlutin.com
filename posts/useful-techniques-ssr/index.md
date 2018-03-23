@@ -1,10 +1,11 @@
 ---
 title: Useful techniques to facilitate React server-side rendering
 description: Useful techniques to facilitate React server-side rendering
-date: "2018-03-17"
+publishedDate: "2018-03-17"
+modifiedDate: "2018-03-17"
 thumbnail: "./images/cover.jpg"
 slug: useful-techniques-react-server-side-rendering
-tags: ['react', 'server-side rendering']
+tags: ['react', 'server side rendering']
 draft: false
 ---
 

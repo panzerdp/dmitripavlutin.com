@@ -8,11 +8,8 @@ import styles from './index.module.scss';
 import Subheader from 'components/Subheader';
 import BlogPostMetadata from 'components/BlogPostMetadata';
 
-const getTitle = R.path(['data', 'site', 'siteMetadata', 'title']);
-
 export default function BlogPostTemplate(props) {
   const post = props.data.markdownRemark;
-  const siteTitle = getTitle(props);
   const sizes = post.frontmatter.thumbnail.childImageSharp.sizes;
   return (
     <article>
@@ -42,7 +39,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         slug
-        date(formatString: "MMMM DD, YYYY")
+        publishedDate(formatString: "MMMM DD, YYYY")
         tags
         thumbnail {
           childImageSharp {

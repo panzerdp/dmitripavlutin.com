@@ -1,7 +1,8 @@
 ---
 title: 7 tips to handle undefined in JavaScript
 description: A detailed article about 'undefined' keyword in JavaScript. 7 tips on how to handle correctly 'undefined' and increase code durability.
-date: "2017-04-15"
+publishedDate: "2017-04-15"
+modifiedDate: "2017-04-15"
 thumbnail: "./blade-runner-rachel.png"
 slug: 7-tips-to-handle-undefined-in-javascript
 tags: ["javascript", "undefined"]
