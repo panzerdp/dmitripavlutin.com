@@ -34,9 +34,16 @@
 @media (max-width: $small-device-width) {
   .excerpt {
     margin-top: 1.5rem;
+    box-shadow: none;
+    border-bottom: 1px solid #dae4ed;
+    border-radius: 0;
+
+    &:last-child {
+      border-bottom: none;
+    }
   }
 
   .content {
-    padding: 0 1rem 1rem;
+    padding: 0 1rem 2rem 1rem;
   }
 }
