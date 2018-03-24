@@ -5,20 +5,20 @@ import Helmet from 'react-helmet';
 
 import ArticleExcerpt from 'components/ArticleExcerpt';
 import Paginator from 'components/Paginator';
+import IndexMetaTags from 'components/Index/MetaTags';
+import IndexMetaStructuredData from 'components/Index/MetaStructuredData';
 
-const getSiteTitle = R.path(['data', 'site', 'siteMetadata', 'title']);
-const getSlug = R.path(['node', 'frontmatter', 'slug']);
-const getNode = R.path(['node']);
 const getPaginator = R.pipe(R.path(['pathContext']), R.pick(['currentPage', 'pagesSum', 'pathPrefix']));
 const toArticleExcerpts = R.pipe(
   R.path(['data', 'allMarkdownRemark', 'edges']),
-  R.map(edge => <ArticleExcerpt key={getSlug(edge)} post={getNode(edge)} />)
+  R.addIndex(R.map)((edge, index) => <ArticleExcerpt key={index} post={edge.node} />)
 );
 
 export default function Page(props) {
   return (
     <Fragment>
-      <Helmet title={getSiteTitle(props)} />
+      <IndexMetaTags {...props} />
+      <IndexMetaStructuredData {...props} />
       {toArticleExcerpts(props)}
       <Paginator {...getPaginator(props)} />
     </Fragment>
@@ -35,6 +35,7 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        description
       }
     }
     allMarkdownRemark(sort: { fields: [frontmatter___published], order: DESC }, skip: $skip, limit: $limit) {

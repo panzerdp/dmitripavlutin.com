@@ -6,8 +6,8 @@ import Img from "gatsby-image";
 import 'prismjs/themes/prism.css';
 import styles from './index.module.scss';
 import Subheader from 'components/Subheader';
-import PostMetaTags from 'components/PostMetaTags';
-import PostMetaStructuredData from 'components/PostMetaStructuredData';
+import PostMetaTags from 'components/Post/MetaTags';
+import PostMetaStructuredData from 'components/Post/MetaStructuredData';
 
 export default function BlogPostTemplate(props) {
   const post = props.data.markdownRemark;
