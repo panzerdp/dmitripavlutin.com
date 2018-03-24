@@ -6,14 +6,16 @@ import Img from "gatsby-image";
 import 'prismjs/themes/prism.css';
 import styles from './index.module.scss';
 import Subheader from 'components/Subheader';
-import BlogPostMetadata from 'components/BlogPostMetadata';
+import PostMetaTags from 'components/PostMetaTags';
+import PostMetaStructuredData from 'components/PostMetaStructuredData';
 
 export default function BlogPostTemplate(props) {
   const post = props.data.markdownRemark;
   const sizes = post.frontmatter.thumbnail.childImageSharp.sizes;
   return (
     <article>
-      <BlogPostMetadata {...props} />
+      <PostMetaTags {...props} />
+      <PostMetaStructuredData {...props} />
       <div className={styles.postCover}>
         <Img sizes={sizes} />
       </div>
@@ -32,10 +34,21 @@ export const pageQuery = graphql`
         author
         siteUrl
         profiles {
+          stackoverflow
+          twitter
+          linkedin
+          github
           facebook
         }
         nicknames {
           twitter
+        }
+      }
+    }
+    authorProfilePicture: file(relativePath: { eq: "layouts/profile-picture.jpg" }) {
+      childImageSharp {
+        resize(width: 128, height: 128, quality: 100) {
+          src
         }
       }
     }

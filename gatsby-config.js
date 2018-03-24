@@ -7,7 +7,7 @@ module.exports = {
     siteUrl: 'https://dmitripavlutin.com',
     postsPerPage: 5,
     profiles: {
-      stackoverflow: 'http://stackoverflow.com/users/1894471/dmitrii',
+      stackoverflow: 'https://stackoverflow.com/users/1894471/dmitri-pavlutin',
       twitter: 'https://twitter.com/panzerdp',
       linkedin: 'https://www.linkedin.com/in/dmitri-pavlutin/',
       github: 'https://github.com/panzerdp',

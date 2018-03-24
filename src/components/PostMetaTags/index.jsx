@@ -12,10 +12,10 @@ export default function BlogPostMetadata(props) {
   const { data: { markdownRemark: { frontmatter }, site: { siteMetadata } } } = props;
   const postUrl = `${siteMetadata.siteUrl}/${frontmatter.slug}/`;
   const imageUrl = `${siteMetadata.siteUrl}${frontmatter.thumbnail.childImageSharp.sizes.src}`;
-  console.log(props);
   return (
     <Helmet>
       <title>{frontmatter.title}</title>
+      <meta name="description" content={frontmatter.description} />
       <link rel="shortcut icon" href="/favicon.ico" />
       <link rel="canonical" href={postUrl} />
       <meta name="referrer" content="no-referrer-when-downgrade" />
