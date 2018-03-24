@@ -10,8 +10,9 @@ const toMetaArticleTag = R.map(function(tag) {
 
 export default function BlogPostMetadata(props) {
   const { data: { markdownRemark: { frontmatter }, site: { siteMetadata } } } = props;
-  const postUrl = `${siteMetadata.siteUrl}${frontmatter.slug}/`;
-  console.log(frontmatter);
+  const postUrl = `${siteMetadata.siteUrl}/${frontmatter.slug}/`;
+  const imageUrl = `${siteMetadata.siteUrl}${frontmatter.thumbnail.childImageSharp.sizes.src}`;
+  console.log(props);
   return (
     <Helmet>
       <title>{frontmatter.title}</title>
@@ -24,25 +25,25 @@ export default function BlogPostMetadata(props) {
       <meta property="og:title" content={frontmatter.title} />
       <meta property="og:description" content={frontmatter.description} />
       <meta property="og:url" content={postUrl} />
-      <meta property="og:image" content="https://dmitripavlutin.com/content/images/2017/08/07d5ecc752ef92b61669bb51150f8285-1.jpg" />
+      <meta property="og:image" content={imageUrl} />
       <meta property="article:published_time" content={frontmatter.published} />
       <meta property="article:modified_time" content={frontmatter.modified} />
       
       {toMetaArticleTag(frontmatter.tags)}
 
-      <meta property="article:author" content="https://www.facebook.com/dmitri.pavlutin" />
+      <meta property="article:author" content={siteMetadata.profiles.facebook} />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="An easy guide to object rest/spread properties in JavaScript" />
-      <meta name="twitter:description" content="Object spread allows easily to clone, merge, extend objects. While object rest collects rest of properties after destructuring." />
-      <meta name="twitter:url" content="https://dmitripavlutin.com/object-rest-spread-properties-javascript/" />
-      <meta name="twitter:image" content="https://dmitripavlutin.com/content/images/2017/08/07d5ecc752ef92b61669bb51150f8285-1.jpg" />
+      <meta name="twitter:title" content={frontmatter.title} />
+      <meta name="twitter:description" content={frontmatter.description} />
+      <meta name="twitter:url" content={postUrl} />
+      <meta name="twitter:image" content={imageUrl} />
       <meta name="twitter:label1" content="Written by" />
-      <meta name="twitter:data1" content="Dmitri Pavlutin" />
+      <meta name="twitter:data1" content={siteMetadata.author} />
       <meta name="twitter:label2" content="Filed under" />
-      <meta name="twitter:data2" content="object literal, object initializer, object spread, object rest" />
-      <meta name="twitter:creator" content="@panzerdp" />
-      <meta property="og:image:width" content="1022" />
-      <meta property="og:image:height" content="381" />
+      <meta name="twitter:data2" content={frontmatter.tags.join(', ')} />
+      <meta name="twitter:creator" content={siteMetadata.nicknames.twitter} />
+      <meta property="og:image:width" content="720" />
+      <meta property="og:image:height" content="400" />
     </Helmet>
   );
 }

@@ -31,6 +31,12 @@ export const pageQuery = graphql`
         title
         author
         siteUrl
+        profiles {
+          facebook
+        }
+        nicknames {
+          twitter
+        }
       }
     }
     markdownRemark(frontmatter: { slug: { eq: $slug } }) {
@@ -38,6 +44,7 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
+        description
         slug
         publishedDate: published(formatString: "MMMM DD, YYYY")
         published(formatString: "YYYY-MM-DDTHH:mm:ssZ")

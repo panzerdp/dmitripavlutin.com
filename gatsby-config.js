@@ -4,13 +4,17 @@ module.exports = {
     author: 'Dmitri Pavlutin',
     description: 'Posts by Dmitri Pavlutin about JavaScript and React',
     speciality: 'JavaScript & React developer',
-    siteUrl: 'https://dmitripavlutin.com/',
+    siteUrl: 'https://dmitripavlutin.com',
     postsPerPage: 5,
     profiles: {
       stackoverflow: 'http://stackoverflow.com/users/1894471/dmitrii',
       twitter: 'https://twitter.com/panzerdp',
       linkedin: 'https://www.linkedin.com/in/dmitri-pavlutin/',
-      github: 'https://github.com/panzerdp'
+      github: 'https://github.com/panzerdp',
+      facebook: 'https://www.facebook.com/dmitri.pavlutin'
+    },
+    nicknames: {
+      twitter: '@panzerdp'
     }
   },
   pathPrefix: '/',
