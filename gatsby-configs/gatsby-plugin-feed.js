@@ -8,7 +8,8 @@ module.exports = {
             title
             description
             siteUrl
-            site_url: siteUrl
+            site_url: siteUrl,
+            author
           }
         }
       }
@@ -18,9 +19,10 @@ module.exports = {
         serialize: ({ query: { site, allMarkdownRemark } }) => {
           return allMarkdownRemark.edges.map(edge => {
             return Object.assign({}, edge.node.frontmatter, {
-              description: edge.node.excerpt,
+              description: edge.node.frontmatter.description,
               url: site.siteMetadata.siteUrl + '/' + edge.node.frontmatter.slug + '/',
-              guid: site.siteMetadata.siteUrl + '/' + edge.node.frontmatter.slug,
+              guid: site.siteMetadata.siteUrl + '/' + edge.node.frontmatter.slug + '/',
+              categories: edge.node.frontmatter.tags,
               custom_elements: [{ "content:encoded": edge.node.html }],
             });
           });
@@ -29,7 +31,7 @@ module.exports = {
           {
             allMarkdownRemark(
               limit: 1000,
-              sort: { order: DESC, fields: [frontmatter___date] },
+              sort: { order: DESC, fields: [frontmatter___published] },
               filter: {frontmatter: { draft: { ne: true } }}
             ) {
               edges {
@@ -38,8 +40,10 @@ module.exports = {
                   html
                   frontmatter {
                     title
-                    date
+                    date: published
                     slug
+                    tags
+                    description
                   }
                 }
               }
