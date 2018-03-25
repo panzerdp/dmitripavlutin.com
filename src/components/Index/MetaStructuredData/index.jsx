@@ -2,14 +2,12 @@ import React, { Fragment } from 'react';
 import Helmet from 'react-helmet';
 import R from 'ramda';
 
-export default function PostMetaStructuredData(props) {
-  const { data: { markdownRemark: { frontmatter }, site: { siteMetadata }, authorProfilePicture } } = props;
-  const postUrl = `${siteMetadata.siteUrl}/${frontmatter.slug}/`;
-  const postImageUrl = `${siteMetadata.siteUrl}${frontmatter.thumbnail.childImageSharp.sizes.src}`;
+export default function IndexMetaStructuredData(props) {
+  const { data: { site: { siteMetadata }, authorProfilePicture } } = props;
   const authorProfilePictureUrl = `${siteMetadata.siteUrl}${authorProfilePicture.childImageSharp.resize.src}`;
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "Website",
     "publisher": {
       "@type": "Organization",
       "name": siteMetadata.title,
@@ -18,31 +16,14 @@ export default function PostMetaStructuredData(props) {
         "url": authorProfilePictureUrl
       }
     },
-    "author": {
-      "@type": "Person",
-      "name": siteMetadata.author,
-      "image": {
-        "@type": "ImageObject",
-        "url": authorProfilePictureUrl,
-        "width": 128,
-        "height": 128
-      },
-      "url": siteMetadata.siteUrl,
-      "sameAs": R.values(siteMetadata.profiles),
-      "description": siteMetadata.speciality
-    },
-    "headline": frontmatter.title,
-    "url": postUrl,
-    "datePublished": frontmatter.published,
-    "dateModified": frontmatter.modified,
+    "url": siteMetadata.siteUrl,
     "image": {
       "@type": "ImageObject",
-      "url": postImageUrl,
-      "width": 720,
-      "height": 400
+      "url": authorProfilePictureUrl,
+      "width": 256,
+      "height": 256
     },
-    "keywords": frontmatter.tags.join(', '),
-    "description": frontmatter.description,
+    "description": siteMetadata.description,
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": siteMetadata.siteUrl

@@ -19,7 +19,7 @@ export default function Page(props) {
   return (
     <Fragment>
       <IndexMetaTags {...props} />
-      {/* <IndexMetaStructuredData {...props} /> */}
+      <IndexMetaStructuredData {...props} />
       {toArticleExcerpts(props)}
       <Paginator {...getPaginator(props)} />
     </Fragment>
