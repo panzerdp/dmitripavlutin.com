@@ -47,7 +47,7 @@ export const pageQuery = graphql`
     }
     authorProfilePicture: file(relativePath: { eq: "layouts/profile-picture.jpg" }) {
       childImageSharp {
-        resize(width: 128, height: 128, quality: 100) {
+        resize(width: 256, height: 256, quality: 100) {
           src
         }
       }

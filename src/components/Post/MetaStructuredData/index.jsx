@@ -24,8 +24,8 @@ export default function PostMetaStructuredData(props) {
       "image": {
         "@type": "ImageObject",
         "url": authorProfilePictureUrl,
-        "width": 128,
-        "height": 128
+        "width": 256,
+        "height": 256
       },
       "url": siteMetadata.siteUrl,
       "sameAs": R.values(siteMetadata.profiles),

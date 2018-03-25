@@ -15,10 +15,11 @@ const toArticleExcerpts = R.pipe(
 );
 
 export default function Page(props) {
+  console.log(props);
   return (
     <Fragment>
       <IndexMetaTags {...props} />
-      <IndexMetaStructuredData {...props} />
+      {/* <IndexMetaStructuredData {...props} /> */}
       {toArticleExcerpts(props)}
       <Paginator {...getPaginator(props)} />
     </Fragment>
@@ -36,6 +37,14 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         description
+        siteUrl
+      }
+    }
+    authorProfilePicture: file(relativePath: { eq: "layouts/profile-picture.jpg" }) {
+      childImageSharp {
+        resize(width: 256, height: 256, quality: 100) {
+          src
+        }
       }
     }
     allMarkdownRemark(sort: { fields: [frontmatter___published], order: DESC }, skip: $skip, limit: $limit) {

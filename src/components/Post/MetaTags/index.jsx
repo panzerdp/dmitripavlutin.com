@@ -26,6 +26,8 @@ export default function BlogPostMetadata(props) {
       <meta property="og:description" content={frontmatter.description} />
       <meta property="og:url" content={postUrl} />
       <meta property="og:image" content={imageUrl} />
+      <meta property="og:image:width" content="720" />
+      <meta property="og:image:height" content="400" />
       <meta property="article:published_time" content={frontmatter.published} />
       <meta property="article:modified_time" content={frontmatter.modified} />
       
@@ -42,8 +44,6 @@ export default function BlogPostMetadata(props) {
       <meta name="twitter:label2" content="Filed under" />
       <meta name="twitter:data2" content={frontmatter.tags.join(', ')} />
       <meta name="twitter:creator" content={siteMetadata.nicknames.twitter} />
-      <meta property="og:image:width" content="720" />
-      <meta property="og:image:height" content="400" />
     </Helmet>
   );
 }
