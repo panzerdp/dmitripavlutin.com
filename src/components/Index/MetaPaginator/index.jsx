@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import R from 'ramda';
 import Helmet from 'react-helmet';
 
+import { PAGE_PATH } from 'constants';
+
 export default class IndexMetaPaginator extends Component {
   constructor(props) {
     super(props);
@@ -36,17 +38,16 @@ export default class IndexMetaPaginator extends Component {
   }
 
   pageToUrl(page) {
-    const { siteUrl, pathPrefix } = this.props;
+    const { siteUrl } = this.props;
     if (page === 1) {
-      return '/';
+      return siteUrl;
     }
-    return this.props.pathPrefix + page;
+    return `${siteUrl}/${PAGE_PATH}/${page}`;
   }
 }
 
 Paginator.propTypes = {
   pagesSum: PropTypes.number,
   currentPage: PropTypes.number,
-  pathPrefix: PropTypes.string,
   siteUrl: PropTypes.string
 };

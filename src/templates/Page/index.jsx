@@ -7,6 +7,7 @@ import ArticleExcerpt from 'components/ArticleExcerpt';
 import Paginator from 'components/Paginator';
 import IndexMetaTags from 'components/Index/MetaTags';
 import IndexMetaStructuredData from 'components/Index/MetaStructuredData';
+import IndexMetaPaginator from 'components/Index/MetaPaginator';
 
 const getPaginator = R.pipe(R.path(['pathContext']), R.pick(['currentPage', 'pagesSum', 'pathPrefix']));
 const toArticleExcerpts = R.pipe(
