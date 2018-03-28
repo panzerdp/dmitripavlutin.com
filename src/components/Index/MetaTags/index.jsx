@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 export default function IndexMetaTags(props) {
@@ -11,7 +12,7 @@ export default function IndexMetaTags(props) {
 
       <link rel="canonical" href={siteMetadata.siteUrl} />
       <meta name="referrer" content="no-referrer-when-downgrade" />
-      
+
       <meta property="og:site_name" content={siteMetadata.title} />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={siteMetadata.title} />
@@ -29,3 +30,7 @@ export default function IndexMetaTags(props) {
     </Helmet>
   );
 }
+
+IndexMetaTags.propTypes = {
+  data: PropTypes.object
+};

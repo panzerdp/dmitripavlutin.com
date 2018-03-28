@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
 import styles from './index.module.scss';
@@ -29,3 +30,8 @@ export default function Footer({ profiles, author }) {
     </footer>
   );
 }
+
+Footer.propTypes = {
+  profiles: PropTypes.object,
+  author: PropTypes.string
+};

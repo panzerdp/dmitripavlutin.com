@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link, { withPrefix } from 'gatsby-link';
-import R from 'ramda';
+import Link from 'gatsby-link';
 import Img from 'gatsby-image';
 
 import Subheader from 'components/Subheader';

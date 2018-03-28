@@ -6,5 +6,5 @@ module.exports = {
     includePaths: [
       path.resolve(__dirname, '../src')
     ]
-  } 
+  }
 };

@@ -29,6 +29,7 @@
     "gatsby-source-filesystem": "1.5.27",
     "gatsby-transformer-remark": "1.7.37",
     "gatsby-transformer-sharp": "1.6.22",
+    "husky": "0.14.3",
     "normalize.css": "8.0.0",
     "ramda": "0.25.0",
     "react-helmet": "5.2.0",
@@ -60,6 +61,7 @@
     "develop": "gatsby develop",
     "build": "gatsby build",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public",
-    "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js"
+    "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js",
+    "precommit": "npm run lint"
   }
 }

@@ -1,12 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import R from 'ramda';
-
 
 const toMetaArticleTag = R.map(function(tag) {
   return <meta property="article:tag" content={tag} key={tag} />;
 });
-
 
 export default function BlogPostMetadata(props) {
   const { data: { markdownRemark: { frontmatter }, site: { siteMetadata } } } = props;
@@ -30,7 +29,7 @@ export default function BlogPostMetadata(props) {
       <meta property="og:image:height" content="400" />
       <meta property="article:published_time" content={frontmatter.published} />
       <meta property="article:modified_time" content={frontmatter.modified} />
-      
+
       {toMetaArticleTag(frontmatter.tags)}
 
       <meta property="article:author" content={siteMetadata.profiles.facebook} />
@@ -47,3 +46,7 @@ export default function BlogPostMetadata(props) {
     </Helmet>
   );
 }
+
+BlogPostMetadata.propTypes = {
+  data: PropTypes.object
+};

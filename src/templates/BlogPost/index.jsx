@@ -1,7 +1,6 @@
 import React from 'react';
-import Link from 'gatsby-link';
-import R from 'ramda';
 import Img from "gatsby-image";
+import PropTypes from 'prop-types';
 
 import 'prismjs/themes/prism.css';
 import styles from './index.module.scss';
@@ -25,6 +24,10 @@ export default function BlogPostTemplate(props) {
     </article>
   );
 }
+
+BlogPostTemplate.propTypes = {
+  data: PropTypes.object
+};
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {

@@ -83,4 +83,4 @@ module.exports = {
     require('./gatsby-configs/gatsby-plugin-sass'),
     require('./gatsby-configs/gatsby-plugin-feed')
   ],
-}
+};

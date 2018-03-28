@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 import R from 'ramda';
@@ -25,9 +25,9 @@ export default class Paginator extends Component {
   }
 
   mapPageToLink(page) {
-    const { pagesSum, currentPage } = this.props;
+    const { currentPage } = this.props;
     return (
-      <Link 
+      <Link
         to={this.pageToPath(page)}
         key={page}
         className={page === currentPage ? styles.selected : ''}
@@ -36,7 +36,7 @@ export default class Paginator extends Component {
       </Link>
     );
   }
-  
+
   toPrevLink() {
     const { currentPage } = this.props;
     if (currentPage === 1) {
@@ -48,7 +48,7 @@ export default class Paginator extends Component {
       </Link>
     );
   }
-  
+
   toNextLink() {
     const { pagesSum, currentPage } = this.props;
     if (currentPage === pagesSum) {

@@ -1,12 +1,12 @@
 import React from 'react';
-import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import 'normalize.css/normalize.css';
 
 import styles from './index.module.scss';
 
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
 
 export default function Template({ children, data }) {
   const { site: { siteMetadata } } = data;
@@ -28,6 +28,11 @@ export default function Template({ children, data }) {
     </div>
   );
 }
+
+Template.propTypes = {
+  children: PropTypes.node,
+  data: PropTypes.object
+};
 
 export const query = graphql`
   query GatsbyImageSampleQuery {

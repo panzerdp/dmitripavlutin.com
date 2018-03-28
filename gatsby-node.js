@@ -23,6 +23,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   return new Promise(function(resolve, reject) {
     const queryResult = graphql(query).then(result => {
       if (result.errors) {
+        // eslint-disable-next-line no-console
         console.log(result.errors);
         reject(result.errors);
         return;
@@ -36,10 +37,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   });
 };
 
-exports.modifyWebpackConfig = ({ config, _stage }) => {
+exports.modifyWebpackConfig = ({ config }) => {
   return config.merge({
     resolve: {
       root: path.resolve(config._config.context, 'src'),
-    },
-  })
-}
+    }
+  });
+};

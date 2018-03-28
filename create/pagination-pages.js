@@ -25,4 +25,4 @@ module.exports = function createPaginationPages(createPage, pathPrefix, edges) {
       });
     })
   )(1, pagesSum + 1);
-}
+};

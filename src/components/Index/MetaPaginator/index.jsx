@@ -1,6 +1,5 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import R from 'ramda';
 import Helmet from 'react-helmet';
 
 import { PAGE_PATH } from 'constants';
@@ -18,17 +17,17 @@ export default class IndexMetaPaginator extends Component {
         {this.prev()}
         {this.next()}
       </Helmet>
-    )
+    );
   }
-  
+
   prev() {
-    const { pagesSum, currentPage } = this.props;
+    const { currentPage } = this.props;
     if (currentPage === 1) {
       return null;
     }
     return <link rel="prev" href={this.pageToPath(currentPage - 1)} />;
   }
-  
+
   next() {
     const { pagesSum, currentPage } = this.props;
     if (currentPage === pagesSum) {
@@ -46,7 +45,7 @@ export default class IndexMetaPaginator extends Component {
   }
 }
 
-Paginator.propTypes = {
+IndexMetaPaginator.propTypes = {
   pagesSum: PropTypes.number,
   currentPage: PropTypes.number,
   siteUrl: PropTypes.string

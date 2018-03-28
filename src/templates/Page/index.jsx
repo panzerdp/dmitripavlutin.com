@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import R from 'ramda';
-import Helmet from 'react-helmet';
 
 import ArticleExcerpt from 'components/ArticleExcerpt';
 import Paginator from 'components/Paginator';
@@ -16,13 +15,14 @@ const toArticleExcerpts = R.pipe(
 );
 
 export default function Page(props) {
-  console.log(props);
+  const paginatorProps = getPaginator(props);
   return (
     <Fragment>
       <IndexMetaTags {...props} />
       <IndexMetaStructuredData {...props} />
+      <IndexMetaPaginator {...paginatorProps} />
       {toArticleExcerpts(props)}
-      <Paginator {...getPaginator(props)} />
+      <Paginator {...paginatorProps} />
     </Fragment>
   );
 }
