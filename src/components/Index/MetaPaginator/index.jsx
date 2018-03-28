@@ -25,7 +25,7 @@ export default class IndexMetaPaginator extends Component {
     if (currentPage === 1) {
       return null;
     }
-    return <link rel="prev" href={this.pageToPath(currentPage - 1)} />;
+    return <link rel="prev" href={this.pageToUrl(currentPage - 1)} />;
   }
 
   next() {
@@ -33,7 +33,7 @@ export default class IndexMetaPaginator extends Component {
     if (currentPage === pagesSum) {
       return null;
     }
-    return <link rel="next" href={this.pageToPath(currentPage + 1)} />;
+    return <link rel="next" href={this.pageToUrl(currentPage + 1)} />;
   }
 
   pageToUrl(page) {

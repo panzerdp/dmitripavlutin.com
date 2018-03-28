@@ -16,11 +16,12 @@ const toArticleExcerpts = R.pipe(
 
 export default function Page(props) {
   const paginatorProps = getPaginator(props);
+  const siteUrl = props.data.site.siteMetadata.siteUrl;
   return (
     <Fragment>
       <IndexMetaTags {...props} />
       <IndexMetaStructuredData {...props} />
-      <IndexMetaPaginator {...paginatorProps} />
+      <IndexMetaPaginator {...paginatorProps} siteUrl={siteUrl} />
       {toArticleExcerpts(props)}
       <Paginator {...paginatorProps} />
     </Fragment>

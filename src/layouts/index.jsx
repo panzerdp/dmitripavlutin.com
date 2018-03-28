@@ -1,8 +1,8 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import 'normalize.css/normalize.css';
 
+import 'normalize.css/normalize.css';
 import styles from './index.module.scss';
 
 import Header from 'components/Header';
@@ -30,7 +30,7 @@ export default function Template({ children, data }) {
 }
 
 Template.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.func,
   data: PropTypes.object
 };
 
