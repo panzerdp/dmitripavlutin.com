@@ -4,12 +4,13 @@ import Link from 'gatsby-link';
 import Img from "gatsby-image";
 
 import styles from './index.module.scss';
+import { TO_INDEX, TO_ALL_POSTS, TO_ABOUT } from 'path';
 
 export default function Header({ pictureResolutions, speciality }) {
   return (
     <header>
       <div className={styles.headerContent}>
-        <Link to="/">
+        <Link to={TO_INDEX()}>
           <Img
             title="Home"
             resolutions={pictureResolutions}
@@ -17,12 +18,12 @@ export default function Header({ pictureResolutions, speciality }) {
           />
         </Link>
         <div className={styles.profileInfo}>
-          <Link to="/" className={styles.name}>Dmitri Pavlutin</Link>
+          <Link to={TO_INDEX()} className={styles.name}>Dmitri Pavlutin</Link>
           <div className={styles.speciality}>{speciality}</div>
         </div>
         <div className={styles.links}>
-          <Link to="/all-posts/">All posts</Link>
-          <Link to="/about/">About</Link>
+          <Link to={TO_ALL_POSTS()}>All posts</Link>
+          <Link to={TO_ABOUT()}>About</Link>
         </div>
       </div>
     </header>

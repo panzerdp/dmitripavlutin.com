@@ -5,12 +5,13 @@ import Img from 'gatsby-image';
 
 import Subheader from 'components/Subheader';
 import styles from './index.module.scss';
+import { TO_POST } from 'path';
 
 export default function ArticleExcerpt({ post }) {
   const slug = post.frontmatter.slug;
   const title = post.frontmatter.title;
   const sizes = post.frontmatter.thumbnail.childImageSharp.sizes;
-  const to = `/${slug}/`;
+  const to = TO_POST({ slug });
   return (
     <article key={slug} className={styles.excerpt}>
       <Link exact to={to} className={styles.thumbnailAnchor}>

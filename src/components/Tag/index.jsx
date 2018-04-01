@@ -4,13 +4,11 @@ import Link from 'gatsby-link';
 import slugify from 'voca/slugify';
 
 import styles from './index.module.scss';
+import { TO_TAG } from 'path';
 
 export default function Tag({ name }) {
-  return (
-    <Link to={`/tag/${slugify(name)}`} className={styles.tag}>
-      {name}
-    </Link>
-  );
+  const tag = slugify(name);
+  return <Link to={TO_TAG({ tag })} className={styles.tag}>{name}</Link>;
 }
 
 Tag.propTypes = {

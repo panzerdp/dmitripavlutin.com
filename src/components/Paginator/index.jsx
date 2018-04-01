@@ -4,6 +4,7 @@ import Link from 'gatsby-link';
 import R from 'ramda';
 
 import styles from './index.module.scss';
+import { TO_INDEX, TO_PAGE } from 'path';
 
 export default class Paginator extends Component {
   constructor(props) {
@@ -63,14 +64,13 @@ export default class Paginator extends Component {
 
   pageToPath(page) {
     if (page === 1) {
-      return '/';
+      return TO_INDEX();
     }
-    return this.props.pathPrefix + page;
+    return TO_PAGE({ page });
   }
 }
 
 Paginator.propTypes = {
   pagesSum: PropTypes.number,
-  currentPage: PropTypes.number,
-  pathPrefix: PropTypes.string
+  currentPage: PropTypes.number
 };

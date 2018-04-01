@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
 import styles from './index.module.scss';
+import {
+  TO_INDEX,
+  TO_ALL_POSTS,
+  TO_ABOUT
+} from 'path';
 
 const year = new Date().getFullYear();
 
@@ -15,9 +20,9 @@ export default function Footer({ profiles, author }) {
         </div>
         <div className={styles.links}>
           <div className={styles.footerNavigation}>
-            <Link to="/">Home</Link>
-            <Link to="/all-posts">All posts</Link>
-            <Link to="/about">About</Link>
+            <Link to={TO_INDEX()}>Home</Link>
+            <Link to={TO_ALL_POSTS()}>All posts</Link>
+            <Link to={TO_ABOUT()}>About</Link>
           </div>
           <div className={styles.follow}>
             <a href={profiles.twitter}><img alt={`${author} Twitter profile`} src="/twitter.svg" /></a>
