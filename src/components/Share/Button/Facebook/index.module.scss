@@ -1,0 +1,14 @@
+@import '~styles/variables';
+
+.share {
+  display: block;
+  height: 2.8rem;
+  width: 2.8rem;
+  background: url('/facebook.svg') center / 1.8rem no-repeat rgba($facebook-brand-color, 0.8);
+  border-radius: 1.4rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba($facebook-brand-color, 1);
+  }
+}

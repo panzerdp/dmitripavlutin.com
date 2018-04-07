@@ -7,6 +7,7 @@ import styles from './index.module.scss';
 import Subheader from 'components/Subheader';
 import PostMetaTags from 'components/Post/MetaTags';
 import PostMetaStructuredData from 'components/Post/MetaStructuredData';
+import ShareGroupVertical from 'components/Share/Group/Vertical';
 
 export default function BlogPostTemplate(props) {
   const post = props.data.markdownRemark;
@@ -20,6 +21,7 @@ export default function BlogPostTemplate(props) {
       </div>
       <h1>{post.frontmatter.title}</h1>
       <Subheader post={post} />
+      <ShareGroupVertical url={props.data.site.siteMetadata.siteUrl} />
       <div dangerouslySetInnerHTML={{ __html: post.html }} />
     </article>
   );

@@ -30,16 +30,14 @@ function windowOpen({ url, name, height = 400, width = 550 }) {
   const shareDialog = window.open(
     url,
     name,
-    Object.keys(config).map(key => `${key}=${config[key]}`).join(', '),
+    Object.keys(config).map(key => `${key}=${config[key]}`).join(', ')
   );
 
   return shareDialog;
 }
 
 export default function withWindowOpen(WrappedComponent) {
-  function EnhancedComponent(props) {
-    return <WrappedComponent {...props} windowOpen={windowOpen} />;
-  };
-  EnhancedComponent.name = `withWindowOpen(${WrappedComponent.name})`;
+  const EnhancedComponent = props => <WrappedComponent {...props} windowOpen={windowOpen} />;
+  EnhancedComponent.displayName = `withWindowOpen(${WrappedComponent.name})`;
   return EnhancedComponent;
-};
+}
