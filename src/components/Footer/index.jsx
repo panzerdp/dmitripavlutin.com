@@ -7,7 +7,7 @@ import {
   TO_INDEX,
   TO_ALL_POSTS,
   TO_ABOUT
-} from 'path';
+} from 'routes/path';
 
 const year = new Date().getFullYear();
 

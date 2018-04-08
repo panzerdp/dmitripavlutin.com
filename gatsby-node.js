@@ -37,7 +37,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   });
 };
 
-exports.modifyWebpackConfig = ({ config }) => {
+exports.modifyWebpackConfig = ({ config, stage }) => {
+  if (stage === 'build-html') {
+    config.loader('null', {
+      test: /intersection-observer/,
+      loader: 'null-loader'
+    })
+  }
   return config.merge({
     resolve: {
       root: path.resolve(config._config.context, 'src'),

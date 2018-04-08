@@ -4,7 +4,7 @@ import Link from 'gatsby-link';
 import Img from "gatsby-image";
 
 import styles from './index.module.scss';
-import { TO_INDEX, TO_ALL_POSTS, TO_ABOUT } from 'path';
+import { TO_INDEX, TO_ALL_POSTS, TO_ABOUT } from 'routes/path';
 
 export default function Header({ pictureResolutions, speciality }) {
   return (

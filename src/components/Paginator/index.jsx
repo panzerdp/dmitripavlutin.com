@@ -4,7 +4,7 @@ import Link from 'gatsby-link';
 import R from 'ramda';
 
 import styles from './index.module.scss';
-import { TO_INDEX, TO_PAGE } from 'path';
+import { TO_INDEX, TO_PAGE } from 'routes/path';
 
 export default class Paginator extends Component {
   constructor(props) {

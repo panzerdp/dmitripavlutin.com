@@ -5,7 +5,7 @@ import Img from 'gatsby-image';
 
 import Subheader from 'components/Subheader';
 import styles from './index.module.scss';
-import { TO_POST } from 'path';
+import { TO_POST } from 'routes/path';
 
 export default function ArticleExcerpt({ post }) {
   const slug = post.frontmatter.slug;

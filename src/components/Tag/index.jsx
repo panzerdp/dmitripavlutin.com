@@ -4,7 +4,7 @@ import Link from 'gatsby-link';
 import slugify from 'voca/slugify';
 
 import styles from './index.module.scss';
-import { TO_TAG } from 'path';
+import { TO_TAG } from 'routes/path';
 
 export default function Tag({ name }) {
   const tag = slugify(name);
