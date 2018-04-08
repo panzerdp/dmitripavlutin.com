@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Img from "gatsby-image";
 import PropTypes from 'prop-types';
+import Observer from 'react-intersection-observer'
 
 import 'prismjs/themes/prism.css';
+import 'intersection-observer';
+
 import styles from './index.module.scss';
 import Subheader from 'components/Subheader';
 import PostMetaTags from 'components/Post/MetaTags';

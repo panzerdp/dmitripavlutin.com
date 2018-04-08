@@ -1,7 +1,8 @@
 import React from 'react';
+import { canUseDom } from 'exenv';
 
 function windowOpen({ url, name, height = 400, width = 550 }) {
-  if (typeof window === 'undefined') {
+  if (!canUseDom) {
     return null;
   }
   /* eslint-disable no-mixed-operators */

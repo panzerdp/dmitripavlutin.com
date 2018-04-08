@@ -48,9 +48,13 @@ footer {
       width: 1.8rem;
       height: 1.8rem;
       display: inline-block;
-      background-color: #33805b;
+      background-color: rgba($anchor-color, 0.9);
       border-radius: 4px;
       padding: 0.25rem;
+
+      &:hover {
+        background-color: rgba($anchor-color, 1);
+      }
   
       &:last-child {
         margin-right: 0;
