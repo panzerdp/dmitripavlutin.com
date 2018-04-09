@@ -6,9 +6,9 @@ import styles from './index.module.scss';
 import ShareButtonTwitter from 'components/Share/Button/Twitter';
 import ShareButtonFacebook from 'components/Share/Button/Facebook';
 
-export default function ShareButtonsVertical({ url }) {
+export default function ShareButtonsVertical({ url, className }) {
   return (
-    <div className={styles.verticalGroup}>
+    <div className={`${styles.verticalGroup} ${className}`}>
       <ShareButtonTwitter url={url} />
       <ShareButtonFacebook url={url} />
     </div>
@@ -16,5 +16,6 @@ export default function ShareButtonsVertical({ url }) {
 }
 
 ShareButtonsVertical.propTypes = {
-  url: PropTypes.string
+  url: PropTypes.string,
+  className: PropTypes.string
 };

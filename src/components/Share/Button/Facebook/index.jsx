@@ -11,7 +11,7 @@ export class ShareButtonFacebook extends Component {
   }
 
   render() {
-    return <a title="Share the post on Facebook" onClick={this.handleClick} className={styles.share} />;
+    return <a title="Share on Facebook" onClick={this.handleClick} className={styles.share} />;
   }
 
   handleClick() {

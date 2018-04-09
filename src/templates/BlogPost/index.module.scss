@@ -48,6 +48,10 @@ blockquote {
   }
 }
 
+.hidePostCover {
+  display: none;
+}
+
 :global {
   .token.function {
     color: #883f44;

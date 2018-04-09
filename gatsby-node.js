@@ -42,7 +42,7 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
     config.loader('null', {
       test: /intersection-observer/,
       loader: 'null-loader'
-    })
+    });
   }
   return config.merge({
     resolve: {

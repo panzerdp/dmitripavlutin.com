@@ -11,7 +11,7 @@ export class ShareButtonTwitter extends Component {
   }
 
   render() {
-    return <a title="Share the post on Twitter" onClick={this.handleClick} className={styles.share} />;
+    return <a title="Share on Twitter" onClick={this.handleClick} className={styles.share} />;
   }
 
   handleClick() {
