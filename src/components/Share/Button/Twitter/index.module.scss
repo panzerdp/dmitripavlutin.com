@@ -2,10 +2,10 @@
 
 .share {
   display: block;
-  height: 2.8rem;
-  width: 2.8rem;
-  background: url('/twitter.svg') center / 1.8rem no-repeat rgba($twitter-brand-color, 0.8);
-  border-radius: 1.4rem;
+  height: 2.6rem;
+  width: 2.6rem;
+  background: url('/twitter.svg') center / 1.6rem no-repeat rgba($twitter-brand-color, 0.75);
+  border-radius: 1.3rem;
   cursor: pointer;
 
   &:hover {

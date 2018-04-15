@@ -52,7 +52,7 @@ export const pageQuery = graphql`
     allMarkdownRemark(sort: { fields: [frontmatter___published], order: DESC }, skip: $skip, limit: $limit) {
       edges {
         node {
-          excerpt(pruneLength: 200)
+          excerpt(pruneLength: 250)
           frontmatter {
             publishedDate: published(formatString: "DD MMMM, YYYY")
             title

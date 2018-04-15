@@ -26,8 +26,10 @@ export default function ArticleExcerpt({ post }) {
         <Subheader post={post} />
         <div>
           <span dangerouslySetInnerHTML={{ __html: post.excerpt }} />
-          &nbsp; <Link exact to={to}>Continue reading</Link>
         </div>
+        <Link className={styles.continueReading} exact to={to}>
+          Continue reading &#x21FE;
+        </Link>
       </div>
     </article>
   );
