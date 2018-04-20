@@ -28,7 +28,7 @@ export default function ArticleExcerpt({ post }) {
           <span dangerouslySetInnerHTML={{ __html: post.excerpt }} />
         </div>
         <Link className={styles.continueReading} exact to={to}>
-          Continue reading &#x2192;
+          Continue reading &#x279e;
         </Link>
       </div>
     </article>
