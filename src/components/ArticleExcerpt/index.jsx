@@ -17,7 +17,7 @@ export default function ArticleExcerpt({ post }) {
       <Link exact to={to} className={styles.thumbnailAnchor}>
         <Img sizes={sizes} />
       </Link>
-      <div className={styles.content} >
+      <div className={styles.content}>
         <h4>
           <Link exact to={to}>
             {title}
@@ -26,10 +26,10 @@ export default function ArticleExcerpt({ post }) {
         <Subheader post={post} />
         <div>
           <span dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+          <Link className={styles.continueReading} exact to={to}>
+            Continue reading &#x279e;
+          </Link>
         </div>
-        <Link className={styles.continueReading} exact to={to}>
-          Continue reading &#x279e;
-        </Link>
       </div>
     </article>
   );
