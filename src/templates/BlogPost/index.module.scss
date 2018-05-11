@@ -1,3 +1,5 @@
+@import 'styles/variables.scss';
+
 .postCover {
   margin: 2rem 0;
 }
@@ -90,5 +92,11 @@ blockquote {
   .postCover {
     margin: 1rem 0;
     transform: none;
+  }
+}
+
+@media (max-width: $small-device-width) {
+  article h1 {
+    font-size: 1.25em;
   }
 }

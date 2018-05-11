@@ -51,5 +51,24 @@ a {
 @media (max-width: $small-device-width) {
   .main {
     padding: 0 0.5rem;
-  } 
+  }
+
+  h1 { 
+    font-size: 0.8 * 2em; 
+  }
+  h2 { 
+    font-size: 0.8 * 1.5em; 
+  }
+  h3 { 
+    font-size: 0.8 * 1.17em; 
+  }
+  h4 { 
+    font-size: 0.8 * 1.12em; 
+  }
+  h5 { 
+    font-size: 0.8 * .83em; 
+  }
+  h6 { 
+    font-size: 0.8 * .75em; 
+  }
 }
