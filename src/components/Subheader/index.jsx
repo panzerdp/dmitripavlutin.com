@@ -9,15 +9,16 @@ const mapTags = R.map(function mapTag(tagName) {
   return <Tag name={tagName} key={tagName} />;
 });
 
-export default function Subheader({ post }) {
+export default function Subheader({ tags, publishedDate }) {
   return (
     <div className={styles.subheader}>
-      <div className={styles.tags}>{mapTags(post.frontmatter.tags)}</div>
-      <small>{post.frontmatter.publishedDate}</small>
+      <div className={styles.tags}>{mapTags(tags)}</div>
+      <small>{publishedDate}</small>
     </div>
   );
 }
 
 Subheader.propTypes = {
-  post: PropTypes.object
+  tags: PropTypes.array,
+  publishedDate: PropTypes.string
 };

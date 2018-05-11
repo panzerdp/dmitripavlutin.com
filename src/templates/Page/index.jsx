@@ -11,7 +11,19 @@ import IndexMetaPaginator from 'components/Index/MetaPaginator';
 const getPaginator = R.pipe(R.path(['pathContext']), R.pick(['currentPage', 'pagesSum', 'pathPrefix']));
 const toArticleExcerpts = R.pipe(
   R.path(['data', 'allMarkdownRemark', 'edges']),
-  R.addIndex(R.map)((edge, index) => <ArticleExcerpt key={index} post={edge.node} />)
+  R.addIndex(R.map)(function({ node: { frontmatter }, node }, index) {
+    return (
+      <ArticleExcerpt
+        key={index}
+        excerpt={node.excerpt}
+        slug={frontmatter.slug}
+        title={frontmatter.title}
+        sizes={frontmatter.thumbnail.childImageSharp.sizes}
+        tags={frontmatter.tags}
+        publishedDate={frontmatter.publishedDate}
+      />
+    );
+  })
 );
 
 export default function Page(props) {

@@ -34,7 +34,7 @@ export default class BlogPostTemplate extends Component {
           sizes={sizes}
         />
         <h1>{post.frontmatter.title}</h1>
-        <Subheader post={post} />
+        <Subheader tags={post.frontmatter.tags} publishedDate={post.frontmatter.publishedDate} />
         <ShareGroupVertical
           url={siteUrl}
           className={this.state.coverIsInView ? styles.hidePostCover : ''}

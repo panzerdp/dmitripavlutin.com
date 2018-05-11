@@ -7,10 +7,7 @@ import Subheader from 'components/Subheader';
 import styles from './index.module.scss';
 import { TO_POST } from 'routes/path';
 
-export default function ArticleExcerpt({ post }) {
-  const slug = post.frontmatter.slug;
-  const title = post.frontmatter.title;
-  const sizes = post.frontmatter.thumbnail.childImageSharp.sizes;
+export default function ArticleExcerpt({ excerpt, slug, title, sizes, tags, publishedDate }) {
   const to = TO_POST({ slug });
   return (
     <article key={slug} className={styles.excerpt}>
@@ -23,9 +20,9 @@ export default function ArticleExcerpt({ post }) {
             {title}
           </Link>
         </h4>
-        <Subheader post={post} />
+        <Subheader tags={tags} publishedDate={publishedDate} />
         <div>
-          <span dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+          <span dangerouslySetInnerHTML={{ __html: excerpt }} />
           <Link className={styles.continueReading} exact to={to}>
             Continue reading &#x279e;
           </Link>
@@ -36,5 +33,10 @@ export default function ArticleExcerpt({ post }) {
 }
 
 ArticleExcerpt.propTypes = {
-  post: PropTypes.object
+  excerpt: PropTypes.string,
+  slug: PropTypes.string,
+  title: PropTypes.string,
+  sizes: PropTypes.array,
+  tags: PropTypes.array,
+  publishedDate: PropTypes.string
 };
