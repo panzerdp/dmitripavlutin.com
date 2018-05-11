@@ -38,7 +38,9 @@ function windowOpen({ url, name, height = 400, width = 550 }) {
 }
 
 export default function withWindowOpen(WrappedComponent) {
-  const EnhancedComponent = props => <WrappedComponent {...props} windowOpen={windowOpen} />;
+  function EnhancedComponent(props) {
+    return <WrappedComponent {...props} windowOpen={windowOpen} />;
+  }
   EnhancedComponent.displayName = `withWindowOpen(${WrappedComponent.name})`;
   return EnhancedComponent;
 }

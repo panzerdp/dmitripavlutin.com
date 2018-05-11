@@ -14,7 +14,7 @@ function PostCover({ className, sizes }) {
 
 PostCover.propTypes = {
   className: PropTypes.string,
-  sizes: PropTypes.array
+  sizes: PropTypes.object
 };
 
 export default withIntersectionObserver(PostCover);

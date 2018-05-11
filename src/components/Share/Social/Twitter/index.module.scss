@@ -1,12 +1,7 @@
 @import '~styles/variables';
 
-.share {
-  display: block;
-  height: 2.6rem;
-  width: 2.6rem;
+.twitter {
   background: url('/twitter.svg') center / 1.6rem no-repeat rgba($twitter-brand-color, 0.75);
-  border-radius: 1.3rem;
-  cursor: pointer;
 
   &:hover {
     background-color: rgba($twitter-brand-color, 1);

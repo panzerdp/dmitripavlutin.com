@@ -36,7 +36,7 @@ ArticleExcerpt.propTypes = {
   excerpt: PropTypes.string,
   slug: PropTypes.string,
   title: PropTypes.string,
-  sizes: PropTypes.array,
+  sizes: PropTypes.object,
   tags: PropTypes.array,
   publishedDate: PropTypes.string
 };

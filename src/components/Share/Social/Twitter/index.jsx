@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import ShareButton from 'components/Share/Button';
 import styles from './index.module.scss';
 import withWindowOpen from 'components/With/WindowOpen';
 
-export class ShareButtonTwitter extends Component {
+export class ShareSocialTwitter extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
 
   render() {
-    return <a title="Share on Twitter" onClick={this.handleClick} className={styles.share} />;
+    return <ShareButton title="Share on Twitter" onClick={this.handleClick} className={styles.twitter} />;
   }
 
   handleClick() {
   }
 }
 
-ShareButtonTwitter.propTypes = {
+ShareSocialTwitter.propTypes = {
   url: PropTypes.string
 };
 
-export default withWindowOpen(ShareButtonTwitter);
+export default withWindowOpen(ShareSocialTwitter);

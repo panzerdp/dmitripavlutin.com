@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 
 import styles from './index.module.scss';
 
-import ShareButtonTwitter from 'components/Share/Button/Twitter';
-import ShareButtonFacebook from 'components/Share/Button/Facebook';
+import ShareSocialTwitter from 'components/Share/Social/Twitter';
+import ShareSocialFacebook from 'components/Share/Social/Facebook';
 
 export default function ShareButtonsVertical({ url, className }) {
   return (
     <div className={`${styles.verticalGroup} ${className}`}>
-      <ShareButtonTwitter url={url} />
-      <ShareButtonFacebook url={url} />
+      <ShareSocialTwitter url={url} />
+      <ShareSocialFacebook url={url} />
     </div>
   );
 }
