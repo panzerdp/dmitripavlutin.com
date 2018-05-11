@@ -1,10 +1,11 @@
 import React from 'react';
-import { canUseDom } from 'exenv';
+import { canUseDOM } from 'exenv';
 
 function windowOpen({ url, name, height = 400, width = 550 }) {
-  if (!canUseDom) {
+  if (!canUseDOM) {
     return null;
   }
+
   /* eslint-disable no-mixed-operators */
   const left = (window.outerWidth / 2)
     + (window.screenX || window.screenLeft || 0) - (width / 2);

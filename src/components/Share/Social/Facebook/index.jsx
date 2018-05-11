@@ -20,7 +20,8 @@ export class ShareSocialFacebook extends Component {
 }
 
 ShareSocialFacebook.propTypes = {
-  url: PropTypes.string
+  url: PropTypes.string,
+  text: PropTypes.string
 };
 
 export default withWindowOpen(ShareSocialFacebook);

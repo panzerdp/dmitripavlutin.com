@@ -10,6 +10,7 @@ import PostMetaTags from 'components/Post/MetaTags';
 import PostMetaStructuredData from 'components/Post/MetaStructuredData';
 import ShareGroupVertical from 'components/Share/Group/Vertical';
 import PostCover from 'components/Post/Cover';
+import { TO_POST } from 'routes/path';
 
 export default class BlogPostTemplate extends Component {
   constructor(props) {
@@ -22,8 +23,13 @@ export default class BlogPostTemplate extends Component {
 
   render() {
     const post = this.props.data.markdownRemark;
-    const sizes = post.frontmatter.thumbnail.childImageSharp.sizes;
-    const siteUrl = this.props.data.site.siteMetadata.siteUrl;
+    const frontmatter = post.frontmatter;
+    const sizes = frontmatter.thumbnail.childImageSharp.sizes;
+    const title = frontmatter.title;
+    const tags = frontmatter.tags;
+    const postUrl = this.props.data.site.siteMetadata.siteUrl + TO_POST({
+      slug: frontmatter.slug
+    });
     return (
       <article>
         <PostMetaTags {...this.props} />
@@ -36,7 +42,9 @@ export default class BlogPostTemplate extends Component {
         <h1>{post.frontmatter.title}</h1>
         <Subheader tags={post.frontmatter.tags} publishedDate={post.frontmatter.publishedDate} />
         <ShareGroupVertical
-          url={siteUrl}
+          url={postUrl}
+          text={title}
+          tags={tags}
           className={this.state.coverIsInView ? styles.hidePostCover : ''}
         />
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
