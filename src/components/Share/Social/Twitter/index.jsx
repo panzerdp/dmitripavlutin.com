@@ -9,6 +9,7 @@ import styles from './index.module.scss';
 import withWindowOpen from 'components/With/WindowOpen';
 
 const SHARE_TWITTER = 'https://twitter.com/share';
+
 const toTwitterHashtags = R.pipe(
   R.map(slugify),
   R.join(',')
