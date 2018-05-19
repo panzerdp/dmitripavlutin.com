@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "exenv": "1.2.2",
-    "gatsby": "1.9.260",
+    "gatsby": "1.9.261",
     "gatsby-cli": "1.1.52",
     "gatsby-image": "1.0.51",
     "gatsby-link": "1.6.44",
@@ -27,7 +27,7 @@
     "gatsby-remark-prismjs": "2.0.2",
     "gatsby-remark-responsive-iframe": "1.4.18",
     "gatsby-remark-smartypants": "1.4.12",
-    "gatsby-source-filesystem": "1.5.35",
+    "gatsby-source-filesystem": "1.5.36",
     "gatsby-transformer-remark": "1.7.41",
     "gatsby-transformer-sharp": "1.6.24",
     "husky": "0.14.3",
@@ -38,12 +38,12 @@
     "query-string": "6.1.0",
     "ramda": "0.25.0",
     "react-helmet": "5.2.0",
-    "react-intersection-observer": "3.0.3",
+    "react-intersection-observer": "4.0.2",
     "voca": "1.4.0"
   },
   "devDependencies": {
     "eslint": "4.19.1",
-    "eslint-plugin-react": "7.7.0",
+    "eslint-plugin-react": "7.8.2",
     "gh-pages": "1.1.0",
     "prettier": "1.12.1"
   },
