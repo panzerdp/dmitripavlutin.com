@@ -42,6 +42,7 @@
     "voca": "1.4.0"
   },
   "devDependencies": {
+    "babel-eslint": "8.2.3",
     "eslint": "4.19.1",
     "eslint-plugin-react": "7.8.2",
     "gh-pages": "1.2.0",

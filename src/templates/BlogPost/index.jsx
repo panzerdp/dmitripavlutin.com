@@ -10,7 +10,9 @@ import PostMetaTags from 'components/Post/MetaTags';
 import PostMetaStructuredData from 'components/Post/MetaStructuredData';
 import ShareGroupVertical from 'components/Share/Group/Vertical';
 import PostCover from 'components/Post/Cover';
+import PostEdit from 'components/Post/Edit';
 import { TO_POST } from 'routes/path';
+import { postRelativePath } from './util';
 
 export default class BlogPostTemplate extends Component {
   constructor(props) {
@@ -18,18 +20,19 @@ export default class BlogPostTemplate extends Component {
     this.state = {
       coverIsInView: true
     };
-    this.handleCoverViewChange = this.handleCoverViewChange.bind(this);
   }
 
   render() {
     const post = this.props.data.markdownRemark;
+    const siteMetadata = this.props.data.site.siteMetadata;
     const frontmatter = post.frontmatter;
     const sizes = frontmatter.thumbnail.childImageSharp.sizes;
     const title = frontmatter.title;
     const tags = frontmatter.tags;
-    const postUrl = this.props.data.site.siteMetadata.siteUrl + TO_POST({
+    const postUrl = siteMetadata.siteUrl + TO_POST({
       slug: frontmatter.slug
     });
+    const postRepositoryFileUrl = siteMetadata.repositoryUrl + '/tree/master/' + postRelativePath(post.fileAbsolutePath);
     return (
       <article>
         <PostMetaTags {...this.props} />
@@ -48,11 +51,12 @@ export default class BlogPostTemplate extends Component {
           className={this.state.coverIsInView ? styles.hidePostCover : ''}
         />
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        <PostEdit url={postRepositoryFileUrl} />
       </article>
     );
   }
 
-  handleCoverViewChange(coverIsInView) {
+  handleCoverViewChange = (coverIsInView) => {
     this.setState({
       coverIsInView
     });
@@ -70,6 +74,7 @@ export const pageQuery = graphql`
         title
         author
         siteUrl
+        repositoryUrl
         profiles {
           stackoverflow
           twitter
@@ -93,6 +98,7 @@ export const pageQuery = graphql`
     markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       id
       html
+      fileAbsolutePath
       frontmatter {
         title
         description

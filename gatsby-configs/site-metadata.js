@@ -4,6 +4,7 @@ module.exports = {
   description: 'Posts by Dmitri Pavlutin about JavaScript and React',
   speciality: 'JavaScript & React developer',
   siteUrl: 'https://dmitripavlutin.com',
+  repositoryUrl: 'https://github.com/panzerdp/dmitripavlutin.com',
   postsPerPage: 5,
   profiles: {
     stackoverflow: 'https://stackoverflow.com/users/1894471/dmitri-pavlutin',
