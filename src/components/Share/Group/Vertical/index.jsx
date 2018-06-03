@@ -5,6 +5,7 @@ import styles from './index.module.scss';
 
 import ShareSocialTwitter from 'components/Share/Social/Twitter';
 import ShareSocialFacebook from 'components/Share/Social/Facebook';
+import ShareSocialReddit from 'components/Share/Social/Reddit';
 
 export default function ShareButtonsVertical({ url, text, tags, className }) {
   const shareProps = {
@@ -16,6 +17,7 @@ export default function ShareButtonsVertical({ url, text, tags, className }) {
     <div className={`${styles.verticalGroup} ${className}`}>
       <ShareSocialTwitter {...shareProps} />
       <ShareSocialFacebook {...shareProps} />
+      <ShareSocialReddit {...shareProps} />
     </div>
   );
 }

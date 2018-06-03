@@ -6,27 +6,27 @@ import ShareButton from 'components/Share/Button';
 import styles from './index.module.scss';
 import withWindowOpen from 'components/With/WindowOpen';
 
-const SHARE_FACEBOOK = 'https://www.facebook.com/sharer/sharer.php/';
+const SHARE_REDDIT = 'https://www.reddit.com/submit';
 
 export class ShareSocialFacebook extends Component {
   render() {
-    return <ShareButton title="Share on Twitter" onClick={this.handleClick} className={styles.facebook} />;
+    return <ShareButton title="Submit to Reddit" onClick={this.handleClick} className={styles.reddit} />;
   }
 
   handleClick = (event) => {
     event.preventDefault();
     this.props.windowOpen({
-      url: this.getFacebookShareUrl(),
+      url: this.getRedditShareUrl(),
       width: 550,
       height: 296,
-      name: 'Facebook share'
+      name: 'Reddit submit'
     });
   }
 
-  getFacebookShareUrl() {
+  getRedditShareUrl() {
     const { url } = this.props;
-    return SHARE_FACEBOOK + '?' + stringify({
-      u: url
+    return SHARE_REDDIT + '?' + stringify({
+      url
     });
   }
 }

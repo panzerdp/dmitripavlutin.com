@@ -1,0 +1,9 @@
+@import '~styles/variables';
+
+.reddit {
+  background: url('/reddit.svg') center / 1.6rem no-repeat rgba($reddit-brand-color, 0.75);
+
+  &:hover {
+    background-color: rgba($reddit-brand-color, 1);
+  }
+}

@@ -16,16 +16,11 @@ const toTwitterHashtags = R.pipe(
 );
 
 export class ShareSocialTwitter extends Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
   render() {
     return <ShareButton title="Share on Twitter" onClick={this.handleClick} className={styles.twitter} />;
   }
 
-  handleClick(event) {
+  handleClick = (event) => {
     event.preventDefault();
     this.props.windowOpen({
       url: this.getTwitterShareUrl(),
