@@ -6,7 +6,7 @@ import styles from './index.module.scss';
 export default function PostEdit({ url }) {
   return (
     <div className={styles.postEdit}>
-      <a href={url} target="_blank">
+      <a href={url} target="_blank" rel="noopener noreferrer">
         <img alt="GitHub Logo" src="/github.svg" />
         <span>Edit on GitHub</span>
       </a>
