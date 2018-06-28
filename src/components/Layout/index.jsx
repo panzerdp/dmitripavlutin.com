@@ -22,6 +22,7 @@ export default class Layout extends Component {
   }
 
   renderContent = (data) => {
+    console.log('render!');
     const { site: { siteMetadata } } = data;
     const { children } = this.props;
     return (
@@ -45,5 +46,5 @@ export default class Layout extends Component {
 }
 
 Layout.propTypes = {
-  children: PropTypes.func
+  children: PropTypes.node
 };

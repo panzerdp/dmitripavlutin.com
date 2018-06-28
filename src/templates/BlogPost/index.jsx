@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { StaticQuery } from "gatsby";
+import PropTypes from 'prop-types';
 
 import 'prismjs/themes/prism.css';
 import 'intersection-observer';
 
 import styles from './index.module.scss';
-
-import Layout from 'components/Layout';
 import Subheader from 'components/Subheader';
 import PostMetaTags from 'components/Post/MetaTags';
 import PostMetaStructuredData from 'components/Post/MetaStructuredData';
@@ -15,7 +13,7 @@ import PostCover from 'components/Post/Cover';
 import PostEdit from 'components/Post/Edit';
 import { TO_POST } from 'routes/path';
 import { postRelativePath } from './util';
-import query from './query';
+import Layout from 'components/Layout';
 
 export default class BlogPostTemplate extends Component {
   constructor(props) {
@@ -26,23 +24,8 @@ export default class BlogPostTemplate extends Component {
   }
 
   render() {
-    return (
-      <StaticQuery
-        query={query}
-        render={this.renderContent}
-      />
-    );
-  }
-
-  handleCoverViewChange = (coverIsInView) => {
-    this.setState({
-      coverIsInView
-    });
-  }
-
-  renderContent = (data) => {
-    const post = data.markdownRemark;
-    const siteMetadata = data.site.siteMetadata;
+    const post = this.props.data.markdownRemark;
+    const siteMetadata = this.props.data.site.siteMetadata;
     const frontmatter = post.frontmatter;
     const sizes = frontmatter.thumbnail.childImageSharp.sizes;
     const title = frontmatter.title;
@@ -75,4 +58,66 @@ export default class BlogPostTemplate extends Component {
       </Layout>
     );
   }
+
+  handleCoverViewChange = (coverIsInView) => {
+    this.setState({
+      coverIsInView
+    });
+  }
 }
+
+BlogPostTemplate.propTypes = {
+  data: PropTypes.object
+};
+
+export const pageQuery = graphql`
+  query BlogPostBySlug($slug: String!) {
+    site {
+      siteMetadata {
+        title
+        author
+        siteUrl
+        repositoryUrl
+        profiles {
+          stackoverflow
+          twitter
+          linkedin
+          github
+          facebook
+          googlePlus
+        }
+        nicknames {
+          twitter
+        }
+      }
+    }
+    authorProfilePicture: file(relativePath: { eq: "layouts/profile-picture.jpg" }) {
+      childImageSharp {
+        resize(width: 256, height: 256, quality: 100) {
+          src
+        }
+      }
+    }
+    markdownRemark(frontmatter: { slug: { eq: $slug } }) {
+      id
+      html
+      fileAbsolutePath
+      frontmatter {
+        title
+        description
+        slug
+        publishedDate: published(formatString: "MMMM DD, YYYY")
+        published(formatString: "YYYY-MM-DDTHH:mm:ssZ")
+        modified(formatString: "YYYY-MM-DDTHH:mm:ssZ")
+        tags
+        thumbnail {
+          childImageSharp {
+            sizes(maxWidth: 720, maxHeight: 400, quality: 90) {
+              ...GatsbyImageSharpSizes
+            }
+          }
+        }
+      }
+    }
+  }
+`;
