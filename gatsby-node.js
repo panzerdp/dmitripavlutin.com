@@ -18,8 +18,8 @@ const query = `
   }
 }`;
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions;
   return new Promise(function(resolve, reject) {
     const queryResult = graphql(query).then(result => {
       if (result.errors) {
@@ -37,16 +37,22 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   });
 };
 
-exports.modifyWebpackConfig = ({ config, stage }) => {
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
   if (stage === 'build-html') {
-    config.loader('null', {
-      test: /intersection-observer/,
-      loader: 'null-loader'
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /intersection-observer/,
+            loader: 'null-loader'
+          },
+        ],
+      },
     });
   }
-  return config.merge({
+  actions.setWebpackConfig({
     resolve: {
-      root: path.resolve(config._config.context, 'src'),
-    }
+      modules: [path.resolve(__dirname, "src"), "node_modules"],
+    },
   });
 };
