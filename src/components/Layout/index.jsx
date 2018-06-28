@@ -12,19 +12,16 @@ import Footer from 'components/Footer';
 import query from './query';
 
 export default class Layout extends Component {
-  constructor(props) {
-    super(props);
-    this.renderContent = this.renderContent.bind(this);
-  }
-
   render() {
-    <StaticQuery
-      query={query}
-      render={this.renderContent}
-    />;
+    return (
+      <StaticQuery
+        query={query}
+        render={this.renderContent}
+      />
+    );
   }
 
-  renderContent(data) {
+  renderContent = (data) => {
     const { site: { siteMetadata } } = data;
     const { children } = this.props;
     return (

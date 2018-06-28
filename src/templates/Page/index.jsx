@@ -13,7 +13,7 @@ import query from './query';
 
 const toArticleExcerpts = R.pipe(
   R.path(['data', 'allMarkdownRemark', 'edges']),
-  R.addIndex(R.map)(function ({ node: { frontmatter }, node }, index) {
+  R.addIndex(R.map)(function({ node: { frontmatter }, node }, index) {
     return (
       <ArticleExcerpt
         key={index}
