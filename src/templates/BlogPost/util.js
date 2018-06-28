@@ -1,4 +1,4 @@
-import R from 'ramda';
+import * as R from 'ramda';
 
 const POSTS_DIRECTORY_DEPTH = 2;
 

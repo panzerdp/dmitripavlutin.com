@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { stringify } from 'query-string';
 import slugify from 'voca/slugify';
-import R from 'ramda';
+import * as R from 'ramda';
 
 import ShareButton from 'components/Share/Button';
 import styles from './index.module.scss';

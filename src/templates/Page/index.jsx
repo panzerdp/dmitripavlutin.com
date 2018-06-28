@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import R from 'ramda';
+import * as R from 'ramda';
 import { StaticQuery } from "gatsby";
 
 import Layout from 'components/Layout';
@@ -28,7 +28,7 @@ const toArticleExcerpts = R.pipe(
   })
 );
 
-export default class Page extends Comment {
+export default class Page extends Component {
   render() {
     return (
       <StaticQuery

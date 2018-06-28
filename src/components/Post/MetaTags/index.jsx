@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import R from 'ramda';
+import * as R from 'ramda';
 
 const toMetaArticleTag = R.map(function(tag) {
   return <meta property="article:tag" content={tag} key={tag} />;

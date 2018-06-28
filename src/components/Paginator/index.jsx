@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
-import R from 'ramda';
+import * as R from 'ramda';
 
 import styles from './index.module.scss';
 import { TO_INDEX, TO_PAGE } from 'routes/path';

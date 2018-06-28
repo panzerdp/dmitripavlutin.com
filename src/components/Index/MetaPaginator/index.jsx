@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
-import { PAGE_PATH } from 'constants';
+const PAGE_PATH = 'page';
 
 export default class IndexMetaPaginator extends Component {
   constructor(props) {

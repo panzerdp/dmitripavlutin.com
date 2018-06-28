@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import R from 'ramda';
+import * as R from 'ramda';
 import { canUseDOM } from 'exenv';
 
 import 'intersection-observer';

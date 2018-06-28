@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import R from 'ramda';
+import * as R from 'ramda';
 
 export default function PostMetaStructuredData(props) {
   const { data: { markdownRemark: { frontmatter }, site: { siteMetadata }, authorProfilePicture } } = props;
