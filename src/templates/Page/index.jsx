@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import * as R from 'ramda';
+import { graphql } from 'gatsby';
 
 import ArticleExcerpt from 'components/ArticleExcerpt';
 import Paginator from 'components/Paginator';
@@ -28,17 +29,16 @@ const toArticleExcerpts = R.pipe(
 );
 
 export default function Page(props) {
-  console.log(props);
   const paginatorProps = getPaginator(props);
   const siteUrl = props.data.site.siteMetadata.siteUrl;
   return (
-    <Fragment>
+    <Layout>
       <IndexMetaTags {...props} />
       <IndexMetaStructuredData {...props} />
       <IndexMetaPaginator {...paginatorProps} siteUrl={siteUrl} />
       {toArticleExcerpts(props)}
       <Paginator {...paginatorProps} />
-    </Fragment>
+    </Layout>
   );
 }
 
@@ -56,7 +56,7 @@ export const pageQuery = graphql`
         siteUrl
       }
     }
-    authorProfilePicture: file(relativePath: { eq: "layouts/profile-picture.jpg" }) {
+    authorProfilePicture: file(relativePath: { eq: "components/Layout/profile-picture.jpg" }) {
       childImageSharp {
         resize(width: 256, height: 256, quality: 100) {
           src

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import { StaticQuery } from "gatsby";
+import { StaticQuery, graphql } from "gatsby";
 
 import 'normalize.css/normalize.css';
 import styles from './index.module.scss';
@@ -9,20 +9,41 @@ import styles from './index.module.scss';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
-import query from './query';
-
 export default class Layout extends Component {
   render() {
     return (
       <StaticQuery
-        query={query}
+        query={graphql`
+        query GatsbyImageSampleQuery {
+          file(relativePath: { eq: "components/Layout/profile-picture.jpg" }) {
+            childImageSharp {
+              # Specify the image processing steps right in the query
+              # Makes it trivial to update as your page's design changes.
+              resolutions(width: 64, height: 64, quality: 100) {
+                ...GatsbyImageSharpResolutions
+              }
+            }
+          }
+          site {
+            siteMetadata {
+              author
+              speciality
+              profiles {
+                stackoverflow
+                twitter 
+                github
+                linkedin
+              }
+            }
+          }
+        }
+      `}
         render={this.renderContent}
       />
     );
   }
 
   renderContent = (data) => {
-    console.log('render!');
     const { site: { siteMetadata } } = data;
     const { children } = this.props;
     return (
