@@ -12,6 +12,7 @@ import PostMetaStructuredData from 'components/Post/MetaStructuredData';
 import ShareGroupVertical from 'components/Share/Group/Vertical';
 import PostCover from 'components/Post/Cover';
 import PostEdit from 'components/Post/Edit';
+import PostShareBottom from 'components/Post/ShareBottom';
 import { TO_POST } from 'routes/path';
 import { postRelativePath } from './util';
 import Layout from 'components/Layout';
@@ -55,6 +56,11 @@ export default class BlogPostTemplate extends Component {
           />
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
           <PostEdit url={postRepositoryFileUrl} />
+          <PostShareBottom
+            url={postUrl}
+            text={title}
+            tags={tags}
+          />
         </article>
       </Layout>
     );
