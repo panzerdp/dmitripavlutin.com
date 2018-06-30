@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as R from 'ramda';
 import { graphql } from 'gatsby';
 
 import ArticleExcerpt from 'components/ArticleExcerpt';
@@ -10,41 +9,51 @@ import IndexMetaStructuredData from 'components/Index/MetaStructuredData';
 import IndexMetaPaginator from 'components/Index/MetaPaginator';
 import Layout from 'components/Layout';
 
-const getPaginator = R.pipe(R.path(['pathContext']), R.pick(['currentPage', 'pagesSum', 'pathPrefix']));
-const toArticleExcerpts = R.pipe(
-  R.path(['data', 'allMarkdownRemark', 'edges']),
-  R.addIndex(R.map)(function({ node: { frontmatter }, node }, index) {
+export default class Page extends Component {
+  render() {
+    const siteUrl = this.props.data.site.siteMetadata.siteUrl;
+    const paginatorProps = this.getPaginatorProps();
     return (
-      <ArticleExcerpt
-        key={index}
-        excerpt={node.excerpt}
-        slug={frontmatter.slug}
-        title={frontmatter.title}
-        sizes={frontmatter.thumbnail.childImageSharp.sizes}
-        tags={frontmatter.tags}
-        publishedDate={frontmatter.publishedDate}
-      />
+      <Layout>
+        <IndexMetaTags {...this.props} />
+        <IndexMetaStructuredData {...this.props} />
+        <IndexMetaPaginator {...paginatorProps} siteUrl={siteUrl} />
+        {this.getArticeExcerpts()}
+        <Paginator {...paginatorProps} />
+      </Layout>
     );
-  })
-);
+  }
 
-export default function Page(props) {
-  const paginatorProps = getPaginator(props);
-  const siteUrl = props.data.site.siteMetadata.siteUrl;
-  return (
-    <Layout>
-      <IndexMetaTags {...props} />
-      <IndexMetaStructuredData {...props} />
-      <IndexMetaPaginator {...paginatorProps} siteUrl={siteUrl} />
-      {toArticleExcerpts(props)}
-      <Paginator {...paginatorProps} />
-    </Layout>
-  );
+  getPaginatorProps() {
+    const { pageContext: { currentPage, pagesSum, pathPrefix } } = this.props;
+    return {
+      currentPage,
+      pagesSum,
+      pathPrefix
+    };
+  }
+
+  getArticeExcerpts() {
+    const edges = this.props.data.allMarkdownRemark.edges;
+    return edges.map(function({ node: { frontmatter, excerpt } }, index) {
+      return (
+        <ArticleExcerpt
+          key={index}
+          excerpt={excerpt}
+          slug={frontmatter.slug}
+          title={frontmatter.title}
+          sizes={frontmatter.thumbnail.childImageSharp.sizes}
+          tags={frontmatter.tags}
+          publishedDate={frontmatter.publishedDate}
+        />
+      );
+    });
+  }
 }
 
 Page.propTypes = {
   data: PropTypes.object,
-  pathContext: PropTypes.object
+  pageContext: PropTypes.object
 };
 
 export const pageQuery = graphql`
