@@ -6,6 +6,7 @@ modified: "2018-03-04"
 thumbnail: "./images/runner.jpg"
 slug: tips-on-shortening-arrow-functions
 tags: ['javascript', 'arrow function']
+recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript", "7-architectural-attributes-of-a-reliable-react-component"]
 draft: false
 ---
 

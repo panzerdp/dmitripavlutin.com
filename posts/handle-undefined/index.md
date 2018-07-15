@@ -6,6 +6,7 @@ modified: "2017-04-15"
 thumbnail: "./blade-runner-rachel.png"
 slug: 7-tips-to-handle-undefined-in-javascript
 tags: ["javascript", "undefined"]
+recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript", "7-architectural-attributes-of-a-reliable-react-component"]
 draft: false
 ---
 

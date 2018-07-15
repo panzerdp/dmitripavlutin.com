@@ -6,6 +6,7 @@ modified: "2016-12-14"
 thumbnail: "./images/future-car.jpg"
 slug: announcing-voca-the-ultimate-javascript-string-library
 tags: ["javascript", "string", "open source"]
+recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript", "7-architectural-attributes-of-a-reliable-react-component"]
 draft: false
 ---
 

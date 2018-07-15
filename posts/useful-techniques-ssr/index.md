@@ -6,6 +6,7 @@ modified: "2018-03-17"
 thumbnail: "./images/cover.jpg"
 slug: useful-techniques-react-server-side-rendering
 tags: ['react', 'server side rendering']
+recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript", "7-architectural-attributes-of-a-reliable-react-component"]
 draft: false
 ---
 

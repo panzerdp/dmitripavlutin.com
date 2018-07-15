@@ -117,6 +117,7 @@ export const pageQuery = graphql`
         published(formatString: "YYYY-MM-DDTHH:mm:ssZ")
         modified(formatString: "YYYY-MM-DDTHH:mm:ssZ")
         tags
+        recommended
         thumbnail {
           childImageSharp {
             sizes(maxWidth: 720, maxHeight: 400, quality: 90) {
