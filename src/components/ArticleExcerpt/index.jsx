@@ -22,10 +22,7 @@ export default function ArticleExcerpt({ excerpt, slug, title, sizes, tags, publ
         </h4>
         <Subheader tags={tags} publishedDate={publishedDate} />
         <div>
-          <span dangerouslySetInnerHTML={{ __html: excerpt }} />
-          <Link className={styles.continueReading} exact to={to}>
-            Continue reading &#x279e;
-          </Link>
+          <span dangerouslySetInnerHTML={{ __html: excerpt }} /> <Link className={styles.continueReading} exact to={to}>Continue reading &#x279e;</Link>
         </div>
       </div>
     </article>

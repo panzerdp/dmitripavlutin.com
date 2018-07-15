@@ -10,9 +10,6 @@ export default function PostShareBottom({ url, text, tags }) {
       <h3>
         Like the post? Share it!
       </h3>
-      <p>
-        <i>Writing a quality post requires a lot of time and effort. I appreciate if you&#x27;d share it!</i>
-      </p>
       <ShareGroupHorizontal
         url={url}
         text={text}
