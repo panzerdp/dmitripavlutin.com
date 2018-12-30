@@ -11,18 +11,18 @@ export default function ArticleExcerpt({ excerpt, slug, title, sizes, tags, publ
   const to = TO_POST({ slug });
   return (
     <article key={slug} className={styles.excerpt}>
-      <Link exact to={to} className={styles.thumbnailAnchor}>
+      <Link exact="true" to={to} className={styles.thumbnailAnchor}>
         <Img sizes={sizes} />
       </Link>
       <div className={styles.content}>
         <h4>
-          <Link exact to={to}>
+          <Link exact="true" to={to}>
             {title}
           </Link>
         </h4>
         <Subheader tags={tags} publishedDate={publishedDate} />
         <div>
-          <span dangerouslySetInnerHTML={{ __html: excerpt }} /> <Link className={styles.continueReading} exact to={to}>Continue reading &#x279e;</Link>
+          <span dangerouslySetInnerHTML={{ __html: excerpt }} /> <Link className={styles.continueReading} exact="true" to={to}>Continue reading &#x279e;</Link>
         </div>
       </div>
     </article>
