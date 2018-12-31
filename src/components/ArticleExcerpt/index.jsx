@@ -7,7 +7,7 @@ import Subheader from 'components/Subheader';
 import styles from './index.module.scss';
 import { TO_POST } from 'routes/path';
 
-export default function ArticleExcerpt({ excerpt, slug, title, sizes, tags, publishedDate }) {
+export default function ArticleExcerpt({ slug, title, description, sizes, tags, publishedDate }) {
   const to = TO_POST({ slug });
   return (
     <article key={slug} className={styles.excerpt}>
@@ -21,16 +21,14 @@ export default function ArticleExcerpt({ excerpt, slug, title, sizes, tags, publ
           </Link>
         </h4>
         <Subheader tags={tags} publishedDate={publishedDate} />
-        <div>
-          <span dangerouslySetInnerHTML={{ __html: excerpt }} /> <Link className={styles.continueReading} exact="true" to={to}>Continue reading &#x279e;</Link>
-        </div>
+        <div>{description}</div>
       </div>
     </article>
   );
 }
 
 ArticleExcerpt.propTypes = {
-  excerpt: PropTypes.string,
+  description: PropTypes.string,
   slug: PropTypes.string,
   title: PropTypes.string,
   sizes: PropTypes.object,

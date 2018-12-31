@@ -1,6 +1,6 @@
 ---
 title: Useful techniques to facilitate React server-side rendering
-description: Useful techniques to facilitate React server-side rendering
+description: Useful techniques to facilitate React server-side rendering.
 published: "2018-03-17"
 modified: "2018-03-17"
 thumbnail: "./images/cover.jpg"

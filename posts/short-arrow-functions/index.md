@@ -1,6 +1,6 @@
 ---
 title: Tips on shortening arrow functions
-description: Tips on shortening arrow functions
+description: Tips on shortening arrow functions.
 published: "2018-03-04"
 modified: "2018-03-04"
 thumbnail: "./images/runner.jpg"

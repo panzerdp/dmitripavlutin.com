@@ -35,13 +35,13 @@ export default class Page extends Component {
 
   getArticeExcerpts() {
     const edges = this.props.data.allMarkdownRemark.edges;
-    return edges.map(function({ node: { frontmatter, excerpt } }, index) {
+    return edges.map(function({ node: { frontmatter } }, index) {
       return (
         <ArticleExcerpt
           key={index}
-          excerpt={excerpt}
           slug={frontmatter.slug}
           title={frontmatter.title}
+          description={frontmatter.description}
           sizes={frontmatter.thumbnail.childImageSharp.sizes}
           tags={frontmatter.tags}
           publishedDate={frontmatter.publishedDate}
@@ -75,10 +75,10 @@ export const pageQuery = graphql`
     allMarkdownRemark(sort: { fields: [frontmatter___published], order: DESC }, skip: $skip, limit: $limit) {
       edges {
         node {
-          excerpt(pruneLength: 250)
           frontmatter {
             publishedDate: published(formatString: "DD MMMM, YYYY")
             title
+            description
             slug
             tags
             thumbnail {
