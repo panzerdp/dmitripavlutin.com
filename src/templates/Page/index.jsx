@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
-import ArticleExcerpt from 'components/ArticleExcerpt';
-import Paginator from 'components/Paginator';
-import IndexMetaTags from 'components/Index/MetaTags';
-import IndexMetaStructuredData from 'components/Index/MetaStructuredData';
-import IndexMetaPaginator from 'components/Index/MetaPaginator';
-import Layout from 'components/Layout';
+import ArticleExcerpt from 'components/Pages/Index/ArticleExcerpt';
+import Paginator from 'components/Pages/Index/Paginator';
+import MetaTags from 'components/Pages/Index/Meta/Tags';
+import MetaStructuredData from 'components/Pages/Index/Meta/StructuredData';
+import MetaPaginator from 'components/Pages/Index/Meta/Paginator';
+import Layout from 'components/Layout/Container';
 
 export default class Page extends Component {
   render() {
@@ -15,9 +15,9 @@ export default class Page extends Component {
     const paginatorProps = this.getPaginatorProps();
     return (
       <Layout>
-        <IndexMetaTags {...this.props} />
-        <IndexMetaStructuredData {...this.props} />
-        <IndexMetaPaginator {...paginatorProps} siteUrl={siteUrl} />
+        <MetaTags {...this.props} />
+        <MetaStructuredData {...this.props} />
+        <MetaPaginator {...paginatorProps} siteUrl={siteUrl} />
         {this.getArticeExcerpts()}
         <Paginator {...paginatorProps} />
       </Layout>
@@ -83,7 +83,7 @@ export const pageQuery = graphql`
             tags
             thumbnail {
               childImageSharp {
-                sizes(maxWidth: 720, maxHeight: 300, quality: 90) {
+                sizes(maxWidth: 720, maxHeight: 350, quality: 90) {
                   ...GatsbyImageSharpSizes
                 }
               }

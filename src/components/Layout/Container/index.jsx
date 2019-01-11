@@ -6,10 +6,10 @@ import { StaticQuery, graphql } from "gatsby";
 import 'normalize.css/normalize.css';
 import styles from './index.module.scss';
 
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+import LayoutHeader from 'components/Layout/Header';
+import LayoutFooter from 'components/Layout/Footer';
 
-export default class Layout extends Component {
+export default class LayoutContainer extends Component {
   render() {
     return (
       <StaticQuery
@@ -53,19 +53,19 @@ export default class Layout extends Component {
           <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
           <meta name="HandheldFriendly" content="True" />
         </Helmet>
-        <Header
+        <LayoutHeader
           pictureResolutions={data.file.childImageSharp.resolutions}
           speciality={siteMetadata.speciality}
         />
         <main className={styles.main}>
           {children}
         </main>
-        <Footer profiles={siteMetadata.profiles} author={siteMetadata.author} />
+        <LayoutFooter profiles={siteMetadata.profiles} author={siteMetadata.author} />
       </div>
     );
   }
 }
 
-Layout.propTypes = {
+LayoutContainer.propTypes = {
   children: PropTypes.node
 };

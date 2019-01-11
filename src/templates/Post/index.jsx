@@ -6,18 +6,18 @@ import 'prismjs/themes/prism.css';
 import 'intersection-observer';
 
 import styles from './index.module.scss';
-import Subheader from 'components/Subheader';
-import PostMetaTags from 'components/Post/MetaTags';
-import PostMetaStructuredData from 'components/Post/MetaStructuredData';
-import ShareGroupVertical from 'components/Share/Group/Vertical';
-import PostCover from 'components/Post/Cover';
-import PostEdit from 'components/Post/Edit';
-import PostShareBottom from 'components/Post/ShareBottom';
+import Subheader from 'components/Pages/Common/Subheader';
+import MetaTags from 'components/Pages/Post/Meta/Tags';
+import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData';
+import ShareGroupVertical from 'components/Pages/Post/Share/Group/Vertical';
+import Cover from 'components/Pages/Post/Cover';
+import Edit from 'components/Pages/Post/Edit';
+import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import { TO_POST } from 'routes/path';
 import { postRelativePath } from './util';
-import Layout from 'components/Layout';
+import Layout from 'components/Layout/Container';
 
-export default class BlogPostTemplate extends Component {
+export default class PostTemplate extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,9 +39,9 @@ export default class BlogPostTemplate extends Component {
     return (
       <Layout>
         <article>
-          <PostMetaTags {...this.props} />
-          <PostMetaStructuredData {...this.props} />
-          <PostCover
+          <MetaTags {...this.props} />
+          <MetaStructuredData {...this.props} />
+          <Cover
             onViewChange={this.handleCoverViewChange}
             className={styles.postCover}
             sizes={sizes}
@@ -55,8 +55,8 @@ export default class BlogPostTemplate extends Component {
             className={this.state.coverIsInView ? styles.hidePostCover : ''}
           />
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
-          <PostEdit url={postRepositoryFileUrl} />
-          <PostShareBottom
+          <Edit url={postRepositoryFileUrl} />
+          <ShareBottom
             url={postUrl}
             text={title}
             tags={tags}
@@ -73,7 +73,7 @@ export default class BlogPostTemplate extends Component {
   }
 }
 
-BlogPostTemplate.propTypes = {
+PostTemplate.propTypes = {
   data: PropTypes.object
 };
 
@@ -120,7 +120,7 @@ export const pageQuery = graphql`
         recommended
         thumbnail {
           childImageSharp {
-            sizes(maxWidth: 720, maxHeight: 400, quality: 90) {
+            sizes(maxWidth: 720, maxHeight: 350, quality: 90) {
               ...GatsbyImageSharpSizes
             }
           }

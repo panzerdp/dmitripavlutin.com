@@ -4,7 +4,7 @@ import { stringify } from 'query-string';
 import slugify from 'voca/slugify';
 import * as R from 'ramda';
 
-import ShareButton from 'components/Share/Button';
+import ShareButton from '../../Button';
 import styles from './index.module.scss';
 import withWindowOpen from 'components/With/WindowOpen';
 

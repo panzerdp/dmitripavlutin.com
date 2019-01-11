@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import * as R from 'ramda';
 
 import styles from './index.module.scss';
-import Tag from 'components/Tag';
+import Tag from '../Tag';
 
 const mapTags = R.map(function mapTag(tagName) {
   return <Tag name={tagName} key={tagName} />;

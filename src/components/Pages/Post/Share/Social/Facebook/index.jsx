@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { stringify } from 'query-string';
 
-import ShareButton from 'components/Share/Button';
+import ShareButton from '../../Button';
 import styles from './index.module.scss';
 import withWindowOpen from 'components/With/WindowOpen';
 

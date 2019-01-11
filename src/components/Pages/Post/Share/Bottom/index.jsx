@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ShareGroupHorizontal from 'components/Share/Group/Horizontal';
+import ShareGroupHorizontal from '../Group/Horizontal';
 import styles from './index.module.scss';
 
 export default function PostShareBottom({ url, text, tags }) {

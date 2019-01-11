@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import styles from './index.module.scss';
 
-import ShareSocialTwitter from 'components/Share/Social/Twitter';
-import ShareSocialFacebook from 'components/Share/Social/Facebook';
-import ShareSocialReddit from 'components/Share/Social/Reddit';
+import ShareSocialTwitter from 'components/Pages/Post/Share/Social/Twitter';
+import ShareSocialFacebook from 'components/Pages/Post/Share/Social/Facebook';
+import ShareSocialReddit from 'components/Pages/Post/Share/Social/Reddit';
 
 export default function ShareButtonsHorizontal({ url, text, tags }) {
   const shareProps = {

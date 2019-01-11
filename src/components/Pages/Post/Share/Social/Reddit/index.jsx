@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { stringify } from 'query-string';
 
-import ShareButton from 'components/Share/Button';
+import ShareButton from '../../Button';
 import styles from './index.module.scss';
 
 const SHARE_REDDIT = 'https://www.reddit.com/submit';
