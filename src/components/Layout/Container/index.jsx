@@ -15,7 +15,7 @@ export default class LayoutContainer extends Component {
       <StaticQuery
         query={graphql`
         query GatsbyImageSampleQuery {
-          file(relativePath: { eq: "components/Layout/profile-picture.jpg" }) {
+          file(relativePath: { eq: "profile-picture.jpg" }) {
             childImageSharp {
               # Specify the image processing steps right in the query
               # Makes it trivial to update as your page's design changes.
