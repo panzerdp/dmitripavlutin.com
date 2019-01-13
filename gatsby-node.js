@@ -3,6 +3,7 @@ const path = require('path');
 
 const createPaginationPages = require('./create/pagination-pages');
 const createPosts = require('./create/posts');
+const createTags = require('./create/tags');
 
 const query = `
 {
@@ -12,6 +13,7 @@ const query = `
         frontmatter {
           title
           slug
+          tags
         }
       }
     }
@@ -32,6 +34,7 @@ exports.createPages = ({ graphql, actions }) => {
       const edges = result.data.allMarkdownRemark.edges;
       createPaginationPages(createPage, '/page/', edges);
       createPosts(createPage, edges);
+      createTags(createPage, edges);
     });
     resolve(queryResult);
   });

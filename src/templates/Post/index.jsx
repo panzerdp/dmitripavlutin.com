@@ -81,7 +81,6 @@ export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
     site {
       siteMetadata {
-        title
         author
         siteUrl
         repositoryUrl

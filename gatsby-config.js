@@ -90,7 +90,8 @@ module.exports = {
         alias: {
           '@layout': `${__dirname}/src/components/Layout`,
           '@common': `${__dirname}/src/components/Pages/Common`,
-          '@allposts': `${__dirname}/src/components/Pages/AllPosts`
+          '@allposts': `${__dirname}/src/components/Pages/AllPosts`,
+          '@tag': `${__dirname}/src/components/Pages/Tag`,
         },
         extensions: []
       }
