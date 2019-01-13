@@ -1,16 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { graphql } from 'gatsby';
 
 import Layout from 'components/Layout/Container';
-import PostList from 'components/Pages/AllPosts/List';
+import SimpleList from 'components/Pages/Common/Simple/List';
 
 export default function AllPosts({ data }) {
-  console.log(data);
   return (
     <Layout>
-      <div>Hello!</div>
+      <h1>All posts</h1>
+      <SimpleList edges={data.allMarkdownRemark.edges} />
     </Layout>
   );
 }
+
+AllPosts.propTypes = {
+  data: PropTypes.object
+};
 
 export const pageQuery = graphql`
   query AllPostsQuery {

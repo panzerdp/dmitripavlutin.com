@@ -10,6 +10,10 @@
   color: #4e7aa1;
   margin-top: 0.2rem;
 
+  span {
+    vertical-align: middle;
+  }
+
   &:hover {
     cursor: pointer;
     color: $anchor-color;
