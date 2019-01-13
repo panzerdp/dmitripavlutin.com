@@ -1,11 +1,11 @@
 module.exports = {
-  title: 'Dmitri Pavlutin: JavaScript and React thoughts',
-  author: 'Dmitri Pavlutin',
+  title: 'Dmitri Pavlutin blog',
   description: 'Posts by Dmitri Pavlutin about JavaScript and React',
   speciality: 'Software developer',
   siteUrl: 'https://dmitripavlutin.com',
   repositoryUrl: 'https://github.com/panzerdp/dmitripavlutin.com',
   postsPerPage: 5,
+  author: 'Dmitri Pavlutin',
   profiles: {
     stackoverflow: 'https://stackoverflow.com/users/1894471/dmitri-pavlutin',
     twitter: 'https://twitter.com/panzerdp',

@@ -88,7 +88,9 @@ module.exports = {
       resolve: `gatsby-plugin-alias-imports`,
       options: {
         alias: {
-          "@common": `${__dirname}/src/components/Pages/Common`
+          '@layout': `${__dirname}/src/components/Layout`,
+          '@common': `${__dirname}/src/components/Pages/Common`,
+          '@allposts': `${__dirname}/src/components/Pages/AllPosts`
         },
         extensions: []
       }

@@ -7,11 +7,7 @@ export default function IndexMetaTags(props) {
   const imageUrl = `${siteMetadata.siteUrl}${authorProfilePicture.childImageSharp.resize.src}`;
   return (
     <Helmet>
-      <title>{siteMetadata.title}</title>
-      <meta name="description" content={siteMetadata.description} />
-
       <link rel="canonical" href={siteMetadata.siteUrl} />
-      <meta name="referrer" content="no-referrer-when-downgrade" />
 
       <meta property="og:site_name" content={siteMetadata.title} />
       <meta property="og:type" content="website" />

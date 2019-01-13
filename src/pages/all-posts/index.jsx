@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
+import AllPostsMetaTags from '@allposts/Meta/Tags';
 import Layout from 'components/Layout/Container';
 import SimpleList from 'components/Pages/Common/Simple/List';
 
 export default function AllPosts({ data }) {
   return (
     <Layout>
+      <AllPostsMetaTags />
       <h1>All posts</h1>
       <SimpleList edges={data.allMarkdownRemark.edges} />
     </Layout>

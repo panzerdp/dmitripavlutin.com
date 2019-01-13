@@ -7,12 +7,14 @@ const toMetaArticleTag = R.map(function(tag) {
   return <meta property="article:tag" content={tag} key={tag} />;
 });
 
-export default function BlogPostMetadata(props) {
+export default function PostMetaTags(props) {
   const { data: { markdownRemark: { frontmatter }, site: { siteMetadata } } } = props;
   const postUrl = `${siteMetadata.siteUrl}/${frontmatter.slug}/`;
   const imageUrl = `${siteMetadata.siteUrl}${frontmatter.thumbnail.childImageSharp.sizes.src}`;
   return (
-    <Helmet>
+    <Helmet
+      titleTemplate="%s"
+    >
       <title>{frontmatter.title}</title>
       <meta name="description" content={frontmatter.description} />
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -47,6 +49,6 @@ export default function BlogPostMetadata(props) {
   );
 }
 
-BlogPostMetadata.propTypes = {
+PostMetaTags.propTypes = {
   data: PropTypes.object
 };
