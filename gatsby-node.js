@@ -7,7 +7,20 @@ const createTags = require('./create/tags');
 
 const query = `
 {
-  allMarkdownRemark(sort: { fields: [frontmatter___published], order: DESC }, limit: 1000) {
+  allMarkdownRemark(
+    sort: { 
+      fields: [frontmatter___published], 
+      order: DESC 
+    }, 
+    filter: {
+      frontmatter: { 
+        draft: {
+          eq: false
+        }
+      }
+    },
+    limit: 1000
+  ) {
     edges {
       node {
         frontmatter {

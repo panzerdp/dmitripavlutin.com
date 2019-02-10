@@ -29,7 +29,19 @@ export const pageQuery = graphql`
         siteUrl
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___published], order: DESC }) {
+    allMarkdownRemark(
+      sort: { 
+        fields: [frontmatter___published], 
+        order: DESC 
+      },
+      filter: {
+        frontmatter: { 
+          draft: {
+            eq: false
+          } 
+        }
+      }
+    ) {
       edges {
         node {
           frontmatter {

@@ -72,7 +72,21 @@ export const pageQuery = graphql`
         }
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___published], order: DESC }, skip: $skip, limit: $limit) {
+    allMarkdownRemark(
+      sort: { 
+        fields: [frontmatter___published], 
+        order: DESC 
+      },
+      filter: {
+        frontmatter: { 
+          draft: {
+            eq: false
+          }
+        }
+      },
+      skip: $skip, 
+      limit: $limit
+    ) {
       edges {
         node {
           frontmatter {

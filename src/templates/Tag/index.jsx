@@ -30,7 +30,22 @@ export const pageQuery = graphql`
         siteUrl
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___published], order: DESC }, filter: { frontmatter: { tags: { eq: $tag } } }) {
+    allMarkdownRemark(
+      sort: { 
+        fields: [frontmatter___published], 
+        order: DESC 
+      }, 
+      filter: { 
+        frontmatter: { 
+          tags: { 
+            eq: $tag 
+          },
+          draft: {
+            eq: false
+          }
+        } 
+      }
+    ) {
       edges {
         node {
           frontmatter {

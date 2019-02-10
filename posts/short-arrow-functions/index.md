@@ -7,7 +7,7 @@ thumbnail: "./images/runner.jpg"
 slug: tips-on-shortening-arrow-functions
 tags: ['javascript', 'arrow function']
 recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript", "7-architectural-attributes-of-a-reliable-react-component"]
-draft: false
+draft: true
 ---
 
 An arrow function expression is a way to define a JavaScript function using a short form that contains, surprisingly, an arrow `=>`.  
