@@ -1,6 +1,12 @@
-.recommendedList {
-  display: flex;
+.recommended {
+  padding-bottom: 2rem;
+  
+  border-top: 1px solid #dae4ed;
+}
 
+.list {
+  display: flex;
+  
   > * {
     flex: 1;
     margin-right: 10px;

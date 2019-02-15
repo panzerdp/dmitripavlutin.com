@@ -20,8 +20,13 @@ export default function RecommendedList({ posts }) {
     );
   });
   return (
-    <div className={styles.recommendedList}>
-      {list}
+    <div className={styles.recommended}>
+      <h3>
+        Recommended reading:
+      </h3>
+      <div className={styles.list}>
+        {list}
+      </div>
     </div>
   );
 }

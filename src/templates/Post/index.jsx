@@ -37,7 +37,7 @@ export default class PostTemplate extends Component {
     const postUrl = siteMetadata.siteUrl + TO_POST({
       slug: frontmatter.slug
     });
-    const postRepositoryFileUrl = siteMetadata.repositoryUrl + '/tree/master/' + postRelativePath(post.fileAbsolutePath);
+    const postRepositoryFileUrl = `${siteMetadata.repositoryUrl}/tree/master/${postRelativePath(post.fileAbsolutePath)}`;
     return (
       <Layout>
         <article>
