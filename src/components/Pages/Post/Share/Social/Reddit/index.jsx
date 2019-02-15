@@ -7,9 +7,10 @@ import styles from './index.module.scss';
 
 const SHARE_REDDIT = 'https://www.reddit.com/submit';
 
-export default function ShareSocialReddit({ url }) {
+export default function ShareSocialReddit({ url, text }) {
   const shareUrl = SHARE_REDDIT + '?' + stringify({
-    url
+    url,
+    title: text
   });
   return (
     <ShareButton
@@ -23,5 +24,6 @@ export default function ShareSocialReddit({ url }) {
 }
 
 ShareSocialReddit.propTypes = {
-  url: PropTypes.string
+  url: PropTypes.string,
+  text: PropTypes.string
 };
