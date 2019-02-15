@@ -6,7 +6,7 @@ modified: "2018-01-03"
 thumbnail: "./future-car.jpg"
 slug: object-rest-spread-properties-javascript
 tags: ["javascript", "spread properties", "rest properties"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript", "7-architectural-attributes-of-a-reliable-react-component"]
+recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
 draft: false
 ---
 

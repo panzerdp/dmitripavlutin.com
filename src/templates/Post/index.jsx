@@ -13,6 +13,7 @@ import ShareGroupVertical from 'components/Pages/Post/Share/Group/Vertical';
 import Cover from 'components/Pages/Post/Cover';
 import Edit from 'components/Pages/Post/Edit';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
+import RecommendedList from 'components/Pages/Post/Recommended/List';
 import { TO_POST } from 'routes/path';
 import { postRelativePath } from './util';
 import Layout from 'components/Layout/Container';
@@ -32,6 +33,7 @@ export default class PostTemplate extends Component {
     const sizes = frontmatter.thumbnail.childImageSharp.sizes;
     const title = frontmatter.title;
     const tags = frontmatter.tags;
+    const recommendedPosts = this.props.data.recommendedPosts.edges;
     const postUrl = siteMetadata.siteUrl + TO_POST({
       slug: frontmatter.slug
     });
@@ -61,6 +63,7 @@ export default class PostTemplate extends Component {
             text={title}
             tags={tags}
           />
+          <RecommendedList posts={recommendedPosts} />
         </article>
       </Layout>
     );
@@ -78,7 +81,7 @@ PostTemplate.propTypes = {
 };
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query BlogPostBySlug($slug: String!, $recommended: [String]!) {
     site {
       siteMetadata {
         author
@@ -121,6 +124,31 @@ export const pageQuery = graphql`
           childImageSharp {
             sizes(maxWidth: 720, maxHeight: 350, quality: 90) {
               ...GatsbyImageSharpSizes
+            }
+          }
+        }
+      }
+    }
+    recommendedPosts: allMarkdownRemark(
+      filter: {
+        frontmatter: { 
+          slug: {
+            in: $recommended
+          }
+        }
+      }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            title
+            slug
+            thumbnail {
+              childImageSharp {
+                sizes(maxWidth: 360, maxHeight: 175, quality: 90) {
+                  ...GatsbyImageSharpSizes
+                }
+              }
             }
           }
         }

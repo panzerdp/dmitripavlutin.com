@@ -6,7 +6,7 @@ modified: "2016-11-16"
 thumbnail: "./images/cover.jpg"
 slug: make-your-swift-code-expressive-addition-operator-use-cases
 tags: ["swift"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript", "7-architectural-attributes-of-a-reliable-react-component"]
+recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
 draft: false
 ---
 

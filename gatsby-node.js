@@ -27,6 +27,7 @@ const query = `
           title
           slug
           tags
+          recommended
         }
       }
     }

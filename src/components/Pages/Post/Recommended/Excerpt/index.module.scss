@@ -1,0 +1,31 @@
+@import '~styles/variables';
+
+.excerpt {
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px $border-color, 0 5px 15px -5px rgba(0,0,0,.1);
+  background: #fff;
+  overflow: hidden;
+}
+
+.content {
+  padding: 0 1rem 1.3rem 1rem;
+
+  h4 {
+    margin: 0;
+
+    a {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.thumbnailAnchor {
+  width: 92%;
+  margin: 4%;
+  display: block;
+
+  img {
+    width: 100% !important;
+    border-radius: 4px;
+  }
+}
