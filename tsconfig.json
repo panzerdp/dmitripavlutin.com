@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./src",
+    "rootDir": "./",
+    "jsx": "react",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "pretty": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "lib": ["es2015", "dom"]
+  },
+  "exclude": ["node_modules", "**/node_modules/*"],
+  "include": [
+    "src/**/*"
+  ]
+}

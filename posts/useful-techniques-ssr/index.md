@@ -7,7 +7,7 @@ thumbnail: "./images/cover.jpg"
 slug: useful-techniques-react-server-side-rendering
 tags: ['react', 'server side rendering']
 recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
-draft: true
+draft: false
 ---
 
 At the beginning of 2017 I was planning the development of a web application. Because UI interactivity was an important

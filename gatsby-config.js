@@ -51,7 +51,8 @@ module.exports = {
                 size12: "size12"  // 1/2 of the image
               },
             },
-          }
+          },
+          'gatsby-plugin-typescript'
         ],
       },
     },

@@ -19,6 +19,7 @@
     "gatsby-plugin-react-helmet": "3.0.12",
     "gatsby-plugin-sass": "2.0.11",
     "gatsby-plugin-sharp": "2.0.37",
+    "gatsby-plugin-typescript": "2.0.13",
     "gatsby-remark-autolink-headers": "2.0.16",
     "gatsby-remark-code-repls": "2.1.0",
     "gatsby-remark-copy-linked-files": "2.0.12",

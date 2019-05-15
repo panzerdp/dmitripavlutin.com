@@ -1,0 +1,2 @@
+type Tags = string[];
+
