@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 
 import 'prismjs/themes/prism.css';
 import 'intersection-observer';
@@ -17,6 +17,7 @@ import { postRelativePath } from './util';
 import Layout from 'components/Layout/Container';
 
 interface PostTemplateProps {
+  siteMetadata: SiteMetadata;
   
 }
 

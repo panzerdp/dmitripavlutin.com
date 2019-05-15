@@ -1,4 +1,10 @@
-interface PostFrontmatter {
+interface PostRecommended<ImageType> {
+  title: string;
+  slug: string;
+  thumbnail: ImageType;
+}
+
+interface Post<ImageType> {
   title: string;
   description: string;
   slug: string;
@@ -7,18 +13,5 @@ interface PostFrontmatter {
   modified: string;
   tags: Tags;
   recommended: string[];
-  thumbnail {
-    childImageSharp {
-      sizes(maxWidth: 720, maxHeight: 350, quality: 90) {
-        ...GatsbyImageSharpSizes
-      }
-    }
-  }
-}
-
-interface Post {
-  id: string;
-  html: string;
-  fileAbsolutePath: string;
-  frontmatter: PostFrontmatter;
+  thumbnail: ImageType;
 }
