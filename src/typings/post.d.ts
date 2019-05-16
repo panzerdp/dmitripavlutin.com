@@ -16,3 +16,7 @@ interface Post {
   recommended: string[];
   thumbnail: FluidImage;
 }
+
+interface PostExcerpt {
+  
+}

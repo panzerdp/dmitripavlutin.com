@@ -7,21 +7,21 @@ import Subheader from 'components/Pages/Common/Subheader';
 import styles from './index.module.scss';
 import { TO_POST } from 'routes/path';
 
-export default function ArticleExcerpt({ slug, title, description, sizes, tags, publishedDate }) {
+export default function PostExcerpt({ slug, title, description, sizes, tags, publishedDate }) {
   const to = TO_POST({ slug });
   return (
     <article key={slug} className={styles.excerpt}>
-      <Link exact="true" to={to} className={styles.thumbnailAnchor}>
+      <Link to={to} className={styles.thumbnailAnchor}>
         <Img sizes={sizes} />
       </Link>
       <div className={styles.content}>
         <h4>
-          <Link exact="true" to={to}>
+          <Link to={to}>
             {title}
           </Link>
         </h4>
         <Subheader tags={tags} publishedDate={publishedDate} />
-        <div>{description}</div>
+        <div>{description} <Link className={styles.continueReading} to={to}>Continue reading &#x279e;</Link></div> 
       </div>
     </article>
   );

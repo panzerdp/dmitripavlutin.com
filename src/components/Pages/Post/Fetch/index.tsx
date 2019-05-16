@@ -38,24 +38,28 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
 }
 
 export const pageQuery = graphql`
+  fragment SiteInformation on Site {
+    siteMetadata {
+      author
+      siteUrl
+      repositoryUrl
+      profiles {
+        stackoverflow
+        twitter
+        linkedin
+        github
+        facebook
+        googlePlus
+      }
+      nicknames {
+        twitter
+      }
+    }
+  }
+
   query BlogPostBySlug($slug: String!, $recommended: [String]!) {
     site {
-      siteMetadata {
-        author
-        siteUrl
-        repositoryUrl
-        profiles {
-          stackoverflow
-          twitter
-          linkedin
-          github
-          facebook
-          googlePlus
-        }
-        nicknames {
-          twitter
-        }
-      }
+      ...SiteInformation
     }
     authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {
       childImageSharp {

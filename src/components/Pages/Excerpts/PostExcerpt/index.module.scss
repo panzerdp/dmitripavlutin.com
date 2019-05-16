@@ -31,6 +31,10 @@
   }
 }
 
+.continueReading {
+  white-space: nowrap;
+}
+
 @media (max-width: $small-device-width) {
   .excerpt {
     margin-top: 1.5rem;

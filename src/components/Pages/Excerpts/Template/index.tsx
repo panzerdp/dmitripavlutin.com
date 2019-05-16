@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
-import ArticleExcerpt from 'components/Pages/Index/ArticleExcerpt';
-import Paginator from 'components/Pages/Index/Paginator';
-import MetaTags from 'components/Pages/Index/Meta/Tags';
-import MetaStructuredData from 'components/Pages/Index/Meta/StructuredData';
-import MetaPaginator from 'components/Pages/Index/Meta/Paginator';
+import ArticleExcerpt from 'components/Pages/Excerpts/PostExcerpt';
+import Paginator from 'components/Pages/Excerpts/Paginator';
+import MetaTags from 'components/Pages/Excerpts/Meta/Tags';
+import MetaStructuredData from 'components/Pages/Excerpts/Meta/StructuredData';
+import MetaPaginator from 'components/Pages/Excerpts/Meta/Paginator';
 import Layout from 'components/Layout/Container';
 
 export default class Page extends Component {
