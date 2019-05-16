@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql } from 'gatsby';
 
 import PostTemplate from 'components/Pages/Post/Template';
-import { postRelativePath } from './util';
 
 interface PostTemplateFetchProps {
   data: any;
@@ -17,7 +16,8 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
     html: markdownRemark.html,
     thumbnail: markdownRemark.frontmatter.thumbnail.childImageSharp.fluid
   };
-  const postRepositoryFileUrl = `${siteMetadata.repositoryUrl}/tree/master/${postRelativePath(markdownRemark.fileAbsolutePath)}`;
+  const postRelativePath = markdownRemark.fileAbsolutePath.split('/').slice(-3).join('/');
+  const postRepositoryFileUrl = `${siteMetadata.repositoryUrl}/tree/master/${postRelativePath}`;
   const posts = recommendedPosts.edges.map(function(edge: any) {
     const { node: { frontmatter } } = edge;
     return {

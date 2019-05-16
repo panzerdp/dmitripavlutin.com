@@ -33,7 +33,6 @@
     "gatsby-transformer-remark": "2.3.12",
     "gatsby-transformer-sharp": "2.1.19",
     "husky": "2.3.0",
-    "intersection-observer": "0.7.0",
     "node-sass": "4.12.0",
     "normalize.css": "8.0.1",
     "path-to-regexp": "3.0.0",

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import * as R from 'ramda';
 import { canUseDOM } from 'exenv';
 
-import 'intersection-observer';
 import Observer from 'react-intersection-observer';
 
 function withIntersectionObserver(WrappedComponent) {
@@ -26,7 +25,7 @@ function withIntersectionObserver(WrappedComponent) {
 }
 
 export default R.ifElse(
-  R.always(canUseDOM),
+  R.always(canUseDOM && typeof IntersectionObserver !== 'undefined'),
   withIntersectionObserver,
   R.identity
 );
