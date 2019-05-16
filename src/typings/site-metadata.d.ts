@@ -5,6 +5,7 @@ interface SiteMetadataProfiles {
   github: string;
   facebook: string;
   googlePlus: string;
+  [index: string]: string;
 }
 
 interface SiteMetadataNicknames {

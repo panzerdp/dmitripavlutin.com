@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import * as R from 'ramda';
 
-export default function PostMetaStructuredData(props) {
-  const { data: { markdownRemark: { frontmatter }, site: { siteMetadata }, authorProfilePicture } } = props;
-  const postUrl = `${siteMetadata.siteUrl}/${frontmatter.slug}/`;
-  const postImageUrl = `${siteMetadata.siteUrl}${frontmatter.thumbnail.childImageSharp.sizes.src}`;
-  const authorProfilePictureUrl = `${siteMetadata.siteUrl}${authorProfilePicture.childImageSharp.resize.src}`;
+interface PostMetaStructuredDataProps {
+  post: Post;
+  siteMetadata: SiteMetadata;
+  authorProfilePicture: FluidImage
+}
+
+export default function PostMetaStructuredData({ post, siteMetadata, authorProfilePicture }: PostMetaStructuredDataProps) {
+  const postUrl = `${siteMetadata.siteUrl}/${post.slug}/`;
+  const postImageUrl = `${siteMetadata.siteUrl}${post.thumbnail.src}`;
+  const authorProfilePictureUrl = `${siteMetadata.siteUrl}${authorProfilePicture.src}`;
+  const sameAs = Object.keys(siteMetadata.profiles).reduce((sameAs, key) => [...sameAs, siteMetadata.profiles[key]], []);
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -29,21 +34,21 @@ export default function PostMetaStructuredData(props) {
         "height": 256
       },
       "url": siteMetadata.siteUrl,
-      "sameAs": R.values(siteMetadata.profiles),
+      "sameAs": sameAs,
       "description": siteMetadata.speciality
     },
-    "headline": frontmatter.title,
+    "headline": post.title,
     "url": postUrl,
-    "datePublished": frontmatter.published,
-    "dateModified": frontmatter.modified,
+    "datePublished": post.published,
+    "dateModified": post.modified,
     "image": {
       "@type": "ImageObject",
       "url": postImageUrl,
       "width": 720,
       "height": 400
     },
-    "keywords": frontmatter.tags.join(', '),
-    "description": frontmatter.description,
+    "keywords": post.tags.join(', '),
+    "description": post.description,
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": siteMetadata.siteUrl

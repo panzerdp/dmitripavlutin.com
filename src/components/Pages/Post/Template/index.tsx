@@ -19,30 +19,33 @@ interface PostTemplateProps {
   siteMetadata: SiteMetadata;
   postRepositoryFileUrl: string;
   post: Post,
-  recommendedPosts: RecommendedPost[]
+  recommendedPosts: RecommendedPost[],
+  authorProfilePicture: FluidImage
 }
 
 export default function PostTemplate({ 
     siteMetadata,
     postRepositoryFileUrl,
     post,
-    recommendedPosts
+    recommendedPosts,
+    authorProfilePicture
   }: PostTemplateProps) {
   const [coverIsInView, setCoverIsInView] = useState(true);
-  // const post = this.props.data.markdownRemark;
-  // const frontmatter = post.frontmatter;
-  // const sizes = frontmatter.thumbnail.childImageSharp.sizes;
-  // const title = frontmatter.title;
-  // const tags = frontmatter.tags;
-  // const recommendedPosts = this.props.data.recommendedPosts.edges;
   const postUrl = siteMetadata.siteUrl + TO_POST({
     slug: post.slug
   });
   return (
     <Layout>
       <article>
-        {/* <MetaTags {...this.props} />
-        <MetaStructuredData {...this.props} /> */}
+        <MetaTags 
+          post={post} 
+          siteMetadata={siteMetadata} 
+        />
+        <MetaStructuredData 
+          post={post} 
+          siteMetadata={siteMetadata} 
+          authorProfilePicture={authorProfilePicture} 
+        />
         <Cover
           onViewChange={setCoverIsInView}
           className={styles.postCover}

@@ -10,7 +10,7 @@ function withIntersectionObserver(WrappedComponent) {
   function EnhancedComponent(props) {
     const { onViewChange, ...wrappedProps } = props;
     return (
-      <Observer onChange={onViewChange}>
+      <Observer onChange={inView => onViewChange(inView)}>
         <WrappedComponent {...wrappedProps} />
       </Observer>
     );

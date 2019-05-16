@@ -10,19 +10,19 @@ interface PostTemplateFetchProps {
 
 export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
   const siteMetadata: SiteMetadata = data.site.siteMetadata;
-  const { markdownRemark, recommendedPosts } = data;
+  const { markdownRemark, recommendedPosts, authorProfilePicture } = data;
 
   const post: Post = {
     ...markdownRemark.frontmatter,
     html: markdownRemark.html,
-    thumbnail: markdownRemark.frontmatter.thumbnail.childImageSharp
+    thumbnail: markdownRemark.frontmatter.thumbnail.childImageSharp.fluid
   };
   const postRepositoryFileUrl = `${siteMetadata.repositoryUrl}/tree/master/${postRelativePath(markdownRemark.fileAbsolutePath)}`;
   const posts = recommendedPosts.edges.map(function(edge: any) {
     const { node: { frontmatter } } = edge;
     return {
       ...frontmatter,
-      thumbnail: frontmatter.thumbnail.childImageSharp
+      thumbnail: frontmatter.thumbnail.childImageSharp.fluid
     };
   });
 
@@ -32,6 +32,7 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
       postRepositoryFileUrl={postRepositoryFileUrl}
       post={post}
       recommendedPosts={posts}
+      authorProfilePicture={authorProfilePicture.childImageSharp.resize}
     />
   ) 
 }
@@ -78,8 +79,8 @@ export const pageQuery = graphql`
         recommended
         thumbnail {
           childImageSharp {
-            sizes(maxWidth: 720, maxHeight: 350, quality: 90) {
-              ...GatsbyImageSharpSizes
+            fluid(maxWidth: 720, maxHeight: 350, quality: 90) {
+              ...GatsbyImageSharpFluid
             }
           }
         }
@@ -101,8 +102,8 @@ export const pageQuery = graphql`
             slug
             thumbnail {
               childImageSharp {
-                sizes(maxWidth: 360, maxHeight: 175, quality: 90) {
-                  ...GatsbyImageSharpSizes
+                fluid(maxWidth: 360, maxHeight: 175, quality: 90) {
+                  ...GatsbyImageSharpFluid
                 }
               }
             }

@@ -9,10 +9,9 @@ interface PostCoverProps {
 }
 
 export function PostCover({ className, thumbnail }: PostCoverProps) {
-  console.log(thumbnail);
   return (
     <div className={className}>
-      <Img sizes={thumbnail}  />
+      <Img fluid={thumbnail}  />
     </div>
   );
 }
