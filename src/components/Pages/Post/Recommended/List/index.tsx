@@ -4,17 +4,15 @@ import PropTypes from 'prop-types';
 import RecommendedExcerpt from '../Excerpt';
 import styles from './index.module.scss';
 
-export default function RecommendedList({ posts }) {
-  const list = posts.map(function({
-    node: {
-      frontmatter: { title, slug, thumbnail }
-    }
-  }, index) {
+interface RecommendedListProps {
+  posts: RecommendedPost[]
+}
+
+export default function RecommendedList({ posts }: RecommendedListProps) {
+  const list = posts.map(function(post, index) {
     return (
       <RecommendedExcerpt
-        title={title}
-        slug={slug}
-        sizes={thumbnail.childImageSharp.sizes}
+        post={post}
         key={index}
       />
     );
