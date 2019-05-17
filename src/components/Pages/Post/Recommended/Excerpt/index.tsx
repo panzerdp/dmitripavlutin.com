@@ -7,7 +7,7 @@ import styles from './index.module.scss';
 import { TO_POST } from 'routes/path';
 
 interface RecommendedExcerptProps {
-  post: RecommendedPost
+  post: PostExcerpt
 }
 
 export default function RecommendedExcerpt({ post: { slug, title, thumbnail } }: RecommendedExcerptProps) {

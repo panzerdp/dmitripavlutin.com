@@ -1,7 +1,7 @@
 const path = require('path');
 const R = require('ramda');
 
-const tagComponentPath = path.resolve(__dirname, '../src/templates/Tag/index.jsx');
+const tagComponentPath = path.resolve(__dirname, '../src/components/Pages/Tag/Fetch/index.tsx');
 
 const getTagsFromEdges = R.pipe(
   R.reduce(function(acc, edge) {

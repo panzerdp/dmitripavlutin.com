@@ -2,7 +2,7 @@ const path = require('path');
 const R = require('ramda');
 
 const config = require('../gatsby-config');
-const pageComponentPath = path.resolve(__dirname, '../src/templates/Page/index.jsx');
+const pageComponentPath = path.resolve(__dirname, '../src/components/Pages/Excerpts/Fetch/index.tsx');
 
 const postsPerPage = config.siteMetadata.postsPerPage;
 

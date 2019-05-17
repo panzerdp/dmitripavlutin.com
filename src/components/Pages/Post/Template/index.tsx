@@ -19,7 +19,7 @@ interface PostTemplateProps {
   siteMetadata: SiteMetadata;
   postRepositoryFileUrl: string;
   post: Post,
-  recommendedPosts: RecommendedPost[],
+  recommendedPosts: PostExcerpt[],
   authorProfilePicture: FluidImage
 }
 

@@ -1,22 +1,14 @@
-interface RecommendedPost {
-  title: string;
-  slug: string;
-  thumbnail: FluidImage;
-}
-
-interface Post {
+interface PostExcerpt {
   title: string;
   description: string;
-  html: string;
   slug: string;
-  publishedDate: string;
-  published: string;
-  modified: string;
   tags: Tags;
-  recommended: string[];
+  published: string;
   thumbnail: FluidImage;
 }
 
-interface PostExcerpt {
-  
+interface Post extends PostExcerpt {
+  html: string;
+  modified: string;
+  recommended: string[];
 }

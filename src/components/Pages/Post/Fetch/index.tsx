@@ -38,7 +38,7 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
 }
 
 export const pageQuery = graphql`
-  fragment SiteInformation on Site {
+  fragment SiteMetadata on Site {
     siteMetadata {
       author
       siteUrl
@@ -57,9 +57,24 @@ export const pageQuery = graphql`
     }
   }
 
+  fragment PostExcerpt on MarkdownRemarkFrontmatter {
+    title
+    description
+    published
+    slug
+    tags
+    thumbnail {
+      childImageSharp {
+        fluid(maxWidth: 720, maxHeight: 350, quality: 90) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+
   query BlogPostBySlug($slug: String!, $recommended: [String]!) {
     site {
-      ...SiteInformation
+      ...SiteMetadata
     }
     authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {
       childImageSharp {

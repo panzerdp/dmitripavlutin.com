@@ -1,9 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import styles from './index.module.scss';
 
-export default function PostEdit({ url }) {
+interface PostEditProps {
+  url: string;
+}
+
+export default function PostEdit({ url }: PostEditProps) {
   return (
     <div className={styles.postEdit}>
       <a href={url} target="_blank" rel="noopener noreferrer">
@@ -13,7 +16,3 @@ export default function PostEdit({ url }) {
     </div>
   );
 }
-
-PostEdit.propTypes = {
-  url: PropTypes.string
-};

@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
 
 import ExcerptsTemplate from 'components/Pages/Excerpts/Template';
 
 interface ExcerptsFetchProps {
-  siteMetadata: SiteMetadata;
+  data: any;
   pageContext: {
     currentPage: number;
     pagesSum: number;
@@ -12,19 +12,27 @@ interface ExcerptsFetchProps {
   }
 }
 
-export default function ExcerptsFetch({ siteMetadata, pageContext }: ExcerptsFetchProps ) {
+function nodeToPostExcerpt({ node: { frontmatter } }: any): PostExcerpt {
+  return {
+    ...frontmatter,
+    thumbnail: frontmatter.thumbnail.childImageSharp.fluid
+  }
+}
+
+export default function ExcerptsFetch({ data: { site: { siteMetadata }, allMarkdownRemark } , pageContext }: ExcerptsFetchProps ) {
   return (
     <ExcerptsTemplate 
       siteMetadata={siteMetadata}
+      posts={allMarkdownRemark.edges.map(nodeToPostExcerpt)}
       {...pageContext}
     />
   );
 }
 
 export const pageQuery = graphql`
-  query IndexQuery($skip: Int, $limit: Int) {
+  query ExcerptsQuery($skip: Int, $limit: Int) {
     site {
-      ...SiteInformation
+      ...SiteMetadata
     }
     authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {
       childImageSharp {
@@ -51,18 +59,7 @@ export const pageQuery = graphql`
       edges {
         node {
           frontmatter {
-            publishedDate: published(formatString: "DD MMMM, YYYY")
-            title
-            description
-            slug
-            tags
-            thumbnail {
-              childImageSharp {
-                sizes(maxWidth: 720, maxHeight: 350, quality: 90) {
-                  ...GatsbyImageSharpSizes
-                }
-              }
-            }
+            ...PostExcerpt
           }
         }
       }

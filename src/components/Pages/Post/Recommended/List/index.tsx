@@ -5,7 +5,7 @@ import RecommendedExcerpt from '../Excerpt';
 import styles from './index.module.scss';
 
 interface RecommendedListProps {
-  posts: RecommendedPost[]
+  posts: PostExcerpt[]
 }
 
 export default function RecommendedList({ posts }: RecommendedListProps) {
