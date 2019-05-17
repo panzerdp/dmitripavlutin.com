@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import ExcerptsTemplate from 'components/Pages/Excerpts/Template';
+import ExcerptsListTemplate from 'components/Pages/ExcerptsList/Template';
 
 interface ExcerptsFetchProps {
   data: any;
@@ -19,11 +19,12 @@ function nodeToPostExcerpt({ node: { frontmatter } }: any): PostExcerpt {
   }
 }
 
-export default function ExcerptsFetch({ data: { site: { siteMetadata }, allMarkdownRemark } , pageContext }: ExcerptsFetchProps ) {
+export default function ExcerptsFetch({ data: { site: { siteMetadata }, allMarkdownRemark, authorProfilePicture } , pageContext }: ExcerptsFetchProps ) {
   return (
-    <ExcerptsTemplate 
+    <ExcerptsListTemplate 
       siteMetadata={siteMetadata}
       posts={allMarkdownRemark.edges.map(nodeToPostExcerpt)}
+      authorProfilePicture={authorProfilePicture.childImageSharp.resize}
       {...pageContext}
     />
   );

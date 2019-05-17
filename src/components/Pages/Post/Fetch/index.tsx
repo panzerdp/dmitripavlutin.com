@@ -10,7 +10,6 @@ interface PostTemplateFetchProps {
 export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
   const siteMetadata: SiteMetadata = data.site.siteMetadata;
   const { markdownRemark, recommendedPosts, authorProfilePicture } = data;
-
   const post: Post = {
     ...markdownRemark.frontmatter,
     html: markdownRemark.html,
@@ -18,14 +17,13 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
   };
   const postRelativePath = markdownRemark.fileAbsolutePath.split('/').slice(-3).join('/');
   const postRepositoryFileUrl = `${siteMetadata.repositoryUrl}/tree/master/${postRelativePath}`;
-  const posts = recommendedPosts.edges.map(function(edge: any) {
+  const posts: PostExcerpt[] = recommendedPosts.edges.map(function(edge: any) {
     const { node: { frontmatter } } = edge;
     return {
       ...frontmatter,
       thumbnail: frontmatter.thumbnail.childImageSharp.fluid
     };
   });
-
   return (
     <PostTemplate
       siteMetadata={siteMetadata}
@@ -40,9 +38,13 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
 export const pageQuery = graphql`
   fragment SiteMetadata on Site {
     siteMetadata {
-      author
+      title
+      description
+      speciality
       siteUrl
       repositoryUrl
+      postsPerPage
+      author
       profiles {
         stackoverflow
         twitter
@@ -91,9 +93,8 @@ export const pageQuery = graphql`
         title
         description
         slug
-        publishedDate: published(formatString: "MMMM DD, YYYY")
-        published(formatString: "YYYY-MM-DDTHH:mm:ssZ")
-        modified(formatString: "YYYY-MM-DDTHH:mm:ssZ")
+        published
+        modified
         tags
         recommended
         thumbnail {

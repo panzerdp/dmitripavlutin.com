@@ -1,10 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
-export default function IndexMetaStructuredData(props) {
-  const { data: { site: { siteMetadata }, authorProfilePicture } } = props;
-  const authorProfilePictureUrl = `${siteMetadata.siteUrl}${authorProfilePicture.childImageSharp.resize.src}`;
+interface MetaStructuredData {
+  siteMetadata: SiteMetadata;
+  authorProfilePicture: FluidImage;
+}
+
+export default function MetaStructuredData({ siteMetadata, authorProfilePicture }: MetaStructuredData) {
+  const authorProfilePictureUrl = `${siteMetadata.siteUrl}${authorProfilePicture.src}`;
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Website",
@@ -37,7 +40,3 @@ export default function IndexMetaStructuredData(props) {
     </Helmet>
   );
 }
-
-IndexMetaStructuredData.propTypes = {
-  data: PropTypes.object
-};

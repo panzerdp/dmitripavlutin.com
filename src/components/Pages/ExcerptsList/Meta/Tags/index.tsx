@@ -1,10 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
-export default function IndexMetaTags(props) {
-  const { data: { site: { siteMetadata }, authorProfilePicture } } = props;
-  const imageUrl = `${siteMetadata.siteUrl}${authorProfilePicture.childImageSharp.resize.src}`;
+interface MetaTagsProps {
+  siteMetadata: SiteMetadata;
+  authorProfilePicture: FluidImage;
+}
+
+export default function MetaTags({ siteMetadata, authorProfilePicture }: MetaTagsProps) {
+  const imageUrl = `${siteMetadata.siteUrl}${authorProfilePicture.src}`;
   return (
     <Helmet>
       <link rel="canonical" href={siteMetadata.siteUrl} />
@@ -22,11 +25,6 @@ export default function IndexMetaTags(props) {
       <meta name="twitter:description" content={siteMetadata.description} />
       <meta name="twitter:url" content={siteMetadata.siteUrl} />
       <meta name="twitter:image" content={imageUrl} />
-
     </Helmet>
   );
 }
-
-IndexMetaTags.propTypes = {
-  data: PropTypes.object
-};
