@@ -1,19 +1,15 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import PlainListByTagTemplate from 'components/Pages/PlainListByTag/Template';
+import PlainListAllTemplate from 'components/Pages/PlainListAll/Template';
 
-interface PlainListByTagProps {
-  pageContext: {
-    tag: string;
-  };
+interface PlainListAllFetchProps {
   data: any;
 }
 
-export default function PlainListByTagFetch({ pageContext: { tag }, data }: PlainListByTagProps) {
+export default function PlainListAllFetch({ data }: PlainListAllFetchProps) {
   return (
-    <PlainListByTagTemplate
-      tag={tag}
+    <PlainListAllTemplate 
       posts={data.allMarkdownRemark.edges.map(nodeToPostExcerpt)}
     />
   );
@@ -27,21 +23,18 @@ function nodeToPostExcerpt({ node: { frontmatter } }: any): PostExcerpt {
 }
 
 export const pageQuery = graphql`
-  query TagPostsQuery($tag: String!) {
+  query AllPostsQuery {
     allMarkdownRemark(
-      sort: { 
+      sort: {
         fields: [frontmatter___published], 
         order: DESC 
-      }, 
-      filter: { 
-        frontmatter: { 
-          tags: { 
-            eq: $tag 
-          },
+      },
+      filter: {
+        frontmatter: {
           draft: {
             eq: false
           }
-        } 
+        }
       }
     ) {
       edges {

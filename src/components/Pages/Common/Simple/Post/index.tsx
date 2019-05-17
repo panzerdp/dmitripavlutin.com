@@ -2,20 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
-import Subheader from '@common/Subheader';
+import Subheader from 'components/Pages/Common/Subheader';
 import styles from './index.module.scss';
 import { TO_POST } from 'routes/path';
 
-export default function SimplePost({ title, slug, tags, publishedDate }) {
-  const to = TO_POST({ slug });
+interface SimplePostProps {
+  post: PostExcerpt;
+}
+
+export default function SimplePost({ post }: SimplePostProps) {
+  const to = TO_POST({ slug: post.slug });
   return (
     <div className={styles.simplePost}>
       <h4>
-        <Link exact="true" to={to}>{title}</Link>
+        <Link to={to}>{post.title}</Link>
       </h4>
       <Subheader
-        tags={tags}
-        publishedDate={publishedDate}
+        tags={post.tags}
+        publishedDate={post.published}
       />
     </div>
   );
