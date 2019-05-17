@@ -42,7 +42,6 @@ export const pageQuery = graphql`
     speciality
     siteUrl
     repositoryUrl
-    postsPerPage
     author
     profiles {
       stackoverflow

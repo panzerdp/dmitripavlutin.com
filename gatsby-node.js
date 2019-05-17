@@ -1,7 +1,7 @@
 const Promise = require('bluebird');
 const path = require('path');
 
-const createPaginationPages = require('./create/pagination-pages');
+const createPaginationPages = require('./create/excerpts-list');
 const createPosts = require('./create/posts');
 const createTags = require('./create/tags');
 
@@ -46,7 +46,7 @@ exports.createPages = ({ graphql, actions }) => {
       }
       // Create blog posts pages.
       const edges = result.data.allMarkdownRemark.edges;
-      createPaginationPages(createPage, '/page/', edges);
+      createPaginationPages(createPage, edges);
       createPosts(createPage, edges);
       createTags(createPage, edges);
     });

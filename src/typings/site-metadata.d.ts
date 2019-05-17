@@ -18,7 +18,6 @@ interface SiteMetadata {
   speciality: string;
   siteUrl: string;
   repositoryUrl: string;
-  postsPerPage: number;
   author: string;
   profiles: SiteMetadataProfiles;
   nicknames: SiteMetadataNicknames;
