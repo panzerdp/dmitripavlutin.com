@@ -1,10 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import ShareGroupHorizontal from '../Group/Horizontal';
 import styles from './index.module.scss';
 
-export default function PostShareBottom({ url, text, tags }) {
+interface PostShareButtomProps {
+  url: string;
+  text: string;
+  tags: Tags
+}
+
+export default function PostShareBottom({ url, text, tags }: PostShareButtomProps) {
   return (
     <div className={styles.postShareBottom}>
       <h3>
@@ -18,9 +23,3 @@ export default function PostShareBottom({ url, text, tags }) {
     </div>
   );
 }
-
-PostShareBottom.propTypes = {
-  url: PropTypes.string,
-  text: PropTypes.string,
-  tags: PropTypes.array
-};

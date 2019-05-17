@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { stringify } from 'query-string';
-import slugify from 'voca/slugify';
-import * as R from 'ramda';
 
 import ShareButton from '../../Button';
 import styles from './index.module.scss';
@@ -10,17 +7,19 @@ import withWindowOpen from 'components/With/WindowOpen';
 
 const SHARE_TWITTER = 'https://twitter.com/share';
 
-const toTwitterHashtags = R.pipe(
-  R.map(slugify),
-  R.join(',')
-);
+interface ShareSocialTwitterProps {
+  url: string;
+  text: string;
+  tags: Tags;
+  windowOpen(props: any): void;
+}
 
-export class ShareSocialTwitter extends Component {
+export class ShareSocialTwitter extends Component<ShareSocialTwitterProps> {
   render() {
     return <ShareButton title="Share on Twitter" onClick={this.handleClick} className={styles.twitter} />;
   }
 
-  handleClick = (event) => {
+  handleClick = (event: React.SyntheticEvent) => {
     event.preventDefault();
     this.props.windowOpen({
       url: this.getTwitterShareUrl(),
@@ -35,16 +34,9 @@ export class ShareSocialTwitter extends Component {
     return SHARE_TWITTER + '?' + stringify({
       url,
       text,
-      hashtags: toTwitterHashtags(tags)
+      hashtags: tags.map(tag => tag.toLowerCase().split(' ').join('-'))
     });
   }
 }
-
-ShareSocialTwitter.propTypes = {
-  url: PropTypes.string,
-  text: PropTypes.string,
-  tags: PropTypes.array,
-  windowOpen: PropTypes.func
-};
 
 export default withWindowOpen(ShareSocialTwitter);

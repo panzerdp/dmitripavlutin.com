@@ -33,7 +33,9 @@ export default function ExcerptsFetch({ data: { site: { siteMetadata }, allMarkd
 export const pageQuery = graphql`
   query ExcerptsQuery($skip: Int, $limit: Int) {
     site {
-      ...SiteMetadata
+      siteMetadata {
+        ...SiteMetadataAll
+      }
     }
     authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {
       childImageSharp {

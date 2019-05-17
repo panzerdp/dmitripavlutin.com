@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
-import AllPostsMetaTags from '@allposts/Meta/Tags';
+import AllPostsMetaTags from 'components/Pages/PlainListAll/Meta/Tags';
 import Layout from 'components/Layout/Container';
 import SimpleList from 'components/Pages/Common/Simple/List';
 

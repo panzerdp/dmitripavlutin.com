@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { stringify } from 'query-string';
 
 import ShareButton from '../../Button';
@@ -8,12 +7,17 @@ import withWindowOpen from 'components/With/WindowOpen';
 
 const SHARE_FACEBOOK = 'https://www.facebook.com/sharer/sharer.php/';
 
-export class ShareSocialFacebook extends Component {
+interface ShareSocialFacebookProps {
+  url: string;
+  windowOpen(props: any): void;
+}
+
+export class ShareSocialFacebook extends Component<ShareSocialFacebookProps> {
   render() {
     return <ShareButton title="Share on Twitter" onClick={this.handleClick} className={styles.facebook} />;
   }
 
-  handleClick = (event) => {
+  handleClick = (event: React.SyntheticEvent) => {
     event.preventDefault();
     this.props.windowOpen({
       url: this.getFacebookShareUrl(),
@@ -30,10 +34,5 @@ export class ShareSocialFacebook extends Component {
     });
   }
 }
-
-ShareSocialFacebook.propTypes = {
-  url: PropTypes.string,
-  windowOpen: PropTypes.func
-};
 
 export default withWindowOpen(ShareSocialFacebook);

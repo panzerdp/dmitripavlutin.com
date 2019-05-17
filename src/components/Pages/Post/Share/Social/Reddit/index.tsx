@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { stringify } from 'query-string';
 
 import ShareButton from '../../Button';
@@ -7,7 +6,12 @@ import styles from './index.module.scss';
 
 const SHARE_REDDIT = 'https://www.reddit.com/submit';
 
-export default function ShareSocialReddit({ url, text }) {
+interface ShareSocialRedditProps {
+  url: string;
+  text: string;
+}
+
+export default function ShareSocialReddit({ url, text }: ShareSocialRedditProps) {
   const shareUrl = SHARE_REDDIT + '?' + stringify({
     url,
     title: text
@@ -22,8 +26,3 @@ export default function ShareSocialReddit({ url, text }) {
     />
   );
 }
-
-ShareSocialReddit.propTypes = {
-  url: PropTypes.string,
-  text: PropTypes.string
-};

@@ -1,12 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
 import TagMetaTags from '../Meta/Tags';
 import Layout from 'components/Layout/Container';
 import SimpleList from 'components/Pages/Common/Simple/List';
 
-export default function Tag({ pageContext: { tag }, data }) {
+interface PlainListByTagProps {
+  pageContext: {
+    tag: string;
+  };
+  data: any
+}
+
+export default function PlainListByTagFetch({ pageContext: { tag }, data }: PlainListByTagProps) {
   return (
     <Layout>
       <TagMetaTags tag={tag} />
@@ -16,18 +22,11 @@ export default function Tag({ pageContext: { tag }, data }) {
   );
 }
 
-Tag.propTypes = {
-  data: PropTypes.object,
-  pageContext: PropTypes.object
-};
-
 export const pageQuery = graphql`
   query TagPostsQuery($tag: String!) {
     site {
       siteMetadata {
-        title
-        description
-        siteUrl
+        ...SiteMetadataAll
       }
     }
     allMarkdownRemark(
@@ -49,11 +48,7 @@ export const pageQuery = graphql`
       edges {
         node {
           frontmatter {
-            publishedDate: published(formatString: "DD MMMM, YYYY")
-            title
-            description
-            slug
-            tags
+            ...PostExcerpt
           }
         }
       }

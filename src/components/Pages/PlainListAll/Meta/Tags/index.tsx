@@ -1,6 +1,5 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import PropTypes from 'prop-types';
 
 export default function AllPostsMetaTags() {
   return (
@@ -10,7 +9,3 @@ export default function AllPostsMetaTags() {
     </Helmet>
   );
 }
-
-AllPostsMetaTags.propTypes = {
-  data: PropTypes.object
-};

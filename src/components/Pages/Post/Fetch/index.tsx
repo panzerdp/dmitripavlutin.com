@@ -36,26 +36,24 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
 }
 
 export const pageQuery = graphql`
-  fragment SiteMetadata on Site {
-    siteMetadata {
-      title
-      description
-      speciality
-      siteUrl
-      repositoryUrl
-      postsPerPage
-      author
-      profiles {
-        stackoverflow
-        twitter
-        linkedin
-        github
-        facebook
-        googlePlus
-      }
-      nicknames {
-        twitter
-      }
+  fragment SiteMetadataAll on SiteSiteMetadata {
+    title
+    description
+    speciality
+    siteUrl
+    repositoryUrl
+    postsPerPage
+    author
+    profiles {
+      stackoverflow
+      twitter
+      linkedin
+      github
+      facebook
+      googlePlus
+    }
+    nicknames {
+      twitter
     }
   }
 
@@ -76,7 +74,9 @@ export const pageQuery = graphql`
 
   query BlogPostBySlug($slug: String!, $recommended: [String]!) {
     site {
-      ...SiteMetadata
+      siteMetadata {
+        ...SiteMetadataAll
+      }
     }
     authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {
       childImageSharp {
@@ -118,15 +118,7 @@ export const pageQuery = graphql`
       edges {
         node {
           frontmatter {
-            title
-            slug
-            thumbnail {
-              childImageSharp {
-                fluid(maxWidth: 360, maxHeight: 175, quality: 90) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
+            ...PostExcerpt
           }
         }
       }
