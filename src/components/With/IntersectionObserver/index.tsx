@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import * as R from 'ramda';
 import { canUseDOM } from 'exenv';
 
 import Observer from 'react-intersection-observer';
 
-function withIntersectionObserver(WrappedComponent) {
-  function EnhancedComponent(props) {
+function withIntersectionObserver(WrappedComponent: React.ComponentType) {
+  function EnhancedComponent(props: { onViewChange: (inView: boolean) => void}) {
     const { onViewChange, ...wrappedProps } = props;
     return (
       <Observer onChange={inView => onViewChange(inView)}>
@@ -16,10 +15,6 @@ function withIntersectionObserver(WrappedComponent) {
   }
 
   EnhancedComponent.displayName = `withIntersectionObserver(${WrappedComponent.name})`;
-
-  EnhancedComponent.propTypes = {
-    onViewChange: PropTypes.func
-  };
 
   return EnhancedComponent;
 }

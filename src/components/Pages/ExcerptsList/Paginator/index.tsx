@@ -1,31 +1,26 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
-import * as R from 'ramda';
 
 import styles from './index.module.scss';
 import { TO_INDEX, TO_PAGE } from 'routes/path';
 
-export default class Paginator extends Component {
-  constructor(props) {
-    super(props);
-    this.mapPageToLink = this.mapPageToLink.bind(this);
-    this.toPrevLink = this.toPrevLink.bind(this);
-    this.toNextLink = this.toNextLink.bind(this);
-  }
+interface PaginatorProps {
+  pagesSum: number;
+  currentPage: number;
+}
 
+export default class Paginator extends Component<PaginatorProps> {
   render() {
     const { pagesSum } = this.props;
-    const links = R.pipe(
-      R.range,
-      R.map(this.mapPageToLink),
-      R.prepend(this.toPrevLink()),
-      R.append(this.toNextLink())
-    )(1, pagesSum + 1);
+    const links = [this.toPrevLink()];
+    for (let page = 1; page <= pagesSum; page++) {
+      links.push(this.mapPageToLink(page));
+    }
+    links.push(this.toNextLink());
     return <div className={styles.paginator}>{links}</div>;
   }
 
-  mapPageToLink(page) {
+  mapPageToLink(page: number) {
     const { currentPage } = this.props;
     return (
       <Link
@@ -62,15 +57,10 @@ export default class Paginator extends Component {
     );
   }
 
-  pageToPath(page) {
+  pageToPath(page: number) {
     if (page === 1) {
       return TO_INDEX();
     }
     return TO_PAGE({ page });
   }
 }
-
-Paginator.propTypes = {
-  pagesSum: PropTypes.number,
-  currentPage: PropTypes.number
-};

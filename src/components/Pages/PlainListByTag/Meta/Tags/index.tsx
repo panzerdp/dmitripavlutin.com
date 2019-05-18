@@ -1,8 +1,11 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import PropTypes from 'prop-types';
 
-export default function TagMetaTags({ tag }) {
+interface TagMetTagsProps {
+  tag: string;
+}
+
+export default function TagMetaTags({ tag }: TagMetTagsProps) {
   const capitalizedTag = tag[0].toUpperCase() + tag.slice(1);
   return (
     <Helmet>
@@ -11,7 +14,3 @@ export default function TagMetaTags({ tag }) {
     </Helmet>
   );
 }
-
-TagMetaTags.propTypes = {
-  tag: PropTypes.string
-};

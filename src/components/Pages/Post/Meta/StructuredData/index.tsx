@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 interface PostMetaStructuredDataProps {
@@ -62,7 +61,3 @@ export default function PostMetaStructuredData({ post, siteMetadata, authorProfi
     </Helmet>
   );
 }
-
-PostMetaStructuredData.propTypes = {
-  data: PropTypes.object
-};

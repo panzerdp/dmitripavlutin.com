@@ -1,19 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 import Img from "gatsby-image";
 
 import styles from './index.module.scss';
 import { TO_INDEX, TO_ALL_POSTS, TO_ABOUT } from 'routes/path';
 
-export default function Header({ pictureResolutions, speciality }) {
+interface HeaderProps {
+  profilePicture: FixedImage;
+  speciality: string;
+}
+
+export default function Header({ profilePicture, speciality }: HeaderProps) {
   return (
     <header>
       <div className={styles.headerContent}>
         <Link to={TO_INDEX()}>
           <Img
             title="Home"
-            resolutions={pictureResolutions}
+            resolutions={profilePicture}
             className={styles.picture}
           />
         </Link>
@@ -29,8 +33,3 @@ export default function Header({ pictureResolutions, speciality }) {
     </header>
   );
 }
-
-Header.propTypes = {
-  pictureResolutions: PropTypes.object,
-  speciality: PropTypes.string
-};

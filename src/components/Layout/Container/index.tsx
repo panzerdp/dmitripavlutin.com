@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from "gatsby";
 
 import 'normalize.css/normalize.css';
@@ -9,7 +8,11 @@ import LayoutMetaTags from 'components/Layout/Meta/Tags';
 import LayoutHeader from 'components/Layout/Header';
 import LayoutFooter from 'components/Layout/Footer';
 
-export default class LayoutContainer extends Component {
+interface LayoutContainerProps {
+  children: React.ReactNode;
+}
+
+export default class LayoutContainer extends Component<LayoutContainerProps> {
   render() {
     return (
       <StaticQuery
@@ -26,16 +29,7 @@ export default class LayoutContainer extends Component {
           }
           site {
             siteMetadata {
-              title
-              description
-              author
-              speciality
-              profiles {
-                stackoverflow
-                twitter 
-                github
-                linkedin
-              }
+              ...SiteMetadataAll
             }
           }
         }
@@ -45,14 +39,13 @@ export default class LayoutContainer extends Component {
     );
   }
 
-  renderContent = (data) => {
-    const { site: { siteMetadata } } = data;
+  renderContent = ({ site: { siteMetadata }, file }: { site: { siteMetadata: SiteMetadata }, file: any }) => {
     const { children } = this.props;
     return (
       <div className={styles.container}>
         <LayoutMetaTags siteMetadata={siteMetadata} />
         <LayoutHeader
-          pictureResolutions={data.file.childImageSharp.resolutions}
+          profilePicture={file.childImageSharp.resolutions}
           speciality={siteMetadata.speciality}
         />
         <main className={styles.main}>
@@ -63,7 +56,3 @@ export default class LayoutContainer extends Component {
     );
   }
 }
-
-LayoutContainer.propTypes = {
-  children: PropTypes.node
-};

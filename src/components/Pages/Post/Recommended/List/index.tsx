@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import RecommendedExcerpt from '../Excerpt';
 import styles from './index.module.scss';
@@ -28,7 +27,3 @@ export default function RecommendedList({ posts }: RecommendedListProps) {
     </div>
   );
 }
-
-RecommendedList.propTypes = {
-  posts: PropTypes.array
-};

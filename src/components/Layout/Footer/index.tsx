@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
 import styles from './index.module.scss';
@@ -11,7 +10,12 @@ import {
 
 const year = new Date().getFullYear();
 
-export default function Footer({ profiles, author }) {
+interface FooterProps {
+  profiles: SiteMetadataProfiles;
+  author: string;
+}
+
+export default function Footer({ profiles, author }: FooterProps) {
   return (
     <footer>
       <div className={styles.footerContent}>
@@ -43,8 +47,3 @@ export default function Footer({ profiles, author }) {
     </footer>
   );
 }
-
-Footer.propTypes = {
-  profiles: PropTypes.object,
-  author: PropTypes.string
-};

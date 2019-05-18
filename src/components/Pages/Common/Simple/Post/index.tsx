@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
 import Subheader from 'components/Pages/Common/Subheader';
@@ -19,17 +18,8 @@ export default function SimplePost({ post }: SimplePostProps) {
       </h4>
       <Subheader
         tags={post.tags}
-        publishedDate={post.published}
+        published={post.published}
       />
     </div>
   );
 }
-
-SimplePost.propTypes = {
-  description: PropTypes.string,
-  slug: PropTypes.string,
-  title: PropTypes.string,
-  sizes: PropTypes.object,
-  tags: PropTypes.array,
-  publishedDate: PropTypes.string
-};
