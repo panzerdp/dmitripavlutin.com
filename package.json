@@ -13,7 +13,6 @@
     "gatsby-cli": "2.5.14",
     "gatsby-image": "2.0.41",
     "gatsby-link": "2.1.1",
-    "gatsby-plugin-alias-imports": "1.0.5",
     "gatsby-plugin-feed": "2.2.0",
     "gatsby-plugin-google-analytics": "2.0.20",
     "gatsby-plugin-offline": "2.1.0",
@@ -42,8 +41,7 @@
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-helmet": "5.2.1",
-    "react-intersection-observer": "8.23.0",
-    "voca": "1.4.0"
+    "react-intersection-observer": "8.23.0"
   },
   "devDependencies": {
     "babel-eslint": "10.0.1",

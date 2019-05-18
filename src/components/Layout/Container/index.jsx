@@ -5,7 +5,7 @@ import { StaticQuery, graphql } from "gatsby";
 import 'normalize.css/normalize.css';
 import styles from './index.module.scss';
 
-import LayoutMetaTags from '@layout/Meta/Tags';
+import LayoutMetaTags from 'components/Layout/Meta/Tags';
 import LayoutHeader from 'components/Layout/Header';
 import LayoutFooter from 'components/Layout/Footer';
 

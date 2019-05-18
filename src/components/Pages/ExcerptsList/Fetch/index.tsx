@@ -8,7 +8,6 @@ interface ExcerptsFetchProps {
   pageContext: {
     currentPage: number;
     pagesSum: number;
-    pathPrefix: string;
   }
 }
 

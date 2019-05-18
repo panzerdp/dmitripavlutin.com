@@ -8,7 +8,7 @@ declare module 'routes/path' {
   export const TO_INDEX: () => string;
 
   export const PATH_POST: string;
-  export const TO_POST: () => string;
+  export const TO_POST: (params: { slug: string }) => string;
 
   export const PATH_ALL_POSTS: string;
   export const TO_ALL_POSTS: () => string;

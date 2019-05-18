@@ -12,7 +12,6 @@ interface ExcerptsTemplateProps {
   posts: PostExcerpt[];
   currentPage: number;
   pagesSum: number;
-  pathPrefix: string;
   authorProfilePicture: FluidImage
 }
 
@@ -21,7 +20,6 @@ export default function ExcerptsTemplate({
   posts,
   currentPage,
   pagesSum,
-  pathPrefix,
   authorProfilePicture
   }: ExcerptsTemplateProps) {
   return (
@@ -43,7 +41,6 @@ export default function ExcerptsTemplate({
       <Paginator
         currentPage={currentPage}
         pagesSum={pagesSum}
-        pathPrefix={pathPrefix}
       />
     </Layout>
   );

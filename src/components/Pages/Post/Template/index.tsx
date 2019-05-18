@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import 'prismjs/themes/prism.css';
-import 'intersection-observer';
 
 import styles from './index.module.scss';
 import Subheader from 'components/Pages/Common/Subheader';

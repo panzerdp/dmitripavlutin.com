@@ -4,6 +4,7 @@ import { stringify } from 'query-string';
 import ShareButton from '../../Button';
 import styles from './index.module.scss';
 import withWindowOpen from 'components/With/WindowOpen';
+import { slugify } from 'utils/string';
 
 const SHARE_TWITTER = 'https://twitter.com/share';
 
@@ -34,7 +35,7 @@ export class ShareSocialTwitter extends Component<ShareSocialTwitterProps> {
     return SHARE_TWITTER + '?' + stringify({
       url,
       text,
-      hashtags: tags.map(tag => tag.toLowerCase().split(' ').join('-'))
+      hashtags: tags.map(tag => slugify(tag))
     });
   }
 }

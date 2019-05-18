@@ -85,18 +85,6 @@ module.exports = {
         //trackingId: 'ADD YOUR TRACKING ID HERE',
       },
     },
-    {
-      resolve: `gatsby-plugin-alias-imports`,
-      options: {
-        alias: {
-          '@layout': `${__dirname}/src/components/Layout`,
-          '@common': `${__dirname}/src/components/Pages/Common`,
-          '@allposts': `${__dirname}/src/components/Pages/AllPosts`,
-          '@tag': `${__dirname}/src/components/Pages/Tag`,
-        },
-        extensions: []
-      }
-    },
     'gatsby-plugin-offline',
     'gatsby-plugin-react-helmet',
     require('./gatsby-configs/gatsby-plugin-sass'),
