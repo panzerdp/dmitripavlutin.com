@@ -4,7 +4,6 @@ interface SiteMetadataProfiles {
   linkedin: string;
   github: string;
   facebook: string;
-  googlePlus: string;
   [index: string]: string;
 }
 

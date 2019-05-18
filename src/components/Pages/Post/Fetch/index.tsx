@@ -49,7 +49,6 @@ export const pageQuery = graphql`
       linkedin
       github
       facebook
-      googlePlus
     }
     nicknames {
       twitter
