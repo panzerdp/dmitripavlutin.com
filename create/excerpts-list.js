@@ -6,24 +6,20 @@ const POSTS_PER_PAGE = 5;
 
 const pageComponentPath = path.resolve(__dirname, '../src/components/Pages/ExcerptsList/Fetch/index.tsx');
 
-module.exports = function createPaginationPages(createPage, edges) {
-  const pagesSum = Math.ceil(edges.length / postsPerPage);
-  R.pipe(
-    R.range,
-    R.forEach(function(currentPage) {
-      createPage({
-        path: pageToPath(currentPage),
-        component: pageComponentPath,
-        context: {
-          skip: (currentPage - 1) * POSTS_PER_PAGE,
-          limit: postsPerPage,
-          currentPage,
-          pagesSum,
-          pathPrefix
-        }
-      });
-    })
-  )(1, pagesSum + 1);
+module.exports = function createExcerptsList(createPage, edges) {
+  const pagesSum = Math.ceil(edges.length / POSTS_PER_PAGE);
+  for (let currentPage = 1; currentPage <= pagesSum; currentPage++) {
+    createPage({
+      path: pageToPath(currentPage),
+      component: pageComponentPath,
+      context: {
+        skip: (currentPage - 1) * POSTS_PER_PAGE,
+        limit: POSTS_PER_PAGE,
+        currentPage,
+        pagesSum
+      }
+    });
+  }
 };
 
 function pageToPath(currentPage) {

@@ -1,6 +1,8 @@
 const path = require('path');
 const R = require('ramda');
 
+const { TO_TAG } = require('../src/routes/path');
+
 const tagComponentPath = path.resolve(__dirname, '../src/components/Pages/PlainListByTag/Fetch/index.tsx');
 
 const getTagsFromEdges = R.pipe(
@@ -19,13 +21,15 @@ const getTagsFromEdges = R.pipe(
   })
 );
 
-module.exports = function createTags(createPage, edges) {
+module.exports = function createPlainListByTag(createPage, edges) {
   const tags = getTagsFromEdges(edges);
 
   R.forEach(function(tag) {
-    const tagSlug = tag.split(' ').join('-');
+    const slug = tag.split(' ').join('-');
     createPage({
-      path: `/tag/${tagSlug}`,
+      path: TO_TAG({
+        slug
+      }),
       component: tagComponentPath,
       context: {
         tag

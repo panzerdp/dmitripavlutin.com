@@ -1,9 +1,9 @@
 const Promise = require('bluebird');
 const path = require('path');
 
-const createPaginationPages = require('./create/excerpts-list');
-const createPosts = require('./create/posts');
-const createTags = require('./create/tags');
+const createExcerptsList = require('./create/excerpts-list');
+const createPost = require('./create/post');
+const createPlainListByTag = require('./create/plain-list-by-tag');
 
 const query = `
 {
@@ -46,9 +46,9 @@ exports.createPages = ({ graphql, actions }) => {
       }
       // Create blog posts pages.
       const edges = result.data.allMarkdownRemark.edges;
-      createPaginationPages(createPage, edges);
-      createPosts(createPage, edges);
-      createTags(createPage, edges);
+      createExcerptsList(createPage, edges);
+      createPost(createPage, edges);
+      createPlainListByTag(createPage, edges);
     });
     resolve(queryResult);
   });

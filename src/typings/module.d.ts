@@ -17,7 +17,7 @@ declare module 'routes/path' {
   export const TO_ABOUT: () => string;
 
   export const PATH_TAG: string;
-  export const TO_TAG: (params: { tag: string }) => string;
+  export const TO_TAG: (params: { slug: string }) => string;
 
   export const PATH_PAGE: string;
   export const TO_PAGE: (params: { page: number }) => string;
