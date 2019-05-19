@@ -23,7 +23,7 @@ export default function Excerpt({ post }: ExcerptProps) {
             {post.title}
           </Link>
         </h4>
-        <Subheader tags={post.tags} publishedDate={post.published} />
+        <Subheader tags={post.tags} published={post.published} />
         <div>{post.description} <Link className={styles.continueReading} to={to}>Continue reading &#x279e;</Link></div> 
       </div>
     </article>

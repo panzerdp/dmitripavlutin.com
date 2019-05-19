@@ -9,6 +9,7 @@ interface SubheaderProps {
 }
 
 export default function Subheader({ tags, published }: SubheaderProps) {
+  console.log(published);
   return (
     <div className={styles.subheader}>
       <div className={styles.tags}>{tags.map(mapTag)}</div>

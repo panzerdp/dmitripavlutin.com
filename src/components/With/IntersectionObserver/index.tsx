@@ -1,5 +1,4 @@
 import React from 'react';
-import * as R from 'ramda';
 import { canUseDOM } from 'exenv';
 
 import Observer from 'react-intersection-observer';
@@ -19,8 +18,9 @@ function withIntersectionObserver(WrappedComponent: React.ComponentType) {
   return EnhancedComponent;
 }
 
-export default R.ifElse(
-  R.always(canUseDOM && typeof IntersectionObserver !== 'undefined'),
-  withIntersectionObserver,
-  R.identity
-);
+export default function(WrappedComponent: React.ComponentType) {
+  if (canUseDOM && typeof IntersectionObserver !== 'undefined') {
+    return withIntersectionObserver(WrappedComponent);
+  }
+  return () => WrappedComponent;
+}

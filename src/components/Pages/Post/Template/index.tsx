@@ -51,7 +51,7 @@ export default function PostTemplate({
           thumbnail={post.thumbnail}
         />
         <h1>{post.title}</h1>
-        <Subheader tags={post.tags} publishedDate={post.published} />
+        <Subheader tags={post.tags} published={post.published} />
         <ShareGroupVertical
           url={postUrl}
           text={post.title}
