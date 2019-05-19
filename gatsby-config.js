@@ -17,9 +17,16 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 740,
-              linkImagesToOriginal: false,
-              sizeByPixelDensity: false
+              maxWidth: 600,
+              linkImagesToOriginal: true,
+              sizeByPixelDensity: false,
+              quality: 90,
+              wrapperStyle({ aspectRatio }) {
+                if (aspectRatio <= 0.8) {
+                  return 'max-width: 560px !important;';
+                }
+                return '';
+              }
             },
           },
           {
