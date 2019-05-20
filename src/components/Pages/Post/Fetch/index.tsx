@@ -1,5 +1,5 @@
-import React from 'react';
 import { graphql } from 'gatsby';
+import React from 'react';
 
 import PostTemplate from 'components/Pages/Post/Template';
 
@@ -13,15 +13,20 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
   const post: Post = {
     ...markdownRemark.frontmatter,
     html: markdownRemark.html,
-    thumbnail: markdownRemark.frontmatter.thumbnail.childImageSharp.fluid
+    thumbnail: markdownRemark.frontmatter.thumbnail.childImageSharp.fluid,
   };
-  const postRelativePath = markdownRemark.fileAbsolutePath.split('/').slice(-3).join('/');
+  const postRelativePath = markdownRemark.fileAbsolutePath
+    .split('/')
+    .slice(-3)
+    .join('/');
   const postRepositoryFileUrl = `${siteMetadata.repositoryUrl}/tree/master/${postRelativePath}`;
   const posts: PostExcerpt[] = recommendedPosts.edges.map(function(edge: any) {
-    const { node: { frontmatter } } = edge;
+    const {
+      node: { frontmatter },
+    } = edge;
     return {
       ...frontmatter,
-      thumbnail: frontmatter.thumbnail.childImageSharp.fluid
+      thumbnail: frontmatter.thumbnail.childImageSharp.fluid,
     };
   });
   return (
@@ -32,7 +37,7 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
       recommendedPosts={posts}
       authorProfilePicture={authorProfilePicture.childImageSharp.resize}
     />
-  ) 
+  );
 }
 
 export const pageQuery = graphql`
@@ -104,15 +109,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    recommendedPosts: allMarkdownRemark(
-      filter: {
-        frontmatter: { 
-          slug: {
-            in: $recommended
-          }
-        }
-      }
-    ) {
+    recommendedPosts: allMarkdownRemark(filter: { frontmatter: { slug: { in: $recommended } } }) {
       edges {
         node {
           frontmatter {

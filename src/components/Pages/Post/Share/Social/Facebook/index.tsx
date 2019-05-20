@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
 import { stringify } from 'query-string';
+import React, { Component } from 'react';
 
+import withWindowOpen from 'components/With/WindowOpen';
 import ShareButton from '../../Button';
 import styles from './index.module.scss';
-import withWindowOpen from 'components/With/WindowOpen';
 
 const SHARE_FACEBOOK = 'https://www.facebook.com/sharer/sharer.php/';
 
@@ -13,25 +13,29 @@ interface ShareSocialFacebookProps {
 }
 
 export class ShareSocialFacebook extends Component<ShareSocialFacebookProps> {
-  render() {
+  public render() {
     return <ShareButton title="Share on Twitter" onClick={this.handleClick} className={styles.facebook} />;
   }
 
-  handleClick = (event: React.SyntheticEvent) => {
+  public handleClick = (event: React.SyntheticEvent) => {
     event.preventDefault();
     this.props.windowOpen({
       url: this.getFacebookShareUrl(),
       width: 550,
       height: 296,
-      name: 'Facebook share'
+      name: 'Facebook share',
     });
   }
 
-  getFacebookShareUrl() {
+  public getFacebookShareUrl() {
     const { url } = this.props;
-    return SHARE_FACEBOOK + '?' + stringify({
-      u: url
-    });
+    return (
+      SHARE_FACEBOOK +
+      '?' +
+      stringify({
+        u: url,
+      })
+    );
   }
 }
 

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import styles from './index.module.scss';
 import Tag from 'components/Pages/Common/Tag';
 import { formatDate } from 'utils/date';
+import styles from './index.module.scss';
 
 interface SubheaderProps {
   tags: Tags;

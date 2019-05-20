@@ -1,5 +1,5 @@
-import React from 'react';
 import { graphql } from 'gatsby';
+import React from 'react';
 
 import ExcerptsListTemplate from 'components/Pages/ExcerptsList/Template';
 
@@ -8,19 +8,26 @@ interface ExcerptsFetchProps {
   pageContext: {
     currentPage: number;
     pagesSum: number;
-  }
+  };
 }
 
 function nodeToPostExcerpt({ node: { frontmatter } }: any): PostExcerpt {
   return {
     ...frontmatter,
-    thumbnail: frontmatter.thumbnail.childImageSharp.fluid
-  }
+    thumbnail: frontmatter.thumbnail.childImageSharp.fluid,
+  };
 }
 
-export default function ExcerptsFetch({ data: { site: { siteMetadata }, allMarkdownRemark, authorProfilePicture } , pageContext }: ExcerptsFetchProps ) {
+export default function ExcerptsFetch({
+  data: {
+    site: { siteMetadata },
+    allMarkdownRemark,
+    authorProfilePicture,
+  },
+  pageContext,
+}: ExcerptsFetchProps) {
   return (
-    <ExcerptsListTemplate 
+    <ExcerptsListTemplate
       siteMetadata={siteMetadata}
       posts={allMarkdownRemark.edges.map(nodeToPostExcerpt)}
       authorProfilePicture={authorProfilePicture.childImageSharp.resize}
@@ -44,18 +51,9 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      sort: { 
-        fields: [frontmatter___published], 
-        order: DESC 
-      },
-      filter: {
-        frontmatter: { 
-          draft: {
-            eq: false
-          }
-        }
-      },
-      skip: $skip, 
+      sort: { fields: [frontmatter___published], order: DESC }
+      filter: { frontmatter: { draft: { eq: false } } }
+      skip: $skip
       limit: $limit
     ) {
       edges {

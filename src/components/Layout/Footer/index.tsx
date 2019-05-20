@@ -1,12 +1,8 @@
-import React from 'react';
 import Link from 'gatsby-link';
+import React from 'react';
 
+import { TO_ABOUT, TO_ALL_POSTS, TO_INDEX } from 'routes/path';
 import styles from './index.module.scss';
-import {
-  TO_INDEX,
-  TO_ALL_POSTS,
-  TO_ABOUT
-} from 'routes/path';
 
 const year = new Date().getFullYear();
 

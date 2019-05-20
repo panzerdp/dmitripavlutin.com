@@ -1,5 +1,5 @@
-import React from 'react';
 import { graphql } from 'gatsby';
+import React from 'react';
 
 import PlainListByTagTemplate from 'components/Pages/PlainListByTag/Template';
 
@@ -11,38 +11,21 @@ interface PlainListByTagProps {
 }
 
 export default function PlainListByTagFetch({ pageContext: { tag }, data }: PlainListByTagProps) {
-  return (
-    <PlainListByTagTemplate
-      tag={tag}
-      posts={data.allMarkdownRemark.edges.map(nodeToPostExcerpt)}
-    />
-  );
+  return <PlainListByTagTemplate tag={tag} posts={data.allMarkdownRemark.edges.map(nodeToPostExcerpt)} />;
 }
 
 function nodeToPostExcerpt({ node: { frontmatter } }: any): PostExcerpt {
   return {
     ...frontmatter,
-    thumbnail: frontmatter.thumbnail.childImageSharp.fluid
-  }
+    thumbnail: frontmatter.thumbnail.childImageSharp.fluid,
+  };
 }
 
 export const pageQuery = graphql`
   query TagPostsQuery($tag: String!) {
     allMarkdownRemark(
-      sort: { 
-        fields: [frontmatter___published], 
-        order: DESC 
-      }, 
-      filter: { 
-        frontmatter: { 
-          tags: { 
-            eq: $tag 
-          },
-          draft: {
-            eq: false
-          }
-        } 
-      }
+      sort: { fields: [frontmatter___published], order: DESC }
+      filter: { frontmatter: { tags: { eq: $tag }, draft: { eq: false } } }
     ) {
       edges {
         node {

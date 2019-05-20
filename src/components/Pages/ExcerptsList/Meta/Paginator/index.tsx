@@ -10,7 +10,7 @@ interface MetaPaginatorProps {
 }
 
 export default class MetaPaginator extends Component<MetaPaginatorProps> {
-  render() {
+  public render() {
     return (
       <Helmet>
         {this.prev()}
@@ -19,7 +19,7 @@ export default class MetaPaginator extends Component<MetaPaginatorProps> {
     );
   }
 
-  prev() {
+  public prev() {
     const { currentPage } = this.props;
     if (currentPage === 1) {
       return null;
@@ -27,7 +27,7 @@ export default class MetaPaginator extends Component<MetaPaginatorProps> {
     return <link rel="prev" href={this.pageToUrl(currentPage - 1)} />;
   }
 
-  next() {
+  public next() {
     const { pagesSum, currentPage } = this.props;
     if (currentPage === pagesSum) {
       return null;
@@ -35,7 +35,7 @@ export default class MetaPaginator extends Component<MetaPaginatorProps> {
     return <link rel="next" href={this.pageToUrl(currentPage + 1)} />;
   }
 
-  pageToUrl(page: number) {
+  public pageToUrl(page: number) {
     const { siteUrl } = this.props;
     if (page === 1) {
       return siteUrl;

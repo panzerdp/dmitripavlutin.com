@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
 import Link from 'gatsby-link';
+import React, { Component } from 'react';
 
-import styles from './index.module.scss';
 import { TO_INDEX, TO_PAGE } from 'routes/path';
+import styles from './index.module.scss';
 
 interface PaginatorProps {
   pagesSum: number;
@@ -10,7 +10,7 @@ interface PaginatorProps {
 }
 
 export default class Paginator extends Component<PaginatorProps> {
-  render() {
+  public render() {
     const { pagesSum } = this.props;
     const links = [this.toPrevLink()];
     for (let page = 1; page <= pagesSum; page++) {
@@ -20,23 +20,23 @@ export default class Paginator extends Component<PaginatorProps> {
     return <div className={styles.paginator}>{links}</div>;
   }
 
-  mapPageToLink(page: number) {
+  public mapPageToLink(page: number) {
     const { currentPage } = this.props;
     return (
-      <Link
-        to={this.pageToPath(page)}
-        key={page}
-        className={page === currentPage ? styles.selected : ''}
-      >
+      <Link to={this.pageToPath(page)} key={page} className={page === currentPage ? styles.selected : ''}>
         {page}
       </Link>
     );
   }
 
-  toPrevLink() {
+  public toPrevLink() {
     const { currentPage } = this.props;
     if (currentPage === 1) {
-      return <div key="prev" className={styles.nextPrev}>prev</div>;
+      return (
+        <div key="prev" className={styles.nextPrev}>
+          prev
+        </div>
+      );
     }
     return (
       <Link to={this.pageToPath(currentPage - 1)} key="prev" className={styles.nextPrev}>
@@ -45,10 +45,14 @@ export default class Paginator extends Component<PaginatorProps> {
     );
   }
 
-  toNextLink() {
+  public toNextLink() {
     const { pagesSum, currentPage } = this.props;
     if (currentPage === pagesSum) {
-      return <div key="next" className={styles.nextPrev}>next</div>;
+      return (
+        <div key="next" className={styles.nextPrev}>
+          next
+        </div>
+      );
     }
     return (
       <Link to={this.pageToPath(currentPage + 1)} key="next" className={styles.nextPrev}>
@@ -57,7 +61,7 @@ export default class Paginator extends Component<PaginatorProps> {
     );
   }
 
-  pageToPath(page: number) {
+  public pageToPath(page: number) {
     if (page === 1) {
       return TO_INDEX();
     }

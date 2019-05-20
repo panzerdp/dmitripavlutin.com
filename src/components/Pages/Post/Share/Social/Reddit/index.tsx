@@ -1,5 +1,5 @@
-import React from 'react';
 import { stringify } from 'query-string';
+import React from 'react';
 
 import ShareButton from '../../Button';
 import styles from './index.module.scss';
@@ -12,10 +12,13 @@ interface ShareSocialRedditProps {
 }
 
 export default function ShareSocialReddit({ url, text }: ShareSocialRedditProps) {
-  const shareUrl = SHARE_REDDIT + '?' + stringify({
-    url,
-    title: text
-  });
+  const shareUrl =
+    SHARE_REDDIT +
+    '?' +
+    stringify({
+      url,
+      title: text,
+    });
   return (
     <ShareButton
       title="Submit to Reddit"

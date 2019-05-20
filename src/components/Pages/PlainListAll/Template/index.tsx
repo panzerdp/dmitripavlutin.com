@@ -1,11 +1,11 @@
 import React from 'react';
 
-import AllPostsMetaTags from '../Meta/Tags';
 import Layout from 'components/Layout/Container';
 import SimpleList from 'components/Pages/Common/Simple/List';
+import AllPostsMetaTags from '../Meta/Tags';
 
 interface PlainListAllTemplateProps {
-  posts: PostExcerpt[]
+  posts: PostExcerpt[];
 }
 
 export default function PlainListAllTemplate({ posts }: PlainListAllTemplateProps) {

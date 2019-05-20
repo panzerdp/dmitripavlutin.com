@@ -10,9 +10,7 @@ export default function PostMetaTags({ post, siteMetadata }: PostMetaTagsProps) 
   const postUrl = `${siteMetadata.siteUrl}/${post.slug}/`;
   const imageUrl = `${siteMetadata.siteUrl}${post.thumbnail.src}`;
   return (
-    <Helmet
-      titleTemplate="%s"
-    >
+    <Helmet titleTemplate="%s">
       <title>{post.title}</title>
       <meta name="description" content={post.description} />
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -30,7 +28,9 @@ export default function PostMetaTags({ post, siteMetadata }: PostMetaTagsProps) 
       <meta property="article:published_time" content={post.published} />
       <meta property="article:modified_time" content={post.modified} />
 
-      {post.tags.map(tag => <meta property="article:tag" content={tag} key={tag} />)}
+      {post.tags.map((tag) => (
+        <meta property="article:tag" content={tag} key={tag} />
+      ))}
 
       <meta property="article:author" content={siteMetadata.profiles.facebook} />
       <meta name="twitter:card" content="summary_large_image" />

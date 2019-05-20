@@ -1,0 +1,5 @@
+{
+  "hooks": {
+    "pre-commit": "npm run tcheck && lint-staged && npm run test -- --coverage"
+  }
+}

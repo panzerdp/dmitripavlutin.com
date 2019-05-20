@@ -2,6 +2,11 @@ import React from 'react';
 
 import styles from './index.module.scss';
 
-export default function ShareButton({ className = '', ...restProps }) {
+interface ShareButtonProps {
+  className?: string;
+  [x: string]: any;
+}
+
+export default function ShareButton({ className = '', ...restProps }: ShareButtonProps) {
   return <a {...restProps} className={`${className} ${styles.share}`} />;
 }

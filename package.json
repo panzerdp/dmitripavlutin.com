@@ -7,12 +7,12 @@
     "url": "https://github.com/panzerdp/dmitripavlutin.com/issues"
   },
   "dependencies": {
-    "@types/enzyme": "3.9.1",
+    "@types/enzyme": "3.9.2",
     "@types/exenv": "1.2.0",
-    "@types/jest": "24.0.11",
+    "@types/jest": "24.0.13",
     "@types/react-helmet": "5.0.8",
     "enzyme": "3.9.0",
-    "enzyme-adapter-react-16": "1.12.1",
+    "enzyme-adapter-react-16": "1.13.1",
     "enzyme-to-json": "3.3.5",
     "exenv": "1.2.2",
     "gatsby": "2.5.5",
@@ -39,7 +39,8 @@
     "gatsby-transformer-sharp": "2.1.19",
     "husky": "2.3.0",
     "identity-obj-proxy": "3.0.0",
-    "jest": "24.7.1",
+    "jest": "24.8.0",
+    "lint-staged": "8.1.7",
     "node-sass": "4.12.0",
     "normalize.css": "8.0.1",
     "path-to-regexp": "3.0.0",
@@ -51,6 +52,8 @@
     "react-helmet": "5.2.1",
     "react-intersection-observer": "8.23.0",
     "ts-jest": "24.0.2",
+    "tslint": "5.16.0",
+    "tslint-react": "4.0.0",
     "typescript": "3.4.5"
   },
   "devDependencies": {},
@@ -68,12 +71,20 @@
   },
   "scripts": {
     "dev": "gatsby develop",
-    "lint": "./node_modules/.bin/eslint --ext .js,.jsx --ignore-pattern public .",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --trailing-comma es5 --semi --single-quote --write 'src/**/*.js' 'src/**/*.md'",
-    "develop": "gatsby develop",
+    "lint": "tslint 'src/**/*.ts?(x)'",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "jest",
     "build": "gatsby build",
-    "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js",
-    "precommit": "npm run lint"
+    "tcheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "npm run lint:fix",
+      "git add"
+    ],
+    "*.{js,css,ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

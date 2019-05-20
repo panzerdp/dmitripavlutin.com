@@ -1,8 +1,8 @@
 import React from 'react';
 
-import TagMetaTags from '../Meta/Tags';
 import Layout from 'components/Layout/Container';
 import SimpleList from 'components/Pages/Common/Simple/List';
+import TagMetaTags from '../Meta/Tags';
 
 interface PlainListByTagTemplateProps {
   tag: string;

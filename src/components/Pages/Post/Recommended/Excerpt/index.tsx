@@ -1,12 +1,12 @@
-import React from 'react';
-import Link from 'gatsby-link';
 import Img from 'gatsby-image';
+import Link from 'gatsby-link';
+import React from 'react';
 
-import styles from './index.module.scss';
 import { TO_POST } from 'routes/path';
+import styles from './index.module.scss';
 
 interface RecommendedExcerptProps {
-  post: PostExcerpt
+  post: PostExcerpt;
 }
 
 export default function RecommendedExcerpt({ post: { slug, title, thumbnail } }: RecommendedExcerptProps) {
@@ -18,9 +18,7 @@ export default function RecommendedExcerpt({ post: { slug, title, thumbnail } }:
       </Link>
       <div className={styles.content}>
         <h4>
-          <Link to={to}>
-            {title}
-          </Link>
+          <Link to={to}>{title}</Link>
         </h4>
       </div>
     </article>

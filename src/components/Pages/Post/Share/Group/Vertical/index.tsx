@@ -2,9 +2,9 @@ import React from 'react';
 
 import styles from './index.module.scss';
 
-import ShareSocialTwitter from 'components/Pages/Post/Share/Social/Twitter';
 import ShareSocialFacebook from 'components/Pages/Post/Share/Social/Facebook';
 import ShareSocialReddit from 'components/Pages/Post/Share/Social/Reddit';
+import ShareSocialTwitter from 'components/Pages/Post/Share/Social/Twitter';
 
 interface ShareButtonsVerticalProps {
   url: string;
@@ -17,7 +17,7 @@ export default function ShareButtonsVertical({ url, text, tags, className }: Sha
   const shareProps = {
     url,
     text,
-    tags
+    tags,
   };
   return (
     <div className={`${styles.verticalGroup} ${className}`}>

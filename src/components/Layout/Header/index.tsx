@@ -1,9 +1,9 @@
-import React from 'react';
+import Img from 'gatsby-image';
 import Link from 'gatsby-link';
-import Img from "gatsby-image";
+import React from 'react';
 
+import { TO_ABOUT, TO_ALL_POSTS, TO_INDEX } from 'routes/path';
 import styles from './index.module.scss';
-import { TO_INDEX, TO_ALL_POSTS, TO_ABOUT } from 'routes/path';
 
 interface HeaderProps {
   profilePicture: FixedImage;
@@ -15,14 +15,12 @@ export default function Header({ profilePicture, speciality }: HeaderProps) {
     <header>
       <div className={styles.headerContent}>
         <Link to={TO_INDEX()}>
-          <Img
-            title="Home"
-            resolutions={profilePicture}
-            className={styles.picture}
-          />
+          <Img title="Home" resolutions={profilePicture} className={styles.picture} />
         </Link>
         <div className={styles.profileInfo}>
-          <Link to={TO_INDEX()} className={styles.name}>Dmitri Pavlutin</Link>
+          <Link to={TO_INDEX()} className={styles.name}>
+            Dmitri Pavlutin
+          </Link>
           <div className={styles.speciality}>{speciality}</div>
         </div>
         <div className={styles.links}>
