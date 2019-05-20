@@ -7,8 +7,13 @@
     "url": "https://github.com/panzerdp/dmitripavlutin.com/issues"
   },
   "dependencies": {
+    "@types/enzyme": "3.9.1",
     "@types/exenv": "1.2.0",
+    "@types/jest": "24.0.11",
     "@types/react-helmet": "5.0.8",
+    "enzyme": "3.9.0",
+    "enzyme-adapter-react-16": "1.12.1",
+    "enzyme-to-json": "3.3.5",
     "exenv": "1.2.2",
     "gatsby": "2.5.5",
     "gatsby-cli": "2.5.15",
@@ -33,23 +38,22 @@
     "gatsby-transformer-remark": "2.3.12",
     "gatsby-transformer-sharp": "2.1.19",
     "husky": "2.3.0",
+    "identity-obj-proxy": "3.0.0",
+    "jest": "24.7.1",
     "node-sass": "4.12.0",
     "normalize.css": "8.0.1",
     "path-to-regexp": "3.0.0",
+    "prettier": "1.17.1",
     "prismjs": "1.16.0",
     "query-string": "6.5.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-helmet": "5.2.1",
-    "react-intersection-observer": "8.23.0"
+    "react-intersection-observer": "8.23.0",
+    "ts-jest": "24.0.2",
+    "typescript": "3.4.5"
   },
-  "devDependencies": {
-    "babel-eslint": "10.0.1",
-    "eslint": "5.16.0",
-    "eslint-plugin-react": "7.13.0",
-    "gh-pages": "2.0.1",
-    "prettier": "1.17.1"
-  },
+  "devDependencies": {},
   "homepage": "https://github.com/panzerdp/dmitripavlutin.com/",
   "keywords": [
     "javascript",
@@ -69,7 +73,6 @@
     "format": "prettier --trailing-comma es5 --semi --single-quote --write 'src/**/*.js' 'src/**/*.md'",
     "develop": "gatsby develop",
     "build": "gatsby build",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
     "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js",
     "precommit": "npm run lint"
   }
