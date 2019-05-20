@@ -1,0 +1,39 @@
+{
+  "extends": ["plugin:@typescript-eslint/recommended", "plugin:react/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "globals": {
+ 
+  },
+  "env": {
+    "node": true,
+    "mocha": true,
+    "browser": true,
+    "es6": true
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "react"
+  ],
+  "rules": {
+    "@typescript-eslint/indent": ["error", 2],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/jsx-closing-bracket-location": "error",
+    "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
+    "react/jsx-curly-spacing": ["error", "never"]
+  },
+  "settings": {
+    "react": {
+      "version": "16.8"
+    }
+  }
+}

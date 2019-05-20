@@ -5,3 +5,4 @@ public
 .intermediate-representation/
 .cache/
 yarn.lock
+coverage
