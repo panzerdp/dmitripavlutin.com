@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import RecommendedExcerpt from '../Excerpt';
 import styles from './index.module.scss';

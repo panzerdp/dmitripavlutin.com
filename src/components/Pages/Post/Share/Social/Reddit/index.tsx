@@ -1,5 +1,5 @@
 import { stringify } from 'query-string';
-import React from 'react';
+import * as React from 'react';
 
 import ShareButton from '../../Button';
 import styles from './index.module.scss';

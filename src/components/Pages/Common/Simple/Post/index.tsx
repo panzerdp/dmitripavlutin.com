@@ -1,5 +1,5 @@
 import Link from 'gatsby-link';
-import React from 'react';
+import * as React from 'react';
 
 import Subheader from 'components/Pages/Common/Subheader';
 import { TO_POST } from 'routes/path';

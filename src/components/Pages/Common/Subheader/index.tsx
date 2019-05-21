@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import Tag from 'components/Pages/Common/Tag';
 import { formatDate } from 'utils/date';

@@ -1,5 +1,5 @@
+import * as React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import React, { Component } from 'react';
 
 import 'normalize.css/normalize.css';
 import styles from './index.module.scss';
@@ -12,7 +12,7 @@ interface LayoutContainerProps {
   children: React.ReactNode;
 }
 
-export default class LayoutContainer extends Component<LayoutContainerProps> {
+export default class LayoutContainer extends React.Component<LayoutContainerProps> {
   public render() {
     return (
       <StaticQuery
@@ -49,5 +49,5 @@ export default class LayoutContainer extends Component<LayoutContainerProps> {
         <LayoutFooter profiles={siteMetadata.profiles} author={siteMetadata.author} />
       </div>
     );
-  }
+  };
 }

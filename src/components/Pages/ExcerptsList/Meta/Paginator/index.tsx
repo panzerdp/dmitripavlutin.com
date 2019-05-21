@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import Helmet from 'react-helmet';
 
 import { TO_PAGE } from 'routes/path';
@@ -9,7 +9,7 @@ interface MetaPaginatorProps {
   siteUrl: string;
 }
 
-export default class MetaPaginator extends Component<MetaPaginatorProps> {
+export default class MetaPaginator extends React.Component<MetaPaginatorProps> {
   public render() {
     return (
       <Helmet>

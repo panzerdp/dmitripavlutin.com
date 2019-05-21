@@ -1,5 +1,5 @@
+import * as React from 'react';
 import { stringify } from 'query-string';
-import React, { Component } from 'react';
 
 import withWindowOpen from 'components/With/WindowOpen';
 import { slugify } from 'utils/string';
@@ -15,7 +15,7 @@ interface ShareSocialTwitterProps {
   windowOpen(props: any): void;
 }
 
-export class ShareSocialTwitter extends Component<ShareSocialTwitterProps> {
+export class ShareSocialTwitter extends React.Component<ShareSocialTwitterProps> {
   public render() {
     return <ShareButton title="Share on Twitter" onClick={this.handleClick} className={styles.twitter} />;
   }
@@ -28,7 +28,7 @@ export class ShareSocialTwitter extends Component<ShareSocialTwitterProps> {
       height: 300,
       name: 'Twitter share',
     });
-  }
+  };
 
   public getTwitterShareUrl() {
     const { url, text, tags } = this.props;

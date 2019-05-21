@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { canUseDOM } from 'exenv';
 
 function windowOpen({ url, name, height = 400, width = 550 }) {
@@ -7,10 +7,8 @@ function windowOpen({ url, name, height = 400, width = 550 }) {
   }
 
   /* eslint-disable no-mixed-operators */
-  const left = (window.outerWidth / 2)
-    + (window.screenX || window.screenLeft || 0) - (width / 2);
-  const top = (window.outerHeight / 2)
-    + (window.screenY || window.screenTop || 0) - (height / 2);
+  const left = window.outerWidth / 2 + (window.screenX || window.screenLeft || 0) - width / 2;
+  const top = window.outerHeight / 2 + (window.screenY || window.screenTop || 0) - height / 2;
   /* eslint-enable no-mixed-operators */
 
   const config = {
@@ -32,7 +30,9 @@ function windowOpen({ url, name, height = 400, width = 550 }) {
   const shareDialog = window.open(
     url,
     name,
-    Object.keys(config).map(key => `${key}=${config[key]}`).join(', ')
+    Object.keys(config)
+      .map((key) => `${key}=${config[key]}`)
+      .join(', ')
   );
 
   return shareDialog;

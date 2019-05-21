@@ -1,6 +1,6 @@
 import Img from 'gatsby-image';
 import Link from 'gatsby-link';
-import React from 'react';
+import * as React from 'react';
 
 import { TO_ABOUT, TO_ALL_POSTS, TO_INDEX } from 'routes/path';
 import styles from './index.module.scss';

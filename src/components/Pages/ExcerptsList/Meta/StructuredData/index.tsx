@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Helmet from 'react-helmet';
 
 interface MetaStructuredData {
@@ -11,23 +11,23 @@ export default function MetaStructuredData({ siteMetadata, authorProfilePicture 
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Website',
-    'publisher': {
+    publisher: {
       '@type': 'Organization',
-      'name': siteMetadata.title,
-      'logo': {
+      name: siteMetadata.title,
+      logo: {
         '@type': 'ImageObject',
-        'url': authorProfilePictureUrl,
+        url: authorProfilePictureUrl,
       },
     },
-    'url': siteMetadata.siteUrl,
-    'image': {
+    url: siteMetadata.siteUrl,
+    image: {
       '@type': 'ImageObject',
-      'url': authorProfilePictureUrl,
-      'width': 256,
-      'height': 256,
+      url: authorProfilePictureUrl,
+      width: 256,
+      height: 256,
     },
-    'description': siteMetadata.description,
-    'mainEntityOfPage': {
+    description: siteMetadata.description,
+    mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': siteMetadata.siteUrl,
     },

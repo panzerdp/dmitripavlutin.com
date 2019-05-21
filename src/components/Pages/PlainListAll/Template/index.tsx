@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import Layout from 'components/Layout/Container';
 import SimpleList from 'components/Pages/Common/Simple/List';

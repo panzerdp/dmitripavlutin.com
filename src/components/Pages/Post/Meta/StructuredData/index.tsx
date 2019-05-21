@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Helmet from 'react-helmet';
 
 interface PostMetaStructuredDataProps {
@@ -19,40 +19,40 @@ export default function PostMetaStructuredData({
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    'publisher': {
+    publisher: {
       '@type': 'Organization',
-      'name': siteMetadata.title,
-      'logo': {
+      name: siteMetadata.title,
+      logo: {
         '@type': 'ImageObject',
-        'url': authorProfilePictureUrl,
+        url: authorProfilePictureUrl,
       },
     },
-    'author': {
+    author: {
       '@type': 'Person',
-      'name': siteMetadata.author,
-      'image': {
+      name: siteMetadata.author,
+      image: {
         '@type': 'ImageObject',
-        'url': authorProfilePictureUrl,
-        'width': 256,
-        'height': 256,
+        url: authorProfilePictureUrl,
+        width: 256,
+        height: 256,
       },
-      'url': siteMetadata.siteUrl,
-      'sameAs': sameAs,
-      'description': siteMetadata.speciality,
+      url: siteMetadata.siteUrl,
+      sameAs: sameAs,
+      description: siteMetadata.speciality,
     },
-    'headline': post.title,
-    'url': postUrl,
-    'datePublished': post.published,
-    'dateModified': post.modified,
-    'image': {
+    headline: post.title,
+    url: postUrl,
+    datePublished: post.published,
+    dateModified: post.modified,
+    image: {
       '@type': 'ImageObject',
-      'url': postImageUrl,
-      'width': 720,
-      'height': 400,
+      url: postImageUrl,
+      width: 720,
+      height: 400,
     },
-    'keywords': post.tags.join(', '),
-    'description': post.description,
-    'mainEntityOfPage': {
+    keywords: post.tags.join(', '),
+    description: post.description,
+    mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': siteMetadata.siteUrl,
     },
