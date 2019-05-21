@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Layout from 'components/Layout/Container';
+import Layout from 'components/Layout/Fetch';
 import SimpleList from 'components/Pages/Common/Simple/List';
 import AllPostsMetaTags from '../Meta/Tags';
 

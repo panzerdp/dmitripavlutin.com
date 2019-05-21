@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Layout from 'components/Layout/Container';
+import Layout from 'components/Layout/Fetch';
 import PostExcerptComponent from 'components/Pages/ExcerptsList/Excerpt';
 import MetaPaginator from 'components/Pages/ExcerptsList/Meta/Paginator';
 import MetaStructuredData from 'components/Pages/ExcerptsList/Meta/StructuredData';

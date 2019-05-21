@@ -1,10 +1,10 @@
 import Img from 'gatsby-image';
-import React, { useState } from 'react';
+import * as React from 'react';
 import Observer from 'react-intersection-observer';
 
 import 'prismjs/themes/prism.css';
 
-import Layout from 'components/Layout/Container';
+import Layout from 'components/Layout/Fetch';
 import Subheader from 'components/Pages/Common/Subheader';
 import Edit from 'components/Pages/Post/Edit';
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData';
@@ -30,7 +30,7 @@ export default function PostTemplate({
   recommendedPosts,
   authorProfilePicture,
 }: PostTemplateProps) {
-  const [coverIsInView, setCoverIsInView] = useState(true);
+  const [coverIsInView, setCoverIsInView] = React.useState(true);
   const postUrl = siteMetadata.siteUrl + TO_POST({ slug: post.slug });
   return (
     <Layout>
