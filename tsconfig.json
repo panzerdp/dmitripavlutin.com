@@ -2,6 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": false,
+    "esModuleInterop": true,
     "baseUrl": "./src",
     "rootDir": "./",
     "jsx": "react",

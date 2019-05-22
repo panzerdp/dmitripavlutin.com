@@ -2,28 +2,28 @@ import * as React from 'react';
 import Helmet from 'react-helmet';
 
 interface MetaTagsProps {
-  siteMetadata: SiteMetadata;
+  siteInfo: SiteInfo;
   authorProfilePicture: FluidImage;
 }
 
-export default function MetaTags({ siteMetadata, authorProfilePicture }: MetaTagsProps) {
-  const imageUrl = `${siteMetadata.siteUrl}${authorProfilePicture.src}`;
+export default function MetaTags({ siteInfo, authorProfilePicture }: MetaTagsProps) {
+  const imageUrl = `${siteInfo.url}${authorProfilePicture.src}`;
   return (
     <Helmet>
-      <link rel="canonical" href={siteMetadata.siteUrl} />
+      <link rel="canonical" href={siteInfo.url} />
 
-      <meta property="og:site_name" content={siteMetadata.title} />
+      <meta property="og:site_name" content={siteInfo.title} />
       <meta property="og:type" content="website" />
-      <meta property="og:title" content={siteMetadata.title} />
-      <meta property="og:description" content={siteMetadata.description} />
-      <meta property="og:url" content={siteMetadata.siteUrl} />
+      <meta property="og:title" content={siteInfo.title} />
+      <meta property="og:description" content={siteInfo.description} />
+      <meta property="og:url" content={siteInfo.url} />
       <meta property="og:image" content={imageUrl} />
       <meta property="og:image:width" content="256" />
       <meta property="og:image:height" content="256" />
       <meta name="twitter:card" content="summary" />
-      <meta name="twitter:title" content={siteMetadata.title} />
-      <meta name="twitter:description" content={siteMetadata.description} />
-      <meta name="twitter:url" content={siteMetadata.siteUrl} />
+      <meta name="twitter:title" content={siteInfo.title} />
+      <meta name="twitter:description" content={siteInfo.description} />
+      <meta name="twitter:url" content={siteInfo.url} />
       <meta name="twitter:image" content={imageUrl} />
     </Helmet>
   );

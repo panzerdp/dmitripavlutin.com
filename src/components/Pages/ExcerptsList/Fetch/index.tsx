@@ -20,7 +20,9 @@ function nodeToPostExcerpt({ node: { frontmatter } }: any): PostExcerpt {
 
 export default function ExcerptsFetch({
   data: {
-    site: { siteMetadata },
+    site: {
+      siteMetadata: { siteInfo },
+    },
     allMarkdownRemark,
     authorProfilePicture,
   },
@@ -28,7 +30,7 @@ export default function ExcerptsFetch({
 }: ExcerptsFetchProps) {
   return (
     <ExcerptsListTemplate
-      siteMetadata={siteMetadata}
+      siteInfo={siteInfo}
       posts={allMarkdownRemark.edges.map(nodeToPostExcerpt)}
       authorProfilePicture={authorProfilePicture.childImageSharp.resize}
       {...pageContext}
@@ -40,7 +42,12 @@ export const pageQuery = graphql`
   query ExcerptsQuery($skip: Int, $limit: Int) {
     site {
       siteMetadata {
-        ...SiteMetadataAll
+        siteInfo {
+          ...SiteInfoAll
+        }
+        authorInfo {
+          ...AuthorInfoAll
+        }
       }
     }
     authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {

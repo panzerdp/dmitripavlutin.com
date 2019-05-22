@@ -1,27 +1,31 @@
 import * as React from 'react';
 import Helmet from 'react-helmet';
 
+import { TO_POST } from 'routes/path';
+
 interface PostMetaStructuredDataProps {
   post: Post;
-  siteMetadata: SiteMetadata;
+  siteInfo: SiteInfo;
+  authorInfo: AuthorInfo;
   authorProfilePicture: FluidImage;
 }
 
 export default function PostMetaStructuredData({
   post,
-  siteMetadata,
+  siteInfo,
+  authorInfo,
   authorProfilePicture,
 }: PostMetaStructuredDataProps) {
-  const postUrl = `${siteMetadata.siteUrl}/${post.slug}/`;
-  const postImageUrl = `${siteMetadata.siteUrl}${post.thumbnail.src}`;
-  const authorProfilePictureUrl = `${siteMetadata.siteUrl}${authorProfilePicture.src}`;
-  const sameAs = Object.keys(siteMetadata.profiles).reduce((list, key) => [...list, siteMetadata.profiles[key]], []);
+  const postUrl = `${siteInfo.url}/${TO_POST({ slug: post.slug })}`;
+  const postImageUrl = `${siteInfo.url}${post.thumbnail.src}`;
+  const authorProfilePictureUrl = `${siteInfo.url}${authorProfilePicture.src}`;
+  const sameAs = Object.keys(authorInfo.profiles).reduce((list, key) => [...list, authorInfo.profiles[key]], []);
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     publisher: {
       '@type': 'Organization',
-      name: siteMetadata.title,
+      name: siteInfo.title,
       logo: {
         '@type': 'ImageObject',
         url: authorProfilePictureUrl,
@@ -29,16 +33,16 @@ export default function PostMetaStructuredData({
     },
     author: {
       '@type': 'Person',
-      name: siteMetadata.author,
+      name: authorInfo.name,
       image: {
         '@type': 'ImageObject',
         url: authorProfilePictureUrl,
         width: 256,
         height: 256,
       },
-      url: siteMetadata.siteUrl,
+      url: siteInfo.url,
       sameAs: sameAs,
-      description: siteMetadata.speciality,
+      description: authorInfo.speciality,
     },
     headline: post.title,
     url: postUrl,
@@ -54,7 +58,7 @@ export default function PostMetaStructuredData({
     description: post.description,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': siteMetadata.siteUrl,
+      '@id': siteInfo.url,
     },
   };
   return (

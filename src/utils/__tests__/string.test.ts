@@ -13,4 +13,9 @@ describe('slugify()', function() {
     expect(slugify('JavaScript"s tutorial')).toStrictEqual('javascript-s-tutorial');
     expect(slugify(' JavaScript tutorial    -')).toStrictEqual('javascript-tutorial');
   });
+
+  test('should not modify the case', function() {
+    expect(slugify('   JavaScript -- ', false)).toStrictEqual('JavaScript');
+    expect(slugify('JavaScript tutorial', false)).toStrictEqual('JavaScript-tutorial');
+  });
 });

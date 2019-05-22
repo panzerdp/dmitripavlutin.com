@@ -8,7 +8,7 @@ import MetaTags from 'components/Pages/ExcerptsList/Meta/Tags';
 import Paginator from 'components/Pages/ExcerptsList/Paginator';
 
 interface ExcerptsTemplateProps {
-  siteMetadata: SiteMetadata;
+  siteInfo: SiteInfo;
   posts: PostExcerpt[];
   currentPage: number;
   pagesSum: number;
@@ -16,7 +16,7 @@ interface ExcerptsTemplateProps {
 }
 
 export default function ExcerptsTemplate({
-  siteMetadata,
+  siteInfo,
   posts,
   currentPage,
   pagesSum,
@@ -24,9 +24,9 @@ export default function ExcerptsTemplate({
 }: ExcerptsTemplateProps) {
   return (
     <Layout>
-      <MetaTags siteMetadata={siteMetadata} authorProfilePicture={authorProfilePicture} />
-      <MetaStructuredData siteMetadata={siteMetadata} authorProfilePicture={authorProfilePicture} />
-      <MetaPaginator currentPage={currentPage} pagesSum={pagesSum} siteUrl={siteMetadata.siteUrl} />
+      <MetaTags siteInfo={siteInfo} authorProfilePicture={authorProfilePicture} />
+      <MetaStructuredData siteInfo={siteInfo} authorProfilePicture={authorProfilePicture} />
+      <MetaPaginator currentPage={currentPage} pagesSum={pagesSum} siteUrl={siteInfo.url} />
       {posts.map((post, index) => (
         <PostExcerptComponent post={post} key={index} />
       ))}

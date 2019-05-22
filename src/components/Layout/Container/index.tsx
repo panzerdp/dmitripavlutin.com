@@ -9,17 +9,18 @@ import LayoutMetaTags from 'components/Layout/Meta/Tags';
 
 interface LayoutContainerProps {
   children: React.ReactNode;
-  siteMetadata: SiteMetadata;
+  siteInfo: SiteInfo;
+  authorInfo: AuthorInfo;
   profilePicture: FixedImage;
 }
 
-export default function LayoutContainer({ children, siteMetadata, profilePicture }: LayoutContainerProps) {
+export default function LayoutContainer({ children, siteInfo, authorInfo, profilePicture }: LayoutContainerProps) {
   return (
     <div className={styles.container}>
-      <LayoutMetaTags siteMetadata={siteMetadata} />
-      <LayoutHeader profilePicture={profilePicture} speciality={siteMetadata.speciality} />
+      <LayoutMetaTags siteInfo={siteInfo} />
+      <LayoutHeader profilePicture={profilePicture} authorInfo={authorInfo} />
       <main className={styles.main}>{children}</main>
-      <LayoutFooter profiles={siteMetadata.profiles} author={siteMetadata.author} />
+      <LayoutFooter authorInfo={authorInfo} />
     </div>
   );
 }

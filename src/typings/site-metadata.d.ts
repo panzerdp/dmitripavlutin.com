@@ -1,4 +1,4 @@
-interface SiteMetadataProfiles {
+interface Profiles {
   stackoverflow: string;
   twitter: string;
   linkedin: string;
@@ -7,17 +7,20 @@ interface SiteMetadataProfiles {
   [index: string]: string;
 }
 
-interface SiteMetadataNicknames {
+interface Nicknames {
   twitter: string;
 }
 
-interface SiteMetadata {
+interface AuthorInfo {
+  name: string;
+  speciality: string;
+  profiles: Profiles;
+  nicknames: Nicknames;
+}
+
+interface SiteInfo {
   title: string;
   description: string;
-  speciality: string;
-  siteUrl: string;
+  url: string;
   repositoryUrl: string;
-  author: string;
-  profiles: SiteMetadataProfiles;
-  nicknames: SiteMetadataNicknames;
 }

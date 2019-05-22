@@ -2,34 +2,34 @@ import * as React from 'react';
 import Helmet from 'react-helmet';
 
 interface MetaStructuredData {
-  siteMetadata: SiteMetadata;
+  siteInfo: SiteInfo;
   authorProfilePicture: FluidImage;
 }
 
-export default function MetaStructuredData({ siteMetadata, authorProfilePicture }: MetaStructuredData) {
-  const authorProfilePictureUrl = `${siteMetadata.siteUrl}${authorProfilePicture.src}`;
+export default function MetaStructuredData({ siteInfo, authorProfilePicture }: MetaStructuredData) {
+  const authorProfilePictureUrl = `${siteInfo.url}${authorProfilePicture.src}`;
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Website',
     publisher: {
       '@type': 'Organization',
-      name: siteMetadata.title,
+      name: siteInfo.title,
       logo: {
         '@type': 'ImageObject',
         url: authorProfilePictureUrl,
       },
     },
-    url: siteMetadata.siteUrl,
+    url: siteInfo.url,
     image: {
       '@type': 'ImageObject',
       url: authorProfilePictureUrl,
       width: 256,
       height: 256,
     },
-    description: siteMetadata.description,
+    description: siteInfo.description,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': siteMetadata.siteUrl,
+      '@id': siteInfo.url,
     },
   };
   return (

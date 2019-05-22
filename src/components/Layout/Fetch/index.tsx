@@ -24,7 +24,12 @@ export default class LayoutFetch extends React.Component<LayoutContainerProps> {
             }
             site {
               siteMetadata {
-                ...SiteMetadataAll
+                siteInfo {
+                  ...SiteInfoAll
+                }
+                authorInfo {
+                  ...AuthorInfoAll
+                }
               }
             }
           }
@@ -34,10 +39,14 @@ export default class LayoutFetch extends React.Component<LayoutContainerProps> {
     );
   }
 
-  public renderContent = ({ site: { siteMetadata }, file }: { site: { siteMetadata: SiteMetadata }; file: any }) => {
+  public renderContent = ({ site, file }: any) => {
     const { children } = this.props;
     return (
-      <LayoutContainer siteMetadata={siteMetadata} profilePicture={file.childImageSharp.resolutions}>
+      <LayoutContainer
+        siteInfo={site.siteMetadata.siteInfo}
+        authorInfo={site.siteMetadata.authorInfo}
+        profilePicture={file.childImageSharp.resolutions}
+      >
         {children}
       </LayoutContainer>
     );

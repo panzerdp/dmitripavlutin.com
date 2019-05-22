@@ -7,10 +7,10 @@ import styles from './index.module.scss';
 
 interface HeaderProps {
   profilePicture: FixedImage;
-  speciality: string;
+  authorInfo: AuthorInfo;
 }
 
-export default function Header({ profilePicture, speciality }: HeaderProps) {
+export default function Header({ profilePicture, authorInfo }: HeaderProps) {
   return (
     <header>
       <div className={styles.headerContent}>
@@ -19,9 +19,9 @@ export default function Header({ profilePicture, speciality }: HeaderProps) {
         </Link>
         <div className={styles.profileInfo}>
           <Link to={TO_INDEX()} className={styles.name}>
-            Dmitri Pavlutin
+            {authorInfo.name}
           </Link>
-          <div className={styles.speciality}>{speciality}</div>
+          <div className={styles.speciality}>{authorInfo.speciality}</div>
         </div>
         <div className={styles.links}>
           <Link to={TO_ALL_POSTS()}>All posts</Link>

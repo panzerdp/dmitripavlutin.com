@@ -1,14 +1,17 @@
 import * as React from 'react';
 import Helmet from 'react-helmet';
 
+import { TO_POST } from 'routes/path';
+
 interface PostMetaTagsProps {
   post: Post;
-  siteMetadata: SiteMetadata;
+  siteInfo: SiteInfo;
+  authorInfo: AuthorInfo;
 }
 
-export default function PostMetaTags({ post, siteMetadata }: PostMetaTagsProps) {
-  const postUrl = `${siteMetadata.siteUrl}/${post.slug}/`;
-  const imageUrl = `${siteMetadata.siteUrl}${post.thumbnail.src}`;
+export default function PostMetaTags({ post, siteInfo, authorInfo }: PostMetaTagsProps) {
+  const postUrl = `${siteInfo.url}/${TO_POST({ slug: post.slug })}`;
+  const imageUrl = `${siteInfo.url}${post.thumbnail.src}`;
   return (
     <Helmet titleTemplate="%s">
       <title>{post.title}</title>
@@ -17,7 +20,7 @@ export default function PostMetaTags({ post, siteMetadata }: PostMetaTagsProps) 
       <link rel="canonical" href={postUrl} />
       <meta name="referrer" content="no-referrer-when-downgrade" />
 
-      <meta property="og:site_name" content={siteMetadata.title} />
+      <meta property="og:site_name" content={siteInfo.title} />
       <meta property="og:type" content="article" />
       <meta property="og:title" content={post.title} />
       <meta property="og:description" content={post.description} />
@@ -32,17 +35,17 @@ export default function PostMetaTags({ post, siteMetadata }: PostMetaTagsProps) 
         <meta property="article:tag" content={tag} key={tag} />
       ))}
 
-      <meta property="article:author" content={siteMetadata.profiles.facebook} />
+      <meta property="article:author" content={authorInfo.profiles.facebook} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={post.title} />
       <meta name="twitter:description" content={post.description} />
       <meta name="twitter:url" content={postUrl} />
       <meta name="twitter:image" content={imageUrl} />
       <meta name="twitter:label1" content="Written by" />
-      <meta name="twitter:data1" content={siteMetadata.author} />
+      <meta name="twitter:data1" content={authorInfo.name} />
       <meta name="twitter:label2" content="Filed under" />
       <meta name="twitter:data2" content={post.tags.join(', ')} />
-      <meta name="twitter:creator" content={siteMetadata.nicknames.twitter} />
+      <meta name="twitter:creator" content={authorInfo.nicknames.twitter} />
     </Helmet>
   );
 }

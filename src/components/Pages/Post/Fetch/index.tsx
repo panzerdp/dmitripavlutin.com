@@ -8,7 +8,8 @@ interface PostTemplateFetchProps {
 }
 
 export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
-  const siteMetadata: SiteMetadata = data.site.siteMetadata;
+  const siteInfo: SiteInfo = data.site.siteMetadata.siteInfo;
+  const authorInfo: AuthorInfo = data.site.siteMetadata.authorInfo;
   const { markdownRemark, recommendedPosts, authorProfilePicture } = data;
   const post: Post = {
     ...markdownRemark.frontmatter,
@@ -19,7 +20,7 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
     .split('/')
     .slice(-3)
     .join('/');
-  const postRepositoryFileUrl = `${siteMetadata.repositoryUrl}/tree/master/${postRelativePath}`;
+  const postRepositoryFileUrl = `${siteInfo.repositoryUrl}/tree/master/${postRelativePath}`;
   const posts: PostExcerpt[] = recommendedPosts.edges.map(function(edge: any) {
     const {
       node: { frontmatter },
@@ -31,7 +32,8 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
   });
   return (
     <PostTemplate
-      siteMetadata={siteMetadata}
+      siteInfo={siteInfo}
+      authorInfo={authorInfo}
       postRepositoryFileUrl={postRepositoryFileUrl}
       post={post}
       recommendedPosts={posts}
@@ -41,13 +43,16 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
 }
 
 export const pageQuery = graphql`
-  fragment SiteMetadataAll on SiteSiteMetadata {
+  fragment SiteInfoAll on SiteSiteMetadataSiteInfo {
     title
     description
-    speciality
-    siteUrl
+    url
     repositoryUrl
-    author
+  }
+
+  fragment AuthorInfoAll on SiteSiteMetadataAuthorInfo {
+    name
+    speciality
     profiles {
       stackoverflow
       twitter
@@ -78,7 +83,12 @@ export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!, $recommended: [String]!) {
     site {
       siteMetadata {
-        ...SiteMetadataAll
+        siteInfo {
+          ...SiteInfoAll
+        }
+        authorInfo {
+          ...AuthorInfoAll
+        }
       }
     }
     authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {

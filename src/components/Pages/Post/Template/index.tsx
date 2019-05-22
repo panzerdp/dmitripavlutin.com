@@ -16,7 +16,8 @@ import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 
 interface PostTemplateProps {
-  siteMetadata: SiteMetadata;
+  siteInfo: SiteInfo;
+  authorInfo: AuthorInfo;
   postRepositoryFileUrl: string;
   post: Post;
   recommendedPosts: PostExcerpt[];
@@ -24,19 +25,25 @@ interface PostTemplateProps {
 }
 
 export default function PostTemplate({
-  siteMetadata,
+  siteInfo,
+  authorInfo,
   postRepositoryFileUrl,
   post,
   recommendedPosts,
   authorProfilePicture,
 }: PostTemplateProps) {
   const [coverIsInView, setCoverIsInView] = React.useState(true);
-  const postUrl = siteMetadata.siteUrl + TO_POST({ slug: post.slug });
+  const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
   return (
     <Layout>
       <article>
-        <MetaTags post={post} siteMetadata={siteMetadata} />
-        <MetaStructuredData post={post} siteMetadata={siteMetadata} authorProfilePicture={authorProfilePicture} />
+        <MetaTags post={post} siteInfo={siteInfo} authorInfo={authorInfo} />
+        <MetaStructuredData
+          post={post}
+          siteInfo={siteInfo}
+          authorInfo={authorInfo}
+          authorProfilePicture={authorProfilePicture}
+        />
         <Observer onChange={(inView) => setCoverIsInView(inView)}>
           <div className={styles.postCover}>
             <Img fluid={post.thumbnail} />
