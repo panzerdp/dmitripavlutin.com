@@ -22,7 +22,7 @@ function nodeToPostExcerpt({ node: { frontmatter } }: any): PostExcerpt {
 }
 
 export const pageQuery = graphql`
-  query TagPostsQuery($tag: String!) {
+  query PlainListByTag($tag: String!) {
     allMarkdownRemark(
       sort: { fields: [frontmatter___published], order: DESC }
       filter: { frontmatter: { tags: { eq: $tag }, draft: { eq: false } } }

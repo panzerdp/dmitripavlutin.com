@@ -80,7 +80,7 @@ export const pageQuery = graphql`
     }
   }
 
-  query BlogPostBySlug($slug: String!, $recommended: [String]!) {
+  query Post($slug: String!, $recommended: [String]!) {
     site {
       siteMetadata {
         siteInfo {

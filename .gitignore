@@ -1,8 +1,9 @@
 node_modules/
-public
+public/
+build/
+.cache/
+coverage/
+
+src/typings/graphql.d.ts
 .gatsby-context.js
 .DS_Store
-.intermediate-representation/
-.cache/
-yarn.lock
-coverage

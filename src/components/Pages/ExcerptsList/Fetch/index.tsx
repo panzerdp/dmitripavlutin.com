@@ -39,7 +39,7 @@ export default function ExcerptsFetch({
 }
 
 export const pageQuery = graphql`
-  query ExcerptsQuery($skip: Int, $limit: Int) {
+  query ExcerptsList($skip: Int, $limit: Int) {
     site {
       siteMetadata {
         siteInfo {
