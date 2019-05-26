@@ -2,19 +2,14 @@ import { graphql } from 'gatsby';
 import * as React from 'react';
 
 import ExcerptsListTemplate from 'components/Pages/ExcerptsList/Template';
+import { ExcerptsListQuery } from 'typings/graphql';
+import { toPostExcerpt } from 'utils/mapper';
 
 interface ExcerptsFetchProps {
-  data: any;
+  data: ExcerptsListQuery;
   pageContext: {
     currentPage: number;
     pagesSum: number;
-  };
-}
-
-function nodeToPostExcerpt({ node: { frontmatter } }: any): PostExcerpt {
-  return {
-    ...frontmatter,
-    thumbnail: frontmatter.thumbnail.childImageSharp.fluid,
   };
 }
 
@@ -31,8 +26,8 @@ export default function ExcerptsFetch({
   return (
     <ExcerptsListTemplate
       siteInfo={siteInfo}
-      posts={allMarkdownRemark.edges.map(nodeToPostExcerpt)}
-      authorProfilePicture={authorProfilePicture.childImageSharp.resize}
+      posts={allMarkdownRemark.edges.map(toPostExcerpt)}
+      authorProfilePictureSrc={authorProfilePicture.childImageSharp.resize.src}
       {...pageContext}
     />
   );

@@ -3,11 +3,11 @@ import Helmet from 'react-helmet';
 
 interface MetaStructuredData {
   siteInfo: SiteInfo;
-  authorProfilePicture: FluidImage;
+  authorProfilePictureSrc: string;
 }
 
-export default function MetaStructuredData({ siteInfo, authorProfilePicture }: MetaStructuredData) {
-  const authorProfilePictureUrl = `${siteInfo.url}${authorProfilePicture.src}`;
+export default function MetaStructuredData({ siteInfo, authorProfilePictureSrc }: MetaStructuredData) {
+  const authorProfilePictureUrl = `${siteInfo.url}${authorProfilePictureSrc}`;
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Website',

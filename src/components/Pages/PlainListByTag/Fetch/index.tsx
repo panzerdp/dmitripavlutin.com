@@ -2,23 +2,18 @@ import { graphql } from 'gatsby';
 import * as React from 'react';
 
 import PlainListByTagTemplate from 'components/Pages/PlainListByTag/Template';
+import { PlainListByTagQuery } from 'typings/graphql';
+import { toPostExcerpt } from 'utils/mapper';
 
 interface PlainListByTagProps {
   pageContext: {
     tag: string;
   };
-  data: any;
+  data: PlainListByTagQuery;
 }
 
 export default function PlainListByTagFetch({ pageContext: { tag }, data }: PlainListByTagProps) {
-  return <PlainListByTagTemplate tag={tag} posts={data.allMarkdownRemark.edges.map(nodeToPostExcerpt)} />;
-}
-
-function nodeToPostExcerpt({ node: { frontmatter } }: any): PostExcerpt {
-  return {
-    ...frontmatter,
-    thumbnail: frontmatter.thumbnail.childImageSharp.fluid,
-  };
+  return <PlainListByTagTemplate tag={tag} posts={data.allMarkdownRemark.edges.map(toPostExcerpt)} />;
 }
 
 export const pageQuery = graphql`

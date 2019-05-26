@@ -7,18 +7,18 @@ interface PostMetaStructuredDataProps {
   post: Post;
   siteInfo: SiteInfo;
   authorInfo: AuthorInfo;
-  authorProfilePicture: FluidImage;
+  authorProfilePictureSrc: string;
 }
 
 export default function PostMetaStructuredData({
   post,
   siteInfo,
   authorInfo,
-  authorProfilePicture,
+  authorProfilePictureSrc,
 }: PostMetaStructuredDataProps) {
   const postUrl = `${siteInfo.url}/${TO_POST({ slug: post.slug })}`;
   const postImageUrl = `${siteInfo.url}${post.thumbnail.src}`;
-  const authorProfilePictureUrl = `${siteInfo.url}${authorProfilePicture.src}`;
+  const authorProfilePictureUrl = `${siteInfo.url}${authorProfilePictureSrc}`;
   const sameAs = Object.keys(authorInfo.profiles).reduce((list, key) => [...list, authorInfo.profiles[key]], []);
   const structuredData = {
     '@context': 'https://schema.org',

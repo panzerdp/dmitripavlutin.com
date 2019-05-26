@@ -8,7 +8,7 @@ interface PostExcerpt {
 }
 
 interface Post extends PostExcerpt {
-  html: string;
-  modified: string;
-  recommended: string[];
+  html?: string;
+  modified?: string;
+  recommended?: string[];
 }

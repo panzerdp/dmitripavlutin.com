@@ -21,7 +21,7 @@ interface PostTemplateProps {
   postRepositoryFileUrl: string;
   post: Post;
   recommendedPosts: PostExcerpt[];
-  authorProfilePicture: FluidImage;
+  authorProfilePictureSrc: string;
 }
 
 export default function PostTemplate({
@@ -30,7 +30,7 @@ export default function PostTemplate({
   postRepositoryFileUrl,
   post,
   recommendedPosts,
-  authorProfilePicture,
+  authorProfilePictureSrc,
 }: PostTemplateProps) {
   const [coverIsInView, setCoverIsInView] = React.useState(true);
   const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
@@ -42,7 +42,7 @@ export default function PostTemplate({
           post={post}
           siteInfo={siteInfo}
           authorInfo={authorInfo}
-          authorProfilePicture={authorProfilePicture}
+          authorProfilePictureSrc={authorProfilePictureSrc}
         />
         <Observer onChange={(inView) => setCoverIsInView(inView)}>
           <div className={styles.postCover}>

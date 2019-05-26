@@ -2,9 +2,11 @@ import { graphql } from 'gatsby';
 import * as React from 'react';
 
 import PostTemplate from 'components/Pages/Post/Template';
+import { PostBySlugQuery } from 'typings/graphql';
+import { toPostExcerpt } from 'utils/mapper';
 
 interface PostTemplateFetchProps {
-  data: any;
+  data: PostBySlugQuery;
 }
 
 export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
@@ -21,15 +23,7 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
     .slice(-3)
     .join('/');
   const postRepositoryFileUrl = `${siteInfo.repositoryUrl}/tree/master/${postRelativePath}`;
-  const posts: PostExcerpt[] = recommendedPosts.edges.map(function(edge: any) {
-    const {
-      node: { frontmatter },
-    } = edge;
-    return {
-      ...frontmatter,
-      thumbnail: frontmatter.thumbnail.childImageSharp.fluid,
-    };
-  });
+  const posts = recommendedPosts.edges.map(toPostExcerpt);
   return (
     <PostTemplate
       siteInfo={siteInfo}
@@ -37,7 +31,7 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
       postRepositoryFileUrl={postRepositoryFileUrl}
       post={post}
       recommendedPosts={posts}
-      authorProfilePicture={authorProfilePicture.childImageSharp.resize}
+      authorProfilePictureSrc={authorProfilePicture.childImageSharp.resize.src}
     />
   );
 }
@@ -80,7 +74,7 @@ export const pageQuery = graphql`
     }
   }
 
-  query Post($slug: String!, $recommended: [String]!) {
+  query PostBySlug($slug: String!, $recommended: [String]!) {
     site {
       siteMetadata {
         siteInfo {

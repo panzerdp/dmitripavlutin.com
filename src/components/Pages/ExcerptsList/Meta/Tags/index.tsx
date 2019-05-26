@@ -3,11 +3,11 @@ import Helmet from 'react-helmet';
 
 interface MetaTagsProps {
   siteInfo: SiteInfo;
-  authorProfilePicture: FluidImage;
+  authorProfilePictureSrc: string;
 }
 
-export default function MetaTags({ siteInfo, authorProfilePicture }: MetaTagsProps) {
-  const imageUrl = `${siteInfo.url}${authorProfilePicture.src}`;
+export default function MetaTags({ siteInfo, authorProfilePictureSrc }: MetaTagsProps) {
+  const imageUrl = `${siteInfo.url}${authorProfilePictureSrc}`;
   return (
     <Helmet>
       <link rel="canonical" href={siteInfo.url} />

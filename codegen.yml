@@ -7,3 +7,6 @@ generates:
     plugins:
       - typescript
       - typescript-operations
+config:
+  avoidOptionals: true
+  # skipTypename: true 

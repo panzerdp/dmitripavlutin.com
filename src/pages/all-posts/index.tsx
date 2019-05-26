@@ -2,21 +2,15 @@ import { graphql } from 'gatsby';
 import * as React from 'react';
 
 import PlainListAllTemplate from 'components/Pages/PlainListAll/Template';
-import { PlainListAllQuery, MarkdownRemarkEdge } from 'typings/graphql';
+import { PlainListAllQuery } from 'typings/graphql';
+import { toPostExcerpt } from 'utils/mapper';
 
 interface PlainListAllFetchProps {
   data: PlainListAllQuery;
 }
 
 export default function PlainListAllFetch({ data }: PlainListAllFetchProps) {
-  return <PlainListAllTemplate posts={data.allMarkdownRemark!.edges!.map(nodeToPostExcerpt)} />;
-}
-
-function nodeToPostExcerpt(edge: MarkdownRemarkEdge): PostExcerpt {
-  return {
-    ...frontmatter,
-    thumbnail: frontmatter.thumbnail.childImageSharp.fluid,
-  };
+  return <PlainListAllTemplate posts={data.allMarkdownRemark.edges.map(toPostExcerpt)} />;
 }
 
 export const pageQuery = graphql`

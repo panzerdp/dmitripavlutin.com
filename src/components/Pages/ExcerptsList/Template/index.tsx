@@ -12,7 +12,7 @@ interface ExcerptsTemplateProps {
   posts: PostExcerpt[];
   currentPage: number;
   pagesSum: number;
-  authorProfilePicture: FluidImage;
+  authorProfilePictureSrc: string;
 }
 
 export default function ExcerptsTemplate({
@@ -20,12 +20,12 @@ export default function ExcerptsTemplate({
   posts,
   currentPage,
   pagesSum,
-  authorProfilePicture,
+  authorProfilePictureSrc,
 }: ExcerptsTemplateProps) {
   return (
     <Layout>
-      <MetaTags siteInfo={siteInfo} authorProfilePicture={authorProfilePicture} />
-      <MetaStructuredData siteInfo={siteInfo} authorProfilePicture={authorProfilePicture} />
+      <MetaTags siteInfo={siteInfo} authorProfilePictureSrc={authorProfilePictureSrc} />
+      <MetaStructuredData siteInfo={siteInfo} authorProfilePictureSrc={authorProfilePictureSrc} />
       <MetaPaginator currentPage={currentPage} pagesSum={pagesSum} siteUrl={siteInfo.url} />
       {posts.map((post, index) => (
         <PostExcerptComponent post={post} key={index} />

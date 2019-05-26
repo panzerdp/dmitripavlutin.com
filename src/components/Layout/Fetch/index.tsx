@@ -2,6 +2,7 @@ import * as React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 
 import LayoutContainer from 'components/Layout/Container';
+import { LayoutQuery } from 'typings/graphql';
 
 interface LayoutContainerProps {
   children: React.ReactNode;
@@ -12,7 +13,7 @@ export default class LayoutFetch extends React.Component<LayoutContainerProps> {
     return (
       <StaticQuery
         query={graphql`
-          query GatsbyImageSampleQuery {
+          query Layout {
             file(relativePath: { eq: "profile-picture.jpg" }) {
               childImageSharp {
                 # Specify the image processing steps right in the query
@@ -39,7 +40,7 @@ export default class LayoutFetch extends React.Component<LayoutContainerProps> {
     );
   }
 
-  public renderContent = ({ site, file }: any) => {
+  public renderContent = ({ site, file }: LayoutQuery) => {
     const { children } = this.props;
     return (
       <LayoutContainer
