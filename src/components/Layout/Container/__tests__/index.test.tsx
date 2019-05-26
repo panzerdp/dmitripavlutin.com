@@ -28,7 +28,7 @@ const authorInfo: AuthorInfo = {
   },
 };
 
-const profilePicture: FixedImage = {
+const authorProfilePicture: FixedImage = {
   width: 100,
   height: 100,
   src: 'http://images.com/image',
@@ -39,7 +39,7 @@ describe('<LayoutMetaTags />', function() {
   it('should render its children', function() {
     const child = <div>I am a child</div>;
     const wrapper = shallow(
-      <LayoutContainer siteInfo={siteInfo} authorInfo={authorInfo} profilePicture={profilePicture}>
+      <LayoutContainer siteInfo={siteInfo} authorInfo={authorInfo} authorProfilePicture={authorProfilePicture}>
         {child}
       </LayoutContainer>
     );
@@ -48,7 +48,7 @@ describe('<LayoutMetaTags />', function() {
 
   it('should render meta tags', function() {
     const wrapper = shallow(
-      <LayoutContainer siteInfo={siteInfo} authorInfo={authorInfo} profilePicture={profilePicture}>
+      <LayoutContainer siteInfo={siteInfo} authorInfo={authorInfo} authorProfilePicture={authorProfilePicture}>
         Child
       </LayoutContainer>
     );
@@ -57,16 +57,16 @@ describe('<LayoutMetaTags />', function() {
 
   it('should render header', function() {
     const wrapper = shallow(
-      <LayoutContainer siteInfo={siteInfo} authorInfo={authorInfo} profilePicture={profilePicture}>
+      <LayoutContainer siteInfo={siteInfo} authorInfo={authorInfo} authorProfilePicture={authorProfilePicture}>
         Child
       </LayoutContainer>
     );
-    expect(wrapper.contains(<LayoutHeader profilePicture={profilePicture} authorInfo={authorInfo} />));
+    expect(wrapper.contains(<LayoutHeader authorProfilePicture={authorProfilePicture} authorInfo={authorInfo} />));
   });
 
   it('should render footer', function() {
     const wrapper = shallow(
-      <LayoutContainer siteInfo={siteInfo} authorInfo={authorInfo} profilePicture={profilePicture}>
+      <LayoutContainer siteInfo={siteInfo} authorInfo={authorInfo} authorProfilePicture={authorProfilePicture}>
         Child
       </LayoutContainer>
     );

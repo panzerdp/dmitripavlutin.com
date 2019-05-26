@@ -6,16 +6,16 @@ import { TO_ABOUT, TO_ALL_POSTS, TO_INDEX } from 'routes/path';
 import styles from './index.module.scss';
 
 interface HeaderProps {
-  profilePicture: FixedImage;
+  authorProfilePicture: FixedImage;
   authorInfo: AuthorInfo;
 }
 
-export default function Header({ profilePicture, authorInfo }: HeaderProps) {
+export default function Header({ authorProfilePicture, authorInfo }: HeaderProps) {
   return (
     <header>
       <div className={styles.headerContent}>
         <Link to={TO_INDEX()}>
-          <Img title="Home" resolutions={profilePicture} className={styles.picture} />
+          <Img title="Home" resolutions={authorProfilePicture} className={styles.picture} />
         </Link>
         <div className={styles.profileInfo}>
           <Link to={TO_INDEX()} className={styles.name}>

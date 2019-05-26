@@ -46,7 +46,7 @@ export default class LayoutFetch extends React.Component<LayoutContainerProps> {
       <LayoutContainer
         siteInfo={site.siteMetadata.siteInfo}
         authorInfo={site.siteMetadata.authorInfo}
-        profilePicture={file.childImageSharp.resolutions}
+        authorProfilePicture={file.childImageSharp.resolutions}
       >
         {children}
       </LayoutContainer>

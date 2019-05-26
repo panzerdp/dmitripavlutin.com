@@ -11,14 +11,19 @@ interface LayoutContainerProps {
   children: React.ReactNode;
   siteInfo: SiteInfo;
   authorInfo: AuthorInfo;
-  profilePicture: FixedImage;
+  authorProfilePicture: FixedImage;
 }
 
-export default function LayoutContainer({ children, siteInfo, authorInfo, profilePicture }: LayoutContainerProps) {
+export default function LayoutContainer({
+  children,
+  siteInfo,
+  authorInfo,
+  authorProfilePicture,
+}: LayoutContainerProps) {
   return (
     <div className={styles.container}>
       <LayoutMetaTags siteInfo={siteInfo} />
-      <LayoutHeader profilePicture={profilePicture} authorInfo={authorInfo} />
+      <LayoutHeader authorProfilePicture={authorProfilePicture} authorInfo={authorInfo} />
       <main className={styles.main}>{children}</main>
       <LayoutFooter authorInfo={authorInfo} />
     </div>
