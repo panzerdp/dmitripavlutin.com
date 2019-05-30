@@ -3,6 +3,7 @@ public/
 build/
 .cache/
 coverage/
+.vscode/
 
 src/typings/graphql.d.ts
 .gatsby-context.js

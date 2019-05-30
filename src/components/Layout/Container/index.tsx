@@ -21,11 +21,13 @@ export default function LayoutContainer({
   authorProfilePicture,
 }: LayoutContainerProps) {
   return (
-    <div className={styles.container}>
+    <>
       <LayoutMetaTags siteInfo={siteInfo} />
-      <LayoutHeader authorProfilePicture={authorProfilePicture} authorInfo={authorInfo} />
-      <main className={styles.main}>{children}</main>
-      <LayoutFooter authorInfo={authorInfo} />
-    </div>
+      <div className={styles.container}>
+        <LayoutHeader authorProfilePicture={authorProfilePicture} authorInfo={authorInfo} />
+        <main className={styles.main}>{children}</main>
+        <LayoutFooter authorInfo={authorInfo} />
+      </div>
+    </>
   );
 }

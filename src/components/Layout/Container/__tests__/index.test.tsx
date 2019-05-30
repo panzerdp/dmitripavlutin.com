@@ -35,32 +35,26 @@ const authorProfilePicture: FixedImage = {
   srcSet: 'some srcset values',
 };
 
+const props = {
+  siteInfo,
+  authorInfo,
+  authorProfilePicture,
+};
+
 describe('<LayoutMetaTags />', function() {
   it('should render its children', function() {
     const child = <div>I am a child</div>;
-    const wrapper = shallow(
-      <LayoutContainer siteInfo={siteInfo} authorInfo={authorInfo} authorProfilePicture={authorProfilePicture}>
-        {child}
-      </LayoutContainer>
-    );
+    const wrapper = shallow(<LayoutContainer {...props}>{child}</LayoutContainer>);
     expect(wrapper.contains(child));
   });
 
   it('should render meta tags', function() {
-    const wrapper = shallow(
-      <LayoutContainer siteInfo={siteInfo} authorInfo={authorInfo} authorProfilePicture={authorProfilePicture}>
-        Child
-      </LayoutContainer>
-    );
+    const wrapper = shallow(<LayoutContainer {...props}>Child</LayoutContainer>);
     expect(wrapper.contains(<LayoutMetaTags siteInfo={siteInfo} />));
   });
 
   it('should render header', function() {
-    const wrapper = shallow(
-      <LayoutContainer siteInfo={siteInfo} authorInfo={authorInfo} authorProfilePicture={authorProfilePicture}>
-        Child
-      </LayoutContainer>
-    );
+    const wrapper = shallow(<LayoutContainer {...props}>Child</LayoutContainer>);
     expect(wrapper.contains(<LayoutHeader authorProfilePicture={authorProfilePicture} authorInfo={authorInfo} />));
   });
 

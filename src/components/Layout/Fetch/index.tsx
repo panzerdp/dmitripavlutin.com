@@ -4,52 +4,52 @@ import { graphql, StaticQuery } from 'gatsby';
 import LayoutContainer from 'components/Layout/Container';
 import { LayoutQuery } from 'typings/graphql';
 
-interface LayoutContainerProps {
+interface LayoutFetchQueryProps {
   children: React.ReactNode;
 }
 
-export default class LayoutFetch extends React.Component<LayoutContainerProps> {
-  public render() {
-    return (
-      <StaticQuery
-        query={graphql`
-          query Layout {
-            file(relativePath: { eq: "profile-picture.jpg" }) {
-              childImageSharp {
-                # Specify the image processing steps right in the query
-                # Makes it trivial to update as your page's design changes.
-                resolutions(width: 64, height: 64, quality: 100) {
-                  ...GatsbyImageSharpResolutions
-                }
-              }
-            }
-            site {
-              siteMetadata {
-                siteInfo {
-                  ...SiteInfoAll
-                }
-                authorInfo {
-                  ...AuthorInfoAll
-                }
+export default function LayoutFetchQuery({ children }: LayoutFetchQueryProps) {
+  return (
+    <StaticQuery
+      query={graphql`
+        query Layout {
+          file(relativePath: { eq: "profile-picture.jpg" }) {
+            childImageSharp {
+              resolutions(width: 64, height: 64, quality: 100) {
+                ...GatsbyImageSharpResolutions
               }
             }
           }
-        `}
-        render={this.renderContent}
-      />
-    );
-  }
+          site {
+            siteMetadata {
+              siteInfo {
+                ...SiteInfoAll
+              }
+              authorInfo {
+                ...AuthorInfoAll
+              }
+            }
+          }
+        }
+      `}
+      render={(data: LayoutQuery) => <LayoutFetch data={data}>{children}</LayoutFetch>}
+    />
+  );
+}
 
-  public renderContent = ({ site, file }: LayoutQuery) => {
-    const { children } = this.props;
-    return (
-      <LayoutContainer
-        siteInfo={site.siteMetadata.siteInfo}
-        authorInfo={site.siteMetadata.authorInfo}
-        authorProfilePicture={file.childImageSharp.resolutions}
-      >
-        {children}
-      </LayoutContainer>
-    );
-  };
+interface LayoutFetchProps {
+  data: LayoutQuery;
+  children: React.ReactNode;
+}
+
+export function LayoutFetch({ data: { site, file }, children }: LayoutFetchProps) {
+  return (
+    <LayoutContainer
+      siteInfo={site.siteMetadata.siteInfo}
+      authorInfo={site.siteMetadata.authorInfo}
+      authorProfilePicture={file.childImageSharp.resolutions}
+    >
+      {children}
+    </LayoutContainer>
+  );
 }
