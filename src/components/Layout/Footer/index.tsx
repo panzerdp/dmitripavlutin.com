@@ -10,7 +10,7 @@ interface FooterProps {
   authorInfo: AuthorInfo;
 }
 
-export default function Footer({ authorInfo: { profiles, name } }: FooterProps) {
+export default function LayoutFooter({ authorInfo: { profiles, name } }: FooterProps) {
   return (
     <footer>
       <div className={styles.footerContent}>

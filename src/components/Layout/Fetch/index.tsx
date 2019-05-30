@@ -8,6 +8,8 @@ interface LayoutFetchQueryProps {
   children: React.ReactNode;
 }
 
+/* istanbul ignore next */
+
 export default function LayoutFetchQuery({ children }: LayoutFetchQueryProps) {
   return (
     <StaticQuery
