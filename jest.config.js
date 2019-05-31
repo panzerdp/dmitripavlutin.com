@@ -5,7 +5,6 @@ module.exports = {
   collectCoverageFrom: ['src/**/*.{js,jsx,mjs,ts,tsx}'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testMatch: ['<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs,ts,tsx}'],
-  // testEnvironment: 'jsdom',
   testURL: 'http://localhost',
   transform: {
     '^.+\\.(js|jsx|mjs|ts|tsx)$': 'ts-jest',

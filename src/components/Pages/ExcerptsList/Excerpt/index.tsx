@@ -24,7 +24,7 @@ export default function Excerpt({ post }: ExcerptProps) {
         <Subheader tags={post.tags} published={post.published} />
         <div>
           {post.description}{' '}
-          <Link className={styles.continueReading} to={to}>
+          <Link to={to} className={styles.continueReading}>
             Continue reading &#x279e;
           </Link>
         </div>

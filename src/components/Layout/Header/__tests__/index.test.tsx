@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Img from 'gatsby-image';
 import { shallow } from 'enzyme';
 
 import LayoutHeader from '../index';
@@ -43,5 +44,10 @@ describe('<LayoutHeader />', function() {
     [{ to: TO_INDEX() }, { to: TO_ABOUT() }, { to: TO_ALL_POSTS() }].forEach((linkProps) =>
       expect(wrapper.find(linkProps).length).toBeGreaterThanOrEqual(1)
     );
+  });
+
+  it('should render profile picture', function() {
+    const wrapper = shallow(<LayoutHeader {...props} />);
+    expect(wrapper.find({ resolutions: authorProfilePicture }).is(Img)).toBe(true);
   });
 });

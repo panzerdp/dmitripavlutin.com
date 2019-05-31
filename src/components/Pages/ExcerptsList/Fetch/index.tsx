@@ -28,7 +28,8 @@ export default function ExcerptsFetch({
       siteInfo={siteInfo}
       posts={allMarkdownRemark.edges.map(toPostExcerpt)}
       authorProfilePictureSrc={authorProfilePicture.childImageSharp.resize.src}
-      {...pageContext}
+      currentPage={pageContext.currentPage}
+      pagesSum={pageContext.pagesSum}
     />
   );
 }
