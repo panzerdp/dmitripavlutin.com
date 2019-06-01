@@ -10,8 +10,6 @@ export default function MetaTags({ siteInfo, authorProfilePictureSrc }: MetaTags
   const imageUrl = `${siteInfo.url}${authorProfilePictureSrc}`;
   return (
     <Helmet>
-      <link rel="canonical" href={siteInfo.url} />
-
       <meta property="og:site_name" content={siteInfo.title} />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={siteInfo.title} />

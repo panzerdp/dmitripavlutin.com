@@ -2,7 +2,6 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import { LayoutFetch } from '../index';
-import LayoutContainer from 'components/Layout/Container';
 
 const siteInfo = {
   title: 'Dmitri Pavlutin blog',
@@ -59,7 +58,6 @@ describe('<LayoutFetch />', function() {
 
   it('should render the layout container', function() {
     const wrapper = shallow(<LayoutFetch {...props}>Child</LayoutFetch>);
-    const layoutContainerProps = { siteInfo, authorInfo, authorProfilePicture };
-    expect(wrapper.contains(<LayoutContainer {...layoutContainerProps}>Child</LayoutContainer>));
+    expect(wrapper).toMatchSnapshot();
   });
 });

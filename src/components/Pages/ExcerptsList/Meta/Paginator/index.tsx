@@ -40,6 +40,6 @@ export default class MetaPaginator extends React.Component<MetaPaginatorProps> {
     if (page === 1) {
       return siteUrl;
     }
-    return `${siteUrl}/${TO_PAGE({ page })}`;
+    return `${siteUrl}${TO_PAGE({ page })}`;
   }
 }
