@@ -83,7 +83,7 @@
     "build": "gatsby build",
     "type:check": "tsc -p tsconfig.json --noEmit",
     "type:generate": "graphql-codegen",
-    "type:generate:watch": "npm run type:generate -- --watch"
+    "type:dev": "npm run type:generate -- --watch"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
