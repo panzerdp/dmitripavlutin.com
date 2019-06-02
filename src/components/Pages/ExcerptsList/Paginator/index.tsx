@@ -12,6 +12,9 @@ interface PaginatorProps {
 export default class Paginator extends React.Component<PaginatorProps> {
   public render() {
     const { pagesSum } = this.props;
+    if (pagesSum === 0) {
+      return null;
+    }
     const links = [this.toPrevLink()];
     for (let page = 1; page <= pagesSum; page++) {
       links.push(this.mapPageToLink(page));
