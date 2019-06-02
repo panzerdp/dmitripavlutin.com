@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PlainListByTagFetch /> should render plain list by tag template 1`] = `
+<PlainListByTagTemplate
+  posts={
+    Array [
+      Object {
+        "description": "Useful techniques to facilitate React server-side rendering.",
+        "published": "2018-03-17",
+        "slug": "useful-techniques-react-server-side-rendering",
+        "tags": Array [
+          "react",
+          "server side rendering",
+        ],
+        "thumbnail": Object {
+          "aspectRatio": 2,
+          "base64": "base64",
+          "sizes": "some sizes",
+          "src": "source",
+          "srcSet": "src-set",
+        },
+        "title": "Useful techniques to facilitate React server-side rendering",
+      },
+    ]
+  }
+  tag="javascript"
+/>
+`;
