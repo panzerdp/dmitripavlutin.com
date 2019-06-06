@@ -18,7 +18,7 @@ exports[`<PostFetch /> should render post template 1`] = `
       "speciality": "Software developer",
     }
   }
-  authorProfilePictureSrc="http://images.com/image"
+  authorProfilePictureSrc="/image.png"
   post={
     Object {
       "description": "Useful techniques to facilitate React server-side rendering.",

@@ -14,7 +14,7 @@ const authorProfilePicture = {
   width: 100,
   height: 100,
   base64: 'base64-encoded-string',
-  src: 'http://images.com/image',
+  src: '/image.png',
   srcSet: 'some srcset values',
 };
 

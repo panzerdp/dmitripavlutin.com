@@ -35,33 +35,35 @@ export default function PostTemplate({
   const [coverIsInView, setCoverIsInView] = React.useState(true);
   const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
   return (
-    <Layout>
-      <article>
-        <MetaTags post={post} siteInfo={siteInfo} authorInfo={authorInfo} />
-        <MetaStructuredData
-          post={post}
-          siteInfo={siteInfo}
-          authorInfo={authorInfo}
-          authorProfilePictureSrc={authorProfilePictureSrc}
-        />
-        <Observer onChange={(inView) => setCoverIsInView(inView)}>
-          <div className={styles.postCover}>
-            <Img fluid={post.thumbnail} />
-          </div>
-        </Observer>
-        <h1>{post.title}</h1>
-        <Subheader tags={post.tags} published={post.published} />
-        <ShareGroupVertical
-          url={postUrl}
-          text={post.title}
-          tags={post.tags}
-          className={coverIsInView ? styles.hidePostCover : ''}
-        />
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
-        <Edit url={postRepositoryFileUrl} />
-        <ShareBottom url={postUrl} text={post.title} tags={post.tags} />
-        <RecommendedList posts={recommendedPosts} />
-      </article>
-    </Layout>
+    <>
+      <MetaTags post={post} siteInfo={siteInfo} authorInfo={authorInfo} />
+      <MetaStructuredData
+        post={post}
+        siteInfo={siteInfo}
+        authorInfo={authorInfo}
+        authorProfilePictureSrc={authorProfilePictureSrc}
+      />
+      <Layout>
+        <article>
+          <Observer onChange={(inView) => setCoverIsInView(inView)}>
+            <div className={styles.postCover}>
+              <Img fluid={post.thumbnail} />
+            </div>
+          </Observer>
+          <h1>{post.title}</h1>
+          <Subheader tags={post.tags} published={post.published} />
+          <ShareGroupVertical
+            url={postUrl}
+            text={post.title}
+            tags={post.tags}
+            className={coverIsInView ? styles.hidePostCover : ''}
+          />
+          <div dangerouslySetInnerHTML={{ __html: post.html }} />
+          <Edit url={postRepositoryFileUrl} />
+          <ShareBottom url={postUrl} text={post.title} tags={post.tags} />
+          <RecommendedList posts={recommendedPosts} />
+        </article>
+      </Layout>
+    </>
   );
 }

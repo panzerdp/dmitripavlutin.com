@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PostMetaStructuredData /> should render structured data 1`] = `
+<HelmetWrapper
+  defer={true}
+  encodeSpecialCharacters={true}
+>
+  <script
+    type="application/ld+json"
+  >
+    {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Dmitri Pavlutin blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://dmitripavlutin.com/profile.png"
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Dmitri Pavlutin",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://dmitripavlutin.com/profile.png",
+      "width": 256,
+      "height": 256
+    },
+    "url": "https://dmitripavlutin.com",
+    "sameAs": [
+      "https://stackoverflow.com/users/1894471/dmitri-pavlutin",
+      "https://twitter.com/panzerdp",
+      "https://www.linkedin.com/in/dmitri-pavlutin/",
+      "https://github.com/panzerdp",
+      "https://www.facebook.com/dmitri.pavlutin"
+    ],
+    "description": "Software developer"
+  },
+  "headline": "Useful techniques to facilitate React server-side rendering",
+  "url": "https://dmitripavlutin.com//useful-techniques-react-server-side-rendering/",
+  "datePublished": "2018-03-17",
+  "dateModified": "2019-01-01",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://dmitripavlutin.com/source.png",
+    "width": 720,
+    "height": 400
+  },
+  "keywords": "react, server side rendering",
+  "description": "Useful techniques to facilitate React server-side rendering.",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://dmitripavlutin.com"
+  }
+}
+  </script>
+</HelmetWrapper>
+`;

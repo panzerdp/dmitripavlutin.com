@@ -16,9 +16,7 @@ export default function PostMetaTags({ post, siteInfo, authorInfo }: PostMetaTag
     <Helmet titleTemplate="%s">
       <title>{post.title}</title>
       <meta name="description" content={post.description} />
-      <link rel="shortcut icon" href="/favicon.ico" />
       <link rel="canonical" href={postUrl} />
-      <meta name="referrer" content="no-referrer-when-downgrade" />
 
       <meta property="og:site_name" content={siteInfo.title} />
       <meta property="og:type" content="article" />
@@ -36,6 +34,7 @@ export default function PostMetaTags({ post, siteInfo, authorInfo }: PostMetaTag
       ))}
 
       <meta property="article:author" content={authorInfo.profiles.facebook} />
+
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={post.title} />
       <meta name="twitter:description" content={post.description} />

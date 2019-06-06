@@ -12,17 +12,12 @@ interface ShareButtonsHorizontalProps {
   tags: Tags;
 }
 
-export default function ShareButtonsHorizontal({ url, text, tags }: ShareButtonsHorizontalProps) {
-  const shareProps = {
-    url,
-    text,
-    tags,
-  };
+export default function ShareButtonsHorizontal(props: ShareButtonsHorizontalProps) {
   return (
     <div className={styles.horizontalGroup}>
-      <ShareSocialTwitter {...shareProps} />
-      <ShareSocialFacebook {...shareProps} />
-      <ShareSocialReddit {...shareProps} />
+      <ShareSocialTwitter {...props} />
+      <ShareSocialFacebook {...props} />
+      <ShareSocialReddit {...props} />
     </div>
   );
 }
