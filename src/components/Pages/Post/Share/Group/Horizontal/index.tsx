@@ -4,7 +4,7 @@ import styles from './index.module.scss';
 
 import ShareSocialFacebook from 'components/Pages/Post/Share/Social/Facebook';
 import ShareSocialReddit from 'components/Pages/Post/Share/Social/Reddit';
-import ShareSocialTwitter from 'components/Pages/Post/Share/Social/Twitter';
+import PostShareSocialTwitter from 'components/Pages/Post/Share/Social/Twitter';
 
 interface ShareButtonsHorizontalProps {
   url: string;
@@ -15,7 +15,7 @@ interface ShareButtonsHorizontalProps {
 export default function ShareButtonsHorizontal(props: ShareButtonsHorizontalProps) {
   return (
     <div className={styles.horizontalGroup}>
-      <ShareSocialTwitter {...props} />
+      <PostShareSocialTwitter {...props} />
       <ShareSocialFacebook {...props} />
       <ShareSocialReddit {...props} />
     </div>

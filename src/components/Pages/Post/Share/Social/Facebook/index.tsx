@@ -1,20 +1,19 @@
-import { stringify } from 'query-string';
 import * as React from 'react';
 
 import withWindowOpen from 'components/With/WindowOpen';
-import ShareButton from '../../Button';
+import PostShareButton from 'components/Pages/Post/Share/Button';
 import styles from './index.module.scss';
 
-const SHARE_FACEBOOK = 'https://www.facebook.com/sharer/sharer.php/';
+export const URL_SHARE_FACEBOOK = 'https://www.facebook.com/sharer/sharer.php/';
 
-interface ShareSocialFacebookProps {
+interface PostShareSocialFacebookProps {
   url: string;
   windowOpen(props: any): void;
 }
 
-export class ShareSocialFacebook extends React.Component<ShareSocialFacebookProps> {
+export class PostShareSocialFacebook extends React.Component<PostShareSocialFacebookProps> {
   public render() {
-    return <ShareButton title="Share on Twitter" onClick={this.handleClick} className={styles.facebook} />;
+    return <PostShareButton title="Share on Twitter" onClick={this.handleClick} className={styles.facebook} />;
   }
 
   public handleClick = (event: React.SyntheticEvent) => {
@@ -29,14 +28,8 @@ export class ShareSocialFacebook extends React.Component<ShareSocialFacebookProp
 
   public getFacebookShareUrl() {
     const { url } = this.props;
-    return (
-      SHARE_FACEBOOK +
-      '?' +
-      stringify({
-        u: url,
-      })
-    );
+    return `${URL_SHARE_FACEBOOK}?u=${encodeURIComponent(url)}`;
   }
 }
 
-export default withWindowOpen(ShareSocialFacebook);
+export default withWindowOpen(PostShareSocialFacebook);

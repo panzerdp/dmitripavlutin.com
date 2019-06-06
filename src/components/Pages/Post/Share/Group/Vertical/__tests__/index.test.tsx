@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import PostShareGroupVertical from '../index';
 import ShareSocialFacebook from 'components/Pages/Post/Share/Social/Facebook';
 import ShareSocialReddit from 'components/Pages/Post/Share/Social/Reddit';
-import ShareSocialTwitter from 'components/Pages/Post/Share/Social/Twitter';
+import PostShareSocialTwitter from 'components/Pages/Post/Share/Social/Twitter';
 
 const props = {
   url: 'http://site.com/post-id',
@@ -35,6 +35,6 @@ describe('<PostShareGroupVertical />', function() {
 
   it('should render twitter share button', function() {
     const wrapper = shallow(<PostShareGroupVertical {...groupProps} />);
-    expect(wrapper.contains(<ShareSocialTwitter {...props} />)).toBe(true);
+    expect(wrapper.contains(<PostShareSocialTwitter {...props} />)).toBe(true);
   });
 });

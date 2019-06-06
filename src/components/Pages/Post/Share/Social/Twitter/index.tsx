@@ -1,21 +1,20 @@
 import * as React from 'react';
-import { stringify } from 'query-string';
 
 import withWindowOpen from 'components/With/WindowOpen';
 import { slugify } from 'utils/string';
 import ShareButton from '../../Button';
 import styles from './index.module.scss';
 
-const SHARE_TWITTER = 'https://twitter.com/share';
+export const URL_SHARE_TWITTER = 'https://twitter.com/share';
 
-interface ShareSocialTwitterProps {
+interface PostShareSocialTwitterProps {
   url: string;
   text: string;
   tags: Tags;
   windowOpen(props: any): void;
 }
 
-export class ShareSocialTwitter extends React.Component<ShareSocialTwitterProps> {
+export class PostShareSocialTwitter extends React.Component<PostShareSocialTwitterProps> {
   public render() {
     return <ShareButton title="Share on Twitter" onClick={this.handleClick} className={styles.twitter} />;
   }
@@ -33,15 +32,13 @@ export class ShareSocialTwitter extends React.Component<ShareSocialTwitterProps>
   public getTwitterShareUrl() {
     const { url, text, tags } = this.props;
     return (
-      SHARE_TWITTER +
+      URL_SHARE_TWITTER +
       '?' +
-      stringify({
-        url,
-        text,
-        hashtags: tags.map((tag) => slugify(tag)),
-      })
+      `url=${encodeURIComponent(url)}` +
+      `text=${encodeURIComponent(text)}` +
+      `hastags=${encodeURIComponent(tags.map((tag) => slugify(tag)).join(','))}`
     );
   }
 }
 
-export default withWindowOpen(ShareSocialTwitter);
+export default withWindowOpen(PostShareSocialTwitter);
