@@ -4,11 +4,11 @@ import Observer from 'react-intersection-observer';
 
 import 'prismjs/themes/prism.css';
 
+import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData';
+import MetaTags from 'components/Pages/Post/Meta/Tags';
 import Layout from 'components/Layout/Fetch';
 import Subheader from 'components/Pages/Common/Subheader';
 import Edit from 'components/Pages/Post/Edit';
-import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData';
-import MetaTags from 'components/Pages/Post/Meta/Tags';
 import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import ShareGroupVertical from 'components/Pages/Post/Share/Group/Vertical';
