@@ -1,6 +1,6 @@
 import Img from 'gatsby-image';
 import * as React from 'react';
-import Observer from 'react-intersection-observer';
+import { useInView } from 'react-intersection-observer';
 
 import 'prismjs/themes/prism.css';
 
@@ -32,7 +32,7 @@ export default function PostTemplate({
   recommendedPosts,
   authorProfilePictureSrc,
 }: PostTemplateProps) {
-  const [coverIsInView, setCoverIsInView] = React.useState(true);
+  const [ref, coverIsInView] = useInView();
   const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
   return (
     <>
@@ -45,11 +45,9 @@ export default function PostTemplate({
       />
       <Layout>
         <article>
-          <Observer onChange={(inView) => setCoverIsInView(inView)}>
-            <div className={styles.postCover}>
-              <Img fluid={post.thumbnail} />
-            </div>
-          </Observer>
+          <div ref={ref} className={styles.postCover}>
+            <Img fluid={post.thumbnail} />
+          </div>
           <h1>{post.title}</h1>
           <Subheader tags={post.tags} published={post.published} />
           <ShareGroupVertical

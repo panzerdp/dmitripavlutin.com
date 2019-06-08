@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import Img from 'gatsby-image';
+// import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
 
 import PostTemplate from '../index';
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData';
@@ -117,9 +118,7 @@ describe('<PostTemplate />', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
     expect(
-      article.contains(
-        <ShareGroupVertical url={postUrl} text={props.post.title} tags={props.post.tags} className="hidePostCover" />
-      )
+      article.contains(<ShareGroupVertical url={postUrl} text={props.post.title} tags={props.post.tags} className="" />)
     ).toBe(true);
     expect(article.contains(<ShareBottom url={postUrl} text={props.post.title} tags={props.post.tags} />)).toBe(true);
   });
