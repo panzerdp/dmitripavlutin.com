@@ -121,7 +121,7 @@ describe('<PostTemplate />', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
     expect(
-      article.contains(<ShareGroupVertical url={postUrl} text={props.post.title} tags={props.post.tags} show={true} />)
+      article.contains(<ShareGroupVertical url={postUrl} text={props.post.title} tags={props.post.tags} show={false} />)
     ).toBe(true);
     expect(article.contains(<ShareBottom url={postUrl} text={props.post.title} tags={props.post.tags} />)).toBe(true);
   });
@@ -147,12 +147,36 @@ describe('<PostTemplate />', function() {
   it('should hide social buttons', function() {
     jest.doMock('react-intersection-observer', () => {
       return {
-        useInView: jest.fn().mockReturnValue([null, true]),
+        useInView: jest.fn().mockReturnValue([null, null, null]),
       };
     });
     //eslint-disable-next-line @typescript-eslint/no-var-requires
     const { default: PostTemplate } = require('../index');
     const wrapper = shallow(<PostTemplate {...props} />);
     expect(wrapper.find('ShareGroupVertical').prop('show')).toBe(false);
+  });
+
+  it('should hide social buttons', function() {
+    jest.doMock('react-intersection-observer', () => {
+      return {
+        useInView: jest.fn().mockReturnValue([null, null, { isIntersecting: true }]),
+      };
+    });
+    //eslint-disable-next-line @typescript-eslint/no-var-requires
+    const { default: PostTemplate } = require('../index');
+    const wrapper = shallow(<PostTemplate {...props} />);
+    expect(wrapper.find('ShareGroupVertical').prop('show')).toBe(false);
+  });
+
+  it('should show social buttons', function() {
+    jest.doMock('react-intersection-observer', () => {
+      return {
+        useInView: jest.fn().mockReturnValue([null, null, { isIntersecting: false }]),
+      };
+    });
+    //eslint-disable-next-line @typescript-eslint/no-var-requires
+    const { default: PostTemplate } = require('../index');
+    const wrapper = shallow(<PostTemplate {...props} />);
+    expect(wrapper.find('ShareGroupVertical').prop('show')).toBe(true);
   });
 });
