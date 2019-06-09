@@ -23,6 +23,11 @@ describe('<PostShareGroupVertical />', function() {
     expect(wrapper.find('.show')).toHaveLength(1);
   });
 
+  it('should hide', function() {
+    const wrapper = shallow(<PostShareGroupVertical {...groupProps} show={false} />);
+    expect(wrapper.find('.show')).toHaveLength(0);
+  });
+
   it('should render facebook share button', function() {
     const wrapper = shallow(<PostShareGroupVertical {...groupProps} />);
     expect(wrapper.contains(<ShareSocialFacebook {...props} />)).toBe(true);
