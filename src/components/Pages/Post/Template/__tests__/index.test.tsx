@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import Img from 'gatsby-image';
-// import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
 
 import PostTemplate from '../index';
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData';
@@ -75,6 +74,10 @@ const props = {
 const postUrl = props.siteInfo.url + TO_POST({ slug: props.post.slug });
 
 describe('<PostTemplate />', function() {
+  beforeEach(() => {
+    jest.resetModules();
+  });
+
   it('should render meta tags', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     expect(
@@ -115,6 +118,11 @@ describe('<PostTemplate />', function() {
   });
 
   it('should render share buttons', function() {
+    jest.doMock('react-intersection-observer', () => {
+      return {
+        useInView: jest.fn().mockReturnValue([null, false]),
+      };
+    });
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
     expect(
@@ -139,5 +147,17 @@ describe('<PostTemplate />', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
     expect(article.contains(<RecommendedList posts={props.recommendedPosts} />)).toBe(true);
+  });
+
+  it('should hide social buttons', function() {
+    jest.doMock('react-intersection-observer', () => {
+      return {
+        useInView: jest.fn().mockReturnValue([null, true]),
+      };
+    });
+    //eslint-disable-next-line @typescript-eslint/no-var-requires
+    const { default: PostTemplate } = require('../index');
+    const wrapper = shallow(<PostTemplate {...props} />);
+    expect(wrapper.find('ShareGroupVertical').prop('className')).toBe('hidePostCover');
   });
 });

@@ -33,6 +33,7 @@ export default function PostTemplate({
   authorProfilePictureSrc,
 }: PostTemplateProps) {
   const [ref, coverIsInView] = useInView();
+  console.log(ref, coverIsInView);
   const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
   return (
     <>

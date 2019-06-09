@@ -14,6 +14,12 @@ module.exports = {
   moduleNameMapper: {
     '\\.(css|scss)$': 'identity-obj-proxy',
   },
+  globals: {
+    __PATH_PREFIX__: ``,
+    'ts-jest': {
+      diagnostics: false,
+    },
+  },
   // coverageThreshold: {
   //   global: {
   //     statements: 80,
