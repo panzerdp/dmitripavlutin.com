@@ -33,10 +33,9 @@ export class PostShareSocialTwitter extends React.Component<PostShareSocialTwitt
     const { url, text, tags } = this.props;
     return (
       URL_SHARE_TWITTER +
-      '?' +
-      `url=${encodeURIComponent(url)}` +
-      `text=${encodeURIComponent(text)}` +
-      `hastags=${encodeURIComponent(tags.map((tag) => slugify(tag)).join(','))}`
+      `?url=${encodeURIComponent(url)}` +
+      `&text=${encodeURIComponent(text)}` +
+      `&hashtags=${encodeURIComponent(tags.map((tag) => slugify(tag)).join(','))}`
     );
   }
 }

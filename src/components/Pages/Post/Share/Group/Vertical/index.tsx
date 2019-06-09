@@ -10,17 +10,17 @@ interface ShareGroupVerticalProps {
   url: string;
   text: string;
   tags: Tags;
-  className: string;
+  show: boolean;
 }
 
-export default function ShareGroupVertical({ url, text, tags, className }: ShareGroupVerticalProps) {
+export default function ShareGroupVertical({ url, text, tags, show }: ShareGroupVerticalProps) {
   const shareProps = {
     url,
     text,
     tags,
   };
   return (
-    <div className={`${styles.verticalGroup} ${className}`}>
+    <div className={`${styles.verticalGroup} ${show ? styles.show : ''}`}>
       <PostShareSocialTwitter {...shareProps} />
       <ShareSocialFacebook {...shareProps} />
       <ShareSocialReddit {...shareProps} />

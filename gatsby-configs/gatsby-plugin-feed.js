@@ -5,11 +5,9 @@ module.exports = {
       {
         site {
           siteMetadata {
-            title
-            description
-            siteUrl
-            site_url: siteUrl,
-            author
+            siteInfo {
+              url
+            }
           }
         }
       }
@@ -17,13 +15,13 @@ module.exports = {
     feeds: [
       {
         serialize: ({ query: { site, allMarkdownRemark } }) => {
-          return allMarkdownRemark.edges.map(edge => {
+          return allMarkdownRemark.edges.map((edge) => {
             return Object.assign({}, edge.node.frontmatter, {
               description: edge.node.frontmatter.description,
-              url: site.siteMetadata.siteUrl + '/' + edge.node.frontmatter.slug + '/',
-              guid: site.siteMetadata.siteUrl + '/' + edge.node.frontmatter.slug + '/',
+              url: site.siteMetadata.siteInfo.url + '/' + edge.node.frontmatter.slug + '/',
+              guid: site.siteMetadata.siteInfo.url + '/' + edge.node.frontmatter.slug + '/',
               categories: edge.node.frontmatter.tags,
-              custom_elements: [{ "content:encoded": edge.node.html }],
+              custom_elements: [{ 'content:encoded': edge.node.html }],
             });
           });
         },
@@ -50,7 +48,7 @@ module.exports = {
             }
           }
         `,
-        output: "/rss.xml"
+        output: '/rss.xml',
       },
     ],
   },

@@ -27,10 +27,9 @@ describe('<PostShareSocialFacebook />', function() {
     expect(argument).toHaveProperty(
       'url',
       URL_SHARE_TWITTER +
-        '?' +
-        `url=${encodeURIComponent(props.url)}` +
-        `text=${encodeURIComponent(props.text)}` +
-        `hastags=${encodeURIComponent(props.tags.join(','))}`
+        `?url=${encodeURIComponent(props.url)}` +
+        `&text=${encodeURIComponent(props.text)}` +
+        `&hashtags=${encodeURIComponent(props.tags.join(','))}`
     );
   });
 });

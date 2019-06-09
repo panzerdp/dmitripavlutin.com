@@ -14,13 +14,13 @@ const props = {
 
 const groupProps = {
   ...props,
-  className: 'some-class',
+  show: true,
 };
 
 describe('<PostShareGroupVertical />', function() {
-  it('should set class name', function() {
+  it('should show', function() {
     const wrapper = shallow(<PostShareGroupVertical {...groupProps} />);
-    expect(wrapper.find('.some-class')).toHaveLength(1);
+    expect(wrapper.find('.show')).toHaveLength(1);
   });
 
   it('should render facebook share button', function() {

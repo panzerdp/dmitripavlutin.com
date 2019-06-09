@@ -66,6 +66,10 @@ blockquote {
   display: none;
 }
 
+.showPostCover {
+  display: initial;
+}
+
 :global {
   .token.function {
     color: #883f44;

@@ -33,8 +33,8 @@ export default function PostTemplate({
   authorProfilePictureSrc,
 }: PostTemplateProps) {
   const [ref, coverIsInView] = useInView();
-  console.log(ref, coverIsInView);
   const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
+  console.log(coverIsInView);
   return (
     <>
       <MetaTags post={post} siteInfo={siteInfo} authorInfo={authorInfo} />
@@ -51,12 +51,7 @@ export default function PostTemplate({
           </div>
           <h1>{post.title}</h1>
           <Subheader tags={post.tags} published={post.published} />
-          <ShareGroupVertical
-            url={postUrl}
-            text={post.title}
-            tags={post.tags}
-            className={coverIsInView ? styles.hidePostCover : ''}
-          />
+          <ShareGroupVertical url={postUrl} text={post.title} tags={post.tags} show={!coverIsInView} />
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
           <Edit url={postRepositoryFileUrl} />
           <ShareBottom url={postUrl} text={post.title} tags={post.tags} />

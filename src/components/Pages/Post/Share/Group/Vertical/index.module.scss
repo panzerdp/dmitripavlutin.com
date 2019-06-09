@@ -2,6 +2,11 @@
   position: fixed;
   transform: translateX(-2.8rem - 2rem);
   top: 2rem;
+  display: none;
+
+  &.show {
+    display: block;
+  }
 
   a {
     margin-bottom: 0.6rem;

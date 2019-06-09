@@ -118,15 +118,10 @@ describe('<PostTemplate />', function() {
   });
 
   it('should render share buttons', function() {
-    jest.doMock('react-intersection-observer', () => {
-      return {
-        useInView: jest.fn().mockReturnValue([null, false]),
-      };
-    });
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
     expect(
-      article.contains(<ShareGroupVertical url={postUrl} text={props.post.title} tags={props.post.tags} className="" />)
+      article.contains(<ShareGroupVertical url={postUrl} text={props.post.title} tags={props.post.tags} show={true} />)
     ).toBe(true);
     expect(article.contains(<ShareBottom url={postUrl} text={props.post.title} tags={props.post.tags} />)).toBe(true);
   });
@@ -158,6 +153,6 @@ describe('<PostTemplate />', function() {
     //eslint-disable-next-line @typescript-eslint/no-var-requires
     const { default: PostTemplate } = require('../index');
     const wrapper = shallow(<PostTemplate {...props} />);
-    expect(wrapper.find('ShareGroupVertical').prop('className')).toBe('hidePostCover');
+    expect(wrapper.find('ShareGroupVertical').prop('show')).toBe(false);
   });
 });
