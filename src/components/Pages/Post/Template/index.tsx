@@ -37,7 +37,6 @@ export default function PostTemplate({
   if (record != null && !record.isIntersecting) {
     showShareButtons = true;
   }
-  console.log(showShareButtons);
   const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
   return (
     <>

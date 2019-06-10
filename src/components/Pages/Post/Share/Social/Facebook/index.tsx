@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import withWindowOpen from 'components/With/WindowOpen';
+import withWindowOpen, { WindowOpenOptions } from 'components/With/WindowOpen';
 import PostShareButton from 'components/Pages/Post/Share/Button';
 import styles from './index.module.scss';
 
@@ -8,7 +8,7 @@ export const URL_SHARE_FACEBOOK = 'https://www.facebook.com/sharer/sharer.php/';
 
 interface PostShareSocialFacebookProps {
   url: string;
-  windowOpen(props: any): void;
+  windowOpen?(props: WindowOpenOptions): void;
 }
 
 export class PostShareSocialFacebook extends React.Component<PostShareSocialFacebookProps> {

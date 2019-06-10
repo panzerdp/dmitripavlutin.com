@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import withWindowOpen from 'components/With/WindowOpen';
+import withWindowOpen, { WindowOpenOptions } from 'components/With/WindowOpen';
 import { slugify } from 'utils/string';
 import ShareButton from '../../Button';
 import styles from './index.module.scss';
@@ -11,7 +11,7 @@ interface PostShareSocialTwitterProps {
   url: string;
   text: string;
   tags: Tags;
-  windowOpen(props: any): void;
+  windowOpen?(props: WindowOpenOptions): void;
 }
 
 export class PostShareSocialTwitter extends React.Component<PostShareSocialTwitterProps> {
