@@ -1,5 +1,7 @@
 # Dmitri Pavlutin Blog
 
+[![Build Status](https://travis-ci.com/panzerdp/dmitripavlutin.com.svg?branch=master)](https://travis-ci.com/panzerdp/dmitripavlutin.com)
+
 This repository contains the source code and articles of my blog https://dmitripavlutin.com.  
 The blog is powered by [GatsbyJS](https://www.gatsbyjs.org/).  
 
