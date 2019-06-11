@@ -1,15 +1,15 @@
 # Dmitri Pavlutin Blog
 
-This repository holds the source code and articles of my blog https://dmitripavlutin.com.  
+This repository contains the source code and articles of my blog https://dmitripavlutin.com.  
 The blog is powered by [GatsbyJS](https://www.gatsbyjs.org/).  
 
-If you want to contribute to any article (typos, clarifications, etc), you are welcome to create pull requests. Note that posts markdown files are located in [/posts](/tree/master/props).  
+You are welcome to contribute to articles (fix typos, add clarifications, etc) using pull requests. Posts markdown files are located in [./posts](/tree/master/props) folder.  
 
 ## Development installation
 
 To compile the blog and generate the articles, follow these steps.
 
-After cloning the repository, install the dependencies within the project root directory:
+Install the dependencies within the project root directory:
 
 ```bash
 npm install
@@ -32,4 +32,4 @@ The blog is available at http://localhost:8000/.
 
 ## License
 
-Licensed under [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/)
+Licensed under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
