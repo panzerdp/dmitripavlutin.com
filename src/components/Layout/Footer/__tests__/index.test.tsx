@@ -39,4 +39,9 @@ describe('<LayoutFooter />', function() {
       expect(wrapper.find(`a[href="${url}"]`)).toHaveLength(1)
     );
   });
+
+  it('should render license information', function() {
+    const wrapper = shallow(<LayoutFooter authorInfo={authorInfo} />);
+    expect(wrapper.text()).toContain('Licensed under CC BY 4.0');
+  });
 });

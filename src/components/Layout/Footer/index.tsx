@@ -15,7 +15,12 @@ export default function LayoutFooter({ authorInfo: { profiles, name } }: FooterP
     <footer>
       <div className={styles.footerContent}>
         <div className={styles.copyright}>
-          © {year} {name}
+          <div>
+            © {year} {name}
+          </div>
+          <div className={styles.license}>
+            Licensed under <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+          </div>
         </div>
         <div className={styles.links}>
           <div className={styles.footerNavigation}>
