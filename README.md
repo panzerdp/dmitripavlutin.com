@@ -1,6 +1,6 @@
 # Dmitri Pavlutin Blog
 
-[![Build Status](https://travis-ci.com/panzerdp/dmitripavlutin.com.svg?branch=master)](https://travis-ci.com/panzerdp/dmitripavlutin.com)
+[![Build Status](https://travis-ci.com/panzerdp/dmitripavlutin.com.svg?branch=master)](https://travis-ci.com/panzerdp/dmitripavlutin.com) [![codecov](https://codecov.io/gh/panzerdp/dmitripavlutin.com/branch/master/graph/badge.svg)](https://codecov.io/gh/panzerdp/dmitripavlutin.com) [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 This repository contains the source code and articles of my blog https://dmitripavlutin.com.  
 The blog is powered by [GatsbyJS](https://www.gatsbyjs.org/).  
