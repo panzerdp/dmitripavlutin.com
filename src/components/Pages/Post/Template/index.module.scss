@@ -9,10 +9,10 @@
 }
 
 article h1 {
-  font-size: 1.8em;
+  font-size: 180%;
 }
 
-code {
+article code[class*="language-"] {
   font-size: 1rem;
   background-color: #f5f2f0;
   padding: 0 0.2rem;
@@ -21,10 +21,8 @@ code {
 }
 
 article :not(pre) > code[class*="language-"] {
-  font-size: inherit;
-  font-family: inherit;
+  font-size: 1rem;
   line-height: inherit;
-  padding: 0 5px;
 }
 
 code[class*="language-"], pre[class*="language-"] {

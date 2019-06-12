@@ -12,7 +12,7 @@ Posts markdown files are located in [./posts](/posts) folder.
 
 ## Development installation
 
-To compile the blog and generate the articles, follow these steps.
+To compile the blog into HTML content, follow these steps.
 
 Install the dependencies within the project root directory:
 
