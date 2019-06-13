@@ -8,7 +8,7 @@ The blog is powered by [GatsbyJS](https://www.gatsbyjs.org/).
 ## Contributing
 
 You are welcome to contribute to posts (fix typos, add clarifications, etc) using pull requests.  
-Posts markdown files are located in [./posts](/posts) folder.  
+Posts markdown files are located in [./posts](/content/posts) folder.  
 
 ## Development installation
 
@@ -33,7 +33,6 @@ The blog is available at http://localhost:8000/.
 | ![Dmitri Pavlutin](https://s.gravatar.com/avatar/7be6b604e5d3c6a82ed933dd90ed68dc?s=100) |
 | :-: |
 | [@panzerdp](https://twitter.com/panzerdp) |
-| [dmitripavlutin@gmail.com](mailto:dmitripavlutin@gmail.com) |
 
 ## License
 

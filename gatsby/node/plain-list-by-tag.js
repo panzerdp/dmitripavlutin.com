@@ -1,8 +1,8 @@
 const path = require('path');
 
-const { TO_TAG } = require('../src/routes/path');
+const { TO_TAG } = require('../../src/routes/path');
 
-const tagComponentPath = path.resolve(__dirname, '../src/components/Pages/PlainListByTag/Fetch/index.tsx');
+const tagComponentPath = path.resolve(__dirname, '../../src/components/Pages/PlainListByTag/Fetch/index.tsx');
 
 module.exports = function createPlainListByTag(createPage, edges) {
   const tags = getTagsFromEdges(edges);
@@ -10,12 +10,12 @@ module.exports = function createPlainListByTag(createPage, edges) {
     const slug = tag.split(' ').join('-');
     createPage({
       path: TO_TAG({
-        slug
+        slug,
       }),
       component: tagComponentPath,
       context: {
-        tag
-      }
+        tag,
+      },
     });
   });
 };

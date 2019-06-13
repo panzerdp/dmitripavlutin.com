@@ -1,14 +1,7 @@
 module.exports = {
-  siteMetadata: require('./gatsby-configs/site-metadata'),
+  siteMetadata: require('./gatsby/config/site-metadata'),
   pathPrefix: '/',
   plugins: [
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/posts`,
-        name: 'posts',
-      },
-    },
     {
       resolve: 'gatsby-transformer-remark',
       options: {
@@ -26,7 +19,7 @@ module.exports = {
                   return 'max-width: 560px !important;';
                 }
                 return '';
-              }
+              },
             },
           },
           {
@@ -43,7 +36,7 @@ module.exports = {
             options: {
               defaultText: 'Click here',
               dependencies: [],
-              directory: `${__dirname}/posts/`,
+              directory: `${__dirname}/content/posts/`,
               externals: [],
               html: '',
               target: '_blank',
@@ -51,15 +44,15 @@ module.exports = {
           },
           'gatsby-remark-autolink-headers',
           {
-            resolve: "gatsby-remark-custom-blocks",
+            resolve: 'gatsby-remark-custom-blocks',
             options: {
               blocks: {
-                size34: "size34", // 3/4 of the image
-                size12: "size12"  // 1/2 of the image
+                size34: 'size34', // 3/4 of the image
+                size12: 'size12', // 1/2 of the image
               },
             },
           },
-          'gatsby-plugin-typescript'
+          'gatsby-plugin-typescript',
         ],
       },
     },
@@ -67,21 +60,21 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/src`,
-        name: 'src'
+        name: 'src',
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/posts`,
-        name: 'posts'
+        path: `${__dirname}/content/posts`,
+        name: 'posts',
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/static`,
-        name: 'static'
+        name: 'static',
       },
     },
     'gatsby-plugin-sharp',
@@ -94,7 +87,7 @@ module.exports = {
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-react-helmet',
-    require('./gatsby-configs/gatsby-plugin-sass'),
-    require('./gatsby-configs/gatsby-plugin-feed')
+    require('./gatsby/config/gatsby-plugin-sass'),
+    require('./gatsby/config/gatsby-plugin-feed'),
   ],
 };

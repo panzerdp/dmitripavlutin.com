@@ -1,9 +1,9 @@
 const Promise = require('bluebird');
 const path = require('path');
 
-const createExcerptsList = require('./create/excerpts-list');
-const createPost = require('./create/post');
-const createPlainListByTag = require('./create/plain-list-by-tag');
+const createExcerptsList = require('./gatsby/node/excerpts-list');
+const createPost = require('./gatsby/node/post');
+const createPlainListByTag = require('./gatsby/node/plain-list-by-tag');
 
 const query = `
 {

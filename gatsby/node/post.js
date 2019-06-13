@@ -1,8 +1,8 @@
 const path = require('path');
 
-const { TO_POST } = require('../src/routes/path');
+const { TO_POST } = require('../../src/routes/path');
 
-const postComponentPath = path.resolve(__dirname, '../src/components/Pages/Post/Fetch/index.tsx');
+const postComponentPath = path.resolve(__dirname, '../../src/components/Pages/Post/Fetch/index.tsx');
 
 module.exports = function createPost(createPage, edges) {
   edges.forEach(function(post) {
@@ -10,12 +10,12 @@ module.exports = function createPost(createPage, edges) {
     const recommended = post.node.frontmatter.recommended;
     createPage({
       path: TO_POST({
-        slug
+        slug,
       }),
       component: postComponentPath,
       context: {
         slug,
-        recommended
+        recommended,
       },
     });
   });
