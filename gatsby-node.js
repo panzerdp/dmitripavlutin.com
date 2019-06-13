@@ -17,6 +17,9 @@ const query = `
         draft: {
           eq: false
         }
+      },
+      fileAbsolutePath: { 
+        regex: "/content/posts/" 
       }
     },
     limit: 1000

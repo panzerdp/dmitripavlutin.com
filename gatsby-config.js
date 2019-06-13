@@ -43,15 +43,6 @@ module.exports = {
             },
           },
           'gatsby-remark-autolink-headers',
-          {
-            resolve: 'gatsby-remark-custom-blocks',
-            options: {
-              blocks: {
-                size34: 'size34', // 3/4 of the image
-                size12: 'size12', // 1/2 of the image
-              },
-            },
-          },
           'gatsby-plugin-typescript',
         ],
       },
@@ -66,8 +57,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/content/posts`,
-        name: 'posts',
+        path: `${__dirname}/content`,
+        name: 'content',
       },
     },
     {
