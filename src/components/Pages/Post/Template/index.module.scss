@@ -15,7 +15,6 @@ article h1 {
 article code[class*="language-"] {
   font-size: 1rem;
   background-color: #f5f2f0;
-  padding: 0 0.2rem;
   color: black;
   font-family: Roboto Mono, monospace;
 }
@@ -99,6 +98,15 @@ blockquote {
   
   .size12 p > span {
     max-width: 1/2 * 740px !important;
+  }
+
+  .gatsby-highlight-code-line {
+    background-color: #feb;
+    display: block;
+    margin-right: -0.8rem;
+    margin-left: -0.8rem;
+    padding: 2px 0.8rem 2px 0.7rem;
+    border-left: 0.1rem solid #f99;
   }
 }
 

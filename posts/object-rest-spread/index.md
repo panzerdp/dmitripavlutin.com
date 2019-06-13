@@ -96,7 +96,7 @@ Now let's create a non-enumerable property `.age` on `person` object. Then see h
   <div class="clear"></div>
 </div>
 
-```javascript
+```javascript{1-4}
 Object.defineProperty(person, 'age', {
   enumerable: false, // Make the property non-enumerable
   value: 25

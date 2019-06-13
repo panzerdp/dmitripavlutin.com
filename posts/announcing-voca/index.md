@@ -18,8 +18,7 @@ I always wanted to create and maintain an open source project. It is a must expe
 
 This way I started to work on a JavaScript library called *Voca*. It's main scope is to facilitate the string manipulations in JavaScript.  
 
-[[size12]]
-| ![Voca logo](./images/voca-logo.png)
+![Voca logo](./images/voca-logo.png)
 
 From the start I setup for myself the following quality obligations:
 
