@@ -37,7 +37,7 @@ const query = `
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
   return new Promise(function(resolve, reject) {
-    const queryResult = graphql(query).then(result => {
+    const queryResult = graphql(query).then((result) => {
       if (result.errors) {
         // eslint-disable-next-line no-console
         console.log(result.errors);
@@ -54,10 +54,23 @@ exports.createPages = ({ graphql, actions }) => {
   });
 };
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
+  if (stage === 'build-html') {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /intersection-observer/,
+            loader: 'null-loader',
+          },
+        ],
+      },
+    });
+  }
+
   actions.setWebpackConfig({
     resolve: {
-      modules: [path.resolve(__dirname, "src"), "node_modules"],
+      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     },
   });
 };

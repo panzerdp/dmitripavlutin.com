@@ -21,7 +21,7 @@ In case of JavaScript, the interpreter returns `undefined` when accessing a vari
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 let company;
 company;    // => undefined
 let person = { name: 'John Smith' };
@@ -36,7 +36,7 @@ Some native methods like `String.prototype.match()` can return `null` to denote 
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 let array = null;  
 array;                // => null
 let movie = { name: 'Starship Troopers',  musicBy: null };
@@ -54,7 +54,7 @@ Often such risky actions generate `undefined` related errors, ending the script 
 
 JavaScript developer can understand the irony of this joke:  
 
-```javascript language-javascript
+```javascript
 function undefined() {
   // problem solved
 }
@@ -88,7 +88,7 @@ The standard clearly defines that you will receive an undefined value when acces
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 let number;
 number;     // => undefined
 
@@ -116,7 +116,7 @@ In this sense, `typeof` operator returns `'undefined'` string for an `undefined`
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 typeof undefined === 'undefined'; // => true
 ```
 Of course `typeof` works nicely to verify whether a variable contains an `undefined` value:
@@ -126,7 +126,7 @@ Of course `typeof` works nicely to verify whether a variable contains an `undefi
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 let nothing;
 typeof nothing === 'undefined';   // => true
 ```
@@ -144,7 +144,7 @@ Plain and simple:
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 let myVariable;
 myVariable; // => undefined
 ```
@@ -168,7 +168,7 @@ Let's check the function that verifies whether a word is a palindrome:
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function isPalindrome(word) {
   const length = word.length;
   const half = Math.floor(length / 2);
@@ -200,7 +200,7 @@ What about the old school `var`? In terms of ES2015, my suggestion is [stop usin
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function bigFunction() {
   // code...
   myVariable; // => undefined
@@ -222,7 +222,7 @@ The above example updated with `let` (instead of `var`) throws a `ReferenceError
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function bigFunction() {
   // code...
   myVariable; // => Throws 'ReferenceError: myVariable is not defined'
@@ -259,7 +259,7 @@ For instance, if a variable solely exists to form the logic of a block scope, th
 
 One classic example of unnecessary extended life of variables is the usage of `for` cycle inside a function:
 
-```javascript language-javascript
+```javascript
 function someFunc(array) {
   var index, item, length = array.length;
   // some code...
@@ -277,7 +277,7 @@ All the way between the declaration at the top and the usage in `for` statement 
 
 A better approach is to move these variables as close as possible to their usage place:
 
-```javascript language-javascript
+```javascript
 function someFunc(array) {
   // some code...
   // some code...
@@ -309,7 +309,7 @@ Let's demonstrate that in an example:
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 let favoriteMovie = {
   title: 'Blade Runner'
 };
@@ -327,7 +327,7 @@ Let's slightly modify the previous code snippet to illustrate a `TypeError` thro
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript 
+```javascript 
 let favoriteMovie = {
   title: 'Blade Runner'
 };
@@ -355,7 +355,7 @@ The first version of `append()`, a bit naive, may look like this:
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function append(array, toAppend) {
   const arrayCopy = array.slice();
   if (toAppend.first) {
@@ -383,7 +383,7 @@ In the current implementation of `append()`, the function doesn't allow to inser
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 append([10], { first: 0, last: false }); // => [10]
 ```
 
@@ -417,7 +417,7 @@ Let's improve `append(array, toAppend)` function using `in` operator:
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function append(array, toAppend) {
   const arrayCopy = array.slice();
   if ('first' in toAppend) {
@@ -446,7 +446,7 @@ You might use `in` accompanied with ternary operator to accomplish that:
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 const object = { };
 const prop = 'prop' in object ? object.prop : 'default';
 prop; // => 'default'
@@ -465,7 +465,7 @@ Indeed, the property extraction now looks short and meaningful:
   <div class="clear"></div>
 </div>  
 
-```javascript language-javascript
+```javascript
 const object = {  };
 const { prop = 'default' } = object;
 prop; // => 'default'
@@ -484,7 +484,7 @@ Applying the benefits of the object destructuring, let's implement `quote()`:
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function quote(str, config) {
   const { char = '"', skipIfQuoted = true } = config;
   const length = str.length;
@@ -511,7 +511,7 @@ Let's move the destructuring assignment right into the parameters section. And s
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function quote(str, { char = '"', skipIfQuoted = true } = {}) {
   const length = str.length;
   if (skipIfQuoted
@@ -547,7 +547,7 @@ To avoid `undefined` when accessing a non-existing property from `unsafeOptions`
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 const unsafeOptions = {
   fontSize: 18
 };
@@ -575,7 +575,7 @@ Instead of `Object.assign()` invocation, use the object spread syntax to copy in
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 const unsafeOptions = {
   fontSize: 18
 };
@@ -605,7 +605,7 @@ Normally a function that is defined with a specific number of parameters should 
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function multiply(a, b) {
   a; // => 5
   b; // => 3
@@ -624,7 +624,7 @@ Let's slightly modify the previous example by calling the function with just one
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function multiply(a, b) {
   a; // => 5
   b; // => undefined
@@ -647,7 +647,7 @@ Recalling the previous example, let's make an improvement. If `b` parameter is `
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function multiply(a, b) {
   if (b === undefined) {
     b = 2;
@@ -672,7 +672,7 @@ Modifying the previous example with a default parameter for `b` indeed looks gre
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function multiply(a, b = 2) {
   a; // => 5
   b; // => 2
@@ -696,7 +696,7 @@ In JavaScript a function that doesn't have any `return` statements implicitly re
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function square(x) {
   const res = x * x;
 }
@@ -711,7 +711,7 @@ The same situation happens when `return` statement is present, but without an ex
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function square(x) {
   const res = x * x;
   return;
@@ -727,7 +727,7 @@ Of course, indicating near `return` the expression to be returned works as expec
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function square(x) {
   const res = x * x;
   return res;
@@ -755,7 +755,7 @@ If you use one of the above statements, be sure to indicate a semicolon at the e
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function getNum() {
   // Notice the semicolons at the end
   let num = 1; 
@@ -777,7 +777,7 @@ Being helped by ASI, you can remove the semicolons from the previous example:
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function getNum() {
   // Notice that semicolons are missing
   let num = 1
@@ -800,7 +800,7 @@ For instance, let's study the returned value of `getPrimeNumbers()` invocation:
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function getPrimeNumbers() {
   return 
     [ 2, 3, 5, 7, 11, 13, 17 ]
@@ -814,7 +814,7 @@ Between `return` statement and the array literal expression exists a new line. J
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function getPrimeNumbers() {
   return; 
   [ 2, 3, 5, 7, 11, 13, 17 ];
@@ -830,7 +830,7 @@ The problem is solved by removing the newline between `return` and array literal
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function getPrimeNumbers() {
   return [ 
     2, 3, 5, 7, 11, 13, 17 
@@ -852,7 +852,7 @@ Of course, never put a newline between `return` and the returned expression.
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 void 1;                    // => undefined
 void (false);              // => undefined
 void {name: 'John Smith'}; // => undefined
@@ -870,7 +870,7 @@ You get `undefined` when accessing an array element with an out of bounds index.
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 const colors = ['blue', 'white', 'red'];
 colors[5];  // => undefined
 colors[-1]; // => undefined
@@ -889,7 +889,7 @@ The following example generates sparse arrays and tries to access their empty sl
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 const sparse1 = new Array(3);
 sparse1;       // => [<empty slot>, <empty slot>, <empty slot>]
 sparse1[0];    // => undefined
@@ -919,7 +919,7 @@ The variable `number` is defined, however is not assigned with an initial value:
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 let number;
 number; // => undefined
 ```
@@ -932,7 +932,7 @@ The same uninitialized concept happens when a *non-existing object property* is 
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 const obj = { firstName: 'Dmitri' };
 obj.lastName; // => undefined
 ```
@@ -947,7 +947,7 @@ For example, `clone()` is a function that clones a plain JavaScript object. The 
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 function clone(obj) {
   if (typeof obj === 'object' && obj !== null) {
     return Object.assign({}, obj);
@@ -968,7 +968,7 @@ However `clone()` might be invoked with a non-object argument: `15` or `null` (o
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 typeof undefined; // => 'undefined'
 typeof null;      // => 'object'
 ```
@@ -980,7 +980,7 @@ The [strict quality operator](https://rainsoft.io/the-legend-of-javascript-equal
   <div class="clear"></div>
 </div>
 
-```javascript language-javascript
+```javascript
 let nothing = undefined;
 let missingObject = null;
 nothing === missingObject; // => false

@@ -48,6 +48,7 @@
     "graphql": "14.3.1",
     "husky": "2.4.1",
     "identity-obj-proxy": "3.0.0",
+    "intersection-observer": "0.7.0",
     "jest": "24.8.0",
     "lint-staged": "8.2.0",
     "node-sass": "4.12.0",

@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import 'prismjs/themes/prism.css';
+import 'intersection-observer';
 
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData';
 import MetaTags from 'components/Pages/Post/Meta/Tags';
