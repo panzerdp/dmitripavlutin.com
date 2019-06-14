@@ -8,6 +8,7 @@ slug: 7-architectural-attributes-of-a-reliable-react-component
 tags: ['react', 'component', 'architecture']
 recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
 draft: false
+type: post
 ---
 
 I like how React embraces component-based architecture. You can compose complex user interfaces from smaller pieces, take advantage of components reusability and abstracted DOM manipulations.  

@@ -16,4 +16,9 @@ describe('<LayoutMetaTags />', function() {
     expect(wrapper.contains(<title>{siteInfo.title}</title>));
     expect(wrapper.contains(<meta name="description" content={siteInfo.description} />));
   });
+
+  it('should allow robots index', function() {
+    const wrapper = shallow(<LayoutMetaTags siteInfo={siteInfo} />);
+    expect(wrapper.contains(<meta name="robots" content="index, follow" />));
+  });
 });

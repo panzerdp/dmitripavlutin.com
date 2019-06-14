@@ -8,6 +8,7 @@ slug: announcing-voca-the-ultimate-javascript-string-library
 tags: ["javascript", "string", "open source"]
 recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
 draft: false
+type: post
 ---
 
 Open source changed the software development. And it changes the developers. Many libraries, apps, servers, and much more are powered by open source software.  

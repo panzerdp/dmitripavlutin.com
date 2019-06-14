@@ -8,6 +8,7 @@ slug: object-rest-spread-properties-javascript
 tags: ["javascript", "spread properties", "rest properties"]
 recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
 draft: false
+type: post
 ---
 
 Merging multiple JavaScript objects is a frequent task. Unfortunately JavaScript is sloppy at providing a convenient syntax to do the merge. At least until now.  

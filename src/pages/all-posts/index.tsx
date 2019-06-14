@@ -22,15 +22,15 @@ export const pageQuery = graphql`
         ], 
         order: DESC 
       }
-      filter: { 
+      filter: {
         frontmatter: { 
           draft: { 
             eq: false 
           }
-        }, 
-        fileAbsolutePath: { 
-          regex: "/content/posts/" 
-        } 
+          type: {
+            eq: "post"
+          }
+        }
       }
     ) {
       edges {

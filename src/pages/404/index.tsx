@@ -1,32 +1,37 @@
 import { graphql } from 'gatsby';
 import * as React from 'react';
 
-import PlainListAllTemplate from 'components/Pages/PlainListAll/Template';
-import { PlainListAllQuery } from 'typings/graphql';
-import { toPostExcerpt } from 'utils/mapper';
+import Page404Template from 'components/Pages/404/Template';
+import { Page404Query } from 'typings/graphql';
 
-interface PlainListAllFetchProps {
-  data: PlainListAllQuery;
+interface Page404FetchProps {
+  data: Page404Query;
 }
 
-export default function PlainListAllFetch({ data }: PlainListAllFetchProps) {
-  // return <PlainListAllTemplate posts={data.allMarkdownRemark.edges.map(toPostExcerpt)} />;
-  return '404';
+export default function Page404Fetch({ data }: Page404FetchProps) {
+  const edges = data.allMarkdownRemark.edges;
+  if (edges.length === 0) {
+    throw new Error('404 page content not found. Create a markdown file which type is "404"');
+  }
+  return <Page404Template html={edges[0].node.html} />;
 }
 
-// export const pageQuery = graphql`
-//   query PlainListAll {
-//     allMarkdownRemark(
-//       sort: { fields: [frontmatter___published], order: DESC }
-//       filter: { frontmatter: { draft: { eq: false } } }
-//     ) {
-//       edges {
-//         node {
-//           frontmatter {
-//             ...PostExcerpt
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
+export const pageQuery = graphql`
+  query Page404 {
+    allMarkdownRemark(
+      filter: { 
+        frontmatter: {
+          type: {
+            eq: "404"
+          }
+        }
+      }
+    ) {
+      edges {
+        node {
+          html
+        }
+      }
+    }
+  }
+`;

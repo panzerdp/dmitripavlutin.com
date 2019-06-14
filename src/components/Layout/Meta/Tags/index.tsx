@@ -19,6 +19,7 @@ export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps) {
       <meta name="HandheldFriendly" content="True" />
       <link rel="shortcut icon" href="/favicon.ico" />
       <meta name="referrer" content="no-referrer-when-downgrade" />
+      <meta name="robots" content="index, follow" />
     </Helmet>
   );
 }

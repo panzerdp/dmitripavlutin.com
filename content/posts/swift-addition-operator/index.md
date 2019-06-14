@@ -8,6 +8,7 @@ slug: make-your-swift-code-expressive-addition-operator-use-cases
 tags: ["swift"]
 recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
 draft: false
+type: post
 ---
 
 I like reading short and expressive code. Because developer spends more time reading code than writing, expressiveness often is obligatory.  
