@@ -33,9 +33,7 @@ export default function PostTemplate({
   recommendedPosts,
   authorProfilePictureSrc,
 }: PostTemplateProps) {
-  const viewResult = useInView();
-  const ref = viewResult[0];
-  const record = viewResult[2];
+  const [ref, , record] = useInView();
   let showShareButtons = false;
   if (record != null && !record.isIntersecting) {
     showShareButtons = true;

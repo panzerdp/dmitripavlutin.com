@@ -103,4 +103,22 @@ describe('<PostMetaTags />', function() {
       <meta name="twitter:creator" content={authorInfo.nicknames.twitter} />,
     ].forEach((item) => expect(wrapper.contains(item)).toBe(true));
   });
+
+  it('should not index when post is draft', function() {
+    const wrapper = shallow(
+      <PostMetaTags
+        {...props}
+        post={{
+          ...props.post,
+          draft: true,
+        }}
+      />
+    );
+    expect(wrapper.contains(<meta name="robots" content="noindex, nofollow" />)).toBe(true);
+  });
+
+  it('should index when post is not draft', function() {
+    const wrapper = shallow(<PostMetaTags {...props} />);
+    expect(wrapper.contains(<meta name="robots" content="noindex, nofollow" />)).toBe(false);
+  });
 });
