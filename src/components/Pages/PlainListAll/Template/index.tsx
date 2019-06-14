@@ -10,12 +10,10 @@ interface PlainListAllTemplateProps {
 
 export default function PlainListAllTemplate({ posts }: PlainListAllTemplateProps) {
   return (
-    <>
+    <Layout>
       <MetaTags />
-      <Layout>
-        <h1>All posts</h1>
-        <SimpleList posts={posts} />
-      </Layout>
-    </>
+      <h1>All posts</h1>
+      <SimpleList posts={posts} />
+    </Layout>
   );
 }

@@ -82,21 +82,25 @@ describe('<PostTemplate />', function() {
   it('should render meta tags', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     expect(
-      wrapper.contains(<MetaTags post={props.post} siteInfo={props.siteInfo} authorInfo={props.authorInfo} />)
+      wrapper
+        .find(Layout)
+        .contains(<MetaTags post={props.post} siteInfo={props.siteInfo} authorInfo={props.authorInfo} />)
     ).toBe(true);
   });
 
   it('should render structured meta', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     expect(
-      wrapper.contains(
-        <MetaStructuredData
-          post={props.post}
-          siteInfo={props.siteInfo}
-          authorInfo={props.authorInfo}
-          authorProfilePictureSrc={props.authorProfilePictureSrc}
-        />
-      )
+      wrapper
+        .find(Layout)
+        .contains(
+          <MetaStructuredData
+            post={props.post}
+            siteInfo={props.siteInfo}
+            authorInfo={props.authorInfo}
+            authorProfilePictureSrc={props.authorProfilePictureSrc}
+          />
+        )
     ).toBe(true);
   });
 

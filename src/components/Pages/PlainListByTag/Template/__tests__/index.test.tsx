@@ -45,7 +45,8 @@ const props = {
 describe('<PlainListAllTemplate />', function() {
   it('should render meta information', function() {
     const wrapper = shallow(<PlainListByTagTemplate {...props} />);
-    expect(wrapper.contains(<PlainListByTagMetaTags tag={props.tag} />)).toBe(true);
+    const layout = wrapper.find(Layout);
+    expect(layout.contains(<PlainListByTagMetaTags tag={props.tag} />)).toBe(true);
   });
 
   it('should render posts list', () => {

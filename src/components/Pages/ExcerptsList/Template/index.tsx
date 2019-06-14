@@ -23,16 +23,14 @@ export default function ExcerptsListTemplate({
   authorProfilePictureSrc,
 }: ExcerptsTemplateProps) {
   return (
-    <>
+    <Layout>
       <MetaTags siteInfo={siteInfo} authorProfilePictureSrc={authorProfilePictureSrc} />
       <MetaStructuredData siteInfo={siteInfo} authorProfilePictureSrc={authorProfilePictureSrc} />
       <MetaPaginator currentPage={currentPage} pagesSum={pagesSum} siteUrl={siteInfo.url} />
-      <Layout>
-        {posts.map((post, index) => (
-          <Excerpt post={post} key={index} />
-        ))}
-        <Paginator currentPage={currentPage} pagesSum={pagesSum} />
-      </Layout>
-    </>
+      {posts.map((post, index) => (
+        <Excerpt post={post} key={index} />
+      ))}
+      <Paginator currentPage={currentPage} pagesSum={pagesSum} />
+    </Layout>
   );
 }

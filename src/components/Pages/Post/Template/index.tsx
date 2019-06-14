@@ -40,7 +40,7 @@ export default function PostTemplate({
   }
   const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
   return (
-    <>
+    <Layout>
       <MetaTags post={post} siteInfo={siteInfo} authorInfo={authorInfo} />
       <MetaStructuredData
         post={post}
@@ -48,20 +48,18 @@ export default function PostTemplate({
         authorInfo={authorInfo}
         authorProfilePictureSrc={authorProfilePictureSrc}
       />
-      <Layout>
-        <article>
-          <div ref={ref} className={styles.postCover}>
-            <Img fluid={post.thumbnail} />
-          </div>
-          <h1>{post.title}</h1>
-          <Subheader tags={post.tags} published={post.published} />
-          <ShareGroupVertical url={postUrl} text={post.title} tags={post.tags} show={showShareButtons} />
-          <div dangerouslySetInnerHTML={{ __html: post.html }} />
-          <Edit url={postRepositoryFileUrl} />
-          <ShareBottom url={postUrl} text={post.title} tags={post.tags} />
-          <RecommendedList posts={recommendedPosts} />
-        </article>
-      </Layout>
-    </>
+      <article>
+        <div ref={ref} className={styles.postCover}>
+          <Img fluid={post.thumbnail} />
+        </div>
+        <h1>{post.title}</h1>
+        <Subheader tags={post.tags} published={post.published} />
+        <ShareGroupVertical url={postUrl} text={post.title} tags={post.tags} show={showShareButtons} />
+        <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        <Edit url={postRepositoryFileUrl} />
+        <ShareBottom url={postUrl} text={post.title} tags={post.tags} />
+        <RecommendedList posts={recommendedPosts} />
+      </article>
+    </Layout>
   );
 }

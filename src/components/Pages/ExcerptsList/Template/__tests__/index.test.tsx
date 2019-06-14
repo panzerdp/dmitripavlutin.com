@@ -41,25 +41,31 @@ describe('<ExcerptsListTemplate />', function() {
   it('should render meta tags', function() {
     const wrapper = shallow(<ExcerptsListTemplate {...props} />);
     expect(
-      wrapper.contains(<MetaTags siteInfo={props.siteInfo} authorProfilePictureSrc={props.authorProfilePictureSrc} />)
+      wrapper
+        .find(Layout)
+        .contains(<MetaTags siteInfo={props.siteInfo} authorProfilePictureSrc={props.authorProfilePictureSrc} />)
     ).toBe(true);
   });
 
   it('should render structured meta', function() {
     const wrapper = shallow(<ExcerptsListTemplate {...props} />);
     expect(
-      wrapper.contains(
-        <MetaStructuredData siteInfo={props.siteInfo} authorProfilePictureSrc={props.authorProfilePictureSrc} />
-      )
+      wrapper
+        .find(Layout)
+        .contains(
+          <MetaStructuredData siteInfo={props.siteInfo} authorProfilePictureSrc={props.authorProfilePictureSrc} />
+        )
     ).toBe(true);
   });
 
   it('should render meta paginator', function() {
     const wrapper = shallow(<ExcerptsListTemplate {...props} />);
     expect(
-      wrapper.contains(
-        <MetaPaginator currentPage={props.currentPage} pagesSum={props.pagesSum} siteUrl={props.siteInfo.url} />
-      )
+      wrapper
+        .find(Layout)
+        .contains(
+          <MetaPaginator currentPage={props.currentPage} pagesSum={props.pagesSum} siteUrl={props.siteInfo.url} />
+        )
     ).toBe(true);
   });
 
@@ -72,7 +78,8 @@ describe('<ExcerptsListTemplate />', function() {
 
   it('should render pagination', function() {
     const wrapper = shallow(<ExcerptsListTemplate {...props} />);
-    const layout = wrapper.find(Layout);
-    expect(layout.contains(<Paginator currentPage={props.currentPage} pagesSum={props.pagesSum} />)).toBe(true);
+    expect(wrapper.find(Layout).contains(<Paginator currentPage={props.currentPage} pagesSum={props.pagesSum} />)).toBe(
+      true
+    );
   });
 });

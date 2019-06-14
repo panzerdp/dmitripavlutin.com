@@ -40,12 +40,11 @@ const posts: PostExcerpt[] = [
 describe('<PlainListAllTemplate />', function() {
   it('should render meta information', function() {
     const wrapper = shallow(<PlainListAllTemplate posts={posts} />);
-    expect(wrapper.contains(<PlainListAllMetaTags />)).toBe(true);
+    expect(wrapper.find(Layout).contains(<PlainListAllMetaTags />)).toBe(true);
   });
 
   it('should render posts list', () => {
     const wrapper = shallow(<PlainListAllTemplate posts={posts} />);
-    const layout = wrapper.find(Layout);
-    expect(layout.contains(<SimpleList posts={posts} />)).toBe(true);
+    expect(wrapper.find(Layout).contains(<SimpleList posts={posts} />)).toBe(true);
   });
 });
