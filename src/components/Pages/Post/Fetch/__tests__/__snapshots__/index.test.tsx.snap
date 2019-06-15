@@ -4,6 +4,7 @@ exports[`<PostFetch /> should render post template 1`] = `
 <PostTemplate
   authorInfo={
     Object {
+      "description": "Dmitri Pavlutin is a software developer specialized in Frontend technologies",
       "name": "Dmitri Pavlutin",
       "nicknames": Object {
         "twitter": "@panzerdp",

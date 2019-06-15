@@ -27,6 +27,7 @@ const props = {
       twitter: 'https://twitter.com/panzerdp',
     },
     speciality: 'Software developer',
+    description: 'Dmitri Pavlutin is a software developer specialized in Frontend technologies',
   },
   authorProfilePictureSrc: '/image.png',
   post: {

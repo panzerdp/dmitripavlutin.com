@@ -21,6 +21,7 @@ const authorProfilePicture = {
 const authorInfo = {
   name: 'Dmitri Pavlutin',
   speciality: 'Software developer',
+  description: 'Dmitri Pavlutin is a software developer specialized in Frontend technologies',
   profiles: {
     stackoverflow: 'https://stackoverflow.com/users/1894471/dmitri-pavlutin',
     twitter: 'https://twitter.com/panzerdp',
@@ -38,48 +39,45 @@ const props = {
     site: {
       siteMetadata: {
         siteInfo,
-        authorInfo
+        authorInfo,
       },
     },
     authorProfilePicture: {
       childImageSharp: {
-        resize: authorProfilePicture
+        resize: authorProfilePicture,
       },
     },
-    "allMarkdownRemark": {
-      "edges": [
+    allMarkdownRemark: {
+      edges: [
         {
-          "node": {
-            "frontmatter": {
-              "title": "Useful techniques to facilitate React server-side rendering",
-              "description": "Useful techniques to facilitate React server-side rendering.",
-              "published": "2018-03-17",
-              "slug": "useful-techniques-react-server-side-rendering",
-              "tags": [
-                "react",
-                "server side rendering"
-              ],
-              "thumbnail": {
-                "childImageSharp": {
-                  "fluid": {
+          node: {
+            frontmatter: {
+              title: 'Useful techniques to facilitate React server-side rendering',
+              description: 'Useful techniques to facilitate React server-side rendering.',
+              published: '2018-03-17',
+              slug: 'useful-techniques-react-server-side-rendering',
+              tags: ['react', 'server side rendering'],
+              thumbnail: {
+                childImageSharp: {
+                  fluid: {
                     src: 'source',
                     base64: 'base64',
                     aspectRatio: 2,
                     srcSet: 'src-set',
-                    sizes: 'some sizes'
-                  }
-                }
-              }
-            }
-          }
-        }
-      ]
-    }
+                    sizes: 'some sizes',
+                  },
+                },
+              },
+            },
+          },
+        },
+      ],
+    },
   },
   pageContext: {
     currentPage: 2,
-    pagesSum: 10
-  }
+    pagesSum: 10,
+  },
 };
 
 describe('<ExcerptsFetch />', function() {

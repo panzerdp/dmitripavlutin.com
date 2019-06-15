@@ -25,7 +25,7 @@ export default function Header({ authorProfilePicture, authorInfo }: HeaderProps
         </div>
         <div className={styles.links}>
           <Link to={TO_ALL_POSTS()}>All posts</Link>
-          <Link to={TO_ABOUT()}>About me</Link>
+          <Link to={TO_ABOUT()}>About</Link>
         </div>
       </div>
     </header>

@@ -47,6 +47,7 @@ export const pageQuery = graphql`
   fragment AuthorInfoAll on SiteSiteMetadataAuthorInfo {
     name
     speciality
+    description
     profiles {
       stackoverflow
       twitter

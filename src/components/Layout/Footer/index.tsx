@@ -26,7 +26,7 @@ export default function LayoutFooter({ authorInfo: { profiles, name } }: FooterP
           <div className={styles.footerNavigation}>
             <Link to={TO_INDEX()}>Home</Link>
             <Link to={TO_ALL_POSTS()}>All posts</Link>
-            <Link to={TO_ABOUT()}>About me</Link>
+            <Link to={TO_ABOUT()}>About</Link>
           </div>
           <div className={styles.follow}>
             <a href={profiles.twitter} title={`${name}'s Twitter profile`}>
