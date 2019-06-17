@@ -54,8 +54,7 @@ npm install voca
 
 The Voca library was lucky enough to land *first one* in trending JavaScript repositories for 16 December 2016:   
 
-[[size34]]
-| ![Voca trending on GitHub](./images/trending.png)
+![Voca trending on GitHub](./images/trending.png)
 
 This is a nice beginning. I hope the library will serve well JavaScript developers in the long run.  
 

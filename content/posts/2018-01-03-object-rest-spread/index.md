@@ -126,7 +126,7 @@ The object spread `...personB` copies from source object `personB`  only `.profe
 
 > The object spread syntax copies from the source object **own and enumerable** properties. Same as returned by [Object.keys()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys) function.  
 
-###2. Object spread properties
+### 2. Object spread properties
 
 **Object spread** syntax within the object literal extracts from **source** objects own and enumerable properties, and copies them into the **target** object.   
 
@@ -554,7 +554,7 @@ Updating height of nested object `box.size` requires an additional object litera
 
 I like the possibility to perform multiple updates through one statement.  
 
-What about changing the color to `black`, increase the width to `400` and add a new item `ruler` (using [spread array](https://dmitripavlutin.com/how-three-dots-changed-javascript/#4improvedarraymanipulation))? That's easy:
+What about changing the color to `black`, increase the width to `400` and add a new item `ruler` (using [spread array](https://dmitripavlutin.com/how-three-dots-changed-javascript))? That's easy:
 
 ```javascript
 const blackBox = {
