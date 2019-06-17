@@ -12,3 +12,9 @@
     margin-bottom: 0.6rem;
   }
 }
+
+@media (max-width: 900px) {
+  .verticalGroup.show {
+    display: none;
+  }
+}

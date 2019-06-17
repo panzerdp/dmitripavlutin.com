@@ -20,7 +20,7 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
   };
   const postRelativePath = markdownRemark.fileAbsolutePath
     .split('/')
-    .slice(-3)
+    .slice(-4)
     .join('/');
   const postRepositoryFileUrl = `${siteInfo.repositoryUrl}/tree/master/${postRelativePath}`;
   const posts = recommendedPosts.edges.map(toPostExcerpt);
