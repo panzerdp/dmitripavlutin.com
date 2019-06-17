@@ -16,11 +16,6 @@ In ES5 your solution is `_.extend(target, [sources])` from Lodash (or any altern
 
 Luckily [object spread syntax](https://github.com/tc39/proposal-object-rest-spread) (an ECMASript proposal at stage 3) is a step forward how to manipulate objects, providing a short and easy to follow syntax.  
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/FearlessLovableUintagroundsquirrel">Run demo</a>
-  <div class="clear"></div>
-</div>
-
 ```javascript
 const cat = {
   legs: 4,
@@ -67,23 +62,13 @@ You can enumerate object properties using `Object.keys()` (to access own and enu
 
 Properties declared explicitly in an object literal `{ prop1: 'val1', prop2: 'val2' }` are enumerable. Let's see what enumerable properties `person` object contains:  
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/UnrulyYearlyAmericanlobster">Run demo</a>
-  <div class="clear"></div>
-</div>
-
 ```javascript
 const keys = Object.keys(person);
 console.log(keys); // => ['name', 'surname']
 ```
 `.name` and `.surname` are enumerable properties of `person` object.  
 
-Here comes the interesting part. *Object spread copies from the source **enumerable** properties:*  
-
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/DependentUnevenIberianmidwifetoad">Run demo</a>
-  <div class="clear"></div>
-</div>
+Here comes the interesting part. Object spread copies from the source *enumerable* properties: 
 
 ```javascript
 console.log({ ...person };// => { name: 'Dave', surname: 'Bowman' }
@@ -91,12 +76,7 @@ console.log({ ...person };// => { name: 'Dave', surname: 'Bowman' }
 
 Now let's create a non-enumerable property `.age` on `person` object. Then see how spread behaves:   
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/SameFirmBlackrhino">Run demo</a>
-  <div class="clear"></div>
-</div>
-
-```javascript{1-4}
+```javascript{2}
 Object.defineProperty(person, 'age', {
   enumerable: false, // Make the property non-enumerable
   value: 25
@@ -119,11 +99,6 @@ A property explicitly declared in the object literal is **own**. But a property 
 
 Let's create an object `personB` and set its prototype to `person`:
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/MonumentalUnimportantAmericancrayfish">Run demo</a>
-  <div class="clear"></div>
-</div>
-
 ```javascript
 const personB = Object.create(person, {  
   profession: {
@@ -139,11 +114,6 @@ console.log(personB.hasOwnProperty('surname'));    // => false
 `personB` object has an own property `.profession`, and inherits `.name` and `.surname` properties from its prototype `person`.  
 
 *Object spread copies from source **own** properties*, ignoring the inherited ones:
-
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/OccasionalThirstyMinibeast">Run demo</a>
-  <div class="clear"></div>
-</div>
 
 ```javascript
 const cloneB = {
@@ -190,7 +160,9 @@ const targetObject = {
 ```
 #### 2.1 Object spread rule: latter property wins  
 
-When multiple objects are spread and some properties have same keys, how do the final the final set of values is calculated? The rule is simple: **latter spread property overwrites earlier properties that have the same key**.   
+When multiple objects are spread and some properties have same keys, how do the final the final set of values is calculated? The rule is simple: 
+
+> **Latter** spread property **overwrites earlier** properties that have the same key   
 
 Let's continue with a few examples. The following object literal instantiates a cat:  
 
@@ -203,12 +175,7 @@ const cat = {
 
 Let's play Dr. Frankenstein and transform this cat into a dog. Pay attention to the value of `.sound` property:  
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/LightgraySleepyRooster">Run demo</a>
-  <div class="clear"></div>
-</div>
-
-```javascript
+```javascript{4}
 const dog = {
   ...cat,
   ...{
@@ -221,12 +188,7 @@ The latter value `'woof'` overwrites earlier value `'meow'` (which comes from `c
 
 Same rule applies to regular properties of the object initializer:  
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/CloudyTotalAnophelesmosquito">Run demo</a>
-  <div class="clear"></div>
-</div>
-
-```javascript
+```javascript{3}
 const anotherDog = {
   ...cat,
   sound: 'woof' // <---- Overwrites cat.sound
@@ -237,12 +199,7 @@ The regular property `sound: 'woof'` wins because it is the latest.
 
 Now if you swap the spread objects relative position, the result is different:
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/CharmingAwfulChimneyswift">Run demo</a>
-  <div class="clear"></div>
-</div>
-
-```javascript
+```javascript{3}
 const stillCat = {
   ...{
     sound: 'woof' // <---- Is overwritten by cat.sound
@@ -260,11 +217,6 @@ Let's details into these recipes.
 #### 2.2 Cloning an object  
 
 Coning an object using spread syntax is short and expressive. The following example creates a clone of `bird` object:  
-
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/InsubstantialUnnaturalJabiru">Run demo</a>
-  <div class="clear"></div>
-</div>
 
 ```javascript
 const bird = {
@@ -289,11 +241,6 @@ Object spread does a *shallow copy* of the object. Only the object itself is clo
 
 `laptop` has a nested object `laptop.screen`. Let's clone `laptop` and see how it affects the nested object:  
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/WellmadeEnlightenedTurtle">Run demo</a>
-  <div class="clear"></div>
-</div>
-
 ```javascript
 const laptop = {
   name: 'MacBook Pro',
@@ -315,11 +262,6 @@ However `laptop.screen === laptopClone.screen` evaluates to `true`. It means tha
 
 The good news is that you can spread properties at any level. With little effort just clone the nested object too:  
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/CyanSoreColt">Run demo</a>
-  <div class="clear"></div>
-</div>
-
 ```javascript
 const laptopDeepClone = {
   ...laptop,
@@ -336,11 +278,6 @@ An additional spread `...laptop.screen` ensures that the nested object is cloned
 ##### The prototype is lost  
 
 The code snippet below declares a class `Game`, and creates an instance of this class `doom`:
-
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/TediousProbableMuskox">Run demo</a>
-  <div class="clear"></div>
-</div>
 
 ```javascript
 class Game {
@@ -361,11 +298,6 @@ console.log(doom.getMessage());    // => "I like Doom!"
 
 Now let's clone `doom` instance that was created from a constructor invocation. This might lead to a surprise:  
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/HummingFatalEthiopianwolf">Run demo</a>
-  <div class="clear"></div>
-</div>
-
 ```javascript
 const doomClone = {
   ...doom
@@ -384,12 +316,7 @@ Therefore calling `doomClone.getMessage()` throws a `TypeError`, since `doomClon
 
 To fix the missing prototype indicate it manually using `__proto__`:  
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/PreciousGroundedJuliabutterfly">Run demo</a>
-  <div class="clear"></div>
-</div>
-
-```javascript
+```javascript{3}
 const doomFullClone = {
   ...doom,
   __proto__: Game.prototype
@@ -406,11 +333,6 @@ console.log(doomFullClone.getMessage());    // => "I like Doom!"
 Object spread lags on instances created from constructor invocation since it doesn't keep the prototype. The intention is to spread own and enumerable properties in a shallow manner, so the approach to ignore the prototype seems reasonable.  
 
 As a side note, there's a more reasonable way to clone `doom` using `Object.assign()`:  
-
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/DecentUnsteadyGavial">Run demo</a>
-  <div class="clear"></div>
-</div>
 
 ```javascript
 const doomFullClone = Object.assign(new Game(), doom);
@@ -441,12 +363,7 @@ const book = {
 
 Then a new 6th edition comes out. Object spread let's you program this scenario in an immutable manner:  
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/DistantWrongYak">Run demo</a>
-  <div class="clear"></div>
-</div>
-
-```javascript
+```javascript{3-4}
 const newerBook = {
   ...book,
   edition: 6,  // <----- Overwrites book.edition
@@ -476,11 +393,6 @@ Merging is straightforward since you may spread properties of any number of obje
 
 Let's merge 3 objects in order to create a composite:  
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/LightseagreenMatureItaliangreyhound">Run demo</a>
-  <div class="clear"></div>
-</div>
-
 ```javascript
 const part1 = {
   color: 'white'
@@ -505,12 +417,7 @@ Don't forget about the *latter property wins* rule. It gives the reasoning about
 
 Let's change a bit the previous example. Now `part1` and `part3` have a new property `.configuration`:
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/RuralUnkemptDrake">Run demo</a>
-  <div class="clear"></div>
-</div>
-
-```javascript
+```javascript{16}
 const part1 = {
   color: 'white',
   configuration: 'sedan'
@@ -556,11 +463,6 @@ Let's implement a `multiline(str, config)` function that breaks `str` into multi
 
 A few examples of how `multiline()` works:  
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/FrankFirsthandBullfrog">Run demo</a>
-  <div class="clear"></div>
-</div>
-
 ```javascript
 multiline('Hello World!');
 // => 'Hello Worl\nd!'
@@ -578,11 +480,6 @@ multiline('Hello World!', { width: 6, newLine: '*', indent: '_' });
 `config` argument accepts different sets of properties: you can indicate 1, 2, or 3 properties, or even no properties at all.  
 
 Using object spread is fairly simple to fill the configuration object with default values. Inside the object literal first spread the defaults object, then the config object:  
-
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/FrankFirsthandBullfrog">Run demo</a>
-  <div class="clear"></div>
-</div>
 
 ```javascript
 function multiline(str, config = {}) {
@@ -630,12 +527,7 @@ const box = {
 
 To make the box higher by increasing `box.size.height`, just spread properties on the nested object:  
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/DemandingShoddyInsect">Run demo</a>
-  <div class="clear"></div>
-</div>
-
-```javascript
+```javascript{4}
 const biggerBox = {
   ...box,
   size: {
@@ -663,11 +555,6 @@ Updating height of nested object `box.size` requires an additional object litera
 I like the possibility to perform multiple updates through one statement.  
 
 What about changing the color to `black`, increase the width to `400` and add a new item `ruler` (using [spread array](https://dmitripavlutin.com/how-three-dots-changed-javascript/#4improvedarraymanipulation))? That's easy:
-
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/ElectricLinearMayfly">Run demo</a>
-  <div class="clear"></div>
-</div>
 
 ```javascript
 const blackBox = {
@@ -699,11 +586,6 @@ console.log(blackBox);
 
 When spreading properties an of `undefined`, `null` or a primitive value no properties are extracted, and no error is thrown. The result is a plain empty object:  
 
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/ForcefulFeminineKissingbug">Run demo</a>
-  <div class="clear"></div>
-</div>
-
 ```javascript
 const nothing = undefined;
 const missingObject = null;
@@ -723,11 +605,6 @@ Of course, there is no reason to use object spread on primitive values.
 After extracting properties of an object to variables using a destructuring assignment, the remaining properties can be collected into a rest object.  
 
 This is what object rest properties does nicely:  
-
-<div class="try-it-container">
-  <a target="_blank" href="https://repl.it/@panzerdp/PrimaryRawHagfish">Run demo</a>
-  <div class="clear"></div>
-</div>
 
 ```javascript
 const style = {

@@ -76,30 +76,6 @@ blockquote {
     background: inherit;
   }
 
-  // Compatibility with old style of posts
-  .try-it-container {
-    a {
-      float: right;
-      font-size: 1rem;
-      line-height: 1.0;
-
-      &::before {
-        content: 	'\25b6 ';
-      }
-    }
-    .clear {
-      clear: both;
-    }
-  }
-
-  .size34 p > span {
-    max-width: 3/4 * 740px !important;
-  }
-  
-  .size12 p > span {
-    max-width: 1/2 * 740px !important;
-  }
-
   .gatsby-highlight-code-line {
     background-color: #feb;
     display: block;

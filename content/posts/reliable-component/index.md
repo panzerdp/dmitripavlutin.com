@@ -123,7 +123,7 @@ Solving multiple responsibilities issue requires to split `<ChartAndForm>` in 2 
 
 The worst case of multiple responsibilities problem is so called God component anti-pattern (an analogy of [God object](https://en.wikipedia.org/wiki/God_object)). A God component tends to know and do everything within the application. You might see it named `<Application>`, `<Manager>`, `<BigContainer>` or `<Page>`, having more than 500 lines of code.    
 
-Dissolve God components by having them conform to SRP with the [help of composition](#31compositionbenefits).  
+Dissolve God components by having them conform to SRP with the [help of composition](#31-composition-benefits).  
 
 ###1.2 Case study: make component have one responsibility  
 
@@ -595,7 +595,7 @@ Consequently, the second problem is that `<Controls>` knows too many details abo
 
 The broken encapsulation couples `<App>` and `<Controls>` components.  
 
-A troublesome outcome is that `<Controls>` would be complicated to test (see [6.1 Case study](#61casestudytestablemeanswelldesigned)) and reuse. A slight modification to structure of `<App>` leads to cascade of modifications to `<Controls>` (and to alike coupled components in case of a bigger application).  
+A troublesome outcome is that `<Controls>` would be complicated to test (see [6.1 Case study](#61-case-study-testable-means-well-designed)) and reuse. A slight modification to structure of `<App>` leads to cascade of modifications to `<Controls>` (and to alike coupled components in case of a bigger application).  
 
 The solution is to design a convenient communication interface that respects *loose coupling* and *strong encapsulation*. Let's improve the structure and props of both components in order to restore the encapsulation.  
 
@@ -653,7 +653,7 @@ Furthermore `<Controls>` no longer depends on `<App>` implementation details. `o
 
 `<Controls>` reusability and testability  significantly increased.  
 
-The reuse of `<Controls>` is convenient because it requires only callbacks, without any other dependencies. Testing is also handy: just verify whether callbacks are executed on buttons click (see [6.1 Case study](#61casestudytestablemeanswelldesigned)).  
+The reuse of `<Controls>` is convenient because it requires only callbacks, without any other dependencies. Testing is also handy: just verify whether callbacks are executed on buttons click (see [6.1 Case study](#61-case-study-testable-means-well-designed)).  
 
 ##3. "Composable"
 
@@ -814,7 +814,7 @@ Good libraries positively affect architectural decisions and advocate best pract
 [react-router](https://github.com/ReactTraining/react-router/) uses declarative routing to structure a Single Page Application.  
 Associate a URL path with your component using `<Route>`. Then router will render the component for you when user visits the matched URL.  
 
-[redux](http://redux.js.org/) and [react-redux](https://github.com/reactjs/react-redux) HOC introduce unidirectional and predictable application state management. It extracts async and impure code (like HTTP requests) out of components, favoring single responsibility principle and creating [pure or almost-pure components](#5pureoralmostpure).   
+[redux](http://redux.js.org/) and [react-redux](https://github.com/reactjs/react-redux) HOC introduce unidirectional and predictable application state management. It extracts async and impure code (like HTTP requests) out of components, favoring single responsibility principle and creating [pure or almost-pure components](#5-pure-or-almost-pure).   
 
 To be sure that a 3rd party library is worth using, here's my checklist:  
 
@@ -1053,11 +1053,11 @@ describe('<Header />', function() {
 ```
 This is great. Unit testing of pure `<Header>` is straightforward. The test does  one thing: verify whether the component renders the expected elements for a given input. No need to import, access or modify global variables, no side effects magic.  
 
-Well designed components are easy to test (statement detailed in [chapter 6](#6testableandtested)), which is visible in case of pure components.  
+Well designed components are easy to test (statement detailed in [chapter 6](#6-testable-and-tested)), which is visible in case of pure components.  
 
 ###5.2 Case study: purification from network requests
 
-Recall `<WeatherFetch>` component from [1.2 Case study](#12casestudymakecomponenthaveoneresponsibility). On mount it makes a network request to get the information about the weather:  
+Recall `<WeatherFetch>` component from [1.2 Case study](#12-case-study-make-component-have-one-responsibility). On mount it makes a network request to get the information about the weather:  
 
 ```jsx
 class WeatherFetch extends Component {  
@@ -1278,7 +1278,7 @@ In conclusion, the reason why many applications are untested is incorrectly desi
 
 ###6.1 Case study: testable means well designed  
 
-Let's test 2 versions of `<Controls>` from the [encapsulation chapter](#21exampleencapsulationrestoration).  
+Let's test 2 versions of `<Controls>` from the [encapsulation chapter](#21-information-hiding).  
 
 The following code tests `<Controls>` version that highly depends on the parent's component structure:  
 
