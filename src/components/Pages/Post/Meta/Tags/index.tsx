@@ -18,8 +18,6 @@ export default function PostMetaTags({ post, siteInfo, authorInfo }: PostMetaTag
       <meta name="description" content={post.description} />
       <link rel="canonical" href={postUrl} />
 
-      {post.draft ? <meta name="robots" content="noindex, nofollow" /> : null}
-
       <meta property="og:site_name" content={siteInfo.title} />
       <meta property="og:type" content="article" />
       <meta property="og:title" content={post.title} />

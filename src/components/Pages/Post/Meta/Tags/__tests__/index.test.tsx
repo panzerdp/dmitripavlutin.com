@@ -14,7 +14,6 @@ const post: Post = {
   recommended: ['javascript-language'],
   slug: 'useful-techniques-react-server-side-rendering',
   tags: ['react', 'server side rendering'],
-  draft: false,
   thumbnail: {
     aspectRatio: 2,
     base64: 'base64',
@@ -103,23 +102,5 @@ describe('<PostMetaTags />', function() {
       <meta name="twitter:data2" content={post.tags.join(', ')} />,
       <meta name="twitter:creator" content={authorInfo.nicknames.twitter} />,
     ].forEach((item) => expect(wrapper.contains(item)).toBe(true));
-  });
-
-  it('should not index when post is draft', function() {
-    const wrapper = shallow(
-      <PostMetaTags
-        {...props}
-        post={{
-          ...props.post,
-          draft: true,
-        }}
-      />
-    );
-    expect(wrapper.contains(<meta name="robots" content="noindex, nofollow" />)).toBe(true);
-  });
-
-  it('should index when post is not draft', function() {
-    const wrapper = shallow(<PostMetaTags {...props} />);
-    expect(wrapper.contains(<meta name="robots" content="noindex, nofollow" />)).toBe(false);
   });
 });

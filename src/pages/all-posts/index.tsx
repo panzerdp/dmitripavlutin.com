@@ -16,22 +16,8 @@ export default function PlainListAllFetch({ data }: PlainListAllFetchProps) {
 export const pageQuery = graphql`
   query PlainListAll {
     allMarkdownRemark(
-      sort: { 
-        fields: [
-          frontmatter___published
-        ], 
-        order: DESC 
-      }
-      filter: {
-        frontmatter: { 
-          draft: { 
-            eq: false 
-          }
-          type: {
-            eq: "post"
-          }
-        }
-      }
+      sort: { fields: [frontmatter___published], order: DESC }
+      filter: { frontmatter: { type: { eq: "post" } } }
     ) {
       edges {
         node {

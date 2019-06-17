@@ -38,10 +38,7 @@ module.exports = {
                 fields: [frontmatter___published]
               },
               filter: {
-                frontmatter: { 
-                  draft: { 
-                    eq: false 
-                  }
+                frontmatter: {
                   type: {
                     eq: "post"
                   }

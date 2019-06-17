@@ -11,7 +11,6 @@ const post: Post = {
   recommended: ['javascript-language'],
   slug: 'useful-techniques-react-server-side-rendering',
   tags: ['react', 'server side rendering'],
-  draft: false,
   thumbnail: {
     aspectRatio: 2,
     base64: 'base64',

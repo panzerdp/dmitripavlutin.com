@@ -23,7 +23,6 @@ exports[`<PostFetch /> should render post template 1`] = `
   post={
     Object {
       "description": "Useful techniques to facilitate React server-side rendering.",
-      "draft": false,
       "html": "<div>JavaScript is a programming language</div>",
       "modified": "2019-01-01",
       "published": "2018-03-17",

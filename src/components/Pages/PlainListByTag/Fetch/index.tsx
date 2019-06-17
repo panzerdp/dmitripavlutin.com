@@ -20,7 +20,7 @@ export const pageQuery = graphql`
   query PlainListByTag($tag: String!) {
     allMarkdownRemark(
       sort: { fields: [frontmatter___published], order: DESC }
-      filter: { frontmatter: { tags: { eq: $tag }, draft: { eq: false } } }
+      filter: { frontmatter: { tags: { eq: $tag }, type: { eq: "post" } } }
     ) {
       edges {
         node {

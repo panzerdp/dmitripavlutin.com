@@ -85,7 +85,6 @@ const props = {
         slug: 'useful-techniques-react-server-side-rendering',
         tags: ['react', 'server side rendering'],
         recommended: ['javascript-language'],
-        draft: false,
         thumbnail: {
           childImageSharp: {
             fluid: {

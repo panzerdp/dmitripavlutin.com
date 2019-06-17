@@ -105,7 +105,6 @@ export const pageQuery = graphql`
         modified
         tags
         recommended
-        draft
         thumbnail {
           childImageSharp {
             fluid(maxWidth: 720, maxHeight: 350, quality: 90) {

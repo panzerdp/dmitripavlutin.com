@@ -14,9 +14,6 @@ const query = `
     }, 
     filter: {
       frontmatter: { 
-        draft: {
-          eq: false
-        }
         type: {
           eq: "post"
         }
