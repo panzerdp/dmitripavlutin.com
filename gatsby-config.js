@@ -78,6 +78,7 @@ module.exports = {
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sitemap',
     require('./gatsby/config/gatsby-plugin-sass'),
     require('./gatsby/config/gatsby-plugin-feed'),
   ],

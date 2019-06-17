@@ -1,8 +1,11 @@
+const siteUrl = 'https://dmitripavlutin.com';
+
 module.exports = {
+  siteUrl, // ensure compatibility with plugins that require `siteUrl`
   siteInfo: {
     title: 'Dmitri Pavlutin blog',
     description: 'Posts by Dmitri Pavlutin about software development',
-    url: 'https://dmitripavlutin.com',
+    url: siteUrl,
     repositoryUrl: 'https://github.com/panzerdp/dmitripavlutin.com',
   },
   authorInfo: {

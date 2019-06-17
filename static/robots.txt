@@ -1,2 +1,3 @@
 User-agent: *
+Sitemap: https://dmitripavlutin.com/sitemap.xml
 Disallow:
