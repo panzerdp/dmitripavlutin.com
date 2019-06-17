@@ -57,7 +57,7 @@ Table of contents:
 9. [Reliability is important](#9-reliability-is-important)  
 10. [Conclusion](#10-conclusion)  
 
-##1. "Single responsibility"
+## 1. "Single responsibility"
 
 > A component has a **single responsibility** when it has one reason to change.  
 
@@ -99,7 +99,7 @@ If you find SRP a bit obscured, check out [this article](https://8thlight.com/bl
 
 Units written at early project stage *will change often* until reaching the release stage. These *change often* components are required to be *easily modifiable in isolation*: a goal of the SRP.  
 
-##1.1 The pitfall of multiple responsibilities  
+## 1.1 The pitfall of multiple responsibilities  
 
 A common oversight happens when a component has multiple responsibilities. At first glance, this practice seems harmless and requires less work: 
 
@@ -251,7 +251,7 @@ Again, this modification of `<WeatherInfo>` happens in isolation and does not af
 
 `<WeatherFetch>` and `<WeatherInfo>` have their own one responsibility. A change of one component has small effect on the other one. That's the power of single responsibility principle: modification in isolation that affects lightly and predictability other components of the system.  
 
-###1.3 Case study: HOC favors single responsibility principle  
+### 1.3 Case study: HOC favors single responsibility principle  
 
 Applying composition with chunking components by responsibilities doesn't always help to conform to single responsibility principle. You can benefit from another efficient practice called Higher order components (abbreviated HOC):  
 
@@ -453,7 +453,7 @@ The isolation of modification and reusability benefits are not possible with the
 
 In situations when composition is ineffective, props proxy and render highjacking HOC techniques are useful in making component have one responsibility.  
 
-##2. "Encapsulated"
+## 2. "Encapsulated"
 
 > An **encapsulated** component provides props to control its behavior while not exposing its internal structure.  
 
@@ -481,7 +481,7 @@ Contrary, a tightly coupled system looses the benefits described above. The main
 
 **Encapsulation**, or **Information Hiding**, is a fundamental principle of how to design components, and is the key to loose coupling.  
 
-###2.1 Information hiding
+### 2.1 Information hiding
 
 A well encapsulated component *hides its internal structure* and provides a set of *props to control its behavior*.  
 
@@ -491,7 +491,7 @@ A React component can be functional or class based, define instance methods, set
 
 Units that precisely hide their internal structure are less dependent on each other. Lowering the dependency degree brings the benefits of loose coupling.  
 
-###2.2 Communication
+### 2.2 Communication
 
 Details hiding is a restriction that isolates the component. Nevertheless, you need a way to make components communicate. So welcome the props.  
 
@@ -527,7 +527,7 @@ To avoid breaking encapsulation, watch out the details passed through props. A p
 
 Accessing global variables is another problem that negatively affects encapsulation.  
 
-###2.3 Case study: encapsulation restoration  
+### 2.3 Case study: encapsulation restoration  
 
 Component's instance and state object are implementation details encapsulated inside the component. Thus a certain way to break the encapsulation is to pass the parent instance for state management to a child component.  
 
@@ -655,7 +655,7 @@ Furthermore `<Controls>` no longer depends on `<App>` implementation details. `o
 
 The reuse of `<Controls>` is convenient because it requires only callbacks, without any other dependencies. Testing is also handy: just verify whether callbacks are executed on buttons click (see [6.1 Case study](#61-case-study-testable-means-well-designed)).  
 
-##3. "Composable"
+## 3. "Composable"
 
 > A **composable** component is created from the composition of smaller specialized  components.  
 
@@ -696,9 +696,9 @@ How does composition relate with single responsibility and encapsulation? Let's 
 
 > **Single responsibility principle** describes how to split requirements into components, **encapsulation** describes how to organize these components, and **composition** describes how to glue the whole system back.  
 
-###3.1 Composition benefits  
+### 3.1 Composition benefits  
 
-#####Single responsibility  
+#### Single responsibility  
 An important aspect of composition is the ability *to compose complex components from smaller specialized components*. This [divide and conquer](https://en.wikipedia.org/wiki/Divide_and_rule) approach helps an authority component  conform to single responsibility principle.  
 
 Recall the previous code snippet. `<Application>` has the responsibility to render the header, footer, sidebar and main regions.  
@@ -707,7 +707,7 @@ Makes sense to divide this responsibility into four sub-responsibilities, each o
 
 Now comes up the benefit. Composition makes `<Application>` conform to single responsibility principle, by allowing its children to implement the sub-responsibilities.  
 
-#####Reusability
+#### Reusability
 Components using composition can reuse common logic. This is the benefit of *reusability*.  
 
 For instance, components `<Composed1>` and `<Composed2>` share common code:   
@@ -746,7 +746,7 @@ const instance2 = (
 
 Reusable components favor [Don't repeat yourself](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) (DRY) principle. This beneficial practice saves efforts and time.  
 
-#####Flexibility  
+#### Flexibility  
 
 In React a composable component can control its children, usually through `children` prop. This leads to another benefit of *flexibility*.  
 
@@ -764,10 +764,10 @@ function ByDevice({ children: { mobile, other } }) {
 ```
 `<ByDevice>` composed component renders the message `"Mobile detected!"` for a mobile, and `"Not a mobile device"` for other devices.   
 
-#####Efficiency
+#### Efficiency
 User interfaces are composable hierarchical structures. Thus composition of components is an *efficient* way to construct user interfaces. 
 
-##4. "Reusable"
+## 4. "Reusable"
 
 > A **reusable** component is written once but used multiple times.  
 
@@ -779,7 +779,7 @@ In such environment, would it be possible to write an application in a reasonabl
 
 Welcome reusability. Make things work, not reinvent how they work.  
 
-###4.1 Reuse across application  
+### 4.1 Reuse across application  
 
 According to *Don't repeat yourself* (DRY) principle, every piece of knowledge must have a single, unambiguous, authoritative representation within a system. The principle advises to avoid repetition.  
 
@@ -801,7 +801,7 @@ You want a banana, and you get a banana, plus all the jungle with it.
 
 Correct encapsulation creates a component that doesn't stuck with dependencies. Hidden internal structure and focused props enable the component to fit nicely in multiple places where it's about to be reused.  
 
-###4.2 Reuse of 3rd party libraries  
+### 4.2 Reuse of 3rd party libraries  
 
 A regular working day. You've just read the task to add a new feature to the application. Before firing up the text editor, hold on for a few minutes...
 
@@ -822,7 +822,7 @@ To be sure that a 3rd party library is worth using, here's my checklist:
 * *Tested*: a sign of trustworthy library is high code coverage   
 * *Maintenance*: see how often the library author creates new features, fixes bugs  and generally maintains the library.  
 
-##5. "Pure" or "Almost-pure"
+## 5. "Pure" or "Almost-pure"
 
 > A **pure** component always renders same elements for same prop values.  
 An **almost-pure** component always renders same elements for same prop values, and can produce a side effect.  
@@ -911,7 +911,7 @@ Isolated impure code explicitly shows it has side effects, or rely on global sta
 
 Let's detail into purification examples.  
 
-###5.1 Case study: purification from global variables
+### 5.1 Case study: purification from global variables
 
 I don't like global variables. They break encapsulation, create unpredictable behavior and make testing difficult.  
 
@@ -1055,7 +1055,7 @@ This is great. Unit testing of pure `<Header>` is straightforward. The test does
 
 Well designed components are easy to test (statement detailed in [chapter 6](#6-testable-and-tested)), which is visible in case of pure components.  
 
-###5.2 Case study: purification from network requests
+### 5.2 Case study: purification from network requests
 
 Recall `<WeatherFetch>` component from [1.2 Case study](#12-case-study-make-component-have-one-responsibility). On mount it makes a network request to get the information about the weather:  
 
@@ -1209,7 +1209,7 @@ describe('<WeatherFetch />', function() {
 ```
 You have to check that for given prop values `<WeatherFetch>` renders the expected `<WeatherInfo>`, and on mount `fetch()` gets called. Easy and straightforward.  
 
-###5.3 Transform almost-pure into pure  
+### 5.3 Transform almost-pure into pure  
 
 Practically at this step you would end isolating impurities. Almost-pure component has a good level of predictability and is easy to test.  
 
@@ -1251,7 +1251,7 @@ Now `<WeatherFetch>` is a *pure* component. It doesn't have side effects, and al
 
 While the pure version of `<WeatherFetch>` is great in terms of predictability and simplicity, it adds an overhead by requiring HOCs like `compose()` and `lifecycle()`. Usually transforming an *impure* component to an *almost-pure* is a decent trade-off. 
 
-##6. "Testable" and "Tested"  
+## 6. "Testable" and "Tested"  
 
 > A **tested** component is verified whether it renders the expected output for a given input.  
 > A **testable** component is easy to test.  
@@ -1276,7 +1276,7 @@ When the component has *weak architectural design*, it becomes *untestable*. Whe
 
 In conclusion, the reason why many applications are untested is incorrectly designed components. Even if *you want* to test such an application, *you can't*.  
 
-###6.1 Case study: testable means well designed  
+### 6.1 Case study: testable means well designed  
 
 Let's test 2 versions of `<Controls>` from the [encapsulation chapter](#21-information-hiding).  
 
@@ -1371,7 +1371,7 @@ Strong encapsulation leads to easy and straightforward testing. And contrary a c
 
 Testability is a practical criteria to identify how well your components are structured.  
 
-##7. "Meaningful"
+## 7. "Meaningful"
 
 > A **meaningful** component is easy to understand what it does.  
 
@@ -1383,12 +1383,12 @@ A slight additional time spent on readability reduces the understanding time for
 
 *Reading* meaningful code is easy. Nevertheless *writing* meaningfully requires  clean code practices and constant effort to express yourself clearly.  
 
-###7.1 Component naming
+### 7.1 Component naming
 
-#####Pascal case  
+#### Pascal case  
 Component name is a concatenation of one or more words (mostly nouns) in [pascal case](https://en.wikipedia.org/wiki/PascalCase). For instance `<DatePicker>`, `<GridItem>`, `<Application>`, `<Header>`.  
 
-#####Specialization  
+#### Specialization  
 The more specialized a component is, the more words its name might contain.  
 
 A component named `<HeaderMenu>` suggests a menu in the header. A name `<SidebarMenuItem>` indicates a menu item located in sidebar.  
@@ -1403,7 +1403,7 @@ A more specialized name instead of `<Authors>` doesn't create this situation. Be
 
 [Favor clarity over brevity](https://signalvnoise.com/posts/3250-clarity-over-brevity-in-variable-and-method-names).  
 
-#####One word - one concept  
+#### One word - one concept  
 A word represents a concept. For example, a *collection of rendered items* concept is represented by *list* word.  
 
 Pick one word per concept, then keep the relation consistent within the whole application. The result is a predicable mental mapping of *words - concepts* that you get used to.  
@@ -1414,10 +1414,10 @@ The same concept of a *collection of rendered items* is represented by 2 differe
 
 Name the components `<OrdersList>` and `<ExpensesList>` (using *list* word) or `<OrdersTable>` and `<ExpensesTable>` (using *table* word). Use whatever word you feel is better, just keep it consistent.  
 
-#####Comments  
+#### Comments  
 Meaningful names for components, methods and variables are enough for making the code readable. Thus, comments are mostly redundant.  
 
-###7.2 Case study: write self-explanatory code  
+### 7.2 Case study: write self-explanatory code  
 
 Common misuse of comments is explanation of inexpressive and obscured naming. Let's see such case:  
 
@@ -1462,7 +1462,7 @@ function GamesList({ items }) {
 
 Don't explain yourself with comments. Write code that is self-explanatory and self-documenting.  
 
-###7.3 Expressiveness stairs  
+### 7.3 Expressiveness stairs  
 
 I distinguish 4 expressiveness stairs of a component. The lower you move on the stairs, the more effort you need to understand the component.  
 
@@ -1483,7 +1483,7 @@ If documentation is missing or doesn't answer all the questions, you have to exp
 
 When exploring code doesn't help decipher the component, the next step is asking component's author for details. That's definitely bad naming, and avoid going down to this step. Better ask the author to refactor the code, or refactor it yourself.  
 
-##8. Do continuous improvement  
+## 8. Do continuous improvement  
 
 At the same time of composing this article, I was reading an interesting book by William Zinsser named ["On Writing Well: The Classic Guide to Writing Nonfiction"](https://www.amazon.com/Writing-Well-Classic-Guide-Nonfiction/dp/0060891548). It's an amazing piece for improving the writing skills.  
 
@@ -1512,7 +1512,7 @@ Finding the right organization is a series of trials and reviews. The more compl
 
 Pragmatically, development is a never stopping process of reviewing previous decisions and making improvements.  
 
-##9. Reliability is important
+## 9. Reliability is important
 
 Taking care of component's quality requires effort and periodical review. It worth investment, since correct components are the foundation of a well designed system. Such system is easy to maintain and grow  with complexity that increases linearly.  
 
@@ -1526,7 +1526,7 @@ How does the sad story end? You might *throw away the current system and rewrite
 
 The solution is simple, yet demanding: write reliable components.  
 
-##10. Conclusion
+## 10. Conclusion
 
 The presented 7 characteristics suggest the same idea from different angles:
 

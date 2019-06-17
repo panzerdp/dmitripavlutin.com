@@ -582,7 +582,7 @@ console.log(blackBox);
 */
 ```  
 
-#### 2.7 Spread `undefined`, `null` and primitives
+#### 2.7 Spread undefined, null and primitives
 
 When spreading properties an of `undefined`, `null` or a primitive value no properties are extracted, and no error is thrown. The result is a plain empty object:  
 
