@@ -55,7 +55,7 @@ Also the max component of the tuple can be skipped on extraction: `let (min, _)`
 
 Let's study the situations where underscore `_` helps avoiding redundant details.  
 
-# 1. Omitting argument labels
+## 1. Omitting argument labels
 
 Starting version 3.0 Swift [requires](https://github.com/apple/swift-evolution/blob/master/proposals/0046-first-label.md) by default to indicate the argument labels on invocation.   
 The parameter name `paramName` in `func myFunc(paramName: Type) {...}` automatically create argument label `paramName:` on invocation `myFunc(paramName: valueOfType)`.
@@ -85,7 +85,7 @@ Since the argument label is not necessary, the invocation `sum(10, 5)` looks bet
 
 You can use `_` to suppress the argument label every time its indication seems redundant.  
 
-# 2. Ignore tuple component
+## 2. Ignore tuple component
 
 Tuples are simple data structures that are used to couple related values. They are especially useful when returning multiple values from a function.  
 
@@ -134,7 +134,7 @@ print(result.1, result.3)     // => 2 1
 `result.sub` and `result.div` (or `result.1` and `result.3`) selects tuple's named components `sub` and `div`.  
 The downside of this approach is the need to keep a variable for tuple. And later access the components using a selector.  
 
-# 3. Ignore enumeration associated value
+## 3. Ignore enumeration associated value
 
 Swift is so kind that besides simple enumeration, you can associate for each enumeration case a value. These are similar to [tagged unions](https://en.wikipedia.org/wiki/Tagged_union) data structure from computer science.  
 
@@ -187,7 +187,7 @@ The flight speed case `.flight(let speed, _)` omits the information about the al
 
 Even if the altitude info is extracted `.flight(let speed, let altitude)`, but later not used, Swift triggers a warning: `immutable value 'altitude' was never used`.  The underscore helps solving such situations.  
 
-# 4. Skip function invocation result
+## 4. Skip function invocation result
 
 Swift 3.0 implements an [interesting mechanism](https://github.com/apple/swift-evolution/blob/master/proposals/0047-nonvoid-warn.md) that warns developer when a function invocation result (non `Void`) is not used.  
 
@@ -213,7 +213,7 @@ _ = greet("Alexandra")
 ```
 Such way you let know the compiler that you ignore the returned value. And no warning is triggered in this case.  
 
-# 5. Skip closure parameters
+## 5. Skip closure parameters
 
 If you need to skip naming some closure parameters, just mark those with underscores. 
 For example the first and second parameters in `{ _, _, param3, param4 in ... }` are skipped.  
@@ -229,7 +229,7 @@ print(evenColors) // => ["green", "white", "orange"]
 ```
 `.filter()` method accepts a closure that receives index and value values on each iteration. Because the intent is to check whether the index is even, the value parameter is skipped using an underscore `_`: `.filter { index, _ in ...}`.
 
-# 6. Skip iteration value
+## 6. Skip iteration value
 
 Another common usage of the underscore is to iterate a code block a particular number of times, and ignore the iteration value.  
 
@@ -246,7 +246,7 @@ print(power) // => 32
 ```
 Since the sequence value on each iteration is insignificant, `_` is used instead of a variable in the loop `for _ in 1...exponent`.  
 
-# 7. Final words
+## 7. Final words
 
 Swift suggests developer to practice writing meaningful and detailed code. While it works in most of the cases, sometimes providing additional details is redundant.  
 

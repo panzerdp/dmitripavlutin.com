@@ -43,7 +43,7 @@ The main reason is the existence of better equivalents like `for-in` and `stride
 
 The article describes typical `for-loop` usage scenarios. And explains how easily to migrate to `for-in`, `stride()` or simple `while() {}`.
 
-# 1. How to migrate `for-loop` to `for-in`
+## 1. How to migrate `for-loop` to `for-in`
 
 The typical scenario of `for-loop` application is to iterate over an interval of numbers. These numbers can be indexes of an array, and so on.
  
@@ -86,7 +86,7 @@ for bird in birds {
 
 As seen, for standard array or collection iteration `for-in` is a better alternative to `for-loop`. At least in this case, the decision to remove `for-loop` in Swift 3.0 is justified.  
 
-# 2. How to migrate `for-loop` to `stride`
+## 2. How to migrate `for-loop` to `stride`
 
 You may reasonable ask that `for-loop` is verbose, but still flexible. It is useful for more complex iterations.  
 
@@ -131,7 +131,7 @@ for index in stride(from: 0, to: colors.count, by: 2) {
 If the upper limit must be included, there is a second form of the function:   
 `stride(from: value, through: value, by: value)`. The second parameter label is `through`, which indicates that the upper limit is included.  
 
-# 3. Other cases stick to `while`
+## 3. Other cases stick to `while`
 
 C-style `for-loop` has a nice property that every component: the initialization, break verification and increment are fully configurable:
 
@@ -184,7 +184,7 @@ while (index < nCount && numbers[index] != 0) {
 ```
 If you have a case that do not stick into an inline `for-in` or `stride()`, I recommend to use a simple `while() {}`. 
 
-# 4. Consistent argument label behavior
+## 4. Consistent argument label behavior
 
 In Swift 2.3 and earlier you can omit the first argument label on function invocation:
 
@@ -223,7 +223,7 @@ However I do not recommend this approach in the long run. It breaks the consiste
 
 [Swift naming guidelines](https://swift.org/documentation/api-design-guidelines/#naming) has many useful advice on naming.
 
-# 5. Conclusion
+## 5. Conclusion
 
 Swift 3.0 has a nice list of changes. Many of them are breaking changes, so you have to put some efforts to migrate the Swift 2.3 or older code. 
 

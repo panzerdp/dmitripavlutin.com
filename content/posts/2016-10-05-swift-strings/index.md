@@ -38,7 +38,7 @@ Most of the time developer deals with simple string characters, without diving i
 `CharacterView` works nice for most of the string related tasks: iteration over the characters, counting the number of characters, verify substring existence, access by index, different manipulations and so on.  
 Let's see in more details how these tasks are accomplished in Swift.  
 
-# 1. Character and CharacterView structures
+## 1. Character and CharacterView structures
 
 `String.CharacterView` structure is a view over string content that is a collection of `Character`.  
 
@@ -100,7 +100,7 @@ let multipleGraphemes: Character = "ab" // Error!
 Even if `singleGrapheme` is composed of 3 Unicode scalars, it creates a single grapheme `ḉ`.
 `multipleGraphemes` tries to create a `Character` from 2 Unicode scalars. This creates 2 separated graphemes `a` and `b` in a single `Character` structure, which is not allowed.  
 
-# 2. Iterating over characters in a string
+## 2. Iterating over characters in a string
 
 `CharacterView` collection conforms to `Sequence` protocol. This allows to iterate over the view characters in a `for-in` loop:
 
@@ -145,7 +145,7 @@ for (index, char) in weather.characters.enumerated() {
 `enumerated()` method on each iteration returns tuples `(index, char)`.  
 `index` variable contains the character index at the current loop step. Correspondingly `char` variable contains the character.  
 
-# 3. Counting characters
+## 3. Counting characters
 
 Simply use `count` property of the `CharacterView` to get the number of characters:
 
@@ -169,7 +169,7 @@ print(drink.characters.count) // => 4
 Initially `drink` has 4 characters. 
 When the combining mark `U+0301` *COMBINING ACUTE ACCENT* is appended to string, it modifies the previous base character `e` and creates a new grapheme `é`. The property `count` is not increased, because the number of graphemes is still the same.  
 
-# 4. Accessing character by index
+## 4. Accessing character by index
 
 Swift doesn't know about the characters count in the string view until it actually evaluates the graphemes in it. As result a subscript that allows to access the character by an integer index directly does not exist.   
 You can access the characters by a special type `String.Index`.
@@ -238,7 +238,7 @@ if let charIndex = oops {
 ```
 `oops` is an optional `String.Index?`. The optional unwrap verifies whether the index didn't jump out of the string.  
 
-# 5. Checking substring existence
+## 5. Checking substring existence
 
 The simplest way to verify the substring existence is to call `contains(_ other: String)` string method:
 
@@ -277,7 +277,7 @@ print(animal.characters.contains {
 `contains(_:)` verifies whether the character view has a particular character.  
 The second function form accepts a closure: `contains(where predicate: (Character) -> Bool)` and performs the same verification.  
 
-# 6. String manipulation
+## 6. String manipulation
 
 The string in Swift is a *value type*. Whether you pass a string as an argument on function call, assign it to a variable or constant - every time a *copy* of the original string is created.  
 
@@ -285,7 +285,7 @@ A mutating method call changes the string in place.
 
 This chapter covers the common manipulations over strings.  
 
-## Append to string a character or another string
+### Append to string a character or another string
 
 The simplest way to append to string is `+=` operator. You can append an entire string to original one:  
 
@@ -308,7 +308,7 @@ bird.append(contentsOf: " fly".characters)
 print(bird) // => "pigeons and sparrows fly"
 ```
 
-## Extract a substring from string
+### Extract a substring from string
 
 The method `substring()` allows to extract substrings:
 
@@ -344,7 +344,7 @@ let lastTwoRange =
 print(plant[lastTwoRange]) // => "ee"
 ```
 
-## Insert into string
+### Insert into string
 
 The string type provides the mutating method `insert()`. The method allows to insert a character or a sequence of characters at specific index.  
 
@@ -360,7 +360,7 @@ plant.insert(contentsOf: "nice ".characters, at: plant.startIndex)
 print(plant) // => "nice green trees"
 ```
 
-## Remove from string
+### Remove from string
 
 The mutating method `remove(at:)` removes the character at an index:
 
@@ -382,7 +382,7 @@ weather.removeSubrange(range)
 print(weather) // => "sunny"  
 ```
 
-## Replace in string
+### Replace in string
 
 The method `replaceSubrange(_:with:)` accepts a range of indexes that should be replaced with a particular string. The method is mutating the string.
 
@@ -397,7 +397,7 @@ if let index = weather.characters.index(of: " ") {
 }
 ```
 
-## The character view mutation alternative
+### The character view mutation alternative
 
 Many of string manipulations described above may be applied directly on string's character view. 
 
@@ -459,7 +459,7 @@ let numberOfStars = fruit.characters.reduce(0) { countStars, char in
 print(numberOfStars) // => 2
 ```
 
-# 7. Final words
+## 7. Final words
 
 At first sight, the idea of different types of views over string's content may seem overcomplicated.  
 

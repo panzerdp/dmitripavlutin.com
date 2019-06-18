@@ -95,7 +95,7 @@ As result an error is thrown: `cannot assign to value: 'windSpeed' is a 'let' co
 
 ![Self keyword in Swift](./images/cat-mirror.jpg)
 
-##2. To be, or not to be
+## 2. To be, or not to be
 
 There were plenty of discussions about [the obligatory usage](https://github.com/apple/swift-evolution/blob/master/proposals/0009-require-self-for-accessing-instance-members.md) of `self` to access properties, or contrary to skip `self`.  
 
@@ -261,7 +261,7 @@ I recommend  to read more about instances lifetime at [Unowned or Weak? Lifetime
 
 Of course there are plenty of situations when you need to return or modify `self` directly. Let's enumerate the common scenarios.  
 
-#### Method chaining
+### Method chaining
 
 When working with classes, you might want to implement a [method chaining](https://en.wikipedia.org/wiki/Method_chaining). Such practice is useful to chain multiple method calls on the same instance, without storing the intermediate results.  
 
@@ -295,7 +295,7 @@ numbers.printElements() // => [8, 10, 2]
 The method `push(:)` returns the current instance `self`. This enables the method chaining calls to push multiple elements `8`, `10` and `2` at once into the stack. 
 Notice that `@discardableResult` attribute for `push(:)` method suppresses the warning that the result of the last method call in the chain is unused.  
 
-#### Enumeration case
+### Enumeration case
 
 To find what case holds the enumeration within its method, you can easily query `self` property with a `switch` statement.  
 
@@ -326,7 +326,7 @@ print(improving.getOccupation()) // => "Reading a book"
 ```
 The method `getOccupation()` accesses `self` to determine the current enumeration case.  
 
-#### New structure instance
+### New structure instance
 
 In a structure you can dynamically modify the current instance by assigning to `self` a new value:
 

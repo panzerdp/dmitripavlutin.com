@@ -161,7 +161,7 @@ if var date = dateFormatter.date(from: "2017-02-15") {
 
 The `Date` methods that provide the same behavior are `addingTimeInterval(_:)` and the mutating `addTimeInterval(_:)`.  
 
-#### Tip about calendar
+### Tip about calendar
 
 The provided way to modify a date adjusts absolute values. You may have unexpected results when adding longer time intervals like weeks or months.  
 

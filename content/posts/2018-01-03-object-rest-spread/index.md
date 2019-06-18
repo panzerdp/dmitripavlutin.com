@@ -91,7 +91,7 @@ console.log(clone); // => { name: 'Dave', surname: 'Bowman' }
 
 `.name` and `.surname` enumerable properties are copied from source object `person` into `clone`.  But the non-enumerable `.age` is ignored.  
 
-#### 1.2 Own properties
+### 1.2 Own properties
 
 JavaScript embraces prototypal inheritance. Thus an object property can be either **own** or **inherited**.  
 
@@ -113,7 +113,7 @@ console.log(personB.hasOwnProperty('surname'));    // => false
 ```
 `personB` object has an own property `.profession`, and inherits `.name` and `.surname` properties from its prototype `person`.  
 
-*Object spread copies from source **own** properties*, ignoring the inherited ones:
+Object spread copies from source **own** properties, ignoring the inherited ones:
 
 ```javascript
 const cloneB = {
@@ -126,7 +126,7 @@ The object spread `...personB` copies from source object `personB`  only `.profe
 
 > The object spread syntax copies from the source object **own and enumerable** properties. Same as returned by [Object.keys()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys) function.  
 
-### 2. Object spread properties
+## 2. Object spread properties
 
 **Object spread** syntax within the object literal extracts from **source** objects own and enumerable properties, and copies them into the **target** object.   
 
@@ -158,7 +158,8 @@ const targetObject = {
   property2: 'Value 2'
 };
 ```
-#### 2.1 Object spread rule: latter property wins  
+
+### 2.1 Object spread rule: latter property wins  
 
 When multiple objects are spread and some properties have same keys, how do the final the final set of values is calculated? The rule is simple: 
 
@@ -184,6 +185,7 @@ const dog = {
 };
 console.log(dog); // => { sound: 'woof', legs: 4 }
 ```
+
 The latter value `'woof'` overwrites earlier value `'meow'` (which comes from `cat` source object). This matches the rule that latter property overwrites the earliest properties with the same key.  
 
 Same rule applies to regular properties of the object initializer:  
@@ -214,7 +216,7 @@ The relative position of object spreads and regular properties is important. Suc
 
 Let's details into these recipes.  
 
-#### 2.2 Cloning an object  
+### 2.2 Cloning an object  
 
 Coning an object using spread syntax is short and expressive. The following example creates a clone of `bird` object:  
 
@@ -235,7 +237,7 @@ console.log(bird === birdClone); // => false
 
 While cloning seems simple at first sight, there are a couple of nuances to be aware of.  
 
-##### Shallow copy
+#### Shallow copy
 
 Object spread does a *shallow copy* of the object. Only the object itself is cloned, while nested instances *are not cloned*.  
 
@@ -275,7 +277,7 @@ console.log(laptop.screen === laptopDeepClone.screen); // => false
 ```
 An additional spread `...laptop.screen` ensures that the nested object is cloned too. Nice, now `laptopDeepClone` is a full clone of `laptop` object.  
 
-##### The prototype is lost  
+#### The prototype is lost  
 
 The code snippet below declares a class `Game`, and creates an instance of this class `doom`:
 
@@ -344,7 +346,7 @@ console.log(doomFullClone.getMessage());    // => "I like Doom!"
 
 Ok, enough with prototypes. I promise.  
 
-#### 2.3 Immutable object update
+### 2.3 Immutable object update
 
 When the same object is shared across many places of an application, a direct modification of it might lead to unexpected side effects. Tracing such modifications is a tedious task.  
 
@@ -387,7 +389,7 @@ The significant property values are specified at the end, to match the spread ru
 
 `newerBook` is a new object with updated properties. Meanwhile the original `book` remains intact. Immutability is satisfied.  
 
-#### 2.4 Merging objects  
+### 2.4 Merging objects  
 
 Merging is straightforward since you may spread properties of any number of objects. 
 
@@ -447,7 +449,7 @@ console.log(car);
 ```
 The first object spread `...part1` sets the value of `.configuration` to `'sedan'`. Nevertheless the latter object spread `...part3` overwrites the previous `.configuration` value, making it finally `'hatchback'`.  
 
-#### 2.5 Filling an object with defaults
+### 2.5 Filling an object with defaults
 
 An object can have different sets of properties on runtime. Some properties might be set, others might be missing.  
 
@@ -507,7 +509,7 @@ As result `safeConfig` has the full set of properties that `multiline()` main co
 
 Object spread's implementation of defaults is intuitive, which is great.    
 
-#### 2.6 "We need to go deeper"  
+### 2.6 "We need to go deeper"  
 
 The cool thing about object spread is the possibility to use on nested objects. That's a great readability win when updating a big object, and is recommended over `Object.assign()` alternative.  
 
@@ -582,7 +584,7 @@ console.log(blackBox);
 */
 ```  
 
-#### 2.7 Spread undefined, null and primitives
+### 2.7 Spread undefined, null and primitives
 
 When spreading properties an of `undefined`, `null` or a primitive value no properties are extracted, and no error is thrown. The result is a plain empty object:  
 
@@ -600,7 +602,7 @@ Object spread extracts no properties from `nothing`, `missingObject` and `two`.
 
 Of course, there is no reason to use object spread on primitive values.  
 
-### 3. Object rest properties  
+## 3. Object rest properties  
 
 After extracting properties of an object to variables using a destructuring assignment, the remaining properties can be collected into a rest object.  
 
@@ -626,7 +628,7 @@ Object rest collects only own and enumerable properties.
 Notice that object rest must be the last element in the destructuring assignment. 
 Hence the code `const { ...margin , width  } = style` is invalid and would trigger a `SyntaxError: Rest element must be last element`.  
 
-### 4. Conclusion  
+## 4. Conclusion  
 
 Object spread has a few rules to remember: 
 

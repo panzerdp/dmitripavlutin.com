@@ -99,7 +99,7 @@ If you find SRP a bit obscured, check out [this article](https://8thlight.com/bl
 
 Units written at early project stage *will change often* until reaching the release stage. These *change often* components are required to be *easily modifiable in isolation*: a goal of the SRP.  
 
-## 1.1 The pitfall of multiple responsibilities  
+### 1.1 The pitfall of multiple responsibilities  
 
 A common oversight happens when a component has multiple responsibilities. At first glance, this practice seems harmless and requires less work: 
 
@@ -125,7 +125,7 @@ The worst case of multiple responsibilities problem is so called God component a
 
 Dissolve God components by having them conform to SRP with the [help of composition](#31-composition-benefits).  
 
-###1.2 Case study: make component have one responsibility  
+### 1.2 Case study: make component have one responsibility  
 
 Imagine a component that makes an HTTP request to a specialized server to get the current weather. When data is successfully fetched, the same component uses the response to display the weather:   
 
@@ -972,7 +972,6 @@ or:
   Some content
 </div>
 ```
-
 
 The second problem is testing difficulties. To test how component handles `null` site name, you have to modify the global variable `globalConfig.siteName = null` manually:  
 
