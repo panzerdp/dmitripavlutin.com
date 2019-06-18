@@ -2,7 +2,7 @@ const path = require('path');
 
 const { TO_INDEX, TO_PAGE } = require('../../src/routes/path.js');
 
-const POSTS_PER_PAGE = 8;
+const POSTS_PER_PAGE = 10;
 
 const pageComponentPath = path.resolve(__dirname, '../../src/components/Pages/ExcerptsList/Fetch/index.tsx');
 

@@ -32,7 +32,8 @@
 }
 
 .continueReading {
-  white-space: nowrap;
+  display: block;
+  margin-top: 0.5rem;
 }
 
 @media (max-width: $small-device-width) {
