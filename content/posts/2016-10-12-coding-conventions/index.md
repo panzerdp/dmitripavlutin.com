@@ -103,7 +103,7 @@ Just exactly what it does.
 
 I don't see a problem if a function is renamed multiple times to find the best name that describes it. A fresh view over an old function may help finding a better name.
 
-##3. Use natural language with argument labels
+## 3. Use natural language with argument labels
 
 Not sure if someone is happy to read the assembly language. Such language is natural for computer hardware, but quite hard to process by human brain.  
 
