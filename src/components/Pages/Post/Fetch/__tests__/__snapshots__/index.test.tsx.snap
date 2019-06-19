@@ -16,7 +16,6 @@ exports[`<PostFetch /> should render post template 1`] = `
         "stackoverflow": "https://stackoverflow.com/users/1894471/dmitri-pavlutin",
         "twitter": "https://twitter.com/panzerdp",
       },
-      "speciality": "Software developer",
     }
   }
   authorProfilePictureSrc="/image.png"

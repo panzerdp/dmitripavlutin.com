@@ -16,7 +16,6 @@ exports[`<LayoutFetch /> should render the layout container 1`] = `
         "stackoverflow": "https://stackoverflow.com/users/1894471/dmitri-pavlutin",
         "twitter": "https://twitter.com/panzerdp",
       },
-      "speciality": "Software developer",
     }
   }
   authorProfilePicture={

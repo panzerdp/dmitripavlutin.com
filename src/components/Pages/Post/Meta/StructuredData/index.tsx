@@ -42,7 +42,7 @@ export default function PostMetaStructuredData({
       },
       url: siteInfo.url,
       sameAs: sameAs,
-      description: authorInfo.speciality,
+      description: authorInfo.description,
     },
     headline: post.title,
     url: postUrl,

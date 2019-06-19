@@ -13,7 +13,6 @@ interface Nicknames {
 
 interface AuthorInfo {
   name: string;
-  speciality: string;
   description: string;
   profiles: Profiles;
   nicknames: Nicknames;

@@ -8,9 +8,10 @@ import styles from './index.module.scss';
 interface HeaderProps {
   authorProfilePicture: FixedImage;
   authorInfo: AuthorInfo;
+  siteInfo: SiteInfo;
 }
 
-export default function Header({ authorProfilePicture, authorInfo }: HeaderProps) {
+export default function Header({ authorProfilePicture, authorInfo, siteInfo }: HeaderProps) {
   return (
     <header>
       <div className={styles.headerContent}>
@@ -21,7 +22,7 @@ export default function Header({ authorProfilePicture, authorInfo }: HeaderProps
           <Link to={TO_INDEX()} className={styles.name}>
             {authorInfo.name}
           </Link>
-          <div className={styles.speciality}>{authorInfo.speciality}</div>
+          <div className={styles.speciality}>{siteInfo.description}</div>
         </div>
         <div className={styles.links}>
           <Link to={TO_ALL_POSTS()}>All posts</Link>

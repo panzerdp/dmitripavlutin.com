@@ -15,7 +15,6 @@ const siteInfo: SiteInfo = {
 
 const authorInfo: AuthorInfo = {
   name: 'Dmitri Pavlutin',
-  speciality: 'Software developer',
   description: 'Dmitri Pavlutin is a software developer specialized in Frontend technologies',
   profiles: {
     stackoverflow: 'https://stackoverflow.com/users/1894471/dmitri-pavlutin',
@@ -56,7 +55,11 @@ describe('<LayoutMetaTags />', function() {
 
   it('should render header', function() {
     const wrapper = shallow(<LayoutContainer {...props}>Child</LayoutContainer>);
-    expect(wrapper.contains(<LayoutHeader authorProfilePicture={authorProfilePicture} authorInfo={authorInfo} />));
+    expect(
+      wrapper.contains(
+        <LayoutHeader authorProfilePicture={authorProfilePicture} authorInfo={authorInfo} siteInfo={siteInfo} />
+      )
+    );
   });
 
   it('should render footer', function() {

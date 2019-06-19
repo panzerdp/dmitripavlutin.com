@@ -36,7 +36,7 @@ exports[`<PostMetaStructuredData /> should render structured data 1`] = `
       "https://github.com/panzerdp",
       "https://www.facebook.com/dmitri.pavlutin"
     ],
-    "description": "Software developer"
+    "description": "Dmitri Pavlutin is a software developer specialized in Frontend technologies"
   },
   "headline": "Useful techniques to facilitate React server-side rendering",
   "url": "https://dmitripavlutin.com//useful-techniques-react-server-side-rendering/",
