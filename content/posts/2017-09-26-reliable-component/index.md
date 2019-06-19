@@ -6,7 +6,7 @@ modified: "2017-09-26"
 thumbnail: "./images/temple.jpg"
 slug: 7-architectural-attributes-of-a-reliable-react-component
 tags: ['react', 'component', 'architecture']
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["the-path-of-software-development-craftsmanship", "gentle-explanation-of-this-in-javascript"]
 type: post
 ---
 

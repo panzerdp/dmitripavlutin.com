@@ -6,7 +6,7 @@ modified: "2016-05-01"
 thumbnail: "./images/cover.jpg"
 slug: understanding-constructor-property
 tags: ["javascript", "constructor"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["power-up-the-array-creation-in-javascript", "6-ways-to-declare-javascript-functions"]
 type: post
 ---
 

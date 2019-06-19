@@ -6,7 +6,7 @@ modified: "2016-11-09"
 thumbnail: "./images/portrait.png"
 slug: how-to-use-correctly-self-keyword-in-swift
 tags: ["swift", "self"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["useful-details-about-underscore-keyword-in-swift", "mastering-swift-essential-details-about-strings"]
 type: post
 ---
 

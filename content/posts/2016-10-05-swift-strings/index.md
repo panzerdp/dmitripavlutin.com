@@ -6,7 +6,7 @@ modified: "2016-10-05"
 thumbnail: "./images/cover.jpg"
 slug: mastering-swift-essential-details-about-strings
 tags: ["swift", "string", "unicode"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["make-your-swift-code-expressive-addition-operator-use-cases", "how-to-use-correctly-self-keyword-in-swift"]
 type: post
 ---
 

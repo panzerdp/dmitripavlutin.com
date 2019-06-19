@@ -6,7 +6,7 @@ modified: "2016-05-22"
 thumbnail: "./images/cover.jpg"
 slug: gentle-explanation-of-this-in-javascript
 tags: ["javascript", "this"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["6-ways-to-declare-javascript-functions", "when-not-to-use-arrow-functions-in-javascript"]
 type: post
 ---
 

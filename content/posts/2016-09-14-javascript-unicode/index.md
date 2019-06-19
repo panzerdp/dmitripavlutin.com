@@ -6,7 +6,7 @@ modified: "2016-09-14"
 thumbnail: "./images/cover.jpg"
 slug: what-every-javascript-developer-should-know-about-unicode
 tags: ["javascript", "string", "unicode"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["javascriptss-addition-operator-demystified", "announcing-voca-the-ultimate-javascript-string-library"]
 type: post
 ---
 

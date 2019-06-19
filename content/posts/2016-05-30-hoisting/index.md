@@ -6,7 +6,7 @@ modified: "2016-05-30"
 thumbnail: "./images/cover.jpg"
 slug: javascript-hoisting-in-details
 tags: ["javascript", "hoisting", "es2015"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["variables-lifecycle-and-why-let-is-not-hoisted", "6-ways-to-declare-javascript-functions"]
 type: post
 ---
 

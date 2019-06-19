@@ -6,7 +6,7 @@ modified: "2016-06-22"
 thumbnail: "./images/cover.jpg"
 slug: 6-ways-to-declare-javascript-functions
 tags: ["javascript", "function"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["when-not-to-use-arrow-functions-in-javascript", "javascript-hoisting-in-details"]
 type: post
 ---
 

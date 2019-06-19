@@ -6,7 +6,7 @@ modified: "2016-10-12"
 thumbnail: "./images/cover.jpg"
 slug: coding-like-shakespeare-practical-function-naming-conventions
 tags: ["clean code"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["the-path-of-software-development-craftsmanship", "the-art-of-writing-small-and-plain-functions"]
 type: post
 ---
 

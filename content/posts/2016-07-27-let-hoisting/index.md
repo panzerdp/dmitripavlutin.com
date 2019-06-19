@@ -6,7 +6,7 @@ modified: "2016-07-27"
 thumbnail: "./images/cover.jpg"
 slug: variables-lifecycle-and-why-let-is-not-hoisted
 tags: ["javascript", "hoisting"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["javascript-hoisting-in-details", "make-your-javascript-code-shide-knockout-old-es5-hack"]
 type: post
 ---
 

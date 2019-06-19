@@ -6,7 +6,7 @@ modified: "2016-09-28"
 thumbnail: "./images/cover.jpg"
 slug: useful-tips-for-migrating-to-swift-3-0
 tags: ["swift"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["mastering-swift-essential-details-about-strings", "concise-initialization-of-collections-in-swift"]
 type: post
 ---
 

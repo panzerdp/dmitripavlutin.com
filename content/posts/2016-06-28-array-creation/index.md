@@ -6,7 +6,7 @@ modified: "2016-06-28"
 thumbnail: "./images/cover.jpg"
 slug: power-up-the-array-creation-in-javascript
 tags: ["javascript", "array"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["the-magic-behind-array-length-property", "how-three-dots-changed-javascript"]
 type: post
 ---
 

@@ -6,7 +6,7 @@ modified: "2016-07-12"
 thumbnail: "./images/cover.jpg"
 slug: must-know-details-about-es2016-features
 tags: ["javascript", "es2016"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["make-your-javascript-code-shide-knockout-old-es5-hack", "object-rest-spread-properties-javascript"]
 type: post
 ---
 

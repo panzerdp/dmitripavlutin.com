@@ -6,7 +6,7 @@ modified: "2016-06-14"
 thumbnail: "./images/cover.jpg"
 slug: how-three-dots-changed-javascript
 tags: ["javascript", "spread", "rest"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["object-rest-spread-properties-javascript", "7-tips-to-handle-undefined-in-javascript"]
 type: post
 ---
 

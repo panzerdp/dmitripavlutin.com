@@ -6,7 +6,7 @@ modified: "2016-01-17"
 thumbnail: "./images/cover.jpg"
 slug: the-magic-behind-array-length-property
 tags: ["javascript", "array"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["power-up-the-array-creation-in-javascript", "how-to-iterate-easily-over-object-properties-in-javascript"]
 type: post
 ---
 

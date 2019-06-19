@@ -6,7 +6,7 @@ modified: "2016-07-20"
 thumbnail: "./images/cover.jpg"
 slug: why-object-literals-in-javascript-are-cool
 tags: ["javascript", "object literal", "es2015"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["how-three-dots-changed-javascript", "object-rest-spread-properties-javascript"]
 type: post
 ---
 

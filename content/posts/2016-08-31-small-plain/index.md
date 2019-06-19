@@ -6,7 +6,7 @@ modified: "2016-08-31"
 thumbnail: "./images/cover.jpg"
 slug: the-art-of-writing-small-and-plain-functions
 tags: ["javascript", "function", "clean code"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["the-path-of-software-development-craftsmanship", "make-your-javascript-code-shide-knockout-old-es5-hack"]
 type: post
 ---
 

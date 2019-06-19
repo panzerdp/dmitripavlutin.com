@@ -6,7 +6,7 @@ modified: "2016-01-02"
 thumbnail: "./images/cover.jpg"
 slug: javascriptss-addition-operator-demystified
 tags: ["javascript", "addition"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["the-legend-of-javascript-equality-operator", "what-every-javascript-developer-should-know-about-unicode"]
 type: post
 ---
 

@@ -6,7 +6,7 @@ modified: "2016-09-21"
 thumbnail: "./images/cover.jpg"
 slug: the-path-of-software-development-craftsmanship
 tags: ["javascript", "craftsmanship"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["coding-like-shakespeare-practical-function-naming-conventions", "the-art-of-writing-small-and-plain-functions"]
 type: post
 ---
 

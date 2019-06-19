@@ -6,7 +6,7 @@ modified: "2016-06-06"
 thumbnail: "./images/cover.png"
 slug: when-not-to-use-arrow-functions-in-javascript
 tags: ["javascript", "arrow function"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["6-ways-to-declare-javascript-functions", "gentle-explanation-of-this-in-javascript"]
 type: post
 ---
 

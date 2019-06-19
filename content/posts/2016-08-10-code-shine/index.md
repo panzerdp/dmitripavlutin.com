@@ -6,7 +6,7 @@ modified: "2016-08-10"
 thumbnail: "./images/cover.jpg"
 slug: make-your-javascript-code-shide-knockout-old-es5-hack
 tags: ["javascript", "es2015"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["make-your-javascript-code-shine-knockout-old-es5-hacks-part-2", "must-know-details-about-es2016-features"]
 type: post
 ---
 

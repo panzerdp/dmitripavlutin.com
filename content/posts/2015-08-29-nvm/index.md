@@ -6,7 +6,7 @@ modified: "2015-08-29"
 thumbnail: "./images/cover.jpg"
 slug: install-node-like-a-boss-with-nvm
 tags: ["nodejs"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "object-rest-spread-properties-javascript"]
+recommended: ["gentle-explanation-of-this-in-javascript", "how-three-dots-changed-javascript"]
 type: post
 ---
 
