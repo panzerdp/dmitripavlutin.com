@@ -4,24 +4,16 @@ type: "about"
 
 # About me
 
-My name is Dmitri Pavlutin. I'm a software developer who specializes in Frontend development: JavaScript/TypeScript, React and CSS technologies. I have good experience in iOS mobile development too.   
+My name is Dmitri Pavlutin. I'm a software developer who specializes in Frontend development.  
 
-I enjoy creating systems that are clean and extensible. I apply principles and practices like SOLID, Test-driven development (TDD), Ports and adapters architecture, Domain-Driven Design.  
+The tech stack I'm currently working with is JavaScript, TypeScript, React, CSS. Plus I have experience in native iOS mobile development.   
+
+I apply principles and practices like SOLID, Test-driven development (TDD), Domain-Driven Design, carefully selecting the right system design.  
 
 ![Dmitri Pavlutin Ocean Picture](./images/dmitri-pavlutin-ocean.png)
 
-## Availability
+In this blog I write regularly about my Frontend development experience. Writing helps structuring my knowledge, and get feedback on my opinions.  
 
-I am opened to interesting Frontend job opportunities. You're welcome to send me an email to [dmitripavlutin@gmail.com](mailto:dmitripavlutin@gmail.com).  
+I maintain an open source JavaScript library [vocajs.com](https://vocajs.com). From time to time I help fellow developers on [Stackoverflow](http://stackoverflow.com/users/1894471/dmitri-pavlutin). 
 
-## Open source
-
-I have a belief in the power of the Open Source software. Check my open source JavaScript library [vocajs.com](https://vocajs.com).  
-
-## Community
-
-My passion is to constantly learn and teach. This blog is a way to help people become better through learning and discussing. Follow me [@panzerdp](https://twitter.com/panzerdp) to get in touch with the latest publications.  
-
-From time to time [I share my experience](http://stackoverflow.com/users/1894471/dmitri-pavlutin) on Stackoverflow. 
-
-Contact me at [dmitripavlutin@gmail.com](mailto:dmitripavlutin@gmail.com).  
+You're welcome to contact me at [dmitripavlutin@gmail.com](mailto:dmitripavlutin@gmail.com).
