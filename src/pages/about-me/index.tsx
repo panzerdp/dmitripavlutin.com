@@ -11,7 +11,7 @@ interface AboutFetchProps {
 export default function AboutFetch({ data }: AboutFetchProps) {
   const edges = data.allMarkdownRemark.edges;
   if (edges.length === 0) {
-    throw new Error('About page content not found. Create a markdown file which type is "about"');
+    throw new Error('About me page content not found. Create a markdown file which type is "about-me"');
   }
   return <AboutTemplate authorInfo={data.site.siteMetadata.authorInfo} html={edges[0].node.html} />;
 }
@@ -25,7 +25,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allMarkdownRemark(filter: { frontmatter: { type: { eq: "about" } } }) {
+    allMarkdownRemark(filter: { frontmatter: { type: { eq: "about-me" } } }) {
       edges {
         node {
           html

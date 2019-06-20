@@ -2,7 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import LayoutFooter from '../index';
-import { TO_ABOUT, TO_ALL_POSTS, TO_INDEX } from 'routes/path';
+import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX } from 'routes/path';
 
 const authorInfo: AuthorInfo = {
   name: 'Dmitri Pavlutin',
@@ -28,7 +28,7 @@ describe('<LayoutFooter />', function() {
   it('should render navigation links', function() {
     const wrapper = shallow(<LayoutFooter authorInfo={authorInfo} />);
     expect(wrapper.find({ to: TO_INDEX() })).toHaveLength(1);
-    expect(wrapper.find({ to: TO_ABOUT() })).toHaveLength(1);
+    expect(wrapper.find({ to: TO_ABOUT_ME() })).toHaveLength(1);
     expect(wrapper.find({ to: TO_ALL_POSTS() })).toHaveLength(1);
   });
 

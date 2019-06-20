@@ -1,5 +1,7 @@
 .recommended {
-  border-top: 1px solid #dae4ed;
+  h3 {
+    margin-top: 0;
+  }
 }
 
 .list {
@@ -8,10 +10,9 @@
   
   > * {
     flex: 1 0 250px;
-    margin-right: 10px;
 
-    &:last-child {
-      margin-right: 0;
+    &:first-child {
+      margin-right: 10px;
     }
   }
 }

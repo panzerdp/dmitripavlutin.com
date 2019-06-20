@@ -3,7 +3,7 @@ import Img from 'gatsby-image';
 import { shallow } from 'enzyme';
 
 import LayoutHeader from '../index';
-import { TO_ABOUT, TO_ALL_POSTS, TO_INDEX } from 'routes/path';
+import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX } from 'routes/path';
 
 const authorInfo: AuthorInfo = {
   name: 'Dmitri Pavlutin',
@@ -50,7 +50,7 @@ describe('<LayoutHeader />', function() {
 
   it('should render navigation links', function() {
     const wrapper = shallow(<LayoutHeader {...props} />);
-    [{ to: TO_INDEX() }, { to: TO_ABOUT() }, { to: TO_ALL_POSTS() }].forEach((linkProps) =>
+    [{ to: TO_INDEX() }, { to: TO_ABOUT_ME() }, { to: TO_ALL_POSTS() }].forEach((linkProps) =>
       expect(wrapper.find(linkProps).length).toBeGreaterThanOrEqual(1)
     );
   });

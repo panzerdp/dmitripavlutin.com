@@ -58,9 +58,15 @@ export default function PostTemplate({
         <ShareGroupVertical url={postUrl} text={post.title} tags={post.tags} show={showShareButtons} />
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
         <Edit url={postRepositoryFileUrl} />
-        <ShareBottom url={postUrl} text={post.title} tags={post.tags} />
-        <RecommendedList posts={recommendedPosts} />
-        <Comments url={postUrl} title={post.title} />
+        <div className={styles.delimiter}>
+          <ShareBottom url={postUrl} text={post.title} tags={post.tags} />
+        </div>
+        <div className={styles.delimiter}>
+          <RecommendedList posts={recommendedPosts} />
+        </div>
+        <div className={styles.delimiter}>
+          <Comments url={postUrl} title={post.title} />
+        </div>
       </article>
     </Layout>
   );

@@ -13,8 +13,8 @@ declare module 'routes/path' {
   export const PATH_ALL_POSTS: string;
   export const TO_ALL_POSTS: () => string;
 
-  export const PATH_ABOUT: string;
-  export const TO_ABOUT: () => string;
+  export const PATH_ABOUT_ME: string;
+  export const TO_ABOUT_ME: () => string;
 
   export const PATH_TAG: string;
   export const TO_TAG: (params: { slug: string }) => string;

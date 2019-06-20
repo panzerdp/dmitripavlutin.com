@@ -1,7 +1,7 @@
 import Link from 'gatsby-link';
 import * as React from 'react';
 
-import { TO_ABOUT, TO_ALL_POSTS, TO_INDEX } from 'routes/path';
+import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX } from 'routes/path';
 import styles from './index.module.scss';
 
 const year = new Date().getFullYear();
@@ -26,7 +26,7 @@ export default function LayoutFooter({ authorInfo: { profiles, name } }: FooterP
           <div className={styles.footerNavigation}>
             <Link to={TO_INDEX()}>Home</Link>
             <Link to={TO_ALL_POSTS()}>All posts</Link>
-            <Link to={TO_ABOUT()}>About</Link>
+            <Link to={TO_ABOUT_ME()}>About me</Link>
           </div>
           <div className={styles.follow}>
             <a href={profiles.twitter} title={`${name}'s Twitter profile`}>

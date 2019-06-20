@@ -1,5 +1,5 @@
 ---
-type: "about"
+type: "about-me"
 ---
 
 # About me

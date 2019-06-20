@@ -2,7 +2,7 @@ import Img from 'gatsby-image';
 import Link from 'gatsby-link';
 import * as React from 'react';
 
-import { TO_ABOUT, TO_ALL_POSTS, TO_INDEX } from 'routes/path';
+import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX } from 'routes/path';
 import styles from './index.module.scss';
 
 interface HeaderProps {
@@ -26,7 +26,7 @@ export default function Header({ authorProfilePicture, authorInfo, siteInfo }: H
         </div>
         <div className={styles.links}>
           <Link to={TO_ALL_POSTS()}>All posts</Link>
-          <Link to={TO_ABOUT()}>About</Link>
+          <Link to={TO_ABOUT_ME()}>About me</Link>
         </div>
       </div>
     </header>

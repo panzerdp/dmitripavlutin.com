@@ -10,8 +10,8 @@ const TO_POST = compile(PATH_POST);
 const PATH_ALL_POSTS = '/all-posts/';
 const TO_ALL_POSTS = compile('/all-posts/');
 
-const PATH_ABOUT = '/about/';
-const TO_ABOUT = compile(PATH_ABOUT);
+const PATH_ABOUT_ME = '/about-me/';
+const TO_ABOUT_ME = compile(PATH_ABOUT_ME);
 
 const PATH_TAG = '/tag/:slug([a-zA-Z0-9-]+)/';
 const TO_TAG = compile(PATH_TAG);
@@ -29,12 +29,12 @@ module.exports = {
   PATH_ALL_POSTS,
   TO_ALL_POSTS,
 
-  PATH_ABOUT,
-  TO_ABOUT,
+  PATH_ABOUT_ME,
+  TO_ABOUT_ME,
 
   PATH_TAG,
   TO_TAG,
 
   PATH_PAGE,
-  TO_PAGE
+  TO_PAGE,
 };
