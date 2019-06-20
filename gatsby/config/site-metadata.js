@@ -4,7 +4,7 @@ module.exports = {
   siteUrl, // ensure compatibility with plugins that require `siteUrl`
   siteInfo: {
     title: 'Dmitri Pavlutin Blog',
-    description: 'Writing about Frontend development',
+    description: 'Thoughts on Frontend development',
     url: siteUrl,
     repositoryUrl: 'https://github.com/panzerdp/dmitripavlutin.com',
   },

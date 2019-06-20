@@ -2,12 +2,13 @@
 
 .excerpt {
   border-radius: 8px;
-  background: #fff;
   overflow: hidden;
+  box-shadow: inset 0 0 0 1px #dae4ed, 0 5px 15px -5px rgba(0, 0, 0, 0.1);
+  background: #fff;
 }
 
 .content {
-  padding: 0 1rem 1.3rem 1rem;
+  padding: 0 1.5rem 1.5rem 1.5rem;
 
   h4 {
     margin: 0;
@@ -16,6 +17,12 @@
       font-size: 1.5rem;
     }
   }
+}
+
+.tags {
+  display: flex;
+  flex-flow: wrap;
+  margin-top: 1rem;
 }
 
 .thumbnailAnchor {

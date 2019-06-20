@@ -4,6 +4,7 @@ import Link from 'gatsby-link';
 import Img from 'gatsby-image';
 
 import PostRecommendedExcerpt from '../index';
+import Tag from 'components/Pages/Common/Tag';
 import { TO_POST } from 'routes/path';
 
 const post: PostExcerpt = {
@@ -34,5 +35,10 @@ describe('<PostRecommendedExcerpt />', function() {
   it('should render the post thumbnail', function() {
     const wrapper = shallow(<PostRecommendedExcerpt {...props} />);
     expect(wrapper.contains(<Img sizes={post.thumbnail} />)).toBe(true);
+  });
+
+  it('should render post tags', function() {
+    const wrapper = shallow(<PostRecommendedExcerpt {...props} />);
+    post.tags.forEach((tag) => expect(wrapper.contains(<Tag name={tag} />)).toBe(true));
   });
 });
