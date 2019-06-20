@@ -13,6 +13,18 @@
   border-top: 1px solid $border-color;
 }
 
+.shareGroup {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+
+  > * {
+    flex: 1 0 250px;
+  }
+}
+
 article h1 {
   font-size: 180%;
 }

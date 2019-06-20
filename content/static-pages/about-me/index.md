@@ -6,13 +6,13 @@ type: "about-me"
 
 My name is Dmitri Pavlutin. I'm a software developer who specializes in Frontend development.  
 
-The tech stack I'm currently working with is JavaScript, TypeScript, React, CSS. Plus I have experience in native iOS mobile development.   
-
-I practice approaches like SOLID, Test-driven development (TDD), Domain-Driven Design, carefully selecting the right system design.  
+In this blog I write my thoughts and experience on Frontend development. Subscribe if you are interested in JavaScript language analysis, clean code practices and efficient system design in the Frontend world.  
 
 ![Dmitri Pavlutin Ocean Picture](./images/dmitri-pavlutin-ocean.png)
 
-In this blog I write regularly about my Frontend development experience. Writing helps me structuring my knowledge and get feedback. 
+The tech stack I'm currently working with is JavaScript, TypeScript, React, CSS. Plus I have experience in native iOS mobile development.   
+
+I practice SOLID principles, Test-driven development (TDD), Domain-Driven Design, careful organization of system design in my daily coding challenges. 
 
 I maintain an open source JavaScript library [vocajs.com](https://vocajs.com). From time to time I help fellow developers on [Stackoverflow](http://stackoverflow.com/users/1894471/dmitri-pavlutin). 
 
