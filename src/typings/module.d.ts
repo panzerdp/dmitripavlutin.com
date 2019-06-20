@@ -22,3 +22,7 @@ declare module 'routes/path' {
   export const PATH_PAGE: string;
   export const TO_PAGE: (params: { page: number }) => string;
 }
+
+declare module 'gatsby-plugin-disqus' {
+  export default (params: { url?: string; title?: string }) => JSX.Element;
+}

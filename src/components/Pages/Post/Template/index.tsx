@@ -13,6 +13,7 @@ import Edit from 'components/Pages/Post/Edit';
 import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import ShareGroupVertical from 'components/Pages/Post/Share/Group/Vertical';
+import Comments from 'components/Pages/Post/Comments';
 import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 
@@ -59,6 +60,7 @@ export default function PostTemplate({
         <Edit url={postRepositoryFileUrl} />
         <ShareBottom url={postUrl} text={post.title} tags={post.tags} />
         <RecommendedList posts={recommendedPosts} />
+        <Comments url={postUrl} title={post.title} />
       </article>
     </Layout>
   );

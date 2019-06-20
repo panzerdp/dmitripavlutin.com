@@ -79,6 +79,12 @@ module.exports = {
     'gatsby-plugin-offline',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
+    {
+      resolve: 'gatsby-plugin-disqus',
+      options: {
+        shortname: 'rainsoft',
+      },
+    },
     require('./gatsby/config/gatsby-plugin-sass'),
     require('./gatsby/config/gatsby-plugin-feed'),
   ],

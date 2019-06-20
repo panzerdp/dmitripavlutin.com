@@ -11,6 +11,7 @@ import Edit from 'components/Pages/Post/Edit';
 import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import ShareGroupVertical from 'components/Pages/Post/Share/Group/Vertical';
+import Comments from 'components/Pages/Post/Comments';
 import { TO_POST } from 'routes/path';
 
 const props = {
@@ -182,5 +183,11 @@ describe('<PostTemplate />', function() {
     const { default: PostTemplate } = require('../index');
     const wrapper = shallow(<PostTemplate {...props} />);
     expect(wrapper.find('ShareGroupVertical').prop('show')).toBe(true);
+  });
+
+  it('should render post comments', function() {
+    const wrapper = shallow(<PostTemplate {...props} />);
+    const article = wrapper.find(Layout).find('article');
+    expect(article.contains(<Comments url={postUrl} title={props.post.title} />)).toBe(true);
   });
 });
