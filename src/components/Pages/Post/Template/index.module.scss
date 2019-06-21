@@ -37,7 +37,7 @@ article code[class*="language-"] {
   font-size: 1rem;
   background-color: #f5f2f0;
   color: black;
-  font-family: Roboto Mono, monospace;
+  font-family: $mono-font-family;
 }
 
 article :not(pre) > code[class*="language-"] {
@@ -51,7 +51,7 @@ code[class*="language-"], pre[class*="language-"] {
   font-size: 1rem;
   padding: 0;
   code {
-    font-family: Roboto Mono, monospace;
+    font-family: $mono-font-family;
   }
 }
 

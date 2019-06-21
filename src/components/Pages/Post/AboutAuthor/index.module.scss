@@ -1,6 +1,8 @@
 @import '~styles/variables';
 
 .aboutAuthor {
+  background-color: rgba($border-color, 0.4);
+  border-radius: 8px;
   margin-bottom: 2rem;
   display: flex;
   flex-wrap: wrap;
