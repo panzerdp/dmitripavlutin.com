@@ -3,12 +3,12 @@
 .excerpt {
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: inset 0 0 0 1px #dae4ed, 0 5px 15px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 0 1px $border-color, 0 5px 15px -5px rgba(0, 0, 0, 0.1);
   background: #fff;
 }
 
 .content {
-  padding: 0 1.5rem 1.5rem 1.5rem;
+  padding: 0 1.2rem 1.2rem 1.2rem;
 
   h4 {
     margin: 0;

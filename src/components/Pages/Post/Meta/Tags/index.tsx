@@ -44,7 +44,7 @@ export default function PostMetaTags({ post, siteInfo, authorInfo }: PostMetaTag
       <meta name="twitter:data1" content={authorInfo.name} />
       <meta name="twitter:label2" content="Filed under" />
       <meta name="twitter:data2" content={post.tags.join(', ')} />
-      <meta name="twitter:creator" content={authorInfo.nicknames.twitter} />
+      <meta name="twitter:creator" content={`@${authorInfo.nicknames.twitter}`} />
     </Helmet>
   );
 }

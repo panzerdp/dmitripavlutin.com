@@ -24,7 +24,7 @@ const authorInfo: AuthorInfo = {
     facebook: 'https://www.facebook.com/dmitri.pavlutin',
   },
   nicknames: {
-    twitter: '@panzerdp',
+    twitter: 'panzerdp',
   },
 };
 

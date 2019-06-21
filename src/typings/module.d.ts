@@ -1,6 +1,8 @@
 declare module '*.scss' {
-  const scssContent: any;
-  export default cssContent;
+  const scssContent: {
+    [index: string]: string;
+  };
+  export default scssContent;
 }
 
 declare module 'routes/path' {
@@ -25,4 +27,8 @@ declare module 'routes/path' {
 
 declare module 'gatsby-plugin-disqus' {
   export default (params: { url?: string; title?: string }) => JSX.Element;
+}
+
+declare module 'react-twitter-embed' {
+  export const TwitterFollowButton: (params: { screenName: string }) => JSX.Element;
 }

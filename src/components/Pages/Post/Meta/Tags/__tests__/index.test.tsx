@@ -42,7 +42,7 @@ const authorInfo = {
     facebook: 'https://www.facebook.com/dmitri.pavlutin',
   },
   nicknames: {
-    twitter: '@panzerdp',
+    twitter: 'panzerdp',
   },
 };
 
@@ -99,7 +99,7 @@ describe('<PostMetaTags />', function() {
       <meta name="twitter:data1" content={authorInfo.name} />,
       <meta name="twitter:label2" content="Filed under" />,
       <meta name="twitter:data2" content={post.tags.join(', ')} />,
-      <meta name="twitter:creator" content={authorInfo.nicknames.twitter} />,
+      <meta name="twitter:creator" content={`@${authorInfo.nicknames.twitter}`} />,
     ].forEach((item) => expect(wrapper.contains(item)).toBe(true));
   });
 });

@@ -29,7 +29,7 @@ const authorInfo = {
     facebook: 'https://www.facebook.com/dmitri.pavlutin',
   },
   nicknames: {
-    twitter: '@panzerdp',
+    twitter: 'panzerdp',
   },
 };
 

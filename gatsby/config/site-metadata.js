@@ -10,7 +10,7 @@ module.exports = {
   },
   authorInfo: {
     name: 'Dmitri Pavlutin',
-    description: 'Dmitri Pavlutin is a software developer specialized in Frontend technologies',
+    description: 'Dmitri Pavlutin is a software developer and tech writer specialized in Frontend technologies.',
     profiles: {
       stackoverflow: 'https://stackoverflow.com/users/1894471/dmitri-pavlutin',
       twitter: 'https://twitter.com/panzerdp',
@@ -19,7 +19,7 @@ module.exports = {
       facebook: 'https://www.facebook.com/dmitri.pavlutin',
     },
     nicknames: {
-      twitter: '@panzerdp',
+      twitter: 'panzerdp',
     },
   },
 };

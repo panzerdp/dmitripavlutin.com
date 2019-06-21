@@ -12,13 +12,14 @@ import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import ShareGroupVertical from 'components/Pages/Post/Share/Group/Vertical';
 import Comments from 'components/Pages/Post/Comments';
+import AboutAuthor from 'components/Pages/Post/AboutAuthor';
 import { TO_POST } from 'routes/path';
 
 const props = {
   authorInfo: {
     name: 'Dmitri Pavlutin',
     nicknames: {
-      twitter: '@panzerdp',
+      twitter: 'panzerdp',
     },
     profiles: {
       facebook: 'https://www.facebook.com/dmitri.pavlutin',
@@ -134,7 +135,9 @@ describe('<PostTemplate />', function() {
   it('should render post content', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
-    expect(article.contains(<div dangerouslySetInnerHTML={{ __html: props.post.html }} />)).toBe(true);
+    expect(
+      article.contains(<div className="postContent" dangerouslySetInnerHTML={{ __html: props.post.html }} />)
+    ).toBe(true);
   });
 
   it('should render edit post link', function() {
@@ -189,5 +192,15 @@ describe('<PostTemplate />', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
     expect(article.contains(<Comments url={postUrl} title={props.post.title} />)).toBe(true);
+  });
+
+  it('should render about author', function() {
+    const wrapper = shallow(<PostTemplate {...props} />);
+    const article = wrapper.find(Layout).find('article');
+    expect(
+      article.contains(
+        <AboutAuthor authorInfo={props.authorInfo} authorProfilePictureSrc={props.authorProfilePictureSrc} />
+      )
+    ).toBe(true);
   });
 });

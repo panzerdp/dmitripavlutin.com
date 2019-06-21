@@ -9,7 +9,7 @@ const html = '<div>Author info</div>';
 const authorInfo: AuthorInfo = {
   name: 'Dmitri Pavlutin',
   nicknames: {
-    twitter: '@panzerdp',
+    twitter: 'panzerdp',
   },
   profiles: {
     facebook: 'https://www.facebook.com/dmitri.pavlutin',

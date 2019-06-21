@@ -14,6 +14,7 @@ import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import ShareGroupVertical from 'components/Pages/Post/Share/Group/Vertical';
 import Comments from 'components/Pages/Post/Comments';
+import AboutAuthor from 'components/Pages/Post/AboutAuthor';
 import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 
@@ -56,15 +57,16 @@ export default function PostTemplate({
         <h1>{post.title}</h1>
         <Subheader tags={post.tags} published={post.published} />
         <ShareGroupVertical url={postUrl} text={post.title} tags={post.tags} show={showShareButtons} />
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
         <div className={styles.shareGroup}>
-          <div className={styles.shareBottom}>
-            <ShareBottom url={postUrl} text={post.title} tags={post.tags} />
-          </div>
           <div className={styles.postEdit}>
             <Edit url={postRepositoryFileUrl} />
           </div>
+          <div className={styles.shareBottom}>
+            <ShareBottom url={postUrl} text={post.title} tags={post.tags} />
+          </div>
         </div>
+        <AboutAuthor authorInfo={authorInfo} authorProfilePictureSrc={authorProfilePictureSrc} />
         <div className={styles.delimiter}>
           <RecommendedList posts={recommendedPosts} />
         </div>

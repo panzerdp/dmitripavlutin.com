@@ -8,7 +8,7 @@ import Layout from 'components/Layout/Fetch';
 const authorInfo: AuthorInfo = {
   name: 'Dmitri Pavlutin',
   nicknames: {
-    twitter: '@panzerdp',
+    twitter: 'panzerdp',
   },
   profiles: {
     facebook: 'https://www.facebook.com/dmitri.pavlutin',

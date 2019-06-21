@@ -1,0 +1,35 @@
+@import '~styles/variables';
+
+.aboutAuthor {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+
+  .profilePicture {
+    flex: 0 0 100px;
+    text-align: center;
+
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+    }
+  }
+
+  .authorInfo {
+    flex: 1 1 0%;
+    padding: 1rem;
+
+    h4 {
+      margin: 0;
+    }
+
+    .description {
+      margin: 0.6rem 0;
+      font-size: 1.2rem;
+    }
+  }
+}

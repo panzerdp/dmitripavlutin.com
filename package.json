@@ -62,6 +62,7 @@
     "react-dom": "16.8.6",
     "react-helmet": "5.2.1",
     "react-intersection-observer": "8.23.0",
+    "react-twitter-embed": "2.0.8",
     "ts-jest": "24.0.2",
     "typescript": "3.5.2"
   },
