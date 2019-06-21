@@ -8,11 +8,11 @@ The blog is powered by [GatsbyJS](https://www.gatsbyjs.org/).
 ## Contributing
 
 You are welcome to contribute to posts (fix typos, add clarifications, increase readability, etc) using pull requests.  
-Posts markdown files are located in [./posts](/content/posts) folder.  
+Posts markdown files are located in [./content/posts](/content/posts) folder.  
 
-## Development installation
+## Development
 
-To compile the blog into HTML content, follow these steps.
+To compile the blog to HTML content, follow these steps.
 
 Install the dependencies within the project root directory:
 
@@ -26,7 +26,7 @@ Then run the gatsby develop command:
 npm run dev
 ```
 
-The blog is available at http://localhost:8000/.
+The blog is now available at http://localhost:8000/.
 
 You can also generate TypeScript types from GraphQL queries:
 

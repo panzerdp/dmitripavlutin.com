@@ -2,26 +2,15 @@
 
 .postEdit {
   a {
-    font-size: 1.3rem;
-    float: right;
+    display: flex;
+    align-items: center;
 
     img {
       width: 1rem;
       background-color: rgba($anchor-color, 0.9);
       border-radius: 4px;
       padding: 0.25rem;
-      vertical-align: middle;
       margin-right: 0.4rem;
     }
-
-    span {
-      vertical-align: middle;
-    }
   }
-}
-
-.postEdit:after {
-  content: ' ';
-  display: table;
-  clear: both;
 }

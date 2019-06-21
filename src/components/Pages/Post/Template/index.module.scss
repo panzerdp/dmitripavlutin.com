@@ -16,12 +16,12 @@
 .shareGroup {
   display: flex;
   flex-flow: wrap;
-  justify-content: space-between;
   align-items: center;
-  margin: 2rem 0;
+  justify-content: space-between;
+  margin: 1.5rem 0;
 
-  > * {
-    flex: 1 0 250px;
+  .shareBottom, .postEdit {
+    margin: 0.5rem 0;
   }
 }
 
@@ -113,5 +113,9 @@ blockquote {
 @media (max-width: $small-device-width) {
   article h1 {
     font-size: 1.25em;
+  }
+
+  .shareGroup {
+    justify-content: center;
   }
 }
