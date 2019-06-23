@@ -4,7 +4,7 @@ footer {
   width: 100%;
   box-sizing: border-box;
   background-color: rgba($border-color, 0.2);
-  padding: 0.5rem;
+  padding: 0.8rem;
   font-size: 1.3rem;
 }
 
@@ -24,7 +24,9 @@ footer {
 
     a {
       margin-right: 0.8rem;
+      font-size: 1.5rem;
     }
+
     a:last-child {
       margin-right: 0;
     }
