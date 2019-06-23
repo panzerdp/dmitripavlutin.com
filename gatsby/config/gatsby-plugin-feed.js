@@ -8,7 +8,10 @@ module.exports = {
             siteInfo {
               title
               description
-              site_url: url
+              url
+            }
+            authorInfo {
+              name
             }
           }
         }
@@ -17,15 +20,23 @@ module.exports = {
     setup: ({ query }) => query.site.siteMetadata.siteInfo,
     feeds: [
       {
-        serialize: ({ query: { site, allMarkdownRemark } }) => {
+        serialize: ({
+          query: {
+            site: {
+              siteMetadata: { siteInfo, authorInfo },
+            },
+            allMarkdownRemark,
+          },
+        }) => {
           return allMarkdownRemark.edges.map((edge) => {
-            const url = site.siteMetadata.siteInfo.url + '/' + edge.node.frontmatter.slug + '/';
+            const url = siteInfo.url + '/' + edge.node.frontmatter.slug + '/';
             return Object.assign({}, edge.node.frontmatter, {
               description: edge.node.frontmatter.description,
               url,
               guid: url,
               categories: edge.node.frontmatter.tags,
               custom_elements: [{ 'content:encoded': edge.node.html }],
+              author: authorInfo.name,
             });
           });
         },
