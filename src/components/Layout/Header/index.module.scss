@@ -45,20 +45,18 @@ header {
 
 .profileInfo {
   margin-right: auto;
-  flex: 1 1 0;
+  flex: 1 0 200px;
 }
 
 .links {
-  a {
-    margin-left: 1rem;
-    font-size: 1.5rem;
-  }
-}
+  flex: 1 1 auto; 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1rem 0;
 
-@media (max-width: $small-device-width) {
-  .links {
-    width: 100%;
-    text-align: center;
-    margin: 0.5rem 0;
+  a {
+    margin: 0 0.5rem;
+    font-size: 1.5rem;
   }
 }

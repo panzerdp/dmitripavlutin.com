@@ -21,9 +21,12 @@ footer {
 
   .footerNavigation {
     text-align: right;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 
     a {
-      margin-right: 0.8rem;
+      margin: 0 0.5rem;
       font-size: 1.5rem;
     }
 

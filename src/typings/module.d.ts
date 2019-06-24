@@ -23,6 +23,9 @@ declare module 'routes/path' {
 
   export const PATH_PAGE: string;
   export const TO_PAGE: (params: { page: number }) => string;
+
+  export const PAGE_NEWSLETTER: string;
+  export const TO_NEWSLETTER: () => string;
 }
 
 declare module 'gatsby-plugin-disqus' {

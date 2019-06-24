@@ -19,6 +19,9 @@ const TO_TAG = compile(PATH_TAG);
 const PATH_PAGE = '/page/:page([0-9]+)/';
 const TO_PAGE = compile(PATH_PAGE);
 
+const PATH_NEWSLETTER = '/newsletter/';
+const TO_NEWSLETTER = compile(PATH_NEWSLETTER);
+
 module.exports = {
   PATH_INDEX,
   TO_INDEX,
@@ -37,4 +40,7 @@ module.exports = {
 
   PATH_PAGE,
   TO_PAGE,
+
+  PATH_NEWSLETTER,
+  TO_NEWSLETTER,
 };

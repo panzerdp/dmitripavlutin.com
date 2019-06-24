@@ -4,9 +4,9 @@ type: "about-me"
 
 # About me
 
-My name is Dmitri Pavlutin. I'm a software developer who specializes in Frontend development.  
+My name is Dmitri Pavlutin. I'm a software developer specialized in Frontend technologies.  
 
-In this blog I write my thoughts and experience on Frontend development. Subscribe if you are interested in JavaScript language analysis, clean code practices and efficient system design in the Frontend world.  
+In this blog I write my thoughts and experience on Frontend development. [Subscribe](/newsletter/) if you are interested in knowing more about JavaScript language analysis, clean code practices and efficient system design.  
 
 ![Dmitri Pavlutin Ocean Picture](./images/dmitri-pavlutin-ocean.png)
 

@@ -8,6 +8,7 @@ interface LayoutMetaTagsProps {
 export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps) {
   return (
     <Helmet>
+      <link rel="preconnect" href="//fonts.gstatic.com/" crossOrigin="" />
       <title>{siteInfo.title}</title>
       <meta name="description" content={siteInfo.description} />
       <link
