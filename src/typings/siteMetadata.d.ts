@@ -24,3 +24,8 @@ interface SiteInfo {
   url: string;
   repositoryUrl: string;
 }
+
+interface EmailSubscriptionService {
+  endpoint: string;
+  hiddenFieldName: string;
+}

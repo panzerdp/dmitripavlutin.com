@@ -1,0 +1,53 @@
+@import '~styles/variables';
+
+.subscribe {
+  background-color: rgba($border-color, 0.4);
+  border-radius: 8px;
+  padding: 1rem;
+
+  .subscribeForm {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid $anchor-color;
+    border-radius: 3px;
+    overflow: hidden;
+
+    .emailField {
+      flex: 1 1 300px;
+
+      .email {
+        border: none;
+        width: 100%;
+        padding: 1rem;      
+        font-family: $serif-font-family;
+      }
+    }
+
+    .submit {
+      border: none;
+      background-color: rgba($anchor-color, 0.9);
+      color: white;
+      font-weight: bold;
+      font-family: $sans-serif-font-family;
+      font-size: 1.2rem;
+      cursor: pointer;
+      flex: 1 1 100px;
+      min-height: 40px;      
+
+      &:hover {
+        background-color: rgba($anchor-color, 1);
+      }
+    }
+
+    .hiddenField {
+      position: absolute;
+      left: -5000px;
+    }
+  }
+
+  .subscriptionInfo {
+    font-style: italic;
+    font-size: 1.1rem;
+    padding-top: 0.5rem;
+  }
+}
