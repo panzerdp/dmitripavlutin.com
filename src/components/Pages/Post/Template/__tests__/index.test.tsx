@@ -71,6 +71,10 @@ const props = {
     title: 'Dmitri Pavlutin blog',
     url: 'https://dmitripavlutin.com',
   },
+  carbonAdsService: {
+    scriptSrc: 'http://example.com/script.js',
+    enabled: true,
+  },
 };
 
 const postUrl = props.siteInfo.url + TO_POST({ slug: props.post.slug });

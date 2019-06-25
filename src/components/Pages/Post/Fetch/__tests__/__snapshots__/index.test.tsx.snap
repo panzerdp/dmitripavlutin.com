@@ -19,6 +19,12 @@ exports[`<PostFetch /> should render post template 1`] = `
     }
   }
   authorProfilePictureSrc="/image.png"
+  carbonAdsService={
+    Object {
+      "enabled": true,
+      "scriptSrc": "http://example.com/script.js",
+    }
+  }
   post={
     Object {
       "description": "Useful techniques to facilitate React server-side rendering.",

@@ -10,8 +10,7 @@ interface PostTemplateFetchProps {
 }
 
 export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
-  const siteInfo: SiteInfo = data.site.siteMetadata.siteInfo;
-  const authorInfo: AuthorInfo = data.site.siteMetadata.authorInfo;
+  const { siteInfo, authorInfo, carbonAdsService } = data.site.siteMetadata;
   const { markdownRemark, recommendedPosts, authorProfilePicture } = data;
   const post: Post = {
     ...markdownRemark.frontmatter,
@@ -28,6 +27,7 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
     <PostTemplate
       siteInfo={siteInfo}
       authorInfo={authorInfo}
+      carbonAdsService={carbonAdsService}
       postRepositoryFileUrl={postRepositoryFileUrl}
       post={post}
       recommendedPosts={posts}
@@ -59,6 +59,11 @@ export const pageQuery = graphql`
     }
   }
 
+  fragment CarbonAdsServiceAll on SiteSiteMetadataCarbonAdsService {
+    scriptSrc
+    enabled
+  }
+
   fragment PostExcerpt on MarkdownRemarkFrontmatter {
     title
     description
@@ -82,6 +87,9 @@ export const pageQuery = graphql`
         }
         authorInfo {
           ...AuthorInfoAll
+        }
+        carbonAdsService {
+          ...CarbonAdsServiceAll
         }
       }
     }
