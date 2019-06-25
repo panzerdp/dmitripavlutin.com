@@ -17,7 +17,7 @@ export default function SubscribeForm({ emailSubscriptionService: { endpoint, hi
         className={styles.subscribeForm}
       >
         <div className={styles.emailField}>
-          <input type="email" name="EMAIL" className={styles.email} placeholder="Enter your email" />
+          <input type="email" name="EMAIL" tabIndex={0} className={styles.email} placeholder="Enter your email" />
         </div>
         <button type="submit" name="subscribe" className={styles.submit}>
           Subscribe
@@ -26,7 +26,7 @@ export default function SubscribeForm({ emailSubscriptionService: { endpoint, hi
           <input type="text" name={hiddenFieldName} tabIndex={-1} />
         </div>
       </form>
-      <div className={styles.subscriptionInfo}>*No spam. One click to unsubscribe.</div>
+      <div className={styles.subscriptionInfo}>*I will never spam. One click to unsubscribe.</div>
     </div>
   );
 }
