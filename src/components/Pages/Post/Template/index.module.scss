@@ -31,6 +31,18 @@
 
 article h1 {
   font-size: 180%;
+  position: relative;
+}
+
+.bannerContainer {
+  position: relative;
+
+  .banner {
+    position: absolute;
+    top: 0;
+    right: -150px;
+    padding: 1rem 0 0.5rem 0.5rem;
+  }
 }
 
 article code[class*="language-"] {
@@ -111,6 +123,14 @@ blockquote {
   .postCover {
     margin: 1rem 0;
     transform: none;
+  }
+
+  .bannerContainer {
+    float: right;
+
+    .banner {
+      position: static;
+    }
   }
 }
 

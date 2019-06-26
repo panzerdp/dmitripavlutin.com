@@ -59,7 +59,9 @@ export default function PostTemplate({
         </div>
         <h1>{post.title}</h1>
         <Subheader tags={post.tags} published={post.published} />
-        <CarbondAdsBanner carbonAdsService={carbonAdsService} />
+        <div className={styles.bannerContainer}>
+          <CarbondAdsBanner carbonAdsService={carbonAdsService} className={styles.banner} />
+        </div>
         <ShareGroupVertical url={postUrl} text={post.title} tags={post.tags} show={showShareButtons} />
         <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
         <div className={styles.shareGroup}>
