@@ -40,8 +40,8 @@ article h1 {
   .banner {
     position: absolute;
     top: 0;
-    right: -180px;
-    padding: 1rem 0 0.5rem 0.5rem;
+    right: 0;
+    transform: translateX(100%);
   }
 }
 
@@ -130,6 +130,7 @@ blockquote {
 
     .banner {
       position: static;
+      transform: none;
     }
   }
 }

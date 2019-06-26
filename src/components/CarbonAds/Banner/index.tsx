@@ -20,7 +20,7 @@ export default class CarbonAdsBanner extends React.Component<CarbonAdsBannerProp
       return null;
     }
     const { className = '' } = this.props;
-    return <div ref={this.container} className={className}></div>;
+    return <div ref={this.container} className={`${styles.carbonAdsBanner} ${className}`}></div>;
   }
 
   public componentDidMount(): void {
