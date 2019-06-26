@@ -21,7 +21,8 @@ exports[`<PostFetch /> should render post template 1`] = `
   authorProfilePictureSrc="/image.png"
   carbonAdsService={
     Object {
-      "enabled": true,
+      "isEnabled": true,
+      "isProductionMode": true,
       "scriptSrc": "http://example.com/script.js",
     }
   }

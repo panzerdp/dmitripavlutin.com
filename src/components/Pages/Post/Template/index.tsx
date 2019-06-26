@@ -15,7 +15,7 @@ import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import ShareGroupVertical from 'components/Pages/Post/Share/Group/Vertical';
 import Comments from 'components/Pages/Post/Comments';
 import AboutAuthor from 'components/Pages/Post/AboutAuthor';
-import CarbondAds from 'components/Pages/Common/CardonAds';
+import CarbondAdsBanner from 'components/CarbonAds/Banner';
 import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 
@@ -59,7 +59,7 @@ export default function PostTemplate({
         </div>
         <h1>{post.title}</h1>
         <Subheader tags={post.tags} published={post.published} />
-        <CarbondAds carbonAdsService={carbonAdsService} />
+        <CarbondAdsBanner carbonAdsService={carbonAdsService} />
         <ShareGroupVertical url={postUrl} text={post.title} tags={post.tags} show={showShareButtons} />
         <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
         <div className={styles.shareGroup}>

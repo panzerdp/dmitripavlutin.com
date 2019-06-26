@@ -61,7 +61,8 @@ export const pageQuery = graphql`
 
   fragment CarbonAdsServiceAll on SiteSiteMetadataCarbonAdsService {
     scriptSrc
-    enabled
+    isEnabled
+    isProductionMode
   }
 
   fragment PostExcerpt on MarkdownRemarkFrontmatter {

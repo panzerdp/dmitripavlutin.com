@@ -30,6 +30,9 @@ export default function LayoutFetchQuery({ children }: LayoutFetchQueryProps) {
               authorInfo {
                 ...AuthorInfoAll
               }
+              carbonAdsService {
+                ...CarbonAdsServiceAll
+              }
             }
           }
         }
@@ -44,11 +47,18 @@ interface LayoutFetchProps {
   children: React.ReactNode;
 }
 
-export function LayoutFetch({ data: { site, file }, children }: LayoutFetchProps) {
+export function LayoutFetch({
+  data: {
+    site: { siteMetadata },
+    file,
+  },
+  children,
+}: LayoutFetchProps) {
   return (
     <LayoutContainer
-      siteInfo={site.siteMetadata.siteInfo}
-      authorInfo={site.siteMetadata.authorInfo}
+      siteInfo={siteMetadata.siteInfo}
+      authorInfo={siteMetadata.authorInfo}
+      carbonAdsService={siteMetadata.carbonAdsService}
       authorProfilePicture={file.childImageSharp.resolutions}
     >
       {children}

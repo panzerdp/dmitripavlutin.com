@@ -25,6 +25,12 @@ const authorInfo = {
   },
 };
 
+const carbonAdsService = {
+  scriptSrc: 'http://example.com/script.js',
+  isProductionMode: true,
+  isEnabled: true,
+};
+
 const authorProfilePicture = {
   width: 100,
   height: 100,
@@ -39,6 +45,7 @@ const props = {
       siteMetadata: {
         siteInfo,
         authorInfo,
+        carbonAdsService,
       },
     },
     file: {

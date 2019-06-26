@@ -35,10 +35,17 @@ const authorProfilePicture: FixedImage = {
   srcSet: 'some srcset values',
 };
 
+const carbonAdsService = {
+  scriptSrc: 'http://example.com/script.js',
+  isProductionMode: true,
+  isEnabled: true,
+};
+
 const props = {
   siteInfo,
   authorInfo,
   authorProfilePicture,
+  carbonAdsService,
 };
 
 describe('<LayoutMetaTags />', function() {
@@ -63,11 +70,7 @@ describe('<LayoutMetaTags />', function() {
   });
 
   it('should render footer', function() {
-    const wrapper = shallow(
-      <LayoutContainer siteInfo={siteInfo} authorInfo={authorInfo} authorProfilePicture={authorProfilePicture}>
-        Child
-      </LayoutContainer>
-    );
+    const wrapper = shallow(<LayoutContainer {...props}>Child</LayoutContainer>);
     expect(wrapper.contains(<LayoutFooter authorInfo={authorInfo} />));
   });
 });

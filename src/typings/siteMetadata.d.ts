@@ -32,5 +32,6 @@ interface EmailSubscriptionService {
 
 interface CarbonAdsService {
   scriptSrc: string;
-  enabled: boolean;
+  isEnabled: boolean;
+  isProductionMode: boolean;
 }

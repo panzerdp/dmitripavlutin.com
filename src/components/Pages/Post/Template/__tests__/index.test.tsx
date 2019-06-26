@@ -73,7 +73,8 @@ const props = {
   },
   carbonAdsService: {
     scriptSrc: 'http://example.com/script.js',
-    enabled: true,
+    isProductionMode: true,
+    isEnabled: true,
   },
 };
 
