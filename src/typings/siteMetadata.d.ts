@@ -14,6 +14,7 @@ interface Nicknames {
 interface AuthorInfo {
   name: string;
   description: string;
+  email: string;
   profiles: Profiles;
   nicknames: Nicknames;
 }

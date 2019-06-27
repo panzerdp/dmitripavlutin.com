@@ -16,7 +16,7 @@ export default function PostMetaStructuredData({
   authorInfo,
   authorProfilePictureSrc,
 }: PostMetaStructuredDataProps) {
-  const postUrl = `${siteInfo.url}/${TO_POST({ slug: post.slug })}`;
+  const postUrl = `${siteInfo.url}${TO_POST({ slug: post.slug })}`;
   const postImageUrl = `${siteInfo.url}${post.thumbnail.src}`;
   const authorProfilePictureUrl = `${siteInfo.url}${authorProfilePictureSrc}`;
   const sameAs = Object.keys(authorInfo.profiles).reduce((list, key) => [...list, authorInfo.profiles[key]], []);

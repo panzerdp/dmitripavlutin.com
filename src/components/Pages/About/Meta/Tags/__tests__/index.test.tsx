@@ -6,6 +6,7 @@ import AboutMetaTags from '../index';
 
 const authorInfo: AuthorInfo = {
   name: 'Dmitri Pavlutin',
+  email: 'mail@mail.com',
   nicknames: {
     twitter: 'panzerdp',
   },

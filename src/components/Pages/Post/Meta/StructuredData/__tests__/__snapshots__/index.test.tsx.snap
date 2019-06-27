@@ -39,7 +39,7 @@ exports[`<PostMetaStructuredData /> should render structured data 1`] = `
     "description": "Dmitri Pavlutin is a software developer specialized in Frontend technologies"
   },
   "headline": "Useful techniques to facilitate React server-side rendering",
-  "url": "https://dmitripavlutin.com//useful-techniques-react-server-side-rendering/",
+  "url": "https://dmitripavlutin.com/useful-techniques-react-server-side-rendering/",
   "datePublished": "2018-03-17",
   "dateModified": "2019-01-01",
   "image": {

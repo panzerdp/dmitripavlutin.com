@@ -7,6 +7,7 @@ import Layout from 'components/Layout/Fetch';
 
 const authorInfo: AuthorInfo = {
   name: 'Dmitri Pavlutin',
+  email: 'mail@mail.com',
   nicknames: {
     twitter: 'panzerdp',
   },

@@ -6,6 +6,7 @@ import PostAboutAuthor from '../index';
 const props = {
   authorInfo: {
     name: 'Dmitri Pavlutin',
+    email: 'mail@mail.com',
     nicknames: {
       twitter: 'panzerdp',
     },
