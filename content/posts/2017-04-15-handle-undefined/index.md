@@ -54,7 +54,7 @@ To reduce the risk of such errors, you have to understand the cases when `undefi
 
 Let's detail the exploration of `undefined` and its effect on code safety.  
 
-## 1. What is `undefined`
+## 1. What is undefined
 
 JavaScript has 6 primitive types: 
 
@@ -106,7 +106,7 @@ let nothing;
 typeof nothing === 'undefined';   // => true
 ```
 
-## 2. Common scenarios that create `undefined`
+## 2. Common scenarios that create undefined
 
 ### 2.1 Uninitialized variable
 
@@ -200,7 +200,7 @@ High cohesion is preferable because it suggests to design the elements of the mo
 * *Reusable*: being focusing on a single task, it makes the module easier to reuse
 * *Testable*: you would easier test a module that's focused on a single task
 
-![Components coupling and cohesion](./images/coupling-vs-cohesion.svg)
+![Components coupling and cohesion](./images/coupling-vs-cohesion.png)
 
 High cohesion accompanied with [loose coupling](https://en.wikipedia.org/wiki/Loose_coupling) is the characteristic of a well designed system.   
 
