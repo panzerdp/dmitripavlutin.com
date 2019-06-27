@@ -1,7 +1,7 @@
 import Link from 'gatsby-link';
 import * as React from 'react';
 
-import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER } from 'routes/path';
+import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_RSS } from 'routes/path';
 import styles from './index.module.scss';
 
 const year = new Date().getFullYear();
@@ -10,7 +10,7 @@ interface FooterProps {
   authorInfo: AuthorInfo;
 }
 
-export default function LayoutFooter({ authorInfo: { profiles, name } }: FooterProps) {
+export default function LayoutFooter({ authorInfo: { profiles, name, email } }: FooterProps) {
   return (
     <footer>
       <div className={styles.footerContent}>
@@ -26,21 +26,22 @@ export default function LayoutFooter({ authorInfo: { profiles, name } }: FooterP
           <div className={styles.footerNavigation}>
             <Link to={TO_INDEX()}>Home</Link>
             <Link to={TO_NEWSLETTER()}>Newsletter</Link>
+            <Link to={TO_RSS()}>RSS</Link>
             <Link to={TO_ALL_POSTS()}>All posts</Link>
             <Link to={TO_ABOUT_ME()}>About me</Link>
           </div>
           <div className={styles.follow}>
+            <a href={`mailto:${email}`} title={`${name}'s Twitter profile`}>
+              <img alt={`${name}'s Email address`} src="/email.svg" />
+            </a>
             <a href={profiles.twitter} title={`${name}'s Twitter profile`}>
               <img alt={`${name}'s Twitter profile`} src="/twitter.svg" />
-            </a>
-            <a href={profiles.github} title={`${name}'s Github profile`}>
-              <img alt={`${name}'s Github profile`} src="/github.svg" />
             </a>
             <a href={profiles.stackoverflow} title={`${name}'s Stackoverflow profile`}>
               <img alt={`${name}'s Stackoverflow profile`} src="/stackoverflow.svg" />
             </a>
-            <a href={profiles.linkedin} title={`${name}'s LinkedIn profile`}>
-              <img alt={`${name}'s LinkedIn profile`} src="/linkedin.svg" />
+            <a href={profiles.github} title={`${name}'s Github profile`}>
+              <img alt={`${name}'s Github profile`} src="/github.svg" />
             </a>
           </div>
         </div>
