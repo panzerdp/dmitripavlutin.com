@@ -16,13 +16,13 @@ import ShareGroupVertical from 'components/Pages/Post/Share/Group/Vertical';
 import Comments from 'components/Pages/Post/Comments';
 import AboutAuthor from 'components/Pages/Post/AboutAuthor';
 import CarbondAdsBanner from 'components/CarbonAds/Banner';
+import CarbonAdsFetch from 'components/CarbonAds/Fetch';
 import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 
 interface PostTemplateProps {
   siteInfo: SiteInfo;
   authorInfo: AuthorInfo;
-  carbonAdsService: CarbonAdsService;
   postRepositoryFileUrl: string;
   post: Post;
   recommendedPosts: PostExcerpt[];
@@ -32,7 +32,6 @@ interface PostTemplateProps {
 export default function PostTemplate({
   siteInfo,
   authorInfo,
-  carbonAdsService,
   postRepositoryFileUrl,
   post,
   recommendedPosts,
@@ -60,7 +59,11 @@ export default function PostTemplate({
         <h1>{post.title}</h1>
         <Subheader tags={post.tags} published={post.published} />
         <div className={styles.bannerContainer}>
-          <CarbondAdsBanner carbonAdsService={carbonAdsService} className={styles.banner} />
+          <CarbonAdsFetch
+            render={({ carbonAdsService }) => (
+              <CarbondAdsBanner carbonAdsService={carbonAdsService} className={styles.banner} />
+            )}
+          />
         </div>
         <ShareGroupVertical url={postUrl} text={post.title} tags={post.tags} show={showShareButtons} />
         <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />

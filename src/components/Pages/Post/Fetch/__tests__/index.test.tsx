@@ -34,19 +34,12 @@ const authorInfo = {
   },
 };
 
-const carbonAdsService = {
-  scriptSrc: 'http://example.com/script.js',
-  isProductionMode: true,
-  isEnabled: true,
-};
-
 const props = {
   data: {
     site: {
       siteMetadata: {
         siteInfo,
         authorInfo,
-        carbonAdsService,
       },
     },
     authorProfilePicture: {
