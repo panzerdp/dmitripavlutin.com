@@ -6,7 +6,7 @@ import PostTemplate from '../index';
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData';
 import MetaTags from 'components/Pages/Post/Meta/Tags';
 import Layout from 'components/Layout/Fetch';
-import Subheader from 'components/Pages/Common/Subheader';
+import Subheader from 'components/Subheader';
 import Edit from 'components/Pages/Post/Edit';
 import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';

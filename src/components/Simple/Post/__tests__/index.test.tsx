@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import SimplePost from '../index';
 import { TO_POST } from 'routes/path';
-import Subheader from 'components/Pages/Common/Subheader';
+import Subheader from 'components/Subheader';
 
 const post: PostExcerpt = {
   title: 'Post 1',

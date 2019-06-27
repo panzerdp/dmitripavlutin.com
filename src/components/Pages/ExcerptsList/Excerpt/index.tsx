@@ -2,7 +2,7 @@ import Img from 'gatsby-image';
 import Link from 'gatsby-link';
 import * as React from 'react';
 
-import Subheader from 'components/Pages/Common/Subheader';
+import Subheader from 'components/Subheader';
 import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 
@@ -22,9 +22,7 @@ export default function Excerpt({ post }: ExcerptProps) {
           <Link to={to}>{post.title}</Link>
         </h4>
         <Subheader tags={post.tags} published={post.published} />
-        <div>
-          {post.description}{' '}
-        </div>
+        <div>{post.description} </div>
         <Link to={to} className={styles.continueReading}>
           Continue reading &#x279e;
         </Link>

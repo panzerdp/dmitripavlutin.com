@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Tag from 'components/Pages/Common/Tag';
+import Tag from 'components/Tag';
 import { formatDate } from 'utils/date';
 import styles from './index.module.scss';
 

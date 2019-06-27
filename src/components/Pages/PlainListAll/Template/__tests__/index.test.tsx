@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import PlainListAllTemplate from '../index';
 import Layout from 'components/Layout/Fetch';
-import SimpleList from 'components/Pages/Common/Simple/List';
+import SimpleList from 'components/Simple/List';
 import PlainListAllMetaTags from 'components/Pages/PlainListAll/Meta/Tags';
 
 const posts: PostExcerpt[] = [

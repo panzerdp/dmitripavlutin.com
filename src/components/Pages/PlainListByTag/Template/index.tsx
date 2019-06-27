@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import Layout from 'components/Layout/Fetch';
-import SimpleList from 'components/Pages/Common/Simple/List';
+import SimpleList from 'components/Simple/List';
 import PlainListByTagMetaTags from '../Meta/Tags';
 
 interface PlainListByTagTemplateProps {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 
-import Tag from 'components/Pages/Common/Tag';
+import Tag from 'components/Tag';
 import { TO_TAG } from 'routes/path';
 
 const props = {

@@ -1,7 +1,7 @@
 import Link from 'gatsby-link';
 import * as React from 'react';
 
-import Subheader from 'components/Pages/Common/Subheader';
+import Subheader from 'components/Subheader';
 import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 

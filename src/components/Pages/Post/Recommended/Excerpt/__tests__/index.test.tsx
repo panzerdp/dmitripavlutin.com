@@ -4,7 +4,7 @@ import Link from 'gatsby-link';
 import Img from 'gatsby-image';
 
 import PostRecommendedExcerpt from '../index';
-import Tag from 'components/Pages/Common/Tag';
+import Tag from 'components/Tag';
 import { TO_POST } from 'routes/path';
 
 const post: PostExcerpt = {

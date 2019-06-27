@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 
-import Subheader from 'components/Pages/Common/Subheader';
+import Subheader from 'components/Subheader';
 import { formatDate } from 'utils/date';
 
 const props = {
