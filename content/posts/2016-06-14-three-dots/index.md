@@ -2,7 +2,7 @@
 title: "How three dots changed JavaScript"
 description: "Spread operator and rest parameter are great additions. The article explains how they improve array literals, array destructuring and function arguments handling."
 published: "2016-06-14"
-modified: "2016-06-14"
+modified: "2019-06-27"
 thumbnail: "./images/cover.jpg"
 slug: how-three-dots-changed-javascript
 tags: ["javascript", "spread", "rest"]
@@ -10,8 +10,9 @@ recommended: ["object-rest-spread-properties-javascript", "7-tips-to-handle-unde
 type: post
 ---
 
-When accessing arguments values in a function call, I always felt uncomfortable with `arguments` object. Its hardcoded name makes difficult to access `arguments` of an outer function in an inner one (which defines its own `arguments`).  
-Even worse JavaScript provides it as an array-like object. It is not possible to use array methods like `.map()` or `.forEach()` directly on it.  
+I don't like `arguments` keyword when I access the arguments of a function call. Its hardcoded name makes difficult to access `arguments` of an outer function in an inner one (which defines its own `arguments`).  
+
+Even worse `arguments` is an array-like object. You cannot use array methods like `.map()` or `.forEach()` directly on it.  
 
 To access `arguments` from the enclosing function, you have to use workarounds by storing it into a separated variable. And to walk through this array-like object, you have to use *duck typing* and make indirect invocations. See the following example:
 
@@ -31,6 +32,7 @@ function outerFunction() {
 Another situation is the function invocation that accepts a dynamic number of arguments. Filling the arguments from an array is unpleasant.  
 
 For instance `.push(item1, ..., itemN)` inserts elements into an array one by one: you have to enumerate each element as an argument. This is not always convenient: often an entire array of elements needs to be pushed into an existing array, without creating a new instance.  
+
 In ES5 it's solved with `.apply()`: an unfriendly and verbose approach. Let's  take a look:
 
 ```javascript
@@ -268,11 +270,11 @@ console.log(restArray); // => ['spring', 'summer', 'autumn']
 
 ## 5. Spread operator and iteration protocols
 
-The spread operator is using the [iteration protocols](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Iteration_protocols) to navigate over elements and collect the results. This makes the spread operator even more valuable, because any object can define how the operator will extract data.
+The spread operator uses [iteration protocols](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Iteration_protocols) to navigate over elements of a collection. This makes the spread operator even more valuable, because any object can define how the operator will extract data.
 
-An object is iterable when it conforms to [iterable protocol](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Iteration_protocols#iterable). 
+> An object is *Iterable* when it conforms to [iterable protocol](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Iteration_protocols#iterable). 
 
-Iterable protocol requires the object to contain a special property. The property name should be [`Symbol.iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator) and value as a function that returns an iterator object.
+Iterable protocol requires the object to contain a special property. The property name must be [`Symbol.iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator) and value as a function that returns an iterator object.
 
 ```javascript
 interface Iterable {
@@ -283,7 +285,9 @@ interface Iterable {
 }
 ```
 
-The iterator object should conform to [iterator protocol](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Iteration_protocols#iterator). It needs to provide a property `next`, which value is a function that returns an object with properties `done` (a boolean to indicate the end of iteration) and `value` (the iteration result).  
+> The *Iterator* object must conform to [iterator protocol](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Iteration_protocols#iterator).  
+
+It needs to provide a property `next`, which value is a function that returns an object with properties `done` (a boolean to indicate the end of iteration) and `value` (the iteration result).  
 
 ```javascript
 interface Iterator {
@@ -296,11 +300,11 @@ interface Iterator {
   };
 }
 ```
-It seems though to understand the iteration protocols from verbal description, but the code behind those is quite simple.  
+It seems tough to understand the iteration protocols from verbal description, but the code behind those is quite simple.  
 
 The object or primitive **must** be iterable in order that spread operator to extract data from it.  
 
-Many native primitive types and objects are iterable: strings, arrays, [typed arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray), [sets](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Set) and [maps](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). So they work by default with the spread operator.  
+Many native primitive types and objects are iterable: strings, arrays, [typed arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray), [sets](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Set) and [maps](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). They work by default with the spread operator.  
 
 For instance, let's see how a string conforms to iteration protocols:
 

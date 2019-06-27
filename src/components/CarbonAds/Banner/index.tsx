@@ -37,7 +37,7 @@ export default class CarbonAdsBanner extends React.Component<CarbonAdsBannerProp
     } else {
       const div = document.createElement('div');
       div.id = 'carbonads';
-      div.innerHTML = 'Carbon Ad (Dev mode)';
+      div.innerHTML = 'Carbon Ad (Dev mode) Lorem ipsum dolor sit, amet consectetur adipisicing elit.';
       this.container.current.appendChild(div);
     }
   }
