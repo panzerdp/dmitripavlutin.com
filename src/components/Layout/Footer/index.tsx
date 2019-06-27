@@ -31,17 +31,17 @@ export default function LayoutFooter({ authorInfo: { profiles, name, email } }: 
             <Link to={TO_ABOUT_ME()}>About me</Link>
           </div>
           <div className={styles.follow}>
-            <a href={`mailto:${email}`} title={`${name}'s Twitter profile`}>
-              <img alt={`${name}'s Email address`} src="/email.svg" />
+            <a href={`mailto:${email}`} title={`Send an email to ${name}`}>
+              <img alt="Email address" src="/email.svg" />
             </a>
             <a href={profiles.twitter} title={`${name}'s Twitter profile`}>
-              <img alt={`${name}'s Twitter profile`} src="/twitter.svg" />
+              <img alt="Twitter profile" src="/twitter.svg" />
             </a>
             <a href={profiles.stackoverflow} title={`${name}'s Stackoverflow profile`}>
-              <img alt={`${name}'s Stackoverflow profile`} src="/stackoverflow.svg" />
+              <img alt="Stackoverflow profile" src="/stackoverflow.svg" />
             </a>
             <a href={profiles.github} title={`${name}'s Github profile`}>
-              <img alt={`${name}'s Github profile`} src="/github.svg" />
+              <img alt="Github profile" src="/github.svg" />
             </a>
           </div>
         </div>

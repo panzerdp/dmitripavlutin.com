@@ -2,11 +2,13 @@ import * as React from 'react';
 
 import styles from './index.module.scss';
 
-interface SubscribeFormProps {
+interface SubscriptionFormProps {
   emailSubscriptionService: EmailSubscriptionService;
 }
 
-export default function SubscribeForm({ emailSubscriptionService: { endpoint, hiddenFieldName } }: SubscribeFormProps) {
+export default function SubscriptionForm({
+  emailSubscriptionService: { endpoint, hiddenFieldName },
+}: SubscriptionFormProps) {
   return (
     <div className={styles.subscribe}>
       <form
@@ -26,7 +28,6 @@ export default function SubscribeForm({ emailSubscriptionService: { endpoint, hi
           <input type="text" name={hiddenFieldName} tabIndex={-1} />
         </div>
       </form>
-      <div className={styles.subscriptionInfo}>*I will never spam. One click to unsubscribe.</div>
     </div>
   );
 }

@@ -2,15 +2,11 @@ import * as React from 'react';
 
 import styles from './index.module.scss';
 import Layout from 'components/Layout/Fetch';
-import SubscribeForm from 'components/Pages/Newsletter/SubscribeForm';
+import SubscriptionForm from 'components/Subscription/Form';
+import SubscriptionFetch from 'components/Subscription/Fetch';
 import MetaTags from 'components/Pages/Newsletter/Meta/Tags';
 
-interface NewsletterTemplateProps {
-  emailSubscriptionService: EmailSubscriptionService;
-  siteInfo: SiteInfo;
-}
-
-export default function NewsletterTemplate({ emailSubscriptionService }: NewsletterTemplateProps) {
+export default function NewsletterTemplate() {
   return (
     <Layout>
       <MetaTags />
@@ -21,7 +17,11 @@ export default function NewsletterTemplate({ emailSubscriptionService }: Newslet
           tips.
         </p>
         <p>Subscribe to my newsletter to get them right to your inbox.</p>
-        <SubscribeForm emailSubscriptionService={emailSubscriptionService} />
+        <SubscriptionFetch
+          render={({ emailSubscriptionService }) => (
+            <SubscriptionForm emailSubscriptionService={emailSubscriptionService} />
+          )}
+        />
       </div>
     </Layout>
   );
