@@ -14,6 +14,8 @@ interface LayoutContainerProps {
   authorInfo: AuthorInfo;
   authorProfilePicture: FixedImage;
   carbonAdsService: CarbonAdsService;
+  leftSidebar?: React.ReactNode;
+  rightSidebar?: React.ReactNode;
 }
 
 export default function LayoutContainer({
@@ -22,16 +24,20 @@ export default function LayoutContainer({
   authorInfo,
   authorProfilePicture,
   carbonAdsService,
+  leftSidebar = null,
+  rightSidebar = null,
 }: LayoutContainerProps) {
   return (
     <>
       <LayoutMetaTags siteInfo={siteInfo} />
       <CarbonAdsMetaTags carbonAdsService={carbonAdsService} />
+      <LayoutHeader authorProfilePicture={authorProfilePicture} authorInfo={authorInfo} siteInfo={siteInfo} />
       <div className={styles.container}>
-        <LayoutHeader authorProfilePicture={authorProfilePicture} authorInfo={authorInfo} siteInfo={siteInfo} />
         <main className={styles.main}>{children}</main>
-        <LayoutFooter authorInfo={authorInfo} />
+        <aside className={styles.leftSidebar}>{leftSidebar}</aside>
+        <aside className={styles.rightSidebar}>{rightSidebar}</aside>
       </div>
+      <LayoutFooter authorInfo={authorInfo} />
     </>
   );
 }

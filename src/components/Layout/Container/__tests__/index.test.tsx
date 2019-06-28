@@ -74,4 +74,24 @@ describe('<LayoutMetaTags />', function() {
     const wrapper = shallow(<LayoutContainer {...props}>Child</LayoutContainer>);
     expect(wrapper.contains(<LayoutFooter authorInfo={authorInfo} />));
   });
+
+  it('should render left sidebar', function() {
+    const leftSidebar = <div>Left sidebar</div>;
+    const wrapper = shallow(
+      <LayoutContainer {...props} leftSidebar={leftSidebar}>
+        Child
+      </LayoutContainer>
+    );
+    expect(wrapper.contains(leftSidebar));
+  });
+
+  it('should render right sidebar', function() {
+    const rightSidebar = <div>Right sidebar</div>;
+    const wrapper = shallow(
+      <LayoutContainer {...props} rightSidebar={rightSidebar}>
+        Child
+      </LayoutContainer>
+    );
+    expect(wrapper.contains(rightSidebar));
+  });
 });

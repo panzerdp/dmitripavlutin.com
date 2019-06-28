@@ -33,24 +33,34 @@ a {
   }
 }
 
-.main {
-  max-width: 740px;
-  margin: 0 auto;
-  flex: 1 0 auto;
-  padding: 0 1.2rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-
 .container {
   display: flex;
-  flex-flow: column;
   min-height: 100vh;
+
+  .leftSidebar, .rightSidebar {
+    flex: 1 1 0%;
+  }
+
+  .leftSidebar {
+    order: 1;
+  }
+
+  .main {
+    order: 2;
+    flex: 0 1 740px;
+    max-width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .rightSidebar {
+    order: 3;
+  }
 }
 
 @media (max-width: $small-device-width) {
-  .main {
-    padding: 0 1rem;
+  .container .main {
+    padding: 0 0.5rem;
   }
 
   h1 { 
