@@ -135,9 +135,13 @@ describe('<PostTemplate />', function() {
   it('should render share buttons', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
-    const leftSidebar = shallow(wrapper.prop('leftSidebar'));
-    expect(leftSidebar.find('ShareGroupVertical')).toHaveLength(1);
     expect(article.contains(<ShareBottom url={postUrl} text={props.post.title} tags={props.post.tags} />)).toBe(true);
+  });
+
+  it('should render left sidebar', function() {
+    const wrapper = shallow(<PostTemplate {...props} />);
+    const leftSidebar = shallow(wrapper.prop('leftSidebar'));
+    expect(leftSidebar.find('PostLeftSidebar')).toHaveLength(1);
   });
 
   it('should render post content', function() {

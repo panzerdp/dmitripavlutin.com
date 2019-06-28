@@ -34,22 +34,10 @@ article h1 {
   position: relative;
 }
 
-.bannerContainer {
-  position: relative;
-
-  .banner {
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translateX(100%);
-  }
-}
-
-.leftSidebar {
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 1rem;
+.banner {
+  max-width: 140px;
+  float: right;
+  padding: 1rem 0 0.5rem 0.5rem;
 }
 
 article code[class*="language-"] {
@@ -131,15 +119,6 @@ blockquote {
     margin: 1rem 0;
     transform: none;
   }
-
-  .bannerContainer {
-    float: right;
-
-    .banner {
-      position: static;
-      transform: none;
-    }
-  }
 }
 
 @media (max-width: $small-device-width) {
@@ -149,5 +128,11 @@ blockquote {
 
   .shareGroup {
     justify-content: center;
+  }
+
+  .banner {
+    float: none;
+    max-width: 100%;
+    padding: 0;
   }
 }

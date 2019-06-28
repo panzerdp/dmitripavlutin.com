@@ -10,9 +10,10 @@ import MetaTags from 'components/Pages/Post/Meta/Tags';
 import Layout from 'components/Layout/Fetch';
 import Subheader from 'components/Subheader';
 import Edit from 'components/Pages/Post/Edit';
+import LeftSidebar from 'components/Pages/Post/Sidebar/Left';
+import RightSidebar from 'components/Pages/Post/Sidebar/Right';
 import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
-import ShareGroupVertical from 'components/Pages/Post/Share/Group/Vertical';
 import Comments from 'components/Pages/Post/Comments';
 import AboutAuthor from 'components/Pages/Post/AboutAuthor';
 import CarbondAdsBanner from 'components/CarbonAds/Banner';
@@ -44,13 +45,11 @@ export default function PostTemplate({
     showShareButtons = true;
   }
   const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
-  const leftSidebar = (
-    <div className={styles.leftSidebar}>
-      <ShareGroupVertical url={postUrl} text={post.title} tags={post.tags} show={showShareButtons} />
-    </div>
-  );
   return (
-    <Layout leftSidebar={leftSidebar}>
+    <Layout
+      leftSidebar={<LeftSidebar post={post} siteUrl={siteInfo.url} showShareButtons={showShareButtons} />}
+      rightSidebar={<RightSidebar />}
+    >
       <MetaTags post={post} siteInfo={siteInfo} authorInfo={authorInfo} />
       <MetaStructuredData
         post={post}

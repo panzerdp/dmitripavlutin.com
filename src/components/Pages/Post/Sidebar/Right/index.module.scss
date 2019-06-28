@@ -1,0 +1,35 @@
+@import '~styles/variables';
+
+.rightSidebar {
+  margin-top: 1.5rem;
+  margin-right: 1rem;
+  max-width: 20rem;
+
+  .subscription {
+    box-shadow: $box-shadow;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    padding: 1rem;
+
+    > div {
+      padding: 0;
+      background-color: transparent;
+    }
+
+    .message {
+      font-size: 1.2rem;
+      padding: 0.5rem;
+
+      h3 {
+        margin: 0;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .rightSidebar {
+    display: none;
+  }
+}
