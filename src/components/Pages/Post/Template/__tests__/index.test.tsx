@@ -10,9 +10,11 @@ import Subheader from 'components/Subheader';
 import Edit from 'components/Pages/Post/Edit';
 import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
-import ShareGroupVertical from 'components/Pages/Post/Share/Group/Vertical';
 import Comments from 'components/Pages/Post/Comments';
 import AboutAuthor from 'components/Pages/Post/AboutAuthor';
+import CarbondAdsBanner from 'components/CarbonAds/Banner';
+import CarbonAdsFetch from 'components/CarbonAds/Fetch';
+import CarbonAdsMetaTags from 'components/CarbonAds/Meta/Tags';
 import { TO_POST } from 'routes/path';
 
 const props = {
@@ -74,6 +76,12 @@ const props = {
   },
 };
 
+const carbonAdsService: CarbonAdsService = {
+  isEnabled: true,
+  isProductionMode: true,
+  scriptSrc: 'http://site.com/script.js',
+};
+
 const postUrl = props.siteInfo.url + TO_POST({ slug: props.post.slug });
 
 describe('<PostTemplate />', function() {
@@ -127,9 +135,8 @@ describe('<PostTemplate />', function() {
   it('should render share buttons', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
-    expect(
-      article.contains(<ShareGroupVertical url={postUrl} text={props.post.title} tags={props.post.tags} show={false} />)
-    ).toBe(true);
+    const leftSidebar = shallow(wrapper.prop('leftSidebar'));
+    expect(leftSidebar.find('ShareGroupVertical')).toHaveLength(1);
     expect(article.contains(<ShareBottom url={postUrl} text={props.post.title} tags={props.post.tags} />)).toBe(true);
   });
 
@@ -162,7 +169,8 @@ describe('<PostTemplate />', function() {
     //eslint-disable-next-line @typescript-eslint/no-var-requires
     const { default: PostTemplate } = require('../index');
     const wrapper = shallow(<PostTemplate {...props} />);
-    expect(wrapper.find('ShareGroupVertical').prop('show')).toBe(false);
+    const leftSidebar = shallow(wrapper.prop('leftSidebar'));
+    expect(leftSidebar.find('ShareGroupVertical').prop('show')).toBe(false);
   });
 
   it('should hide social buttons', function() {
@@ -174,7 +182,8 @@ describe('<PostTemplate />', function() {
     //eslint-disable-next-line @typescript-eslint/no-var-requires
     const { default: PostTemplate } = require('../index');
     const wrapper = shallow(<PostTemplate {...props} />);
-    expect(wrapper.find('ShareGroupVertical').prop('show')).toBe(false);
+    const leftSidebar = shallow(wrapper.prop('leftSidebar'));
+    expect(leftSidebar.find('ShareGroupVertical').prop('show')).toBe(false);
   });
 
   it('should show social buttons', function() {
@@ -186,7 +195,8 @@ describe('<PostTemplate />', function() {
     //eslint-disable-next-line @typescript-eslint/no-var-requires
     const { default: PostTemplate } = require('../index');
     const wrapper = shallow(<PostTemplate {...props} />);
-    expect(wrapper.find('ShareGroupVertical').prop('show')).toBe(true);
+    const leftSidebar = shallow(wrapper.prop('leftSidebar'));
+    expect(leftSidebar.find('ShareGroupVertical').prop('show')).toBe(true);
   });
 
   it('should render post comments', function() {
@@ -203,5 +213,13 @@ describe('<PostTemplate />', function() {
         <AboutAuthor authorInfo={props.authorInfo} authorProfilePictureSrc={props.authorProfilePictureSrc} />
       )
     ).toBe(true);
+  });
+
+  it('should render carbon ads', function() {
+    const wrapper = shallow(<PostTemplate {...props} />)
+      .find(CarbonAdsFetch)
+      .renderProp('render')({ carbonAdsService });
+    expect(wrapper.find(<CarbondAdsBanner carbonAdsService={carbonAdsService} className="banner" />));
+    expect(wrapper.contains(<CarbonAdsMetaTags carbonAdsService={carbonAdsService} />));
   });
 });

@@ -45,6 +45,13 @@ article h1 {
   }
 }
 
+.leftSidebar {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 1rem;
+}
+
 article code[class*="language-"] {
   font-size: 1rem;
   background-color: #f5f2f0;

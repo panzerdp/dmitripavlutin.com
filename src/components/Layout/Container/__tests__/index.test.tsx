@@ -36,17 +36,10 @@ const authorProfilePicture: FixedImage = {
   srcSet: 'some srcset values',
 };
 
-const carbonAdsService = {
-  scriptSrc: 'http://example.com/script.js',
-  isProductionMode: true,
-  isEnabled: true,
-};
-
 const props = {
   siteInfo,
   authorInfo,
   authorProfilePicture,
-  carbonAdsService,
 };
 
 describe('<LayoutMetaTags />', function() {

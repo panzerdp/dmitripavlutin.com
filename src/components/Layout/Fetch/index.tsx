@@ -6,11 +6,13 @@ import { LayoutQuery } from 'typings/graphql';
 
 interface LayoutFetchQueryProps {
   children: React.ReactNode;
+  leftSidebar?: React.ReactNode;
+  rightSidebar?: React.ReactNode;
 }
 
 /* istanbul ignore next */
 
-export default function LayoutFetchQuery({ children }: LayoutFetchQueryProps) {
+export default function LayoutFetchQuery({ children, leftSidebar, rightSidebar }: LayoutFetchQueryProps) {
   return (
     <StaticQuery
       query={graphql`
@@ -30,14 +32,15 @@ export default function LayoutFetchQuery({ children }: LayoutFetchQueryProps) {
               authorInfo {
                 ...AuthorInfoAll
               }
-              carbonAdsService {
-                ...CarbonAdsServiceAll
-              }
             }
           }
         }
       `}
-      render={(data: LayoutQuery) => <LayoutFetch data={data}>{children}</LayoutFetch>}
+      render={(data: LayoutQuery) => (
+        <LayoutFetch data={data} leftSidebar={leftSidebar} rightSidebar={rightSidebar}>
+          {children}
+        </LayoutFetch>
+      )}
     />
   );
 }
@@ -45,6 +48,8 @@ export default function LayoutFetchQuery({ children }: LayoutFetchQueryProps) {
 interface LayoutFetchProps {
   data: LayoutQuery;
   children: React.ReactNode;
+  leftSidebar?: React.ReactNode;
+  rightSidebar?: React.ReactNode;
 }
 
 export function LayoutFetch({
@@ -53,13 +58,16 @@ export function LayoutFetch({
     file,
   },
   children,
+  leftSidebar,
+  rightSidebar,
 }: LayoutFetchProps) {
   return (
     <LayoutContainer
       siteInfo={siteMetadata.siteInfo}
       authorInfo={siteMetadata.authorInfo}
-      carbonAdsService={siteMetadata.carbonAdsService}
       authorProfilePicture={file.childImageSharp.resolutions}
+      leftSidebar={leftSidebar}
+      rightSidebar={rightSidebar}
     >
       {children}
     </LayoutContainer>

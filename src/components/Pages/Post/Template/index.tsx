@@ -17,6 +17,7 @@ import Comments from 'components/Pages/Post/Comments';
 import AboutAuthor from 'components/Pages/Post/AboutAuthor';
 import CarbondAdsBanner from 'components/CarbonAds/Banner';
 import CarbonAdsFetch from 'components/CarbonAds/Fetch';
+import CarbonAdsMetaTags from 'components/CarbonAds/Meta/Tags';
 import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 
@@ -43,8 +44,13 @@ export default function PostTemplate({
     showShareButtons = true;
   }
   const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
+  const leftSidebar = (
+    <div className={styles.leftSidebar}>
+      <ShareGroupVertical url={postUrl} text={post.title} tags={post.tags} show={showShareButtons} />
+    </div>
+  );
   return (
-    <Layout>
+    <Layout leftSidebar={leftSidebar}>
       <MetaTags post={post} siteInfo={siteInfo} authorInfo={authorInfo} />
       <MetaStructuredData
         post={post}
@@ -61,11 +67,13 @@ export default function PostTemplate({
         <div className={styles.bannerContainer}>
           <CarbonAdsFetch
             render={({ carbonAdsService }) => (
-              <CarbondAdsBanner carbonAdsService={carbonAdsService} className={styles.banner} />
+              <>
+                <CarbonAdsMetaTags carbonAdsService={carbonAdsService} />
+                <CarbondAdsBanner carbonAdsService={carbonAdsService} className={styles.banner} />
+              </>
             )}
           />
         </div>
-        <ShareGroupVertical url={postUrl} text={post.title} tags={post.tags} show={showShareButtons} />
         <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
         <div className={styles.shareGroup}>
           <div className={styles.shareBottom}>

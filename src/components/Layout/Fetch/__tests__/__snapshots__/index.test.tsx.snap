@@ -28,13 +28,6 @@ exports[`<LayoutFetch /> should render the layout container 1`] = `
       "width": 100,
     }
   }
-  carbonAdsService={
-    Object {
-      "isEnabled": true,
-      "isProductionMode": true,
-      "scriptSrc": "http://example.com/script.js",
-    }
-  }
   siteInfo={
     Object {
       "description": "Posts by Dmitri Pavlutin about software development",
