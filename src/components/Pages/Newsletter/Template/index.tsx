@@ -11,12 +11,7 @@ export default function NewsletterTemplate() {
     <Layout>
       <MetaTags />
       <div className={styles.newsletter}>
-        <h1>Quality posts to your inbox</h1>
-        <p className={styles.newsletterMessage}>
-          I publish regularly posts about JavaScript, TypeScript, React, CSS with lots of clear explanations and useful
-          tips.
-        </p>
-        <p>Subscribe to my newsletter to get them right to your inbox.</p>
+        <h1>Newsletter</h1>
         <SubscriptionFetch
           render={({ emailSubscriptionService }) => (
             <SubscriptionForm emailSubscriptionService={emailSubscriptionService} />

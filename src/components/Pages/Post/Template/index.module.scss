@@ -29,6 +29,15 @@
   word-wrap: break-word;
 }
 
+.bottomSubscriptionForm {
+  max-width: 500px;
+  margin: 0 auto 2rem auto;
+
+  h3 {
+    font-size: 2rem;
+  }
+}
+
 article h1 {
   font-size: 180%;
   position: relative;

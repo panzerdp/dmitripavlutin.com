@@ -19,6 +19,8 @@ import AboutAuthor from 'components/Pages/Post/AboutAuthor';
 import CarbondAdsBanner from 'components/CarbonAds/Banner';
 import CarbonAdsFetch from 'components/CarbonAds/Fetch';
 import CarbonAdsMetaTags from 'components/CarbonAds/Meta/Tags';
+import SubscriptionFetch from 'components/Subscription/Fetch';
+import SubscriptionForm from 'components/Subscription/Form';
 import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 
@@ -87,6 +89,13 @@ export default function PostTemplate({
           <RecommendedList posts={recommendedPosts} />
         </div>
         <div className={styles.delimiter}>
+          <div className={styles.bottomSubscriptionForm}>
+            <SubscriptionFetch
+              render={({ emailSubscriptionService }) => (
+                <SubscriptionForm emailSubscriptionService={emailSubscriptionService} />
+              )}
+            />
+          </div>
           <Comments url={postUrl} title={post.title} />
         </div>
       </article>

@@ -141,7 +141,7 @@ describe('<PostTemplate />', function() {
   it('should render left sidebar', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const leftSidebar = shallow(wrapper.prop('leftSidebar'));
-    expect(leftSidebar.find('PostLeftSidebar')).toHaveLength(1);
+    expect(leftSidebar.exists()).toBe(true);
   });
 
   it('should render post content', function() {
@@ -173,8 +173,8 @@ describe('<PostTemplate />', function() {
     //eslint-disable-next-line @typescript-eslint/no-var-requires
     const { default: PostTemplate } = require('../index');
     const wrapper = shallow(<PostTemplate {...props} />);
-    const leftSidebar = shallow(wrapper.prop('leftSidebar'));
-    expect(leftSidebar.find('ShareGroupVertical').prop('show')).toBe(false);
+    const leftSidebar = wrapper.prop('leftSidebar');
+    expect(leftSidebar.props.showShareButtons).toBe(false);
   });
 
   it('should hide social buttons', function() {
@@ -186,8 +186,8 @@ describe('<PostTemplate />', function() {
     //eslint-disable-next-line @typescript-eslint/no-var-requires
     const { default: PostTemplate } = require('../index');
     const wrapper = shallow(<PostTemplate {...props} />);
-    const leftSidebar = shallow(wrapper.prop('leftSidebar'));
-    expect(leftSidebar.find('ShareGroupVertical').prop('show')).toBe(false);
+    const leftSidebar = wrapper.prop('leftSidebar');
+    expect(leftSidebar.props.showShareButtons).toBe(false);
   });
 
   it('should show social buttons', function() {
@@ -199,8 +199,8 @@ describe('<PostTemplate />', function() {
     //eslint-disable-next-line @typescript-eslint/no-var-requires
     const { default: PostTemplate } = require('../index');
     const wrapper = shallow(<PostTemplate {...props} />);
-    const leftSidebar = shallow(wrapper.prop('leftSidebar'));
-    expect(leftSidebar.find('ShareGroupVertical').prop('show')).toBe(true);
+    const leftSidebar = wrapper.prop('leftSidebar');
+    expect(leftSidebar.props.showShareButtons).toBe(true);
   });
 
   it('should render post comments', function() {

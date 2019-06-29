@@ -1,11 +1,34 @@
 @import '~styles/variables';
 
-.subscribe {
+.subscriptionForm {
   background-color: rgba($border-color, 0.4);
   border-radius: 8px;
+  font-size: 1.2rem;
   padding: 1rem;
 
-  .subscribeForm {
+  ul {
+    padding-left: 30px;
+
+    li {
+      list-style-image: url('/check.svg');
+    }
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  .message {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+
+    h2 {
+      margin: 0;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .form {
     display: flex;
     flex-wrap: wrap;
     border: 1px solid $anchor-color;

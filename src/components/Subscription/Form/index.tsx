@@ -10,14 +10,18 @@ export default function SubscriptionForm({
   emailSubscriptionService: { endpoint, hiddenFieldName },
 }: SubscriptionFormProps) {
   return (
-    <div className={styles.subscribe}>
-      <form
-        action={endpoint}
-        method="post"
-        name="mc-embedded-subscribe-form"
-        target="_blank"
-        className={styles.subscribeForm}
-      >
+    <div className={styles.subscriptionForm}>
+      <div className={styles.message}>
+        <h2>Quality posts to your inbox</h2>
+        <p>I regularly publish posts containing: </p>
+        <ul>
+          <li>JavaScript complex concepts explained in simple words</li>
+          <li>Overview of new JavaScript features</li>
+          <li>React clean code practices and efficient design patterns</li>
+        </ul>
+        <p>Subscribe to my newsletter to get them right to your inbox.</p>
+      </div>
+      <form action={endpoint} method="post" name="mc-embedded-subscribe-form" target="_blank" className={styles.form}>
         <div className={styles.emailField}>
           <input type="email" name="EMAIL" tabIndex={0} className={styles.email} placeholder="Enter your email" />
         </div>
