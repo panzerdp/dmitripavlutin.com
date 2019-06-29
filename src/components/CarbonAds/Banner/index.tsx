@@ -37,7 +37,21 @@ export default class CarbonAdsBanner extends React.Component<CarbonAdsBannerProp
     } else {
       const div = document.createElement('div');
       div.id = 'carbonads';
-      div.innerHTML = 'Carbon Ad (Dev mode) Lorem ipsum dolor sit, amet consectetur adipisicing elit.';
+      div.innerHTML = `
+      <span>
+        <span class="carbon-wrap">
+          <a href="#" class="carbon-img" target="_blank" rel="noopener">
+            <img src="/slack-blue_2x.png" alt="ads via Carbon" border="0" height="100" width="130" style="max-width: 130px;">
+          </a>
+          <a href="#" class="carbon-text" target="_blank" rel="noopener">
+            Bring your team together with Slack, the collaboration hub for work.
+          </a>
+        </span>
+        <a href="#" class="carbon-poweredby" target="_blank" rel="noopener">
+          ads via Carbon (DEV)
+        </a>
+        <img src="#" border="0" height="1" width="1" alt="ads via Carbon" style="display: none;">
+      </span>`;
       this.container.current.appendChild(div);
     }
   }

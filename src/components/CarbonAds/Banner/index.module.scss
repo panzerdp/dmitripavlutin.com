@@ -1,7 +1,7 @@
 @import '~styles/variables';
 
 .carbonAdsBanner {
-  
+
 }
 
 :global {
@@ -14,6 +14,7 @@
     text-align: center;
     line-height: 1.5;
     font-size: 14px;
+    max-width: 130px;
     box-shadow: $box-shadow;
     border-radius: 8px;
   }
@@ -49,5 +50,20 @@
     font-size: 10px;
     letter-spacing: 1px;
     line-height: 1;
+  }
+
+  @media (max-width: $small-device-width) {
+    #carbonads {
+      max-width: none;
+
+      .carbon-wrap {
+        display: flex;
+        align-items: center;
+      }
+
+      .carbon-text {
+        margin-left: 8px;
+      }
+    }
   }
 }
