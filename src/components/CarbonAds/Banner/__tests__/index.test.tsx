@@ -27,7 +27,7 @@ describe('<CarbonAdsBanner />', function() {
         }}
       />
     );
-    expect(wrapper.html()).toContain('Carbon Ad (Dev mode)');
+    expect(wrapper.html()).not.toContain('<script src="http://example.com/script.js" id="_carbonads_js"></script>');
   });
 
   it('should render null when disabled', function() {

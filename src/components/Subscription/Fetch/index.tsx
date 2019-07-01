@@ -4,7 +4,7 @@ import { graphql, StaticQuery } from 'gatsby';
 import { EmailSubscriptionServiceQuery } from 'typings/graphql';
 
 interface CarbonAdsFetchProps {
-  render({ emailSubscriptionService }: { emailSubscriptionService: EmailSubscriptionService }): React.ReactNode;
+  render(emailSubscriptionService: EmailSubscriptionService): React.ReactNode;
 }
 
 /* istanbul ignore next */
@@ -23,9 +23,7 @@ export default function SubscriptionFetch({ render }: CarbonAdsFetchProps) {
           }
         }
       `}
-      render={(data: EmailSubscriptionServiceQuery) =>
-        render({ emailSubscriptionService: data.site.siteMetadata.emailSubscriptionService })
-      }
+      render={(data: EmailSubscriptionServiceQuery) => render(data.site.siteMetadata.emailSubscriptionService)}
     />
   );
 }

@@ -1,6 +1,5 @@
 import Img from 'gatsby-image';
 import * as React from 'react';
-import { useInView } from 'react-intersection-observer';
 
 import 'prismjs/themes/prism.css';
 import 'intersection-observer';
@@ -19,8 +18,8 @@ import AboutAuthor from 'components/Pages/Post/AboutAuthor';
 import CarbondAdsBanner from 'components/CarbonAds/Banner';
 import CarbonAdsFetch from 'components/CarbonAds/Fetch';
 import CarbonAdsMetaTags from 'components/CarbonAds/Meta/Tags';
-import SubscriptionFetch from 'components/Subscription/Fetch';
-import SubscriptionForm from 'components/Subscription/Form';
+import SubscriptionRegion from 'components/Subscription/Region';
+import isInView from 'hooks/isInView';
 import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 
@@ -41,16 +40,13 @@ export default function PostTemplate({
   recommendedPosts,
   authorProfilePictureSrc,
 }: PostTemplateProps) {
-  const [ref, , record] = useInView();
-  let showShareButtons = false;
-  if (record != null && !record.isIntersecting) {
-    showShareButtons = true;
-  }
+  const [ref, showShareButtons] = isInView();
   const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
+  const subscription = <SubscriptionRegion />;
   return (
     <Layout
       leftSidebar={<LeftSidebar post={post} siteUrl={siteInfo.url} showShareButtons={showShareButtons} />}
-      rightSidebar={<RightSidebar />}
+      rightSidebar={<RightSidebar>{subscription}</RightSidebar>}
     >
       <MetaTags post={post} siteInfo={siteInfo} authorInfo={authorInfo} />
       <MetaStructuredData
@@ -89,13 +85,7 @@ export default function PostTemplate({
           <RecommendedList posts={recommendedPosts} />
         </div>
         <div className={styles.delimiter}>
-          <div className={styles.bottomSubscriptionForm}>
-            <SubscriptionFetch
-              render={({ emailSubscriptionService }) => (
-                <SubscriptionForm emailSubscriptionService={emailSubscriptionService} />
-              )}
-            />
-          </div>
+          <div className={styles.bottomSubscriptionForm}>{subscription}</div>
           <Comments url={postUrl} title={post.title} />
         </div>
       </article>

@@ -164,45 +164,6 @@ describe('<PostTemplate />', function() {
     expect(article.contains(<RecommendedList posts={props.recommendedPosts} />)).toBe(true);
   });
 
-  it('should hide social buttons', function() {
-    jest.doMock('react-intersection-observer', () => {
-      return {
-        useInView: jest.fn().mockReturnValue([null, null, null]),
-      };
-    });
-    //eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { default: PostTemplate } = require('../index');
-    const wrapper = shallow(<PostTemplate {...props} />);
-    const leftSidebar = wrapper.prop('leftSidebar');
-    expect(leftSidebar.props.showShareButtons).toBe(false);
-  });
-
-  it('should hide social buttons', function() {
-    jest.doMock('react-intersection-observer', () => {
-      return {
-        useInView: jest.fn().mockReturnValue([null, null, { isIntersecting: true }]),
-      };
-    });
-    //eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { default: PostTemplate } = require('../index');
-    const wrapper = shallow(<PostTemplate {...props} />);
-    const leftSidebar = wrapper.prop('leftSidebar');
-    expect(leftSidebar.props.showShareButtons).toBe(false);
-  });
-
-  it('should show social buttons', function() {
-    jest.doMock('react-intersection-observer', () => {
-      return {
-        useInView: jest.fn().mockReturnValue([null, null, { isIntersecting: false }]),
-      };
-    });
-    //eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { default: PostTemplate } = require('../index');
-    const wrapper = shallow(<PostTemplate {...props} />);
-    const leftSidebar = wrapper.prop('leftSidebar');
-    expect(leftSidebar.props.showShareButtons).toBe(true);
-  });
-
   it('should render post comments', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');

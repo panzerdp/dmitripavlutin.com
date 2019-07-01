@@ -1,3 +1,2 @@
-import NewsletterTemplate from 'components/Pages/Newsletter/Template';
-
-export default NewsletterTemplate;
+/* istanbul ignore next */
+export * from 'components/Pages/Newsletter/Template';

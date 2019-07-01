@@ -15,9 +15,9 @@ export default function SubscriptionForm({
         <h2>Quality posts to your inbox</h2>
         <p>I regularly publish posts containing: </p>
         <ul>
-          <li>JavaScript complex concepts explained in simple words</li>
+          <li>Important JavaScript concepts explained in simple words</li>
           <li>Overview of new JavaScript features</li>
-          <li>React clean code practices and efficient design patterns</li>
+          <li>React best practices and design patterns</li>
         </ul>
         <p>Subscribe to my newsletter to get them right to your inbox.</p>
       </div>
