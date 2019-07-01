@@ -21,6 +21,8 @@ exports[`<ExcerptsFetch /> should render excerpts template 1`] = `
           "sizes": "some sizes",
           "src": "source",
           "srcSet": "src-set",
+          "srcSetWebp": "src-set-webp",
+          "srcWebp": "src-webp",
         },
         "title": "Useful techniques to facilitate React server-side rendering",
       },

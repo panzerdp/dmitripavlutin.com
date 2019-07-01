@@ -21,6 +21,7 @@ export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps) {
       <link rel="shortcut icon" href="/favicon.ico" />
       <meta name="referrer" content="no-referrer-when-downgrade" />
       <meta name="robots" content="index, follow" />
+      <html lang="en" />
     </Helmet>
   );
 }

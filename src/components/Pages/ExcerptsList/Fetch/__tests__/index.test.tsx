@@ -65,6 +65,8 @@ const props = {
                     aspectRatio: 2,
                     srcSet: 'src-set',
                     sizes: 'some sizes',
+                    srcWebp: 'src-webp',
+                    srcSetWebp: 'src-set-webp',
                   },
                 },
               },

@@ -21,4 +21,9 @@ describe('<LayoutMetaTags />', function() {
     const wrapper = shallow(<LayoutMetaTags siteInfo={siteInfo} />);
     expect(wrapper.contains(<meta name="robots" content="index, follow" />));
   });
+
+  it('should indicate the site language', function() {
+    const wrapper = shallow(<LayoutMetaTags siteInfo={siteInfo} />);
+    expect(wrapper.contains(<html lang="en" />));
+  });
 });

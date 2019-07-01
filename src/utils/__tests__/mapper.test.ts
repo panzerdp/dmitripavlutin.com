@@ -7,6 +7,8 @@ const fluidImage = {
   aspectRatio: 1,
   srcSet: 'test',
   sizes: 'test',
+  srcWebp: 'src-webp',
+  srcSetWebp: 'src-set-webp',
 };
 
 const postExcerptFragment: PostExcerptFragment = {
