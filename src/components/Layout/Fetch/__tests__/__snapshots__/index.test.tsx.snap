@@ -25,6 +25,8 @@ exports[`<LayoutFetch /> should render the layout container 1`] = `
       "height": 100,
       "src": "http://images.com/image",
       "srcSet": "some srcset values",
+      "srcSetWebp": "src-set-webp",
+      "srcWebp": "src-webp",
       "width": 100,
     }
   }

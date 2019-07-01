@@ -38,6 +38,8 @@ const authorProfilePicture = {
   base64: 'base64-encoded-string',
   src: 'http://images.com/image',
   srcSet: 'some srcset values',
+  srcSetWebp: 'src-set-webp',
+  srcWebp: 'src-webp',
 };
 
 const props = {
@@ -51,7 +53,7 @@ const props = {
     },
     file: {
       childImageSharp: {
-        resolutions: authorProfilePicture,
+        fixed: authorProfilePicture,
       },
     },
   },

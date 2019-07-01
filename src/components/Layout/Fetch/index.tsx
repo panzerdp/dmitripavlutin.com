@@ -19,8 +19,8 @@ export default function LayoutFetchQuery({ children, leftSidebar, rightSidebar }
         query Layout {
           file(relativePath: { eq: "profile-picture.jpg" }) {
             childImageSharp {
-              resolutions(width: 64, height: 64, quality: 100) {
-                ...GatsbyImageSharpResolutions
+              fixed(width: 64, height: 64, quality: 100) {
+                ...GatsbyImageSharpFixed_withWebp
               }
             }
           }
@@ -65,7 +65,7 @@ export function LayoutFetch({
     <LayoutContainer
       siteInfo={siteMetadata.siteInfo}
       authorInfo={siteMetadata.authorInfo}
-      authorProfilePicture={file.childImageSharp.resolutions}
+      authorProfilePicture={file.childImageSharp.fixed}
       leftSidebar={leftSidebar}
       rightSidebar={rightSidebar}
     >

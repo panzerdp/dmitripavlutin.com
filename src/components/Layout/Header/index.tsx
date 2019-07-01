@@ -16,7 +16,7 @@ export default function Header({ authorProfilePicture, authorInfo, siteInfo }: H
     <header>
       <div className={styles.headerContent}>
         <Link to={TO_INDEX()}>
-          <Img title="Home" resolutions={authorProfilePicture} className={styles.picture} />
+          <Img title="Home" fixed={authorProfilePicture} className={styles.picture} />
         </Link>
         <div className={styles.profileInfo}>
           <Link to={TO_INDEX()} className={styles.name}>

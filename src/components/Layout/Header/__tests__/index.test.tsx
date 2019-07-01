@@ -34,6 +34,8 @@ const authorProfilePicture: FixedImage = {
   base64: 'base64-encoded-string',
   src: 'http://images.com/image',
   srcSet: 'some srcset values',
+  srcSetWebp: 'src-set-webp',
+  srcWebp: 'src-webp',
 };
 
 const props = {
@@ -58,6 +60,6 @@ describe('<LayoutHeader />', function() {
 
   it('should render profile picture', function() {
     const wrapper = shallow(<LayoutHeader {...props} />);
-    expect(wrapper.find({ resolutions: authorProfilePicture }).is(Img)).toBe(true);
+    expect(wrapper.find({ fixed: authorProfilePicture }).is(Img)).toBe(true);
   });
 });
