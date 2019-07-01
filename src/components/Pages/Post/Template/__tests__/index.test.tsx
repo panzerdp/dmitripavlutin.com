@@ -180,11 +180,19 @@ describe('<PostTemplate />', function() {
     ).toBe(true);
   });
 
+  it('should render carbon ads meta tags', function() {
+    const wrapper = shallow(<PostTemplate {...props} />)
+      .find(CarbonAdsFetch)
+      .at(0)
+      .renderProp('render')(carbonAdsService);
+    expect(wrapper.find(<CarbonAdsMetaTags carbonAdsService={carbonAdsService} />));
+  });
+
   it('should render carbon ads', function() {
     const wrapper = shallow(<PostTemplate {...props} />)
       .find(CarbonAdsFetch)
-      .renderProp('render')({ carbonAdsService });
-    expect(wrapper.find(<CarbondAdsBanner carbonAdsService={carbonAdsService} className="banner" />));
-    expect(wrapper.contains(<CarbonAdsMetaTags carbonAdsService={carbonAdsService} />));
+      .at(1)
+      .renderProp('render')(carbonAdsService);
+    expect(wrapper.find(<CarbondAdsBanner carbonAdsService={carbonAdsService} />));
   });
 });

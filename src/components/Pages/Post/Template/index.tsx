@@ -1,5 +1,6 @@
 import Img from 'gatsby-image';
 import * as React from 'react';
+import Media from 'react-media';
 
 import 'prismjs/themes/prism.css';
 import 'intersection-observer';
@@ -15,10 +16,10 @@ import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import Comments from 'components/Pages/Post/Comments';
 import AboutAuthor from 'components/Pages/Post/AboutAuthor';
-import CarbondAdsBanner from 'components/CarbonAds/Banner';
-import CarbonAdsFetch from 'components/CarbonAds/Fetch';
-import CarbonAdsMetaTags from 'components/CarbonAds/Meta/Tags';
 import SubscriptionRegion from 'components/Subscription/Region';
+import CarbonAdsFetch from 'components/CarbonAds/Fetch';
+import CarbonAdsBanner from 'components/CarbonAds/Banner';
+import CarbonAdsMetaTags from 'components/CarbonAds/Meta/Tags';
 import isInView from 'hooks/isInView';
 import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
@@ -42,11 +43,10 @@ export default function PostTemplate({
 }: PostTemplateProps) {
   const [ref, showShareButtons] = isInView();
   const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
-  const subscription = <SubscriptionRegion />;
   return (
     <Layout
       leftSidebar={<LeftSidebar post={post} siteUrl={siteInfo.url} showShareButtons={showShareButtons} />}
-      rightSidebar={<RightSidebar>{subscription}</RightSidebar>}
+      rightSidebar={<RightSidebar />}
     >
       <MetaTags post={post} siteInfo={siteInfo} authorInfo={authorInfo} />
       <MetaStructuredData
@@ -55,22 +55,18 @@ export default function PostTemplate({
         authorInfo={authorInfo}
         authorProfilePictureSrc={authorProfilePictureSrc}
       />
+      <CarbonAdsFetch render={(service) => <CarbonAdsMetaTags carbonAdsService={service} />} />
       <article>
         <div ref={ref} className={styles.postCover}>
           <Img fluid={post.thumbnail} />
         </div>
         <h1>{post.title}</h1>
         <Subheader tags={post.tags} published={post.published} />
-        <div className={styles.bannerContainer}>
-          <CarbonAdsFetch
-            render={({ carbonAdsService }) => (
-              <>
-                <CarbonAdsMetaTags carbonAdsService={carbonAdsService} />
-                <CarbondAdsBanner carbonAdsService={carbonAdsService} className={styles.banner} />
-              </>
-            )}
-          />
-        </div>
+        <Media query="(max-width: 1200px)" defaultMatches={false}>
+          <div className={styles.bannerContainer}>
+            <CarbonAdsFetch render={(service) => <CarbonAdsBanner carbonAdsService={service} />} />
+          </div>
+        </Media>
         <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
         <div className={styles.shareGroup}>
           <div className={styles.shareBottom}>
@@ -85,7 +81,9 @@ export default function PostTemplate({
           <RecommendedList posts={recommendedPosts} />
         </div>
         <div className={styles.delimiter}>
-          <div className={styles.bottomSubscriptionForm}>{subscription}</div>
+          <div className={styles.bottomSubscriptionForm}>
+            <SubscriptionRegion />
+          </div>
           <Comments url={postUrl} title={post.title} />
         </div>
       </article>

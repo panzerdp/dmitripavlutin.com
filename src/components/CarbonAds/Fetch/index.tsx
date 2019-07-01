@@ -4,7 +4,7 @@ import { graphql, StaticQuery } from 'gatsby';
 import { CarbonAdsQuery } from 'typings/graphql';
 
 interface CarbonAdsFetchProps {
-  render({ carbonAdsService }: { carbonAdsService: CarbonAdsService }): React.ReactNode;
+  render(carbonAdsService: CarbonAdsService): React.ReactNode;
 }
 
 /* istanbul ignore next */
@@ -22,7 +22,7 @@ export default function CarbonAdsFetch({ render }: CarbonAdsFetchProps) {
           }
         }
       `}
-      render={(data: CarbonAdsQuery) => render({ carbonAdsService: data.site.siteMetadata.carbonAdsService })}
+      render={(data: CarbonAdsQuery) => render(data.site.siteMetadata.carbonAdsService)}
     />
   );
 }
