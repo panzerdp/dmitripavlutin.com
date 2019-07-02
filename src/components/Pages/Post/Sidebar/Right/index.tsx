@@ -10,9 +10,11 @@ import CarbonAdsBanner from 'components/CarbonAds/Banner';
 export default function PostRightSidebar() {
   return (
     <div className={styles.rightSidebar}>
-      <Media query="(min-width: 1201px)" defaultMatches={false}>
-        <CarbonAdsFetch render={(service) => <CarbonAdsBanner carbonAdsService={service} />} />
-      </Media>
+      <div className={styles.carbonAdsContainer}>
+        <Media query="(min-width: 1201px)" defaultMatches={false}>
+          <CarbonAdsFetch render={(service) => <CarbonAdsBanner carbonAdsService={service} />} />
+        </Media>
+      </div>
       <SubscriptionRegion />
     </div>
   );
