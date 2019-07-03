@@ -8,6 +8,7 @@ module.exports = {
             siteInfo {
               title
               description
+              site_url: url
               url
             }
             authorInfo {
@@ -35,7 +36,7 @@ module.exports = {
               url,
               guid: url,
               categories: edge.node.frontmatter.tags,
-              custom_elements: [{ 'content:encoded': edge.node.html }],
+              // custom_elements: [{ 'content:encoded': edge.node.html }],
               author: authorInfo.name,
             });
           });
