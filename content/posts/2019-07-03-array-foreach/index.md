@@ -1,8 +1,8 @@
 ---
 title: How to use forEach() to iterate an array in JavaScript
-description: How to use forEach() method to iterate over items of an array in JavaScript, with best practices.
-published: "2019-07-01"
-modified: "2019-07-01"
+description: How to use forEach() method to iterate over items of an array in JavaScript, with lots of best practices.
+published: "2019-07-03"
+modified: "2019-07-03"
 thumbnail: "./images/cover.jpg"
 slug: foreach-iterate-array-javascript
 tags: ["javascript", "array", "foreach"]
