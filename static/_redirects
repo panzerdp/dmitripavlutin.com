@@ -1,0 +1,2 @@
+# Support old rss path
+/rss/         /rss.xml            301
