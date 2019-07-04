@@ -6,7 +6,7 @@ import PlainListByTagMetaTags from '../Meta/Tags';
 
 interface PlainListByTagTemplateProps {
   tag: string;
-  posts: PostExcerpt[];
+  posts: PostPlain[];
 }
 
 export default function PlainListByTagTemplate({ tag, posts }: PlainListByTagTemplateProps) {

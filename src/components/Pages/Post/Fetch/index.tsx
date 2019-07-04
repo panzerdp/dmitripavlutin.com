@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import PostTemplate from 'components/Pages/Post/Template';
 import { PostBySlugQuery } from 'typings/graphql';
-import { toPostExcerpt } from 'utils/mapper';
+import { toPostExcerpt, toPostPlain } from 'utils/mapper';
 
 interface PostTemplateFetchProps {
   data: PostBySlugQuery;
@@ -11,7 +11,7 @@ interface PostTemplateFetchProps {
 
 export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
   const { siteInfo, authorInfo } = data.site.siteMetadata;
-  const { markdownRemark, recommendedPosts, authorProfilePicture } = data;
+  const { markdownRemark, recommendedPosts, popularPosts, authorProfilePicture } = data;
   const post: Post = {
     ...markdownRemark.frontmatter,
     html: markdownRemark.html,
@@ -22,14 +22,16 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
     .slice(-4)
     .join('/');
   const postRepositoryFileUrl = `${siteInfo.repositoryUrl}/tree/master/${postRelativePath}`;
-  const posts = recommendedPosts.edges.map(toPostExcerpt);
+  const recommended = recommendedPosts.edges.map(toPostExcerpt);
+  const popular = popularPosts.edges.map(toPostPlain);
   return (
     <PostTemplate
       siteInfo={siteInfo}
       authorInfo={authorInfo}
       postRepositoryFileUrl={postRepositoryFileUrl}
       post={post}
-      recommendedPosts={posts}
+      recommendedPosts={recommended}
+      popularPosts={popular}
       authorProfilePictureSrc={authorProfilePicture.childImageSharp.resize.src}
     />
   );
@@ -65,22 +67,15 @@ export const pageQuery = graphql`
     isProductionMode
   }
 
-  fragment PostExcerpt on MarkdownRemarkFrontmatter {
+  fragment Post on MarkdownRemarkFrontmatter {
     title
     description
     published
     slug
     tags
-    thumbnail {
-      childImageSharp {
-        fluid(maxWidth: 720, maxHeight: 350, quality: 90) {
-          ...GatsbyImageSharpFluid_withWebp
-        }
-      }
-    }
   }
 
-  query PostBySlug($slug: String!, $recommended: [String]!) {
+  query PostBySlug($slug: String!, $recommended: [String]!, $popular: [String]!) {
     site {
       siteMetadata {
         siteInfo {
@@ -123,7 +118,23 @@ export const pageQuery = graphql`
       edges {
         node {
           frontmatter {
-            ...PostExcerpt
+            ...Post
+            thumbnail {
+              childImageSharp {
+                fluid(maxWidth: 720, maxHeight: 350, quality: 90) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    popularPosts: allMarkdownRemark(filter: { frontmatter: { slug: { in: $popular } } }) {
+      edges {
+        node {
+          frontmatter {
+            ...Post
           }
         }
       }

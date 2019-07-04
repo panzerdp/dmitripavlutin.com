@@ -5,7 +5,7 @@ import SimpleList from 'components/Simple/List';
 import MetaTags from '../Meta/Tags';
 
 interface PlainListAllTemplateProps {
-  posts: PostExcerpt[];
+  posts: PostPlain[];
 }
 
 export default function PlainListAllTemplate({ posts }: PlainListAllTemplateProps) {

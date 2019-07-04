@@ -22,7 +22,7 @@ export const pageQuery = graphql`
       edges {
         node {
           frontmatter {
-            ...PostExcerpt
+            ...Post
           }
         }
       }

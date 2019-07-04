@@ -1,5 +1,4 @@
 import { toPostExcerpt } from '../mapper';
-import { PostExcerptFragment } from 'typings/graphql';
 
 const fluidImage = {
   src: 'test',
@@ -11,7 +10,7 @@ const fluidImage = {
   srcSetWebp: 'src-set-webp',
 };
 
-const postExcerptFragment: PostExcerptFragment = {
+const post = {
   title: 'Title',
   description: 'Description',
   published: '2019-01-01',
@@ -26,7 +25,7 @@ const postExcerptFragment: PostExcerptFragment = {
 
 const edge = {
   node: {
-    frontmatter: postExcerptFragment,
+    frontmatter: post,
   },
 };
 

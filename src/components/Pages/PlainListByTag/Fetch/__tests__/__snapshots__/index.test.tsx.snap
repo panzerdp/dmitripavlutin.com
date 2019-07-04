@@ -12,15 +12,6 @@ exports[`<PlainListByTagFetch /> should render plain list by tag template 1`] = 
           "react",
           "server side rendering",
         ],
-        "thumbnail": Object {
-          "aspectRatio": 2,
-          "base64": "base64",
-          "sizes": "some sizes",
-          "src": "source",
-          "srcSet": "src-set",
-          "srcSetWebp": "src-set-webp",
-          "srcWebp": "src-webp",
-        },
         "title": "Useful techniques to facilitate React server-side rendering",
       },
     ]

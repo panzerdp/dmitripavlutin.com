@@ -6,19 +6,12 @@ import Layout from 'components/Layout/Fetch';
 import SimpleList from 'components/Simple/List';
 import PlainListByTagMetaTags from 'components/Pages/PlainListByTag/Meta/Tags';
 
-const posts: PostExcerpt[] = [
+const posts: PostPlain[] = [
   {
     description: 'Useful techniques to facilitate React server-side rendering.',
     published: '2018-03-17',
     slug: 'useful-techniques-react-server-side-rendering',
     tags: ['react', 'server side rendering'],
-    thumbnail: {
-      aspectRatio: 2,
-      base64: 'base64',
-      sizes: 'some sizes',
-      src: 'source',
-      srcSet: 'src-set',
-    },
     title: 'Useful techniques to facilitate React server-side rendering',
   },
   {
@@ -26,13 +19,6 @@ const posts: PostExcerpt[] = [
     published: '2018-03-17',
     slug: 'javascript-arrow-functions',
     tags: ['javascript', 'arrow function'],
-    thumbnail: {
-      aspectRatio: 2,
-      base64: 'base64',
-      sizes: 'some sizes',
-      src: 'source',
-      srcSet: 'src-set',
-    },
     title: 'JavaScript arrow functions in details',
   },
 ];

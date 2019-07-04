@@ -30,6 +30,7 @@ interface PostTemplateProps {
   postRepositoryFileUrl: string;
   post: Post;
   recommendedPosts: PostExcerpt[];
+  popularPosts: PostPlain[];
   authorProfilePictureSrc: string;
 }
 
@@ -39,15 +40,15 @@ export default function PostTemplate({
   postRepositoryFileUrl,
   post,
   recommendedPosts,
+  popularPosts,
   authorProfilePictureSrc,
 }: PostTemplateProps) {
   const [ref, showShareButtons] = isInView();
   const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
+  const leftSidebar = <LeftSidebar post={post} siteUrl={siteInfo.url} showShareButtons={showShareButtons} />;
+  const rightSidebar = <RightSidebar popularPosts={popularPosts} />;
   return (
-    <Layout
-      leftSidebar={<LeftSidebar post={post} siteUrl={siteInfo.url} showShareButtons={showShareButtons} />}
-      rightSidebar={<RightSidebar />}
-    >
+    <Layout leftSidebar={leftSidebar} rightSidebar={rightSidebar}>
       <MetaTags post={post} siteInfo={siteInfo} authorInfo={authorInfo} />
       <MetaStructuredData
         post={post}

@@ -75,6 +75,21 @@ const props = {
         },
       ],
     },
+    popularPosts: {
+      edges: [
+        {
+          node: {
+            frontmatter: {
+              title: 'Useful techniques to facilitate React server-side rendering',
+              description: 'Useful techniques to facilitate React server-side rendering.',
+              published: '2018-03-17',
+              slug: 'useful-techniques-react-server-side-rendering',
+              tags: ['react', 'server side rendering'],
+            },
+          },
+        },
+      ],
+    },
     markdownRemark: {
       id: 'post-id',
       html: '<div>JavaScript is a programming language</div>',

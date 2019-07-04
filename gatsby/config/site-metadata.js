@@ -32,4 +32,12 @@ module.exports = {
     isEnabled: true,
     isProductionMode: process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod',
   },
+  featured: {
+    popular: [
+      'how-three-dots-changed-javascript',
+      'gentle-explanation-of-this-in-javascript',
+      '7-tips-to-handle-undefined-in-javascript',
+      '6-ways-to-declare-javascript-functions',
+    ],
+  },
 };

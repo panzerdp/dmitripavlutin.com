@@ -3,7 +3,7 @@ import * as React from 'react';
 import SimplePost from '../Post';
 
 interface SimpleListProps {
-  posts: PostExcerpt[];
+  posts: PostPlain[];
 }
 
 export default function SimpleList({ posts }: SimpleListProps) {

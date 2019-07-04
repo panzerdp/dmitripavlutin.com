@@ -6,7 +6,7 @@ import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 
 interface SimplePostProps {
-  post: PostExcerpt;
+  post: PostPlain;
 }
 
 export default function SimplePost({ post }: SimplePostProps) {

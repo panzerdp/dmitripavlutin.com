@@ -7,6 +7,13 @@ const createPlainListByTag = require('./gatsby/node/plain-list-by-tag');
 
 const query = `
 {
+  site {
+    siteMetadata {
+      featured {
+        popular
+      }
+    }
+  }
   allMarkdownRemark(
     sort: { 
       fields: [frontmatter___published], 
@@ -47,7 +54,8 @@ exports.createPages = ({ graphql, actions }) => {
       // Create blog posts pages.
       const edges = result.data.allMarkdownRemark.edges;
       createExcerptsList(createPage, edges);
-      createPost(createPage, edges);
+      const popular = result.data.site.siteMetadata.featured.popular;
+      createPost(createPage, edges, popular);
       createPlainListByTag(createPage, edges);
     });
     resolve(queryResult);

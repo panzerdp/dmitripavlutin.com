@@ -62,7 +62,14 @@ export const pageQuery = graphql`
       edges {
         node {
           frontmatter {
-            ...PostExcerpt
+            ...Post
+            thumbnail {
+              childImageSharp {
+                fluid(maxWidth: 720, maxHeight: 350, quality: 90) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
           }
         }
       }

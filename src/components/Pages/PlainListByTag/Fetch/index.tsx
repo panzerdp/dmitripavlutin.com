@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import PlainListByTagTemplate from 'components/Pages/PlainListByTag/Template';
 import { PlainListByTagQuery } from 'typings/graphql';
-import { toPostExcerpt } from 'utils/mapper';
+import { toPostPlain } from 'utils/mapper';
 
 interface PlainListByTagProps {
   pageContext: {
@@ -13,7 +13,7 @@ interface PlainListByTagProps {
 }
 
 export default function PlainListByTagFetch({ pageContext: { tag }, data }: PlainListByTagProps) {
-  return <PlainListByTagTemplate tag={tag} posts={data.allMarkdownRemark.edges.map(toPostExcerpt)} />;
+  return <PlainListByTagTemplate tag={tag} posts={data.allMarkdownRemark.edges.map(toPostPlain)} />;
 }
 
 export const pageQuery = graphql`
@@ -25,7 +25,7 @@ export const pageQuery = graphql`
       edges {
         node {
           frontmatter {
-            ...PostExcerpt
+            ...Post
           }
         }
       }

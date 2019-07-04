@@ -20,6 +20,20 @@ exports[`<PostFetch /> should render post template 1`] = `
     }
   }
   authorProfilePictureSrc="/image.png"
+  popularPosts={
+    Array [
+      Object {
+        "description": "Useful techniques to facilitate React server-side rendering.",
+        "published": "2018-03-17",
+        "slug": "useful-techniques-react-server-side-rendering",
+        "tags": Array [
+          "react",
+          "server side rendering",
+        ],
+        "title": "Useful techniques to facilitate React server-side rendering",
+      },
+    ]
+  }
   post={
     Object {
       "description": "Useful techniques to facilitate React server-side rendering.",

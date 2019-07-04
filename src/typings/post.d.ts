@@ -1,9 +1,12 @@
-interface PostExcerpt {
+interface PostPlain {
   title: string;
   description: string;
+  published: string;
   slug: string;
   tags: Tags;
-  published: string;
+}
+
+interface PostExcerpt extends PostPlain {
   thumbnail: FluidImage;
 }
 

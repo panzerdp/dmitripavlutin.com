@@ -68,6 +68,15 @@ const props = {
       title: 'Useful techniques to facilitate React server-side rendering',
     },
   ],
+  popularPosts: [
+    {
+      description: 'Useful techniques to facilitate React server-side rendering.',
+      published: '2018-03-17',
+      slug: 'useful-techniques-react-server-side-rendering',
+      tags: ['react', 'server side rendering'],
+      title: 'Useful techniques to facilitate React server-side rendering',
+    },
+  ],
   siteInfo: {
     description: 'Posts by Dmitri Pavlutin about software development',
     repositoryUrl: 'https://github.com/panzerdp/dmitripavlutin.com',
