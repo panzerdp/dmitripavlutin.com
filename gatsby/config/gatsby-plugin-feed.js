@@ -8,7 +8,6 @@ module.exports = {
             siteInfo {
               title
               description
-              site_url: url
               url
             }
             authorInfo {
@@ -18,7 +17,18 @@ module.exports = {
         }
       }
     `,
-    setup: ({ query }) => query.site.siteMetadata.siteInfo,
+    setup: ({ query }) => {
+      const { siteInfo, authorInfo } = query.site.siteMetadata;
+      return {
+        title: siteInfo.title,
+        description: siteInfo.description,
+        site_url: siteInfo.url,
+        image_url: `${siteInfo.url}/favicon256.png`,
+        copyright: `2015 ${authorInfo.name}`,
+        language: 'en',
+        categories: ['JavaScript', 'React', 'CSS', 'Software development', 'Frontend development'],
+      }
+    },
     feeds: [
       {
         serialize: ({
