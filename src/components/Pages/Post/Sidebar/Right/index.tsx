@@ -6,7 +6,7 @@ import styles from './index.module.scss';
 import SubscriptionRegion from 'components/Subscription/Region';
 import CarbonAdsFetch from 'components/CarbonAds/Fetch';
 import CarbonAdsBanner from 'components/CarbonAds/Banner';
-import PopularPostsList from 'components/PopularPosts/List';
+import PopularPosts from 'components/PopularPosts';
 
 interface PostRightSidebarProps {
   popularPosts: PostPlain[];
@@ -21,7 +21,7 @@ export default function PostRightSidebar({ popularPosts }: PostRightSidebarProps
         </Media>
       </div>
       <SubscriptionRegion />
-      <PopularPostsList posts={popularPosts} />
+      <PopularPosts posts={popularPosts} />
     </div>
   );
 }

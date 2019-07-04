@@ -1,0 +1,21 @@
+@import '~styles/variables';
+
+.popularPosts {
+  background-color: rgba($border-color, 0.4);
+  border-radius: 8px;
+  font-size: 1.3rem;
+  padding: 1rem;
+
+  h2 {
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  ul {
+    padding-left: 30px;
+
+    li {
+      margin: 0.5rem 0;
+    }
+  }
+}
