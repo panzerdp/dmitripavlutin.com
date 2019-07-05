@@ -63,11 +63,13 @@ export default function PostTemplate({
         </div>
         <h1>{post.title}</h1>
         <Subheader tags={post.tags} published={post.published} />
-        <Media query="(max-width: 1200px)" defaultMatches={false}>
-          <div className={styles.bannerContainer}>
-            <CarbonAdsFetch render={(service) => <CarbonAdsBanner carbonAdsService={service} />} />
-          </div>
-        </Media>
+        <div>
+          <Media query="(max-width: 1200px)" defaultMatches={false}>
+            <div className={styles.bannerContainer}>
+              <CarbonAdsFetch render={(service) => <CarbonAdsBanner carbonAdsService={service} />} />
+            </div>
+          </Media>
+        </div>
         <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
         <div className={styles.shareGroup}>
           <div className={styles.shareBottom}>
