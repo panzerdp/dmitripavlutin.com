@@ -2,7 +2,7 @@
 title: "Make your JavaScript code shine: knockout old ES5 hacks (Part 2)"
 description: "Hacks influence negatively the way JavaScript programs are coded. Find out how to remove old hacks and make your code shine again using ES2015 features."
 published: "2016-08-17"
-modified: "2016-08-17"
+modified: "2019-07-05"
 thumbnail: "./images/cover.jpg"
 slug: make-your-javascript-code-shine-knockout-old-es5-hacks-part-2
 tags: ["javascript", "es2015"]
@@ -222,7 +222,7 @@ The second problem is a redundant indication of the context `.apply(numbers, ...
 
 To me the indirect call expression looks like a big lazy frog.  
 
-The [spread operator](https://rainsoft.io/how-three-dots-changed-javascript/) `...` makes the function invocation from an array of arguments  wonderful.  
+The [spread operator](/how-three-dots-changed-javascript/) `...` makes the function invocation from an array of arguments  wonderful.  
 Simply put three dots `...` before the array when calling a function and its elements spread into invocation arguments. `myFunction(...argsArray)` is equivalent to `myFunction(argsArray[0], argsArray[1], ..., argsArray[n])`.
 
 ![Use spread operator to call a function with arguments from an array](./images/3-2.jpg)

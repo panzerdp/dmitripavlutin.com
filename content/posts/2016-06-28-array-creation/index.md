@@ -2,7 +2,7 @@
 title: "Power up the array creation in JavaScript"
 description: "ES6 improves the way arrays are created in JavaScript. See how the combination of array literal, spread operator and iterators upgrade array initialization."
 published: "2016-06-28"
-modified: "2016-06-28"
+modified: "2019-07-05"
 thumbnail: "./images/cover.jpg"
 slug: power-up-the-array-creation-in-javascript
 tags: ["javascript", "array"]
@@ -105,7 +105,7 @@ You can *accidentally* fall into this case when deleting or adding elements in a
 
 ### 1.2 Improved by spread operator
 
-The [spread operator](http://rainsoft.io/how-three-dots-changed-javascript/) from ECMAScript 6 improves how an array can be initialized from other arrays.  
+The [spread operator](/how-three-dots-changed-javascript/) from ECMAScript 6 improves how an array can be initialized from other arrays.  
 There are many uses cases how three dots makes the array creation easier. The idea is to prefix with `...` the source array in the literal, then the elements from the source are included in the created array. Pretty straightforward. 
 
 The following array literal is using the spread operator:

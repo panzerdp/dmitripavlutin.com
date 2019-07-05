@@ -2,7 +2,7 @@
 title: "How to iterate easily over object properties in JavaScript"
 description: "Object.values() and Object.entries() are another improvement step for JavaScript developers to have helper functions that iterate over object properties."
 published: "2016-08-23"
-modified: "2016-08-23"
+modified: "2019-07-05"
 thumbnail: "./images/cover.jpg"
 slug: how-to-iterate-easily-over-object-properties-in-javascript
 tags: ["javascript", "object"]
@@ -14,7 +14,7 @@ type: post
 
 *Bjarne Stroustrup, inventor of C++*
 
-In the same period of [ECMAScript 2016](https://rainsoft.io/must-know-details-about-es2016-features/) release in June 2016, JavaScript developers are happy to know that another bunch of awesome proposals [reached the stage 4](https://github.com/tc39/proposals/blob/master/finished-proposals.md) (finished).  
+In the same period of [ECMAScript 2016](/must-know-details-about-es2016-features/) release in June 2016, JavaScript developers are happy to know that another bunch of awesome proposals [reached the stage 4](https://github.com/tc39/proposals/blob/master/finished-proposals.md) (finished).  
 
 Let's list these features:  
 

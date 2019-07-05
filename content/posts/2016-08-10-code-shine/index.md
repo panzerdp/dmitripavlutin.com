@@ -2,7 +2,7 @@
 title: "Make your JavaScript code shine: knockout old ES5 hacks"
 description: "Hacks influence negatively the way JavaScript programs are coded. Find out how to remove old hacks and make your code shining again using ES2015 features."
 published: "2016-08-10"
-modified: "2016-08-10"
+modified: "2019-07-05"
 thumbnail: "./images/cover.jpg"
 slug: make-your-javascript-code-shide-knockout-old-es5-hack
 tags: ["javascript", "es2015"]
@@ -60,7 +60,7 @@ Even worse you may encounter other ways of comparison:
 
 Such way to search elements is not convenient and smells like a hack.  
 
-To pass this problem, ECMAScript 2016 introduces a [new method](https://rainsoft.io/must-know-details-about-es2016-features/#1thearraymethodincludes) `Array.prototype.includes(element, [fromIndex])`. It returns a boolean that indicates the existence of `element` in array.  
+To pass this problem, ECMAScript 2016 introduces a [new method](/must-know-details-about-es2016-features/#1-the-array-method-includes) `Array.prototype.includes(element, [fromIndex])`. It returns a boolean that indicates the existence of `element` in array.  
 
 ![Use includes() instead of indexOf() in to verify the element existence in JavaScript](./images/1-4.jpg)
 
@@ -131,7 +131,7 @@ sum(10, 5, 2); // => 17
 `sum()` function returns the sum of arguments. As described in the list of limitations above, `arguments` is an array-like object. So an indirect call of `.reduce()` method is necessary.  
 The function signature `function sum() {}` indicates that it does not have any parameters, however in the body `arguments` accesses the values passed on invocation. This creates confusion, because the signature should clearly indicate what parameters the function accepts, without the necessity to dive into the implementation details.  
 
-Almost all of these limitation are solved by [rest parameters](https://rainsoft.io/how-three-dots-changed-javascript/#2improvedparametersaccess) `function funName(...restParam)`, available in ECMAScript 2015.  
+Almost all of these limitation are solved by [rest parameters](/how-three-dots-changed-javascript/#2-improved-parameters-access) `function funName(...restParam)`, available in ECMAScript 2015.  
 
 ![Use rest parameter instead of arguments object in JavaScript function](./images/2-2.jpg)
 
@@ -189,7 +189,7 @@ The availability of the rest parameters:
 
 > `this` is a small word that makes a big headache.
 
-`this` or the function invocation context is a difficult part of JavaScript. I recommend you to read [my definitive guide to understanding `this`](https://rainsoft.io/gentle-explanation-of-this-in-javascript/).  
+`this` or the function invocation context is a difficult part of JavaScript. I recommend you to read [my definitive guide to understanding `this`](/gentle-explanation-of-this-in-javascript/).  
 
 Regular JavaScript functions have `this` depending on the invocation type. In case of a regular invocation `myFunction()`, `this` is `window` object or `undefined` in strict mode.  
 
@@ -226,7 +226,7 @@ myNumbers.calculate(); // => 16
 `Numbers` constructor calculates the sum or multiplication of elements in an array.  
 The constructor provides `.calculate()` method, which uses `this.array.reduce()` to apply the necessary operation. The callback function is bound with the enclosing context `function(accumulator, element) {...}.bind(this)`, to access `this.operation` correctly.  
 
-The [arrow function](https://rainsoft.io/6-ways-to-declare-javascript-functions/#4arrowfunction) allows efficiently to bind `this` lexically. It uses the enclosing context and does not define its own `this`.  
+The [arrow function](/6-ways-to-declare-javascript-functions/#4-arrow-function) allows efficiently to bind `this` lexically. It uses the enclosing context and does not define its own `this`.  
 
 ![Use arrow function instead of .bind(this)](./images/3-1.jpg)
 

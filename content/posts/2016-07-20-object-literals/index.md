@@ -2,7 +2,7 @@
 title: "Why object literals in JavaScript are cool"
 description: "ES2015 improves the object literals (or initialiazers) to set the prototype using __proto__, use super, shorthand method declarations, computed names."
 published: "2016-07-20"
-modified: "2016-07-20"
+modified: "2019-07-05"
 thumbnail: "./images/cover.jpg"
 slug: why-object-literals-in-javascript-are-cool
 tags: ["javascript", "object literal", "es2015"]
@@ -308,7 +308,7 @@ var object = {
 
 [Rest and spread properties](https://github.com/sebmarkbage/ecmascript-rest-spread) of the object literal are a proposal in draft (stage 2), which makes them a candidate for a new JavaScript version.  
 
-They are an equivalent of [the spread and rest operator](https://rainsoft.io/how-three-dots-changed-javascript/#4improvedarraymanipulation) already available for arrays in ECMAScript 2015.  
+They are an equivalent of [the spread and rest operator](/how-three-dots-changed-javascript/#4-improved-array-manipulation) already available for arrays in ECMAScript 2015.  
 
 [Rest properties](https://github.com/sebmarkbage/ecmascript-rest-spread/blob/master/Rest.md) allows to collect the properties from an object that are left after a destructuring assignment.  
 The following example collects the remaining properties after destructuring `object`: 

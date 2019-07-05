@@ -2,7 +2,7 @@
 title: "The path of software development craftsmanship"
 description: "Detailed learning of algorithms and data structures is a must for everyone who plans to become a great software developer. Half knowledge is zero knowledge."
 published: "2016-09-21"
-modified: "2016-09-21"
+modified: "2019-07-05"
 thumbnail: "./images/cover.jpg"
 slug: the-path-of-software-development-craftsmanship
 tags: ["javascript", "craftsmanship"]
@@ -80,7 +80,7 @@ A beginner developer got really excited by a particular framework, ReactJS for e
 
 The JavaScript knowledge of such developer is a minimum necessary to code in ReactJS. He deals fine with defining variables, functions, ES2015 modules and ReactJS components.  
 
-However he has problems with deeper concepts of JavaScript like [how `this` keyword works](https://rainsoft.io/gentle-explanation-of-this-in-javascript/), [prototypal inheritance](https://developer.mozilla.org/en/docs/Web/JavaScript/Inheritance_and_the_prototype_chain), [hoisting](https://rainsoft.io/javascript-hoisting-in-details/) and [event loop](http://altitudelabs.com/blog/what-is-the-javascript-event-loop/).  
+However he has problems with deeper concepts of JavaScript like [how `this` keyword works](/gentle-explanation-of-this-in-javascript/), [prototypal inheritance](https://developer.mozilla.org/en/docs/Web/JavaScript/Inheritance_and_the_prototype_chain), [hoisting](/javascript-hoisting-in-details/) and [event loop](http://altitudelabs.com/blog/what-is-the-javascript-event-loop/).  
 
 Lack of language experience influences negatively the way components are coded in JavaScript. Usually hacks and workarounds are used just to make the things work.    
 

@@ -2,7 +2,7 @@
 title: How to use forEach() to iterate an array in JavaScript
 description: Detailed description on how to use forEach() method to iterate array items in JavaScript. Including best practices.
 published: "2019-07-03"
-modified: "2019-07-04"
+modified: "2019-07-05"
 thumbnail: "./images/cover.jpg"
 slug: foreach-iterate-array-javascript
 tags: ["javascript", "array", "foreach"]
@@ -258,7 +258,7 @@ numbers.forEach(function(number) {
 console.log(allEven); // => false
 ```
 
-The code determines correctly if all numbers are even. But the problem is the impossibility to break after finding the first odd number `3`.  
+The code determines correctly if all numbers are even. The problem is the impossibility to break after finding the first odd number `3`.  
 
 A better solution is to apply `array.every()` method:
 
@@ -271,12 +271,12 @@ const allEven = numbers.every(function(number) {
 
 console.log(allEven); // => false
 ```
-`array.every()` not only makes the code shorter and more expressive. It is also more optimal, because `.every()` method breaks iterating right after finding the first odd number.  
+`array.every()` not only makes the code shorter and more expressive. It is also optimal, because `.every()` method breaks iterating right after finding the first odd number.  
 
 ## 6. Conclusion
 
 `forEach()` method is an efficient way to iterate over all array items. Its first argument is the callback function, which is invoked for every item in the array with 3 arguments: item, index and the array itself.  
 
-You would use `forEach()` to iterate over all array items, without break, involving simultaneously some side-effects. Otherwise, consider an alternative array method that solves better your task. 
+You would use `forEach()` to iterate over all array items, without breaking, involving simultaneously some side-effects. Otherwise, consider an alternative [array method](https://javascript.info/array-methods) that solves better your task. 
 
 *Do you know good uses cases of `forEach()`? Write them in a comment below.*

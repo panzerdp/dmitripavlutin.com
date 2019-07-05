@@ -2,7 +2,7 @@
 title: 7 tips to handle undefined in JavaScript
 description: A detailed article about 'undefined' keyword in JavaScript. 7 tips on how to handle correctly 'undefined' and increase code durability.
 published: "2017-04-15"
-modified: "2017-04-15"
+modified: "2019-07-05"
 thumbnail: "./images/blade-runner-rachel.png"
 slug: 7-tips-to-handle-undefined-in-javascript
 tags: ["javascript", "undefined"]
@@ -125,7 +125,7 @@ An efficient approach to solve the troubles of uninitialized variables is whenev
 
 **Tip 1: Favor `const`, otherwise use `let`, but say goodbye to `var`**
 
-In my opinion, one of the best features of ECMAScript 2015 is the new way to declare variables using `const` and `let`. It is a big step forward that these declarations are block scoped (contrary to older function scoped `var`) and exist in a [temporal dead zone](https://rainsoft.io/variables-lifecycle-and-why-let-is-not-hoisted/#5letvariableslifecycle) until the declaration line.    
+In my opinion, one of the best features of ECMAScript 2015 is the new way to declare variables using `const` and `let`. It is a big step forward that these declarations are block scoped (contrary to older function scoped `var`) and exist in a [temporal dead zone](/variables-lifecycle-and-why-let-is-not-hoisted/#5-let-variables-lifecycle) until the declaration line.    
 
 When the variable receives a value once and forever, I recommend to use a `const` declaration. It creates an [immutable binding](https://mathiasbynens.be/notes/es6-const).  
 
@@ -156,7 +156,7 @@ What about the old school `var`? In terms of ES2015, my suggestion is [stop usin
 
 ![Do not write var, write const and let in JavaScript](./images/no-var.png)
 
-`var` declaration problem is the [variable hoisting](https://rainsoft.io/javascript-hoisting-in-details/#hoistingandvar) in the entire function scope. You can declare a `var` variable somewhere at the end of the function scope, but still it can accessed before declaration: and you'll get an `undefined`.  
+`var` declaration problem is the [variable hoisting](/javascript-hoisting-in-details/#hoisting-and-var) in the entire function scope. You can declare a `var` variable somewhere at the end of the function scope, but still it can accessed before declaration: and you'll get an `undefined`.  
 
 ```javascript
 function bigFunction() {
@@ -171,7 +171,7 @@ bigFunction();
 ```
 `myVariable` is accessible and contains `undefined` even before the declaration line: `var myVariable = 'Initial value'`.
 
-Contrary, a `let` (including `const`) variable cannot be accessed before the declaration line. It happens because the variable is in a [temporal dead zone](https://rainsoft.io/variables-lifecycle-and-why-let-is-not-hoisted/#5letvariableslifecycle) before the declaration. And that's nice, because you have less chances to access an `undefined`.
+Contrary, a `let` (including `const`) variable cannot be accessed before the declaration line. It happens because the variable is in a [temporal dead zone](/variables-lifecycle-and-why-let-is-not-hoisted/#5-let-variables-lifecycle) before the declaration. And that's nice, because you have less chances to access an `undefined`.
 
 The above example updated with `let` (instead of `var`) throws a `ReferenceError`, because the variable in the temporal dead zone is not accessible. 
 

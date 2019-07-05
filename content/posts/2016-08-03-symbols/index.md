@@ -2,7 +2,7 @@
 title: "Detailed overview of well-known symbols"
 description: "Well-known symbols allow to customize many JavaScript algorithms: elements iteration, instanceof, regexp string methods, derived object and more."
 published: "2016-08-03"
-modified: "2016-08-03"
+modified: "2019-07-05"
 thumbnail: "./images/cover.jpg"
 slug: detailed-overview-of-well-known-symbols
 tags: ["javascript", "symbol", "es2015"]
@@ -52,7 +52,7 @@ firstNamed === secondNamed; // => false
 `first` and `second` create unique symbols and are different.   
 `firstNamed` and `secondNamed` have the same name `'Lorem'`, but are still different.
 
-Symbols can be keys for properties in objects. In object literals or classes declaration, it is necessary to use a [computed property name](https://rainsoft.io/why-object-literals-in-javascript-are-cool/#4computedpropertynames) syntax `[symbol]`:
+Symbols can be keys for properties in objects. In object literals or classes declaration, it is necessary to use a [computed property name](/why-object-literals-in-javascript-are-cool/#4-computed-property-names) syntax `[symbol]`:
 
 ```javascript
 let stringSymbol = Symbol('String');
