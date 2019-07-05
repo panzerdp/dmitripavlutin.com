@@ -3,14 +3,14 @@ import * as React from 'react';
 
 import PlainListAllTemplate from 'components/Pages/PlainListAll/Template';
 import { PlainListAllQuery } from 'typings/graphql';
-import { toPostExcerpt } from 'utils/mapper';
+import { toPostPlain } from 'utils/mapper';
 
 interface PlainListAllFetchProps {
   data: PlainListAllQuery;
 }
 
 export default function PlainListAllFetch({ data }: PlainListAllFetchProps) {
-  return <PlainListAllTemplate posts={data.allMarkdownRemark.edges.map(toPostExcerpt)} />;
+  return <PlainListAllTemplate posts={data.allMarkdownRemark.edges.map(toPostPlain)} />;
 }
 
 export const pageQuery = graphql`

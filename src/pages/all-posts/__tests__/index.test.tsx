@@ -18,19 +18,6 @@ const props = {
               published: '2018-03-17',
               slug: 'useful-techniques-react-server-side-rendering',
               tags: ['react', 'server side rendering'],
-              thumbnail: {
-                childImageSharp: {
-                  fluid: {
-                    src: 'source',
-                    base64: 'base64',
-                    aspectRatio: 2,
-                    srcSet: 'src-set',
-                    sizes: 'some sizes',
-                    srcWebp: 'src-webp',
-                    srcSetWebp: 'src-set-webp',
-                  },
-                },
-              },
             },
           },
         },
