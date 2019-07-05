@@ -1,12 +1,13 @@
+@import '~styles/variables';
+
 .simplePost {
-  margin: 3.5rem 0;
+  margin: 2.2rem 0;
+  box-shadow: $box-shadow;
+  border-radius: 8px;
+  padding: 1rem 1rem 0.4rem 1rem;
 
   h4 {
     margin: 0;
-
-    a {
-      font-size: 1.6rem;
-    }
   }
 
   .subheader {

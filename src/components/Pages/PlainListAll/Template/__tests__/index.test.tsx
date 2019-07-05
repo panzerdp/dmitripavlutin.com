@@ -31,6 +31,6 @@ describe('<PlainListAllTemplate />', function() {
 
   it('should render posts list', () => {
     const wrapper = shallow(<PlainListAllTemplate posts={posts} />);
-    expect(wrapper.find(Layout).contains(<SimpleList posts={posts} />)).toBe(true);
+    expect(wrapper.find(SimpleList).prop('posts')).toEqual(posts);
   });
 });

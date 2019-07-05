@@ -4,13 +4,17 @@ import SimplePost from '../Post';
 
 interface SimpleListProps {
   posts: PostPlain[];
+  beforeEachPost?(post: PostPlain): React.ReactNode;
 }
 
-export default function SimpleList({ posts }: SimpleListProps) {
+export default function SimpleList({ posts, beforeEachPost }: SimpleListProps) {
   return (
     <div>
       {posts.map((post, index) => (
-        <SimplePost post={post} key={index} />
+        <>
+          {beforeEachPost ? beforeEachPost(post) : null}
+          <SimplePost post={post} key={index} />
+        </>
       ))}
     </div>
   );
