@@ -17,8 +17,8 @@ describe('<Subheader />', function() {
 
   it('should render post tags', function() {
     const wrapper = shallow(<Subheader {...props} />);
-    props.tags.forEach((name) => {
-      expect(wrapper.find({ name }).is('Tag')).toBe(true);
+    props.tags.forEach((tag) => {
+      expect(wrapper.find({ tag }).is('Tag')).toBe(true);
     });
   });
 });

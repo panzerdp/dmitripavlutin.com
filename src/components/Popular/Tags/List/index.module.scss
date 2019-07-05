@@ -1,0 +1,22 @@
+@import '~styles/variables';
+
+.popularPosts {
+  box-shadow: $box-shadow;
+  border-radius: 8px;
+  font-size: 1.3rem;
+  padding: 1.5rem;
+
+  h2 {
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+
+    a {
+      margin-top: 0.5rem;
+    }
+  }
+}

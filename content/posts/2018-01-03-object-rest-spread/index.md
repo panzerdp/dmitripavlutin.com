@@ -14,7 +14,7 @@ Merging multiple JavaScript objects is a frequent task. Unfortunately JavaScript
 
 In ES5 your solution is `_.extend(target, [sources])` from Lodash (or any alternative), and ES2015 introduces `Object.assign(target, [sources])`. 
 
-Luckily [object spread syntax](https://github.com/tc39/proposal-object-rest-spread) (an ECMASript proposal at stage 3) is a step forward how to manipulate objects, providing a short and easy to follow syntax.  
+Luckily [object spread syntax](https://github.com/tc39/proposal-object-rest-spread) (an ECMAScript proposal at stage 3) is a step forward how to manipulate objects, providing a short and easy to follow syntax.  
 
 ```javascript
 const cat = {

@@ -5,13 +5,13 @@ import Tag from 'components/Tag';
 import { TO_TAG } from 'routes/path';
 
 const props = {
-  name: 'JavaScript Language',
+  tag: 'JavaScript Language',
 };
 
 describe('<Tag />', function() {
   it('should render tag name', function() {
     const wrapper = shallow(<Tag {...props} />);
-    expect(wrapper.text()).toContain(props.name);
+    expect(wrapper.text()).toContain(props.tag);
   });
 
   it('should render tag link', function() {

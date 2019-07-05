@@ -1,0 +1,21 @@
+@import '~styles/variables';
+
+.rightSidebar {
+  margin-top: 1.5rem;
+  margin-right: 1rem;
+  max-width: 20rem;
+
+  > * {
+    margin-top: 1.5rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .rightSidebar {
+    display: none;
+  }
+}

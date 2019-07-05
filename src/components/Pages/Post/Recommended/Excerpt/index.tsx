@@ -23,7 +23,7 @@ export default function RecommendedExcerpt({ post: { slug, title, thumbnail, tag
         </h4>
         <div className={styles.tags}>
           {tags.map((tag) => (
-            <Tag name={tag} key={tag} />
+            <Tag tag={tag} key={tag} />
           ))}
         </div>
       </div>

@@ -19,5 +19,5 @@ export default function Subheader({ tags, published }: SubheaderProps) {
 }
 
 function mapTag(tagName: string) {
-  return <Tag name={tagName} key={tagName} />;
+  return <Tag tag={tagName} key={tagName} />;
 }

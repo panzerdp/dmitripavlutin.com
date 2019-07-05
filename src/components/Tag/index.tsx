@@ -6,13 +6,17 @@ import { slugify } from 'utils/string';
 import styles from './index.module.scss';
 
 interface TagProps {
-  name: string;
+  tag: string;
+  label?: string;
 }
 
-export default function Tag({ name }: TagProps) {
+export default function Tag({ tag, label }: TagProps) {
+  if (!label) {
+    label = tag;
+  }
   return (
-    <Link to={TO_TAG({ slug: slugify(name) })} className={styles.tag}>
-      <span>{name}</span>
+    <Link to={TO_TAG({ slug: slugify(tag) })} className={styles.tag}>
+      <span>{label}</span>
     </Link>
   );
 }

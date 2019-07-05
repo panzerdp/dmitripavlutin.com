@@ -39,6 +39,6 @@ describe('<PostRecommendedExcerpt />', function() {
 
   it('should render post tags', function() {
     const wrapper = shallow(<PostRecommendedExcerpt {...props} />);
-    post.tags.forEach((tag) => expect(wrapper.contains(<Tag name={tag} />)).toBe(true));
+    post.tags.forEach((tag) => expect(wrapper.contains(<Tag tag={tag} />)).toBe(true));
   });
 });

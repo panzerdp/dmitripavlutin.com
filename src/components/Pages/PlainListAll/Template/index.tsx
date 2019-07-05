@@ -3,6 +3,7 @@ import * as React from 'react';
 import Layout from 'components/Layout/Fetch';
 import SimpleList from 'components/Simple/List';
 import MetaTags from '../Meta/Tags';
+import PlainListAllRightSidebar from 'components/Pages/PlainListAll/Sidebar/Right';
 import { formatDateToMonth } from 'utils/date';
 
 import styles from './index.module.scss';
@@ -13,7 +14,7 @@ interface PlainListAllTemplateProps {
 
 export default function PlainListAllTemplate({ posts }: PlainListAllTemplateProps) {
   return (
-    <Layout>
+    <Layout rightSidebar={<PlainListAllRightSidebar />}>
       <MetaTags />
       <div className={styles.plainListAllTemplate}>
         <h1>All posts</h1>
