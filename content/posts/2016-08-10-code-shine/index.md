@@ -185,7 +185,7 @@ The availability of the rest parameters:
 </tr>
 </table>
 
-## 3. Bind `this` lexically
+## 3. Bind this lexically
 
 > `this` is a small word that makes a big headache.
 

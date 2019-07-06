@@ -12,7 +12,6 @@ import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import Comments from 'components/Pages/Post/Comments';
 import AboutAuthor from 'components/Pages/Post/AboutAuthor';
-import CarbondAdsBanner from 'components/CarbonAds/Banner';
 import CarbonAdsFetch from 'components/CarbonAds/Fetch';
 import CarbonAdsMetaTags from 'components/CarbonAds/Meta/Tags';
 import { TO_POST } from 'routes/path';
@@ -195,13 +194,5 @@ describe('<PostTemplate />', function() {
       .at(0)
       .renderProp('render')(carbonAdsService);
     expect(wrapper.find(<CarbonAdsMetaTags carbonAdsService={carbonAdsService} />));
-  });
-
-  it('should render carbon ads', function() {
-    const wrapper = shallow(<PostTemplate {...props} />)
-      .find(CarbonAdsFetch)
-      .at(1)
-      .renderProp('render')(carbonAdsService);
-    expect(wrapper.find(<CarbondAdsBanner carbonAdsService={carbonAdsService} />));
   });
 });

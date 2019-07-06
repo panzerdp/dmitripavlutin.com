@@ -1,6 +1,5 @@
 import Img from 'gatsby-image';
 import * as React from 'react';
-import Media from 'react-media';
 
 import 'prismjs/themes/prism.css';
 import 'intersection-observer';
@@ -18,7 +17,6 @@ import Comments from 'components/Pages/Post/Comments';
 import AboutAuthor from 'components/Pages/Post/AboutAuthor';
 import SubscriptionRegion from 'components/Subscription/Region';
 import CarbonAdsFetch from 'components/CarbonAds/Fetch';
-import CarbonAdsBanner from 'components/CarbonAds/Banner';
 import CarbonAdsMetaTags from 'components/CarbonAds/Meta/Tags';
 import isInView from 'hooks/isInView';
 import { TO_POST } from 'routes/path';
@@ -63,13 +61,6 @@ export default function PostTemplate({
         </div>
         <h1>{post.title}</h1>
         <Subheader tags={post.tags} published={post.published} />
-        <div>
-          <Media query="(max-width: 1200px)" defaultMatches={false}>
-            <div className={styles.bannerContainer}>
-              <CarbonAdsFetch render={(service) => <CarbonAdsBanner carbonAdsService={service} />} />
-            </div>
-          </Media>
-        </div>
         <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
         <div className={styles.shareGroup}>
           <div className={styles.shareBottom}>

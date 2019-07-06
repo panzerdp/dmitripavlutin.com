@@ -57,9 +57,7 @@ The first argument of `forEach()` is the callback function called for every item
 array.forEach(callback [, thisArgument])
 ```
 
-Note that `forEach()` always returns `undefined`.  
-
-When iterating over an array with empty slots (named [sparse array](/power-up-the-array-creation-in-javascript/#third-case-no-element-between-commas)), `forEach()` skips the empty slots.  
+`forEach()` skips the empty slots when iterating over an array with empty slots (named [sparse array](/power-up-the-array-creation-in-javascript/#third-case-no-element-between-commas)).  
 
 ## 2. Index of the iterated element
 
@@ -211,7 +209,41 @@ Because of that, inside the callback of `forEach()`, `this` points also to an in
 
 However, using an arrow function as the callback of `forEach()` would be better. The [arrow function preserves](/gentle-explanation-of-this-in-javascript/#7-arrow-function) the value of `this` from the lexical scope, so there would be no need to use the second argument on `forEach()`.  
 
-## 5. Appropriate usage of forEach()
+## 5. Iterate array-like objects using forEach
+
+`forEach()` can iterate over array-like objects. The downside is the need to make the `forEach()` call indirectly:
+
+```javascript{12}
+const arrayLikeColors = {
+  "0": "blue",
+  "1": "green",
+  "2": "white",
+  "length": 3
+};
+
+function iterate(item) {
+  console.log(item);
+}
+
+Array.prototype.forEach.call(arrayLikeColors, iterate);
+// logs "blue"
+// logs "green"
+// logs "white"
+```
+`arrayLikeColors` is an array-like object. In order to iterate over its items, you have to call indirectly `forEach()` method, taking it from `Array.prototype`.  
+
+Alternatively, you can transform the array-like object into an array using `Array.from()`, then iterate. With a sligh performance impract, the code becomes shorter:
+
+```javascript
+//...
+
+Array.from(arrayLikeColors).forEach(iterate);
+// logs "blue"
+// logs "green"
+// logs "white"
+```
+
+## 6. Appropriate usage of forEach()
 
 I find that the appropriate usage of `forEach()` is when you need to iterate over all items of the array, without breaking, and have simultaneously some side-effects. 
 
@@ -273,7 +305,7 @@ console.log(allEven); // => false
 ```
 `array.every()` not only makes the code shorter and more expressive. It is also optimal, because `.every()` method breaks iterating right after finding the first odd number.  
 
-## 6. Conclusion
+## 7. Conclusion
 
 `forEach()` method is an efficient way to iterate over all array items. Its first argument is the callback function, which is invoked for every item in the array with 3 arguments: item, index and the array itself.  
 

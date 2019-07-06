@@ -12,7 +12,7 @@ interface PopularPostsListProps {
 export default function PopularPostsList({ posts }: PopularPostsListProps) {
   return (
     <div className={styles.popularPosts}>
-      <h2>Popular posts</h2>
+      <h2>Read popular posts</h2>
       <ul>
         {posts.map((post) => (
           <li key={post.slug}>
