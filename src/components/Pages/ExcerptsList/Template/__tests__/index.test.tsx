@@ -30,10 +30,12 @@ const props = {
     },
   ],
   siteInfo: {
-    description: 'Posts by Dmitri Pavlutin about software development',
-    repositoryUrl: 'https://github.com/panzerdp/dmitripavlutin.com',
-    title: 'Dmitri Pavlutin blog',
+    title: 'Dmitri Pavlutin',
+    description: 'Thoughts on Frontend development',
+    metaTitle: 'Dmitri Pavlutin Blog',
+    metaDescription: 'Posts by Dmitri Pavlutin about software development',
     url: 'https://dmitripavlutin.com',
+    repositoryUrl: 'https://github.com/panzerdp/dmitripavlutin.com',
   },
 };
 
@@ -43,7 +45,13 @@ describe('<ExcerptsListTemplate />', function() {
     expect(
       wrapper
         .find(Layout)
-        .contains(<MetaTags siteInfo={props.siteInfo} authorProfilePictureSrc={props.authorProfilePictureSrc} />)
+        .contains(
+          <MetaTags
+            currentPage={props.currentPage}
+            siteInfo={props.siteInfo}
+            authorProfilePictureSrc={props.authorProfilePictureSrc}
+          />
+        )
     ).toBe(true);
   });
 

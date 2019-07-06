@@ -25,7 +25,7 @@ export default function PostMetaStructuredData({
     '@type': 'Article',
     publisher: {
       '@type': 'Organization',
-      name: siteInfo.title,
+      name: siteInfo.metaTitle,
       logo: {
         '@type': 'ImageObject',
         url: authorProfilePictureUrl,

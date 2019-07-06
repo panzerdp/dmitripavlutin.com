@@ -13,7 +13,7 @@ exports[`<ExcerptsListStructuredData /> should render structured data 1`] = `
   "@type": "Website",
   "publisher": {
     "@type": "Organization",
-    "name": "Dmitri Pavlutin blog",
+    "name": "Dmitri Pavlutin",
     "logo": {
       "@type": "ImageObject",
       "url": "https://dmitripavlutin.com/image.png"
@@ -26,7 +26,7 @@ exports[`<ExcerptsListStructuredData /> should render structured data 1`] = `
     "width": 256,
     "height": 256
   },
-  "description": "Posts by Dmitri Pavlutin about software development",
+  "description": "Thoughts on Frontend development",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https://dmitripavlutin.com"

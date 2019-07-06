@@ -24,7 +24,7 @@ export default function ExcerptsListTemplate({
 }: ExcerptsTemplateProps) {
   return (
     <Layout>
-      <MetaTags siteInfo={siteInfo} authorProfilePictureSrc={authorProfilePictureSrc} />
+      <MetaTags siteInfo={siteInfo} authorProfilePictureSrc={authorProfilePictureSrc} currentPage={currentPage} />
       <MetaStructuredData siteInfo={siteInfo} authorProfilePictureSrc={authorProfilePictureSrc} />
       <MetaPaginator currentPage={currentPage} pagesSum={pagesSum} siteUrl={siteInfo.url} />
       {posts.map((post, index) => (

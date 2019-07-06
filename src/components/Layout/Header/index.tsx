@@ -7,11 +7,10 @@ import styles from './index.module.scss';
 
 interface HeaderProps {
   authorProfilePicture: FixedImage;
-  authorInfo: AuthorInfo;
   siteInfo: SiteInfo;
 }
 
-export default function Header({ authorProfilePicture, authorInfo, siteInfo }: HeaderProps) {
+export default function Header({ authorProfilePicture, siteInfo }: HeaderProps) {
   return (
     <header>
       <div className={styles.headerContent}>
@@ -20,7 +19,7 @@ export default function Header({ authorProfilePicture, authorInfo, siteInfo }: H
         </Link>
         <div className={styles.profileInfo}>
           <Link to={TO_INDEX()} className={styles.name}>
-            {authorInfo.name}
+            {siteInfo.title}
           </Link>
           <div className={styles.speciality}>{siteInfo.description}</div>
         </div>

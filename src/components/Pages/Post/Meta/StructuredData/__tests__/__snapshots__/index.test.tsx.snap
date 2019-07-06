@@ -13,7 +13,7 @@ exports[`<PostMetaStructuredData /> should render structured data 1`] = `
   "@type": "Article",
   "publisher": {
     "@type": "Organization",
-    "name": "Dmitri Pavlutin blog",
+    "name": "Dmitri Pavlutin Blog",
     "logo": {
       "@type": "ImageObject",
       "url": "https://dmitripavlutin.com/profile.png"

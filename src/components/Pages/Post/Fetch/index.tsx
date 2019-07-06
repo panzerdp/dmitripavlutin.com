@@ -41,6 +41,8 @@ export const pageQuery = graphql`
   fragment SiteInfoAll on SiteSiteMetadataSiteInfo {
     title
     description
+    metaTitle
+    metaDescription
     url
     repositoryUrl
   }

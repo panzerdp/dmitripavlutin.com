@@ -86,9 +86,11 @@ exports[`<PostFetch /> should render post template 1`] = `
   }
   siteInfo={
     Object {
-      "description": "Posts by Dmitri Pavlutin about software development",
+      "description": "Thoughts on Frontend development",
+      "metaDescription": "Posts by Dmitri Pavlutin about software development",
+      "metaTitle": "Dmitri Pavlutin Blog",
       "repositoryUrl": "https://github.com/panzerdp/dmitripavlutin.com",
-      "title": "Dmitri Pavlutin blog",
+      "title": "Dmitri Pavlutin",
       "url": "https://dmitripavlutin.com",
     }
   }

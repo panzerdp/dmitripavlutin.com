@@ -172,7 +172,7 @@ function iterate(letter) {
 letters.forEach(iterate); // logs 3 times "true"
 ```
 
-`this` inside `iterate()` equals to `window`, which is the global object in the browser environment. Follow [regular function invocation](./gentle-explanation-of-this-in-javascript/#2-function-invocation) to get more information.  
+`this` inside `iterate()` equals to `window`, which is the global object in the browser environment. Follow [regular function invocation](/gentle-explanation-of-this-in-javascript/#2-function-invocation) to get more information.  
 
 In some situations, you might need to set `this` to an object of interest. Then indicate this object as the second argument when calling `forEach()`:
 

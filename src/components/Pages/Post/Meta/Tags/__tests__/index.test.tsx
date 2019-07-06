@@ -25,8 +25,10 @@ const post: Post = {
 };
 
 const siteInfo = {
-  title: 'Dmitri Pavlutin blog',
-  description: 'Posts by Dmitri Pavlutin about software development',
+  title: 'Dmitri Pavlutin',
+  description: 'Thoughts on Frontend development',
+  metaTitle: 'Dmitri Pavlutin Blog',
+  metaDescription: 'Posts by Dmitri Pavlutin about software development',
   url: 'https://dmitripavlutin.com',
   repositoryUrl: 'https://github.com/panzerdp/dmitripavlutin.com',
 };

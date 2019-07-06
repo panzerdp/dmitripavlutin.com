@@ -22,6 +22,8 @@ interface AuthorInfo {
 interface SiteInfo {
   title: string;
   description: string;
+  metaTitle: string;
+  metaDescription: string;
   url: string;
   repositoryUrl: string;
 }

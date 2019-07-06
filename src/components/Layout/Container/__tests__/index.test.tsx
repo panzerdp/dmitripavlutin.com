@@ -7,8 +7,10 @@ import LayoutHeader from 'components/Layout/Header';
 import LayoutMetaTags from 'components/Layout/Meta/Tags';
 
 const siteInfo: SiteInfo = {
-  title: 'Dmitri Pavlutin blog',
-  description: 'Posts by Dmitri Pavlutin about software development',
+  title: 'Dmitri Pavlutin',
+  description: 'Thoughts on Frontend development',
+  metaTitle: 'Dmitri Pavlutin Blog',
+  metaDescription: 'Posts by Dmitri Pavlutin about software development',
   url: 'https://dmitripavlutin.com',
   repositoryUrl: 'https://github.com/panzerdp/dmitripavlutin.com',
 };
@@ -42,7 +44,7 @@ const props = {
   authorProfilePicture,
 };
 
-describe('<LayoutMetaTags />', function() {
+describe('<LayoutContainer />', function() {
   it('should render its children', function() {
     const child = <div>I am a child</div>;
     const wrapper = shallow(<LayoutContainer {...props}>{child}</LayoutContainer>);
@@ -56,11 +58,7 @@ describe('<LayoutMetaTags />', function() {
 
   it('should render header', function() {
     const wrapper = shallow(<LayoutContainer {...props}>Child</LayoutContainer>);
-    expect(
-      wrapper.contains(
-        <LayoutHeader authorProfilePicture={authorProfilePicture} authorInfo={authorInfo} siteInfo={siteInfo} />
-      )
-    );
+    expect(wrapper.contains(<LayoutHeader authorProfilePicture={authorProfilePicture} siteInfo={siteInfo} />));
   });
 
   it('should render footer', function() {
