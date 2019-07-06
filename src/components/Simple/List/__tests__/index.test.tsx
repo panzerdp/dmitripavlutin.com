@@ -11,12 +11,6 @@ const props = {
       slug: 'post-1',
       tags: ['tag1', 'tag2'],
       published: '2019-01-01',
-      thumbnail: {
-        aspectRatio: 1,
-        src: 'src',
-        srcSet: 'src-set',
-        sizes: 'sizes',
-      },
     },
     {
       title: 'Post 2',
@@ -24,12 +18,6 @@ const props = {
       slug: 'post-2',
       tags: ['tag1', 'tag4'],
       published: '2019-01-01',
-      thumbnail: {
-        aspectRatio: 2,
-        src: 'src',
-        srcSet: 'src-set',
-        sizes: 'sizes',
-      },
     },
   ],
 };
@@ -40,5 +28,13 @@ describe('<SimpleList />', function() {
     props.posts.forEach((post) => {
       expect(wrapper.find({ post }).is('SimplePost')).toBe(true);
     });
+  });
+
+  it('should render insert elements before post', function() {
+    function beforeEachPost(post: PostPlain): React.ReactNode {
+      return <div className="inserted">{post.title}</div>;
+    }
+    const wrapper = shallow(<SimpleList {...props} beforeEachPost={beforeEachPost} />);
+    expect(wrapper.find('.inserted+SimplePost')).toHaveLength(2);
   });
 });

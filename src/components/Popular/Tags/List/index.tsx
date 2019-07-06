@@ -3,13 +3,13 @@ import * as React from 'react';
 import styles from './index.module.scss';
 import Tag from 'components/Tag';
 
-interface PopularPostsListProps {
+interface PopularTagsListProps {
   posts: PostPlain[];
   limit?: number;
   title: string;
 }
 
-export default function PopularPostsList({ posts, limit = Infinity, title }: PopularPostsListProps) {
+export default function PopularTagsList({ posts, limit = Infinity, title }: PopularTagsListProps) {
   const allTags = posts.reduce((tags, post) => tags.concat(post.tags), []);
   const byCount = allTags.reduce((accumulator, tag) => {
     if (typeof accumulator[tag] !== 'number') {
