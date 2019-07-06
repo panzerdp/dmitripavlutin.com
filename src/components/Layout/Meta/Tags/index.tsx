@@ -9,8 +9,8 @@ export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps) {
   return (
     <Helmet>
       <link rel="preconnect" href="//fonts.gstatic.com/" crossOrigin="" />
-      <title>{siteInfo.title}</title>
-      <meta name="description" content={siteInfo.description} />
+      <title>{siteInfo.metaTitle}</title>
+      <meta name="description" content={siteInfo.metaDescription} />
       <link
         href="//fonts.googleapis.com/css?family=Open+Sans:700|EB+Garamond:400,400i,600,700|Roboto+Mono:400"
         rel="stylesheet"

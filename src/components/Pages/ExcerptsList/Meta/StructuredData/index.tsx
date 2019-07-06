@@ -13,7 +13,7 @@ export default function MetaStructuredData({ siteInfo, authorProfilePictureSrc }
     '@type': 'Website',
     publisher: {
       '@type': 'Organization',
-      name: siteInfo.title,
+      name: siteInfo.metaTitle,
       logo: {
         '@type': 'ImageObject',
         url: authorProfilePictureUrl,

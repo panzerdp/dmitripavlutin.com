@@ -15,8 +15,8 @@ const siteInfo: SiteInfo = {
 describe('<LayoutMetaTags />', function() {
   it('should render meta information', function() {
     const wrapper = shallow(<LayoutMetaTags siteInfo={siteInfo} />);
-    expect(wrapper.contains(<title>{siteInfo.title}</title>));
-    expect(wrapper.contains(<meta name="description" content={siteInfo.description} />));
+    expect(wrapper.contains(<title>{siteInfo.metaTitle}</title>));
+    expect(wrapper.contains(<meta name="description" content={siteInfo.metaDescription} />));
   });
 
   it('should allow robots index', function() {
@@ -24,7 +24,7 @@ describe('<LayoutMetaTags />', function() {
     expect(wrapper.contains(<meta name="robots" content="index, follow" />));
   });
 
-  it('should indicate the site language', function() {
+  it('should set the site language', function() {
     const wrapper = shallow(<LayoutMetaTags siteInfo={siteInfo} />);
     expect(wrapper.contains(<html lang="en" />));
   });

@@ -13,7 +13,7 @@ exports[`<ExcerptsListStructuredData /> should render structured data 1`] = `
   "@type": "Website",
   "publisher": {
     "@type": "Organization",
-    "name": "Dmitri Pavlutin",
+    "name": "Dmitri Pavlutin Blog",
     "logo": {
       "@type": "ImageObject",
       "url": "https://dmitripavlutin.com/image.png"

@@ -29,10 +29,10 @@ describe('<ExcerptsListMetaTags />', function() {
   it('should render open graph tags', function() {
     const wrapper = shallow(<MetaTags currentPage={1} siteInfo={siteInfo} authorProfilePictureSrc="/image.png" />);
     [
-      <meta property="og:site_name" content={siteInfo.title} />,
+      <meta property="og:site_name" content={siteInfo.metaTitle} />,
       <meta property="og:type" content="website" />,
-      <meta property="og:title" content={siteInfo.title} />,
-      <meta property="og:description" content={siteInfo.description} />,
+      <meta property="og:title" content={siteInfo.metaTitle} />,
+      <meta property="og:description" content={siteInfo.metaDescription} />,
       <meta property="og:url" content={siteInfo.url} />,
       <meta property="og:image" content={`${siteInfo.url}/image.png`} />,
       <meta property="og:image:width" content="256" />,
@@ -44,8 +44,8 @@ describe('<ExcerptsListMetaTags />', function() {
     const wrapper = shallow(<MetaTags currentPage={1} siteInfo={siteInfo} authorProfilePictureSrc="/image.png" />);
     [
       <meta name="twitter:card" content="summary" />,
-      <meta name="twitter:title" content={siteInfo.title} />,
-      <meta name="twitter:description" content={siteInfo.description} />,
+      <meta name="twitter:title" content={siteInfo.metaTitle} />,
+      <meta name="twitter:description" content={siteInfo.metaDescription} />,
       <meta name="twitter:url" content={siteInfo.url} />,
       <meta name="twitter:image" content={`${siteInfo.url}/image.png`} />,
     ].forEach((item) => expect(wrapper.contains(item)).toBe(true));

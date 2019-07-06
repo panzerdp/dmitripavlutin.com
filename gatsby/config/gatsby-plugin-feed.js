@@ -6,8 +6,8 @@ module.exports = {
         site {
           siteMetadata {
             siteInfo {
-              title
-              description
+              metaTitle
+              metaDescription
               url
             }
             authorInfo {
@@ -20,14 +20,14 @@ module.exports = {
     setup: ({ query }) => {
       const { siteInfo, authorInfo } = query.site.siteMetadata;
       return {
-        title: siteInfo.title,
-        description: siteInfo.description,
+        title: siteInfo.metaTitle,
+        description: siteInfo.metaDescription,
         site_url: siteInfo.url,
         image_url: `${siteInfo.url}/favicon256.png`,
         copyright: `2015 ${authorInfo.name}`,
         language: 'en',
         categories: ['JavaScript', 'React', 'CSS', 'Software development', 'Frontend development'],
-      }
+      };
     },
     feeds: [
       {

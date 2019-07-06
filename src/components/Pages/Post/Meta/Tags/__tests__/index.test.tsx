@@ -74,7 +74,7 @@ describe('<PostMetaTags />', function() {
   it('should render open graph tags', function() {
     const wrapper = shallow(<PostMetaTags {...props} />);
     [
-      <meta property="og:site_name" content={siteInfo.title} />,
+      <meta property="og:site_name" content={siteInfo.metaTitle} />,
       <meta property="og:type" content="article" />,
       <meta property="og:title" content={post.title} />,
       <meta property="og:description" content={post.description} />,

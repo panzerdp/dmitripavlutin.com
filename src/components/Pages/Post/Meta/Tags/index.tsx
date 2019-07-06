@@ -18,7 +18,7 @@ export default function PostMetaTags({ post, siteInfo, authorInfo }: PostMetaTag
       <meta name="description" content={post.description} />
       <link rel="canonical" href={postUrl} />
 
-      <meta property="og:site_name" content={siteInfo.title} />
+      <meta property="og:site_name" content={siteInfo.metaTitle} />
       <meta property="og:type" content="article" />
       <meta property="og:title" content={post.title} />
       <meta property="og:description" content={post.description} />

@@ -11,10 +11,10 @@ export default function SimpleList({ posts, beforeEachPost }: SimpleListProps) {
   return (
     <div>
       {posts.map((post, index) => (
-        <>
+        <React.Fragment key={index}>
           {beforeEachPost ? beforeEachPost(post) : null}
-          <SimplePost post={post} key={index} />
-        </>
+          <SimplePost post={post} />
+        </React.Fragment>
       ))}
     </div>
   );
