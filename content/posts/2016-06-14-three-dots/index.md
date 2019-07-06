@@ -2,7 +2,7 @@
 title: "How three dots changed JavaScript"
 description: "Spread operator and rest parameter are great additions. The article explains how they improve array literals, array destructuring and function arguments handling."
 published: "2016-06-14"
-modified: "2019-06-27"
+modified: "2019-07-06"
 thumbnail: "./images/cover.jpg"
 slug: how-three-dots-changed-javascript
 tags: ["javascript", "spread", "rest"]
@@ -19,10 +19,10 @@ To access `arguments` from the enclosing function, you have to use workarounds b
 ```javascript
 function outerFunction() {
    // store arguments into a separated variable
-   var argsOuter = arguments;
+   const argsOuter = arguments;
    function innerFunction() {
       // args is an array-like object
-      var even = Array.prototype.map.call(argsOuter, function(item) {
+      const even = Array.prototype.map.call(argsOuter, function(item) {
          // do something with argsOuter               
       });
    }
@@ -36,8 +36,8 @@ For instance `.push(item1, ..., itemN)` inserts elements into an array one by on
 In ES5 it's solved with `.apply()`: an unfriendly and verbose approach. Let's  take a look:
 
 ```javascript
-var fruits = ['banana'];
-var moreFruits = ['apple', 'orange'];
+const fruits = ['banana'];
+const moreFruits = ['apple', 'orange'];
 Array.prototype.push.apply(fruits, moreFruits);
 console.log(fruits); // => ['banana', 'apple', 'orange']
 ``` 
@@ -82,8 +82,8 @@ For example a JavaScript inner function `filterNumbers()` wants to access `argum
 
 ```javascript
 function sumOnlyNumbers() {
-  var args = arguments;
-  var numbers = filterNumbers();
+  const args = arguments;
+  const numbers = filterNumbers();
   return numbers.reduce((sum, element) => sum + element);
   function filterNumbers() {
      return Array.prototype.filter.call(args, 
@@ -95,13 +95,13 @@ sumOnlyNumbers(1, 'Hello', 5, false); // => 6
 ```
 In order to access `arguments` of `sumOnlyNumbers()` inside `filterNumbers()` you have to create a temporary variable `args`. It happens because `filterNumbers()` defines its own `arguments` object that overwrites the external one.  
 
-The approach works, but it's too verbose. `var args = arguments` can be omitted and `Array.prototype.filter.call(args)` can be transformed to `args.filter()` using a rest parameter. Let's optimize this part.
+The approach works, but it's too verbose. `const args = arguments` can be omitted and `Array.prototype.filter.call(args)` can be transformed to `args.filter()` using a rest parameter. Let's optimize this part.
 
 The rest operator solves this elegantly. It allows to define a **rest parameter** `...args` in a function declaration: 
 
 ```javascript
 function sumOnlyNumbers(...args) {
-  var numbers = filterNumbers();
+  const numbers = filterNumbers();
   return numbers.reduce((sum, element) => sum + element);
   function filterNumbers() {
      return args.filter(element => typeof element === 'number');
@@ -162,8 +162,8 @@ ES5 provides [`.apply()`](https://developer.mozilla.org/en-US/docs/Web/JavaScrip
 Let's see an example of `.apply()` usage:
 
 ```javascript
-let countries = ['Moldova', 'Ukraine'];
-let otherCountries = ['USA', 'Japan'];
+const countries = ['Moldova', 'Ukraine'];
+const otherCountries = ['USA', 'Japan'];
 countries.push.apply(countries, otherCountries);
 console.log(countries); // => ['Moldova', 'Ukraine', 'USA', 'Japan']
 ```
@@ -175,8 +175,8 @@ And the entire invocation looks verbose.
 Let's improve the above sample with a spread operator:
 
 ```javascript
-let countries = ['Moldova', 'Ukraine'];
-let otherCountries = ['USA', 'Japan'];
+const countries = ['Moldova', 'Ukraine'];
+const otherCountries = ['USA', 'Japan'];
 countries.push(...otherCountries);
 console.log(countries); // => ['Moldova', 'Ukraine', 'USA', 'Japan']
 ```
@@ -194,16 +194,16 @@ class King {
      return `${this.name} leads ${this.country}`;
    }
 }
-var details = ['Alexander the Great', 'Greece'];
-var Alexander = new King(...details);
+const details = ['Alexander the Great', 'Greece'];
+const Alexander = new King(...details);
 Alexander.getDescription(); // => 'Alexander the Great leads Greece'
 ```
 
 Moreover you can combine multiple spread operators and regular arguments in the same invocation. The following example is removing from an array existing elements, then adds other array and an element:  
 
 ```javascript
-var numbers = [1, 2];
-var evenNumbers = [4, 8];
+const numbers = [1, 2];
+const evenNumbers = [4, 8];
 const zero = 0;
 numbers.splice(0, 2, ...evenNumbers, zero);
 console.log(numbers); // => [4, 8, 0]
@@ -221,10 +221,10 @@ This improvement makes easier to accomplish common tasks described below.
 **Create** an array with initial elements **from another array**:
 
 ```javascript
-var initial = [0, 1];
-var numbers1 = [...initial, 5, 7];
+const initial = [0, 1];
+const numbers1 = [...initial, 5, 7];
 console.log(numbers1); // => [0, 1, 5, 7]
-let numbers2 = [4, 8, ...initial];
+const numbers2 = [4, 8, ...initial];
 console.log(numbers2); // => [4, 8, 0, 1]
 ```
 `number1` and `number2` arrays are created using an array literal and in the meantime initialized with items from `initial`.
@@ -232,9 +232,9 @@ console.log(numbers2); // => [4, 8, 0, 1]
 **Concatenate** 2 or more arrays:
 
 ```javascript
-var odds = [1, 5, 7];
-var evens = [4, 6, 8];
-var all = [...odds, ...evens];
+const odds = [1, 5, 7];
+const evens = [4, 6, 8];
+const all = [...odds, ...evens];
 console.log(all); // => [1, 5, 7, 4, 6, 8]
 ```
 `all` array is created from concatentation of `odds` and `evens` arrays.
@@ -242,8 +242,8 @@ console.log(all); // => [1, 5, 7, 4, 6, 8]
 **Clone** an array instance:
 
 ```javascript
-var words = ['Hi', 'Hello', 'Good day'];
-var otherWords = [...words];
+const words = ['Hi', 'Hello', 'Good day'];
+const otherWords = [...words];
 console.log(otherWords);           // => ['Hi', 'Hello', 'Good day']
 console.log(otherWords === words); // => false
 ```
@@ -260,8 +260,8 @@ In term of syntax, the rest operator should be the last one in a destructuring a
 Let's see some applications:
 
 ```javascript
-var seasons = ['winter', 'spring', 'summer', 'autumn'];
-var head, restArray;
+const seasons = ['winter', 'spring', 'summer', 'autumn'];
+const head, restArray;
 [head, ...restArray] = seasons;
 console.log(head);      // => 'winter'
 console.log(restArray); // => ['spring', 'summer', 'autumn']
@@ -309,8 +309,8 @@ Many native primitive types and objects are iterable: strings, arrays, [typed ar
 For instance, let's see how a string conforms to iteration protocols:
 
 ```javascript
-var str = 'hi';
-var iterator = str[Symbol.iterator]();
+const str = 'hi';
+const iterator = str[Symbol.iterator]();
 iterator.toString(); // => '[object String Iterator]'
 iterator.next();     // => { value: 'h', done: false }
 iterator.next();     // => { value: 'i', done: false }
@@ -324,7 +324,7 @@ The following sample makes an array-like object conformed to iteration protocols
 
 ```javascript
 function iterator() {
-  var index = 0;
+  let index = 0;
   return {
     next: () => ({ // Conform to Iterator protocol
       done : index >= this.length,
@@ -332,14 +332,14 @@ function iterator() {
     })
   };
 }
-var arrayLike = {
+const arrayLike = {
   0: 'Cat',
   1: 'Bird',
   length: 2
 };
 // Conform to Iterable Protocol
 arrayLike[Symbol.iterator] = iterator;
-var array = [...arrayLike];
+const array = [...arrayLike];
 console.log(array); // => ['Cat', 'Bird']
 ```
 
