@@ -1,6 +1,6 @@
 ---
 title: How to use forEach() to iterate an array in JavaScript
-description: "forEach() calls the provided function on each item of the array with 3 arguments: item, index and array itself. Follow a quick guide on forEach()."
+description: "forEach() in JavaScript calls the provided function on each array item with 3 arguments: item, index, the array itself. Learn how to use forEach()."
 published: "2019-07-03"
 modified: "2019-07-05"
 thumbnail: "./images/cover.jpg"

@@ -75,7 +75,7 @@ cold              // => ['autumn', 'winter', 'spring', 'summer']
 ```
 ## 2. Improved parameters access
 
-### 2.1  Rest parameter
+### 2.1 Rest parameter
 As presented in the introduction, dealing with `arguments` object in a function body becomes troublesome in complex scenarios.  
 
 For example a JavaScript inner function `filterNumbers()` wants to access `arguments` from its outer function `sumOnlyNumbers()`:

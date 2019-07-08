@@ -24,7 +24,7 @@ export default function PostRightSidebar({ popularPosts }: PostRightSidebarProps
       </div>
       <SubscriptionRegion />
       <PopularPosts posts={popularPosts} />
-      <PopularTagsFetch render={(posts) => <PopularTagsList posts={posts} title="Popular tags" limit={20} />} />
+      <PopularTagsFetch render={(posts) => <PopularTagsList posts={posts} title="Explore popular tags" limit={20} />} />
     </div>
   );
 }
