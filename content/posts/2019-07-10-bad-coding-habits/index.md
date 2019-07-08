@@ -44,6 +44,8 @@ Relying excessively on the implicit type coversion is a bad habit. First of all,
 
 Here's my advice: stop using implicit type conversion. Always use explicit type conversion.  
 
+@TODO Give an example of transforming implicit to explicit
+
 You might say that this approach requires writing more code... You're right! But with explicit type conversion, you control the behavior of your code. Plus the explicitness increases the readability.   
 
 ## 2. Don't use old JavaScript tricks
@@ -95,17 +97,23 @@ Tony Hoare, inventor of ALGOL, once stated:
 
 The post ["The worst mistake of computer science"](https://www.lucidchart.com/techblog/2015/08/31/the-worst-mistake-of-computer-science/) goes in depth why `null` is damaging the quality of your code.
 
-## 5. Don't use a casual coding style. Enforce a standard
+## 5. Don't use casual coding style. Enforce a standard
 
 What could be more daunting than reading code that has a random coding style. You never know what to expect!  
 
-What if the application codebase contains different coding styles of many developers?  
+What if the codebase contains different coding styles of many developers? An assorted character graffiti wall.
+ 
+![Different coding styles](./images/different-coding-styles.jpg)
 
-To increase the productivity of the whole team, increase the readability you have to enfore a coding style for the entire team working on the application. 
+Same coding style across the entire team and the application codebase is a requirement. It's a boost of code readability.  
 
-But I'll be honest with you. I'm lazy. Something when I'm in a hurry to finish the task, or to commit the code before going home I might "forget" about styling my code. 
+But I'll be honest with you. I'm lazy. Often when I'm on a deadline, or I'm about to commit  before going home, I might "forget" about styling my code.  
+
+“Myself lazy” says to leave it as is, and update later. But later means never.  
 
 In order for "Myself rationale" to beat the "Myself lazy", enforce respecting the coding style.  
+
+![Same coding styles](./images/same-coding-styles.jpg)
 
 ## 6. Conclusion
 
