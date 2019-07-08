@@ -11,9 +11,9 @@ type: post
 ---
 
 ## 1. The mystery of this
-A lot of time `this` keyword was a mystery for me and many starting JavaScript developers. It is a powerful feature, but requires efforts to be understood.
+A lot of time `this` keyword was a mystery for me and many starting JavaScript developers. It is a powerful feature but requires efforts to be understood.
 
-From a background like *Java*, *PHP* or other *standard* language, [`this`](https://en.wikipedia.org/wiki/This_(computer_programming)) is seen as an instance of the current object in the class method: no more and no less. Mostly, it cannot be used outside the method and such simple approach does not create confusion.  
+From a background like *Java*, *PHP* or other *standard* language, [`this`](https://en.wikipedia.org/wiki/This_(computer_programming)) is seen as an instance of the current object in the class method: no more and no less. Mostly, it cannot be used outside the method and such a simple approach does not create confusion.  
 
 In JavaScript the situation is different: `this` is the current execution context of a function. The language has 4 function invocation types: 
 
@@ -22,7 +22,7 @@ In JavaScript the situation is different: `this` is the current execution contex
  * constructor invocation: `new RegExp('\\d')`
  * indirect invocation: `alert.call(undefined, 'Hello World!')`
 
-Each invocation type defines the context in its own way, so `this` behaves slight different than developer expects.  
+Each invocation type defines the context in its own way, so `this` behaves slightly different than developer expects.  
 
 ![The mystery of this in JavaScript](./images/Gentle-explanation-of-this--7--1.png)
 
@@ -87,7 +87,7 @@ const message = (function(name) {
 console.log(message) // => 'Hello World!'
 ```
 
-IIFE is a function invocation too: first pair of parenthesis `(function(name) {...})` is an expression that evaluates to a function object, followed by a pair of parenthesis with `'World'` argument: `('World')`.
+IIFE is a function invocation too: the first pair of parenthesis `(function(name) {...})` is an expression that evaluates to a function object, followed by the pair of parenthesis with `'World'` argument: `('World')`.
 
 ### 2.1. this in function invocation
 
@@ -97,7 +97,7 @@ The global object is determined by the execution environment. In a browser, it i
 
 ![this in JavaScript function invocation](./images/2-1.png)
 
-In a function invocation the execution context is the global object.  
+In a function invocation, the execution context is the global object.  
 
 Let's check the context in the following function:
 
@@ -114,7 +114,7 @@ window.myNumber; // => 20
 ```
 At the time `sum(15, 16)` is called, JavaScript automatically sets `this` as the global object, which in a browser is `window`.
 
-When `this` is used outside any function scope (the top most scope: global execution context), it also refers to the global object:
+When `this` is used outside any function scope (the topmost scope: global execution context), it also refers to the global object:
 
 ```javascript
 console.log(this === window); // => true
@@ -137,7 +137,7 @@ The strict mode was introduced in [ECMAScript 5.1](http://www.ecma-international
 
 To enable the strict mode, place the directive `'use strict'` at the top of a function body.  
 
-Once enable, the strict mode mode affects the execution context, making `this` to be `undefined` in a regular function invocation. The execution context is **not** the global object anymore, contrary to above case [2.1](#21-this-in-function-invocation).
+Once enabled, the strict mode affects the execution context, making `this` to be `undefined` in a regular function invocation. The execution context is **not** the global object anymore, contrary to above case [2.1](#21-this-in-function-invocation).
 
 ![this in JavaScript function invocation, strict mode](./images/3-1.png)
 
@@ -155,7 +155,7 @@ multiply(2, 5); // => 10
 ```
 When `multiply(2, 5)` is invoked as a function, `this` is `undefined`.
 
-The strict mode is active not only in the current scope, but also in the inner scopes (for all functions declared inside):
+The strict mode is active not only in the current scope but also in the inner scopes (for all functions declared inside):
 
 ```javascript
 function execute() {
@@ -228,7 +228,7 @@ The invocation result of `numbers.sum()` is `NaN` (or an error is thrown `TypeEr
 
 👍 To solve the problem, `calculate` function should be executed with the same context as the `sum` method, in order to access `numberA` and `numberB` properties. 
 
-One solution is to change manually the context of `calculate` to a desired one by calling `calculate.call(this)` (an indirect invocation of a function, see section [5.](#5indirectinvocation)):
+One solution is to change manually the context of `calculate` to the desired one by calling `calculate.call(this)` (an indirect invocation of a function, see section [5.](#5indirectinvocation)):
 
 ```javascript{11}
 const numbers = {
@@ -249,7 +249,7 @@ numbers.sum(); // => 15
 `calculate.call(this)` executes `calculate` function as usual, but additionally modifies the context to a value specified as the first parameter.  
 Now ` this.numberA + this.numberB` is equivalent to `numbers.numberA + numbers.numberB`. The function returns the expected result `5 + 10 = 15`.  
 
-Another solution, slighly better, is to use an arrow function: 
+Another solution, slightly better, is to use an arrow function: 
 
 ```javascript
 const numbers = {
@@ -304,9 +304,9 @@ parseFloat('16.60'); // function invocation
 isNaN(0);            // function invocation
 ```
 
-Understanding the difference between function invocation and method invocation helps identifying correctly the context.
+Understanding the difference between function invocation and method invocation helps in identifying correctly the context.
 
-### 3.1. this in method invocation
+### 3.1. this in a method invocation
 
 > `this` is the **object that owns the method** in a method invocation
 
@@ -480,7 +480,7 @@ paris.travel();
 ```
 `new City('Paris')` is a constructor invocation. The object initialization is handled by a special method in the class: [`constructor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor), which has `this` as the newly created object.
 
-A constructor call creates an empty new object, which inherits properties from constructor's prototype. The role of constructor function is to initialize the object.
+A constructor call creates an empty new object, which inherits properties from the constructor's prototype. The role of the constructor function is to initialize the object.
 As you might know already, the context in this type of call is the created instance.  
 
 When a property accessor `myObject.myFunction` is preceded by `new` keyword, JavaScript will execute a **constructor invocation**, but **not** a **method invocation**.  
@@ -578,7 +578,7 @@ car instanceof Vehicle // => true
 // Function invocation. Throws an error.
 const brokenCar = Vehicle('Broken Car', 3);
 ```
-`new Vehicle('Car', 4)`  works well: a new object is created and initialized, because `new`  keyword is present in the constructor invocation.  
+`new Vehicle('Car', 4)`  works well: a new object is created and initialized because `new`  keyword is present in the constructor invocation.  
 
 A verification is added in the constructor function: `this instanceof Vehicle`, to make sure that execution context is a correct object type. If `this` is not a `Vehicle` type, then an error is thrown. Whenever `Vehicle('Broken Car', 3)` is executed without `new` an exception is thrown: `Error: Incorrect invocation`. 
 
@@ -606,7 +606,7 @@ increment.apply(undefined, [10]); // => 11
 
 The main difference between the two is that `.call()` accepts a list of arguments, for example `myFun.call(thisValue, 'val1', 'val2')`. But `.apply()` accepts a list of values in an array-like object, e.g. `myFunc.apply(thisValue, ['val1', 'val2'])`.
 
-### 5.1. this in indirect invocation
+### 5.1. this in an indirect invocation
 
 > `this` is the **first argument** of `.call()` or `.apply()` in an indirect invocation
 
@@ -675,7 +675,7 @@ Contrary to `.apply()` and `.call()` methods (see [5.](#5-indirect-invocation)),
 
 >  `this` is the **first argument** of `.bind()` when invoking a bound function
 
-The role of `.bind()` is to create a new function, which invocation will have the context as the first argument passed to `.bind()`. It is a powerful technique that  allows to create functions with a predefined `this` value.
+The role of `.bind()` is to create a new function, which invocation will have the context as the first argument passed to `.bind()`. It is a powerful technique that allows creating functions with a predefined `this` value.
 
 ![this in JavaScript bound function invocation](./images/7-1.png)
 
@@ -786,7 +786,7 @@ myPoint.log();
 
 A regular function in this example would create its own context (`window` or `undefined` in strict mode). So to make the same code work correctly with a function expression it's necessary to manually bind the context: `setTimeout(function() {...}.bind(this))`. This is verbose, and using an arrow function is a cleaner and shorter solution.
 
-If the arrow function is defined in the top most scope (outside any function), the context is always the global object (`window` in a browser):
+If the arrow function is defined in the topmost scope (outside any function), the context is always the global object (`window` in a browser):
 
 ```javascript
 const getContext = () => {
@@ -818,7 +818,7 @@ No matter how the arrow function `get` is called, it always keeps the lexical co
 
 An arrow function cannot be used as a constructor. Invoking it as a constructor `new get()` throws an error: `TypeError: get is not a constructor`.
 
-### 7.2. Pitfall: defining method with arrow function
+### 7.2. Pitfall: defining method with an arrow function
 
 ⚠️ You might want to use arrow functions to declare methods on an object. Fair enough: their declaration is quite short comparing to a [function expression](https://developer.mozilla.org/en/docs/web/JavaScript/Reference/Operators/function): `(param) => {...}` instead of `function(param) {..}`.  
 
@@ -843,7 +843,7 @@ Even if `format` is executed as a method on an object `walkPeriod.format()`, `wi
 
 The method returns `'undefined hours and undefined minutes'`, which is not the expected result.  
 
-👍 The function expression solves the problem, because a regular function does change its context depending on invocation:
+👍 The function expression solves the problem because a regular function does change its context depending on invocation:
 
 ```javascript
 function Period (hours, minutes) {  
@@ -861,7 +861,7 @@ walkPeriod.format(); // => '2 hours and 30 minutes'
 
 ## 8. Conclusion
 
-Because the function invocation has the biggest impart on `this`, from now on **do not** ask yourself:
+Because the function invocation has the biggest impact on `this`, from now on **do not** ask yourself:
 
 > Where is `this` taken from?
 
@@ -873,6 +873,6 @@ For an arrow function ask yourself:
 
 > What is `this` where the arrow function is `defined`?
 
-This mindset is correct when dealing with `this` and will save you from headache.  
+This mindset is correct when dealing with `this` and will save you from the headache.  
 
-*If you have an interesting example of context pitfall or just experience difficulties with a case, write a comment bellow and let's discuss!*
+*If you have an interesting example of context pitfall or just experience difficulties with a case, write a comment below and let's discuss!*
