@@ -15,6 +15,7 @@ module.exports = {
     name: 'Dmitri Pavlutin',
     description: 'Dmitri Pavlutin is a software developer and tech writer specialized in Frontend technologies.',
     email: 'dmitripavlutin@gmail.com',
+    jobTitle: 'Software Developer',
     profiles: {
       stackoverflow: 'https://stackoverflow.com/users/1894471/dmitri-pavlutin',
       twitter: 'https://twitter.com/panzerdp',

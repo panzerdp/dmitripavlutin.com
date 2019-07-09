@@ -21,6 +21,7 @@ const props = {
     name: 'Dmitri Pavlutin',
     description: 'Dmitri Pavlutin is a software developer specialized in Frontend technologies',
     email: 'mail@mail.com',
+    jobTitle: 'Software Developer',
     nicknames: {
       twitter: 'panzerdp',
     },

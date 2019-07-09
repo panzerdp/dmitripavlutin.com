@@ -6,6 +6,7 @@ exports[`<PostFetch /> should render post template 1`] = `
     Object {
       "description": "Dmitri Pavlutin is a software developer specialized in Frontend technologies",
       "email": "mail@mail.com",
+      "jobTitle": "Software developer",
       "name": "Dmitri Pavlutin",
       "nicknames": Object {
         "twitter": "panzerdp",
@@ -60,7 +61,7 @@ exports[`<PostFetch /> should render post template 1`] = `
       "title": "Useful techniques to facilitate React server-side rendering",
     }
   }
-  postRepositoryFileUrl="https://github.com/panzerdp/dmitripavlutin.com/tree/master//home/user/my-post.md"
+  postRepositoryFileUrl="https://github.com/panzerdp/dmitripavlutin.com/edit/master/home/user/my-post.md"
   recommendedPosts={
     Array [
       Object {

@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import ExcerptsFetch from '../index';
 
-const siteInfo = {
+const siteInfo: SiteInfo = {
   title: 'Dmitri Pavlutin',
   description: 'Thoughts on Frontend development',
   metaTitle: 'Dmitri Pavlutin Blog',
@@ -20,10 +20,11 @@ const authorProfilePicture = {
   srcSet: 'some srcset values',
 };
 
-const authorInfo = {
+const authorInfo: AuthorInfo = {
   name: 'Dmitri Pavlutin',
   description: 'Dmitri Pavlutin is a software developer specialized in Frontend technologies',
   email: 'mail@mail.com',
+  jobTitle: 'Software Developer',
   profiles: {
     stackoverflow: 'https://stackoverflow.com/users/1894471/dmitri-pavlutin',
     twitter: 'https://twitter.com/panzerdp',

@@ -6,6 +6,7 @@ exports[`<LayoutFetch /> should render the layout container 1`] = `
     Object {
       "description": "Dmitri Pavlutin is a software developer specialized in Frontend technologies",
       "email": "mail@mail.com",
+      "jobTitle": "Software developer",
       "name": "Dmitri Pavlutin",
       "nicknames": Object {
         "twitter": "panzerdp",

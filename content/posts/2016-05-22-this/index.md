@@ -1,6 +1,6 @@
 ---
 title: "Gentle explanation of this keyword in JavaScript"
-description: "The value of this keyword in JavaScript is determined by how the function is called. My guide will help you effortlessly demystify this."
+description: "The value of this keyword in JavaScript is determined by how the function is called. My guide will help you effortlessly understand this."
 published: "2016-05-22"
 modified: "2016-07-08"
 thumbnail: "./images/cover.jpg"

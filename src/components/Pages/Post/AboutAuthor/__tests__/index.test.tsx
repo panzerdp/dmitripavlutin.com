@@ -7,6 +7,7 @@ const props = {
   authorInfo: {
     name: 'Dmitri Pavlutin',
     email: 'mail@mail.com',
+    jobTitle: 'Software Developer',
     nicknames: {
       twitter: 'panzerdp',
     },

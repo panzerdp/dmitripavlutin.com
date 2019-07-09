@@ -11,6 +11,7 @@ const authorInfo: AuthorInfo = {
   nicknames: {
     twitter: 'panzerdp',
   },
+  jobTitle: 'Software developer',
   profiles: {
     facebook: 'https://www.facebook.com/dmitri.pavlutin',
     github: 'https://github.com/panzerdp',
@@ -21,9 +22,20 @@ const authorInfo: AuthorInfo = {
   description: 'Dmitri Pavlutin is a software developer specialized in Frontend technologies',
 };
 
+const siteInfo = {
+  title: 'Dmitri Pavlutin',
+  description: 'Thoughts on Frontend development',
+  metaTitle: 'Dmitri Pavlutin Blog',
+  metaDescription: 'Posts by Dmitri Pavlutin about software development',
+  url: 'https://dmitripavlutin.com',
+  repositoryUrl: 'https://github.com/panzerdp/dmitripavlutin.com',
+};
+
 const props = {
   html: '<div>Some content</div>',
   authorInfo,
+  authorProfilePictureSrc: '/picture.jpg',
+  siteInfo,
 };
 
 describe('<AboutTemplate />', function() {

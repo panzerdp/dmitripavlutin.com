@@ -10,6 +10,7 @@ const authorInfo: AuthorInfo = {
   name: 'Dmitri Pavlutin',
   description: 'Dmitri Pavlutin is a software developer specialized in Frontend technologies',
   email: 'mail@mail.com',
+  jobTitle: 'Software Developer',
   nicknames: {
     twitter: 'panzerdp',
   },
@@ -22,11 +23,29 @@ const authorInfo: AuthorInfo = {
   },
 };
 
+const siteInfo = {
+  title: 'Dmitri Pavlutin',
+  description: 'Thoughts on Frontend development',
+  metaTitle: 'Dmitri Pavlutin Blog',
+  metaDescription: 'Posts by Dmitri Pavlutin about software development',
+  url: 'https://dmitripavlutin.com',
+  repositoryUrl: 'https://github.com/panzerdp/dmitripavlutin.com',
+};
+
+const authorProfilePicture = {
+  width: 100,
+  height: 100,
+  base64: 'base64-encoded-string',
+  src: '/image.png',
+  srcSet: 'some srcset values',
+};
+
 const props = {
   data: {
     site: {
       siteMetadata: {
         authorInfo,
+        siteInfo,
       },
     },
     allMarkdownRemark: {
@@ -38,13 +57,22 @@ const props = {
         },
       ],
     },
+    authorProfilePicture: {
+      childImageSharp: {
+        resize: authorProfilePicture,
+      },
+    },
   },
 };
 
 describe('<AboutFetch />', function() {
   it('should render about template', function() {
     const wrapper = shallow(<AboutFetch {...props} />);
-    expect(wrapper.contains(<AboutTemplate html={html} authorInfo={authorInfo} />)).toBe(true);
+    expect(
+      wrapper.contains(
+        <AboutTemplate html={html} authorInfo={authorInfo} siteInfo={siteInfo} authorProfilePictureSrc="/image.png" />
+      )
+    ).toBe(true);
   });
 
   it('should throw exception when no markdown edges were found', function() {
@@ -52,11 +80,7 @@ describe('<AboutFetch />', function() {
       shallow(
         <AboutFetch
           data={{
-            site: {
-              siteMetadata: {
-                authorInfo,
-              },
-            },
+            ...props.data,
             allMarkdownRemark: {
               edges: [],
             },
