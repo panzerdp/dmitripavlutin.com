@@ -1,5 +1,5 @@
 ---
-title: 5 bad coding habits in JavaScript to unlearn right now
+title: 5 JavaScript bad coding habits to unlearn right now
 description: "To write quality JavaScript code don't use implicit type conversion, old JavaScript tricks, pollute scope with variables, and avoid undefined & null"
 published: "2019-07-10"
 modified: "2019-07-10"
@@ -20,7 +20,7 @@ These are the signs of bad coding habits.
 
 In this post I describe 5 common bad coding habits in JavaScript. And importantly I will present my actionable recommendations how to get rid of these habits.  
 
-## 1. Don't use implicit type coercion
+## 1. Don't use implicit type conversion
 
 JavaScript is a loosely typed language. If used correctly, this is a benefit because of the flexibility it gives you.   
 
@@ -85,11 +85,11 @@ function myBigFunction(param1, param2) {
 }
 ```
 
-If this is the case, the function or block scope is polluted with too many variables.  
+If that's the case, then the function or block scope is polluted with too many variables. 
 
 The solution is to make the life of your JavaScript variables as short as possible. 
 
-## 4. Avoid using directly undefined and null
+## 4. If possible, avoid using undefined and null
 
 Tony Hoare, inventor of ALGOL, once stated:
 
@@ -105,15 +105,13 @@ What if the codebase contains different coding styles of many developers? An ass
  
 ![Different coding styles](./images/different-coding-styles.jpg)
 
-Same coding style across the entire team and the application codebase is a requirement. It's a boost of code readability.  
+Same coding style across the entire team and the application codebase is a requirement. It's a boost for the code readability.  
 
-But I'll be honest with you. I'm lazy. Often when I'm on a deadline, or I'm about to commit  before going home, I might "forget" about styling my code.  
+But I'll be honest with you. I'm lazy. When I'm on a deadline, or I'm about to commit  before going home - I might "forget" about styling my code.  
 
-“Myself lazy” says to leave it as is, and update later. But later means never.  
+“Myself lazy” says to leave the code as is, and update later. But later means never.  
 
 In order for "Myself rationale" to beat the "Myself lazy", enforce respecting the coding style.  
-
-![Same coding styles](./images/same-coding-styles.jpg)
 
 ## 6. Conclusion
 
