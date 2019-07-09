@@ -60,7 +60,7 @@ const props = {
 };
 
 describe('<PostMetaTags />', function() {
-  const postUrl = `${siteInfo.url}/${TO_POST({ slug: post.slug })}`;
+  const postUrl = `${siteInfo.url}${TO_POST({ slug: post.slug })}`;
   const imageUrl = `${siteInfo.url}${post.thumbnail.src}`;
 
   it('should render indexing meta tag', function() {

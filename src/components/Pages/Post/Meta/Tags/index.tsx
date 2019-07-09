@@ -10,7 +10,7 @@ interface PostMetaTagsProps {
 }
 
 export default function PostMetaTags({ post, siteInfo, authorInfo }: PostMetaTagsProps) {
-  const postUrl = `${siteInfo.url}/${TO_POST({ slug: post.slug })}`;
+  const postUrl = `${siteInfo.url}${TO_POST({ slug: post.slug })}`;
   const imageUrl = `${siteInfo.url}${post.thumbnail.src}`;
   return (
     <Helmet titleTemplate="%s">
