@@ -14,11 +14,11 @@ When reading JavaScript code, have you ever had the feeling:
 
 * that you barely understand what the code does?  
 * the code uses lots of JavaScript tricks?  
-* the naming, coding style are rather random?
+* the naming and coding style are rather random?
 
 These are the signs of bad coding habits. 
 
-In this post I describe 5 common bad coding habits in JavaScript. And importantly I will present my actionable recommendations how to get rid of these habits.  
+In this post, I describe 5 common bad coding habits in JavaScript. And importantly I will present my actionable recommendations on how to get rid of these habits.  
 
 ## 1. Don't use implicit type conversion
 
@@ -40,7 +40,7 @@ console.log(true == []); // -> false
 console.log(true == ![]); // -> false
 ```
 
-Relying excessively on the implicit type coversion is a bad habit. First of all, it makes your code less stable in edge cases. Secondly, you increase the chance to introduce a bug that is difficult to reproduce and fix.  
+Relying excessively on the implicit type conversion is a bad habit. First of all, it makes your code less stable in edge cases. Secondly, you increase the chance to introduce a bug that is difficult to reproduce and fix.  
 
 Let's implement a function that gets the property of an object. If the property does not exist, the function returns a default value:
 
@@ -130,12 +130,12 @@ function someFunc(array) {
    */
   for (index = 0; index < length; index++) {
     item = array[index];
-    // some code...
+    // Use `item`
   }
   return someResult;
 }
 ```
-The variables `index`, `item` and `length` are function scoped. But they actually pollute the function scope, because they are necessary only inside the `for()` scope.  
+The variables `index`, `item` and `length` are function scoped. But these variables pollute the function scope because they are necessary only inside the `for()` block scope.  
 
 With the introduction of block scope variables `let` and `const`, limit the life of your variables as much as possible. 
 
@@ -149,46 +149,211 @@ function someFunc(array) {
   const length = array.length;
   for (let index = 0; index < length; index++) {
     const item = array[index];
-    // some 
+    // Use `item`
   }
   return someResult;
 }
 ```
-`index` and `item` variables are limited to `for()` cycle block scope. `length` is moved near the place of its usage.  
+`index` and `item` variables are limited to `for()` cycle block scope. `length` was moved near the place of its usage.  
 
-The refactored code is easier to understand because the variables are not spread accross the entire function scope. They exist solely near the place of usage.  
+The refactored code is easier to understand because the variables are not spread across the entire function scope. They exist solely near the place of usage.  
 
+Define the variables in the block scope they are used:
 
+#### if block scope
+```javascript{2}
+// Bad
+let message;
+// ...
+if (notFound) {
+  message = 'Item not found';
+  // Use `message`
+}
+```
 
-## 4. If possible, avoid using undefined and null
+```javascript{3}
+// Good
+if (notFound) {
+  const message = 'Item not found';
+  // Use `message`
+}
+```
 
-Tony Hoare, inventor of ALGOL, once stated:
+#### for block scope
+```javascript{2}
+// Bad
+let item;
+for (item of array) {
+  // Use `item`
+}
+```
+
+```javascript{2}
+// Good
+for (const item of array) {
+  // Use `item`
+}
+```
+
+## 4. Try to avoid undefined and null
+
+`undefined` is used when a variable has not been assigned a value. For example:
+
+```javascript
+let count;
+console.log(count); // => undefined
+
+const hero = {
+  name: 'Batman'
+};
+console.log(hero.city); // => undefined
+```
+`count` variable is defined, but not yet assigned with a value. It has `undefined` value.  
+When accessing the property of a non-existing object, `undefined` is returned also.  
+
+Why is using directly `undefined` a bad habit? Because when you start comparing against `undefined`, you're working with variables in an uninitialized state. 
+
+Variables, object properties, arrays must be initialized with values before using them!
+
+JavaScript offers a lot of possibilities to avoid comparing with `undefined`.
+
+#### Property existence
+```javascript{5}
+// Bad
+const object = {
+  prop: 'value'
+};
+if (object.nonExistingProp === undefined) {
+  // ...
+}
+```
+```javascript{5}
+// Good
+const object = {
+  prop: 'value'
+};
+if (nonExistingProp in object) {
+  // ...
+}
+```
+
+#### Object's default properties
+```javascript{3}
+// Bad
+function foo(options) {
+  if (object.optionalProp1 === undefined) {
+    object.optionalProp1 = 'Default value 1';
+  }
+  // ...
+}
+```
+```javascript{7}
+// Good
+function foo(options) {
+  const defaultProps = {
+    optionalProp1: 'Default value 1'
+  };
+  options = {
+    ...defaultProps,
+    ...options
+  };
+  // ...
+}
+```
+
+#### Default function parameter
+```javascript{3}
+// Bad
+function foo(param1, param2) {
+  if (param2 === undefined) {
+    param2 = 'Some default value';
+  }
+  // ...
+}
+```
+```javascript{2}
+// Good
+function foo(param1, param2 = 'Some default value') {
+  // ...
+}
+```
+
+`null` is an indicator of a missing object. 
+
+You should strive to avoid returning `null` from functions, and more importantly, call functions with `null` as an argument.  
+
+As soon as `null` appears in your call stack, you have to check for its existence in every function that potentially can access `null`. It's error-prone.  
+
+```javascript{5,10,18}
+function bar(something) {
+  if (something) {
+    return foo({ value: 'Some value' });
+  } else {
+    return foo(null);
+  }
+}
+
+function foo(options) {
+  let value = null;
+  if (options !== null) {
+    value = options.value;
+    // ...
+  }
+  return bar(value);
+}
+
+function bar(someValue) {
+  if (someValue === null) {
+    return 'Nothing';
+  }
+  return someValue;
+}
+```
+
+Try to write code that does not involve `null`. Possible alternatives are `try/catch` mechanism, the usage of default objects.  
+
+Tony Hoare, the inventor of ALGOL, once stated:
 
 > *I call it my billion-dollar mistake...* [...] I was designing the first comprehensive type system for references in an object-oriented language. [...] But I couldn’t resist the temptation to put in a *null* reference, simply because it was so easy to implement. This has led to *innumerable errors, vulnerabilities, and system crashes,* which have probably caused a billion dollars of pain and damage in the last forty years.
 
 
-The post ["The worst mistake of computer science"](https://www.lucidchart.com/techblog/2015/08/31/the-worst-mistake-of-computer-science/) goes in depth why `null` is damaging the quality of your code.  
+The post ["The worst mistake of computer science"](https://www.lucidchart.com/techblog/2015/08/31/the-worst-mistake-of-computer-science/) goes in-depth why `null` is damaging the quality of your code.  
 
-## 5. Don't use casual coding style. Enforce a standard
+## 5. Don't use a casual coding style. Enforce a standard
 
-What could be more daunting than reading code that has a random coding style. You never know what to expect!  
+What could be more daunting than reading code that has a random coding style? You never know what to expect!  
 
 What if the codebase contains different coding styles of many developers? An assorted character graffiti wall.
  
 ![Different coding styles](./images/different-coding-styles.jpg)
 
-Same coding style across the entire team and the application codebase is a requirement. It's a boost for the code readability.  
+The same coding style across the entire team and the application codebase is a requirement. It's a boost for the code readability.  
 
-But I'll be honest with you. I'm lazy. When I'm on a deadline, or I'm about to commit  before going home - I might "forget" about styling my code.  
+Examples of useful coding styles:
 
-“Myself lazy” says to leave the code as is, and update later. But later means never.  
+* [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
+* [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html)
 
-In order for "Myself rationale" to beat the "Myself lazy", enforce respecting the coding style.  
+But I'll be honest with you. I'm lazy. When I'm on a deadline, or I'm about to commit before going home - I might "forget" about styling my code.  
 
+“Myself lazy” says: leave the code as is, update it later. But later means never.  
 
+I recommend to automate the process of coding style verification:
+
+1. Install [eslint](https://eslint.org/)
+2. Configure eslint with a coding style that's best for you
+3. Set a pre-commit hook that runs eslint verification before committing.  
+
+Start with [eslint-prettier-husky-boilerplate](https://github.com/cma224/eslint-prettier-husky-boilerplate).  
 
 ## 6. Conclusion
 
-Writing quality and clean code requires discipline and overcome of the bad coding habits. 
+Writing quality and clean code requires discipline, overcome bad coding habits.  
 
-Good coding habits produce an easy to understand, less buggy code. 
+JavaScript is a permissive language, with a lot of flexibility. But you have to pay attention to what features you use. My recommendation is to avoid implicit type conversions and reduce the usage of `undefined` and `null`.  
+
+The language is evolving quite fast these days. Identify tricky code, and refactor it to use the latest JavaScript features. 
+
+A consistent coding style across the codebase benefits readability.  
+
+*What other bad coding habits in JavaScript do you know?*  
