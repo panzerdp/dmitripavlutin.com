@@ -24,11 +24,9 @@ In this post I describe 5 common bad coding habits in JavaScript. And importantl
 
 JavaScript is a loosely typed language. If used correctly, this is a benefit because of the flexibility it gives you.   
 
-Most of the operators `+ - * /  ==` (but not `===`) when working with operands of different types use implicit conversion of types. 
+Most of the operators `+ - * /  ==` (but not `===`) when working with operands of different types use implicit conversion of types.  
 
-The statements `if (condition) {...}`, `while(condition) {...}` implicitly transform the condition to a boolean type.  
-
-Unfortunately, JavaScript is known for its bizzare way of performing some type conversions. 
+The statements `if (condition) {...}`, `while(condition) {...}` implicitly transform the condition to a boolean.  
 
 The following examples rely on the implicit conversion of types. I bet you feel the confusion:  
 
@@ -38,58 +36,129 @@ console.log("2" - "1");  // => 1
 
 console.log('' == 0);    // => true
 
-console.log({} == true);          // => false
-console.log(Boolean({}) == true); // => true
+console.log(true == []); // -> false
+console.log(true == ![]); // -> false
 ```
 
 Relying excessively on the implicit type coversion is a bad habit. First of all, it makes your code less stable in edge cases. Secondly, you increase the chance to introduce a bug that is difficult to reproduce and fix.  
 
-Here's an example. 
+Let's implement a function that gets the property of an object. If the property does not exist, the function returns a default value:
 
-Here's my advice: stop using implicit type conversion. Instead, make sure that your variables and function parameters always have the same type. Use explicit type conversion when necessary.  
+```javascript
+function getProp(object, propertyName, defaultValue) {
+  if (!object[propertyName]) {
+    return defaultValue;
+  }
+  return object[propertyName];
+}
 
-You might say that this approach requires writing more code... You're right! But with explicit type conversion, you control the behavior of your code. Plus, the explicitness increases readability.   
+const hero = {
+  name: 'Batman',
+  isVillain: false
+};
+
+console.log(getProp(hero, 'name', 'Unknown'));     // => 'Batman'
+```
+
+`getProp()` reads the value of the `name` property, which is `'Batman'`.  
+
+What about trying to access `isVillian` property:
+
+```javascript
+console.log(getProp(villian, 'isVillian', true)); // => true
+```
+That's an error. Even if the `hero`'s property `isVillian` is `false`, the function `getProp()` return the incorrect `true`.  
+
+It happens because the verification of property existence relies on implicit conversion to a boolean by the `if (!object[propertyName]) {...}`. 
+
+These kind of errors are difficult to spot. To fix the function, verify explicitely the type of the value: 
+
+```javascript{2}
+function getPropFixed(object, propertyName, defaultValue) {
+   if (object[propertyName] === undefined) {
+     return defaultValue;
+   }
+   return object[propertyName];
+}
+
+const hero = {
+  name: 'Batman',
+  isVillain: false
+};
+
+console.log(getPropFixed(villian, 'isVillian', true)); // => false
+```
+
+`object[propertyName] === undefined` verifies exactly if the property accessor evaluates to `undefined`.  
+
+Here's my advice: whenever possible, do not use implicit type conversions. Instead, make sure that variables and function parameters always have the same type. Use explicit type conversion when necessary.  
+
+A list of best practices:
+
+* Always use strict equality operator `===` to perform comparisons 
+* Don't use loose equality operator `==`
+* Addition operator `operand1 + operand2`: both operands should be numbers or both strings
+* Arithmetic operators `- * / % **`: both operands should be numbers
+* `if (condition) {...}`, `while (condition) {...}`, etc statements: `condition` should be a boolean
+
+You might say that this approach requires writing more code... You're right! But with an explicit approach, you control the behavior of your code. Plus, the explicitness increases readability.   
 
 ## 2. Don't use old JavaScript tricks
 
-What's interesting about JavaScript language is that its creators weren't expecting it will become so popular.
+What's interesting about JavaScript is its creators weren't expecting the language to become so popular.
 
-The complexity of the applications built on JavaScript was increasing faster than the language evolution. This situation forced developers to use JavaScript hacks and tricks, just to make things work.  
+The complexity of the applications built on JavaScript was increasing faster than the language evolution. This situation forced developers to use JavaScript hacks and workarounds, just to make things work.  
 
-A classic example is searching whether an array contains a specific item. I've never liked to use `array.indexOf(item) !== -1` to check the presence of an item.  
+A classic example is searching whether an array contains an item. I've never liked to use `array.indexOf(item) !== -1` to check the presence of an item.  
 
-That's not the case of today's JavaScript! ECMAScript 2015 and beyond JavaScript is way more powerful. You can safely refactor a lot of tricks by using the new language features.  
+ECMAScript 2015 and beyond are way more powerful. You can safely refactor a lot of tricks by using new language features.  
 
 Refactor `array.indexOf(item) !== -1` in favor of the new ES2015 method `array.includes(item)` .  
 
 Follow [my compiled list of refactorings](http://localhost:8000/make-your-javascript-code-shide-knockout-old-es5-hack/) to remove old hacks from your JavaScript code. 
 
-## 3. Don't pollute scope with too many variables
+## 3. Don't pollute the function scope
 
-How often do you look at a variable, but have difficulties in understanding how did it get here, and where was it defined?  
+Before ES2015, JavaScript variables where function scoped. Because of that, you might have a bad habit of declaring all the variables as function scoped.
 
-```javascript{6}
-function myBigFunction(param1, param2) {
- /*
-  * A Lot of code...  
-  */
- if (somethingTrue) {
-  increment++; // <----  Where is this taken from?
-  if (increment > 10) {
-    /*
-     * A lot of code...  
-     */
-  }
+Let's look at an example:  
+```javascript
+function someFunc(array) {
+  var index, item, length = array.length;
   /*
-   * A lot of code...  
+   * Lots of code
    */
- }
+  for (index = 0; index < length; index++) {
+    item = array[index];
+    // some code...
+  }
+  return someResult;
 }
 ```
+The variables `index`, `item` and `length` are function scoped. But they actually pollute the function scope, because they are necessary only inside the `for()` scope.  
 
-If that's the case, then the function or block scope is polluted with too many variables. 
+With the introduction of block scope variables `let` and `const`, limit the life of your variables as much as possible. 
 
-The solution is to make the life of your JavaScript variables as short as possible. 
+Let's clean up the function scope:
+
+```javascript
+function someFunc(array) {
+  /*
+   * Lots of code
+   */
+  const length = array.length;
+  for (let index = 0; index < length; index++) {
+    const item = array[index];
+    // some 
+  }
+  return someResult;
+}
+```
+`index` and `item` variables are limited to `for()` cycle block scope. `length` is moved near the place of its usage.  
+
+The refactored code is easier to understand because the variables are not spread accross the entire function scope. They exist solely near the place of usage.  
+
+
 
 ## 4. If possible, avoid using undefined and null
 
@@ -97,7 +166,8 @@ Tony Hoare, inventor of ALGOL, once stated:
 
 > *I call it my billion-dollar mistake...* [...] I was designing the first comprehensive type system for references in an object-oriented language. [...] But I couldn’t resist the temptation to put in a *null* reference, simply because it was so easy to implement. This has led to *innumerable errors, vulnerabilities, and system crashes,* which have probably caused a billion dollars of pain and damage in the last forty years.
 
-The post ["The worst mistake of computer science"](https://www.lucidchart.com/techblog/2015/08/31/the-worst-mistake-of-computer-science/) goes in depth why `null` is damaging the quality of your code.
+
+The post ["The worst mistake of computer science"](https://www.lucidchart.com/techblog/2015/08/31/the-worst-mistake-of-computer-science/) goes in depth why `null` is damaging the quality of your code.  
 
 ## 5. Don't use casual coding style. Enforce a standard
 
@@ -114,6 +184,8 @@ But I'll be honest with you. I'm lazy. When I'm on a deadline, or I'm about to c
 “Myself lazy” says to leave the code as is, and update later. But later means never.  
 
 In order for "Myself rationale" to beat the "Myself lazy", enforce respecting the coding style.  
+
+
 
 ## 6. Conclusion
 
