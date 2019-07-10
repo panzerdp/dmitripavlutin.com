@@ -21,7 +21,7 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
     .split('/')
     .slice(-4)
     .join('/');
-  const postRepositoryFileUrl = `${siteInfo.repositoryUrl}/edit/master${postRelativePath}`;
+  const postRepositoryFileUrl = `${siteInfo.repositoryUrl}/edit/master/${postRelativePath}`;
   const recommended = recommendedPosts.edges.map(toPostExcerpt);
   const popular = popularPosts.edges.map(toPostPlain);
   return (

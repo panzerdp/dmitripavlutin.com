@@ -61,7 +61,7 @@ exports[`<PostFetch /> should render post template 1`] = `
       "title": "Useful techniques to facilitate React server-side rendering",
     }
   }
-  postRepositoryFileUrl="https://github.com/panzerdp/dmitripavlutin.com/edit/master/home/user/my-post.md"
+  postRepositoryFileUrl="https://github.com/panzerdp/dmitripavlutin.com/edit/master/home/test/user/my-post.md"
   recommendedPosts={
     Array [
       Object {

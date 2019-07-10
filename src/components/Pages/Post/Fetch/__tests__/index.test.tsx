@@ -96,7 +96,7 @@ const props = {
     markdownRemark: {
       id: 'post-id',
       html: '<div>JavaScript is a programming language</div>',
-      fileAbsolutePath: '/home/user/my-post.md',
+      fileAbsolutePath: '/home/test/user/my-post.md',
       frontmatter: {
         title: 'Useful techniques to facilitate React server-side rendering',
         description: 'Useful techniques to facilitate React server-side rendering.',
