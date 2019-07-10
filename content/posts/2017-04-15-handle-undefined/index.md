@@ -125,11 +125,11 @@ An efficient approach to solve the troubles of uninitialized variables is whenev
 
 **Tip 1: Favor `const`, otherwise use `let`, but say goodbye to `var`**
 
-In my opinion, one of the best features of ECMAScript 2015 is the new way to declare variables using `const` and `let`. It is a big step forward that these declarations are block scoped (contrary to older function scoped `var`) and exist in a [temporal dead zone](/variables-lifecycle-and-why-let-is-not-hoisted/#5-let-variables-lifecycle) until the declaration line.    
+In my opinion, one of the best features of ECMAScript 2015 is the new way to declare variables using `const` and `let`. It is a big step forward. `const` and `let` are block scoped (contrary to older function scoped `var`) and exist in a [temporal dead zone](/variables-lifecycle-and-why-let-is-not-hoisted/#5-let-variables-lifecycle) until the declaration line.    
 
 When the variable receives a value once and forever, I recommend using a `const` declaration. It creates an [immutable binding](https://mathiasbynens.be/notes/es6-const).  
 
-One of the nice features of `const` is that *you have to assign an initial value* to the variable `const myVariable = 'initial'`. The variable is not exposed to the uninitialized state and to access `undefined` is simply not possible.  
+One of the nice features of `const` is that *you have to assign an initial value* to the variable `const myVariable = 'initial'`. The variable is not exposed to the uninitialized state and accessing `undefined` is simply not possible.  
 
 Let's check the function that verifies whether a word is a palindrome:
 
@@ -280,7 +280,7 @@ As a result, accessing the first item of an `undefined` value using the expressi
 
 The permissive nature of JavaScript that allows accessing non-existing properties is a source of confusion: the property may be set or not. The ideal way to bypass this problem is to restrict the object to have always defined the properties that it holds.  
 
-Unfortunately, you often don't have control over the objects that you work with. Such objects may have a different set of properties in diverse scenarios. So you have to handle all these scenarios manually.  
+Unfortunately, often you don't have control over the objects. Such objects may have a different set of properties in diverse scenarios. So you have to handle all these scenarios manually.  
 
 Let's implement a function `append(array, toAppend)` that adds at the beginning and/or at the end of an array of new elements. `toAppend` parameter accepts an object with properties:
 
