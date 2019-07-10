@@ -1,8 +1,8 @@
 ---
 title: 5 JavaScript bad coding habits to unlearn right now
 description: "Overuse of implicit type conversion, old JavaScript tricks, polluting function scope, undefined & null, casual coding style ruin JavaScript code quality"
-published: "2019-07-10"
-modified: "2019-07-10"
+published: "2019-07-10T14:30:00Z"
+modified: "2019-07-10T14:30:00Z"
 thumbnail: "./images/cover.jpg"
 slug: unlearn-javascript-bad-coding-habits
 tags: ["javascript", "undefined", "clean code", "craftsmanship"]
@@ -67,7 +67,7 @@ What about trying to access `isVillian` property:
 ```javascript
 console.log(getProp(villian, 'isVillian', true)); // => true
 ```
-That's an error. Even if the `hero`'s property `isVillian` is `false`, the function `getProp()` return the incorrect `true`.  
+That's an error. Even if the `hero`'s property `isVillian` is `false`, the function `getProp()` returns the incorrect `true`.  
 
 It happens because the verification of property existence relies on implicit conversion to a boolean by the `if (!object[propertyName]) {...}`. 
 
@@ -91,7 +91,7 @@ console.log(getPropFixed(villian, 'isVillian', true)); // => false
 
 `object[propertyName] === undefined` verifies exactly if the property accessor evaluates to `undefined`.  
 
-Here's my advice: whenever possible, do not use implicit type conversions. Instead, make sure that variables and function parameters always have the same type. Use explicit type conversion when necessary.  
+Here's my advice: whenever possible, do not use implicit type conversion. Instead, make sure that variables and function parameters always have the same type. Use explicit type conversion when necessary.  
 
 A list of best practices:
 
@@ -113,13 +113,15 @@ A classic example is searching whether an array contains an item. I've never lik
 
 ECMAScript 2015 and beyond are way more powerful. You can safely refactor a lot of tricks by using new language features.  
 
-Refactor `array.indexOf(item) !== -1` in favor of the new ES2015 method `array.includes(item)` .  
+![Use includes() instead of indexOf() in to verify the element existence in JavaScript](./images/includes.jpg)
+
+Refactor `array.indexOf(item) !== -1` in favor of the new ES2015 method `array.includes(item)`.  
 
 Follow [my compiled list of refactorings](http://localhost:8000/make-your-javascript-code-shide-knockout-old-es5-hack/) to remove old hacks from your JavaScript code. 
 
 ## 3. Don't pollute the function scope
 
-Before ES2015, JavaScript variables where function scoped. Because of that, you might have a bad habit of declaring all the variables as function scoped.
+Before ES2015, JavaScript variables where function scoped. Because of that, you might developed a bad habit of declaring all the variables as function scoped.
 
 Let's look at an example:  
 ```javascript
@@ -137,7 +139,7 @@ function someFunc(array) {
 ```
 The variables `index`, `item` and `length` are function scoped. But these variables pollute the function scope because they are necessary only inside the `for()` block scope.  
 
-With the introduction of block scope variables `let` and `const`, limit the life of your variables as much as possible. 
+With the introduction of block scope variables `let` and `const`, you can limit the life of your variables as much as possible. 
 
 Let's clean up the function scope:
 
@@ -156,7 +158,7 @@ function someFunc(array) {
 ```
 `index` and `item` variables are limited to `for()` cycle block scope. `length` was moved near the place of its usage.  
 
-The refactored code is easier to understand because the variables are not spread across the entire function scope. They exist solely near the place of usage.  
+The refactored code is easier to understand because the variables are not spread across the entire function scope. They exist near the place of usage.  
 
 Define the variables in the block scope they are used:
 
@@ -197,7 +199,7 @@ for (const item of array) {
 
 ## 4. Try to avoid undefined and null
 
-`undefined` is used when a variable has not been assigned a value. For example:
+A variable has not been assigned a value is evaluated to `undefined`. For example:
 
 ```javascript
 let count;
