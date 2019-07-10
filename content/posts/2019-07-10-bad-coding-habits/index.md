@@ -1,6 +1,6 @@
 ---
 title: 5 JavaScript bad coding habits to unlearn right now
-description: "To write quality JavaScript code don't use implicit type conversion, old JavaScript tricks, pollute scope with variables, and avoid undefined & null"
+description: "Overuse of implicit type conversion, old JavaScript tricks, polluting function scope, undefined & null, casual coding style ruin JavaScript code quality"
 published: "2019-07-10"
 modified: "2019-07-10"
 thumbnail: "./images/cover.jpg"
