@@ -26,9 +26,11 @@ JavaScript is a loosely typed language. If used correctly, this is a benefit bec
 
 Most of the operators `+ - * /  ==` (but not `===`) when working with operands of different types use implicit conversion of types. 
 
+The statements `if (condition) {...}`, `while(condition) {...}` implicitly transform the condition to a boolean type.  
+
 Unfortunately, JavaScript is known for its bizzare way of performing some type conversions. 
 
-The following examples illustrate the confusion:
+The following examples rely on the implicit conversion of types. I bet you feel the confusion:  
 
 ```javascript
 console.log("2" + "1");  // => "21"
@@ -42,11 +44,11 @@ console.log(Boolean({}) == true); // => true
 
 Relying excessively on the implicit type coversion is a bad habit. First of all, it makes your code less stable in edge cases. Secondly, you increase the chance to introduce a bug that is difficult to reproduce and fix.  
 
-Here's my advice: stop using implicit type conversion. Always use explicit type conversion.  
+Here's an example. 
 
-@TODO Give an example of transforming implicit to explicit
+Here's my advice: stop using implicit type conversion. Instead, make sure that your variables and function parameters always have the same type. Use explicit type conversion when necessary.  
 
-You might say that this approach requires writing more code... You're right! But with explicit type conversion, you control the behavior of your code. Plus the explicitness increases the readability.   
+You might say that this approach requires writing more code... You're right! But with explicit type conversion, you control the behavior of your code. Plus, the explicitness increases readability.   
 
 ## 2. Don't use old JavaScript tricks
 
@@ -58,7 +60,7 @@ A classic example is searching whether an array contains a specific item. I've n
 
 That's not the case of today's JavaScript! ECMAScript 2015 and beyond JavaScript is way more powerful. You can safely refactor a lot of tricks by using the new language features.  
 
-Instead of `array.indexOf(item) !== -1` trick use the corresponding `array.includes(item)` new method (available in ECMAScript 2015).  
+Refactor `array.indexOf(item) !== -1` in favor of the new ES2015 method `array.includes(item)` .  
 
 Follow [my compiled list of refactorings](http://localhost:8000/make-your-javascript-code-shide-knockout-old-es5-hack/) to remove old hacks from your JavaScript code. 
 
