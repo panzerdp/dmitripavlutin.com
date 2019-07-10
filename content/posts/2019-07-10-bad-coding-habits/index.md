@@ -54,7 +54,7 @@ function getProp(object, propertyName, defaultValue) {
 
 const hero = {
   name: 'Batman',
-  isVillain: false
+  isVillian: false
 };
 
 console.log(getProp(hero, 'name', 'Unknown'));     // => 'Batman'
@@ -65,7 +65,7 @@ console.log(getProp(hero, 'name', 'Unknown'));     // => 'Batman'
 What about trying to access `isVillian` property:
 
 ```javascript
-console.log(getProp(villian, 'isVillian', true)); // => true
+console.log(getProp(hero, 'isVillian', true)); // => true
 ```
 That's an error. Even if the `hero`'s property `isVillian` is `false`, the function `getProp()` returns the incorrect `true`.  
 
@@ -83,10 +83,10 @@ function getPropFixed(object, propertyName, defaultValue) {
 
 const hero = {
   name: 'Batman',
-  isVillain: false
+  isVillian: false
 };
 
-console.log(getPropFixed(villian, 'isVillian', true)); // => false
+console.log(getPropFixed(hero, 'isVillian', true)); // => false
 ```
 
 `object[propertyName] === undefined` verifies exactly if the property accessor evaluates to `undefined`.  
