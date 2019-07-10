@@ -117,7 +117,7 @@ ECMAScript 2015 and beyond are way more powerful. You can safely refactor a lot 
 
 Refactor `array.indexOf(item) !== -1` in favor of the new ES2015 method `array.includes(item)`.  
 
-Follow [my compiled list of refactorings](http://localhost:8000/make-your-javascript-code-shide-knockout-old-es5-hack/) to remove old hacks from your JavaScript code. 
+Follow [my compiled list of refactorings](/make-your-javascript-code-shide-knockout-old-es5-hack/) to remove old hacks from your JavaScript code. 
 
 ## 3. Don't pollute the function scope
 
