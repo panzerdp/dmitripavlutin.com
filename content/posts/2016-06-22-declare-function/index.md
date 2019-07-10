@@ -567,4 +567,4 @@ For a shorter syntax when declaring methods on object literals, the shorthand me
 
 `new Function` way to declare functions generally should not be used. Mainly because it opens potential security risks, doesn't allow code auto-complete in editors and lose the engine optimizations.
 
-*Do you prefer arrow functions `(param) => {...}`, or still use the function expressions `function(param) {...}`? Let me know why in a comment bellow!*
+*Do you prefer arrow functions `(param) => {...}`, or still use the function expressions `function(param) {...}`? Let me know why in a comment below!*

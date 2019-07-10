@@ -441,4 +441,4 @@ Just make sure that the migration process does not introduce new bugs, because o
 
 I hope from now on `array.indexOf(element) !== -1` will disappear from your code!
 
-*Do you know other hacks that nicely can be knocked out? Write a comment bellow and let's discuss!*
+*Do you know other hacks that nicely can be knocked out? Write a comment below and let's discuss!*

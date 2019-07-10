@@ -471,4 +471,4 @@ The character view deals with graphemes that may be compound from one or more Un
 
 Special index type adds a bit of complexity when accessing individual characters or manipulating strings. I agree to pay this price, because having truly Unicode-aware operations on strings is awesome! 
 
-*Do you find string views comfortable to use? Write a comment bellow and let's discuss!*
+*Do you find string views comfortable to use? Write a comment below and let's discuss!*

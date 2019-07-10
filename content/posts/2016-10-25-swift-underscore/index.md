@@ -258,4 +258,4 @@ You can omit unnecessary extractions from tuple components `let (value, _) = ...
 
 On a function invocation `_ = myFunc()` you can also suppress the usage of the returned value. However this workaround should be applied as an exception, since in most of the cases the result should be used.  
 
-*Do you know other useful applications of the underscore in Swift? Feel free to write a comment bellow!*
+*Do you know other useful applications of the underscore in Swift? Feel free to write a comment below!*

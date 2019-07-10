@@ -155,4 +155,4 @@ After solidifying your ground in those directions, take a next level:
 * The quality and readability of your code: [Clean code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)  by Robert C. Martin *(one of my favorite books)*
 * The object-oriented design and scalable code: [Design Patterns: Elements of Reusable Object-Oriented Software](https://www.amazon.com/exec/obidos/ASIN/B000SEIBB8/makithecompsi-20) 
 
-*What is your opinion on software development craftsmanship? Speak up your mind in a comment bellow!*
+*What is your opinion on software development craftsmanship? Speak up your mind in a comment below!*

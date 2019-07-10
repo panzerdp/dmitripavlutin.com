@@ -231,4 +231,4 @@ Generally these are used to sum numbers and concatenate strings.
 
 You can also benefit from a concise syntax when concatenating arrays, manipulating dates and sum measurements.  
 
-*Do you know other Swift types that implement addition operator overloading? Feel free to write a comment bellow!*
+*Do you know other Swift types that implement addition operator overloading? Feel free to write a comment below!*

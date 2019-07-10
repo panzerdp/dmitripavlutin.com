@@ -693,4 +693,4 @@ If you need a better way to process Unicode characters, you can use [punycode](h
 
 I hope the article helped you master the Unicode!
 
-*Do you know other interesting Unicode nuances in JavaScript? Feel free to write a comment bellow!*
+*Do you know other interesting Unicode nuances in JavaScript? Feel free to write a comment below!*

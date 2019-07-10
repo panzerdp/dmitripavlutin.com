@@ -304,4 +304,4 @@ Also the name should describe only one concept: one-to-one relation.
 
 In the end you probably don't want to communicate like [these guys](https://www.youtube.com/watch?v=jjRsY7pJ18M)!  
 
-*What is your opinion about the code readability and function naming? Feel free to write a comment bellow!*
+*What is your opinion about the code readability and function naming? Feel free to write a comment below!*

@@ -384,4 +384,4 @@ Just remember that clean and organized code **always deserves investing time**. 
 
 Nothing can be worse than messy code.
 
-*What practice do you use to make the code organized? Feel free to write a comment bellow!*
+*What practice do you use to make the code organized? Feel free to write a comment below!*
