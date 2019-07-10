@@ -356,4 +356,6 @@ The language is evolving quite fast these days. Identify tricky code, and refact
 
 A consistent coding style across the codebase benefits readability.  
 
+Good coding skills are always a win solution.  
+
 *What other bad coding habits in JavaScript do you know?*  
