@@ -1,8 +1,8 @@
 ---
 title: "What every JavaScript developer should know about Unicode"
-description: "In-depth article about Unicode in JavaScript: basic concepts, escape sequences, normalization, surrogate pairs, combining marks and how to avoid pitfalls"
+description: "Unicode in JavaScript: basic concepts, escape sequences, normalization, surrogate pairs, combining marks and how to avoid pitfalls"
 published: "2016-09-14"
-modified: "2016-09-14"
+modified: "2019-07-11T08:40Z"
 thumbnail: "./images/cover.jpg"
 slug: what-every-javascript-developer-should-know-about-unicode
 tags: ["javascript", "string", "unicode"]
@@ -11,15 +11,15 @@ type: post
 ---
 
 This story starts with a confession: I was afraid of Unicode for a long time. 
-When a programming task required Unicode knowledge, I was searching for a hackable solution for the problem, without detailed sense what I was doing.  
+When a programming task required Unicode knowledge, I was searching for a hackable solution for the problem, without a detailed sense of what I was doing.  
 
 My avoiding continued until I faced a problem that required detailed Unicode knowledge. There was no way to apply situational solutions.  
 
-After applying some efforts, reading a bunch of articles - surprisingly it wasn't  hard to understand it. Well, some articles required reading at least 3 times.  
+After applying some efforts, reading a bunch of articles - surprisingly it wasn't hard to understand it. Well, some articles required reading at least 3 times.  
 
-As it turns out, Unicode is an universal and elegant standard. It may be tough because of a bunch of abstract terms hard to stick to.  
+As it turns out, Unicode is a universal and elegant standard. It may be tough because of a bunch of abstract terms hard to stick to.  
 
-If you have gaps in understanding Unicode, now is the right time to face it! It's not that hard. Make yourself a tasteful tea or coffee ☕. And let's dive into the wonderful world of abstraction, characters, astrals and surrogates.   
+If you have gaps in understanding Unicode, now is the right time to face it! It's not that hard. Make yourself a tasteful tea or coffee ☕. And let's dive into the wonderful world of abstraction, characters, astrals, and surrogates.   
 
 The post explains the basic concepts of Unicode. This creates the necessary ground.  
 Then it clarifies how JavaScript works with Unicode and what traps you may encounter.  
@@ -46,13 +46,13 @@ Table of contents:
 
 ## 1. The idea behind Unicode
 
-Let's start with an elementary question. How are you able to read and understand the current article? Simply: because you know the meaning of letters and words as group of letters.  
+Let's start with an elementary question. How are you able to read and understand the current article? Simply: because you know the meaning of letters and words as a group of letters.  
 
-Why are you able to understand the meaning of letters? Simply: because you (reader) and me (writer) have an agreement over the association between the graphical symbol (what is seen on the screen) and English language letter (the meaning).  
+Why are you able to understand the meaning of letters? Simply: because you (reader) and me (writer) have an agreement over the association between the graphical symbol (what is seen on the screen) and the English language letter (the meaning).  
 
 Almost the same happens with computers. One difference is that computers don't understand the meaning of letters: these are sequences of bits.  
 
-Imagine a scenario when a computer of *User1* sends a message `'hello'` to computer of *User2*.  
+Imagine a scenario when the computer of *User1* sends a message `'hello'` to the computer of *User2*.  
 
 The computer doesn't know the meaning of letters. So the computer of *User1* transforms  `'hello'` message into a sequence of numbers `0x68 0x65 0x6C 0x6C 0x6F`, where each letter uniquely corresponds to a number: `h` is `0x68`, `e` is `0x65`, etc. 
 Then sends these numbers to *User2*'s computer.  
@@ -63,7 +63,7 @@ The agreement between the two computers about the correspondence between letters
 
 In terms of Unicode, `h` is an abstract character named *LATIN SMALL LETTER H*. This character has the corresponding number `0x68`, which is a code point in notation `U+0068`.  These terms are described in the chapter below.  
 
-The role of Unicode is to provide a list of abstract characters (character set) and assign to each character an unique identifier code point (coded character set).  
+The role of Unicode is to provide a list of abstract characters (character set) and assign to each character a unique identifier code point (coded character set).  
 
 ## 2. Basic Unicode terms
 
@@ -74,15 +74,15 @@ no matter what the platform,
 no matter what the program,  
 no matter what the language.  
 
-Unicode is an universal character set that defines the list of characters from majority of the writing systems, and associates for every character an unique number (code point).  
+Unicode is a universal character set that defines the list of characters from the majority of the writing systems, and associates for every character a unique number (code point).  
 
 ![Unicode logo](./images/unicode-logo.svg)
 
 Unicode includes characters from most of today languages, punctuation marks, diacritics, mathematical symbols, technical symbols, arrows, emoji and more.  
 
-The first Unicode version 1.0 was published in October 1991 and had 7,161 characters. Latest version 9.0 (published in June 2016) provides codes for 128,172 characters.  
+The first Unicode version 1.0 was published in October 1991 and had 7,161 characters. The latest version 9.0 (published in June 2016) provides codes for 128,172 characters.  
 
-The universal and embracing approach of Unicode solves a major problem that existed before, when vendors implemented a lot of characters sets and encodings that were difficult to handle.  
+The universal and embracing approach of Unicode solves a major problem that existed before when vendors implemented a lot of character sets and encodings that were difficult to handle.  
 
 It was complicated to create an application that supports all character sets and encodings. 
 
@@ -100,12 +100,12 @@ Unicode deals with characters as abstract terms. Every abstract character has an
 
 The code point is presented in the format `U+<hex>`, where `U+` is a prefix that means Unicode and `<hex>` is a number in hexadecimal. For example `U+0041` and `U+2603` are code points.  
 
-Code points are numbers in range from `U+0000` to `U+10FFFF`. 
+Code points are numbers in the range from `U+0000` to `U+10FFFF`. 
 
 Remember that code point is a simple number. And that's how you should think about it. 
-Code point is kind of index of an element in array.  
+The code point is a kind of index of an element in an array.  
 
-The magic happens because Unicode associates a code point with a character. For example `U+0041` corresponds to character named *LATIN CAPITAL LETTER A* (rendered as `A`), or `U+2603` corresponds to character named *SNOWMAN* (rendered as `☃`).  
+The magic happens because Unicode associates a code point with a character. For example `U+0041` corresponds to the character named *LATIN CAPITAL LETTER A* (rendered as `A`), or `U+2603` corresponds to the character named *SNOWMAN* (rendered as `☃`).  
 
 Notice that not all code points have associated characters. `1,114,112` code points are available (the range `U+0000` to `U+10FFFF`), but only `128,237` have assigned characters.  
 
@@ -126,9 +126,9 @@ Planes split Unicode code points into 17 equal groups:
 
 *Plane 0* is a special one, named **Basic Multilingual Plane** or shortly **BPM**. It contains characters from most of the modern languages ([Basic Latin](https://en.wikipedia.org/wiki/Basic_Latin_(Unicode_block)), [Cyrillic](https://en.wikipedia.org/wiki/Cyrillic_(Unicode_block)), [Greek](https://en.wikipedia.org/wiki/Greek_and_Coptic), etc) and a big number of [symbols](https://en.wikipedia.org/wiki/Unicode_symbols).  
 
-As mentioned above, the code points from Basic Multilingual Plane are in range from `U+0000` to `U+FFFF` and can have up to 4 hexadecimal digits.  
+As mentioned above, the code points from the Basic Multilingual Plane are in the range from `U+0000` to `U+FFFF` and can have up to 4 hexadecimal digits.  
 
-Basically developer deals with characters from BPM. It contains most of the necessary characters. 
+Basically, the developer deals with characters from BPM. It contains most of the necessary characters. 
 
 Some characters from BPM:
 
@@ -141,7 +141,7 @@ Some characters from BPM:
 
 The 16 planes beyond the BPM (*Plane 1*, *Plane 2*, ..., *Plane 16*) are named **astral planes** or **supplementary planes**.  
 
-The code points that are part of the astral planes are named **astral code points**. These code points are in range from `U+10000` to `U+10FFFF`. 
+The code points that are part of the astral planes are named **astral code points**. These code points are in the range from `U+10000` to `U+10FFFF`. 
 
 An astral code point can have 5 or 6 digits in hexadecimal: `U+ddddd` or `U+dddddd`.  
 
@@ -154,7 +154,7 @@ Let's see some characters from astral planes:
 
 ### 2.3 Code units
 
-Computer at memory level of course doesn't use code points or abstract characters. 
+A computer at the memory level doesn't use code points or abstract characters. 
 It needs a physical way to represent Unicode code points: the code units.  
 
 > **Code unit** is a bit sequence used to encode each character within a given encoding form.  
@@ -177,13 +177,13 @@ Suppose you want to save to hard drive *LATIN SMALL LETTER A* character `a`. Uni
 
 Now let's ask UTF-16 encoding how `U+0061` should be transformed. The encoding specification says that for BPM code point take its hexadecimal number <code>U+<b>0061</b></code> and store it into **one code unit** of 16-bit: `0x0061`.  
 
-As you can see, code points from BPM fit into a single 16-bit code unit. It works easy as pie for BPM. 
+As you can see, code points from BPM fit into a single 16-bit code unit. It works easily as a pie for BPM. 
 
 ### 2.4 Surrogate pairs
 
 Now let's study a complex case. Suppose you want to save an astral code point (from astral planes): *GRINNING FACE* character `😀`. This character maps to `U+1F600` code point.  
 
-Because astral code points require 21 bits to save the information, UTF-16 says that you need **two code units** of 16-bit. The code point `U+1F600` is split into so called surrogate pair: `0xD83D` (high-surrogate code unit) and `0xDE00` (low-surrogate code unit).
+Because astral code points require 21 bits to save the information, UTF-16 says that you need **two code units** of 16-bit. The code point `U+1F600` is split into so-called surrogate pair: `0xD83D` (high-surrogate code unit) and `0xDE00` (low-surrogate code unit).
 
 >  **Surrogate pair** is a representation for a single abstract character that consists of a sequence of code units of two 16-bit code units, where the first value of the pair is a **high-surrogate code unit** and the second value is a **low-surrogate code unit**.  
 
@@ -215,36 +215,36 @@ getAstralCodePoint(0xD83D, 0xDE00); // => 0x1F600
 
 Surrogate pairs are not comfortable. You have to handle them as special cases when dealing with strings in JavaScript, as described below in the article. 
 
-However UTF-16 is memory efficient. 99% of the processed characters are from BPM, which requires one code unit.
+However, UTF-16 is memory efficient. 99% of the processed characters are from BPM, which requires one code unit.
 
 ### 2.5 Combining marks
 
 > A **grapheme**, or **symbol**, is a minimally distinctive unit of writing in the context of a particular writing system. 
 
-Grapheme is how user thinks about a character. A concrete image of a grapheme displayed on screen is named **glyph**.
+A grapheme is how a user thinks about a character. A concrete image of a grapheme displayed on the screen is named **glyph**.
 
 In most of the cases, a single Unicode character represents a single grapheme. For instance `U+0066` *LATIN SMALL LETTER F* is an English writing `f`.
 
 There are cases when a grapheme contains a sequence of characters.  
 
-For example `å` is an atomic grapheme in Danish writing system. It is displayed using `U+0061` *LATIN SMALL LETTER A* (rendered as `a`) combined with a special character `U+030A` [*COMBINING RING ABOVE*](https://en.wikipedia.org/wiki/Ring_(diacritic)) (rendered as ◌̊).  
+For example, `å` is an atomic grapheme in the Danish writing system. It is displayed using `U+0061` *LATIN SMALL LETTER A* (rendered as `a`) combined with a special character `U+030A` [*COMBINING RING ABOVE*](https://en.wikipedia.org/wiki/Ring_(diacritic)) (rendered as ◌̊).  
 
 `U+030A` modifies the precedent character and is named **combining mark**.  
 
 ```javascript
-console.log('\u0061\u030A'); // => 'å'
+console.log('\u0061\u030A'); // => 'å'
 console.log('\u0061');       // => 'a'
 ```
 
 > **Combining mark** is a character that applies to the precedent base character to create a grapheme. 
 
-Combining marks include such characters as accents, diacritics, Hebrew points, Arabic vowel signs and Indic matras.  
+Combining marks include such characters as accents, diacritics, Hebrew points, Arabic vowel signs, and Indic matras.  
 
 Combining marks normally are not used in isolation, i.e. without the base character. You should avoid displaying them isolated.  
 
 As well as the surrogate pairs, combining marks are tough to handle in JavaScript.  
 
-A combining character sequence (base character + combining mark) is distinguished by user as a single symbol (e.g. `'\u0061\u030A'` is `'å'`). But developer must determine that actually 2 code points `U+0061` and `U+030A` are used to construct `å`.  
+A combining character sequence (base character + combining mark) is distinguished by the user as a single symbol (e.g. `'\u0061\u030A'` is `'å'`). But the developer must determine that actually 2 code points `U+0061` and `U+030A` are used to construct `å`.  
 
 ![Unicode basic terms](./images/unicode-terms.png)
 
@@ -252,7 +252,7 @@ A combining character sequence (base character + combining mark) is distinguishe
 
 ES2015 specification [mentions](http://www.ecma-international.org/ecma-262/6.0/#sec-source-text) that source code text is expressed using Unicode (version 5.1 and above). The source text is a sequence of code points from `U+0000` to `U+10FFFF`. The way source code is stored or interchanged is not relevant to ECMAScript specification, but usually is encoded in UTF-8 (the preferred encoding for the web).  
 
-I recommend to keep the source code text with characters from [Basic Latin Unicode block](https://en.wikipedia.org/wiki/Basic_Latin_(Unicode_block)) (or ASCII). Characters outside ASCII  should be escaped. This will ensure less problems when comes to encoding.  
+I recommend keeping the source code text with characters from [Basic Latin Unicode block](https://en.wikipedia.org/wiki/Basic_Latin_(Unicode_block)) (or ASCII). Characters outside ASCII  should be escaped. This will ensure fewer problems when comes to encoding.  
 
 Internally, at the language level, ECMAScript 2015 provides an explicit [definition](http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-language-types-string-type) what strings are in JavaScript: 
 
@@ -261,10 +261,10 @@ Internally, at the language level, ECMAScript 2015 provides an explicit [definit
 Every element of a string is interpreted by the engine as a code unit. The way a string is rendered does not provide a deterministic way to decide what code units (that represent code points) it contains. See the following example:   
 
 ```javascript
-console.log('cafe\u0301'); // => 'café'
+console.log('cafe\u0301'); // => 'café'
 console.log('café');       // => 'café'
 ```
-`'cafe\u0301'` and `'café'` literals have a slight different code units, but both are rendered the same symbols sequence `café`.  
+`'cafe\u0301'` and `'café'` literals have slightly different code units, but both are rendered the same symbols sequence `café`.  
 
 > **The length of a String** is the number of elements (i.e., 16-bit values) within it. [...] Where ECMAScript operations interpret String values, each element is interpreted as a single UTF-16 code unit.
 
@@ -276,16 +276,16 @@ console.log(smile);        // => '😀'
 console.log(smile.length); // => 2
 
 let letter = 'e\u0301';
-console.log(letter);        // => 'é'
+console.log(letter);        // => 'é'
 console.log(letter.length); // => 2
 ```
 `smile` string contains 2 code units: `\uD83D` (high-surrogate) and `\uDE00` (low-surrogate). Since the string is a sequence of code units, `smile.length` evaluates to `2`. Even if rendered `smile` has only one symbol `'😀'`.  
-The same scenario happens with `letter` string. The combining mark `U+0301` applies to previous character and the rendered result is one symbol `'é'`. However `letter` contains `2` code units, thus `letter.length` is `2`.  
+The same scenario happens with `letter` string. The combining mark `U+0301` applies to the previous character and the rendered result is one symbol `'é'`. However `letter` contains `2` code units, thus `letter.length` is `2`.  
 
 My advice: **always think of string in JavaScript as a sequence of code units**. The way string is rendered cannot say clearly what code units it contains. 
 
 Astral symbols and combining character sequences require 2 or more code units to be encoded. But are treated as a single grapheme.  
-If string has surrogate pairs or combining marks, developer may be confused when evaluating string length or accessing a character by index without keeping this idea in mind.  
+If a string has surrogate pairs or combining marks, the developer may be confused when evaluating string length or accessing a character by index without keeping this idea in mind.  
 
 Most of the JavaScript string methods are not Unicode-aware. If your string contains compound Unicode characters, take precaution when calling `myString.slice()`, `myString.substring()`, etc.
 
@@ -293,11 +293,11 @@ Most of the JavaScript string methods are not Unicode-aware. If your string cont
 
 Escape sequences in a JavaScript string are used to express code units based on code point numbers. JavaScript has 3 escape types, one which was introduced in ECMAScript 2015.  
 
-Let's see them in more details.
+Let's see them in more detail.
 
 #### Hexadecimal escape sequence
 
-The shortest form is named **hexadecimal escape sequence**: `\x<hex>`, where `\x` is a prefix followed by a hexadecimal number `<hex>` with fixed length of 2 digits.  
+The shortest form is named **hexadecimal escape sequence**: `\x<hex>`, where `\x` is a prefix followed by a hexadecimal number `<hex>` with a fixed length of 2 digits.  
 For example `'\x30'` (symbol `'0'`) or `'\x5B'` (symbol `'['`).  
 
 The hexadecimal escape sequence in a string literal or regular expression looks this way:  
@@ -309,11 +309,11 @@ var reg = /\x4A\x61va.*/;
 console.log(reg.test('JavaScript')); // => true
 ```
 
-An hexadecimal escape sequence can escape code points in a limited range: from `U+00` to `U+FF`, because only 2 digits are allowed.  But hexadecimal escape is nice because it's short.  
+A hexadecimal escape sequence can escape code points in a limited range: from `U+00` to `U+FF` because only 2 digits are allowed.  But hexadecimal escape is nice because it's short.  
 
 #### Unicode escape sequence
 
-If you want to escape code points from the entire BPM, then use an **unicode escape sequence**. The escape format is `\u<hex>`, where `\u` is a prefix followed by a hexadecimal number `<hex>` with fixed length of 4 digits. 
+If you want to escape code points from the entire BPM, then use an **unicode escape sequence**. The escape format is `\u<hex>`, where `\u` is a prefix followed by a hexadecimal number `<hex>` with a fixed length of 4 digits. 
 For example `'\u0051'` (symbol `'Q'`) or `'\u222B'` (integral symbol `'∫'`).
 
 Let's use the unicode escape sequences:
@@ -325,7 +325,7 @@ var reg = /\u0055ni.*/;
 console.log(reg.test('Unicode')); // => true
 ```
 
-An unicode escape sequence can escape code points in a limited range: from `U+0000` to `U+FFFF` (all BPM code points), because only 4 digits are allowed. Most of the time this is enough to represent the commonly used symbols.  
+An unicode escape sequence can escape code points in a limited range: from `U+0000` to `U+FFFF` (all BPM code points) because only 4 digits are allowed. Most of the time this is enough to represent the commonly used symbols.  
 
 To indicate an astral symbol in JavaScript literal, use two joined unicode escape sequences (a high surrogate and low surrogate), which creates a surrogate pair:  
 
@@ -338,7 +338,7 @@ console.log(str); // => 'My face 😀'
 
 ECMAScript 2015 provides escape sequences that represent code points from the entire Unicode space: `U+0000` to `U+10FFFF`, i.e. BPM and astral planes.    
 
-The new format is called **code point escape sequence**: `\u{<hex>}`, where `<hex>` is a hexadecimal number with variable length of 1 to 6 digits.  
+The new format is called **code point escape sequence**: `\u{<hex>}`, where `<hex>` is a hexadecimal number with a variable length of 1 to 6 digits.  
 For example `'\u{7A}'` (symbol `'z'`) or `'\u{1F639}'` (funny cat symbol `😹`).  
 
 Let's see how you can use it in literals:
@@ -387,14 +387,14 @@ console.log(firstStr === secondStr); // => true
 ```
 `firstStr` and `secondStr` strings have the same sequence of code units. Reasonable they are equal.
 
-Suppose you want to compare two strings that rendered look the same, but contain different code unit sequences. 
+Suppose you want to compare two strings that rendered look the same but contain different code unit sequences. 
 Then you may have an unexpected result, because strings that visually look the same are not equal in a comparison:  
 
 ```javascript
 var str1 = 'ça va bien';
 var str2 = 'c\u0327a va bien';
 console.log(str1);          // => 'ça va bien'
-console.log(str2);          // => 'ça va bien'
+console.log(str2);          // => 'ça va bien'
 console.log(str1 === str2); // => false
 ```
 `str1` and `str2` when rendered look the same, but have different code units.  
@@ -433,11 +433,11 @@ console.log(str1 === str2);             // => false
 When `str2.normalize()` is invoked, a canonical version of `str2` is returned (`'c\u0327'` is replaced with `'ç'`). So the comparison `str1 === str2.normalize()` returns `true` as expected.  
 `str1` is not affected by the normalization, since it's already in a canonical form.  
 
-Seems reasonable to normalize both compared strings, to obtain canonical representations on both operands.  
+It seems reasonable to normalize both compared strings, to obtain canonical representations on both operands.  
 
 ### 3.3 String length
 
-The common way to determine the string length is of course accessing the `myString.length` property. This property indicates the number of code units that a string has.  
+The common way to determine the string length is, of course, accessing the `myString.length` property. This property indicates the number of code units that a string has.  
 
 The evaluation of string length that contains code points from BPM works usually as expected:
 
@@ -449,7 +449,7 @@ Each code unit in `color` corresponds to a single grapheme. The expected length 
 
 #### Length and surrogate pairs
 
-The situation becomes tricky when a string contains surrogate pairs, to represent astral code points. Since each surrogate pair contains 2 code units (a high-surrogate and a low-surrogate), length property is greater than expected.  
+The situation becomes tricky when a string contains surrogate pairs, to represent astral code points. Since each surrogate pair contains 2 code units (a high-surrogate and a low-surrogate), the length property is greater than expected.  
 
 Take a look at the example:
 
@@ -461,9 +461,9 @@ console.log(str.length); // => 5
 When `str` string is rendered, it contains 4 symbols `cat😹`. 
 However `smile.length` evaluates to `5`, because `U+1F639` is an astral code point encoded with 2 code units (a surrogate pair).  
 
-Unfortunately a native and performant way to fix the problem is not available at the moment.  
+Unfortunately, a native and performant way to fix the problem is not available at the moment.  
 
-At least ECMAScript 2015 introduced algorithms that are aware about astral symbols. The astral symbol is counted as a single character, even being encoded with 2 code units.  
+At least ECMAScript 2015 introduced algorithms that are aware of astral symbols. The astral symbol is counted as a single character, even being encoded with 2 code units.  
 
 Unicode-aware is the string iterator [`String.prototype[@@iterator]()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/@@iterator). You can combine the string with spread operator `[...str]` or `Array.from(str)` function (both consume the string iterator). Then count the number of symbols in the returned array.  
 Notice that this solution may cost you slight performance issues when used extensively.  
@@ -486,7 +486,7 @@ The problem is solved when normalizing the string. If you're lucky, the combinin
 
 ```javascript
 var drink = 'cafe\u0301';
-console.log(drink);                    // => 'café'
+console.log(drink);                    // => 'café'
 console.log(drink.length);             // => 5
 console.log(drink.normalize())         // => 'café'
 console.log(drink.normalize().length); // => 4
@@ -499,7 +499,7 @@ Unfortunately normalization is not an universal solution. Long combining charact
 
 ```javascript
 var drink = 'cafe\u0327\u0301';
-console.log(drink);                    // => 'cafȩ́'
+console.log(drink);                    // => 'cafȩ́'
 console.log(drink.length);             // => 6
 console.log(drink.normalize());        // => 'cafȩ́'
 console.log(drink.normalize().length); // => 5
@@ -563,13 +563,13 @@ console.log(String.fromCodePoint(number)); // => '𝛀'
 
 Character positioning in strings with combining marks has the same problem as string length describe above.  
 
-Accessing characters by index in a string is accessing code units. However the combining mark sequence should be accessed as a whole, without splitting into separated code units.  
+Accessing characters by index in a string is accessing code units. However, the combining mark sequence should be accessed as a whole, without splitting into separated code units.  
 
 The following example demonstrates the problem:
 
 ```javascript
 var drink = 'cafe\u0301';  
-console.log(drink);        // => 'café'
+console.log(drink);        // => 'café'
 console.log(drink.length); // => 5
 console.log(drink[3]);     // => 'e'
 console.log(drink[4]);     // => ◌́
@@ -577,22 +577,22 @@ console.log(drink[4]);     // => ◌́
 `drink[3]` accesses only the base character `e`, without the combining mark `U+0301` *COMBINING ACUTE ACCENT* (rendered as ◌́ ).  
 `drink[4]` accesses the isolated combining mark ◌́ .  
 
-In such case apply a string normalization. The combining character sequence `U+0065` *LATIN SMALL LETTER E* + `U+0301` *COMBINING ACUTE ACCENT* has a canonical equivalent `U+00E9` *LATIN SMALL LETTER E WITH ACUTE* `é`. 
+In such cases apply a string normalization. The combining character sequence `U+0065` *LATIN SMALL LETTER E* + `U+0301` *COMBINING ACUTE ACCENT* has a canonical equivalent `U+00E9` *LATIN SMALL LETTER E WITH ACUTE* `é`. 
 Let's improve the previous code sample:
 
 ```javascript
 var drink = 'cafe\u0301';
-console.log(drink.normalize());        // => 'café'  
+console.log(drink.normalize());        // => 'café'  
 console.log(drink.normalize().length); // => 4  
 console.log(drink.normalize()[3]);     // => 'é'
 ```
 
 Notice that not all combining character sequences have canonical equivalents as a single symbol. So the normalization solution is not universal.  
-Fortunately it should work in most of the cases for European / North America's languages.  
+Fortunately, it should work in most of the cases for European / North America's languages.  
 
 ### 3.5 Regular expression match
 
-Regular expressions, as well as strings, work in terms of code units. Similar to previous described scenarios, this creates difficulties when processing surrogate pairs and combining character sequences using regular expressions.   
+Regular expressions, as well as strings, work in terms of code units. Similar to previously described scenarios, this creates difficulties when processing surrogate pairs and combining character sequences using regular expressions.   
 
 BPM characters match as expected, because a single code unit represents a symbol:  
 
@@ -622,12 +622,12 @@ var regex = /[😀-😎]/;
 // Range out of order in character class
 ```
 
-The astral code points are encoded to surrogate pairs. So JavaScript represents the regular expression using code units `/[\uD83D\uDE00-\uD83D\uDE0E]/`. Each code unit is considered a separated element in pattern, so the regular expression ignores the concept of surrogate pair.  
-The `\uDE00-\uD83D` part of character class is not a valid, because `\uDE00` is greater than `\uD83D`. As result an error is generated.  
+The astral code points are encoded to surrogate pairs. So JavaScript represents the regular expression using code units `/[\uD83D\uDE00-\uD83D\uDE0E]/`. Each code unit is considered a separated element in the pattern, so the regular expression ignores the concept of a surrogate pair.  
+The `\uDE00-\uD83D` part of the character class is not valid, because `\uDE00` is greater than `\uD83D`. As a result, an error is generated.  
 
 #### Regular expression *u* flag
 
-Fortunately ECMAScript 2015 introduced an useful `u` flag, making the regular expression Unicode-aware. This flag enables the correct processing of astral symbols.  
+Fortunately, ECMAScript 2015 introduced a useful `u` flag, making the regular expression Unicode-aware. This flag enables the correct processing of astral symbols.  
 
 You can use unicode escape sequences in regular expressions `/u{1F600}/u`. This escape is shorter than indicating the high-surrogate and low-surrogate pair `/\uD83D\uDE00/`.  
 
@@ -655,7 +655,7 @@ console.log(regexSpEscape.test(smile)); // => true
 
 #### Regular expression and combining marks
 
-Unfortunately with `u` flag or without it regular expression treats the combining marks as separate code units.  
+Unfortunately, with `u` flag or without it regular expression treats the combining marks as separate code units.  
 If you need to match a combining character sequence, you have to match the base character and the combining mark separately.  
 
 Take a look at the following example:
@@ -664,18 +664,18 @@ Take a look at the following example:
 var drink = 'cafe\u0301';
 var regex1 = /^.{4}$/;
 var regex2 = /^.{5}$/;
-console.log(drink);              // => 'café'  
+console.log(drink);              // => 'café'  
 console.log(regex1.test(drink)); // => false
 console.log(regex2.test(drink)); // => true
 ```
-The string rendered has 4 symbols `café`.  
-Nevertheless the regular expression matches `'cafe\u0301'` as a sequence of 5 elements `/^.{5}$/`.  
+The string rendered has 4 symbols `café`.  
+Nevertheless, the regular expression matches `'cafe\u0301'` as a sequence of 5 elements `/^.{5}$/`.  
 
 ## 4. Final words
 
 Probably the most important concept about Unicode in JavaScript is **to treat strings as sequences of code units**, as they really are.  
 
-The confusion appears when developer thinks that strings are composed of graphemes (or symbols), ignoring the code unit sequence concept.  
+The confusion appears when the developer thinks that strings are composed of graphemes (or symbols), ignoring the code unit sequence concept.  
 It creates misunderstanding when processing strings that contain surrogate pairs or combining character sequences:
 
 * Getting the string length

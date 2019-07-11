@@ -1,5 +1,5 @@
 ---
-title: "The art of writing small and plain functions"
+title: "The Art of Writing Small and Plain Functions"
 description: "Messy code wastes your time & efforts. It poisons apps. Clean code is obligatory for a successful project: learn to write small and plain functions."
 published: "2016-08-31"
 modified: "2016-08-31"

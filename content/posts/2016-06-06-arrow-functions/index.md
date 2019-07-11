@@ -1,8 +1,8 @@
 ---
-title: "When 'not' to use arrow functions"
+title: "When 'Not' to Use Arrow Functions"
 description: "Arrow functions in JavaScript are great, but there are cases when you should avoid them. See the common pitfalls with explanations and examples."
 published: "2016-06-06"
-modified: "2016-06-06"
+modified: "2019-07-11T10:08Z"
 thumbnail: "./images/cover.png"
 slug: when-not-to-use-arrow-functions-in-javascript
 tags: ["javascript", "arrow function"]
@@ -12,9 +12,9 @@ type: post
 
 It is a pleasure to see the evolution of the programming language you code every day. Learning from mistakes, searching for better implementation, creating new features is what makes the progress from version to version.  
 
-This is happening to JavaScript these years, when [ECMAScript 6](http://www.ecma-international.org/ecma-262/6.0/) brings the language to a new level of usability: arrow functions, classes and [a lot more](https://github.com/lukehoban/es6features#introduction). And this is great!  
+This is happening to JavaScript these years when [ECMAScript 6](http://www.ecma-international.org/ecma-262/6.0/) brings the language to a new level of usability: arrow functions, classes and [a lot more](https://github.com/lukehoban/es6features#introduction). And this is great!  
 
-One of the most valuable new feature is the arrow function. There are plenty of good articles that describe its context transparency and short syntax. If you're new to ES6, take a start from [reading about it](https://strongloop.com/strongblog/an-introduction-to-javascript-es6-arrow-functions/).  
+One of the most valuable new features is the arrow function. There are plenty of good articles that describe its context transparency and short syntax. If you're new to ES6, take a start from [reading about it](https://strongloop.com/strongblog/an-introduction-to-javascript-es6-arrow-functions/).  
 
 But every medal has two sides. Often new features introduce some confusion, one of which is the arrow functions misguided utilization.   
 
@@ -23,7 +23,7 @@ This article guides through scenarios where you should bypass the arrow function
 
 ## 1. Defining methods on an object
 
-In JavaScript the method is a function stored in a property of an object. When calling the method, `this` becomes the object that method belongs to.  
+In JavaScript, the method is a function stored in a property of an object. When calling the method, `this` becomes the object that the method belongs to.  
 
 ### 1a. Object literal
 Since arrow function has a short syntax, it's inviting to use it for a method definition. Let's take a try:
@@ -44,7 +44,7 @@ calculate.sum();
 When invoking the method `sum()` on the `calculate` object, the context still remains `window`. It happens because the arrow function binds the context lexically with the `window` object.  
 Executing `this.array` is equivalent to `window.array`, which is `undefined`.
 
-The solution is to use a function expression or [shorthand syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions) for method definition (available in ECMAScript 6). In such case `this` is determined by the invocation, but not by the enclosing context. Let's see the fixed version:
+The solution is to use a function expression or [shorthand syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions) for method definition (available in ECMAScript 6). In such a case `this` is determined by the invocation, but not by the enclosing context. Let's see the fixed version:
 
 ```javascript
 var calculate = {  
@@ -91,9 +91,9 @@ cat.sayCatName(); // => 'Mew'
 
 ## 2. Callback functions with dynamic context
 
-`this` in JavaScript is a powerful feature. It allows to change the context depending on the way a function is called. Frequently the context is the target object on which invocation happens, making the code more *natural*. It says like "something is happening with this object".
+`this` in JavaScript is a powerful feature. It allows changing the context depending on the way a function is called. Frequently the context is the target object on which invocation happens, making the code more *natural*. It says like "something is happening with this object".
 
-However the arrow function binds the context statically on declaration and is not possible to make it dynamic. It's the other side of the medal in a situation when lexical `this` is not necessary.
+However, the arrow function binds the context statically on the declaration and is not possible to make it dynamic. It's the other side of the medal in a situation when lexical `this` is not necessary.
 
 Attaching event listeners to DOM elements is a common task in client side programming. An event triggers the handler function with `this` as the target element. Handy usage of the dynamic context.  
 
@@ -155,7 +155,7 @@ The arrow function has a nice property of omitting the arguments parenthesis `()
 
 My university professor of programming gives students an interesting task: write the shortest function that counts the string length in C language. This is a good approach to study and explore a new language.  
 
-Nevertheless in real world applications the code is read by many developers. The shortest syntax is not always appropriate to help your colleague understand the function on the fly.  
+Nevertheless, in real world applications, the code is read by many developers. The shortest syntax is not always appropriate to help your colleague understand the function on the fly.  
 
 At some level the compressed function becomes difficult to read, so try not to get into passion. Let's see an example:
 
@@ -187,6 +187,6 @@ It is good to find a balance between short and verbose to make your JavaScript s
 
 ## 5. Conclusion
 
-Without doubt the arrow function is a great addition. When used correctly it brings simplicity in places where earlier you had to use `.bind()` or trying to catch the context. It also makes the code lighter.  
+Without a doubt, the arrow function is a great addition. When used correctly it brings simplicity in places where earlier you had to use `.bind()` or trying to catch the context. It also makes the code lighter.  
 
-Advantages in some situations brings disadvantages in others. You can't use an arrow function when a dynamic context is required: defining methods, create objects with constructors, get the target from `this` when handling events.
+Advantages in some situations bring disadvantages in others. You can't use an arrow function when a dynamic context is required: defining methods, create objects with constructors, get the target from `this` when handling events.

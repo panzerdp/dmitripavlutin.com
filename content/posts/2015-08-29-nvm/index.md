@@ -1,5 +1,5 @@
 ---
-title: "Install node like a boss with nvm"
+title: "Install Node Like a Boss with nvm"
 description: "The step by step tutorial on how to use nvm script for quick node installation. Allows to install many node versions, with quickly switch between them. "
 published: "2015-08-29"
 modified: "2015-08-29"

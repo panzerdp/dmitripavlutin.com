@@ -1,5 +1,5 @@
 ---
-title: "Yes. JavaScript rises."
+title: "Yes. JavaScript Rises."
 description: "The history how JavaScript from a complementary language in 1995 became the most popular language these days."
 published: "2016-07-04"
 modified: "2016-07-04"

@@ -1,5 +1,5 @@
 ---
-title: "Useful tips for migrating to Swift 3.0"
+title: "Useful Tips for Migrating to Swift 3.0"
 description: "The article describes useful tips to migrate to  Swift 3.0. C-style for-loops are replaced by for-in loops, new rules for argument labels, and so on."
 published: "2016-09-28"
 modified: "2016-09-28"

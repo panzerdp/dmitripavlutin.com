@@ -1,5 +1,5 @@
 ---
-title: "How to iterate easily over object properties in JavaScript"
+title: "How to Iterate Easily Over Object Properties in JavaScript"
 description: "Object.values() and Object.entries() are another improvement step for JavaScript developers to have helper functions that iterate over object properties."
 published: "2016-08-23"
 modified: "2019-07-10T10:00:00Z"

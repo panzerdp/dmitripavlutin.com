@@ -1,5 +1,5 @@
 ---
-title: "The magic behind array length property"
+title: "The Magic Behind Array Length Property"
 description: "Everything you need about Array.prototype.length in JavaScript: how to correctly query, modify and avoid potential problems. Lots of code samples."
 published: "2016-01-17"
 modified: "2016-01-17"

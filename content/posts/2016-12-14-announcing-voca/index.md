@@ -1,5 +1,5 @@
 ---
-title: "Announcing Voca: The ultimate JavaScript string library"
+title: "Announcing Voca: The Ultimate JavaScript String Library"
 description: "The Voca library offers helpful functions to make string manipulations comfortable: change case, trim, pad, slugifly, latinise, sprintf, truncate, escape and more."
 published: "2016-12-14"
 modified: "2016-12-14"

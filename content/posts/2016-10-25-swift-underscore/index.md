@@ -1,5 +1,5 @@
 ---
-title: "Useful details about underscore keyword in Swift"
+title: "Useful Details About Underscore Keyword in Swift"
 description: "The underscore keyword `_` is used to skip providing unnecessary details in Swift. See all its use cases in details and explanatory examples."
 published: "2016-10-25"
 modified: "2016-10-25"

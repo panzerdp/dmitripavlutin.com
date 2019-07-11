@@ -1,5 +1,5 @@
 ---
-title: "6 ways to declare JavaScript functions"
+title: "6 Ways to Declare JavaScript Functions"
 description: "JavaScript allows to declare functions in 6 ways. The article describes how to choose the right declaration type, depending on the situation and function purpose."
 published: "2016-06-22"
 modified: "2019-07-05"

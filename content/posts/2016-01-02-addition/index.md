@@ -1,5 +1,5 @@
 ---
-title: "JavaScript addition operator in details"
+title: "JavaScript Addition Operator in Details"
 description: "Addition in JavaScript can sum numbers or concatenate strings. How not to get confused? Study the addition algorithm and follow the examples."
 published: "2016-01-02"
 modified: "2016-01-02"

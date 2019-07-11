@@ -2,7 +2,7 @@
 title: 5 JavaScript Bad Coding Habits to Unlearn Right Now
 description: "Overuse of implicit type conversion, old JavaScript tricks, polluting function scope, undefined & null, casual coding style ruin JavaScript code quality"
 published: "2019-07-10T14:30:00Z"
-modified: "2019-07-11T05:00:00Z"
+modified: "2019-07-11T05:00Z"
 thumbnail: "./images/cover.jpg"
 slug: unlearn-javascript-bad-coding-habits
 tags: ["javascript", "undefined", "clean code", "craftsmanship"]
@@ -150,7 +150,7 @@ function someFunc(array) {
 ```
 The variables `index`, `item` and `length` are function scoped. But these variables pollute the function scope because they are necessary only inside the `for()` block scope.  
 
-With the introduction of block scope variables `let` and `const`, you can limit the life of your variables as much as possible. 
+With the introduction of block scope variables `let` and `const`, you should limit the life of your variables as much as possible. 
 
 Let's clean up the function scope:
 
@@ -245,7 +245,7 @@ if (object.nonExistingProp === undefined) {
 const object = {
   prop: 'value'
 };
-if (nonExistingProp in object) {
+if ('nonExistingProp' in object) {
   // ...
 }
 ```

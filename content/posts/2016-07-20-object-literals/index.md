@@ -1,5 +1,5 @@
 ---
-title: "Why object literals in JavaScript are cool"
+title: "Why Object Literals in JavaScript Are Cool"
 description: "ES2015 improves the object literals (or initialiazers) to set the prototype using __proto__, use super, shorthand method declarations, computed names."
 published: "2016-07-20"
 modified: "2019-07-05"

@@ -1,8 +1,8 @@
 ---
-title: "How three dots changed JavaScript"
+title: "How Three Dots Changed JavaScript"
 description: "Spread operator and rest parameter are great additions. The article explains how they improve array literals, array destructuring and function arguments handling."
 published: "2016-06-14"
-modified: "2019-07-06"
+modified: "2019-07-11T08:40Z"
 thumbnail: "./images/cover.jpg"
 slug: how-three-dots-changed-javascript
 tags: ["javascript", "spread", "rest"]
@@ -42,7 +42,7 @@ Array.prototype.push.apply(fruits, moreFruits);
 console.log(fruits); // => ['banana', 'apple', 'orange']
 ``` 
 
-Fortunately the JavaScript world is changing. The three dots operator `...` fixes many of these situations. The operator is introduced by ECMAScript 6 and in my opinion is a noticeable improvement.  
+Fortunately, the JavaScript world is changing. The three dots operator `...` fixes many of these situations. The operator is introduced by ECMAScript 6 and in my opinion, is a noticeable improvement.  
 
 This article walks through `...` operator use cases and shows how to solve similar problems.
 
@@ -113,10 +113,10 @@ The function declaration `function sumOnlyNumbers(...args)` indicates that `args
 
 Also forget about array-like objects: `args` *is an array*, which is a nice bonus. As result `filterNumbers()` can get rid of `Array.prototype.filter.call()` and make a filter method call directly  `args.filter()`.  
 
-Notice that rest parameter should be last one in the function parameters list.
+Notice that the rest parameter should be the last one in the function parameters list.
 
 ### 2.2 Selective rest parameter
-When not all values should be included in the rest parameter, you could define those  as comma separated parameters at the beginning. Explicitly defined parameters are not included in the rest parameter.  
+When not all values should be included in the rest parameter, you could define those as comma separated parameters at the beginning. Explicitly defined parameters are not included in the rest parameter.  
 
 Let's see an example:
 
@@ -133,7 +133,7 @@ filter('number', false, 4, 'Welcome', 7); // => [4, 7]
 
 ### 2.3 Arrow function case
 
-[An arrow function](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) does not define `arguments` object in its body, but accesses the one from the enclosing scope. 
+[An arrow function](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) does not define `arguments` object in its body but accesses the one from the enclosing scope. 
 If you want to get all the arguments, use a rest parameter.
 Let's try this in an example:  
 
@@ -153,7 +153,7 @@ Let's try this in an example:
 ## 3. Improved function call
 
 In the article introduction, the second problem asks a better way to fill the invocation arguments from an array.  
-ES5 provides [`.apply()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) method on the function object to solve this. Unfortunately  this technique has 3 problems:  
+ES5 provides [`.apply()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) method on the function object to solve this. Unfortunately, this technique has 3 problems:  
 
 * It's necessary to indicate manually the context of the function invocation
 * Is not possible to use in a constructor invocation
@@ -168,7 +168,7 @@ countries.push.apply(countries, otherCountries);
 console.log(countries); // => ['Moldova', 'Ukraine', 'USA', 'Japan']
 ```
 
-As mentioned, it seems irrelevant to indicate in `.apply()` second time the context `countries`. The property accessor `countries.push` is enough to determine the method invocation on an object.  
+As mentioned, it seems irrelevant to indicate in `.apply()` the second time the context `countries`. The property accessor `countries.push` is enough to determine the method invocation on an object.  
 And the entire invocation looks verbose.  
 
 **The spread operator**  fills the function invocation arguments with values from an array (or more strictly from an iterable object, see [5.](#5spreadoperatoranditerationprotocols)).  
@@ -182,7 +182,7 @@ console.log(countries); // => ['Moldova', 'Ukraine', 'USA', 'Japan']
 ```
 As seen, spread operator is cleaner and straightforward solution. The only additional characters are 3 dots (`...`).
 
-Spread operator configures the constructor invocation arguments from an array, which is [not possible directly](http://stackoverflow.com/questions/1606797/use-of-apply-with-new-operator-is-this-possible) when using `.apply()`. Let's see an example:
+The spread operator configures the constructor invocation arguments from an array, which is [not possible directly](http://stackoverflow.com/questions/1606797/use-of-apply-with-new-operator-is-this-possible) when using `.apply()`. Let's see an example:
 
 ```javascript
 class King {
@@ -215,7 +215,7 @@ console.log(numbers); // => [4, 8, 0]
 
 The array literal `[item1, item2, .., itemN]` does not provide functionality other than enumerating the initial array elements.
 
-The spread operator improves array literals by allowing to insert on the fly another arrays (or any other [iterables](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Iteration_protocols#Iterable_examples)) into the initialized instance. 
+The spread operator improves array literals by allowing to insert on the fly other arrays (or any other [iterables](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Iteration_protocols#Iterable_examples)) into the initialized instance. 
 This improvement makes easier to accomplish common tasks described below.
 
 **Create** an array with initial elements **from another array**:
@@ -270,11 +270,11 @@ console.log(restArray); // => ['spring', 'summer', 'autumn']
 
 ## 5. Spread operator and iteration protocols
 
-The spread operator uses [iteration protocols](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Iteration_protocols) to navigate over elements of a collection. This makes the spread operator even more valuable, because any object can define how the operator will extract data.
+The spread operator uses [iteration protocols](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Iteration_protocols) to navigate over elements of a collection. This makes the spread operator even more valuable because any object can define how the operator will extract data.
 
 > An object is *Iterable* when it conforms to [iterable protocol](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Iteration_protocols#iterable). 
 
-Iterable protocol requires the object to contain a special property. The property name must be [`Symbol.iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator) and value as a function that returns an iterator object.
+The iterable protocol requires the object to contain a special property. The property name must be [`Symbol.iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator) and value as a function that returns an iterator object.
 
 ```javascript
 interface Iterable {
@@ -318,7 +318,7 @@ iterator.next();     // => { value: undefined, done: true }
 [...str];            // => ['h', 'i']
 ```
 
-I like the spread operator for its ability to use object's custom iteration implementation. You can control how spread operator consumes  your object - an effective coding technique.  
+I like the spread operator for its ability to use the object's custom iteration implementation. You can control how the spread operator consumes your object - an effective coding technique.  
 
 The following sample makes an array-like object conformed to iteration protocols, then transforms it to an array using spread operator:
 
@@ -353,12 +353,12 @@ Since `arrayLike` is now iterable, spread operator is used to extract its elemen
 
 Three dots operator adds a bunch of great features to JavaScript.  
 
-The rest parameter makes a lot easier to collect the arguments. It's a reasonable replacement for the hardcoded array-like object `arguments`. If the situation permits to choose between rest parameter and `arguments`, use the first one.  
+The rest parameter makes a lot easier to collect the arguments. It's a reasonable replacement for the hardcoded array-like object `arguments`. If the situation permits to choose between the rest parameter and `arguments`, use the first one.  
 
 `.apply()` method is not convenient for its verbose syntax. The spread operator is a good alternative when invocation arguments should be taken from an array.
 
 The spread operator improves array literals. You can initialize, concatenate and clone arrays a lot simpler.  
 
-You can extract parts of array using destructuring assignments. In combination with iteration protocols, spread operator can be used in a more configurable manner.  
+You can extract parts of an array using destructuring assignments. In combination with iteration protocols, the spread operator can be used in a more configurable manner.  
 
 I hope from now on the spread operator will appear more often in your code!

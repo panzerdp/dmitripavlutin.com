@@ -1,5 +1,5 @@
 ---
-title: "Inheritance in JavaScript: understanding the constructor property"
+title: "Inheritance in JavaScript: Understanding the constructor Property"
 description: "The `constructor` property is a piece of the inheritance mechanism in JavaScript. Precautions should be taken when creating hierarchies of classes.  "
 published: "2016-05-01"
 modified: "2016-05-01"

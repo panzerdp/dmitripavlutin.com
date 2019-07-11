@@ -1,5 +1,5 @@
 ---
-title: "Power up the array creation in JavaScript"
+title: "Power Up the Array Creation in JavaScript"
 description: "ES6 improves the way arrays are created in JavaScript. See how the combination of array literal, spread operator and iterators upgrade array initialization."
 published: "2016-06-28"
 modified: "2019-07-05"

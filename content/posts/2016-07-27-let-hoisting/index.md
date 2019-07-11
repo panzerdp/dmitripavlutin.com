@@ -1,5 +1,5 @@
 ---
-title: "JavaScript variables lifecycle: why let is not hoisted"
+title: "JavaScript Variables Lifecycle: Why let Is Not Hoisted"
 description: "Hoisting moves variables and functions to the beginning of the scope. But this term is no longer valid for `let`, `const` and `class`: and here's why."
 published: "2016-07-27"
 modified: "2016-07-27"

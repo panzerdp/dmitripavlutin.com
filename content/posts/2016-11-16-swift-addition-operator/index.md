@@ -1,5 +1,5 @@
 ---
-title: "Make your Swift code expressive: addition operator use cases"
+title: "Make Your Swift Code Expressive: Addition Operator Use Cases"
 description: "Check + and += operators use cases for writing short and concise expressions: sum numbers & measurements, concat strings & arrays, date manipulations."
 published: "2016-11-16"
 modified: "2016-11-16"

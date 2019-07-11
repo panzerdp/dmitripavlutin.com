@@ -1,5 +1,5 @@
 ---
-title: "JavaScript variables hoisting in details"
+title: "JavaScript Variables Hoisting in Details"
 description: "The JavaScript variables hoisting described in details and easy to follow examples. See how hoisting works in var, const, let, function and class."
 published: "2016-05-30"
 modified: "2016-05-30"

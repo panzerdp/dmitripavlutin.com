@@ -1,5 +1,5 @@
 ---
-title: "Must know details about ES2016 features"
+title: "Must Know Details about ES2016 Features"
 description: "ES2016 is a small but important release. Examine the must know details about the new array method includes() and the exponentiation operator."
 published: "2016-07-12"
 modified: "2016-07-12"

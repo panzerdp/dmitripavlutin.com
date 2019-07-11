@@ -1,5 +1,5 @@
 ---
-title: "How to use correctly 'self' keyword in Swift"
+title: "How to Use Correctly 'self' Keyword in Swift"
 description: "Interesting dive into practices how to use 'self' keyword in Swift. Should you omit or always use 'self'? Find out the reasons and answer."
 published: "2016-11-09"
 modified: "2016-11-09"

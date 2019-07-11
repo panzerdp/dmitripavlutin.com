@@ -1,5 +1,5 @@
 ---
-title: "The legend of JavaScript equality operator"
+title: "The Legend of JavaScript Equality Operator"
 description: "A great article on how the JavaScript equality and identity operators work. Covered with detailed explanation, computation algorithms and plenty of examples."
 published: "2016-01-04"
 modified: "2016-01-04"

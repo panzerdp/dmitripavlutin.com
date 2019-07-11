@@ -1,5 +1,5 @@
 ---
-title: "Detailed overview of well-known symbols"
+title: "Detailed Overview of Well-known Symbols"
 description: "Well-known symbols allow to customize many JavaScript algorithms: elements iteration, instanceof, regexp string methods, derived object and more."
 published: "2016-08-03"
 modified: "2019-07-05"

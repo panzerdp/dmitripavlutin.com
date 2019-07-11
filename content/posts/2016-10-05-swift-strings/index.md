@@ -1,5 +1,5 @@
 ---
-title: "Mastering Swift: essential details about strings"
+title: "Mastering Swift: Essential Details About Strings"
 description: "A detailed writing how efficiently to handle strings in Swift: string views, count characters, access characters by index and complex string manipulations."
 published: "2016-10-05"
 modified: "2016-10-05"

@@ -1,5 +1,5 @@
 ---
-title: "Catch the XMLHttpRequest in plain JavaScript"
+title: "Catch the XMLHttpRequest in Plain JavaScript"
 description: "Explanation and example on how to catch the XMLHttpRequest start and finish events in plain JavaScript. Useful for Chrome extensions development."
 published: "2016-01-24"
 modified: "2016-01-24"

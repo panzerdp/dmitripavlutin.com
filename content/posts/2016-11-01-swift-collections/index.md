@@ -1,5 +1,5 @@
 ---
-title: "Mastering Swift: tips about array and dictionary literals"
+title: "Mastering Swift: Tips About Array and Dictionary Literals"
 description: "How to use Swift literals to initialize the 3 fundamental collection types: array, set and dictionary. Details about collection type inference."
 published: "2016-11-01"
 modified: "2016-11-01"

@@ -1,5 +1,5 @@
 ---
-title: "Make your JavaScript code shine: knockout old ES5 hacks"
+title: "Make your JavaScript Code Shine: Knockout Old ES5 Hacks"
 description: "Hacks influence negatively the way JavaScript programs are coded. Find out how to remove old hacks and make your code shining again using ES2015 features."
 published: "2016-08-10"
 modified: "2019-07-05"
