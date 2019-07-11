@@ -64,12 +64,6 @@ export const pageQuery = graphql`
     }
   }
 
-  fragment CarbonAdsServiceAll on SiteSiteMetadataCarbonAdsService {
-    scriptSrc
-    isEnabled
-    isProductionMode
-  }
-
   fragment Post on MarkdownRemarkFrontmatter {
     title
     description
