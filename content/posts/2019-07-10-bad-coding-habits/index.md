@@ -91,6 +91,8 @@ console.log(getPropFixed(hero, 'isVillian', true)); // => false
 
 `object[propertyName] === undefined` verifies exactly if the property accessor evaluates to `undefined`.  
 
+*Do you know other ways to verify the property existence in an object? If so, leave a comment below!*
+
 Side note: the section [4.](#4-try-to-avoid-undefined-and-null) suggests to avoid using directly `undefined`. So the above solution can be improved in favor of `in` operator:  
 
 ```javascript{2}
