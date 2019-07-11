@@ -91,7 +91,7 @@ console.log(getPropFixed(hero, 'isVillian', true)); // => false
 
 `object[propertyName] === undefined` verifies exactly if the property accessor evaluates to `undefined`.  
 
-Site note: the section [4.](#4-try-to-avoid-undefined-and-null) suggests to avoid using directly `undefined`. So the above solution can be improved in favor of `in` operator:  
+Side note: the section [4.](#4-try-to-avoid-undefined-and-null) suggests to avoid using directly `undefined`. So the above solution can be improved in favor of `in` operator:  
 
 ```javascript{2}
 function getPropFixedBetter(object, propertyName, defaultValue) {
