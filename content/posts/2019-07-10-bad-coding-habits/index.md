@@ -1,8 +1,8 @@
 ---
-title: 5 JavaScript bad coding habits to unlearn right now
+title: 5 JavaScript Bad Coding Habits to Unlearn Right Now
 description: "Overuse of implicit type conversion, old JavaScript tricks, polluting function scope, undefined & null, casual coding style ruin JavaScript code quality"
 published: "2019-07-10T14:30:00Z"
-modified: "2019-07-10T14:30:00Z"
+modified: "2019-07-11T05:00:00Z"
 thumbnail: "./images/cover.jpg"
 slug: unlearn-javascript-bad-coding-habits
 tags: ["javascript", "undefined", "clean code", "craftsmanship"]
@@ -90,6 +90,17 @@ console.log(getPropFixed(hero, 'isVillian', true)); // => false
 ```
 
 `object[propertyName] === undefined` verifies exactly if the property accessor evaluates to `undefined`.  
+
+Site note: the section [4.](#4-try-to-avoid-undefined-and-null) suggests to avoid using directly `undefined`. So the above solution can be improved in favor of `in` operator:  
+
+```javascript{2}
+function getPropFixedBetter(object, propertyName, defaultValue) {
+   if (!(propertyName in object)) {
+     return defaultValue;
+   }
+   return object[propertyName];
+}
+```
 
 Here's my advice: whenever possible, do not use implicit type conversion. Instead, make sure that variables and function parameters always have the same type. Use explicit type conversion when necessary.  
 
@@ -199,7 +210,7 @@ for (const item of array) {
 
 ## 4. Try to avoid undefined and null
 
-A variable has not been assigned a value is evaluated to `undefined`. For example:
+A variable not yet assigned with value is evaluated to `undefined`. For example:
 
 ```javascript
 let count;
@@ -286,7 +297,7 @@ You should strive to avoid returning `null` from functions, and more importantly
 
 As soon as `null` appears in your call stack, you have to check for its existence in every function that potentially can access `null`. It's error-prone.  
 
-```javascript{5,10,18}
+```javascript{5,10}
 function bar(something) {
   if (something) {
     return foo({ value: 'Some value' });
@@ -301,14 +312,7 @@ function foo(options) {
     value = options.value;
     // ...
   }
-  return bar(value);
-}
-
-function bar(someValue) {
-  if (someValue === null) {
-    return 'Nothing';
-  }
-  return someValue;
+  return value;
 }
 ```
 
