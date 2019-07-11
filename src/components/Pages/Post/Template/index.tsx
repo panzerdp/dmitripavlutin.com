@@ -16,8 +16,6 @@ import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import Comments from 'components/Pages/Post/Comments';
 import AboutAuthor from 'components/Pages/Post/AboutAuthor';
 import SubscriptionRegion from 'components/Subscription/Region';
-import CarbonAdsFetch from 'components/CarbonAds/Fetch';
-import CarbonAdsMetaTags from 'components/CarbonAds/Meta/Tags';
 import isInView from 'hooks/isInView';
 import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
@@ -54,7 +52,6 @@ export default function PostTemplate({
         authorInfo={authorInfo}
         authorProfilePictureSrc={authorProfilePictureSrc}
       />
-      <CarbonAdsFetch render={(service) => <CarbonAdsMetaTags carbonAdsService={service} />} />
       <article>
         <div ref={ref} className={styles.postCover}>
           <Img fluid={post.thumbnail} />

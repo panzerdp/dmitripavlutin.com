@@ -12,8 +12,6 @@ import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import Comments from 'components/Pages/Post/Comments';
 import AboutAuthor from 'components/Pages/Post/AboutAuthor';
-import CarbonAdsFetch from 'components/CarbonAds/Fetch';
-import CarbonAdsMetaTags from 'components/CarbonAds/Meta/Tags';
 import { TO_POST } from 'routes/path';
 
 const props = {
@@ -85,12 +83,6 @@ const props = {
     url: 'https://dmitripavlutin.com',
     repositoryUrl: 'https://github.com/panzerdp/dmitripavlutin.com',
   },
-};
-
-const carbonAdsService: CarbonAdsService = {
-  isEnabled: true,
-  isProductionMode: true,
-  scriptSrc: 'http://site.com/script.js',
 };
 
 const postUrl = props.siteInfo.url + TO_POST({ slug: props.post.slug });
@@ -189,13 +181,5 @@ describe('<PostTemplate />', function() {
         <AboutAuthor authorInfo={props.authorInfo} authorProfilePictureSrc={props.authorProfilePictureSrc} />
       )
     ).toBe(true);
-  });
-
-  it('should render carbon ads meta tags', function() {
-    const wrapper = shallow(<PostTemplate {...props} />)
-      .find(CarbonAdsFetch)
-      .at(0)
-      .renderProp('render')(carbonAdsService);
-    expect(wrapper.find(<CarbonAdsMetaTags carbonAdsService={carbonAdsService} />));
   });
 });
