@@ -88,6 +88,7 @@ module.exports = {
         shortname: 'rainsoft',
       },
     },
+    'gatsby-plugin-webpack-size',
     require('./gatsby/config/gatsby-plugin-sass'),
     require('./gatsby/config/gatsby-plugin-feed'),
   ],
