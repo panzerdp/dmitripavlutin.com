@@ -212,7 +212,7 @@ for (const item of array) {
 
 ## 4. Try to avoid undefined and null
 
-A variable not yet assigned with value is evaluated to `undefined`. For example:
+[A variable](https://www.ecma-international.org/ecma-262/6.0/#sec-let-and-const-declarations) not yet assigned with value is evaluated to `undefined`. For example:
 
 ```javascript
 let count;
@@ -223,7 +223,7 @@ const hero = {
 };
 console.log(hero.city); // => undefined
 ```
-`count` variable is defined, but not yet assigned with a value. It has `undefined` value.  
+`count` is defined, but not yet initialized with a value. JavaScript implicitly assigns to it `undefined`.  
 When accessing the property of a non-existing object, `undefined` is returned also.  
 
 Why is using directly `undefined` a bad habit? Because when you start comparing against `undefined`, you're working with variables in an uninitialized state. 
@@ -299,7 +299,7 @@ You should strive to avoid returning `null` from functions, and more importantly
 
 As soon as `null` appears in your call stack, you have to check for its existence in every function that potentially can access `null`. It's error-prone.  
 
-```javascript{5,10}
+```javascript{5,11}
 function bar(something) {
   if (something) {
     return foo({ value: 'Some value' });
