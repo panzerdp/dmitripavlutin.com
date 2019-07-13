@@ -223,8 +223,8 @@ const hero = {
 };
 console.log(hero.city); // => undefined
 ```
-`count` is defined, but not yet initialized with a value. JavaScript implicitly assigns to it `undefined`.  
-When accessing the property of a non-existing object, `undefined` is returned also.  
+`count` variable is defined, but not yet initialized with a value. JavaScript implicitly assigns to it `undefined`.  
+When accessing a non-existing property `hero.city`, `undefined` is returned also.  
 
 Why is using directly `undefined` a bad habit? Because when you start comparing against `undefined`, you're working with variables in an uninitialized state. 
 
