@@ -6,10 +6,12 @@ interface PostCommentsProps {
   title: string;
 }
 
-export default function PostComments({ url, title }: PostCommentsProps) {
+export function PostComments({ url, title }: PostCommentsProps) {
   return (
     <div>
       <Disqus url={url} title={title} />
     </div>
   );
 }
+
+export default React.memo(PostComments);
