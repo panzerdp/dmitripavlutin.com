@@ -3,7 +3,7 @@ title: Use React memo wisely
 description: "React memo only when used correctly increases the performance of components. It's best used with components that re-render often with rarely changing props."
 published: "2019-07-17"
 modified: "2019-07-17"
-thumbnail: "./images/memo.jpg"
+thumbnail: "./images/instruments.jpg"
 slug: use-react-memo-wisely
 tags: ["react", "component", "memoization"]
 recommended: ["7-architectural-attributes-of-a-reliable-react-component", "the-art-of-writing-small-and-plain-functions"]
