@@ -19,7 +19,7 @@ import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll';
 import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 
-const SHOW_SHARE_AFTER_Y = 470;
+const SHOW_SHARE_AFTER_Y = 500;
 
 interface PostTemplateProps {
   siteInfo: SiteInfo;
