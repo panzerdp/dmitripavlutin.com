@@ -1,6 +1,6 @@
 ---
 title: Use React.memo() wisely
-description: "React memo only when used correctly increases the performance of components. It's best used with components that re-render often with rarely changing props."
+description: "React.memo() uses memoization to skip unnecessary component re-renders. But used incorrectly, it harms performance of components. Here's why..."
 published: "2019-07-17"
 modified: "2019-07-17"
 thumbnail: "./images/instruments.jpg"
@@ -10,15 +10,15 @@ recommended: ["7-architectural-attributes-of-a-reliable-react-component", "the-a
 type: post
 ---
 
-Users enjoy fast and responsive user interfaces (UI). When [directly manipulating](https://www.nngroup.com/articles/direct-manipulation/) elements of the UI, users expect a feedback of up to 0.1 seconds. Otherwise the application feels "laggy".
+Users enjoy fast and responsive user interfaces (UI). When [directly manipulating](https://www.nngroup.com/articles/direct-manipulation/) elements of the UI, users expect feedback of up to 0.1 seconds. Otherwise, the application feels "laggy".
 
-To improve user interface performance, React offers a higher order component `React.memo()`. By memoizing the render output, it helps avoiding unnecessary re-renders.  
+To improve user interface performance, React offers a higher-order component `React.memo()`. By memoizing the render output, it helps to avoid unnecessary re-renders.  
 
 While it might be tempting to apply `React.memo()` on many components, that's not always correct.  
 
 This post helps you distinguish the situations when `React.memo()` improves the performance, and, which is not less important, understand when its usage is useless.  
 
-Plus I'll describe some usage tips you should be aware of.  
+Plus I'll describe some useful tips you should be aware of.  
 
 ## 1. React.memo()
 
@@ -41,11 +41,13 @@ export function Movie({ title, releaseDate }) {
 export const MemoizedMovie = React.memo(Movie);
 ```
 
-`React.memo(Movie)` returns a new memoized component `MemoizedMovie`. It will output the same content as original `Movie` component, but with one difference. 
+`React.memo(Movie)` returns a new memoized component `MemoizedMovie`. It will output the same content as the original `Movie` component, but with one difference. 
 
 `MemoizedMovie` re-renders only if `title` or `releaseDate` props change. 
 
-This is where you gain performance benefit: as long as the memoized component receives the same props as in previous render, React skips re-rendering using the previous saved render output.  
+This is where you gain performance benefit: as long as the memoized component receives the same props as in the previous render, React skips re-rendering using the previously saved render output.  
+
+The same functionality for class components is implemented by [PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent).  
 
 ### 1.1 Custom comparison of props
 
@@ -74,17 +76,19 @@ const MemoizedMovie2 = React.memo(Movie, moviePropsAreEqual);
 
 ## 2. When to use React.memo()
 
-![Inforgraphic explaining when to use React.memo()](./images/when-to-use-react-memo.jpg)
+![Inforgraphic explaining when to use React.memo()](./images/when-to-use-react-memo-infographic-1.jpg)
 
 ### 2.1 Component re-renders often with the same props
 
-The best case of wrapping a component in `React.memo()` is when you expect the component to re-render often with the same props.  
+`React.memo()` is applied on pure functional components. These are components that given the same props, always render the same output.  
 
-A common situation that makes a component to re-render with the same props is being forced by the parent component re-render.  
+The best case of wrapping a component in `React.memo()` is when you expect the pure functional component to re-render often with usually the same props.  
 
-Let's reuse `Movie` component defined above. Inside a parent component let's display realtime the number of views of the movie:  
+A common situation that makes a component to re-render with the same props is being forced by a parent component re-render.  
 
-```jsx{6}
+Let's reuse `Movie` component defined above. Inside a parent component let's display the number of views of a movie, with realtime updates every second:  
+
+```jsx{4}
 function MovieViewsRealtime({ title, releaseDate, views }) {
   return (
     <div>
@@ -94,7 +98,7 @@ function MovieViewsRealtime({ title, releaseDate, views }) {
   );
 }
 ```
-The application regularly polls the server in background (for example every 1 second), updating realtime `views` property of `MovieViewsRealtime` component.  
+The application regularly polls the server in background (for example every 1 second), updating `views` property of `MovieViewsRealtime` component.  
 
 ```jsx{3,10,17}
 // Initial render
@@ -121,7 +125,7 @@ The application regularly polls the server in background (for example every 1 se
 // etc
 ```
 
-Every time `views` prop is updated with a new number, `MovieViewsRealtime` re-renders. This triggers `Movie` re-render too, regadless of `title` and `releaseDate` being unchanged.  
+Every time `views` prop is updated with a new number, `MovieViewsRealtime` re-renders. This triggers `Movie` re-render too, regardless of `title` and `releaseDate` being unchanged.  
 
 That's the right case to use memoization.  
 
@@ -142,7 +146,7 @@ As long as `title` and `releaseDate` props are the same, React will skip re-rend
 
 > The more often the component re-renders with the same props, the heavier and the more computationally expensive the output is, the more chances are that component needs to be wrapped in `React.memo()`  
 
-Anyways, use [profiling](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab) to clearly see the benefits of applying `React.memo()`.  
+Anyways, use [profiling](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab) to see the benefits of applying `React.memo()`.   
 
 *Do you know other circumstances when React.memo() improves performance? If so, please write a comment below!*
 
@@ -150,24 +154,24 @@ Anyways, use [profiling](https://reactjs.org/docs/optimizing-performance.html#pr
 
 If your component's rendering situation doesn't fit into the case described above, most likely you don't need `React.memo()`.  
 
-Use the following rule of thumb: if you don't see clearly the gains of memoizing, don't use it.  
+Use the following rule of thumb: if you don't see the gains of memoization, don't use it.  
 
-Performance-related changes applied incorectly can even damage the performance. Use `React.memo()` wisely. 
+> Performance-related changes applied incorrectly can even harm performance. Use `React.memo()` wisely. 
 
 ### 3.1 Useless props comparison
 
-Suppose a case when the component typically re-renders with different props. In this case memoization doesn't provide benefits. 
+Suppose a case when the component typically re-renders with different props. In this case, memoization doesn't provide benefits. 
 
 Even if you try to use `React.memo()`, React will have to do 2 jobs on every re-render:
 
 1. Invoke the comparison function to determine whether the previous and next props are equal
 2. Because the props are different, perform the diff of previous and current render output
 
-Invokation of the comparison function is useless.  
+Invocation of the comparison function is useless.  
 
 ## 4. React.memo() and callback functions
 
-Function objects follow the same principles of comparison like any object. The function object equals only to itself.  
+Function objects follow the same principles of comparison as any object. The function object equals only to itself.  
 
 Let's compare some functions:
 ```javascript
@@ -182,9 +186,9 @@ console.log(sum1 === sum2); // => false
 console.log(sum1 === sum1); // => true
 console.log(sum2 === sum2); // => true
 ```
-The functions `sum1` and `sum2` both sum 2 numbers. However, comparing `sum1` and `sum2` shows that these are different function objects.  
+The functions `sum1` and `sum2` both sum 2 numbers. However, `sum1` and `sum2` are different function objects.  
 
-Let's define a component that accepts a callback prop:
+Now, let's define a component that accepts a callback prop:
 
 ```jsx
 function Logout({ username, onLogout }) {
@@ -219,7 +223,7 @@ Even if provided with the same `username` value, `MemoizedLogout` re-renders eve
 
 Memoization is broken.  
 
-To fix it, provide the same callback instance from the parent component. [useCallback()](https://reactjs.org/docs/hooks-reference.html#usecallback) is helpful in this case:
+To fix it, the same callback instance must be used for `onLogout` prop. Let's apply [useCallback()](https://reactjs.org/docs/hooks-reference.html#usecallback) to preserve the callback instance between re-renders:
 
 ```jsx{4,10}
 const MemoizedLogout = React.memo(Logout);
@@ -246,10 +250,14 @@ function MyApp({ store, cookies }) {
 
 Strictly, React uses memoization as a performance hint. 
 
-While in most situations React avoids re-rendering a memoized component with equal props, you shouln't count on that to prevent re-render.  
+While in most situations React avoids re-rendering a memoized component with equal props, you shouldn't count on that to prevent re-render.  
 
 ## 6. Conclusion
 
-`React.memo()` is a great tool to apply the benefits of memoization for functional components. When applied correctly, it will prevent component re-render when props are the same as previous props.  
+`React.memo()` is a great tool to apply the benefits of memoization for pure functional components. When applied correctly, it prevents component re-render when props are the same as previous.  
+
+Take precaution when memoizing components that have callback functions in props. Make sure to provide the same callback function instance.  
 
 Don't forget to use [profiling](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab) to measure the performance gains of memoization.  
+
+*Do you know interesting use cases of React.memo()? If so, please write a comment below!*
