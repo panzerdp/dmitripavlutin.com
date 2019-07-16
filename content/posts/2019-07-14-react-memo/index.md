@@ -1,5 +1,5 @@
 ---
-title: Use React memo wisely
+title: Use React.memo() wisely
 description: "React memo only when used correctly increases the performance of components. It's best used with components that re-render often with rarely changing props."
 published: "2019-07-17"
 modified: "2019-07-17"
@@ -12,19 +12,21 @@ type: post
 
 Users enjoy fast and responsive user interfaces (UI). When [directly manipulating](https://www.nngroup.com/articles/direct-manipulation/) elements of the UI, users expect a feedback of up to 0.1 seconds. Otherwise the application feels "laggy".
 
-To increase the performance of user interface components, React offers a higher order component React.memo(). It helps avoiding unnecessary re-renders.  
+To improve user interface performance, React offers a higher order component `React.memo()`. By memoizing the render output, it helps avoiding unnecessary re-renders.  
 
-While it might be tempting to use apply React.memo() to improve the performance of any component, that's not always corrent.  
+While it might be tempting to apply `React.memo()` on many components, that's not always correct.  
 
-Continue reading to get a good grasp of when React.memo() really improves the performance. And contrarily, understand the situations when React.memo() is useless.  
+This post helps you distinguish the situations when `React.memo()` improves the performance, and, which is not less important, understand when its usage is useless.  
 
-## 1. React.memo
+Plus I'll describe nice usage tips you should be aware of.  
 
-When deciding to update DOM or not, React first renders your component, then compares the result with previous render. If the render results are different, React decides to update the DOM.  
+## 1. React.memo()
 
-Current vs previous render results comparison is reasonable fast. But you can speed up the process by comparing only current vs previous props supplied to the component. This is what [React.memo()](https://reactjs.org/docs/react-api.html#reactmemo) does for functional components.
+When deciding to update DOM, React first renders your component, then compares the result with the previous render. If the render results are different, React decides to update the DOM.  
 
-Let's define a functional component `Movie`, then wrap it with React.memo():
+Current vs previous render results comparison is fast. But you can *speed up* the process by comparing current vs previous props only. This is what [React.memo()](https://reactjs.org/docs/react-api.html#reactmemo) can do for you.  
+
+Let's define a functional component `Movie`, then wrap it in `React.memo()`:
 
 ```jsx
 function Movie({ title, releaseDate }) {
@@ -39,15 +41,17 @@ function Movie({ title, releaseDate }) {
 const MemoizedMovie = React.memo(Movie);
 ```
 
-`React.memo(Movie)` returns a new memoized component `MemoizedMovie`. It will output the same content as original `Movie` component. 
+`React.memo(Movie)` returns a new memoized component `MemoizedMovie`. It will output the same content as original `Movie` component, but with one difference. 
 
-However, `MemoizedMovie` only re-renders if `title` or `releaseDate` props change. 
+`MemoizedMovie` re-renders only if `title` or `releaseDate` props change. 
 
 This is where you gain performance benefit: as long as the memoized component receives the same props as in previous render, React skips re-rendering and uses the previous saved render output.  
 
-### 1.1 Custom props comparison
+### 1.1 Custom comparison of props
 
-By default React.memo() makes a shallow comparison of props and complex object of props. Use the second argument to indicate a custom props comparison function:
+By default React.memo() does a [shallow](https://github.com/facebook/react/blob/v16.8.6/packages/shared/shallowEqual.js) comparison of props and objects of props. 
+
+But you can use the second argument to indicate a custom equality function:  
 
 ```javascript
 React.memo(Component, [areEqual(prevProps, nextProps)]);
@@ -67,40 +71,38 @@ function moviePropsAreEqual(prevMovie, nextMovie) {
 const MemoizedMovie2 = React.memo(Movie, moviePropsAreEqual);
 ```
 
-(The alternative of `React.memo()` for class based components is the method [shouldComponentUpdate()](https://reactjs.org/docs/react-component.html#shouldcomponentupdate). Note that the considerations in this post apply to `shouldComponentUpdate()` too.) 
+`moviePropsAreEqual()` function returns `true` if prev and next props are equal.  
 
-## 2. When to use React memo
+## 2. When to use React.memo()
 
 ![Inforgraphic explaining when to use React.memo()](./images/when-to-use-react-memo.jpg)
 
 ### 2.1 Often re-render with usually the same props
 
-As mentioned in previous section, the main benefit of `React.memo()` is to skip re-rendering when props are the same.  
-
-The best case of wrapping a component with `React.memo()` is when you expect the component to re-render often with the same props. 
+The best case of wrapping a component in `React.memo()` is when you expect the component to re-render often with the same props. 
 
 *Do you know other circumstances when React.memo() improves performance? If so, please write a comment below!*
 
-## 3. When to avoid React memo
+## 3. When to avoid React.memo()
 
 If your component's rendering situation doesn't fit into the case described above, most likely you don't need `React.memo()`.  
 
-I use the following rule of thumb. If I weren't able to definitely prove the gains of memoizing, I don't need it. 
+Use the following rule of thumb: if you don't see clearly the gains of memoizing, don't use it.  
 
-Performance-related changes applied incorectly can even damage the basic performance. Use React.memo() wisely. 
+Performance-related changes applied incorectly can even damage the performance. Use `React.memo()` wisely. 
 
-### 3.1 Component props change often
+### 3.1 Useless props comparison
 
-Suppose a case when the component almost always receives different props. In this case, memoizing doesn't give benefits. 
+Suppose a case when the component typically re-renders with different props. In this case memoization doesn't provide benefits. 
 
 Even if you try to use `React.memo()`, React will have to do 2 jobs on every re-render:
 
-1. Invoke the comparison function to determine whether the props are equal
-2. Because the props are different, the component re-renders
+1. Invoke the comparison function to determine whether the previous and next props are equal
+2. Because the props are different, perform the diff of previous and current render output
 
 Invokation of the comparison function is useless.  
 
-## 4. React memo and callback functions
+## 4. React.memo() and callback functions
 
 Function objects follow the same principles of comparison like any object. The function object is equal only to itself.  
 
@@ -119,8 +121,12 @@ console.log(sum2 === sum2); // => true
 ```
 The functions `sum1` and `sum2` both sum 2 numbers. However, comparing `sum1` and `sum2` shows that these are different function objects.  
 
-## 5. Conclusion
+## 5. React.memo() is about memoization
+
+
+
+## 6. Conclusion
 
 `React.memo()` is a great tool to apply the benefits of memoization for functional components. When applied correctly, it will prevent component re-render when props are the same as previous props.  
 
-Don't forget to use [profiling](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab) to practically see the performance gains of memoization.  
+Don't forget to use [profiling](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab) to measure the performance gains of memoization.  
