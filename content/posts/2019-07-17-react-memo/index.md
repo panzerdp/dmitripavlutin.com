@@ -1,6 +1,6 @@
 ---
 title: Use React.memo() wisely
-description: "React.memo() uses memoization to skip unnecessary component re-render. But used incorrectly, it harms performance of components. Here's why..."
+description: "React.memo() uses memoization to skip unnecessary component re-render. But when used incorrectly, React.memo() can reduce performance of components."
 published: "2019-07-17"
 modified: "2019-07-17"
 thumbnail: "./images/instruments.jpg"
