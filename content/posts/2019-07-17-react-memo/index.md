@@ -177,18 +177,20 @@ Function objects follow the same principles of comparison as any object. The fun
 
 Let's compare some functions:
 ```javascript
-function sum1(a, b) {
-  return a + b;
+function sumFactory() {
+  return (a, b) => a + b;
 }
-function sum2(a, b) {
-  return a + b;
-}
+
+const sum1 = sumFactory();
+const sum2 = sumFactory();
 
 console.log(sum1 === sum2); // => false
 console.log(sum1 === sum1); // => true
 console.log(sum2 === sum2); // => true
 ```
-The functions `sum1` and `sum2` both sum 2 numbers. However, `sum1` and `sum2` are different function objects.  
+`sumFactory()` is a factory function. It returns arrow functions that sum 2 numbers.  
+
+The functions `sum1` and `sum2` are both created by the factory function. Both sum 2 numbers. However, `sum1` and `sum2` are different function objects.  
 
 Now, let's define a component that accepts a callback prop:
 
