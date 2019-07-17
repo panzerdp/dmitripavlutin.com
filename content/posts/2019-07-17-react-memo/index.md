@@ -1,6 +1,6 @@
 ---
 title: Use React.memo() wisely
-description: "React.memo() uses memoization to skip unnecessary component re-render. But when used incorrectly, React.memo() can reduce performance of components."
+description: "React.memo() increases performance by memoizing component render result. But when used incorrectly, React.memo() can reduce performance, and here's why."
 published: "2019-07-17"
 modified: "2019-07-17"
 thumbnail: "./images/instruments.jpg"
@@ -10,7 +10,7 @@ recommended: ["7-architectural-attributes-of-a-reliable-react-component", "the-a
 type: post
 ---
 
-Users enjoy fast and responsive user interfaces (UI). User insterface response delay of less than 100 milliseconds feels instant to a user. A delay between 100 and 300 milliseconds is already perceptible.  
+Users enjoy fast and responsive user interfaces (UI). User interface response delay of less than 100 milliseconds feels instant to a user. A delay between 100 and 300 milliseconds is already perceptible.  
 
 To improve user interface performance, React offers a higher-order component `React.memo()`. By memoizing the rendered output, memoization helps to avoid unnecessary rendering.  
 
@@ -26,7 +26,7 @@ When deciding to update DOM, React first renders your component, then compares t
 
 Current vs previous render results comparison is fast. But you can *speed up* the process under some circumstances.  
 
-When a component is wrapper in `React.memo()`, React renders the component and memoizes the result. Before next render, if the props are the same, React reuses the memoized content.  
+When a component is wrapped in `React.memo()`, React renders the component and memoizes the result. Before the next render, if the props are the same, React reuses the memoized content.  
 
 Let's define a functional component `Movie`, then wrap it in `React.memo()`:
 
@@ -45,9 +45,9 @@ export const MemoizedMovie = React.memo(Movie);
 
 `React.memo(Movie)` returns a new memoized component `MemoizedMovie`. It will output the same content as the original `Movie` component, but with one difference. 
 
-`MemoizedMovie` render output is memoized. The memoized content is reused as long as `title` or `releaseDate` props are the same during next rendering rounds.  
+`MemoizedMovie` render output is memoized. The memoized content is reused as long as `title` or `releaseDate` props are the same during the next rendering rounds.  
 
-This is where you gain performance benefit: by reusing the memoized result, React skips rendering the component and doesn't perform virtual DOM difference check.  
+This is where you gain performance benefit: by reusing the memoized result, React skips rendering the component and doesn't perform a virtual DOM difference check.  
 
 The same functionality for class components is implemented by [PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent).  
 
@@ -256,7 +256,7 @@ While in most situations React avoids re-rendering a memoized component, you sho
 
 ## 6. Conclusion
 
-`React.memo()` is a great tool to apply the benefits of memoization for pure functional components. When applied correctly, it prevents component re-render when next props are the same as previous.  
+`React.memo()` is a great tool to gain the benefits of memoization for pure functional components. When applied correctly, it prevents component re-render when the next props are the same as previous.  
 
 Take precaution when memoizing components that use props with callback functions. Make sure to provide the same callback function instance between renderings.  
 
