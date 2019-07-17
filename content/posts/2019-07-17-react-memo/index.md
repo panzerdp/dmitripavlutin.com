@@ -1,8 +1,8 @@
 ---
 title: Use React.memo() wisely
 description: "React.memo() increases performance by memoizing component render result. But when used incorrectly, React.memo() can reduce performance, and here's why."
-published: "2019-07-17"
-modified: "2019-07-17"
+published: "2019-07-17T11:30:00Z"
+modified: "2019-07-17T11:30Z"
 thumbnail: "./images/instruments.jpg"
 slug: use-react-memo-wisely
 tags: ["react", "component", "memoization"]
