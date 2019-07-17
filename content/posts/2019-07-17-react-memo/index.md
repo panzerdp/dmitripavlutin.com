@@ -14,11 +14,9 @@ Users enjoy fast and responsive user interfaces (UI). User interface response de
 
 To improve user interface performance, React offers a higher-order component `React.memo()`. By memoizing the rendered output, memoization helps to avoid unnecessary re-rendering.  
 
-While it might be tempting to apply `React.memo()` on many components, you must use it wisely.    
-
 This post helps you distinguish the situations when `React.memo()` improves the performance, and, not less important, understand when its usage is useless.  
 
-Plus I'll describe some useful tips you should be aware of.  
+Plus I'll describe some useful memoization tips you should be aware of.  
 
 ## 1. React.memo()
 
