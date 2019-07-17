@@ -12,9 +12,9 @@ type: post
 
 Users enjoy fast and responsive user interfaces (UI). User interface response delay of less than 100 milliseconds feels instant to a user. A delay between 100 and 300 milliseconds is already perceptible.  
 
-To improve user interface performance, React offers a higher-order component `React.memo()`. By memoizing the rendered output, memoization helps to avoid unnecessary rendering.  
+To improve user interface performance, React offers a higher-order component `React.memo()`. By memoizing the rendered output, memoization helps to avoid unnecessary re-rendering.  
 
-While it might be tempting to apply `React.memo()` on many components, you must use it wisely.  
+While it might be tempting to apply `React.memo()` on many components, you must use it wisely.    
 
 This post helps you distinguish the situations when `React.memo()` improves the performance, and, not less important, understand when its usage is useless.  
 
@@ -158,7 +158,9 @@ If your component's rendering situation doesn't fit into the case described abov
 
 Use the following rule of thumb: if you don't see the gains of memoization, don't use it.  
 
-> Performance-related changes applied incorrectly can even harm performance. Use `React.memo()` wisely. 
+> Performance-related changes applied incorrectly can even harm performance. Use `React.memo()` wisely.  
+
+Of course, you cannot use `React.memo()` on non-pure components, e.g. components that have state, etc.  
 
 ### 3.1 Useless props comparison
 
