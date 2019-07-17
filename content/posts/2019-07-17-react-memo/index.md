@@ -190,7 +190,7 @@ console.log(sum2 === sum2); // => true
 ```
 `sumFactory()` is a factory function. It returns arrow functions that sum 2 numbers.  
 
-The functions `sum1` and `sum2` are both created by the factory function. Both sum 2 numbers. However, `sum1` and `sum2` are different function objects.  
+The functions `sum1` and `sum2` are created by the factory. Both functions sum 2 numbers. However, `sum1` and `sum2` are different function objects.  
 
 Now, let's define a component that accepts a callback prop:
 
