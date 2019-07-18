@@ -25,8 +25,8 @@ export default function LayoutFooter({ authorInfo: { profiles, name, email } }: 
         <div className={styles.links}>
           <div className={styles.footerNavigation}>
             <Link to={TO_INDEX()}>Home</Link>
-            <a href={TO_NEWSLETTER()}>Newsletter</a>
-            <Link to={TO_RSS()}>RSS</Link>
+            <Link to={TO_NEWSLETTER()}>Newsletter</Link>
+            <a href={TO_RSS()}>RSS</a>
             <Link to={TO_ALL_POSTS()}>All posts</Link>
             <Link to={TO_ABOUT_ME()}>About me</Link>
           </div>
