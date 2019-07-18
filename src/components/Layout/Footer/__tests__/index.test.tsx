@@ -30,7 +30,7 @@ describe('<LayoutFooter />', function() {
   it('should render navigation links', function() {
     const wrapper = shallow(<LayoutFooter authorInfo={authorInfo} />);
     expect(wrapper.find({ to: TO_INDEX() })).toHaveLength(1);
-    expect(wrapper.find({ to: TO_NEWSLETTER() })).toHaveLength(1);
+    expect(wrapper.find({ href: TO_NEWSLETTER() })).toHaveLength(1);
     expect(wrapper.find({ to: TO_RSS() })).toHaveLength(1);
     expect(wrapper.find({ to: TO_ABOUT_ME() })).toHaveLength(1);
     expect(wrapper.find({ to: TO_ALL_POSTS() })).toHaveLength(1);
