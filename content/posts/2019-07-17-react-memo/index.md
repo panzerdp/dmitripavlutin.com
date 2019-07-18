@@ -196,7 +196,7 @@ The functions `sum1` and `sum2` are created by the factory. Both functions sum 2
 
 The implicit new functions creation might happen when a parent component defines a callback for its child. Let's study how this can break memoization, and how to fix it.   
 
-The following component `Logout` accepts a callback prop:
+The following component `Logout` accepts a callback prop `onLogout`:
 
 ```jsx
 function Logout({ username, onLogout }) {
