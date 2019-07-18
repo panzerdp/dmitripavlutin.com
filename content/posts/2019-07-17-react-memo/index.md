@@ -2,7 +2,7 @@
 title: Use React.memo() wisely
 description: "React.memo() increases the performance of pure functional components by preventing useless re-renders. But such performance tweaks must be applied wisely."
 published: "2019-07-17T11:30:00Z"
-modified: "2019-07-17T11:30Z"
+modified: "2019-07-18T08:28Z"
 thumbnail: "./images/instruments.jpg"
 slug: use-react-memo-wisely
 tags: ["react", "component", "memoization"]
@@ -10,7 +10,7 @@ recommended: ["7-architectural-attributes-of-a-reliable-react-component", "the-a
 type: post
 ---
 
-Users enjoy fast and responsive user interfaces (UI). User interface response delay of less than 100 milliseconds feels instant to a user. A delay between 100 and 300 milliseconds is already perceptible.  
+Users enjoy fast and responsive user interfaces (UI). An UI response delay of less than 100 milliseconds feels instant to a user. A delay between 100 and 300 milliseconds is already perceptible.  
 
 To improve user interface performance, React offers a higher-order component `React.memo()`. By memoizing the rendered output, memoization helps to avoid unnecessary re-rendering.  
 
@@ -26,7 +26,7 @@ Current vs previous render results comparison is fast. But you can *speed up* th
 
 When a component is wrapped in `React.memo()`, React renders the component and memoizes the result. Before the next render, if the props are the same, React reuses the memoized content.  
 
-Let's define a functional component `Movie`, then wrap it in `React.memo()`:
+Let's define a pure functional component `Movie`, then wrap it in `React.memo()`:
 
 ```jsx
 export function Movie({ title, releaseDate }) {
@@ -82,11 +82,11 @@ const MemoizedMovie2 = React.memo(Movie, moviePropsAreEqual);
 
 `React.memo()` is applied on pure functional components. These are components that given the same props, always render the same output.  
 
-The best case of wrapping a component in `React.memo()` is when you expect the pure functional component to render often with usually the same props.  
+The best case of wrapping a component in `React.memo()` is when you expect the pure functional component to render often and usually with the same props.  
 
 A common situation that makes a component re-render with the same props is being forced to re-render by a parent component.  
 
-Let's reuse `Movie` component defined above. A new parent component `MovieViewsRealtime` displays the number of views of a movie, with realtime updates every second:  
+Let's reuse `Movie` component defined above. A new parent component `MovieViewsRealtime` displays the number of views of a movie, with realtime updates:  
 
 ```jsx{4}
 function MovieViewsRealtime({ title, releaseDate, views }) {
@@ -158,7 +158,9 @@ Use the following rule of thumb: if you don't see the gains of memoization, don'
 
 > Performance-related changes applied incorrectly can even harm performance. Use `React.memo()` wisely.  
 
-Of course, you cannot use `React.memo()` on non-pure components, e.g. components that have state, etc.  
+Of course, you cannot use `React.memo()` on non-pure components, e.g. components that have state or use sources of truth other than props.  
+
+While technically possible, it doesn't make much sense to wrap class-based components in `React.memo()`. Just extend `PureComponent` class or define a custom implementation of `shouldComponentUpdate()` method if you need memoization for class-based components.  
 
 ### 3.1 Useless props comparison
 
@@ -167,7 +169,7 @@ Suppose a case when the component typically renders with different props. In thi
 Even if you try to use `React.memo()`, React will have to do 2 jobs on every re-render:
 
 1. Invoke the comparison function to determine whether the previous and next props are equal
-2. Because the props are different, perform the diff of previous and current render output
+2. Because props comparison almost always returns `false`, React performs the diff of previous and current render output
 
 Invocation of the comparison function is useless.  
 
@@ -176,7 +178,7 @@ Invocation of the comparison function is useless.
 Function objects follow the same principles of comparison as any object. The function object equals only to itself.  
 
 Let's compare some functions:
-```javascript
+```javascript{8}
 function sumFactory() {
   return (a, b) => a + b;
 }
@@ -192,7 +194,9 @@ console.log(sum2 === sum2); // => true
 
 The functions `sum1` and `sum2` are created by the factory. Both functions sum 2 numbers. However, `sum1` and `sum2` are different function objects.  
 
-Now, let's define a component that accepts a callback prop:
+The implicit new functions creation might happen when a parent component defines a callback for its child. Let's study how this can break memoization, and how to fix it.   
+
+The following component `Logout` accepts a callback prop:
 
 ```jsx
 function Logout({ username, onLogout }) {
