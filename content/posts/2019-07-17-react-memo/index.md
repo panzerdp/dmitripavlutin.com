@@ -2,7 +2,7 @@
 title: Use React.memo() wisely
 description: "React.memo() increases the performance of pure functional components by preventing useless re-renders. But such performance tweaks must be applied wisely."
 published: "2019-07-17T11:30:00Z"
-modified: "2019-07-18T08:28Z"
+modified: "2019-07-18T12:23Z"
 thumbnail: "./images/instruments.jpg"
 slug: use-react-memo-wisely
 tags: ["react", "component", "memoization"]
@@ -26,7 +26,7 @@ Current vs previous render results comparison is fast. But you can *speed up* th
 
 When a component is wrapped in `React.memo()`, React renders the component and memoizes the result. Before the next render, if the props are the same, React reuses the memoized content.  
 
-Let's define a pure functional component `Movie`, then wrap it in `React.memo()`:
+Let's look at a React memo example. The pure functional component `Movie` is wrapped in `React.memo()`:  
 
 ```jsx
 export function Movie({ title, releaseDate }) {
@@ -146,7 +146,7 @@ As long as `title` and `releaseDate` props are the same, React skips re-renderin
 
 > The more often the component re-renders with the same props, the heavier and the more computationally expensive the output is, the more chances are that component needs to be wrapped in `React.memo()`  
 
-Anyways, use [profiling](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab) to see the benefits of applying `React.memo()`.   
+Anyways, use [profiling](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab) to measure the benefits of applying `React.memo()`.   
 
 *Do you know other circumstances when React.memo() improves performance? If so, please write a comment below!*
 
