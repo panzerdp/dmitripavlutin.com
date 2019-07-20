@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { TwitterFollowButton } from 'react-twitter-embed';
 import Link from 'gatsby-link';
 
 import styles from './index.module.scss';
 import { TO_ABOUT_ME } from 'routes/path';
+import TwitterRegion from 'components/Twitter/Region';
 
 interface PostAboutAuthorProps {
   authorInfo: AuthorInfo;
@@ -21,7 +21,7 @@ export default function PostAboutAuthor({ authorInfo, authorProfilePictureSrc }:
         <div className={styles.description}>
           {authorInfo.description} <Link to={TO_ABOUT_ME()}>Read more</Link>
         </div>
-        <TwitterFollowButton screenName={authorInfo.nicknames.twitter} />
+        <TwitterRegion />
       </div>
     </div>
   );

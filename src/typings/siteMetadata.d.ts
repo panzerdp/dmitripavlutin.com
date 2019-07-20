@@ -20,6 +20,10 @@ interface AuthorInfo {
   nicknames: Nicknames;
 }
 
+interface AuthorStats {
+  twitterFollowersCount: string;
+}
+
 interface SiteInfo {
   title: string;
   description: string;
