@@ -58,7 +58,7 @@ The problem manifests itself by increasing difficulty when adding new components
 
 Turns out, if you dig too much into implementation details, you don't develop a vision of the whole picture. You cannot efficiently design functions, classes, and components that are well structured and loosely interact with each other.  
 
-Ok, I have to climb through the abstract principles of a good architecture.  
+Ok, I have to climb through the abstract principles of a good system design.  
 
 ## 3. I started climbing
 
@@ -70,9 +70,9 @@ I've started my journey of climbing by reading ["Clean Code"](https://www.amazon
 
 Then I've continued my journey by understanding coding recipes: the design patterns. I particularly enjoyed [Pro JavaScript Design Patterns](https://www.amazon.com/Pro-JavaScript-Design-Patterns-Object-Oriented/dp/159059908X).  
 
-Again, it wasn't enough for me. The next book ["Clean Architecture"](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164) wasn't easy. I didn't want to miss any detail, so I read the book page by page for about 1 year. At least for me, understanding the principles of clean application architecture is hard.   
+Again, it wasn't enough for me. The next book ["Clean Architecture"](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164) wasn't easy. I didn't want to miss any detail, so I read the book page by page for about 1 year. At least for me, understanding the principles of clean architecture is hard.  
 
-I repeat the structuring principles over and over again. Having them always circulating in my head helps me identify the places to use them.  
+I repeat the principles of good design ([SOLID](https://en.wikipedia.org/wiki/SOLID), [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), [SoC](https://en.wikipedia.org/wiki/Separation_of_concerns), etc) over and over again. Having them always circulating in my head helps me identify the places to use them.  
 
 ![Software development climbing](./images/climb.jpg)
 
