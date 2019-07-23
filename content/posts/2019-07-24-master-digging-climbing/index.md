@@ -1,8 +1,8 @@
 ---
 title: "How to Become a Better Software Developer by Digging & Climbing"
 description: "Read my story of how to become a better software developer by digging low level details and climbing good system design principles."
-published: "2019-07-24T11:00Z"
-modified: "2019-07-24T11:11Z"
+published: "2019-07-23T13:20Z"
+modified: "2019-07-23T13:20Z"
 thumbnail: "./images/trying-to-fly.jpg"
 slug: become-better-software-developer-digging-climbing
 tags: ["craftsmanship", "clean code", "architecture"]
