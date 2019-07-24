@@ -52,7 +52,8 @@ export const MemoizedMovie = React.memo(Movie);
   releaseDate="December 15, 1995" 
 />
 
-// Next render attempt. React does not call MemoizedMovie function
+// On next round React does not call MemoizedMovie function,
+// preventing re-render
 <MemoizedMovie
   movieTitle="Heat" 
   releaseDate="December 15, 1995" 
