@@ -2,7 +2,7 @@
 title: "What every JavaScript developer should know about Unicode"
 description: "Unicode in JavaScript: basic concepts, escape sequences, normalization, surrogate pairs, combining marks and how to avoid pitfalls"
 published: "2016-09-14"
-modified: "2019-07-11T08:40Z"
+modified: "2019-07-24T08:00Z"
 thumbnail: "./images/cover.jpg"
 slug: what-every-javascript-developer-should-know-about-unicode
 tags: ["javascript", "string", "unicode"]
@@ -107,7 +107,7 @@ The code point is a kind of index of an element in an array.
 
 The magic happens because Unicode associates a code point with a character. For example `U+0041` corresponds to the character named *LATIN CAPITAL LETTER A* (rendered as `A`), or `U+2603` corresponds to the character named *SNOWMAN* (rendered as `☃`).  
 
-Notice that not all code points have associated characters. `1,114,112` code points are available (the range `U+0000` to `U+10FFFF`), but only `128,237` have assigned characters.  
+Notice that not all code points have associated characters. `1,114,112` code points are available (the range `U+0000` to `U+10FFFF`), but only `137,929` (as of May 2019) have assigned characters.  
 
 ## 2.2 Unicode planes
 
@@ -124,13 +124,13 @@ Planes split Unicode code points into 17 equal groups:
 
 #### Basic Multilingual Plane
 
-*Plane 0* is a special one, named **Basic Multilingual Plane** or shortly **BPM**. It contains characters from most of the modern languages ([Basic Latin](https://en.wikipedia.org/wiki/Basic_Latin_(Unicode_block)), [Cyrillic](https://en.wikipedia.org/wiki/Cyrillic_(Unicode_block)), [Greek](https://en.wikipedia.org/wiki/Greek_and_Coptic), etc) and a big number of [symbols](https://en.wikipedia.org/wiki/Unicode_symbols).  
+*Plane 0* is a special one, named **Basic Multilingual Plane** or shortly **BMP**. It contains characters from most of the modern languages ([Basic Latin](https://en.wikipedia.org/wiki/Basic_Latin_(Unicode_block)), [Cyrillic](https://en.wikipedia.org/wiki/Cyrillic_(Unicode_block)), [Greek](https://en.wikipedia.org/wiki/Greek_and_Coptic), etc) and a big number of [symbols](https://en.wikipedia.org/wiki/Unicode_symbols).  
 
 As mentioned above, the code points from the Basic Multilingual Plane are in the range from `U+0000` to `U+FFFF` and can have up to 4 hexadecimal digits.  
 
-Basically, the developer deals with characters from BPM. It contains most of the necessary characters. 
+Basically, the developer deals with characters from BMP. It contains most of the necessary characters. 
 
-Some characters from BPM:
+Some characters from BMP:
 
 * `e` is `U+0065` named *LATIN SMALL LETTER E*
 * `|` is `U+007C` named *VERTICAL BAR*
@@ -139,7 +139,7 @@ Some characters from BPM:
 
 #### Astral planes
 
-The 16 planes beyond the BPM (*Plane 1*, *Plane 2*, ..., *Plane 16*) are named **astral planes** or **supplementary planes**.  
+The 16 planes beyond the BMP (*Plane 1*, *Plane 2*, ..., *Plane 16*) are named **astral planes** or **supplementary planes**.  
 
 The code points that are part of the astral planes are named **astral code points**. These code points are in the range from `U+10000` to `U+10FFFF`. 
 
@@ -168,16 +168,16 @@ Most **JavaScript engines use UTF-16** encoding. This affects the way JavaScript
 
 UTF-16 (the long name: 16-bit Unicode Transformation Format) is a [variable-length](https://en.wikipedia.org/wiki/Variable-width_encoding) encoding:
 
-* Code points from BPM are encoded using a single code unit of 16-bit
+* Code points from BMP are encoded using a single code unit of 16-bit
 * Code points from astral planes are encoded using two code units of 16-bit each.  
 
 Let's follow some examples.  
 
 Suppose you want to save to hard drive *LATIN SMALL LETTER A* character `a`. Unicode tells you that *LATIN SMALL LETTER A* abstract character maps to `U+0061` code point.  
 
-Now let's ask UTF-16 encoding how `U+0061` should be transformed. The encoding specification says that for BPM code point take its hexadecimal number <code>U+<b>0061</b></code> and store it into **one code unit** of 16-bit: `0x0061`.  
+Now let's ask UTF-16 encoding how `U+0061` should be transformed. The encoding specification says that for BMP code point take its hexadecimal number <code>U+<b>0061</b></code> and store it into **one code unit** of 16-bit: `0x0061`.  
 
-As you can see, code points from BPM fit into a single 16-bit code unit. It works easily as a pie for BPM. 
+As you can see, code points from BMP fit into a single 16-bit code unit. It works easily as a pie for BMP. 
 
 ### 2.4 Surrogate pairs
 
@@ -215,7 +215,7 @@ getAstralCodePoint(0xD83D, 0xDE00); // => 0x1F600
 
 Surrogate pairs are not comfortable. You have to handle them as special cases when dealing with strings in JavaScript, as described below in the article. 
 
-However, UTF-16 is memory efficient. 99% of the processed characters are from BPM, which requires one code unit.
+However, UTF-16 is memory efficient. 99% of the processed characters are from BMP, which requires one code unit.
 
 ### 2.5 Combining marks
 
@@ -313,7 +313,7 @@ A hexadecimal escape sequence can escape code points in a limited range: from `U
 
 #### Unicode escape sequence
 
-If you want to escape code points from the entire BPM, then use an **unicode escape sequence**. The escape format is `\u<hex>`, where `\u` is a prefix followed by a hexadecimal number `<hex>` with a fixed length of 4 digits. 
+If you want to escape code points from the entire BMP, then use an **unicode escape sequence**. The escape format is `\u<hex>`, where `\u` is a prefix followed by a hexadecimal number `<hex>` with a fixed length of 4 digits. 
 For example `'\u0051'` (symbol `'Q'`) or `'\u222B'` (integral symbol `'∫'`).
 
 Let's use the unicode escape sequences:
@@ -325,7 +325,7 @@ var reg = /\u0055ni.*/;
 console.log(reg.test('Unicode')); // => true
 ```
 
-An unicode escape sequence can escape code points in a limited range: from `U+0000` to `U+FFFF` (all BPM code points) because only 4 digits are allowed. Most of the time this is enough to represent the commonly used symbols.  
+An unicode escape sequence can escape code points in a limited range: from `U+0000` to `U+FFFF` (all BMP code points) because only 4 digits are allowed. Most of the time this is enough to represent the commonly used symbols.  
 
 To indicate an astral symbol in JavaScript literal, use two joined unicode escape sequences (a high surrogate and low surrogate), which creates a surrogate pair:  
 
@@ -336,7 +336,7 @@ console.log(str); // => 'My face 😀'
 
 #### Code point escape sequence
 
-ECMAScript 2015 provides escape sequences that represent code points from the entire Unicode space: `U+0000` to `U+10FFFF`, i.e. BPM and astral planes.    
+ECMAScript 2015 provides escape sequences that represent code points from the entire Unicode space: `U+0000` to `U+10FFFF`, i.e. BMP and astral planes.    
 
 The new format is called **code point escape sequence**: `\u{<hex>}`, where `<hex>` is a hexadecimal number with a variable length of 1 to 6 digits.  
 For example `'\u{7A}'` (symbol `'z'`) or `'\u{1F639}'` (funny cat symbol `😹`).  
@@ -439,7 +439,7 @@ It seems reasonable to normalize both compared strings, to obtain canonical repr
 
 The common way to determine the string length is, of course, accessing the `myString.length` property. This property indicates the number of code units that a string has.  
 
-The evaluation of string length that contains code points from BPM works usually as expected:
+The evaluation of string length that contains code points from BMP works usually as expected:
 
 ```javascript
 var color = 'Green';
@@ -512,7 +512,7 @@ The normalization `drink.normalize()` transforms the combining sequence `'e\u032
 
 Because the string is a sequence of code units, accessing the character in a string by index has difficulties also.   
 
-When a string contains only BPM characters (excluding high-surrogate from `U+D800` to `U+DBFF` and low-surrogate from `U+DC00` to `U+DFFF`), the character positioning works correctly.  
+When a string contains only BMP characters (excluding high-surrogate from `U+D800` to `U+DBFF` and low-surrogate from `U+DC00` to `U+DFFF`), the character positioning works correctly.  
 
 ```javascript
 var str = 'hello';
@@ -594,7 +594,7 @@ Fortunately, it should work in most of the cases for European / North America's 
 
 Regular expressions, as well as strings, work in terms of code units. Similar to previously described scenarios, this creates difficulties when processing surrogate pairs and combining character sequences using regular expressions.   
 
-BPM characters match as expected, because a single code unit represents a symbol:  
+BMP characters match as expected, because a single code unit represents a symbol:  
 
 ```javascript
 var greetings = 'Hi!';

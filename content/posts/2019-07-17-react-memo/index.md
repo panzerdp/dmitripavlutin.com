@@ -2,7 +2,7 @@
 title: Use React.memo() wisely
 description: "React.memo() increases the performance of pure functional components by preventing useless re-renders. But such performance tweaks must be applied wisely."
 published: "2019-07-17T11:30:00Z"
-modified: "2019-07-18T12:23Z"
+modified: "2019-07-24T08:25Z"
 thumbnail: "./images/instruments.jpg"
 slug: use-react-memo-wisely
 tags: ["react", "component", "memoization"]
@@ -10,9 +10,9 @@ recommended: ["7-architectural-attributes-of-a-reliable-react-component", "the-a
 type: post
 ---
 
-Users enjoy fast and responsive user interfaces (UI). An UI response delay of less than 100 milliseconds feels instant to a user. A delay between 100 and 300 milliseconds is already perceptible.  
+Users enjoy fast and responsive user interfaces (UI). An UI response delay of less than 100 milliseconds feels instant to the user. A delay between 100 and 300 milliseconds is already perceptible.  
 
-To improve user interface performance, React offers a higher-order component `React.memo()`. By memoizing the rendered output, memoization helps to avoid unnecessary re-rendering.  
+To improve user interface performance, React offers a higher-order component `React.memo()`. By memoizing the rendered output, React skips unnecessary re-rendering.  
 
 This post helps you distinguish the situations when `React.memo()` improves the performance, and, not less important, understand when its usage is useless.  
 
@@ -45,7 +45,21 @@ export const MemoizedMovie = React.memo(Movie);
 
 `MemoizedMovie` render output is memoized. The memoized content is reused as long as `title` or `releaseDate` props are the same during the next rendering rounds.  
 
-This is where you gain performance benefit: by reusing the memoized result, React skips rendering the component and doesn't perform a virtual DOM difference check.  
+```jsx{3-4,9-10}
+// First render. React calls MemoizedMovie function.
+<MemoizedMovie 
+  movieTitle="Heat" 
+  releaseDate="December 15, 1995" 
+/>
+
+// Next render attempt. React does not call MemoizedMovie function
+<MemoizedMovie
+  movieTitle="Heat" 
+  releaseDate="December 15, 1995" 
+/>
+```
+
+This is where you gain performance benefit: by reusing the memoized result, React skips re-rendering the component and doesn't perform a virtual DOM difference check.  
 
 The same functionality for class components is implemented by [PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent).  
 
@@ -154,7 +168,7 @@ Anyways, use [profiling](https://reactjs.org/docs/optimizing-performance.html#pr
 
 If your component's rendering situation doesn't fit into the case described above, most likely you don't need `React.memo()`.  
 
-Use the following rule of thumb: if you don't see the gains of memoization, don't use it.  
+Use the following rule of thumb: don't use memoization if you can't quantify the performance gains.  
 
 > Performance-related changes applied incorrectly can even harm performance. Use `React.memo()` wisely.  
 
@@ -164,18 +178,18 @@ While technically possible, it doesn't make much sense to wrap class-based compo
 
 ### 3.1 Useless props comparison
 
-Suppose a case when the component typically renders with different props. In this case, memoization doesn't provide benefits. 
+Imagine a component typically renders with different props. In this case, memoization doesn't provide benefits. 
 
-Even if you try to use `React.memo()`, React will have to do 2 jobs on every re-render:
+Even if you wrap such a volatile component in `React.memo()`, React will have to do 2 jobs on every re-render:
 
 1. Invoke the comparison function to determine whether the previous and next props are equal
 2. Because props comparison almost always returns `false`, React performs the diff of previous and current render output
 
-Invocation of the comparison function is useless.  
+The invocation of the comparison function is useless because it almost always returns `false`.  
 
 ## 4. React.memo() and callback functions
 
-Function objects follow the same principles of comparison as any object. The function object equals only to itself.  
+Function objects follow the same principles of comparison as "regular" objects. The function object equals only to itself.  
 
 Let's compare some functions:
 ```javascript{8}
@@ -262,7 +276,7 @@ While in most situations React avoids re-rendering a memoized component, you sho
 
 ## 6. Conclusion
 
-`React.memo()` is a great tool to gain the benefits of memoization for pure functional components. When applied correctly, it prevents component re-render when the next props are the same as previous.  
+`React.memo()` is a great tool to gain the benefits of memoization for pure functional components. When applied correctly, it prevents component re-render when the next props equal previous.  
 
 Take precaution when memoizing components that use props with callback functions. Make sure to provide the same callback function instance between renderings.  
 

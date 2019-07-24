@@ -21,7 +21,6 @@ A **function** is a parametric block of code defined one time and called any num
 * The variable that holds the function object after declaration
 * `arguments` object (or its missing in an arrow function)
 
-
 These components affect the function behavior depending on the declaration type. In JavaScript a function can be declared using several ways: 
 
 * [Function declaration](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/function)
