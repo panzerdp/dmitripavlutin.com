@@ -45,7 +45,7 @@ export const MemoizedMovie = React.memo(Movie);
 
 `MemoizedMovie` render output is memoized. The memoized content is reused as long as `title` or `releaseDate` props are the same during the next rendering rounds.  
 
-```jsx{3-4,9-10}
+```jsx{3-4,10-11}
 // First render. React calls MemoizedMovie function.
 <MemoizedMovie 
   movieTitle="Heat" 
