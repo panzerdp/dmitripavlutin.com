@@ -13,7 +13,8 @@ module.exports = {
   },
   authorInfo: {
     name: 'Dmitri Pavlutin',
-    description: 'Dmitri Pavlutin is a software developer and tech writer specialized in Frontend technologies.',
+    description:
+      'Dmitri Pavlutin is a software developer and tech writer specialized in Frontend technologies. He likes to read books, run and travel the world.',
     email: 'dmitripavlutin@gmail.com',
     jobTitle: 'Software Developer',
     profiles: {

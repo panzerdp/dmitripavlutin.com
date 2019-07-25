@@ -38,16 +38,13 @@
   }
 }
 
+.authorInfoContainer {
+  display: none;
+}
+
 article h1 {
   font-size: 180%;
   position: relative;
-}
-
-.bannerContainer {
-  max-width: 53%;
-  float: right;
-  padding-top: 1rem;
-  padding-right: 0.25rem;
 }
 
 article code[class*="language-"] {
@@ -139,10 +136,10 @@ blockquote {
   .shareGroup {
     justify-content: center;
   }
+}
 
-  .bannerContainer {
-    max-width: none;
-    float: none;
-    padding: 0;
+@media (max-width: $sidebars-max-width) {
+  .authorInfoContainer {
+    display: block;
   }
 }

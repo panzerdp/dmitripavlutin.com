@@ -3,7 +3,7 @@ import * as React from 'react';
 import 'normalize.css/normalize.css';
 import styles from './index.module.scss';
 
-import LayoutFooter from 'components/Layout/Footer';
+import Footer from 'components/Layout/Footer';
 import LayoutHeader from 'components/Layout/Header';
 import LayoutMetaTags from 'components/Layout/Meta/Tags';
 
@@ -33,7 +33,7 @@ export default function LayoutContainer({
         <aside className={styles.leftSidebar}>{leftSidebar}</aside>
         <aside className={styles.rightSidebar}>{rightSidebar}</aside>
       </div>
-      <LayoutFooter authorInfo={authorInfo} />
+      <Footer authorInfo={authorInfo} />
     </>
   );
 }

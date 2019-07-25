@@ -10,7 +10,7 @@ interface HeaderProps {
   siteInfo: SiteInfo;
 }
 
-export default function Header({ authorProfilePicture, siteInfo }: HeaderProps) {
+export function Header({ authorProfilePicture, siteInfo }: HeaderProps) {
   return (
     <header>
       <div className={styles.headerContent}>
@@ -32,3 +32,5 @@ export default function Header({ authorProfilePicture, siteInfo }: HeaderProps) 
     </header>
   );
 }
+
+export default React.memo(Header);

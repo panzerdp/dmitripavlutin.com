@@ -6,6 +6,7 @@ import MetaPaginator from 'components/Pages/ExcerptsList/Meta/Paginator';
 import MetaStructuredData from 'components/Pages/ExcerptsList/Meta/StructuredData';
 import MetaTags from 'components/Pages/ExcerptsList/Meta/Tags';
 import Paginator from 'components/Pages/ExcerptsList/Paginator';
+import RightSidebar from 'components/Pages/ExcerptsList/Sidebar/Right';
 
 interface ExcerptsTemplateProps {
   siteInfo: SiteInfo;
@@ -23,7 +24,7 @@ export default function ExcerptsListTemplate({
   authorProfilePictureSrc,
 }: ExcerptsTemplateProps) {
   return (
-    <Layout>
+    <Layout rightSidebar={<RightSidebar />}>
       <MetaTags siteInfo={siteInfo} authorProfilePictureSrc={authorProfilePictureSrc} currentPage={currentPage} />
       <MetaStructuredData siteInfo={siteInfo} authorProfilePictureSrc={authorProfilePictureSrc} />
       <MetaPaginator currentPage={currentPage} pagesSum={pagesSum} siteUrl={siteInfo.url} />

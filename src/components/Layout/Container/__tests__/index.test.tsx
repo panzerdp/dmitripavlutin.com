@@ -2,7 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import LayoutContainer from '../index';
-import LayoutFooter from 'components/Layout/Footer';
+import Footer from 'components/Layout/Footer';
 import LayoutHeader from 'components/Layout/Header';
 import LayoutMetaTags from 'components/Layout/Meta/Tags';
 
@@ -64,7 +64,7 @@ describe('<LayoutContainer />', function() {
 
   it('should render footer', function() {
     const wrapper = shallow(<LayoutContainer {...props}>Child</LayoutContainer>);
-    expect(wrapper.contains(<LayoutFooter authorInfo={authorInfo} />));
+    expect(wrapper.contains(<Footer authorInfo={authorInfo} />));
   });
 
   it('should render left sidebar', function() {

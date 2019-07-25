@@ -11,7 +11,6 @@ import Edit from 'components/Pages/Post/Edit';
 import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import Comments from 'components/Pages/Post/Comments';
-import AboutAuthor from 'components/Pages/Post/AboutAuthor';
 import { TO_POST } from 'routes/path';
 
 const props = {
@@ -171,15 +170,5 @@ describe('<PostTemplate />', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
     expect(article.contains(<Comments url={postUrl} title={props.post.title} />)).toBe(true);
-  });
-
-  it('should render about author', function() {
-    const wrapper = shallow(<PostTemplate {...props} />);
-    const article = wrapper.find(Layout).find('article');
-    expect(
-      article.contains(
-        <AboutAuthor authorInfo={props.authorInfo} authorProfilePictureSrc={props.authorProfilePictureSrc} />
-      )
-    ).toBe(true);
   });
 });

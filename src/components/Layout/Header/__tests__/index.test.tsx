@@ -2,7 +2,7 @@ import * as React from 'react';
 import Img from 'gatsby-image';
 import { shallow } from 'enzyme';
 
-import LayoutHeader from '../index';
+import { Header } from '../index';
 import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX } from 'routes/path';
 
 const authorInfo: AuthorInfo = {
@@ -49,20 +49,20 @@ const props = {
 
 describe('<LayoutHeader />', function() {
   it('should render author name', function() {
-    const wrapper = shallow(<LayoutHeader {...props} />);
+    const wrapper = shallow(<Header {...props} />);
     expect(wrapper.text()).toContain(authorInfo.name);
     expect(wrapper.text()).toContain(siteInfo.description);
   });
 
   it('should render navigation links', function() {
-    const wrapper = shallow(<LayoutHeader {...props} />);
+    const wrapper = shallow(<Header {...props} />);
     [{ to: TO_INDEX() }, { to: TO_ABOUT_ME() }, { to: TO_ALL_POSTS() }].forEach((linkProps) =>
       expect(wrapper.find(linkProps).length).toBeGreaterThanOrEqual(1)
     );
   });
 
   it('should render profile picture', function() {
-    const wrapper = shallow(<LayoutHeader {...props} />);
+    const wrapper = shallow(<Header {...props} />);
     expect(wrapper.find({ fixed: authorProfilePicture }).is(Img)).toBe(true);
   });
 });

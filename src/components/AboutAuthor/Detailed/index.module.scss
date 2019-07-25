@@ -1,0 +1,26 @@
+@import '~styles/variables';
+
+.aboutAuthor {
+  box-shadow: $box-shadow;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 1.5rem;
+
+  :global {
+    .gatsby-image-wrapper {
+      border-radius: 8px;
+    }
+  }
+
+  .authorInfo {
+
+    h3 {
+      margin: 1.5rem 0 1rem;
+    }
+
+    .description {
+      margin: 1rem 0;
+      font-size: 1.2rem;
+    }
+  }
+}

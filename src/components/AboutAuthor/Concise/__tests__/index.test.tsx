@@ -1,7 +1,16 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
+import Img from 'gatsby-image';
 
-import PostAboutAuthor from '../index';
+import AboutAuthorConcise from '../index';
+
+const authorProfilePicture: FixedImage = {
+  width: 100,
+  height: 100,
+  base64: 'base64-encoded-string',
+  src: '/image.png',
+  srcSet: 'some srcset values',
+};
 
 const props = {
   authorInfo: {
@@ -20,17 +29,20 @@ const props = {
     },
     description: 'Dmitri Pavlutin is a software developer specialized in Frontend technologies',
   },
-  authorProfilePictureSrc: '/image.png',
+  authorProfilePicture,
+  authorStats: {
+    twitterFollowersCount: '1.1K'
+  }
 };
 
-describe('<PostAboutAuthor />', function() {
+describe('<PostAboutAuthorConcise />', function() {
   it('should render author profile picture', function() {
-    const wrapper = shallow(<PostAboutAuthor {...props} />);
-    expect(wrapper.find(`img[src="${props.authorProfilePictureSrc}"]`)).toHaveLength(1);
+    const wrapper = shallow(<AboutAuthorConcise {...props} />);
+    expect(wrapper.contains(<Img fixed={authorProfilePicture} alt={props.authorInfo.name} />)).toBe(true);
   });
 
   it('should render author description', function() {
-    const wrapper = shallow(<PostAboutAuthor {...props} />);
+    const wrapper = shallow(<AboutAuthorConcise {...props} />);
     expect(wrapper.text()).toContain(props.authorInfo.description);
   });
 });

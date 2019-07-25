@@ -10,7 +10,7 @@ interface FooterProps {
   authorInfo: AuthorInfo;
 }
 
-export default function LayoutFooter({ authorInfo: { profiles, name, email } }: FooterProps) {
+export function Footer({ authorInfo: { profiles, name, email } }: FooterProps) {
   return (
     <footer>
       <div className={styles.footerContent}>
@@ -49,3 +49,5 @@ export default function LayoutFooter({ authorInfo: { profiles, name, email } }: 
     </footer>
   );
 }
+
+export default React.memo(Footer);

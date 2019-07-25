@@ -13,7 +13,8 @@ import RightSidebar from 'components/Pages/Post/Sidebar/Right';
 import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import Comments from 'components/Pages/Post/Comments';
-import AboutAuthor from 'components/Pages/Post/AboutAuthor';
+import AboutAuthorConcise from 'components/AboutAuthor/Concise';
+import AboutAuthorFetch from 'components/AboutAuthor/Fetch';
 import SubscriptionRegion from 'components/Subscription/Region';
 import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll';
 import { TO_POST } from 'routes/path';
@@ -69,14 +70,26 @@ export default function PostTemplate({
             <Edit url={postRepositoryFileUrl} />
           </div>
         </div>
-        <AboutAuthor authorInfo={authorInfo} authorProfilePictureSrc={authorProfilePictureSrc} />
+        <div className={styles.bottomSubscriptionForm}>
+          <SubscriptionRegion />
+        </div>
+        <div className={`${styles.delimiter} ${styles.authorInfoContainer}`}>
+          <AboutAuthorFetch
+            render={({ authorStats, authorProfilePictureSmall }) => {
+              return (
+                <AboutAuthorConcise
+                  authorInfo={authorInfo}
+                  authorProfilePicture={authorProfilePictureSmall}
+                  authorStats={authorStats}
+                />
+              );
+            }}
+          />
+        </div>
         <div className={styles.delimiter}>
           <RecommendedList posts={recommendedPosts} />
         </div>
         <div className={styles.delimiter}>
-          <div className={styles.bottomSubscriptionForm}>
-            <SubscriptionRegion />
-          </div>
           <Comments url={postUrl} title={post.title} />
         </div>
       </article>
