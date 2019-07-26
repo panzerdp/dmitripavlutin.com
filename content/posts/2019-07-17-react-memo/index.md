@@ -1,8 +1,8 @@
 ---
 title: Use React.memo() wisely
-description: "React.memo() increases the performance of pure functional components by preventing useless re-renders. But such performance tweaks must be applied wisely."
+description: "React.memo() increases the performance of functional components by preventing useless re-renders. But such performance tweaks must be applied wisely."
 published: "2019-07-17T11:30:00Z"
-modified: "2019-07-24T08:25Z"
+modified: "2019-07-26T07:23Z"
 thumbnail: "./images/instruments.jpg"
 slug: use-react-memo-wisely
 tags: ["react", "component", "memoization"]
@@ -26,7 +26,7 @@ Current vs previous render results comparison is fast. But you can *speed up* th
 
 When a component is wrapped in `React.memo()`, React renders the component and memoizes the result. Before the next render, if the props are the same, React reuses the memoized content.  
 
-Let's look at a React memo example. The pure functional component `Movie` is wrapped in `React.memo()`:  
+Let's look at a React memo example. The functional component `Movie` is wrapped in `React.memo()`:  
 
 ```jsx
 export function Movie({ title, releaseDate }) {
@@ -95,9 +95,9 @@ const MemoizedMovie2 = React.memo(Movie, moviePropsAreEqual);
 
 ### 2.1 Component renders often with the same props
 
-`React.memo()` is applied on pure functional components. These are components that given the same props, always render the same output.  
+`React.memo()` is applied on functional components that given the same props, render the same output.  
 
-The best case of wrapping a component in `React.memo()` is when you expect the pure functional component to render often and usually with the same props.  
+The best case of wrapping a component in `React.memo()` is when you expect the functional component to render often and usually with the same props.  
 
 A common situation that makes a component re-render with the same props is being forced to re-render by a parent component.  
 
@@ -172,8 +172,6 @@ If your component's rendering situation doesn't fit into the case described abov
 Use the following rule of thumb: don't use memoization if you can't quantify the performance gains.  
 
 > Performance-related changes applied incorrectly can even harm performance. Use `React.memo()` wisely.  
-
-Of course, you cannot use `React.memo()` on non-pure components, e.g. components that have state or use sources of truth other than props.  
 
 While technically possible, it doesn't make much sense to wrap class-based components in `React.memo()`. Just extend `PureComponent` class or define a custom implementation of `shouldComponentUpdate()` method if you need memoization for class-based components.  
 
@@ -277,7 +275,7 @@ While in most situations React avoids re-rendering a memoized component, you sho
 
 ## 6. Conclusion
 
-`React.memo()` is a great tool to gain the benefits of memoization for pure functional components. When applied correctly, it prevents component re-render when the next props equal previous.  
+`React.memo()` is a great tool to gain the benefits of memoization for functional components. When applied correctly, it prevents component re-render when the next props equal previous.  
 
 Take precaution when memoizing components that use props with callback functions. Make sure to provide the same callback function instance between renderings.  
 
