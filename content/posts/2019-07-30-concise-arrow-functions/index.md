@@ -1,6 +1,6 @@
 ---
-title: Recipes of Concise Arrow Functions in JavaScript
-description: Useful tips on how to write consice arrow functions in JavaScript.
+title: Arrow Functions Shortening Recipes in JavaScript
+description: Arrow functions in JavaScript can be shortened to provide a concise and straightforward code.
 published: "2019-07-30"
 modified: "2019-07-30"
 thumbnail: "./images/arrows.jpg"
@@ -10,7 +10,7 @@ recommended: ["6-ways-to-declare-javascript-functions", "when-not-to-use-arrow-f
 type: post
 ---
 
-Arrow function syntax offers a way to define functions using a short arrow-like `=>` form:
+An arrow function in JavaScript uses the fat arrow `=>` syntax:
 
 ```javascript
 const sayMessage = (what, who) => {
@@ -22,21 +22,21 @@ sayMessage('Hello', 'World'); // => 'Hello, World!'
 
 Arrow function syntax is attractive because you can define functions shorter than a [function expression](/6-ways-to-declare-javascript-functions/#2-function-expression). There are cases when you can completely omit:  
 
-* parameters parenthesis `(param1, param2)`
+* parameters parentheses `(param1, param2)`
 * `return` keyword 
 * or even curly braces `{ }`.  
 
-Let's explore how to make arrow functions short and straightforward to read. Plus I'll describe some tricky shortening cases to be aware of.   
+Let's explore how to make arrow functions concise and straightforward to read. Plus I'll describe some tricky shortening cases to be aware of.   
 
 ## 1. Base extended syntax
 
 An arrow function declaration in its extended version consists of:
 
-* a pair of parenthesis with the params enumerated `(param1, param2)`
+* a pair of parentheses with the params enumerated `(param1, param2)`
 * followed by an arrow `=>`
-* and finally the function body `{ FunctionBody }`
+* ended with the function body `{ FunctionBody }`
 
-Simply, the function would looks as follows:  
+A typical arrow function looks as follows:  
 
 ```javascript
 const myArrowFunction = (param1, param2) => {
@@ -46,13 +46,15 @@ const myArrowFunction = (param1, param2) => {
 };
 ```
 
-Note that you can't put a newline between the parameters `(param1, param2)` and the arrow `=>`.  
+One small nuance here: you can't put a newline between the parameters `(param1, param2)` and the arrow `=>`.  
 
 The example that defines `sayMessage` presented in the introduction is the extended version of the arrow function.  
 
-## 2. Reducing parameters parenthesis
+Having the extended version in mind, let's see if the arrow function can be shortened, making the functions straightforward to read.   
 
-The following function has just one parameter:
+## 2. Reducing parameters parentheses
+
+The following function `greet` has just one parameter:
 
 ```javascript
 const greet = (who) => {
@@ -62,23 +64,27 @@ const greet = (who) => {
 greet('Aliens'); // => "Aliens, Welcome!"
 ```
 
-`greet` arrow function has only one parameter `who`.  
+`greet` arrow function has only one parameter `who`. This parameter is wrapped in a pair of parentheses `(who)`.  
 
-When the arrow function has only one parameter, you can ommit the parameters parenthesis. Let's shorten `greet` function:
+When the arrow function has only one parameter, you can omit the parameters parentheses. 
+
+Let's use this possibility and simplify `greet`:  
 
 ```javascript
-const greetNoParenthesis = who => {
+const greetNoParentheses = who => {
   return `${who}, Welcome!`
 };
 
 greetNoParenthesis('Aliens'); // => "Aliens, Welcome!"
 ```
 
-The new version of the arrow function `greetNoParenthesis` doesn't have parenthesis around its single parameter `who`.  
+The new version of the arrow function `greetNoParentheses` doesn't have parentheses around its single parameter `who`. You might find it a bit easier to read.  
+
+While this simplification is easy to grasp, there are a few exceptions when you have to keep the parentheses. Let's see these exceptions.  
 
 ### 2.1 Be aware of default param  
 
-If the arrow function has one parameter, but it has a default value, you must keep the parenthesis:
+If the arrow function has one parameter with a default value, you must keep the parentheses.
 
 ```javascript
 const greetDefParam = (who = 'Martians') => {
@@ -88,11 +94,11 @@ const greetDefParam = (who = 'Martians') => {
 greetDefParam(); // => "Martians, Welcome!"
 ```
 
-`who` parameter has a default value `'Martians'`. In such case you must keep the pair of parenthesis around the single parameter: `(who = 'Martians')`.
+`who` parameter has a default value `'Martians'`. In such a case, you must keep the pair of parentheses around the single parameter: `(who = 'Martians')`.
 
 ### 2.2 Be aware of param destructuring
 
-The same applies to destructring a parameter: don't skip the parameters parenthesis.
+The same applies to destructuring a parameter: keep the parameters parentheses.
 
 ```javascript
 const greetDestruct = ({ who }) => {
@@ -107,11 +113,11 @@ const race = {
 greetDestruct(race); // => "Jupiterians, Welcome!"
 ```
 
-The only parameter of the function uses destructuring `{ who }` to access the object's property who. In this case you must also wrap the destructuring in parenthesis: `({ who })`.
+The only parameter of the function uses destructuring `{ who }` to access the object's property `who`. In this case, you must wrap the destructuring in parentheses: `({ who })`.
 
 ### 2.3 No parameters
 
-When the function has no parameters, you must keep the parenthesis as well:
+When the function has no parameters, you must keep the parentheses as well:
 
 ```javascript
 const greetEveryone = () => {
@@ -121,13 +127,17 @@ const greetEveryone = () => {
 greetEveryone(); // => "Everyone, Welcome!"
 ```
 
-`greetEveryone` doesn't have any paremeters. The params parenthesis are kept.  
+`greetEveryone` doesn't have any parameters. The params parentheses are kept.  
 
 ## 3. Reducing curly braces and return
 
-When the arrow function body consists of only one expression, you can remove the curly braces and `return` keyword.  
+When the arrow function body consists of only one expression, you can remove the curly braces `{ }` and `return` keyword. 
 
-Let's simplify `greetNoParenthesis` function (defined in [2.](#2-reducing-parameters-parenthesis)) by removing the curly braces `{ }` and `return`:  
+Don't worry about omitting `return`. The arrow function implicitly returns the expression evaluation result.  
+
+That's the simplification I like the most in the arrow function syntax.  
+
+`greetConcise` function that doesn't have the curly braces `{ }` and `return`:  
 
 ```javascript
 const greetConcise = who => `${who}, Welcome!`;
@@ -135,11 +145,11 @@ const greetConcise = who => `${who}, Welcome!`;
 greetConsice('Friends'); // => "Friends, Welcome!"
 ```
 
-`greetConcise` is the shortest version of the arrow function syntax.  
+`greetConcise` is the shortest version of the arrow function syntax. The expression ``` `${who}, Welcome!` ``` is implicitly returned, even without `return` being present.  
 
 ### 3.1 Be aware of object literal
 
-When using the shortest arrow function syntax, and returning an object literal, you might see an unexpected result.
+When using the shortest arrow function syntax, and returning an object literal, you might experience an unexpected result.
 
 Let's see what would happen in such case:
 
@@ -149,11 +159,11 @@ const greetObject = who => { message: `${who}, Welcome!` };
 greetObject('Klingons'); // => undefined
 ```
 
-While it could be expected that `greetObject` to return an object, it actually returns `undefined`. 
+Being expected that `greetObject` returns an object, it returns `undefined`. 
 
-The problem is that JavaScript interprets the curly braces as a function body delimiter, rather than an object literal. `message: ` is interpreted as a [label identifier](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label), rather than a property.  
+The problem is that JavaScript interprets the curly braces `{ }` as function body delimiter, rather than an object literal. `message: ` is interpreted as a [label identifier](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label), rather than a property.  
 
-To make JavaScript return an object, wrap the object literal into a pair of parenthesis:
+To make the function return an object, wrap the object literal into a pair of parentheses:
 
 ```javascript
 const greetObject = who => ({ message: `${who}, Welcome!` });
@@ -161,15 +171,15 @@ const greetObject = who => ({ message: `${who}, Welcome!` });
 greetObject('Klingons'); // => { message: `Klingons, Welcome!` }
 ```
 
-```({ message: `${who}, Welcome!` })``` is explicitly written as an expresion. Now JavaScript understands the expression containing an object literal.  
+```({ message: `${who}, Welcome!` })``` is an expression. Now JavaScript understands that you mean an expression containing an object literal.  
 
 ## 4. Fat arrow method
 
-[Class Fields Proposal](https://github.com/tc39/proposal-class-fields) (as of August 2019 at stage 3) introduces the fat arrow method syntax to classes. I find it convinient that fat arrow binds `this` lexically to the class instance.  
+[Class Fields Proposal](https://github.com/tc39/proposal-class-fields) (as of August 2019 at stage 3) introduces the fat arrow method syntax to classes. `this` inside such a method always binds to the class instance.  
 
 Let's see a class `Greet` containing a method defined using the fat arrow syntax:
 
-```javascript
+```javascript{5-7}
 class Greet {
   constructor(what) {
     this.what = what;
@@ -182,13 +192,13 @@ const welcome = new Greet('Welcome');
 welcome.getMessage('Romulans'); // => 'Romulans, Welcome!'
 ```
 
-`getMessage` is a method defined as a  in `Greet` class using the fat arrow syntax. `this` inside `getMessage` method always binds to the class instance.  
+`getMessage` is a method in `Greet` class defined using the fat arrow syntax. `this` inside `getMessage` method always binds to the class instance.  
 
-Can you write consice fat arrow methods? Yes, you can!
+Can you write concise fat arrow methods? Yes, you can!
 
 Let's shorten `getMessage` method:
 
-```javascript
+```javascript{5}
 class Greet {
   constructor(what) {
     this.what = what;
@@ -199,11 +209,11 @@ const welcome = new Greet('Welcome');
 welcome.getMessage('Romulans'); // => 'Romulans, Welcome!'
 ```
 
-```getMessage = who => `${who}, ${this.what}!` ``` is a concise fat arrow method definition. The pair of perenthesis around its single param `who` was ommited, as well as the curly braces `{ }` and `return` keyword.  
+```getMessage = who => `${who}, ${this.what}!` ``` is a concise fat arrow method definition. The pair of parentheses around its single param `who` was omitted, as well as the curly braces `{ }` and `return` keyword.  
 
 ## 5. Concise is not always readable
 
-I enjoy the consice arrow functions for the ability to instantly show what the function does.  
+I enjoy concise arrow functions for the ability to instantly expose what the function does.  
 
 ```javascript
 const numbers = [1, 4, 5];
@@ -213,7 +223,7 @@ numbers.map(x => x * 2); // => [2, 8, 10]
 
 While it might be tempting to use the short syntax as much as possible, it must be done wisely.  
 
-I shorten the functions as long as it increases readability. Otherwise, it's ok to keep the curly braces and `return` keyword.  
+I shorten the functions as long as it increases readability. Generally, I favor readability over conciseness, so sometimes I would deliberately keep the curly braces and `return` keyword.  
 
 Let's define a concise factory function:
 
@@ -225,7 +235,7 @@ double(5); // => 10
 ```
 While `multiplyFactory` is short, it might be difficult to understand at first glance what it does.  
 
-In such case, I would avoid the shortest syntax and make the function definition a bit longer:
+In such a case, I would avoid the shortest syntax and make the function definition a bit longer:
 
 ```javascript
 const multiplyFactory = m => { 
@@ -238,16 +248,16 @@ double(5); // => 10
 
 In the longer form, `multiplyFactory` is easier to understand that it returns an arrow function. 
 
-Anyways, you can have your own taste. But I personally prioritize readability over passionate shortening.  
+Anyways, you might have your taste. But I advise you to prioritize readability over passionate shortening.  
 
 ## 6. Conclusion
 
 The arrow function is known for its ability to provide short definitions.  
 
-Under the recipes presented above, you can shorten the arrow function by removing the params parenthesis, curly braces  or `return` keyword.  
+Using the recipes presented above, you can shorten arrow functions by removing the params parentheses, curly braces or `return` keyword.  
 
-Good news are that you can use these recipes with the upcoming fat arrow method in classes.  
+You can use these recipes with the upcoming fat arrow methods in classes.  
 
-In my opinion, shortening is good as long as it increases readability. If you have many nested arrow functions, it might be wisely to avoid the shortest possible forms.  
+However, shortening is good as long as it increases readability. If you have many nested arrow functions, it might be wise to avoid the shortest possible forms.  
 
-*Do you think concise arrow functions are good or bad for readability? Feel free to leave a comment!*
+*What JavaScript shortening techniques do you know? Please write a comment below!*
