@@ -1,6 +1,6 @@
 ---
 title: Arrow Functions Shortening Recipes in JavaScript
-description: Arrow functions in JavaScript can be shortened to provide a concise and straightforward code.
+description:  See how arrow functions in JavaScript can be shortened to increase the readability of your code 
 published: "2019-07-30"
 modified: "2019-07-30"
 thumbnail: "./images/arrows.jpg"
@@ -28,9 +28,9 @@ Arrow function syntax is attractive because you can define functions shorter tha
 
 Let's explore how to make arrow functions concise and straightforward to read. Plus I'll describe some tricky shortening cases to be aware of.   
 
-## 1. Base extended syntax
+## 1. Full syntax
 
-An arrow function declaration in its extended version consists of:
+An arrow function declaration in its full version consists of:
 
 * a pair of parentheses with the params enumerated `(param1, param2)`
 * followed by an arrow `=>`
@@ -48,9 +48,7 @@ const myArrowFunction = (param1, param2) => {
 
 One small nuance here: you can't put a newline between the parameters `(param1, param2)` and the arrow `=>`.  
 
-The example that defines `sayMessage` presented in the introduction is the extended version of the arrow function.  
-
-Having the extended version in mind, let's see if the arrow function can be shortened, making the functions straightforward to read.   
+Let's see how the arrow function can be shortened, making the function easy to read. Such readability is convinient when dealing with callbacks.  
 
 ## 2. Reducing parameters parentheses
 
