@@ -6,7 +6,7 @@ modified: "2019-07-05"
 thumbnail: "./images/cover.jpg"
 slug: 6-ways-to-declare-javascript-functions
 tags: ["javascript", "function"]
-recommended: ["when-not-to-use-arrow-functions-in-javascript", "concise-arrow-functions-javascript"]
+recommended: ["when-not-to-use-arrow-functions-in-javascript", "javascript-arrow-functions-shortening-recipes"]
 type: post
 ---
 

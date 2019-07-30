@@ -1,8 +1,8 @@
 ---
 title: JavaScript Arrow Functions Shortening Recipes
 description:  How to shorten arrow functions in JavaScript to increase the readability of your code.
-published: "2019-07-30"
-modified: "2019-07-30"
+published: "2019-07-30T13:00Z"
+modified: "2019-07-30T13:00Z"
 thumbnail: "./images/arrows.jpg"
 slug: javascript-arrow-functions-shortening-recipes
 tags: ['javascript', 'arrow function', 'es2015']
