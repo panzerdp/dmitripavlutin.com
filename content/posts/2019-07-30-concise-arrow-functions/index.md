@@ -213,7 +213,7 @@ While it might be tempting to use the short syntax as much as possible, it must 
 
 ![JavaScript code Readability](./images/between-cables.jpg)
 
-I favor readability over conciseness, so sometimes I would deliberately keep the curly braces and `return` keyword.  
+I favor readability over brevity, so sometimes I would deliberately keep the curly braces and `return` keyword.  
 
 Let's define a concise factory function:
 
