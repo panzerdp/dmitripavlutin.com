@@ -1,10 +1,10 @@
 ---
-title: Arrow Functions Shortening Recipes in JavaScript
+title: JavaScript Arrow Functions Shortening Recipes
 description:  How to shorten arrow functions in JavaScript to increase the readability of your code.
 published: "2019-07-30"
 modified: "2019-07-30"
 thumbnail: "./images/arrows.jpg"
-slug: concise-arrow-functions-javascript
+slug: javascript-arrow-functions-shortening-recipes
 tags: ['javascript', 'arrow function', 'es2015']
 recommended: ["6-ways-to-declare-javascript-functions", "when-not-to-use-arrow-functions-in-javascript"]
 type: post
@@ -16,9 +16,9 @@ With fat arrow syntax you can define functions shorter than a [function expressi
 * `return` keyword 
 * or even curly braces `{ }`.  
 
-Let's explore how to make arrow functions concise and straightforward to read. Plus I'll describe some tricky shortening cases to be aware of.   
+Let's explore how to make arrow functions concise and straightforward to read. Plus you'll find some tricky shortening cases to be aware of.   
 
-## 1. Full syntax
+## 1. Basic syntax
 
 An arrow function declaration in its full version consists of:
 
@@ -209,9 +209,11 @@ numbers.map(x => x * 2); // => [2, 8, 10]
 ```
 `x => x * 2` easily implies a function that multiplies a number by `2`.
 
-While it might be tempting to use the short syntax as much as possible, it must be done wisely.  
+While it might be tempting to use the short syntax as much as possible, it must be done wisely. Otherwise you might end up in a readability issue, especially in the case of multiple nested concise arrow functions.    
 
-I shorten the functions as long as it increases readability. However, I favor readability over conciseness, so sometimes I would deliberately keep the curly braces and `return` keyword.  
+![JavaScript code Readability](./images/between-cables.jpg)
+
+I favor readability over conciseness, so sometimes I would deliberately keep the curly braces and `return` keyword.  
 
 Let's define a concise factory function:
 
@@ -234,7 +236,7 @@ const double = multiplyFactory(2);
 double(5); // => 10
 ```
 
-In the longer form, `multiplyFactory` is easier to understand that it returns an arrow function. 
+In the longer form, `multiplyFactory` is easier to understand that it returns an arrow function.  
 
 Anyways, you might have your taste. But I advise you to prioritize readability over passionate shortening.  
 
