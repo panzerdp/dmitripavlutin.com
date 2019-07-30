@@ -1,6 +1,6 @@
 ---
 title: Arrow Functions Shortening Recipes in JavaScript
-description:  See how arrow functions in JavaScript can be shortened to increase the readability of your code 
+description:  How to shorten arrow functions in JavaScript to increase the readability of your code.
 published: "2019-07-30"
 modified: "2019-07-30"
 thumbnail: "./images/arrows.jpg"
@@ -10,17 +10,7 @@ recommended: ["6-ways-to-declare-javascript-functions", "when-not-to-use-arrow-f
 type: post
 ---
 
-An arrow function in JavaScript uses the fat arrow `=>` syntax:
-
-```javascript
-const sayMessage = (what, who) => {
-  return `${what}, ${name}!`;
-};
-
-sayMessage('Hello', 'World'); // => 'Hello, World!'
-```
-
-Arrow function syntax is attractive because you can define functions shorter than a [function expression](/6-ways-to-declare-javascript-functions/#2-function-expression). There are cases when you can completely omit:  
+With fat arrow syntax you can define functions shorter than a [function expression](/6-ways-to-declare-javascript-functions/#2-function-expression). There are cases when you can completely omit:  
 
 * parameters parentheses `(param1, param2)`
 * `return` keyword 
@@ -39,16 +29,16 @@ An arrow function declaration in its full version consists of:
 A typical arrow function looks as follows:  
 
 ```javascript
-const myArrowFunction = (param1, param2) => {
-  let someResult = param1;
-  // ...
-  return someResult;
+const sayMessage = (what, who) => {
+  return `${what}, ${who}!`;
 };
+
+sayMessage('Hello', 'World'); // => 'Hello, World!'
 ```
 
 One small nuance here: you can't put a newline between the parameters `(param1, param2)` and the arrow `=>`.  
 
-Let's see how the arrow function can be shortened, making the function easy to read. Such readability is convinient when dealing with callbacks.  
+Let's see how the arrow function can be shortened, making the function easy to read, almost inline. Such readability is convinient when dealing with callbacks.  
 
 ## 2. Reducing parameters parentheses
 
@@ -73,10 +63,10 @@ const greetNoParentheses = who => {
   return `${who}, Welcome!`
 };
 
-greetNoParenthesis('Aliens'); // => "Aliens, Welcome!"
+greetNoParentheses('Aliens'); // => "Aliens, Welcome!"
 ```
 
-The new version of the arrow function `greetNoParentheses` doesn't have parentheses around its single parameter `who`. You might find it a bit easier to read.  
+The new version of the arrow function `greetNoParentheses` doesn't have parentheses around its single parameter `who`. Two characters less: still a win.  
 
 While this simplification is easy to grasp, there are a few exceptions when you have to keep the parentheses. Let's see these exceptions.  
 
@@ -96,7 +86,7 @@ greetDefParam(); // => "Martians, Welcome!"
 
 ### 2.2 Be aware of param destructuring
 
-The same applies to destructuring a parameter: keep the parameters parentheses.
+You must also keep the parentheses around a destructured parameter:  
 
 ```javascript
 const greetDestruct = ({ who }) => {
@@ -115,7 +105,7 @@ The only parameter of the function uses destructuring `{ who }` to access the ob
 
 ### 2.3 No parameters
 
-When the function has no parameters, you must keep the parentheses as well:
+When the function has no parameters, the parentheses are required as well:
 
 ```javascript
 const greetEveryone = () => {
@@ -125,7 +115,7 @@ const greetEveryone = () => {
 greetEveryone(); // => "Everyone, Welcome!"
 ```
 
-`greetEveryone` doesn't have any parameters. The params parentheses are kept.  
+`greetEveryone` doesn't have any parameters. The params parentheses `()` are kept.  
 
 ## 3. Reducing curly braces and return
 
@@ -140,7 +130,7 @@ That's the simplification I like the most in the arrow function syntax.
 ```javascript
 const greetConcise = who => `${who}, Welcome!`;
 
-greetConsice('Friends'); // => "Friends, Welcome!"
+greetConcise('Friends'); // => "Friends, Welcome!"
 ```
 
 `greetConcise` is the shortest version of the arrow function syntax. The expression ``` `${who}, Welcome!` ``` is implicitly returned, even without `return` being present.  
@@ -157,7 +147,7 @@ const greetObject = who => { message: `${who}, Welcome!` };
 greetObject('Klingons'); // => undefined
 ```
 
-Being expected that `greetObject` returns an object, it returns `undefined`. 
+Being expected that `greetObject` returns an object, it actually returns `undefined`. 
 
 The problem is that JavaScript interprets the curly braces `{ }` as function body delimiter, rather than an object literal. `message: ` is interpreted as a [label identifier](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label), rather than a property.  
 
@@ -169,13 +159,13 @@ const greetObject = who => ({ message: `${who}, Welcome!` });
 greetObject('Klingons'); // => { message: `Klingons, Welcome!` }
 ```
 
-```({ message: `${who}, Welcome!` })``` is an expression. Now JavaScript understands that you mean an expression containing an object literal.  
+```({ message: `${who}, Welcome!` })``` is an expression. Now JavaScript sees this as [an expression](https://2ality.com/2012/09/expressions-vs-statements.html) containing an object literal.  
 
 ## 4. Fat arrow method
 
 [Class Fields Proposal](https://github.com/tc39/proposal-class-fields) (as of August 2019 at stage 3) introduces the fat arrow method syntax to classes. `this` inside such a method always binds to the class instance.  
 
-Let's see a class `Greet` containing a method defined using the fat arrow syntax:
+Let's define a class `Greet` containing a fat arrow method:
 
 ```javascript{5-7}
 class Greet {
@@ -221,7 +211,7 @@ numbers.map(x => x * 2); // => [2, 8, 10]
 
 While it might be tempting to use the short syntax as much as possible, it must be done wisely.  
 
-I shorten the functions as long as it increases readability. Generally, I favor readability over conciseness, so sometimes I would deliberately keep the curly braces and `return` keyword.  
+I shorten the functions as long as it increases readability. However, I favor readability over conciseness, so sometimes I would deliberately keep the curly braces and `return` keyword.  
 
 Let's define a concise factory function:
 
