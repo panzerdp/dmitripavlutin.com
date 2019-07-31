@@ -2,7 +2,7 @@
 title: 7 Tips to Handle undefined in JavaScript
 description: A detailed article about 'undefined' keyword in JavaScript. 7 tips on how to handle correctly 'undefined' and increase code durability.
 published: "2017-04-15"
-modified: "2019-07-10"
+modified: "2019-07-31T08:50Z"
 thumbnail: "./images/blade-runner-rachel.png"
 slug: 7-tips-to-handle-undefined-in-javascript
 tags: ["javascript", "undefined"]
@@ -487,6 +487,30 @@ options.color;    // => 'black'
 The object initializer spreads properties from `defaults` and `unsafeOptions` source objects. The order in which the source objects are specified is important: later source object properties overwrite earlier ones.  
 
 Filling an incomplete object with default property values is an efficient strategy to make your code safe and durable. No matter the situation, the object always contains the full set of properties: and `undefined` cannot be generated.  
+
+**Bonus tip: nullish coalescing**
+
+A new operator named [nullish coalescing](https://github.com/tc39/proposal-nullish-coalescing) (a proposal at stage 3 as of August 2019) evaluates to a default value when its operand is `undefined` or `null`:  
+
+```javascript
+const value = nullOrUndefinedValue ?? defaultValue;
+```
+
+Nullish coalescing operator is convenient to access an object property, while having a default value when this property is `undefined` or `null`:  
+
+```javascript
+const styles = {
+  fontSize: 18
+};
+
+styles.color ?? 'black'; // => 'black'
+styles.fontSize ?? 16;   // => 18
+```
+
+`styles` object doesn't have the property `color`, thus `styles.color` property accessor is `undefined`. 
+`styles.color ?? 'black'` evaluates to the default value `'black'`.  
+
+`styles.fontSize` is `18`, so the nullish coalescing operator evaluates to the property value `18`.  
 
 ### 2.3 Function parameters
 
