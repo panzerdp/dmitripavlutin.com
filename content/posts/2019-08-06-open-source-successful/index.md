@@ -12,15 +12,15 @@ type: post
 
 You have decided to start an open source project. You have worked a few months on an interesting problem. Finally, you wrote some notes in README.md and released version 1.0. 
 
-After a few weeks, you might notice that the interest in the project is low. You've worked a lot for free, giving your best efforts, but in the end, few people are interested.  
+After a few weeks, the interest in the project is still low. You've worked a lot for free, giving the best efforts, but in the end, few people are interested.  
 
 How could that happen? And more importantly, what to do to make your open source project successful?  
 
-I've built an open source library [vocajs.com](https://vocajs.com) that [managed](/announcing-voca-the-ultimate-javascript-string-library/) to rise to the top trending repositories on GitHub. Along the way, I learned some important principles of how to make a quality open source project. I want to share these ideas with you.  
+I've built an open source library [vocajs.com](https://vocajs.com) that [managed](/announcing-voca-the-ultimate-javascript-string-library/) to rise to the top trending repositories on GitHub. Along the way, I learned some important principles of how to make a quality open source project. I want to share these ideas.  
 
 ## 1. No one cares about your project
 
-First of all, as an author, shift your thoughts about open source. You might think that if you put a lot of effort into your project (library, tool, framework, etc) that's interesting to you, a lot of developers are going to get excited as well.  
+First of all, as an author, shift your thoughts about open source. You might think that if putting a lot of effort into the project (library, tool, framework, etc) that's interesting to you, a lot of developers are going to get excited as well.  
 
 Unfortunately, that's far from the truth...
 
@@ -28,7 +28,7 @@ It might sound harsh, but developers out there are only interested in *solving t
 
 ## 2. Solve a real problem
 
-Before even starting the open source project, before even writing the first line of code, you need to invest a lot of time in finding a real problem to solve.  
+Before even starting the open source project, before even writing the first line of code, invest a lot of time in finding a real problem to solve.  
 
 To summarize, a good open source project solves a problem that developers are actively searching for a solution.  
 
@@ -58,11 +58,11 @@ The truth is a lot of open source code is not the best quality. Nobody wants to 
 
 In this regards a good way to increase trust and demonstrate the quality of your open source project is testing it. You might need to have at least 80% of code coverage.  
 
-You can even go further and put some badges on README.md to demonstrate that your project is fully tested. 
+You can even go further and put some badges on README.md to demonstrate that the codebase is fully tested. 
 
 The readability of the source is also an important aspect. If you want at later stages to attract more contributors, the code must be readable and well structured.  
 
-Additionally, your open source tool will only benefit from implementing non-functional requirements:
+Additionally, the open source tool will only benefit from implementing non-functional requirements:
 
 * Have an intuitive, configurable and extensible API
 * Support a wide range of environments (cross-platform, cross-browser, etc)
@@ -80,17 +80,17 @@ Ok, you followed my advice, found a decent problem and implemented a relatively 
 
 Unfortunately, only half of the job is done...
 
-README.md file is the entry point of your project. And if you struggle to explain concisely and exactly what your project does, people will hardly understand the mission of your project and will bounce-off.  
+README.md file is the entry point of the project. And if you struggle to explain concisely and exactly what the project does, people will hardly understand its mission and will bounce-off.  
 
 In case if README.md lacks details, you might think that developers are going to dive into implementation details and find by themselves how to use the tool. Usually, that's not going to happen because nobody likes deciphering code.  
 
-What everyone expects is to understand what problem your tool solves and how to use the tool. That's all.  
+What everyone expects is to understand what problem your tool solves and how to use it. That's all.  
 
-Let me tell you one truth that worked for me quite well: 
+Let me tell you one truth that worked for me well: 
 
-*Spend 50% of the time writing compelling README.md and straightforward documentation.* 
+*Invest 50% of the time writing compelling README.md and straightforward documentation.* 
 
-Yes, you read it right. Spend half of the time explaining what your project does and how to use it.  
+Yes, you read it right. Spend half of the time explaining what the project does and how to use it.  
 
 ### 4.1 README.md
 
@@ -174,7 +174,7 @@ While it might seem secondary at first, communication is a complex task. Respond
 
 Sometimes you will deal with frustrated users, anyways find the will to communicate politely with everyone.  
 
-Often you have to say "No" to certain requests or reject pull requests. Always try to explain politely your decisions and gratify contributor for spending his time.  
+Be ready to say "No" to certain requests or reject pull requests. Always try to explain politely your decisions and gratify contributor for spending his time.  
 
 The goal is to attract new contributors to your project. Some say that popular open source projects are based on a strong community of contributors.  
 
@@ -204,9 +204,9 @@ Accept constructive criticism, and simply ignore the trash comments.
 
 A successful open source project requires a lot of time and commitment.  
 
-First of all your project must solve a problem, and solve it good. Developers are searching for good solutions for their problems.  
+First of all the project must solve a problem, and solve it good. Developers are searching for good solutions for their problems.  
 
-You must invest about 50% of the time into creating quality README.md and detailed documentation. The usage of your tool should be effortless for the user.  
+You must invest about 50% of the time into creating quality README.md and detailed documentation. Tool usage should be effortless as much as possible for the user.  
 
 Having a decent code coverage builds trust in the quality of your code. Do not forget to invest in non-functional requirements also, like supporting many environments and have few dependencies.  
 
