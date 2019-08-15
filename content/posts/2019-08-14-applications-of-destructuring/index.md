@@ -1,8 +1,8 @@
 ---
 title: 5 Interesting Uses of JavaScript Destructuring
 description: A list of interseting and helpful applications of destructing assignments in JavaScript. 
-published: "2019-08-14T13:00Z"
-modified: "2019-08-14T13:00Z"
+published: "2019-08-15T13:15Z"
+modified: "2019-08-14T13:15Z"
 thumbnail: "./images/logs.jpg"
 slug: 5-interesting-uses-javascript-destructuring
 tags: ["javascript", "destructuring", "rest", "es2015"]
@@ -10,17 +10,15 @@ recommended: ["how-three-dots-changed-javascript", "object-rest-spread-propertie
 type: post
 ---
 
-Looking at my regular JavaScript code, I see that one of the most used features is destructuring. 
+Looking at my regular JavaScript code, I see that destructuring assignments are everywhere.  
 
-It happens because reading object properties and accessing array items are frequent operations. The destructuring assignments make these operations so much easier and concise. 
+Reading object properties and accessing array items are frequent operations. The destructuring assignments make these operations so much easier and concise. 
 
 In this post, I will describe 5 interesting uses of destructuring in JavaScript, beyond the basic usage. 
 
 ## 1. Swap variables
 
-To swap to variables values the usual way requires an additional temporary holder variable. 
-
-Let's see a simple scenario: 
+The usual way to swap 2 variables requires an additional temporary variable. Let's see a simple scenario: 
 ```javascript
 let a = 1;
 let b = 2;
@@ -36,7 +34,7 @@ b; // => 1
 
 `temp` is a temporary variable that holds the value of `a`. Then `a` is assigned with the value of `b`, and consequently `b` is assigned with `temp`. 
 
-The destructuring assignment makes the variables swapping simple, without any need of temporary variable:
+The destructuring assignment makes the variables swapping simple, without any need of a temporary variable:
 
 ```javascript{4}
 let a = 1;
@@ -50,9 +48,9 @@ b; // => 1
 
 `[a, b] = [b, a]` is a destructuring assignment. On the right side, an array is created `[b, a]`, that is `[2, 1]`. The first item of this array `2` is assigned to `a`, and the second item `1` is assigned to `b`. 
 
-As seen in the example, swapping variables using destructuring assignment is short and expressive. 
+Although you still create a temporary array, swapping variables using destructuring assignment is more concise.  
 
-What's more interesting that is swapping more than 2 variables at the same time. Let's try that:
+This is not the limit. You can swap more than 2 variables at the same time. Let's try that:
 
 ```javascript{5}
 let zero = 2;
@@ -62,15 +60,15 @@ let two = 0;
 [zero, one, two] = [two, one, zero];
 
 zero; // => 0
-one; // => 1
-two; // => 2
+one;  // => 1
+two;  // => 2
 ```
 
 You can swap as many variables as you want! Although, swapping 2 variables is the most common scenario. 
 
-## 2. Access nth array item
+## 2. Access array item
 
-You have an array of items that potentially can be empty. You want to access the first, second, or nth item of the array, but if the item does not exist, simply default to a value. 
+You have an array of items that potentially can be empty. You want to access the first, second, or nth item of the array, but if the item does not exist, get a default value.  
 
 Normally you would use the length property of the array:
 
@@ -111,11 +109,11 @@ Notice the comma on the left side of the destructuring: it means that the first 
 
 ## 3. Immutable operations
 
-When I started using React, and later Redux, I was forced to write code that respects immutability. While having some difficulties at the start, later I saw its benefits: it's easier to grasp the data flow inside the application. 
+When I started using React, and later Redux, I was forced to write code that respects immutability. While having some difficulties at the start, later I saw its benefits: it's easier to deal with unidirectional data flow.  
 
 Immutability forbids mutating objects. Fortunately, destructuring helps you achieve some operations in an immutable manner easily. 
 
-The destructuring in combination with `...` rest operator removes elements from the beginning of an array:
+The destructuring in combination with `...` [rest operator](/how-three-dots-changed-javascript/#42-array-destructure) removes elements from the beginning of an array:
 
 ```javascript{3}
 const numbers = [1, 2, 3];
@@ -144,11 +142,11 @@ small; // => { bar: 'value Bar' }
 big; // => { foo: 'value Foo', bar: 'value Bar' }
 ```
 
-The destructuring assignment in combination with object rest operator creates a new object `small` with all properties from `big`, only without `foo`. 
+The destructuring assignment in combination with [object rest operator](/object-rest-spread-properties-javascript/#3-object-rest-properties) creates a new object `small` with all properties from `big`, only without `foo`. 
 
 ## 4. Destructuring iterables
 
-In the previous sections, the destructuring was applied to arrays. That's only a particular case because you can apply destructuring to any object that implements [the iterable protocol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol). 
+In the previous sections, the destructuring was applied to arrays. But you can any object that implements the [iterable protocol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol). 
 
 Many native primitive types and objects are iterable: arrays, strings, typed arrays, sets, and maps. 
 
@@ -162,44 +160,49 @@ const [firstChar = ''] = str;
 firstChar; // => 'c'
 ```
 
-You're not limited to native types that implement the iterable protocol. By implementing the iterable protocol, you can define your own how to destructure objects. 
+You're not limited to native types. You can create custom destructuring logic by implementing the iterable protocol.  
 
-`movies` holds a list of movie objects. When destructuring `movie`, it would be great to get the movie title directly as a string. Let's implement a custom iterator: 
+`movies` holds a list of movie objects. When destructuring `movies`, it would be great to get the movie title as a string. Let's implement a custom iterator: 
 
 ```javascript
 const movies = {
- list: [
- { title: 'Heat' },
- { title: 'Interstellar' }
- ],
- [Symbol.iterator]() {
- let index = 0;
- return {
- next: () => {
- if (index < this.list.length) {
- const value = this.list[index++].title;
- return { value, done: false };
- } else {
- return { done: true };
- }
- }
- };
- }
+  list: [
+    { title: 'Heat' }, 
+    { title: 'Interstellar' }
+  ],
+  [Symbol.iterator]() {
+    let index = 0;
+    return {
+      next: () => {
+        if (index < this.list.length) {
+          const value = this.list[index++].title;
+          return {
+            value,
+            done: false
+          };
+        } else {
+          return {
+            done: true
+          };
+        }
+      }
+    };
+  }
 };
 
-const [firstMovieTitle] = movies; 
+const [firstMovieTitle] = movies;
 console.log(firstMovieTitle); // => 'Heat'
 ```
 
 `movies` object implements the iterable protocol by defining the `Symbol.iterator` method. The iterator iterates over the titles of movies. 
 
-Conforming to an iterable protocol allows the destructuring of `movies` object into titles of movies. 
+Conforming to an iterable protocol allows the destructuring of `movies` object into titles, specifically by reading the title of the first movie: `const [firstMovieTitle] = movies`. 
 
-The only limit is your imagination when using destructuring with iterators. 
+The sky is the limit when using destructuring with iterators. 
 
 ## 5. Destructuring dynamic properties
 
-In my experience, the destructuring of an object by properties happens more often than the destructuring of arrays. 
+In my experience, the destructuring of an object by properties happens more often than arrays destructuring.   
 
 The destructuring of an object looks pretty simple:
 
@@ -213,9 +216,9 @@ title; // => 'Heat'
 
 `const { title } = movie` creates a variable `title` and assigns to it the value of property `movie.title`.
 
-When first reading about the destructuring of the object, I was a bit surprised that you don't have to know the object's property name statically. You can destructure an object with a dynamic property name!
+When first reading about objects destructuring, I was a bit surprised that you don't have to know the property name statically. You can destructure an object with a dynamic property name!
 
-Let's write a greeting function:
+To see how dynamic destructuring works, let's write a greeting function:
 
 ```javascript{2}
 function greet(obj, nameProp) {
@@ -237,7 +240,7 @@ Even better you can specify a default value `'Unknown'` in case if the property 
 
 Destructuring works great if you want to access object properties and array items. 
 
-On top of the basic usage, array destructuring offers way more flexibility to achieve goals like swapping variables, accessing array items, execute immutable operations.
+On top of the basic usage, array destructuring is convinient to swap variables, access array items, perform some immutable operations.
 
 JavaScript offers even greater destructuring possibilities because you can define your destructuring logic using iterators. 
 
