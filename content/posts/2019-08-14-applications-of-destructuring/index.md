@@ -2,7 +2,7 @@
 title: 5 Interesting Uses of JavaScript Destructuring
 description: A list of interseting and helpful applications of destructing assignments in JavaScript. 
 published: "2019-08-15T13:15Z"
-modified: "2019-08-14T13:15Z"
+modified: "2019-08-14T13:51Z"
 thumbnail: "./images/logs.jpg"
 slug: 5-interesting-uses-javascript-destructuring
 tags: ["javascript", "destructuring", "rest", "es2015"]
@@ -176,15 +176,9 @@ const movies = {
       next: () => {
         if (index < this.list.length) {
           const value = this.list[index++].title;
-          return {
-            value,
-            done: false
-          };
-        } else {
-          return {
-            done: true
-          };
+          return { value, done: false };
         }
+        return { done: true };
       }
     };
   }
