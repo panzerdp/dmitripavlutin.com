@@ -1,6 +1,6 @@
 ---
 title: 5 Interesting Uses of JavaScript Destructuring
-description: A list of interseting and helpful applications of destructing assignments in JavaScript. 
+description: A list of interesting and helpful applications of destructing assignments in JavaScript. 
 published: "2019-08-15T13:15Z"
 modified: "2019-08-14T13:51Z"
 thumbnail: "./images/logs.jpg"
