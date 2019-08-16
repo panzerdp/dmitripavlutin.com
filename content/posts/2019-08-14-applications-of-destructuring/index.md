@@ -2,7 +2,7 @@
 title: 5 Interesting Uses of JavaScript Destructuring
 description: A list of interesting and helpful applications of destructing assignments in JavaScript. 
 published: "2019-08-15T13:15Z"
-modified: "2019-08-14T13:51Z"
+modified: "2019-08-15T07:25Z"
 thumbnail: "./images/logs.jpg"
 slug: 5-interesting-uses-javascript-destructuring
 tags: ["javascript", "destructuring", "rest", "es2015"]
@@ -105,7 +105,7 @@ const [, secondColor = 'black'] = colors;
 secondColor; // => 'black'
 ```
 
-Notice the comma on the left side of the destructuring: it means that the first element is ignored. `secondColor` is assigned with the element at index `1` from the `colors` array. 
+Note the comma on the left side of the destructuring: it means that the first element is ignored. `secondColor` is assigned with the element at index `1` from the `colors` array. 
 
 ## 3. Immutable operations
 
@@ -146,11 +146,11 @@ The destructuring assignment in combination with [object rest operator](/object-
 
 ## 4. Destructuring iterables
 
-In the previous sections, the destructuring was applied to arrays. But you can any object that implements the [iterable protocol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol). 
+In the previous sections, the destructuring was applied to arrays. But you can destructure any object that implements the [iterable protocol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol). 
 
 Many native primitive types and objects are iterable: arrays, strings, typed arrays, sets, and maps. 
 
-For example, you can use destructuring to access the characters of a string:
+For example, you can destructure a string to characters:
 
 ```javascript
 const str = 'cheese';
@@ -160,7 +160,7 @@ const [firstChar = ''] = str;
 firstChar; // => 'c'
 ```
 
-You're not limited to native types. You can create custom destructuring logic by implementing the iterable protocol.  
+You're not limited to native types. Destructuring logic can be customize by implementing the iterable protocol.  
 
 `movies` holds a list of movie objects. When destructuring `movies`, it would be great to get the movie title as a string. Let's implement a custom iterator: 
 
@@ -236,6 +236,6 @@ Destructuring works great if you want to access object properties and array item
 
 On top of the basic usage, array destructuring is convinient to swap variables, access array items, perform some immutable operations.
 
-JavaScript offers even greater destructuring possibilities because you can define your destructuring logic using iterators. 
+JavaScript offers even greater possibilities because you can define custom destructuring logic using iterators. 
 
 *What interesting applications of destructuring do you know? Write a comment below!* 
