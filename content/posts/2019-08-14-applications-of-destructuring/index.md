@@ -2,7 +2,7 @@
 title: 5 Interesting Uses of JavaScript Destructuring
 description: A list of interesting and helpful applications of destructing assignments in JavaScript. 
 published: "2019-08-15T13:15Z"
-modified: "2019-08-15T07:25Z"
+modified: "2019-08-18T09:14Z"
 thumbnail: "./images/logs.jpg"
 slug: 5-interesting-uses-javascript-destructuring
 tags: ["javascript", "destructuring", "rest", "es2015"]
@@ -160,7 +160,7 @@ const [firstChar = ''] = str;
 firstChar; // => 'c'
 ```
 
-You're not limited to native types. Destructuring logic can be customize by implementing the iterable protocol.  
+You're not limited to native types. Destructuring logic can be customized by implementing the iterable protocol.  
 
 `movies` holds a list of movie objects. When destructuring `movies`, it would be great to get the movie title as a string. Let's implement a custom iterator: 
 
