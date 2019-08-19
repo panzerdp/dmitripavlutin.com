@@ -2,7 +2,7 @@
 title: Use React.memo() wisely
 description: "React.memo() increases the performance of functional components by preventing useless re-renders. But such performance tweaks must be applied wisely."
 published: "2019-07-17T11:30:00Z"
-modified: "2019-07-26T07:23Z"
+modified: "2019-08-19T08:38Z"
 thumbnail: "./images/instruments.jpg"
 slug: use-react-memo-wisely
 tags: ["react", "component", "memoization"]
@@ -250,7 +250,9 @@ To fix it, the same callback instance must be used to set `onLogout` prop. Let's
 const MemoizedLogout = React.memo(Logout);
 
 function MyApp({ store, cookies }) {
-  const onLogout = useCallback(() => { cookies.clear() }, []);
+  const onLogout = useCallback(() => {
+    cookies.clear(); 
+  }, [cookies]);
   return (
     <div className="main">
       <header>
@@ -265,7 +267,7 @@ function MyApp({ store, cookies }) {
 }
 ```
 
-`useCallback(() => { cookies.clear() }, [])` always returns the same function instance. Memoization of `MemoizedLogout` is fixed.  
+`useCallback(() => { cookies.clear() }, [cookies])` always returns the same function instance as long as `cookies` is the same. Memoization of `MemoizedLogout` is fixed.  
 
 ## 5. React.memo() is a performance hint
 
