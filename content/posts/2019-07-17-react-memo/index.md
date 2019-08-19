@@ -250,9 +250,7 @@ To fix it, the same callback instance must be used to set `onLogout` prop. Let's
 const MemoizedLogout = React.memo(Logout);
 
 function MyApp({ store, cookies }) {
-  const onLogout = useCallback(() => {
-    cookies.clear(); 
-  }, [cookies]);
+  const onLogout = useCallback(() => cookies.clear(), [cookies]);
   return (
     <div className="main">
       <header>
@@ -267,7 +265,7 @@ function MyApp({ store, cookies }) {
 }
 ```
 
-`useCallback(() => { cookies.clear() }, [cookies])` always returns the same function instance as long as `cookies` is the same. Memoization of `MemoizedLogout` is fixed.  
+`useCallback(() => cookies.clear(), [cookies])` always returns the same function instance as long as `cookies` is the same. Memoization of `MemoizedLogout` is fixed.  
 
 ## 5. React.memo() is a performance hint
 
