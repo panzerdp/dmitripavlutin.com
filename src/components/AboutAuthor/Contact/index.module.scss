@@ -1,0 +1,41 @@
+@import '~styles/variables';
+
+.contactAuthor {
+  box-shadow: $box-shadow;
+  border-radius: 8px;
+  font-size: 1.3rem;
+  padding: 1.5rem;
+
+  h3 {
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .description {
+    margin: 1rem 0;
+  }
+
+  .links {
+    display: block;
+    
+    .icon {
+      background-color: rgba($anchor-color, 0.9);
+      vertical-align: middle;
+      display: inline-block;
+      border-radius: 4px;
+      width: 1.4rem;
+      height: 1.4rem;
+      padding: 0.25rem 0.25rem;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .text {
+      font-size: 1.4rem;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+  }
+}

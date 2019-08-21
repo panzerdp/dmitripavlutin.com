@@ -7,6 +7,7 @@ import PopularPosts from 'components/Popular/Posts';
 import PopularTagsFetch from 'components/Popular/Tags/Fetch';
 import PopularTagsList from 'components/Popular/Tags/List';
 import AboutAuthorDetailed from 'components/AboutAuthor/Detailed';
+import AboutAuthorContact from 'components/AboutAuthor/Contact';
 import AboutAuthorFetch from 'components/AboutAuthor/Fetch';
 
 interface PostRightSidebarProps {
@@ -20,11 +21,14 @@ export default function PostRightSidebar({ popularPosts }: PostRightSidebarProps
       <AboutAuthorFetch
         render={({ authorInfo, authorProfilePictureBig, authorStats }) => {
           return (
-            <AboutAuthorDetailed
-              authorInfo={authorInfo}
-              authorProfilePicture={authorProfilePictureBig}
-              authorStats={authorStats}
-            />
+            <>
+              <AboutAuthorDetailed
+                authorInfo={authorInfo}
+                authorProfilePicture={authorProfilePictureBig}
+                authorStats={authorStats}
+              />
+              <AboutAuthorContact authorInfo={authorInfo} />
+            </>
           );
         }}
       />

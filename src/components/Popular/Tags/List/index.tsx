@@ -28,7 +28,7 @@ export default function PopularTagsList({ posts, limit = Infinity, title }: Popu
     .slice(0, limit);
   return (
     <div className={styles.popularPosts}>
-      <h2>{title}</h2>
+      <h3>{title}</h3>
       <div className={styles.tags}>
         {tags.map((tag) => (
           <Tag tag={tag} key={tag} />

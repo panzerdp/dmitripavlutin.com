@@ -31,8 +31,8 @@ const props = {
   },
   authorProfilePicture,
   authorStats: {
-    twitterFollowersCount: '1.1K'
-  }
+    twitterFollowersCount: '1.1K',
+  },
 };
 
 describe('<PostAboutAuthorConcise />', function() {
@@ -44,5 +44,10 @@ describe('<PostAboutAuthorConcise />', function() {
   it('should render author description', function() {
     const wrapper = shallow(<AboutAuthorConcise {...props} />);
     expect(wrapper.text()).toContain(props.authorInfo.description);
+  });
+
+  it('should render send email link', function() {
+    const wrapper = shallow(<AboutAuthorConcise {...props} />);
+    expect(wrapper.find(`a[href="mailto:${props.authorInfo.email}"]`).length).toBeGreaterThanOrEqual(1);
   });
 });

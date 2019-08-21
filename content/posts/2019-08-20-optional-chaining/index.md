@@ -56,7 +56,9 @@ Thus you have to manually check the properties existence:
 
 ```javascript
 // Later
-if (bigObject && bigObject.prop1 != null && bigObject.prop1.prop2 != null) {
+if (bigObject && 
+    bigObject.prop1 != null && 
+    bigObject.prop1.prop2 != null) {
   let result = bigObject.prop1.prop2.value;
 }
 ```
@@ -227,7 +229,7 @@ object?.method('Some value'); // => undefined
 These forms can be combined to create a long optional chain, if you need it:
 
 ```javascript
-const value = bigObject.maybeUndefinedProp?.maybeReturnNull()?.[propName];
+const value = object.maybeUndefinedProp?.maybeNull()?.[propName];
 ```
 
 ## 5. Short-circuiting: stopping on *null/undefined*  
@@ -266,8 +268,11 @@ function logMovie(movie) {
 
 // Bad
 function logMovie(movie) {
-  console.log(movie.director.name);// `director` requires optional chaining operator
-  console.log(movie?.title);       // `movie` doesn't need optional chaining
+  // director needs optional chaining
+  console.log(movie.director.name);
+
+  // movie doesn't need optional chaining
+  console.log(movie?.title);
 }
 ```
 
