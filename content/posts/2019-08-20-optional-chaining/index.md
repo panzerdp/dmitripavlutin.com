@@ -1,6 +1,6 @@
 ---
 title: Why I like JavaScript Optional Chaining
-description: Optional chaining accesses properties from deep objects structures without intermediate variables and boilerplate conditionals.
+description: Optional chaining accesses properties from deep of nested objects without boilerplate prop existence verification and intermediate variables.
 published: "2019-08-20"
 modified: "2019-08-20"
 thumbnail: "./images/chain.jpg"
@@ -10,21 +10,21 @@ recommended: ["5-interesting-uses-javascript-destructuring", "7-tips-to-handle-u
 type: post
 ---
 
-There are JavaScript features that wastly change the way you code. Starting ES2015 and beyond, the features that influenced my code are destructuring, arrow functions, classes, and modules system.  
+There are JavaScript features that vastly change the way you code. Starting ES2015 and beyond, the features that influenced my code are destructuring, arrow functions, classes, and modules system.  
 
-As of August 2019, a new proposal [optional chaining](https://github.com/tc39/proposal-optional-chaining) reached stage 3, and is going to be a nice improvement. Optional chaining changes the way proprties are accessed in deep objects structures. 
+As of August 2019, a new proposal [optional chaining](https://github.com/tc39/proposal-optional-chaining) reached stage 3 and is going to be a nice improvement. Optional chaining changes the way properties are accessed from deep objects structures. 
 
 Let's see how optional chaining makes your code simpler by removes boilerplate conditionals and variables when deep accessing of potentially missing properties.  
 
 ## 1. The problem
 
-Due to dynamic nature of JavaScript, an object can have different nested structure of objects. 
+Due to the dynamic nature of JavaScript, an object can have a very different nested structure of objects. 
 
-Usually you deal with such objects when:  
+Usually, you deal with such objects when:  
 
 * Fetching remote JSON data
 * Using configuration objects
-* Dealing with objects having optional properties
+* Having optional properties
 
 While this gives flexibility for an object to hold different shapes of data, it comes with the price of increased complexity when accessing the properties of such objects.  
 
@@ -65,7 +65,7 @@ Let's see how optional chaining solves this problem, reducing boilerplate condit
 
 ## 2. Easy deep access of properties
 
-Let's create an object that holds movie information. Only `title` propery is required, while `director` and `actors` are optional.  
+Let's create an object that holds movie information. Only `title` property is required, while `director` and `actors` are optional.  
 
 `movieSmall` object contains only the `title`, while `movieFull` contains the full set of properties:
 
@@ -81,7 +81,7 @@ const movieFull = {
 };
 ```
 
-Let's write a function that gets the director name. Remember that the `director` property might be missing:
+Let's write a function that gets the director's name. Remember that the `director` property might be missing:
 
 ```javascript{2}
 function getDirector(movie) {
@@ -109,10 +109,9 @@ getDirector(movieFull);  // => 'Ridley Scott'
 
 Inside the expression `movie.director?.name` you can find `?.`: the optional chaining operator.  
 
-Let's take a closer look at `movie.director?.name` expression. There are 2 cases to evaluate:
+In the case of `movieSmall`, the property `director` is missing. As a result, `movie.director?.name` evaluates to `undefined`. The optional chaining operator prevents throwing `TypeError: Cannot read property 'name' of undefined`.  
 
-  * If the expression on the left side of `?.` operator is `undefined` or `null` (also called nullish values), then the whole expression `movie.director?.name` evaluates to `undefined`. Note that `TypeError`, signaling a missing property, is not thrown
-  * Othwerise, the expression evaluation continues as usual
+Contrary, in the case of `movieFull`, the property `director` is available. `movie.director?.name` evaluates normally to `'Ridley Scott'`.
 
 In simple words, the code snippet:  
 
@@ -133,7 +132,7 @@ if (movie.director != null) {
 
 ### 2.1 Array items
 
-But the optional chaining feature can do more than that. You are free to use multiple optional chaininig operators in the same expression. You can even use it to access array items safely!
+But the optional chaining feature can do more than that. You are free to use multiple optional chaining operators in the same expression. You can even use it to access array items safely!
 
 The next task is to write a function that returns the leading actor name of a movie. 
 
@@ -141,7 +140,7 @@ Inside the movie object, the `actors` array can be empty or even missing, so you
 
 ```javascript{2}
 function getLeadingActor(movie) {
-  if (movie.actors && movies.actors.length > 0) {
+  if (movie.actors && movie.actors.length > 0) {
     return movie.actors[0].name;
   }
 }
@@ -163,7 +162,7 @@ getLeadingActor(movieSmall); // => undefined
 getLeadingActor(movieFull);  // => 'Harrison Ford'
 ```
 
-`actors?.` makes sure `actors` property exists. `[0]?.` makes sure that the first actor exists in list.  
+`actors?.` makes sure `actors` property exists. `[0]?.` makes sure that the first actor exists in the list.  
 
 ## 3. Default with nullish coalescing  
 
@@ -179,7 +178,7 @@ noValue ?? 'Nothing'; // => 'Nothing'
 value   ?? 'Nothing'; // => 'Hello'
 ```
 
-Nullish coleascing can improve the optional chaining to default to a specific value when the chain evaluates to `undefined`.   
+Nullish coalescing can improve the optional chaining to default to a specific value when the chain evaluates to `undefined`.   
 
 For example, let's change `getLeading()` function to return `"Unknown actor"` when there are no actors in the movie object:  
 
@@ -225,7 +224,7 @@ object?.method('Some value'); // => undefined
 
 ## 5. Short-circuiting: stopping on *null/undefined*  
 
-What's interesting about optional chaining operator is that as soon as a nullish value is encountered on its left-hand side `leftHandSide?.rightHandSide`, the evaluation of the right-hand side accessors stops. This is called short-circuiting.  
+What's interesting about the optional chaining operator is that as soon as a nullish value is encountered on its left-hand side `leftHandSide?.rightHandSide`, the evaluation of the right-hand side accessors stops. This is called short-circuiting.  
 
 Let's look at an example:
 ```javascript
@@ -240,9 +239,9 @@ index;              // => 0
 
 ## 6. When to use optional chaining
 
-Like any tool, optional chaining must be used wisely.   
+Resist the urge to use optional chaining to access any property: that would lead to a misguided usage. 
 
-### 6.1 Use with potentially nullish 
+### 6.1 Access properties of potentially nullish
 
 `?.` must be used only near the properties that can potentially be `undefined` or `null`. In other cases, use the good-old property accessors: `.property` or `[expression]`.  
 
@@ -250,43 +249,57 @@ Recall the movie object. Looking at the expression `movie.director?.name`, becau
 
 Contrary, it doesn't make sense to use `?.` to access the movie title: `movie?.title`. The movie object is never going to be nullish.  
 
+```javascript
+// Good
+function logMovie(movie) {
+  console.log(movie.director?.name);
+  console.log(movie.title);
+}
+
+// Bad
+function logMovie(movie) {
+  console.log(movie.director.name);// `director` requires optional chaining operator
+  console.log(movie?.title);       // `movie` doesn't need optional chaining
+}
+```
+
 ### 6.2 Often there are better alternatives
 
-The following function `hasPadding()` accepts a style object, which can have a `padding` property. The `padding` can have properties `left`, `top`, `right`, `bottom`, containing number of pixels.  
+The following function `hasPadding()` accepts a style object with an optional `padding` property. The `padding` have optional properties `left`, `top`, `right`, `bottom`.
 
 Let's try to use the optional chaining for such a function:  
 
 ```javascript
-function hasPadding(style) {
-  const top = style.padding?.top ?? 0;
-  const right = style.padding?.right ?? 0;
-  const bottom = style.padding?.bottom ?? 0;
-  const left = style.padding?.left ?? 0;
+function hasPadding({ padding }) {
+  const top = padding?.top ?? 0;
+  const right = padding?.right ?? 0;
+  const bottom = padding?.bottom ?? 0;
+  const left = padding?.left ?? 0;
   return left + top + right + bottom !== 0;
 }
 
-hasPadding({});                        // => false
+hasPadding({ color: 'black' });        // => false
 hasPadding({ padding: { left: 0 } });  // => false
 hasPadding({ padding: { right: 10 }}); // => true
 ```
 
-While the function correctly determines the whether the element has padding, it is overwhelming to use the optional chaining for every property.  
+While the function correctly determines if the element has padding, it's overwhelming to use the optional chaining for every property.  
 
-A better approach in this case is to use the object spread operator, and default the style object to zero values.  
+A better approach is to use the object spread operator to default the padding object to zero values:  
 
 ```javascript
-function hasPadding(style) {
+function hasPadding({ padding }) {
   const p = {
-    ...style.padding,
     top: 0,
     right: 0,
     bottom: 0,
-    left: 0
+    left: 0,
+    ...padding
   };
-  return p.left + p.top + p.right + p.bottom !== 0;
+  return p.top + p.left + p.right + p.bottom !== 0;
 }
 
-hasPadding({});                        // => false
+hasPadding({ color: 'black' });        // => false
 hasPadding({ padding: { left: 0 } });  // => false
 hasPadding({ padding: { right: 10 }}); // => true
 ```
@@ -295,8 +308,8 @@ In my opinion, this version of `hasPadding()` is easier to read.
 
 ## 7. Why do I like it?
 
-I like the optional chaining operator because it allows to access eaily the properties from nested objects. It prevents writing boileprate that verifies against nullish values on every property accessor from the accessors chain.  
+I like the optional chaining operator because it allows accessing easily the properties from nested objects. It prevents writing boilerplate that verifies against nullish values on every property accessor from the accessor chain.  
 
-You can have even better result when optional chaining is combined with nullish coaersion operator, to handle default values in an easier way.  
+You can have an even better result when optional chaining is combined with a nullish coalescing operator, to handle default values more easily.  
 
 *What nice use cases of optional chaining do you know? Write a comment below!*  
