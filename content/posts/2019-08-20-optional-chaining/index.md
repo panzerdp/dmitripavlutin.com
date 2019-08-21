@@ -1,8 +1,8 @@
 ---
 title: Why I like JavaScript Optional Chaining
-description: Optional chaining accesses properties from deep of nested objects without boilerplate prop existence verification and intermediate variables.
+description: Optional chaining accesses properties from deep of nested objects without prop existence verification and intermediate variables boilerplates.
 published: "2019-08-21T13:06Z"
-modified: "2019-08-21T13:06Z"
+modified: "2019-08-21T13:17Z"
 thumbnail: "./images/chain.jpg"
 slug: javascript-optional-chaining
 tags: ["javascript", "optional chaining", "nullish coalescing"]
