@@ -2,7 +2,7 @@
 title: Why I like JavaScript Optional Chaining
 description: Optional chaining accesses properties from deep of nested objects without prop existence verification and intermediate variables boilerplates.
 published: "2019-08-21T13:06Z"
-modified: "2019-08-21T13:17Z"
+modified: "2019-08-23T14:07Z"
 thumbnail: "./images/chain.jpg"
 slug: javascript-optional-chaining
 tags: ["javascript", "optional chaining", "nullish coalescing"]
@@ -28,7 +28,7 @@ Usually, you deal with such objects when:
 
 While this gives flexibility for an object to support different shapes of data, it comes with the price of increased complexity when accessing the properties of such objects.  
 
-`bigObject` can have different set of properties on runtime:   
+`bigObject` can have different set of properties during runtime:   
 
 ```javascript
 // One version of bigObject
