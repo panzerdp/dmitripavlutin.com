@@ -27,6 +27,7 @@ interface PostTemplateProps {
   authorInfo: AuthorInfo;
   postRepositoryFileUrl: string;
   post: Post;
+  commentsThreadId: string | undefined;
   recommendedPosts: PostExcerpt[];
   popularPosts: PostPlain[];
   authorProfilePictureSrc: string;
@@ -37,6 +38,7 @@ export default function PostTemplate({
   authorInfo,
   postRepositoryFileUrl,
   post,
+  commentsThreadId,
   recommendedPosts,
   popularPosts,
   authorProfilePictureSrc,
@@ -90,7 +92,7 @@ export default function PostTemplate({
           <RecommendedList posts={recommendedPosts} />
         </div>
         <div className={styles.delimiter}>
-          <Comments url={postUrl} title={post.title} />
+          <Comments url={postUrl} title={post.title} commentsTheadId={commentsThreadId} />
         </div>
       </article>
     </Layout>

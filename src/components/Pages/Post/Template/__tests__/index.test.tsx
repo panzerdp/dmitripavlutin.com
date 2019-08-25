@@ -48,6 +48,7 @@ const props = {
     },
     title: 'Useful techniques to facilitate React server-side rendering',
   },
+  commentsThreadId: 'thread-id',
   postRepositoryFileUrl: 'https://github.com/panzerdp/dmitripavlutin.com/tree/master/home/user/my-post.md',
   recommendedPosts: [
     {
@@ -169,6 +170,8 @@ describe('<PostTemplate />', function() {
   it('should render post comments', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
-    expect(article.contains(<Comments url={postUrl} title={props.post.title} />)).toBe(true);
+    expect(
+      article.contains(<Comments url={postUrl} title={props.post.title} commentsTheadId={props.commentsThreadId} />)
+    ).toBe(true);
   });
 });

@@ -21,6 +21,7 @@ exports[`<PostFetch /> should render post template 1`] = `
     }
   }
   authorProfilePictureSrc="/image.png"
+  commentsThreadId="thread-id"
   popularPosts={
     Array [
       Object {
@@ -37,6 +38,7 @@ exports[`<PostFetch /> should render post template 1`] = `
   }
   post={
     Object {
+      "commentsThreadId": "thread-id",
       "description": "Useful techniques to facilitate React server-side rendering.",
       "html": "<div>JavaScript is a programming language</div>",
       "modified": "2019-01-01",

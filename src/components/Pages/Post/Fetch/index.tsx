@@ -30,6 +30,7 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
       authorInfo={authorInfo}
       postRepositoryFileUrl={postRepositoryFileUrl}
       post={post}
+      commentsThreadId={markdownRemark.frontmatter.commentsThreadId}
       recommendedPosts={recommended}
       popularPosts={popular}
       authorProfilePictureSrc={authorProfilePicture.childImageSharp.resize.src}
@@ -106,6 +107,7 @@ export const pageQuery = graphql`
         modified
         tags
         recommended
+        commentsThreadId
         thumbnail {
           childImageSharp {
             fluid(maxWidth: 720, maxHeight: 400, quality: 90) {

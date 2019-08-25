@@ -4,12 +4,13 @@ import Disqus from 'gatsby-plugin-disqus';
 interface PostCommentsProps {
   url: string;
   title: string;
+  commentsTheadId: string | undefined;
 }
 
-export function PostComments({ url, title }: PostCommentsProps) {
+export function PostComments({ url, title, commentsTheadId }: PostCommentsProps) {
   return (
     <div>
-      <Disqus url={url} title={title} />
+      <Disqus url={url} title={title} identifier={commentsTheadId} />
     </div>
   );
 }
