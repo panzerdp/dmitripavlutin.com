@@ -2,7 +2,7 @@
 title: Use React.memo() wisely
 description: "React.memo() increases the performance of functional components by preventing useless re-renders. But such performance tweaks must be applied wisely."
 published: "2019-07-17T11:30:00Z"
-modified: "2019-08-19T08:38Z"
+modified: "2019-08-27T06:26Z"
 thumbnail: "./images/instruments.jpg"
 slug: use-react-memo-wisely
 tags: ["react", "component", "memoization"]
@@ -162,9 +162,6 @@ As long as `title` and `releaseDate` props are the same, React skips re-renderin
 > The more often the component re-renders with the same props, the heavier and the more computationally expensive the output is, the more chances are that component needs to be wrapped in `React.memo()`  
 
 Anyways, use [profiling](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab) to measure the benefits of applying `React.memo()`.   
-
-*Do you know other circumstances when React.memo() improves performance? If so, please write a comment below!*
-
 ## 3. When to avoid React.memo()
 
 If your component's rendering situation doesn't fit into the case described above, most likely you don't need `React.memo()`.  
