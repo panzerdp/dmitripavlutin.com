@@ -1,8 +1,8 @@
 ---
-title: 5 Handy Applications of JavaScript Array.from()
+title: 5 Handy Applications of Array.from() in JavaScript
 description: Array.from() transforms array-like objects to arrays, generates ranges, removes arrays duplicates, initializes and clones arrays.
 published: "2019-08-27T13:24Z"
-modified: "2019-08-27T13:24Z"
+modified: "2019-08-27T15:00Z"
 thumbnail: "./images/bulb.jpg"
 slug: javascript-array-from-applications
 tags: ["javascript", "array", "es2015"]
