@@ -1,8 +1,8 @@
 ---
-title: 5 Handy Applications of Array.from() in JavaScript
+title: 5 Handy Applications of JavaScript Array.from()
 description: Array.from() transforms array-like objects to arrays, generates ranges, removes arrays duplicates, initializes and clones arrays.
 published: "2019-08-27T13:24Z"
-modified: "2019-08-27T15:00Z"
+modified: "2019-08-28T07:06Z"
 thumbnail: "./images/bulb.jpg"
 slug: javascript-array-from-applications
 tags: ["javascript", "array", "es2015"]
@@ -61,7 +61,7 @@ Moreover, you can use `Array.from()` with any object or primitive that implement
 
 ```javascript
 Array.from('Hey');                   // => ['H', 'e', 'y']
-Array.from(new Set(['one', 'two'])); // => ['one', 'two', 'three']
+Array.from(new Set(['one', 'two'])); // => ['one', 'two']
 
 const map = new Map();
 map.set('one', 1)
@@ -84,23 +84,23 @@ numbers === numbersCopy; // => false
 
 `Array.from(numbers)` creates a shallow copy of `numbers` array. The equality check `numbers === numbersCopy` is `false`, meaning that while having the same items, these are different array objects.  
 
-Is it possible to use `Array.from()` to create a deep copy of an array? Challenge accepted!
+Is it possible to use `Array.from()` to create a clone of the array, including all the nested ones? Challenge accepted!
 
 ```javascript
-function deepCopy(val) {
-  return Array.isArray(val) ? Array.from(val, deepCopy) : val;
+function recursiveClone(val) {
+  return Array.isArray(val) ? Array.from(val, recursiveClone) : val;
 }
 
 const numbers = [[0, 1, 2], ['one', 'two', 'three']];
-const numbersDeepCopy = deepCopy(numbers);
+const numbersClone = recursiveClone(numbers);
 
-numbersDeepCopy; // => [[0, 1, 2], ['one', 'two', 'three']]
-numbers[0] === numbersDeepCopy[0] // => false
+numbersClone; // => [[0, 1, 2], ['one', 'two', 'three']]
+numbers[0] === numbersClone[0] // => false
 ```
 
-`deepCopy()` creates a deep copy of the supplied array. This is achieved by calling recursively `deepCopy()` on array items that are arrays too.  
+`recursiveClone()` creates a deep clone of the supplied array. This is achieved by calling recursively `recursiveClone()` on array items that are arrays too.  
 
-*Can you write a shorter than mine version of deep copy that uses `Array.from()`? If so, please write a comment below!*
+*Can you write a shorter than mine version of recursive clone that uses `Array.from()`? If so, please write a comment below!*
 
 ## 4. Fill an array with values
 
@@ -157,7 +157,7 @@ Is it possible to use [array.map()](https://developer.mozilla.org/en-US/docs/Web
 ```javascript
 const length = 3;
 const init   = 0;
-const result = Array(length).map(() => value);
+const result = Array(length).map(() => init);
 
 result; // => [undefined, undefined, undefined]
 ```
