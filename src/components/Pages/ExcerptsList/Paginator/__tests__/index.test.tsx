@@ -7,35 +7,28 @@ import { TO_INDEX, TO_PAGE } from 'routes/path';
 
 describe('<ExcerptsLisPaginator />', function() {
   it('should render pages links', function() {
-    const wrapper = shallow(<Paginator currentPage={2} pagesSum={4} />);
-    expect(
-      wrapper.contains(
-        <Link to={TO_INDEX()} className="">
-          {1}
-        </Link>
-      )
-    ).toBe(true);
-    expect(
-      wrapper.contains(
-        <Link to={TO_PAGE({ page: 2 })} className="selected">
-          {2}
-        </Link>
-      )
-    ).toBe(true);
-    expect(
-      wrapper.contains(
-        <Link to={TO_PAGE({ page: 3 })} className="">
-          {3}
-        </Link>
-      )
-    ).toBe(true);
-    expect(
-      wrapper.contains(
-        <Link to={TO_PAGE({ page: 4 })} className="">
-          {4}
-        </Link>
-      )
-    ).toBe(true);
+    const wrapper = shallow(<Paginator currentPage={2} pagesSum={6} />);
+    const items = [
+      <Link key={0} to={TO_INDEX()} className="">
+        {1}
+      </Link>,
+      <Link key={1} to={TO_PAGE({ page: 2 })} className="selected">
+        {2}
+      </Link>,
+      <Link key={2} to={TO_PAGE({ page: 3 })} className="">
+        {3}
+      </Link>,
+      <Link key={3} to={TO_PAGE({ page: 4 })} className="">
+        {4}
+      </Link>,
+      <div key={4} className="nextPrev">
+        [...]
+      </div>,
+      <Link key={5} to={TO_PAGE({ page: 6 })} className="">
+        {6}
+      </Link>
+    ];
+    expect(wrapper.contains(items)).toBe(true);
   });
 
   it('should render prev page link', function() {
