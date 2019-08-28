@@ -84,6 +84,7 @@ module.exports = {
           }
         `,
         output: '/rss.xml',
+        title: "Dmitri Pavlutin Blog RSS Feed"
       },
     ],
   },
