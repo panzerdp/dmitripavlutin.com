@@ -2,7 +2,7 @@
 title: 5 Handy Applications of JavaScript Array.from()
 description: Array.from() transforms array-like objects to arrays, generates ranges, removes arrays duplicates, initializes and clones arrays.
 published: "2019-08-27T13:24Z"
-modified: "2019-08-28T07:06Z"
+modified: "2019-08-28T08:39Z"
 thumbnail: "./images/bulb.jpg"
 slug: javascript-array-from-applications
 tags: ["javascript", "array", "es2015"]
@@ -162,7 +162,7 @@ const result = Array(length).map(() => init);
 result; // => [undefined, undefined, undefined]
 ```
 
-The `map()` approach seems to be incorrect. Instead of expecting the array with three zeros, an array with 3 empty slots is created.   
+The `map()` approach seems to be incorrect. Instead of the expected array with three zeros, an array with 3 empty slots is created.   
 
 It happens because `Array(length)` creates an array having 3 empty slots (also called [sparse array](/power-up-the-array-creation-in-javascript/#21-numeric-argument-creates-sparse-array)), but `map()` method skips the iteration over these empty slots.  
 
