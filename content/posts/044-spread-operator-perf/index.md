@@ -68,7 +68,7 @@ Let's run a [performance test](https://jsperf.com/spread-operator-head-vs-tail/5
 * Firefox 68 
 * Safari 12.1
 
-Here's the result:  
+Here are the performance test results:  
 ![Spread operator performance check](./images/performance.png)
 
 As expected, Firefox and Safari browsers show the same performance.  
@@ -85,13 +85,13 @@ But another question arises: why does it happen?
 
 ## 3. The fast-path optimization
 
-Starting the version `7.2` of the V8 engine (that powers the JavaScript execution in Chrome) a new optimization of the spread operator is available: *the fast path optimization*.  
+Starting the version `7.2` of the V8 engine (that powers the JavaScript execution in Chrome) a new optimization of the spread operator is available: *the fast-path optimization*.  
 
 In a few sentences, it works as follows. 
 
-Without this optimization, when the engine encounters a spread operator `[...iterable, item]`, it invokes the iterator of the iterable object. On each iteration, the memory of the resulted array is increased, and the iteration result is added to it.  
+Without this optimization, when the engine encounters a spread operator `[...iterable, item]`, it invokes the iterator (something like `iterator.next()`) of the iterable object. On each iteration, the memory of the resulted array is increased, and the iteration result is added to it.  
 
-But *the fast path optimization* detects a known iterable (like an array of integers) and skips the creation of the iterator object at all. Then the engine reads the length of the spread array, allocates only *once* memory for the resulted array, and by index passes the whole spread array. 
+But *the fast-path optimization* detects a known iterable (like an array of integers) and skips the creation of the iterator object at all. Then the engine reads the length of the spread array, allocating only *once* memory for the resulted array. Then passes by index the spread array, adding each item to the resulted array.  
 
 The fast-path optimization skips the creation of the iteration object, allocating the memory for the result only once. Thus the performance increase.  
 
@@ -138,7 +138,7 @@ const names = new Map([[5: 'five'], [7: 'seven']]);
 
 ## 5. Conclusion
 
-When the spread array is located at the beginning of the array literal, you can get a performance boost due to the fast path optimization implemented by the V8 engine. It is available in V8 engine `v7.2` (shipped in Chrome `v72` and NodeJS `v12`).   
+When the spread array is located at the beginning of the array literal, you can get a performance boost due to the fast-path optimization implemented by the V8 engine. It is available in V8 engine `v7.2` (shipped in Chrome `v72` and NodeJS `v12`).   
 
 With this optimization, [the performance test](https://jsperf.com/spread-operator-head-vs-tail/5) shows that `[...array, item]` can perform at least twice faster than `[item, ...array]`.  
 
