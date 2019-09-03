@@ -1,6 +1,6 @@
 ---
 title: How To Accelerate the JavaScript Spread Operator
-description: The V8 fast-path optimization can boost at least twice the performance of JavaScript spread operator.  
+description: The fast-path optimization can boost at least twice the performance of JavaScript spread operator.  
 published: "2019-09-03T13:00Z"
 modified: "2019-09-03T13:00Z"
 thumbnail: "./images/powerboat.jpg"
@@ -11,7 +11,9 @@ type: post
 commentsThreadId: javascript-spread-operator-performance
 ---
 
-Let's start with a short introduction on how [spread operator](how-three-dots-changed-javascript/#41-array-construction) works in array literals. 
+In this post, I will make an interesting investigation on how you could boost the performance of spread operator.  
+
+Let's start with a short introduction on how [spread operator](how-three-dots-changed-javascript/#41-array-construction) works inside array literals. 
 
 The spread operator, or three dots, takes an array or generally an iterable `[...arrayOrIterable]` and slices it into pieces. Then the array literal uses these pieces to construct a new array.  
 
@@ -24,28 +26,13 @@ const numbers = [1, 2, 3];
 [...numbers, 4];    // => [1, 2, 3, 4]
 ```
 
-Now comes the interesting question. Is there a position of the spread operator inside the array literal that could increase performance? 
-
-Let's investigate and find out.  
+Now comes the interesting question. Is there a position of the spread operator inside the array literal that could increase performance? Let's find out.  
 
 ## 1. Append to head and to tail functions
 
 Before starting the performance comparisons, let's define two functions.
 
-The first one is `appendToHead()`:  
-
-```javascript{2}
-function appendToHead(item, array) {
-  return [item, ...array];
-}
-
-const numbers = [1, 2, 3];
-appendToHead(10, numbers); // => [10, 1, 2, 3]
-```
-
-`appendToHead()` is a pure function that returns a new array where the item is appended at the head of the original array.  
-
-The second is `appendToTail()`:
+The first one is `appendToTail()`:
 
 ```javascript{2}
 function appendToTail(item, array) {
@@ -56,13 +43,26 @@ const numbers = [1, 2, 3];
 appendToTail(10, numbers); // => [1, 2, 3, 10]
 ```
 
-`appendToTail()` inserts the item at the end of the array.  
+`appendToTail()` inserts the item at the end of the array. This function uses  `[...array, item]`.
+
+The second one is `appendToHead()`:  
+
+```javascript{2}
+function appendToHead(item, array) {
+  return [item, ...array];
+}
+
+const numbers = [1, 2, 3];
+appendToHead(10, numbers); // => [10, 1, 2, 3]
+```
+
+`appendToHead()` is a pure function that returns a new array where the item is appended at the head of the original array. It uses `[item, ...array]`.
 
 At first sight, there's no reason to think that these functions perform differently. But let's take a try.
 
 ## 2. The performance test
 
-Let's run a [performance test](https://jsperf.com/spread-operator-head-vs-tail/5) of `[...array, item]` vs `[item, ...array]` on a MacBook Pro laptop in the following 3 browsers: 
+Let's run [the performance test](https://jsperf.com/spread-operator-head-vs-tail/5) of `[...array, item]` vs `[item, ...array]` on a MacBook Pro laptop in the following 3 browsers: 
 
 * Chrome 76
 * Firefox 68 
@@ -89,7 +89,7 @@ Starting the version `7.2` of the V8 engine (that powers the JavaScript executio
 
 In a few sentences, it works as follows. 
 
-Without this optimization, when the engine encounters a spread operator `[...iterable, item]`, it invokes the iterator (something like `iterator.next()`) of the iterable object. On each iteration, the memory of the resulted array is increased, and the iteration result is added to it.  
+Without this optimization, when the engine encounters a spread operator `[...iterable, item]`, it invokes the iterator (`iterator.next()`) of the iterable object. On each iteration, the memory of the resulted array is increased, and the iteration result is added to it.  
 
 But *the fast-path optimization* detects a known iterable (like an array of integers) and skips the creation of the iterator object at all. Then the engine reads the length of the spread array, allocating only *once* memory for the resulted array. Then passes by index the spread array, adding each item to the resulted array.  
 
@@ -110,7 +110,7 @@ const numbers = [1, 2, 3, 4];
 #### Strings
 
 ```javascript
-const message = ['Hi'];
+const message = 'Hi';
 
 [...message, '!']; // => ['H', 'i', '!']
 ```
@@ -130,7 +130,7 @@ const colors = new Set(['blue', 'white']);
 On maps only `map.keys()` and `map.values()` methods are supported:
 
 ```javascript
-const names = new Map([[5: 'five'], [7: 'seven']]);
+const names = new Map([[5, 'five'], [7, 'seven']]);
 
 [...names.values(), 'ten']; // => ['five', 'seven', 'ten']
 [...names.keys(), 10];      // => [5, 7, 10]
