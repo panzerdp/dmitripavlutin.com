@@ -1,8 +1,8 @@
 ---
 title: How To Accelerate the JavaScript Spread Operator
 description: The fast-path optimization increases at least twice the performance of JavaScript spread operator.  
-published: "2019-09-03T13:00Z"
-modified: "2019-09-03T13:00Z"
+published: "2019-09-03T13:10Z"
+modified: "2019-09-03T13:10Z"
 thumbnail: "./images/powerboat.jpg"
 slug: javascript-spread-operator-performance-optimization
 tags: ["javascript", "spread", "performance"]
