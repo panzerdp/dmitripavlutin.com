@@ -1,0 +1,52 @@
+@import '~styles/variables';
+
+.subheader {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .right {
+    display: flex;
+    flex: 1 0 0%;
+    padding: 0.2rem;
+    justify-content: flex-end;
+    align-items: center;
+
+    .commentsCount {
+      margin-right: 1rem;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      margin-top: -2px;
+    }
+
+    .published {
+      font-style: italic;
+      font-size: 80%;
+    }
+  }
+  
+}
+
+@media (max-width: $small-device-width) {
+  .subheader {
+    flex-flow: column;
+
+    small {
+      margin-top: 0.5rem;
+      flex-basis: auto;
+      margin-left: auto;
+    }
+
+    .tags {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  }  
+}

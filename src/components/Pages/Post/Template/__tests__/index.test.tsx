@@ -6,11 +6,11 @@ import PostTemplate from '../index';
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData';
 import MetaTags from 'components/Pages/Post/Meta/Tags';
 import Layout from 'components/Layout/Fetch';
-import Subheader from 'components/Subheader';
+import PostSubheader from 'components/Pages/Post/Subheader';
 import Edit from 'components/Pages/Post/Edit';
 import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
-import Comments from 'components/Pages/Post/Comments';
+import CommentsThread from 'components/Pages/Post/Comments/Thread';
 import { TO_POST } from 'routes/path';
 
 const props = {
@@ -132,7 +132,9 @@ describe('<PostTemplate />', function() {
   it('should render subheader', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
-    expect(article.contains(<Subheader tags={props.post.tags} published={props.post.published} />)).toBe(true);
+    expect(
+      article.contains(<PostSubheader post={props.post} url={postUrl} commentsTheadId={props.commentsThreadId} />)
+    ).toBe(true);
   });
 
   it('should render share buttons', function() {
@@ -171,7 +173,9 @@ describe('<PostTemplate />', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
     expect(
-      article.contains(<Comments url={postUrl} title={props.post.title} commentsTheadId={props.commentsThreadId} />)
+      article.contains(
+        <CommentsThread url={postUrl} title={props.post.title} commentsTheadId={props.commentsThreadId} />
+      )
     ).toBe(true);
   });
 });

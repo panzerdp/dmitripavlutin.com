@@ -32,7 +32,11 @@ declare module 'routes/path' {
 }
 
 declare module 'gatsby-plugin-disqus' {
-  export default (params: { url?: string; title?: string; identifier?: string }) => JSX.Element;
+  export const Disqus: (params: { config: { url?: string; title?: string; identifier?: string } }) => JSX.Element;
+  export const CommentCount: (params: {
+    config: { url?: string; title?: string; identifier?: string };
+    placeholder?: string;
+  }) => JSX.Element;
 }
 
 declare module 'react-twitter-embed' {
