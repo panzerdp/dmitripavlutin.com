@@ -1,6 +1,6 @@
 const REGEXP_NON_ALPHANUM = /([^a-zA-Z0-9\s])/g;
 
-export function slugify(str: string, toLowerCase: boolean = true) {
+export function slugify(str: string, toLowerCase = true) {
   if (toLowerCase) {
     str = str.toLowerCase();
   }

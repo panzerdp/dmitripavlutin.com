@@ -4,11 +4,13 @@ import { shallow } from 'enzyme';
 import { TwitterFollowButton } from '../index';
 
 const props = {
-  twitterFollowersCount: "2.5K",
-  username: "panzerdp",
-  authorName: "Dmitri Pavlutin",
-  windowOpen() {}
-}
+  twitterFollowersCount: '2.5K',
+  username: 'panzerdp',
+  authorName: 'Dmitri Pavlutin',
+  windowOpen() {
+    // window open
+  },
+};
 
 describe('<AboutAuthorTwitterFollowButton />', function() {
   it('should render username and followers count', function() {
@@ -22,7 +24,9 @@ describe('<AboutAuthorTwitterFollowButton />', function() {
     const wrapper = shallow(<TwitterFollowButton {...props} windowOpen={windowOpen} />);
     expect(windowOpen).not.toBeCalled();
     wrapper.find('#follow-button').simulate('click', {
-      preventDefault() {}
+      preventDefault() {
+        // prevent default
+      },
     });
     expect(windowOpen).toBeCalled();
   });

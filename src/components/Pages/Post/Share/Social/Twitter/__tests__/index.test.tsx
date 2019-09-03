@@ -8,7 +8,9 @@ const props = {
   url: 'http://dmitripavlutin.com/some-javascript-post',
   text: 'How to determine string length',
   tags: ['string', 'length'],
-  windowOpen() {},
+  windowOpen() {
+    // open window
+  },
 };
 
 describe('<PostShareSocialFacebook />', function() {

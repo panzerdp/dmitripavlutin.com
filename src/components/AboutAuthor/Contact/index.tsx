@@ -11,7 +11,8 @@ export default function AboutAuthorContact({ authorInfo }: AboutAuthorContact) {
     <div className={styles.contactAuthor}>
       <h3>Contact the author</h3>
       <div className={styles.description}>
-        Feel free to contact the author regarding blog posts, hiring, conferences, or just to say thanks.
+        Feel free to contact the author regarding blog posts, interesting job opportunities, speaking at conferences, or
+        just to say thanks.
       </div>
       <div className={styles.links}>
         <a className={styles.icon} href={`mailto:${authorInfo.email}`} title={`Write a message to ${authorInfo.name}`}>

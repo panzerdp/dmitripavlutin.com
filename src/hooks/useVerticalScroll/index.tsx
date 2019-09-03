@@ -12,7 +12,7 @@ export default function useVerticalScroll(relativeToScrollY: number): RelativePo
   }
 
   function listener() {
-    let newPosition = window.scrollY < relativeToScrollY ? RelativePosition.Above : RelativePosition.Below;
+    const newPosition = window.scrollY < relativeToScrollY ? RelativePosition.Above : RelativePosition.Below;
     if (newPosition !== position) {
       setPosition(newPosition);
     }

@@ -6,7 +6,9 @@ import PostShareButton from 'components/Pages/Post/Share/Button';
 
 const props = {
   url: 'http://dmitripavlutin.com/some-javascript-post',
-  windowOpen() {},
+  windowOpen() {
+    // window open
+  },
 };
 
 describe('<PostShareSocialFacebook />', function() {
