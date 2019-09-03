@@ -1,6 +1,6 @@
 ---
 title: How To Accelerate the JavaScript Spread Operator
-description: The fast-path optimization can boost at least twice the performance of JavaScript spread operator.  
+description: The fast-path optimization increases at least twice the performance of JavaScript spread operator.  
 published: "2019-09-03T13:00Z"
 modified: "2019-09-03T13:00Z"
 thumbnail: "./images/powerboat.jpg"
@@ -11,13 +11,13 @@ type: post
 commentsThreadId: javascript-spread-operator-performance
 ---
 
-In this post, I will make an interesting investigation on how you could boost the performance of spread operator.  
+In this post, you will read an interesting investigation on how to boost the performance of the spread operator.  
 
-Let's start with a short introduction on how [spread operator](how-three-dots-changed-javascript/#41-array-construction) works inside array literals. 
+Let's start with a short introduction on how spread operator works inside array literals. 
 
 The spread operator, or three dots, takes an array or generally an iterable `[...arrayOrIterable]` and slices it into pieces. Then the array literal uses these pieces to construct a new array.  
 
-The spread operator can be placed in any position inside the array literal:
+The spread operator can be placed at any position inside the array literal:
 
 ```javascript
 const numbers = [1, 2, 3];
@@ -71,7 +71,7 @@ Let's run [the performance test](https://jsperf.com/spread-operator-head-vs-tail
 Here are the performance test results:  
 ![Spread operator performance check](./images/performance.png)
 
-As expected, Firefox and Safari browsers show the same performance.  
+As expected, in Firefox and Safari browsers `[...array, item]` and `[item, ...array]` have the same performance.  
 
 In Chrome, however, `[...array, item]` performs *twice* faster than `[item, ...array]`. That's a useful result.  
 
@@ -138,7 +138,7 @@ const names = new Map([[5, 'five'], [7, 'seven']]);
 
 ## 5. Conclusion
 
-When the spread array is located at the beginning of the array literal, you can get a performance boost due to the fast-path optimization implemented by the V8 engine. It is available in V8 engine `v7.2` (shipped in Chrome `v72` and NodeJS `v12`).   
+When the spread array is located at the beginning of the array literal, you can get a performance boost due to the fast-path optimization. It is available in V8 engine `v7.2` (shipped in Chrome `v72` and NodeJS `v12`).   
 
 With this optimization, [the performance test](https://jsperf.com/spread-operator-head-vs-tail/5) shows that `[...array, item]` can perform at least twice faster than `[item, ...array]`.  
 
