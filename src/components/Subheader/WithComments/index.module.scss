@@ -11,8 +11,8 @@
   .line {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
-    margin: 0.5rem 0;
 
     .tags {
       display: flex;
@@ -20,18 +20,28 @@
     }
 
     .commentsCount {
+      white-space: nowrap;
+
       .icon {
+        vertical-align: middle;
         margin-right: 0.5rem;
-        font-size: 1.4rem;
+        width: 1.5rem;
+        margin-bottom: -5px;
+      }
+
+      a {
+        text-decoration: none;
       }
   
-      a {
+      .anchor {
+        vertical-align: middle;
         text-decoration: underline;
         text-decoration-style: dotted;
       }
     }
-  }
-}
 
-@media (max-width: $small-device-width) {
+    .tags, .commentsCount {
+      margin: 0.5rem 0;
+    }
+  }
 }

@@ -18,8 +18,8 @@ export default function SubheaderWithComments({ post, url, threadAnchor }: Subhe
       <div className={styles.line}>
         <div className={styles.tags}>{post.tags.map(mapTag)}</div>
         <div className={styles.commentsCount}>
-          <span className={styles.icon}>&#x1f4ac;</span>
-          <a href={threadAnchor} title="Jump to comments section">
+          <img alt="Comments" src="/comments.svg" className={styles.icon} />
+          <a href={threadAnchor} title="Jump to comments section" className={styles.anchor}>
             <PostCommentsCount title={post.title} url={url} commentsTheadId={post.commentsThreadId} />
           </a>
         </div>

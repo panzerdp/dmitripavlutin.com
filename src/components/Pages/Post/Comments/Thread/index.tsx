@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Disqus } from 'gatsby-plugin-disqus';
 
+import styles from './index.module.scss';
+
 interface PostCommentsThreadProps {
   url: string;
   title: string;
@@ -14,7 +16,7 @@ export function PostCommentsThread({ url, title, commentsTheadId }: PostComments
     identifier: commentsTheadId,
   };
   return (
-    <div>
+    <div className={styles.commentsThread}>
       <Disqus config={disqusConfig} />
     </div>
   );
