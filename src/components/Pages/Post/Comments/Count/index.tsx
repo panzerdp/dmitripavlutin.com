@@ -8,12 +8,15 @@ interface PostCommentsCountProps {
 }
 
 export function PostCommentsCount({ url, title, commentsTheadId }: PostCommentsCountProps) {
-  const disqusConfig = {
+  const disqusConfig: any = {
     url,
-    identifier: commentsTheadId,
     title,
   };
+  if (commentsTheadId) {
+    disqusConfig.identifier = commentsTheadId;
+  }
+  console.log(disqusConfig);
   return <CommentCount config={disqusConfig} placeholder="... Comments" />;
 }
 
-export default React.memo(PostCommentsCount);
+export default PostCommentsCount;

@@ -12,6 +12,8 @@ const props = {
       slug: 'post-1',
       tags: ['tag1', 'tag2'],
       published: '2019-01-01',
+      modified: '2019-01-01',
+      commentsThreadId: 'thread-id',
       thumbnail: {
         aspectRatio: 1,
         src: 'src',
@@ -25,6 +27,8 @@ const props = {
       slug: 'post-2',
       tags: ['tag1', 'tag4'],
       published: '2019-01-01',
+      modified: '2019-01-01',
+      commentsThreadId: 'thread-id',
       thumbnail: {
         aspectRatio: 2,
         src: 'src',

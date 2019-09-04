@@ -9,6 +9,8 @@ const posts: PostPlain[] = [
   {
     description: 'Useful techniques to facilitate React server-side rendering.',
     published: '2018-03-17',
+    modified: '2019-01-01',
+    commentsThreadId: 'thread-id',
     slug: 'useful-techniques-react-server-side-rendering',
     tags: ['react', 'arrow function', 'arrow', 'javascript', 'server'],
     title: 'Useful techniques to facilitate React server-side rendering',
@@ -16,6 +18,8 @@ const posts: PostPlain[] = [
   {
     description: 'JavaScript arrow functions in details',
     published: '2018-03-17',
+    modified: '2019-01-01',
+    commentsThreadId: 'thread-id',
     slug: 'javascript-arrow-functions',
     tags: ['arrow function', 'react', 'function', 'javascript'],
     title: 'JavaScript arrow functions in details',

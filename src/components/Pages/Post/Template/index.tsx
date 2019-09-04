@@ -6,7 +6,7 @@ import 'prismjs/themes/prism.css';
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData';
 import MetaTags from 'components/Pages/Post/Meta/Tags';
 import Layout from 'components/Layout/Fetch';
-import PostSubheader from 'components/Pages/Post/Subheader';
+import Subheader from 'components/Subheader/WithComments';
 import Edit from 'components/Pages/Post/Edit';
 import LeftSidebar from 'components/Pages/Post/Sidebar/Left';
 import RightSidebar from 'components/Pages/Post/Sidebar/Right';
@@ -27,7 +27,6 @@ interface PostTemplateProps {
   authorInfo: AuthorInfo;
   postRepositoryFileUrl: string;
   post: Post;
-  commentsThreadId: string | undefined;
   recommendedPosts: PostExcerpt[];
   popularPosts: PostPlain[];
   authorProfilePictureSrc: string;
@@ -38,7 +37,6 @@ export default function PostTemplate({
   authorInfo,
   postRepositoryFileUrl,
   post,
-  commentsThreadId,
   recommendedPosts,
   popularPosts,
   authorProfilePictureSrc,
@@ -62,7 +60,7 @@ export default function PostTemplate({
           <Img fluid={post.thumbnail} />
         </div>
         <h1>{post.title}</h1>
-        <PostSubheader post={post} url={postUrl} commentsTheadId={commentsThreadId} />
+        <Subheader post={post} url={postUrl} threadAnchor="#disqus_thread" />
         <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
         <div className={styles.shareGroup}>
           <div className={styles.shareBottom}>
@@ -92,7 +90,7 @@ export default function PostTemplate({
           <RecommendedList posts={recommendedPosts} />
         </div>
         <div className={styles.delimiter}>
-          <CommentsThread url={postUrl} title={post.title} commentsTheadId={commentsThreadId} />
+          <CommentsThread url={postUrl} title={post.title} commentsTheadId={post.commentsThreadId} />
         </div>
       </article>
     </Layout>

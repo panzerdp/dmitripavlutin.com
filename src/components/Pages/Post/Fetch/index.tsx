@@ -30,7 +30,6 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
       authorInfo={authorInfo}
       postRepositoryFileUrl={postRepositoryFileUrl}
       post={post}
-      commentsThreadId={markdownRemark.frontmatter.commentsThreadId}
       recommendedPosts={recommended}
       popularPosts={popular}
       authorProfilePictureSrc={authorProfilePicture.childImageSharp.resize.src}
@@ -73,8 +72,10 @@ export const pageQuery = graphql`
     title
     description
     published
+    modified
     slug
     tags
+    commentsThreadId
   }
 
   query PostBySlug($slug: String!, $recommended: [String]!, $popular: [String]!) {
@@ -100,12 +101,7 @@ export const pageQuery = graphql`
       html
       fileAbsolutePath
       frontmatter {
-        title
-        description
-        slug
-        published
-        modified
-        tags
+        ...Post
         recommended
         commentsThreadId
         thumbnail {

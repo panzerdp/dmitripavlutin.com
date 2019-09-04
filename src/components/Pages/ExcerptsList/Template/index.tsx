@@ -29,7 +29,7 @@ export default function ExcerptsListTemplate({
       <MetaStructuredData siteInfo={siteInfo} authorProfilePictureSrc={authorProfilePictureSrc} />
       <MetaPaginator currentPage={currentPage} pagesSum={pagesSum} siteUrl={siteInfo.url} />
       {posts.map((post, index) => (
-        <Excerpt post={post} key={index} />
+        <Excerpt post={post} siteUrl={siteInfo.url} key={index} />
       ))}
       <Paginator currentPage={currentPage} pagesSum={pagesSum} />
     </Layout>

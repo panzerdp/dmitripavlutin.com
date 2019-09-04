@@ -8,7 +8,9 @@ exports[`<ExcerptsFetch /> should render excerpts template 1`] = `
   posts={
     Array [
       Object {
+        "commentsThreadId": "thread-id",
         "description": "Useful techniques to facilitate React server-side rendering.",
+        "modified": "2019-01-01",
         "published": "2018-03-17",
         "slug": "useful-techniques-react-server-side-rendering",
         "tags": Array [

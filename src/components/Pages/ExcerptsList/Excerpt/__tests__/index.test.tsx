@@ -12,16 +12,19 @@ const post: PostExcerpt = {
   slug: 'post-1',
   tags: ['tag1', 'tag2'],
   published: '2019-01-01',
+  modified: '2019-01-01',
+  commentsThreadId: 'thread-id',
   thumbnail: {
     aspectRatio: 1,
     src: 'src',
     srcSet: 'src-set',
     sizes: 'sizes',
-  }
+  },
 };
 
 const props = {
-  post
+  post,
+  siteUrl: 'https://example.com',
 };
 
 describe('<Excerpt />', function() {

@@ -8,6 +8,7 @@ const post: Post = {
   html: '<div>JavaScript is a programming language</div>',
   modified: '2019-01-01',
   published: '2018-03-17',
+  commentsThreadId: 'thread-id',
   recommended: ['javascript-language'],
   slug: 'useful-techniques-react-server-side-rendering',
   tags: ['react', 'server side rendering'],

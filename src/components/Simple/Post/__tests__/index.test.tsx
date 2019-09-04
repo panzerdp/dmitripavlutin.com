@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import SimplePost from '../index';
 import { TO_POST } from 'routes/path';
-import Subheader from 'components/Subheader';
+import Subheader from 'components/Subheader/Simple';
 
 const post: PostExcerpt = {
   title: 'Post 1',
@@ -11,6 +11,8 @@ const post: PostExcerpt = {
   slug: 'post-1',
   tags: ['tag1', 'tag2'],
   published: '2019-01-01',
+  modified: '2019-01-01',
+  commentsThreadId: 'thread-id',
   thumbnail: {
     aspectRatio: 1,
     src: 'src',
@@ -31,6 +33,6 @@ describe('<SimplePost />', function() {
 
   it('should render the subheader', function() {
     const wrapper = shallow(<SimplePost {...props} />);
-    expect(wrapper.contains(<Subheader tags={post.tags} published={post.published} />)).toBe(true);
+    expect(wrapper.contains(<Subheader post={post} />)).toBe(true);
   });
 });

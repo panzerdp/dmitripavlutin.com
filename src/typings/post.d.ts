@@ -2,8 +2,10 @@ interface PostPlain {
   title: string;
   description: string;
   published: string;
+  modified: string;
   slug: string;
   tags: Tags;
+  commentsThreadId: string | undefined;
 }
 
 interface PostExcerpt extends PostPlain {
@@ -12,6 +14,5 @@ interface PostExcerpt extends PostPlain {
 
 interface Post extends PostExcerpt {
   html: string;
-  modified: string;
   recommended: string[];
 }

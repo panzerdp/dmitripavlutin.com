@@ -1,7 +1,7 @@
 import Link from 'gatsby-link';
 import * as React from 'react';
 
-import Subheader from 'components/Subheader';
+import SubheaderSimple from 'components/Subheader/Simple';
 import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 
@@ -16,7 +16,7 @@ export default function SimplePost({ post }: SimplePostProps) {
       <h4>
         <Link to={to}>{post.title}</Link>
       </h4>
-      <Subheader tags={post.tags} published={post.published} />
+      <SubheaderSimple post={post} />
     </div>
   );
 }

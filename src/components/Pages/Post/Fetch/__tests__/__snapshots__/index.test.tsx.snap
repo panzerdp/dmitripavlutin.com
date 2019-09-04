@@ -21,11 +21,12 @@ exports[`<PostFetch /> should render post template 1`] = `
     }
   }
   authorProfilePictureSrc="/image.png"
-  commentsThreadId="thread-id"
   popularPosts={
     Array [
       Object {
+        "commentsThreadId": "thread-id",
         "description": "Useful techniques to facilitate React server-side rendering.",
+        "modified": "2019-01-01",
         "published": "2018-03-17",
         "slug": "useful-techniques-react-server-side-rendering",
         "tags": Array [
@@ -67,7 +68,9 @@ exports[`<PostFetch /> should render post template 1`] = `
   recommendedPosts={
     Array [
       Object {
+        "commentsThreadId": "thread-id",
         "description": "Useful techniques to facilitate React server-side rendering.",
+        "modified": "2019-01-01",
         "published": "2018-03-17",
         "slug": "useful-techniques-react-server-side-rendering",
         "tags": Array [

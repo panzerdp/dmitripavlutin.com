@@ -6,7 +6,7 @@ import PostTemplate from '../index';
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData';
 import MetaTags from 'components/Pages/Post/Meta/Tags';
 import Layout from 'components/Layout/Fetch';
-import PostSubheader from 'components/Pages/Post/Subheader';
+import SubheaderWithComments from 'components/Subheader/WithComments';
 import Edit from 'components/Pages/Post/Edit';
 import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
@@ -35,6 +35,7 @@ const props = {
     description: 'Useful techniques to facilitate React server-side rendering.',
     html: '<div>JavaScript is a programming language</div>',
     modified: '2019-01-01',
+    commentsThreadId: 'thread-id',
     published: '2018-03-17',
     recommended: ['javascript-language'],
     slug: 'useful-techniques-react-server-side-rendering',
@@ -48,12 +49,13 @@ const props = {
     },
     title: 'Useful techniques to facilitate React server-side rendering',
   },
-  commentsThreadId: 'thread-id',
   postRepositoryFileUrl: 'https://github.com/panzerdp/dmitripavlutin.com/tree/master/home/user/my-post.md',
   recommendedPosts: [
     {
       description: 'Useful techniques to facilitate React server-side rendering.',
       published: '2018-03-17',
+      modified: '2019-01-01',
+      commentsThreadId: 'thread-id',
       slug: 'useful-techniques-react-server-side-rendering',
       tags: ['react', 'server side rendering'],
       thumbnail: {
@@ -70,6 +72,8 @@ const props = {
     {
       description: 'Useful techniques to facilitate React server-side rendering.',
       published: '2018-03-17',
+      modified: '2019-01-01',
+      commentsThreadId: 'thread-id',
       slug: 'useful-techniques-react-server-side-rendering',
       tags: ['react', 'server side rendering'],
       title: 'Useful techniques to facilitate React server-side rendering',
@@ -133,7 +137,7 @@ describe('<PostTemplate />', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
     expect(
-      article.contains(<PostSubheader post={props.post} url={postUrl} commentsTheadId={props.commentsThreadId} />)
+      article.contains(<SubheaderWithComments post={props.post} url={postUrl} threadAnchor="#disqus_thread" />)
     ).toBe(true);
   });
 
@@ -174,7 +178,7 @@ describe('<PostTemplate />', function() {
     const article = wrapper.find(Layout).find('article');
     expect(
       article.contains(
-        <CommentsThread url={postUrl} title={props.post.title} commentsTheadId={props.commentsThreadId} />
+        <CommentsThread url={postUrl} title={props.post.title} commentsTheadId={props.post.commentsThreadId} />
       )
     ).toBe(true);
   });

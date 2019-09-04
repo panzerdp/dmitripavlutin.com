@@ -8,6 +8,8 @@ import { TO_POST } from 'routes/path';
 const post: PostExcerpt = {
   description: 'Useful techniques to facilitate React server-side rendering.',
   published: '2018-03-17',
+  modified: '2019-01-01',
+  commentsThreadId: 'thread-id',
   slug: 'useful-techniques-react-server-side-rendering',
   tags: ['react', 'server side rendering'],
   thumbnail: {

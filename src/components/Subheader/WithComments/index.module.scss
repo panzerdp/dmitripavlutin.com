@@ -1,0 +1,37 @@
+@import '~styles/variables';
+
+.subheader {
+  overflow: hidden;
+
+  .published {
+    font-style: italic;
+    margin: 0 0 1rem 0.2rem;
+  }
+
+  .line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0;
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .commentsCount {
+      .icon {
+        margin-right: 0.5rem;
+        font-size: 1.4rem;
+      }
+  
+      a {
+        text-decoration: underline;
+        text-decoration-style: dotted;
+      }
+    }
+  }
+}
+
+@media (max-width: $small-device-width) {
+}
