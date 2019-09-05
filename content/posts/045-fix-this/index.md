@@ -1,5 +1,5 @@
 ---
-title: How to fix this in JavaScript
+title: How to Fix this in JavaScript
 description: Approaches on how to fix the value of this keyword in JavaScript.
 published: "2019-09-10T13:00Z"
 modified: "2019-09-10T13:00Z"
