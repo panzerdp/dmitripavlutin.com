@@ -7,16 +7,11 @@ interface PostCommentsCountProps {
   commentsTheadId: string | undefined;
 }
 
-export function PostCommentsCount({ url, title, commentsTheadId }: PostCommentsCountProps) {
-  const disqusConfig: any = {
+export default function PostCommentsCount({ url, title, commentsTheadId }: PostCommentsCountProps) {
+  const disqusConfig = {
     url,
     title,
+    identifier: commentsTheadId,
   };
-  if (commentsTheadId) {
-    disqusConfig.identifier = commentsTheadId;
-  }
-  console.log(disqusConfig);
   return <CommentCount config={disqusConfig} placeholder="... Comments" />;
 }
-
-export default PostCommentsCount;

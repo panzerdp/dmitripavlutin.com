@@ -17,15 +17,17 @@
     .tags {
       display: flex;
       flex-wrap: wrap;
+      margin: 0.4rem 0;
     }
 
     .commentsCount {
       white-space: nowrap;
+      margin: 0.4rem 0 0.4rem 0.5rem;
 
       .icon {
         vertical-align: middle;
         margin-right: 0.5rem;
-        width: 1.5rem;
+        width: 1.4rem;
         margin-bottom: -5px;
       }
 
@@ -38,10 +40,6 @@
         text-decoration: underline;
         text-decoration-style: dotted;
       }
-    }
-
-    .tags, .commentsCount {
-      margin: 0.5rem 0;
     }
   }
 }

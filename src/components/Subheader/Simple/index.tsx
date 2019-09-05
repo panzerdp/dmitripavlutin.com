@@ -11,9 +11,11 @@ interface PostSubheaderProps {
 export default function PostSubheader({ post }: PostSubheaderProps) {
   return (
     <div className={styles.subheader}>
-      <div className={styles.tags}>{post.tags.map(mapTag)}</div>
-      <div className={styles.right}>
-        <span className={styles.published}>{formatDate(post.published)}</span>
+      <div className={styles.line}>
+        <div className={styles.tags}>{post.tags.map(mapTag)}</div>
+        <div className={styles.right}>
+          <span className={styles.published}>{formatDate(post.published)}</span>
+        </div>
       </div>
     </div>
   );
