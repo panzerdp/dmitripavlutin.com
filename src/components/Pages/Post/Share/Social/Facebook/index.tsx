@@ -13,7 +13,14 @@ interface PostShareSocialFacebookProps {
 
 export class PostShareSocialFacebook extends React.Component<PostShareSocialFacebookProps> {
   public render() {
-    return <PostShareButton title="Share on Twitter" onClick={this.handleClick} className={styles.facebook} />;
+    return (
+      <PostShareButton
+        title="Share on Twitter"
+        href={this.getFacebookShareUrl()}
+        onClick={this.handleClick}
+        className={styles.facebook}
+      />
+    );
   }
 
   public handleClick = (event: React.SyntheticEvent) => {
