@@ -1,6 +1,6 @@
 ---
 title: 5 Ways to Fix 'this' value in JavaScript
-description: Approaches on how to fix the value of this keyword in JavaScript.
+description: You can fix the value of 'this' using an additional self variable, arrow functions, manual binding, or fat arrow methods.
 published: "2019-09-10T13:00Z"
 modified: "2019-09-10T13:00Z"
 thumbnail: "./images/birds.jpg"
@@ -15,12 +15,11 @@ I like in JavaScript is the possibility to change dynamically the function execu
 
 For example, you can execute array methods on array-like objects:
 
-```javascript{5}
+```javascript
 const reduce = Array.prototype.reduce;
 
 function sumArgs() {
   return reduce.call(arguments, (sum, value) => {
-    this === arguments; // => true
     return sum += value;
   });
 }
@@ -63,17 +62,17 @@ agent.getFullName(); // => 'John Smith'
 
 Calling `agent.getFullName()` returns the full name of the person: `'John Smith'`. As expected, `this` inside `getFullName()` method equals to `agent`.  
 
-What would happen if `agent.getFullName` is executed by the helper function `execute()`:  
+What would happen if `agent.getFullName` is executed by the helper function:  
 
 ```javascript
 execute(agent.getFullName); // => 'undefined undefined'
 ```
 
-The execution result is incorrect: `'undefined undefined'`. Why does it happen?  
+The execution result is incorrect: `'undefined undefined'`. That's a problem of `this` having an incorrect value.  
 
 Inside the method `getFullName()` the value of `this` is the global object (`window` in a browser environment). Having `this` equal to `window`, the evaluation of `` `${window.firstName} ${window.lastName}` `` is `'undefined undefined'`.
 
-It happens because the method was separated from the execution context when calling `execute(agent.getFullName)`:
+It happens because the method was separated from the object when calling `execute(agent.getFullName)`. Basically what happens is just a regular function invocation (not method invocation):  
 
 ```javascript
 execute(agent.getFullName); // => 'undefined undefined'
@@ -84,29 +83,32 @@ const getFullNameSeparated = agent.getFullName;
 execute(getFullNameSeparated); // => 'undefined undefined'
 ```
 
-This is the the source of the most confusion regarding `this` in JavaScript: *method separation from the original object*.  
+*A method separated from its object* is the source of `this` keyword confusion.  
 
-When a method is a regular function (with the exception of arrow functions and fat arrow methods), `this` is determined by how the function is invoked (but not how it is defined).  
+To be sure that `this` inside the method is the containing object:
 
-The method separation problem, and as result an incorrect value of `this`, appears in different shapes.
+1) Execute the method in the form of a property accessor: `agent.getFullName()`
+2) Or bind `this` statically to the containing object (using arrow functions, `.bind()` method, etc)
+
+The method separation problem, and as a result an incorrect value of `this`, appears in different shapes:
 
 #### When setting callbacks
 
 ```javascript
-// `this` inside `methodHandler()` is the global object (`window`)
+// `this` inside `methodHandler()` is the global object
 setTimeout(object.handlerMethod, 1000);
 ```
 
 #### When setting event handlers
 
 ```jsx
-// JSX: `this` inside `methodHandler()` is the global object (`window`)
+// React: `this` inside `methodHandler()` is the global object
 <button onClick={object.handlerMethod}>
   Click me
 </button>
 ```
 
-Let's continue with some useful approaches how to keep `this` pointing to the needed object, even if the method is separated from the object.  
+Let's continue with some useful approaches on how to keep `this` pointing to the needed object, even if the method is separated from the object.  
 
 ## 2. Close over the context
 
@@ -137,9 +139,9 @@ Now there's no problem when calling `execute(agent.getFullName)`, because `getFu
 
 Again, `execute(agent.getFullName)` returns the correct result because inside the arrow function `this` equals to `agent` object.  
 
-## 3. Lexical this: arrow function
+## 3. Lexical this using arrow function
 
-Is there are way to bind `this` statically without an additional variable? Yes, this is exactly what the arrow function does.  
+Is there are a way to bind `this` statically without an additional variable? Yes, this is exactly what the arrow function does.  
 
 Let's refactor `Person` to use an arrow function:
 
@@ -157,11 +159,11 @@ agent.getFullName();        // => 'John Smith'
 execute(agent.getFullName); // => 'John Smith'
 ```
 
-The arrow function binds `this` lexically. In simple words it uses `this` value from the outer function it is defined within.  
+The arrow function binds `this` lexically. In simple words, it uses `this` value from the outer function it is defined within.  
 
 ## 4. Bind the context
 
-Now let's take a step forward and refactor `Person` and use an ES2015 classes. 
+Now let's take a step forward and refactor `Person` and use an ES2015 class. 
 
 ```javascript
 class Person {
@@ -183,9 +185,9 @@ execute(agent.getFullName); // => 'undefined undefined'
 
 `execute(agent.getFullName)` still returns `'undefined undefined'`. 
 
-The additional variables `self` or arrow functions to fix the value of `this` don't work in case of classes.  
+The additional variables `self` or arrow functions to fix the value of `this` doesn't work in case of classes.  
 
-Fortunately, there's a trick that involves using `myFunc.bind(thisValue)` to setup the context of the function. 
+Fortunately, there's a trick that involves using `myFunc.bind(thisValue)` to set up the context of the function. 
 
 ```javascript{6}
 class Person {
@@ -214,7 +216,7 @@ execute(agent.getFullName); // => 'John Smith'
 
 The above method of manual binding the context requires boilerplate code. But there's still room for improvement regarding classes. 
 
-You can use the JavaScript class fields proposal that permits to defined a fat arrow method:
+You can use the JavaScript [class fields proposal](https://github.com/tc39/proposal-class-fields) that permits to defined a fat arrow method:
 
 ```javascript{7}
 class Person {
@@ -234,14 +236,16 @@ agent.getFullName();        // => 'John Smith'
 execute(agent.getFullName); // => 'John Smith'
 ```
 
-The fat arrow method `getFullName = () => { ... }` always binds to the class instance, even if you separate the method from its object.  
+The fat arrow method `getFullName = () => { ... }` is bound to the class instance, even if you separate the method from its object.  
 
 ## 6. Conclusion
 
-The method separated from object creates lots of missundesranding regarding `this`.  
+The method separated from the object creates lots of misunderstanding regarding `this`.  
 
-To fix the context of the method, you can manually use an additional variable `self` that holds the correct context object. But a better alternative is to use the arrow functions, which are designed to bind `this` lexically.
+To bind `this` statically, you can manually use an additional variable `self` that holds the correct context object. A better alternative is to use the arrow functions, which are designed to bind `this` statically.
 
-In classes, you can use the `myFunc.bind(thisArg)` method to bind manually the class methods inside the constructor. Anyways, the new JavaScript proposal class fields brinds the fat arrow method on the table, which are automatically bound to the instance.  
+In classes, you can use the `myFunc.bind(thisArg)` method to bind manually the class methods inside the constructor. 
 
-*Does it worth using `this`, regardless of its complexity? Free to write a comment below.*
+If you want to skip writing boilerplate code, the new JavaScript proposal class fields bring the fat arrow method on the table that automatically binds `this` to the class instance.  
+
+*Do you find `this` useful, or rather it should be avoided? Feel free to write a comment below!*
