@@ -4,7 +4,7 @@ description: How to fix 'this' value in JavaScript using an additional variable,
 published: "2019-09-11T13:00Z"
 modified: "2019-09-11T13:00Z"
 thumbnail: "./images/birds.jpg"
-slug: how-to-fixate-this-value-javascript
+slug: fix-this-in-javascript
 tags: ["javascript", "this"]
 recommended: ["gentle-explanation-of-this-in-javascript", "5-interesting-uses-javascript-destructuring"]
 type: post
