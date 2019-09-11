@@ -1,5 +1,5 @@
 ---
-title: 4 Ways to Fix 'this' Value in JavaScript
+title: 4 Ways to Fix 'this' in JavaScript
 description: How to fix 'this' value in JavaScript using an additional variable, arrow functions, manual binding, or fat arrow methods.
 published: "2019-09-11T13:00Z"
 modified: "2019-09-11T13:00Z"
