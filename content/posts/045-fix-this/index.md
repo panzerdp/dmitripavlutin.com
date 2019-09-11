@@ -1,6 +1,6 @@
 ---
-title: 5 Ways to Fix 'this' value in JavaScript
-description: How to 'this' value using an additional variable, arrow functions, manual binding, or fat arrow methods.
+title: 4 Ways to Fix 'this' value in JavaScript
+description: How to fix 'this' value in JavaScript using an additional variable, arrow functions, manual binding, or fat arrow methods.
 published: "2019-09-11T13:00Z"
 modified: "2019-09-11T13:00Z"
 thumbnail: "./images/birds.jpg"
@@ -41,7 +41,7 @@ execute(function() { return 10 }); // => 10
 
 Now, let's continue with understanding the essence of mistakes around `this`: method separation.  
 
-## 1. Method separation
+## 1. Method separation problem
 
 A class `Person` contains the fields `firstName` and `lastName`. Plus, it has a method `getFullName()` that returns the full name of the person.  
 
