@@ -6,7 +6,7 @@ modified: "2016-07-08"
 thumbnail: "./images/cover.jpg"
 slug: gentle-explanation-of-this-in-javascript
 tags: ["javascript", "this"]
-recommended: ["6-ways-to-declare-javascript-functions", "when-not-to-use-arrow-functions-in-javascript"]
+recommended: ["how-to-fixate-this-value-javascript", "when-not-to-use-arrow-functions-in-javascript"]
 type: post
 ---
 
