@@ -2,7 +2,7 @@
 title: 4 Ways to Fix 'this' in JavaScript
 description: How to fix 'this' value in JavaScript using an additional variable, arrow functions, manual binding, or fat arrow methods.
 published: "2019-09-11T13:00Z"
-modified: "2019-09-11T13:00Z"
+modified: "2019-09-11T14:44Z"
 thumbnail: "./images/birds.jpg"
 slug: fix-this-in-javascript
 tags: ["javascript", "this"]
@@ -27,7 +27,9 @@ function sumArgs() {
 sumArgs(1, 2, 3); // => 6
 ```
 
-The other side of the coin is that `this` keyword is difficult to grasp. In this post, I will explain easy ways to fix `this` value in common situations.  
+The other side of the coin is that `this` keyword is difficult to grasp. 
+
+Often you might find yourself searching why `this` has an incorrect value. The following sections will teach you easy ways how to bind `this` to the desired value.  
 
 Before starting, I'll need a helper function `execute(func)`. It simply executes the function supplied as an argument:   
 
