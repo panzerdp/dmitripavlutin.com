@@ -1,8 +1,8 @@
 ---
 title: 5 Ways to Fix 'this' value in JavaScript
 description: How to 'this' value using an additional variable, arrow functions, manual binding, or fat arrow methods.
-published: "2019-09-10T13:00Z"
-modified: "2019-09-10T13:00Z"
+published: "2019-09-11T13:00Z"
+modified: "2019-09-11T13:00Z"
 thumbnail: "./images/birds.jpg"
 slug: how-to-fixate-this-value-javascript
 tags: ["javascript", "this"]
@@ -39,7 +39,7 @@ function execute(func) {
 execute(function() { return 10 }); // => 10
 ```
 
-Now, let's continue with the essence of the lost `this`: method separation.  
+Now, let's continue with understanding the essence of mistakes around `this`: method separation.  
 
 ## 1. Method separation
 
@@ -87,7 +87,7 @@ const getFullNameSeparated = agent.getFullName;
 execute(getFullNameSeparated); // => 'undefined undefined'
 ```
 
-This effect is what I name *method separated from its object*, and is a source of confusion.  
+This effect is what I name *method separated from its object*. When the method is separated, and later executed, it has no connection with its original object.  
 
 To be sure that `this` inside the method points to the right object, you have to:
 
@@ -191,7 +191,7 @@ Unfortunately, even with the new class syntax, `execute(agent.getFullName)` stil
 
 The use of additional variable `self` or arrow functions to fix the value of `this` would not work in case of classes.  
 
-Fortunately, there's a trick that involves using  [bind()](/gentle-explanation-of-this-in-javascript/#6-bound-function) method to bind the context of the method inside the constructor: 
+But there's a trick involving [bind()](/gentle-explanation-of-this-in-javascript/#6-bound-function) method that binds the context of the method inside the constructor: 
 
 ```javascript{6}
 class Person {
@@ -243,14 +243,16 @@ execute(agent.getFullName); // => 'John Smith'
 
 The fat arrow method `getFullName = () => { ... }` is bound to the class instance, even if you separate the method from its object.  
 
+This approach is the most efficient and concise to bind `this` in classes.  
+
 ## 6. Conclusion
 
 The method separated from its object creates lots of misunderstanding regarding `this`. You should be aware of this effect.  
 
-To bind `this` statically, you can manually use an additional variable `self` that holds the correct context object. A better alternative is to use arrow functions, which are by nature designed to bind `this` lexically.
+To bind `this` statically, you can manually use an additional variable `self` that holds the correct context object. However, a better alternative is to use arrow functions, which are by nature designed to bind `this` lexically.
 
-In classes, you can use the `bind()` method of the function to bind manually the class methods inside the constructor. 
+In classes, you can use the `bind()` method to bind manually the class methods inside the constructor. 
 
-If you want to skip writing boilerplate code, the new JavaScript proposal class fields bring the fat arrow method on the table that automatically binds `this` to the class instance.  
+If you want to skip writing boilerplate code, the new JavaScript proposal class fields brings the fat arrow method that automatically binds `this` to the class instance.  
 
 *Do you find `this` useful, or rather it should be avoided? Feel free to write a comment below!*
