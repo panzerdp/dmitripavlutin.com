@@ -12,6 +12,10 @@ interface PostExcerpt extends PostPlain {
   thumbnail: FluidImage;
 }
 
+interface PostPreview extends PostPlain {
+  thumbnail: FixedImage;
+}
+
 interface Post extends PostExcerpt {
   html: string;
   recommended: string[];
