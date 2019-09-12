@@ -26,8 +26,8 @@ interface PostTemplateProps {
   siteInfo: SiteInfo;
   authorInfo: AuthorInfo;
   postRepositoryFileUrl: string;
-  post: Post;
-  recommendedPosts: PostExcerpt[];
+  post: PostDetailed;
+  recommendedPosts: Post<FixedImage>[];
   popularPosts: PostPlain[];
   authorProfilePictureSrc: string;
 }

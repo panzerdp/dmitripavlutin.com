@@ -10,7 +10,7 @@ import RightSidebar from 'components/Pages/ExcerptsList/Sidebar/Right';
 
 interface ExcerptsTemplateProps {
   siteInfo: SiteInfo;
-  posts: PostExcerpt[];
+  posts: Post[];
   currentPage: number;
   pagesSum: number;
   authorProfilePictureSrc: string;

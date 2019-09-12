@@ -6,7 +6,7 @@ import Img from 'gatsby-image';
 import Excerpt from 'components/Pages/ExcerptsList/Excerpt';
 import { TO_POST } from 'routes/path';
 
-const post: PostExcerpt = {
+const post: Post = {
   title: 'Post 1',
   description: 'Description',
   slug: 'post-1',

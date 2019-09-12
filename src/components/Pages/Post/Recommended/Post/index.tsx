@@ -6,16 +6,16 @@ import Tag from 'components/Tag';
 import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 
-interface RecommendedExcerptProps {
-  post: PostExcerpt;
+interface RecommendedPostProps {
+  post: Post<FixedImage>;
 }
 
-export default function RecommendedExcerpt({ post: { slug, title, thumbnail, tags } }: RecommendedExcerptProps) {
+export default function RecommendedPost({ post: { slug, title, thumbnail, tags } }: RecommendedPostProps) {
   const to = TO_POST({ slug });
   return (
     <article key={slug} className={styles.excerpt}>
       <Link to={to} className={styles.thumbnailAnchor}>
-        <Img sizes={thumbnail} />
+        <Img fixed={thumbnail} />
       </Link>
       <div className={styles.content}>
         <h4>

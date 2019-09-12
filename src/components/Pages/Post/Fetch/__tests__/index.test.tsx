@@ -64,14 +64,14 @@ const props = {
               tags: ['react', 'server side rendering'],
               thumbnail: {
                 childImageSharp: {
-                  fluid: {
-                    src: 'source',
-                    base64: 'base64',
-                    aspectRatio: 2,
+                  fixed: {
+                    src: 'src',
                     srcSet: 'src-set',
-                    sizes: 'some sizes',
+                    width: 100,
+                    height: 100,
+                    base64: '',
                     srcWebp: 'src-webp',
-                    srcSetWebp: 'src-set-webp',
+                    srcSetWebp: 'srcset-webp',
                   },
                 },
               },

@@ -8,15 +8,11 @@ interface PostPlain {
   commentsThreadId: string | undefined;
 }
 
-interface PostExcerpt extends PostPlain {
-  thumbnail: FluidImage;
+interface Post<Image = FluidImage> extends PostPlain {
+  thumbnail: Image;
 }
 
-interface PostPreview extends PostPlain {
-  thumbnail: FixedImage;
-}
-
-interface Post extends PostExcerpt {
+interface PostDetailed<Image = FluidImage> extends Post<Image> {
   html: string;
   recommended: string[];
 }

@@ -1,13 +1,13 @@
 import { PostFragment } from 'typings/graphql';
 
-export function toPostExcerpt({ node: { frontmatter } }: { node: { frontmatter: any } }): PostExcerpt {
+export function toPostImageFluid({ node: { frontmatter } }: { node: { frontmatter: any } }): Post<FluidImage> {
   return {
     ...frontmatter,
     thumbnail: frontmatter.thumbnail.childImageSharp.fluid,
   };
 }
 
-export function toPostPreview({ node: { frontmatter } }: { node: { frontmatter: any } }): PostExcerpt {
+export function toPostImageFixed({ node: { frontmatter } }: { node: { frontmatter: any } }): Post<FixedImage> {
   return {
     ...frontmatter,
     thumbnail: frontmatter.thumbnail.childImageSharp.fixed,

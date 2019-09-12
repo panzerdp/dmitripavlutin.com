@@ -7,7 +7,7 @@ import PostRecommendedExcerpt from '../index';
 import Tag from 'components/Tag';
 import { TO_POST } from 'routes/path';
 
-const post: PostExcerpt = {
+const post: Post<FixedImage> = {
   title: 'Post 1',
   description: 'Description',
   slug: 'post-1',
@@ -16,10 +16,10 @@ const post: PostExcerpt = {
   modified: '2019-01-01',
   commentsThreadId: 'thread-id',
   thumbnail: {
-    aspectRatio: 1,
     src: 'src',
     srcSet: 'src-set',
-    sizes: 'sizes',
+    width: 100,
+    height: 100,
   },
 };
 
@@ -36,7 +36,7 @@ describe('<PostRecommendedExcerpt />', function() {
 
   it('should render the post thumbnail', function() {
     const wrapper = shallow(<PostRecommendedExcerpt {...props} />);
-    expect(wrapper.contains(<Img sizes={post.thumbnail} />)).toBe(true);
+    expect(wrapper.contains(<Img fixed={post.thumbnail} />)).toBe(true);
   });
 
   it('should render post tags', function() {

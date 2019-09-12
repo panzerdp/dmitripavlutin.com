@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import PostMetaStructuredData from '../index';
 
-const post: Post = {
+const post: PostDetailed = {
   description: 'Useful techniques to facilitate React server-side rendering.',
   html: '<div>JavaScript is a programming language</div>',
   modified: '2019-01-01',

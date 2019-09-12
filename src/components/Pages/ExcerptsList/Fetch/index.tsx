@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import ExcerptsListTemplate from 'components/Pages/ExcerptsList/Template';
 import { ExcerptsListQuery } from 'typings/graphql';
-import { toPostExcerpt } from 'utils/mapper';
+import { toPostImageFluid } from 'utils/mapper';
 
 interface ExcerptsFetchProps {
   data: ExcerptsListQuery;
@@ -26,7 +26,7 @@ export default function ExcerptsFetch({
   return (
     <ExcerptsListTemplate
       siteInfo={siteInfo}
-      posts={allMarkdownRemark.edges.map(toPostExcerpt)}
+      posts={allMarkdownRemark.edges.map(toPostImageFluid)}
       authorProfilePictureSrc={authorProfilePicture.childImageSharp.resize.src}
       currentPage={pageContext.currentPage}
       pagesSum={pageContext.pagesSum}

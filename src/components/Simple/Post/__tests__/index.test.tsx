@@ -5,7 +5,7 @@ import SimplePost from '../index';
 import { TO_POST } from 'routes/path';
 import Subheader from 'components/Subheader/Simple';
 
-const post: PostExcerpt = {
+const post: PostPlain = {
   title: 'Post 1',
   description: 'Description',
   slug: 'post-1',
@@ -13,12 +13,6 @@ const post: PostExcerpt = {
   published: '2019-01-01',
   modified: '2019-01-01',
   commentsThreadId: 'thread-id',
-  thumbnail: {
-    aspectRatio: 1,
-    src: 'src',
-    srcSet: 'src-set',
-    sizes: 'sizes',
-  },
 };
 
 const props = {

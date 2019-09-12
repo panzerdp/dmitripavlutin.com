@@ -7,7 +7,7 @@ import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 
 interface ExcerptProps {
-  post: PostExcerpt;
+  post: Post;
   siteUrl: string;
 }
 

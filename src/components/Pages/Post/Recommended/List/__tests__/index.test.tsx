@@ -2,7 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import PostRecommendedList from '../index';
-import PostRecommendedExcerpt from 'components/Pages/Post/Recommended/Excerpt';
+import PostRecommendedExcerpt from 'components/Pages/Post/Recommended/Post';
 
 const props = {
   posts: [
@@ -15,10 +15,10 @@ const props = {
       modified: '2019-01-01',
       commentsThreadId: 'thread-id',
       thumbnail: {
-        aspectRatio: 1,
         src: 'src',
         srcSet: 'src-set',
-        sizes: 'sizes',
+        width: 100,
+        height: 100,
       },
     },
     {
@@ -30,10 +30,10 @@ const props = {
       modified: '2019-01-01',
       commentsThreadId: 'thread-id',
       thumbnail: {
-        aspectRatio: 2,
         src: 'src',
         srcSet: 'src-set',
-        sizes: 'sizes',
+        width: 100,
+        height: 100,
       },
     },
   ],

@@ -1,4 +1,4 @@
-import { toPostExcerpt } from '../mapper';
+import { toPostImageFluid } from '../mapper';
 
 const fluidImage = {
   src: 'test',
@@ -29,9 +29,9 @@ const edge = {
   },
 };
 
-describe('toPostExcerpt()', function() {
-  test('should map to post excerpt', function() {
-    expect(toPostExcerpt(edge)).toStrictEqual({
+describe('toPostImageFluid()', function() {
+  test('should map to post', function() {
+    expect(toPostImageFluid(edge)).toStrictEqual({
       title: 'Title',
       description: 'Description',
       published: '2019-01-01',

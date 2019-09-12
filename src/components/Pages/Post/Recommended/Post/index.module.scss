@@ -30,8 +30,12 @@
   margin: 4%;
   display: block;
 
-  img {
-    width: 100% !important;
-    border-radius: 4px;
+  :global {
+    .gatsby-image-wrapper {
+      width: 100% !important;
+      height: auto !important;
+      padding-top: 55.55%;
+      border-radius: 4px;
+    }
   }
 }

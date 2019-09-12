@@ -7,7 +7,7 @@ import { TO_POST } from 'routes/path';
 
 interface PostLeftSidebarProps {
   siteUrl: string;
-  post: PostExcerpt;
+  post: PostPlain;
   showShareButtons: boolean;
 }
 
