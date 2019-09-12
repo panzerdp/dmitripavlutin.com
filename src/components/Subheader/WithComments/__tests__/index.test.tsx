@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 
 import SubheaderWithComments from '../index';
 import { formatDate } from 'utils/date';
+import { TO_POST } from 'routes/path';
 
 const post: PostPlain = {
   title: 'Post 1',
@@ -16,8 +17,7 @@ const post: PostPlain = {
 
 const props = {
   post,
-  threadAnchor: '#disqus_thread',
-  url: 'http://example.com/post-1',
+  siteUrl: 'http://example.com/',
 };
 
 describe('<SubheaderWithComments />', function() {
@@ -28,7 +28,8 @@ describe('<SubheaderWithComments />', function() {
 
   it('should render the comments count', function() {
     const wrapper = shallow(<SubheaderWithComments {...props} />);
-    expect(wrapper.find(`a[href="${props.threadAnchor}"] PostCommentsCount`)).toHaveLength(1);
+    const postUrl = TO_POST({ slug: post.slug });
+    expect(wrapper.find(`a[href="${postUrl}#disqus_thread"] PostCommentsCount`)).toHaveLength(1);
   });
 
   it('should render post tags', function() {

@@ -3,13 +3,13 @@ import { Disqus } from 'gatsby-plugin-disqus';
 
 import styles from './index.module.scss';
 
-interface PostCommentsThreadProps {
+interface CommentsThreadProps {
   url: string;
   title: string;
   commentsTheadId: string | undefined;
 }
 
-export function PostCommentsThread({ url, title, commentsTheadId }: PostCommentsThreadProps) {
+export function CommentsThread({ url, title, commentsTheadId }: CommentsThreadProps) {
   const disqusConfig = {
     url: url,
     title: title,
@@ -22,4 +22,4 @@ export function PostCommentsThread({ url, title, commentsTheadId }: PostComments
   );
 }
 
-export default React.memo(PostCommentsThread);
+export default React.memo(CommentsThread);

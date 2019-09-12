@@ -10,7 +10,7 @@ import SubheaderWithComments from 'components/Subheader/WithComments';
 import Edit from 'components/Pages/Post/Edit';
 import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
-import CommentsThread from 'components/Pages/Post/Comments/Thread';
+import CommentsThread from 'components/Comments/Thread';
 import { TO_POST } from 'routes/path';
 
 const props = {
@@ -76,6 +76,12 @@ const props = {
       slug: 'useful-techniques-react-server-side-rendering',
       tags: ['react', 'server side rendering'],
       title: 'Useful techniques to facilitate React server-side rendering',
+      thumbnail: {
+        src: 'src',
+        srcSet: 'src-set',
+        width: 100,
+        height: 100,
+      },
     },
   ],
   siteInfo: {
@@ -136,7 +142,7 @@ describe('<PostTemplate />', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
     expect(
-      article.contains(<SubheaderWithComments post={props.post} url={postUrl} threadAnchor="#disqus_thread" />)
+      article.contains(<SubheaderWithComments post={props.post} siteUrl={props.siteInfo.url} />)
     ).toBe(true);
   });
 

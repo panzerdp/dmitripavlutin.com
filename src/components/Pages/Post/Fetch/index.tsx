@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import PostTemplate from 'components/Pages/Post/Template';
 import { PostBySlugQuery } from 'typings/graphql';
-import { toPostImageFixed, toPostPlain } from 'utils/mapper';
+import { toPostImageFixed } from 'utils/mapper';
 
 interface PostTemplateFetchProps {
   data: PostBySlugQuery;
@@ -23,7 +23,7 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
     .join('/');
   const postRepositoryFileUrl = `${siteInfo.repositoryUrl}/edit/master/${postRelativePath}`;
   const recommended = recommendedPosts.edges.map(toPostImageFixed);
-  const popular = popularPosts.edges.map(toPostPlain);
+  const popular = popularPosts.edges.map(toPostImageFixed);
   return (
     <PostTemplate
       siteInfo={siteInfo}
@@ -134,6 +134,13 @@ export const pageQuery = graphql`
         node {
           frontmatter {
             ...Post
+            thumbnail {
+              childImageSharp {
+                fixed(width: 70, height: 70, quality: 90) {
+                  ...GatsbyImageSharpFixed_withWebp
+                }
+              }
+            }
           }
         }
       }

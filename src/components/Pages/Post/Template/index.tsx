@@ -12,7 +12,7 @@ import LeftSidebar from 'components/Pages/Post/Sidebar/Left';
 import RightSidebar from 'components/Pages/Post/Sidebar/Right';
 import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
-import CommentsThread from 'components/Pages/Post/Comments/Thread';
+import CommentsThread from 'components/Comments/Thread';
 import AboutAuthorConcise from 'components/AboutAuthor/Concise';
 import AboutAuthorFetch from 'components/AboutAuthor/Fetch';
 import SubscriptionRegion from 'components/Subscription/Region';
@@ -28,7 +28,7 @@ interface PostTemplateProps {
   postRepositoryFileUrl: string;
   post: PostDetailed;
   recommendedPosts: Post<FixedImage>[];
-  popularPosts: PostPlain[];
+  popularPosts: Post<FixedImage>[];
   authorProfilePictureSrc: string;
 }
 
@@ -44,7 +44,7 @@ export default function PostTemplate({
   const relativePosition = useVerticalScroll(SHOW_SHARE_AFTER_Y);
   const showShareButtons = relativePosition === RelativePosition.Below;
   const leftSidebar = <LeftSidebar post={post} siteUrl={siteInfo.url} showShareButtons={showShareButtons} />;
-  const rightSidebar = <RightSidebar popularPosts={popularPosts} />;
+  const rightSidebar = <RightSidebar popularPosts={popularPosts} siteUrl={siteInfo.url} />;
   const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
   return (
     <Layout leftSidebar={leftSidebar} rightSidebar={rightSidebar}>
@@ -60,7 +60,7 @@ export default function PostTemplate({
           <Img fluid={post.thumbnail} />
         </div>
         <h1>{post.title}</h1>
-        <Subheader post={post} url={postUrl} threadAnchor="#disqus_thread" />
+        <Subheader post={post} siteUrl={siteInfo.url} />
         <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
         <div className={styles.shareGroup}>
           <div className={styles.shareBottom}>

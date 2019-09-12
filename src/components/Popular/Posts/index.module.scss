@@ -4,18 +4,48 @@
   box-shadow: $box-shadow;
   border-radius: 8px;
   font-size: 1.3rem;
-  padding: 1.5rem;
+  padding: 1.5rem 1rem;
 
   h3 {
     margin: 0;
     margin-bottom: 0.5rem;
   }
 
-  ul {
-    padding-left: 25px;
+  .list {
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
 
-    li {
-      margin: 0.5rem 0;
+      .thumbnail {
+        border-radius: 4px;
+        display: block !important;
+        min-width: 70px;
+        margin-right: 0.5rem;
+      }
+
+      .link {
+        font-size: 1.3rem;
+      }
+
+      .commentsCount {
+        margin-top: 0.25rem;
+
+        .icon {
+          vertical-align: middle;
+          width: 1rem;
+          margin-right: 0.25rem;
+        }
+
+        a {
+          vertical-align: middle;
+          font-size: 1rem;
+          text-decoration: underline;
+          
+          line-height: 1.4;
+        }
+      }
     }
   }
 }

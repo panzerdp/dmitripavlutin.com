@@ -11,10 +11,11 @@ import AboutAuthorContact from 'components/AboutAuthor/Contact';
 import AboutAuthorFetch from 'components/AboutAuthor/Fetch';
 
 interface PostRightSidebarProps {
-  popularPosts: PostPlain[];
+  popularPosts: Post<FixedImage>[];
+  siteUrl: string;
 }
 
-export default function PostRightSidebar({ popularPosts }: PostRightSidebarProps) {
+export default function PostRightSidebar({ popularPosts, siteUrl }: PostRightSidebarProps) {
   return (
     <div className={styles.rightSidebar}>
       <SubscriptionRegion />
@@ -32,7 +33,7 @@ export default function PostRightSidebar({ popularPosts }: PostRightSidebarProps
           );
         }}
       />
-      <PopularPosts posts={popularPosts} />
+      <PopularPosts posts={popularPosts} siteUrl={siteUrl} />
       <PopularTagsFetch render={(posts) => <PopularTagsList posts={posts} title="Explore popular tags" limit={20} />} />
     </div>
   );

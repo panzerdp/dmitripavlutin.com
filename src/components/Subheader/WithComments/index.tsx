@@ -1,17 +1,19 @@
 import * as React from 'react';
 
 import Tag from 'components/Tag';
-import PostCommentsCount from 'components/Pages/Post/Comments/Count';
+import PostCommentsCount from 'components/Comments/Count';
 import { formatDate } from 'utils/date';
 import styles from './index.module.scss';
+import { TO_POST } from 'routes/path';
 
 interface SubheaderWithCommentsProps {
   post: PostPlain;
-  url: string;
-  threadAnchor: string;
+  siteUrl: string;
 }
 
-export default function SubheaderWithComments({ post, url, threadAnchor }: SubheaderWithCommentsProps) {
+export default function SubheaderWithComments({ post, siteUrl }: SubheaderWithCommentsProps) {
+  const postUrl = TO_POST({ slug: post.slug });
+  const url = siteUrl + postUrl;
   return (
     <div className={styles.subheader}>
       <div className={styles.published}>{formatDate(post.published)}</div>
@@ -19,7 +21,7 @@ export default function SubheaderWithComments({ post, url, threadAnchor }: Subhe
         <div className={styles.tags}>{post.tags.map(mapTag)}</div>
         <div className={styles.commentsCount}>
           <img alt="Comments" src="/comments.svg" className={styles.icon} />
-          <a href={threadAnchor} title="Jump to comments section" className={styles.anchor}>
+          <a href={`${postUrl}#disqus_thread`} title="Jump to comments section" className={styles.anchor}>
             <PostCommentsCount title={post.title} url={url} commentsTheadId={post.commentsThreadId} />
           </a>
         </div>
