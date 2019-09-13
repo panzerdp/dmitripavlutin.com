@@ -92,6 +92,19 @@ const props = {
               commentsThreadId: 'thread-id',
               slug: 'useful-techniques-react-server-side-rendering',
               tags: ['react', 'server side rendering'],
+              thumbnail: {
+                childImageSharp: {
+                  fixed: {
+                    src: 'src',
+                    srcSet: 'src-set',
+                    width: 100,
+                    height: 100,
+                    base64: '',
+                    srcWebp: 'src-webp',
+                    srcSetWebp: 'srcset-webp',
+                  },
+                },
+              },
             },
           },
         },

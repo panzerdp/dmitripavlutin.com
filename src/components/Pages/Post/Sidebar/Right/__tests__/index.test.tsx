@@ -13,12 +13,23 @@ const popularPosts = [
     slug: 'useful-techniques-react-server-side-rendering',
     tags: ['react', 'server side rendering'],
     title: 'Useful techniques to facilitate React server-side rendering',
+    thumbnail: {
+      src: 'src',
+      srcSet: 'src-set',
+      width: 100,
+      height: 100,
+    },
   },
 ];
 
+const props = {
+  popularPosts,
+  siteUrl: 'http://example.com',
+};
+
 describe('<PostRightSidebar />', function() {
   it('should render subscription form', function() {
-    const wrapper = shallow(<PostRightSidebar popularPosts={popularPosts} />);
+    const wrapper = shallow(<PostRightSidebar {...props} />);
     expect(wrapper.contains(<SubscriptionRegion />)).toBe(true);
   });
 });

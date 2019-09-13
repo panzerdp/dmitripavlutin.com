@@ -33,6 +33,15 @@ exports[`<PostFetch /> should render post template 1`] = `
           "react",
           "server side rendering",
         ],
+        "thumbnail": Object {
+          "base64": "",
+          "height": 100,
+          "src": "src",
+          "srcSet": "src-set",
+          "srcSetWebp": "srcset-webp",
+          "srcWebp": "src-webp",
+          "width": 100,
+        },
         "title": "Useful techniques to facilitate React server-side rendering",
       },
     ]

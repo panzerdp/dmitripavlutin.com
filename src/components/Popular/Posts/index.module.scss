@@ -16,7 +16,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 1.5rem;
+      margin-top: 1.25rem;
+
+      &:first-child {
+        margin-top: 1rem;
+      }
 
       .thumbnail {
         border-radius: 4px;
