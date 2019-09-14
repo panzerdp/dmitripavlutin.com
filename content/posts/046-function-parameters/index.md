@@ -44,11 +44,13 @@ identity(1); // => 1
 sum(1, 2);   // => 3
 ```
 
-In JavaScript, you can call a function with fewer arguments than the number of parameters. JavaScript does not generate any errors or warnings in such a case.  
+The 3 functions above were called with the same number of arguments as the number of parameters.  
+
+But you can call a function with fewer arguments than the number of parameters. JavaScript does not generate any errors in such a case.  
 
 However, the parameters that have no argument on invocation are initialized with `undefined` value.  
 
-For example, let's call the function `sum()`, that has 2 parameters, with just one argument:
+For example, let's call the function `sum()` (which has 2 parameters) with just one argument:
 
 ```javascript{2}
 function sum(param1, param2) {
@@ -60,11 +62,11 @@ function sum(param1, param2) {
 sum(1); // => NaN
 ```
 
-The function is called only with one parameter: `sum(1)`. While `param1` has the value `1`, the second parameter `param2` is initialized with `undefined`. 
+The function is called only with one argument: `sum(1)`. While `param1` has the value `1`, the second parameter `param2` is initialized with `undefined`. 
 
 `param1 + param2` is evaluated as `1 + undefined`, which results in `NaN`.
 
-If necessary, you can always verify if the parameter is `undefined` and provide a default value. Let's make the `param2` from previous example default to `0`:
+If necessary, you can always verify if the parameter is `undefined` and provide a default value. Let's make the `param2` default to `0`:
 
 ```javascript{2}
 function sum(param1, param2) {
@@ -77,13 +79,11 @@ function sum(param1, param2) {
 sum(1); // => 1
 ```
 
-Unfortunately, the problem with this approach is the boilerplate code.  
-
 But there is a better way to set default values. Let's see how it works in the next section.  
 
 ## 2. Default parameters
 
-The ES2015 default parameter features allow initializing parameters with defaults. It's a better and more concise way than the one presented above.  
+The ES2015 default parameters feature allows initializing parameters with defaults. It's a better and more concise way than the one presented above.  
 
 Let's make `param2` default to value `0` using ES2015 default parameters feature:
 
@@ -97,7 +97,7 @@ sum(1);            // => 1
 sum(1, undefined); // => 1
 ```
 
-As you can see in the function signature there's now: `param2 = 0`. It will make `param2` default to `0`.  
+In the function signature there's now `param2 = 0`, which makes `param2` default to `0` if it doesn't get any value.  
 
 Now if the function is called with just one argument: `sum(1)`, the second parameter `param2` is initialized with `0`.  
 
@@ -105,7 +105,7 @@ Note that if you set `undefined` as the second argument `sum(1, undefined)`, the
 
 ## 3. Parameter destructuring
 
-What I especially like in the JavaScript function parameters is the ability to destructure it. You can easily use objects and array destructuring on parameters.  
+What I especially like in the JavaScript function parameters is the ability to destructure. You can destructure inline the parameter's objects or arrays.  
 
 This feature makes it useful to extract just a few properties from the parameter object:
 
@@ -132,7 +132,7 @@ greetWithDefault(); // => 'Hello, Unknown!'
 
 `{ name = 'Unknown' } = {}` defaults to an empty object. 
 
-You can use all the power of combining the destructuring. For example, let's use the object and array destructuring:
+You can use all the power of combining the different types of destructuring. For example, let's use the object and array destructuring on the same parameter:
 
 ```javascript
 function greeFirstPerson([{ name }]) {
@@ -143,13 +143,13 @@ const persons = [{ name: 'John Smith' }, { name: 'Jane Doe'}];
 greeFirstPerson(persons); // => 'Hello, John Smith!'
 ```
 
-The destructuring of parameter `[{ name }]` is more complex. It extracts the first item of the array, then read from this item the `name` name property.  
+The destructuring of parameter `[{ name }]` is more complex. It extracts the first item of the array, then reads from this item the `name` property.  
 
 ## 4. *arguments* object
 
-Another nice feature of JavaScript functions is that you can call the same function with a variable number of arguments. 
+Another nice feature of JavaScript functions is the ability to call the same function with a variable number of arguments. 
 
-In such a situation you have to use a special object `arguments`. It holds the function parameters in an array-like object.  
+If you do so, it makes sense to use a special object `arguments`, which holds all the inocation arguments in an array-like object.  
 
 For example, let's sum the arguments of a function:
 
@@ -163,14 +163,14 @@ function sumArgs() {
   return sum;
 }
 
-sumArguments(5, 6); // => 11
+sumArgs(5, 6); // => 11
 ```
 
-`arguments` contains the arguments with what function was called.  
+`arguments` contains the arguments the function was called with.  
 
-`arguments` object is not comfortable to work with. It's an array-like object (so you cannot use all the fancy array methods). 
+`arguments` is an array-like object, so you cannot use all the fancy array methods on it.  
 
-Another difficulty is that each function scope defines it's own `arguments` object. Thus you might need additional variables to access the outer function scope:
+Another difficulty is that each function scope defines it's own `arguments` object. Thus you might need an additional variable to access the outer function scope `arguments`:
 
 ```javascript
 function outerFunction() {
@@ -184,7 +184,7 @@ function outerFunction() {
 
 ### 4.1 Arrow functions case
 
-Note a special case. The `arguments` special object is not available inside the arrow functions:
+There's a special case: `arguments` is not available inside the arrow functions.
 
 ```javascript
 const sumArgs = () => {
@@ -215,9 +215,9 @@ function sumArgs(...numbers) {
 sumArgs(5, 6); // => 11
 ```
 
-`...numbers` is a rest parameter that holds the arguments into an array `[5, 6]`. Since `numbers` is an array, you can easily use all the fancy array methods on it (contrary with `arguments` that is an array-like object).  
+`...numbers` is a rest parameter that holds the arguments in an array `[5, 6]`. Since `numbers` is an array, you can easily use all the fancy array methods on it (contrary to `arguments` that is an array-like object).  
 
-While the `arguments` object is not available inside the arrow functions, the rest parameters work without problem:  
+While the `arguments` object is not available inside the arrow functions, the rest parameters work without problem here:  
 
 ```javascript
 const sumArgs = (...numbers) => {
@@ -241,9 +241,9 @@ function multiplyAndSumArgs(multiplier, ...numbers) {
 multiplyAndSumArgs(2, 5, 6); // => 22
 ```
 
-`multiplier` is a regular parameter that gets the first argument's value. The followed rest parameter `...numbers` receives the rest of the arguments.  
+`multiplier` is a regular parameter that gets the first argument's value. Then the rest parameter `...numbers` receives the rest of the arguments.  
 
-Note that you can have up to one rest parameter per function. As well as the rest parameter should be always positioned last in the function parameters list. 
+Note that you can have up to one rest parameter per function. As well as the rest parameter must be positioned last in the function parameters list. 
 
 ## 6. Conclusion
 
@@ -255,6 +255,8 @@ All the power of JavaScript destructuring can be applied to parameters. You can 
 
 `arguments` is a special array-like object that holds all the arguments the function was invoked with.  
 
-As a better alternative to `arguments`, you can use the rest parameters feature. It as well holds the arguments list, however, it keeps them into an array. Plus you can use regular parameters with rest parameter, the latter, however, must always be last in the params list.  
+As a better alternative to `arguments`, you can use the rest parameters feature. It holds as well the arguments list, however, it stores them into an array.  
+
+Plus you can use regular parameters with rest parameter, the latter, however, must always be last in the params list.  
 
 *What parameters feature do you use the most? Feel free to write a comment below!*
