@@ -25,7 +25,7 @@ import Mouse from 'Mouse';
 function ShowMousePosition() {
   return (
     <Mouse
-      render={{ x, y } => <div>Position: {x}px, {y}px</div> } 
+      render={({ x, y }) => <div>Position: {x}px, {y}px</div> } 
     />
   );
 }
@@ -75,7 +75,9 @@ function DetectCity() {
 
 You might already spot the issue: the nesting of the `render` prop callback functions. The more callbacks are nested, the harder it is going to understand the code. This is the render props callback hell problem.  
 
-Let's find better ways to design the component to exclude the nesting of the callbacks.
+Let's find better ways to design the component to exclude the nesting of the callbacks.  
+
+![How to solve React render props callback hell](./images/solving.png)
 
 The first approach using a class is what I use mostly. I like it for its simplicity.  
 
