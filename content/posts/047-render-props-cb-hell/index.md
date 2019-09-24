@@ -6,7 +6,7 @@ modified: "2019-09-24T13:00Z"
 thumbnail: "./images/tree.jpg"
 slug: solve-render-props-callback-hell-react
 tags: ["react", "render prop"]
-recommended: ["6-ways-to-declare-javascript-functions", "when-not-to-use-arrow-functions-in-javascript"]
+recommended: ["use-react-memo-wisely", "7-architectural-attributes-of-a-reliable-react-component"]
 type: post
 commentsThreadId: solve-render-props-callback-hell-react
 ---
