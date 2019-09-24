@@ -1,7 +1,7 @@
 ---
 title: How to Solve Render Props Callback Hell
 description: Efficient techniques to solve the callback hell problem of React render props.
-published: "2019-09-24T11:450Z"
+published: "2019-09-24T11:45Z"
 modified: "2019-09-24T11:45Z"
 thumbnail: "./images/tree.jpg"
 slug: solve-react-render-props-callback-hell
