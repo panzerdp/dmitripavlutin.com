@@ -15,8 +15,6 @@ A good design of React components is the key to a maintainable and easy to chang
 
 In this sense, React offers a lot of design techniques like [composition](https://www.robinwieruch.de/react-component-composition), [hooks](https://reactjs.org/docs/hooks-intro.html), [higher-order components](https://reactjs.org/docs/higher-order-components.html), [render props](https://reactjs.org/docs/render-props.html), and more.  
 
-There are no good or bad techniques. Rather there are only inappropriate usages.  
-
 Render props is efficient to design components in a [loosely coupled](https://en.wikipedia.org/wiki/Loose_coupling) manner. Its essence consists in using a special prop (usually named `render`) that delegates the rendering logic to the parent component:
 
 ```jsx{6}
