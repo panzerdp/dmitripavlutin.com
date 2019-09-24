@@ -77,7 +77,7 @@ You might already spot the issue: the nesting of the `render` prop callback func
 
 Let's find better ways to design the component to exclude the nesting of the callbacks.  
 
-![How to solve React render props callback hell](./images/solving.png)
+![How to solve React render props callback hell](./images/solving-render-props-callback-hell.png)
 
 The first approach using a class is what I use mostly. I like it for its simplicity.  
 
@@ -174,7 +174,7 @@ Now, instead of creating a class with methods, regular functions `renderCoors()`
 
 If you need more nesting, you can simply add new functions. The code will grow vertically (by adding new functions) rather than horizontally (by nesting), solving this way the callback hell problem.  
 
-One more nice benefit of this approach is that you can test in isolation the render functions: `renderCoords()` and `renderCity()`. It would help achieve easier higher code coverage. Plus, you can always create a module for each render function and reuse it.  
+One more benefit of this approach is that you can test in isolation the render functions: `renderCoords()` and `renderCity()`. It would help achieve easier higher code coverage. Plus, you can always create a module for each render function and reuse it.  
 
 ### 3.1 Access component props inside render functions
 
@@ -215,7 +215,7 @@ function renderCity (props, city) {
 
 `renderCoords.bind(null, props)` and `renderCity.bind(null, props)` are used to bind the render function to the main component props. 
 
-If you need to access the main component props inside the render prop callback, it's better to apply the already mentioned [class approach](#access-component-props-inside-render-methods). Render methods are always bound to the component instance, so you can access `this.props` without hassle.
+If you need to access the main component props inside the render prop callback, it's better to apply the already mentioned [class approach](#21-access-component-props-inside-render-methods). Render methods are always bound to the component instance, so you can access `this.props` without hassle.
 
 ## 4. Utility approach
 
