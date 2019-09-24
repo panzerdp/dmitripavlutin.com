@@ -2,7 +2,7 @@
 title: How to Solve Render Props Callback Hell
 description: Efficient techniques to solve the callback hell problem of React render props.
 published: "2019-09-24T11:45Z"
-modified: "2019-09-24T11:45Z"
+modified: "2019-09-24T12:00Z"
 thumbnail: "./images/tree.jpg"
 slug: solve-react-render-props-callback-hell
 tags: ["react", "render prop"]
@@ -176,44 +176,42 @@ One more benefit of this approach is that you can test in isolation the render f
 
 ### 3.1 Access component props inside render functions
 
-Unfortunately, the downside of the separated render functions is the difficulty to access the main component props.  
+If you need to access the props inside the render functions, you could insert the render functions directly inside the component:
 
-Because to access the props you need to pass manually the props through the call stack:
-
-```jsx{4,14,20}
+```jsx
 function DetectCityMessage(props) {
   return (
     <AsyncCoords 
-      render={renderCoords.bind(null, props)} 
+      render={renderCoords} 
     />
   );
-}
 
-function renderCoords(props, { lat, long }) {
-  return (
-    <AsyncCity 
-      lat={lat} 
-      long={long} 
-      render={renderCity.bind(null, props)}
-    />
-  );
-}
-
-function renderCity (props, city) {
-  const { noCityMessage } = props;
-  if (city == null) {
-    return <div>{noCityMessage}</div>;
+  function renderCoords({ lat, long }) {
+    return (
+      <AsyncCity 
+        lat={lat} 
+        long={long} 
+        render={renderCity}
+      />
+    );
   }
-  return <div>You might be in {city}.</div>;
+
+  function renderCity(city) {
+    const { noCityMessage } = props;
+    if (city == null) {
+      return <div>{noCityMessage}</div>;
+    }
+    return <div>You might be in {city}.</div>;
+  }
 }
 
 // Somewhere
 <DetectCityMessage noCityMessage="Unknown city." />
 ```
 
-`renderCoords.bind(null, props)` and `renderCity.bind(null, props)` are used to bind the render function to the main component props. 
+While this structuring works, I don't like it much because every time `<DetectCityMessage>` re-renders, new function instances of `renderCoords()` and `renderCity()` are created. 
 
-If you need to access the main component props inside the render prop callback, it's better to apply the already mentioned [class approach](#21-access-component-props-inside-render-methods). Render methods are always bound to the component instance, so you can access `this.props` without hassle.
+The already mentioned [class approach](#21-access-component-props-inside-render-methods) might be better to use. Render methods are always bound to the component instance, so you can access `this.props` without hassle. At the same time the methods are not recreated on every re-render.  
 
 ## 4. Utility approach
 
