@@ -1,6 +1,6 @@
 ---
 title: How to Solve Render Props Callback Hell
-description: This post describes efficients techniques to solve the callback hell of React render props.
+description: Efficient techniques to solve the callback hell problem of React render props.
 published: "2019-09-24T13:00Z"
 modified: "2019-09-24T13:00Z"
 thumbnail: "./images/tree.jpg"
@@ -11,13 +11,13 @@ type: post
 commentsThreadId: solve-render-props-callback-hell-react
 ---
 
-A good design of React components is the key to a maintanable and easy to change codebase.  
+A good design of React components is the key to a maintainable and easy to change codebase.  
 
 In this sense, React offers a lot of design techniques like [composition](https://www.robinwieruch.de/react-component-composition), [hooks](https://reactjs.org/docs/hooks-intro.html), [higher-order components](https://reactjs.org/docs/higher-order-components.html), [render props](https://reactjs.org/docs/render-props.html), and more.  
 
-There are no good or bad techniques. Rather there are bad decisions regarding the use of a technique in a specific situation.  
+There are no good or bad techniques. Rather there are only inappropriate usages.  
 
-From my experience, I find render props to be quite efficient. Its essence consists in using a special prop (usually named `render`) that deffers the render logic to the parent component:
+Render props technique is efficient to design components in a [loosely coupled](https://en.wikipedia.org/wiki/Loose_coupling) manner. Its essence consists in using a special prop (usually named `render`) that delegates the rendering logic to the parent component:
 
 ```jsx{6}
 import Mouse from 'Mouse';
@@ -33,15 +33,15 @@ function ShowMousePosition() {
 
 When using render props, sooner or later you'll face a problem of nesting multiple components with render props: the *render props callback hell*.  
 
-In this post I will describe my experience on how to solve it using 3 approaches: class component, function composition or `react-adopt` tool.  
+In this post, I will describe 3 simple and efficient approaches on how to solve this problem: using class component, function composition or `react-adopt` tool.  
 
 ## 1. Render props callback hell
 
-Let's say you need to detect and display the city of the visitor of your website. 
+Let's say you need to detect and display the city of the website visitor.
 
-First, you'll need the component that determines user's geographical coordinates. A component like `<AsyncCoords render={{lat, long} => ... } />` makes an async call, for example using [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API), then calls `render` prop callback with the coordinates.  
+First, you'll need the component that determines the user's geographical coordinates. A component like `<AsyncCoords render={{lat, long} => ... } />` makes an async call, for example using [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API), then calls `render` prop callback with the coordinates.  
 
-Then these coordinates are used to determine approximately the user's city: `<AsyncCity lat={lat} long={long} render={city => ...} />`.  
+Then these coordinates are used to determine approximately the user's city: `<AsyncCity lat={lat} long={long} render={city => ...} />`. This component also calls `render` prop as soon as the city is known.   
 
 The implementation details of `<AsyncCoords>` and `<AsynCity>` are unimportant for now. What's important is that the component calls `render` prop callback as soon as the result is ready.  
 
@@ -51,12 +51,12 @@ Let's combine these async components into `<DetectCity>`:
 function DetectCity() {
   return (
     <AsyncCoords 
-      render={({lat, long}) => {
+      render={({ lat, long }) => {
         return (
           <AsyncCity 
             lat={lat} 
             long={long} 
-            render={({ city }) => {
+            render={city => {
               if (city == null) {
                 return <div>Unable to detect city.</div>;
               }
@@ -73,13 +73,15 @@ function DetectCity() {
 <DetectCity />
 ```
 
-You might already spot the issue: the nesting of the `render` prop callback functions. The more callbacks are nested, the harder is going to understand the code. This is the render props callback hell problem.  
+You might already spot the issue: the nesting of the `render` prop callback functions. The more callbacks are nested, the harder it is going to understand the code. This is the render props callback hell problem.  
+
+Let's find better ways to design the component to exclude the nesting of the callbacks.
 
 The first approach using a class is what I use mostly. I like it for its simplicity.  
 
 ## 2. Class approach
 
-In order to transform the nesting of callbacks into something more readable, let's refactor the callbacks into methods of a class. 
+To transform the nesting of callbacks into something more readable, let's refactor the callbacks into methods of a class. 
 
 The refactored `<DetectCity>` to a class component might look like this:
 
@@ -93,7 +95,7 @@ class DetectCity extends React.Component {
     return <AsyncCity lat={lat} long={long} render={this.renderCity}/>;
   }
 
-  renderCity = ({ city }) => {
+  renderCity = city => {
     if (city == null) {
       return <div>Unable to detect city.</div>;
     }
@@ -105,7 +107,7 @@ class DetectCity extends React.Component {
 <DetectCity />
 ```
 
-The callbacks were extracted into separated methods `renderCoords()` and `renderCity()`. Such component design is easier to understand, because the render logic is encapsulated into a separated method.  
+The callbacks were extracted into separated methods `renderCoords()` and `renderCity()`. Such component design is easier to understand because the rendering logic is encapsulated into a separated method.  
 
 If you need even more nesting, the class will grow vertically (by adding new methods) rather than horizontally (by nesting functions into each other). The callback hell problem vanishes.  
 
@@ -125,7 +127,7 @@ class DetectCityMessage extends React.Component {
     return <AsyncCity lat={lat} long={long} render={this.renderCity}/>;
   }
 
-  renderCity = ({ city }) => {
+  renderCity = city => {
     const { noCityMessage } = this.props;
     if (city == null) {
       return <div>{noCityMessage}</div>;
@@ -155,7 +157,7 @@ function renderCoords({ lat, long }) {
   return <AsyncCity lat={lat} long={long} render={renderCity}/>;
 }
 
-function renderCity ({ city }) {
+function renderCity(city) {
   if (city == null) {
     return <div>Unable to detect city.</div>;
   }
@@ -170,13 +172,13 @@ Now, instead of creating a class with methods, regular functions `renderCoors()`
 
 If you need more nesting, you can simply add new functions. The code will grow vertically (by adding new functions) rather than horizontally (by nesting), solving this way the callback hell problem.  
 
-One more nice benefit of this approach is that you can test in isolation the render functions: `renderCoords()` and `renderCity()`. It would help achieve easier a higher code coverage. Plus, you can always create a module for each render function and reuse it.  
+One more nice benefit of this approach is that you can test in isolation the render functions: `renderCoords()` and `renderCity()`. It would help achieve easier higher code coverage. Plus, you can always create a module for each render function and reuse it.  
 
 ### 3.1 Access component props inside render functions
 
 Unfortunately, the downside of the separated render functions is the difficulty to access the main component props.  
 
-In order to access the props, you need to bind and pass manually the props throught the call stack:
+To access the props, you need to bind and pass manually the props through the call stack:
 
 ```jsx{4,14,20}
 function DetectCityMessage(props) {
@@ -197,7 +199,7 @@ function renderCoords(props, { lat, long }) {
   );
 }
 
-function renderCity (props, { city }) {
+function renderCity (props, city) {
   const { noCityMessage } = props;
   if (city == null) {
     return <div>{noCityMessage}</div>;
@@ -232,7 +234,7 @@ const Composed = adopt({
 function DetectCity() {
   return (
     <Composed>
-      {({ city: { city } }) => {
+      { city => {
         if (city == null) {
           return <div>Unable to detect city.</div>;
         }
@@ -246,13 +248,15 @@ function DetectCity() {
 <DetectCity />
 ```
 
-`react-adopt` requires a special mapper `Composed`. This mapper describes the way the components use render prop and the results. At the same time, the library takes care of creating the customized `render` callbacks.  
+`react-adopt` requires a special mapper `Composed` that describes the order of async operations. At the same time, the library takes care of creating the customized `render` callbacks to ensure the correct async execution order.  
 
-As you might notice, the above example that uses `react-adopt` requires more code than the approaches using a class component or function composition. So why bother using `react-adopt`?  
+As you might notice, the above example using `react-adopt` requires more code than the approaches using a class component or function composition. So why bother using `react-adopt`?  
 
-Unfortunately, the class component and function composition approach are not suitable if you need to aggregate the result of multiple render prop callbacks. 
+Unfortunately, the class component and function composition approaches are not suitable if you need to aggregate the results of multiple render props.  
 
-### 4.1 Aggregate multiple render prop results
+Let's detail this issue.  
+
+### 4.1 Aggregate multiple render props results
 
 Imagine a situation when you want to render the result of 3 render prop callbacks (`AsyncFetch1`, `AsyncFetch2`, `AsyncFetch3`):
 
@@ -279,7 +283,7 @@ function MultipleFetchResult() {
 
 `<MultipleFetchResult>` component renders the result of all 3 async fetch actions. That's a nasty callback hell situation.  
 
-If you try to use the class component or function composition approach, it's going to be hard. The callback hell problem transforms into params binding hell problem:
+If you try to use the class component or function composition approach, it's going to be hard. The callback hell problem transforms into arguments binding hell:
 
 ```jsx{9,17}
 class MultipleFetchResult extends React.Component {
@@ -320,9 +324,9 @@ class MultipleFetchResult extends React.Component {
 
 You have to manually bind the result of render prop callbacks until they finally reach `renderResult3()` method. 
 
-For such situations `react-adopt` library works better. The resulted code looks simpler:
+If you don't like manual binding, `react-adopt` could work better. Let's see a refactored version using this utility:
 
-```jsx
+```jsx{12}
 import { adopt } from 'react-adopt';
 
 const Composed = adopt({
@@ -349,13 +353,15 @@ function MultipleFetchResult() {
 <MultipleFetchResult />
 ```
 
-Of course `react-adopt` comes the price of additional abstractions to learn and a slight app size increase. 
+The render props results are ready inside the function `({ result1, result2, result3 }) => {...}` supplied to `<Composed>`. Note that you don't to manual bind arguments or nest callbacks. `react-adopt` takes care to solve that for you.  
+
+Of course `react-adopt` comes with the price of additional abstractions to learn and a slight app size increase. 
 
 ## 5. Conclusion
 
-Render prop is an efficient technique to design React components. However, one of the problems that affects its usability is the render props callback hell.  
+Render prop is an efficient technique to design React components. However, one problem that affects its usability is the render props callback hell.  
 
-For simple situations when the render prop results are used in chain, the function composition or class component approaches work well.  
+For simple situations when the render prop results are used in a chain, the function composition or class component approaches work well.  
 
 But if you have a more complex case, with multiple render prop callbacks using the result of each other, `react-adopt` will make your code lighter and easier to understand.  
 
