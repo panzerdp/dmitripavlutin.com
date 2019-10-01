@@ -39,7 +39,7 @@ The correct answer: the first snippet, the one with a class, generates a `Refere
 
 If your answer is different than the above, or you made a guess without knowing what happens under the hood, then you need to grasp the _Temporal Dead Zone_ (TDZ).
 
-TDZ manages the availability of `let`, `const`, and `class` statements. It is essential to how variables work in JavaScript.
+TDZ manages the availability of `let`, `const`, and `class` statements. It is important to how variables work in JavaScript.
 
 ## 1. What is _Temporal Dead Zone_
 
