@@ -1,19 +1,19 @@
 ---
 title: Don't Use JavaScript Variables Without Knowing Temporal Dead Zone
-description: Temporal Dead Zone manages the availability of variables and classes declaration in JavaScript.
+description: Temporal Dead Zone forbids the access of variables and classes before declaration in JavaScript.
 published: '2019-10-01T13:00Z'
 modified: '2019-10-01T13:00Z'
 thumbnail: './images/hourglass.jpg'
 slug: javascript-variables-and-temporal-dead-zone
-tags: ['javascript', 'variable', 'function', 'class']
-recommended: ['use-react-memo-wisely', '7-architectural-attributes-of-a-reliable-react-component']
+tags: ['javascript', 'tdz', 'es2015']
+recommended: ['variables-lifecycle-and-why-let-is-not-hoisted', 'javascript-hoisting-in-details']
 type: post
 commentsThreadId: temporal-dead-zone-in-javascript
 ---
 
 Let me ask you a simple question. Which of the following code snippets will generate an error?
 
-The first one that first creates a class instance, then defines the class:
+The first one that creates an instance, then defines the used class:
 
 ```javascript
 new Car('red'); // Does it work?
@@ -37,7 +37,7 @@ function greet(who) {
 
 The correct answer: the first snippet, the one with a class, generates a `ReferenceError`. The second works correctly.
 
-If your answer is different than the above, then you need to grasp the _Temporal Dead Zone_ (TDZ).
+If your answer is different than the above, or you made a guess without knowing what happens under the hood, then you need to grasp the _Temporal Dead Zone_ (TDZ).
 
 TDZ manages the availability of `let`, `const`, and `class` statements. It is essential to how variables work in JavaScript.
 
@@ -51,7 +51,7 @@ const white = '#FFFFFF';
 white; // => '#FFFFFF'
 ```
 
-But if you try to use the variable before declaration, you will get a `ReferenceError`:
+Now let's try to access `white` variable before declaration:
 
 ```javascript{1}
 white; // throws `ReferenceError`
@@ -61,15 +61,13 @@ const white = '#FFFFFF';
 white;
 ```
 
-In the lines of code until `const count = 4` statement, the variable `count` is in TDZ.
+In the lines of code until `const count = 4` statement, the variable `count` is in Temporal Dead Zone.
 
 Having `count` accessed in TDZ, JavaScript throws `ReferenceError: Cannot access 'count' before initialization`.
 
 ![Temporal Dead Zone in JavaScript](./images/temporal-dead-zone-in-javascript.png)
 
-> _Temporal Dead Zone_ semantics forbids accessing a variable before its declaration.
-
-TDZ enforces a quality discipline: _don't use anything before declaring it_.
+> _Temporal Dead Zone_ semantics forbids accessing a variable before its declaration. It enforces the discipline: _don't use anything before declaring it_.
 
 ## 2. Statements affected by TDZ
 
@@ -137,7 +135,7 @@ class Car {
 }
 ```
 
-Move the class usage after the definition:
+To make it work, keep the class usage after its definition:
 
 ```javascript{8}
 class Car {
@@ -153,7 +151,7 @@ myNissan.color; // => 'red'
 
 ### 2.4 _super()_ inside _constructor()_
 
-As a matter of precaution, before calling `super()`, the `this` binding is in TDZ:
+If you extend a parent class, before calling `super()` inside the constructor, `this` binding lays in TDZ:
 
 ```javascript{3-4,9}
 class MuscleCar extends Car {
@@ -167,11 +165,9 @@ class MuscleCar extends Car {
 const myCar = new MuscleCar('blue', '300HP'); // `ReferenceError`
 ```
 
-Inisde `constructor()`, `this` cannot be used until `super()` is called.
+Inside the `constructor()`, `this` cannot be used until `super()` is called.
 
-That's a good thing because TDZ suggests you to call the parent constructor first to initialize the instance.
-
-Just make sure to call `super()` before using `this`:
+TDZ suggests calling the parent constructor to initialize the instance. After doing that, the instance is ready, and you can make the adjustments in the child constructor.
 
 ```javascript{3-4,9}
 class MuscleCar extends Car {
@@ -188,7 +184,7 @@ myCar.power; // => '300HP'
 
 ### 2.5 Default function parameters
 
-The default parameters exist within an intermidiate scope, separated from global and function. Thus a default parameter variable is in TDZ before its declaration:
+The default parameters exist within an intermidiate scope, separated from global and function scopes. The default parameters also follow the TDZ restriction:
 
 ```javascript{6}
 const a = 2;
@@ -199,9 +195,9 @@ function square(a = a) {
 square(); // throws `ReferenceError`
 ```
 
-The parameter `a` is used on the right side of the expression `a = a`, before being declared. This generates a reference error about `a` is not defined.
+The parameter `a` is used on the right side of the expression `a = a`, before being declared. This generates a reference error regarding `a`.
 
-Make sure that the default parameter is used after its declaration and initialization. Let's use a special variable `init`, making sure it is initialized before usage:
+Make sure that the default parameter is used after its declaration and initialization. Let's use a special variable `init` that is initialized before usage:
 
 ```javascript{6}
 const init = 2;
@@ -214,7 +210,7 @@ square(); // => 4
 
 ## 3. _var_, _function_, _import_ statements
 
-Contrary to the statements presented above, `var` and `function` definition are not affected by TDZ. They are hoisted up in the current scope.
+Contrary to the statements presented above, `var` and `function` definitions are not affected by TDZ. They are hoisted up in the current scope.
 
 If you access `var` variable before the declaration, you simply get an `undefined`:
 
@@ -239,7 +235,7 @@ function greet(who) {
 greet('Earth'); // => 'Hello, Earth!'
 ```
 
-Often you're not interested much in the function implementation, but just want to invoke it. That's why sometimes it makes sense to invoke the function before defining it.
+Often you're not interested much in the function implementation, rather you just want to call it. That's why sometimes it makes sense to invoke the function before defining it.
 
 What's interesting that `import` modules are hoisted too:
 
@@ -250,11 +246,13 @@ myFunction();
 import { myFunction } from './myModule';
 ```
 
+While `import` hoists, a good practice is to keep import the module's dependencies at the beginning of the JavaScript file.
+
 ## 4. _typeof_ behavior in TDZ
 
 `typeof` operator is useful to determine whether a variable is defined within the current scope.
 
-For example, the variable `notDefined` is not defined. Using it with `typeof` operator does not generate an error:
+For example, the variable `notDefined` is not defined. Applying `typeof` operator on this variable does not throw an error:
 
 ```javascript
 typeof notDefined; // => 'undefined'
@@ -270,7 +268,7 @@ typeof variable; // throws `ReferenceError`
 let variable;
 ```
 
-The reason behind the reference error is that you can statically (just by looking at code) determine that `variable` is already defined.
+The reason behind this reference error is that you can statically (just by looking at code) determine that `variable` is already defined.
 
 ## 5. TDZ acts within the current scope
 
