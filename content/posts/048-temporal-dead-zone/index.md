@@ -13,7 +13,7 @@ commentsThreadId: temporal-dead-zone-in-javascript
 
 Let me ask you a simple question. Which of the following code snippets will generate an error?
 
-The first one that creates a class instance, then defines the class:
+The first one that first creates a class instance, then defines the class:
 
 ```javascript
 new Car('red'); // Does it work?
@@ -35,9 +35,11 @@ function greet(who) {
 }
 ```
 
-The correct answer: the first snippet defining a class generates a `ReferenceError`. While the second works correctly.
+The correct answer: the first snippet, the one with a class, generates a `ReferenceError`. The second works correctly.
 
-If your answer is different than the above, then you need to grasp the _Temporal Dead Zone_ (TDZ), introduced in ES2015. It's an essential concept that manages the availability of `let`, `const`, `class`, and `import` module statements.
+If your answer is different than the above, then you need to grasp the _Temporal Dead Zone_ (TDZ).
+
+TDZ manages the availability of `let`, `const`, and `class` statements. It is essential to how variables work in JavaScript.
 
 ## 1. What is _Temporal Dead Zone_
 
@@ -59,13 +61,19 @@ const white = '#FFFFFF';
 white;
 ```
 
-In the lines of code until `const count = 4` statement, the variable `count` is in TDZ. Having `count` accessed in TDZ, JavaScript throws `ReferenceError: Cannot access 'count' before initialization`.
+In the lines of code until `const count = 4` statement, the variable `count` is in TDZ.
+
+Having `count` accessed in TDZ, JavaScript throws `ReferenceError: Cannot access 'count' before initialization`.
+
+![Temporal Dead Zone in JavaScript](./images/temporal-dead-zone-in-javascript.png)
+
+> _Temporal Dead Zone_ semantics forbids accessing a variable before its declaration.
+
+TDZ enforces a quality discipline: _don't use anything before declaring it_.
 
 ## 2. Statements affected by TDZ
 
-TDZ is good because it enforces a quality discipline over declaration statements: _don't use anything before declaring it_.
-
-Let's see the list of statements is affected by TDZ.
+Let's see the statements affected by TDZ.
 
 ### 2.1 _const_ variables
 
@@ -78,7 +86,7 @@ pi; // throws `ReferenceError`
 const pi = 3.14;
 ```
 
-Use `const` variable after the declaration:
+You have to use `const` variable after the declaration:
 
 ```javascript{4}
 const pi = 3.14;
@@ -143,27 +151,68 @@ const myNissan = new Car('red');
 myNissan.color; // => 'red'
 ```
 
-### 2.4 _import_ module statement
+### 2.4 _super()_ inside _constructor()_
 
-When using ES2015 modules system, it doesn't make much sense to use the module before importing it:
+As a matter of precaution, before calling `super()`, the `this` binding is in TDZ:
 
-```javascript{2}
+```javascript{3-4,9}
+class MuscleCar extends Car {
+  constructor(color, power) {
+    this.power = power;
+    super(color);
+  }
+}
+
 // Does not work!
-myFunction(); // throws `ReferenceError`
-
-import { myFunction } from './myModule';
+const myCar = new MuscleCar('blue', '300HP'); // `ReferenceError`
 ```
 
-It's reasonable to keep the module dependencies at the beginning of the file since it makes clear about the external dependencies right away:
+Inisde `constructor()`, `this` cannot be used until `super()` is called.
 
-```javascript{4}
-import { myFunction } from './myModule';
+That's a good thing because TDZ suggests you to call the parent constructor first to initialize the instance.
+
+Just make sure to call `super()` before using `this`:
+
+```javascript{3-4,9}
+class MuscleCar extends Car {
+  constructor(color, power) {
+    super(color);
+    this.power = power;
+  }
+}
 
 // Works!
-myFunction(); // throws `ReferenceError`
+const myCar = new MuscleCar('blue', '300HP');
+myCar.power; // => '300HP'
 ```
 
-## 3. _var_ and _function_ statements
+### 2.5 Default function parameters
+
+The default parameters exist within an intermidiate scope, separated from global and function. Thus a default parameter variable is in TDZ before its declaration:
+
+```javascript{6}
+const a = 2;
+function square(a = a) {
+  return a * a;
+}
+// Does not work!
+square(); // throws `ReferenceError`
+```
+
+The parameter `a` is used on the right side of the expression `a = a`, before being declared. This generates a reference error about `a` is not defined.
+
+Make sure that the default parameter is used after its declaration and initialization. Let's use a special variable `init`, making sure it is initialized before usage:
+
+```javascript{6}
+const init = 2;
+function square(a = init) {
+  return a * a;
+}
+// Works!
+square(); // => 4
+```
+
+## 3. _var_, _function_, _import_ statements
 
 Contrary to the statements presented above, `var` and `function` definition are not affected by TDZ. They are hoisted up in the current scope.
 
@@ -190,7 +239,16 @@ function greet(who) {
 greet('Earth'); // => 'Hello, Earth!'
 ```
 
-When using functions, sometimes it makes sense to use them before the declaration.
+Often you're not interested much in the function implementation, but just want to invoke it. That's why sometimes it makes sense to invoke the function before defining it.
+
+What's interesting that `import` modules are hoisted too:
+
+```javascript{2}
+// Works!
+myFunction();
+
+import { myFunction } from './myModule';
+```
 
 ## 4. _typeof_ behavior in TDZ
 
@@ -202,40 +260,52 @@ For example, the variable `notDefined` is not defined. Using it with `typeof` op
 typeof notDefined; // => 'undefined'
 ```
 
+Because the variable is not defined, `typeof notDefined` evaluates to `undefined`.
+
 But `typeof` operator has a different behavior when used with variables in a Temporal Dead Zone. In this case, JavaScript throws an error:
 
 ```javascript{1}
-typeof definedLater; // throws `ReferenceError`
+typeof variable; // throws `ReferenceError`
 
-let definedLater;
+let variable;
 ```
+
+The reason behind the reference error is that you can statically (just by looking at code) determine that `variable` is already defined.
 
 ## 5. TDZ acts within the current scope
 
-The Temporal Dead Zone effect is applied to variables within the limits of the current scope.
+The Temporal Dead Zone affects the variable within the limits of the scope where the declaration statement is present.
+
+![Limits of Temporal Dead Zone in JavaScript](./images/limits-of-temporal-dead-zone-javascript.png)
 
 Let's see an example:
 
 ```javascript{3,6}
-// Outer scope
-typeof variable; // => undefined
-{
-  // Inner scope
-  typeof variable; // throws `ReferenceError`
-  let variable;
+function doSomething(someVal) {
+  // Function scope
+  typeof variable; // => undefined
+  if (someVal) {
+    // Inner block scope
+    typeof variable; // throws `ReferenceError`
+    let variable;
+  }
 }
+doSomething(true);
 ```
 
-There are 2 block scopes: the inner one where a `let` variable is defined, and the outer one.
+There are 2 scopes:
 
-In the inner scope, because it is used before the variable declaration, `typeof variable` statement throws an error `ReferenceError: Cannot access 'variable' before initialization`.
+1. The function scope
+2. The inner block scope where a `let` variable is defined
 
-However, in the outer scope, `typeof variable` simply evaluates to `undefined`. In the outer scope, the TDZ has no effect.
+In the function scope, `typeof variable` simply evaluates to `undefined`. Here the TDZ of `let variable` statement has no effect.
+
+In the inner scope the `typeof variable` statement, using a variable before the declaration, throws an error `ReferenceError: Cannot access 'variable' before initialization`. TDZ exists within this inner scope only.
 
 ## 6. Conclusion
 
-TDZ is an important concept that affects the availability of `const`, `let`, `class` and `import` statements. Its idea is simple: first declare, then use.
+TDZ is an important concept that affects the availability of `const`, `let`, and `class` statements. Its idea is simple: first declare, then use.
 
-Contrary, `var` variables inherit an older error-prone behavior when you can use the variable even before the declaration. You should avoid doing that.
+Contrary, `var` variables inherit an older behavior when you can use the variable even before the declaration. You should avoid doing that.
 
-In my opinion, TDZ is one of those good things when good coding practices reach almost into the language specification.
+In my opinion, TDZ is one of those good things when good coding practices reach into the language specification.
