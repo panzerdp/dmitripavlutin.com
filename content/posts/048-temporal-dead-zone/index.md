@@ -2,7 +2,7 @@
 title: Don't Use JavaScript Variables Without Knowing Temporal Dead Zone
 description: Temporal Dead Zone forbids the access of variables and classes before declaration in JavaScript.
 published: '2019-10-01T13:00Z'
-modified: '2019-10-01T13:00Z'
+modified: '2019-10-01T14:30Z'
 thumbnail: './images/hourglass.jpg'
 slug: javascript-variables-and-temporal-dead-zone
 tags: ['javascript', 'tdz', 'es2015']
@@ -246,7 +246,7 @@ myFunction();
 import { myFunction } from './myModule';
 ```
 
-While `import` hoists, a good practice is to keep import the module's dependencies at the beginning of the JavaScript file.
+While `import` hoists, a good practice is to load module's dependencies at the beginning of the JavaScript file.
 
 ## 4. _typeof_ behavior in TDZ
 
@@ -302,7 +302,7 @@ In the inner scope the `typeof variable` statement, using a variable before the 
 
 ## 6. Conclusion
 
-TDZ is an important concept that affects the availability of `const`, `let`, and `class` statements. Its idea is simple: first declare, then use.
+TDZ is an important concept that affects the availability of `const`, `let`, and `class` statements. It doesn't allow to use the variable before the declaration.
 
 Contrary, `var` variables inherit an older behavior when you can use the variable even before the declaration. You should avoid doing that.
 
