@@ -2,7 +2,7 @@
 title: Don't Use JavaScript Variables Without Knowing Temporal Dead Zone
 description: Temporal Dead Zone forbids the access of variables and classes before declaration in JavaScript.
 published: '2019-10-01T13:00Z'
-modified: '2019-10-01T14:30Z'
+modified: '2019-10-03T08:23Z'
 thumbnail: './images/hourglass.jpg'
 slug: javascript-variables-and-temporal-dead-zone
 tags: ['javascript', 'tdz', 'es2015']
@@ -61,9 +61,9 @@ const white = '#FFFFFF';
 white;
 ```
 
-In the lines of code until `const count = 4` statement, the variable `count` is in Temporal Dead Zone.
+In the lines of code until `const white = 4` statement, the variable `white` is in Temporal Dead Zone.
 
-Having `count` accessed in TDZ, JavaScript throws `ReferenceError: Cannot access 'count' before initialization`.
+Having `white` accessed in TDZ, JavaScript throws `ReferenceError: Cannot access 'white' before initialization`.
 
 ![Temporal Dead Zone in JavaScript](./images/temporal-dead-zone-in-javascript.png)
 
