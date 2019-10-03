@@ -61,7 +61,7 @@ const white = '#FFFFFF';
 white;
 ```
 
-In the lines of code until `const white = 4` statement, the variable `white` is in Temporal Dead Zone.
+In the lines of code until `const white = '#FFFFFF'` statement, the variable `white` is in Temporal Dead Zone.
 
 Having `white` accessed in TDZ, JavaScript throws `ReferenceError: Cannot access 'white' before initialization`.
 
