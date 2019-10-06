@@ -43,7 +43,14 @@ export default function PostTemplate({
 }: PostTemplateProps) {
   const relativePosition = useVerticalScroll(SHOW_SHARE_AFTER_Y);
   const showShareButtons = relativePosition === RelativePosition.Below;
-  const leftSidebar = <LeftSidebar post={post} siteUrl={siteInfo.url} showShareButtons={showShareButtons} />;
+  const leftSidebar = (
+    <LeftSidebar
+      post={post}
+      siteUrl={siteInfo.url}
+      showShareButtons={showShareButtons}
+      twitterName={authorInfo.nicknames.twitter}
+    />
+  );
   const rightSidebar = <RightSidebar popularPosts={popularPosts} siteUrl={siteInfo.url} />;
   const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
   return (
@@ -64,7 +71,7 @@ export default function PostTemplate({
         <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
         <div className={styles.shareGroup}>
           <div className={styles.shareBottom}>
-            <ShareBottom url={postUrl} text={post.title} tags={post.tags} />
+            <ShareBottom url={postUrl} text={post.title} tags={post.tags} twitterName={authorInfo.nicknames.twitter} />
           </div>
           <div className={styles.postEdit}>
             <Edit url={postRepositoryFileUrl} />

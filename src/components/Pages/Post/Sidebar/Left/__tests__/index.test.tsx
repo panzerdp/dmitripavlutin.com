@@ -19,6 +19,7 @@ const props = {
   siteUrl: 'http://example.com',
   post,
   showShareButtons: false,
+  twitterName: 'panzerdp',
 };
 
 describe('<PostLeftSidebar />', function() {
@@ -31,6 +32,7 @@ describe('<PostLeftSidebar />', function() {
           text={post.title}
           tags={post.tags}
           show={props.showShareButtons}
+          twitterName={props.twitterName}
         />
       )
     ).toBe(true);

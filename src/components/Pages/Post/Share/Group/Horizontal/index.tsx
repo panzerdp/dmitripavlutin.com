@@ -10,14 +10,20 @@ interface ShareButtonsHorizontalProps {
   url: string;
   text: string;
   tags: Tags;
+  twitterName: string;
 }
 
-export default function ShareButtonsHorizontal(props: ShareButtonsHorizontalProps) {
+export default function ShareButtonsHorizontal({ url, text, tags, twitterName }: ShareButtonsHorizontalProps) {
+  const shareProps = {
+    url,
+    text,
+    tags,
+  };
   return (
     <div className={styles.horizontalGroup}>
-      <PostShareSocialTwitter {...props} />
-      <ShareSocialFacebook {...props} />
-      <ShareSocialReddit {...props} />
+      <PostShareSocialTwitter {...shareProps} twitterName={twitterName} />
+      <ShareSocialFacebook {...shareProps} />
+      <ShareSocialReddit {...shareProps} />
     </div>
   );
 }

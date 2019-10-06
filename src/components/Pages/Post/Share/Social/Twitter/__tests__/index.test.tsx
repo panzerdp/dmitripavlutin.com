@@ -8,6 +8,7 @@ const props = {
   url: 'http://dmitripavlutin.com/some-javascript-post',
   text: 'How to determine string length',
   tags: ['string', 'length'],
+  twitterName: 'panzerdp',
   windowOpen() {
     // open window
   },
@@ -31,7 +32,8 @@ describe('<PostShareSocialFacebook />', function() {
       URL_SHARE_TWITTER +
         `?url=${encodeURIComponent(props.url)}` +
         `&text=${encodeURIComponent(props.text)}` +
-        `&hashtags=${encodeURIComponent(props.tags.join(','))}`
+        `&hashtags=${encodeURIComponent(props.tags.join(','))}` +
+        `&via=${props.twitterName}`
     );
   });
 });

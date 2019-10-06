@@ -11,6 +11,7 @@ interface PostShareSocialTwitterProps {
   url: string;
   text: string;
   tags: Tags;
+  twitterName: string;
   windowOpen?(props: WindowOpenOptions): void;
 }
 
@@ -37,12 +38,13 @@ export class PostShareSocialTwitter extends React.Component<PostShareSocialTwitt
   };
 
   public getTwitterShareUrl() {
-    const { url, text, tags } = this.props;
+    const { url, text, tags, twitterName } = this.props;
     return (
       URL_SHARE_TWITTER +
       `?url=${encodeURIComponent(url)}` +
       `&text=${encodeURIComponent(text)}` +
-      `&hashtags=${encodeURIComponent(tags.map((tag) => slugify(tag)).join(','))}`
+      `&hashtags=${encodeURIComponent(tags.map((tag) => slugify(tag)).join(','))}` +
+      `&via=${twitterName}`
     );
   }
 }

@@ -12,19 +12,24 @@ const props = {
   tags: ['javascript', 'string', 'length'],
 };
 
+const groupProps = {
+  ...props,
+  twitterName: 'panzerdp',
+};
+
 describe('<PostShareGroupHorizontal />', function() {
   it('should render facebook share button', function() {
-    const wrapper = shallow(<PostShareGroupHorizontal {...props} />);
+    const wrapper = shallow(<PostShareGroupHorizontal {...groupProps} />);
     expect(wrapper.contains(<ShareSocialFacebook {...props} />)).toBe(true);
   });
 
   it('should render reddit share button', function() {
-    const wrapper = shallow(<PostShareGroupHorizontal {...props} />);
+    const wrapper = shallow(<PostShareGroupHorizontal {...groupProps} />);
     expect(wrapper.contains(<ShareSocialReddit {...props} />)).toBe(true);
   });
 
   it('should render twitter share button', function() {
-    const wrapper = shallow(<PostShareGroupHorizontal {...props} />);
-    expect(wrapper.contains(<PostShareSocialTwitter {...props} />)).toBe(true);
+    const wrapper = shallow(<PostShareGroupHorizontal {...groupProps} />);
+    expect(wrapper.contains(<PostShareSocialTwitter {...props} twitterName={groupProps.twitterName} />)).toBe(true);
   });
 });

@@ -9,13 +9,20 @@ interface PostLeftSidebarProps {
   siteUrl: string;
   post: PostPlain;
   showShareButtons: boolean;
+  twitterName: string;
 }
 
-export default function PostLeftSidebar({ siteUrl, post, showShareButtons }: PostLeftSidebarProps) {
+export default function PostLeftSidebar({ siteUrl, post, showShareButtons, twitterName }: PostLeftSidebarProps) {
   const postUrl = siteUrl + TO_POST({ slug: post.slug });
   return (
     <div className={styles.leftSidebar}>
-      <ShareGroupVertical url={postUrl} text={post.title} tags={post.tags} show={showShareButtons} />
+      <ShareGroupVertical
+        url={postUrl}
+        text={post.title}
+        tags={post.tags}
+        show={showShareButtons}
+        twitterName={twitterName}
+      />
     </div>
   );
 }

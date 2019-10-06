@@ -141,15 +141,22 @@ describe('<PostTemplate />', function() {
   it('should render subheader', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
-    expect(
-      article.contains(<SubheaderWithComments post={props.post} siteUrl={props.siteInfo.url} />)
-    ).toBe(true);
+    expect(article.contains(<SubheaderWithComments post={props.post} siteUrl={props.siteInfo.url} />)).toBe(true);
   });
 
   it('should render share buttons', function() {
     const wrapper = shallow(<PostTemplate {...props} />);
     const article = wrapper.find(Layout).find('article');
-    expect(article.contains(<ShareBottom url={postUrl} text={props.post.title} tags={props.post.tags} />)).toBe(true);
+    expect(
+      article.contains(
+        <ShareBottom
+          url={postUrl}
+          text={props.post.title}
+          tags={props.post.tags}
+          twitterName={props.authorInfo.nicknames.twitter}
+        />
+      )
+    ).toBe(true);
   });
 
   it('should render left sidebar', function() {

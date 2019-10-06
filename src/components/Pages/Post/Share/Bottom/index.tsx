@@ -7,12 +7,13 @@ interface PostShareButtomProps {
   url: string;
   text: string;
   tags: Tags;
+  twitterName: string;
 }
 
-export default function PostShareBottom({ url, text, tags }: PostShareButtomProps) {
+export default function PostShareBottom(props: PostShareButtomProps) {
   return (
     <div className={styles.postShareBottom}>
-      <h4>Share: </h4> <ShareGroupHorizontal url={url} text={text} tags={tags} />
+      <h4>Share: </h4> <ShareGroupHorizontal {...props} />
     </div>
   );
 }

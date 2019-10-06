@@ -15,6 +15,7 @@ const props = {
 const groupProps = {
   ...props,
   show: true,
+  twitterName: 'panzerdp',
 };
 
 describe('<PostShareGroupVertical />', function() {
@@ -40,6 +41,6 @@ describe('<PostShareGroupVertical />', function() {
 
   it('should render twitter share button', function() {
     const wrapper = shallow(<PostShareGroupVertical {...groupProps} />);
-    expect(wrapper.contains(<PostShareSocialTwitter {...props} />)).toBe(true);
+    expect(wrapper.contains(<PostShareSocialTwitter {...props} twitterName={groupProps.twitterName} />)).toBe(true);
   });
 });

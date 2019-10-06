@@ -8,6 +8,7 @@ const props = {
   url: 'http://site.com/post-id',
   text: 'Some share text',
   tags: ['javascript', 'string', 'length'],
+  twitterName: 'panzerdp',
 };
 
 describe('<PostShareBottom />', function() {
