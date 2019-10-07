@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 
 import AboutMetaTags from '../index';
 
