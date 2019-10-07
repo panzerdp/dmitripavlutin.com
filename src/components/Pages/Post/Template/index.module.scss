@@ -15,12 +15,12 @@
 
 .shareGroup {
   display: flex;
-  flex-flow: wrap;
   align-items: center;
   justify-content: space-between;
   margin: 1.5rem 0;
 
-  .shareBottom, .postEdit {
+  .shareBottom,
+  .postEdit {
     margin: 0.5rem 0;
   }
 }
@@ -47,19 +47,20 @@ article h1 {
   position: relative;
 }
 
-article code[class*="language-"] {
+article code[class*='language-'] {
   font-size: 1rem;
   background-color: #f5f2f0;
   color: black;
   font-family: $mono-font-family;
 }
 
-article :not(pre) > code[class*="language-"] {
+article :not(pre) > code[class*='language-'] {
   font-size: 1rem;
   line-height: inherit;
 }
 
-code[class*="language-"], pre[class*="language-"] {
+code[class*='language-'],
+pre[class*='language-'] {
   border-radius: 3px;
   line-height: 1.25;
   font-size: 1rem;
@@ -69,7 +70,7 @@ code[class*="language-"], pre[class*="language-"] {
   }
 }
 
-pre[class*="language-"] {
+pre[class*='language-'] {
   padding: 0.8rem;
 }
 
@@ -82,9 +83,9 @@ blockquote {
   padding: 0.5rem;
   padding-left: 4rem;
   border-radius: 3px;
-  
+
   p {
-    quotes: "“" "”" "‘" "’";
+    quotes: '“' '”' '‘' '’';
   }
   p:before {
     content: open-quote;
@@ -107,7 +108,11 @@ blockquote {
     color: #883f44;
   }
 
-  .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
+  .token.operator,
+  .token.entity,
+  .token.url,
+  .language-css .token.string,
+  .style .token.string {
     background: inherit;
   }
 
@@ -134,7 +139,7 @@ blockquote {
   }
 
   .shareGroup {
-    justify-content: center;
+    flex-flow: column;
   }
 }
 

@@ -13,7 +13,10 @@ interface PostShareButtomProps {
 export default function PostShareBottom(props: PostShareButtomProps) {
   return (
     <div className={styles.postShareBottom}>
-      <h4>Share: </h4> <ShareGroupHorizontal {...props} />
+      <h4>Like the post? Share it!</h4>
+      <div className={styles.shareGroup}>
+        <ShareGroupHorizontal {...props} />
+      </div>
     </div>
   );
 }

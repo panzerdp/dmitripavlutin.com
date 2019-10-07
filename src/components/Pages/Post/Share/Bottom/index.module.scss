@@ -1,7 +1,17 @@
 @import '~styles/variables';
 
 .postShareBottom {
+  margin-right: 1rem;
+
   h4 {
-    display: inline;
+    display: block;
+    margin: 0 0 0.75rem 0;
+  }
+}
+
+@media (max-width: $small-device-width) {
+  .shareGroup {
+    display: flex;
+    justify-content: center;
   }
 }
