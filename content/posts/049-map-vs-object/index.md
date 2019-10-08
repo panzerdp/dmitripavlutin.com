@@ -144,7 +144,7 @@ Check the [list of properties and methods](https://developer.mozilla.org/en-US/d
 
 For example, imagine an User Interface that manages some custom fields:
 
-![Custom fields User Interface](./images/custom-fields.png)
+![Custom fields User Interface](./images/custom-fields-2.png)
 
 It would be convinient to store the state of the custom fields into a plain object:
 
