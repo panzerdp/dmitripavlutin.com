@@ -3,7 +3,7 @@ title: When to Use Map instead of Plain JavaScript Object
 description: Map complements plain objects, allowing keys of any type and not having collisions with prototype object keys.
 published: '2019-10-09T13:00Z'
 modified: '2019-10-09T13:00Z'
-thumbnail: './images/card-catalog-1.jpg'
+thumbnail: './images/named.jpg'
 slug: maps-vs-plain-objects-javascript
 tags: ['javascript', 'map', 'object']
 recommended: ['why-object-literals-in-javascript-are-cool', 'javascript-array-from-applications']
@@ -11,26 +11,23 @@ type: post
 commentsThreadId: use-map-instead-of-object-javascript
 ---
 
-JavaScript plain objects `{ key: 'value' }` do their job decently to hold structured data.
+JavaScript plain objects `{ key: 'value' }` are meant to hold structured data.
 
-But I find annoying one thing: the object keys have to be strings or symbols. At the same time, JavaScript allows you to define an object with numbers as keys:
+But one thing I find annoying: the object keys have to be strings (or rarely used symbols). 
 
+What happens if you use numbers as keys? There's no error in such case:
 ```javascript
 const names = {
   1: 'One',
   2: 'Two',
 };
-```
 
-But when accessing object keys, they are strings!
-
-```javascript
 Object.keys(names); // => ['1', '2']
 ```
 
-JavaScript implicitly converts the object keys to strings. That's tricky behavior because you lose the consistency of the types.
+JavaScript just implicitly converts the object keys to strings. That's tricky behavior because you lose the consistency of the types.
 
-In this post, I will describe how JavaScript [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), available in ES2015, solves many of the plain object's issues. Including the presented one.
+In this post, I will describe how JavaScript [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) object, available in ES2015, solves many of the plain object's issues, including the conversion of keys to strings.
 
 ## 1. Map accepts any key type
 
@@ -145,7 +142,25 @@ The property `toString` defined on the object `actor` overwrites `toString()` me
 
 Check the [list of properties and methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype#Properties) that plain object inherits from the prototype. Avoid defining custom properties with these names.  
 
-The Map doesn't have this problem. You are not limited to the keys names:
+For example, imagine an User Interface that manages some custom fields:
+
+![Custom fields User Interface](./images/custom-fields.png)
+
+It would be convinient to store the state of the custom fields into a plain object:
+
+```javascript{4}
+const userCustomFields = {
+  'color':    'blue',
+  'size':     'medium',
+  'toString': 'A blue box'
+};
+```
+
+But the user might choose a custom field name like `toString` (as in the example), `constructor`, etc. that could potentially break your object. 
+
+Don't use user input to create keys on your plain objects!  
+
+The Map doesn't have this problem. You are not limited in the keys names:
 
 ```javascript{11}
 function isMap(value) {
