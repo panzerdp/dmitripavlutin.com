@@ -25,7 +25,7 @@ const names = {
 Object.keys(names); // => ['1', '2']
 ```
 
-JavaScript just implicitly converts the object keys to strings. That's tricky behavior because you lose the consistency of the types.
+JavaScript just implicitly converts object's keys to strings. That's tricky behavior because you lose the consistency of the types.
 
 In this post, I will describe how JavaScript [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) object, available in ES2015, solves many of the plain object's issues, including the conversion of keys to strings.
 
@@ -59,17 +59,17 @@ booleansMap.set(false, "Nope");
 
 `booleansMap` uses booleans as keys without issues. 
 
-Again, boolean keys would not be possible with plain objects.
+Again, boolean keys would not work in plain objects.
 
-Let's push the boundaries: can you use an entire object as a key? Turns out, yes!
+Let's push the boundaries: can you use an entire object as a key in a map? Turns out, yes!
 
 ## 1.1 Object as key
 
-Let's say you need to store some object-related data, without attaching that data on the object itself. 
+Let's say you need to store some object-related data, without attaching this data on the object itself. 
 
 Doing so using plain objects is not possible. 
 
-The best you can do is use an array of object-value tuples:
+A workaround is to use an array of object-value tuples:
 
 ```javascript
 const foo = { name: 'foo' };
@@ -98,7 +98,7 @@ function getByKey(kindOfMap, key) {
 getByKey(kindOfMap, foo); // => 'Foo related data'
 ```
 
-You don't need all this headache with [WeakMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap) (a specialized version of `Map`): it accepts even objects as keys. 
+You don't need all this headache with [WeakMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap) (a specialized version of `Map`): it accepts objects as keys. 
 
 The main difference between `Map` and `WeakMap`is that the latter allows garbage collection of the objects that are keys, preventing memory leaks.  
 
@@ -118,7 +118,7 @@ mapOfObjects.get(foo); // => 'Foo related data'
 
 `WeakMap`, contrary to `Map`, accepts only objects as keys and has a [reduced set of methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap#Methods).
 
-## 2. The map has no restriction over key names
+## 2. The map has no restriction over keys names
 
 Any object in JavaScript inherits the properties from its prototype object. The same happens to plain JavaScript objects.
 
@@ -142,7 +142,7 @@ The property `toString` defined on the object `actor` overwrites `toString()` me
 
 Check the [list of properties and methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype#Properties) that plain object inherits from the prototype. Avoid defining custom properties with these names.  
 
-For example, imagine a User Interface that manages some custom fields:
+For example, imagine a User Interface that manages some custom fields. The user can add a custom field by indicating the name and value:
 
 ![Custom fields User Interface](./images/custom-fields-2.png)
 
@@ -158,7 +158,7 @@ const userCustomFields = {
 
 But the user might choose a custom field name like `toString` (as in the example), `constructor`, etc. that could potentially break your object. 
 
-Don't take user input to create keys on your plain objects!  
+*Don't take user input to create keys on your plain objects!*  
 
 The map doesn't have this problem. You are not limited in the keys names:
 
@@ -180,7 +180,7 @@ Regardless of `actorMap` having a property named `toString`, the method `toStrin
 
 ## 3. The map is iterable
 
-In order to iterate over the plain object properties, you have to use additional helper static functions like `Object.keys()` or `Object.entries()` (available in ES2017):
+In order to iterate over the plain object's properties, you have to use additional helper static functions like `Object.keys()` or `Object.entries()` (available in ES2017):
 
 ```javascript
 const colorsHex = {
@@ -197,7 +197,7 @@ for (const [color, hex] of Object.entries(colorsHex)) {
 
 `Object.entries(colorsHex)` returns an array of key-value pairs extracted from the object.
 
-A map, however, is iterable directly:
+A map, however, is an iterable by itself:
 
 ```javascript
 const colorsHexMap = new Map();
@@ -212,13 +212,13 @@ for (const [color, hex] of colorsHexMap) {
 // 'black' '#000000'
 ```
 
-`colorsHexMap` is iterable. You can use it anywhere where an iterable is accepted: `for()` loops, spread operator `[...map]`.  
+`colorsHexMap` is iterable. You can use it anywhere an iterable is accepted: `for()` loops, spread operator `[...map]`.  
 
 The map provides additional methods that return an iterable: `map.keys()` to iterate over keys and `map.values()` over values.  
 
 ## 4. Map's size
 
-Another issue with the plain object is that you easily determine the number of properties that it holds:
+Another issue with the plain object is that you cannot easily determine the number of properties that it holds:
 
 ```javascript
 const exams = {
