@@ -13,4 +13,4 @@ commentsThreadId: simple-but-tricky-javascript-interview-questions
 
 
 
-*Do you know other tricky interview questions? Please write it below and let's discuss!*
+*Do you know tricky interview questions? Write them below and let's discuss!*
