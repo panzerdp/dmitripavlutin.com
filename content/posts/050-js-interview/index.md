@@ -2,7 +2,7 @@
 title: 7 Simple but Tricky JavaScript Interview Questions
 description: A compiled list of simple but tricky questions you might be asked during a JavaScript coding interview.
 published: '2019-10-15T12:40Z'
-modified: '2019-10-15T12:40Z'
+modified: '2019-10-15T14:30Z'
 thumbnail: './images/people-at-interview.jpg'
 slug: simple-but-tricky-javascript-interview-questions
 tags: ['javascript']
@@ -28,7 +28,9 @@ What can you do?
 
 Follow the advice: *"Practice makes perfect"*. By investing enough time, better regularly, to deeply understand JavaScript will improve your coding, and as a positive side effect, interviewing skills.   
 
-In this post, you will find 7 at first sight simple, but tricky JavaScript interview questions.  
+In this post, you will find 7 at first sight simple, but tricky JavaScript interview questions. 
+
+While at first the questions might seem random, they try to hook into important concepts of JavaScript. So you better practice them before your next interview! 
 
 ## 1. Accidental global variable
 
