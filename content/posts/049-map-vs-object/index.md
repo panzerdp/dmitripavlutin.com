@@ -2,7 +2,7 @@
 title: When to Use Map instead of Plain JavaScript Object
 description: Map complements plain objects, allowing keys of any type and not having collisions with prototype object keys.
 published: '2019-10-09T13:00Z'
-modified: '2019-10-09T13:00Z'
+modified: '2019-10-15T07:46Z'
 thumbnail: './images/named.jpg'
 slug: maps-vs-plain-objects-javascript
 tags: ['javascript', 'map', 'object']
@@ -33,7 +33,7 @@ In this post, I will describe how JavaScript [Map](https://developer.mozilla.org
 
 As presented above, if the object's key is not a string or symbol, JavaScript implicitly transforms it into a string.
 
-Fortunately, the map has no problem with the key types:
+Fortunately, the map has no problem with the keys types:
 
 ```javascript{6}
 const numbersMap = new Map();

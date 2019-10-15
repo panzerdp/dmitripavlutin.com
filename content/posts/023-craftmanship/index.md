@@ -19,7 +19,7 @@ This is great for the software industry. But is a big load for us, software deve
 
 Unfortunately, human intellectual possibilities are impressive... but limited.  You cannot (and should not) know all the new frameworks and build tools.  
 
-What a software developer can do? The solution is to apply an efficient learning strategy: * put accept on programming fundamentals*.  
+What a software developer can do? The solution is to apply an efficient learning strategy: *put accept on programming fundamentals*.  
 
 The programming fundamentals consist of algorithms, data structures, and programming language knowledge.  
 

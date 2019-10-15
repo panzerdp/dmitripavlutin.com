@@ -1,8 +1,8 @@
 ---
 title: 7 Simple but Tricky JavaScript Interview Questions
 description: A compiled list of simple but quite tricky question you might be asked during an interview.
-published: '2019-10-15T13:00Z'
-modified: '2019-10-15T13:00Z'
+published: '2019-10-15T12:00Z'
+modified: '2019-10-15T12:00Z'
 thumbnail: './images/people-at-interview.jpg'
 slug: simple-but-tricky-javascript-interview-questions
 tags: ['javascript']
@@ -16,15 +16,19 @@ My top stressing things in software development are:
 1. The coding interview
 2. A toxic manager or teammate
 
+Not JavaScript, `this`, CSS, Internet Explorer, but the 2 above.  
+
 If you're qualifying as Senior Developer that involves JavaScript, there's a good chance that you will be asked for tricky questions during the coding interview.
 
-I know it's unfair. Some unknown people are throwing you to the edge of your knowledge to see what you're made of.  
+I know it's unfair. Some unknown people put you on the knowledge edge to see what you're made of. It's an unpleasant experience.  
 
 ![Job interview](./images/job-interview.png)
 
-What can you do? *Prepare*. 
+What can you do? 
 
-In this post, you will find 7 at first sight simple, but in essence tricky JavaScript interview questions.  
+Follow the advice: *"Practice makes perfect"*. By investing enough time, better regularly, to deeply understand JavaScript will improve your coding, and as a positive side effect, interviewing skills.  
+
+In this post, you will find 7 at first sight simple, but tricky JavaScript interview questions.  
 
 ## 1. Accidental global variable
 
@@ -46,7 +50,9 @@ typeof b; // => ???
 
 #### Answer
 
-Let's take a closer look at the tricky line 2: `let a = b = 0`. This statement indeed declares a local variable `a`. However, it doesn't declare a *local* variable `b`, but rather a *global* variable `b`.  
+Let's take a closer look at the line 2: `let a = b = 0`. This statement indeed declares a local variable `a`. However, it does declare a *global* variable `b`.  
+
+There is no variable `b` declared neither in the `foo()` scope or global scope. So JavaScript interprets `b = 0` expression as `window.b = 0`.
 
 In a browser, the above code snippet is equivalent to:
 
@@ -64,9 +70,9 @@ typeof a;        // => 'undefined'
 typeof window.b; // => 'number'
 ```
 
-`typeof a` is `'undefined'`. The variable `a` is declared only within `foo()` scope and is not available in the outside scope.  
+`typeof a` is `'undefined'`. The variable `a` is declared only within `foo()` scope and is not available in the outside scope where `typeof a` is evaluated.  
 
-`typeof b` evaluates to `'number'`. `b` is a global variable with value `0`.  
+`typeof b` evaluates to `'number'`. `b` is a global variable with the value `0`.  
 
 ## 2. Array length property
 
@@ -113,16 +119,26 @@ Let's take a closer look at the semicolon `;` that appears right before the open
 
 ![The null statement effect](./images/for-and-null-statement.png)
 
-While it might easy to overlook this semicolon, unfortunately, it creates a so-called *null statement* effect. 
+It's easy to overlook this semicolon, while it creates a *null statement*.  
 
-`for()` cycle makes 4 null statements (that do nothing), ignoring the block that actually pushes the numbers `{ numbers.push(i + 1); }`. 
+The null statement is an empty statement that does nothing. Some examples:
+
+```javascript
+// null statement
+;
+
+// null statement after if
+if (true);
+```
+
+`for()` cycles 4 time over the null statement (that does nothing), ignoring the block that actually pushes the numbers `{ numbers.push(i + 1); }`. 
 
 The above code is equivalent to the following code snippet:
 
 ```javascript
 const length = 4;
 const numbers = [];
-for (var i = 0; i < length; i++) {
+for (let i = 0; i < length; i++) {
   // does nothing
 }
 { 
@@ -139,7 +155,19 @@ Thus `numbers` is `[5]`.
 
 #### My story behind this question
 
-I was asked this question during an interview.
+*Long time ago, when I was searching for my first job, I was asked this question during an interview.*
+
+*For the interview I was given 20 coding questions to answer in 1 hour limit. The null statement question was on the list.*
+
+*When solving it, being in a rush, I didn't see the comma `;` right before the curly brace `{`. So I answered incorrectly `[1, 2, 3, 4]`.*
+
+*I was slightly disappointed because of such unfair tricks. I asked the interviewer, what is the reason behind asking me things like that? The interviewer replied:*
+
+*"Because we need people that put high attention to detail."*
+
+*Fortunately, I didn't end up working for that company.*
+
+I'll leave the conclusion up to you.
 
 ## 4. Automatic semicolon insertion
 
@@ -182,11 +210,13 @@ Follow [this section](/7-tips-to-handle-undefined-in-javascript/#24-function-ret
 #### Question
 
 What will output to the console the following script:
-```javascript{3}
-for (var i = 0; i < 3; i++) {
-  setTimeout(function log() {
-    console.log(i); // ???
-  }, 100);
+```javascript{4}
+let i;
+for (i = 0; i < 3; i++) {
+  const log = () => {
+    console.log(i);
+  }
+  setTimeout(log, 100);
 }
 ```
 
@@ -194,15 +224,28 @@ for (var i = 0; i < 3; i++) {
 
 If you didn't hear about this tricky question, most likely your answer is `0`, `1` and `2`. When I first encountered this question, it was my answer too!
 
-`log()` function is a closure that captures the variable `i` from the outer scope. It's important to understand that the closure captures *variables* directly, but not variables values.  
+There are 2 phases behind executing this snippet.
 
-Because `log()` captures the variable `i`, after 100ms when `setTimeout()` executes `log()`, `i` is already `3` (`i` is incremented by `for()` cycle).  
+**Phase 1**  
+
+The first phase consists of:
+
+1. `for()` cycle iterating 3 times. During each cycle a new function `log()`. Each callback captures the variable `i`. Then `log()` is used as an argument to `setTimout()`.  
+3. When `for()` cycle completes, `i` variable has value `3`.  
+
+`log()` is a closure that captures the variable `i` that is defined in the outside scope of `for()` cycle. It's important to understand that the closure captures `i` *variable* directly, but not its value.   
+
+**Phase 2**
+
+The second phase happens after 100ms:
+
+1. Each of the 3 schedulded `setTimeout()` execute `log()` callback. `log()` reads the *current value* of variable `i`, which is `3`, and logs to console `3`.
 
 That's why the output to the console is `3`, `3` and `3`.  
 
 *Do you know how to make the snippet log `0`, `1`, and `3`? Please write your solution in a comment below!*
 
-## 6. Floats sum
+## 6. Floating point math
 
 #### Question
 
@@ -214,8 +257,6 @@ What's the result of the equality check?
 
 #### Answer
 
-If you don't know how floats are represented in memory, you might easily say that `0.1 + 0.2 === 0.3` is `true`.
-
 First, let's take a look what is the value of `0.1 + 0.2`:
 
 ```javascript
@@ -223,6 +264,12 @@ First, let's take a look what is the value of `0.1 + 0.2`:
 ```
 
 The sum of `0.1` and `0.2` numbers is *not exactly* `0.3`, but slightly above `0.3`.  
+
+Due to how floating point numbers are encoded in binary, operations like addition on floating point numbers are subject to rounding errors.  
+
+Thus `0.1 + 0.2 === 0.3` is `false`.  
+
+Check [0.30000000000000004.com](https://0.30000000000000004.com/) for more information.
 
 ## 7. Hoisting
 
@@ -252,8 +299,8 @@ Follow the guide [JavaScript Variables Hoisting in Details](/javascript-hoisting
 
 ## 8. Key takeaways
 
-You might be thinking that some of the questions are useless to ask during the interview. I have the same feeling, especially regarding the [eagle eye test](#3-eagle-eye-test).
+You might be thinking that some of the questions are useless to ask during the interview. I have the same feeling, especially regarding the [eagle eye test](#3-eagle-eye-test). Still, they could be asked.
 
-Still, some of these questions can assess if you are seasoned in JavaScript, and you know it's common traps. If you failed to answer some, it's a good indicator of what you must study next!
+Some of these questions can truly assess if you are seasoned in JavaScript, that you know its issues. If you failed to answer some while reading the post, it's a good indicator of what you must study next!
 
-*What is your favorite tricky JavaScript question?*
+*Is it fair to ask tricky questions during the interview? Let me know your opinion.*
