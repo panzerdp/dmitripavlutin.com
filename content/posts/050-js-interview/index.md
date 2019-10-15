@@ -11,20 +11,20 @@ type: post
 commentsThreadId: simple-but-tricky-javascript-interview-questions
 ---
 
-My personal top stressing things in software development are:
+My top stressing things in software development are:
 
 1. The coding interview
 2. A toxic manager or teammate
 
 If you're qualifying as Senior Developer that involves JavaScript, there's a good chance that you will be asked for tricky questions during the coding interview.
 
-I know it's unfair. Some unkown people are throwing you to the edge of your knowledge to see what you're made of.  
+I know it's unfair. Some unknown people are throwing you to the edge of your knowledge to see what you're made of.  
 
 ![Job interview](./images/job-interview.png)
 
 What can you do? *Prepare*. 
 
-In this post, you will find 7 at first sight simple, but in essense tricky JavaScript interview questions.  
+In this post, you will find 7 at first sight simple, but in essence tricky JavaScript interview questions.  
 
 ## 1. Accidental global variable
 
@@ -64,7 +64,7 @@ typeof a;        // => 'undefined'
 typeof window.b; // => 'number'
 ```
 
-`typeof a` is `'undefined'`. The variable `a` is declated only within `foo()` scope, and is not available in the outside scope.  
+`typeof a` is `'undefined'`. The variable `a` is declared only within `foo()` scope and is not available in the outside scope.  
 
 `typeof b` evaluates to `'number'`. `b` is a global variable with value `0`.  
 
@@ -113,7 +113,7 @@ Let's take a closer look at the semicolon `;` that appears right before the open
 
 ![The null statement effect](./images/for-and-null-statement.png)
 
-While it might easy to overloow this semicolon, unfortunately it creates a so called *null statement* effect. 
+While it might easy to overlook this semicolon, unfortunately, it creates a so-called *null statement* effect. 
 
 `for()` cycle makes 4 null statements (that do nothing), ignoring the block that actually pushes the numbers `{ numbers.push(i + 1); }`. 
 
@@ -130,7 +130,7 @@ for (var i = 0; i < length; i++) {
   numbers.push(i + 1);
 }
 
-numbers; // => [6]
+numbers; // => [5]
 ```
 
 `for()` increments `i` variable until `4`. Then JavaScript enters one time the block `{ numbers.push(i + 1); }`, pushing `4 + 1` to `numbers` array.  
@@ -158,9 +158,9 @@ arrayFromValue(10); // => ???
 
 #### Answer
 
-It's easy to miss the newline between the `return` keyword and `[items]` expression. 
+It's easy to miss the new line between the `return` keyword and `[items]` expression. 
 
-But actually this newline makes the JavaScript automatically insert a semicolon between `return` amd `[items]` expression. That's an equivalent of the above code snippet:
+The newline makes the JavaScript automatically insert a semicolon between `return` and `[items]` expression. That's an equivalent of the above code snippet:
 
 ```javascript{2}
 function arrayFromValue(item) {
@@ -224,17 +224,15 @@ First, let's take a look what is the value of `0.1 + 0.2`:
 
 The sum of `0.1` and `0.2` numbers is *not exactly* `0.3`, but slightly above `0.3`.  
 
-
-
 ## 7. Hoisting
 
 #### Question
 
-What's the result of using `typeof`?
+What happens if you access `myVar` and `myConst` before declaration?
 
 ```javascript{1-2}
-typeof myVar;   // => ???
-typeof myConst; // => ???
+myVar;   // => ???
+myConst; // => ???
 
 var myVar = 'value';
 const myConst = 3.14;
@@ -244,9 +242,9 @@ const myConst = 3.14;
 
 Hoisting and temporal dead zone are 2 important concepts that influence the lifecycle of JavaScript variables. 
 
-`typeof myVar` is `undefined` because the `var` variable `myVar` is hoisted up. A hoisted `var` variable has `undefined` value.
+`myVar` is `undefined` because the `var` variable `myVar` is hoisted up. A hoisted `var` variable has an `undefined` value.
 
-However, executing `typeof myConst` before the declaration line throws a `ReferenceError`. In this case `const` variables are in a temporal dead zone until the declaration line `const myConst = 3.14`.    
+However, accessing `myConst` before the declaration line throws a `ReferenceError`. In this case `const` variables are in a temporal dead zone until the declaration line `const myConst = 3.14`.    
 
 (Put here the image about hoisting)
 
@@ -256,6 +254,6 @@ Follow the guide [JavaScript Variables Hoisting in Details](/javascript-hoisting
 
 You might be thinking that some of the questions are useless to ask during the interview. I have the same feeling, especially regarding the [eagle eye test](#3-eagle-eye-test).
 
-Still, some of these questions can assess if you are seasoned in JavaScript, and you know it's common traps. If you failed to answer on some, it is a good indicator on what you must study next!
+Still, some of these questions can assess if you are seasoned in JavaScript, and you know it's common traps. If you failed to answer some, it's a good indicator of what you must study next!
 
 *What is your favorite tricky JavaScript question?*
