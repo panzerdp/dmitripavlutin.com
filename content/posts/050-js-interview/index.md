@@ -1,8 +1,8 @@
 ---
 title: 7 Simple but Tricky JavaScript Interview Questions
-description: A compiled list of simple but quite tricky question you might be asked during an interview.
-published: '2019-10-15T12:00Z'
-modified: '2019-10-15T12:00Z'
+description: A compiled list of simple but tricky questions you might be asked during a JavaScript coding interview.
+published: '2019-10-15T12:40Z'
+modified: '2019-10-15T12:40Z'
 thumbnail: './images/people-at-interview.jpg'
 slug: simple-but-tricky-javascript-interview-questions
 tags: ['javascript']
@@ -20,13 +20,13 @@ Not JavaScript, `this`, CSS, Internet Explorer, but the 2 above.
 
 If you're qualifying as Senior Developer that involves JavaScript, there's a good chance that you will be asked for tricky questions during the coding interview.
 
-I know it's unfair. Some unknown people put you on the knowledge edge to see what you're made of. It's an unpleasant experience.  
+I know it's unfair. Some unknown people put you on the edge to see what you're made of. It's an unpleasant experience.  
 
 ![Job interview](./images/job-interview.png)
 
 What can you do? 
 
-Follow the advice: *"Practice makes perfect"*. By investing enough time, better regularly, to deeply understand JavaScript will improve your coding, and as a positive side effect, interviewing skills.  
+Follow the advice: *"Practice makes perfect"*. By investing enough time, better regularly, to deeply understand JavaScript will improve your coding, and as a positive side effect, interviewing skills.   
 
 In this post, you will find 7 at first sight simple, but tricky JavaScript interview questions.  
 
@@ -54,6 +54,10 @@ Let's take a closer look at the line 2: `let a = b = 0`. This statement indeed d
 
 There is no variable `b` declared neither in the `foo()` scope or global scope. So JavaScript interprets `b = 0` expression as `window.b = 0`.
 
+![Accidental global variables JavaScript](./images/accitental-global-variables.png)
+
+`b` is an accidently created global variable.  
+
 In a browser, the above code snippet is equivalent to:
 
 ```javascript{2-4}
@@ -70,7 +74,7 @@ typeof a;        // => 'undefined'
 typeof window.b; // => 'number'
 ```
 
-`typeof a` is `'undefined'`. The variable `a` is declared only within `foo()` scope and is not available in the outside scope where `typeof a` is evaluated.  
+`typeof a` is `'undefined'`. The variable `a` is declared only within `foo()` scope and is not available in the outside scope.  
 
 `typeof b` evaluates to `'number'`. `b` is a global variable with the value `0`.  
 
@@ -106,7 +110,7 @@ What is the content of `numbers` array:
 ```javascript{7}
 const length = 4;
 const numbers = [];
-for (var i = 0; i < length; i++);{
+for (let i = 0; i < length; i++);{
   numbers.push(i + 1);
 }
 
@@ -117,23 +121,13 @@ numbers; // => ???
 
 Let's take a closer look at the semicolon `;` that appears right before the opening curly brace `{`:
 
-![The null statement effect](./images/for-and-null-statement.png)
+![The null statement effect](./images/for-and-null-statement-pitfall-3.png)
 
-It's easy to overlook this semicolon, while it creates a *null statement*.  
+It's easy to overlook this semicolon, while it creates a *null statement*. The null statement is an empty statement that does nothing. 
 
-The null statement is an empty statement that does nothing. Some examples:
+`for()` iterates 4 times over the null statement (that does nothing), ignoring the block that actually pushes items to array: `{ numbers.push(i + 1); }`. 
 
-```javascript
-// null statement
-;
-
-// null statement after if
-if (true);
-```
-
-`for()` cycles 4 time over the null statement (that does nothing), ignoring the block that actually pushes the numbers `{ numbers.push(i + 1); }`. 
-
-The above code is equivalent to the following code snippet:
+The above code is equivalent to the following:
 
 ```javascript
 const length = 4;
@@ -155,13 +149,13 @@ Thus `numbers` is `[5]`.
 
 #### My story behind this question
 
-*Long time ago, when I was searching for my first job, I was asked this question during an interview.*
+*Long time ago, when I was interviewing for my first job, I was asked this question.*
 
-*For the interview I was given 20 coding questions to answer in 1 hour limit. The null statement question was on the list.*
+*For the interview I was given 20 coding questions to answer within 1 hour limit. The null statement question was on the list.*
 
-*When solving it, being in a rush, I didn't see the comma `;` right before the curly brace `{`. So I answered incorrectly `[1, 2, 3, 4]`.*
+*When solving the question, being in a rush, I didn't see the comma `;` right before the curly brace `{`. So I answered incorrectly `[1, 2, 3, 4]`.*
 
-*I was slightly disappointed because of such unfair tricks. I asked the interviewer, what is the reason behind asking me things like that? The interviewer replied:*
+*I was slightly disappointed because of such unfair tricks. I asked the interviewer what is the reason behind tricks like that? The interviewer replied:*
 
 *"Because we need people that put high attention to detail."*
 
@@ -188,7 +182,9 @@ arrayFromValue(10); // => ???
 
 It's easy to miss the new line between the `return` keyword and `[items]` expression. 
 
-The newline makes the JavaScript automatically insert a semicolon between `return` and `[items]` expression. That's an equivalent of the above code snippet:
+The newline makes the JavaScript automatically insert a semicolon between `return` and `[items]` expression. 
+
+Here's an equivalent code with the semicolon inserted after `return`:
 
 ```javascript{2}
 function arrayFromValue(item) {
@@ -209,7 +205,7 @@ Follow [this section](/7-tips-to-handle-undefined-in-javascript/#24-function-ret
 
 #### Question
 
-What will output to the console the following script:
+What will output to console the following script:
 ```javascript{4}
 let i;
 for (i = 0; i < 3; i++) {
@@ -222,28 +218,26 @@ for (i = 0; i < 3; i++) {
 
 #### Answer
 
-If you didn't hear about this tricky question, most likely your answer is `0`, `1` and `2`. When I first encountered this question, it was my answer too!
+If you didn't hear about this tricky question before, most likely your answer is `0`, `1` and `2`, which is incorrect. When I first tried to solve it, this was my answer too!
 
 There are 2 phases behind executing this snippet.
 
 **Phase 1**  
 
-The first phase consists of:
-
-1. `for()` cycle iterating 3 times. During each cycle a new function `log()`. Each callback captures the variable `i`. Then `log()` is used as an argument to `setTimout()`.  
+1. `for()` iterating 3 times. During each iteration a new function `log()` is created, which captures the variable `i`. Then `setTimout()` schedules an execution of `log()`.  
 3. When `for()` cycle completes, `i` variable has value `3`.  
 
-`log()` is a closure that captures the variable `i` that is defined in the outside scope of `for()` cycle. It's important to understand that the closure captures `i` *variable* directly, but not its value.   
+`log()` is a closure that captures the variable `i`, which is defined in the outside scope of `for()` cycle. It's important to understand that the closure captures `i` *variable* lexically.  
 
 **Phase 2**
 
 The second phase happens after 100ms:
 
-1. Each of the 3 schedulded `setTimeout()` execute `log()` callback. `log()` reads the *current value* of variable `i`, which is `3`, and logs to console `3`.
+1. The 3 schedulded `log()` callbacks are called by `setTimeout()`. `log()` reads the *current value* of variable `i`, which is `3`, and logs to console `3`.
 
 That's why the output to the console is `3`, `3` and `3`.  
 
-*Do you know how to make the snippet log `0`, `1`, and `3`? Please write your solution in a comment below!*
+*Do you know how to fix the snippet to log `0`, `1`, and `3`? Please write your solution in a comment below!*
 
 ## 6. Floating point math
 
@@ -257,7 +251,7 @@ What's the result of the equality check?
 
 #### Answer
 
-First, let's take a look what is the value of `0.1 + 0.2`:
+First, let's look at the value of `0.1 + 0.2`:
 
 ```javascript
 0.1 + 0.2; // => 0.30000000000000004
@@ -265,7 +259,9 @@ First, let's take a look what is the value of `0.1 + 0.2`:
 
 The sum of `0.1` and `0.2` numbers is *not exactly* `0.3`, but slightly above `0.3`.  
 
-Due to how floating point numbers are encoded in binary, operations like addition on floating point numbers are subject to rounding errors.  
+Due to how floating point numbers are encoded in binary, operations like addition of floating point numbers are subject to rounding errors.  
+
+Simply put, comparing floats directly is not precise.  
 
 Thus `0.1 + 0.2 === 0.3` is `false`.  
 
@@ -289,11 +285,11 @@ const myConst = 3.14;
 
 Hoisting and temporal dead zone are 2 important concepts that influence the lifecycle of JavaScript variables. 
 
-`myVar` is `undefined` because the `var` variable `myVar` is hoisted up. A hoisted `var` variable has an `undefined` value.
+![Temporal dead zone and hoisting in JavaScript](./images/temporal-dead-zone-and-hoisting-javascript.png)
 
-However, accessing `myConst` before the declaration line throws a `ReferenceError`. In this case `const` variables are in a temporal dead zone until the declaration line `const myConst = 3.14`.    
+Accessing `myVar` before declaration evaluates to `undefined`. A hoisted `var` variable, before its initialization, has an `undefined` value.
 
-(Put here the image about hoisting)
+However, accessing `myConst` before the declaration line throws a `ReferenceError`. `const` variables are in a temporal dead zone until the declaration line `const myConst = 3.14`.    
 
 Follow the guide [JavaScript Variables Hoisting in Details](/javascript-hoisting-in-details/) to get a good grasp on hoisting.  
 
@@ -301,6 +297,6 @@ Follow the guide [JavaScript Variables Hoisting in Details](/javascript-hoisting
 
 You might be thinking that some of the questions are useless to ask during the interview. I have the same feeling, especially regarding the [eagle eye test](#3-eagle-eye-test). Still, they could be asked.
 
-Some of these questions can truly assess if you are seasoned in JavaScript, that you know its issues. If you failed to answer some while reading the post, it's a good indicator of what you must study next!
+Anyways, most of these questions can truly assess if you are seasoned in JavaScript. If you had difficulties to answer some while reading the post, it's a good indicator of what you must study next!
 
 *Is it fair to ask tricky questions during the interview? Let me know your opinion.*
