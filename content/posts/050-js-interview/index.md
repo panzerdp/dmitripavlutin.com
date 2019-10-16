@@ -112,7 +112,7 @@ What is the content of `numbers` array:
 ```javascript{7}
 const length = 4;
 const numbers = [];
-for (let i = 0; i < length; i++);{
+for (var i = 0; i < length; i++);{
   numbers.push(i + 1);
 }
 
@@ -123,7 +123,7 @@ numbers; // => ???
 
 Let's take a closer look at the semicolon `;` that appears right before the opening curly brace `{`:
 
-![The null statement effect](./images/for-and-null-statement-pitfall-3.png)
+![The null statement effect](./images/for-and-null-statement-pitfall-4.png)
 
 It's easy to overlook this semicolon, while it creates a *null statement*. The null statement is an empty statement that does nothing. 
 
@@ -134,7 +134,8 @@ The above code is equivalent to the following:
 ```javascript
 const length = 4;
 const numbers = [];
-for (let i = 0; i < length; i++) {
+var i;
+for (i = 0; i < length; i++) {
   // does nothing
 }
 { 
