@@ -2,7 +2,7 @@
 title: 7 Simple but Tricky JavaScript Interview Questions
 description: A compiled list of simple but tricky questions you might be asked during a JavaScript coding interview.
 published: '2019-10-15T12:40Z'
-modified: '2019-10-17T07:05Z'
+modified: '2019-10-18T07:30Z'
 thumbnail: './images/people-at-interview.jpg'
 slug: simple-but-tricky-javascript-interview-questions
 tags: ['javascript']
@@ -161,8 +161,6 @@ Thus `numbers` is `[5]`.
 *I was slightly disappointed because of such unfair tricks. I asked the interviewer what is the reason behind tricks like that? The interviewer replied:*
 
 *"Because we need people that have good attention to detail."*
-
-*Suddenly, [this song](https://www.youtube.com/watch?v=peclQi67KS8) started to play in my head.*
 
 *Fortunately, I didn't end up working for that company.*
 
