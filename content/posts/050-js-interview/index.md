@@ -58,7 +58,7 @@ There is no variable `b` declared neither in the `foo()` scope or global scope. 
 
 ![Accidental global variables JavaScript](./images/accitental-global-variables.png)
 
-`b` is an accidently created global variable.  
+`b` is an accidentally created global variable.  
 
 In a browser, the above code snippet is equivalent to:
 
@@ -236,7 +236,7 @@ There are 2 phases behind executing this snippet.
 
 The second phase happens after 100ms:
 
-1. The 3 schedulded `log()` callbacks are called by `setTimeout()`. `log()` reads the *current value* of variable `i`, which is `3`, and logs to console `3`.
+1. The 3 scheduled `log()` callbacks are called by `setTimeout()`. `log()` reads the *current value* of variable `i`, which is `3`, and logs to console `3`.
 
 That's why the output to the console is `3`, `3` and `3`.  
 
@@ -298,7 +298,7 @@ Follow the guide [JavaScript Variables Hoisting in Details](/javascript-hoisting
 
 ## 8. Key takeaways
 
-You might be thinking that some of the questions are useless to ask during the interview. I have the same feeling, especially regarding the [eagle eye test](#3-eagle-eye-test). Still, they could be asked.
+You can think that some of the questions are useless for interviewing. I have the same feeling, especially regarding the [eagle eye test](#3-eagle-eye-test). Still, they could be asked.
 
 Anyways, most of these questions can truly assess if you are seasoned in JavaScript. If you had difficulties to answer some while reading the post, it's a good indicator of what you must study next!
 
