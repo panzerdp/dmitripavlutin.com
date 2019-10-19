@@ -1,8 +1,8 @@
 ---
 title: When to Use Map instead of Plain JavaScript Object
-description: Map complements plain objects, allowing keys of any type and not having collisions with prototype object keys.
+description: Map complements plain objects. Map's main benefits over plain object is allowing keys of any type and any name.
 published: '2019-10-09T13:00Z'
-modified: '2019-10-18T15:00Z'
+modified: '2019-10-19T16:15Z'
 thumbnail: './images/named.jpg'
 slug: maps-vs-plain-objects-javascript
 tags: ['javascript', 'map', 'object']
@@ -23,17 +23,17 @@ const names = {
 Object.keys(names); // => ['1', '2']
 ```
 
-The numbers `1` and `2` are keys in `names` object. Later, when the object's keys are accessed,  turns out the numbers were converted to strings.  
+The numbers `1` and `2` are keys in `names` object. Later, when the object's keys are accessed, it turns out the numbers were converted to strings.  
 
-JavaScript implicitly converts plain object's keys to strings. That's tricky because you lose the consistency of the types (what you put is what exactly you'll extract later).  
+Implicit conversion of keys is tricky because you lose the consistency of the types.  
 
-A lot of plain object's issues (including keys to string conversion, impossibility to use objects as keys) are solved by [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) object. This post describes the use cases when it's better to use maps instead of plain objects.  
+A lot of plain object's issues (keys to string conversion, impossibility to use objects like keys, etc) are solved by [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) object. This post describes the use cases when it's better to use maps instead of plain objects.  
 
 ## 1. The map accepts any key type
 
 As presented above, if the object's key is not a string or symbol, JavaScript implicitly transforms it into a string.
 
-Contrary, the map accepts keys of any type: strings, numbers, boolean, symbols. Moreover the map preserves the type of the key, avoiding any implicit conversion of types. That's the main benefit of a map over a plain JavaScript object.  
+Contrary, the map accepts keys of any type: strings, numbers, boolean, symbols. Moreover, the map preserves the type of key, skipping implicit conversion. That's the main benefit of a map over a plain JavaScript object.  
 
 For example, if you use a number as a key inside a map, it will remain a number:
 
@@ -48,7 +48,7 @@ numbersMap.set(2, 'two');
 
 `1` and `2` are keys in `numbersMap`. The type of these keys, *number*, remains the same. 
 
-Continuing, you can use booleans as keys inside a map:
+You can also use booleans as keys inside a map:
 
 ```javascript{6}
 const booleansMap = new Map();
@@ -61,15 +61,15 @@ booleansMap.set(false, "Nope");
 
 `booleansMap` uses booleans `true` and `false` as keys. 
 
-Inside a plain object using booleans as keys is impossible. These keys would be transformed into strings: `'true'` or `'false'`.
+Inside a plain object, the use of booleans as keys is impossible. These keys would be transformed into strings: `'true'` or `'false'`.
 
-Let's push the boundaries: can you use an entire object as a key in a map? Turns out, you can. Just be aware of memory leaks.  
+Having established the map's main benefit, can you use further an entire object as a key? Yes, you can. Just be aware of memory leaks.  
 
 ## 1.1 Object as key
 
 Let's say you need to store some object-related data, without attaching this data on the object itself. 
 
-Doing so using plain objects is not possible. But there's a workaround using an array of object-value tuples:
+Doing so using plain objects is not possible. But there's a workaround: an array of object-value tuples.
 
 ```javascript
 const foo = { name: 'foo' };
@@ -83,7 +83,7 @@ const kindOfMap = [
 
 `kindOfMap` is an array holding pairs of an object and associated value. 
 
-The biggest issue with this approach is the O(n) complexity to get the value by key. You have to loop through the entire array to get the desired value:
+The downside of this approach is the O(n) complexity of accessing the value by key. You have to loop through the entire array to get the desired value:
 
 ```javascript 
 function getByKey(kindOfMap, key) {
@@ -98,9 +98,10 @@ function getByKey(kindOfMap, key) {
 getByKey(kindOfMap, foo); // => 'Foo related data'
 ```
 
-You don't need all this headache with [WeakMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap) (a specialized version of `Map`): it accepts objects as keys. 
+[WeakMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap) (a specialized version of `Map`) is a better solution:
 
-The main difference between `Map` and `WeakMap`is that the latter allows garbage collection of the objects that are keys. This prevents memory leaks.  
+* `WeakMap` accepts objects as keys
+* Allows straightforward access of value by the key, with O(1) complexity  
 
 The above code refactored to use `WeakMap` becomes trivial:
 
@@ -116,13 +117,15 @@ mapOfObjects.set(bar, 'Bar related data');
 mapOfObjects.get(foo); // => 'Foo related data'
 ```
 
-`WeakMap`, contrary to `Map`, accepts only objects as keys and has a [reduced set of methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap#Methods).
+The main difference between `Map` and `WeakMap` is the latter allowing garbage collection of keys (which are objects). This prevents memory leaks.  
+
+`WeakMap`, contrary to `Map`, accepts only *objects as keys* and has a [reduced set of methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap#Methods).
 
 ## 2. The map has no restriction over keys names
 
-Any object in JavaScript inherits the properties from its prototype object. The same happens to plain JavaScript objects.
+Any JavaScript object inherits properties from its prototype object. The same happens to plain objects.
 
-The accidentally overwritten property inherited from the prototype is dangerous. Let's study such a scenario.
+The accidentally overwritten property inherited from the prototype is dangerous. Let's study such a dangerous situation.
 
 First, let's ovewrite the `toString()` property in an object `actor`:
 
@@ -141,16 +144,16 @@ function isPlainObject(value) {
 }
 ```
 
-Finally, because `actor` has a string inside `toString` property, calling `isPlainObject(actor)` generates an error:
+Finally, lets' call `isPlainObject(actor)`. Here's the problem: because `toString` property inside `actor` is a string (instead of an expected function), this call generates an error:
 
 ```javascript
 // Does not work!
 isPlainObject(actor); // TypeError: value.toString is not a function
 ```
 
-When the application input [generates keys on objects](#21-real-world-example), you have to use maps instead of plain objects to avoid the problem described above.
+When the application input is used to [create the keys names](#21-real-world-example), you have to use a map instead of a plain object to avoid the problem described above.
 
-The map doesn't have any restriction on the keys names. You can use keys names as `toString`, `constructor`, etc. without consequences:
+The map doesn't have any restrictions on the keys names. You can use keys names like `toString`, `constructor`, etc. without consequences:
 
 ```javascript{11}
 function isMap(value) {
@@ -170,9 +173,9 @@ Regardless of `actorMap` having a property named `toString`, the method `toStrin
 
 ### 2.1 Real world example
 
-What could be the situation when the user input creates keys on objects?
+When the user input creates keys on objects? Let's analyze a case.  
 
-Imagine a User Interface that manages some custom fields. The user can add a custom field by indicating the name and value:
+Imagine a User Interface that manages custom fields. The user can add a custom field by specifying its name and value:
 
 ![Custom fields User Interface](./images/custom-fields-2.png)
 
@@ -186,11 +189,11 @@ const userCustomFields = {
 };
 ```
 
-The user can choose a custom field name like `toString` (as in the example), `constructor`, etc. that could potentially break the code that later uses this object. 
+But the user can choose a custom field name like `toString` (as in the example), `constructor`, etc. As presented above, such keys names on the state object could potentially break the code that later uses this object. 
 
 *Don't take user input to create keys on your plain objects!*  
 
-It's more reasonable to bind the user interface state to a map:
+Because the map has no restrictions over the keys names, the right solution is to bind the user interface state to a map.  
 
 ```javascript
 const userCustomFieldsMap = new Map([
@@ -204,9 +207,11 @@ There is no way to break the map, even using keys as `toString`, `constructor`, 
 
 ## 3. The map is iterable
 
-In order to iterate over the plain object's properties, you have to use additional helper static functions like `Object.keys()` or `Object.entries()` (available in ES2017):
+To iterate plain object's properties are necessary static functions like `Object.keys()` or `Object.entries()` (available in ES2017) .  
 
-```javascript
+For example, let's iterate over the keys and values of `colorsHex` object:
+
+```javascript{6}
 const colorsHex = {
   'white': '#FFFFFF',
   'black': '#000000'
@@ -221,9 +226,11 @@ for (const [color, hex] of Object.entries(colorsHex)) {
 
 `Object.entries(colorsHex)` returns an array of key-value pairs extracted from the object.
 
-A map, however, is an iterable by itself:
+Access of keys-values of a map is more comfortable because the map is iterable. Anywhere an iterable is accepted, like `for()` loop or spread operator, use the map directly.
 
-```javascript
+`colorsHexMap` keys-values are iterated directly by `for()` loop:
+
+```javascript{6}
 const colorsHexMap = new Map();
 
 colorsHexMap.set('white', '#FFFFFF');
@@ -238,11 +245,13 @@ for (const [color, hex] of colorsHexMap) {
 
 `colorsHexMap` is iterable. You can use it anywhere an iterable is accepted: `for()` loops, spread operator `[...map]`.  
 
-The map provides additional methods that return an iterable: `map.keys()` to iterate over keys and `map.values()` over values.  
+Moreover, `map.keys()` returns an iterator over keys and `map.values()` over values.  
 
 ## 4. Map's size
 
-Another issue with the plain object is that you cannot easily determine the number of properties that it holds:
+You cannot easily determine the number of properties in a plain object. 
+
+One workaround is to use a helper function like `Object.keys()`:
 
 ```javascript
 const exams = {
@@ -253,9 +262,11 @@ const exams = {
 Object.keys(exams).length; // => 2
 ```
 
-To determine the size of `exams`, you would have to pass through all the keys to determine the number of them.
+`Object.keys(exams)` returns an array with keys of `exams`. The size of `exams` is the number of keys this array contains.  
 
-The map provides an alternative with the accessor property `size` counting the key-value pairs:
+The map provides a better alternative. The property `map.size` indicates the number of keys-values.
+
+Let's see how to use `size` on `examsMap`:
 
 ```javascript
 const examsMap = new Map([
@@ -266,18 +277,18 @@ const examsMap = new Map([
 examsMap.size; // => 2
 ```
 
-It's simpler to determine the size of the map: `examsMap.size`.  
+It's simple to determine the size of the map: `examsMap.size`.  
 
 ## 5. Conclusion
 
-Plain JavaScript objects normally do a good job to hold structured data. But they have some limitations:
+Plain JavaScript objects do the job of holding structured data. But they have some limitations:
 
 1) Only strings or symbols can be used as keys
 * Own object properties might collide with property keys inherited from the prototype (e.g. `toString`, `constructor`, etc). 
 * Objects cannot be used as keys
 
-All these issues are easily solved by maps. Moreover, they provide benefits like being iterators and easy size look-up.  
+These limitations are solved by maps. Moreover, maps provide benefits like being iterators and allowing easy size look-up.  
 
-Don't consider maps as a replacement of plain objects, but rather a complement.  
+Anyways, don't consider maps as a replacement of plain objects, but rather a complement.  
 
 *Do you know other benefits of maps over plain objects? Please write a comment below!*
