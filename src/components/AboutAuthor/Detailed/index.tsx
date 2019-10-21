@@ -15,7 +15,7 @@ export default function AboutAuthorDetailed({ authorInfo, authorProfilePicture }
     <div className={styles.aboutAuthor}>
       <div className={styles.authorInfo}>
         <Img fluid={authorProfilePicture} alt={authorInfo.name} />
-        <h3>About me</h3>
+        <h3>About {authorInfo.name}</h3>
         <div className={styles.description}>{authorInfo.description}</div>
       </div>
       <div className={styles.readMore}>
@@ -24,7 +24,7 @@ export default function AboutAuthorDetailed({ authorInfo, authorProfilePicture }
             <img alt={`About ${authorInfo.name}`} src="/person.svg" />
           </Link>
           <Link className={styles.text} to={TO_ABOUT_ME()} title={`About ${authorInfo.name}`}>
-            Read about me
+            More about me
           </Link>
         </div>
       </div>

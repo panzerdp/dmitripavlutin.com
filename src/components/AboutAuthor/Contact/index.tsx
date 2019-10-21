@@ -9,7 +9,7 @@ interface AboutAuthorContact {
 export default function AboutAuthorContact({ authorInfo }: AboutAuthorContact) {
   return (
     <div className={styles.contactAuthor}>
-      <h3>Contact</h3>
+      <h3>Contact me</h3>
       <div className={styles.description}>
         You&apos;re welcome to contact me regarding job opportunities, blog posts discussions, speaking at conferences,
         or just to say thanks.

@@ -2,7 +2,7 @@
 title: 7 Simple but Tricky JavaScript Interview Questions
 description: A compiled list of simple but tricky questions you might be asked during a JavaScript coding interview.
 published: '2019-10-15T12:40Z'
-modified: '2019-10-18T07:30Z'
+modified: '2019-10-21T10:40Z'
 thumbnail: './images/people-at-interview.jpg'
 slug: simple-but-tricky-javascript-interview-questions
 tags: ['javascript']
@@ -175,7 +175,7 @@ What value is returned by `arrayFromValue()`?
 ```javascript{6}
 function arrayFromValue(item) {
   return
-    [items];
+    [item];
 }
 
 arrayFromValue(10); // => ???
@@ -183,16 +183,16 @@ arrayFromValue(10); // => ???
 
 #### Answer
 
-It's easy to miss the new line between the `return` keyword and `[items]` expression. 
+It's easy to miss the new line between the `return` keyword and `[item]` expression. 
 
-The newline makes the JavaScript automatically insert a semicolon between `return` and `[items]` expression. 
+The newline makes the JavaScript automatically insert a semicolon between `return` and `[item]` expression. 
 
 Here's an equivalent code with the semicolon inserted after `return`:
 
 ```javascript{2}
 function arrayFromValue(item) {
   return;
-  [items];
+  [item];
 }
 
 arrayFromValue(10); // => undefined

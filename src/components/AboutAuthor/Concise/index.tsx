@@ -17,7 +17,7 @@ export default function AboutAuthorConcise({ authorInfo, authorStats, authorProf
         <Img fixed={authorProfilePicture} alt={authorInfo.name} />
       </div>
       <div className={styles.authorInfo}>
-        <h4>About me</h4>
+        <h4>About {authorInfo.name}</h4>
         <div className={styles.description}>{authorInfo.description}</div>
         <div className={styles.links}>
           <a
