@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import Img from 'gatsby-image';
 
 import AboutAuthorDetailed from '../index';
+import { TO_ABOUT_ME } from 'routes/path';
 
 const authorProfilePicture: FluidImage = {
   src: 'source',
@@ -46,5 +47,10 @@ describe('<PostAboutAuthorDetailed />', function() {
   it('should render author description', function() {
     const wrapper = shallow(<AboutAuthorDetailed {...props} />);
     expect(wrapper.text()).toContain(props.authorInfo.description);
+  });
+
+  it('should render about me link', function() {
+    const wrapper = shallow(<AboutAuthorDetailed {...props} />);
+    expect(wrapper.find({ to: TO_ABOUT_ME() }).length).toBeGreaterThanOrEqual(1);
   });
 });

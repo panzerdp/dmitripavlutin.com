@@ -33,7 +33,7 @@ A lot of plain object's issues (keys to string conversion, impossibility to use 
 
 As presented above, if the object's key is not a string or symbol, JavaScript implicitly transforms it into a string.
 
-Contrary, the map accepts keys of any type: strings, numbers, boolean, symbols. Moreover, the map preserves the type of key, skipping implicit conversion. That's the main benefit of a map over a plain JavaScript object.  
+Contrary, the map accepts keys of any type: strings, numbers, boolean, symbols. Moreover, the map preserves the key type. That's the map's main benefit.  
 
 For example, if you use a number as a key inside a map, it will remain a number:
 
@@ -46,7 +46,7 @@ numbersMap.set(2, 'two');
 [...numbersMap.keys()]; // => [1, 2]
 ```
 
-`1` and `2` are keys in `numbersMap`. The type of these keys, *number*, remains the same. 
+`1` and `2` are keys in `numbersMap`. The type of the keys remains the same. 
 
 You can also use booleans as keys inside a map:
 
@@ -63,7 +63,7 @@ booleansMap.set(false, "Nope");
 
 Inside a plain object, the use of booleans as keys is impossible. These keys would be transformed into strings: `'true'` or `'false'`.
 
-Having established the map's main benefit, can you use further an entire object as a key? Yes, you can. Just be aware of memory leaks.  
+Can you use further an entire object as a key? Yes, you can. Just be aware of memory leaks.  
 
 ## 1.1 Object as key
 

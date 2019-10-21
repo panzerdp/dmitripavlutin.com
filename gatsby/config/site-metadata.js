@@ -38,10 +38,10 @@ module.exports = {
   featured: {
     popular: [
       'how-three-dots-changed-javascript',
-      'gentle-explanation-of-this-in-javascript',
       '7-tips-to-handle-undefined-in-javascript',
       '6-ways-to-declare-javascript-functions',
       '5-interesting-uses-javascript-destructuring',
+      'simple-but-tricky-javascript-interview-questions',
     ],
   },
 };

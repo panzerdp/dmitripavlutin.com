@@ -62,13 +62,10 @@ describe('<PostRightSidebar />', function() {
     const authorWrapper = wrapper.find(AboutAuthorFetch).renderProp('render')(fetchData);
     expect(
       authorWrapper.contains(
-        <AboutAuthorDetailed
-          authorInfo={fetchData.authorInfo}
-          authorProfilePicture={authorProfilePictureBig}
-          authorStats={fetchData.authorStats}
-        />
+        <AboutAuthorDetailed authorInfo={fetchData.authorInfo} authorProfilePicture={authorProfilePictureBig} />
       )
     );
+    expect(authorWrapper.contains(<AboutAuthorContact authorInfo={fetchData.authorInfo} />));
     expect(authorWrapper.contains(<AboutAuthorContact authorInfo={fetchData.authorInfo} />));
   });
 });

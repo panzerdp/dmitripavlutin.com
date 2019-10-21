@@ -17,7 +17,7 @@ export default function AboutAuthorConcise({ authorInfo, authorStats, authorProf
         <Img fixed={authorProfilePicture} alt={authorInfo.name} />
       </div>
       <div className={styles.authorInfo}>
-        <h4>About the author</h4>
+        <h4>About me</h4>
         <div className={styles.description}>{authorInfo.description}</div>
         <div className={styles.links}>
           <a
@@ -32,7 +32,7 @@ export default function AboutAuthorConcise({ authorInfo, authorStats, authorProf
             href={`mailto:${authorInfo.email}`}
             title={`Write a message to ${authorInfo.name}`}
           >
-            Write author an email
+            Write me an email
           </a>
         </div>
         <TwitterFollowButton

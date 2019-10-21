@@ -1,0 +1,17 @@
+@import '~styles/variables';
+
+.folowAuthor {
+  box-shadow: $box-shadow;
+  border-radius: 8px;
+  font-size: 1.3rem;
+  padding: 1.5rem;
+
+  h3 {
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .description {
+    margin: 1rem 0;
+  }
+}

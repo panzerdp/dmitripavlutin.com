@@ -12,14 +12,10 @@ export default function ExcerptsListRightSidebar() {
     <div className={styles.rightSidebar}>
       <SubscriptionRegion />
       <AboutAuthorFetch
-        render={({ authorInfo, authorProfilePictureBig, authorStats }) => {
+        render={({ authorInfo, authorProfilePictureBig }) => {
           return (
             <>
-              <AboutAuthorDetailed
-                authorInfo={authorInfo}
-                authorProfilePicture={authorProfilePictureBig}
-                authorStats={authorStats}
-              />
+              <AboutAuthorDetailed authorInfo={authorInfo} authorProfilePicture={authorProfilePictureBig} />
               <AboutAuthorContact authorInfo={authorInfo} />
             </>
           );
