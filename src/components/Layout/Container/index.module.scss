@@ -1,8 +1,13 @@
 @import 'styles/variables.scss';
 
-html, body {
+html,
+body {
   height: 100%;
   line-height: 1.25;
+}
+
+summary {
+  cursor: pointer;
 }
 
 body {
@@ -14,7 +19,12 @@ body {
   min-height: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: $sans-serif-font-family;
 }
 
@@ -37,7 +47,8 @@ a {
   display: flex;
   min-height: 100vh;
 
-  .leftSidebar, .rightSidebar {
+  .leftSidebar,
+  .rightSidebar {
     flex: 1 1 0%;
   }
 
@@ -63,22 +74,22 @@ a {
     padding: 0 0.5rem;
   }
 
-  h1 { 
-    font-size: 0.8 * 2em; 
+  h1 {
+    font-size: 0.8 * 2em;
   }
-  h2 { 
-    font-size: 0.8 * 1.5em; 
+  h2 {
+    font-size: 0.8 * 1.5em;
   }
-  h3 { 
-    font-size: 0.8 * 1.17em; 
+  h3 {
+    font-size: 0.8 * 1.17em;
   }
-  h4 { 
-    font-size: 0.8 * 1.12em; 
+  h4 {
+    font-size: 0.8 * 1.12em;
   }
-  h5 { 
-    font-size: 0.8 * .83em; 
+  h5 {
+    font-size: 0.8 * 0.83em;
   }
-  h6 { 
-    font-size: 0.8 * .75em; 
+  h6 {
+    font-size: 0.8 * 0.75em;
   }
 }
