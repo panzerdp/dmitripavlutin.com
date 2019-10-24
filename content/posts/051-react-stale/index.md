@@ -2,7 +2,7 @@
 title: Be Aware of Stale Closures when Using React Hooks
 description: The stale closures is a pitfall of React hooks when an outdated variable is captured by a closure.
 published: '2019-10-24T12:40Z'
-modified: '2019-10-24T12:40Z'
+modified: '2019-10-24T14:15Z'
 thumbnail: './images/landscape.jpg'
 slug: react-hooks-stale-closures
 tags: ['react', 'closure', 'hook']
@@ -183,63 +183,73 @@ log();             // logs "Current value is 3"
 ## 3. Stale closures of hooks
 
 ### 3.1 *useEffect()*
+
 Let's study a common case of stale closure when using `useEffect()` hook.
 
-Inside the component `<SetDocumentTitle>` the hook `useEffect()` sets the title of the document:  
+Inside the component `<WatchCount>` the hook `useEffect()` logs every second the value of `count`:  
 
 ```jsx
-function SetDocumentTitle() {
-  const [message, setMessage] = useState("Nothing");
-  const [who, setWho] = useState("Nobody");
+function WatchCount() {
+  const [count, setCount] = useState(0);
 
-  useEffect(function changeTitle() {
-    document.title = `${message}, ${who}!`;
-  }, [message]);
+  useEffect(function() {
+    setInterval(function log() {
+      console.log(`Count is: ${count}`);
+    }, 2000);
+  }, []);
 
   return (
     <div>
-      <button onClick={() => setWho("Joe") }>
-        Set who to Joe
-      </button>
-      <button onClick={() => setMessage("Hello") }>
-        Set message to Hello
+      {count}
+      <button onClick={() => setCount(count + 1) }>
+        Increase
       </button>
     </div>
   );
 }
 ```
 
-[Open the demo](https://jkp7w.csb.app/) and click on the button "Set who to Joe". The document title doesn't update.  
+[Open the demo](https://codesandbox.io/s/stale-closure-use-effect-broken-2-gyhzk) and click a few times increase button. Then look at the console, and every 2 seconds apprears `Count is: 0`.   
 
 Why does it happen?
 
-At first render, the closure `changeTitle()` captures `who` as `"Nobody"` and `message` as `"Nothing"`. The document title is set as `"Nothing, Nobody!"`.   
+At first render, the closure `log()` captures `count` variable as `0`. Later, even if `count` increases, `log()` still uses `count` as `0` from initial render. `log()` is a stale closure.  
 
-When "Set who to Joe" button is clicked, the click handler updates `who` state `setWho("Joe")`. Then the component re-renders.  
+The solution is to let know `useEffect()` that the closure `log()` depends on `count` and properly handle the reset of interval:  
 
-After re-render, `useEffect(changeTitle, [message])` calls the stale closure `changeTitle()` from the first render, which captured `who` having `"Nobody"`. The document title is set as `"Nothing, Nobody!"`.   
+```jsx{11}
+function WatchCount() {
+  const [count, setCount] = useState(0);
 
-`changeTitle()` closure is stale because it captured an outdated `who`.  
+  useEffect(function() {
+    const id = setInterval(function log() {
+      console.log(`Count is: ${count}`);
+    }, 2000);
+    return function() {
+      clearInterval(id);
+    }
+  }, [count]);
 
-The solution is to let know `useEffect()` that the closure `changeTitle()` depends on both variables `message` and `who`:  
-
-```jsx{5}
-function SetDocumentTitle() {
-  // ...
-  useEffect(function changeTitle() {
-    document.title = `${message}, ${who}!`;
-  }, [message, who]);
-  // ...
+  return (
+    <div>
+      {count}
+      <button onClick={() => setCount(count + 1) }>
+        Increase
+      </button>
+    </div>
+  );
 }
 ```
 
-With the dependencies properly set, `useEffect()` updates the closure as soon as `message` or `who` variables are changed.  
+With the dependencies properly set, `useEffect()` updates the closure as soon as `count` changes.  
 
-[Open the fixed demo](https://hu18o.csb.app/) and click on the button "Set who to Joe". The document title updates correctly.  
+[Open the fixed demo](https://codesandbox.io/s/stale-closure-use-effect-fixed-2-ybv47) and click a few times increase. The console will log the actual value of `count`.  
 
 Proper management of hooks dependencies is an efficient way to solve the stale closure problem. 
 
-I recommend to install [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks), which detects the forgotten dependencies.    
+I recommend to install [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks), which detects the forgotten dependencies.  
+
+*There's another solution how to make log() work correctly. If you see it, let me know in a [comment](#disqus_thread)!*  
 
 ### 3.2 *useState()*
 
