@@ -23,7 +23,7 @@ This post explains the important term JavaScript closure. Follows the stale clos
 
 ### 1. The JavaScript closure
 
-Before looking into the stale closure issue, it is important to understand what a closure is.  
+Before looking into the stale closure issue, it's important to understand what a closure is.  
 
 The following code defines a factory function `createIncrement(i)` that returns an increment function. Later, every time the increment function is called, an internal counter is incremented by `i`:
 
