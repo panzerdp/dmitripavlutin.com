@@ -1,8 +1,8 @@
 ---
 title: Be Aware of Stale Closures when Using React Hooks
 description: The stale closures is a pitfall of React hooks when an outdated variable is captured by a closure.
-published: '2019-10-24T11:00Z'
-modified: '2019-10-24T11:00Z'
+published: '2019-10-24T12:40Z'
+modified: '2019-10-24T12:40Z'
 thumbnail: './images/landscape.jpg'
 slug: react-hooks-stale-closures
 tags: ['react', 'closure', 'hook']
@@ -11,15 +11,13 @@ type: post
 commentsThreadId: react-hooks-stale-closure
 ---
 
-A side effect (state management, HTTP request, etc) inside a React component using [hooks](https://reactjs.org/docs/hooks-reference.html) is performed as a composition of a few functions. That's the selling point of React hooks.   
+Hooks replace class-based components by easying the reuse of state and side effects management. Additionally you can extract repeated logic into a custom hook to reuse across the application.  
 
-Hooks replace class-based components by easying the reuse of state and side effects management. Plus you can extract repeated logic into a custom hook to reuse across the application.  
-
-Hooks heavily rely on JavaScript closures. Closures make hooks “simple” to use. But closures are sometimes tricky (recall memory leaks?). 
+Hooks heavily rely on JavaScript closures. But closures are sometimes tricky (recall memory leaks?).  
 
 You can encounter the stale closure problem when working with a React component having a multitude of effects and state management. And it might be difficult to solve!
 
-This post explains the important term JavaScript closure. Follows the stale closure problem description. Finally, you will understand how to distinguish stale closure situations within your React components, and how to solve them.  
+This post explains the important term JavaScript closure. Follows the stale closure problem description and solutions. Finally, you will understand how to distinguish stale closure situations within your React components, and how to solve them.  
 
 ### 1. The JavaScript closure
 
@@ -44,17 +42,17 @@ inc(); // logs 2
 
 `createIncrement(1)` returns an increment function, which is assigned to `inc` variable. When `inc()` is called, the `value` variable gets incremented by `1`.  
 
-You can call `inc()` function as many times as you want. The first call of `inc()` returns `1`, the second call returns `2`, and so on.  
+The first call of `inc()` returns `1`, the second call returns `2`, and so on.  
 
 Did you spot the interesting thing? You simply call `inc()`, without arguments, but JavaScript still knows the current `value` and how much to increment `i`. How does it work? 
 
 The answer lays inside `createIncrement()`. There you will find `increment()` function: the closure that does the magic. The closure captures (or closes over, or simply remembers) the variables `value` and `i` from the lexical scope.  
 
-The *lexical scope* is the set of variables a closure accesses from the outer scope *where it is defined*. In the example, the lexical scope of `increment()` is the scope of `createIncrement()`, which contains variables `value` and `i`.  
+The *lexical scope* is the is the outer scope *where the closure is defined*. In the example, the lexical scope of `increment()` is the scope of `createIncrement()`, which contains variables `value` and `i`.  
 
 ![The lexical scope in JavaScript](./images/lexical-scope-2.png)
 
-Because `inc()` is a closure (`inc` variable holds `increment` closure), no matter where invoked, it always has access to the variables from its lexical scope  `value` and `i`.  
+No matter where `inc()` is called, even outside the scope of `createIncrement()`, it has access to `value` and `i`.  
 
 > *The closure* is a function that can remember and modify variables from its lexical scope, regardless of execution scope.  
 
@@ -76,13 +74,13 @@ I know closures might be difficult to grasp. But once you *get it*, it's forever
 
 You can model them in your mind the following way. 
 
-Imagine a magical paintbrush with an interesting property. If you paint using it some objects from real life, then the painting becomes a window you can interact with.  
+Imagine a magical paintbrush with an interesting property. If you paint with it some objects from real life, then the painting becomes a window you can interact with.  
 
 ![Painting as a model of JavaScript closures](./images/rose.jpg)
 
 Through this window, you can move the painted objects with your hands.  
 
-Moreover, you can carry the magical painting anywhere, even far from the place you've painted the objects. From there, through the magical painting as a widow, you can still move the objects with your hands.  
+Moreover, you can carry the magical painting anywhere, even far from the place where you've painted the objects. From there, through the magical painting as a window, you can still move the objects with your hands.  
 
 The magical painting is a *closure*, while the painted objects are the *lexical scope*.  
 
@@ -121,7 +119,7 @@ On the first call of `inc()`, the returned closure is assigned to the variable `
 
 Finally, the call of `log()` logs the message `"Current value is 1"`. This is unexpected because `value` equals to `3`.  
 
-*`log()` is a stale closure.* At first invocation of `inc()`, the closure `log()` captured `message` variable having `"Current value is 1"`. While now, when `value` is already `3`, `message` is obsolete.  
+*`log()` is a stale closure.* On first invocation of `inc()`, the closure `log()` has captured `message` variable having `"Current value is 1"`. While now, when `value` is already `3`, `message` variable is outdated.  
 
 > *The stale closure* captures variables that have outdated values.  
 
@@ -133,7 +131,7 @@ Let's see some approaches on how to fix the stale closure.
 
 The first approach to solving stale closures is to find the closure that captured the freshest variables.  
 
-Let's find the closure that captured the most fresh `message` variable. That's the closure returned from the *latest* `inc()` invocation:
+Let's find the closure that has captured the most up to date `message` variable. That's the closure returned from the *latest* `inc()` invocation:
 
 ```javascript{7}
 const inc = createIncrement(1);
@@ -145,9 +143,11 @@ const latestLog = inc(); // logs 3
 latestLog(); // logs "Current value is 3"
 ```
 
-`latestLog` captured the `message` variable that 
+`latestLog` captured the `message` variable that has the most up to date `"Current value is 3"`.  
 
-By the way, this is roughly how React hooks handle the freshness of closures. Hooks implementation assumes that between the component re-renderings, the latest closure supplied as a callback to the hook (e.g. `useEffect(callback)`) have captured the freshest variables from the component's function scope.  
+*By the way, this is approximately how React hooks handle the freshness of closures.* 
+
+*Hooks implementation assumes that between the component re-renderings, the latest closure supplied as a callback to the hook (e.g. `useEffect(callback)`) has captured the freshest variables from the component's function scope.*  
 
 #### B. Close over the changed variable
 
@@ -211,9 +211,15 @@ function SetDocumentTitle() {
 
 [Open the demo](https://jkp7w.csb.app/) and click on the button "Set who to Joe". The document title doesn't update.  
 
-At first render, the closure `changeTitle()` captures `who` variable having the initial state `"Nobody"`.  
+Why does it happen?
 
-When you click the "Set who to Joe" button, the state variable `who` updates to `"Joe"` and the component re-renders. But `useEffect(..., [message])` still uses the stale closure from the first render, which captured `who` having `"Nobody"` value.  
+At first render, the closure `changeTitle()` captures `who` as `"Nobody"` and `message` as `"Nothing"`. The document title is set as `"Nothing, Nobody!"`.   
+
+When "Set who to Joe" button is clicked, the click handler updates `who` state `setWho("Joe")`. Then the component re-renders.  
+
+After re-render, `useEffect(changeTitle, [message])` calls the stale closure `changeTitle()` from the first render, which captured `who` having `"Nobody"`. The document title is set as `"Nothing, Nobody!"`.   
+
+`changeTitle()` closure is stale because it captured an outdated `who`.  
 
 The solution is to let know `useEffect()` that the closure `changeTitle()` depends on both variables `message` and `who`:  
 
@@ -237,7 +243,10 @@ I recommend to install [eslint-plugin-react-hooks](https://www.npmjs.com/package
 
 ### 3.2 *useState()*
 
-You have a button that increases a counter async with a delay of 1 second and the second button increments the counter by 1 right away. The naive implementation looks as follows:
+The component `<DelayedCount>` has 2 buttons: 
+
+* "Increase async" increments the counter in async mode with 1 second delay 
+* "Increase sync" increments the counter right away, in sync mode. 
 
 ```jsx
 function DelayedCount() {
@@ -302,7 +311,7 @@ function DelayedCount() {
 }
 ```
 
-Now `setCount(count => count + 1)` updates the count state inside `delay()`. React makes sure the latest state value is supplied as an argument to the update state function.  
+Now `setCount(count => count + 1)` updates the count state inside `delay()`. React makes sure the latest state value is supplied as an argument to the update state function. The stale closure is solved.    
 
 [Open the demo](https://codesandbox.io/s/use-state-fixed-zz78r). Click "Increase async" then right away "Increase sync" buttons. The `counter` displays the correct value `2`.  
 
