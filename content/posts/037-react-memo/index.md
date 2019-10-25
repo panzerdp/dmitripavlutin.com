@@ -271,13 +271,13 @@ Strictly, React uses memoization as a performance hint.
 
 While in most situations React avoids re-rendering a memoized component, you shouldn't count on that to prevent rendering.  
 
-## 5. React.memo() and hooks
+## 6. React.memo() and hooks
 
 `React.memo()` can be freely applied on components that use hooks.  
 
 In case of `useState()`, React always makes sure to re-render the component if the state changes. Even if the component is wrapped in `React.memo()`.  
 
-## 6. Conclusion
+## 7. Conclusion
 
 `React.memo()` is a great tool to memoize functional components. When applied correctly, it prevents component re-render when the next props equal to previous.  
 
