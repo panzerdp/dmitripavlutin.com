@@ -60,7 +60,7 @@ export const MemoizedMovie = React.memo(Movie);
 />
 ```
 
-This is where you gain a *performance boost*: by reusing the memoized content, React skips re-rendering the component and doesn't perform a virtual DOM difference check.  
+You gain a *performance boost*: by reusing the memoized content, React skips re-rendering the component and doesn't perform a virtual DOM difference check.  
 
 The same functionality for class components is implemented by [PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent).  
 
@@ -177,8 +177,8 @@ Imagine a component that typically renders with different props. In this case, m
 
 Even if you wrap such a volatile component in `React.memo()`, React does 2 jobs on every re-render:
 
-1. Invoke the comparison function to determine whether the previous and next props are equal
-2. Because props comparison almost always returns `false`, React performs the diff of previous and current render output
+1. Invokes the comparison function to determine whether the previous and next props are equal
+2. Because props comparison almost always returns `false`, React performs the diff of previous and current render results
 
 The invocation of the comparison function is useless because it almost always returns `false`.  
 
@@ -241,7 +241,7 @@ Memoization is broken.
 
 To fix it, the same callback instance must be used to set `onLogout` prop. Let's apply [useCallback()](https://reactjs.org/docs/hooks-reference.html#usecallback) to preserve the callback instance between renderings:
 
-```jsx{4-7,10}
+```jsx{4-7,13}
 const MemoizedLogout = React.memo(Logout);
 
 function MyApp({ store, cookies }) {
