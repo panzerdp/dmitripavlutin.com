@@ -2,10 +2,10 @@
 title: Be Aware of Stale Closures when Using React Hooks
 description: The stale closures is a pitfall of React hooks when an outdated variable is captured by a closure.
 published: '2019-10-24T12:40Z'
-modified: '2019-10-24T14:15Z'
+modified: '2019-10-25T04:31Z'
 thumbnail: './images/landscape.jpg'
 slug: react-hooks-stale-closures
-tags: ['react', 'closure', 'hook']
+tags: ['react', 'hook']
 recommended: ['use-react-memo-wisely', 'become-better-software-developer-digging-climbing']
 type: post
 commentsThreadId: react-hooks-stale-closure
@@ -13,86 +13,19 @@ commentsThreadId: react-hooks-stale-closure
 
 Hooks replace class-based components by easying the reuse of state and side effects management. Additionally you can extract repeated logic into a custom hook to reuse across the application.  
 
-Hooks heavily rely on JavaScript closures. But closures are sometimes tricky (recall memory leaks?).  
+Hooks heavily rely on JavaScript closures. But closures are sometimes tricky.  
 
-You can encounter the stale closure problem when working with a React component having a multitude of effects and state management. And it might be difficult to solve!
+One issue you can encouter when working with a React component having a multitude of effects and state management is the stale closure. And it might be difficult to solve!
 
-This post explains the important term JavaScript closure. Follows the stale closure problem description and solutions. Finally, you will understand how to distinguish stale closure situations within your React components, and how to solve them.  
+Let's start with distilling what the stale closure is. Then let's how a stale closure affects React hooks, and how you could solve that.  
 
-### 1. The JavaScript closure
+*I assume you're familiar with JavaScript closures. If you need a refresh on closures, take a look at [A Simple Explanation of JavaScript Closures](/explanation-of-javascript-closures/).*  
 
-Before looking into the stale closure issue, it's important to understand what a closure is.  
+## 1. The stale closure
 
-The following code defines a factory function `createIncrement(i)` that returns an increment function. Later, every time the increment function is called, an internal counter is incremented by `i`:
+A factory function `createIncrement(i)` returns an increment function. The increment function increases an interval `value` by `i`, and returns a function that logs the current `value`:  
 
-```javascript{3-6,11-12}
-function createIncrement(i) {
-  let value = 0;
-  function increment() {
-    value += i;
-    console.log(value);
-  }
-  return increment;
-}
-
-const inc = createIncrement(1);
-inc(); // logs 1
-inc(); // logs 2
-```
-
-`createIncrement(1)` returns an increment function, which is assigned to `inc` variable. When `inc()` is called, the `value` variable gets incremented by `1`.  
-
-The first call of `inc()` returns `1`, the second call returns `2`, and so on.  
-
-Did you spot the interesting thing? You simply call `inc()`, without arguments, but JavaScript still knows the current `value` and how much to increment `i`. How does it work? 
-
-The answer lays inside `createIncrement()`. There you will find `increment()` function: the closure that does the magic. The closure captures (or closes over, or simply remembers) the variables `value` and `i` from the lexical scope.  
-
-The *lexical scope* is the is the outer scope *where the closure is defined*. In the example, the lexical scope of `increment()` is the scope of `createIncrement()`, which contains variables `value` and `i`.  
-
-![The lexical scope in JavaScript](./images/lexical-scope-2.png)
-
-No matter where `inc()` is called, even outside the scope of `createIncrement()`, it has access to `value` and `i`.  
-
-> *The closure* is a function that can remember and modify variables from its lexical scope, regardless of execution scope.  
-
-Continuing the example, `inc()` can be called anywhere else, even inside an async callback:  
-```javascript{2,7}
-(function() {
-  inc(); // logs 3
-}());
-
-setTimeout(function() {
-  // after 1 second
-  inc(); // logs 4
-}, 1000);
-```
-
-#### 1.1 A mental model of closures
-
-I know closures might be difficult to grasp. But once you *get it*, it's forever. 
-
-You can model them in your mind the following way. 
-
-Imagine a magical paintbrush with an interesting property. If you paint with it some objects from real life, then the painting becomes a window you can interact with.  
-
-![Painting as a model of JavaScript closures](./images/rose.jpg)
-
-Through this window, you can move the painted objects with your hands.  
-
-Moreover, you can carry the magical painting anywhere, even far from the place where you've painted the objects. From there, through the magical painting as a window, you can still move the objects with your hands.  
-
-The magical painting is a *closure*, while the painted objects are the *lexical scope*.  
-
-Isn't JavaScript magic? &#x263a;
-
-*If you know other meaningful mental models of closures, please share in a [comment](#disqus_thread) below!*
-
-## 2. The stale closure
-
-Let's modify the `increment()` to return a function that logs a message to console:
-
-```javascript{6-9,20}
+```javascript{20}
 function createIncrement(i) {
   let value = 0;
   function increment() {
@@ -125,7 +58,7 @@ Finally, the call of `log()` logs the message `"Current value is 1"`. This is un
 
 Let's see some approaches on how to fix the stale closure.  
 
-### 2.1 Fixing the stale closure
+## 2. Fixing the stale closure
 
 #### A. Use a fresh closure
 
@@ -326,10 +259,6 @@ Now `setCount(count => count + 1)` updates the count state inside `delay()`. Rea
 [Open the demo](https://codesandbox.io/s/use-state-fixed-zz78r). Click "Increase async" then right away "Increase sync" buttons. The `counter` displays the correct value `2`.  
 
 ## 4. Conclusion
-
-A closure is a function that captures variables from the place where it is defined (or its lexical scope).  
-
-A good understanding of closures is the first requirement to efficiently use React hooks and avoid stale closures.   
 
 The stale closure problem occurs when a closure captures outdated variables. An efficient way to solve stale closures is to correctly set the dependencies of React hooks. Or, in case of stale state, use a functional way to update the state.   
 
