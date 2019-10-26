@@ -13,7 +13,7 @@ commentsThreadId: explanation-of-javascript-closures
 
 Every JavaScript developer should understand closures. Thanks to closures, the functions as callbacks, event handlers, higher-order functions can access outer scope variables.  
 
-While closures are everywhere, somehow they are difficult to grasp. I had struggled with closures for a while too.  
+While closures are everywhere, somehow they are difficult to grasp. Probably closures, like recusion, require an "Aha!" moment.  
 
 In this post, I will start with the basic terms fundamental to closures. Then, after grasping the basics, it will be easier to understand the closure itself.  
 
