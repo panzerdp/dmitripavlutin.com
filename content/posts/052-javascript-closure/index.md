@@ -11,27 +11,31 @@ type: post
 commentsThreadId: explanation-of-javascript-closures
 ---
 
-This post explains what a JavaScript closure is. As a nice bonus, I'll describe an interesting mental model that can help you grasp the idea of closure.  
+Every JavaScript developer should understand closures. Thanks to closures, the functions as callbacks, event handlers, higher-order functions can access outer scope variables.  
 
-Let's get started.  
+While closures are everywhere, somehow they are difficult to grasp. I had struggled with closures for a while too.  
+
+In this post, I will start with the basic terms fundamental to closures. Then, after grasping the basics, it will be easier to understand the closure itself.  
+
+A nice bonus awaits at the end of the post. You will read real world example that has helped me understand better closures.  
 
 ### 1. The JavaScript closure
 
 The following code defines a factory function `createIncrement(i)` that returns an increment function. Later, every time the increment function is called, an internal counter is incremented by `i`:
 
-```javascript{3-6,11-12}
+```javascript
 function createIncrement(i) {
   let value = 0;
   function increment() {
     value += i;
-    console.log(value);
+    return value;
   }
   return increment;
 }
 
 const inc = createIncrement(1);
-inc(); // logs 1
-inc(); // logs 2
+inc(); // => 1
+inc(); // => 2
 ```
 
 `createIncrement(1)` returns an increment function, which is assigned to `inc` variable. When `inc()` is called, the `value` variable gets incremented by `1`.  
@@ -53,16 +57,16 @@ No matter where `inc()` is called, even outside the scope of `createIncrement()`
 Continuing the example, `inc()` can be called anywhere else, even inside an async callback:  
 ```javascript{2,7}
 (function() {
-  inc(); // logs 3
+  inc(); // => 3
 }());
 
 setTimeout(function() {
   // after 1 second
-  inc(); // logs 4
+  inc(); // => 4
 }, 1000);
 ```
 
-## 2. A mental model of closures
+## 2. Real world example of closure
 
 I know closures might be difficult to grasp. But once you *get it*, it's forever. 
 
