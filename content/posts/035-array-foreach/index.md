@@ -10,22 +10,26 @@ recommended: ["how-to-iterate-easily-over-object-properties-in-javascript", "pow
 type: post
 ---
 
-When searching for new themes to learn, I'm asking myself:  
+What's the usual thing you do with an array? Iterate through its items! This is where `forEach()` array method shines.  
 
-* Should I concentrate on the fundamentals? 
-* Or look into new directions?  
+This post describes how to use `forEach()` method to iterate the items of an array in JavaScript. 
 
-For example: should I learn well JavaScript language, or study how to use React?  
-
-After trials and mistakes, I see the importance of strengthening the fundamentals first. Especially the programming language you're coding with every day. It's impossible to master React without mastering JavaScript first.  
-
-Let's solidify your JavaScript fundamentals knowledge.  
-
-In this post I will explore how `forEach()` array method works in JavaScript. Plus I'll describe situations when the usage of `forEach()` is convenient, and when it is not.  
+The presented best practices (correct handling of `this`, how to iterate array-like objects, etc) will help you even better understand `forEach()`.  
 
 ## 1. Basic forEach example
 
-Let's iterate over a list of colors:  
+> `forEach()` method of the array object iterates over the array's items, in ascending order, without mutating the array 
+
+The first argument of `forEach()` is the callback function called for every item in the array. The second argument (optional) is the value of `this` set in the callback.
+
+```javascript
+array.forEach(callback [, thisArgument])
+```
+
+Let's see how `forEach()` works in practice.  
+
+In the following example, `colors` array has 3 colors. Let's use `forEach()` to log to console every color:  
+
 ```javascript
 const colors = ['blue', 'green', 'white'];
 
@@ -39,25 +43,11 @@ colors.forEach(iterate);
 // logs "white"
 ```
 
-`colors.forEach(iterate)` executes `iterate()` callback function for every item in `colors` array.  
-
-`iterate()` is executed 3 times: 
+`iterate` is the callback function. `colors.forEach(iterate)` executes `iterate` function for every item in `colors`, setting the iterated item as the first argument:
 
 * `iterate('blue')`
 * `iterate('green')`
 * `iterate('white')`
-
-After the first look, let's introduce a formal definition:  
-
-> `forEach()` method of the array object iterates over the array's items, in ascending order, without mutating the array 
-
-The first argument of `forEach()` is the callback function called for every item in the array. The second, optional argument, is the value of `this` set in the callback.
-
-```javascript
-array.forEach(callback [, thisArgument])
-```
-
-`forEach()` skips the empty slots when iterating over an array with empty slots (named [sparse array](/power-up-the-array-creation-in-javascript/#third-case-no-element-between-commas)).  
 
 ## 2. Index of the iterated element
 
@@ -209,7 +199,11 @@ Because of that, inside the callback of `forEach()`, `this` points also to an in
 
 However, using an arrow function as the callback of `forEach()` would be better. The [arrow function preserves](/gentle-explanation-of-this-in-javascript/#7-arrow-function) the value of `this` from the lexical scope, so there would be no need to use the second argument on `forEach()`.  
 
-## 5. Iterate array-like objects using forEach
+## 5. forEach skips empty slots
+
+`forEach()` skips the empty slots when iterating over an array with empty slots (named [sparse array](/power-up-the-array-creation-in-javascript/#third-case-no-element-between-commas)).  
+
+## 6. Iterate array-like objects using forEach
 
 `forEach()` can iterate over array-like objects. The downside is the need to make the `forEach()` call indirectly:
 
@@ -243,9 +237,9 @@ Array.from(arrayLikeColors).forEach(iterate);
 // logs "white"
 ```
 
-## 6. Appropriate usage of forEach()
+## 7. When to use forEach()
 
-I find that the appropriate usage of `forEach()` is when you need to iterate over all items of the array, without breaking, and have simultaneously some side-effects. 
+`forEach()` is best used to iterate over all items of the array, without breaking, and have simultaneously some side-effects. 
 
 Side-effects examples are a mutation of an outer scope variable, I/O operations (HTTP requests), DOM manipulations, and alike.  
 
@@ -305,7 +299,7 @@ console.log(allEven); // => false
 ```
 `array.every()` not only makes the code shorter and more expressive. It is also optimal, because `.every()` method breaks iterating right after finding the first odd number.  
 
-## 7. Conclusion
+## 8. Conclusion
 
 `forEach()` method is an efficient way to iterate over all array items. Its first argument is the callback function, which is invoked for every item in the array with 3 arguments: item, index and the array itself.  
 
