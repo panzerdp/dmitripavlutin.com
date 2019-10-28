@@ -2,7 +2,7 @@
 title: Use React.memo() wisely
 description: "React.memo() increases the performance of functional components by preventing useless renderings. But such performance tweaks must be applied wisely."
 published: "2019-07-17T11:30:00Z"
-modified: "2019-10-25T12:10Z"
+modified: "2019-10-28T12:51Z"
 thumbnail: "./images/instruments.jpg"
 slug: use-react-memo-wisely
 tags: ["react", "component", "memoization"]
@@ -12,7 +12,7 @@ type: post
 
 Users enjoy fast and responsive user interfaces (UI). An UI response delay of less than 100 milliseconds feels instant to the user. A delay between 100 and 300 milliseconds is already perceptible.  
 
-To improve user interface performance, React offers a higher-order component `React.memo()`. By memoizing the rendered output, React skips unnecessary rendering.  
+To improve user interface performance, React offers a higher-order component `React.memo()`. React skips unnecessary rendering by memoizing the rendered output.  
 
 This post describes the situations when `React.memo()` improves the performance, and, not less important, warns when its usage is useless.  
 
@@ -218,7 +218,7 @@ function Logout({ username, onLogout }) {
 const MemoizedLogout = React.memo(Logout);
 ```
 
-A component that accepts a callback must be handled with care when applying memoization. There's a chance that the parent component provides different instances of the callback function on every render:  
+A component that accepts a callback must be handled with care when applying memoization. The parent component could provide different instances of the callback function on every render:  
 
 ```jsx{7}
 function MyApp({ store, cookies }) {
@@ -239,7 +239,7 @@ Even if provided with the same `username` value, `MemoizedLogout` renders every 
 
 Memoization is broken.  
 
-To fix it, the same callback instance must be used to set `onLogout` prop. Let's apply [useCallback()](https://reactjs.org/docs/hooks-reference.html#usecallback) to preserve the callback instance between renderings:
+To fix it, `onLogout` prop must receive the same callback instance. Let's apply [useCallback()](https://reactjs.org/docs/hooks-reference.html#usecallback) to preserve the callback instance between renderings:
 
 ```jsx{4-7,13}
 const MemoizedLogout = React.memo(Logout);
@@ -273,15 +273,15 @@ While in most situations React avoids rendering a memoized component, you should
 
 ## 6. React.memo() and hooks
 
-`React.memo()` can be freely applied on components that use hooks.  
+Components using hooks can be freely wrapped in `React.memo()` to achieve memoization.
 
 In case of `useState()`, React always makes sure to render the component if the state changes. Even if the component is wrapped in `React.memo()`.  
 
 ## 7. Conclusion
 
-`React.memo()` is a great tool to memoize functional components. When applied correctly, it prevents component rendering when the next props equal to previous.  
+`React.memo()` is a great tool to memoize functional components. When applied correctly, it prevents component useless rendering when the next props equal to previous.  
 
-Take precaution when memoizing components that use props with callback functions. Make sure to provide the same callback function instance between renderings.  
+Take precaution when memoizing components that use props as callbacks. Make sure to provide the same callback function instance between renderings.  
 
 Don't forget to use [profiling](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab) to measure the performance gains of memoization.  
 
