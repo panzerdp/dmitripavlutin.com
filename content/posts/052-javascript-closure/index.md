@@ -11,15 +11,141 @@ type: post
 commentsThreadId: explanation-of-javascript-closures
 ---
 
-Every JavaScript developer should understand closures. Thanks to closures, the functions as callbacks, event handlers, higher-order functions can access outer scope variables.  
+Every JavaScript developer should understand closures. Thanks to closures, the callbacks, event handlers, higher-order functions can access outer scope variables.  
 
-While closures are everywhere, somehow they are difficult to grasp. Probably closures, like recusion, require an "Aha!" moment.  
+While closures are everywhere, they could be difficult to grasp. Closures, like recusion, require an "Aha!" moment.  
 
-In this post, I will start with the basic terms fundamental to closures. Then, after grasping the basics, it will be easier to understand the closure itself.  
+In this post, I will start with the terms fundamental to closures. Then, after grasping the basics, it will be easier to understand the closure itself.  
 
-A nice bonus awaits at the end of the post. You will read real world example that has helped me understand better closures.  
+A nice bonus awaits at the end: the closure concept explained with a real world example.  
 
-### 1. The JavaScript closure
+## 1. The scope
+
+> *The scope* defines the boundaries within which variables exists.  
+
+Any variable exists within the limits of a *scope*.  
+
+You are free to access the variable defined within its scope.  However, outside of its  scope, the variable is not accessible.
+
+The body of the function `foo()` is the scope where the variable `count` exists:
+
+```javascript{4,8}
+function foo() {
+  // The function scope
+  let count = 0;
+  console.log(count); // logs 0
+}
+
+foo();
+console.log(count); // ReferenceError: count is not defined
+```
+
+`count` is freely accessed within the scope of `foo()`.  
+
+However, outside of `foo()` scope, the same variable `count` is not accessible. If you try to access `count` from outside anyways, JavaScript throws `ReferenceError: count is not defined`.  
+
+Furthermore, 2 different scopes can have *variables with the same name*. You can reuse common variable names (`count`, `index`, `current`, `value`, etc) in different scopes without worrying about collision.  
+
+`foo()` and `bar()` function scopes have their own, but same named, variable `count`:
+
+```javascript{4,10}
+function foo() {
+  // "foo" function scope
+  let count = 0;
+  console.log(count); // logs 0
+}
+
+function bar() {
+  // "bar" function scope
+  let count = 1;
+  console.log(count); // logs 1
+}
+
+foo();
+bar();
+```
+
+`count` variables from `foo()` and `bar()` function scopes do not collide.  
+
+**Types of scopes**
+
+JavaScript has 2 kinds of scopes:
+
+1. A function scope
+
+```javascript{2-4}
+function foo() {
+  // function scope
+  const pi = 3.14;
+  // ...
+}
+```
+
+2. A block scope (only `let` and `const`, but not `var`)
+
+```javascript{2-4,8-10,14-16}
+if (isValid) {
+  // block scope
+  const message = 'Data is validated';
+  // ...
+}
+
+while (items.length !== 0) {
+  // block scope
+  let items = [];
+  // ...
+}
+
+{
+  // block scope
+  let result = '';
+  // ...
+}
+```
+
+## 2. The lexical scope
+
+Ok. Variables defined inside a function are limited to this function's scope.  
+
+Now let's nest the function `innerFunc()` inside an outer function `outerFunc()`:
+
+```javascript
+function outerFunc() {
+  let message = 'Hello, World!';
+
+  function innerFunc() {
+    let count = 0;
+  }
+
+  foo();
+}
+
+bar();
+``` 
+
+How would the 2 function scopes interract with each other? Can I access the variable `message` from within `innerFunc()` scope?  
+
+```javascript{6}
+function outerFunc() {
+  let message = 'Hello!';
+
+  function innerFunc() {
+    let count = 0;
+    console.log(message); // => logs "Hello!"
+  }
+
+  foo();
+  console.log(count); // ReferenceError: count is not defined
+}
+
+bar();
+```
+
+Yes, `message` variable is accessible inside `innerFunc()` scope. Thus *the inner scope can access the outer scope*. 
+
+
+
+## 3. The closure
 
 The following code defines a factory function `createIncrement(i)` that returns an increment function. Later, every time the increment function is called, an internal counter is incremented by `i`:
 
@@ -66,7 +192,7 @@ setTimeout(function() {
 }, 1000);
 ```
 
-## 2. Real world example of closure
+## 4. Real world example of closure
 
 I know closures might be difficult to grasp. But once you *get it*, it's forever. 
 
@@ -84,7 +210,7 @@ The magical painting is a *closure*, while the painted objects are the *lexical 
 
 Isn't JavaScript magic? &#x263a;
 
-## 3. Conclusion
+## 5. Conclusion
 
 A closure is a function that captures variables from the place where it is defined (or its lexical scope).  
 
