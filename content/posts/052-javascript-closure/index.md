@@ -11,13 +11,11 @@ type: post
 commentsThreadId: explanation-of-javascript-closures
 ---
 
-Thanks to closures, the callbacks, event handlers, higher-order functions can access outer scope variables. Closures are important in functional programming.  
-
-Every JavaScript developer should understand closures. 
+The callbacks, event handlers, higher-order functions can access outer scope variables: thanks to closures. Closures are important in functional programming.  
 
 While closures are widely used, they are difficult to grasp. Closures, like recursion, require an "Aha!" moment.  
 
-If you haven't had your "Aha!" moment for closures, then this post is for you.  
+If you haven't had your "Aha!" moment, then this post is for you.  
 
 I will start with the terms fundamental to closures: scope and lexical scope. Then, after grasping the basics, you'll need just one step to finally understand closures.  
 
@@ -25,16 +23,13 @@ A nice bonus awaits at the end: the closure concept explained with a real-world 
 
 ## 1. The scope
 
-When you define a variable, you want it to exist for strict purpose. E.g. an `index` variable makes sense to exist within a `for()` loop.    
+When you define a variable, you want it for a purpose. E.g. a `result` variable makes sense to exist within `calculate()` function, as an internal detail. Outside of the `calculate()` function the `result` variable is useless.  
 
-The concept that manages the accessibility of variables is called *scope*. You are free to access the variable defined within its scope.  However, outside of its scope, the variable is not accessible.  
+The accessibility of variables is managed by *scope*. You are free to access the variable defined within its scope. But outside of that scope, the variable is not accessible.  
 
-In JavaScript, a scope is created by:
+In JavaScript, a scope is created by a function or code block.  
 
-* A body of a function
-* A code block
-
-The function `foo()` defines a scope where `count` variable exists:
+Let's see how the scope affects the availability of a variable `count`. This variable belongs to a scope create by the function `foo()`:
 
 ```javascript{4,8}
 function foo() {
@@ -49,13 +44,19 @@ console.log(count); // ReferenceError: count is not defined
 
 `count` is freely accessed within the scope of `foo()`.  
 
-However, outside of the `foo()` scope, the same variable `count` is not accessible. If you try to access `count` from outside anyways, JavaScript throws `ReferenceError: count is not defined`.  
+However, outside of the `foo()` scope, `count` is not accessible. If you try to access `count` from outside anyways, JavaScript throws `ReferenceError: count is not defined`.  
 
-> *The scope* is a space policy that dictates where you can or cannot access a variable.  
+In JavaScript, the scope says: if you've defined a variable inside of a function or code block, then you can use this variable only within that function or code block. The above example demonstrates this behavior.   
 
-In JavaScript, if you've defined a variable inside of a function, then use it only within that function.  
+![The JavaScript scope](./images/javascript-scope-3.png)
 
-Furthermore, different scopes can have *variables with the same name*. You can reuse common variables names (`count`, `index`, `current`, `value`, etc) in different scopes without collisions.  
+Now, let's see a stricker formulation:
+
+> *The scope* is a policy that manages the accessibility of variables.  
+
+The scope *isolates* its variables. That's great because *different scopes can have variables with the same name*.  
+
+You can reuse common variables names (`count`, `index`, `current`, `value`, etc) in different scopes without collisions.  
 
 `foo()` and `bar()` function scopes have their own, but same named, variables `count`:
 
@@ -82,22 +83,9 @@ bar();
 
 Let's play a bit more with scopes, and put one scope into another.  
 
-The function `innerFunc()` is nested inside an outer function `outerFunc()`:
+The function `innerFunc()` is nested inside an outer function `outerFunc()`.
 
-```javascript
-function outerFunc() {
-  // the outer scope
-  let outerVar = 'I am outside!';
-
-  function innerFunc() {
-    // the inner scope
-  }
-
-  innerFunc();
-}
-
-outerFunc();
-``` 
+![The JavaScript scopes can be nested](./images/javascript-nested-scopes.png)
 
 How would the 2 function scopes interact with each other? Can I access the variable `outerVar` from within `innerFunc()` scope?  
 
@@ -223,6 +211,8 @@ Now `innerFunc()` is executed outside of its lexical scope. And what's important
 In other words, `innerFunc()` *closes over* (a.k.a. captures, remembers) the variable `outerVar` from its lexical scope.  
 
 In other words, `innerFunc()` is a *closure* because it closes over the variable `outerVar` from its lexical scope.  
+
+![The JavaScript closure](./images/javascript-closure-2.png)
 
 You've made the final step to understanding what a closure is:
 
