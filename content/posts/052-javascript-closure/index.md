@@ -13,9 +13,9 @@ commentsThreadId: explanation-of-javascript-closures
 
 Every JavaScript developer should understand closures. Thanks to closures, the callbacks, event handlers, higher-order functions can access outer scope variables. Functional programming wouldn't be possible without closures.   
 
-While closures are widely used, they could be difficult to grasp. Closures, like recusion, require an "Aha!" moment.  
+While closures are widely used, they could be difficult to grasp. Closures, like recusion, require an "Aha!" moment. If you haven't had your "Aha!" moment for closures, then this post is for you.  
 
-In this post, I will start with the terms fundamental to closures: scope and lexical scope. Then, after grasping the basics, it will be easier to understand the closure itself.  
+I will start with the terms fundamental to closures: scope and lexical scope. Then, after grasping the basics, you'll make just one step to understand the closure.  
 
 A nice bonus awaits at the end: the closure concept explained with a real world example.  
 
@@ -94,12 +94,11 @@ outerFunc();
 
 How would the 2 function scopes interract with each other? Can I access the variable `outerVar` from within `innerFunc()` scope?  
 
-```javascript{6,10}
+```javascript{5}
 function outerFunc() {
   let outerVar = 'I am outside!';
 
   function innerFunc() {
-    let innerVar = 'I am inside!';
     console.log(outerVar); // => logs "I am outside!"
   }
 
@@ -117,30 +116,31 @@ How does JavaScript understand that `outerVar` inside `innerFunc()` corresponds 
 
 It's because JavaScript implements a scoping mechanism named *lexical scoping* (or static scoping). The scope of variables is determined by the variables position in the source code.  
 
-The previous code snippet, before executing it, the engine understands the following way:
+Here's how the engine understands the previous code snippet (at so called lexing time):
 
   1. *I can see you define a function `outerFunc()` that has a variable `outerVar`. Good.*  
   * *Inside the `outerFunc()`, I can see you define a function `innerFunc()`.*  
   * *Inside the `innerFunc()`, I can see a variable `outerVar` without declaration. Since I use lexical scoping, I consider the variable `outerVar` inside `innerFunc()` to be the same variable as `outerVar` of `outerFunc()`.*
 
-> *The lexical scope* of a function consists of the outer scopes of that function determined statically.   
+The distilled idea of the lexical scope:
+
+> *The lexical scope* consists of outer scopes determined statically.   
 
 For example:
 
-```javascript{11-13}
+```javascript{5,9,12}
 const myGlobal = 0;
 
 function func() {
   const myVar = 1;
+  console.log(myGlobal); // logs "0"
 
   function innerOfFunc() {
     const myInnerVar = 2;
+    console.log(myVar, myGlobal); // logs "1 0"
 
     function innerOfInnerOfFunc() {
-      const myInnerInnerVar = 3;
-      console.log(myInnerVar); // => 2
-      console.log(myVar);      // => 1
-      console.log(myGlobal);   // => 0
+      console.log(myInnerVar, myVar, myGlobal); // logs "2 1 0"
     }
 
     innerOfInnerOfFunc();
@@ -152,52 +152,115 @@ function func() {
 func();
 ```
 
-The lexical scope of `innerOfInnerOfFunc()` consits of scopes of `innerOfFunc()`, `func()` and global scope (the outermost scope). Within `innerOfInnerOfFunc()` you can access the variables `myInnerVar`, `myVar` and `myGlobal`.  
+The lexical scope of `innerOfInnerOfFunc()` consits of scopes of `innerOfFunc()`, `func()` and global scope (the outermost scope). Within `innerOfInnerOfFunc()` you can access the lexical scope variables `myInnerVar`, `myVar` and `myGlobal`.  
+
+The lexical scope of `innerFunc()` consists of `func()` and global scope. Within `innerOfFunc()` you can access the lexical scope variables `myVar` and `myGlobal`.  
+
+Finally, the lexical scope of `func()` consists of only the global scope. Within `func()` you can access the lexical scope variable `myGlobal`.  
 
 ## 4. The closure
 
-The following code defines a factory function `createIncrement(i)` that returns an increment function. Later, every time the increment function is called, an internal counter is incremented by `i`:
+Ok, the lexical scope allows to access the variables statically of the outer scopes. There's just one step until the closure.  
 
-```javascript
-function createIncrement(i) {
-  let value = 0;
-  function increment() {
-    value += i;
-    return value;
+Let's take a look again at the `outerFunc()` and `innerFunc()` example:  
+
+```javascript{8}
+function outerFunc() {
+  let outerVar = 'I am outside!';
+
+  function innerFunc() {
+    console.log(outerVar); // => logs "I am outside!"
   }
-  return increment;
+
+  innerFunc();
 }
 
-const inc = createIncrement(1);
-inc(); // => 1
-inc(); // => 2
+outerFunc();
 ```
 
-`createIncrement(1)` returns an increment function, which is assigned to `inc` variable. When `inc()` is called, the `value` variable gets incremented by `1`.  
+Inside the `innerFunc()`, the variable `outerVar` is accessed from the lexical scope. That's known already.  
 
-The first call of `inc()` returns `1`, the second call returns `2`, and so on.  
+But notice that `innerFunc()` invocation happens inside its lexical scope (the scope of `outerFunc()`).  
 
-Did you spot the interesting thing? You simply call `inc()`, without arguments, but JavaScript still knows the current `value` and how much to increment `i`. How does it work? 
+Let's try to make a change. If `innerFunc()` is invoked outside of its lexical scope (outside of `outerFunc()`), would `innerInc()` still be able to access `outerVar`?  
 
-The answer lays inside `createIncrement()`. There you will find `increment()` function: the closure that does the magic. The closure captures (or closes over, or simply remembers) the variables `value` and `i` from the lexical scope.  
+Let's make the adjustments to the code snippet:
 
-No matter where `inc()` is called, even outside the scope of `createIncrement()`, it has access to `value` and `i`.  
+```javascript{8,12}
+function outerFunc() {
+  let outerVar = 'I am outside!';
 
-> *The closure* is a function that can remember and modify variables from its lexical scope, even when executed outside of its lexical scope.  
+  function innerFunc() {
+    console.log(outerVar); // => logs "I am outside!"
+  }
 
-Continuing the example, `inc()` can be called anywhere else, even inside an async callback:  
-```javascript{2,7}
-(function() {
-  inc(); // => 3
-}());
+  return innerFunc;
+}
 
-setTimeout(function() {
-  // after 1 second
-  inc(); // => 4
-}, 1000);
+const myInnerFunc = outerFunc();
+myInnerFunc();
 ```
 
-## 5. Real world example of closure
+Now `innerFunc()` is executed outside of its lexical scope. And what's important: 
+
+*`innerFunc()` still has access to `outerVar` from its lexical scope, even being executed outside of its lexical scope.*
+
+In other words, `innerFunc()` *closes over* (a.k.a. captures, remembers) the variable `outerVar` from its lexical scope.  
+
+In other words, `innerFunc()` is a *closure* because it closes over the variable `outerVar` from its lexical scope.  
+
+You've made the final step to understand what a closure is:
+
+> *The closure* is a function that can accesses its lexical scope even when executed outside of its lexical scope.
+
+Let's continue with examples that demonstrate why the closure is so useful.  
+
+## 5. Closure examples
+
+### 5.1 Event handler
+
+Let's display how many times a button is clicked:
+
+```javascript
+let countClicked = 0;
+
+myButton.addEventListener(function handleClick() {
+  countClicked++;
+  myText.innerText = `You clicked ${countClicked} times`;
+});
+```
+
+[Open the demo](https://codesandbox.io/s/event-handling-ymvr9) and click the button. The text updates to show the number of clicks.  
+
+When the button is clicked, `handleClick()` is executed somewhere inside of the DOM code. The execution happens far from the place of definition.  
+
+But being a closure, `handleClick()` captures `countClicked` from the lexical scope and updates it when a click happens.   
+
+### 5.2 Functional programming
+
+Currying happens when a function returns another function until the arguments are fully supplied. 
+
+For example:
+
+```javascript
+function multiply(a) {
+  return function executeMultiply(b) {
+    return a * b;
+  }
+}
+
+const multiply2 = multiply(2);
+multiply(3); // => 6
+multiply(5); // => 10
+```
+
+`multiply` is a curried function that returns another function.  
+
+Currying, an important concept of functional programming, is also possible due to closures.  
+
+`executeMultiply()` is a closure that captures `a` variable from its lexical scope. 
+
+## 6. Real world example of closure
 
 I know closures might be difficult to grasp. But once you *get it*, it's forever. 
 
@@ -215,7 +278,7 @@ The magical painting is a *closure*, while the painted objects are the *lexical 
 
 Isn't JavaScript magic? &#x263a;
 
-## 6. Conclusion
+## 7. Conclusion
 
 A closure is a function that captures variables from the place where it is defined (or its lexical scope).  
 
