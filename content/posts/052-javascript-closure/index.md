@@ -11,19 +11,23 @@ type: post
 commentsThreadId: explanation-of-javascript-closures
 ---
 
-Every JavaScript developer should understand closures. Thanks to closures, the callbacks, event handlers, higher-order functions can access outer scope variables. Functional programming wouldn't be possible without closures.   
+Thanks to closures, the callbacks, event handlers, higher-order functions can access outer scope variables. Closures are important in functional programming.  
 
-While closures are widely used, they could be difficult to grasp. Closures, like recusion, require an "Aha!" moment. If you haven't had your "Aha!" moment for closures, then this post is for you.  
+Every JavaScript developer should understand closures. 
 
-I will start with the terms fundamental to closures: scope and lexical scope. Then, after grasping the basics, you'll make just one step to understand the closure.  
+While closures are widely used, they are difficult to grasp. Closures, like recursion, require an "Aha!" moment.  
 
-A nice bonus awaits at the end: the closure concept explained with a real world example.  
+If you haven't had your "Aha!" moment for closures, then this post is for you.  
+
+I will start with the terms fundamental to closures: scope and lexical scope. Then, after grasping the basics, you'll need just one step to finally understand closures.  
+
+A nice bonus awaits at the end: the closure concept explained with a real-world example.  
 
 ## 1. The scope
 
-When you define a variable (except a global one), you want it to exist for one purpose. E.g. an `index` variable makes sense to exist within a `for()` loop.  
+When you define a variable, you want it to exist for strict purpose. E.g. an `index` variable makes sense to exist within a `for()` loop.    
 
-The concept that manages the accessibility of variables is called *scope*. You are free to access the variable defined within its scope.  However, outside of its  scope, the variable is not accessible.  
+The concept that manages the accessibility of variables is called *scope*. You are free to access the variable defined within its scope.  However, outside of its scope, the variable is not accessible.  
 
 In JavaScript, a scope is created by:
 
@@ -45,7 +49,7 @@ console.log(count); // ReferenceError: count is not defined
 
 `count` is freely accessed within the scope of `foo()`.  
 
-However, outside of `foo()` scope, the same variable `count` is not accessible. If you try to access `count` from outside anyways, JavaScript throws `ReferenceError: count is not defined`.  
+However, outside of the `foo()` scope, the same variable `count` is not accessible. If you try to access `count` from outside anyways, JavaScript throws `ReferenceError: count is not defined`.  
 
 > *The scope* is a space policy that dictates where you can or cannot access a variable.  
 
@@ -76,16 +80,17 @@ bar();
 
 ## 2. Scopes nesting
 
-Let's play a bit more with scopes, and put one scope into antother.  
+Let's play a bit more with scopes, and put one scope into another.  
 
 The function `innerFunc()` is nested inside an outer function `outerFunc()`:
 
 ```javascript
 function outerFunc() {
+  // the outer scope
   let outerVar = 'I am outside!';
 
   function innerFunc() {
-    let innerVar = 'I am inside!';
+    // the inner scope
   }
 
   innerFunc();
@@ -94,13 +99,15 @@ function outerFunc() {
 outerFunc();
 ``` 
 
-How would the 2 function scopes interract with each other? Can I access the variable `outerVar` from within `innerFunc()` scope?  
+How would the 2 function scopes interact with each other? Can I access the variable `outerVar` from within `innerFunc()` scope?  
 
-```javascript{5}
+```javascript{7}
 function outerFunc() {
+  // the outer scope
   let outerVar = 'I am outside!';
 
   function innerFunc() {
+    // the inner scope
     console.log(outerVar); // => logs "I am outside!"
   }
 
@@ -110,13 +117,19 @@ function outerFunc() {
 outerFunc();
 ```
 
-`outerVar` variable is accessible inside `innerFunc()` scope. *The inner (aka nested) scope can access the outer scope*.  
+`outerVar` variable is accessible inside `innerFunc()` scope. 
+
+Now you know 2 interesting things:
+
+* *Scopes can be nested*
+* *The variables of the outer scope are accessible inside the inner scope*
+
 
 ## 3. The lexical scope
 
 How does JavaScript understand that `outerVar` inside `innerFunc()` corresponds to the variable `outerVar` of `outerFunc()`? 
 
-It's because JavaScript implements a scoping mechanism named *lexical scoping* (or static scoping). The scope of variables is determined by the variables position in the source code.  
+It's because JavaScript implements a scoping mechanism named *lexical scoping* (or static scoping). The scope of variables is determined by the position of the variables in the source code.  
 
 Here's how the engine understands the previous code snippet (at so called lexing time):
 
@@ -211,7 +224,7 @@ In other words, `innerFunc()` *closes over* (a.k.a. captures, remembers) the var
 
 In other words, `innerFunc()` is a *closure* because it closes over the variable `outerVar` from its lexical scope.  
 
-You've made the final step to understand what a closure is:
+You've made the final step to understanding what a closure is:
 
 > *The closure* is a function that accesses its lexical scope even executed outside of its lexical scope.
 
@@ -236,7 +249,7 @@ myButton.addEventListener('click', function handleClick() {
 
 When the button is clicked, `handleClick()` is executed somewhere inside of the DOM code. The execution happens far from the place of definition.  
 
-But being a closure, `handleClick()` captures `countClicked` from the lexical scope and updates it when a click happens. Even more, `myText` element is captured to update its text.  
+But being a closure, `handleClick()` captures `countClicked` from the lexical scope and updates it when a click happens. Even more, `myText` is captured too.  
 
 ### 5.2 Functional programming
 
@@ -263,9 +276,9 @@ triple(4); // => 12
 
 Currying, an important concept of functional programming, is also possible thanks to closures.  
 
-`executeMultiply(b)` is a closure that captures `a` from its lexical scope. When the closure is invoked, the paramater `b` and the captured variable `a` are used to calculate `a * b`.  
+`executeMultiply(b)` is a closure that captures `a` from its lexical scope. When the closure is invoked, the parameter `b` and the captured variable `a` are used to calculate `a * b`.  
 
-## 6. Real world example of closure
+## 6. A real-world example of closure
 
 I know closures might be difficult to grasp. But once you *get it*, it's forever. 
 
@@ -285,10 +298,12 @@ Isn't JavaScript magic? &#x263a;
 
 ## 7. Conclusion
 
-A closure is a function that captures variables from the place where it is defined (or its lexical scope).  
+The scope is what rules accessibility of variables in JavaScript. There can be a function or a block scope.  
 
-You can imagine the closure as a magical painting through which you can modify objects.   
+The lexical scope allows a function scope to access statically the variables from the outer scopes.  
 
-The closure is an important concept that every JavaScript developer should know.  
+Finally, a closure is a function that captures variables from its lexical scope. In simple words, the closure remembers the variables from the place where it is defined, no matter where it is executed.  
 
-*If you know other meaningful mental models of closures, please share in a [comment](#disqus_thread) below!*
+The closure is an important concept that every JavaScript developer should know. It is used to capture variables inside event handlers, callbacks. It is widely used in functional programming.  
+
+*Do you still struggle to understand closures? If so, ask me a question in a comment below!*
