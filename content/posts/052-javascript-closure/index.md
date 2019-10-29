@@ -25,9 +25,12 @@ When you define a variable (except a global one), you want it to exist for one p
 
 The concept that manages the accessibility of variables is called *scope*. You are free to access the variable defined within its scope.  However, outside of its  scope, the variable is not accessible.  
 
-In JavaScript, the body of a function and a code block defines the boundaries of a scope.  
+In JavaScript, a scope is created by:
 
-The body of the function `foo()` is the scope where the variable `count` exists:
+* A body of a function
+* A code block
+
+The function `foo()` defines a scope where `count` variable exists:
 
 ```javascript{4,8}
 function foo() {
@@ -44,9 +47,11 @@ console.log(count); // ReferenceError: count is not defined
 
 However, outside of `foo()` scope, the same variable `count` is not accessible. If you try to access `count` from outside anyways, JavaScript throws `ReferenceError: count is not defined`.  
 
-Furthermore, 2 different scopes can have *variables with the same name*. You can reuse common variable names (`count`, `index`, `current`, `value`, etc) in different scopes without worrying about collision.  
+The scope is a space policy that dictates where you can or cannot access a variable. In JavaScript, if you've defined a variable inside of a function, then use it only within that function.  
 
-`foo()` and `bar()` function scopes have their own, but same named, variable `count`:
+Furthermore, different scopes can have *variables with the same name*. You can reuse common variables names (`count`, `index`, `current`, `value`, etc) in different scopes without collisions.  
+
+`foo()` and `bar()` function scopes have their own, but same named, variables `count`:
 
 ```javascript{4,10}
 function foo() {
@@ -67,47 +72,7 @@ bar();
 
 `count` variables from `foo()` and `bar()` function scopes do not collide.  
 
-**Types of scopes**
-
-JavaScript has 2 kinds of scopes:
-
-1. A function scope
-
-```javascript{2-4}
-function foo() {
-  // function scope
-  const pi = 3.14;
-  // ...
-}
-```
-
-2. A block scope (only `let` and `const`, but not `var`)
-
-```javascript{2-4,8-10,14-16}
-if (isValid) {
-  // block scope
-  const message = 'Data is validated';
-  // ...
-}
-
-while (items.length !== 0) {
-  // block scope
-  let items = [];
-  // ...
-}
-
-{
-  // block scope
-  let result = '';
-  // ...
-}
-```
-
-Key takeway:
-
-> *The scope* defines the boundaries where variables exists.  
-
-## 2. The lexical scope
+## 2. Scopes nesting
 
 Let's play a bit more with scopes, and put one scope into antother.  
 
@@ -129,7 +94,7 @@ outerFunc();
 
 How would the 2 function scopes interract with each other? Can I access the variable `outerVar` from within `innerFunc()` scope?  
 
-```javascript{6}
+```javascript{6,10}
 function outerFunc() {
   let outerVar = 'I am outside!';
 
@@ -139,19 +104,57 @@ function outerFunc() {
   }
 
   innerFunc();
-  console.log(innerVar); // ReferenceError: innerVar is not defined
 }
 
 outerFunc();
 ```
 
-Yes, `outerVar` variable is accessible inside `innerFunc()` scope. Thus *the inner scope can access the outer scope*.  
+`outerVar` variable is accessible inside `innerFunc()` scope. *The inner (aka nested) scope can access the outer scope*.  
 
-*Do you know the name of the outermost scope? If so, let me know in a [comment](#disuqs_thread) below!*
+## 3. The lexical scope
 
-But `innerVar` is not accessible outside of `innerFunc()` scope. JavaScript throws `ReferenceError: innerVar is not defined` in this case. This is expected because *a variable cannot be accepted outside of its scope*. 
+How does JavaScript understand that `outerVar` inside `innerFunc()` corresponds to the variable `outerVar` of `outerFunc()`? 
 
-## 3. The closure
+It's because JavaScript implements a scoping mechanism named *lexical scoping* (or static scoping). The scope of variables is determined by the variables position in the source code.  
+
+The previous code snippet, before executing it, the engine understands the following way:
+
+  1. *I can see you define a function `outerFunc()` that has a variable `outerVar`. Good.*  
+  * *Inside the `outerFunc()`, I can see you define a function `innerFunc()`.*  
+  * *Inside the `innerFunc()`, I can see a variable `outerVar` without declaration. Since I use lexical scoping, I consider the variable `outerVar` inside `innerFunc()` to be the same variable as `outerVar` of `outerFunc()`.*
+
+> *The lexical scope* of a function consists of the outer scopes of that function determined statically.   
+
+For example:
+
+```javascript{11-13}
+const myGlobal = 0;
+
+function func() {
+  const myVar = 1;
+
+  function innerOfFunc() {
+    const myInnerVar = 2;
+
+    function innerOfInnerOfFunc() {
+      const myInnerInnerVar = 3;
+      console.log(myInnerVar); // => 2
+      console.log(myVar);      // => 1
+      console.log(myGlobal);   // => 0
+    }
+
+    innerOfInnerOfFunc();
+  }
+
+  innerOfFunc();
+}
+
+func();
+```
+
+The lexical scope of `innerOfInnerOfFunc()` consits of scopes of `innerOfFunc()`, `func()` and global scope (the outermost scope). Within `innerOfInnerOfFunc()` you can access the variables `myInnerVar`, `myVar` and `myGlobal`.  
+
+## 4. The closure
 
 The following code defines a factory function `createIncrement(i)` that returns an increment function. Later, every time the increment function is called, an internal counter is incremented by `i`:
 
@@ -178,13 +181,9 @@ Did you spot the interesting thing? You simply call `inc()`, without arguments, 
 
 The answer lays inside `createIncrement()`. There you will find `increment()` function: the closure that does the magic. The closure captures (or closes over, or simply remembers) the variables `value` and `i` from the lexical scope.  
 
-The *lexical scope* is the outer scope *where the closure is defined*. In the example, the lexical scope of `increment()` is the scope of `createIncrement()`, which contains variables `value` and `i`.  
-
-![The lexical scope in JavaScript](./images/lexical-scope-2.png)
-
 No matter where `inc()` is called, even outside the scope of `createIncrement()`, it has access to `value` and `i`.  
 
-> *The closure* is a function that can remember and modify variables from its lexical scope, regardless of execution scope.  
+> *The closure* is a function that can remember and modify variables from its lexical scope, even when executed outside of its lexical scope.  
 
 Continuing the example, `inc()` can be called anywhere else, even inside an async callback:  
 ```javascript{2,7}
@@ -198,7 +197,7 @@ setTimeout(function() {
 }, 1000);
 ```
 
-## 4. Real world example of closure
+## 5. Real world example of closure
 
 I know closures might be difficult to grasp. But once you *get it*, it's forever. 
 
@@ -216,7 +215,7 @@ The magical painting is a *closure*, while the painted objects are the *lexical 
 
 Isn't JavaScript magic? &#x263a;
 
-## 5. Conclusion
+## 6. Conclusion
 
 A closure is a function that captures variables from the place where it is defined (or its lexical scope).  
 
