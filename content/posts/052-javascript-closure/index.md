@@ -47,7 +47,9 @@ console.log(count); // ReferenceError: count is not defined
 
 However, outside of `foo()` scope, the same variable `count` is not accessible. If you try to access `count` from outside anyways, JavaScript throws `ReferenceError: count is not defined`.  
 
-The scope is a space policy that dictates where you can or cannot access a variable. In JavaScript, if you've defined a variable inside of a function, then use it only within that function.  
+> *The scope* is a space policy that dictates where you can or cannot access a variable.  
+
+In JavaScript, if you've defined a variable inside of a function, then use it only within that function.  
 
 Furthermore, different scopes can have *variables with the same name*. You can reuse common variables names (`count`, `index`, `current`, `value`, etc) in different scopes without collisions.  
 
@@ -182,7 +184,7 @@ Inside the `innerFunc()`, the variable `outerVar` is accessed from the lexical s
 
 But notice that `innerFunc()` invocation happens inside its lexical scope (the scope of `outerFunc()`).  
 
-Let's try to make a change. If `innerFunc()` is invoked outside of its lexical scope (outside of `outerFunc()`), would `innerInc()` still be able to access `outerVar`?  
+Let's make a change: `innerFunc()` to be invoked outside of its lexical scope (outside of `outerFunc()`). Would `innerInc()` still be able to access `outerVar`?  
 
 Let's make the adjustments to the code snippet:
 
@@ -211,7 +213,7 @@ In other words, `innerFunc()` is a *closure* because it closes over the variable
 
 You've made the final step to understand what a closure is:
 
-> *The closure* is a function that can accesses its lexical scope even when executed outside of its lexical scope.
+> *The closure* is a function that accesses its lexical scope even executed outside of its lexical scope.
 
 Let's continue with examples that demonstrate why the closure is so useful.  
 
@@ -224,7 +226,7 @@ Let's display how many times a button is clicked:
 ```javascript
 let countClicked = 0;
 
-myButton.addEventListener(function handleClick() {
+myButton.addEventListener('click', function handleClick() {
   countClicked++;
   myText.innerText = `You clicked ${countClicked} times`;
 });
@@ -234,7 +236,7 @@ myButton.addEventListener(function handleClick() {
 
 When the button is clicked, `handleClick()` is executed somewhere inside of the DOM code. The execution happens far from the place of definition.  
 
-But being a closure, `handleClick()` captures `countClicked` from the lexical scope and updates it when a click happens.   
+But being a closure, `handleClick()` captures `countClicked` from the lexical scope and updates it when a click happens. Even more, `myText` element is captured to update its text.  
 
 ### 5.2 Functional programming
 
@@ -249,16 +251,19 @@ function multiply(a) {
   }
 }
 
-const multiply2 = multiply(2);
-multiply(3); // => 6
-multiply(5); // => 10
+const double = multiply(2);
+double(3); // => 6
+double(5); // => 10
+
+const triple = multiply(3);
+triple(4); // => 12
 ```
 
 `multiply` is a curried function that returns another function.  
 
-Currying, an important concept of functional programming, is also possible due to closures.  
+Currying, an important concept of functional programming, is also possible thanks to closures.  
 
-`executeMultiply()` is a closure that captures `a` variable from its lexical scope. 
+`executeMultiply(b)` is a closure that captures `a` from its lexical scope. When the closure is invoked, the paramater `b` and the captured variable `a` are used to calculate `a * b`.  
 
 ## 6. Real world example of closure
 
