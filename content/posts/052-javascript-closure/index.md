@@ -25,7 +25,7 @@ A nice bonus awaits at the end: the closure concept explained with a real-world 
 
 Before starting, I suggest you to resist the urge to skip the scope and lexical scope sections. Just remember that these concepts are crucial to closures, and if you get them well, the idea of closure becomes self-evident.  
 
-When you define a variable, you want it to be accessibility within some boundaries. E.g. a `result` variable makes sense to exist within a `calculate()` function, as an internal detail. Outside of the `calculate()`, the `result` variable is useless.  
+When you define a variable, you want it accessible within some boundaries. E.g. a `result` variable makes sense to exist within a `calculate()` function, as an internal detail. Outside of the `calculate()`, the `result` variable is useless.  
 
 The accessibility of variables is managed by *scope*. You are free to access the variable defined within its scope. But outside of that scope, the variable is not accessible.  
 
