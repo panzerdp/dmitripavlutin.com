@@ -2,11 +2,11 @@
 title: 7 Simple but Tricky JavaScript Interview Questions
 description: A compiled list of simple but tricky questions you might be asked during a JavaScript coding interview.
 published: '2019-10-15T12:40Z'
-modified: '2019-10-21T10:40Z'
+modified: '2019-10-30T16:00Z'
 thumbnail: './images/people-at-interview.jpg'
 slug: simple-but-tricky-javascript-interview-questions
 tags: ['javascript']
-recommended: ['the-path-of-software-development-craftsmanship', 'become-better-software-developer-digging-climbing']
+recommended: ['simple-explanation-of-javascript-closures', 'javascript-variables-and-temporal-dead-zone']
 type: post
 commentsThreadId: simple-but-tricky-javascript-interview-questions
 ---
@@ -239,6 +239,8 @@ The second phase happens after 100ms:
 1. The 3 scheduled `log()` callbacks are called by `setTimeout()`. `log()` reads the *current value* of variable `i`, which is `3`, and logs to console `3`.
 
 That's why the output to the console is `3`, `3` and `3`.  
+
+If you struggle with closure, I recommend reading [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).  
 
 *Do you know how to fix the snippet to log `0`, `1`, and `2`? Please write your solution in a comment below!*
 
