@@ -240,7 +240,7 @@ The second phase happens after 100ms:
 
 That's why the output to the console is `3`, `3` and `3`.  
 
-*Do you know how to fix the snippet to log `0`, `1`, and `3`? Please write your solution in a comment below!*
+*Do you know how to fix the snippet to log `0`, `1`, and `2`? Please write your solution in a comment below!*
 
 ## 6. Floating point math
 

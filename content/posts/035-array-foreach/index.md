@@ -2,7 +2,7 @@
 title: How to Use forEach() to Iterate an Array in JavaScript
 description: "forEach() in JavaScript calls the provided function on each array item with 3 arguments: item, index, the array itself. Learn how to use forEach()."
 published: "2019-07-03"
-modified: "2019-07-05"
+modified: "2019-10-30T09:00Z"
 thumbnail: "./images/cover.jpg"
 slug: foreach-iterate-array-javascript
 tags: ["javascript", "array", "foreach"]
@@ -103,53 +103,7 @@ colors.forEach(iterate);
 
 The 3rd parameter `array` inside the callback function is the array on which `forEach()` method was called on. `array` parameter and `colors` variable point to the same array object.  
 
-### 3.1 Strive for modular functions
-
-You might be wondering: why not to use `colors` variable directly inside the callback, and skip the third parameter `array` at all? At first sight, that would simplify the code.  
-
-```javascript{3,9}
-function iterateCoupled(item, index) {
-  console.log(item);
-  if (index === colors.length - 1) {
-    console.log('The last iteration!');
-  }
-}
-
-const numbers = [42];
-numbers.forEach(iterateCoupled); // (!) Wrong
-```
-
-Unfortunately, this change creates a tight coupling problem. Here's why. 
-
-`iterateCoupled()` callback couples with the outer scope variable `colors`. In this case, the modularity and reusability of the callback function are reduced. You cannot reuse `iterateCoupled()` with other array instances, other than `colors`. 
-
-Unless you have a good reason to access outer scope variables, I don't recommend doing this.  
-
-Let's look back to the original `iterate()`. This function uses only its parameters to access data, without looking at the outer scope. Its modularity is high. 
-
-Because of that `iterate()` callback can be reused to iterate any other array instance:
-
-```javascript{9,14}
-function iterate(item, index, array) {
-  console.log(item);
-  if (index === array.length - 1) {
-    console.log('The last iteration!');
-  }
-}
-
-const numbers = [42];
-numbers.forEach(iterate); // Correct
-// logs "42"
-// logs "The last iteration!"
-
-const animals = ['cat', 'dog'];
-animals.forEach(iterate); // Correct
-// logs "cat"
-// logs "dog"
-// logs "The last iteration!"
-```
-
-## 4. this inside the callback
+## 4. *this* inside the callback
 
 Let's run the following example in a browser, and pay attention to the value of `this`:
 ```javascript{4}
@@ -201,7 +155,18 @@ However, using an arrow function as the callback of `forEach()` would be better.
 
 ## 5. forEach skips empty slots
 
-`forEach()` skips the empty slots when iterating over an array with empty slots (named [sparse array](/power-up-the-array-creation-in-javascript/#third-case-no-element-between-commas)).  
+`forEach()` skips the empty slots of the array (named [sparse array](/power-up-the-array-creation-in-javascript/#third-case-no-element-between-commas)).  
+
+```javascript
+const sparseArray = [1, , 3];
+sparseArray.length; // => 3
+
+sparseArray.forEach(function(item) {
+  console.log(item);
+}); // logs 1, 3
+```
+
+`sparseArray` contains `1`, an empty slot, and `3`. `forEach()` iterates over `1` and `3`, but skips the empty slot.  
 
 ## 6. Iterate array-like objects using forEach
 
