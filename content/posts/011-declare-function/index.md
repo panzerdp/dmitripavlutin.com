@@ -297,7 +297,7 @@ collection.get(1) // => 'Java'
 
 The short approach of method definition has several benefits over traditional property definition with a name, colon `:` and a function expression `add: function(...) {...}`:
 
-* A shorter syntax is easier understand
+* A shorter syntax is easier to understand
 * Shorthand method definition creates a named function, contrary to a function expression. It is useful for debugging.
 
 The `class` syntax requires method declarations in a short form:
