@@ -30,14 +30,14 @@ export default function AboutAuthorFetch({ render }: AboutAuthorFetchProps) {
               }
             }
           }
-          authorProfilePictureSmall: file(relativePath: { eq: "profile-louvre.jpg" }) {
+          authorProfilePictureSmall: file(relativePath: { eq: "louvre.jpg" }) {
             childImageSharp {
               fixed(width: 120, height: 120, quality: 100) {
                 ...GatsbyImageSharpFixed_withWebp
               }
             }
           }
-          authorProfilePictureBig: file(relativePath: { eq: "profile-louvre.jpg" }) {
+          authorProfilePictureBig: file(relativePath: { eq: "louvre.jpg" }) {
             childImageSharp {
               fluid(maxWidth: 350, quality: 90) {
                 ...GatsbyImageSharpFluid_withWebp

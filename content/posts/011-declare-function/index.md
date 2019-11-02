@@ -2,7 +2,7 @@
 title: "6 Ways to Declare JavaScript Functions"
 description: "JavaScript allows to declare functions in 6 ways. The article describes how to choose the right declaration type, depending on the function purpose."
 published: "2016-06-22"
-modified: "2019-10-31T09:20Z"
+modified: "2019-11-02T15:11Z"
 thumbnail: "./images/cover.jpg"
 slug: 6-ways-to-declare-javascript-functions
 tags: ["javascript", "function"]
@@ -21,7 +21,7 @@ A **function** is a parametric block of code defined once and called multiple ti
 * The variable that holds the function object
 * `arguments` object (or missing in an arrow function)
 
-This post describes six approaches on how to declare JavaScript functions. Moreover, I will present tips about what type is recommended to use for specific circumstances. Interested? Let's get started.
+This post teaches you six approaches to declare JavaScript functions: the syntax, examples and common pitfalls. Moreover, you will understand when to use a specific function type in certain circumstances.  
 
 Table of contents:
 
