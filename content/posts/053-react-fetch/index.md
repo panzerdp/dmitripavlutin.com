@@ -57,11 +57,10 @@ class EmployeesPage extends Component {
     }
   }
 
-  fetch() {
+  async fetch() {
     this.setState({ isFetching: true });
-    fetchEmployees(this.props.query).then(employees => {
-      this.setState({ employees, isFetching: false });
-    });
+    const employees = await fetchEmployees(this.props.query);
+    this.setState({ employees, isFetching: false });
   }
 
   render() {
@@ -74,29 +73,119 @@ class EmployeesPage extends Component {
 }
 ```
 
-The class-based `<EmployeesPage>` has a method `fetch()` that handles fetching. As soon as the data is ready, the component state is updated with fetched `employees`.  
+[Open the demo]() and explore how data is fetched.  
 
-To start fetching the employees as soon as the component is initially rendered, the `fetch()` method is called inside `componentDidMount()` lifecycle method.  
+The class-based `<EmployeesPage>` has a method `fetch()` that handles fetching. As soon as the data is ready, the component state updates with fetched `employees`.  
 
-When the user enter a query into the input field, `query` prop of the component is updated. To refetch the employees, inside `componentDidUpdate()` the method `fetch()` is called when `query` prop did change.  
+To start fetching the employees when the component is initially rendered, the `fetch()` method is placed inside `componentDidMount()` lifecycle method.  
+
+When the user enters a query into the input field, the `query` prop is updated. Every time it happens, `fetch()` is executed by `componentDidUpdate()`.   
 
 #### Benefits
 
-1. Lifecycle method `componentDidMount()` initiates the fetch on first render
-2. Lifecycle method `componentDidUpdate()` refetches data when props change
+*Intuitive*  
+Lifecycle method `componentDidMount()` initiates the fetch on first render and `componentDidUpdate()` refetches data when props change.
 
 #### Drawbacks
 
-1. Class-based component requires "ceremony" code, like `super(props)` inside `constructor()`
-2. Working with `this` keyword is burdersome
-3. Code duplication inside `componentDidMount()` and `componentDidUpdate()`
-4. It would be complicated to reuse `fetch()` method inside of other component
+*Boilerplate code*  
+Class-based component requires "ceremony" code: extending the `Component`, calling `super(props)` inside `constructor()`.  
+
+*`this`*  
+Working with `this` keyword is burdersome.
+
+*Code duplication*  
+The code inside `componentDidMount()` and `componentDidUpdate()` is mostly duplicated.  
+
+*Hard to reuse*  
+It's complicated to reuse the employees fetch logic inside of other component.
 
 ## 2. Data fetching using hooks
 
+With hooks, data fetching is slightly less intuitive, but with a big win of tighter code.  
+
+Let's recall `useEffect(callback, dependencies)` hook. The callback gets called only when depdencies change.  
+
+Let's apply `useEffect()` to fetch employees data:
+
+```jsx{10-16}
+import React, { useState } from 'react';
+
+import EmployeesList from "./EmployeesList";
+import { fetchEmployees } from "./fake-fetch";
+
+function EmployeesPage({ query }) {
+  const [isFetching, setFetching] = useState(false);
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(function fetch {
+    (async function() {
+      setFetching(true);
+      setEmployees(await fetchEmployees(query));
+      setFetching(false);
+    })();
+  }, [query]);
+  
+  if (isFetching) {
+    return <div>Fetching employees....</div>;
+  }
+  return <EmployeesList employees={employees} />;
+}
+```
+
+[Open the demo](https://codesandbox.io/s/react-fetch-hook-vz2vl) and look how the hook fetches data.  
+
+`useEffect(fetch, [query])` executed the `fetch` callback on right after initial render. Also, `fetch` callback gets called right after re-rendering but only if `query` prop changes.  
+
+But there's still room for improvement. Hooks allows you to extract the employees fetching logic from `<EmployeesPage>` component. Let's do that:
+
+```jsx{22}
+import React, { useState } from 'react';
+
+import EmployeesList from "./EmployeesList";
+import { fetchEmployees } from "./fake-fetch";
+
+function useEmployeesFetch(query) {
+  const [isFetching, setFetching] = useState(false);
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(function fetch {
+    (async function() {
+      setFetching(true);
+      setEmployees(await fetchEmployees(query));
+      setFetching(false);
+    })();
+  }, [query]);
+
+  return [isFetching, employees];
+}
+
+function EmployeesPage({ query }) {
+  const [employees, isFetching] = useEmployeesFetch(query);
+  
+  if (isFetching) {
+    return <div>Fetching employees....</div>;
+  }
+  return <EmployeesList employees={employees} />;
+}
+```
+
+The fetching jungle, bananas and monkeys were extracted to `useEmployeesFetch()`. The component `<EmployeesPage>` is not cluttered with fetching logic, but rather does its direct job: render UI elements.  
+
+What's better, you can reuse `useEmployeesFetch()` in any other component that requires fetching employees.  
+
 #### Benefits
 
+*Simplicity*  
+Hooks don't need lots of boilerplate code because they are plain functions.  
+
+*Reusability*  
+Fetching logic implemented in hooks is easy to reuse.  
+
 #### Drawbacks
+
+*Entry barrier*  
+You have [to make sense of hooks](https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889) before using them. Hooks rely on closures, so you have to [know them well too](/simple-explanation-of-javascript-closures/).   
 
 ## 3. Data fetching using suspense
 
@@ -105,3 +194,5 @@ When the user enter a query into the input field, `query` prop of the component 
 #### Drawbacks
 
 ## 4. Key takeaways
+
+*Which data fetching approach do you prefer?*
