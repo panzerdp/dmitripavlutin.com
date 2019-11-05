@@ -2,7 +2,7 @@
 title: A Simple Explanation of JavaScript Closures
 description: A closure is a function that captures variables from where it is defined (or its lexical scope).  
 published: '2019-10-25T04:00Z'
-modified: '2019-11-02T13:10Z'
+modified: '2019-11-05T14:30Z'
 thumbnail: './images/bulb.jpg'
 slug: simple-explanation-of-javascript-closures
 tags: ['javascript', 'closure']
@@ -118,11 +118,11 @@ Now you know 2 interesting things:
 
 How does JavaScript understand that `outerVar` inside `innerFunc()` corresponds to the variable `outerVar` of `outerFunc()`? 
 
-It's because JavaScript implements a scoping mechanism named *lexical scoping* (or static scoping). Lexical scoping means that the accessibility of variables is determined by the position of the variables in the source code. 
+It's because JavaScript implements a scoping mechanism named *lexical scoping* (or static scoping). Lexical scoping means that the accessibility of variables is determined by the position of the variables in the source code inside the nesting scopes.  
 
-In simple words, the lexical scoping says that inside the inner scope you can access variables of its outer scopes.  
+Simpler, the lexical scoping means that inside the inner scope you can access variables of its outer scopes.  
 
-It's called *lexical* (or *statical*) because the engine determines (at [lexing time](https://en.wikipedia.org/wiki/Lexical_analysis)) the nesting of scopes just by looking at the JavaScript source code, without executing it.  
+It's called *lexical* (or *static*) because the engine determines (at [lexing time](https://en.wikipedia.org/wiki/Lexical_analysis)) the nesting of scopes just by looking at the JavaScript source code, without executing it.  
 
 Here's how the engine understands the previous code snippet:
 
@@ -335,8 +335,8 @@ The lexical scope allows a function scope to access statically the variables fro
 
 Finally, a closure is a function that captures variables from its lexical scope. In simple words, the closure remembers the variables from the place where it is defined, no matter where it is executed.  
 
-It is used to capture variables inside event handlers, callbacks. It is widely used in functional programming. Moreover, you could be asked about it during a Frontend job interview.  
+Closures capture variables inside event handlers, callbacks. They're used in functional programming. Moreover, you could be asked how closures work during a Frontend job interview.  
 
-The closure is an important concept that every JavaScript developer should know. 
+Every JavaScript developer must know how closures work. Take it for granted.  
 
 *Do you still struggle to understand closures? If so, ask me a question in a comment below!*

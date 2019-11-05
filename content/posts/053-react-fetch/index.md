@@ -11,26 +11,22 @@ type: post
 commentsThreadId: react-data-fetching-improvement
 ---
 
-When I write a React component, I want it to be pure and functional. Pure components are the easiest to work with: from composition to unit testing.  
+When performing [I/O operations](https://en.wikipedia.org/wiki/Input/output) like data fetching, you have to initiate the fetch operation, wait for the response, save the response data to component's state, and finally render. 
 
-But when you need to perform on [I/O operation](https://en.wikipedia.org/wiki/Input/output), like an HTTP data fetch, things become more difficult because of the async nature of I/O operations.  
+Async data fetching requires extra-effort to fit into the declarative nature of React. But the library evolves to provide better tools to handle this.  
 
-You have to initiate the fetch operation, wait for the response, then handle the response, save the response to component's state, and finally render. 
+Class-based using lifecycle methods, hooks and suspense are approaches to fetch data in React. I will describe them with examples and demos, distill the benefits and drawbacks of each one. 
 
-Fortunately, React evolves in a direction to help you with better tools to handle data fetching.  
-
-This post presents 3 ways to fetch data in React: the class-based approach using lifecycle methods, hooks and suspense. 
-
-You will understand the benefits and drawbacks of each approach, so you could decide which works better for you next time you need to handle data fetching.  
-
+Knowing ins and outs of each approach makes you better at coding async operations in React.  
 
 ## 1. Data fetching using lifecycle methods
 
-An application *Employees.org* fetches the employees of a company.  
+The application *Employees.org* has 2 requirements:
+
+1. Initially fetch 20 employees of the company. 
+2. Typing a query in the input field lists employees whose name contains the query.  
 
 ![Employees Application](./images/application.png)
-
-On initial render, the first 20 employees are fetched. You can type a query into the input field, and the list gets filtered.  
 
 Let's recall 2 lifecycle methods of the class-based component:
 
