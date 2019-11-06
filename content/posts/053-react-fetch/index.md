@@ -1,8 +1,8 @@
 ---
 title: "3 Ways to Fetch Data in React: Which is Best?"
 description: "Lifecycle methods, hooks, suspense: which's best for fetching in React?"
-published: '2019-11-05T13:00Z'
-modified: '2019-11-05T13:00Z'
+published: '2019-11-06T12:10Z'
+modified: '2019-11-06T12:10Z'
 thumbnail: './images/oldman-sea.jpg'
 slug: react-fetch-lifecycle-methods-hooks-suspense
 tags: ['react', 'lifecycle', 'hook', 'suspense']
@@ -13,29 +13,27 @@ commentsThreadId: react-data-fetching-improvement
 
 When performing [I/O operations](https://en.wikipedia.org/wiki/Input/output) like data fetching, you have to initiate the fetch operation, wait for the response, save the response data to component's state, and finally render. 
 
-Async data fetching requires extra-effort to fit into the declarative nature of React. But the library evolves to provide better tools to handle this.  
+Async data fetching requires extra-effort to fit into the declarative nature of React. Step by step React improves to minimize this extra-effort.  
 
-Class-based using lifecycle methods, hooks, and suspense are approaches to fetch data in React. I'll describe them with examples and demos, distill the benefits and drawbacks of each one. 
+Lifecycle methods, hooks, and suspense are approaches to fetch data in React. I'll describe them with examples and demos, distill the benefits and drawbacks of each one. 
 
-Knowing the ins and outs of each approach makes you better at coding async operations.  
+Knowing the ins and outs of each approach makes will make you better at coding async operations.  
 
 ## 1. Data fetching using lifecycle methods
 
-The application *Employees.org* does 2 things:
+The application *Employees.org* has to do 2 things:
 
-1. Initially fetches 20 employees of the company. 
-2. Filters employees whose name contains a query.  
+1. Initially fetch 20 employees of the company. 
+2. Filter employees whose name contains a query.  
 
 ![Employees Application](./images/employees-application.png)
 
-Let's recall 2 lifecycle methods:
+Before implementing these requirements, recall 2 lifecycle methods of a class component:
 
 1. `componentDidMount()`: is executed once after mounting
 2. `componentDidUpdate(prevProps)`: is executed when props or state change
 
-`<EmployeesPage>` implements the fetching logic using these 2 lifecycle methods. It accepts a prop `query` to filter the employees.  
-
-Let's see how `<EmployeesPage>` looks like:
+`<EmployeesPage>` implements the fetching logic using these 2 lifecycle methods:
 
 ```jsx{10-12,14-18}
 import EmployeesList from "./EmployeesList";
@@ -75,11 +73,11 @@ class EmployeesPage extends Component {
 
 [Open the demo](https://codesandbox.io/s/react-fetch-class-urndw) and explore how `<EmployeesPage>` fetches data.  
 
-The class-based `<EmployeesPage>` has an async method `fetch()` that does fetching. When fetching request completes, the component state updates with fetched `employees`.  
+`<EmployeesPage>` has an async method `fetch()` that handles fetching. When fetching request completes, the component state updates with fetched `employees`.  
 
-To start fetching the employees when the component is initially rendered, `this.fetch()` is executed inside `componentDidMount()` lifecycle method.  
+`this.fetch()` is executed inside `componentDidMount()` lifecycle method: this starts fetching the employees when the component is initially rendered.  
 
-When the user enters a query into the input field, the `query` prop is updated. Every time it happens, `this.fetch()` is executed by `componentDidUpdate()`.   
+When the user enters a query into the input field, the `query` prop is updated. Every time it happens, `this.fetch()` is executed by `componentDidUpdate()`: which implements the filtering of employees.   
 
 While lifecycle methods are relatively easy to grasp, class-based approach suffers from boilerplate code and reusability difficulties.  
 
@@ -91,7 +89,7 @@ It's easy to understand: lifecycle method `componentDidMount()` initiates the fe
 #### Drawbacks
 
 *Boilerplate code*  
-Class-based component requires "ceremony" code: extending the `Component`, calling `super(props)` inside `constructor()`.  
+Class-based component requires "ceremony" code: extending the `React.Component`, calling `super(props)` inside `constructor()`, etc.
 
 *`this`*  
 Working with `this` keyword is burdensome.
@@ -106,7 +104,7 @@ Employees fetching logic is complicated to reuse in another component.
 
 Hooks are a better alternative to class-based fetching. Being simple functions, hooks don't have a "ceremony" code and are more reusable.  
 
-Let's recall `useEffect(callback[, deps])` hook. This hook executes callback after mounting, and after renderings when `deps` change.  
+Let's recall `useEffect(callback[, deps])` hook. This hook executes `callback` after mounting, and after subsequent renderings when `deps` change.  
 
 In the following example `<EmployeesPage>` uses `useEffect()` to fetch employees data:
 
@@ -137,11 +135,11 @@ function EmployeesPage({ query }) {
 
 [Open the demo](https://codesandbox.io/s/react-fetch-hook-vz2vl) and look at how the `useEffect()` fetches data.  
 
-`useEffect(fetch, [query])` executes `fetch` callback on right after initial render. Also, `fetch` gets called after later renderings, but only if `query` prop changes.  
+You can see `<EmployeesPage>` using hooks *simplified* considerable compared to the class version. 
 
-You can see `<EmployeesPage>` using hooks simplifies compared to the class version. 
+Inside `<EmployeesPage>` functional component `useEffect(fetch, [query])` executes `fetch` callback after the initial render. Also, `fetch` gets called after later renderings, but only if `query` prop changes.  
 
-But there's still room for improvement. Hooks allow you to extract the employees fetching logic from `<EmployeesPage>` component. Let's do that:
+But there's still room for improvement. Hooks allow you to *extract the employees fetching logic* from `<EmployeesPage>` component. Let's do that:
 
 ```jsx{6,22}
 import React, { useState } from 'react';
@@ -189,7 +187,7 @@ Fetching logic implemented in hooks is easy to reuse.
 #### Drawbacks
 
 *Entry barrier*  
-You have [to make sense of hooks](https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889) before using them. Hooks rely on closures, so you have to [know them well](/simple-explanation-of-javascript-closures/) too.   
+Hooks are slighly counter-intuitive, thus you have [to make sense of them](https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889) before usage. Hooks rely on closures, so be sure to [know them well](/simple-explanation-of-javascript-closures/) too.   
 
 *Imperative*  
 With hooks, you still have to use an imperative approach to perform data fetching.  
@@ -234,11 +232,11 @@ function EmployeesFetch({ resource }) {
 
 `<EmployeesPage>` uses suspense to handle the fetching inside component `<EmployeesFetch>`.  
 
-`resource.employees` inside `<EmployeesFetch>` is a specially [wrapped promise](https://github.com/gaearon/suspense-experimental-github-demo/blob/master/src/api.js#L33) that communicates in background with suspense. This way suspense knows when to "suspend" rendering of `<EmployeesFetch>`: until the resource is ready.  
+`resource.employees` inside `<EmployeesFetch>` is a specially [wrapped promise](https://github.com/gaearon/suspense-experimental-github-demo/blob/master/src/api.js#L33) that communicates in background with suspense. This way suspense knows how long to "suspend" rendering of `<EmployeesFetch>`, and when the resource is ready, give it a go.  
 
-In the end, you have a big win: *Suspense handles the async operation in a declarative and synchronous way*.  
+Here's the big win: *Suspense handles async operations in a declarative and synchronous way*.  
 
-The components are not cluttered with details of *how* data is fetched, rather they are declaratively using the resource to render the content. No lifecycles, no hooks, no `async/await`, no callbacks inside of the components: just rendering a resource.   
+The components are not cluttered with details of *how* data is fetched. Rather they are declaratively using the resource to render the content. No lifecycles, no hooks, no `async/await`, no callbacks inside of the components: just rendering a resource.   
 
 #### Benefits
 
@@ -246,10 +244,10 @@ The components are not cluttered with details of *how* data is fetched, rather t
 Suspense lets you declaratively perform async operations in React. 
 
 *Simplicity*  
-Simplicity derives from the declarative nature of suspense: declarative code is easier to work with. The components are not cluttered with details of *how* data is fetched.  
+Declarative code is simple to work with. The components are not cluttered with details of *how* data is fetched.  
 
 *Loose coupling with fetching implementation*  
-The components that use suspense don't know how data is fetched: using REST or GraphQL. Suspense is a boundary that protects fetching details to leak into your components.  
+The components that use suspense don't know how data is fetched: using REST or GraphQL. Suspense sets a boundary that protects fetching details to leak into your components.  
 
 *No race conditions*  
 If multiple fetching operations were started, suspense uses the latest fetching request.  
@@ -261,9 +259,9 @@ Suspense requires specialized fetching libraries or adapters that implement the 
 
 ## 4. Key takeaways
 
-Lifecycle methods had been for a long time the only solution to fetching. But this approach has problems with lots of boilerplate code, code duplication, and reusability difficulties.  
+Lifecycle methods had been for a long time the only solution to fetching. However fetching using them has problems with lots of boilerplate code, duplication, and reusability difficulties.  
 
-Usage of `useEffect()` is a better alternative: no more boilerplate code. However, hooks still handle fetching imperatively.  
+Fetching using hooks is a better alternative: way less boilerplate code.  
 
 Suspense's benefit is declarative fetching. Your components are not cluttered with fetching implementation details. Suspense is closer to the declarative nature of React itself.  
 
