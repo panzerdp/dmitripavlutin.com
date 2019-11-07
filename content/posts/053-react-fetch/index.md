@@ -1,8 +1,8 @@
 ---
-title: "3 Ways to Fetch Data in React: Which is Best?"
-description: "Lifecycle methods, hooks, suspense: which's best for fetching in React?"
+title: "Lifecycle methods, hooks, suspense: which's best for fetching in React?"
+description: "Lifecycle methods, hooks & suspense fetch data in React. The post describes them in examples and demos, distill the benefits and drawbacks of each one."
 published: '2019-11-06T12:10Z'
-modified: '2019-11-06T12:10Z'
+modified: '2019-11-07T06:24Z'
 thumbnail: './images/oldman-sea.jpg'
 slug: react-fetch-lifecycle-methods-hooks-suspense
 tags: ['react', 'lifecycle', 'hook', 'suspense']
@@ -15,7 +15,7 @@ When performing [I/O operations](https://en.wikipedia.org/wiki/Input/output) lik
 
 Async data fetching requires extra-effort to fit into the declarative nature of React. Step by step React improves to minimize this extra-effort.  
 
-Lifecycle methods, hooks, and suspense are approaches to fetch data in React. I'll describe them with examples and demos, distill the benefits and drawbacks of each one. 
+Lifecycle methods, hooks, and suspense are approaches to fetch data in React. I'll describe them in examples and demos, distill the benefits and drawbacks of each one. 
 
 Knowing the ins and outs of each approach makes will make you better at coding async operations.  
 
