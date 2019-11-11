@@ -85,7 +85,7 @@ Having the state declared, the next step is to initialize it.
 
 ## 1.2 Initializing state
 
-Every state must have an initial value. Straigforward, the first argument of `useState(initialState)` function is the initial state.  
+The state is initialized with an initial value. The first argument of `useState(initialState)` is the initial state value.  
 
 Let's set bulb switch state to initialize with `false`. It means that when the component is rendered first, the bulb is switched off.
 
@@ -151,7 +151,7 @@ function Bulb() {
 }
 ```
 
-What's important about `isOn` state variable is that unless the state is not changed, it will remains the same even if the React component rerenders.  
+`isOn` state variable is remains unchanged between component renderings.  
 
 The whole idea of state is to be able to change it. Let's see how to do this in a final step.  
 
@@ -494,8 +494,77 @@ Now `setCount(count => count + 1)` updates the count state correctly inside `del
 
 In case if you need to manage some complex state, it makes sense to use `useReducer()` hook. It provides a better support for state that requires many operations. And what's more important, it's easy to extract all the complex state manipulations out of the component.  
 
+Let's say you need to program a list of favorite movies. The user can add a new movie, or delete an already added one.  
 
+A possible implementation of favorite movies list could be:
+
+```jsx
+import React, { useState } from 'react';
+
+function FavoriteMovies() {
+  const [movies, setMovies] = useState([{ name: 'Heat' }]);
+
+  function addMovie() {
+    
+  }
+
+  function deleteMovie(index) {
+    
+  }
+
+  return (
+
+  );
+}
+```
+
+You might notice that the management of movies list is quite complex. It requires adding movies, and remove movies. Somehow the state management starts to clutter the component.  
+
+A better solution is to extract the movies management into a reducer. The component this way cleans from the details of how state is managed.  
+
+```jsx
+import React, { useReducer } from 'react';
+
+function FavoriteMovies() {
+  const [movies, setMovies] = useState([{ name: 'Heat' }]);
+
+  function addMovie() {
+    
+  }
+
+  function deleteMovie(index) {
+    
+  }
+
+  return (
+
+  );
+}
+```
+
+`moviesReducer()` manages the state of movies. There are 2 operations: `add` and `remove`. 
+
+The functionality of the component hasn't changes. But clearly the version of `<FavoriteMovies>` that uses a reducer is easier to understand, because the state management is extraced out into the reducer.  
 
 # 5. Conclusion
 
-`useState()` manages state in functional components. 
+To enable the state inside functional components, invoke `useState()` inside the body of the component's function.
+
+When invoking `useState(initialState)`, use the first argument to set the initial state. The returned array has 2 items: the current state and state updater function.  
+
+```javascript
+const [state, setState] = useState(initialState);
+```
+
+To update the state, call the state updater function with the new state. Alternatively, if you need to update the state based on previous state, supply a callback function.  
+
+You can have multiple states inside of a single component: simply call multiple times `useState()`.  
+
+Lazy initialization is handy when the initial state calculation is expensive. Invoke `useState(computeInitialState)` with a callback that calculates the initial state, and this callback will execute only once, at initial render.  
+
+You have to make sure to follow the rules of hooks with `useState()`. This guarantees the correct handling of state.  
+
+Stale state happens when a closure captures outdated state variables. You can fix this by updating the state using a callback that calculates the new state based on previous one.   
+
+Finally, `useState()` manages simple to moderate complexity of state. To deal with highly complex state operations, a wiser alternative is `useReducer()` hook.  
+
