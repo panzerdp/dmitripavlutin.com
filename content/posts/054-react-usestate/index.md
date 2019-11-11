@@ -260,7 +260,7 @@ Here's an example:
 function MyComponent() {
   const [value, setValue] = useState(function getInitialState() {
     let result;
-    // expensive computation
+    // expensive computation....
     return result;
   });
 
@@ -274,12 +274,228 @@ function MyComponent() {
 
 Now you have the first grasp of how to use `useState()`. 
 
-## 4.1 Incorrect place to declare state
+Still you have to be aware of common issues that you might encouter when using `useState()`. Let's continue with them.  
+
+## 4.1 Incorrect place to call state hook
+
+When using `useState()` hook you have to follow [the rules of hooks](https://reactjs.org/docs/hooks-rules.html):  
+
+1. **Only Call Hooks at the Top Level**: you cannot call `useState()` in loops, conditions, nested functions, etc. When having multiple `useState()` calls, the invocation order has to be the same between renderings.
+2. **Only Call Hooks from React Functions**: you have to call `useState()` only inside the functional component or a custom hook.
+
+Let's follow examples of correct and incorrect usage of `useState()`.  
+
+**Correct usage of `useState()`**
+
+`useState()` is *correctly* called at the top level of functional component:
+
+```jsx{3}
+function Bulb() {
+  // Good
+  const [isOn, setIsOn] = useState(false);
+  // ...
+}
+```
+
+Multiple `useState()` calls are *correctly* invoked in the same order:
+
+```jsx{3-4}
+function Bulb() {
+  // Good
+  const [isOn, setIsOn] = useState(false);
+  const [count, setCount] = useState(1);
+  // ...
+```
+
+`useState()` is *correctly* called at the top level of a custom hook:
+
+```jsx{3,8}
+function toggleHook(initial) {
+  // Good
+  const [isOn, setIsOn] = useState(initial);
+  return [isOn, () => setIsOn(!isOn)];
+}
+
+function Bulb() {
+  const [isOn, toggle] = toggleHook(false);
+  // ...
+}
+```
+
+**Incorrect usage of `useState()`**
+
+`useState()` is *incorrectly* called within a condition:
+
+```jsx{4}
+function Bulb({ isSwitchEnabled }) {
+  if (isSwitchEnabled) {
+    // Bad
+    const [isOn, setIsOn] = useState(false);
+  }
+  // ...
+}
+```
+
+`useState()` is *incorrectly* called within a nested function:
+
+```jsx{7}
+function Bulb() {
+  let isOn = false;
+  let setIsOn = () => {};
+
+  function enableSwitch() {
+    // Bad
+    [isOn, setIsOn] = useState(false);
+  }
+
+  return (
+    <button onClick={enableSwitch}>
+      Enable light switch
+    </button>
+  );
+}
+```
 
 ## 4.2 Incorrect place to set state
 
+The state updates as a response to an event that provides some new information. Such events are a button click, an HTTP request completion, etc.  
+
+Make sure to invoke the state updater function within a callback of an event or a callback of other hooks.  
+
+Recall the `<Bulb>` component:
+
+```jsx{6-7,15-16}
+import React, { useState } from 'react';
+
+function Bulb() {
+  const [isOn, setIsOn] = useState(false);
+
+  const lightOn = () => setIsOn(true);
+  const lightOff = () => setIsOn(false);
+
+  return (
+    <div className="light-switch">
+      { isOn ? 
+        <img src="bulb-on.jpg" /> : 
+        <img src="bulb-off.jpg" /> 
+      }
+      <button onClick={lightOn}>Light on</button>
+      <button onClick={lightOff}>Light off</button>
+    </div>
+  );
+}
+```
+
+`lightOn()` and `lightOff()` event handlers update the state as a response to a click event. That's a *correct* place to update state.  
+
+What about a scenario when you'd like to count the times a component renders. The obvious and *incorrect* solution is to invoke state update in the body of the component's function:
+
+```jsx{7}
+import React, { useState, useEffect } from 'react';
+
+function CountMyRenders() {
+  const [countRender, setCountRender] = useState(0);
+  
+  // Bad
+  setCountRender(countRender => countRender + 1);
+
+  return (
+    <div>I've rendered {countRender} times </div>
+  );
+}
+```
+
+The problem is that as soon as `countRender` state updates, the component re-renders. This triggers another state update, and another re-render, and so on indefinitely.  
+
+You have to use `useEffect()` hook that proves the necessary callback:
+
+```jsx{8}
+import React, { useState, useEffect } from 'react';
+
+function CountMyRenders() {
+  const [countRender, setCountRender] = useState(0);
+  
+  useEffect(function afterRender() {
+    // Good
+    setCountRender(countRender => countRender + 1);
+  });
+
+  return (
+    <div>I've rendered {countRender} times </div>
+  );
+}
+```
+
+`useEffect()` calls `afterRender()` callback after every render. `afterRender()` is the correct place to increment `countRender` state.  
+
 ## 4.3 Stale state
 
-## 4.4 Too complex state
+Inside functional components you might often encounter closures: functions that capture variables from the outer scope. 
+
+Closures often capture state variables. In such case care must be taken that closures to capture the latest state variables, otherwise you might encouter the problem name *stale state*.  
+
+Let's see how stale state could appear using an example.  
+
+A component `<DelayedCount>` should count the number of button clicks, but with a delay of 3 seconds.  
+
+Here's the first naive implementation:  
+
+```jsx
+function DelayedCount() {
+  const [count, setCount] = useState(0);
+
+  function handleClickAsync() {
+    setTimeout(function delay() {
+      setCount(count + 1);
+    }, 3000);
+  }
+
+  return (
+    <div>
+      {count}
+      <button onClick={handleClickAsync}>Increase async</button>
+    </div>
+  );
+}
+```
+
+[Open the demo](https://codesandbox.io/s/use-state-broken-0q994). Click "Increase async" then right away "Increase sync" buttons. The counter gets updated only to `1`.  
+
+`delay()` is a stale closure that uses an outdated `count` variable captured during the initial render. 
+
+To fix the problem, let's use a functional way to update `count` state:
+
+```jsx{6}
+function DelayedCount() {
+  const [count, setCount] = useState(0);
+
+  function handleClickAsync() {
+    setTimeout(function delay() {
+      setCount(count => count + 1);
+    }, 3000);
+  }
+
+  return (
+    <div>
+      {count}
+      <button onClick={handleClickAsync}>Increase async</button>
+    </div>
+  );
+}
+```
+
+Now `setCount(count => count + 1)` updates the count state correctly inside `delay()`. React makes sure the latest state value is supplied as an argument to the update state function. The stale closure is solved.    
+
+[Open the demo](). Click quckly "Increase async" a few times. The `counter` displays the correct number of clicks after a delay of 3 seconds.  
+
+## 4.4 Complex state management
+
+`useState()` is intended to manage the state of simple to moderated complexity.  
+
+In case if you need to manage some complex state, it makes sense to use `useReducer()` hook. It provides a better support for state that requires many operations. And what's more important, it's easy to extract all the complex state manipulations out of the component.  
+
+
 
 # 5. Conclusion
+
+`useState()` manages state in functional components. 
