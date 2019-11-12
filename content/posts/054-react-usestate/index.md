@@ -1,5 +1,5 @@
 ---
-title: "A Wise Guide on React useState()"
+title: "A Wise Guide on React useState() hook"
 description: "React useState() hook manages the state of functional components."
 published: '2019-11-12T14:00Z'
 modified: '2019-11-12T14:00Z'
@@ -11,7 +11,7 @@ type: post
 commentsThreadId: react-usestate-wise-guide
 ---
 
-The state is information hidden inside of a component. The component can modify its state, without outside component knowing about it.  
+The state is information hidden inside of a component. The component can modify its state, without parent component knowing about it.  
 
 In React a class-based component can have state. However, I don't like classes much, maybe because they are too verbose.  
 
@@ -40,16 +40,14 @@ Here's an example of a stateless functional component:
 ```jsx
 import React from 'react';
 
-function Bulb() {
-  return (
-    <div>
-      <div className="bulb-off" />
-    </div>
-  );
+function Bulbs() {
+  return <div className="bulb-off" />;
 }
 ```
 
-`<Bulb />` is a stateless functional component. For now it simply renders a bulb.  
+`<Bulbs />` is a stateless functional component.
+
+[Open the demo](https://codesandbox.io/s/react-usestate-stateless-component-mg2yr): the component simply renders a bulb.  
 
 What if you'd like to add a button inside this component that switches the bulb between on or off? In such case you would need a *stateful functional component*.  
 
@@ -57,45 +55,37 @@ What if you'd like to add a button inside this component that switches the bulb 
 
 ### 1.1 Enabling state
 
-In order to transform `<Bulb>` into a stateful component, you would need to tell React about it.
+In order to transform `<Bulbs>` into a stateful component, you would need to tell React about it.
 
 What you need is to import the `useState` hook from `'react'` package, then make a call of `useState()` at the beginning of the component's function.  
 
-Let's make these change for `<Bulb>` component:
+Let's make these change for `<Bulbs>` component:
 
-```jsx{1,4}
+```jsx {1,4}
 import React, { useState } from 'react';
 
-function Bulb() {
+function Bulbs() {
   ... = useState(...);
-  return (
-    <div>
-      <div className="bulb-off" />
-    </div>
-  );
+  return <div className="bulb-off" />;
 }
 ```
 
-You can see that the first line of `<Bulb>` function calls `useState()`. Let's not think much about its parameters and returned value. It's important for now that calling this hook at the top of the component makes it stateful functional component.  
+You can see that the first line of `<Bulbs>` function calls `useState()`. Let's not think much about its parameters and returned value. It's important for now that calling this hook at the top of the component makes it stateful functional component.  
 
 Having the state declared, the next step is to initialize it.  
 
-## 1.2 Initializing state
+### 1.2 Initializing state
 
 The state is initialized with an initial value. The first argument of `useState(initialState)` is the initial state value.  
 
 Let's set bulb switch state to initialize with `false`. It means that when the component is rendered first, the bulb is switched off.
 
-```jsx{4}
+```jsx {4}
 import React, { useState } from 'react';
 
-function Bulb() {
+function Bulbs() {
   ... = useState(false);
-  return (
-    <div>
-      <div className="bulb-off" />
-    </div>
-  );
+  return <div className="bulb-off" />;
 }
 ```
 
@@ -103,7 +93,7 @@ Calling `useState(false)` indicates that the state is initialized with `false`.
 
 Having the state declared and initialized, how do you read it? Now is the time to see the returned value of `useState(false)`.  
 
-## 1.3 Reading state
+### 1.3 Reading state
 
 `useState(false)` returns an array of 2 items `stateArray`, where the first item `stateArray[0]` contains the state:
 
@@ -112,38 +102,31 @@ const stateArray = useState(false);
 stateArray[0]; // => the state value
 ```
 
-Let's read the switch state inside `<Bulb>` component. `isOn` prop is no longer needed can be deleted.  
+Let's read the switch state inside `<Bulbs>` component. `isOn` prop is no longer needed can be deleted.  
 
-```jsx{4,7}
+```jsx {4,7}
 import React, { useState } from 'react';
 
-function Bulb() {
+function Bulbs() {
   const stateArray = useState(false);
-  return (
-    <div className="light-switch">
-      { stateArray[0] ?
-        <div className="bulb-on" /> :
-        <div className="bulb-off" />
-      }
-    </div>
-  );
+  return <div className={stateArray[0] ? 'bulb-on' : 'bulb-off'} />;
 }
 ```
 
-[Open the demo !!!](./) and see that `<Bulb>` component state is initialized with `false`.  
+`<Bulbs>` component state is initialized with `false`, [as demo shows](https://codesandbox.io/s/react-usestate-initialized-state-wl3ov).  
 
 `useState(false)` returns an array of 2 items. The first item contains the value of the state, which is stored into `on` variable.  
 
 Obviously because the state is initialized with `false`, the variable `on` contains `false` value.  
 
-To make things straighforward, let's use the destrucuing assignment and read the state in one line:
+The destructuring assignment extracts the state value from the array:
 
 ```jsx{4}
 import React, { useState } from 'react';
 
-function Bulb() {
+function Bulbs() {
   const [isOn] = useState(false);
-  // ...
+  return <div className={isOn ? 'bulb-on' : 'bulb-off'} />;
 }
 ```
 
@@ -153,7 +136,7 @@ The whole idea of state is to be able to change it. Let's see how to do this in 
 
 ### 1.4 Updating state
 
-#### Updating the state with a direct value
+#### Updating the state with a value
 
 As you know already `useState(false)` returns an array where the first item is the state value. Now the second item of the array is a function that accepts one argument: the new state value. Use this function to update the state.
 
@@ -164,38 +147,35 @@ setIsOn(true); // changes the state to `true`
 
 The state updates as a response to an event that provides some new information. Such events are a button click, an HTTP request completion, etc. Make sure to invoke the state updater function within a callback of an event or a callback of other hooks.  
 
-Let's make the following changes to `<Bulb>` component:
+Let's make the following changes to `<Bulbs>` component:
 
-* Add 2 buttons: `Light on` and `Light off`
-* Add click event handlers to these buttons where the state of bulb is updated
+* Add the buttons *Light on* and *Light off*
+* Update the state when buttons are clicked
 
-Let's make these updates to `<Bulb>` component:
+Let's make these updates to `<Bulbs>` component:
 
-```jsx{6-7,15-16}
+```jsx {6-7,17-18}
 import React, { useState } from 'react';
 
-function Bulb() {
+function Bulbs() {
   const [isOn, setIsOn] = useState(false);
 
   const lightOn = () => setIsOn(true);
   const lightOff = () => setIsOn(false);
 
   return (
-    <div className="light-switch">
-      { isOn ?
-        <div className="bulb-on" /> :
-        <div className="bulb-off" />
-      }
+    <>
+      <div className={isOn ? 'bulb-on' : 'bulb-off'} />
       <button onClick={lightOn}>On</button>
       <button onClick={lightOff}>Off</button>
-    </div>
+    </>
   );
 }
 ```
 
-[Open the demo !!!](./) and click *Light off* and *Light on* buttons. The bulb lights on or off depending on the clicked button.  
+[Open the demo](https://codesandbox.io/s/react-usestate-state-update-lxj5i), then click *Light off* and *Light on* buttons. The bulb lights on or off depending on the clicked button.  
 
-When *Light on* button is clicked, `lightOn()` event handler is executed. Inside the event handler `setIsOn(true)` updates the state to `true`.  
+When *Light on* button is clicked, `lightOn()` handler is executed. Inside the event handler `setIsOn(true)` updates the state to `true`.  
 
 As soon as the state changes, React re-renders the component. `isOn` variable gets the new state value `true`.  
 
@@ -208,22 +188,21 @@ As an example, let's have implement the bulb component to swithc on/off with a s
 ```jsx{6}
 import React, { useState } from 'react';
 
-function Bulb() {
+function Bulbs() {
   const [isOn, setIsOn] = useState(false);
 
   const lightSwitch = () => setIsOn(isOn => !isOn);
 
   return (
-    <div>
-      { isOn ?
-        <div className="bulb-on" /> :
-        <div className="bulb-off" />
-      }
+    <>
+      <div className={isOn ? 'bulb-on' : 'bulb-off'} />
       <button onClick={lightSwitch}>On/off</button>
-    </div>
+    </>
   );
 }
 ```
+
+[Open the demo](https://codesandbox.io/s/react-usestate-state-update-functional-dhesq), then click *On/off* button. The bulb light switches on every clicks.  
 
 `setIsOn(isOn => !isOn)` updates the state using a function.  
 
@@ -245,33 +224,32 @@ Let's add a button *Add bulb*. When clicked, it increases the number of bulbs.
 
 The new state `count` holds the number of bulbs, and is initialized with `1`:
 
-```jsx{5}
+```jsx {5}
 import React, { useState } from 'react';
 
-function Bulb() {
+function Bulbs() {
   const [isOn, setIsOn] = useState(false);
   const [count, setCount] = useState(1);
 
   const lightSwitch = () => setIsOn(isOn => !isOn);
-  const addBulb = () => setCount(count => count + 1);
+  const addBulbs = () => setCount(count => count + 1);
 
-  const bulb = isOn ?
-    <div className="bulb-on" /> :  
-    <div className="bulb-off" />;
+  const bulb = <div className={isOn ? 'bulb-on' : 'bulb-off'} />;
+  const bulbs = Array(count).fill(bulb);
 
   return (
-    <div>
-      {Array.from(Array(count), () => bulb )}
+    <>
+      <div className="bulbs">{bulbs}</div>
       <button onClick={lightSwitch}>On/off</button>
-      <button onClick={addBulb}>Add bulb</button>
-    </div>
+      <button onClick={addBulbs}>Add bulb</button>
+    </>
   );
 }
 ```
 
-[Open the demo!!!](./) and click *Add bulb* button: the number of bulbs increases. Clicking *On/off* button switches on/off the bulbs.  
+[Open the demo](https://codesandbox.io/s/react-usestate-multiple-states-j8o78), then click *Add bulb* button: the number of bulbs increases. Clicking *On/off* button switches on/off the bulbs.  
 
-`const [count, setCount] = useState(1)` creates a new state that manages the number of bulbs. It works alongside with `isOn` state.  
+`[isOn, setIsOn] = useState(false)` manages the on/off state, while `[count, setCount] = useState(1)` creates a new state that manages the number of bulbs. Multiple states work correctly within one component.  
 
 ## 3. Lazy initialization of state
 
@@ -296,7 +274,7 @@ function MyComponent({ bigJsonData }) {
 
 ## 4. Pitfalls
 
-Now you have the first grasp of how to use `useState()`. 
+Now you have the first grasp of how to use `useState()`.  
 
 Still you have to be aware of common issues that you might encouter when using `useState()`. Let's continue with them.  
 
@@ -314,7 +292,7 @@ Let's follow examples of correct and incorrect usage of `useState()`.
 `useState()` is *correctly* called at the top level of functional component:
 
 ```jsx{3}
-function Bulb() {
+function Bulbs() {
   // Good
   const [isOn, setIsOn] = useState(false);
   // ...
@@ -324,7 +302,7 @@ function Bulb() {
 Multiple `useState()` calls are *correctly* invoked in the same order:
 
 ```jsx{3-4}
-function Bulb() {
+function Bulbs() {
   // Good
   const [isOn, setIsOn] = useState(false);
   const [count, setCount] = useState(1);
@@ -340,7 +318,7 @@ function toggleHook(initial) {
   return [isOn, () => setIsOn(!isOn)];
 }
 
-function Bulb() {
+function Bulbs() {
   const [isOn, toggle] = toggleHook(false);
   // ...
 }
@@ -351,7 +329,7 @@ function Bulb() {
 `useState()` is *incorrectly* called within a condition:
 
 ```jsx{4}
-function Bulb({ isSwitchEnabled }) {
+function BulbsSwitch({ isSwitchEnabled }) {
   if (isSwitchEnabled) {
     // Bad
     const [isOn, setIsOn] = useState(false);
@@ -363,7 +341,7 @@ function Bulb({ isSwitchEnabled }) {
 `useState()` is *incorrectly* called within a nested function:
 
 ```jsx{7}
-function Bulb() {
+function BulbsSwitch() {
   let isOn = false;
   let setIsOn = () => {};
 
@@ -411,7 +389,7 @@ function DelayedCount() {
 }
 ```
 
-[Open the demo](https://codesandbox.io/s/use-state-broken-0q994). Click "Increase async" then right away "Increase sync" buttons. The counter gets updated only to `1`.  
+[Open the demo](https://codesandbox.io/s/react-usestate-async-broken-uzzvg). Click quckly *Increase async* a few times. The counter updates only to `1`, instead of reflecting the actual number of clicks.  
 
 `delay()` is a stale closure that uses an outdated `count` variable captured during the initial render. 
 
@@ -438,7 +416,7 @@ function DelayedCount() {
 
 Now `setCount(count => count + 1)` updates the count state correctly inside `delay()`. React makes sure the latest state value is supplied as an argument to the update state function. The stale closure is solved.  
 
-[Open the demo](). Click quckly "Increase async" a few times. The `counter` displays the correct number of clicks after a delay of 3 seconds.  
+[Open the demo](https://codesandbox.io/s/react-usestate-async-fixed-5y2o8). Click quckly "Increase async" a few times. The `counter` displays the correct number of clicks after a delay of 3 seconds.  
 
 ### 4.3 Complex state management
 
@@ -454,9 +432,9 @@ A possible implementation of favorite movies list could be:
 import React, { useState } from 'react';
 
 function FavoriteMovies() {
-  const [movies, setMovies] = useState();
+  const [movies, setMovies] = useState([{ name: 'Heat' }]);
 
-  const add = movie => setMovies([...movies, movie];
+  const add = movie => setMovies([...movies, movie]);
 
   const remove = index => {
     setMovies([
@@ -471,11 +449,13 @@ function FavoriteMovies() {
 }
 ```
 
+[Try the demo](https://codesandbox.io/s/react-usestate-complex-state-5dplv).
+
 You might notice that the management of movies is complex. It requires adding and removing movies. The state management details clutter the component.  
 
 A better solution is to extract the movies management into a reducer. This refactoring it cleans from the details of how state is managed.  
 
-```jsx{3,18}
+```jsx {3,18}
 import React, { useReducer } from 'react';
 
 function reducer(state, action) {
@@ -507,7 +487,7 @@ function FavoriteMovies() {
 * `"add"` inserts a new movie into the list
 * `"remove"` removes a movie by index from the list
 
-The functionality of the component hasn't changed. But this version of `<FavoriteMovies>` is easier to understand because the state management's been extraced into the reducer.  
+[Try the demo](https://codesandbox.io/s/react-usestate-complex-state-usereducer-gpw87) and notice that component functionality hasn't changed. But this version of `<FavoriteMovies>` is easier to understand because the state management's been extraced into the reducer.  
 
 ### 4.4 State vs reference
 
@@ -553,6 +533,8 @@ function CountMyRenders() {
 }
 ```
 
+[Open the demo](https://codesandbox.io/s/react-usestate-vs-useref-6d8k7) and click a few times the button to trigger re-render.  
+
 The value of `countRenderRef` mutable reference increments `countRenderRef.current++` every time the component renders. What's important, changing the reference doesn't trigger component re-rendering.  
 
 ## 5. Conclusion
@@ -575,4 +557,4 @@ You have to make sure to follow the rules of hooks with `useState()`. This guara
 
 Stale state happens when a closure captures outdated state variables. You can fix this by updating the state using a callback that calculates the new state based on previous one.  
 
-Finally, `useState()` manages simple to moderate complexity of state. To deal with highly complex state operations, a wiser alternative is `useReducer()` hook.
+Finally, you would use `useState()` to manages simple state. To deal with more complex state a wiser alternative is `useReducer()` hook.
