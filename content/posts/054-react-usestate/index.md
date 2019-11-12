@@ -19,7 +19,7 @@ I prefer functional components because they are simple. If you do too, then you 
 
 You will understand how to manage the state of components using `useState()`. Plus I will present the common pitfalls when using `useState()` to be aware of.  
 
-# 1. State management using *useState()*
+## 1. State management using *useState()*
 
 The state management consists of the following steps:
 
@@ -42,8 +42,8 @@ import React from 'react';
 
 function Bulb() {
   return (
-    <div className="bulb">
-      <img src="bulb-off.jpg" /> 
+    <div>
+      <div className="bulb-off" />
     </div>
   );
 }
@@ -53,14 +53,14 @@ function Bulb() {
 
 What if you'd like to add a button inside this component that switches the bulb between on or off? In such case you would need a *stateful functional component*.  
 
-`useState()` is the right hook to achieve the bulb switch state. Let's divide the integration of state management into a functional component in 4 steps: declaring the state, initalizing, reading and updating. 
+`useState()` is the right hook to achieve the bulb switch state. Let's divide the integration of state management into a functional component in 4 steps: declaring the state, initalizing, reading and updating.  
 
-## 1.1 Enabling state
+### 1.1 Enabling state
 
-In order to transform `<Bulb>` into a stateful component, you would need to tell React about it. 
+In order to transform `<Bulb>` into a stateful component, you would need to tell React about it.
 
 What you need is to import the `useState` hook from `'react'` package, then make a call of `useState()` at the beginning of the component's function.  
- 
+
 Let's make these change for `<Bulb>` component:
 
 ```jsx{1,4}
@@ -69,11 +69,8 @@ import React, { useState } from 'react';
 function Bulb() {
   ... = useState(...);
   return (
-    <div className="bulb">
-      { isOn ? 
-        <img src="bulb-on.jpg" /> : 
-        <img src="bulb-off.jpg" /> 
-      }
+    <div>
+      <div className="bulb-off" />
     </div>
   );
 }
@@ -95,8 +92,8 @@ import React, { useState } from 'react';
 function Bulb() {
   ... = useState(false);
   return (
-    <div className="bulb">
-      <img src="bulb-on.jpg" /> : 
+    <div>
+      <div className="bulb-off" />
     </div>
   );
 }
@@ -124,11 +121,10 @@ function Bulb() {
   const stateArray = useState(false);
   return (
     <div className="light-switch">
-      { stateArray[0] ? 
-        <img src="bulb-on.jpg" /> : 
-        <img src="bulb-off.jpg" /> 
+      { stateArray[0] ?
+        <div className="bulb-on" /> :
+        <div className="bulb-off" />
       }
-      <img src={imgSrc} />
     </div>
   );
 }
@@ -155,18 +151,20 @@ function Bulb() {
 
 The whole idea of state is to be able to change it. Let's see how to do this in a final step.  
 
-## 1.4 Updating state
+### 1.4 Updating state
 
-As you know already `useState(false)` returns an array where the first item is the state value. Now the second item of the array is a function that accepts one argument: the new state value. Use this function to update the state.   
+#### Updating the state with a direct value
+
+As you know already `useState(false)` returns an array where the first item is the state value. Now the second item of the array is a function that accepts one argument: the new state value. Use this function to update the state.
 
 ```javascript
 const [isOn, setIsOn] = useState(false);
 setIsOn(true); // changes the state to `true`
 ```
 
-State update happens in response to an event: e.g. the user clicked a button.  
+The state updates as a response to an event that provides some new information. Such events are a button click, an HTTP request completion, etc. Make sure to invoke the state updater function within a callback of an event or a callback of other hooks.  
 
-Let's make the following changes to `<Bulb>` component: 
+Let's make the following changes to `<Bulb>` component:
 
 * Add 2 buttons: `Light on` and `Light off`
 * Add click event handlers to these buttons where the state of bulb is updated
@@ -184,12 +182,12 @@ function Bulb() {
 
   return (
     <div className="light-switch">
-      { isOn ? 
-        <img src="bulb-on.jpg" /> : 
-        <img src="bulb-off.jpg" /> 
+      { isOn ?
+        <div className="bulb-on" /> :
+        <div className="bulb-off" />
       }
-      <button onClick={lightOn}>Light on</button>
-      <button onClick={lightOff}>Light off</button>
+      <button onClick={lightOn}>On</button>
+      <button onClick={lightOff}>Off</button>
     </div>
   );
 }
@@ -197,71 +195,97 @@ function Bulb() {
 
 [Open the demo !!!](./) and click *Light off* and *Light on* buttons. The bulb lights on or off depending on the clicked button.  
 
-When *Light on* button is clicked, `lingOn()` event handler is executed. Inside the event handler `setIsOn(true)` updates the state to `true`.  
+When *Light on* button is clicked, `lightOn()` event handler is executed. Inside the event handler `setIsOn(true)` updates the state to `true`.  
 
 As soon as the state changes, React re-renders the component. `isOn` variable gets the new state value `true`.  
 
-**Key takeaway**
+#### Updating the state with a function
+
+Sometimes you need to calculate the new state based on previous one. In such case invoke you can update the state in a functional way: `setState(prevValue => prevValue + 1)`.  
+
+As an example, let's have implement the bulb component to swithc on/off with a single button:
+
+```jsx{6}
+import React, { useState } from 'react';
+
+function Bulb() {
+  const [isOn, setIsOn] = useState(false);
+
+  const lightSwitch = () => setIsOn(isOn => !isOn);
+
+  return (
+    <div>
+      { isOn ?
+        <div className="bulb-on" /> :
+        <div className="bulb-off" />
+      }
+      <button onClick={lightSwitch}>On/off</button>
+    </div>
+  );
+}
+```
+
+`setIsOn(isOn => !isOn)` updates the state using a function.  
+
+#### State management key takeaway
 
 To *enable state* in a functional component, call `useState()` within the component function. The first argument of the `useState(initialValue)` is the state's *initial value*.  
 
 `useState()` returns an array consiting of 2 items: the current *state value* and a state updater function.  
 
-To *update the state*, invoke the state updater function with the new value. React makes sure to re-render the component so that the new state is consumed.  
+To *update the state*, invoke the state updater function with the new value. Alternatively, you can invoke the state updater with a function which should return the new state based on previous.  
 
-# 2. Multiple states
+React makes sure to re-render the component so that the new state is consumed.  
+
+## 2. Multiple states
 
 A functional component can have as many states as necessary. Just initialize as many states as you need with multiple calls of `useState()`.  
 
-The rule to remember is that states declaration should always happen in the same order (more about that in [4.1](#41-incorrect-place-to-declare-state)).  
+Let's add a button *Add bulb*. When clicked, it increases the number of bulbs.  
 
-Let's improve `<Bulb>` component with a button *Add bulb* that increases the number of bulbs.  
+The new state `count` holds the number of bulbs, and is initialized with `1`:
 
-To do so a new state is necessary. Let's name the new state `count` and initialize it with `1`:
-
-```jsx{5,9,20}
+```jsx{5}
 import React, { useState } from 'react';
 
 function Bulb() {
   const [isOn, setIsOn] = useState(false);
   const [count, setCount] = useState(1);
 
-  const lightOn = () => setIsOn(true);
-  const lightOff = () => setIsOn(false);
-  const addBulb = () => setCount(count + 1);
+  const lightSwitch = () => setIsOn(isOn => !isOn);
+  const addBulb = () => setCount(count => count + 1);
 
-  const bulb = isOn ? 
-    <img src="bulb-on.jpg" /> :  
-    <img src="bulb-off.jpg" />;
+  const bulb = isOn ?
+    <div className="bulb-on" /> :  
+    <div className="bulb-off" />;
 
   return (
-    <div className="bulb">
+    <div>
       {Array.from(Array(count), () => bulb )}
-      <button onClick={lightOn}>Light on</button>
-      <button onClick={lightOff}>Light off</button>
+      <button onClick={lightSwitch}>On/off</button>
       <button onClick={addBulb}>Add bulb</button>
     </div>
   );
 }
 ```
 
-[Open the demo!!!](./) and click *Add bulb* button: the number of bulbs increases. Clicking *Light on* or *Light off* buttons switches on/off the bulbs.  
+[Open the demo!!!](./) and click *Add bulb* button: the number of bulbs increases. Clicking *On/off* button switches on/off the bulbs.  
 
 `const [count, setCount] = useState(1)` creates a new state that manages the number of bulbs. It works alongside with `isOn` state.  
 
-# 3. Lazy initialization of state
+## 3. Lazy initialization of state
 
 Every time React re-renders the component, `useState(initialState)` is executed. If the initial state is a primitive value (number, boolean, etc) there are no performance issues.  
 
 But when the initial state requires complex computation, you can use the *lazy initialization of state* by supplying a function as an argument to `useState(computeInitialState)`.  
 
 Here's an example:
-```javascript
-function MyComponent() {
+
+```javascript {3}
+function MyComponent({ bigJsonData }) {
   const [value, setValue] = useState(function getInitialState() {
-    let result;
-    // expensive computation....
-    return result;
+    const object = JSON.parse(bigJsonData); // expensive operation
+    return object.initialValue;
   });
 
   // ...
@@ -270,13 +294,13 @@ function MyComponent() {
 
 `getInitialState()` is executed just once, at the initial render, to get the initial state. On later renderings `getInitialState()` is not invoked, skipping the expensive computation.  
 
-# 4. Pitfalls
+## 4. Pitfalls
 
 Now you have the first grasp of how to use `useState()`. 
 
 Still you have to be aware of common issues that you might encouter when using `useState()`. Let's continue with them.  
 
-## 4.1 Incorrect place to call state hook
+### 4.1 Where to call *useState()*
 
 When using `useState()` hook you have to follow [the rules of hooks](https://reactjs.org/docs/hooks-rules.html):  
 
@@ -285,7 +309,7 @@ When using `useState()` hook you have to follow [the rules of hooks](https://rea
 
 Let's follow examples of correct and incorrect usage of `useState()`.  
 
-**Correct usage of `useState()`**
+#### Valid call of *useState()*
 
 `useState()` is *correctly* called at the top level of functional component:
 
@@ -309,7 +333,7 @@ function Bulb() {
 
 `useState()` is *correctly* called at the top level of a custom hook:
 
-```jsx{3,8}
+```jsx{3}
 function toggleHook(initial) {
   // Good
   const [isOn, setIsOn] = useState(initial);
@@ -322,7 +346,7 @@ function Bulb() {
 }
 ```
 
-**Incorrect usage of `useState()`**
+#### Invalid call of *useState()*
 
 `useState()` is *incorrectly* called within a condition:
 
@@ -356,79 +380,7 @@ function Bulb() {
 }
 ```
 
-## 4.2 Incorrect place to set state
-
-The state updates as a response to an event that provides some new information. Such events are a button click, an HTTP request completion, etc.  
-
-Make sure to invoke the state updater function within a callback of an event or a callback of other hooks.  
-
-Recall the `<Bulb>` component:
-
-```jsx{6-7,15-16}
-import React, { useState } from 'react';
-
-function Bulb() {
-  const [isOn, setIsOn] = useState(false);
-
-  const lightOn = () => setIsOn(true);
-  const lightOff = () => setIsOn(false);
-
-  return (
-    <div className="light-switch">
-      { isOn ? 
-        <img src="bulb-on.jpg" /> : 
-        <img src="bulb-off.jpg" /> 
-      }
-      <button onClick={lightOn}>Light on</button>
-      <button onClick={lightOff}>Light off</button>
-    </div>
-  );
-}
-```
-
-`lightOn()` and `lightOff()` event handlers update the state as a response to a click event. That's a *correct* place to update state.  
-
-What about a scenario when you'd like to count the times a component renders. The obvious and *incorrect* solution is to invoke state update in the body of the component's function:
-
-```jsx{7}
-import React, { useState, useEffect } from 'react';
-
-function CountMyRenders() {
-  const [countRender, setCountRender] = useState(0);
-  
-  // Bad
-  setCountRender(countRender => countRender + 1);
-
-  return (
-    <div>I've rendered {countRender} times </div>
-  );
-}
-```
-
-The problem is that as soon as `countRender` state updates, the component re-renders. This triggers another state update, and another re-render, and so on indefinitely.  
-
-You have to use `useEffect()` hook that proves the necessary callback:
-
-```jsx{8}
-import React, { useState, useEffect } from 'react';
-
-function CountMyRenders() {
-  const [countRender, setCountRender] = useState(0);
-  
-  useEffect(function afterRender() {
-    // Good
-    setCountRender(countRender => countRender + 1);
-  });
-
-  return (
-    <div>I've rendered {countRender} times </div>
-  );
-}
-```
-
-`useEffect()` calls `afterRender()` callback after every render. `afterRender()` is the correct place to increment `countRender` state.  
-
-## 4.3 Stale state
+### 4.2 Stale state
 
 Inside functional components you might often encounter closures: functions that capture variables from the outer scope. 
 
@@ -440,11 +392,11 @@ A component `<DelayedCount>` should count the number of button clicks, but with 
 
 Here's the first naive implementation:  
 
-```jsx
+```jsx {5}
 function DelayedCount() {
   const [count, setCount] = useState(0);
 
-  function handleClickAsync() {
+  const handleClickAsync = () => {
     setTimeout(function delay() {
       setCount(count + 1);
     }, 3000);
@@ -465,11 +417,11 @@ function DelayedCount() {
 
 To fix the problem, let's use a functional way to update `count` state:
 
-```jsx{6}
+```jsx {6}
 function DelayedCount() {
   const [count, setCount] = useState(0);
 
-  function handleClickAsync() {
+  const handleClickAsync = () => {
     setTimeout(function delay() {
       setCount(count => count + 1);
     }, 3000);
@@ -484,11 +436,11 @@ function DelayedCount() {
 }
 ```
 
-Now `setCount(count => count + 1)` updates the count state correctly inside `delay()`. React makes sure the latest state value is supplied as an argument to the update state function. The stale closure is solved.    
+Now `setCount(count => count + 1)` updates the count state correctly inside `delay()`. React makes sure the latest state value is supplied as an argument to the update state function. The stale closure is solved.  
 
 [Open the demo](). Click quckly "Increase async" a few times. The `counter` displays the correct number of clicks after a delay of 3 seconds.  
 
-## 4.4 Complex state management
+### 4.3 Complex state management
 
 `useState()` is intended to manage the state of simple to moderated complexity.  
 
@@ -498,55 +450,112 @@ Let's say you need to program a list of favorite movies. The user can add a new 
 
 A possible implementation of favorite movies list could be:
 
-```jsx
+```jsx {6,8-13}
 import React, { useState } from 'react';
 
 function FavoriteMovies() {
-  const [movies, setMovies] = useState([{ name: 'Heat' }]);
+  const [movies, setMovies] = useState();
 
-  function addMovie() {
-    
-  }
+  const add = movie => setMovies([...movies, movie];
 
-  function deleteMovie(index) {
-    
+  const remove = index => {
+    setMovies([
+      ...movies.slice(0, index),
+      ...movies.slice(index + 1)
+    ]);
   }
 
   return (
-
+    // Use add(movie) and remove(index)...
   );
 }
 ```
 
-You might notice that the management of movies list is quite complex. It requires adding movies, and remove movies. Somehow the state management starts to clutter the component.  
+You might notice that the management of movies is complex. It requires adding and removing movies. The state management details clutter the component.  
 
-A better solution is to extract the movies management into a reducer. The component this way cleans from the details of how state is managed.  
+A better solution is to extract the movies management into a reducer. This refactoring it cleans from the details of how state is managed.  
 
-```jsx
+```jsx{3,18}
 import React, { useReducer } from 'react';
 
+function reducer(state, action) {
+  switch (action.type) {
+    case 'add':
+      return [...state, action.item];
+    case 'remove':
+      return [
+        ...state.slice(0, action.index),
+        ...state.slice(action.index + 1)
+      ];
+    default:
+      throw new Error();
+  }
+}
+
 function FavoriteMovies() {
-  const [movies, setMovies] = useState([{ name: 'Heat' }]);
-
-  function addMovie() {
-    
-  }
-
-  function deleteMovie(index) {
-    
-  }
+  const [state, dispatch] = useReducer(reducer, [{ name: 'Heat' }]);
 
   return (
-
+    // Use dispatch({ type: 'add', item: movie })
+    // and dispatch({ type: 'remove', index })...
   );
 }
 ```
 
-`moviesReducer()` manages the state of movies. There are 2 operations: `add` and `remove`. 
+`reducer` manages the state of movies. There are 2 action types:
 
-The functionality of the component hasn't changes. But clearly the version of `<FavoriteMovies>` that uses a reducer is easier to understand, because the state management is extraced out into the reducer.  
+* `"add"` inserts a new movie into the list
+* `"remove"` removes a movie by index from the list
 
-# 5. Conclusion
+The functionality of the component hasn't changed. But this version of `<FavoriteMovies>` is easier to understand because the state management's been extraced into the reducer.  
+
+### 4.4 State vs reference
+
+Consider a scenario when you'd like to count the times a component renders.  
+
+Let's initialize `countRender` state, and update it on each render (with the help of `useEffect()`):
+
+```jsx {7}
+import React, { useState, useEffect } from 'react';
+
+function CountMyRenders() {
+  const [countRender, setCountRender] = useState(0);
+  
+  useEffect(function afterRender() {
+    setCountRender(countRender => countRender + 1);
+  });
+
+  return (
+    <div>I've rendered {countRender} times</div>
+  );
+}
+```
+
+`useEffect()` calls `afterRender()` callback after every render. But as soon as `countRender` state updates, the component re-renders. This triggers another state update, and another re-render, and so on *indefinitely*.  
+
+Mutable references `useRef()` are useful when you need state that doesn't trigger re-render on change.  
+
+Let's fix `<CountMyRenders>` to use a mutable reference:
+
+```jsx {7}
+import React, { useRef, useEffect } from 'react';
+
+function CountMyRenders() {
+  const countRenderRef = useRef(1);
+  
+  useEffect(function afterRender() {
+    countRenderRef.current++;
+  });
+
+  return (
+    <div>I've rendered {countRenderRef.current} times</div>
+  );
+}
+```
+
+The value of `countRenderRef` mutable reference increments `countRenderRef.current++` every time the component renders. What's important, changing the reference doesn't trigger component re-rendering.  
+
+## 5. Conclusion
 
 To enable the state inside functional components, invoke `useState()` inside the body of the component's function.
 
@@ -564,7 +573,6 @@ Lazy initialization is handy when the initial state calculation is expensive. In
 
 You have to make sure to follow the rules of hooks with `useState()`. This guarantees the correct handling of state.  
 
-Stale state happens when a closure captures outdated state variables. You can fix this by updating the state using a callback that calculates the new state based on previous one.   
+Stale state happens when a closure captures outdated state variables. You can fix this by updating the state using a callback that calculates the new state based on previous one.  
 
-Finally, `useState()` manages simple to moderate complexity of state. To deal with highly complex state operations, a wiser alternative is `useReducer()` hook.  
-
+Finally, `useState()` manages simple to moderate complexity of state. To deal with highly complex state operations, a wiser alternative is `useReducer()` hook.
