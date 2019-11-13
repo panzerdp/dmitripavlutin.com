@@ -36,6 +36,12 @@
     padding-left: 26px;
     background: left center / 22px no-repeat url('/codesandbox.svg');
   }
+
+  img[src$='.gif'] {
+    margin: 0 auto;
+    display: block;
+    max-width: 100%;
+  }
 }
 
 .bottomSubscriptionForm {

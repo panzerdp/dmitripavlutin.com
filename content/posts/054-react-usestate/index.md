@@ -1,8 +1,8 @@
 ---
 title: "The Wise Guide to React useState() Hook"
 description: "React useState() hook manages the state of functional components."
-published: '2019-11-12T14:00Z'
-modified: '2019-11-12T14:00Z'
+published: '2019-11-13T13:00Z'
+modified: '2019-11-13T13:00Z'
 thumbnail: './images/wood.jpg'
 slug: react-usestate-hook-guide
 tags: ['react', 'state', 'hook']
@@ -154,6 +154,8 @@ function Bulbs() {
 
 [Open the demo](https://codesandbox.io/s/react-usestate-state-update-lxj5i), then click *Off* or *On* button. The bulb lights on or off depending on the clicked button.  
 
+![React app update state](./images/usestate-buttons-on-off7.gif)
+
 When *On* button is clicked, `lightOn()` handler updates the state to `true`: `setOn(true)`. The same happens when *Off* is clicked, except that the state updates to `false`.  
 
 As soon as the state changes, React re-renders the component. `on` variable gets the new state value.  
@@ -209,6 +211,8 @@ function Bulbs() {
 ```
 
 [Open the demo](https://codesandbox.io/s/react-usestate-state-update-functional-dhesq), then click *On/off* button. The bulb light toggles on every click.  
+
+![React app update state](./images/usestate-button1.gif)
 
 `setOn(on => !on)` updates the state using a function.  
 
@@ -269,6 +273,8 @@ function Bulbs() {
 ```
 
 [Open the demo](https://codesandbox.io/s/react-usestate-multiple-states-j8o78), then click *Add bulb* button: the number of bulbs increases. Clicking *On/off* button switches on/off the bulbs.  
+
+![React app multiple state](./images/usestate-multiple1.gif)
 
 * `[on, setOn] = useState(false)` manages the on/off state
 * `[count, setCount] = useState(1)` manages the number of bulbs.  
@@ -417,6 +423,8 @@ function DelayedCount() {
 
 [Open the demo](https://codesandbox.io/s/react-usestate-async-broken-uzzvg). Click *Increase async* quickly a few times. `count` doesn't reflect the actual number of clicks, some clicks are "eaten".
 
+![React app multiple state](./images/usestate-async-fail.gif)
+
 `delay()` is a stale closure that captures an outdated `count` variable from the initial render (when it was initialized with `0`).  
 
 To fix the problem, let's use a functional way to update `count` state:
@@ -443,6 +451,8 @@ function DelayedCount() {
 Now `setCount(count => count + 1)` updates the count state correctly inside `delay()`. React makes sure the latest state value is supplied as an argument to the update state function. The stale closure is solved.  
 
 [Open the demo](https://codesandbox.io/s/react-usestate-async-fixed-5y2o8). Click "Increase async" quickly a few times. When delay passes, the `counter` correctly reflects the number of clicks.  
+
+![React app multiple state](./images/usestate-async.gif)
 
 ### 4.3 Complex state management
 
@@ -475,9 +485,11 @@ function FavoriteMovies() {
 }
 ```
 
-[Try the demo](https://codesandbox.io/s/react-usestate-complex-state-5dplv)
+[Try the demo](https://codesandbox.io/s/react-usestate-complex-state-5dplv): add and remove your favorite movies.  
 
-Notice that the management of movies is complex. It requires adding and removing movies. The state management details clutter the component.  
+![React app complex state](./images/usestate-complex.gif)
+
+The state list requires several operations: adding and removing movies. The state management details clutter the component.  
 
 A better solution is to extract the complex state management into a reducer:
 
@@ -564,6 +576,8 @@ function CountMyRenders() {
 ```
 
 [Open the demo](https://codesandbox.io/s/react-usestate-vs-useref-6d8k7) and click a few times the button to trigger re-render.  
+
+![React app complex state](./images/useref.gif)
 
 The value of `countRenderRef` mutable reference increments `countRenderRef.current++` every time the component renders. What's important, changing the reference doesn't trigger component re-rendering.  
 
