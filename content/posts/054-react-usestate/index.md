@@ -1,10 +1,10 @@
 ---
-title: "A Wise Guide on React useState() hook"
+title: "The Wise Guide to React useState() Hook"
 description: "React useState() hook manages the state of functional components."
 published: '2019-11-12T14:00Z'
 modified: '2019-11-12T14:00Z'
 thumbnail: './images/wood.jpg'
-slug: react-usestate-guide
+slug: react-usestate-hook-guide
 tags: ['react', 'state', 'hook']
 recommended: ['react-fetch-lifecycle-methods-hooks-suspense', 'use-react-memo-wisely']
 type: post
@@ -15,7 +15,7 @@ The state is information hidden inside a component. The component can modify its
 
 I prefer functional components because they are simple. To enable state management for functional components, you need `useState()` hook.  
 
-This guide step by step explains how to use efficiently `useState()`. Apart from that, I will present the common  `useState()` pitfalls you must be aware of.  
+The guide step by step explains how to work with `useState()` hook. Moreover, I will present the common `useState()` pitfalls you must be aware of.  
 
 ## 1. State management using *useState()*
 
@@ -31,7 +31,7 @@ function Bulbs() {
 
 You can [try out the demo](https://codesandbox.io/s/react-usestate-stateless-component-mg2yr).
 
-What about adding a button to switch on/off the bulb? To do so, you would need to create a *stateful functional component*.  
+What about adding a button to switch on/off the bulb? To do so, you need a functional component with state, aka *stateful functional component*.  
 
 `useState()` is the right hook to implement the bulb switch state. Adding state to a functional component requires 4 steps: *enabling* the state, *initializing*, *reading* and *updating*.  
 
@@ -112,7 +112,7 @@ function Bulbs() {
 
 `on` state variable holds the state value.
 
-Ok, the state's been enabled and initialized, and now you can read it. But how do you update it? Let's look again on what `useState(initialState)` returns.  
+Ok, the state's been enabled and initialized, and now you can read it. But how do you update it? Let's look again at what `useState(initialState)` returns.  
 
 ### 1.4 Updating state
 
@@ -162,7 +162,7 @@ The state updates as a response to an event that provides some new information. 
 
 #### Updating the state with a callback
 
-To calculate the new state based on the previous one, you can update the state with a callback:
+When the new state is calculated using the previous state, you can update the state with a callback:
 
 ```javascript
 const [state, setState] = useState(initialState);
@@ -171,6 +171,22 @@ const [state, setState] = useState(initialState);
 setState(prevState => nextState);
 
 // after re-render `state` becomes `newState`
+```
+
+Here are some use cases:
+
+```jsx
+// Toggle a boolean
+const [toggled, setToggled] = useState(false);
+setToggled(toggled => !toggled);
+
+// Increase a counter
+const [count, setCount] = useState(0);
+setCount(count => count + 1);
+
+// Add an item to array
+const [items, setItems] = useState([]);
+setItems(items => [...items, 'New Item']);
 ```
 
 Let's implement the bulb component to switch on/off with a single button:
@@ -198,21 +214,32 @@ function Bulbs() {
 
 #### State management key takeaway
 
-Call `useState()` hook to *enable state* in a functional component. 
+Call `useState()` hook to *enable state* in a functional component.  
 
 The first argument of the `useState(initialValue)` is the state's *initial value*.  
 
 `[state, setState] = useState(initialValue)` returns an array of 2 items: the *state value* and a state updater function.  
 
-Invoking the state updater function `setState(newState)` with the new value *updates the state*. Alternatively, you can invoke the state updater with a callback `setState(prev => next);` that should return the new state based on previous.  
+Invoking the state updater function `setState(newState)` with the new value *updates the state*. Alternatively, you can invoke the state updater with a callback `setState(prev => next)`, which returns the new state based on previous.  
 
-After the state updater is called, React makes sure to *re-render* the component so that the new state is consumed.  
+After the state updater is called, React makes sure to *re-render* the component so that the new state becomes actual.  
 
 That's the essence of how `useState()` hook works.  
 
 ## 2. Multiple states
 
-A functional component can have as many states as necessary. Initialize as many states as you need with multiple calls of `useState()`.  
+A functional component can have as many states as necessary by doing multiple calls of `useState()`.  
+
+```jsx
+function MyComponent() {
+  const [state1, setState1] = useState(initial1);
+  const [state2, setState2] = useState(initial2);
+  const [state3, setState3] = useState(initial3);
+  // ...
+}
+```
+
+Make sure that multiple calls of `useState()` are always in the same order between renderings (more on that in [4.1 Where to call useState()](#41-where-to-call-usestate)).  
 
 Let's add a button *Add bulb* and a new state holding the count of bulbs. When the button is clicked, a new bulb is added.  
 
@@ -415,7 +442,7 @@ function DelayedCount() {
 
 Now `setCount(count => count + 1)` updates the count state correctly inside `delay()`. React makes sure the latest state value is supplied as an argument to the update state function. The stale closure is solved.  
 
-[Open the demo](https://codesandbox.io/s/react-usestate-async-fixed-5y2o8). Click "Increase async" quickly a few times. After the delay passes, the `counter` correctly reflects the number of clicks.  
+[Open the demo](https://codesandbox.io/s/react-usestate-async-fixed-5y2o8). Click "Increase async" quickly a few times. When delay passes, the `counter` correctly reflects the number of clicks.  
 
 ### 4.3 Complex state management
 
