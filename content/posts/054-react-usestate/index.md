@@ -17,6 +17,10 @@ I prefer functional components because they are simple. To enable state manageme
 
 The guide step by step explains how to work with `useState()` hook. Moreover, I will present the common `useState()` pitfalls you must be aware of.  
 
+```toc
+
+```
+
 ## 1. State management using *useState()*
 
 A *stateless functional component* doesn't have a state. Here's an example:  
@@ -216,7 +220,7 @@ function Bulbs() {
 
 `setOn(on => !on)` updates the state using a function.  
 
-#### State management key takeaway
+### 1.5 State management key takeaway
 
 Call `useState()` hook to *enable state* in a functional component.  
 

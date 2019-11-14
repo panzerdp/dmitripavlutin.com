@@ -6,6 +6,13 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
+          {
+            resolve: `gatsby-remark-table-of-contents`,
+            options: {
+              tight: true,
+              fromHeading: 1,
+            },
+          },
           `gatsby-plugin-sharp`,
           {
             resolve: `gatsby-remark-images`,

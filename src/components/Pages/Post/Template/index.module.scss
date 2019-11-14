@@ -42,6 +42,67 @@
     display: block;
     max-width: 100%;
   }
+
+  :global {
+    .toc {
+      background-color: rgba($border-color, 0.25);
+      border-radius: 8px;
+      padding: 1rem;
+      padding-left: 1.5rem;
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+
+      a {
+        color: $anchor-dark-color;
+      }
+
+      ul,
+      li {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      > h4 {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      > ul {
+        > li {
+          padding: 0.2rem 0;
+
+          > a,
+          > p > a {
+            font-size: 1.5rem;
+          }
+
+          > ul > li {
+            > a,
+            > p > a {
+              font-size: 1.4rem;
+            }
+          }
+        }
+
+        ul {
+          margin-left: 3.5rem;
+
+          @media (max-width: $small-device-width) {
+            margin-left: 1.5rem;
+          }
+
+          a,
+          p > a {
+            font-size: 1.25rem;
+          }
+        }
+      }
+    }
+  }
 }
 
 .bottomSubscriptionForm {

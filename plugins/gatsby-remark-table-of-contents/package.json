@@ -1,0 +1,29 @@
+{
+  "name": "gatsby-remark-table-of-contents",
+  "version": "0.0.7",
+  "description": "gatsby remark plugin to generate table of contents",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/signalwerk/gatsby-remark-table-of-contents.git"
+  },
+  "keywords": [
+    "gatsby",
+    "remark",
+    "gatsby-plugin",
+    "toc"
+  ],
+  "author": "Stefan Huber, Signalwerk GmbH",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/signalwerk/gatsby-remark-table-of-contents/issues"
+  },
+  "homepage": "https://github.com/signalwerk/gatsby-remark-table-of-contents#readme",
+  "dependencies": {
+    "js-yaml": "^3.13.1",
+    "mdast-util-toc": "^4.2.0"
+  }
+}
