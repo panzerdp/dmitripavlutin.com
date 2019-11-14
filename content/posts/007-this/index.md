@@ -37,28 +37,9 @@ Before starting, let's familiarize with a couple of terms:
 * **Context** of an invocation is the value of `this` within function body. For example the invocation of `map.set('key', 'value')` has the context `map`.
 * **Scope** of a function is the set of variables, objects, functions accessible within a function body.
 
-Table of contents:
-
-1. [The mystery of this](#1-the-mystery-of-this)  
-2. [Function invocation](#2-function-invocation)  
-    2.1. [this in function invocation](#21-this-in-function-invocation)  
-    2.2. [this in function invocation, strict mode](#22-this-in-function-invocation-strict-mode)   
-    2.3. [Pitfall: this in an inner function](#23-pitfall-this-in-an-inner-function)  
-3. [Method invocation](#3-method-invocation)  
-  3.1. [this in method invocation](#31-this-in-method-invocation)  
-  3.2. [Pitfall: separating method from its object](#32-pitfall-separating-method-from-its-object)  
-4. [Constructor invocation](#4-constructor-invocation)  
-  4.1. [this in constructor invocation](#41-this-in-constructor-invocation)  
-  4.2. [Pitfall: forgetting about new](#42-pitfall-forgetting-about-new)  
-5. [Indirect invocation](#5-indirect-invocation)  
-  5.1. [this in indirect invocation](#51-this-in-indirect-invocation)  
-6. [Bound function](#6-bound-function)  
-  6.1. [this in bound function](#61-this-in-bound-function)  
-  6.2. [Tight context binding](#62-tight-context-binding)  
-7. [Arrow function](#7-arrow-function)  
-  7.1. [this in arrow function](#71-this-in-arrow-function)  
-  7.2. [Pitfall: defining method with arrow function](#72-pitfall-defining-method-with-arrow-function)  
-8. [Conclusion](#8-conclusion)
+```toc
+# Table of contents
+```
 
 ## 2. Function invocation
 
@@ -112,6 +93,7 @@ function sum(a, b) {
 sum(15, 16);     // => 31
 window.myNumber; // => 20
 ```
+
 At the time `sum(15, 16)` is called, JavaScript automatically sets `this` as the global object, which in a browser is `window`.
 
 When `this` is used outside any function scope (the topmost scope: global execution context), it also refers to the global object:

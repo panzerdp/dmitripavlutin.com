@@ -23,24 +23,9 @@ A **function** is a parametric block of code defined once and called multiple ti
 
 This post teaches you six approaches to declare JavaScript functions: the syntax, examples and common pitfalls. Moreover, you will understand when to use a specific function type in certain circumstances.  
 
-Table of contents:
-
-1. [Function declaration](#1-function-declaration)  
-  1.1 [A regular function](#11-a-regular-function)  
-  1.2 [Difference from function expression](#12-difference-from-function-expression)  
-  1.3 [Function declaration in conditionals](#13-function-declaration-in-conditionals)  
-2. [Function expression](#2-function-expression)  
-  2.1 [Named function expression](#21-named-function-expression)  
-  2.2 [Favor named function expression](#22-favor-named-function-expression)
-3. [Shorthand method definition](#3-shorthand-method-definition)  
-  3.1 [Computed property names and methods](#31-computed-property-names-and-methods)
-4. [Arrow function](#4-arrow-function)  
-  4.1 [Context transparency](#41-context-transparency)  
-  4.2 [Short callbacks](#42-short-callbacks)  
-5. [Generator function](#5-generator-function)  
-6. [One more thing: `new Function`](#6-one-more-thing-new-function)
-7. [In the end, which way is better?](#7-in-the-end-which-way-is-better)  
-  
+```toc
+# Table of contents
+```
 
 ## 1. Function declaration
 

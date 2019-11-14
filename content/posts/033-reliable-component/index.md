@@ -28,34 +28,9 @@ When writing a React application, I regularly ask myself:
  
 Luckily, reliable components have common characteristics. Let's study these 7 useful criterias, and detail into case studies.  
 
-Table of contents:  
-
-1. ["Single responsibility"](#1-single-responsibility)  
-  1.1 [The pitfall of multiple responsibilities](#11-the-pitfall-of-multiple-responsibilities)  
-  1.2 [Case study: make component have one responsibility](#12-case-study-make-component-have-one-responsibility)  
-  1.3 [Case study: HOC favors single responsibility principle](#13-case-study-hoc-favors-single-responsibility-principle)  
-2. ["Encapsulated"](#2-encapsulated)  
-  2.1 [Information hiding](#21-information-hiding)  
-  2.2 [Communication](#22-communication)  
-  2.3 [Case study: encapsulation restoration](#23-case-study-encapsulation-restoration)  
-3. ["Composable"](#3-composable)  
-  3.1 [Composition benefits](#31-composition-benefits)  
-4. ["Reusable"](#4-reusable)  
-  4.1 [Reuse across application](#41-reuse-across-application)  
-  4.2 [Reuse of 3rd party libraries](#42-reuse-of-3rd-party-libraries)  
-5. ["Pure" or "Almost-pure"](#5-pure-or-almost-pure)  
-  5.1 [Case study: purification from global variables](#51-case-study-purification-from-global-variables)  
-  5.2 [Case study: purification from network requests](#52-case-study-purification-from-network-requests)  
-  5.3 [Transform almost-pure into pure](#53-transform-almost-pure-into-pure)  
-6. ["Testable" and "Tested"](#6-testable-and-tested)  
-  6.1 [Case study: testable means well designed](#61-case-study-testable-means-well-designed)  
-7. ["Meaningful"](#7-meaningful)  
-  7.1 [Component naming](#71-component-naming)  
-  7.2 [Case study: write self-explanatory code](#72-case-study-write-self-explanatory-code)  
-  7.3 [Expressiveness stairs](#73-expressiveness-stairs)  
-8. [Do continuous improvement](#8-do-continuous-improvement)  
-9. [Reliability is important](#9-reliability-is-important)  
-10. [Conclusion](#10-conclusion)  
+```toc
+# Table of contents
+```
 
 ## 1. "Single responsibility"
 

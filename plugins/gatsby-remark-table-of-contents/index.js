@@ -63,8 +63,6 @@ const transformer = (markdownAST, pluginOptions) => {
     skip: prefs.exclude,
   });
 
-  console.log(JSON.stringify(result));
-
   // insert the TOC≤
   markdownAST.children = [].concat(
     markdownAST.children.slice(0, index),

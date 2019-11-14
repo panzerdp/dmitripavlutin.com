@@ -27,22 +27,9 @@ You'll learn also how to apply new ECMAScript 2015 features to solve a part of t
 
 Ready? Let's rock!
 
-Table of contents:  
-
-1. [The idea behind Unicode](#1-the-idea-behind-unicode)
-2. [Basic Unicode terms](#2-basic-unicode-terms)  
-  2.1 [Characters and code points](#21-characters-and-code-points)  
-  2.2 [Unicode planes](#22-unicode-planes)  
-  2.3 [Code units](#23-code-units)  
-  2.4 [Surrogate pairs](#24-surrogate-pairs)  
-  2.5 [Combining marks](#25-combining-marks)  
-3. [Unicode in JavaScript](#3-unicode-in-javascript)  
-  3.1 [Escape sequences](#31-escape-sequences)  
-  3.2 [String comparison](#32-string-comparison)  
-  3.3 [String length](#33-string-length)  
-  3.4 [Character positioning](#34-character-positioning)  
-  3.5 [Regular expression match](#35-regular-expression-match)  
-4. [Final words](#4-final-words)
+```toc
+# Table of Contents
+```
 
 ## 1. The idea behind Unicode
 
