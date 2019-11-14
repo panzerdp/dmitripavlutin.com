@@ -11,6 +11,7 @@ type: post
 ---
 
 ## 1. The mystery of this
+
 A lot of time `this` keyword was a mystery for me and many starting JavaScript developers. It is a powerful feature but requires efforts to be understood.
 
 From a background like *Java*, *PHP* or other *standard* language, [`this`](https://en.wikipedia.org/wiki/This_(computer_programming)) is seen as an instance of the current object in the class method: no more and no less. Mostly, it cannot be used outside the method and such a simple approach does not create confusion.  

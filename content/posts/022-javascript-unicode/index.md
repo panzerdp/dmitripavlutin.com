@@ -15,7 +15,7 @@ When a programming task required Unicode knowledge, I was searching for a hackab
 
 My avoiding continued until I faced a problem that required detailed Unicode knowledge. There was no way to apply situational solutions.  
 
-After applying some efforts, reading a bunch of articles - surprisingly it wasn't hard to understand it. Well, some articles required reading at least 3 times.  
+After applying some efforts, reading a bunch of articles - surprisingly it wasn't hard to understand it. Well... some articles have required reading at least 3 times.  
 
 As it turns out, Unicode is a universal and elegant standard. It may be tough because of a bunch of abstract terms hard to stick to.  
 
@@ -28,7 +28,8 @@ You'll learn also how to apply new ECMAScript 2015 features to solve a part of t
 Ready? Let's rock!
 
 ```toc
-# Table of Contents
+# Table of contents
+toHeading: 3
 ```
 
 ## 1. The idea behind Unicode
@@ -77,7 +78,7 @@ If you have an opinion that Unicode is hard, programming without it would be eve
 
 I still remember picking randomly charsets and encodings to read the content of files. Pure lottery!
 
-## 2.1 Characters and code points
+### 2.1 Characters and code points
 
 > **Abstract character** (or character) is a unit of information used for the organization, control or representation of textual data.  
 
@@ -96,7 +97,7 @@ The magic happens because Unicode associates a code point with a character. For 
 
 Notice that not all code points have associated characters. `1,114,112` code points are available (the range `U+0000` to `U+10FFFF`), but only `137,929` (as of May 2019) have assigned characters.  
 
-## 2.2 Unicode planes
+### 2.2 Unicode planes
 
 > **Plane** is a range of 65,536 (or 10000<sub>16</sub>) contiguous Unicode code points from `U+n0000` up to `U+nFFFF`, where `n` can take values from 0<sub>16</sub> to 10<sub>16</sub>. 
 
@@ -243,7 +244,7 @@ I recommend keeping the source code text with characters from [Basic Latin Unico
 
 Internally, at the language level, ECMAScript 2015 provides an explicit [definition](http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-language-types-string-type) what strings are in JavaScript: 
 
-*The String type is the set of all ordered sequences of zero or more 16-bit unsigned integer values ("elements") up to a maximum length of 2<sup>53</sup>-1 elements. The String type is generally used to represent textual data in a running ECMAScript program, in which case each element in the String is treated as a **UTF-16 code unit** value.*   
+>The String type is the set of all ordered sequences of zero or more 16-bit unsigned integer values ("elements") up to a maximum length of 2<sup>53</sup>-1 elements. The String type is generally used to represent textual data in a running ECMAScript program, in which case each element in the String is treated as a **UTF-16 code unit** value.   
 
 Every element of a string is interpreted by the engine as a code unit. The way a string is rendered does not provide a deterministic way to decide what code units (that represent code points) it contains. See the following example:   
 
@@ -258,11 +259,11 @@ console.log('café');       // => 'café'
 As you know from surrogate pairs and combining marks above chapters, some symbols need 2 or more code units to be represented. So you should take precautions when counting the number of character or accessing characters by index:  
 
 ```javascript
-let smile = '\uD83D\uDE00';
+const smile = '\uD83D\uDE00';
 console.log(smile);        // => '😀'
 console.log(smile.length); // => 2
 
-let letter = 'e\u0301';
+const letter = 'e\u0301';
 console.log(letter);        // => 'é'
 console.log(letter.length); // => 2
 ```
@@ -290,9 +291,9 @@ For example `'\x30'` (symbol `'0'`) or `'\x5B'` (symbol `'['`).
 The hexadecimal escape sequence in a string literal or regular expression looks this way:  
 
 ```javascript
-var str = '\x4A\x61vaScript';
+const str = '\x4A\x61vaScript';
 console.log(str);                    // => 'JavaScript'
-var reg = /\x4A\x61va.*/;
+const reg = /\x4A\x61va.*/;
 console.log(reg.test('JavaScript')); // => true
 ```
 
@@ -306,9 +307,9 @@ For example `'\u0051'` (symbol `'Q'`) or `'\u222B'` (integral symbol `'∫'`).
 Let's use the unicode escape sequences:
 
 ```javascript
-var str = 'I\u0020learn \u0055nicode';
+const str = 'I\u0020learn \u0055nicode';
 console.log(str);                 // => 'I learn Unicode'
-var reg = /\u0055ni.*/;
+const reg = /\u0055ni.*/;
 console.log(reg.test('Unicode')); // => true
 ```
 
@@ -317,7 +318,7 @@ An unicode escape sequence can escape code points in a limited range: from `U+00
 To indicate an astral symbol in JavaScript literal, use two joined unicode escape sequences (a high surrogate and low surrogate), which creates a surrogate pair:  
 
 ```javascript
-var str = 'My face \uD83D\uDE00';
+const str = 'My face \uD83D\uDE00';
 console.log(str); // => 'My face 😀'
 ```
 
@@ -331,9 +332,9 @@ For example `'\u{7A}'` (symbol `'z'`) or `'\u{1F639}'` (funny cat symbol `😹`)
 Let's see how you can use it in literals:
 
 ```javascript
-var str = 'Funny cat \u{1F639}';
+const str = 'Funny cat \u{1F639}';
 console.log(str);                      // => 'Funny cat 😹'
-var reg = /\u{1F639}/u;
+const reg = /\u{1F639}/u;
 console.log(reg.test('Funny cat 😹')); // => true
 ```
 Notice that the regular expression `/\u{1F639}/u` has a special flag `u`, which enables additional Unicode features (see more about that in [3.5 Regular expression match](#35regularexpressionmatch)).  
@@ -341,12 +342,13 @@ Notice that the regular expression `/\u{1F639}/u` has a special flag `u`, which 
 I like that code point escape gets rid of surrogate pair to represent an astral symbol. Let's escape `U+1F607` *SMILING FACE WITH HALO* code point:  
 
 ```javascript
-var niceEmoticon = '\u{1F607}';
+const niceEmoticon = '\u{1F607}';
 console.log(niceEmoticon);   // => '😇'
-var spNiceEmoticon = '\uD83D\uDE07'
+const spNiceEmoticon = '\uD83D\uDE07'
 console.log(spNiceEmoticon); // => '😇'
 console.log(niceEmoticon === spNiceEmoticon); // => true
 ```
+
 The string literal assigned to variable `niceEmoticon` has a code point escape `'\u{1F607}'` that represents an astral code point `U+1F607`. 
 Nevertheless under the hood code point escape creates a surrogate pair (2 code units). As you can see `spNiceEmoticon`, which was created using a surrogate pair of unicode escapes `'\uD83D\uDE07'`, equals to `niceEmoticon`.  
 
@@ -356,8 +358,8 @@ When a regular expression is created using `RegExp` constructor, in the string l
 The following regular expression objects are equivalent:
 
 ```javascript
-var reg1 = /\x4A \u0020 \u{1F639}/;
-var reg2 = new RegExp('\\x4A \\u0020 \\u{1F639}');
+const reg1 = /\x4A \u0020 \u{1F639}/;
+const reg2 = new RegExp('\\x4A \\u0020 \\u{1F639}');
 console.log(reg1.source === reg2.source); // => true
 ```
 
@@ -368,8 +370,8 @@ Strings in JavaScript are sequences of code units. Reasonable you could expect t
 This approach is fast and effective. It works nicely with "simple" strings:
 
 ```javascript
-var firstStr = 'hello';
-var secondStr = '\u0068ell\u006F';
+const firstStr = 'hello';
+const secondStr = '\u0068ell\u006F';
 console.log(firstStr === secondStr); // => true
 ```
 `firstStr` and `secondStr` strings have the same sequence of code units. Reasonable they are equal.
@@ -378,8 +380,8 @@ Suppose you want to compare two strings that rendered look the same but contain 
 Then you may have an unexpected result, because strings that visually look the same are not equal in a comparison:  
 
 ```javascript
-var str1 = 'ça va bien';
-var str2 = 'c\u0327a va bien';
+const str1 = 'ça va bien';
+const str2 = 'c\u0327a va bien';
 console.log(str1);          // => 'ça va bien'
 console.log(str2);          // => 'ça va bien'
 console.log(str1 === str2); // => false
@@ -410,8 +412,8 @@ In JavaScript to normalize a string invoke `myString.normalize([normForm])` meth
 Let's improve the previous example by applying a string normalization, which will allow to correctly compare the strings:
 
 ```javascript
-var str1 = 'ça va bien';
-var str2 = 'c\u0327a va bien';
+const str1 = 'ça va bien';
+const str2 = 'c\u0327a va bien';
 console.log(str1 === str2.normalize()); // => true
 console.log(str1 === str2);             // => false
 ```
@@ -429,9 +431,10 @@ The common way to determine the string length is, of course, accessing the `mySt
 The evaluation of string length that contains code points from BMP works usually as expected:
 
 ```javascript
-var color = 'Green';
+const color = 'Green';
 console.log(color.length); // => 5
 ```
+
 Each code unit in `color` corresponds to a single grapheme. The expected length of the string is `5`.
 
 #### Length and surrogate pairs
@@ -441,10 +444,11 @@ The situation becomes tricky when a string contains surrogate pairs, to represen
 Take a look at the example:
 
 ```javascript
-var str = 'cat\u{1F639}';
+const str = 'cat\u{1F639}';
 console.log(str);        // => 'cat😹'
 console.log(str.length); // => 5
 ```
+
 When `str` string is rendered, it contains 4 symbols `cat😹`. 
 However `smile.length` evaluates to `5`, because `U+1F639` is an astral code point encoded with 2 code units (a surrogate pair).  
 
@@ -458,7 +462,7 @@ Notice that this solution may cost you slight performance issues when used exten
 Let's improve the above example with a spread operator:
 
 ```javascript
-var str = 'cat\u{1F639}';
+const str = 'cat\u{1F639}';
 console.log(str);             // => 'cat😹'
 console.log([...str]);        // => ['c', 'a', 't', '😹']
 console.log([...str].length); // => 4
@@ -472,7 +476,7 @@ What about the combining character sequences? Because each combining mark is a c
 The problem is solved when normalizing the string. If you're lucky, the combining character sequence is normalized to a single character. Let's try:  
 
 ```javascript
-var drink = 'cafe\u0301';
+const drink = 'cafe\u0301';
 console.log(drink);                    // => 'café'
 console.log(drink.length);             // => 5
 console.log(drink.normalize())         // => 'café'
@@ -485,7 +489,7 @@ When normalizing `drink`, luckily the combining character sequence `'e\u0301'` h
 Unfortunately normalization is not an universal solution. Long combining character sequences not always have canonical equivalents in one symbol. Let's see such case:  
 
 ```javascript
-var drink = 'cafe\u0327\u0301';
+const drink = 'cafe\u0327\u0301';
 console.log(drink);                    // => 'cafȩ́'
 console.log(drink.length);             // => 6
 console.log(drink.normalize());        // => 'cafȩ́'
@@ -502,10 +506,11 @@ Because the string is a sequence of code units, accessing the character in a str
 When a string contains only BMP characters (excluding high-surrogate from `U+D800` to `U+DBFF` and low-surrogate from `U+DC00` to `U+DFFF`), the character positioning works correctly.  
 
 ```javascript
-var str = 'hello';
+const str = 'hello';
 console.log(str[0]); // => 'h'
 console.log(str[4]); // => 'o'
 ```
+
 Each symbol is encoded with a single code unit, so accessing by index a string character is correct.  
 
 #### Character positioning and surrogate pairs
@@ -517,7 +522,7 @@ An astral symbol is encoded using 2 code units (a surrogate pair). So accessing 
 The following example accesses characters from an astral symbol:
 
 ```javascript
-var omega = '\u{1D6C0} is omega';
+const omega = '\u{1D6C0} is omega';
 console.log(omega);        // => '𝛀 is omega'
 console.log(omega[0]);     // => '' (unprintable symbol)
 console.log(omega[1]);     // => '' (unprintable symbol)
@@ -534,15 +539,16 @@ Exist 2 possibilities to access astral symbols correctly in a string:
 Let's apply both options:
 
 ```javascript
-var omega = '\u{1D6C0} is omega';
+const omega = '\u{1D6C0} is omega';
 console.log(omega);                        // => '𝛀 is omega'
 // Option 1
 console.log([...omega][0]);                // => '𝛀'
 // Option 2
-var number = omega.codePointAt(0);
+const number = omega.codePointAt(0);
 console.log(number.toString(16));          // => '1d6c0'
 console.log(String.fromCodePoint(number)); // => '𝛀'
 ```
+
 `[...omega]` returns an array of symbols that `omega` string contains. Surrogate pairs are evaluated correctly, so accessing the first character works as expected. `[...smile][0]` is `'𝛀'`.  
 `omega.codePointAt(0)` method call is Unicode-aware, so it returns the astral code point number `0x1D6C0` of the first character in `omega` string. The function `String.fromCodePoint(number)` returns the symbol based on the code point number: `'𝛀'`.
 
@@ -555,12 +561,13 @@ Accessing characters by index in a string is accessing code units. However, the 
 The following example demonstrates the problem:
 
 ```javascript
-var drink = 'cafe\u0301';  
+const drink = 'cafe\u0301';  
 console.log(drink);        // => 'café'
 console.log(drink.length); // => 5
 console.log(drink[3]);     // => 'e'
 console.log(drink[4]);     // => ◌́
 ```
+
 `drink[3]` accesses only the base character `e`, without the combining mark `U+0301` *COMBINING ACUTE ACCENT* (rendered as ◌́ ).  
 `drink[4]` accesses the isolated combining mark ◌́ .  
 
@@ -568,7 +575,7 @@ In such cases apply a string normalization. The combining character sequence `U+
 Let's improve the previous code sample:
 
 ```javascript
-var drink = 'cafe\u0301';
+const drink = 'cafe\u0301';
 console.log(drink.normalize());        // => 'café'  
 console.log(drink.normalize().length); // => 4  
 console.log(drink.normalize()[3]);     // => 'é'
@@ -584,8 +591,8 @@ Regular expressions, as well as strings, work in terms of code units. Similar to
 BMP characters match as expected, because a single code unit represents a symbol:  
 
 ```javascript
-var greetings = 'Hi!';
-var regex = /.{3}/;
+const greetings = 'Hi!';
+const regex = /.{3}/;
 console.log(regex.test(greetings)); // => true
 ```
 `greetings` has 3 symbols encoded with 3 code units. Regular expression `/.{3}/`, which expects 3 code units, matches `greetings`.  
@@ -593,8 +600,8 @@ console.log(regex.test(greetings)); // => true
 When matching astral symbols (which are encoded with a surrogate pair of 2 code units), you may encounter difficulties:
 
 ```javascript
-var smile = '😀';
-var regex = /^.$/;
+const smile = '😀';
+const regex = /^.$/;
 console.log(regex.test(smile)); // => false
 ```
 
@@ -604,7 +611,7 @@ However the regular expression `/^.$/` expects one code unit, so the match fails
 It's even worse when defining character classes with astral symbols. JavaScript  throws an error:  
 
 ```javascript
-var regex = /[😀-😎]/;
+const regex = /[😀-😎]/;
 // => SyntaxError: Invalid regular expression: /[😀-😎]/: 
 // Range out of order in character class
 ```
@@ -621,8 +628,8 @@ You can use unicode escape sequences in regular expressions `/u{1F600}/u`. This 
 Let's apply `u` flag and see how `.` operator (including quantifiers `?`, `+`, `*` and `{3}`, `{3,}`, `{2,3}`) matches the astral symbol:  
 
 ```javascript
-var smile = '😀';
-var regex = /^.$/u;
+const smile = '😀';
+const regex = /^.$/u;
 console.log(regex.test(smile)); // => true
 ```
 `/^.$/u` regular expression, which is Unicode-aware because of the `u` flag, now matches `😀` astral symbol.  
@@ -630,10 +637,10 @@ console.log(regex.test(smile)); // => true
 The `u` flag enables the correct processing of astral symbols in character classes too:  
 
 ```javascript
-var smile = '😀';
-var regex = /[😀-😎]/u;
-var regexEscape = /[\u{1F600}-\u{1F60E}]/u;
-var regexSpEscape = /[\uD83D\uDE00-\uD83D\uDE0E]/u;
+const smile = '😀';
+const regex = /[😀-😎]/u;
+const regexEscape = /[\u{1F600}-\u{1F60E}]/u;
+const regexSpEscape = /[\uD83D\uDE00-\uD83D\uDE0E]/u;
 console.log(regex.test(smile));         // => true
 console.log(regexEscape.test(smile));   // => true
 console.log(regexSpEscape.test(smile)); // => true
@@ -648,9 +655,9 @@ If you need to match a combining character sequence, you have to match the base 
 Take a look at the following example:
 
 ```javascript
-var drink = 'cafe\u0301';
-var regex1 = /^.{4}$/;
-var regex2 = /^.{5}$/;
+const drink = 'cafe\u0301';
+const regex1 = /^.{4}$/;
+const regex2 = /^.{5}$/;
 console.log(drink);              // => 'café'  
 console.log(regex1.test(drink)); // => false
 console.log(regex2.test(drink)); // => true

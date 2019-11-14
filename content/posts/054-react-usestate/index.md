@@ -18,7 +18,8 @@ I prefer functional components because they are simple. To enable state manageme
 The guide step by step explains how to work with `useState()` hook. Moreover, I will present the common `useState()` pitfalls you must be aware of.  
 
 ```toc
-
+# Table of contents
+toHeading: 3
 ```
 
 ## 1. State management using *useState()*
