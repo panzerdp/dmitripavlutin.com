@@ -708,7 +708,7 @@ new one(); // => Object
 ```
 Only `new one()` changes the context of the bound function. Other types of invocation always have `this` equal to `1`.
 
-### 7. Arrow function
+## 7. Arrow function
 
 **Arrow function** is designed to declare the function in a shorter form and [lexically](https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scoping) bind the context.   
 
