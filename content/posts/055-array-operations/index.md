@@ -107,5 +107,7 @@ While the list of operations and their implementations is designed to be cherry 
 
 ### 14.1 *array.length* property
 
+### 14.2 *array.splice()* method
+
 ## 15. Conclusion
 
