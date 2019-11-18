@@ -72,7 +72,7 @@ const transformer = (markdownAST, pluginOptions) => {
     },
     {
       type: 'html',
-      value: '<h4>Table of Contents</h4>',
+      value: '<h3>Table of Contents</h3>',
     },
     result.map,
     {
