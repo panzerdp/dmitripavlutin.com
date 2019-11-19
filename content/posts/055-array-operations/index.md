@@ -1,8 +1,8 @@
 ---
-title: "14 Common Operations on Arrays in JavaScript (Cheatsheet)"
-description: "14 operations on arrays in JavaScript: iterate, map, reduce, concat, slice, filter, find, insert, delete, and more."
-published: '2019-11-19T14:00Z'
-modified: '2019-11-19T14:00Z'
+title: "15 Common Operations on Arrays in JavaScript (Cheatsheet)"
+description: "15 operations on arrays in JavaScript: iterate, map, reduce, concat, slice, clone, search, query, filter, insert, remove, empty, fill, flatten and sort."
+published: '2019-11-20T14:00Z'
+modified: '2019-11-20T14:00Z'
 thumbnail: './images/birds.jpg'
 slug: operations-on-arrays-javascript
 tags: ['javascript', 'array']
@@ -23,6 +23,8 @@ While the list is created to cherry pick from it, you could still read it whole 
 
 ```toc
 # Table of contents
+tableLayout: true
+toHeading: 3
 ```
 
 ## 1. Iterate
@@ -95,7 +97,7 @@ colors.forEach(function callback(value, index) {
 
 `array.forEach(callback)` invokes `callback` 3 times for every item in the array: `'blue'`, `'green'` and `'white'`.  
 
-Tips: 
+Tips:
 
 * You cannot break `array.forEach()` iterating.  
 
@@ -123,7 +125,7 @@ newNumbers; // => [1, 3, 5]
 
 Tips:
 
-* `array.map()` creates a new mapped array, without altering the original one
+* `array.map()` creates a new mapped array, without mutating the original one
 
 ### 2.2 *Array.from()* function
 
@@ -147,7 +149,7 @@ newNumbers; // => [1, 3, 5]
 
 Tips:
 
-* `Array.from()` creates a new mapped array, without altering the original one
+* `Array.from()` creates a new mapped array, without mutating the original one
 * `Array.from()` fits better to map from an [array-like object](/javascript-array-from-applications/#2-transform-array-like-into-an-array)
 
 ## 3. Reduce
@@ -197,7 +199,7 @@ everyone; // => ['Batman', 'Robin', 'Joker', 'Bane']
 
 Tips:
 
-* `array.concat()` creates a new array, without altering the original one
+* `array.concat()` creates a new array, without mutating the original one
 * `array.concat(array1[, array2, ...])` accepts more than one array to merge.
 
 ### 4.2 Spread operator
@@ -223,7 +225,7 @@ names; // => ['Batman', 'Catwoman', 'Joker', 'Bane']
 
 ### 5.1 *array.slice()* method
 
-`array.slice([begin[, end]])` returns a slice of the array starting `begin` index and ending `end` index (excluding `end` itself). `begin` optional argument defaults to `0`, `end` optional argument defaults to `array.length`.  
+`array.slice([fromIndex[, toIndex]])` returns a slice of the array starting `fromIndex` index and ending `toIndex` index (excluding `toIndex` itself). `fromIndex` optional argument defaults to `0`, `toIndex` optional argument defaults to `array.length`.  
 
 Let's get some array slices:  
 
@@ -242,11 +244,72 @@ villians; // => ['Joker', 'Bane']
 
 Tips:
 
-* `array.slice()` creates a new array, without altering the original one
+* `array.slice()` creates a new array, without mutating the original one
 
-## 6. Search
+## 6. Clone
 
-### 6.1 *array.includes()* method
+### 6.1 Spread operator
+
+The easier way to clone an array is to use the spread operator: `const clone = [...array]`;
+
+Let's clone an array of `colors`:
+
+```javascript
+const colors = ['white', 'black', 'gray'];
+
+const clone = [...colors];
+
+clone;               // => ['white', 'black', 'gray']
+colors === clone; // => false
+```
+
+`[...colors]` creates a clone of `sadColors` array.  
+
+Tips:
+
+* `[...array]` creates a shallow copy of the array
+
+### 6.2 *array.concat()* method
+
+`[].concat(array)` is yet another approach on how to clone `array`.  
+
+```javascript
+const colors = ['white', 'black', 'gray'];
+
+const clone = [].concat(colors);
+
+clone;            // => ['white', 'black', 'gray']
+colors === clone; // => false
+```
+
+`[...color]` creates a clone of `colors` array.  
+
+Tips:
+
+* `[].concat(array)` creates a shallow copy of the array
+
+### 6.3 *array.slice()* method
+
+`array.slice()` is another approach on how to clone `array`.  
+
+```javascript
+const colors = ['white', 'black', 'gray'];
+
+const clone = colors.slice();
+
+clone;            // => ['white', 'black', 'gray']
+colors === clone; // => false
+```
+
+`colors.slice()` creates a clone of `colors` array.  
+
+Tips:
+
+* `colors.slice()` creates a shallow copy of the array
+
+## 7. Search
+
+### 8.1 *array.includes()* method
 
 `array.includes(itemToSearch, [, fromIndex])` returns a boolean whether `itemToSearch` exists in `array`. The optional argument `fromIndex`, defaulting to `0`, indicates the index to start searching.  
 
@@ -260,7 +323,7 @@ numbers.includes(2); // => true
 
 `numbers.includes(2)` returns `true` because `2` exists in `numbers` array.  
 
-### 6.2 *array.find()* method
+### 7.2 *array.find()* method
 
 `array.find(callback)` method returns the first array item that satisfies the `callback` predicate function.  
 
@@ -282,10 +345,10 @@ oddNumber; // => 2
 
 Tips:
 
-* The iteration breaks when the predicate returns `true` 
+* The iteration breaks when the predicate returns `true`  
 * `array.find(callback)` returns `undefined` if no item has satisfied the predicate.
 
-### 6.3 *array.indexOf()* method
+### 7.3 *array.indexOf()* method
 
 `array.indexOf(itemToSearch[, fromIndex])` returns the index of the first appearance `itemToSearch` in `array`. The optional argument `fromIndex`, defaulting to `0`, is the index to start searching.  
 
@@ -305,9 +368,9 @@ Tips:
 
 * `array.indexOf(itemToSearch)` returns `-1` if the item hasn't been found.
 
-## 7. Query
+## 8. Query
 
-### 7.1 *array.every()* method
+### 8.1 *array.every()* method
 
 `array.every(callback)` method returns `true` if every item the `callback` predicate function.  
 
@@ -331,7 +394,7 @@ mix.every(isEven);   // => false
 
 However, `numbers.every(isEven)` evaluates to `false` because `numbers` contains an odd number `1`.  
 
-### 7.2 *array.some()* method
+### 8.2 *array.some()* method
 
 `array.every(callback)` method returns `true` if at least one item the `callback` predicate function.  
 
@@ -355,49 +418,366 @@ odds.some(isEven);    // => false
 
 But `odds.some(isEven)` is `false` because `odds` contains only odd numbers.  
 
-## 8. Filter
+## 9. Filter
 
-### 8.2 *array.filter()*
+### 9.1 *array.filter()*
 
+`array.every(callback)` method returns a new array with items that passed `callback` predicate test.  
 
+On each iteration `callback(item[, index[, array]])` predicate function is invoked with 3 arguments: iterated item, index and array itself.  
 
-## 9. Insert
+Let's filter an array to have only even numbers:
 
-### 9.1 *array.push()* method
+```javascript
+const numbers = [1, 5, 7, 10];
 
-### 9.2 *array.unshift()* method
+const evens = numbers.filter(function isEven(number) {
+  return number % 2 === 0;
+});
 
-### 9.3 Spread operator (immutable)
+evens; // => [10]
+```
 
-## 10. Delete
+`numbers.filter(isEven)` creates a new array `evens` by filtering `numbers` to contain only even numbers: those that pass `isEven` predicate test.  
 
-### 10.1 *array.pop()* method
+Tips:
 
-### 10.2 *array.shift()* method
+* `array.filter()` creates a new array, without mutating the original one
 
-### 10.3 *array.splice()* method
+## 10. Insert
 
-### 10.4 Spread operator (immutable)
+### 10.1 *array.push()* method
 
-## 11. Empty
+`array.push(item1[..., itemN])` method appends one or more items to the end of an array, then returns the new length of array.  
 
-### 11.1 *array.length* property
+Let's append `'Joker'` at the end of `names` array:
 
-### 11.2 *array.splice()* method
+```javascript
+const names = ['Batman'];
 
-## 12. Fill
+names.push('Joker');
 
-### 12.1 *array.fill()* method
+names; // ['Batman', 'Joker']
+```
 
-### 12.2 *Array.from()* function
+`names.push('Joker')` inserts a new item `'Joker'` at the end of `names` array.  
 
-## 13. Flatten 
+Tips:
 
-### 13.1 *array.flatten()* method
+* `array.push()` mutates the array in place.
 
-## 14. Sort
+### 10.2 *array.unshift()* method
 
-### 14.1 *array.sort()* method
+`array.unshift(item1[..., itemN])` method appends one or more items to the beginning of an array, then returns the new length of array.  
 
-## 15. Conclusion
+Let's append `'Catwoman'` at the beginning of `names` array:
 
+```javascript
+const names = ['Batman'];
+
+names.push('Catwoman');
+
+names; // ['Catwoman', 'Batman']
+```
+
+`names.push('Catwoman')` inserts a new item `'Catwoman'` at the beginning of `names` array.  
+
+Tips:
+
+* `array.unshift()` mutates the array in place.
+
+### 10.3 Spread operator
+
+You can insert items in an array in a immutable manner by combining the spread operator with the array literal.  
+
+Appending an item at the *end of an array*:
+
+```javascript
+const names = ['Joker', 'Bane'];
+
+const names2 = [
+  ...names,
+  'Batman',
+];
+
+names2; // => ['Joker', 'Bane', 'Batman'];
+```
+
+Appending an item at the *beginning of an array*:
+
+```javascript
+const names = ['Joker', 'Bane'];
+
+const names2 = [
+  'Batman',
+  ...names
+];
+
+names2; // => ['Batman', 'Joker', 'Bane'];
+```
+
+Inserting an item *at any index*:
+
+```javascript
+const names = ['Joker', 'Bane'];
+const indexToInsert = 1;
+
+const names2 = [
+  ...names.slice(0, indexToInsert),
+  'Batman',
+  ...names.slice(indexToInsert)
+];
+
+names2; // => ['Joker', 'Batman', 'Bane'];
+```
+
+## 11. Remove
+
+### 11.1 *array.pop()* method
+
+`array.pop()` method removes the last item from an array, then returns it.
+
+For example, let's remove the last element of `colors` array:
+
+```javascript
+const colors = ['blue', 'green', 'black'];
+
+const lastColor = colors.pop();
+
+lastColor; // => 'black'
+colors;    // => ['blue', 'green']
+```
+
+`colors.pop()` removes the last element of `colors` and returns it.  
+
+Tips:
+
+* `array.pop()` mutates the array in place.
+
+### 11.2 *array.shift()* method
+
+`array.shift()` method removes the first item from an array, then returns it.  
+
+For example, let's remove the first element of `colors` array:
+
+```javascript
+const colors = ['blue', 'green', 'black'];
+
+const firstColor = colors.pop();
+
+firstColor; // => 'blue'
+colors;    // => ['green', 'black']
+```
+
+`colors.shift()` removes the first element `'blue'` of `colors` and returns it.  
+
+Tips:
+
+* `array.shift()` mutates the array in place.
+
+### 11.3 *array.splice()* method
+
+`array.splice(fromIndex[, removeCount[, item1[, item2[, ...]]]])` removes items from an array and inserts new items instead.  
+
+For example, let's remove 2 items from index `1`:
+
+```javascript
+const names = ['Batman', 'Catwoman', 'Joker', 'Bane'];
+
+names.splice(1, 2);
+
+names; // => ['Batman', 'Bane']
+```
+
+`names.splice(1, 2)` from index `1` removes 2 elements: `'Catwoman'` and `'Joker'`.  
+
+What's nice about *names.splice()* method is the ability to insert new items instead of removed ones. 
+
+Following the previous example, let's replace 2 items from index `1` with a new item `'Alfred'`:
+
+```javascript
+const names = ['Batman', 'Catwoman', 'Joker', 'Bane'];
+
+names.splice(1, 2, 'Alfred');
+
+names; // => ['Batman', 'Alfred' ,'Bane']
+```
+
+Tips:
+
+* `array.splice()` mutates the array in place.  
+
+### 11.4 Spread operator
+
+You can remove items from an array in a immutable manner by combining the spread operator with the array literal.  
+
+Let's remove a few items:
+
+```javascript
+const names = ['Batman', 'Catwoman', 'Joker', 'Bane'];
+const fromIndex = 1;
+const removeCount = 2;
+
+const newNames = [
+  ...names.slice(0, fromIndex),
+  ...names.slice(fromIndex + removeCount)
+];
+
+newNames; // => ['Batman', 'Bane']
+```
+
+`newNames` contains the items of `names`, but with 2 ones removed.  
+
+## 12. Empty
+
+### 12.1 *array.length* property
+
+`array.length` is a property that denotes the array length. What's interesting is that `array.length` is writable.  
+
+If you write a smaller than current length `array.length = newLength`, the extra elements are removed from array.  
+
+Let's use `array.length = 0` to remove all the items of an array:
+
+```javascript
+const colors = ['blue', 'green', 'black'];
+
+colors.length = 0;
+
+colors; // []
+```
+
+`colors.length = 0` removes all items from `colors` array.  
+
+### 12.2 *array.splice()* method
+
+`array.splice(fromIndex[, removeCount[, item1[, item2[, ...]]]])` removes items from an array and inserts new items instead. 
+
+If `removeCount` argument is omitted, then `array.splice()` removes all elements of the array starting `fromIndex`.  
+
+Let's use this to remove all elements of an array:
+
+```javascript
+const colors = ['blue', 'green', 'black'];
+
+colors.splice(0);
+
+colors; // []
+```
+
+`colors.splice(0)` removes all elements of `colors` array.  
+
+## 13. Fill
+
+### 13.1 *array.fill()* method
+
+`array.fill(item[, fromIndex[, toIndex]])` fills the array with `item` starting `fromIndex` until `toIndex` (excluding `toIndex` itself). `fromIndex` optional argument defaults to `0`, `toIndex` optional argument defaults to `array.length`.  
+
+For example, let's fill an array with zero values:
+
+```javascript
+const numbers = [1, 2, 3, 4];
+
+numbers.fill(0);
+
+numbers; // => [0, 0, 0, 0]
+```
+
+`numbers.fill(0)` fills the array with zeros.  
+
+`array.fill()` can initialize an array of certain length with initial value:
+
+```javascript
+const length = 5;
+const zeros = Array(length).fill(0);
+
+zeros; // [0, 0, 0, 0, 0]
+```
+
+`Array(length).fill(0)` creates an array of 5 zeros.  
+
+Tips:
+
+* `array.splice()` mutates the array in place.  
+
+### 13.2 *Array.from()* function
+
+`Array.from()` can be useful to initialize an array of certain length with objects:
+
+```javascript
+const length = 4;
+const emptyObjects = Array.from(Array.length, function() {
+  return {};
+});
+
+emptyObjects; // [{}, {}, {}, {}]
+```
+
+`emptyObjects` is an array initialized with different instances of empty objects.  
+
+## 14. Flatten
+
+### 14.1 *array.flat()* method
+
+`array.flat([depth])` method creates a new array by flatting the items that are arrays recursively until certain `depth`. `depth` optional argument defaults to `1`.  
+
+Let's flatten array of of arrays:
+
+```javascript
+const arrays = [0, [1, 3, 5], [2, 4, 6]];
+
+const flatArray = arrays.flat();
+
+flatArray; // [0, 1, 3, 5, 2, 4, 6]
+```
+
+`arrays` contains a mix of numbers and arrays of numbers. `arrays.flat()` flats the array so that it contains only numbers.  
+
+Tips:
+
+* `array.flat()` mutates the array in place.  
+
+## 15. Sort
+
+### 15.1 *array.sort()* method
+
+`array.sort([compare])` method sorts the items of the array.  
+
+The optional argument `compare(item1, item2)` is a callback that customizes the order of items. If `compare(item1, item2)` returns:
+
+* `-1` then `item1` is followed by `item2` in the sorted array
+* `1` then `item2` is followed by `item1` in the sorted array
+* `0` then the position of items doesn't change
+
+Let's sort an array of numbers:
+
+```javascript
+const numbers = [4, 3, 1, 2];
+
+numbers.sort();
+
+numbers; // => [1, 2, 3, 4]
+```
+
+`numbers.sort()` sort the numbers in ascending order.  
+
+Let's use the compare callback and make even numbers followed by odd ones:
+
+```javascript
+const numbers = [4, 3, 1, 2];
+
+numbers.sort(function compare(number1, number2) {
+  const isEven1 = number1 % 2 === 0;
+  const isEven2 = number2 % 2 === 0;
+  if (isEven1 && !isEven2) { return 1; }
+  if (!isEven1 && isEven2) { return -1; }
+  return 0;
+});
+
+numbers; // => [4, 2, 3, 1]
+```
+
+`numbers.sort(compare)` uses the custom compare function that orders even numbers first.  
+
+Tips:
+
+* `array.sort()` mutates the array in place.  

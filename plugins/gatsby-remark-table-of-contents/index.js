@@ -31,6 +31,7 @@ const transformer = (markdownAST, pluginOptions) => {
     tight: false,
     fromHeading: 2,
     toHeading: 6,
+    tableLayout: false,
     ...keysToCamel(pluginOptions),
   };
 
@@ -68,7 +69,7 @@ const transformer = (markdownAST, pluginOptions) => {
     markdownAST.children.slice(0, index),
     {
       type: 'html',
-      value: '<div class="toc">',
+      value: `<div class="toc ${prefs.tableLayout ? 'table-layout' : ''}">`,
     },
     {
       type: 'html',

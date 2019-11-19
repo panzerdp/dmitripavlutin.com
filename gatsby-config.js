@@ -7,7 +7,7 @@ module.exports = {
       options: {
         plugins: [
           {
-            resolve: 'gatsby-remark-table-of-contents',
+            resolve: `gatsby-remark-table-of-contents`,
             options: {
               tight: true,
               fromHeading: 1,
