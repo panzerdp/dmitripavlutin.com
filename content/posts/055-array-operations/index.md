@@ -15,11 +15,9 @@ The array is a widely used data structure in JavaScript.
 
 The number of operations you can perform on arrays (iteration, adding items, removing, etc) is also big. In this regard, the array object provides a big number of useful methods like `array.forEach()`, `array.map()` and more. 
 
-Time to time I find myself overwhelmed by the number of possible operations and corresponding implementations. You might be in the same situation too. 
+Time to time I find myself overwhelmed by the number of possible operations on arrays and corresponding implementations. You might be in the same situation too. 
 
-I've decided to create a compiled list of common 14 operations on arrays alongside with implementations. If you need an operation like iteration, deleting an array item, and so on, cherry-pick it from the table of contents. 
-
-While the list is created to cherry-pick from it, you could still read it whole to get familiar with some implementations you might not be familiar with. 
+I've decided to create a compiled list of common 15 operations on arrays alongside with implementations. If you need an operation like iteration, removing an array item, and so on, cherry-pick it from the table of contents. 
 
 ```toc
 # Table of contents
@@ -138,14 +136,16 @@ Let's increment the numbers of an array:
 ```javascript
 const numbers = [0, 2, 4];
 
-const newNumbers = Array.from(function callback(number) {
- return number + 1;
-}, numbers);
+const newNumbers = Array.from(numbers,
+ function increment(number) {
+   return number + 1;
+ }
+);
 
 newNumbers; // => [1, 3, 5]
 ```
 
-`Array.from(callback, numbers)` creates a new array from `numbers` by incrementing each array item. 
+`Array.from(numbers, increment)` creates a new array from `numbers` by incrementing each array item.
 
 Tips:
 
@@ -163,20 +163,20 @@ On each iteration `callback(accumulator, item[, index[, array]])` is invoked wit
 The classic example is summing an array of numbers:
 
 ```javascript
-const numbers = [0, 2, 4];
+const numbers = [2, 0, 4];
 
-const sum = numbers.reduce(function callback(accumulator, number) {
+const sum = numbers.reduce(function summarize(accumulator, number) {
  return accumulator + number;
 }, 0);
 
 sum; // => 6
 ```
 
-First, the sum is initialized with `0`. Then the `callback` function is invoked on each array item accumulating the sum of numbers. 
+First, the sum is initialized with `0`. Then the `summarize` function is invoked on each array item accumulating the sum of numbers. 
 
 Tips:
 
-* The first array item becomes the initial value if you skip the `initialValue` argument. 
+* The first array item becomes the initial value if you skip the `initialValue` argument.
 
 ## 4. Concat
 
@@ -190,7 +190,7 @@ Let's concatenate 2 arrays of names:
 const heroes = ['Batman', 'Robin'];
 const villains = ['Joker', 'Bane'];
 
-const everyone = heroes.concat(vaillians);
+const everyone = heroes.concat(villains);
 
 everyone; // => ['Batman', 'Robin', 'Joker', 'Bane']
 ```
@@ -318,10 +318,13 @@ Let's determine if the number `2` exists in an array of numbers:
 ```javascript
 const numbers = [1, 2, 3, 4, 5];
 
-numbers.includes(2); // => true
+numbers.includes(2);  // => true
+numbers.includes(99); // => false
 ```
 
-`numbers.includes(2)` returns `true` because `2` exists in `numbers` array. 
+`numbers.includes(2)` returns `true` because `2` exists in `numbers` array.
+
+`numbers.includes(99)` is, however, `false` because `99` doesn't exist in `numbers`.  
 
 ### 7.2 *array.find()* method
 
@@ -334,14 +337,14 @@ For example, let's find the first odd number:
 ```javascript
 const numbers = [1, 2, 3, 4, 5];
 
-const oddNumber = numbers.find(function callback(number) {
+const oddNumber = numbers.find(function isOdd(number) {
  return number % 2 === 0;
 });
 
 oddNumber; // => 2
 ```
 
-`numbers.find(callback)` returns the first odd number inside `numbers`, which is `2`. 
+`numbers.find(isOdd)` returns the first odd number inside `numbers`, which is `2`. 
 
 Tips:
 
@@ -387,7 +390,7 @@ function isEven(number) {
 }
 
 evens.every(isEven); // => true
-mix.every(isEven); // => false
+numbers.every(isEven); // => false
 ```
 
 `odds.every(isEven)` is `true` because *all* numbers in `evens` are even. 
@@ -475,12 +478,12 @@ Let's append `'Catwoman'` at the beginning of `names` array:
 ```javascript
 const names = ['Batman'];
 
-names.push('Catwoman');
+names.unshift('Catwoman');
 
 names; // ['Catwoman', 'Batman']
 ```
 
-`names.push('Catwoman')` inserts a new item `'Catwoman'` at the beginning of `names` array. 
+`names.unshift('Catwoman')` inserts a new item `'Catwoman'` at the beginning of `names` array.  
 
 Tips:
 
@@ -563,7 +566,7 @@ For example, let's remove the first element of `colors` array:
 ```javascript
 const colors = ['blue', 'green', 'black'];
 
-const firstColor = colors.pop();
+const firstColor = colors.shift();
 
 firstColor; // => 'blue'
 colors; // => ['green', 'black']
@@ -573,7 +576,8 @@ colors; // => ['green', 'black']
 
 Tips:
 
-* `array.shift()` mutates the array in place.
+* `array.shift()` mutates the array in place
+* `array.shift()` has O(n) complexity.
 
 ### 11.3 *array.splice()* method
 
@@ -670,7 +674,7 @@ colors; // []
 
 ### 13.1 *array.fill()* method
 
-`array.fill(item[, fromIndex[, toIndex]])` fills the array with `item` starting `fromIndex` until `toIndex` (excluding `toIndex` itself). `fromIndex` optional argument defaults to `0`, `toIndex` optional argument defaults to `array.length`. 
+`array.fill(item[, fromIndex[, toIndex]])` fills the array with `item` starting `fromIndex` until `toIndex` (excluding `toIndex` itself). `fromIndex` optional argument defaults to `0`, `toIndex` optional argument defaults to `array.length`.
 
 For example, let's fill an array with zero values:
 
@@ -682,22 +686,22 @@ numbers.fill(0);
 numbers; // => [0, 0, 0, 0]
 ```
 
-`numbers.fill(0)` fills the array with zeros. 
+`numbers.fill(0)` fills the array with zeros.
 
-`array.fill()` can initialize an array of certain length with initial value:
+`Array(length).fill(initial)` creates a new array initialized with `initial`:
 
 ```javascript
-const length = 5;
+const length = 3;
 const zeros = Array(length).fill(0);
 
-zeros; // [0, 0, 0, 0, 0]
+zeros; // [0, 0, 0]
 ```
 
-`Array(length).fill(0)` creates an array of 5 zeros. 
+`Array(length).fill(0)` creates an array of 3 zeros.
 
 Tips:
 
-* `array.splice()` mutates the array in place. 
+* `array.splice()` mutates the array in place.
 
 ### 13.2 *Array.from()* function
 
@@ -705,7 +709,7 @@ Tips:
 
 ```javascript
 const length = 4;
-const emptyObjects = Array.from(Array.length, function() {
+const emptyObjects = Array.from(Array(length), function() {
  return {};
 });
 
@@ -734,13 +738,13 @@ flatArray; // [0, 1, 3, 5, 2, 4, 6]
 
 Tips:
 
-* `array.flat()` mutates the array in place. 
+* `array.flat()` mutates the array in place.
 
 ## 15. Sort
 
 ### 15.1 *array.sort()* method
 
-`array.sort([compare])` method sorts the items of the array. 
+`array.sort([compare])` method sorts the items of the array.
 
 The optional argument `compare(item1, item2)` is a callback that customizes the order of items. If `compare(item1, item2)` returns:
 
@@ -768,16 +772,16 @@ const numbers = [4, 3, 1, 2];
 numbers.sort(function compare(number1, number2) {
  const isEven1 = number1 % 2 === 0;
  const isEven2 = number2 % 2 === 0;
- if (isEven1 && !isEven2) { return 1; }
- if (!isEven1 && isEven2) { return -1; }
+ if (isEven1 && !isEven2) { return -1; }
+ if (!isEven1 && isEven2) { return 1; }
  return 0;
 });
 
 numbers; // => [4, 2, 3, 1]
 ```
 
-`numbers.sort(compare)` uses the custom compare function that orders even numbers first. 
+`numbers.sort(compare)` uses the custom compare function that orders even numbers first.  
 
 Tips:
 
-* `array.sort()` mutates the array in place. 
+* `array.sort()` mutates the array in place.
