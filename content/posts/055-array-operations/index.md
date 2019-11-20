@@ -1,8 +1,8 @@
 ---
 title: "15 Common Operations on Arrays in JavaScript (Cheatsheet)"
 description: "15 operations on arrays in JavaScript: iterate, map, reduce, concat, slice, clone, search, query, filter, insert, remove, empty, fill, flatten and sort."
-published: '2019-11-20T12:50Z'
-modified: '2019-11-20T12:50Z'
+published: '2019-11-20T13:00Z'
+modified: '2019-11-20T13:00Z'
 thumbnail: './images/birds.jpg'
 slug: operations-on-arrays-javascript
 tags: ['javascript', 'array']
@@ -137,9 +137,9 @@ Let's increment the numbers of an array:
 const numbers = [0, 2, 4];
 
 const newNumbers = Array.from(numbers,
- function increment(number) {
-   return number + 1;
- }
+  function increment(number) {
+    return number + 1;
+  }
 );
 
 newNumbers; // => [1, 3, 5]
@@ -437,7 +437,7 @@ Let's filter an array to have only even numbers:
 const numbers = [1, 5, 7, 10];
 
 function isEven(number) {
- return number % 2 === 0;
+  return number % 2 === 0;
 }
 
 const evens = numbers.filter(isEven);
@@ -505,8 +505,8 @@ Appending an item at the *end of an array*:
 const names = ['Joker', 'Bane'];
 
 const names2 = [
- ...names,
- 'Batman',
+  ...names,
+  'Batman',
 ];
 
 names2; // => ['Joker', 'Bane', 'Batman'];
@@ -518,8 +518,8 @@ Appending an item at the *beginning of an array*:
 const names = ['Joker', 'Bane'];
 
 const names2 = [
- 'Batman',
- ...names
+  'Batman',
+  ...names
 ];
 
 names2; // => ['Batman', 'Joker', 'Bane'];
@@ -627,8 +627,8 @@ const fromIndex = 1;
 const removeCount = 2;
 
 const newNames = [
- ...names.slice(0, fromIndex),
- ...names.slice(fromIndex + removeCount)
+  ...names.slice(0, fromIndex),
+  ...names.slice(fromIndex + removeCount)
 ];
 
 newNames; // => ['Batman', 'Bane']
@@ -714,7 +714,7 @@ Tips:
 ```javascript
 const length = 4;
 const emptyObjects = Array.from(Array(length), function() {
- return {};
+  return {};
 });
 
 emptyObjects; // [{}, {}, {}, {}]
@@ -774,13 +774,13 @@ Let's use the compare function and make even numbers followed by odd ones:
 const numbers = [4, 3, 1, 2];
 
 function compare(n1, n2) {
- if (n1 % 2 === 0 && n2 % 2 !== 0) {
-   return -1;
- }
- if (n1 % 2 !== 0 && n2 % 2 === 0) {
-   return -1;
- }
- return 0;
+  if (n1 % 2 === 0 && n2 % 2 !== 0) {
+    return -1;
+  }
+  if (n1 % 2 !== 0 && n2 % 2 === 0) {
+    return -1;
+  }
+  return 0;
 }
 
 numbers.sort(compare);
