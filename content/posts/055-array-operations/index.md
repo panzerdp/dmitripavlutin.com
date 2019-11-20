@@ -312,7 +312,7 @@ Tips:
 
 ## 7. Search
 
-### 8.1 *array.includes()* method
+### 7.1 *array.includes()* method
 
 `array.includes(itemToSearch[, fromIndex])` returns a boolean whether `array` contains `itemToSearch`. The optional argument `fromIndex`, defaulting to `0`, indicates the index to start searching.  
 
