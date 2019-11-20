@@ -1,8 +1,8 @@
 ---
 title: "15 Common Operations on Arrays in JavaScript (Cheatsheet)"
 description: "15 operations on arrays in JavaScript: iterate, map, reduce, concat, slice, clone, search, query, filter, insert, remove, empty, fill, flatten and sort."
-published: '2019-11-20T14:00Z'
-modified: '2019-11-20T14:00Z'
+published: '2019-11-20T12:50Z'
+modified: '2019-11-20T12:50Z'
 thumbnail: './images/birds.jpg'
 slug: operations-on-arrays-javascript
 tags: ['javascript', 'array']
