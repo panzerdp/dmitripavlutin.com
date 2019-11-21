@@ -156,7 +156,7 @@ Thus `numbers` is `[5]`.
 
 *During the interview I had 20 coding questions to answer within 1 hour limit. The null statement question was on the list.*
 
-*While solving the question, being in a rush, I hadn't saw the comma `;` right before the curly brace `{`. So I answered incorrectly `[1, 2, 3, 4]`.*
+*While solving the question, being in a rush, I hadn't seen the comma `;` right before the curly brace `{`. So I answered incorrectly `[1, 2, 3, 4]`.*
 
 *I was slightly disappointed because of such unfair tricks. I asked the interviewer what is the reason behind tricks like that? The interviewer replied:*
 
