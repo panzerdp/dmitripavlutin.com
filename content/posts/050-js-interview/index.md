@@ -2,7 +2,7 @@
 title: 7 Simple but Tricky JavaScript Interview Questions
 description: A compiled list of simple but tricky questions you might be asked during a JavaScript coding interview.
 published: '2019-10-15T12:40Z'
-modified: '2019-10-30T16:00Z'
+modified: '2019-11-21T10:15Z'
 thumbnail: './images/people-at-interview.jpg'
 slug: simple-but-tricky-javascript-interview-questions
 tags: ['javascript']
@@ -18,7 +18,7 @@ My top stressing things in software development are:
 
 Not JavaScript, `this`, CSS, Internet Explorer, but the 2 above.  
 
-If you're qualifying as Senior Developer that involves JavaScript, there's a good chance to be asked tricky questions during the coding interview.
+If you're qualifying as Senior Developer whose job involves JavaScript, there's a good chance to be asked tricky questions during the coding interview.
 
 I know it's unfair. Some unknown people put you on the edge to see what you're made of. It's an unpleasant experience.  
 
@@ -26,11 +26,11 @@ I know it's unfair. Some unknown people put you on the edge to see what you're m
 
 What can you do? 
 
-Follow the advice: *"Practice makes perfect"*. By investing enough time, better regularly, to deeply understand JavaScript will improve your coding, and as a positive side effect, interviewing skills.   
+Follow the advice: *"Practice makes perfect"*. Deep, regular learning of JavaScript will improve your coding, and as a positive side effect, interviewing skills.   
 
-In this post, you will find 7 at first sight simple, but tricky JavaScript interview questions. 
+In this post, you will find 7 at first sight simple, but tricky JavaScript interview questions.
 
-While at first the questions might seem random, they try to hook into important concepts of JavaScript. So you better practice them before your next interview! 
+While at first the questions might seem random, they try to hook into important concepts of JavaScript. So you better practice them before your next interview!
 
 ## 1. Accidental global variable
 
@@ -52,13 +52,13 @@ typeof b; // => ???
 
 #### Answer
 
-Let's take a closer look at the line 2: `let a = b = 0`. This statement indeed declares a local variable `a`. However, it does declare a *global* variable `b`.  
+Let's look at the line 2: `let a = b = 0`. This statement declares a local variable `a`. However, it does declare a *global* variable `b`.  
 
-There is no variable `b` declared neither in the `foo()` scope or global scope. So JavaScript interprets `b = 0` expression as `window.b = 0`.
+No variable `b` is declared neither in the `foo()` scope or global scope. So JavaScript interprets `b = 0` expression as `window.b = 0`.
+
+In other words, `b` is a global variable created accidentally.  
 
 ![Accidental global variables JavaScript](./images/accitental-global-variables.png)
-
-`b` is an accidentally created global variable.  
 
 In a browser, the above code snippet is equivalent to:
 
@@ -76,9 +76,9 @@ typeof a;        // => 'undefined'
 typeof window.b; // => 'number'
 ```
 
-`typeof a` is `'undefined'`. The variable `a` is declared only within `foo()` scope and is not available in the outside scope.  
+`typeof a` is `'undefined'`. The variable `a` exists within `foo()` scope and not available in the outside scope.  
 
-`typeof b` evaluates to `'number'`. `b` is a global variable with the value `0`.  
+Because `b` is a global variable with the value `0`, the `typeof b` evaluates to `'number'`.  
 
 ## 2. Array length property
 
@@ -99,9 +99,9 @@ clothes[0]; // => ???
 
 > Reducing the value of the `length` property has the side-effect of deleting own array elements whose array index is between the old and new length values.
 
-Because of this `length` behavior, when JavaScript executes `clothes.length = 0`, all the items of the array `clothes` are deleted.  
+As result when JavaScript executes `clothes.length = 0`, all `clothes` items are deleted.  
 
-`clothes[0]` is `undefined`, because `clothes` array was emptied.  
+`clothes[0]` is `undefined`, because `clothes` array has been emptied.  
 
 ## 3. Eagle eye test
 
@@ -125,7 +125,7 @@ Let's take a closer look at the semicolon `;` that appears right before the open
 
 ![The null statement effect](./images/for-and-null-statement-pitfall-4.png)
 
-It's easy to overlook this semicolon, while it creates a *null statement*. The null statement is an empty statement that does nothing. 
+Being easily overlooked, this semicolon creates a *null statement*. The null statement is an empty statement that does nothing. 
 
 `for()` iterates 4 times over the null statement (that does nothing), ignoring the block that actually pushes items to array: `{ numbers.push(i + 1); }`. 
 
@@ -154,9 +154,9 @@ Thus `numbers` is `[5]`.
 
 *Long time ago, when I was interviewing for my first job, I was asked this question.*
 
-*For the interview I was given 20 coding questions to answer within 1 hour limit. The null statement question was on the list.*
+*During the interview I had 20 coding questions to answer within 1 hour limit. The null statement question was on the list.*
 
-*When solving the question, being in a rush, I didn't see the comma `;` right before the curly brace `{`. So I answered incorrectly `[1, 2, 3, 4]`.*
+*While solving the question, being in a rush, I hadn't saw the comma `;` right before the curly brace `{`. So I answered incorrectly `[1, 2, 3, 4]`.*
 
 *I was slightly disappointed because of such unfair tricks. I asked the interviewer what is the reason behind tricks like that? The interviewer replied:*
 
@@ -185,7 +185,7 @@ arrayFromValue(10); // => ???
 
 It's easy to miss the new line between the `return` keyword and `[item]` expression. 
 
-The newline makes the JavaScript automatically insert a semicolon between `return` and `[item]` expression. 
+However, this newline makes the JavaScript automatically insert a semicolon between `return` and `[item]` expression. 
 
 Here's an equivalent code with the semicolon inserted after `return`:
 
@@ -208,7 +208,7 @@ Follow [this section](/7-tips-to-handle-undefined-in-javascript/#24-function-ret
 
 #### Question
 
-What will output to console the following script:
+What will output to console the following code:
 ```javascript{4}
 let i;
 for (i = 0; i < 3; i++) {
@@ -221,7 +221,7 @@ for (i = 0; i < 3; i++) {
 
 #### Answer
 
-If you didn't hear about this tricky question before, most likely your answer is `0`, `1` and `2`, which is incorrect. When I first tried to solve it, this was my answer too!
+If you haven't heard about this tricky question before, most likely your answer is `0`, `1` and `2`: which is incorrect. When I first had tried to solve it, this was my answer too!
 
 There are 2 phases behind executing this snippet.
 
@@ -240,7 +240,7 @@ The second phase happens after 100ms:
 
 That's why the output to the console is `3`, `3` and `3`.  
 
-If you struggle with closure, I recommend reading [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).  
+If you struggle understanding closures, I recommend reading [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).  
 
 *Do you know how to fix the snippet to log `0`, `1`, and `2`? Please write your solution in a comment below!*
 
@@ -302,6 +302,6 @@ Follow the guide [JavaScript Variables Hoisting in Details](/javascript-hoisting
 
 You can think that some of the questions are useless for interviewing. I have the same feeling, especially regarding the [eagle eye test](#3-eagle-eye-test). Still, they could be asked.
 
-Anyways, most of these questions can truly assess if you are seasoned in JavaScript. If you had difficulties to answer some while reading the post, it's a good indicator of what you must study next!
+Anyways, many of these questions can truly assess if you are seasoned in JavaScript, like [the tricky closure](#5-the-classic-question-tricky-closure). If you have had difficulties to answer some while reading the post, it's a good indicator of what you must study next!
 
 *Is it fair to ask tricky questions during the interview? Let me know your opinion.*
