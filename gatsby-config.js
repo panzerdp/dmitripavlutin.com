@@ -97,6 +97,7 @@ module.exports = {
     },
     'gatsby-plugin-webpack-size',
     require('./gatsby/config/gatsby-plugin-sass'),
+    'gatsby-plugin-minify-classnames',
     require('./gatsby/config/gatsby-plugin-feed'),
   ],
 };

@@ -28,6 +28,7 @@
     "gatsby-plugin-disqus": "1.1.4",
     "gatsby-plugin-feed": "2.3.21",
     "gatsby-plugin-google-analytics": "2.1.28",
+    "gatsby-plugin-minify-classnames": "0.1.2",
     "gatsby-plugin-react-helmet": "3.1.15",
     "gatsby-plugin-remove-serviceworker": "1.0.0",
     "gatsby-plugin-sass": "2.1.23",
