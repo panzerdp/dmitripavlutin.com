@@ -2,7 +2,7 @@
 title: "15 Common Operations on Arrays in JavaScript (Cheatsheet)"
 description: "15 operations on arrays in JavaScript: iterate, map, reduce, concat, slice, clone, search, query, filter, insert, remove, empty, fill, flatten and sort."
 published: '2019-11-20T13:00Z'
-modified: '2019-11-20T13:00Z'
+modified: '2019-11-22T07:50Z'
 thumbnail: './images/birds.jpg'
 slug: operations-on-arrays-javascript
 tags: ['javascript', 'array']
@@ -331,23 +331,25 @@ numbers.includes(99); // => false
 
 ### 7.2 *array.find()* method
 
-`array.find(callback)` method returns the first array item that satisfies the `callback` predicate function. 
+`array.find(predicate)` method returns the first array item that satisfies the `predicate` function.
 
-On each iteration `callback(item[, index[, array]])` predicate function is invoked with the arguments: iterated item, index and the array itself.  
+On each iteration `predicate(item[, index[, array]])` function is invoked with the arguments: iterated item, index and the array itself.  
 
-For example, let's find the first odd number:
+For example, let's find the first even number:
 
 ```javascript
 const numbers = [1, 2, 3, 4, 5];
 
-const oddNumber = numbers.find(function isOdd(number) {
+function isEven(number) {
   return number % 2 === 0;
-});
+}
 
-oddNumber; // => 2
+const evenNumber = numbers.find(isEven);
+
+evenNumber; // => 2
 ```
 
-`numbers.find(isOdd)` returns the first odd number inside `numbers`, which is `2`. 
+`numbers.find(isEven)` returns the first even number inside `numbers`, which is `2`.
 
 Tips:
 
