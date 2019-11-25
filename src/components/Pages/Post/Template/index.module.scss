@@ -211,6 +211,10 @@ blockquote {
     padding: 2px 0.8rem 2px 0.7rem;
     border-left: 0.1rem solid #f99;
   }
+
+  #comments {
+    min-height: 300px;
+  }
 }
 
 @media (max-width: 1080px) {

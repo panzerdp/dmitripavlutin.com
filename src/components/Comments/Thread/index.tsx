@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { Disqus } from 'gatsby-plugin-disqus';
 
-import styles from './index.module.scss';
-
 interface CommentsThreadProps {
   url: string;
   title: string;
@@ -15,11 +13,7 @@ export function CommentsThread({ url, title, commentsTheadId }: CommentsThreadPr
     title: title,
     identifier: commentsTheadId,
   };
-  return (
-    <div className={styles.commentsThread}>
-      <Disqus config={disqusConfig} />
-    </div>
-  );
+  return <Disqus config={disqusConfig} />;
 }
 
 export default React.memo(CommentsThread);
