@@ -190,6 +190,10 @@ blockquote {
   display: initial;
 }
 
+.comments {
+  min-height: 300px;
+}
+
 :global {
   .token.function {
     color: #883f44;
@@ -210,10 +214,6 @@ blockquote {
     margin-left: -0.8rem;
     padding: 2px 0.8rem 2px 0.7rem;
     border-left: 0.1rem solid #f99;
-  }
-
-  #comments {
-    min-height: 300px;
   }
 }
 

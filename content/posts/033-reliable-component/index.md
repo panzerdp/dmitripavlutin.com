@@ -1388,7 +1388,7 @@ The same concept of a *collection of rendered items* is represented by 2 differe
 
 Name the components `<OrdersList>` and `<ExpensesList>` (using *list* word) or `<OrdersTable>` and `<ExpensesTable>` (using *table* word). Use whatever word you feel is better, just keep it consistent.  
 
-#### Comments  
+#### Code comments  
 Meaningful names for components, methods and variables are enough for making the code readable. Thus, comments are mostly redundant.  
 
 ### 7.2 Case study: write self-explanatory code  

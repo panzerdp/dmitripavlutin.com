@@ -97,7 +97,7 @@ export default function PostTemplate({
         <div className={styles.delimiter}>
           <RecommendedList posts={recommendedPosts} />
         </div>
-        <div className={styles.delimiter} id="comments">
+        <div className={`${styles.delimiter} ${styles.comments}`}>
           <CommentsInView>
             <CommentsThread url={postUrl} title={post.title} commentsTheadId={post.commentsThreadId} />
           </CommentsInView>
