@@ -29,7 +29,7 @@ describe('<SubheaderWithComments />', function() {
   it('should render the comments count', function() {
     const wrapper = shallow(<SubheaderWithComments {...props} />);
     const postUrl = TO_POST({ slug: post.slug });
-    expect(wrapper.find(`a[href="${postUrl}#disqus_thread"] CommentsCount`)).toHaveLength(1);
+    expect(wrapper.find(`a[href="${postUrl}#comments"] CommentsCount`)).toHaveLength(1);
   });
 
   it('should render post tags', function() {

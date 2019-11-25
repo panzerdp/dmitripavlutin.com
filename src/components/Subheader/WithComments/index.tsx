@@ -21,7 +21,7 @@ export default function SubheaderWithComments({ post, siteUrl }: SubheaderWithCo
         <div className={styles.tags}>{post.tags.map(mapTag)}</div>
         <div className={styles.commentsCount}>
           <img alt="Comments" src="/comments.svg" className={styles.icon} />
-          <a href={`${postUrl}#disqus_thread`} title="Jump to comments section" className={styles.anchor}>
+          <a href={`${postUrl}#comments`} title="Jump to comments section" className={styles.anchor}>
             <PostCommentsCount title={post.title} url={url} commentsTheadId={post.commentsThreadId} />
           </a>
         </div>

@@ -15,25 +15,35 @@ export default function PopularPostsList({ posts, siteUrl }: PopularPostsListPro
   return (
     <div className={styles.popularPosts}>
       <h3>Read popular posts</h3>
-      <div className={styles.list}>{posts.map(post => {
-        const toPost = TO_POST({ slug: post.slug });
-        return (
-          <div key={post.slug} className={styles.item}>
-            <Link to={toPost}><Img fixed={post.thumbnail} className={styles.thumbnail} /></Link>
-            <div>
+      <div className={styles.list}>
+        {posts.map((post) => {
+          const toPost = TO_POST({ slug: post.slug });
+          return (
+            <div key={post.slug} className={styles.item}>
+              <Link to={toPost}>
+                <Img fixed={post.thumbnail} className={styles.thumbnail} />
+              </Link>
               <div>
-                <Link to={toPost} className={styles.link}>{post.title}</Link>
-              </div>
-              <div className={styles.commentsCount}>
-                <img alt="Comments" src="/comments.svg" className={styles.icon} />
-                <Link to={`${toPost}#disqus_thread`}>
-                  <PostCommentsCount title={post.title} url={siteUrl + toPost} commentsTheadId={post.commentsThreadId} />
-                </Link>
+                <div>
+                  <Link to={toPost} className={styles.link}>
+                    {post.title}
+                  </Link>
+                </div>
+                <div className={styles.commentsCount}>
+                  <img alt="Comments" src="/comments.svg" className={styles.icon} />
+                  <Link to={`${toPost}#comments`}>
+                    <PostCommentsCount
+                      title={post.title}
+                      url={siteUrl + toPost}
+                      commentsTheadId={post.commentsThreadId}
+                    />
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}</div>
+          );
+        })}
+      </div>
     </div>
   );
 }

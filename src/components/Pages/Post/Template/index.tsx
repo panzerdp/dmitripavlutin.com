@@ -13,6 +13,7 @@ import RightSidebar from 'components/Pages/Post/Sidebar/Right';
 import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import CommentsThread from 'components/Comments/Thread';
+import CommentsInView from 'components/Comments/InView';
 import AboutAuthorConcise from 'components/AboutAuthor/Concise';
 import AboutAuthorFetch from 'components/AboutAuthor/Fetch';
 import SubscriptionRegion from 'components/Subscription/Region';
@@ -96,8 +97,10 @@ export default function PostTemplate({
         <div className={styles.delimiter}>
           <RecommendedList posts={recommendedPosts} />
         </div>
-        <div className={styles.delimiter}>
-          <CommentsThread url={postUrl} title={post.title} commentsTheadId={post.commentsThreadId} />
+        <div className={styles.delimiter} id="comments">
+          <CommentsInView>
+            <CommentsThread url={postUrl} title={post.title} commentsTheadId={post.commentsThreadId} />
+          </CommentsInView>
         </div>
       </article>
     </Layout>

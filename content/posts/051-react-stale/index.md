@@ -182,7 +182,7 @@ Proper management of hooks dependencies is an efficient way to solve the stale c
 
 I recommend to install [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks), which detects the forgotten dependencies.  
 
-*There's another solution how to make log() work correctly. If you see it, let me know in a [comment](#disqus_thread)!*  
+*There's another solution how to make log() work correctly. If you see it, let me know in a [comment](#comments)!*  
 
 ### 3.2 *useState()*
 
