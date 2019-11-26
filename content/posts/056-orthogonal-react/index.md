@@ -11,28 +11,34 @@ type: post
 commentsThreadId: orthogonal-react-components
 ---
 
-About 5 years ago, I was developing a cross-platform mobile application for an european startup. The implementation of first features was easy and straighforward. I was progressing well.  
+About 5 years ago, I was developing a cross-platform mobile application for an european startup. First series of features were easy to implement. I was progressing well and was happy about that.    
 
-About 6 months passed by. More features were added on top of previous ones. Step by step, I ended in a situation when making new changes to existing modules had required more and more time.  
+6 months passed by. More features were added on top of previous ones. Step by step, making new changes to existing modules became increasingly harder.  
 
-At some point, I had started rejecting a part of new features and changes because they would require too much time to be implemented.  
+At some point, I had started rejecting a part of new features or changes because they would require too much time to be implemented. The story had ended with a whole rewrite of the mobile apps to native platform, mainly because further maintainance would require too much costs.  
+
+I blaimed the bugs in the cross-platform framework, blamed that client had been changing requirements, and so on. But these weren't the main problem.   
+
+*I overlooked the importance of making my components easy to change.*  
 
 ## 1. Orthogonal components
+
+
 
 ## 2. The benefits of orthogonal design
 
 ## 3. Think in principles
 
-> Think in principles, code with implementations.
+> Think in principles.
 
-## 4. Use case 1: Making HTTP requests
+## 4. Scenario 1: Making HTTP requests
 
-## 5. Use case 2: Is the component in view?
+## 5. Scenario 2: Is the component in view?
 
 ## 6. The "Main" component
 
 ## 7. The ballance
 
-![Ballance to the force](./images/force-ballance-3.jpg)
+> Bring balance to the Force, not leave it in darkness!
 
 ## 8. Key takeaway
