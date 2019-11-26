@@ -281,19 +281,21 @@ Let's recall [a scene](https://www.youtube.com/watch?v=D4UiQX-Rf3U) from "Star W
 
 Anakin Skywalker was chosen to become a Jedi and bring a *balance* between Dark and Light sides.  
 
-The orthogonal design has to be balanced too by ["You aren't gonna need it"](https://deviq.com/yagni/) (YAGNI) principle.  
+![Balance](./images/balance.jpg)
+
+The orthogonal design is balanced by ["You aren't gonna need it"](https://deviq.com/yagni/) (YAGNI) principle.  
 
 YAGNI emerges as a principle of Extreme Programming:
 
 > Always implement things when you actually need them, never when you just foresee that you may need them.
 
-It's important to avoid the extremes of the over-use of both orthogonal principle and YAGNI.  
+It's important to avoid the extremes of both orthogonal principle and YAGNI.  
 
 Recall my story from the intro of the post: I ended up with an application that was difficult and costly to change. My mistake was that I unintentionally created components that were inflexible to change. That's an extreme of YAGNI.  
 
 On the other side, if you make every piece of logic orthogonal, you will end up creating abstractions that are not going to be needed. That's an extreme of orthogonal design.  
 
-The practical approach is to foresee the changes of your components. Study in detail the domain problem that your application solves, ask the client for a list of *potential* features that might need to be implemented. If you think that a certain place is going to change, then apply the orthogonal principle. 
+The practical approach is to foresee the changes of your components. Study in detail the domain problem that your application solves, ask the client for a list of *potential* features. If you think that a certain place is going to change, then apply the orthogonal principle. 
 
 ## 8. Key takeaway
 
