@@ -25,9 +25,13 @@ My story concludes that every developer must know good design principles. One pa
 
 ## 1. Orthogonal components
 
-Orthogonal design means that your components have to change in isolation. If you make a particular change, like a UI update, it doesn't have to be echoed into other layers of the application, like data fetching logic.  
+Two or more components are orthogonal if a change in one component does not affect other components. If you make an UI update, it doesn't echo in other layers of the application, like data fetching logic.  
 
-When the components are not orthogonal, or tightly coupled, any change to a component might be echoed in another part of the application. Catching these side effects might be easy at first, but as you add more and more features what you would be doing is fighting these side effects, rather than implement new features.  
+When the components are not orthogonal, tightly coupled, any change to a component might be echo unexpectedly in another part of the application. As you add more and more features what you would be doing is catching these side effects, rather than implement new features.  
+
+![Don Quijote](./images/don-quijote-3.jpg)
+
+Fighting tighly coupled components is like Don Quijote fighing with the mindmills.  
 
 ## 2. Scenario 1: Isolate fetch logic
 
