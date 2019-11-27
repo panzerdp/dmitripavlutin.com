@@ -113,7 +113,7 @@ function EmployeesFetch({ resource }) {
 
 `<EmployeesPage>` doesn't care that `axios` implements fetching. You could easily change `axios` to native `fetch`, or move to GraphQL: `<EmployeesPage>` is not affected.  
 
-## 4. Making the view orthogonal to scroll watch
+## 4. Making the view orthogonal to scroll listener
 
 Let's say you want to a *Jump to top* button that shows when the user scrolls down more than 500px. When the button is clicked, the page automatically scrolls to the top.  
 
@@ -155,11 +155,11 @@ function ScrollToTop() {
 
 [Try the demo](https://codesandbox.io/s/non-orthogonal-scroll-detect-si3hf)
 
-`<ScrollToTop>` implements the scroll watch and renders a button that scrolls the page to top. The issue is that these concepts can change at different rates.  
+`<ScrollToTop>` implements the scroll listener and renders a button that scrolls the page to top. The issue is that these concepts can change at different rates.  
 
-A better orthogonal design should isolate the scroll watch from the UI. 
+A better orthogonal design should isolate the scroll listener from the UI. 
 
-Let's extract the scroll watch logic into a custom hook `useScrollDistance()`:
+Let's extract the scroll listener logic into a custom hook `useScrollDistance()`:
 
 ```javascript
 import { useState, useEffect } from 'react';
