@@ -50,7 +50,9 @@ A good React application design would make orthogonal:
 * Global state management (Redux)
 * Persistence logic (local storage, cookies).
 
-When the components that are tightly coupled, any change to a component echoes unexpectedly in other parts of the system. If that happens, decouple the problem components and make the orthogonal. Let's see how to do that in the following 2 examples.  
+Make your components implement one task, be isolated, self-contained and encapsulated. This will make your components orthogonal, and any change you make is going to be isolated and focused on just one component. That's the recipe for predictable and easy to develop systems.  
+
+Let's see how to do that in 2 examples.  
 
 ## 3. Making the component orthogonal to fetch details
 
