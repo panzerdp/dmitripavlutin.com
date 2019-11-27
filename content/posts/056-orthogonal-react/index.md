@@ -1,8 +1,8 @@
 ---
 title: "Strive to Orthogonal React Components"
-description: "How to design components that are easy to change, maintain, and test? Strive to orthogonal React components."
-published: '2019-11-26T13:00Z'
-modified: '2019-11-26T13:00Z'
+description: "How to design React components that are easy to change, maintain, and test? Strive to orthogonal React components."
+published: '2019-11-27T14:00Z'
+modified: '2019-11-27T14:00Z'
 thumbnail: './images/lego.png'
 slug: orthogonal-react-components
 tags: ['react', 'component', 'architecture']
@@ -25,7 +25,7 @@ But these weren't the main problem. Without realizing it, I was fighting tightly
 
 ![Don Quijote](./images/don-quijote.jpg)
 
-*I overlooked the importance of making my components easy to change.* I didn't follow the principles of good design. I didn't make my components adaptable to changes that eventually would happen.  
+*I overlooked the importance of making my components easy to change.* I didn't follow the principles of good design and didn't make my components adaptable to potential changes.  
 
 Don't make my mistake: learn design principles. One particularly influential is the orthogonality principle, which says to isolate things that change for different reasons.  
 
@@ -35,9 +35,11 @@ If A and B are *orthogonal*, then changing A does not change B (and vice-versa).
 
 In a radio device, the volume and station selection controls are orthogonal. The volume control changes only the sound volume. The station selection control changes only the received radio  station.  
 
+![Radio device](./images/radio-4.png)
+
 Two or more components are orthogonal if a change in one component does not affect other components. If you make a UI update, it doesn't echo in other layers of the application, like data fetching.  
 
-A good design would make orthogonal:
+A good design of a React application would make orthogonal:  
 
 * The UI elements (the presentational components)
 * Fetch details (fetch library, REST or GraphQL)
@@ -79,9 +81,9 @@ function EmployeesPage() {
 
 The problem with the current implementation is that `<EmployeesPage>` depends on how data is fetched. The component knows about `axios` library, knows that a `GET` request is performed. 
 
-What would happen if later you switch from `axios` and REST to GraphQL? 
+What would happen if later you switch from `axios` and REST to GraphQL? If the application has dozens of components coupled with fetching logic, you would have to change them all manually.  
 
-Let's isolate the fetch logic details from the component.  
+There's a better approach. Let's isolate the fetch logic details from the component.  
 
 A good way to do this is to use the new Suspense feature of React:
 

@@ -2,7 +2,7 @@
 title: A Simple Explanation of JavaScript Closures
 description: A closure is a function that captures variables from where it is defined (or its lexical scope).  
 published: '2019-10-25T04:00Z'
-modified: '2019-11-05T14:30Z'
+modified: '2019-11-27T14:00Z'
 thumbnail: './images/bulb.jpg'
 slug: simple-explanation-of-javascript-closures
 tags: ['javascript', 'closure']
@@ -54,7 +54,7 @@ Now, let's see a general formulation:
 
 > *The scope* is a space policy that rules the accessibility of variables.  
 
-The scope *isolates* its variables. That's great because *different scopes can have variables with the same name*.  
+An immediate property arises: the scope *isolates* its variables. That's great because *different scopes can have variables with the same name*.  
 
 You can reuse common variables names (`count`, `index`, `current`, `value`, etc) in different scopes without collisions.  
 
@@ -87,7 +87,7 @@ The function `innerFunc()` is nested inside an outer function `outerFunc()`.
 
 ![The JavaScript scopes can be nested](./images/javascript-nested-scopes.png)
 
-How would the 2 function scopes interact with each other? Can I access the variable `outerVar` from within `innerFunc()` scope?  
+How would the 2 function scopes interact with each other? Can I access the variable `outerVar` of `outerFunc()` from within `innerFunc()` scope?  
 
 Let's try that in the example:
 
@@ -107,7 +107,7 @@ function outerFunc() {
 outerFunc();
 ```
 
-`outerVar` variable is accessible inside `innerFunc()` scope. 
+Indeed, `outerVar` variable is accessible inside `innerFunc()` scope. The variables of the outer scope are accessible inside the inner scope.  
 
 Now you know 2 interesting things:
 
