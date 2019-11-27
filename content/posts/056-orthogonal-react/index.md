@@ -2,7 +2,7 @@
 title: "Strive to Orthogonal React Components"
 description: "How to design React components that are easy to change, maintain, and test? Strive to orthogonal React components."
 published: '2019-11-27T14:00Z'
-modified: '2019-11-27T14:00Z'
+modified: '2019-11-27T15:20Z'
 thumbnail: './images/lego.png'
 slug: orthogonal-react-components
 tags: ['react', 'component', 'architecture']
@@ -37,16 +37,20 @@ In a radio device, the volume and station selection controls are orthogonal. The
 
 ![Radio device](./images/radio-4.png)
 
-Two or more components are orthogonal if a change in one component does not affect other components. If you make a UI update, it doesn't echo in other layers of the application, like data fetching.  
+Imagine the radio device has broken. The volume control changes the volume, but also diverts the selected radio station. The volume control and station selection controls are non-orthogonal — the volume control produces a side-effect.  
 
-A good design of a React application would make orthogonal:  
+It would be difficult to tune the broken radio device. The same happens when you try to add changes to tightly coupled components: you're forced to catch the side-effects of your changes.  
+
+Two or more components are orthogonal if a change in one component does not affect other components. For example, a component that displays a list of employees should be orthogonal to the logic that fetches the employees.  
+
+A good React application design would make orthogonal:  
 
 * The UI elements (the presentational components)
 * Fetch details (fetch library, REST or GraphQL)
 * Global state management (Redux)
 * Persistence logic (local storage, cookies).
 
-When the components are not orthogonal, tightly coupled, any change to a component echoes unexpectedly in other parts of the system.  
+When the components that are tightly coupled, any change to a component echoes unexpectedly in other parts of the system. If that happens, decouple the problem components and make the orthogonal. Let's see how to do that in the following 2 examples.  
 
 ## 3. Making the component orthogonal to fetch details
 
