@@ -1,8 +1,8 @@
 ---
-title: "Strive to Orthogonal React Components"
+title: "The Benefits of Orthogonal React Components"
 description: "How to design React components that are easy to change, maintain, and test? Strive to orthogonal React components."
 published: '2019-11-27T14:00Z'
-modified: '2019-11-27T15:20Z'
+modified: '2019-11-28T09:50Z'
 thumbnail: './images/lego.png'
 slug: orthogonal-react-components
 tags: ['react', 'component', 'architecture']
@@ -11,7 +11,7 @@ type: post
 commentsThreadId: orthogonal-react-components
 ---
 
-## 1. My mistake
+## 1. Why good system design is important
 
 About 5 years ago, I was developing a cross-platform mobile application for a European startup. The first series of features were easy to implement. I was progressing well and was happy about that.    
 
