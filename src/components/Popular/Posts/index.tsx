@@ -20,7 +20,7 @@ export default function PopularPostsList({ posts, siteUrl }: PopularPostsListPro
           const toPost = TO_POST({ slug: post.slug });
           return (
             <div key={post.slug} className={styles.item}>
-              <Link to={toPost}>
+              <Link to={toPost} title={post.title}>
                 <Img fixed={post.thumbnail} className={styles.thumbnail} />
               </Link>
               <div>

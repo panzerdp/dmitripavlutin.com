@@ -14,7 +14,7 @@ export default function RecommendedPost({ post: { slug, title, thumbnail, tags }
   const to = TO_POST({ slug });
   return (
     <article key={slug} className={styles.excerpt}>
-      <Link to={to} className={styles.thumbnailAnchor}>
+      <Link to={to} className={styles.thumbnailAnchor} title={title}>
         <Img fixed={thumbnail} />
       </Link>
       <div className={styles.content}>
