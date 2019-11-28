@@ -35,6 +35,10 @@ This article guides through object spread and rest syntax. Including how object 
 
 What follows is a short recap on enumerable properties, and how to distinguish own from inherited properties. These are necessary basics to understand how object spread and rest works.  
 
+```toc
+toHeading: 3
+```
+
 ## 1. Enumberable and own properties
 
 An object in JavaScript is an association between keys and values.  
