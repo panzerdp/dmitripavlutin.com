@@ -2,7 +2,7 @@
 title: "15 Common Operations on Arrays in JavaScript (Cheatsheet)"
 description: "15 operations on arrays in JavaScript: iterate, map, reduce, concat, slice, clone, search, query, filter, insert, remove, empty, fill, flatten and sort."
 published: '2019-11-20T13:00Z'
-modified: '2019-11-22T07:50Z'
+modified: '2019-11-29T11:30Z'
 thumbnail: './images/birds.jpg'
 slug: operations-on-arrays-javascript
 tags: ['javascript', 'array']
@@ -398,13 +398,13 @@ evens.every(isEven); // => true
 numbers.every(isEven); // => false
 ```
 
-`odds.every(isEven)` is `true` because *all* numbers in `evens` are even. 
+`evens.every(isEven)` is `true` because *all* numbers in `evens` are even. 
 
 However, `numbers.every(isEven)` evaluates to `false` because `numbers` contains an odd number `1`.  
 
 ### 8.2 *array.some()* method
 
-`array.every(predicate)` method returns `true` if at least one item passes `predicate` check.  
+`array.some(predicate)` method returns `true` if at least one item passes `predicate` check.  
 On each iteration `predicate(item[, index[, array]])` function is invoked with the arguments: iterated item, index and the array itself.  
 
 Let's determine whether the arrays contain at least one even number:
@@ -429,7 +429,7 @@ But `odds.some(isEven)` is `false` because `odds` contains only odd numbers.
 
 ### 9.1 *array.filter()*
 
-`array.every(predicate)` method returns a new array with items that have passed `predicate` check.  
+`array.filter(predicate)` method returns a new array with items that have passed `predicate` check.  
 
 On each iteration `predicate(item[, index[, array]])` function is invoked with the arguments: iterated item, index and the array itself.  
 
