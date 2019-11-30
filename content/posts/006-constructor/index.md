@@ -5,7 +5,7 @@ published: "2016-05-01"
 modified: "2016-05-01"
 thumbnail: "./images/cover.jpg"
 slug: understanding-constructor-property
-tags: ["javascript", "constructor"]
+tags: ["javascript", "constructor", "instanceof"]
 recommended: ["power-up-the-array-creation-in-javascript", "6-ways-to-declare-javascript-functions"]
 type: post
 ---
