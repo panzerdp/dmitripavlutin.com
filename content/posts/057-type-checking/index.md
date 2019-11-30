@@ -41,7 +41,9 @@ const myCat = new Cat();
 myCat instanceof Cat; // => true
 ```
 
-But some behavior of `typeof` and `instanceof` can be confusing, especially at the edge case values like `null` or arrays. Let's see the 5 common pitfalls of `typeof` and `instanceof`, as well some other tips to be aware of.  
+But some behavior of `typeof` and `instanceof` can be confusing, especially at the edge case values like `null` or arrays. You have to be aware of them in advance.   
+
+Let's see the 5 common pitfalls of `typeof` and `instanceof`, and how to solve them. As well as other type checking tips.  
 
 ## 1. The type of null
 
