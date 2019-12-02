@@ -23,7 +23,7 @@ typeof { a: 1 };  // => 'object'
 typeof undefined; // => 'undefined'
 ```
 
-As well, you can check the constuctor of an instance using `instanceof`:
+As well, you can check the constructor of an instance using `instanceof`:
 
 ```javascript
 class Cat { }
@@ -50,7 +50,7 @@ typeof person; // => 'object'
 
 `typeof person` is `'object'` because `person` holds a plain JavaScript object.  
 
-Sometimes the places where object are expected can receive an empty value: `null`. You can use `null` to skip indicating configuration objects. When a function that expects to return an object cannot create tha object for some reason, it can also return `null`.  
+Sometimes the places where objects are expected can receive an empty value: `null`. You can use `null` to skip indicating configuration objects. When a function that expects to return an object cannot create the object for some reason, it can also return `null`.  
 
 For example, `str.match(regExp)` method returns `null` if no regular expression matches occur:
 
@@ -73,7 +73,7 @@ Why does the type of `null` is `'object'`? Let's see how JavaScript [defines](ht
 
 > `null` is primitive value that represents the intentional absence of any object value
 
-So the correct way to detect when a variable really contains an object, no missing objects like `null` or primitives, it's better to use:
+So the correct way to detect when a variable contains an object, no missing objects like `null` or primitives, it's better to use:
 
 ```javascript
 const missing = null;
@@ -81,7 +81,7 @@ const missing = null;
 typeof missing === 'object' && missing !== null; // => false
 ```
 
-This constuction is verbose, but it trully assets if `missing` contains an object.  
+This construction is verbose, but it truly assets if `missing` contains an object.
 
 ## 2. The type of an array
 
@@ -99,10 +99,10 @@ A better way to detect if the variable is an array is to use explicitely `Array.
 
 ```javascript
 const colors = ['white', 'blue', 'red'];
-const who = { name: 'Batman' };
+const hero = { name: 'Batman' };
 
 Array.isArray(colors); // => true
-Array.isArray(who);    // => false
+Array.isArray(hero);    // => false
 ```
 
 `Array.isArray(colors)` returns a boolean `true`, indicating that `colors` holds an array.  
@@ -115,7 +115,7 @@ You can get an `undefined` value if you try to access an uninitialized variable 
 
 ```javascript
 let city;
-let hero = { name: 'Batman', villan: false };
+let hero = { name: 'Batman', villain: false };
 
 city;     // => undefined
 hero.age; // => undefined
@@ -143,9 +143,9 @@ getProp(hero, 'villain', true);  // => true
 
 `object[propName]` evaluates to `undefined` when `propName` doesn't exist in `object`. `if (!object[propName]) { return def }` guards againts missing property, and returns `def` value that happens.  
 
-Using this approach has the downside that it all fasly values as non-existing property. `villain` prop exists and has `false` value, but `getProp(hero, 'villain', true)` incorrectly accesses the value of property `villain`: `true` instsead of the actual `false`.  
+Using this approach has the downside that it all falsy values as non-existing property. `villain` prop exists and has `false` value, but `getProp(hero, 'villain', true)` incorrectly accesses the value of property `villain`: `true` instead of the actual `false`.  
 
-Don't use falsy as a type check of `undefined`. Just explicitely check if the property exists in the object.  
+Don't use falsy as a type check of `undefined`. Just explicitly check if the property exists in the object.  
 
 Let's improve `getProp()` function:
 
@@ -237,7 +237,7 @@ styles.fontSize * 2;           // => NaN
 
 `NaN`, while being a number, represents a faulty number *Not A Number*.  
 
-If you want to be sure that you receive a correct number, you have to verify additionally agains `NaN`.  
+If you want to be sure that you receive a correct number, you have to verify additionally against `NaN`.  
 
 Let's make a better version of `isNumber()` function:
 
@@ -257,7 +257,7 @@ The better version of `isNumber()` now uses `isNaN(value)` function that returns
 
 ## 5. *instanceof* and the prototype chain
 
-`instanceof` is the operator that let's you determine the constructor of an object.  
+`instanceof` is the operator that checks the constructor of an object.  
 
 For example the constructor of any plain object in JavaScript is `Object`:
 
@@ -327,7 +327,7 @@ class Cat extends Pet {
 const myCustomCat = new Cat('Scratchy');
 ```
 
-`Pet` class defines a method named `Symbol.hasInstance`. The method receives the constructor parameter, and it should return a boolean indicating whether the current instance has `constructor` parameter as a constructor.  
+`Pet` class defines a method named `Symbol.hasInstance`. The method receives the constructor parameter, and it should return a boolean indicating whether the current instance has a `constructor` parameter as a constructor.  
 
 Let's try again to use `instanceof` to detect the constructor of `myCustomCat`:
 
@@ -339,11 +339,11 @@ myCustomCat instanceof Object; // => false
 
 Because of the special method `Symbol.hasInstance`, now only `myCustomCat instanceof Cat` evaluates to `true`.  
 
-Anyways, customize `instanceof` with care to avoid confusing developers or break code that rely on default behavior of `instanceof`.
+Anyways, carefully customize `instanceof` to avoid confusing developers or break code that relies on the default behavior of `instanceof`.
 
 ## 6. Key takeaways
 
-The operators `typeof` and `instanceof` perform the type checking in JavaScript. While they are generally simple to use, make sure to known the edge cases.  
+The operators `typeof` and `instanceof` perform the type checking in JavaScript. While they are generally simple to use, make sure to know the edge cases.  
 
 `typeof null` equals `'object'`, which could be unexpected. To determine exactly if a variable contains a non-null object you have to use a more verbose:
 
@@ -359,6 +359,6 @@ Use better constructions like `prop in object` to verify the property existence,
 
 `NaN` is a special value of type number that is generated after an invalid operation on numbers. If you want to be sure that your variable has a correct number, a more explicit verification `!isNaN(number) && typeof number === 'number'`.  
 
-Finally, remember that `instanceof` checks the constructor of the instance in the whole prototype chain. Without knowing that, you could get a false-positive if you verify a child class instance with the parent class.  
+Finally, remember that `instanceof` checks the constructor of the instance in the whole prototype chain. Without knowing that, you could get a false-positive if you verify a child's class instance with the parent class.  
 
 *What JavaScript type checking pitfalls do you know?*
