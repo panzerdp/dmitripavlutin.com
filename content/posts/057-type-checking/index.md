@@ -11,7 +11,7 @@ type: post
 commentsThreadId: javascript-type-checking-typeof-instanceof
 ---
 
-JavaScript's dynamic typing is good and bad at the same time. It's good because you don't have to indicate the variable's type. It's bad because you can never be sure what type the variable has.  
+JavaScript's dynamic typing is good and bad at the same time. It's good because you don't have to indicate the variable's type. It's bad because you can never be sure about the variable's type.  
 
 `typeof` operator determines the 5 common types in JavaScript:
 
@@ -23,7 +23,7 @@ typeof { a: 1 };  // => 'object'
 typeof undefined; // => 'undefined'
 ```
 
-As well, you can check the constructor of an instance using `instanceof`:
+As well, `instanceof` checks the constructor of an instance:
 
 ```javascript
 class Cat { }
@@ -32,9 +32,9 @@ const myCat = new Cat();
 myCat instanceof Cat; // => true
 ```
 
-But some behavior of `typeof` and `instanceof` can be confusing, especially at the edge case values like `null` or arrays. You have to be aware of them in advance.   
+But some behavior of `typeof` and `instanceof` can be confusing. Especially at the edge cases. You have to be aware of the type checking pitfalls in advance.  
 
-Let's see the 5 common pitfalls of `typeof` and `instanceof`, and how to solve them. As well as other type checking tips.  
+This post explains 5 common pitfalls you might encouter when using `typeof` and `instanceof`. Plus you'll find useful type checking best practices.  
 
 ## 1. The type of null
 
@@ -50,7 +50,13 @@ typeof person; // => 'object'
 
 `typeof person` is `'object'` because `person` holds a plain JavaScript object.  
 
-Sometimes the places where objects are expected can receive an empty value: `null`. You can use `null` to skip indicating configuration objects. When a function that expects to return an object cannot create the object for some reason, it can also return `null`.  
+Sometimes the variables that hold objects, for some reason, could be empty. Then you need a special value `null`.  
+
+Here are a few use-cases:
+
+* You can use `null` to skip indicating configuration objects
+* When a function cannot construct an object for some reason, it can return `null`
+* A variable, which later should hold an object, you can initialize with `null`.
 
 For example, `str.match(regExp)` method returns `null` if no regular expression matches occur:
 
@@ -59,33 +65,36 @@ const message = 'Hello';
 message.match(/Hi/); // => null
 ```
 
-A known confusion of `typeof` operator happens when you want to detect the missing object:
+Can you use `typeof` to differentiate an existing object from a missing object? 
+
+Unfortunately, you can't:
 
 ```javascript
-const missing = null;
+const myObject = null;
+typeof myObject; // => 'object'
 
-typeof null; // => 'object'
+myObject = { prop: 'Value' };
+typeof myObject; // => 'object'
 ```
 
-Even if `missing` is `null`, JavaScript still evaluates `typeof missing` to `'object'`.  
+`typeof` with an existing object and with `null` evaluates to `'object'`.  
 
-Why does the type of `null` is `'object'`? Let's see how JavaScript [defines](http://www.ecma-international.org/ecma-262/6.0/#sec-null-value) `null`:
+A good approach to detect if a variable has an object, and no `null` values, is this:
 
-> `null` is primitive value that represents the intentional absence of any object value
+```javascript{2}
+function isObject(value) {
+  return typeof value === 'object' && value !== null;
+}
 
-So the correct way to detect when a variable contains an object, no missing objects like `null` or primitives, it's better to use:
-
-```javascript
-const missing = null;
-
-typeof missing === 'object' && missing !== null; // => false
+isObject({});   // => true
+isObject(null); // => false
 ```
 
-This construction is verbose, but it truly assets if `missing` contains an object.
+In addition to checking that `value` is an object: `typeof value === 'object'`, you also explicitely verify for null: `value !== null`.  
 
 ## 2. The type of an array
 
-If you try to detect if a variable contains an object, the first temptation is to use `typeof` operator:
+If you try to detect if a variable contains an array, the first temptation is to use `typeof` operator:
 
 ```javascript
 const colors = ['white', 'blue', 'red'];
@@ -93,25 +102,25 @@ const colors = ['white', 'blue', 'red'];
 typeof colors; // => 'object'
 ```
 
-However, the type of the array is an object. Nothing useful...
+However, the type of the array is an `'object'` too. While technically an array is an object, would it be better to have a spectial type for arrays? Maybe.  
 
-A better way to detect if the variable is an array is to use explicitely `Array.isArray()`:
+The correct way to detect an array is to use explicitely `Array.isArray()`:
 
 ```javascript
 const colors = ['white', 'blue', 'red'];
 const hero = { name: 'Batman' };
 
 Array.isArray(colors); // => true
-Array.isArray(hero);    // => false
+Array.isArray(hero);   // => false
 ```
 
-`Array.isArray(colors)` returns a boolean `true`, indicating that `colors` holds an array.  
+`Array.isArray(colors)` returns a boolean `true`, indicating that `colors` is an array.  
 
 ## 3. Falsy as type check
 
 `undefined` in JavaScript is a special value meaning uninitialized variable.  
 
-You can get an `undefined` value if you try to access an uninitialized variable or object property:
+You can get an `undefined` value if you try to access an uninitialized variable, non-existing object property:
 
 ```javascript
 let city;
@@ -123,11 +132,9 @@ hero.age; // => undefined
 
 Accessing the uninitialized variable `city` and a non-existing property `hero.age` evaluates to `undefined`.  
 
-If you'd like to check if a property exists inside an object. Because `undefined` is a falsy value, you might try to simply use the value inside a condition.
+To check if a property exists, and `undefined` being falsy, you might have the tempration to use `object[propName]` in a condition:
 
-Let's try that in a simple function that accesses the property of an object:
-
-```javascript{3,11}
+```javascript{11,15}
 function getProp(object, propName, def) {
   // Not good
   if (!object[propName]) {
@@ -136,16 +143,24 @@ function getProp(object, propName, def) {
   return object[propName];
 }
 
-const hero = { name: 'Batman', villain: false };
+const hero = { 
+  name: 'Batman', 
+  villain: false 
+};
+
 getProp(hero, 'name', 'Unkown'); // => 'Batman'
 getProp(hero, 'villain', true);  // => true
 ```
 
-`object[propName]` evaluates to `undefined` when `propName` doesn't exist in `object`. `if (!object[propName]) { return def }` guards againts missing property, and returns `def` value that happens.  
+`object[propName]` evaluates to `undefined` when `propName` doesn't exist in `object`. `if (!object[propName]) { return def }` guards missing properties.
 
-Using this approach has the downside that it all falsy values as non-existing property. `villain` prop exists and has `false` value, but `getProp(hero, 'villain', true)` incorrectly accesses the value of property `villain`: `true` instead of the actual `false`.  
+However, `hero.villain` property exists and has `false` value. But the function incorrectly returns `true` when executing `getProp(hero, 'villain', true)`.  
 
-Don't use falsy as a type check of `undefined`. Just explicitly check if the property exists in the object.  
+Don't use falsy as a type check. Explicitly verify if the property exists in the object:
+
+* `typeof object[propName] === 'undefined'`
+* `propName in object`
+* `object.hasOwnProperty(propName)`
 
 Let's improve `getProp()` function:
 
@@ -165,34 +180,33 @@ getProp(hero, 'villain', true);  // => false
 
 `if (!(propName in object)) { ... }` condition correctly determines if the property exists.  
 
-### Logical operators as guards
+### Logical operators
 
-As a person preference, I avoid using logical operators as values generators:
+I think it's better to avoid using logical operator `||` as default mechanism. My code reading flow always stucks when I see this:
 
 ```javascript{6,9}
 const hero = { name: 'Batman', villan: false };
 
-const name = hero.name || 'Unknwon';
+const name = herro.villain || 'Unknown';
+name; // => 'Unknwon'
+
 // Bad
 const villain = hero.villain || true;
-
-name;    // => 'Batman'
 villain; // => true
 ```
 
-Even `hero` having the property `villain`, the expression `hero.villain || true` evaluates to `true`. It doesn't access correctly the value of property `villain`.  
+`hero` has a property `villain` with value `false`. However the expression `hero.villain || true` evaluates to `true`.  
 
-To quickly default if the property does not exists, better options are the new [nullish coalescing operator](/javascript-optional-chaining/#3-default-with-nullish-coalescing):
+*The logical operator `||` used as defaulting mechanism when accessing properties fails when the property exists and has a falsy value.* 
+
+To default when the property does not exists, better options are the new [nullish coalescing operator](/javascript-optional-chaining/#3-default-with-nullish-coalescing):
 
 ```javascript{6,9}
 const hero = { name: 'Batman', villan: false };
 
-const name = hero.name ?? 'Unknwon';
 // Good
 const villain = hero.villain ?? true;
-
-name;    // => 'Batman'
-villain; // => true
+villain; // => false
 ```
 
 Or destructuring assignment:
@@ -201,10 +215,8 @@ Or destructuring assignment:
 const hero = { name: 'Batman', villan: false };
 
 // Good
-const { name = 'Unknown', villain = true } = hero;
-
-name;    // => 'Batman'
-villain; // => true
+const { villain = true } = hero;
+villain; // => false
 ```
 
 ## 4. The type of NaN
@@ -221,7 +233,7 @@ typeof pi; // => 'number'
 
 `pi` variable contains a number, respectively `typeof pi` is `'number'`.  
 
-Trying to assume that a variable contains a number is not always correct using `typeof`:
+Trying to assume that a variable contains a "correct" number (integer or float) is not always correct using `typeof`:
 
 ```javascript
 function isNumber(value) {
