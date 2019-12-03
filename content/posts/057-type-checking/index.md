@@ -1,8 +1,8 @@
 ---
 title: "Type Checking in JavaScript is Slightly Screwed"
 description: '"typeof" and "instanceof" perform the type checking in JavaScript. While they are generally simple to use, make sure to known the edge cases.'
-published: '2019-12-03T14:00Z'
-modified: '2019-12-03T14:00Z'
+published: '2019-12-03T13:20Z'
+modified: '2019-12-03T13:20Z'
 thumbnail: './images/upside-3.jpg'
 slug: javascript-type-checking-screwed
 tags: ['javascript', 'typeof', 'instanceof']
