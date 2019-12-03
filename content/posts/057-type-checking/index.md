@@ -1,10 +1,10 @@
 ---
-title: "5 Type Checking Pitfalls in JavaScript"
+title: "Type Checking in JavaScript is Slightly Screwed"
 description: '"typeof" and "instanceof" perform the type checking in JavaScript. While they are generally simple to use, make sure to known the edge cases.'
 published: '2019-12-03T14:00Z'
 modified: '2019-12-03T14:00Z'
-thumbnail: './images/bird.jpg'
-slug: javascript-type-checking-pitfalls
+thumbnail: './images/upside-3.jpg'
+slug: javascript-type-checking-screwed
 tags: ['javascript', 'typeof', 'instanceof']
 recommended: ['7-tips-to-handle-undefined-in-javascript', 'the-legend-of-javascript-equality-operator']
 type: post
@@ -34,7 +34,7 @@ myCat instanceof Cat; // => true
 
 But some behavior of `typeof` and `instanceof` can be confusing. The edge cases are wiser to know in advance.  
 
-This post explains 5 common pitfalls encountered when using `typeof` and `instanceof`. Plus you'll find useful type checking best practices.  
+This post describes the pitfalls and remedial workarounds of using `typeof` and `instanceof`.
 
 ## 1. The type of null
 
@@ -50,13 +50,11 @@ typeof person; // => 'object'
 
 `typeof person` is `'object'` because `person` holds a plain JavaScript object.  
 
-Sometimes the variables that hold objects, for some reason, could be empty. Then you need a special value `null`.  
-
-Here are a few use-cases:
+Variables that hold objects, sometimes, could be empty. In such case you would need `null` value. Here are a few use-cases:
 
 * You can use `null` to skip indicating configuration objects
+* You can initialize with `null` the variables that later will hold objects.
 * When a function cannot construct an object for some reason, it can return `null`
-* A variable, which later should hold an object, you can initialize with `null`.
 
 For example, `str.match(regExp)` method returns `null` if no regular expression matches occur:
 
@@ -65,7 +63,7 @@ const message = 'Hello';
 message.match(/Hi/); // => null
 ```
 
-Can you use `typeof` to differentiate an existing object from a missing object? 
+Can you use `typeof` to differentiate an existing object from a `null` missing object? 
 
 Unfortunately, you can't:
 
@@ -199,7 +197,7 @@ hero.villain; // => false
 
 `hero` has a property `villain` with value `false`. However the expression `hero.villain || true` evaluates to `true`.  
 
-*The logical operator `||` used as defaulting mechanism when accessing properties fails when the property exists and has a falsy value.* 
+*The logical operator `||` used as a default mechanism to access properties fails when the property exists and has a falsy value.* 
 
 To default when the property does not exists, better options are the new [nullish coalescing operator](/javascript-optional-chaining/#3-default-with-nullish-coalescing):
 
@@ -270,7 +268,7 @@ isValidNumber(Number('99'));  // => true
 isValidNumber(5 + 10);        // => true
 ```
 
-In addition to `typeof value === 'number'`, it's wise to verify `!isNaN(value)` for `NaN`.
+In addition to `typeof value === 'number'`, it's wise to verify `!isNaN(value)` for `NaN`.  
 
 ## 5. *instanceof* and the prototype chain
 
@@ -315,9 +313,9 @@ myCat instanceof Object; // => true
 
 `instanceof` operator says that `myCat` is an instance of `Cat`, `Pet` and even `Object`. That  
 
-It happens because `instanceof` operator searches for the constructor of the object through the entire prototype chain. To detect exactly the constructor that has created the object look at the `constructor` property of the instance.  
+`instanceof` operator searches for object's constructor through the entire prototype chain. To detect exactly the constructor that has created the object look at the `constructor` property of the instance.  
 
-Let's detect the exact class of `myCat`:
+Use the property `constructor` to find the exact constructor of the instance:
 
 ```javascript
 myCat.constructor === Cat;    // => true
@@ -343,6 +341,6 @@ Because `undefined` is falsy, you might be tempted to use it directly in conditi
 
 `NaN` is a special value of type number created by an invalid operation on numbers. To be sure that a variable has a "correct" number, it's wise to use a more detailed verification: `!isNaN(number) && typeof number === 'number'`.  
 
-Finally, remember that `instanceof` checks the constructor of the instance in the whole prototype chain. Without knowing that, you could get a false-positive if you verify a child's class instance with the parent class.  
+Finally, remember that `instanceof` searches for the constructor of the instance through the prototype chain. Without knowing that, you could get a false-positive if you verify a child's class instance with the parent class.  
 
 *What JavaScript type checking pitfalls do you know?*
