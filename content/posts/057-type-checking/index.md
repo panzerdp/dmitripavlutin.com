@@ -13,7 +13,7 @@ commentsThreadId: javascript-type-checking-typeof-instanceof
 
 JavaScript's dynamic typing is good and bad at the same time. It's good because you don't have to indicate the variable's type. It's bad because you can never be sure about the variable's type.  
 
-`typeof` operator determines the 5 common types in JavaScript:
+`typeof` operator determines the 6 types in JavaScript:
 
 ```javascript
 typeof 10;        // => 'number'
@@ -21,6 +21,7 @@ typeof 'Hello';   // => 'string'
 typeof false;     // => 'boolean'
 typeof { a: 1 };  // => 'object'
 typeof undefined; // => 'undefined'
+typeof Symbol();  // => 'symbol'
 ```
 
 As well, `instanceof` checks the constructor of an instance:
@@ -76,6 +77,8 @@ typeof myObject; // => 'object'
 ```
 
 `typeof` with an existing object and with `null` evaluates to `'object'`.  
+
+["The history of typeof null"](https://2ality.com/2013/10/typeof-null.html) describes this bug in detail. 
 
 A good approach to detect if a variable has an object, and no `null` values, is this:
 
