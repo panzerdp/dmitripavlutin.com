@@ -70,7 +70,7 @@ Can you use `typeof` to differentiate an existing object from a missing object?
 Unfortunately, you can't:
 
 ```javascript
-const myObject = null;
+let myObject = null;
 typeof myObject; // => 'object'
 
 myObject = { prop: 'Value' };
@@ -187,14 +187,14 @@ I think it's better to avoid using logical operator `||` as a default mechanism.
 ```javascript
 const hero = { name: 'Batman', villain: false };
 
-const name = herro.name || 'Unknown';
-name;       // => 'Batman'
-herro.name; // => 'Batman'
+const name = hero.name || 'Unknown';
+name;      // => 'Batman'
+hero.name; // => 'Batman'
 
 // Bad
 const villain = hero.villain || true;
-villain;     // => true
-hero.villain // => false
+villain;      // => true
+hero.villain; // => false
 ```
 
 `hero` has a property `villain` with value `false`. However the expression `hero.villain || true` evaluates to `true`.  
@@ -215,12 +215,12 @@ hero.villain; // => false
 Or destructuring assignment:
 
 ```javascript
-const hero = { name: 'Batman', villan: false };
+const hero = { name: 'Batman', villain: false };
 
 // Good
 const { villain = true } = hero;
-villain;       // => false
-herro.villain; // => false
+villain;      // => false
+hero.villain; // => false
 ```
 
 ## 4. The type of NaN
@@ -326,38 +326,6 @@ myCat.constructor === Object; // => false
 ```
 
 Only `myCat.constructor === Cat` evaluates to `true`, indicating exactly the constructor of the `myCat` instance.  
-
-### *instanceof* customization
-
-`Symbol.hasInstance` is a special symbol that customizes the behavior of `instanceof` operator.  
-
-Let's define a new method `[Symbol.hasInstance]()` on the `Cat` class:
-
-```javascript{4-6}
-class Cat extends Pet {
-  sound = 'Meow';
-
-  [Symbol.hasInstance](constructor) {
-    return this.constructor === constructor;
-  }
-}
-
-const myCustomCat = new Cat('Scratchy');
-```
-
-`Pet` class defines a method named `Symbol.hasInstance`. The method has one parameter: the constructor, and returns a boolean whether the current instance's constructor matches the parameter.  
-
-Let's use again `instanceof` to detect the constructor of `myCustomCat`:
-
-```javascript
-myCustomCat instanceof Cat;    // => true
-myCustomCat instanceof Pet;    // => false
-myCustomCat instanceof Object; // => false
-```
-
-Because of the special method `Symbol.hasInstance`, now only `myCustomCat instanceof Cat` evaluates to `true`.  
-
-Anyways, carefully customize `instanceof` to avoid confusing developers or break code that relies on the default behavior of `instanceof`.
 
 ## 6. Key takeaways
 
