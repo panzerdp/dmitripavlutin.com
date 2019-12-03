@@ -311,7 +311,7 @@ myCat instanceof Pet;    // => true
 myCat instanceof Object; // => true
 ```
 
-`instanceof` operator says that `myCat` is an instance of `Cat`, `Pet` and even `Object`. That  
+`instanceof` operator says that `myCat` is an instance of `Cat`, `Pet` and even `Object`.  
 
 `instanceof` operator searches for object's constructor through the entire prototype chain. To detect exactly the constructor that has created the object look at the `constructor` property of the instance.  
 
