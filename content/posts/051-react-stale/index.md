@@ -6,7 +6,7 @@ modified: '2019-10-25T04:31Z'
 thumbnail: './images/landscape.jpg'
 slug: react-hooks-stale-closures
 tags: ['react', 'hook']
-recommended: ['use-react-memo-wisely', 'become-better-software-developer-digging-climbing']
+recommended: ['use-react-memo-wisely', 'simple-explanation-of-javascript-closures']
 type: post
 commentsThreadId: react-hooks-stale-closure
 ---
