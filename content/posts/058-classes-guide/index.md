@@ -113,6 +113,8 @@ Fields are the variables that hold useful information. Fields can be defined at 
 1. Fields on the class instance
 2. Fields on the class itself (aka static)
 
+Note that instance and static fields are a part of [Class fields proposal](https://github.com/tc39/proposal-class-fields).  
+
 ### 3.1 Public instance fields
 
 The instance fields are initialized inside the constructor. Let's look again at the previous code snippet:
@@ -220,7 +222,7 @@ However, if you try to access the private field `#name` outside of `User` class 
 
 You can also defines fields on the class itself: these are the static fields. These are helpful to define constants that make sense within the class or store information specific to class.   
 
-To create static fields in a JavaScript class, use the special keyword `static` followed by the field name.  
+To create static fields in a JavaScript class, use the special keyword `static` followed by the field name: `static myStaticField`.  
 
 Let's add a new field named `type` that indicates the type of the user: admin or regular. The static fields `TYPE_ADMIN` and `TYPE_REGULAR` are handy constants to differentiate the user types:
 
@@ -248,26 +250,388 @@ admin.type === User.TYPE_ADMIN; // => true
 
 Sometimes even the static fields could be an implementation detail that you woudnl't like to share with the external world.  
 
-In this regards make the static fields private too. To make the static field private, prefix the field name with `#` special symbol: `static #myStaticPrivateField`.  
+In this regards make the static fields private too. To make the static field private, prefix the field name with `#` special symbol: `static #myPrivateStaticField`.  
 
+Let's say you'd like to limit the number of instances of the `User` class. In order not to reveal the details of instance limits, you can create the private static fields:
 
+```javascript{2-3}
+class User {
+  static #MAX_INSTANCES = 2;
+  static #instances = 0;
+  
+  name = 'Unknown';
+
+  constructor(name) {
+    User.#instances++;
+    if (User.#instances > User.#MAX_INSTANCES) {
+      throw new Error('Unable to create User instance');
+    }
+    this.name = name;
+  }
+}
+
+new User('Jon Snow');
+new User('Arya Stark');
+new User('Sansa Stark'); // throws Error
+```
+
+The static field `User.#MAX_INSTANCES` determines the maximum number of instances to be created, while `User.#instances` static field counts the actual number of instances.  
+
+These private static fields are accessible only within `User` class.  
 
 ## 4. Methods
 
+The fields hold the instance's data. But the ability to modify or access instance data is performed by special functions that are a part of the class: methods.   
+
+The JavaScript classes support both instance and static methods.  
+
 ### 4.1 Instance methods
+
+Instance methods can access and modify instance data.  
+
+For example, let's define a method `getName()` that returns the name in the `User` class:
+
+```javascript{8-10}
+class User {
+  name = 'Unknown';
+
+  constructor(name) {
+    this.name = name;
+  }
+
+  getName() {
+    return this.name;
+  }
+}
+
+const user = new User('Jon Snow');
+user.getName(); // => 'Jon Snow'
+```
+
+`getName() { ... }` is an method inside the `User` class.  
+
+In a class method, as well as in the constructor, `this` value equals to the class instance. Use `this` to access instance data.  
+
+`user.getName()` is a method invocation: it executes the method and returns the computed value, if any.  
+
+Methods can have parameters. As well, inside methods you can call other methods of the same instance:
+
+```javascript{12-14}
+class User {
+  name = 'Unknown';
+
+  constructor(name) {
+    this.name = name;
+  }
+
+  getName() {
+    return this.name;
+  }
+
+  nameContains(str) {
+    return this.getName().includes(str);
+  }
+}
+
+const user = new User('Jon Snow');
+user.nameContains('Jon');   // => true
+user.nameContains('Stark'); // => false
+```
+
+`nameContains(str) { ... }` is a method of `User` class that accepts one parameter `str`. More than that, it executes another method of the instance `this.getName()` to get the user's name.  
 
 ### 4.2 Static methods
 
+The static methods are function attached directly to the class. To create a static method, use the special keyword `static` followed by a regular method syntax: `static myStaticMethod() { ... }`.
+
+When working with static methods, there are 2 simple rules to remember:
+
+1. A static method *can access* static fields
+2. A static method *cannot access* instance fields.
+
+For example, let's create a static method that detects whether a user with a specific name was already taken.  
+
+```javascript{4-6}
+class User {
+  static #takenNames = [];
+
+  static isNameTaken(name) {
+    return User.#takenNames.includes(name);
+  }
+
+  name = 'Unknown';
+
+  constructor(name) {
+    this.name = name;
+    User.#takenNames.push(name);
+  }
+}
+
+const user = new User('Jon Snow');
+
+User.isNameTaken('Jon Snow');   // => true
+User.isNameTaken('Arya Stark'); // => false
+```
+
+`isNameTaken()` is a static method that uses the static private field `User.#takenNames` to check for taken names.  
+
 ## 5. Inheritance: *extends*
+
+The classes in JavaScript support single inheritance using the `extends` keyword.  
+
+In the expression `class Child extends Parent { }` the `Child` class inherits from `Parent` the constructor, fields and methods.  
+
+For example, let's create a new child class `Blogger` that extends the parent class `User`.  
+
+```javascript{13}
+class User {
+  name;
+
+  constructor(name) {
+    this.name = name;
+  }
+
+  getName() {
+    return this.name;
+  }
+}
+
+class ContentWriter extends User {
+  posts = [];
+}
+
+const writer = new ContentWriter('John Smith');
+
+writer.name;      // => 'John Smith'
+writer.getName(); // => 'John Smith'
+writer.posts;     // => []
+```
+
+`ContentWriter` inherits from the `User` the constructor, the method `getName()` and the field `name`. As well, the `ContentWriter` class declares a new field `posts`.  
 
 ### 5.1 Parent constructor: *super()* in *constructor()*
 
+If you'd like to customize the constructor, and still be able to use the parent constructor, then you need to use `super()` special method available in the child constructor.  
+
+For example, let's update `ContentWriter` constructor to initialize the posts array:
+
+```javascript{17}
+class User {
+  name;
+
+  constructor(name) {
+    this.name = name;
+  }
+
+  getName() {
+    return this.name;
+  }
+}
+
+class ContentWriter extends User {
+  posts = [];
+
+  constructor(name, posts) {
+    super(name);
+    this.posts = posts;
+  }
+}
+
+const writer = new ContentWriter('John Smith', ['Why I like JS']);
+writer.name; // => 'John Smith'
+writer.posts // => ['Why I like JS']
+```
+
+`super(name)` inside the child class `ContentWriter` executes the constructor of the parent class `User`.  
+
+Note that inside the child constructor you must execute `super()` before using `this` keyword. Calling `super()` makes sure that the instance is initialized and ready.  
+
+```javascript{4-5}
+class Child extends Parent {
+  constructor(value1, value2) {
+    // Does not work!
+    this.prop2 = value2;
+    super(value1);
+  }
+}
+```
+
 ### 5.2 Parent instance: *super* in methods
+
+If you'd like to access the parent method inside of a child method, you can use the special shortcut `super`.  
+
+```javascript{22}
+class User {
+  name;
+
+  constructor(name) {
+    this.name = name;
+  }
+
+  getName() {
+    return this.name;
+  }
+}
+
+class ContentWriter extends User {
+  posts = [];
+
+  constructor(name, posts) {
+    super(name);
+    this.posts = posts;
+  }
+
+  getName() {
+    const name = super.getName();
+    if (name === '') {
+      return 'Unknwon';
+    }
+    return name;
+  }
+}
+
+const writer = new ContentWriter('', ['Why I like JS']);
+writer.getName(); // => 'Unknwon'
+```
+
+`getName()` of the child class `ContentWriter` accesses the method `super.getName()` directly from the parent class `User`.  
+
+This feature is called [method overriding](https://en.wikipedia.org/wiki/Method_overriding).  
+
+Note that you can use `super` with static methods too, to access the parent's static methods.  
 
 ## 6. Object type checking: *instanceof*
 
+`object instanceof Class` is the operator that determines if `object` is an instance of `Class`.  
+
+Let's see `instanceof` operator in action:
+
+```javascript
+class User {
+  name;
+
+  constructor(name) {
+    this.name = name;
+  }
+
+  getName() {
+    return this.name;
+  }
+}
+
+const user = new User('Jon Snow');
+
+user instanceof User; // => true
+{}   instanceof User; // => false
+```
+
+`user` is an instance of `User` class, `user instanceof User`  evaluates to `true`.  
+
+The empty object `{}` is not an instance of `User`, correspondigly  `{} instanceof User` is `false`.  
+
+`instanceof` is polyphorphic, meaning that it will detect a child class instance as an instance of a parent class.  
+
+```javascript
+class User {
+  name;
+
+  constructor(name) {
+    this.name = name;
+  }
+
+  getName() {
+    return this.name;
+  }
+}
+
+class ContentWriter extends User {
+  posts = [];
+
+  constructor(name, posts) {
+    super(name);
+    this.posts = posts;
+  }
+}
+
+const writer = new ContentWriter('John Smith', ['Why I like JS']);
+
+writer instanceof ContentWriter; // => true
+writer instanceof User;          // => true
+```
+
+`writer` is an instance of the child class `ContentWriter`. The operator `writer instanceof ContentWriter` evaluates to `true`.  
+
+At the same time `ContentWriter` is a child class of `User`. So `writer instanceof User` evaluates to `true` as well.  
+
+What if you'd like to determine the exact class of the instance? You can use the `constructor` property and compare directly with the class:
+
+```javascript
+writer.constructor === ContentWriter; // => true
+writer.constructor === User;          // => false
+```
+
 ## 7. Classes and prototypes
 
+I must say that the class syntax in JavaScript does a great job to abstract from the prototypal inheritance. To describe the main features of the classes I didn't even have to use the word prototype.  
+
+But the classes are built on top of the prototypal inheritance. Every class is a function, and when invoked as a constructor, creates an instance.  
+
+The following two code snippets are equivalent.  
+
+The class version:
+
+```javascript
+class User {
+  constructor(name) {
+    this.name = name;
+  }
+
+  getName() {
+    return this.name;
+  }
+}
+
+const user = new User('John');
+
+user.getName();       // => 'John Snow'
+user instanceof User; // => true
+```
+
+The version that use prototype syntax directly:
+
+```javascript
+function User(name) {
+  this.name = name;
+}
+
+User.prototype.getName = function() {
+  return this.name;
+}
+
+const user = new User('John');
+
+user.getName();       // => 'John Snow'
+user instanceof User; // => true
+```
+
+The class syntax is way easier to work if you're familiar with classic inheritance mechanism of Java or Swift languages.  
+
+Anyways, even if you use classes syntax in JavaScript, I recommend you to have a good grasp of protypal inheritance.  
+
 ## 8. Conclusion
+
+JavaScript classes allow you do intialize instances with constructors, define fields and methods. 
+
+The fields and methods can be defined on the class instance, or even on the class itself using `static` keyword.  
+
+Inheritance is achieved using `extends` keyword: you can easily create a child class from a parent. `super` keyword used in the child let's you communicate with the parent class.  
+
+If you want to take advantage of encapsulation, you can make private the fields and methods to hide the internal implementation details of your classes. In such case you must prefix you field or method name with a special character `#`.  
+
+The following features are still a part of [Class field proposal](https://github.com/tc39/proposal-class-fields):
+
+* The declaration of instance fields inside the class body
+* The declaration of static fields inside the class body
+* The private fields and methods
 
 *What do you think about using `#` to prefix private properties?*
