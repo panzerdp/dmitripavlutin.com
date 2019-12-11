@@ -2,7 +2,7 @@
 title: 'The Complete Guide to JavaScript Classes'
 description: 'JavaScript classes have constructors, let you define fields and methods, enable encapsulation with private fields, and permit inheritance.'
 published: '2019-12-11T13:45Z'
-modified: '2019-12-11T13:45Z'
+modified: '2019-12-11T16:10Z'
 thumbnail: './images/classes-guide.png'
 slug: javascript-classes-complete-guide
 tags: ['javascript', 'class', 'instanceof']
@@ -715,10 +715,10 @@ At the end of 2019:
 
 JavaScript classes allow you to initialize instances with constructors, define fields and methods. You can attach fields and methods even on the class itself using the `static` keyword.  
 
-Inheritance is achieved using `extends` keyword: you can easily create a child class from a parent. `super` keyword lets you communicate with the parent class.  
+Inheritance is achieved using `extends` keyword: you can easily create a child class from a parent. `super` keyword is used to access the parent class from the child one.  
 
-If you want to take advantage of encapsulation, you can make private the fields and methods to hide the internal implementation details of your classes. The private fields and methods names must begin with `#`.  
+If you want to take advantage of encapsulation, make the fields and methods private to hide the internal details of your classes. The private fields and methods names must begin with `#`.  
 
-The classes in JavaScript become more and more convenient to use. 
+The classes in JavaScript become more and more convenient to use.
 
 *What do you think about using `#` to prefix private properties?*
