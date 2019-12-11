@@ -13,16 +13,6 @@ commentsThreadId: javascript-classes-complete-guide
 
 JavaScript uses prototypal inheritance: every object inherits properties and methods from its prototype object.  
 
-```javascript
-const obj = {};
-const proto = Object.getPrototypeOf(obj);
-
-obj.toString();                  // => '[object Object]'
-obj.toString === proto.toString; // => true
-```
-
-`obj` inherits the properties and methods from its prototype `objProto`. The method `toString()` is inherited.  
-
 The traditional class as *the blueprint to create objects*, used in languages like Java or Swift, does not exist in JavaScript. The prototypal inheritance deals only with objects.  
 
 The prototypal inheritance can emulate the classic class inheritance. ES2015 introduces the `class` syntax, which is syntactic sugar over the prototypal inheritance. 
@@ -99,7 +89,6 @@ Inside the constructor `this` value equals to the newly created instance.
 
 ```javascript
 const user = new User('Jon Snow');
-user.name; // => 'Jon Snow'
 ```
 
 A default constructor is created when you don't define a constructor for the class. The default constructor is an empty function, which doesn't modify the instance.  
@@ -149,7 +138,7 @@ class User {
   name;
   
   constructor(name) {
-    this.name;
+    this.name = name;
   }
 }
 
@@ -165,7 +154,7 @@ Moreover, the class field can be initialized right away at declaration.
 
 ```javascript{2}
 class User {
-  name = 'Unkown';
+  name = 'Unknown';
 
   constructor() {
     // No initialization
@@ -173,12 +162,12 @@ class User {
 }
 
 const user = new User();
-user.name; // => 'Unkown'
+user.name; // => 'Unknown'
 ```
 
-`name = 'Unkown'` inside the class body declares a field `name` and initializes it with value `'Unkown'`.  
+`name = 'Unknown'` inside the class body declares a field `name` and initializes it with value `'Unknown'`.  
 
-Even without initialization inside the constructor, `user.name` is `'Unkown Hero'`.  
+Even without initialization inside the constructor, `user.name` is `'Unknown'`.  
 
 There's no restriction on accessing and updating of the public fields.  
 
@@ -211,6 +200,7 @@ class User {
 
 const user = new User('Jon Snow');
 user.getName(); // => 'Jon Snow'
+
 user.#name;     // SyntaxError is thrown
 ```
 
@@ -520,14 +510,15 @@ class User {
 }
 
 const user = new User('Jon Snow');
+const obj = {};
 
 user instanceof User; // => true
-{}   instanceof User; // => false
+obj instanceof User; // => false
 ```
 
 `user` is an instance of `User` class, `user instanceof User`  evaluates to `true`.  
 
-The empty object `{}` is not an instance of `User`, correspondingly `{} instanceof User` is `false`.  
+The empty object `{}` is not an instance of `User`, correspondingly `obj instanceof User` is `false`.  
 
 `instanceof` is polymorphic, meaning that it will detect a child class instance as an instance of a parent class.  
 
