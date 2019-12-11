@@ -1,8 +1,8 @@
 ---
 title: 'The Complete Guide to JavaScript Classes'
 description: 'JavaScript classes have constructors, let you define fields and methods, enable encapsulation with private fields, and permit inheritance.'
-published: '2019-12-11T13:30Z'
-modified: '2019-12-11T13:30Z'
+published: '2019-12-11T13:45Z'
+modified: '2019-12-11T13:45Z'
 thumbnail: './images/classes-guide.png'
 slug: javascript-classes-complete-guide
 tags: ['javascript', 'class', 'instanceof']
@@ -17,7 +17,7 @@ The traditional class as *the blueprint to create objects*, used in languages li
 
 The prototypal inheritance can emulate the classic class inheritance. ES2015 introduces the `class` syntax: a syntactic sugar over the prototypal inheritance.  
 
-This post familiarizes you with ES2015 classes: how to define a class, initialize the instance, define fields and methods, understand the private and public fields, grasp the static fields and methods.  
+This post familiarizes you with JavaScript classes: how to define a class, initialize the instance, define fields and methods, understand the private and public fields, grasp the static fields and methods.  
 
 ```toc
 
@@ -106,7 +106,7 @@ const user = new User('Jon Snow');
 
 If you don't define a constructor for the class, a default one is created. The default constructor is an empty function, which doesn't modify the instance.  
 
-At the same time, an ES2015 class can have up to one constructor.  
+At the same time, a JavaScript class can have up to one constructor.  
 
 ## 3. Fields
 
@@ -611,7 +611,7 @@ obj instanceof User; // => false
 
 The empty object `{}` is not an instance of `User`, correspondingly `obj instanceof User` is `false`.  
 
-`instanceof` is polymorphic, meaning that it will detect a child class instance as an instance of a parent class.  
+`instanceof` is polymorphic: the operator detects a child instance as an instance of a parent class.  
 
 ```javascript
 class User {
