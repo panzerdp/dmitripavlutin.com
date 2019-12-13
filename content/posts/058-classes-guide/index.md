@@ -2,7 +2,7 @@
 title: 'The Complete Guide to JavaScript Classes'
 description: 'JavaScript classes have constructors, let you define fields and methods, enable encapsulation with private fields, and permit inheritance.'
 published: '2019-12-11T13:45Z'
-modified: '2019-12-11T16:10Z'
+modified: '2019-12-13T09:20Z'
 thumbnail: './images/classes-guide.png'
 slug: javascript-classes-complete-guide
 tags: ['javascript', 'class', 'instanceof']
@@ -15,7 +15,7 @@ JavaScript uses prototypal inheritance: every object inherits properties and met
 
 The traditional class as *the blueprint to create objects*, used in languages like Java or Swift, does not exist in JavaScript. The prototypal inheritance deals only with objects.  
 
-The prototypal inheritance can emulate the classic class inheritance. ES2015 introduces the `class` syntax: a syntactic sugar over the prototypal inheritance.  
+The prototypal inheritance can emulate the classic class inheritance. To bring the traditional classes to JavaScript, ES2015 standard introduces the `class` syntax: a syntactic sugar over the prototypal inheritance.  
 
 This post familiarizes you with JavaScript classes: how to define a class, initialize the instance, define fields and methods, understand the private and public fields, grasp the static fields and methods.  
 
@@ -59,9 +59,11 @@ export class User {
 }
 ```
 
-The class becomes useful when you create an *instance* of the class. The instance is the object that contains data and behaves exactly as the class describes.  
+The class becomes useful when you create an *instance* of the class. The instance is an object containing data and behavior described by the class.  
 
-The `new` operator instantiates the class in JavaScript: `const instance = new Class()`.  
+![JavaScript class instances](./images/instances-3.png)
+
+The `new` operator instantiates the class in JavaScript: `instance = new Class()`.    
 
 For example, you can instantiate the `User` class using the `new` operator:  
 
