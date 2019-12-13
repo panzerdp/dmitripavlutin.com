@@ -1,8 +1,8 @@
 ---
 title: 'The Complete Guide to JavaScript Classes'
-description: 'JavaScript classes have constructors, let you define fields and methods, enable encapsulation with private fields, and permit inheritance.'
+description: 'JavaScript classes initialize instances with constructors, have fields and methods, permit encapsulation with private fields.'
 published: '2019-12-11T13:45Z'
-modified: '2019-12-13T09:20Z'
+modified: '2019-12-13T10:50Z'
 thumbnail: './images/classes-guide.png'
 slug: javascript-classes-complete-guide
 tags: ['javascript', 'class', 'instanceof']
@@ -59,7 +59,7 @@ export class User {
 }
 ```
 
-The class becomes useful when you create an *instance* of the class. The instance is an object containing data and behavior described by the class.  
+The class becomes useful when you create an *instance* of the class. An instance is an object containing data and behavior described by the class.  
 
 ![JavaScript class instances](./images/instances-3.png)
 
@@ -75,9 +75,9 @@ const myUser = new User();
 
 ## 2. Initialization: *constructor()*
 
-`constructor(param1, param2, ...)` is a special method used in the body of a class that initializes the instance.  
+`constructor(param1, param2, ...)` is a special method in the body of a class that initializes the instance. That's the place where you set the initial values for the fields, or do any kind of object setup.
 
-Let's initialize a property `name` using a constructor:
+In the following example the constructor sets the initial value of the field `name`:
 
 ```javascript{2-4}
 class User {
@@ -87,7 +87,7 @@ class User {
 }
 ```
 
-`User`'s constructor has one parameter `name`. The constructor uses `name` parameter to create a property `this.name` on the class instance (more about class fields in [the next section](#3-fields)).  
+`User`'s constructor has one parameter `name`, which is used to set the initial value of the field `this.name`.  
 
 Inside the constructor `this` value equals to the newly created instance.  
 
@@ -112,10 +112,15 @@ At the same time, a JavaScript class can have up to one constructor.
 
 ## 3. Fields
 
-Class fields are variables that hold information. Fields can be defined at 2 levels:
+Class fields are variables that hold information. Fields can be attached to 2 entities:
 
 1. Fields on the class instance
 2. Fields on the class itself (aka static)
+
+The fields also have 2 levels of accessibility:
+
+1. Public: the field is accessible anywhere
+2. Private: the field is accessible only within the body of the class
 
 ### 3.1 Public instance fields
 
@@ -140,9 +145,9 @@ user.name; // => 'Jon Snow'
 
 `name` is a *public field* because you can access it outside of the `User` class body.  
 
-When the fields are created inside the constructor, like in the previous scenario, it could be difficult to grasp the fields list.  
+When the fields are created implicitly inside the constructor, like in the previous scenario, it could be difficult to grasp the fields list. You have to decipher them from the constructor's code.   
 
-A better approach is to explicitly declare the class fields. No matter what constructor does, the instance always has the same set of fields. 
+A better approach is to explicitly declare the class fields. No matter what constructor does, the instance always has the same set of fields.  
 
 The [class fields proposal](https://github.com/tc39/proposal-class-fields) lets you define the fields inside the body of the class. Plus, you can indicate the initial value right away:
 
@@ -172,7 +177,7 @@ user.name; // => 'Jon Snow'
 
 `name;` inside the body of the class declares a public field `name`.  
 
-The public fields declared such a way is expressive: simply looking at the fields declarations you understand on what data operates the class.  
+The public fields declared such a way is expressive: a quick look at the fields declarations is enough to understand the class's data structure.  
 
 Moreover, the class field can be initialized right away at declaration.  
 
@@ -191,19 +196,19 @@ user.name; // => 'Unknown'
 
 `name = 'Unknown'` inside the class body declares a field `name` and initializes it with value `'Unknown'`.  
 
-There's no restriction on accessing and updating of the public fields. You can read and assign values to public fields inside the constructor, methods, and outside of the class.  
+There's no restriction on access or update of the public fields. You can read and assign values to public fields inside the constructor, methods, and outside of the class.  
 
 ### 3.2 Private instance fields
 
-Encapsulation is an important concept that lets you hide the internal details of a class. Someone that uses the class depends only on the public interface that the class provides, and doesn't dig into the implementation details of your class.  
+Encapsulation is an important concept that lets you hide the internal details of a class. Someone that uses an encapsulated class depends only on the public interface that the class provides, and doesn't couple to the implementation details of the class.  
 
 Classes organized with encapsulation in mind are easier to update when implementation details change.  
 
 A good way to hide internal data of an object is to use the private fields. These are the fields that can be read and change only within the class they belong to. The outside world of the class cannot change private fields directly.  
 
-Prefix the field name with the special symbol `#` to make it private, e.g. `#myField`. The prefix `#` must be kept every time you work with the field: declare it, read it, or modify it.  
+> *The private fields* are accessible only within the body of the class.
 
-*The private fields are accessible only within the body of the class.*
+Prefix the field name with the special symbol `#` to make it private, e.g. `#myField`. The prefix `#` must be kept every time you work with the field: declare it, read it, or modify it.  
 
 Let's make sure that the field `#name` can be set once at the instance initialization:
 
@@ -232,7 +237,7 @@ But if you try to access the private field `#name` outside of `User` class body,
 
 ### 3.3 Public static fields
 
-You can also define fields on the class itself: the static fields. These are helpful to define class constants or store information specific to the class.
+You can also define fields on the class itself: *the static fields*. These are helpful to define class constants or store information specific to the class.
 
 To create static fields in a JavaScript class, use the special keyword `static` followed by the field name: `static myStaticField`.  
 
@@ -260,11 +265,11 @@ admin.type === User.TYPE_ADMIN; // => true
 
 ### 3.4 Private static fields
 
-Sometimes even the static fields could be an implementation detail that you wouldn't like to share with the world.
+Sometimes even the static fields are an implementation detail that you'd like to hide. In this regard, you can make static fields private. 
 
-In this regard make the static fields private too. To make the static field private, prefix the field name with `#` special symbol: `static #myPrivateStaticField`.
+To make the static field private, prefix the field name with `#` special symbol: `static #myPrivateStaticField`.  
 
-Let's say you'd like to limit the number of instances of the `User` class. To hide the details about instance limits, you can create the private static fields:
+Let's say you'd like to limit the number of instances of the `User` class. To hide the details about instances limits, you can create the private static fields:
 
 ```javascript{2-3}
 class User {
@@ -289,11 +294,11 @@ new User('Sansa Stark'); // throws Error
 
 The static field `User.#MAX_INSTANCES` sets the maximum number of allowed instances, while `User.#instances` static field counts the actual number of instances.  
 
-These private static fields are accessible only within the `User` class.  
+These private static fields are accessible only within the `User` class. Nothing from the external world can interfere with the limits mechanism: that's the benefit of encapsulation. 
 
 ## 4. Methods
 
-The fields hold data. But the ability to modify data is performed by special functions that are a part of the class: methods.   
+The fields hold data. But the ability to modify data is performed by special functions that are a part of the class: *the methods*.  
 
 The JavaScript classes support both instance and static methods.  
 
@@ -320,7 +325,7 @@ const user = new User('Jon Snow');
 user.getName(); // => 'Jon Snow'
 ```
 
-`getName() { ... }` is an method inside the `User` class. `user.getName()` is a method invocation: it executes the method and returns the computed value if any.   
+`getName() { ... }` is a method inside the `User` class. `user.getName()` is a method invocation: it executes the method and returns the computed value if any.   
 
 In a class method, as well as in the constructor, `this` value equals to the class instance. Use `this` to access instance data: `this.field`, or even call other methods: `this.method()`.  
 
@@ -350,7 +355,7 @@ user.nameContains('Stark'); // => false
 
 `nameContains(str) { ... }` is a method of `User` class that accepts one parameter `str`. More than that, it executes another method of the instance `this.getName()` to get the user's name.  
 
-You can also make a method private. Make sure to prefix it with `#`.  
+A method can also be private. To make the method private prefix its name with `#`.  
 
 Let's make `getName()` method private:
 
@@ -374,13 +379,17 @@ class User {
 const user = new User('Jon Snow');
 user.nameContains('Jon');   // => true
 user.nameContains('Stark'); // => false
+
+user.#getName(); // SyntaxError is thrown
 ```
 
 `#getName()` is a private method. Inside the method `nameContains(str)` you call a private method such way: `this.#getName()`.  
 
+Being private, `#getName()` cannot be called outside of `User` class body.  
+
 ### 4.2 Getters and setters
 
-The getter and setter mimic regular fields, but with more control on how the field is accessed and changed.  
+The getter and setter mimic regular field, but with more control on how the field is accessed and changed.  
 
 The getter is executed on an attempt to get the field value, while setter on an attempt to set a value.  
 
@@ -419,7 +428,7 @@ While `set name(name) {...}` is executed when the field is updated `user.name = 
 
 ### 4.3 Static methods
 
-The static methods are functions attached directly to the class. They hold logic related to the class, rather than the instance of the class.  
+The static methods are functions attached directly to the class. They hold logic related to the class, rather than to the instance of the class.  
 
 To create a static method use the special keyword `static` followed by a regular method syntax: `static myStaticMethod() { ... }`.
 
@@ -454,7 +463,7 @@ User.isNameTaken('Arya Stark'); // => false
 
 `isNameTaken()` is a static method that uses the static private field `User.#takenNames` to check for taken names.  
 
-Private static methods also can be defined: `static #staticFunction() {...}`. Again, they follow the same rules of privacy rules: you can call a private static method only within the class body.   
+Static methods can be private: `static #staticFunction() {...}`. Again, they follow the rules of privacy: you can call a private static method only within the class body.   
 
 ## 5. Inheritance: *extends*
 
@@ -462,7 +471,7 @@ The classes in JavaScript support single inheritance using the `extends` keyword
 
 In the expression `class Child extends Parent { }` the `Child` class inherits from `Parent` the constructor, fields, and methods.  
 
-For example, let's create a new child class `Blogger` that extends the parent class `User`.  
+For example, let's create a new child class `ContentWriter` that extends the parent class `User`.  
 
 ```javascript{13}
 class User {
@@ -494,9 +503,9 @@ Note that private members of a parent class are *not inherited* by the child cla
 
 ### 5.1 Parent constructor: *super()* in *constructor()*
 
-If you'd like to customize the constructor, and still be able to use the parent constructor, then you need to use the `super()` special method available in the child constructor.  
+If you'd like to call the parent constructor in a child class, you need to use the `super()` special function available in the child constructor.  
 
-For example, let's update `ContentWriter` constructor to initialize the posts array:
+For example, let's make `ContentWriter` constructor call the parent constructor of `User`, as well as initialize the posts field:
 
 ```javascript{17}
 class User {
@@ -527,7 +536,7 @@ writer.posts // => ['Why I like JS']
 
 `super(name)` inside the child class `ContentWriter` executes the constructor of the parent class `User`.  
 
-Note that inside the child constructor you must execute `super()` before using `this` keyword. Calling `super()` makes sure that the instance is initialized and ready.  
+Note that inside the child constructor you must execute `super()` before using `this` keyword. Calling `super()` makes sure that the parent constructor initializes the instance.
 
 ```javascript{4-5}
 class Child extends Parent {
@@ -613,7 +622,7 @@ obj instanceof User; // => false
 
 The empty object `{}` is not an instance of `User`, correspondingly `obj instanceof User` is `false`.  
 
-`instanceof` is polymorphic: the operator detects a child instance as an instance of a parent class.  
+`instanceof` is polymorphic: the operator detects a child as an instance of the parent class.  
 
 ```javascript
 class User {
@@ -656,7 +665,7 @@ writer.constructor === User;          // => false
 
 ## 7. Classes and prototypes
 
-I must say that the class syntax in JavaScript does a great job to abstract from the prototypal inheritance. To describe the main features of the classes I didn't even use the term *prototype*.  
+I must say that the class syntax in JavaScript does a great job to abstract from the prototypal inheritance. To describe the `class` syntax I haven't even used the term *prototype*.  
 
 But the classes are built on top of the prototypal inheritance. Every class is a function, and creates an instance when [invoked as a constructor](/gentle-explanation-of-this-in-javascript/#4-constructor-invocation).  
 
@@ -706,7 +715,7 @@ Anyways, even if you use class syntax in JavaScript, I recommend you to have a g
 
 The class features presented in this post are spread across ES2015 and proposals at stage 3.  
 
-At the end of 2019:
+At the end of 2019, the class features are split between:
 
 * Public and private instance fields are part of [Class fields proposal](https://github.com/tc39/proposal-class-fields)
 * Private instance methods and accessors are part of [Class private methods proposal](https://github.com/tc39/proposal-private-methods)
@@ -715,11 +724,11 @@ At the end of 2019:
 
 ## 9. Conclusion
 
-JavaScript classes allow you to initialize instances with constructors, define fields and methods. You can attach fields and methods even on the class itself using the `static` keyword.  
+JavaScript classes initialize instances with constructors, define fields and methods. You can attach fields and methods even on the class itself using the `static` keyword.  
 
-Inheritance is achieved using `extends` keyword: you can easily create a child class from a parent. `super` keyword is used to access the parent class from the child one.  
+Inheritance is achieved using `extends` keyword: you can easily create a child class from a parent. `super` keyword is used to access the parent class from a child class.  
 
-If you want to take advantage of encapsulation, make the fields and methods private to hide the internal details of your classes. The private fields and methods names must begin with `#`.  
+To take advantage of encapsulation, make the fields and methods private to hide the internal details of your classes. The private fields and methods names must begin with `#`.  
 
 The classes in JavaScript become more and more convenient to use.
 
