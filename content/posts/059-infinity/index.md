@@ -11,22 +11,22 @@ type: post
 commentsThreadId: infinity-in-javascript
 ---
 
-In JavaScript `Infinity` is a special number with an interesting property: it's bigger than any finite number.  
+In JavaScript `Infinity` is a special number with an interesting property: it's bigger than any finite number. 
 
-While most likely you haven't encoutered much of `Infinity` during day by day coding, it still worth knowing because it's an useful initial values for certain algorithms.  
+While most likely you haven't encountered much of `Infinity` during day by day coding, it still worth knowing because it's a useful initial value for certain algorithms. 
 
-Let's look at the properties of `Infinity` number in JavaScript, some of its use cases, as well as demystify some misconceptions.  
+Let's look at the properties of `Infinity` number in JavaScript, some of its use cases, as well as demystify some misconceptions. 
 
 ## 1. The definition of *Infinity*
 
-The ECMAScript standard describe `Infinity` as follows:
+The ECMAScript standard describes `Infinity` as follows:
 
-> There are two other special values, called *positive Infinity* and *negative Infinity*. [...] Note that these two infinite Number values are produced by the program expressions `+Infinity` (or simply `Infinity`) and `-Infinity`.  
+> There are two other special values, called *positive Infinity* and *negative Infinity*. [...] Note that these two infinite Number values are produced by the program expressions `+Infinity` (or simply `Infinity`) and `-Infinity`. 
 
 Which means that `Infinity`, as well as `-Infinity` (the number small than any finite number) are special numbers:
 
 ```javascript
-typeof Infinity; // => 'number'
+typeof Infinity;  // => 'number'
 typeof -Infinity; // => 'number'
 ```
 
@@ -39,7 +39,7 @@ Number.NEGATIVE_INFINITY; // => -Infinity
 
 ## 2. The properties of *Infinity*
 
-`Infinity` is bigger than any finite number in JavaScript:  
+`Infinity` is bigger than any finite number in JavaScript: 
 
 ```javascript
 Infinity > 100;                     // => true
@@ -89,7 +89,7 @@ Infinity % 2;        // => NaN
 -Infinity < -Number.MAX_SAFE_INTEGER; // => true
 ```
 
-At the same time `-Infinity` is smaller than positive infinity:  
+At the same time `-Infinity` is smaller than positive infinity: 
 
 ```javascript
 -Infinity < Infinity; // => true
@@ -108,7 +108,7 @@ Infinity / -2; // => -Infinity
 Fortunately, an infinite value equals to an infinite value:
 
 ```javascript
-Infinity === Infinity;   // => true
+Infinity === Infinity; // => true
 -Infinity === -Infinity; // => true
 ```
 
@@ -128,7 +128,7 @@ Number.isFinite(999);       // => true
 
 ## 4. *Infinity* use cases
 
-The infinity value is handy when you'd like to initialize computations involving numbers comparisons.  
+The infinity value is handy when you'd like to initialize computations involving numbers comparisons. 
 
 For example, when searching for a minimum value in an array:
 
@@ -144,13 +144,13 @@ function findMin(array) {
 findMin([5, 2, 1, 4]); // => 1
 ```
 
-The `min` variable is initialized with `Infinity`. It makes sure that on first `for()` cycle iteration the minimum value becomes the first item.  
+The `min` variable is initialized with `Infinity`. It makes sure that on first `for()` cycle iteration the minimum value becomes the first item. 
 
 ## 5. Pitfalls of *Infinity*
 
-Most likely you're not going to work often directly with `Infinity` values. However, it worth knowing when they infinite values could appear.  
+Most likely you're not going to work often directly with `Infinity` values. However, it worth knowing when the infinite values could appear. 
 
-### 5.1 Parsing integers
+### 5.1 Parsing numbers
 
 Let's say JavaScript an input (POST request, value from an input field, etc) and tries to parse a number from it. In simple cases it would work fine:
 
@@ -159,7 +159,7 @@ Let's say JavaScript an input (POST request, value from an input field, etc) and
 parseFloat('10.5'); // => 10.5
 
 // Indicates an invalid number
-parseFloat('ZZZ');  // => NaN
+parseFloat('ZZZ'); // => NaN
 ```
 
 Care must be taken because `'Infinity'` string is parsed by `parseFloat()` as an actual `Infinity` number:
@@ -168,7 +168,7 @@ Care must be taken because `'Infinity'` string is parsed by `parseFloat()` as an
 parseFloat('Infinity'); // => Infinity
 ```
 
-It should be a validation error when the user introduces `'Infinity'` string into an input field that requires a number.  
+It should be a validation error when the user introduces the `'Infinity'` string into an input field that requires a number. 
 
 A better alternative is to use `parseInt()` to parse integers. It doesn't recongize `'Infinity'` as an integer:
 
@@ -180,21 +180,21 @@ parseInt('Infinity', 10); // => NaN
 
 ### 5.2 JSON serialization
 
-`JSON.stringify()` serializes an `Infinity` number to `null`.  
+`JSON.stringify()` serializes an `Infinity` number to `null`. 
 
 ```javascript
 const worker = {
-  salary: Infinity;
+ salary: Infinity
 };
 
 JSON.stringify(worker); // => '{ "salary": null }'
 ```
 
-`salary` property has the value `Infinity`. However when stringified to JSON, `"salary"`  becomes `null`.  
+`salary` property has the `Infinity` value. However when stringified to JSON, `"salary"` becomes `null`. 
 
 ### 5.3 Max number overflow
 
-`Number.MAX_VALUE` is the biggest float number in JavaScript.  
+`Number.MAX_VALUE` is the biggest float number in JavaScript. 
 
 If you try to use a number that is even bigger than `Number.MAX_VALUE`, JavaScript transforms such number to `Infinity`:
 
@@ -205,27 +205,26 @@ Math.pow(10, 1000);   // => Infinity
 
 ### 5.4 Math functions
 
-Some functions of `Math` namespace in JavaScript can return infinite numbers.  
+Some functions of `Math` namespace in JavaScript can return infinite numbers. 
 
 Here are a few examples:
 
 ```javascript{2,5}
 Math.max(1, 2); // => 2
-Math.max(); // => -Infinity
+Math.max();     // => -Infinity
 
 Math.min(1, 2); // => 1
-Math.min(); // => Infinity
+Math.min();   // => Infinity
 ```
-
 
 ## 6. Key takeaway
 
-`Infinity` in JavaScript represent the concept of an infinity number. Any finite number is smaller than `Infinity`, and any finite number is bigger `-Infinity`.  
+`Infinity` in JavaScript represents the concept of an infinite number. Any finite number is smaller than `Infinity`, and any finite number is bigger `-Infinity`. 
 
-Comparing infinite values in JavaScript is easy: `Infinity === Infinity` is `true`. The special function `Number.isFinite()` determines if the supplied argument is a finite number.  
+Comparing infinite values in JavaScript is easy: `Infinity === Infinity` is `true`. The special function `Number.isFinite()` determines if the supplied argument is a finite number. 
 
-You can initialize variables with `Infinite` when starting an algorithm that involves numbers comparisons. A use case is finding the minimum of an array.  
+You can initialize variables with `Infinite` when starting an algorithm that involves numbers of comparisons. A use case is finding the minimum of an array. 
 
-Care must be taken with `Infinity` when parsing numbers from inputs: `Number('Infinity')`, `parseFloat('Infinity')` return the actual `Infinity` number. When serialized with `JSON.stringify()`, the infinite value `Infinite` becames `null`.  
+Care must be taken with `Infinity` when parsing numbers from inputs: `Number('Infinity')`, `parseFloat('Infinity')` return the actual `Infinity` number. When serialized with `JSON.stringify()`, the infinite value `Infinite` becames `null`. 
 
 Hopefully, after reading my post you have a better grasp of how `Infinite` works in JavaScript!
