@@ -1,8 +1,8 @@
 ---
-title: Why I like JavaScript Optional Chaining
+title: Why You'll Like JavaScript Optional Chaining
 description: Optional chaining accesses properties from deep of nested objects without prop existence verification and intermediate variables boilerplates.
 published: "2019-08-21T13:06Z"
-modified: "2019-08-23T14:07Z"
+modified: "2019-12-22T14:07Z"
 thumbnail: "./images/chain.jpg"
 slug: javascript-optional-chaining
 tags: ["javascript", "optional chaining", "nullish coalescing"]
@@ -12,7 +12,7 @@ type: post
 
 There are JavaScript features that vastly change the way you code. Starting from ES2015 and beyond, the features that influenced the most my code are destructuring, arrow functions, classes, and modules system.  
 
-As of August 2019, a new proposal [optional chaining](https://github.com/tc39/proposal-optional-chaining) reached stage 3 and is going to be a nice improvement. Optional chaining changes the way properties are accessed from deep objects structures. 
+Optional chaining, as a part of ES2020, changes the way properties are accessed from deep objects structures. 
 
 Let's see how optional chaining makes your code simpler by removes boilerplate conditionals and variables when deeply accessing potentially missing properties.  
 
@@ -319,7 +319,7 @@ hasPadding({ padding: { right: 10 }}); // => true
 
 In my opinion, this version of `hasPadding()` is easier to read.  
 
-## 7. Why do I like it?
+## 7. Why like it?
 
 I like the optional chaining operator because it allows accessing easily the properties from nested objects. It prevents writing boilerplate that verifies against nullish values on every property accessor from the accessor chain.  
 
