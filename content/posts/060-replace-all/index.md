@@ -11,22 +11,22 @@ type: post
 commentsThreadId: replace-all-string-occurrences-javascript
 ---
 
-JavaScript doesn't have a good way to replace all string occurrences. The irony is that Java, which had served a rough inspiration for JavaScript in the first days, has the `replaceAll()` method on strings from 1995!  
+JavaScript doesn't provide an easy way to replace all string occurrences. The irony is that Java, which had served an inspiration for JavaScript in the first days, has been having the `replaceAll()` method on strings since 1995!  
 
-Fortunately, the new proposal [String.prototype.replaceAll()](https://github.com/tc39/proposal-string-replaceall) (at stage 3) brings the `replaceAll()` method to JavaScript's strings.  
+This post describes 2 workarounds to replace all string occurrences in JavaScript: using split and join of a string, and `replace()` combined with a regular expression. 
 
-In this post you'll find 2 workarounds to replace all string occurrences in JavaScript: using split and join array methods and `replace()` combined with a regular expression. 
-
-And finally, you'll read about the correct way by using the new `replaceAll()` method.  
+Finally, you'll read about the new proposal [String.prototype.replaceAll()](https://github.com/tc39/proposal-string-replaceall) (at stage 3) that brings the `replaceAll()` method to strings.   
 
 ## 1. Split and join an array
 
-The first approach to replace all string occurrences in a haystack string consist of 2 phases:
+The first approach to replace all string occurrences of a string consist of 2 phases:
 
-1) Split the string into pieces by the search string
-2) Then join by the string to replace.  
+1) Split the string into pieces by the search string.
+2) Then join the pieces back having the replace string between the pieces.  
 
-Let's replace all occurrences of `'duck'` with `'goose'`:
+For example, let's replace `+` with `-` in the string `'1+2+3'`. First, `'1+2+3'` is split by `+`, which results in `['1', '2', '3']` pieces. Then these pieces are joined by putting `-` in between, which results to `'1-2-3'`.  
+
+Here's how you can use `split()` and `join()` methods to achieve this in JavaScript:
 
 ```javascript{4}
 const search = 'duck';
@@ -37,11 +37,11 @@ const result = 'duck duck go'.split(search).join(replaceWith);
 result; // => 'goose goose go'
 ```
 
-`'duck duck go'.split('duck')` results in an array of chunks: `['', ' ', ' go']`.  
+`'duck duck go'.split('duck')` splits the string into pieces: `['', ' ', ' go']`.  
 
-These chunks are then joined `['', ' ', ' go'].join('goose')`, which results in the final string `'goose goose go'`.  
+Then these pieces are joined `['', ' ', ' go'].join('goose')` by inserting `'goose'` in between them, which results in the string `'goose goose go'`.  
 
-Here's a generalized helper function that uses this approach:
+Here's a generalized helper function that uses splitting and joining:
 
 ```javascript
 function replaceAll(string, search, replace) {
@@ -50,16 +50,16 @@ function replaceAll(string, search, replace) {
 
 replaceAll('abba', 'a', 'i');          // => 'ibbi'
 replaceAll('go go go!', 'go', 'move'); // => 'move move move!'
-replaceAll('oops', 'z', 'y');         // => 'oops'
+replaceAll('oops', 'z', 'y');          // => 'oops'
 ```
 
-This approach suffers from being hacky and requires transforming the string into an array of string chunks.
+This approach requires transforming the string into an array, and then back into a string. While splitting and joining does replace all occurrences of a string, it's a workaround rather than a good solution.  
 
 ## 2. *replace()* with a global regular expression
 
-`String.prototype.replace(regExpOrString, replaceWith)` lets you search for a string using a regular expression and replace it with a particular string. 
+`String.prototype.replace(regExp, replaceWith)` searches occurrences by a regular expression `regExp`, then replaces all the matches with a `replaceWith` string. 
 
-To use this approach it's obligatory to enable the [global search](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Advanced_searching_with_flags) on the regular expression. Having a global flag enabled, `replace()` will search for all matches of the regular expression inside the string.
+To make `replace()` method replace all occurrences of the pattern in the string, you have to enable the global flag on the regular expression. Here's how you do it:
 
 1) In the regular expression literals append `g` after at the flags section: `/search/g`
 2) In case of the regular expression constructor, use the flags argument: `new RegExp('search', 'g')`  
@@ -75,9 +75,11 @@ const result = 'duck duck go'.replace(searchRegExp, replaceWith);
 result; // => 'goose goose go'
 ```
 
-`'duck duck go'.replace(/duck/g, 'goose')` replaces all findings of `/duck/g` substrings with `goose`.  
+Note the regular expression literal: `/duck/g`. It matches the `'duck'` string, and has the global mode enabled.  
 
-When searching by pattern you can easily make *case insensitive* searches with `i` flag:
+`'duck duck go'.replace(/duck/g, 'goose')` replaces all findings of `/duck/g` substrings with `'goose'`.  
+
+You can easily make *case insensitive* replaces with `i` regular expression flag:
 
 ```javascript{1}
 const searchRegExp = /duck/gi;
@@ -88,20 +90,15 @@ const result = 'DUCK duck go'.replace(searchRegExp, replaceWith);
 result; // => 'goose goose go'
 ```
 
-`'DUCK duck go'.replace(/duck/gi, 'goose')` replaces all findings of `/duck/gi` substrings, in a case insensitive way, with `goose`.
+Looking again at the regular expression: `/duck/gi`. Having the global flag `g`, the regular expression also has enabled the case insensitive search: `i`. `/duck/gi` matches `'duck'`, as well as `'DUCK'`, `'Duck'`, and so on.  
+
+`'DUCK duck go'.replace(/duck/gi, 'goose')` replaces all findings of `/duck/gi` substrings, in a case insensitive way, with `'goose'`.  
+
+While regular expressions replace all occurrences of a string, in my opinion this approach is too heavy.  
 
 ### 2.1 Regular expression from a string
 
-Using regular expression is difficult when the search string is determined at runtime.  
-
-You can create a regular expression from a string using a constructor invocation: 
-
-```javascript
-const search = 'goose';
-const searchRegExp = new RegExp(search, 'g');
-```
-
-Because certain characters like `- [ ] / { } ( ) * + ? . \ ^ $ |` have special meaning in the regular expression, you have to [escape the string for these special characters](https://vocajs.com/#escapeRegExp).  
+Using regular expression approach is inconvinient when the search string is determined at runtime. You can't directly a regular expresson from a string without escaping the characters `- [ ] / { } ( ) * + ? . \ ^ $ |`, which have special meaning.  
 
 Here's an example of the problem:
 
@@ -114,7 +111,9 @@ const replaceWith = '-';
 const result = '5+2+1'.replace(searchRegExp, replaceWith);
 ```
 
-The above snippet tries to transform the search string `+` into a regular expression. But `+` is an invalid regular expression, thus `SyntaxError: Invalid regular expression: /+/` is thrown.   
+The above snippet tries to transform the search string `'+'` into a regular expression. But `'+'` is an invalid regular expression, thus `SyntaxError: Invalid regular expression: /+/` is thrown.  
+
+Escaping the character `'\\+'` solves the problem, but does it worth playing with escaping? Probably not.    
 
 ### 2.2 *replace()* when replacing strings directly
 
@@ -135,7 +134,7 @@ result; // => 'goose duck go'
 
 Finally, the new proposal [String.prototype.replaceAll()](https://github.com/tc39/proposal-string-replaceall) (at stage 3) brings the `replaceAll()` method to JavaScript's strings.  
 
-`replaceAll()` method replaces all appearances of a string with just 1 method call, without workaround like splitting an array or creating regular expressions.
+`replaceAll(search, replaceWith)` string method replaces all appearances of `search` string with `replaceWith`, without any workarounds.  
 
 Let's replace all occurrences of `'duck'` with `'goose'`:
 
@@ -148,7 +147,7 @@ const result = 'duck duck go'.replaceAll(search, replaceWith);
 result; // => 'goose goose go'
 ```
 
-`'duck duck go'.replaceAll('duck', 'goose')` replaces all occurrences of `'duck'` string with `'goose'`. It's simple and straightforward.
+`'duck duck go'.replaceAll('duck', 'goose')` replaces all occurrences of `'duck'` string with `'goose'`. It's simple and straightforward solution.  
 
 ### 3.1 The difference between *replaceAll()* and *replace()*
 
@@ -159,9 +158,9 @@ The string methods `replaceAll(search, replaceWith)` and `replace(search, replac
 
 ## 4. Key takeaway
 
-Replacing all string occurrences should be an easy thing to do. However, JavaScript didn't have a method for doing this for a long time.
+Replacing all string occurrences should be an easy thing to do. However, JavaScript haven't had a method for doing this for a long time.
 
-To emulate the replace all behavior, one approach is to split the string into chunks by the search string, the join back the string by the replace string: `string.split(search).join(replaceWith)`. This approach works, but it's hacky.
+To emulate the replace all behavior, one approach is to split the string into chunks by the search string, the join back the string placing replace string between chunks: `string.split(search).join(replaceWith)`. This approach works, but it's hacky.
 
 Another approach would be to use `String.prototype.replace()` with a regular expresson with global search enabled: `string.replace(/SEARCH/g, replaceWith)`.
 
@@ -169,6 +168,6 @@ Unfortunately, you cannot easily generate regular expressions from a string at r
 
 Finally, the `String.prototype.replaceAll()` the method can easily replace all string occurrences directly: `string.replaceAll(search, replaceWith)`. It's a proposal at stage 3, but hopefully, it will land in a new JavaScript standard pretty soon.
 
-So, I recommend you to use `replaceAll()` for all string occurrences replacement.
+My recommendation is to use `replaceAll()` to replace strings. You'll need a [polyfill](https://github.com/zloirock/core-js#stringreplaceall) to use the method.  
 
 *What other ways to replace all string occurrences do you know? Please share in a comment below!*
