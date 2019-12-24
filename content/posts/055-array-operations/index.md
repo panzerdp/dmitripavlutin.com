@@ -2,7 +2,7 @@
 title: "15 Common Operations on Arrays in JavaScript (Cheatsheet)"
 description: "15 operations on arrays in JavaScript: iterate, map, reduce, concat, slice, clone, search, query, filter, insert, remove, empty, fill, flatten and sort."
 published: '2019-11-20T13:00Z'
-modified: '2019-11-29T11:30Z'
+modified: '2019-12-24T08:00Z'
 thumbnail: './images/birds.jpg'
 slug: operations-on-arrays-javascript
 tags: ['javascript', 'array']
@@ -750,7 +750,7 @@ Tips:
 
 ### 15.1 *array.sort()* method
 
-`array.sort([compare])` method sorts the items of the array.
+`array.sort([compare])` method sorts the items of the array. When the compare function is omitted, the method converts the items to strings, then orders them ascending by UTF-16 code units values.  
 
 The optional argument `compare(item1, item2)` is a callback that customizes the order of items. If `compare(item1, item2)` returns:
 
@@ -758,17 +758,17 @@ The optional argument `compare(item1, item2)` is a callback that customizes the 
 * `1` then `item2` will follow by `item1` in the sorted array
 * `0` then the position of items doesn't change
 
-Let's sort an array of numbers:
+Let's sort an array of letters:
 
 ```javascript
-const numbers = [4, 3, 1, 2];
+const letters = ['B', 'C', 'A'];
 
-numbers.sort();
+letters.sort();
 
-numbers; // => [1, 2, 3, 4]
+letters; // => ['A', 'B', 'C']
 ```
 
-`numbers.sort()` sort the numbers in ascending order. 
+`letters.sort()` sorts the letters in ascending order.  
 
 Let's use the compare function and make even numbers followed by odd ones:
 
