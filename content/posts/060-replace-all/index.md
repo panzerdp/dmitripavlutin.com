@@ -1,8 +1,8 @@
 ---
 title: '3 Ways To Replace All String Occurrences in JavaScript'
 description: 'You can replace all occurrences of a string using split and join approach, replace() with a regular expression and the new replaceAll() string method.'
-published: '2019-12-24T13:00Z'
-modified: '2019-12-24T13:00Z'
+published: '2019-12-24T11:15Z'
+modified: '2019-12-24T11:15Z'
 thumbnail: './images/replace-4.png'
 slug: replace-all-string-occurrences-javascript
 tags: ['javascript', 'string']
