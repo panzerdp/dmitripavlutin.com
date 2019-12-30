@@ -11,43 +11,62 @@ type: post
 commentsThreadId: javascript-utility-libraries
 ---
 
-The specifics of Frontend development are that you have to always monitor the bundle size of the application in order not to include too many libraries. 
+Big JavaScript bundles is a common performance problem of the Frontend development. Nobody likes slow and heavy applications.  
 
-However, a good part of software development consists of not reinventing the wheel: should I include that utility library (lodash, ramda, date-fns, etc) or should you write that utility function by yourself? 
+An impact on the bundle size have the utility libraries: collections of functions implementing common tasks (finding unique items of an array, formatting dates, etc). Examples of utility libraries in JavaScript are Lodash, Ramda, Date-fns, Math.js.  
 
-That's a good question. I'm glad you're asking it yourself because no user likes to download megabytes of bundles. 
+Let's discuss when it makes sense to use utility libraries. And importantly, how to integrate libraries to minimally impact the bundle size.  
 
-In this post, you will find the reasons when you should include the utility libraries in your code. And more importantly, how to do it correctly in order to have the minimum bundle size as a result. 
+## 1. My rule of thumb
 
-## 1. The pros
+If the following is true:
 
-### 1.1 Prevents reinventing the wheel
+> Writing the solution by yourself would look similarly to the solution provided by the utility library.  
 
-The main benefit of using a utility library is the code reuse. Instead of reinventing the wheel, it's wiser to explore if the problem wasn't solved already. 
+then it's good to use the utility library.  
 
-For example, you'd like to find the unique items of an array you can:
+In simple words, you want to avoid reinventing the wheel and leverage existing solutions.  
 
-1) Write the function by yourself. 
-2) You can use a utility library like lodash that provides `_.unique(array)`. 
+Let's continue looking at some pros and cons of using utility libraries.  
 
-### 1.2 Quality
+## 2. The pros of utilities
 
-Another important benefit of utility libraries is that they are usually:
+### 2.1 Prevents reinventing the wheel
+
+The main benefit of utility libraries is the code reuse. When facing a problem, before solving it by yourself, research if there isn't a solution already. 
+
+For example the common problems like:
+
+* Operations on arrays
+* Complex string manipulations
+* Formatting dates
+* URL parse and stringify
+* and alike problems
+
+are already solved by utility libraries.  
+
+And let's be honest. Writing *your own date formatting utility* when developing a Frontend application is wasting of time.  
+
+### 2.2 Quality
+
+Popular utility libraries are usually:
 
 1. Well tested
 2. Well documented
 3. Performance tuned
 4. "Bullet proofed" by the community
 
-So if you're integrating a specific utility function in your code, you can be sure that it was tested by lots of developers. This guarantees that the quality of the utility function is at a high level.
+So when you're include that library, you inherit all these nice benefits.  
 
-## 2. The cons
+## 3. The cons of utilities
 
-### 2.1 Bundle size increase
+### 3.1 Bundle size increase
 
-Of course, the usage of a utility comes with a cost, the most significant one is by increasing the bundle size. 
+The usage of a utility comes with costs, one being the potential increase of the bundle size.  
 
-But note that this problem is significant if you include the whole library inside of your application:
+Bundle size increases too much when you include the whole library. You should always cherry peek only the functions you need.
+
+For example, importing `lodash` library such way:
 
 ```javascript
 // Not good!
@@ -56,25 +75,27 @@ import _ from 'lodash';
 _.unique([1, 1, 2, 3]); // => [1, 2, 3]
 ```
 
-The section [3.1 Cherry pick functions](#31-cherry-pick-functions) addresses this problem. 
+clutters the application with unneded functions. 
 
-### 2.2 Tight coupling
+The sections [3.1 Cherry pick functions](#31-cherry-pick-functions) and [3.2 Tree shaking](#32-tree-shaking) describe the tips how to include only the used functions into the bundle.  
 
-Another problem is that the code of your application becomes tightly coupled to the utility library. 
+### 3.2 Tight coupling
 
-In case if the utility function has a bug, you'll have to wait until the author of the library fixes the problem. 
+The code of your application becomes tightly coupled to the utility library. Being coupled with the utility library puts you in a risk zone because you depend on the library API, bugs, maintenance. 
 
-Also, if later you'd like a slightly different behavior of the utility function, you'd have to contact the author for changes. And quite often the author could refuse the proposed changes because that's only your use case. 
+In case if the utility function has a bug, you'll have to wait until the library author fixes the problem.  
 
-Being coupled with the utility library puts you in a risk zone because you depend on the library maintenance. 
+If later you'd like a different behavior of some utility function, you'd have to contact the author to make changes. Often the author could refuse the proposed changes because that's only your use case.  
 
-## 3. The tips
+Integrate only the libraries that are high quality, well tested, actively maintained, have an API that fits your *current and potential future* uses cases.  
 
-### 3.1 Cherry pick functions
+## 4. Tips
 
-To avoid the increasing of bundle size when using the utility library is to cherry-pick the utility functions. 
+### 4.1 Cherry pick functions
 
-For example, here's how you could cherry-pick `unique()` function:
+To avoid the increase of bundle size when using the utility library, a good approach is to cherry-pick the utility functions.  
+
+For example, here's how you could cherry-pick `unique` function out of `lodash`:
 
 ```javascript
 import unique from 'lodash/unique';
@@ -82,9 +103,9 @@ import unique from 'lodash/unique';
 unique([1, 1, 2, 3]); // => [1, 2, 3]
 ```
 
-`import unique from 'lodash-es/unique'` picks only the `unique` function from the library. It guarantees the minimal bundle size. 
+`import unique from 'lodash/unique'` picks only the `unique` function from the library. It guarantees the minimal bundle size. 
 
-### 3.2 Tree shaking
+### 4.2 Tree shaking
 
 Also, because the ES2015 are defined statically, you could cherry-pick the functions by using named imports:
 
@@ -98,9 +119,9 @@ unique([1, 1, 2, 3]); // => [1, 2, 3]
 
 While technically a named import loads the entire utility library, the bundlers (like webpack or rollup) that implement [tree shacking](https://webpack.js.org/guides/tree-shaking/) mechanism will try to optimize the bundle by using the code for the imported functions only. 
 
-### 3.3 Tiny npm modules
+### 4.3 Tiny npm packages
 
-There's an idea that instead of using the entire library as a dependency, you could use the tiny npm modules for each function. 
+There's an idea that instead of using the entire library as a dependency, you could use tiny npm packages for each function.  
 
 Here's an example how you could use `debounce` and `throttle`:
 
@@ -136,7 +157,7 @@ import throttle from 'lodash-es/throttle';
 
 When the functions are cherry-picked from the entire library, internally the common code is reused. In the final bundle, only 1 copy of the common code is included. 
 
-### 3.4 Monitor bundle size
+### 4.4 Monitor bundle size
 
 Of course, periodically it makes sense to view what is included in the bundle. There are a lot of useful tools, so let's see the ones I like. 
 
@@ -146,7 +167,7 @@ Of course, periodically it makes sense to view what is included in the bundle. T
 
 Another interesting tool is [Webpack Size Plugin](https://www.npmjs.com/package/size-plugin). The plugin prints the sizes of webpack assets and the changes since the last build.
 
-## 4. Key takeaway
+## 5. Key takeaway
 
 Utility libraries are good for code reuse and let you concentrate on creating the application, instead of reinventing the wheel. 
 
@@ -156,4 +177,4 @@ When integrating utilities, care must be taken to use only the necessary functio
 
 A good approach is to cherry-pick only the necessary functions from the utility. This will guarantee a small impact on the bundle size. 
 
-*Does it worth using utility libraries? Please write your opinion in a comment below!*
+*Does it worth using utility libraries? I'd like to know your opinion!*
