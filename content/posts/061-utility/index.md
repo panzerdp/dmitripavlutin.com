@@ -1,9 +1,9 @@
 ---
-title: 'Should You Use JavaScript Utility Libraries?'
-description: "Does it worth using JavaScript utility libraries like Lodash?"
+title: 'How To Use Correctly JavaScript Utility Libraries'
+description: "How to efficiently integrate JavaScript utility libraries into your application and minimize the increase of bundle size."
 published: '2019-12-31T14:00Z'
 modified: '2019-12-31T14:00Z'
-thumbnail: './images/javascript-utility-libraries-8.png'
+thumbnail: './images/javascript-utility-libraries-9.png'
 slug: javascript-utility-libraries
 tags: ['javascript']
 recommended: ['announcing-voca-the-ultimate-javascript-string-library', 'become-better-software-developer-digging-climbing']
@@ -29,7 +29,7 @@ In simple words, you want to avoid reinventing the wheel and leverage existing s
 
 Let's continue looking at some pros and cons of using utility libraries.  
 
-## 2. The pros of utilities
+## 2. The pros
 
 ### 2.1 Prevents reinventing the wheel
 
@@ -58,7 +58,7 @@ Popular utility libraries are usually:
 
 So when you're include that library, you inherit all these nice benefits.  
 
-## 3. The cons of utilities
+## 3. The cons
 
 ### 3.1 Bundle size increase
 
@@ -75,7 +75,7 @@ import _ from 'lodash';
 _.unique([1, 1, 2, 3]); // => [1, 2, 3]
 ```
 
-clutters the application with unneded functions. 
+clutters the JavaScript bundle with functions that are not used.  
 
 The sections [3.1 Cherry pick functions](#31-cherry-pick-functions) and [3.2 Tree shaking](#32-tree-shaking) describe the tips how to include only the used functions into the bundle.  
 
@@ -105,19 +105,43 @@ unique([1, 1, 2, 3]); // => [1, 2, 3]
 
 `import unique from 'lodash/unique'` picks only the `unique` function from the library. It guarantees the minimal bundle size. 
 
-### 4.2 Tree shaking
-
-Also, because the ES2015 are defined statically, you could cherry-pick the functions by using named imports:
+Cherry-picking functions becomes daunting when you'd like to include multiple functions. Each picked function requires an import statement, which is overhelming:
 
 ```javascript
-import { unique } from 'lodash-es';
+import unique from 'lodash/unique';
+import flatten from 'lodash/flatten';
 
-unique([1, 1, 2, 3]); // => [1, 2, 3]
+unique(flatten([[1, 2], [2]])) // => [1, 2]
 ```
 
-`import { unique } from 'lodash-es'` picks the `unique` function from the library. 
+The next approach using ES2015 named imports, even when importing multiple functions, requires just one import statement.  
 
-While technically a named import loads the entire utility library, the bundlers (like webpack or rollup) that implement [tree shacking](https://webpack.js.org/guides/tree-shaking/) mechanism will try to optimize the bundle by using the code for the imported functions only. 
+### 4.2 ES2015 modules enable tree shaking
+
+ES2015 modules are static: what is imported and exported doesn't change during runtime. Bundlers like Webpack and Rollup analyzing the static modules structure can eliminate the unused code. This optimization is also called [tree shaking](https://webpack.js.org/guides/tree-shaking/).   
+
+To enable tree shaking include the ES2015 modules build of the utility library into your application. The field `module` in the `package.json` file indicates the ES2015 modules build:
+
+```json{4}
+// package.json of the utility library
+{
+  "name": "library",
+  "module": "es/index.js", // ES2015 modules build
+  "main": "index.js"
+}
+```
+
+Some libraries like `lodash` publish a separated package having ES2015 build: [lodash-es](https://www.npmjs.com/package/lodash-es).
+
+For example, let's use `lodash-es` to import `unique` function:
+
+```javascript
+import { unique, flatten } from 'lodash-es';
+
+unique(flatten([[1, 2], [2]])) // => [1, 2]
+```
+
+`import { unique, flatten } from 'lodash-es'` includes the `unique` and `flatten` functions from the library. Tree shacking optimization will include in the bundle only the code of `unique` and `flatten` functions only.  
 
 ### 4.3 Tiny npm packages
 
@@ -125,13 +149,14 @@ There's an idea that instead of using the entire library as a dependency, you co
 
 Here's an example how you could use `debounce` and `throttle`:
 
-```json{4-5}
+```json{5-6}
+// package.json of your application
 {
- "name": "my-application",
- "dependencies": {
- "lodash.debounce": "4.0.8",
- "lodash.throttle": "4.1.1"
- }
+  "name": "my-application",
+  "dependencies": {
+    "lodash.debounce": "4.0.8",
+    "lodash.throttle": "4.1.1"
+  }
 }
 ```
 
@@ -144,22 +169,30 @@ import throttle from 'lodash.throttle';
 // use debounce and throttle
 ```
 
-The problem of this approach is that `lodash.debounce` and `lodash.throttle` have some code in common. But because these are independent packages, the common code is going to be duplicated into the final bundle. And even when the tree shaking is enabled, still the duplication cannot be eliminated. 
+The problem of this approach is that `lodash.debounce` and `lodash.throttle` have some code in common. Because these are independent packages, the common code is going to be duplicated into the final bundle. Even having tree shaking is enabled, still the duplication cannot be eliminated.  
 
-When using 2 or more functions from the same utility library, don't use the tiny npm modules. Specify the entire library as a dependency, then cherry-pick the necessary functions:
+Don't use the tiny npm packages for each function when integrating 2 or more functions from the same utility library. Specify the entire library as a dependency, then cherry-pick the necessary functions:
 
 ```javascript
-import debounce from 'lodash-es/debounce';
-import throttle from 'lodash-es/throttle';
+import debounce from 'lodash/debounce';
+import throttle from 'lodash/throttle';
 
 // use debounce and throttle
 ```
 
-When the functions are cherry-picked from the entire library, internally the common code is reused. In the final bundle, only 1 copy of the common code is included. 
+or use ES2015 module named import:
+
+```javascript
+import { debounce, throttle } from 'lodash-es';
+
+// use debounce and throttle
+```
+
+The common code of `debounce` and `throttle` is reused when the functions are cherry-picked from the library. In the final bundle, only 1 copy of the common code is included.  
 
 ### 4.4 Monitor bundle size
 
-Of course, periodically it makes sense to view what is included in the bundle. There are a lot of useful tools, so let's see the ones I like. 
+It's wise to periodically review what's included in the JavaScript bundle. There are a lot of useful tools to monitor the bundle size.  
 
 [Webpack Bundle Analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer) is a webpack plugin that lets you visualize what's included in the JavaScript bundle:
 
