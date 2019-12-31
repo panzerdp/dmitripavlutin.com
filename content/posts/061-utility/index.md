@@ -77,7 +77,7 @@ _.unique([1, 1, 2, 3]); // => [1, 2, 3]
 
 clutters the JavaScript bundle with functions that are not used.  
 
-The sections [3.1 Cherry pick functions](#31-cherry-pick-functions) and [3.2 Tree shaking](#32-tree-shaking) describe the tips how to include only the used functions into the bundle.  
+The sections [4.1 Cherry pick functions](#41-cherry-pick-functions) and [4.2 ES2015 modules enable tree shaking](#42-es2015-modules-enable-tree-shaking) describe how to include only the used functions into the bundle.  
 
 ### 3.2 Tight coupling
 
@@ -85,7 +85,7 @@ The code of your application becomes tightly coupled to the utility library. Bei
 
 In case if the utility function has a bug, you'll have to wait until the library author fixes the problem.  
 
-If later you'd like a different behavior of some utility function, you'd have to contact the author to make changes. Often the author could refuse the proposed changes because that's only your use case.  
+If you'd need a different behavior of some utility function, you'd have to contact the author to make changes. Often the author could refuse the proposed changes because that's only your use case.  
 
 Integrate only the libraries that are high quality, well tested, actively maintained, have an API that fits your *current and potential future* uses cases.  
 
@@ -131,7 +131,7 @@ To enable tree shaking include the ES2015 modules build of the utility library i
 }
 ```
 
-Some libraries like `lodash` publish a separated package having ES2015 build: [lodash-es](https://www.npmjs.com/package/lodash-es).
+Some libraries like `lodash` publish a standalone package having ES2015 build: [lodash-es](https://www.npmjs.com/package/lodash-es).
 
 For example, let's use `lodash-es` to import `unique` function:
 
@@ -143,11 +143,13 @@ unique(flatten([[1, 2], [2]])) // => [1, 2]
 
 `import { unique, flatten } from 'lodash-es'` includes the `unique` and `flatten` functions from the library. Tree shacking optimization will include in the bundle only the code of `unique` and `flatten` functions only.  
 
-### 4.3 Tiny npm packages
+### 4.3 Small focused modules
 
-There's an idea that instead of using the entire library as a dependency, you could use tiny npm packages for each function.  
+[Small focused modules](https://blog.sindresorhus.com/small-focused-modules-9238d977a92a) practice suggests that instead of using the entire library as a dependency, you could use standalone tiny npm packages for each function.  
 
-Here's an example how you could use `debounce` and `throttle`:
+Small focused modules are easier to reason about, are loaded much faster by the package manager. But there's one downside you should be aware of.  
+
+For example, let's use `lodash.debounce` and `lodash.debounce` packages:
 
 ```json{5-6}
 // package.json of your application
@@ -169,9 +171,9 @@ import throttle from 'lodash.throttle';
 // use debounce and throttle
 ```
 
-The problem of this approach is that `lodash.debounce` and `lodash.throttle` have some code in common. Because these are independent packages, the common code is going to be duplicated into the final bundle. Even having tree shaking is enabled, still the duplication cannot be eliminated.  
+`lodash.debounce` and `lodash.throttle` have some code in common. Because these are independent packages, the common code is duplicated into the final bundle. Even having tree shaking enabled, still the duplication cannot be eliminated.  
 
-Don't use the tiny npm packages for each function when integrating 2 or more functions from the same utility library. Specify the entire library as a dependency, then cherry-pick the necessary functions:
+Don't use the tiny npm packages when integrating 2 or more functions from the same utility library. Use the entire library as a dependency and cherry-pick the necessary functions to avoid the common code duplication problem:
 
 ```javascript
 import debounce from 'lodash/debounce';
@@ -188,13 +190,13 @@ import { debounce, throttle } from 'lodash-es';
 // use debounce and throttle
 ```
 
-The common code of `debounce` and `throttle` is reused when the functions are cherry-picked from the library. In the final bundle, only 1 copy of the common code is included.  
+The common code of `debounce` and `throttle` is reused when the functions are picked from the library. In the final bundle, only 1 copy of the common code is included.  
 
 ### 4.4 Monitor bundle size
 
-It's wise to periodically review what's included in the JavaScript bundle. There are a lot of useful tools to monitor the bundle size.  
+It's wise to periodically review what's included in the JavaScript bundle. A lot of useful plugins can help you monitor the bundle size.  
 
-[Webpack Bundle Analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer) is a webpack plugin that lets you visualize what's included in the JavaScript bundle:
+[Webpack Bundle Analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer) is a webpack plugin that visualizes what's included in the JavaScript bundle:
 
 ![Webpack Bundle Analyzer](./images/webpack-bundle-analyzer.png)
 
@@ -204,9 +206,9 @@ Another interesting tool is [Webpack Size Plugin](https://www.npmjs.com/package/
 
 Utility libraries are good for code reuse and let you concentrate on creating the application, instead of reinventing the wheel. 
 
-As a general rule of thumb, if the function you're trying to write is already implemented by a utility library, and it has almost the same size and the same functionality, it's better to use the utility function. 
+As a general rule of thumb, if the function you're trying to write is already implemented by a utility library, and it has almost the same size and the same functionality, it's better to use the utility function.
 
-When integrating utilities, care must be taken to use only the necessary functions. There's almost never a good idea to include the whole utility into your application because it could significantly increase the bundle size of your application. 
+When integrating utilities, care must be taken to use only the necessary functions. There's almost never a good idea to include the whole utility into your application because it could significantly increase the bundle size of your application.
 
 A good approach is to cherry-pick only the necessary functions from the utility. This will guarantee a small impact on the bundle size. 
 
