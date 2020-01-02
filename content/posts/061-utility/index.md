@@ -13,7 +13,7 @@ commentsThreadId: javascript-utility-libraries
 
 The big JavaScript bundle is a common performance problem in Frontend development. Nobody likes slow, heavy applications and looking at the loading spinner.  
 
-An impact on the bundle size has the utility libraries: collections of functions implementing common tasks (finding unique items of an array, formatting dates, etc). Examples of utility libraries in JavaScript are Lodash, Ramda, Date-fns, Math.js.  
+An impact on the bundle size has the utility libraries: collections of functions implementing common tasks (finding uniq items of an array, formatting dates, etc). Examples of utility libraries in JavaScript are Lodash, Ramda, Date-fns, Math.js.  
 
 Let's discuss when it makes sense to use utility libraries. And importantly, how to integrate libraries to minimally affect the bundle size.  
 
@@ -72,10 +72,10 @@ For example, importing `lodash` library such way:
 // Not good!
 import _ from 'lodash';
 
-_.unique([1, 1, 2, 3]); // => [1, 2, 3]
+_.uniq([1, 1, 2, 3]); // => [1, 2, 3]
 ```
 
-clutters the JavaScript bundle with all the functions of lodash library, while you use only `_.unique`.  
+clutters the JavaScript bundle with all the functions of lodash library, while you use only `_.uniq`.  
 
 The sections [4.1 Cherry pick functions](#41-cherry-pick-functions) and [4.2 ES2015 modules enable tree shaking](#42-es2015-modules-enable-tree-shaking) describe how to include only the used functions into the bundle.  
 
@@ -97,23 +97,23 @@ Integrate only the libraries that are high quality, well tested, actively mainta
 
 To avoid the increase of bundle size when using the utility library, a good approach is to cherry-pick the utility functions.  
 
-For example, here's how you could cherry-pick `unique` function out of `lodash`:
+For example, here's how you could cherry-pick `uniq` function out of `lodash`:
 
 ```javascript
-import unique from 'lodash/unique';
+import uniq from 'lodash/uniq';
 
-unique([1, 1, 2, 3]); // => [1, 2, 3]
+uniq([1, 1, 2, 3]); // => [1, 2, 3]
 ```
 
-`import unique from 'lodash/unique'` picks only the `unique` function from the library. It guarantees the minimal bundle size. 
+`import uniq from 'lodash/uniq'` picks only the `uniq` function from the library. It guarantees the minimal bundle size. 
 
 Cherry-picking functions become daunting when you'd like to include multiple functions. Each picked function requires an import statement, which is overwhelming:
 
 ```javascript
-import unique from 'lodash/unique';
+import uniq from 'lodash/uniq';
 import flatten from 'lodash/flatten';
 
-unique(flatten([[1, 2], [2]])) // => [1, 2]
+uniq(flatten([[1, 2], [2]])) // => [1, 2]
 ```
 
 The next approach using ES2015 named imports, even when importing multiple functions, requires just one import statement.  
@@ -137,15 +137,15 @@ To enable tree shaking include the ES2015 modules build of the utility library i
 
 Some libraries like `lodash` publish a standalone package having ES2015 build: [lodash-es](https://www.npmjs.com/package/lodash-es).
 
-For example, let's use `lodash-es` to import `unique` and `flatten` functions:
+For example, let's use `lodash-es` to import `uniq` and `flatten` functions:
 
 ```javascript
-import { unique, flatten } from 'lodash-es';
+import { uniq, flatten } from 'lodash-es';
 
-unique(flatten([[1, 2], [2]])) // => [1, 2]
+uniq(flatten([[1, 2], [2]])) // => [1, 2]
 ```
 
-`import { unique, flatten } from 'lodash-es'` includes `unique` and `flatten` functions from the library. Tree shacking optimization will add to the bundle only the code of `unique` and `flatten` functions only.  
+`import { uniq, flatten } from 'lodash-es'` includes `uniq` and `flatten` functions from the library. Tree shacking optimization will add to the bundle only the code of `uniq` and `flatten` functions only.  
 
 ### 4.3 Small focused modules
 
