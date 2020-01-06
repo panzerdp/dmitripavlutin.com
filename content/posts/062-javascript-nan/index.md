@@ -21,7 +21,19 @@ typeof integer; // => 'number'
 typeof float;   // => 'number'
 ```
 
-But there are more number values that have special behavior: the infinity number 
+Apart from integers and floats, there are 2 values that have special behavior in JavaScript: `Infinity` (the biggest number) and `NaN` (result of a faulty operation on numbers):
+
+```javascript
+const infinite = Infinity;
+const faulty = NaN;
+
+typeof infinite; // => 'number'
+typeof faulty;   // => 'number'
+```
+
+`NaN` is a special kind of number that indicates a faulty operation on numbers. While usually you don't work with `NaN` directly, often it's appearance is a surprise.  
+
+Let's take a closer look at `NaN` special value: how to check whether a variable has `NaN` and importantly understand the operations that result in `NaN`.  
 
 ## 1. NaN number
 
