@@ -71,7 +71,7 @@ The interesting property of `NaN` is that it doesn't equal to any value, even wi
 NaN === NaN; // => false
 ```
 
-As the example above shows, `NaN` does not equal to `NaN`.  
+As the example above shows, `NaN` does not equal `NaN`.  
 
 This behavior is useful to detect if a variable contains `NaN` value:  
 
@@ -114,7 +114,7 @@ On the other side, `Number.isNaN('Joker')` checks without conversion if the argu
 
 ## 3.1 Parsing numbers
 
-JavaScript offers the possibility to parse strings that have numerical values. For example, you could easily transform `'1.5'` string into a `1.5` number.  
+JavaScript offers the possibility to parse strings that have numerical values. For example, you could easily transform the `'1.5'` string into a `1.5` number.  
 
 ```javascript
 const numberString = '1.5';
@@ -145,11 +145,11 @@ if (isNaN(number)) {
 number; // => 0
 ```
 
-If parsing of the `inputToParse` failed, `number` variable gets a default number `0`.  
+If parsing of the `inputToParse` failed, the `number` variable gets a default number `0`.  
 
 ## 3.2 *undefined* as an operand
 
-Another common case when `NaN` value is created is when `undefined` is an operand in arhitmetical operations like addition, multiplication, etc.  
+Another common case when `NaN` value is created is when `undefined` is an operand in arithmetical operations like addition, multiplication, etc.  
 
 For example:
 
@@ -168,7 +168,7 @@ doubledFontSize; // => NaN
 
 `fontSize * 2` is evaluated as `undefined * 2`, which results in `NaN`.  
 
-Most of situations when `NaN` value is created is when a missing property or a function returning `undefined` is used as value in arithemitcal operations.  
+Most of the situations when `NaN` value is created is when a missing property or a function returning `undefined` is used as a value in arithmetical operations.
 
 To properly prevent generating `NaN` value is to make sure that `undefined` doesn't reach arithmetical operations. Handle missing properties correctly (for example by using default values).  
 
@@ -181,7 +181,7 @@ To properly prevent generating `NaN` value is to make sure that `undefined` does
 2 * NaN; // => NaN
 ```
 
-This case is closely related to the previos scenario.  
+This case is closely related to the previous scenario.  
 
 ## 3.4 Indeterminate forms
 
@@ -225,13 +225,11 @@ Math.log2(-2); // => NaN
 
 In conclusion, "Not A Number" is a special number that represents a number type that is not a value. While it might seem funny at first, "Not A Number" is useful to represent faulty operations on numbers.  
 
-In JavaScript `NaN` is the expression that represent "Not A Number".  
+In JavaScript `NaN` is the expression that represents "Not A Number".  
 
-On of the most interesting properties of `NaN` is that it doesn't equal to any other value, even with `NaN` itself. Thus `NaN === NaN` evaluates to `false`.  
+`NaN` doesn't equal to any value, even with `NaN` itself. The recommended way to check if a variable contains `NaN` value is to use `Number.isNaN(value)`.  
 
-The recommended way to check if a variable contains `NaN` value is to use `Number.isNaN(value)`. This function returns `true` is value is `NaN`.  
-
-Most common scenario that generates `NaN` value is arhitethical operations when one operand is `undefined` or `NaN`. It happens when you try to access a missing property, or use the result from a function that returned `undefined`. [Handling correctly `undefined`](/7-tips-to-handle-undefined-in-javascript/) is an efficient way to prevent `NaN`.  
+`undefined` or `NaN` as an operand in arithmetical operations almost always result in `NaN`. It happens when you try to access a missing property or use the result from a function that returned `undefined`.
 
 Also, `NaN` can be created when having indeterminate forms or invalid arguments for mathematical functions. But these cases happen rarely.  
 
