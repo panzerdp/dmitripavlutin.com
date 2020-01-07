@@ -58,7 +58,7 @@ For example, multiplying a number with `undefined` is not a valid operation, thu
 Also trying to parse an invalid numeric string like `'Joker'` results in `NaN` too:
 
 ```javascript
-parseInt('Joker'); // => NaN
+parseInt('Joker', 10); // => NaN
 ```
 
 The section [3. Operations resulting in NaN](#3-operations-resulting-in-nan) details into the operations that generate `NaN`.  
@@ -134,7 +134,7 @@ Number('Joker12');       // => NaN
 When parsing numbers, it's always a good idea to verify if the parsing result is not `NaN`:
 
 ```javascript{5}
-let inputToParse = 'My Number';
+let inputToParse = 'Invalid10';
 let number;
 
 number = parseInt(inputToParse, 10);
