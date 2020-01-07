@@ -21,7 +21,7 @@ typeof integer; // => 'number'
 typeof float;   // => 'number'
 ```
 
-Plus there are 2 special number values: `Infinity` (the biggest number) and `NaN` (result of a faulty operation on numbers):
+Plus there are 2 special number values: `Infinity` (the biggest number) and `NaN` ("Not A Number"):
 
 ```javascript
 const infinite = Infinity;
@@ -31,7 +31,7 @@ typeof infinite; // => 'number'
 typeof faulty;   // => 'number'
 ```
 
-`NaN` is a special kind of number that indicates a faulty operation on numbers. While working directly with `NaN` is rare, it's appearance can be surprising.  
+`NaN` is a special number that indicates a faulty operation on numbers. While working directly with `NaN` is rare, it's appearance can be surprising.  
 
 Let's take a closer look at `NaN` special value: how to check whether a variable has `NaN` and importantly understand the operations that result in `NaN`.  
 
@@ -61,7 +61,7 @@ Also trying to parse an invalid numeric string like `'Joker'` results in `NaN` t
 parseInt('Joker'); // => NaN
 ```
 
-The section [4. Operations resulting in NaN](#4-operations-resulting-in-nan) details into the operations that generate `NaN`.  
+The section [3. Operations resulting in NaN](#3-operations-resulting-in-nan) details into the operations that generate `NaN`.  
 
 ## 2. Checking for equality with NaN
 
@@ -112,9 +112,44 @@ On the other side, `Number.isNaN('Joker')` checks without conversion if the argu
 
 ## 3. Operations resulting in NaN
 
-## 3.1 *undefined* as an operand
+## 3.1 Parsing numbers
 
-The most common situation when `NaN` value is created is when `undefined` is an operand in arhitmetical operations like addition, multiplication, etc.  
+JavaScript offers the possibility to parse strings that have numerical values. For example, you could easily transform `'1.5'` string into a `1.5` number.  
+
+```javascript
+const numberString = '1.5';
+const number = parseFloat(numberString);
+
+number; // => 1.5
+```
+
+But not all string values can be parsed to numbers, in which case the parsing function returns `NaN` value: which indicates that parsing failed. Here are some examples:
+
+```javascript
+parseFloat('Joker12.5'); // => NaN
+parseInt('Joker12', 10); // => NaN
+Number('Joker12');       // => NaN
+```
+
+When parsing numbers, it's always a good idea to verify if the parsing result is not `NaN`:
+
+```javascript{5}
+let inputToParse = 'My Number';
+let number;
+
+number = parseInt(inputToParse, 10);
+if (isNaN(number)) {
+  number = 0;
+}
+
+number; // => 0
+```
+
+If parsing of the `inputToParse` failed, `number` variable gets a default number `0`.  
+
+## 3.2 *undefined* as an operand
+
+Another common case when `NaN` value is created is when `undefined` is an operand in arhitmetical operations like addition, multiplication, etc.  
 
 For example:
 
@@ -137,7 +172,7 @@ Most of situations when `NaN` value is created is when a missing property or a f
 
 To properly prevent generating `NaN` value is to make sure that `undefined` doesn't reach arithmetical operations. Handle missing properties correctly (for example by using default values).  
 
-## 3.2 *NaN* as an operand
+## 3.3 *NaN* as an operand
 
 `NaN` value is also generated when an operand in aritemtical operations is `NaN`:
 
@@ -147,10 +182,6 @@ To properly prevent generating `NaN` value is to make sure that `undefined` does
 ```
 
 This case is closely related to the previos scenario.  
-
-## 3.3 Parsing numbers
-
-!! Write about parsing numbers
 
 ## 3.4 Indeterminate forms
 
@@ -204,4 +235,4 @@ Most common scenario that generates `NaN` value is arhitethical operations when 
 
 Also, `NaN` can be created when having indeterminate forms or invalid arguments for mathematical functions. But these cases happen rarely.  
 
-Having an `NaN`? Look for `undefined`!
+Here's my pragmatic advice: "Got `NaN`? Search for `undefined`!"
