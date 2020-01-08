@@ -31,7 +31,7 @@ typeof infinite; // => 'number'
 typeof faulty;   // => 'number'
 ```
 
-`NaN` is a special number that indicates a faulty operation on numbers. While working directly with `NaN` is rare, it can appear surprisingly after a failed operation on numbers.  
+While working directly with `NaN` is rare, it can appear surprisingly after a failed operation on numbers.  
 
 Let's take a closer look at `NaN` special value: how to check if a variable has `NaN`, and importantly understand the scenarios that create "Not A Number" values.  
 
