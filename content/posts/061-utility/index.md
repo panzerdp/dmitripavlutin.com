@@ -2,7 +2,7 @@
 title: 'How To Use Correctly JavaScript Utility Libraries'
 description: "How to correctly integrate JavaScript utility libraries into your application and minimize the increase of bundle size."
 published: '2020-01-02T12:00Z'
-modified: '2020-01-02T12:00Z'
+modified: '2020-01-08T10:00Z'
 thumbnail: './images/javascript-utility-libraries-9.png'
 slug: javascript-utility-libraries
 tags: ['javascript']
@@ -120,7 +120,7 @@ The next approach using ES2015 named imports, even when importing multiple funct
 
 ### 4.2 ES2015 modules enable tree shaking
 
-ES2015 modules are static: what is imported and exported doesn't change during runtime. Bundlers like Webpack and Rollup analyzing the static modules structure can eliminate the unused code. This optimization is also called [tree shaking](https://webpack.js.org/guides/tree-shaking/).
+ES2015 modules are static: what is imported and exported doesn't change during runtime. Bundlers like Webpack and Rollup eliminate the unused code by analyzing the static modules structure. This optimization is also called [tree shaking](https://webpack.js.org/guides/tree-shaking/).
 
 ![Tree shacking](./images/tree-shacking.png)
 
@@ -145,13 +145,13 @@ import { uniq, flatten } from 'lodash-es';
 uniq(flatten([[1, 2], [2]])) // => [1, 2]
 ```
 
-`import { uniq, flatten } from 'lodash-es'` includes `uniq` and `flatten` functions from the library. Tree shacking optimization will add to the bundle only the code of `uniq` and `flatten` functions only.  
+`import { uniq, flatten } from 'lodash-es'` includes `uniq` and `flatten` functions from the library. Tree shacking optimization will add to the bundle the code of `uniq` and `flatten` functions only.  
 
 ### 4.3 Small focused modules
 
 [Small focused modules](https://blog.sindresorhus.com/small-focused-modules-9238d977a92a) practice suggests the use of standalone tiny npm packages for each function, instead of using an entire library of functions.  
 
-Small focused modules are easier to reason about, are loaded faster by the package manager. But there's one downside you should be aware of.  
+A small focused modules is easier to reason about, is loaded faster by the package manager. But there's a downside you should be aware of: the common code of tiny modules gets duplicated.  
 
 For example, let's use `lodash.debounce` and `lodash.debounce` packages:
 

@@ -1,8 +1,8 @@
 ---
 title: 'NaN in JavaScript'
 description: 'NaN, denoting "Not A Number", is a special number in JavaScript created after a faulty operation on numbers.'
-published: '2020-01-07T12:00Z'
-modified: '2020-01-07T12:00Z'
+published: '2020-01-08T10:00Z'
+modified: '2020-01-08T10:00Z'
 thumbnail: './images/nan-in-javascript-6.png'
 slug: nan-in-javascript
 tags: ['javascript', 'number']
