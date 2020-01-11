@@ -110,7 +110,7 @@ On the other side, `Number.isNaN('Joker12')` checks without conversion if the ar
 
 ## 3. Operations resulting in NaN
 
-## 3.1 Parsing numbers
+### 3.1 Parsing numbers
 
 In JavaScript you can transform numeric strings into numbers. 
 
@@ -147,7 +147,7 @@ number; // => 0
 
 The parsing of `inputToParse` has failed, thus `parseInt(inputToParse, 10)` returns `NaN`. The condition `if (isNaN(number))` is `true`, and `number` is assigned to `0`.  
 
-## 3.2 *undefined* as an operand
+### 3.2 *undefined* as an operand
 
 `undefined` used as an operand in arithmetical operations like addition, multiplication, etc. results in `NaN`.  
 
@@ -172,7 +172,7 @@ doubledFontSize; // => NaN
 
 Making sure that `undefined` doesn't reach arithmetical operations is a good approach to prevent `NaN`. Feel free to check ["7 Tips to Handle undefined in JavaScript"](/7-tips-to-handle-undefined-in-javascript/).
 
-## 3.3 *NaN* as an operand
+### 3.3 *NaN* as an operand
 
 `NaN` value is also generated when an operand in aritemtical operations is `NaN`:
 
@@ -196,7 +196,7 @@ result; // => NaN
 
 Operations on `result` variable are broken after  `invalidNumber` value (which has `NaN`) is appended to `result`. 
 
-## 3.4 Indeterminate forms
+### 3.4 Indeterminate forms
 
 `NaN` value is created when arithmetical operations are in indeterminate forms.  
 
@@ -219,7 +219,7 @@ Additions of infinite numbers of different signs:
 -Infinity + Infinity; // => NaN
 ```
 
-## 3.5 Invalid arguments of math functions
+### 3.5 Invalid arguments of math functions
 
 The square root of negative number:
 
