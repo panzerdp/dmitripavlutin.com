@@ -2,7 +2,7 @@
 title: 'How To Use Correctly JavaScript Utility Libraries'
 description: "How to correctly integrate JavaScript utility libraries into your application and minimize the increase of bundle size."
 published: '2020-01-02T12:00Z'
-modified: '2020-01-08T10:00Z'
+modified: '2020-01-11T13:00Z'
 thumbnail: './images/javascript-utility-libraries-9.png'
 slug: javascript-utility-libraries
 tags: ['javascript']
@@ -13,7 +13,7 @@ commentsThreadId: javascript-utility-libraries
 
 The big JavaScript bundle is a common performance problem in Frontend development. Nobody likes slow, heavy applications and looking at the loading spinner.  
 
-An impact on the bundle size has the utility libraries: collections of functions implementing common tasks (finding uniq items of an array, formatting dates, etc). Examples of utility libraries in JavaScript are Lodash, Ramda, Date-fns, Math.js.  
+The utility libraries (collections of functions implementing common tasks like finding unique items of an array, formatting dates, etc.) impact heavily the bundle size. Examples of utility libraries in JavaScript are Lodash, Ramda, Date-fns, Math.js.  
 
 Let's discuss when it makes sense to use utility libraries. And importantly, how to integrate libraries to minimally affect the bundle size.  
 
