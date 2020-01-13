@@ -11,3 +11,4 @@ type: post
 commentsThreadId: dont-use-anonymous-javascript-functions
 ---
 
+Imagine you're developing a web application. For some reason, clicking a button in the application generates an error. To fix the bug, you're looking at the error stack trace for clues:  
