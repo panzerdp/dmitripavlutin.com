@@ -1,8 +1,8 @@
 ---
 title: 'The Explicit Coding Discipline'
 description: 'Explicit coding discipline suggests writing code that leaves no room for confusion.'
-published: '2020-01-15T12:00Z'
-modified: '2020-01-15T12:00Z'
+published: '2020-01-15T14:00Z'
+modified: '2020-01-15T14:00Z'
 thumbnail: './images/crystal.jpg'
 slug: explicit-coding-discipline
 tags: ['craftsmanship', 'clean code']
@@ -68,7 +68,7 @@ An explicit variable name `sum` clearly increases the readability of the code sn
 let sum = 0;
 const items = [1, 2, 3];
 for (const item of items) {
- sum += item;
+  sum += item;
 }
 sum; // => 6
 ```
@@ -150,6 +150,15 @@ button.addEventListener('click',
 
 Having the functions (and variables, methods, classes, source files) meaningfully and explicitly named helps in debugging. When an error happens, if all the functions explicitly describe what happens in them, the stack trace gives more clues about what had happened and where is the source of error. 
 
+An exception are inline functions (that have just one expression): they can be anonymous. For example: 
+
+```javascript
+const items = [1, 2, 3];
+items.map(item => item * 2);
+```
+
+`item => item * 2` is an inline arrow function that is easy to understand.  
+
 ## 3. Avoid tricks in favor of explicit code
 
 When I was a student, I was playing to find the shortest possible code that solves a particular task. It was indeed fun: I was searching the language operators to find the shortest expression to solve the task. It was a playful way of learning. 
@@ -160,7 +169,7 @@ While the shortest code and tricks are fun when you're a student, it's not fun w
 
 Another problem is the use of implicit side effects of the operators. For example, you'd like to access a property and default if the property doesn't exist.
 
-One tricky way you could do that is to use `||` operator:
+Let's use the trick that involves `||` operator:
 
 ```javascript
 function getFontSize(style) {
@@ -205,9 +214,9 @@ For example, my blog provides mainly implements these use-cases: show a particul
 
 ![Application structure by use-cases](./images/structure-2.png)
 
-Neither the framework (like GatsbyJS), UI library (React) should dictate me how to structure the application. 
+Neither the framework (like GatsbyJS), UI library (React) should dictate me how to structure the application.  
 
-This point of view is called the [Screaming architecture](https://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html). 
+This structuring can be metaphorically named [Screaming architecture](https://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html).  
 
 ## 5. Conclusion
 
@@ -215,6 +224,6 @@ An explicit coding discipline is an approach to a clear expression of intent in 
 
 It suggests writing meaningful names for variables, functions, classes and other constructions. It suggests avoiding tricky solutions in favor of readings and clear intent.
 
-The uses-cases dictate the structure of the application. What the application does should not be implicitly hidden in an organization that the framework is trying to dictate you, e.g. having folders like `/controllers`, `/views` at the highest level of folders organization. 
+The uses-cases dictate the structure of the application. What the application does should not be implicitly hidden in an organization that the framework is trying to dictate you. Avoid having folders like `/controllers`, `/views` at the highest level of folders organization. 
 
 Explicit code and structure let you develop the system easier. 
