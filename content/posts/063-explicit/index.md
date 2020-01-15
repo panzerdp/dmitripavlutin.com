@@ -17,9 +17,9 @@ The code is the source of truth for both running and developing the application.
 
 In the real world, there's always room for mistakes. The platforms, the programming languages have flaws. The developers regularly make mistakes and write confusing code, jerk-knee solutions. 
 
-A good way to diminish the flaws of unreadable code is to develop a discipline of explicit coding. 
+A good way to diminish the flaws of unreadable code is to develop a discipline of explicit coding: an approach that favors good naming that leaves no doubt about the intent of the code.  
 
-The discipline of explicit coding favors good naming that leaves no doubt about the intent of the code. It suggests avoiding tricky and implicit expressions from programming languages (I will be using JavaScript as an example). 
+Let's see how explicit coding discipline can help you.  
 
 ## 1. Why explicit matters
 
