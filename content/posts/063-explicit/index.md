@@ -224,6 +224,6 @@ The explicit coding discipline favors clear and explicit expression of intent in
 
 It suggests writing meaningful names for variables, functions, classes and other constructions. It suggests avoiding tricky solutions in favor of readings and clear intent.
 
-The uses-cases dictate the structure of the application. What the application does should not be implicitly hidden in an organization that the framework is trying to dictate you. Avoid having folders like `/controllers`, `/views` at the highest level of folders organization. 
+The uses-cases dictate the structure of the application. What the application does should not be implicitly hidden in an organization that the framework is trying to dictate you. Avoid having folders like `/controllers`, `/views` at the highest level of folders organization, in favor of folders containing features and use-cases: `/categories`, `/products`, etc.
 
 Explicit code and structure let you develop the system easier. 
