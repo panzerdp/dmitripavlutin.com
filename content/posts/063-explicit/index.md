@@ -1,6 +1,6 @@
 ---
 title: 'The Explicit Coding Discipline'
-description: 'Explicit coding discipline suggests writing code that leaves no room for confusion.'
+description: 'The explicit coding discipline is the approach that favors clear expression of intent in the code.'
 published: '2020-01-15T14:00Z'
 modified: '2020-01-15T14:00Z'
 thumbnail: './images/crystal.jpg'
@@ -208,7 +208,7 @@ function getFontSize(style) {
 
 The explicit discipline is not limited to naming only. 
 
-The uses-cases of the application should be seen in the source files organization of the application. 
+The uses-cases of the application should be seen in the source files organization of the application at the highest level.   
 
 For example, my blog provides mainly implements these use-cases: show a particular post for reading, list posts excerpts with pagination, list all posts on a single page, list posts by a tag. When you look at the main [folder](https://github.com/panzerdp/dmitripavlutin.com/tree/master/src/components/Pages) of the components, the uses-cases are explicitly visible. 
 
@@ -220,7 +220,7 @@ This structuring can be metaphorically named [Screaming architecture](https://bl
 
 ## 5. Conclusion
 
-An explicit coding discipline is an approach to a clear expression of intent in the code. 
+The explicit coding discipline is the approach that favors clear expression of intent in the code.  
 
 It suggests writing meaningful names for variables, functions, classes and other constructions. It suggests avoiding tricky solutions in favor of readings and clear intent.
 
