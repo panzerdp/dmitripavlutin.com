@@ -210,7 +210,7 @@ The explicit discipline is not limited to naming only.
 
 The uses-cases of the application should be seen in the source files organization of the application at the highest level.   
 
-For example, my blog provides mainly implements these use-cases: show a particular post for reading, list posts excerpts with pagination, list all posts on a single page, list posts by a tag. When you look at the main [folder](https://github.com/panzerdp/dmitripavlutin.com/tree/master/src/components/Pages) of the components, the uses-cases are explicitly visible. 
+For example, my blog implements these use-cases: show a particular post for reading, list posts excerpts with pagination, list all posts on a single page, list posts by a tag. When you look at the main [folder](https://github.com/panzerdp/dmitripavlutin.com/tree/master/src/components/Pages) of the components, the uses-cases are explicitly visible. 
 
 ![Application structure by use-cases](./images/structure-2.png)
 
