@@ -1,6 +1,6 @@
 ---
 title: 'The Explicit Coding Discipline'
-description: 'The explicit coding discipline is the approach that favors clear expression of intent in the code.'
+description: 'The explicit coding discipline favors clear and explicit expression of intent in the code.'
 published: '2020-01-15T14:00Z'
 modified: '2020-01-15T14:00Z'
 thumbnail: './images/crystal.jpg'
@@ -220,7 +220,7 @@ This structuring can be metaphorically named [Screaming architecture](https://bl
 
 ## 5. Conclusion
 
-The explicit coding discipline is the approach that favors clear expression of intent in the code.  
+The explicit coding discipline favors clear and explicit expression of intent in the code.  
 
 It suggests writing meaningful names for variables, functions, classes and other constructions. It suggests avoiding tricky solutions in favor of readings and clear intent.
 
