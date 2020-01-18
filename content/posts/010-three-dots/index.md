@@ -2,7 +2,7 @@
 title: "How Three Dots Changed JavaScript"
 description: "Spread operator and rest parameter are great additions. The article explains how they improve array literals, array destructuring and function arguments handling."
 published: "2016-06-14"
-modified: "2019-07-11T08:40Z"
+modified: "2020-01-18T12:40Z"
 thumbnail: "./images/cover.jpg"
 slug: how-three-dots-changed-javascript
 tags: ["javascript", "spread", "rest"]
@@ -48,7 +48,7 @@ This article walks through `...` operator use cases and shows how to solve simil
 
 ## 1. Three dots
 
-**The rest operator** is used to get the arguments list passed to function on invocation and in array destructure. A case when *the operator gathers the rest remained after the operation*.  
+**The JavaScript rest operator** collects the arguments list passed to a function on invocation or collects the pieces after destructuring an array. A case when *the operator gathers the rest remained after the operation*.  
 
 ```javascript
 function countArguments(...args) {
@@ -62,7 +62,7 @@ let otherSeasons, autumn;
 otherSeasons      // => ['winter']
 ```
 
-**The spread operator** is used for array construction and destructuring, and to fill function arguments from an array on invocation. A case when *the operator spreads the array (or iterable object) elements*.  
+**The JavaScript spread operator** constructs arrays or sets the function arguments on invocation from an array. A case when *the operator spreads the array (or iterable object) elements*.  
 
 ```javascript
 let cold = ['autumn', 'winter'];
@@ -73,6 +73,7 @@ let warm = ['spring', 'summer'];
 cold.push(...warm);
 cold              // => ['autumn', 'winter', 'spring', 'summer']
 ```
+
 ## 2. Improved parameters access
 
 ### 2.1 Rest parameter
@@ -93,7 +94,8 @@ function sumOnlyNumbers() {
 }
 sumOnlyNumbers(1, 'Hello', 5, false); // => 6
 ```
-In order to access `arguments` of `sumOnlyNumbers()` inside `filterNumbers()` you have to create a temporary variable `args`. It happens because `filterNumbers()` defines its own `arguments` object that overwrites the external one.  
+
+To access `arguments` of `sumOnlyNumbers()` inside `filterNumbers()`, you have to create a temporary variable `args`. It happens because `filterNumbers()` defines its own `arguments` object that overwrites the external one.  
 
 The approach works, but it's too verbose. `const args = arguments` can be omitted and `Array.prototype.filter.call(args)` can be transformed to `args.filter()` using a rest parameter. Let's optimize this part.
 
@@ -109,14 +111,16 @@ function sumOnlyNumbers(...args) {
 }
 sumOnlyNumbers(1, 'Hello', 5, false); // => 6
 ```
+
 The function declaration `function sumOnlyNumbers(...args)` indicates that `args` receives the invocation arguments in an array. Because the names conflict is solved, `args` can be used inside `filterNumbers()`.  
 
-Also forget about array-like objects: `args` *is an array*, which is a nice bonus. As result `filterNumbers()` can get rid of `Array.prototype.filter.call()` and make a filter method call directly  `args.filter()`.  
+Also forget about array-like objects: `args` *is an array* - which is a nice bonus. As result, `filterNumbers()` can get rid of `Array.prototype.filter.call()` and make a filter method call directly  `args.filter()`.  
 
-Notice that the rest parameter should be the last one in the function parameters list.
+Notice that the rest parameter must be the last one in the function parameters list.
 
 ### 2.2 Selective rest parameter
-When not all values should be included in the rest parameter, you could define those as comma separated parameters at the beginning. Explicitly defined parameters are not included in the rest parameter.  
+
+When not all values should be included in the rest parameter, you can keep those as comma separated parameters at the beginning. Explicitly defined parameters are not included in the rest parameter.  
 
 Let's see an example:
 
@@ -128,13 +132,14 @@ filter('boolean', true, 0, false);        // => [true, false]
 filter('number', false, 4, 'Welcome', 7); // => [4, 7]
 ```
 
-
 `arguments` object doesn't have this selective property and always includes all the values.
 
 ### 2.3 Arrow function case
 
-[An arrow function](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) does not define `arguments` object in its body but accesses the one from the enclosing scope. 
-If you want to get all the arguments, use a rest parameter.
+[An arrow function](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) does not define `arguments` object in its body but accesses the one from the enclosing scope.  
+
+If you want to get all the arguments in an arrow function, use a rest parameter.
+
 Let's try this in an example:  
 
 ```javascript
@@ -171,7 +176,7 @@ console.log(countries); // => ['Moldova', 'Ukraine', 'USA', 'Japan']
 As mentioned, it seems irrelevant to indicate in `.apply()` the second time the context `countries`. The property accessor `countries.push` is enough to determine the method invocation on an object.  
 And the entire invocation looks verbose.  
 
-**The spread operator**  fills the function invocation arguments with values from an array (or more strictly from an iterable object, see [5.](#5spreadoperatoranditerationprotocols)).  
+**The JavaScript spread operator**  fills the function invocation arguments with values from an array (or more strictly from an iterable object, see [5.](#5spreadoperatoranditerationprotocols)).  
 Let's improve the above sample with a spread operator:
 
 ```javascript
@@ -180,9 +185,10 @@ const otherCountries = ['USA', 'Japan'];
 countries.push(...otherCountries);
 console.log(countries); // => ['Moldova', 'Ukraine', 'USA', 'Japan']
 ```
-As seen, spread operator is cleaner and straightforward solution. The only additional characters are 3 dots (`...`).
 
-The spread operator configures the constructor invocation arguments from an array, which is [not possible directly](http://stackoverflow.com/questions/1606797/use-of-apply-with-new-operator-is-this-possible) when using `.apply()`. Let's see an example:
+As seen, the spread operator is a cleaner and straightforward solution. The only additional characters are 3 dots (`...`).
+
+The JavaScript spread operator configures the constructor invocation arguments from an array, which is [not possible directly](http://stackoverflow.com/questions/1606797/use-of-apply-with-new-operator-is-this-possible) when using `.apply()`. Let's see an example:
 
 ```javascript
 class King {
@@ -247,7 +253,8 @@ const otherWords = [...words];
 console.log(otherWords);           // => ['Hi', 'Hello', 'Good day']
 console.log(otherWords === words); // => false
 ```
-`otherWords` is a clone version of `words` array. Notice that cloning happens only on array itself, but not on the contained elements (i.e. it's not a deep clone).
+
+`otherWords` is a clone version of `words` array. Notice that cloning happens only on the array itself, but not on the contained elements (i.e. it's not a deep clone).
 
 ### 4.2 Array destructure
 
@@ -255,7 +262,7 @@ console.log(otherWords === words); // => false
 
 As a part of the destructuring, the rest operator extracts parts of an array. The extraction result is always an array.  
 
-In term of syntax, the rest operator should be the last one in a destructuring assignment: `[extractedItem1, ...restArray] = destructuredArray`.  
+In terms of syntax, the rest operator should be the last one in a destructuring assignment: `[extractedItem1, ...restArray] = destructuredArray`.  
 
 Let's see some applications:
 
@@ -266,6 +273,7 @@ const head, restArray;
 console.log(head);      // => 'winter'
 console.log(restArray); // => ['spring', 'summer', 'autumn']
 ```
+
 `[head, ...restArray]` extracts the first item `'winter'` into `head` variable and the rest of elements into `restArray`.  
 
 ## 5. Spread operator and iteration protocols
@@ -300,9 +308,10 @@ interface Iterator {
   };
 }
 ```
+
 It seems tough to understand the iteration protocols from verbal description, but the code behind those is quite simple.  
 
-The object or primitive **must** be iterable in order that spread operator to extract data from it.  
+The object or primitive **must** be iterable so that the spread operator to extract data from it.  
 
 Many native primitive types and objects are iterable: strings, arrays, [typed arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray), [sets](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Set) and [maps](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). They work by default with the spread operator.  
 
@@ -353,7 +362,7 @@ Since `arrayLike` is now iterable, spread operator is used to extract its elemen
 
 Three dots operator adds a bunch of great features to JavaScript.  
 
-The rest parameter makes a lot easier to collect the arguments. It's a reasonable replacement for the hardcoded array-like object `arguments`. If the situation permits to choose between the rest parameter and `arguments`, use the first one.  
+The rest parameter makes it a lot easier to collect the arguments. It's a reasonable replacement for the hardcoded array-like object `arguments`. If the situation permits to choose between the rest parameter and `arguments`, use the first one.  
 
 `.apply()` method is not convenient for its verbose syntax. The spread operator is a good alternative when invocation arguments should be taken from an array.
 
