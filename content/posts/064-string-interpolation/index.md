@@ -26,7 +26,27 @@ Let's see in more detail and examples how to use template string to perform stri
 
 ## 1. The string literals
 
-In JavaScript, there are 3 ways to create string literals: using 
+In JavaScript, there are 3 ways to create string literals.  
+
+First, which I prefer for plain strings, is to wrap the string into a pair of single quotes `'`:
+
+```javascript
+const string = 'Hello, world!';
+```
+
+The second, which I use rarely, is to wrap the string into a pair of double quotes `"`:
+
+```javascript
+const string = "Hello, world";
+```
+
+The third, which permits string interpolation, is to wrap the string into a pair of backticks `` ` ``:
+
+```javascript
+const string = `Hello, world!`;
+```
+
+
 
 ## 2. The placeholders
 
