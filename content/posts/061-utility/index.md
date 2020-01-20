@@ -64,7 +64,7 @@ When you're using a quality library, you inherit these nice benefits:
 
 The usage of a utility comes with costs. The first one being the potential increase of the bundle size.
 
-Bundle size increases too much when you include the whole library. You should always cherry peek only the functions that you use.  
+Bundle size increases too much when you include the whole library. You should always cherry pick only the functions that you use.  
 
 For example, importing `lodash` library such way:
 
@@ -153,7 +153,7 @@ uniq(flatten([[1, 2], [2]])) // => [1, 2]
 
 A small focused modules is easier to reason about, is loaded faster by the package manager. But there's a downside you should be aware of: the common code of tiny modules gets duplicated.  
 
-For example, let's use `lodash.debounce` and `lodash.debounce` packages:
+For example, let's use `lodash.debounce` and `lodash.throttle` packages:
 
 ```json{5-6}
 // package.json of your application
