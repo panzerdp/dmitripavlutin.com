@@ -24,6 +24,9 @@ message; // => 'The number is 42'
 
 Let's see in more detail with examples and best practices how to use template strings to perform string interpolation in JavaScript.
 
+```toc
+```
+
 ## 1. The string literals
 
 In JavaScript, there are 3 ways to create string literals. 
@@ -86,7 +89,7 @@ message2; // => 'The sum is 5'
 
 `${n1 + n2}` is a placeholder consisting of the addition operator and 2 operands. `${sum(n1, n2)}` consists of a function invocation. In both cases, the expression is fully evaluated, and the result is inserted into the string. 
 
-### 2.1 The placeholder is converted to a string
+### 2.1 Implicit conversion to string
 
 If the placeholder expression evaluation result is a type other than a string, then it is converted into a string. 
 
