@@ -11,7 +11,7 @@ type: post
 commentsThreadId: string-interpolation-in-javascript
 ---
 
-The string interpolation is the process of evaluating a string literal containing placeholders that during evaluation are replaced with corresponding values.  
+The string interpolation is the process of evaluating a string literal containing placeholders that during evaluation are replaced with corresponding values. 
 
 In JavaScript (starting ES2015), the template literals and `${expression}` as placeholder implement the string interpolation:
 
@@ -26,7 +26,7 @@ Let's see in more detail with examples and best practices how to use template st
 
 ## 1. The string literals
 
-In JavaScript, there are 3 ways to create string literals.  
+In JavaScript, there are 3 ways to create string literals. 
 
 First, which I prefer for plain strings, is to wrap the string into a pair of single quotes `'`:
 
@@ -46,11 +46,11 @@ The third, which permits string interpolation, is to wrap the string into a pair
 const message = `Hello, World!`;
 ```
 
-The string literal wrapped in backticks `` ` `` is also named *template string*. Let's continue in the next section on how to use the template string placeholders.  
+The string literal wrapped in backticks `` ` `` is also named *template string*. Let's continue in the next section on how to use the template string placeholders. 
 
 ## 2. The placeholders
 
-The template string supports placeholders to insert data into the string.  
+The template string supports placeholders to insert data into the string. 
 
 The template string placeholder has a special format: `${expressionToEvaluate}`. Examples of placeholders are `${myVar}`, `${1 + 2}`, `${number + 1}`.
 
@@ -64,9 +64,9 @@ const message = `${greeting}, ${who}!`;
 message; // => 'Hello, World!'
 ```
 
-`` `${greeting}, ${who}!` `` is a template string having placeholders `${greeting}` and `${who}`.  
+`` `${greeting}, ${who}!` `` is a template string having placeholders `${greeting}` and `${who}`. 
 
-On script execution, the first placeholder `${greeting}` is replaced with the value of `greeting` variable, and same for `${who}`. The result of string interpolation is `'Hello, World!'`.  
+On script execution, the first placeholder `${greeting}` is replaced with the value of `greeting` variable, and the same for `${who}`. The result of string interpolation is `'Hello, World!'`. 
 
 The sky is the limit for the expression you can put inside the placeholder. It can be an operator, a function call, or even more complex expressions:
 
@@ -84,11 +84,11 @@ const message2 = `The sum is ${sum(n1, n2)}`;
 message2; // => 'The sum is 5'
 ```
 
-`${n1 + n2}` is a placeholder consisting of the addition operator and 2 operands. `${sum(n1, n2)}` consists of a function invocation. In both cases the expression is fully evaluated, and the result is inserted into the string.  
+`${n1 + n2}` is a placeholder consisting of the addition operator and 2 operands. `${sum(n1, n2)}` consists of a function invocation. In both cases, the expression is fully evaluated, and the result is inserted into the string. 
 
-### 2.1 The placeholder is converted to string
+### 2.1 The placeholder is converted to a string
 
-If the placeholder expression evaluation result is a type other than string, then it is converted into a string.  
+If the placeholder expression evaluation result is a type other than a string, then it is converted into a string. 
 
 For example, a number in a placeholder is transformed into a string:
 
@@ -99,7 +99,7 @@ const message = `The number is ${n}`;
 message; // => `The number is 3.5`
 ```
 
-A first step, the expression `n` of the placeholder `${n}` is evaluated to number `3.5`. The number `3.5` is then transformed into a string `'3.5'`, and inserted into the interpolation result: `'The number is 3.5'`.
+In the first step, the expression `n` of the placeholder `${n}` is evaluated to number `3.5`. The number `3.5` is then transformed into a string `'3.5'`, and inserted into the interpolation result: `'The number is 3.5'`.
 
 If the placeholder contains an object, following the conversion to string rule, the object is converted to a string too. The `toString()` method of the object is called to transform it into a string.
 
@@ -114,11 +114,11 @@ message; // => 'The numbers are 1,2,3'
 
 The placeholder `${numbers}` contains an array of numbers. 
 
-`toString()` array method executes `array.join(',')` when the array is converted to string. Thus the string interpolation result is `'The numbers are 1,2,3'`.  
+`toString()` array method executes `array.join(',')` when the array is converted to string. Thus the string interpolation result is `'The numbers are 1,2,3'`. 
 
 ## 3. Escaping placeholders
 
-Because the placeholder format `${expression}` has a special meaning in the template literals, you cannot use the sequence of characters `"${someCharacters}"` without escaping.  
+Because the placeholder format `${expression}` has a special meaning in the template literals, you cannot use the sequence of characters `"${someCharacters}"` without escaping. 
 
 For example, let's try to create a string literal containing the sequence of characters `${abc}`:
 
@@ -127,7 +127,7 @@ const message = `Some weird characters: ${abc}`;
 // Throws "ReferenceError: abc is not defined"
 ```
 
-Inserting `${abc}` directly throws an error because JavaScript interprets `${abc}` as a placeholder.  
+Inserting `${abc}` directly throws an error because JavaScript interprets `${abc}` as a placeholder. 
 
 A backslash `\` before the placeholder-like sequence of characters `\${abc}` solves the problem:
 
@@ -136,7 +136,7 @@ const message = `Some weird characters: \${abc}`;
 message; // => 'Some weird characters follow: ${abc}'
 ```
 
-In the template string `` `Some weird characters: \${abc}` `` JavaScript interprets `\${abc}` as a sequence of characters, rather than a placeholder.    
+In the template string `` `Some weird characters: \${abc}` `` JavaScript interprets `\${abc}` as a sequence of characters, rather than a placeholder. 
 
 Alongside with `${abc}`, the sequence of characters like `${abc` and `${` also have to be escaped with a backslash `\`:
 
@@ -150,7 +150,7 @@ message; // => 'Some weird characters: ${abc} ${abc ${'
 
 ### 4.1 Refactor string concatentation
 
-The string interpolation replaces the string concatenation when constructing large strings. That's the benefit of string interpolation I like the most.  
+The string interpolation replaces the string concatenation when constructing large strings. That's the benefit of string interpolation I like the most. 
 
 If for some reason you're still concatenating string literals and expressions:
 
@@ -172,13 +172,13 @@ const message = `The sum of ${n1} + ${n2} is ${n1 + n2}`;
 message; // => 'The sum of 2 and 3 is 5'
 ```
 
-The template string usage requires less code and is easier to read.  
+The template string usage requires less code and is easier to read. 
 
 ### 4.2 Single quotes in placeholders
 
-The ternary operator inside a placeholder chooses to render a message based on a condition.  
+The ternary operator inside a placeholder chooses to render a message based on a condition. 
 
-I find that inside the placeholder it makes sense to use the string literals wrapped in single quotes `${condition ? 'string A' : 'string B'}`, because this form is easier to read.  
+I find that inside the placeholder it makes sense to use the string literals wrapped in single quotes `${condition ? 'string A' : 'string B'}`, because this form is easier to read. 
 
 Here's an example:
 
@@ -196,7 +196,7 @@ The string literals `'loading'` and `'loaded'` are wrapped in single quotes, rat
 
 ### 4.3 Helper variables
 
-When the template string contains complex expressions, it might decrease the readability of the literal.  
+When the template string contains complex expressions, it might decrease the readability of the literal. 
 
 Here's a template string having placeholders with complex expressions:
 
@@ -210,7 +210,7 @@ const message =
 message; // => 'Sum: 5, difference: -1, pow: 8'
 ```
 
-The more complex the placehoders are, the more it makes sense to add helper variables that store intermediate values.  
+The more complex the placeholders are, the more it makes sense to add helper variables that store intermediate values. 
 
 ```javascript{4-6}
 const first = 2;
@@ -226,11 +226,11 @@ message; // => 'Sum: 5, difference: -1, pow: 8'
 ```
 
 With the introduction of additional helper variables `sum`, `diff` and `pow`, the template string becomes lighter. Additionally, the intermediate variables
-self-document the code.  
+self-document the code. 
 
 ### 4.4 Alternative solutions
 
-While string interpolation is helpful in many situations, when the template string becomes large and difficult to read you should start looking for other solutions.  
+The string interpolation is helpful in many situations. But when the template string becomes large and difficult to read, you should start looking for other solutions. 
 
 The following component determines the CSS class based on multiple variables:
 
@@ -241,16 +241,16 @@ function LoadingMessage({ isLoading, isModal }) {
 
   return (
     <div className={className}>
-      {isLoading: 'Loading...' : 'Done!'}
+      {isLoading ? 'Loading...' : 'Done!'}
     </div>
   );
 }
 ```
 
-The template literal that determines the class name is difficult to understand.  
+The template literal that determines the class name is difficult to understand. 
 
-In this situation I suggest avoiding the template strings in favor of the tool [classnames](https://github.com/JedWatson/classnames). It constructs the class name string
-in a more expressive and declarative way.  
+In this situation, I suggest avoiding the template strings in favor of the tool [classnames](https://github.com/JedWatson/classnames). It constructs the class name string
+in a more expressive and declarative way. 
 
 Let's refactor the component to use the classnames tool:
 
@@ -265,7 +265,7 @@ function LoadingMessage({ isLoading, isModal }) {
 
   return (
     <div className={className}>
-      {isLoading: 'Loading...' : 'Done!'}
+      {isLoading ? 'Loading...' : 'Done!'}
     </div>
   );
 }
@@ -273,16 +273,16 @@ function LoadingMessage({ isLoading, isModal }) {
 
 This version of the component that uses the classnames tool is declarative and easy to understand. 
 
-If you'd need to add another class (for example to handle `isErrorLoading`), the version that uses classnames grows without singnificantly affecting the readability.  
+If you'd need to add another class (for example to handle `isErrorLoading`), the version that uses classnames grows without significantly affecting the readability. 
 
 ## 5. Conclusion
 
-The string interpolation in JavaScript is implemented by the template strings.  
+The string interpolation in JavaScript is implemented by the template strings. 
 
-The template strings are defined by wrapping the sequence of characters into a pair of backticks `` `I'm template string` ``. The placeholders to insert values into the template string have the format `${expression}`, for example `` `The number is ${number}` ``.  
+The template strings are defined by wrapping the sequence of characters into a pair of backticks `` `I'm template string` ``. The placeholders to insert values into the template string have the format `${expression}`, for example `` `The number is ${number}` ``. 
 
-The string interpolation is a great feature. Its main use case is to insert values into string literals in a relatively short and readable manner. And avoid the clumsy string concatenation approach.  
+The string interpolation is a great feature. Its main use case is to insert values into string literals in a relatively short and readable manner. And avoid the clumsy string concatenation approach. 
 
-While the string interpolation is great, make sure not to overcomplicate the string literal. If you find that the template string uses complex expressions, you might try to introduce intermediate variable to store the expressions before putting them into placeholders.  
+Make sure not to overcomplicate the string literal. If the template string uses complex expressions, try to introduce intermediate variables to store the expressions before putting them into placeholders. 
 
-I use string interpolation often in my code, and I recommend you doing it too.
+I use string interpolation often in my code, and I recommend you do it too.
