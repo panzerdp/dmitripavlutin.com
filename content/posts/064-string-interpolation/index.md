@@ -16,10 +16,10 @@ The string interpolation is the process of evaluating a string literal containin
 In JavaScript (starting ES2015), the template literals and `${expression}` as placeholder implement the string interpolation:
 
 ```javascript
-const number = 13;
+const number = 42;
 const message = `The number is ${number}`;
 
-message; // => 'The number is 13'
+message; // => 'The number is 42'
 ```
 
 Let's see in more detail with examples and best practices how to use template strings to perform string interpolation in JavaScript.
@@ -167,7 +167,7 @@ Then it's the time to switch to string interpolation using template strings:
 ```javascript{3}
 const n1 = 2;
 const n2 = 3;
-const message = `The sum of ${n1} + ${n2} is ${n1 + n2}`;
+const message = `The sum of ${n1} and ${n2} is ${n1 + n2}`;
 
 message; // => 'The sum of 2 and 3 is 5'
 ```
@@ -186,13 +186,13 @@ Here's an example:
 // A React component
 
 function LoadingMessage({ isLoading }) {
-  const message = `Data is ${isLoading ? 'loading' : 'loaded' }`;
+  const message = `Data is ${isLoading ? 'loading...' : 'done!' }`;
 
   return <div>{message}</div>;
 }
 ```
 
-The string literals `'loading'` and `'loaded'` are wrapped in single quotes, rather than backticks `` ` ``.
+The string literals `'loading...'` and `'done!'` are wrapped in single quotes, rather than backticks `` ` ``.
 
 ### 4.3 Helper variables
 
@@ -213,8 +213,8 @@ message; // => 'Sum: 5, difference: -1, pow: 8'
 The more complex the placeholders are, the more it makes sense to add helper variables that store intermediate values. 
 
 ```javascript{4-6}
-const first = 2;
-const second = 3;
+const n1 = 2;
+const n2 = 3;
 
 const sum = n1 + n2;
 const diff = n1 - n2;
