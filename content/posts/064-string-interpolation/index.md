@@ -204,32 +204,85 @@ Here's a template string having placeholders with complex expressions:
 const n1 = 2;
 const n2 = 3;
 
-const message = `Sum: ${n1 + n2}, difference: ${n1 - n2}, operation: ${}`;
+const message = 
+  `Sum: ${n1 + n2}, difference: ${n1 - n2}, pow: ${Math.pow(n1, n2)}`;
 
-message; // => 'Sum: 5, difference: -1'
+message; // => 'Sum: 5, difference: -1, pow: 8'
 ```
 
 The more complex the placehoders are, the more it makes sense to add helper variables that store intermediate values.  
 
-```javascript{4-5}
+```javascript{4-6}
 const first = 2;
 const second = 3;
 
 const sum = n1 + n2;
 const diff = n1 - n2;
+const pow = Math.pow(n1, n2);
 
-const message = `Sum: ${sum}, difference: ${diff}`;
+const message = `Sum: ${sum}, difference: ${diff}, pow: ${pow}`;
 
-message; // => 'Sum: 5, difference: -1'
+message; // => 'Sum: 5, difference: -1, pow: 8'
 ```
 
-With the introduction of additional helper variables `sum` and `diff`, the template string becomes lighter. Additionally, the intermediate variables
+With the introduction of additional helper variables `sum`, `diff` and `pow`, the template string becomes lighter. Additionally, the intermediate variables
 self-document the code.  
 
-### 4.4 Better options
+### 4.4 Alternative solutions
 
 While string interpolation is helpful in many situations, when the template string becomes large and difficult to read you should start looking for other solutions.  
 
+The following component determines the CSS class based on multiple variables:
 
+```jsx{3}
+function LoadingMessage({ isLoading, isModal }) {
+  const className = 
+   `${isLoading ? 'loading' : ''} ${isModal ? 'modal' : ''}`;
+
+  return (
+    <div className={className}>
+      {isLoading: 'Loading...' : 'Done!'}
+    </div>
+  );
+}
+```
+
+The template literal that determines the class name is difficult to understand.  
+
+In this situation I suggest avoiding the template strings in favor of the tool [classnames](https://github.com/JedWatson/classnames). It constructs the class name string
+in a more expressive and declarative way.  
+
+Let's refactor the component to use the classnames tool:
+
+```jsx{4-7}
+import classNames from 'classnames';
+
+function LoadingMessage({ isLoading, isModal }) {
+  const className = classNames({
+    loading: isLoading,
+    modal: isModal
+  });
+
+  return (
+    <div className={className}>
+      {isLoading: 'Loading...' : 'Done!'}
+    </div>
+  );
+}
+```
+
+This version of the component that uses the classnames tool is declarative and easy to understand. 
+
+If you'd need to add another class (for example to handle `isErrorLoading`), the version that uses classnames grows without singnificantly affecting the readability.  
 
 ## 5. Conclusion
+
+The string interpolation in JavaScript is implemented by the template strings.  
+
+The template strings are defined by wrapping the sequence of characters into a pair of backticks `` `I'm template string` ``. The placeholders to insert values into the template string have the format `${expression}`, for example `` `The number is ${number}` ``.  
+
+The string interpolation is a great feature. Its main use case is to insert values into string literals in a relatively short and readable manner. And avoid the clumsy string concatenation approach.  
+
+While the string interpolation is great, make sure not to overcomplicate the string literal. If you find that the template string uses complex expressions, you might try to introduce intermediate variable to store the expressions before putting them into placeholders.  
+
+I use string interpolation often in my code, and I recommend you doing it too.
