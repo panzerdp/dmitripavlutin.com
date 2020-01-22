@@ -2,7 +2,7 @@
 title: 'Gentle Explanation of "this" in JavaScript'
 description: "The value of this keyword in JavaScript is determined by how the function is called. My guide will help you effortlessly understand this."
 published: "2016-05-22"
-modified: "2016-07-08"
+modified: "2020-01-22T09:40Z"
 thumbnail: "./images/cover.jpg"
 slug: gentle-explanation-of-this-in-javascript
 tags: ["javascript", "this"]
@@ -531,7 +531,7 @@ Let's check the context in the following example:
 
 ```javascript{2}
 function Foo () {
-  console.log(this === fooInstance); // => true
+  // this is fooInstance
   this.property = 'Default Value';
 }
 
@@ -547,7 +547,7 @@ The same scenario happens when using [`class`](https://developer.mozilla.org/en-
 ```javascript{3}
 class Bar {
   constructor() {
-    console.log(this === barInstance); // => true
+    // this is barInstance
     this.property = 'Default Value';
   }
 }
