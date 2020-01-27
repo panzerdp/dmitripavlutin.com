@@ -10,3 +10,23 @@ recommended: ['when-not-to-use-arrow-functions-in-javascript', '6-ways-to-declar
 type: post
 commentsThreadId: javascript-arrow-functions-best-practices
 ---
+
+The arrow function syntax is a popular way to define functions in JavaScript. 
+
+Its popularity is deserved. The arrow function is short and concise, binds `this` lexically, fits great when a short and expressive callback function is required.  
+
+
+
+## 1. Function name inference
+
+
+
+## 2. Inline when possible
+
+## 3. Wrap long expressions
+
+## 4. Constructing plain objects
+
+## 5. Be aware of excessive nesting
+
+## 6. Conclusion
