@@ -226,7 +226,7 @@ function getLoadingMessage(isLoading) {
 }
 ```
 
-But using single quotes inside the placeholder is easier to read:
+But using single quotes inside the placeholder just looks better:
 
 ```javascript{2}
 function getLoadingMessage(isLoading) {
@@ -238,7 +238,7 @@ function getLoadingMessage(isLoading) {
 
 The string interpolation is helpful in many situations. But when the template string becomes large, with complex placeholder expressions, you might look for other solutions. 
 
-The following component constructors the CSS class based on many variables:
+The following component builds the CSS class based on 2 variables:
 
 ```jsx{3}
 function LoadingMessage({ isLoading, isModal }) {
@@ -253,10 +253,10 @@ function LoadingMessage({ isLoading, isModal }) {
 }
 ```
 
-The template literal that determines the class name is difficult to understand. It has 2 ternary operators and a mix of string literals.  
+The template literal that determines the class name has 2 ternary operators and a mix of string literals. You may find it difficult to understand.  
 
-In this situation, I suggest avoiding the template strings in favor of the tool [classnames](https://github.com/JedWatson/classnames). The tool constructs the class name string
-in a declarative and more expressive way.  
+A tool like [classnames](https://github.com/JedWatson/classnames) might be a better choice than template string. The tool constructs the class name
+in a more declarative way.
 
 Let's refactor the component to use `classnames`:
 
@@ -277,7 +277,7 @@ function LoadingMessage({ isLoading, isModal }) {
 }
 ```
 
-This version of the component that uses the classnames tool is declarative and easy to understand. 
+This version of the component, which uses the classnames tool, is easier to understand than the template string version.  
 
 If you'd need to add more CSS classes (for example to handle `isErrorLoading`), the version that uses classnames grows without significantly affecting the readability. 
 
