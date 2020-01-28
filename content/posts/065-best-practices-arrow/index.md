@@ -212,4 +212,4 @@ The object literal syntax `{ prop: 'value' }` is similar to a code of block `{}`
 
 Finally, the excessive nesting of functions obscures the code intent. Especially with arrow functions, which are somehow cryptic by themeselves. A good approach to reduce the arrow functions nesting is to try to extract them into variables. And if possible, you might try to use even more powerful features like `async/await` syntax.  
 
-*What best practices do you use with arrow functions?*
+*What's your favorite coding best practices? Leave a comment below!*
