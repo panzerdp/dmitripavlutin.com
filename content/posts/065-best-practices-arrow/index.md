@@ -2,7 +2,7 @@
 title: '5 Best Practices to Write Quality Arrow Functions'
 description: 'Best practices to write better and quality JavaScript arrow function.'
 published: '2020-01-28T12:00Z'
-modified: '2020-01-28T12:0Z'
+modified: '2020-01-28T12:00Z'
 thumbnail: './images/quality-2.png'
 slug: javascript-arrow-functions-best-practices
 tags: ['javascript', 'arrow function', 'es2015']
@@ -105,7 +105,7 @@ The second option is to deliberately define the arrow function using a longer fo
 ```javascript
 const negativeToZero = number => {
   return number <= 0 ? 0 : number;
-}
+};
 ```
 
 These refactorings eliminate the confusion between fat arrow symbol and comparison operators. 
@@ -134,7 +134,7 @@ const array = [1, 2, 3];
 array.map(number => ({ 'number': number }));
 ```
 
-Note that you could also use an alternative form, by specifying the properties in a new line. This form might be more readable:
+You could also use an alternative form by specifying the properties in a new line. This form might be more readable when having lots of properties:
 
 ```javascript
 const array = [1, 2, 3];
@@ -142,6 +142,8 @@ const array = [1, 2, 3];
 // Works!
 array.map(number => ({
   'number': number
+  'propA': 'value A',
+  'propB': 'value B'
 }));
 ```
 
@@ -158,7 +160,7 @@ Let's consider the following scenario. When a button is clicked, a request to se
 ```javascript
 myButton.addEventListener('click', () => {
   fetch('/items.json')
-    .then(response => response.json();
+    .then(response => response.json());
     .then(json => {
       json.forEach(item => {
         console.log(item.name);
@@ -167,7 +169,7 @@ myButton.addEventListener('click', () => {
 });
 ```
 
-The arrow functions are nested in 3 levels. It takes effort and time to understand what the code does. 
+The arrow functions are 3 levels nesting. It takes effort and time to understand what the code does. 
 
 When the arrow functions are nested, to increase readability, the first approach is to introduce variables that hold each arrow function. The variable should describe concisely what the function does (see [arrow function name inference](#1-arrow-function-name-inference) best practice). 
 
@@ -178,7 +180,7 @@ const readItemsJson = json => {
 
 const handleButtonClick = () => {
   fetch('/items.json')
-    .then(response => response.json();
+    .then(response => response.json());
     .then(readItemsJson);
 };
 
@@ -190,10 +192,10 @@ The refactoring extracts the arrow functions into variables `readItemsJson` and 
 Even better you could refactor the entire function to use `async/await` syntax, which is a great way to solve the nesting of functions: 
 
 ```javascript
-  const handleButtonClick = async () => {
+const handleButtonClick = async () => {
   const response = await fetch('/items.json');
   const json = await response.json();
-  json.forEach(item => item.name);
+  json.forEach(item => console.log(item.name));
 };
 
 myButton.addEventListener('click', handleButtonClick);
