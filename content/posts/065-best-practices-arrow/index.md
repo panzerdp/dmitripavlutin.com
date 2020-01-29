@@ -1,8 +1,8 @@
 ---
 title: '5 Best Practices to Write Quality Arrow Functions'
 description: 'Best practices to write better and quality JavaScript arrow function.'
-published: '2020-01-28T12:00Z'
-modified: '2020-01-28T12:00Z'
+published: '2020-01-29T11:30Z'
+modified: '2020-01-29T11:30Z'
 thumbnail: './images/quality-2.png'
 slug: javascript-arrow-functions-best-practices
 tags: ['javascript', 'arrow function', 'es2015']
