@@ -2,7 +2,7 @@
 title: '5 Best Practices to Write Quality Arrow Functions'
 description: 'Best practices on how to write quality, readable and concise arrow functions in JavaScript.'
 published: '2020-01-29T11:30Z'
-modified: '2020-01-29T11:30Z'
+modified: '2020-01-29T15:00Z'
 thumbnail: './images/quality-2.png'
 slug: javascript-arrow-functions-best-practices
 tags: ['javascript', 'arrow function', 'es2015']
@@ -17,7 +17,7 @@ In this post, you'll read 5 best practices to get even more benefits from the ar
 
 ## 1. Arrow function name inference
 
-The arrow function in JavaScript is an anonymous function. Which means that the `name` property of an arrow function is an empty string:
+The arrow function in JavaScript is *anonymous*: `name` property of an arrow function is an empty string.  
 
 ```javascript
 ( number => number + 1 ).name; // => ''
@@ -29,9 +29,11 @@ The following picture shows a debug session of a code that uses anonymous arrow 
 
 ![Anonymous arrow functions call stack](/images/anonymous-arrow-functions-3.png)
 
-The call stack on the right side consists of 2 functions. It's difficult to understand the control flow.   
+The call stack on the right side consists of 2 functions marked as `anonymous`. You can't get anything useful from such call stack information.  
 
-Fortunately, the *function name inference* can put names on the arrow functions. The idea of name inference is that JavaScript can determine the arrow function name from its syntactic position. 
+Fortunately, the *function name inference* (a feature of ES2015) can [assign contextual names](https://stackoverflow.com/a/58983095/1894471) on the arrow functions.  
+
+The idea of name inference is that JavaScript can determine the arrow function name from its syntactic position. 
 
 Let's see how function name inference works:
 
@@ -82,7 +84,7 @@ Here's my advice:
 
 ## 3. Fat arrow and comparison operators
 
-The comparison operators `>`, `<`, `<=` and `>=` look similar to the fat arrow `=>` that defines the arrow function. 
+The comparison operators `>`, `<`, `<=` and `>=` look similar to the fat arrow `=>` (which defines the arrow function). 
 
 When these comparison operators are used in an inline arrow function, it creates some confusion.
 
@@ -94,7 +96,7 @@ const negativeToZero = number => number <= 0 ? 0 : number;
 
 The presence of both symbols `=>` and `<=` on the same line is misleading.  
 
-To make your intent clear, the first option is to wrap the expression into a pair of parentheses:
+To distinguish clearly the fat arrow from the comparison operator, the first option is to wrap the expression into a pair of parentheses:
 
 ```javascript
 const negativeToZero = number => (number <= 0 ? 0 : number);
@@ -123,9 +125,9 @@ const array = [1, 2, 3];
 array.map(number => { 'number': number });
 ```
 
-JavaScript considers the curly braces as a code block, rather than an object literal.  
+JavaScript considers the curly braces a code block, rather than an object literal.  
 
-This problem is solved when the object literal is wrapped into parentheses: 
+Wrapping the object literal into a pair of parentheses solves the problem:
 
 ```javascript
 const array = [1, 2, 3];
@@ -134,7 +136,7 @@ const array = [1, 2, 3];
 array.map(number => ({ 'number': number }));
 ```
 
-You could also use an alternative form by specifying the properties in a new line. This form might be more readable when having lots of properties:
+If the object literal has lots of properties, you can even use newlines, while still keeping the arrow function inline:
 
 ```javascript
 const array = [1, 2, 3];
@@ -153,9 +155,9 @@ My recommendation:
 
 ## 5. Be aware of excessive nesting
 
-The arrow function syntax is short, which is good. But as a side effect, it could be cryptic when nesting many arrow functions. 
+The arrow function syntax is short, which is good. But as a side effect, it could be cryptic when many arrow functions are nested.  
 
-Let's consider the following scenario. When a button is clicked, a request to server starts, and when the response is ready the items are logged to console. 
+Let's consider the following scenario. When a button is clicked, a request to server starts. When the response is ready, the items are logged to console: 
 
 ```javascript
 myButton.addEventListener('click', () => {
@@ -171,7 +173,7 @@ myButton.addEventListener('click', () => {
 
 The arrow functions are 3 levels nesting. It takes effort and time to understand what the code does. 
 
-When the arrow functions are nested, to increase readability, the first approach is to introduce variables that hold each arrow function. The variable should describe concisely what the function does (see [arrow function name inference](#1-arrow-function-name-inference) best practice). 
+To increase readability of nested functions, the first approach is to introduce variables that each holds an arrow function. The variable should describe concisely what the function does (see [arrow function name inference](#1-arrow-function-name-inference) best practice). 
 
 ```javascript
 const readItemsJson = json => {
@@ -207,14 +209,14 @@ Resuming:
 
 ## 6. Conclusion
 
-The arrow functions in JavaScript are anonymous. To make debugging productive, a good practice is to use variables to hold the arrow functions, which allows JavaScript to infer the function name. 
+The arrow functions in JavaScript are anonymous. To make debugging productive, a good practice is to use variables to hold the arrow functions. This allows JavaScript to infer the function names.  
 
 An inline arrow function is handy when the function body has one expression. 
 
 The operators `>`, `<`, `<=` and `>=` look similar to the fat arrow `=>`. Care must be taken when these operators are used inside inline arrow functions. 
 
-The object literal syntax `{ prop: 'value' }` is similar to a code of block `{}`. So when the object literal is placed inside an inline arrow function, you need to wrap it into a pair of parentheses: `() => ({ prop: 'value' })`. 
+The object literal syntax `{ prop: 'value' }` is similar to a code of block `{  }`. So when the object literal is placed inside an inline arrow function, you need to wrap it into a pair of parentheses: `() => ({ prop: 'value' })`.  
 
-Finally, the excessive nesting of functions obscures the code intent. A good approach to reduce the arrow functions nesting is to extract them into variables. Alternatively, try to use even more powerful features like `async/await` syntax. 
+Finally, the excessive nesting of functions obscures the code intent. A good approach to reduce the arrow functions nesting is to extract them into variables. Alternatively, try to use even better features like `async/await` syntax. 
 
 *What's your favorite coding best practices? Leave a comment below!*
