@@ -2,7 +2,7 @@
 title: '5 Best Practices to Write Quality Arrow Functions'
 description: 'Best practices on how to write quality, readable and concise arrow functions in JavaScript.'
 published: '2020-01-29T11:30Z'
-modified: '2020-01-29T15:00Z'
+modified: '2020-01-30T09:10Z'
 thumbnail: './images/quality-2.png'
 slug: javascript-arrow-functions-best-practices
 tags: ['javascript', 'arrow function', 'es2015']
@@ -11,29 +11,27 @@ type: post
 commentsThreadId: javascript-arrow-functions-best-practices
 ---
 
-The arrow function deserves its popularity. The arrow function syntax is concise, binds `this` lexically, fits great as a callback function. 
+The arrow function deserves the popularity. Its syntax is concise, binds `this` lexically, fits great as a callback. 
 
 In this post, you'll read 5 best practices to get even more benefits from the arrow functions. 
 
 ## 1. Arrow function name inference
 
-The arrow function in JavaScript is *anonymous*: `name` property of an arrow function is an empty string.  
+The arrow function in JavaScript is *anonymous*: the `name` property of the function is an empty string `''`.  
 
 ```javascript
 ( number => number + 1 ).name; // => ''
 ```
 
-During a debug session or call stack analysis the anonymous functions are marked as `anonymous`. Unfortunately, `anonymous` gives no clue about the code being executed. 
+The anonymous functions are marked as `anonymous` during a debug session or call stack analysis. Unfortunately, `anonymous` gives no clue about the code being executed. 
 
-The following picture shows a debug session of a code that uses anonymous arrow functions: 
+Here's a debug session of a code that executes anonymous functions: 
 
 ![Anonymous arrow functions call stack](/images/anonymous-arrow-functions-3.png)
 
 The call stack on the right side consists of 2 functions marked as `anonymous`. You can't get anything useful from such call stack information.  
 
-Fortunately, the *function name inference* (a feature of ES2015) can [assign contextual names](https://stackoverflow.com/a/58983095/1894471) on the arrow functions.  
-
-The idea of name inference is that JavaScript can determine the arrow function name from its syntactic position. 
+Fortunately, the *function name inference* (a feature of ES2015) can [detect](https://stackoverflow.com/a/58983095/1894471) the function name under certain conditions. The idea of name inference is that JavaScript can determine the arrow function name from its syntactic position: e.g. from the variable name that holds the function object.  
 
 Let's see how function name inference works:
 
@@ -58,7 +56,7 @@ Because the arrow functions have names, the call stack gives more information ab
 
 ## 2. Inline when possible
 
-An inline function is one which body consists of one expression. I like about arrow functions the ability to compose short inline functions. 
+An inline function is a function that has only one expression. I like about arrow functions the ability to compose short inline functions. 
 
 For example, instead of using the long form of an arrow function:
 
