@@ -27,7 +27,7 @@ The anonymous functions are marked as `anonymous` during a debug session or call
 
 Here's a debug session of a code that executes anonymous functions: 
 
-![Anonymous arrow functions call stack](/images/anonymous-arrow-functions-3.png)
+![Anonymous arrow functions call stack](./images/anonymous-arrow-functions-3.png)
 
 The call stack on the right side consists of 2 functions marked as `anonymous`. You can't get anything useful from such call stack information.  
 
@@ -47,7 +47,7 @@ Because the variable `increaseNumber` holds the arrow function, JavaScript decid
 
 Now let's check a debug session with code that uses name inference:
 
-![Anonymous arrow functions call stack](/images/named-arrow-functions-2.png)
+![Anonymous arrow functions call stack](./images/named-arrow-functions-2.png)
 
 Because the arrow functions have names, the call stack gives more information about the code being executed: 
 
