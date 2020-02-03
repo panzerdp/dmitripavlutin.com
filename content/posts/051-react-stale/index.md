@@ -19,7 +19,7 @@ One issue you can encouter when working with a React component having a multitud
 
 Let's start with distilling what the stale closure is. Then let's how a stale closure affects React hooks, and how you could solve that.  
 
-*I assume you're familiar with JavaScript closures. If you need a refresh on closures, take a look at [A Simple Explanation of JavaScript Closures](/explanation-of-javascript-closures/).*  
+*I assume you're familiar with JavaScript closures. If you need a refresh on closures, take a look at [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).*  
 
 ## 1. The stale closure
 
