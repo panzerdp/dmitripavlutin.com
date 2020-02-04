@@ -31,7 +31,7 @@ expression.identifier
 
 For example, let's access the property `name` of the object `hero`:
 
-```javascript
+```javascript{6}
 const hero = {
   name: 'Batman'
 };
@@ -52,14 +52,14 @@ In most of the cases, the property name you'd like to access contains only alpha
 
 But time to time, you can encounter properties having more than just alpha caracters: 
 
-```javascript
+```javascript{6-7}
 const weirdObject = {
   'prop-3': 'three',
   '3': 'three'
 }
 
 weirdObject.prop-3; // => NaN
-weirdObject.3; // throws SyntaxError: Unexpected number
+weirdObject.3;      // throws SyntaxError: Unexpected number
 ```
 
 `weirdObject.prop-3` evaluates to `NaN`, instead of the expected `'tree'`. 
@@ -69,14 +69,14 @@ weirdObject.3; // throws SyntaxError: Unexpected number
 
 To be able to access the properties with these special name, use the square brackets property accessor (which is described in the next section):
 
-```javascript
+```javascript{6-7}
 const weirdObject = {
   'prop-3': 'three',
   '3': 'three'
 }
 
 weirdObject['prop-3']; // => 'three'
-weirdObject[3]; // => 'three' 
+weirdObject[3];        // => 'three' 
 ```
 
 The square brackets syntax accesses without problems the properties that have special names: `weirdObject['prop-3']` and `weirdObject[3]`. 
@@ -93,14 +93,14 @@ The first `expression` should evaluate to an object and the second `expression` 
 
 Here's an example:
 
-```javascript
+```javascript{7-8}
 const property = 'name';
 const hero = {
   name: 'Batman'
 };
 
 // Square brackets property accessor:
-hero['name']; // => 'Batman'
+hero['name'];   // => 'Batman'
 hero[property]; // => 'Batman'
 ```
 
@@ -116,11 +116,11 @@ The basic object destructuring syntax is pretty simple:
 const { identifier } = expression;
 ```
 
-`expression` should evaluate to an object and the `identifier` should indicate the name of the property you'd like to access. After the destructuring, the variable `identifier` has the value of the accessed property. 
+`expression` should evaluate to an object and the `identifier` should indicate the name of the property you'd like to access. After the destructuring, the variable `identifier` has the value of the accessed property.
 
 Here's an example:
 
-```javascript
+```javascript{6}
 const hero = {
   name: 'Batman'
 };
@@ -152,7 +152,7 @@ const { identifier: aliasIdentifier } = expression;
 
 Here's an example:
 
-```javascript
+```javascript{6}
 const hero = {
   name: 'Batman'
 };
@@ -176,7 +176,7 @@ The first `expression` should evaluate to a property name, and the `identifier` 
 
 Here's an example:
 
-```javascript
+```javascript{7}
 const property = 'name';
 const hero = {
   name: 'Batman'
