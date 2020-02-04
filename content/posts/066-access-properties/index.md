@@ -24,10 +24,10 @@ In this post, I will describe each way to access the properties of an object. An
 The common way to access the property of an object is the *dot property accessor*: an expression followed by dot `.` and an identifier.  
 
 ```javascript
-expressionObject.identifier
+expression.identifier
 ```
 
-`expressionObject` should evaluate to an object, and the `identifier` should indicate the name of the property you'd like to access.   
+`expression` should evaluate to an object and the `identifier` should indicate the name of the property you'd like to access.
 
 For example, let's access the property `name` of the object `hero`:
 
@@ -44,7 +44,7 @@ hero.name; // => 'Batman'
 
 You can use the dot property accessor in chain, for example to access deeper properties: `object.prop1.prop2`.  
 
-> Choose the **dot property accessor** when the property name is *known ahead of time* and is a *valid identifier*.    
+> Choose the **dot property accessor** when the property name is *known ahead of time*.
 
 ### 1.1 Forbidden characters of dot property accessor
 
@@ -86,10 +86,10 @@ The square brackets syntax accesses without problems the properties that have sp
 The square brackers property accessor has the following syntax:
 
 ```javascript
-expressionObject[expressionProperty]
+expression[expression]
 ```
 
-The `expressionObject` should evaluate to an object and the `expressionProperty` should evaluate to a string denoting the property name.  
+The first `expression` should evaluate to an object and the second `expression` should evaluate to a string denoting the property name.  
 
 Here's an example:
 
@@ -104,9 +104,19 @@ hero['name'];   // => 'Batman'
 hero[property]; // => 'Batman'
 ```
 
+`hero['name']` and `hero[property]` both read the property by using the square brackets syntax.  
 
+> Choose the **square brackets property accessor** when the property name is *dynamic*, i.e. determined at runtime.  
 
 ## 3. Object destructuring
+
+The basic object destructuring syntax is pretty simple:
+
+```javascript
+const { identifier } = expression;
+```
+
+`expression` should evaluate to an object and the `identifier` should indicate the name of the property you'd like to access. After the destructuring, the variable `identifier` has the value of the accessed property.  
 
 Here's an example:
 
@@ -114,10 +124,79 @@ Here's an example:
 const hero = {
   name: 'Batman'
 };
+
 // Object destructuring:
 const { name } = hero;
 name; // => 'Batman'
 ```
 
+`const { name } = hero` is an object destructuring. The destucturing defines a new variable `name`, and assigns to the new variable the `name` property value of `hero` object.  
+
+When you get used to object destructuring, you will find that it's syntax is a great way to extract the properties into variables.  
+
+> Choose the **object destructuing** when you'd like to create a variable having the property value.  
+
+Note that you can extract as many properties as you'd like: 
+
+```javascript
+const { identifier1, identifier2, .., identifierN } = expression;
+``` 
+
+### 3.1 Alias variable
+
+If you'd like to access the property, but create a different variable name than the property name, you could use the aliasing feature of object destructuring.  
+
+```javascript
+const { identifier: aliasIdentifier } = expression;
+```
+
+Here's an example:
+
+```javascript
+const hero = {
+  name: 'Batman'
+};
+
+// Object destructuring:
+const { name: heroName } = hero;
+heroName; // => 'Batman'
+```
+
+`const { name: heroName } = hero` is an object destructuring. The destucturing defines a new variable `heroName` (instead of `name` as in previous example), and assigns to the new variable the `name` property value of `hero` object.  
+
+### 3.2 Dynamic property name
+
+What makes the object destructuring even more useful is that you could extract to variables properties with dynamic value. That's really great:
+
+```javascript
+const { [expression]: identifier } = expression;
+```
+
+The first `expression` should evaluate to a property name, and the `identifier` should indicate the variable name created after the destructuring. The second `expression` should evaluate to the object you'd like to destructure.  
+
+Here's an example:
+
+```javascript
+const property = 'name';
+const hero = {
+  name: 'Batman'
+};
+
+// Object destructuring:
+const { [property]: name } = hero;
+name; // => 'Batman'
+```
+
+`const { [property]: name } = hero` is an object destructuring that dynamically determines what property to extract.  
+
 ## 4. Conclusion
 
+JavaScript provides a bunch of good ways to access object properties.  
+
+The dot property accessor syntax `object.property` works nicely when you know the variable ahead of time. This syntax is easy.  
+
+When the property name is dynamic, a better alternative is square brackets property accessor: `object[propertyName]`.  
+
+The great object destructuring lets you extract the property directly into a variable: `{ property } = object`. Moreover, you can extract the property names that are dynamic, i.e. determined at runtime: `{ [propertName]: variable } = object`.  
+
+There are no good or bad ways to access properties. Choose depending on your particular situation.  
