@@ -1,8 +1,8 @@
 ---
 title: '3 Ways To Access Object Properties in JavaScript'
-description: 'Comparing the 3 ways to access object properties in JavaScript.'
-published: '2020-02-04T12:00Z'
-modified: '2020-02-04T12:00Z'
+description: 'You can access object properties in JavaScript using dot or square brackets property accessors, or using object destructuring.'
+published: '2020-02-05T10:25Z'
+modified: '2020-02-05T10:25Z'
 thumbnail: './images/access-object-properties-2.png'
 slug: access-object-properties-javascript
 tags: ['javascript', 'object', 'destructuring']
@@ -17,7 +17,7 @@ You can access the properties of an object in JavaScript using 3 ways:
 2. Square brackets property access: `object['property']`
 3. Object destructuring: `const { property } = object`
 
-Let's check in detail how each way to access the properties work. And understand when it makes sense to use one way or another depending on the situation.  
+Let's check in detail how each way to access the properties work. And understand when it's reasonable to use one way or another depending on the situation.  
 
 ## 1. Dot property accessor
 
@@ -52,7 +52,7 @@ The dot property accessor works correctly when the property name is a valid [ide
 
 This is not a problem, because usually, the property names are valid identifiers: e.g. `name`, `address`, `street`, `createdBy`.  
 
-But sometimes you can encounter properties that are not valid identifiers:
+But sometimes properties are not valid identifiers:
 
 ```javascript{6-7}
 const weirdObject = {
