@@ -148,7 +148,7 @@ const { identifier1, identifier2, .., identifierN } = expression;
 
 ### 3.1 Alias variable
 
-If you'd like to access the property, but create a different variable name different than the property name, you could use aliasing.  
+If you'd like to access the property, but create a variable name different than the property name, you could use aliasing.  
 
 ```javascript
 const { identifier: aliasIdentifier } = expression;
