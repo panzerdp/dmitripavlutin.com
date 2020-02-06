@@ -1,6 +1,6 @@
 ---
 title: '3 Ways To Access Object Properties in JavaScript'
-description: 'An object property in JavaScript is accessed in 3 ways: using dot property accessor, square brackets property accessor, or object destructuring.'
+description: 'You can access an object property in JavaScript in 3 ways: dot property accessor, square brackets property accessor, or object destructuring.'
 published: '2020-02-05T10:25Z'
 modified: '2020-02-05T10:25Z'
 thumbnail: './images/access-object-properties-2.png'
