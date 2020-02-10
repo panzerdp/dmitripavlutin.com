@@ -167,8 +167,8 @@ ReactDom.render(
 
 Playgrounds are a great way to play with the new features of React. If you prefer to have all your source code locally, then using parcel is a good start.  
 
-To setup a local React playground you have to make only 3 easy steps. Install parcel builder globally, create your project directory with 2 source files: the HTML and main React source file. Finally, just run parcel build command. The playground is ready! 
+To setup a local React playground you have to make 3 easy steps. Install parcel builder globally, create your project directory with 2 source files: the HTML and main React source file. Finally, just run parcel build command. The playground is ready! 
 
-If for some reason you don't like `parcel`, an alternative is the known react-create-app. Or if you don't like local playgrounds at all, I had a good experience with [codesandbox.io](https://codesandbox.io/).  
+If for some reason you don't like `parcel`, an alternative is the known [react-create-app](https://github.com/facebook/create-react-app). Or if you don't like local playgrounds at all, I had a good experience with [codesandbox.io](https://codesandbox.io/).  
 
 Happy playing!
