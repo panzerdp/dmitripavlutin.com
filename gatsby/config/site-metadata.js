@@ -37,7 +37,7 @@ module.exports = {
   },
   featured: {
     popular: [
-      'how-three-dots-changed-javascript',
+      'javascript-arrow-functions-best-practices',
       '7-tips-to-handle-undefined-in-javascript',
       '6-ways-to-declare-javascript-functions',
       '5-interesting-uses-javascript-destructuring',
