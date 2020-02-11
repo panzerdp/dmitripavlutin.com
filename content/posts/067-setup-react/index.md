@@ -11,19 +11,17 @@ type: post
 commentsThreadId: react-demo-setup
 ---
 
-It's natural to learn new things by playing and having fun. Children, kittens, puppies explore the world playing.  
+It's natural to learn new things playing and having fun. Children, kittens, puppies explore the world playing.  
 
-Periodically you'd need a local React playground to check new features of React. 
+The same approach is useful in programming. If you'd like to try new React features, explore an idea, implement a simple demo, then you need a playground.  
 
-Setting up a React project manually would require to setup Webpack, Babel, or who knows what else. For a quick playground setup, you don't have to care about these.  
-
-In this post, I will show you how to setup a React demo in 3 easy steps.  
+In this post, I will show you how to setup a React playground with almost zero configuration in 3 easy steps (using [parcel](https://parceljs.org/) bundler).  
 
 ## 1. Step 1: install parcel
 
-The first step is just one command: install the parcel builder.
+The first step is just one command: install globally the parcel builder.
 
-You can install it globally with npm:
+To install the parcel bundler using npm run the command:
 
 ```bash
 npm install -g parcel-bundler
@@ -35,19 +33,19 @@ or if you use yarn:
 yarn global add parcel-bundler
 ```
 
-After the installation is complete, you could easily create the source files.  
+The next step is to create the source files.  
 
 ## 2. Step 2: create source files
 
-Next, you'd need to create the folder of your demo project, with 2 files in it: the HTML code and the app.js.  
+You need to create the directory of the playground and place there 2 files: the HTML code and the React code.  
 
-Let's create a new directory for the demo project. I will name the project `react-demo`, but you can choose your own.
+Let's create a new directory for the playground. I will name the directory `react-playground`, but you can choose your own.
 
 ```bash
-mkdir react-demo && cd react-demo
+mkdir react-playground && cd react-playground
 ```
 
-Now, being inside the `react-demo` directory, let's create 2 source files.  
+Now, being inside the `react-playground` directory, let's create 2 source files.  
 
 The first file `index.html` contains the base HTML code:
 
@@ -78,19 +76,29 @@ ReactDom.render(
 );
 ```
 
+At this step, your playground should have the following items:
+
+```html
+react-playground
+  ├── index.html
+  └── index.jsx
+```
+
 ## 3. Step 3: run parcel
 
-After the files `index.html` and `index.jsx` are created in your playground project's directory, what you have to do is run the parcel build command:
+After the files `index.html` and `index.jsx` have been created in your playground's directory, simply run the build command:
 
 ```bash
 parcel index.html
 ```
 
-What a bit until parcel automatically loads all the dependencies (`react`, `react-dom`, etc). Note that parcel tries to load the latest stable dependencies at the time of installation.  
+What a bit until parcel automatically installs the dependencies (`react`, `react-dom`, etc) and builds the playground. Finally, when the building has been completed, your playground is available at http://localhost:1234. Have fun!
 
-Finally, your playground is available at http://localhost:1234. Have fun!
+You can start making changes to your playground right away. As soon as you change the source files, `parcel` automatically rebuilds the application, and the changes are reflected in the browser. Pretty cool!
 
-`parcel` watches for changes you make to the source files. As soon as you change the code, the application is automatically rebuilt and the changes are reflected in the browser. Pretty cool!
+If your playground needs more libraries, you don't have to install them manually. Simply require the needed library using `import` syntax, and `parcel` automatically installs the required dependencies.  
+
+`parcel` installs the latest stable dependencies at the time of running the build command (but you can [customize](#42-specific-versions-of-dependencies) what is being installed).  
 
 ## 4. Customizations
 
@@ -100,7 +108,16 @@ Let's see the common customizations you'd possibly need.
 
 Adding styles to your local playground application is easy.  
 
-First, you'd need to update the `index.html` to link to the new external CSS file:
+First, create the file `styles.css` in your playground project directory:
+
+```css
+/* styles.css */
+h1 {
+  font-style: italic;
+}
+```
+
+Secondly, update the `index.html` to link to the new external CSS file:
 
 ```html{3-5}
 <!-- index.html -->
@@ -115,24 +132,22 @@ First, you'd need to update the `index.html` to link to the new external CSS fil
 </html>
 ```
 
-Second, create the file `styles.css` in your playground project directory:
-
-```css
-/* styles.css */
-h1 {
-  font-style: italic;
-}
-```
-
-Without any further configuration, `parcel` should pick up the new CSS file and apply it. That's all.
+Without any further configuration, `parcel` picks the CSS file and applies it. That's all.
 
 ### 4.2 Specific versions of dependencies
 
-By default, `parcel` loads the latest stable dependencies of React, but you could easily customize their versions.  
+By default, `parcel` installs the latest stable dependencies. But you can easily customize the dependencies versions.  
 
-After the first build, `parcel` automatically creates a `package.json` file in the project directory. 
+After the first build, `parcel` automatically creates a `package.json` file in the playground directory: 
 
-So if you need a custom version of React, for example, simply update `package.json`:
+```html{4}
+react-playground
+  ├── index.html
+  ├── index.jsx
+  └── package.json
+```
+
+To install a specific dependency version, for example of React and React DOM, simply update `package.json`:
 
 ```json{4-5}
 // package.json
@@ -146,9 +161,9 @@ So if you need a custom version of React, for example, simply update `package.js
 
 ### 4.3 TypeScript support
 
-Amazing, but enabling TypeScript support requires you to just name the React source file as `index.tsx` (`.tsx` extension instead of `.jsx`), and parcel automatically enables the support of TypeScript.  
+Amazing, but enabling TypeScript requires just naming the React source file as `index.tsx` (`.tsx` extension instead of `.jsx`), and `parcel` automatically enables the support of TypeScript.  
 
-So, at step 2 create a file `index.tsx` having TypeScript code:
+Create a file `index.tsx` having some TypeScript code:
 
 ```tsx
 // index.tsx
@@ -165,12 +180,26 @@ ReactDom.render(
 );
 ```
 
+Don't forget to update the HTML source file so that the `script` tag to point to `index.tsx` file:
+
+```html{5}
+<!-- index.html -->
+<html>
+<body>
+  <div id="root"></div>
+  <script src="./index.tsx"></script>
+</body>
+</html>
+```
+
+Now your playground has TypeScript support. No further configuration is necessary.  
+
 ## 5. Conclusion
 
-Playgrounds are a great way to play with the new features of React. If you prefer to have all your source code locally, then using parcel is a good start.  
+Playgrounds are a great way to play with the new features of React, test ideas, wire up a quick demo. If you prefer to have all your source code locally, then using parcel is a good start.  
 
-To setup a local React playground you have to make 3 easy steps. Install parcel builder globally, create your project directory with 2 source files: the HTML and main React source file. Finally, just run the `parcel` build command. The playground is ready! 
+To setup a local React playground only 3 easy steps are needed. Install parcel builder globally, create your project directory with 2 source files: the HTML and React source files. Finally, just run the `parcel` build command. The playground is ready!
 
-If for some reason you don't like `parcel`, an alternative is the known [react-create-app](https://github.com/facebook/create-react-app). Or if you don't like local playgrounds at all, I had a good experience with [codesandbox.io](https://codesandbox.io/).  
+If for some reason you don't like `parcel`, an alternative is the known [react-create-app](https://github.com/facebook/create-react-app). If you don't like local playgrounds, I have had a good experience with [codesandbox.io](https://codesandbox.io/).  
 
 Happy playing!
