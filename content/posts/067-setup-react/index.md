@@ -11,9 +11,11 @@ type: post
 commentsThreadId: react-demo-setup
 ---
 
-Periodically you'd need a local React playrground to check new features of React, or anything else.  
+It's natural to learn new things by playing and having fun. Children, kittens, puppies explore the world playing.  
 
-These days, setting up a React project manually would require to setup Webpack, Babel, or who knows what else. For a quick demo setup, you don't have to care about these.  
+Periodically you'd need a local React playground to check new features of React. 
+
+Setting up a React project manually would require to setup Webpack, Babel, or who knows what else. For a quick playground setup, you don't have to care about these.  
 
 In this post, I will show you how to setup a React demo in 3 easy steps.  
 
@@ -86,17 +88,17 @@ parcel index.html
 
 What a bit until parcel automatically loads all the dependencies (`react`, `react-dom`, etc). Note that parcel tries to load the latest stable dependencies at the time of installation.  
 
-Finally your playground is available at http://localhost:1234. Have fun!
+Finally, your playground is available at http://localhost:1234. Have fun!
 
 `parcel` watches for changes you make to the source files. As soon as you change the code, the application is automatically rebuilt and the changes are reflected in the browser. Pretty cool!
 
 ## 4. Customizations
 
-Let's see the common customizations you'd possible need.
+Let's see the common customizations you'd possibly need.
 
 ### 4.1 Add CSS
 
-Adding styles to your local playground application is really easy.  
+Adding styles to your local playground application is easy.  
 
 First, you'd need to update the `index.html` to link to the new external CSS file:
 
@@ -122,13 +124,13 @@ h1 {
 }
 ```
 
-Without any further configuration, parcel should pickup the new CSS file and apply it. That's all.
+Without any further configuration, `parcel` should pick up the new CSS file and apply it. That's all.
 
 ### 4.2 Specific versions of dependencies
 
-By default paracel loads the latest stable dependencies of React, but you could easily customize their versions.  
+By default, `parcel` loads the latest stable dependencies of React, but you could easily customize their versions.  
 
-After the first build, `parcel` automaitcally creates a `package.json` file in the project directory. 
+After the first build, `parcel` automatically creates a `package.json` file in the project directory. 
 
 So if you need a custom version of React, for example, simply update `package.json`:
 
@@ -167,7 +169,7 @@ ReactDom.render(
 
 Playgrounds are a great way to play with the new features of React. If you prefer to have all your source code locally, then using parcel is a good start.  
 
-To setup a local React playground you have to make 3 easy steps. Install parcel builder globally, create your project directory with 2 source files: the HTML and main React source file. Finally, just run parcel build command. The playground is ready! 
+To setup a local React playground you have to make 3 easy steps. Install parcel builder globally, create your project directory with 2 source files: the HTML and main React source file. Finally, just run the `parcel` build command. The playground is ready! 
 
 If for some reason you don't like `parcel`, an alternative is the known [react-create-app](https://github.com/facebook/create-react-app). Or if you don't like local playgrounds at all, I had a good experience with [codesandbox.io](https://codesandbox.io/).  
 
