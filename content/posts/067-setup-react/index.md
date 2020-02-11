@@ -19,9 +19,9 @@ In this post, I will show you how to setup a React playground with almost zero c
 
 ## 1. Step 1: install parcel
 
-The first step is just one command: install globally the parcel builder (I'm using the version `1.12.4`).  
+The first step is one command: install globally the parcel bundler (I'm using the version `1.12.4`).  
 
-To install the parcel bundler using npm run the command:
+Run the command to install the parcel bundler using npm:
 
 ```bash
 npm install -g parcel-bundler
@@ -37,9 +37,9 @@ The next step is to create the source files.
 
 ## 2. Step 2: create source files
 
-You need to create the directory of the playground and place there 2 files: the HTML code and the React code.  
+You need to create the playground directory and place there 2 files: the HTML code and the React code.  
 
-Let's create a new directory for the playground. I will name the directory `react-playground`, but you can choose your own.
+I will name the directory `react-playground`, but you can choose your own. Let's create the new directory and enter into it:
 
 ```bash
 mkdir react-playground && cd react-playground
@@ -47,19 +47,7 @@ mkdir react-playground && cd react-playground
 
 Now, being inside the `react-playground` directory, let's create 2 source files.  
 
-The first file `index.html` contains the base HTML code:
-
-```html
-<!-- index.html -->
-<html>
-<body>
-  <div id="root"></div>
-  <script src="./index.jsx"></script>
-</body>
-</html>
-```
-
-The second file `index.jsx` contains the React code:
+The first file `index.jsx` contains the React code:
 
 ```jsx
 // index.jsx
@@ -76,7 +64,19 @@ ReactDOM.render(
 );
 ```
 
-At this step, your playground should have the following items:
+The second file `index.html` contains the HTML code (the script tag links to `./index.jsx` file):
+
+```html
+<!-- index.html -->
+<html>
+<body>
+  <div id="root"></div>
+  <script src="./index.jsx"></script>
+</body>
+</html>
+```
+
+After creating the directory and files, your playground has the following items:
 
 ```html
 react-playground
@@ -92,11 +92,11 @@ After the files `index.html` and `index.jsx` have been created in your playgroun
 parcel index.html
 ```
 
-What a bit until parcel automatically installs the dependencies (`react`, `react-dom`, etc) and builds the playground. Finally, when the building has been completed, your playground is available at http://localhost:1234. Have fun!
+What a bit until parcel automatically installs the dependencies (`react`, `react-dom`, etc) and builds the playground. Finally, when the building has been completed, your playground is available at [http://localhost:1234](http://localhost:1234). Have fun!
 
 ![React Playground Ready](./images/playground.png)
 
-You can start making changes to your playground right away. As soon as you change the source files, `parcel` automatically rebuilds the application, and the changes are reflected in the browser. Pretty cool!
+You can start making changes to your playground right away. As soon as you change the source files, `parcel` automatically rebuilds the application, and the updates are reflected in the browser. Pretty cool!
 
 If your playground needs more libraries, you don't have to install them manually. Simply require the needed library using `import` syntax, and `parcel` automatically installs the required dependencies.  
 
@@ -172,7 +172,7 @@ Create a file `index.tsx` having some TypeScript code:
 ```tsx
 // index.tsx
 import * as React from 'react';
-import ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom';
 
 function App(): JSX.Element {
   return <h1>Your React Playground is ready!</h1>;
