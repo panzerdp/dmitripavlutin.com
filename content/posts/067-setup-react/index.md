@@ -19,7 +19,7 @@ In this post, I will show you how to setup a React playground with almost zero c
 
 ## 1. Step 1: install parcel
 
-The first step is just one command: install globally the parcel builder.
+The first step is just one command: install globally the parcel builder (I'm using the version `1.12.4`).  
 
 To install the parcel bundler using npm run the command:
 
@@ -59,7 +59,7 @@ The first file `index.html` contains the base HTML code:
 </html>
 ```
 
-The second file `index.jsx` contains the base React code:
+The second file `index.jsx` contains the React code:
 
 ```jsx
 // index.jsx
@@ -70,7 +70,7 @@ function App() {
   return <h1>Your React Playground is ready!</h1>;
 }
 
-ReactDom.render(
+ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
@@ -94,11 +94,13 @@ parcel index.html
 
 What a bit until parcel automatically installs the dependencies (`react`, `react-dom`, etc) and builds the playground. Finally, when the building has been completed, your playground is available at http://localhost:1234. Have fun!
 
+![React Playground Ready](./images/playground.png)
+
 You can start making changes to your playground right away. As soon as you change the source files, `parcel` automatically rebuilds the application, and the changes are reflected in the browser. Pretty cool!
 
 If your playground needs more libraries, you don't have to install them manually. Simply require the needed library using `import` syntax, and `parcel` automatically installs the required dependencies.  
 
-`parcel` installs the latest stable dependencies at the time of running the build command (but you can [customize](#42-specific-versions-of-dependencies) what is being installed).  
+Note that `parcel` installs the latest stable dependencies at the time of running the build command. But you can [customize](#42-specific-versions-of-dependencies) the version of the dependency.  
 
 ## 4. Customizations
 
@@ -133,6 +135,8 @@ Secondly, update the `index.html` to link to the new external CSS file:
 ```
 
 Without any further configuration, `parcel` picks the CSS file and applies it. That's all.
+
+![React Playground With CSS](./images/playground-css.png)
 
 ### 4.2 Specific versions of dependencies
 
@@ -174,13 +178,13 @@ function App(): JSX.Element {
   return <h1>Your React Playground is ready!</h1>;
 }
 
-ReactDom.render(
+ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
 ```
 
-Don't forget to update the HTML source file so that the `script` tag to point to `index.tsx` file:
+Then update the HTML file so that the `script` tag to point to `index.tsx` file:
 
 ```html{5}
 <!-- index.html -->
@@ -192,7 +196,13 @@ Don't forget to update the HTML source file so that the `script` tag to point to
 </html>
 ```
 
-Now your playground has TypeScript support. No further configuration is necessary.  
+Finally, install the React types modules:
+
+```bash
+npm install --save-dev @types/react @types/react-dom
+```
+
+Now your playground has TypeScript support. The editor should start type checking.  
 
 ## 5. Conclusion
 
