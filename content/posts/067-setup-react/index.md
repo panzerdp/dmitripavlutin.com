@@ -100,7 +100,8 @@ You can start making changes to your playground right away. As soon as you chang
 
 If your playground needs more libraries, you don't have to install them manually. Simply require the needed library using `import` syntax, and `parcel` automatically installs the required dependencies.  
 
-Note that `parcel` installs the latest stable dependencies at the time of running the build command. But you can [customize](#42-specific-versions-of-dependencies) the dependencies version.  
+Note that `parcel` installs the latest stable dependencies at the time of running the build command. But you can [customize](#42-specific-versions-of-dependencies) the dependencies versions.  
+
 ## 4. Customizations
 
 Let's see the common customizations you'd possibly need.
@@ -124,7 +125,7 @@ Secondly, update the `index.html` to link to the new external CSS file:
 <!-- index.html -->
 <html>
 <head>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <div id="root"></div>
@@ -133,7 +134,7 @@ Secondly, update the `index.html` to link to the new external CSS file:
 </html>
 ```
 
-Without any further configuration, `parcel` picks the CSS file and applies it. That's all.
+Without any further configuration, `parcel` picks the CSS file and applies it. Any change to the stylesheets triggers a rebuild and web page update. Great.
 
 ![React Playground With CSS](./images/playground-css.png)
 
