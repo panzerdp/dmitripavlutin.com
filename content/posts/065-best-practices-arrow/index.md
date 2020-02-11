@@ -2,7 +2,7 @@
 title: '5 Best Practices to Write Quality Arrow Functions'
 description: 'Best practices on how to write quality, readable and concise arrow functions in JavaScript.'
 published: '2020-01-29T11:30Z'
-modified: '2020-01-30T09:10Z'
+modified: '2020-02-11T15:00Z'
 thumbnail: './images/quality-2.png'
 slug: javascript-arrow-functions-best-practices
 tags: ['javascript', 'arrow function', 'es2015']
@@ -160,7 +160,7 @@ Let's consider the following scenario. When a button is clicked, a request to se
 ```javascript
 myButton.addEventListener('click', () => {
   fetch('/items.json')
-    .then(response => response.json());
+    .then(response => response.json())
     .then(json => {
       json.forEach(item => {
         console.log(item.name);
@@ -180,7 +180,7 @@ const readItemsJson = json => {
 
 const handleButtonClick = () => {
   fetch('/items.json')
-    .then(response => response.json());
+    .then(response => response.json())
     .then(readItemsJson);
 };
 
