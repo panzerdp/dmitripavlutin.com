@@ -1,8 +1,8 @@
 ---
 title: 'How To Setup Your Local React Playground'
 description: 'How to setup your local React playground in 3 easy steps: install parcel, create 2 source files, run parcel. Then... play with React!'
-published: '2020-02-11T12:00Z'
-modified: '2020-02-11T12:00Z'
+published: '2020-02-11T13:40Z'
+modified: '2020-02-11T13:40Z'
 thumbnail: './images/react-playground-3.png'
 slug: react-playground-setup
 tags: ['react']
@@ -96,12 +96,11 @@ What a bit until parcel automatically installs the dependencies (`react`, `react
 
 ![React Playground Ready](./images/playground.png)
 
-You can start making changes to your playground right away. As soon as you change the source files, `parcel` automatically rebuilds the application, and the updates are reflected in the browser. Pretty cool!
+You can start making changes to your playground right away. As soon as you change the source files, `parcel` automatically rebuilds the application, then updates the web page. Pretty cool!
 
 If your playground needs more libraries, you don't have to install them manually. Simply require the needed library using `import` syntax, and `parcel` automatically installs the required dependencies.  
 
-Note that `parcel` installs the latest stable dependencies at the time of running the build command. But you can [customize](#42-specific-versions-of-dependencies) the version of the dependency.  
-
+Note that `parcel` installs the latest stable dependencies at the time of running the build command. But you can [customize](#42-specific-versions-of-dependencies) the dependencies version.  
 ## 4. Customizations
 
 Let's see the common customizations you'd possibly need.
@@ -142,7 +141,7 @@ Without any further configuration, `parcel` picks the CSS file and applies it. T
 
 By default, `parcel` installs the latest stable dependencies. But you can easily customize the dependencies versions.  
 
-After the first build, `parcel` automatically creates a `package.json` file in the playground directory: 
+After the first build, `parcel` generates a `package.json` file in the playground directory: 
 
 ```html{4}
 react-playground
@@ -165,7 +164,7 @@ To install a specific dependency version, for example of React and React DOM, si
 
 ### 4.3 TypeScript support
 
-Amazing, but enabling TypeScript requires just naming the React source file as `index.tsx` (`.tsx` extension instead of `.jsx`), and `parcel` automatically enables the support of TypeScript.  
+Rename the React source file to `index.tsx` (`.tsx` extension instead of `.jsx`), and `parcel` automatically enables the support of TypeScript.  
 
 Create a file `index.tsx` having some TypeScript code:
 
@@ -208,7 +207,7 @@ Now your playground has TypeScript support. The editor should start type checkin
 
 Playgrounds are a great way to play with the new features of React, test ideas, wire up a quick demo. If you prefer to have all your source code locally, then using parcel is a good start.  
 
-To setup a local React playground only 3 easy steps are needed. Install parcel builder globally, create your project directory with 2 source files: the HTML and React source files. Finally, just run the `parcel` build command. The playground is ready!
+To setup a local React playground 3 easy steps are needed. Install parcel bundler globally, create your project directory with 2 source files: the HTML and React source files. Finally, just run the `parcel` build command. The playground is ready!
 
 If for some reason you don't like `parcel`, an alternative is the known [react-create-app](https://github.com/facebook/create-react-app). If you don't like local playgrounds, I have had a good experience with [codesandbox.io](https://codesandbox.io/).  
 
