@@ -5,7 +5,7 @@ published: '2019-10-01T13:00Z'
 modified: '2019-10-03T08:23Z'
 thumbnail: './images/hourglass.jpg'
 slug: javascript-variables-and-temporal-dead-zone
-tags: ['javascript', 'tdz', 'es2015']
+tags: ['javascript', 'variable', 'tdz', 'es2015']
 recommended: ['variables-lifecycle-and-why-let-is-not-hoisted', 'javascript-hoisting-in-details']
 type: post
 commentsThreadId: temporal-dead-zone-in-javascript

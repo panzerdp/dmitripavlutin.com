@@ -5,7 +5,7 @@ published: "2016-07-27"
 modified: "2016-07-27"
 thumbnail: "./images/cover.jpg"
 slug: variables-lifecycle-and-why-let-is-not-hoisted
-tags: ["javascript", "hoisting"]
+tags: ["javascript", "variable", "hoisting"]
 recommended: ["javascript-hoisting-in-details", "make-your-javascript-code-shide-knockout-old-es5-hack"]
 type: post
 ---
