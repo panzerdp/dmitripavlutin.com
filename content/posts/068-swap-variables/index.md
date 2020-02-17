@@ -129,4 +129,56 @@ a&nbsp;&nbsp;|&nbsp;&nbsp;b&nbsp;&nbsp;| a^b       |
 
 In JavaScript, the bitwise XOR operator `operand1 ^ operand2` performs  the XOR operation on each bit of `operand1` and `operand2`.  
 
+For example, here's how `5 ^ 7` evaluates `2`:
+
+```
+1 0 1 (5 in binary)
+1 1 1 (7 in binary)
+------
+0 1 0 (5 ^ 7 = 2 in binary)
+```
+
+Bitwise XOR has 2 interesting properties: 
+
+* `a ^ a = 0`: XOR perfomed on equals numbers always equals `0`
+* `a ^ 0 = a`: XOR perfomed on a number and `0` always equals to the number.
+
+These 2 properties are useful when perfoming swapping of 2 variables using the bitwise XOR.  
+
+Let's see how to swap the values of `a` and `b` variables using bitwise XOR operator in the following example:
+
+```javascript
+let a = 1;
+let b = 2;
+
+a = a ^ b;
+b = a ^ b;
+a = a ^ b;
+
+a; // => 2
+b; // => 1
+```
+
+At the beginning, `a` has value `1`, and `b` has value `2`.
+
+1. `a = a ^ b`: let's just remember this fact.
+2. `b = a ^ b = (a ^ b) ^ b = a ^ b ^ b = a ^ 0 = a` (`b` is now `a`)
+3. `a = a ^ b = (a ^ b) ^ a = a ^ b ^ a = b ^ a ^ a = b ^ 0 = b` (`a` is `b`)
+
+In the steps 2 and 3, `a` was substituted with `a ^ b`. Later the 2 properties of bitwise XOR operator were applied.  
+
+Again, swapping variables using bitwise XOR operator has limitations: you can swap only integers.  
+
+## 5. Conclusion
+
+JavaScript offers a bunch of good ways to swap the values of variables.  
+
+First way, which I recommend for day by day use, is swapping variables using destructuring assignment `[a, b] = [b, a]`. It's a short and expressive approach.  
+
+The second way uses a temporary variable, but is still a good approach. Use it as an alternative to destructuring assignment approach.  
+
+The thrid way, using additional and substraction, doesn't use additional variables or memory. Howerer, the approach is limited to swapping integer numbers only.  
+
+The same way the fourth approach using bitwise XOR doesn't use additional elements. And again, you can only swap interegers using the XOR operator.  
+
 *Which way is better to swap 3 and more variables? Please write your opinion in a comment below!*
