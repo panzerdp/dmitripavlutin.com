@@ -1,6 +1,6 @@
 ---
 title: '4 Ways To Swap Variables in JavaScript'
-description: 'You can swap 2 variables in JavaScript using a destructuring assingment, a temporary variable, addition & difference or XOR operator.'
+description: 'You can swap 2 variables in JavaScript using a destructuring assignment, a temporary variable, addition & difference or XOR operator.'
 published: '2020-02-18T12:00Z'
 modified: '2020-02-18T12:00Z'
 thumbnail: './images/swap-variables-cover-11.png'
@@ -140,8 +140,8 @@ For example, here's how `5 ^ 7` evaluates `2`:
 
 Bitwise XOR has 2 interesting properties: 
 
-* `a ^ a = 0`: XOR performed on equals numbers always equals `0`
-* `a ^ 0 = a`: XOR performed on a number and `0` always equals to the number.
+* `n ^ n = 0`: bitwise XOR performed on same numbers is `0`
+* `n ^ 0 = n`: bitwise XOR performed on a number and zero is the same number
 
 These 2 properties are useful when performing swapping of 2 variables using the bitwise XOR.  
 
@@ -159,13 +159,13 @@ a; // => 2
 b; // => 1
 ```
 
-In the beginning, `a` has value `1`, and `b` has value `2`.
+Let's see the explanation why the swapping works:
 
-1. `a = a ^ b`: let's just remember this fact.
-2. `b = a ^ b = (a ^ b) ^ b = a ^ b ^ b = a ^ 0 = a` (`b` is now `a`)
-3. `a = a ^ b = (a ^ b) ^ a = a ^ b ^ a = b ^ a ^ a = b ^ 0 = b` (`a` is `b`)
+1. `a = a ^ b`
+2. `b = a ^ b`. Based on 1 `a` is substituted with `a ^ b`. Thus `b = (a ^ b) ^ b = a ^ (b ^ b) = a ^ 0 = a`. Remember than `b` is now `a`.  
+3. `a = a ^ b`. Based on 1 `a` is substituted with `a ^ b` and based on 2 `b` is substituted with `a`. Thus `a = (a ^ b) ^ a = b ^ (a ^ a) = b ^ 0 = b`. The variable `a` becomes `b`.
 
-In steps 2 and 3, `a` was substituted with `a ^ b`. The 2 properties of bitwise XOR operator (`a ^ a = 0` and `a ^ 0 = a`) were applied to simplify the expressions until the final result.  
+If you find the explanation over-complicated, feel free to skip it. The main idea is that the properties of bitwise XOR (`n ^ n = 0` and `n ^ 0 = n`) composed in 3 assignments let's you swap the values of `a` and `b`.
 
 Again, swapping variables using bitwise XOR operator has limitations: you can swap only integers.  
 
