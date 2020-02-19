@@ -51,9 +51,9 @@ At the first step, on the right side of the destructuring, a *temporary array* `
 
 Then the destructuring of the temporary array occurs: `[a, b] = [2, 1]`. The variable `a` is assigned with `2`, and `b` with `1`. The swapping of `a` and `b` has been performed.  
 
-I recommend swapping variables using destructuring assignment in most of the cases. It works with any data type: numbers, strings, booleans, objects.  
+I like the destructuring approach because it's short and expressive: swapping is performed in just one statement. It works with any data type: numbers, strings, booleans, objects.  
 
-I like the destructuring approach to interchange variables because it's short and expressive: swapping is performed in just one statement.  
+I recommend swapping variables using a destructuring assignment for most of the cases.  
 
 ## 2. Temporary variable
 
@@ -102,15 +102,15 @@ b; // => 1
 
 Initially, `a` is `1` and `b` is `2`. Let's see how the 3 statements perform the swapping:
 
-1. `a = a + b` assigns to variable `a` the value `1 + 2`.  
-2. `b = a - b` assigns to variable `b` the value `1 + 2 - 2 = 1` (`b` is now `1`).  
-3. `a = a - b` assigns to variable `a` the value `1 + 2 - 1 = 2` (`a` is now `2`).
+1. `a = a + b` assigns to `a` the value `1 + 2`.  
+2. `b = a - b` assigns to `b` the value `1 + 2 - 2 = 1` (`b` is now `1`).  
+3. `a = a - b` assigns to `a` the value `1 + 2 - 1 = 2` (`a` is now `2`).
 
 Finally, `a` is `2` and `b` is `1`. The swapping of `a` and `b` has been performed.  
 
 While this approach doesn't use temporary variables, it has considerable limitations. 
 
-First, you can swap only integer numbers. Secondly, be aware of the integer overflow when performing the addition at the first step `a = a + b`.  
+First, you can swap integers only. Secondly, be aware of the numbers overflow when performing the addition at the first step `a = a + b` (the sum must be lower than `Number.MAX_SAFE_INTEGER`).  
 
 ## 4. Bitwise XOR operator
 
@@ -143,7 +143,7 @@ Bitwise XOR has 2 interesting properties:
 * `n ^ n = 0`: bitwise XOR performed on the same number is `0`
 * `n ^ 0 = n`: bitwise XOR performed on a number and zero is the same number
 
-These XOR properties can be used to swap variables. Let's see how to swap `a` and `b` variables using bitwise XOR operator:
+These XOR properties can be used to swap variables. Let's see how to swap `a` and `b` variables:
 
 ```javascript{4-6}
 let a = 1;
@@ -157,7 +157,7 @@ a; // => 2
 b; // => 1
 ```
 
-Here's a short demonstration why the swapping works:
+Here's an explanation why the swapping works:
 
 1. `a = a ^ b`
 2. `b = a ^ b`. Based on 1 `a` is substituted with `a ^ b`. Thus `b = (a ^ b) ^ b = a ^ (b ^ b) = a ^ 0 = a`. Remember than `b` is now `a`.  
