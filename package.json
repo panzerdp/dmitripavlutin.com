@@ -15,7 +15,7 @@
     "@types/react-helmet": "5.0.15",
     "@typescript-eslint/eslint-plugin": "2.19.0",
     "@typescript-eslint/parser": "2.19.0",
-    "codecov": "3.6.4",
+    "codecov": "3.6.5",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.2",
     "enzyme-to-json": "3.4.4",
