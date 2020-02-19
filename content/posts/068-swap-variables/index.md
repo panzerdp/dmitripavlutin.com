@@ -1,8 +1,8 @@
 ---
 title: '4 Ways To Swap Variables in JavaScript'
 description: 'There are 4 good ways to swap variables in JavaScript: using a destructuring assignment, a temporary variable, addition & difference or XOR operator.'
-published: '2020-02-19T12:00Z'
-modified: '2020-02-19T12:00Z'
+published: '2020-02-19T09:20Z'
+modified: '2020-02-19T09:20Z'
 thumbnail: './images/swap-variables-cover-11.png'
 slug: swap-variables-javascript
 tags: ['javascript', 'variable']
