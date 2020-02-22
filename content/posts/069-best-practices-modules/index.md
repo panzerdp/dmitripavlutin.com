@@ -3,10 +3,10 @@ title: '5 Best Practices To Write Quality JavaScript Modules'
 description: 'Some good practices how to write good ES2015 JavaScript modules.'
 published: '2020-02-25T12:00Z'
 modified: '2020-02-25T12:00Z'
-thumbnail: './images/modules-cover-3.png'
+thumbnail: './images/modules-cover-6.png'
 slug: javascript-modules-best-practices
 tags: ['javascript', 'es2015', 'clean code']
-recommended: ['javascript-arrow-functions-best-practices', 'when-not-to-use-arrow-functions-in-javascript']
+recommended: ['javascript-arrow-functions-best-practices', 'the-path-of-software-development-craftsmanship']
 type: post
 commentsThreadId: javascript-modules-best-practices
 ---
