@@ -179,4 +179,4 @@ The third way, using addition and subtraction, doesn't use additional variables 
 
 In the same way, the fourth approach using bitwise XOR doesn't use additional memory. But again, you can swap integers only.
 
-*Which way is it better to swap 3 and more variables? Please write your opinion in a comment below!*
+*What's your preferred way to swap variables?*
