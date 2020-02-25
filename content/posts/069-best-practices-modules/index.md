@@ -3,7 +3,7 @@ title: '4 Best Practices To Write Quality JavaScript Modules'
 description: 'Some good practices how to write good ES2015 JavaScript modules.'
 published: '2020-02-25T12:00Z'
 modified: '2020-02-25T12:00Z'
-thumbnail: './images/modules-cover-10.png'
+thumbnail: './images/modules-cover-11.png'
 slug: javascript-modules-best-practices
 tags: ['javascript', 'es2015', 'clean code']
 recommended: ['javascript-arrow-functions-best-practices', 'the-path-of-software-development-craftsmanship']
@@ -11,9 +11,9 @@ type: post
 commentsThreadId: javascript-modules-best-practices
 ---
 
-JavaScript modules are great to organize the code of an application. Modules offer encapsulation at its best: nothing from the outside can influence how the module runs, other than using the public exported functions of the module.  
+ES2015 modules are great to organize the code of an application. Modules offer encapsulation at its best: nothing from the outside can influence how the module runs, other than using the public exported functions of the module.  
 
-Every module does it small part of the job. Modules can export public functions, and other modules can import the public functionality.  
+Every module does it a small part of the job. Modules can export public functions, and other modules can import public functionality.  
 
 ```javascript{1}
 import { myFunc } from 'myModule';
@@ -24,11 +24,11 @@ export function myApp() {
 }
 ```
 
-In this post, you will find 4 best practices how to organize your JavaScript modules.  
+In this post, you will find 4 best practices on how to organize your JavaScript modules.  
 
 ## 1. Prefer named exports
 
-Often you might encouter modules that export only one piece of functionality: a function, class, etc.  
+Often you might encounter modules that export only one piece of functionality: a function, class, etc.  
 
 When I first started working with JavaScript modules, I had used the default syntax to export the one piece of functionality from my module. For example, a default export of a class:
 
@@ -74,9 +74,9 @@ Now you can benefit from the autocomplete when importing the named class inside 
 
 ## 2. No work during import
 
-The module-level scope should only define functions, classes, light object and variables. It shouldn't do any heavy payload work, like parsing JSON configuration, etc.  
+The module-level scope should only define functions, classes, light objects, and variables. It shouldn't do any heavy payload work, like parsing JSON configuration, etc.  
 
-For example, you should't parse configuration JSON when the module is evaluated:
+For example, you shouldn't parse configuration JSON when the module is evaluated:
 
 ```javascript{3}
 export const configuration = {
@@ -98,7 +98,7 @@ export function MyApp() {
 
 The import of a module should perform minimum work. Let the consumer of the module decide when it's the right time to perform the heavy operations.  
 
-Regarding the parsing configuration example, one solution is to perform the lazy parsing. Here's how you could refactor `parseConfiguration` module:
+Regarding the parsing configuration example, one solution is to perform lazy parsing. Here's how you could refactor `parseConfiguration` module:
 
 ```javascript{5}
 let parsedData = null;
@@ -116,7 +116,7 @@ export const configuration = {
 
 `data` property is defined as a getter. The getter parses `bigJSON` only when the consumer accesses the configuration data. This optimization increases the [time to interactive](https://developers.google.com/web/tools/lighthouse/audits/time-to-interactive).  
 
-> When imported, the module shouldn't execute any heavy work. Rather, the module should use lazy initialization and let the consumer decide the right time to perform the heavy operations.  
+> When imported, the module shouldn't execute any heavy work. Rather, the module should use lazy initialization and let the consumer decide the right time to perform heavy operations.  
 
 ## 3. Favor high cohesive modules
 
@@ -143,7 +143,7 @@ export function formatDate(date) {
 
 On the other side, there are low cohesion modules. Those that contain components that a low related to each other.  
 
-For example, the following `utils` module have functions that are low related to each other, and perform different set of tasks:
+For example, the following `utils` module has functions that are low related to each other, and perform a different set of tasks:
 
 ```javascript
 // utils.js
@@ -184,9 +184,9 @@ export function ShoppingCartCount({ count }) {
 }
 ```
 
-While `ShoppingCartCount` module uses only the `pluralize()` function out of `utils` module, it has a transitive dependency on `cookies` module.  
+While `ShoppingCartCount` module uses only the `pluralize()` function out of the `utils` module, it has a transitive dependency on the `cookies` module.  
 
-The good solution is to split the low cohesion modules into several high cohesion modules.  
+The good solution is to split the low cohesion modules into several high cohesive ones.  
 
 > Favor high cohesive modules whose functions, classes, variables are closely related and perform a common task. Refactor big low cohesion modules by splitting them into multiple high cohesive modules.  
 
@@ -228,7 +228,7 @@ By using named exports instead of default exports, you could benefit from easier
 
 The sole purpose of `import { myFunc } from 'myModule'` is to import `myFunc` component, and nothing more. The module-level scope of `myModule` should only define classes, functions, or variables with light content.  
 
-How much functions or classes a component should have, and how do these components should relative to each one? The answer is favor modules of high cohesion: its components should be closely related and perform a common task.  
+How many functions or classes a component should have, and how do these components should relative to each one? The answer is to favor modules of high cohesion: its components should be closely related and perform a common task.  
 
 Long relative paths containing many parent folders `../` are difficult to understand. Refactor them to absolute paths.  
 
