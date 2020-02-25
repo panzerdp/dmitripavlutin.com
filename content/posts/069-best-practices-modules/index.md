@@ -68,7 +68,7 @@ export class Greeter {
 
 Now you can benefit from the autocomplete when importing the named class inside the consumer module:
 
-!!Insert the screenshot
+![JavaScript Named Import Autocomplete](./images/autocomplete-4.png)
 
 > Favor named module exports to benefit from renaming refactoring and code autocomplete.  
 

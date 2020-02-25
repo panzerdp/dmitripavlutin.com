@@ -19,6 +19,9 @@ You can access the properties of an object in JavaScript in 3 ways:
 
 Let's see how each syntax to access the properties work. And understand when it's reasonable, depending on the situation, to use one way or another.  
 
+```toc
+```
+
 ## 1. Dot property accessor
 
 A common way to access the property of an object is the *dot property accessor* syntax:
