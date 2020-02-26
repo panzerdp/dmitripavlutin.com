@@ -178,7 +178,7 @@ import { pluralize } from 'utils';
 export function ShoppingCartCount({ count }) {
   return (
     <div>
-      Shopping cart has {pluralize('product', count)}
+      Shopping cart has {count} {pluralize('product', count)}
     </div>
   );
 }
