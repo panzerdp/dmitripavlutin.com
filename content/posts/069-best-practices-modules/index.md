@@ -139,11 +139,11 @@ The consumer knows better when to perform a heavy operation. The consumer might 
 
 > When imported, the module shouldn't execute any heavy work. Rather, the consumer should decide when to perform runtime operations.  
 
-## 3. Favor high cohesive modules
+## 3. Favor high cohesion modules
 
 [Cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)) describes the degree to which the components inside a module belong together.  
 
-The functions, classes or variables of a high cohesive module are closely related. They are focused on a single task.  
+The functions, classes or variables of a high cohesion module are closely related. They are focused on a single task.  
 
 The module `formatDate` is high cohesive because its functions are closely related and focus on date formatting:  
 
@@ -233,7 +233,7 @@ import { pluralize } from 'utils/stringFormat';
 
 The best examples of high cohesive modules are Node built-in modules, like `fs`, `path`, `assert`.  
 
-> Favor high cohesive modules whose functions, classes, variables are closely related and perform a common task. Refactor big low cohesion modules by splitting them into multiple high cohesive modules.  
+> Favor high cohesion modules whose functions, classes, variables are closely related and perform a common task. Refactor big low cohesion modules by splitting them into multiple high cohesion ones.  
 
 ## 4. Avoid long relative paths
 
