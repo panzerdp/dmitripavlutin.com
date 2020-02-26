@@ -1,6 +1,6 @@
 ---
 title: '4 Best Practices To Write Quality JavaScript Modules'
-description: 'Some good practices how to write good ES2015 JavaScript modules.'
+description: 'JavaScript modules best practices: prefer named exports, no work during import, favor high cohesion and avoid long relative paths.'
 published: '2020-02-25T12:00Z'
 modified: '2020-02-25T12:00Z'
 thumbnail: './images/modules-cover-11.png'
@@ -11,28 +11,18 @@ type: post
 commentsThreadId: javascript-modules-best-practices
 ---
 
-ES2015 modules are great to organize the code of an application. Modules offer encapsulation at its best: nothing from the outside can influence how the module runs, other than using the public exported functions of the module.  
+ES2015 modules are great to organize the code of an application. It's a good practice to chunk the application code into reusable, encapsulated, one-task focused modules.  
 
-Every module does it a small part of the job. Modules can export public functions, and other modules can import public functionality.  
-
-```javascript{1}
-import { myFunc } from 'myModule';
-
-export function myApp() {
-  const result = myFunc();
-  // Do something...
-}
-```
-
-In this post, you will find 4 best practices on how to organize your JavaScript modules.  
+This post presents 4 best practices on how to organize better your JavaScript modules.  
 
 ## 1. Prefer named exports
 
-Often you might encounter modules that export only one piece of functionality: a function, class, etc.  
+When I started using JavaScript modules, I had used the *default* syntax to export the single piece that my module defines, either a class or a function.  
 
-When I first started working with JavaScript modules, I had used the default syntax to export the one piece of functionality from my module. For example, a default export of a class:
+For example, here's a module `greeter` that exports the class `Greeter` as a default :
 
-```javascript{1}
+```javascript{2}
+// greeter.js
 export default class Greeter {
   constructor(name) {
     this.name = name;
@@ -44,15 +34,16 @@ export default class Greeter {
 }
 ```
 
-`export default class Greeter` is a default export that exports the class `Greeter`.  
+In time I've noticed the difficulty in refactoring the classes (or functions) that were default exported. When the original class is renamed, the class name inside the consumer module doesn't change.  
 
-As I've been creating more and more modules having default exports, I've noticed the difficulty in refactoring the classes or functions that were default exported. 
+Worse, the editor doesn't provide autocomplete suggestions of the class name being imported.  
 
-Additionally, the editor doesn't give autocomplete the name of the class or function that's being imported as a default.  
+I've concluded that the default export doesn't give visible benefits. Then I've tried switching to named exports.  
 
-If you change the module to export `Greeter` as a named export:
+Let's change `greeter` module to namely export the `Greeter` class:
 
-```javascript{1}
+```javascript{2}
+// greeter.js
 export class Greeter {
   constructor(name) {
     this.name = name;
@@ -64,86 +55,127 @@ export class Greeter {
 }
 ```
 
-`export class Greeter` performs a named export of the `Greeter` class.  
+With the usage of named exports, the editor does better renaming: every time you change the original class name, all consumer modules also change the class name.
 
-Now you can benefit from the autocomplete when importing the named class inside the consumer module:
+The autocomplete also suggests the imported class:
 
 ![JavaScript Named Import Autocomplete](./images/autocomplete-4.png)
 
+So, here's my advice:
+
 > Favor named module exports to benefit from renaming refactoring and code autocomplete.  
+
+Note: when using 3rd party modules like React, Lodash, is generally ok to use default import. The default import name is usually a constant that doesn't change (like `React` and `_`).  
 
 ## 2. No work during import
 
-The module-level scope should only define functions, classes, light objects, and variables. It shouldn't do any heavy payload work, like parsing JSON configuration, etc.  
-
-For example, you shouldn't parse configuration JSON when the module is evaluated:
-
-```javascript{3}
-export const configuration = {
-  // Bad
-  data: JSON.parse(bigJSON)
-};
-```
-
-When the module is imported, the parsing of `bigJSON` happens during import:
+The module-level scope *defines* functions, classes, light objects, and variables. The module can *export* some of these components. That's all.  
 
 ```javascript
-// Bad: parsing happens when the module is imported
-import { configuration } from 'configuration';
+// Module-level scope
 
-export function MyApp() {
-  return <h1>{configuration.data.siteName}</h1>;
+export function myFunction() {
+  // myFunction Scope
 }
 ```
 
-The import of a module should perform minimum work. Let the consumer of the module decide when it's the right time to perform the heavy operations.  
+The module-level scope shouldn't do any payload computation like parsing JSON, making HTTP requests, reading local storage, etc.
 
-Regarding the parsing configuration example, one solution is to perform lazy parsing. Here's how you could refactor `parseConfiguration` module:
+For example, the following module `configuration` parses the configuration from the global variable `bigJsonString`:
 
-```javascript{5}
+```javascript{4}
+// configuration.js
+export const configuration = {
+  // Bad
+  data: JSON.parse(bigJsonString)
+};
+```
+
+This is a problem because the parsing of `bigJsonString` is done at the module-level scope. The parsing of `bigJsonString` happens when `configuration` module is imported:  
+
+```javascript{2}
+// Bad: parsing happens when the module is imported
+import { configuration } from 'configuration';
+
+export function AboutUs() {
+  return <p>{configuration.data.siteName}</p>;
+}
+```
+
+At a higher level, the module-level scope's role is to define the module components, import dependencies, and export public components: that's the *dependencies resolution process*. It should be separated from the *runtime*: when the user interacts with the application.  
+
+Let's refactor the `configuration` module to perform lazy parsing:
+
+```javascript{6}
+// configuration.js
 let parsedData = null;
 
 export const configuration = {
   // Good
   get data() {
     if (parsedData === null) {
-      parsedData = JSON.parse(bigJSON);
+      parsedData = JSON.parse(bigJsonString);
     }
     return parsedData;
   }
 };
 ```
 
-`data` property is defined as a getter. The getter parses `bigJSON` only when the consumer accesses the configuration data. This optimization increases the [time to interactive](https://developers.google.com/web/tools/lighthouse/audits/time-to-interactive).  
+Because `data` property is defined as a getter, the `bigJsonString` is parsed only when the consumer accesses `configuration.data`.  
 
-> When imported, the module shouldn't execute any heavy work. Rather, the module should use lazy initialization and let the consumer decide the right time to perform heavy operations.  
+```javascript{6}
+// Good: JSON parsing doesn't happen when the module is imported
+import { configuration } from 'configuration';
 
-## 3. Favor high cohesive modules
-
-The functions, classes or variables of a high cohesive module are closely related. They are focused to perform a single task.  
-
-For example, the following module `formatDate` is highly cohesive because the functions are closely related and focus on date formatting.  
-
-```javascript
-// formatDate.js
-const MONTHS = [];
-
-function getMonthName(monthIndex) {
-
-}
-
-export function formatDate(date) {
-  return ``
+export function AboutUs() {
+  // JSON parsing happens now
+  return <p>{configuration.data.companyDescription}</p>;
 }
 ```
 
-`getMonthName()`, `formatDate()` and `MONTHS` variables are closely-related to each other.  
+The consumer knows better when to perform a heavy operation. The consumer might decide to perform the operation when the browser is idle. Or the consumer might import the module, but for some reason never use it.  This opens the opportunity for deeper time to interactive optimizations.  
+
+> When imported, the module shouldn't execute any heavy work. Rather, the consumer should decide when to perform runtime operations.  
+
+## 3. Favor high cohesive modules
+
+[Cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)) describes the degree to which the components inside a module belong together.  
+
+The functions, classes or variables of a high cohesive module are closely related. They are focused on a single task.  
+
+The module `formatDate` is high cohesive because its functions are closely related and focus on date formatting:  
+
+```javascript
+// formatDate.js
+const MONTHS = [
+  'January', 'February', 'March','April', 'May',
+  'June', 'July', 'August', 'September', 'October',
+  'November', 'December'
+];
+
+function ensureDateInstance(date) {
+  if (typeof date === 'string') {
+    return new Date(date);
+  }
+  return date;
+}
+
+export function formatDate(date) {
+  date = ensureDateInstance(date);
+  const monthName = MONTHS[date.getMonth())];
+  return `${monthName} ${date.getDate()}, ${date.getFullYear()}`;
+}
+```
+
+`formatDate()`, `ensureDateInstance()` and `MONTHS` are closely-related to each other. 
+
+Deleting either `MONTHS` or `ensureDateInstance()` would break `formatDate()`: that's the sign of high cohesion.  
 
 ### 3.1 The problem of low cohesion modules
 
-On the other side, there are low cohesion modules. Those that contain components that a low related to each other.  
+On the other side, there are low cohesion modules. Those that contain components that are unrelated to each other.  
 
-For example, the following `utils` module has functions that are low related to each other, and perform a different set of tasks:
+The following `utils` module has 3 functions that perform different tasks:
 
 ```javascript
 // utils.js
@@ -163,11 +195,11 @@ export function cookieExists(cookieName) {
 }
 ```
 
-The 3 functions that the module contain `getRandomInRange()`, `pluralize()` and `cookieExists()` perform different tasks: generate a random number, format a string and check the existence of a cookie. That's the sign of a low cohesion module.  
+`getRandomInRange()`, `pluralize()` and `cookieExists()` perform different tasks: generate a random number, format a string and check the existence of a cookie. Deleting any of these functions doesn't affect the functionality of the remaining ones: that's the sign of low cohesion.  
 
-Because the low cohesion module focuses on multiple tasks that are not related, it's difficult to reason about such a module.  
+Because the low cohesion module focuses on multiple mostly unrelated tasks, it's difficult to reason about such a module. 
 
-Plus, the low cohesion module forces its consumer to depend on modules that it doesn't always need, i.e. it creates unneeded transitive dependencies.  
+Plus, the low cohesion module forces the consumer to depend on modules that it doesn't always need, i.e. unneeded transitive dependencies.  
 
 For example, the component `ShoppingCartCount` imports `pluralize()` function from `utils` module:
 
@@ -184,15 +216,26 @@ export function ShoppingCartCount({ count }) {
 }
 ```
 
-While `ShoppingCartCount` module uses only the `pluralize()` function out of the `utils` module, it has a transitive dependency on the `cookies` module.  
+While `ShoppingCartCount` module uses only the `pluralize()` function out of the `utils` module, it has a transitive dependency on the `cookies` module (which is imported inside `utils`).  
 
-The good solution is to split the low cohesion modules into several high cohesive ones.  
+The good solution is to split the low cohesion module `utils` into several high cohesive ones: `utils/random`, `utils/stringFormat` and `utils/cookies`.  
+
+Now, if `ShoppingCard` module imports `utils/stringFormat`, it wouldn't have a transitive dependency on `cookies`:  
+
+```jsx{2}
+// ShoppingCartCount.jsx
+import { pluralize } from 'utils/stringFormat';
+
+// ...
+```
+
+The best examples of high cohesive modules are Node built-in modules, like `fs`, `path`, `assert`.  
 
 > Favor high cohesive modules whose functions, classes, variables are closely related and perform a common task. Refactor big low cohesion modules by splitting them into multiple high cohesive modules.  
 
 ## 4. Avoid long relative paths
 
-It's kind of difficult to understand the path of a module that contains one, or even more parent folders:
+I find difficult to understand the path of a module that contains one, or even more parent folders:
 
 ```javascript{1-2}
 import { compareDates } from '../../date/compare';
@@ -214,9 +257,9 @@ import { formatDate }   from 'utils/date/format';
 
 While the absolute paths are sometimes longer to write, using them makes it clear the location of the imported module.  
 
-You can introduce new root directories to avoid the problem of the relative paths. This is possible using [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver#readme), for example.  
+To mitigate the long absolute paths, you can introduce new root directories. This is possible using [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver#readme), for example.  
 
-> Use absolute paths (optionally adding new shortcut root directories) instead of the long relative paths.  
+> Use absolute paths instead of the long relative paths.  
 
 ## 5. Conclusion
 
@@ -232,3 +275,4 @@ How many functions or classes a component should have, and how do these componen
 
 Long relative paths containing many parent folders `../` are difficult to understand. Refactor them to absolute paths.  
 
+*What JavaScript modules best practices do you use?*
