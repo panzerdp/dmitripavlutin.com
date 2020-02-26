@@ -11,7 +11,9 @@ type: post
 commentsThreadId: javascript-modules-best-practices
 ---
 
-ES2015 modules are great to organize the code of an application. It's a good practice to chunk the application code into reusable, encapsulated, one-task focused modules.  
+Using ES2015 modules you can chunk the application code into reusable, encapsulated, one-task focused modules. 
+
+That's all good, but how do you structure modules? How many functions, classes a module should have?  
 
 This post presents 4 best practices on how to organize better your JavaScript modules.  
 
