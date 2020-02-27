@@ -477,12 +477,7 @@ function FavoriteMovies() {
 
   const add = movie => setMovies([...movies, movie]);
 
-  const remove = index => {
-    setMovies([
-      ...movies.slice(0, index),
-      ...movies.slice(index + 1)
-    ]);
-  }
+  const remove = index => setMovies(movies.filter((m,i) => i !== index));
 
   return (
     // Use add(movie) and remove(index)...
@@ -506,10 +501,7 @@ function reducer(state, action) {
     case 'add':
       return [...state, action.item];
     case 'remove':
-      return [
-        ...state.slice(0, action.index),
-        ...state.slice(action.index + 1)
-      ];
+      return state.filter((t,i) => i !== action.index);
     default:
       throw new Error();
   }
