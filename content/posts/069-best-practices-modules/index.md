@@ -40,7 +40,7 @@ In time I've noticed the difficulty in refactoring the classes (or functions) th
 
 Worse, the editor doesn't provide autocomplete suggestions of the class name being imported.  
 
-I've concluded that the default export doesn't give visible benefits. Then I've tried switching to named exports.  
+I concluded that the default export doesn't give visible benefits. Then I've switched to named exports.    
 
 Let's change `greeter` module to namely export the `Greeter` class:
 
@@ -67,7 +67,7 @@ So, here's my advice:
 
 > Favor named module exports to benefit from renaming refactoring and code autocomplete.  
 
-Note: when using 3rd party modules like React, Lodash, is generally ok to use default import. The default import name is usually a constant that doesn't change (like `React` and `_`).  
+Note: when using 3rd party modules like React, Lodash, is generally ok to use default import. The default import name is a constant that doesn't change: `React`, `_`.  
 
 ## 2. No work during import
 
@@ -81,7 +81,7 @@ export function myFunction() {
 }
 ```
 
-The module-level scope shouldn't do any payload computation like parsing JSON, making HTTP requests, reading local storage, etc.
+The module-level scope shouldn't do heavy computation like parsing JSON, making HTTP requests, reading local storage, etc.
 
 For example, the following module `configuration` parses the configuration from the global variable `bigJsonString`:
 
@@ -93,7 +93,7 @@ export const configuration = {
 };
 ```
 
-This is a problem because the parsing of `bigJsonString` is done at the module-level scope. The parsing of `bigJsonString` happens when `configuration` module is imported:  
+This is a problem because the parsing of `bigJsonString` is done at the module-level scope. The parsing of `bigJsonString` would actually happen when `configuration` module is imported:  
 
 ```javascript{2}
 // Bad: parsing happens when the module is imported
@@ -104,7 +104,7 @@ export function AboutUs() {
 }
 ```
 
-At a higher level, the module-level scope's role is to define the module components, import dependencies, and export public components: that's the *dependencies resolution process*. It should be separated from the *runtime*: when the user interacts with the application.  
+At a higher level, the module-level scope's role is to define the module components, import dependencies, and export public components: that's the *dependencies resolution process*. It should be separated from the *runtime*: parsing JSON, making requests, handling events.  
 
 Let's refactor the `configuration` module to perform lazy parsing:
 
@@ -135,7 +135,9 @@ export function AboutUs() {
 }
 ```
 
-The consumer knows better when to perform a heavy operation. The consumer might decide to perform the operation when the browser is idle. Or the consumer might import the module, but for some reason never use it.  This opens the opportunity for deeper time to interactive optimizations.  
+The consumer knows better when to perform a heavy operation. The consumer might decide to perform the operation when the browser is idle. Or the consumer might import the module, but for some reason never use it.  
+
+This opens the opportunity for deeper performance optimizations: decreasing [time to interactive](https://developers.google.com/web/tools/lighthouse/audits/time-to-interactive), [minimize main thread work](https://web.dev/mainthread-work-breakdown/).
 
 > When imported, the module shouldn't execute any heavy work. Rather, the consumer should decide when to perform runtime operations.  
 
@@ -201,7 +203,7 @@ export function cookieExists(cookieName) {
 
 Because the low cohesion module focuses on multiple mostly unrelated tasks, it's difficult to reason about such a module. 
 
-Plus, the low cohesion module forces the consumer to depend on modules that it doesn't always need, i.e. unneeded transitive dependencies.  
+Plus, the low cohesion module forces the consumer to depend on modules that it doesn't always need, which creates unneeded transitive dependencies.  
 
 For example, the component `ShoppingCartCount` imports `pluralize()` function from `utils` module:
 
@@ -228,10 +230,12 @@ Now, if `ShoppingCard` module imports `utils/stringFormat`, it wouldn't have a t
 // ShoppingCartCount.jsx
 import { pluralize } from 'utils/stringFormat';
 
-// ...
+export function ShoppingCartCount({ count }) {
+  // ...
+} 
 ```
 
-The best examples of high cohesive modules are Node built-in modules, like `fs`, `path`, `assert`.  
+The best examples of high cohesion modules are Node built-in modules, like `fs`, `path`, `assert`.  
 
 > Favor high cohesion modules whose functions, classes, variables are closely related and perform a common task. Refactor big low cohesion modules by splitting them into multiple high cohesion ones.  
 
@@ -267,13 +271,11 @@ To mitigate the long absolute paths, you can introduce new root directories. Thi
 
 The JavaScript modules are great to split the logic of your application into small, self-contained chunks.  
 
-To make the usage of JavaScript modules even more productive, you can apply a few best practices.  
-
 By using named exports instead of default exports, you could benefit from easier renaming refactoring and editor autocomplete assistance when importing the named component.
 
 The sole purpose of `import { myFunc } from 'myModule'` is to import `myFunc` component, and nothing more. The module-level scope of `myModule` should only define classes, functions, or variables with light content.  
 
-How many functions or classes a component should have, and how do these components should relative to each one? The answer is to favor modules of high cohesion: its components should be closely related and perform a common task.  
+How many functions or classes a component should have, and how do these components should relative to each one? Favor modules of high cohesion: its components should be closely related and perform a common task.  
 
 Long relative paths containing many parent folders `../` are difficult to understand. Refactor them to absolute paths.  
 
