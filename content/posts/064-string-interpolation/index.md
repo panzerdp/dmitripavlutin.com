@@ -2,7 +2,7 @@
 title: 'String Interpolation in JavaScript'
 description: 'How to use template literals to perform string interplation in JavaScript (w/ examples and best practices).'
 published: '2020-01-22T11:30Z'
-modified: '2020-01-22T11:30Z'
+modified: '2020-01-27T11:00Z'
 thumbnail: './images/string-interpolation.png'
 slug: string-interpolation-in-javascript
 tags: ['javascript', 'string', 'es2015']
@@ -11,9 +11,9 @@ type: post
 commentsThreadId: string-interpolation-in-javascript
 ---
 
-The string interpolation is the evaluation of a string literal containing placeholders that are replaced with corresponding values. 
+The evaluation of a string literal which placeholders are replaced with values is named string interpolation.  
 
-In JavaScript, the template literals (strings wrapped in backticks `` ` ``) and `${expression}` as placeholder implement the string interpolation:
+In JavaScript, the template literals (strings wrapped in backticks `` ` ``) and `${expression}` as placeholder perform the string interpolation:
 
 ```javascript
 const number = 42;
@@ -22,7 +22,7 @@ const message = `The number is ${number}`;
 message; // => 'The number is 42'
 ```
 
-Let's see in more detail, with examples and best practices, how to use template strings to perform string interpolation in JavaScript.
+Let's see in more detail, with examples and best practices, how to use template strings to perform string interpolation in JavaScript.  
 
 ```toc
 ```
@@ -281,7 +281,52 @@ This version of the component, which uses the classnames tool, is easier to unde
 
 If you'd need to add more CSS classes (for example to handle `isErrorLoading`), the version that uses classnames grows without significantly affecting the readability. 
 
-## 5. Conclusion
+## 5. String interpolation in TypeScript
+
+The string interpolation works in TypeScript the same way as in JavaScript, without signficant differences.  
+
+```typescript
+const count: number = 10;
+const message: string = `You have ${count} products`;
+
+message; // => 'You have 10 products'
+```
+
+## 6. String interpolation in React JSX
+
+The string interpolation in React JSX consists of 2 cases:
+
+* Attribute interpolation: ``attribute={`My string ${placeholder}`}`` (standard JavaScript interpolation)
+* Element's text interpolation: `<span>My string {placeholder}</span>` (React specific interpolation)
+
+Here's an example that shows both cases:
+
+```jsx{6,9}
+import React from 'react';
+
+export function BuyProductsButton({ count, buy }) {
+  return (
+    <button
+      title={`Buy ${count} products`}
+      onClick={buy}
+    >
+      Buy {count} products
+    </button>
+  );
+}
+```
+
+For example, `<BuyProductsButton count={10} buy={() => {}} />` renders the output:
+
+```jsx
+<button title="Buy 10 products">
+  Buy 10 products
+</button>
+```
+
+During the interpolation of both attribute and text strings, placeholders `${count}` and correspondingly `{count}` are replaced with `10`.  
+
+## 7. Conclusion
 
 The string interpolation is a great feature. It helps in inserting values into string literals in a concise and readable manner. And avoid the clumsy string concatenation approach.
 
