@@ -36,13 +36,13 @@ export default class Greeter {
 }
 ```
 
-In time I've noticed the difficulty in refactoring the classes (or functions) that were default exported. When the original class is renamed, the class name inside the consumer module doesn't change.  
+In time I had noticed the difficulty in refactoring the classes (or functions) that were default exported. When the original class was being renamed, the class name inside the consumer module didn't change.  
 
-Worse, the editor doesn't provide autocomplete suggestions of the class name being imported.  
+Worse, the editor didn't provide autocomplete suggestions of the class name being imported.  
 
-I concluded that the default export doesn't give visible benefits. Then I've switched to named exports.    
+I had concluded that the default export doesn't give visible benefits. Then I switched to named exports.    
 
-Let's change `greeter` module to namely export the `Greeter` class:
+Let's make `Greeter` a named export, and see the benefits:
 
 ```javascript{2}
 // greeter.js
@@ -67,7 +67,7 @@ So, here's my advice:
 
 > Favor named module exports to benefit from renaming refactoring and code autocomplete.  
 
-Note: when using 3rd party modules like React, Lodash, is generally ok to use default import. The default import name is a constant that doesn't change: `React`, `_`.  
+Note: when using 3rd party modules like React, Lodash, default import is usually ok. The default import name is a constant that doesn't change: `React`, `_`.  
 
 ## 2. No work during import
 
