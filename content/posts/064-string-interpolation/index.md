@@ -283,7 +283,7 @@ If you'd need to add more CSS classes (for example to handle `isErrorLoading`), 
 
 ## 5. String interpolation in TypeScript
 
-The string interpolation works in TypeScript the same way as in JavaScript, without signficant differences.  
+The string interpolation in TypeScript works the same way as in JavaScript:
 
 ```typescript
 const count: number = 10;
@@ -316,7 +316,7 @@ export function BuyProductsButton({ count, buy }) {
 }
 ```
 
-For example, `<BuyProductsButton count={10} buy={() => {}} />` renders the output:
+`<BuyProductsButton count={10} buy={() => {}} />` would render the output:
 
 ```jsx
 <button title="Buy 10 products">
