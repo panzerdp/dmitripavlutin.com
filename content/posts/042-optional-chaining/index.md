@@ -1,5 +1,5 @@
 ---
-title: Why You'll Like JavaScript Optional Chaining
+title: How to Use JavaScript Optional Chaining
 description: Optional chaining accesses properties from deep of nested objects without prop existence verification and intermediate variables boilerplates.
 published: "2019-08-21T13:06Z"
 modified: "2019-12-22T14:07Z"
@@ -12,9 +12,9 @@ type: post
 
 There are JavaScript features that vastly change the way you code. Starting from ES2015 and beyond, the features that influenced the most my code are destructuring, arrow functions, classes, and modules system.  
 
-Optional chaining, as a part of ES2020, changes the way properties are accessed from deep objects structures. 
+Optional chaining, as a part of ES2020, changes the way properties are accessed from deep objects structures. Optional chaining is also available in TypeScript, starting from version [3.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#optional-chaining).  
 
-Let's see how optional chaining makes your code simpler by removes boilerplate conditionals and variables when deeply accessing potentially missing properties.  
+Let's see how optional chaining makes your code simpler when accessing potentially `null` or `undefined` properties.  
 
 ## 1. The problem
 
