@@ -2,7 +2,7 @@
 title: 'String Interpolation in JavaScript'
 description: 'How to use template literals to perform string interplation in JavaScript (w/ examples and best practices).'
 published: '2020-01-22T11:30Z'
-modified: '2020-01-27T11:00Z'
+modified: '2020-01-29T14:00Z'
 thumbnail: './images/string-interpolation.png'
 slug: string-interpolation-in-javascript
 tags: ['javascript', 'string', 'es2015']
@@ -292,12 +292,12 @@ const message: string = `You have ${count} products`;
 message; // => 'You have 10 products'
 ```
 
-## 6. String interpolation in React JSX
+## 6. String interpolation in React
 
-The string interpolation in React JSX consists of 2 cases:
+The string interpolation in React consists of:
 
-* Attribute interpolation: ``attribute={`My string ${placeholder}`}`` (standard JavaScript interpolation)
-* Element's text interpolation: `<span>My string {placeholder}</span>` (React specific interpolation)
+* Attribute interpolation: ``attribute={`My string ${placeholder}`}``
+* Element's text interpolation: `<span>My string {placeholder}</span>`
 
 Here's an example that shows both cases:
 
