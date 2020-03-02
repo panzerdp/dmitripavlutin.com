@@ -68,6 +68,12 @@ export const pageQuery = graphql`
     twitterFollowersCount
   }
 
+  fragment CarbonAdsServiceAll on SiteSiteMetadataCarbonAdsService {
+    isEnabled
+    isProductionMode
+    scriptSrc
+  }
+
   fragment Post on MarkdownRemarkFrontmatter {
     title
     description

@@ -60,6 +60,7 @@
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-helmet": "5.2.1",
+    "react-media": "1.10.0",
     "ts-jest": "25.2.1",
     "typescript": "3.8.2"
   },
