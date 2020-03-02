@@ -93,7 +93,6 @@ function ProductsList() {
   const map = name => <div>{name}</div>;
 
   const handleChange = event => setNewName(event.target.value);
-
   const handleAdd = () => {
     const s = new Set([...names, newName]);
     setNames([...s]);
@@ -142,8 +141,7 @@ function ProductsList() {
   const map = name => <div>{name}</div>;
 
   const handleChange = event => setNewName(e.target.value);
-
-  const handleClick = () => add(newName);
+  const handleAdd = () => add(newName);
 
   return (
     <div className="products">
