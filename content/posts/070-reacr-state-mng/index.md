@@ -11,9 +11,9 @@ type: post
 commentsThreadId: react-state-management
 ---
 
-Let's take a look at 3 simple rules that will guide you on how to strcture your React state.  
+Let's take a look at 3 simple rules that will guide you on how to structure your React state.  
 
-This post makes heavily use of hooks.  
+This post makes heavy use of hooks.  
 
 ## 1. Make the state atomic
 
@@ -23,7 +23,7 @@ The first good rule of efficient state management is:
 
 Having an atomic state means that you no longer can chunk the state into multiple state values.  
 
-Let's see an examples of a compound state, i.e. a state that incorporates multiple state values.  
+Let's see an example of a compound state, i.e. a state that incorporates multiple state values.  
 
 ```javascript
 const [state, setState] = useState({
@@ -36,19 +36,19 @@ const [state, setState] = useState({
 
 The first one, `state.on`, holds a boolean value which indicates whether something is on or off. 
 
-The same way `state.count` value holds a number denoting counting something, for example how many times the user had clicked a button.  
+The same way `state.count` value holds a number denoting counting something, for example, how many times the user had clicked a button.  
 
 What happens if you'd like to update such a compound state? Let's say you'd like to increase the counter by 1:
 
 ```javascript
-// Updating compund state
+// Updating compound state
 setUser({
   ...state,
   count: state.count + 1
 });
 ```
 
-Clearly this is a big construction to invoke to simply increase the counter state.  
+This is a big construction to invoke to simply increase the counter state.  
 
 The solution is to split the compound state into 2 atomic states `on` and `count`:
 
@@ -75,15 +75,15 @@ The atomic state takes care of only one concern. Thus, such a state is easy to u
 
 > Extract complex state logic into a custom hook.  
 
-Imagine a component having state that has custom logic when updated. Would it make sense to keep the complex operation within the component?  
+Imagine a component having a state that has custom logic when updated. Would it make sense to keep the complex operation within the component?  
 
 The search for an answer by looking at the fundamentals.  
 
-React hooks are created to isolate the component from *complex state management* and side effects. So, since the component should be concerned only about the elements to render and some event listeneres to attach, the complex state setter should be extracted.  
+React hooks are created to isolate the component from *complex state management* and side effects. So, since the component should be concerned only about the elements to render and some event listeners to attach, the complex state setter should be extracted.  
 
 Let's consider a component that manages a list of products. The user can add new product names, but importantly the names have to be *non-empty* and *unique*.  
 
-The first attemp is to keep the setter of such state directly inside the component:
+The first attempt is to keep the setter of such state directly inside the component:
 
 ```jsx{}
 function ProductsList() {
@@ -113,7 +113,7 @@ function ProductsList() {
 
 Inside `addNewProduct()`, a `Set` object is used to make sure that the product names are unique.  
 
-The problem is that the code of adding a new product name to the list is about 1/3 of the component size. It would be better to isolate the comples state setter logic into a custom hook. Great, let's do that.  
+The problem is that the code of adding a new product name to the list is about 1/3 of the component size. It would be better to isolate the complex state setter logic into a custom hook. Great, let's do that.  
 
 The new custom hook `useUniqueNonEmpty()` takes care of the complex state management:
 
@@ -161,7 +161,7 @@ function ProductsList() {
 
 > Extract multiple state operations into a reducer.
 
-If you find yourself perfoming many operations over the same state value, then its a good idea to extract these operations into a reducer.  
+If you find yourself performing many operations over the same state value, a good idea is to extract these operations into a reducer.  
 
 Again, this approach fits the main idea of hooks: extract the complex state management out of the components.  
 
@@ -169,7 +169,7 @@ Continuing the example with `ProductsList`, let's add a Delete operation to the 
 
 The handle these operations, it makes sense to use a reducer hook and keep the component out of the complex state management logic.  
 
-Here's a possible implementation of the reducer that add and deletes products:
+Here's a possible implementation of the reducer that adds and deletes products:
 
 ```javascript
 function uniqueReducer(state, action) {
@@ -219,15 +219,15 @@ function ProductsList() {
 
 When *Add* button is clicked, the button handler invokes `dispatch({ type: 'add', name: newName })`. Dispatching an `add` action makes the reducer `uniqueReducer` add a new product name to the state.  
 
-The same way, when *Delete* button is clicked, the button handler invokes `dispatch({ type: 'delete', name })`. Dispatching an `remove` action removes the product name from the state of names.  
+In the same way, when *Delete* button is clicked, the button handler invokes `dispatch({ type: 'delete', name })`. Dispatching a `remove` action removes the product name from the state of names.  
 
 ## 4. Conclusion
 
-An atomic state is something that can't be further devided into smaller states. You should favor creating atomic states inside of your components because they are easy to manage.  
+An atomic state is something that can't be further divided into smaller states. You should favor creating atomic states inside of your components because they are easy to manage.  
 
 If the state has a complicated update logic, then it's better to extract this logic out of the component into a custom hook.  
 
-The same way, if the state requires multiple operations, then it's a good idea to use a reducer to incorporate these operations.  
+In the same way, if the state requires multiple operations, then it's a good idea to use a reducer to incorporate these operations.  
 
 No matter what rule you use, the state should be as simple and decoupled as possible. The component should not be cluttered with the details of how the state is updated: these should be a part of the custom hook or the reducer.  
 
