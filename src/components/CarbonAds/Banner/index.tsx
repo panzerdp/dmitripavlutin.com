@@ -41,7 +41,7 @@ export default class CarbonAdsBanner extends React.Component<CarbonAdsBannerProp
       <span>
         <span class="carbon-wrap">
           <a href="#" class="carbon-img" target="_blank" rel="noopener">
-            <img src="/slack-blue_2x.png" alt="ads via Carbon" border="0" height="100" width="130" style="max-width: 130px;">
+            <img src="/slack-carbon.png" alt="ads via Carbon" border="0" height="100" width="130" style="max-width: 130px;">
           </a>
           <a href="#" class="carbon-text" target="_blank" rel="noopener">
             Bring your team together with Slack, the collaboration hub for work.

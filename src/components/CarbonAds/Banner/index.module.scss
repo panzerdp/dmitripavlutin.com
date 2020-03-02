@@ -1,21 +1,16 @@
 @import '~styles/variables';
 
-.carbonAdsBanner {
-
-}
-
 :global {
   #carbonads {
-    display: block;
-    overflow: hidden;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    padding: 1em;
-    background: #fff;
-    text-align: center;
-    line-height: 1.5;
-    font-size: 14px;
-    box-shadow: $box-shadow;
-    border-radius: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
+    Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  
+  #carbonads {
+    display: flex;
+    max-width: 250px;
+    background-color: hsl(0, 0%, 98%);
+    box-shadow: 0 1px 4px 1px hsla(0, 0%, 0%, .1);
   }
   
   #carbonads a {
@@ -28,39 +23,43 @@
   }
   
   #carbonads span {
+    position: relative;
     display: block;
     overflow: hidden;
   }
   
+  #carbonads .carbon-wrap {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+  
   .carbon-img {
     display: block;
-    margin: 0 auto 8px;
+    margin: 0;
     line-height: 1;
+  }
+  
+  .carbon-img img {
+    display: block;
   }
   
   .carbon-text {
-    display: block;
-    margin-bottom: 8px;
+    font-size: 13px;
+    padding: 10px;
+    line-height: 1.5;
+    text-align: left;
   }
   
   .carbon-poweredby {
-    text-transform: uppercase;
     display: block;
-    font-size: 10px;
-    letter-spacing: 1px;
+    padding: 8px 10px;
+    background: repeating-linear-gradient(-45deg, transparent, transparent 5px, rgba($anchor-color, 0.05) 5px, rgba($anchor-color, 0.05) 10px) hsla(203, 11%, 95%, .4);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    font-weight: 600;
+    font-size: 9px;
     line-height: 1;
-  }
-
-  #carbonads {
-    max-width: none;
-
-    .carbon-wrap {
-      display: flex;
-      align-items: center;
-    }
-
-    .carbon-text {
-      margin-left: 8px;
-    }
   }
 }
