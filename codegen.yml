@@ -1,6 +1,7 @@
 schema: http://localhost:8000/___graphql
 documents:
   - ./src/**/*.{ts,tsx}
+  - '!./src/typings/graphql.d.ts'
   - ./node_modules/gatsby-*/**/*.js
 generates:
   ./src/typings/graphql.d.ts:
