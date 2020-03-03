@@ -11,9 +11,15 @@ type: post
 commentsThreadId: react-state-management
 ---
 
-Let's take a look at 3 simple rules that will guide you on how to structure your React state.  
+State inside a React component is the encapsuled data that is persistent between renderings. `useState()` is the React hook responsible for managing state inside a functional component. 
 
-This post makes heavy use of hooks.  
+I like that `useState()` indeed makes the work with state quite easy. But often I encounter questions like: 
+
+- should I divide my component's state into small states, or keep a compound one? 
+- if the state management becomes complicated, should I extract it from the component? How to do that?
+- if `useState()` usage is so simple, when would you need `useReducer()`?  
+
+These are all good questions. To answer them, this post describes 3 easy rules that guide on how to design the component's state.  
 
 ## 1. One concern
 
@@ -30,13 +36,14 @@ const [state, setState] = useState({
   on: true,
   count: 0
 });
+
+state.on    // => true
+state.count // => 0
 ```
 
-`state` is composed of 2 state value: `state.on` and `state.count`.  
+The state consists of a plain JavaScript object, having the properties `on` and `count`.  
 
-The first one, `state.on`, holds a boolean value which indicates whether something is on or off. 
-
-The same way `state.count` value holds a number denoting counting something, for example, how many times the user had clicked a button.  
+The first property, `state.on`, holds a boolean value that indicates if a switch is *on* or *off*. The same way `state.count` holds a number denoting a counter, for example, how many times the user had clicked a button.  
 
 What happens if you'd like to update such a compound state? Let's say you'd like to increase the counter by 1:
 
@@ -48,7 +55,7 @@ setUser({
 });
 ```
 
-This is a big construction to invoke to simply increase the counter state.  
+You have to keep nearby the whole state to be able to update just `count`. This is a big construction to invoke to simply increase the counter state: all because a state designed such way is responsible for 2 concerns: on/off and counter.   
 
 The solution is to split the compound state into 2 atomic states `on` and `count`:
 
@@ -69,7 +76,7 @@ setCount(count => count + 1);
 
 `count` state, which is responsible of counting only, is easy to reason about, and respectively to update and read.  
 
-If your component has state that is responsible of multiple concerns, then for each concern declare a separated state variable. 
+If your component has state responsible for multiple concerns, then for each concern declare a separated state variable. 
 
 ## 2. Extract complex state logic
 
