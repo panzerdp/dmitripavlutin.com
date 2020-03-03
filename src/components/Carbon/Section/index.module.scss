@@ -1,0 +1,11 @@
+@import '~styles/variables';
+
+.carbonSection {
+  box-shadow: $box-shadow;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 1.5rem;
+  h3 {
+    margin: 1.5rem 0 1rem;
+  }
+}

@@ -3,7 +3,7 @@ import { graphql, StaticQuery } from 'gatsby';
 
 import { AboutAuthorQuery } from 'typings/graphql';
 
-interface AboutAuthorFetchResult {
+export interface AboutAuthorFetchResult {
   authorInfo: AuthorInfo;
   authorStats: AuthorStats;
   authorProfilePictureSmall: FixedImage;
