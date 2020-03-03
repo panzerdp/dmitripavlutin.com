@@ -1,5 +1,5 @@
 ---
-title: '4 Best Practices To Write Quality JavaScript Modules'
+title: '4 Best Practices to Write Quality JavaScript Modules'
 description: 'JavaScript modules best practices: prefer named exports, no work during import, favor high cohesion and avoid long relative paths.'
 published: '2020-02-26T12:00Z'
 modified: '2020-02-26T12:00Z'

@@ -1,10 +1,10 @@
 ---
-title: 'What Happens When A Module Is Imported Twice?'
+title: 'What Happens When a Module Is Imported Twice?'
 description: 'How is the JavaScript module evaluated.'
 published: '2020-03-10T12:00Z'
 modified: '2020-03-10T12:00Z'
-thumbnail: './images/modules-cover-11.png'
-slug: javascript-module-twice-import
+thumbnail: './images/import-module-twice-2.png'
+slug: javascript-module-import-twice
 tags: ['javascript', 'es2015', 'module']
 recommended: ['javascript-modules-best-practices', 'javascript-utility-libraries']
 type: post
@@ -36,7 +36,7 @@ counter2; // => ???
 
 When the `consumer` module runs, what is the content of variables `counter1` and `counter2`?  
 
-To answer the question, first, you need to understand how a JavaScript module is evaluated and imported.  
+To answer the question, first, you need to understand how a JavaScript evaluates and imports modules.  
 
 ## 1. Module evaluation
 
