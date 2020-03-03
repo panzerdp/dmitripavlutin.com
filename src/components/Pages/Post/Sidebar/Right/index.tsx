@@ -25,7 +25,9 @@ export default function PostRightSidebar({ popularPosts, siteUrl }: PostRightSid
     <div className={styles.rightSidebar}>
       <SubscriptionRegion />
       <Media query="(min-width: 1081px)" defaultMatches={false}>
-        <CarbonFetch render={renderCarbon} />
+        <CarbonSection>
+          <CarbonFetch render={renderCarbon} />
+        </CarbonSection>
       </Media>
       <AboutAuthorFetch render={renderAuthorInfo} />
       <PopularPosts posts={popularPosts} siteUrl={siteUrl} />
@@ -35,11 +37,7 @@ export default function PostRightSidebar({ popularPosts, siteUrl }: PostRightSid
 }
 
 function renderCarbon(service: CarbonAdsService): JSX.Element {
-  return (
-    <CarbonSection>
-      <CarbonAd carbonAdsService={service} />
-    </CarbonSection>
-  );
+  return <CarbonAd carbonAdsService={service} />;
 }
 
 function renderAuthorInfo({ authorInfo, authorProfilePictureBig, authorStats }: AboutAuthorFetchResult): JSX.Element {
