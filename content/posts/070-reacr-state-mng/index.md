@@ -15,13 +15,13 @@ Let's take a look at 3 simple rules that will guide you on how to structure your
 
 This post makes heavy use of hooks.  
 
-## 1. Make the state atomic
+## 1. One concern
 
 The first good rule of efficient state management is:
 
-> Make the state atomic.
+> Make a state variable responsible for one concern.
 
-Having an atomic state means that you no longer can chunk the state into multiple state values.  
+Having state variable responsible for one concern makes it conform to the Single Responsibility Principle.  
 
 Let's see an example of a compound state, i.e. a state that incorporates multiple state values.  
 
@@ -67,9 +67,9 @@ setCount(count + 1);
 setCount(count => count + 1);
 ```
 
-`count` atomic state is easy to update since you don't have to deal with unnecessary concerns.  
+`count` state, which is responsible of counting only, is easy to reason about, and respectively to update and read.  
 
-The atomic state takes care of only one concern. Thus, such a state is easy to update and test.  
+If your component has state that is responsible of multiple concerns, then for each concern declare a separated state variable. 
 
 ## 2. Extract complex state logic
 
