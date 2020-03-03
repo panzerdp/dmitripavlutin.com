@@ -20,6 +20,6 @@ export default React.forwardRef(function(_: {}, ref: React.RefObject<HTMLDivElem
       <img src="#" border="0" height="1" width="1" alt="ads via Carbon" style="display: none;">
     </span>`;
     ref.current.appendChild(div);
-  }, [])
+  }, []);
   return null;  
 });

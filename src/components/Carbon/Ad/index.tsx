@@ -19,7 +19,10 @@ export default function CarbonAd(props: CarbonAdProps): JSX.Element {
   return (
     <>
       <div ref={container} className={styles.carbonAdsBanner}></div>
-      { isProductionMode ? <CarbonBannerLive scriptSrc={scriptSrc} /> : <CarbonBannerDemo /> }
+      { isProductionMode ? 
+        <CarbonBannerLive ref={container} scriptSrc={scriptSrc} /> : 
+        <CarbonBannerDemo ref={container} />
+      }
     </>
   )
 }

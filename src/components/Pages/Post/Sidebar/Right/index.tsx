@@ -24,7 +24,7 @@ export default function PostRightSidebar({ popularPosts, siteUrl }: PostRightSid
   return (
     <div className={styles.rightSidebar}>
       <SubscriptionRegion />
-      <Media query="(min-width: 1201px)" defaultMatches={false}>
+      <Media query="(min-width: 1081px)" defaultMatches={false}>
         <CarbonFetch render={renderCarbon} />
       </Media>
       <AboutAuthorFetch render={renderAuthorInfo} />
