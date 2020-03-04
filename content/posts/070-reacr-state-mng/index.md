@@ -1,8 +1,8 @@
 ---
 title: '3 Rules of React State Management'
 description: '3 Simple Rules of Efficient React State Management: atomic state, extract complex into hook and extract multiple operations into reducer'
-published: '2020-03-02T12:00Z'
-modified: '2020-03-02T12:00Z'
+published: '2020-03-04T09:00Z'
+modified: '2020-03-04T09:00Z'
 thumbnail: './images/couch.jpg'
 slug: react-state-management
 tags: ['javascript', 'react', 'state']
