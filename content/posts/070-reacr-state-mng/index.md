@@ -11,7 +11,7 @@ type: post
 commentsThreadId: react-state-management
 ---
 
-State inside a React component is the encapsuled data that is persistent between renderings. `useState()` is the React hook responsible for managing state inside a functional component. 
+State inside a React component is the encapsulated data that is persistent between renderings. `useState()` is the React hook responsible for managing state inside a functional component. 
 
 I like that `useState()` indeed makes the work with state quite easy. But often I encounter questions like: 
 
@@ -27,7 +27,7 @@ The first good rule of efficient state management is:
 
 > Make a state variable responsible for one concern.
 
-Having state variable responsible for one concern makes it conform to the Single Responsibility Principle.  
+Having a state variable responsible for one concern makes it conform to the Single Responsibility Principle.  
 
 Let's see an example of a compound state, i.e. a state that incorporates multiple state values.  
 
@@ -64,7 +64,7 @@ const [on, setOnOff] = useState(true);
 const [count, setCount] = useState(0);
 ```
 
-`on` state variable is solely responsible of storing the switch state. The same way `count` variable is solely responsible for a counter.  
+`on` state variable is solely responsible for storing the switch state. The same way `count` variable is solely responsible for a counter.  
 
 Now let's try to update the counter:
 
@@ -74,11 +74,11 @@ setCount(count + 1);
 setCount(count => count + 1);
 ```
 
-`count` state, which is responsible of counting only, is easy to reason about, and respectively esy to update and read.  
+`count` state, which is responsible for counting only, is easy to reason about, and respectively easy to update and read.  
 
 Don't worry about calling multiple `useState()` to create state variables for each concern. 
 
-Note, however, that if you have way too much `useState()` variables, there's a good chance that your component violates the Single Responsibility Principle. Just split such component into smaller ones.  
+Note, however, that if you have way too much `useState()` variables, there's a good chance that your component violates the Single Responsibility Principle. Just split such components into smaller ones.  
 
 ## 2. Extract complex state logic
 
@@ -165,7 +165,7 @@ function ProductsList() {
 
 If you'd like to add a new name to the list, you only have to invoke `add('New Product Name')`.  
 
-Bottom line, the benenfits of extracting the complex state management into a custom hook are:
+Bottom line, the benefits of extracting the complex state management into a custom hook are:
 
 * The component becomes free of state management details
 * The custom hook can be reused
@@ -232,6 +232,8 @@ function ProductsList() {
 When *Add* button is clicked, the handler invokes `dispatch({ type: 'add', name: newName })`. Dispatching an `add` action makes the reducer `uniqueReducer` add a new product name to the state.  
 
 In the same way, when *Delete* button is clicked, the handler invokes `dispatch({ type: 'delete', name })`. Dispatching a `remove` action removes the product name from the state of names.  
+
+Interestingly, the reducer is a special case of [Command design pattern](https://refactoring.guru/design-patterns/command). 
 
 ## 4. Conclusion
 
