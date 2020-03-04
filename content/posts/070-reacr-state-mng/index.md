@@ -19,7 +19,7 @@ I like that `useState()` indeed makes the work with state quite easy. But often 
 - if the state management becomes complicated, should I extract it from the component? How to do that?
 - if `useState()` usage is so simple, when would you need `useReducer()`?  
 
-These are all good questions. To answer them, this post describes 3 easy rules that guide on how to design the component's state.  
+This post describes 3 easy rules that answer the above questions and help you design the component's state.  
 
 ## 1. One concern
 
@@ -43,9 +43,9 @@ state.count // => 0
 
 The state consists of a plain JavaScript object, having the properties `on` and `count`.  
 
-The first property, `state.on`, holds a boolean value that indicates if a switch is *on* or *off*. The same way `state.count` holds a number denoting a counter, for example, how many times the user had clicked a button.  
+The first property, `state.on`, holds a boolean denoting a switch. The same way `state.count` holds a number denoting a counter, for example, how many times the user had clicked a button.  
 
-What happens if you'd like to update such a compound state? Let's say you'd like to increase the counter by 1:
+Then, let's say you'd like to increase the counter by 1:
 
 ```javascript
 // Updating compound state
@@ -55,7 +55,7 @@ setUser({
 });
 ```
 
-You have to keep nearby the whole state to be able to update just `count`. This is a big construction to invoke to simply increase the counter state: all because a state designed such way is responsible for 2 concerns: on/off and counter.   
+You have to keep nearby the whole state to be able to update just `count`. This is a big construction to invoke to simply increase a counter: all because the state variable is responsible for 2 concerns: switch and counter.   
 
 The solution is to split the compound state into 2 atomic states `on` and `count`:
 
@@ -64,9 +64,9 @@ const [on, setOnOff] = useState(true);
 const [count, setCount] = useState(0);
 ```
 
-Both `on` and `count` are atomic states. An atomic state can no longer be divided into something smaller.  
+`on` state variable is solely responsible of storing the switch state. The same way `count` variable is solely responsible for a counter.  
 
-Now increasing the counter is easy:
+Now let's try to update the counter:
 
 ```javascript
 setCount(count + 1);
@@ -74,25 +74,27 @@ setCount(count + 1);
 setCount(count => count + 1);
 ```
 
-`count` state, which is responsible of counting only, is easy to reason about, and respectively to update and read.  
+`count` state, which is responsible of counting only, is easy to reason about, and respectively esy to update and read.  
 
-If your component has state responsible for multiple concerns, then for each concern declare a separated state variable. 
+Don't worry about calling multiple `useState()` to create state variables for each concern. 
+
+Note, however, that if you have way too much `useState()` variables, there's a good chance that your component violates the Single Responsibility Principle. Just split such component into smaller ones.  
 
 ## 2. Extract complex state logic
 
 > Extract complex state logic into a custom hook.  
 
-Imagine a component having a state that has custom logic when updated. Would it make sense to keep the complex operation within the component?  
+Would it make sense to keep complex state operations within the component?  
 
-The search for an answer by looking at the fundamentals.  
+The answer is in fundamentals (as usually happens).  
 
-React hooks are created to isolate the component from *complex state management* and side effects. So, since the component should be concerned only about the elements to render and some event listeners to attach, the complex state setter should be extracted.  
+React hooks are created to isolate the component from *complex state management* and side effects. So, since the component should be concerned only about the elements to render and some event listeners to attach, the complex state logic should be extracted into a custom hook.  
 
-Let's consider a component that manages a list of products. The user can add new product names, but importantly the names have to be *non-empty* and *unique*.  
+Let's consider a component that manages a list of products. The user can add new product names. The constraint is that product names have to be *unique*.  
 
-The first attempt is to keep the setter of such state directly inside the component:
+The first attempt is to keep the setter of product names list state directly inside the component:
 
-```jsx{}
+```jsx{2,8-11}
 function ProductsList() {
   const [names, setNames] = useState([]);
   const [newName, setNewName] = useState('');
@@ -117,13 +119,14 @@ function ProductsList() {
 
 `names` state variable holds the product names. When the *Add* button is clicked, `addNewProduct()` event handler is invoked.  
 
-Inside `addNewProduct()`, a `Set` object is used to make sure that the product names are unique.  
+Inside `addNewProduct()`, a `Set` object is used to keep the product names unique. Should the component be concerned about this implementation detail? Nope.   
 
-The problem is that the code of adding a new product name to the list is about 1/3 of the component size. It would be better to isolate the complex state setter logic into a custom hook. Great, let's do that.  
+It would be better to isolate the complex state setter logic into a custom hook. Let's do that.  
 
-The new custom hook `useUniqueNonEmpty()` takes care of the complex state management:
+The new custom hook `useUnique()` takes care of keeping the items unique:
 
 ```javascript
+// useUnique.js
 export function useUnique(initial) {
   const [items, setItems] = useState(initial);
   const add = newItem => {
@@ -134,11 +137,9 @@ export function useUnique(initial) {
 };
 ```
 
-In a few words, `useUnique()` custom hook makes sure the state items always are unique.  
-
 Having the custom state management extracted into a hook, the `ProductsList` component becomes much lighter:
 
-```jsx{1,5}
+```jsx{4,10}
 import { useUnique } from './useUnique';
 
 function ProductsList() {
@@ -160,19 +161,25 @@ function ProductsList() {
 }
 ```
 
-`const [names, addName] = useUnique([])` is what enables the custom hook. The component is no longer cluttered with complex state management.  
+`const [names, addName] = useUnique([])` is what enables the custom hook. The component is no longer cluttered with complex state management. 
+
+If you'd like to add a new name to the list, you only have to invoke `add('New Product Name')`.  
+
+Bottom line, the benenfits of extracting the complex state management into a custom hook are:
+
+* The component becomes free of state management details
+* The custom hook can be reused
+* The custom hook can be easily tested in isolation
 
 ## 3. Extract multiple state operations
 
 > Extract multiple state operations into a reducer.
 
-If you find yourself performing many operations over the same state value, a good idea is to extract these operations into a reducer.  
+Continuing the example with `ProductsList`, let's introduce a Delete operation, which deletes a product name from the list. 
 
-Again, this approach fits the main idea of hooks: extract the complex state management out of the components.  
+Now you have to code 2 operations: adding and deleting products. The handle these operations, it makes sense to create a reducer and make the component free of state management logic.  
 
-Continuing the example with `ProductsList`, let's add a Delete operation to the list of products. Thus, now you have to code 2 operations: deleting a product name and adding a new product name.  
-
-The handle these operations, it makes sense to use a reducer hook and keep the component out of the complex state management logic.  
+Again, this approach fits the idea of hooks: extract the complex state management out of the components.  
 
 Here's a possible implementation of the reducer that adds and deletes products:
 
@@ -189,7 +196,7 @@ function uniqueReducer(state, action) {
 }
 ```
 
-Then it can be used inside the products list:
+Then `uniqueReducer()` can be used inside the products list by invoking React's `useReducer()` hook:
 
 ```jsx{2,7,10}
 function ProductsList() {
@@ -220,20 +227,20 @@ function ProductsList() {
 }
 ```
 
-`const [names, dispatch] = useReducer(uniqueReducer, [])` enables the reducer `uniqueReducer` inside the component. `names` is the state variable that is an array of product names, and `dispatch` is a special function that accepts an action object.  
+`const [names, dispatch] = useReducer(uniqueReducer, [])` enables `uniqueReducer`. `names` is the state variable holding the product names, and `dispatch` is a function to be called using an action object.  
 
-When *Add* button is clicked, the button handler invokes `dispatch({ type: 'add', name: newName })`. Dispatching an `add` action makes the reducer `uniqueReducer` add a new product name to the state.  
+When *Add* button is clicked, the handler invokes `dispatch({ type: 'add', name: newName })`. Dispatching an `add` action makes the reducer `uniqueReducer` add a new product name to the state.  
 
-In the same way, when *Delete* button is clicked, the button handler invokes `dispatch({ type: 'delete', name })`. Dispatching a `remove` action removes the product name from the state of names.  
+In the same way, when *Delete* button is clicked, the handler invokes `dispatch({ type: 'delete', name })`. Dispatching a `remove` action removes the product name from the state of names.  
 
 ## 4. Conclusion
 
-An atomic state is something that can't be further divided into smaller states. You should favor creating atomic states inside of your components because they are easy to manage.  
+A state variable should be responsible for one concern. 
 
-If the state has a complicated update logic, then it's better to extract this logic out of the component into a custom hook.  
+If the state has a complicated update logic, extract this logic out of the component into a custom hook. 
 
-In the same way, if the state requires multiple operations, then it's a good idea to use a reducer to incorporate these operations.  
+Same way, if the state requires multiple operations, use a reducer to incorporate these operations.  
 
-No matter what rule you use, the state should be as simple and decoupled as possible. The component should not be cluttered with the details of how the state is updated: these should be a part of the custom hook or the reducer.  
+No matter what rule you use, the state should be as simple and decoupled as possible. The component should not be cluttered with the details of how the state is updated: these should be a part of a custom hook or a reducer.  
 
 Confirming to these 3 simple rules will make your state logic easy to understand, maintain, and test.  
