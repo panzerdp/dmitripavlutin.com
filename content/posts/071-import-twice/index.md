@@ -46,7 +46,7 @@ In terms of the specification, every JavaScript module is associated with a [Mod
 
 <hr />
 
-*If this module has already been evaluated successfully, return undefined; [...]. Otherwise, transitively evaluate all module dependencies of this module and then evaluate this module.*
+If this module *has already been evaluated* successfully, return `undefined`; [...]. Otherwise, transitively evaluate all module dependencies of this module and then evaluate this module.
 
 <hr />
 
@@ -64,11 +64,15 @@ import module from 'path';
 
 According to the specification:
 
-*The implementation of `HostResolveImportedModule` must conform to the following requirements:*
+<hr />
 
-* *The normal return value must be an instance of a concrete subclass of `Module Record`.*
-* *If a `Module Record` corresponding to the pair `referencingScriptOrModule, specifier` does not exist or cannot be created, an exception must be thrown.*
-* *Each time this operation is called with a specific `referencingScriptOrModule, specifier` pair as arguments it must return the same `Module Record` instance if it completes normally.*
+The implementation of `HostResolveImportedModule` must conform to the following requirements:
+
+* The normal return value must be an instance of a concrete subclass of `Module Record`.
+* If a `Module Record` corresponding to the pair `referencingScriptOrModule, specifier` does not exist or cannot be created, an exception must be thrown.
+* Each time this operation is called with a specific `referencingScriptOrModule, specifier` pair as arguments it must *return the same `Module Record` instance* if it completes normally.
+
+<hr />
 
 Let's review what happens, in a human-readable manner.  
 
