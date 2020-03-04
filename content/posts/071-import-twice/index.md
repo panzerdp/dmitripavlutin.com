@@ -1,6 +1,6 @@
 ---
 title: 'What Happens When a Module Is Imported Twice?'
-description: 'A JavaScript module is evaluated just once. When imported multiple times from the same path, the same module is received.'
+description: 'A JavaScript module is evaluated just once. When imported multiple times from the same path, the same module instance is returned.'
 published: '2020-03-10T12:00Z'
 modified: '2020-03-10T12:00Z'
 thumbnail: './images/import-module-twice-2.png'
