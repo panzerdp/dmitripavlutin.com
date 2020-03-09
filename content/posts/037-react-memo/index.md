@@ -76,6 +76,7 @@ You can use the second argument to indicate a custom equality check function:
 React.memo(Component, [areEqual(prevProps, nextProps)]);
 ```
 
+
 `areEqual(prevProps, nextProps)` function must return `true` if `prevProps` and `nextProps` are equal.
 
 For example, let's manually calculate if `Movie` component props are equal:
@@ -87,6 +88,11 @@ function moviePropsAreEqual(prevMovie, nextMovie) {
 }
 
 const MemoizedMovie2 = React.memo(Movie, moviePropsAreEqual);
+```
+or
+
+```jsx
+  const MemoizedMovie2 = React.memo(Component, (prevProps, nextProps) => JSON.sringify(prevProps) == JSON.stringify(nextProps));
 ```
 
 `moviePropsAreEqual()` function returns `true` if prev and next props are equal.  
