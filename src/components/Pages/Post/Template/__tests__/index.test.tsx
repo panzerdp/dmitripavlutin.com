@@ -11,8 +11,8 @@ import Edit from 'components/Pages/Post/Edit';
 import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import CommentsThread from 'components/Comments/Thread';
-import CarbonAdsFetch from 'components/CarbonAds/Fetch';
-import CarbonAdsMetaTags from 'components/CarbonAds/Meta/Tags';
+import CarbonAdsFetch from 'components/Carbon/Fetch';
+import CarbonAdsMetaTags from 'components/Carbon/Meta/Tags';
 import { TO_POST } from 'routes/path';
 
 const props = {

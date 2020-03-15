@@ -2,8 +2,8 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import PostRightSidebar from '../index';
-import CarbondAdsBanner from 'components/CarbonAds/Banner';
-import CarbonAdsFetch from 'components/CarbonAds/Fetch';
+import CarbonAd from 'components/Carbon/Ad'
+import CarbonAdsFetch from 'components/Carbon/Fetch';
 import SubscriptionRegion from 'components/Subscription/Region';
 
 const carbonAdsService: CarbonAdsService = {
@@ -37,10 +37,10 @@ const props = {
 
 describe('<PostRightSidebar />', function() {
   it('should render carbon ads', function() {
-    const wrapper = shallow(<PostRightSidebar popularPosts={popularPosts} />)
+    const wrapper = shallow(<PostRightSidebar popularPosts={popularPosts} siteUrl="http://example.com" />)
       .find(CarbonAdsFetch)
       .renderProp('render')(carbonAdsService);
-    expect(wrapper.find(<CarbondAdsBanner carbonAdsService={carbonAdsService} />));
+    expect(wrapper.find(<CarbonAd carbonAdsService={carbonAdsService} />));
   });
 
   it('should render subscription form', function() {
