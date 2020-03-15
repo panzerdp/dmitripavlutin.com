@@ -2,7 +2,7 @@
 title: '3 Rules of React State Management'
 description: '3 Rules of React State Management: one concept per state variable, extract complex state into hooks and extract multiple ops to reducers.'
 published: '2020-03-04T09:00Z'
-modified: '2020-03-04T09:00Z'
+modified: '2020-03-15T15:30Z'
 thumbnail: './images/couch.jpg'
 slug: react-state-management
 tags: ['javascript', 'react', 'state']
@@ -117,9 +117,9 @@ function ProductsList() {
 }
 ```
 
-`names` state variable holds the product names. When the *Add* button is clicked, `addNewProduct()` event handler is invoked.  
+`names` state variable holds the product names. When the *Add* button is clicked, `handleAdd()` event handler is invoked.  
 
-Inside `addNewProduct()`, a `Set` object is used to keep the product names unique. Should the component be concerned about this implementation detail? Nope.   
+Inside `handleAdd()`, a `Set` object is used to keep the product names unique. Should the component be concerned about this implementation detail? Nope.   
 
 It would be better to isolate the complex state setter logic into a custom hook. Let's do that.  
 
@@ -245,4 +245,4 @@ Same way, if the state requires multiple operations, use a reducer to incorporat
 
 No matter what rule you use, the state should be as simple and decoupled as possible. The component should not be cluttered with the details of how the state is updated: these should be a part of a custom hook or a reducer.  
 
-Confirming to these 3 simple rules will make your state logic easy to understand, maintain, and test.  
+Conforming to these 3 rules will make your state logic easy to understand, maintain, and test.  
