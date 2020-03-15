@@ -224,7 +224,7 @@ While `ShoppingCartCount` module uses only the `pluralize()` function out of the
 
 The good solution is to split the low cohesion module `utils` into several high cohesive ones: `utils/random`, `utils/stringFormat` and `utils/cookies`.  
 
-Now, if `ShoppingCard` module imports `utils/stringFormat`, it wouldn't have a transitive dependency on `cookies`:  
+Now, if `ShoppingCart` module imports `utils/stringFormat`, it wouldn't have a transitive dependency on `cookies`:  
 
 ```jsx{2}
 // ShoppingCartCount.jsx
