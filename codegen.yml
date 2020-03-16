@@ -1,8 +1,8 @@
 schema: http://localhost:8000/___graphql
 documents:
   - ./src/**/*.{ts,tsx}
-  - '!./src/typings/graphql.d.ts'
-  - ./node_modules/gatsby-*/**/*.js
+  - ./node_modules/gatsby-transformer-sharp/**/*.js
+  - ./node_modules/gatsby-transformer-remark/**/*.js
 generates:
   ./src/typings/graphql.d.ts:
     plugins:
