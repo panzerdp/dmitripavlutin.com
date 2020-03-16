@@ -13,7 +13,7 @@ export default function AboutAuthorFollow({ authorInfo, authorStats }: AboutAuth
   return (
     <div className={styles.folowAuthor}>
       <h3>Follow me</h3>
-      <div className={styles.description}>Make sure to follow me to stay in touch with new interesting posts.</div>
+      <div className={styles.description}>Follow me to stay in touch with new interesting posts.</div>
       <TwitterFollowButton
         authorName={authorInfo.name}
         twitterFollowersCount={authorStats.twitterFollowersCount}

@@ -2,15 +2,10 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import PostRightSidebar from '../index';
-import CarbonAd from 'components/Carbon/Ad'
-import CarbonAdsFetch from 'components/Carbon/Fetch';
-import SubscriptionRegion from 'components/Subscription/Region';
-
-const carbonAdsService: CarbonAdsService = {
-  isEnabled: true,
-  isProductionMode: true,
-  scriptSrc: 'http://site.com/script.js',
-};
+import SidebarItemsCommon from 'components/SidebarItems/Common';
+import PopularPosts from 'components/Popular/Posts';
+import PopularTagsFetch from 'components/Popular/Tags/Fetch';
+import PopularTagsList from 'components/Popular/Tags/List';
 
 const popularPosts = [
   {
@@ -36,15 +31,23 @@ const props = {
 };
 
 describe('<PostRightSidebar />', function() {
-  it('should render carbon ads', function() {
-    const wrapper = shallow(<PostRightSidebar popularPosts={popularPosts} siteUrl="http://example.com" />)
-      .find(CarbonAdsFetch)
-      .renderProp('render')(carbonAdsService);
-    expect(wrapper.find(<CarbonAd carbonAdsService={carbonAdsService} />));
+  it('should render common sidebar items', function() {
+    const wrapper = shallow(<PostRightSidebar {...props} />);
+    expect(wrapper.contains(<SidebarItemsCommon />)).toBe(true);
   });
 
-  it('should render subscription form', function() {
+  it('should render popular posts', function() {
     const wrapper = shallow(<PostRightSidebar {...props} />);
-    expect(wrapper.contains(<SubscriptionRegion />)).toBe(true);
+    expect(wrapper.contains(<PopularPosts posts={props.popularPosts} siteUrl={props.siteUrl} />));
+  });
+
+  it('should render popular tags', function() {
+    const wrapper = shallow(<PostRightSidebar {...props} />);
+    const authorWrapper = wrapper.find(PopularTagsFetch).renderProp('render')(popularPosts);
+    expect(
+      authorWrapper.contains(
+        <PopularTagsList posts={props.popularPosts} title="Explore popular tags" limit={20} />
+      )
+    );
   });
 });
