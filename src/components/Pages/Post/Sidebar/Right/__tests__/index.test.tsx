@@ -45,9 +45,7 @@ describe('<PostRightSidebar />', function() {
     const wrapper = shallow(<PostRightSidebar {...props} />);
     const authorWrapper = wrapper.find(PopularTagsFetch).renderProp('render')(popularPosts);
     expect(
-      authorWrapper.contains(
-        <PopularTagsList posts={props.popularPosts} title="Explore popular tags" limit={20} />
-      )
+      authorWrapper.contains(<PopularTagsList posts={props.popularPosts} title="Explore popular tags" limit={20} />)
     );
   });
 });

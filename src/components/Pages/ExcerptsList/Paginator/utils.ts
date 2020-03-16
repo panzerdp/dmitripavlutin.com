@@ -9,9 +9,5 @@ export function generatePages(currentPage: number, nrOfPages: number, maxDisplay
   } else if (begin > nrOfPages - displayed) {
     begin = nrOfPages - displayed;
   }
-  return [
-    1,
-    ...Array.from({ length: maxDisplayed - 2 }, (_, i) => begin + i),
-    nrOfPages
-  ];
+  return [1, ...Array.from({ length: maxDisplayed - 2 }, (_, i) => begin + i), nrOfPages];
 }

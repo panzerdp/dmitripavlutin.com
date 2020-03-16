@@ -26,7 +26,7 @@ describe('<ExcerptsLisPaginator />', function() {
       </div>,
       <Link key={5} to={TO_PAGE({ page: 6 })} className="">
         {6}
-      </Link>
+      </Link>,
     ];
     expect(wrapper.contains(items)).toBe(true);
   });

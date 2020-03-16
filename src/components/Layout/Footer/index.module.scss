@@ -43,14 +43,14 @@ footer {
       margin-top: 0.5rem;
     }
   }
-  
+
   .follow {
     font-style: italic;
     margin-top: 1rem;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-  
+
     a {
       box-sizing: border-box;
       margin-right: 0.8rem;
@@ -64,7 +64,7 @@ footer {
       &:hover {
         background-color: rgba($anchor-color, 1);
       }
-  
+
       &:last-child {
         margin-right: 0;
       }
@@ -72,7 +72,7 @@ footer {
       &:first-child {
         margin-left: 0.6rem;
       }
-  
+
       img {
         width: 1.3rem;
       }
@@ -84,7 +84,8 @@ footer {
   .footerContent {
     flex-wrap: wrap-reverse;
 
-    .links, .copyright {
+    .links,
+    .copyright {
       width: 100%;
     }
 
@@ -97,7 +98,7 @@ footer {
       .footerNavigation {
         text-align: center;
       }
-      
+
       .follow {
         justify-content: center;
       }

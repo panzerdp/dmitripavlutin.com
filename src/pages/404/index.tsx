@@ -18,15 +18,7 @@ export default function Page404Fetch({ data }: Page404FetchProps) {
 
 export const pageQuery = graphql`
   query Page404 {
-    allMarkdownRemark(
-      filter: { 
-        frontmatter: {
-          type: {
-            eq: "404"
-          }
-        }
-      }
-    ) {
+    allMarkdownRemark(filter: { frontmatter: { type: { eq: "404" } } }) {
       edges {
         node {
           html

@@ -58,7 +58,8 @@ a {
   }
 
   @media (max-width: $sidebars-max-width) {
-    .leftSidebar, .rightSidebar {
+    .leftSidebar,
+    .rightSidebar {
       display: none;
       width: 0;
     }

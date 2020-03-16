@@ -7,9 +7,5 @@ interface CarbonSectionProps {
 }
 
 export default function CarbonSection(props: CarbonSectionProps): JSX.Element {
-  return (
-    <div className={styles.carbonSection}>
-      {props.children}
-    </div>
-  );
+  return <div className={styles.carbonSection}>{props.children}</div>;
 }

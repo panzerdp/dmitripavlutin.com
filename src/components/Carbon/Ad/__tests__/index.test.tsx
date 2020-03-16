@@ -8,7 +8,7 @@ const props = {
     scriptSrc: 'http://example.com/script.js',
     isEnabled: true,
     isProductionMode: true,
-  }
+  },
 };
 
 describe('<CarbonAd />', function() {

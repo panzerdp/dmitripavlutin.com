@@ -24,7 +24,11 @@ export default class Paginator extends React.Component<PaginatorProps> {
       const page = pages[i];
       links.push(this.mapPageToLink(page));
       if (i < pages.length - 1 && page + 1 !== pages[i + 1]) {
-        links.push(<div key={`gap-${page}`} className={styles.nextPrev}>[...]</div>);
+        links.push(
+          <div key={`gap-${page}`} className={styles.nextPrev}>
+            [...]
+          </div>
+        );
       }
     }
     links.push(this.toNextLink());
@@ -38,7 +42,7 @@ export default class Paginator extends React.Component<PaginatorProps> {
         {page}
       </Link>
     );
-  }
+  };
 
   private toPrevLink() {
     const { currentPage } = this.props;

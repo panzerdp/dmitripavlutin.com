@@ -16,7 +16,6 @@ export default function PostLeftSidebar({ siteUrl, post, showShareButtons, twitt
   const postUrl = siteUrl + TO_POST({ slug: post.slug });
   return (
     <div className={styles.leftSidebar}>
-
       <ShareGroupVertical
         url={postUrl}
         text={post.title}

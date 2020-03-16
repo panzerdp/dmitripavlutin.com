@@ -46,7 +46,7 @@ export function windowOpen({ url, name, height = 400, width = 550 }: WindowOpenO
 
 export default function withWindowOpen<P extends object>(WrappedComponent: React.ComponentType<P>) {
   function EnhancedComponent(props: P) {
-    return <WrappedComponent {...props as P} windowOpen={windowOpen} />;
+    return <WrappedComponent {...(props as P)} windowOpen={windowOpen} />;
   }
   EnhancedComponent.displayName = `withWindowOpen(${WrappedComponent.name})`;
   return EnhancedComponent;
