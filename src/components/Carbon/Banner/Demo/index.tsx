@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export default React.forwardRef(function(_: {}, ref: React.RefObject<HTMLDivElement>): null {
+function CarbonBannerDemo(_: {}, ref: React.RefObject<HTMLDivElement>): null {
   React.useEffect(() => {
     const div = document.createElement('div');
     div.id = 'carbonads';
@@ -21,5 +21,7 @@ export default React.forwardRef(function(_: {}, ref: React.RefObject<HTMLDivElem
     </span>`;
     ref.current.appendChild(div);
   }, []);
-  return null;  
-});
+  return null;
+}
+
+export default React.forwardRef(CarbonBannerDemo);

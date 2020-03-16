@@ -4,7 +4,7 @@ interface CarbonBannerLiveProps {
   scriptSrc: string;
 }
 
-export default React.forwardRef(function(props: CarbonBannerLiveProps, ref: React.RefObject<HTMLDivElement>): null {
+function CarbonBannerLive(props: CarbonBannerLiveProps, ref: React.RefObject<HTMLDivElement>): null {
   React.useEffect(() => {
     const script = document.createElement('script');
     script.src = props.scriptSrc;
@@ -12,5 +12,7 @@ export default React.forwardRef(function(props: CarbonBannerLiveProps, ref: Reac
     script.id = '_carbonads_js';
     ref.current.appendChild(script);
   }, []);
-  return null;  
-});
+  return null;
+}
+
+export default React.forwardRef(CarbonBannerLive);
