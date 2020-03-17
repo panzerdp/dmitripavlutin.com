@@ -28,7 +28,42 @@ This post suggests 5 useful tips that will make you even more productive when us
 
 ## 1. String formatting
 
+The most common way to log something to console is to simply call `console.log()` with one argument:
+
+```javascript
+console.log('My message');
+// logs "My message"
+```
+
+But sometimes you might want to a message containing multiple variables. For such cases `console.log()` offers a possibility to format the string using an `sprintf()` way.  
+
+For example, let's format and then log a message:
+
+```javascript
+const user = 'john_smith';
+const attemps = 5;
+
+console.log('%s failed to login %i times', user, attemps);
+// logs "john_smith failed to login 5 times"
+```
+
+`%s` and `%i` are replaced with values of `user` and `attemps`. The specifier `%s` is converted to a string, while `%i` is converted to a number.  
+
+Here's a list of available specifiers:
+
+| Specifier    |	  Purpose                                                        |
+|--------------|-------------------------------------------------------------------|
+| `%s`         |  Element is converted to a string                                 |
+| `%d` or `%i` |  Element is converted to an integer                               |
+| `%f`	       |  Element is converted to a float                                  |
+| `%o`	       |  Element is displayed with optimally useful formatting            |
+| `%O`	       |  Element is displayed with generic JavaScript object formatting   |
+| `%c`         |  Applies provided CSS                                             |
+
+
 ## 2. Distinguish logged variables
+
+
 
 ## 3. Log with style
 

@@ -32,6 +32,15 @@
 .postContent {
   word-wrap: break-word;
 
+  table {
+    border-collapse: collapse;
+
+    td, th {
+      border: 1px solid $disabled-color;
+      padding: 0.25rem;
+    }
+  }
+
   a[href^="https://codesandbox.io"] {
     padding-left: 26px;
     background: left center / 22px no-repeat url('/codesandbox.svg');
