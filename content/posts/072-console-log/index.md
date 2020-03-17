@@ -26,7 +26,7 @@ console.log(myVar);
 
 This post suggests 5 useful tips that will make you even more productive when using `console.log()`.
 
-## 1. String formatting
+## 1. Advanced formatting
 
 The most common way to log something to console is to simply call `console.log()` with one argument:
 
@@ -61,11 +61,47 @@ Here's a list of available specifiers:
 | `%c`         |  Applies provided CSS                                             |
 
 
-## 2. Distinguish logged variables
+## 2. Naming logged variables
 
+When you'd like to log many variables in different places of the application, you may find difficult to understand to what log corresponds a specific variable.  
 
+Let's log some variables:
+
+```javascript{2}
+function sum(a, b) {
+  console.log(b);
+  return a + b;
+}
+
+sum(1, 2);
+sum(4, 5);
+```
+
+When the above code is executed, you'll see just a series of numbers:
+
+![Unknown variables logged](./images/console-unknown-variables-3.png)
+
+To make an association between the logged value and variable, an easy approach is to wrap the variable into a pair of curly braces `{ b }`:
+
+```javascript{2}
+function sum(a, b) {
+  console.log({ b });
+  return a + b;
+}
+
+sum(1, 2);
+sum(4, 5);
+```
+
+The variable `b` is wrapped into curly braces `console.log({ b })` when being logged.  
+
+Now looking at the console, it's easy to understand that exactly variable `b` is being logged:
+
+![Unknown variables logged](./images/console-known-variables.png)
 
 ## 3. Log with style
+
+
 
 ## 4. Interactive logs
 
@@ -75,4 +111,4 @@ Here's a list of available specifiers:
 
 ### 4.3 DOM trees
 
-## 5. Deep object log in Node console
+## 5. Logging big objects in Node console
