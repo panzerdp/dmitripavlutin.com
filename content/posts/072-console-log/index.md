@@ -13,7 +13,7 @@ commentsThreadId: console-log-tips
 
 The first tool in debugging JavaScript code is the `console.log()` logging function. 
 
-It's usage is simple. The argument on function invokation is logged to console:
+Its usage is simple. The argument on function invocation is logged to console:
 
 ```javascript
 // Log a message
@@ -28,7 +28,7 @@ This post suggests 5 useful tips that will make you even more productive when us
 
 ## 1. Naming logged variables
 
-When you'd like to log many variables in different places of the application, you may find difficult to understand to what log corresponds a specific variable.  
+When you'd like to log many variables in different places of the application, you may find difficult to understand to what log corresponds to a specific variable.  
 
 Let's log some variables:
 
@@ -73,37 +73,37 @@ console.log('My message');
 // logs "My message"
 ```
 
-But sometimes you might want to a message containing multiple variables. For such cases `console.log()` offers a possibility to format the string using an `sprintf()` way.  
+Sometimes you might want a message containing multiple variables. Fortunately, `console.log()` can format the string in a `sprintf()` way using a list of specifiers.   
 
 For example, let's format and then log a message:
 
 ```javascript
 const user = 'john_smith';
-const attemps = 5;
+const attempts = 5;
 
-console.log('%s failed to login %i times', user, attemps);
+console.log('%s failed to login %i times', user, attempts);
 // logs "john_smith failed to login 5 times"
 ```
 
-`%s` and `%i` are replaced with values of `user` and `attemps`. The specifier `%s` is converted to a string, while `%i` is converted to a number.  
+`%s` and `%i` are replaced with values of `user` and `attempts`. The specifier `%s` is converted to a string, while `%i` is converted to a number.  
 
 Here's a list of available specifiers:
 
-| Specifier    |	  Purpose                                                        |
+| Specifier    |    Purpose                                                        |
 |--------------|-------------------------------------------------------------------|
 | `%s`         |  Element is converted to a string                                 |
 | `%d` or `%i` |  Element is converted to an integer                               |
-| `%f`	       |  Element is converted to a float                                  |
-| `%o`	       |  Element is displayed with optimally useful formatting            |
-| `%O`	       |  Element is displayed with generic JavaScript object formatting   |
+| `%f`         |  Element is converted to a float                                  |
+| `%o`         |  Element is displayed with optimally useful formatting            |
+| `%O`         |  Element is displayed with generic JavaScript object formatting   |
 | `%c`         |  Applies provided CSS                                             |
 
 
 ## 3. Log with style
 
-Browser console implementation let's you apply styles to the message that is sent to console.  
+Browser console implementation lets you apply styles to the message that is sent to the console.  
 
-You can to this by using the `%c` specifier with the corresponding styles. For example, let's a log message with increased font size and font weight:
+You can do this by using the `%c` specifier with the corresponding styles. For example, let's a log message with increased font size and font weight:
 
 ```javascript
 console.log('%c Big message', 'font-size: 36px; font-weight: bold');
@@ -117,9 +117,9 @@ Here's how the log message with applied styles looks in Chrome console:
 
 ## 4. Interactive logs
 
-The implement of how the console styles the logged messages depends on the host implementation. The browsers like Chrome and Firefox offer interactive logs of objects and arrays, while Node console is usually text based only.  
+The implement of how the console styles the logged messages depends on the host implementation. The browsers like Chrome and Firefox offer interactive logs of objects and arrays, while Node console is usually text-based only.  
 
-Let's see how Chrome logs the plain objects, arrays and DOM trees. When displayed in console, you can interract with these elements with expanding and collapsing.  
+Let's see how Chrome logs the plain objects, arrays and DOM trees. When displayed in the console, you can interact with these elements with expanding and collapsing.  
 
 ### 4.1 Objects
 
@@ -152,7 +152,7 @@ Chrome logs the `characters` array as follows:
 
 ### 4.3 DOM trees
 
-You can interract directly with a DOM element that is displayed in the console.  
+You can interact directly with a DOM element that is displayed in the console.  
 
 ```javascript
 console.log(document.getElementById('root'));
@@ -164,7 +164,7 @@ In Chrome console, the DOM element can be expanded and its content can be explor
 
 ### 4.4 Interactive log inside messages
 
-Using the `%o` specifier (which associates the right log formatting for the value), you can combine arrays, objects, DOM elements and regular text into a single log, without loosing of the interactivity.  
+Using the `%o` specifier (which associates the right log formatting for the value), you can combine arrays, objects, DOM elements, and regular text into a single log, without losing the interactivity.  
 
 The following invocation logs a message which has inside an object:
 
@@ -177,15 +177,15 @@ const myObject = {
 console.log('Neo, be aware of %o', myObject);
 ```
 
-Looking now at the console, the `myObject` array wasn't converted into a string represenation, but rather is kept interactive.  
+Looking now at the console, the `myObject` array wasn't converted into a string representation, but rather is kept interactive.  
 
 ![Console appropriate formatting](./images/console-formatting.png)
 
 ## 5. Logging big objects in Node console
 
-The Node console doesn't provide the interactive log of objects like browsers do. Because the logs are normally outputed as textual information.  
+The logs in Node are normally output as plain text. 
 
-Unfortunately, by default the console.log() in Node doesn't display objects with deep level of nesting. The nested objectets after the level 3 are just shown as `[Object]`.
+But there is a small issue: `console.log()` in Node doesn't display objects with a deep level of nesting. The deep objects after level 3 are shown as `[Object]`.
 
 For example, let's log the following object:
 
@@ -207,7 +207,7 @@ When running the above script, the following content is logged:
 
 ![Console in Node cuts the deep object](./images/console-node-cut.png)
 
-A nice trick to be able to see the full object structure is to use the `JSON.stringify()` function:
+To be able to see the full object structure is to use the `JSON.stringify()` function:
 
 ```javascript
 const myObject = {
@@ -223,7 +223,7 @@ const myObject = {
 console.log(JSON.stringify(myObject, null, 2));
 ```
 
-`JSON.stringify(myObject, null, 2)` returns a JSON representation of the object. The third argument `2` sets the indend size in spaces.  
+`JSON.stringify(myObject, null, 2)` returns a JSON representation of the object. The third argument `2` sets the indent size in spaces.  
 
 Now the object is logged in full:
 
@@ -231,4 +231,4 @@ Now the object is logged in full:
 
 Hopefully, the 5 tips presented above will make your debugging and logging experience in JavaScript more productive.  
 
-*What console.log() do you use?*
+*What console.log() tips do you use?*
