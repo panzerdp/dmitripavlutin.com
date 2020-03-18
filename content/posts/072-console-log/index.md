@@ -1,9 +1,9 @@
 ---
-title: "How to Use console.log() in Full"
+title: "Handy Tips on Using console.log()"
 description: 'Practical tips on how to use efficiently console.log().'
 published: '2020-03-17T12:00Z'
 modified: '2020-03-17T12:00Z'
-thumbnail: './images/import-module-twice-2.png'
+thumbnail: './images/cover-2.png'
 slug: console-log-tips
 tags: ['javascript', 'debugging']
 recommended: ['javascript-modules-best-practices', 'javascript-utility-libraries']
@@ -231,4 +231,4 @@ Now the object is logged in full:
 
 Hopefully, the 5 tips presented above will make your debugging and logging experience in JavaScript more productive.  
 
-*What console.log() tips do you use?*
+*Please share your logging tips in a comment below!*
