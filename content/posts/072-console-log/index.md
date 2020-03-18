@@ -219,10 +219,8 @@ console.log(JSON.stringify(myObject, null, 2));
 
 `JSON.stringify(myObject, null, 2)` returns a JSON representation of the object. The third argument `2` sets the indent size in spaces.  
 
-Now the object is logged in full:
+Now the object is logged fully and nicely formatted:
 
 ![Console in Node cuts the deep object](./images/console-node-full.png)
 
-Hopefully, the 5 tips presented above will make your debugging and logging experience in JavaScript more productive.  
-
-*Please share your logging tips in a comment below!*
+Hopefully, the 5 tips presented above will make your logging experience in JavaScript more productive. *What loggin tips do you know? Please write a comment below!*
