@@ -275,7 +275,7 @@ By using named exports instead of default exports, you could benefit from easier
 
 The sole purpose of `import { myFunc } from 'myModule'` is to import `myFunc` component, and nothing more. The module-level scope of `myModule` should only define classes, functions, or variables with light content.  
 
-How many functions or classes a component should have, and how do these components should relative to each one? Favor modules of high cohesion: its components should be closely related and perform a common task.  
+How many functions or classes a component should have, and how do these components should relate to each one? Favor modules of high cohesion: its components should be closely related and perform a common task.  
 
 Long relative paths containing many parent folders `../` are difficult to understand. Refactor them to absolute paths.  
 
