@@ -1,19 +1,22 @@
 import * as React from 'react';
-import { useFlexSearch } from 'react-use-flexsearch';
 
 import Layout from 'components/Layout/Fetch';
+import SearchRightSidebar from 'components/Pages/Search/Sidebar/Right';
+import SearchMetaTags from 'components/Pages/Search/Meta/Tags';
+
+import styles from './index.module.scss';
 
 interface SearchTemplateProps {
-  index: string;
-  store: string;
+  googleCustomSearchId: string;
 }
 
-export default function SearchTemplate({ index, store }: SearchTemplateProps): JSX.Element {
-  const results = useFlexSearch('Swift', index, store);
-  console.log(index);
+export default function SearchTemplate({ googleCustomSearchId }: SearchTemplateProps): JSX.Element {
   return (
-    <Layout>
-      <div>Search results</div>
+    <Layout rightSidebar={<SearchRightSidebar />}>
+      <SearchMetaTags googleCustomSearchId={googleCustomSearchId} />
+      <div className={styles.search}>
+        <div className="gcse-search"></div>  
+      </div>
     </Layout>
   );
 }

@@ -8,22 +8,16 @@ interface SearchFetchProps {
   data: SearchQuery;
 }
 
-export default function SearchFetch({
-  data: {
-    localSearchPages: {
-      index,
-      store
-    }
-  }
-}: SearchFetchProps) {
-  return <SearchTemplate index={index} store={store} />;
+export default function SearchFetch({ data }: SearchFetchProps) {
+  return <SearchTemplate googleCustomSearchId={data.site.siteMetadata.googleCustomSearchId} />;
 }
 
 export const pageQuery = graphql`
   query Search {
-    localSearchPages {
-      index
-      store
+    site {
+      siteMetadata {
+        googleCustomSearchId 
+      }
     }
   }
 `;
