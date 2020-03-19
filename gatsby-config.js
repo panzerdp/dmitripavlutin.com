@@ -100,5 +100,6 @@ module.exports = {
     'gatsby-plugin-minify-classnames',
     require('./gatsby/config/gatsby-plugin-feed'),
     'gatsby-plugin-netlify-cache',
+    require('./gatsby/config/gatsby-plugin-local-search')
   ],
 };
