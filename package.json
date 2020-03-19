@@ -28,7 +28,6 @@
     "gatsby-plugin-disqus": "1.1.4",
     "gatsby-plugin-feed": "2.3.28",
     "gatsby-plugin-google-analytics": "2.1.37",
-    "gatsby-plugin-local-search": "1.1.1",
     "gatsby-plugin-minify-classnames": "0.1.2",
     "gatsby-plugin-netlify-cache": "1.2.0",
     "gatsby-plugin-react-helmet": "3.1.23",
@@ -62,7 +61,6 @@
     "react-dom": "16.13.0",
     "react-helmet": "5.2.1",
     "react-media": "1.10.0",
-    "react-use-flexsearch": "0.1.1",
     "ts-jest": "25.2.1",
     "typescript": "3.8.3"
   },
