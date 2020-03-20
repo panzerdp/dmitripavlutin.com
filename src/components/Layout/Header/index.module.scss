@@ -50,11 +50,11 @@ header {
 }
 
 .links {
-  flex: 1 1 auto;
+  flex: 0 0 265px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 0.5rem 0;
+  margin: 0.5rem auto;
 
   a {
     margin: 0 0.5rem;
