@@ -15,6 +15,9 @@ export default function SearchTemplate({ googleCustomSearchId }: SearchTemplateP
     <Layout rightSidebar={<SearchRightSidebar />}>
       <SearchMetaTags googleCustomSearchId={googleCustomSearchId} />
       <div className={styles.search}>
+        <h1>
+          Search blog posts
+        </h1>
         <div className="gcse-search"></div>  
       </div>
     </Layout>

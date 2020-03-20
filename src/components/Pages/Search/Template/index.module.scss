@@ -1,4 +1,11 @@
 .search {
   box-sizing: border-box;
-  padding-top: 2rem;
+
+  :global {
+    .gsc-control-cse {
+      padding: 0;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+  }
 }
