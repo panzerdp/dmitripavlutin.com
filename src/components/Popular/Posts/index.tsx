@@ -30,7 +30,7 @@ export default function PopularPostsList({ posts, siteUrl }: PopularPostsListPro
                   </Link>
                 </div>
                 <div className={styles.commentsCount}>
-                  <img alt="Comments" src="/comments.svg" className={styles.icon} />
+                  <img alt="Comments" src="/icons/comments.svg" className={styles.icon} />
                   <Link to={`${toPost}#comments`}>
                     <PostCommentsCount
                       title={post.title}

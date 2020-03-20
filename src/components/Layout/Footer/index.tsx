@@ -32,19 +32,19 @@ export function Footer({ authorInfo: { profiles, name, email } }: FooterProps) {
           </div>
           <div className={styles.follow}>
             <a href={`mailto:${email}`} title={`Send an email to ${name}`}>
-              <img alt="Email address" src="/email.svg" />
+              <img alt="Email address" src="/icons/email.svg" />
             </a>
             <a href={profiles.twitter} title={`${name}'s Twitter profile`}>
-              <img alt="Twitter profile" src="/twitter.svg" />
+              <img alt="Twitter profile" src="/icons/twitter.svg" />
             </a>
             <a href={profiles.linkedin} title={`${name}'s Linkedin profile`}>
-              <img alt="LinkedIn profile" src="/linkedin.svg" />
+              <img alt="LinkedIn profile" src="/icons/linkedin.svg" />
             </a>
             <a href={profiles.stackoverflow} title={`${name}'s Stackoverflow profile`}>
-              <img alt="Stackoverflow profile" src="/stackoverflow.svg" />
+              <img alt="Stackoverflow profile" src="/icons/stackoverflow.svg" />
             </a>
             <a href={profiles.github} title={`${name}'s Github profile`}>
-              <img alt="Github profile" src="/github.svg" />
+              <img alt="Github profile" src="/icons/github.svg" />
             </a>
           </div>
         </div>

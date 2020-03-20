@@ -1,7 +1,7 @@
 @import '~styles/variables';
 
 .facebook {
-  background: url('/facebook.svg') center / 1.6rem no-repeat rgba($facebook-brand-color, 0.75);
+  background: url('/icons/facebook.svg') center / 1.6rem no-repeat rgba($facebook-brand-color, 0.75);
 
   &:hover {
     background-color: rgba($facebook-brand-color, 1);
