@@ -67,7 +67,7 @@ So, here's my advice:
 
 > Favor named module exports to benefit from renaming refactoring and code autocomplete.  
 
-Note: when using 3rd party modules like React, Lodash, default import is usually ok. The default import name is a constant that doesn't change: `React`, `_`.  
+Note: when using 3rd party modules like React, Lodash, default import is ok. The default import name is a constant that doesn't change: `React`, `_`.  
 
 ## 2. No work during import
 
@@ -93,7 +93,7 @@ export const configuration = {
 };
 ```
 
-This is a problem because the parsing of `bigJsonString` is done at the module-level scope. The parsing of `bigJsonString` would actually happen when `configuration` module is imported:  
+That's a problem. Because the parsing of `bigJsonString` is performed at the module-level scope, a heavy operation is executed when `configuration` module is imported:  
 
 ```javascript{2}
 // Bad: parsing happens when the module is imported
@@ -104,7 +104,7 @@ export function AboutUs() {
 }
 ```
 
-At a higher level, the module-level scope's role is to define the module components, import dependencies, and export public components: that's the *dependencies resolution process*. It should be separated from the *runtime*: parsing JSON, making requests, handling events.  
+At a higher level, the module-level scope's role is to define the module components, import dependencies, and export public components: *dependencies resolution process*. Separate it from the *runtime*: parsing JSON, making requests, handling events.  
 
 Let's refactor the `configuration` module to perform lazy parsing:
 
