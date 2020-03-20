@@ -49,4 +49,5 @@ module.exports = {
       'simple-but-tricky-javascript-interview-questions',
     ],
   },
+  googleCustomSearchId: '004443697379288327791:1zr8pgnumxn'
 };

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import { Footer } from '../index';
-import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_RSS } from 'routes/path';
+import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_RSS, TO_SEARCH } from 'routes/path';
 
 const authorInfo: AuthorInfo = {
   name: 'Dmitri Pavlutin',
@@ -33,6 +33,7 @@ describe('<LayoutFooter />', function() {
     expect(wrapper.find({ to: TO_NEWSLETTER() })).toHaveLength(1);
     expect(wrapper.find({ href: TO_RSS() })).toHaveLength(1);
     expect(wrapper.find({ to: TO_ABOUT_ME() })).toHaveLength(1);
+    expect(wrapper.find({ to: TO_SEARCH() })).toHaveLength(1);
     expect(wrapper.find({ to: TO_ALL_POSTS() })).toHaveLength(1);
   });
 

@@ -8,3 +8,5 @@ coverage/
 src/typings/graphql.d.ts
 .gatsby-context.js
 .DS_Store
+
+.env*

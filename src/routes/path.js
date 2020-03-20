@@ -22,11 +22,14 @@ const TO_PAGE = compile(PATH_PAGE);
 const PATH_NEWSLETTER = '/newsletter/';
 const TO_NEWSLETTER = compile(PATH_NEWSLETTER);
 
+const PATH_SEARCH = '/search/';
+const TO_SEARCH = compile(PATH_SEARCH);
+
 const PATH_RSS = '/rss.xml';
 const TO_RSS = compile(PATH_RSS);
 
 module.exports = {
-  PATH_INDEX,
+  PATH_INDEX: '/',
   TO_INDEX,
 
   PATH_POST,
@@ -46,6 +49,9 @@ module.exports = {
 
   PATH_NEWSLETTER,
   TO_NEWSLETTER,
+
+  PATH_SEARCH,
+  TO_SEARCH,
 
   PATH_RSS,
   TO_RSS,

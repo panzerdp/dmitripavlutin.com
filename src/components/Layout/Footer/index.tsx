@@ -1,7 +1,7 @@
 import Link from 'gatsby-link';
 import * as React from 'react';
 
-import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_RSS } from 'routes/path';
+import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_RSS, TO_SEARCH } from 'routes/path';
 import styles from './index.module.scss';
 
 const year = new Date().getFullYear();
@@ -28,23 +28,24 @@ export function Footer({ authorInfo: { profiles, name, email } }: FooterProps) {
             <Link to={TO_NEWSLETTER()}>Newsletter</Link>
             <a href={TO_RSS()}>RSS</a>
             <Link to={TO_ALL_POSTS()}>All posts</Link>
-            <Link to={TO_ABOUT_ME()}>About me</Link>
+            <Link to={TO_SEARCH()}>Search</Link>
+            <Link to={TO_ABOUT_ME()}>About</Link>
           </div>
           <div className={styles.follow}>
             <a href={`mailto:${email}`} title={`Send an email to ${name}`}>
-              <img alt="Email address" src="/email.svg" />
+              <img alt="Email address" src="/icons/email.svg" />
             </a>
             <a href={profiles.twitter} title={`${name}'s Twitter profile`}>
-              <img alt="Twitter profile" src="/twitter.svg" />
+              <img alt="Twitter profile" src="/icons/twitter.svg" />
             </a>
             <a href={profiles.linkedin} title={`${name}'s Linkedin profile`}>
-              <img alt="LinkedIn profile" src="/linkedin.svg" />
+              <img alt="LinkedIn profile" src="/icons/linkedin.svg" />
             </a>
             <a href={profiles.stackoverflow} title={`${name}'s Stackoverflow profile`}>
-              <img alt="Stackoverflow profile" src="/stackoverflow.svg" />
+              <img alt="Stackoverflow profile" src="/icons/stackoverflow.svg" />
             </a>
             <a href={profiles.github} title={`${name}'s Github profile`}>
-              <img alt="Github profile" src="/github.svg" />
+              <img alt="Github profile" src="/icons/github.svg" />
             </a>
           </div>
         </div>

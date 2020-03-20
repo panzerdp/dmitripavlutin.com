@@ -27,6 +27,9 @@ declare module 'routes/path' {
   export const PATH_NEWSLETTER: string;
   export const TO_NEWSLETTER: () => string;
 
+  export const PATH_SEARCH: string;
+  export const TO_SEARCH: () => string;
+
   export const PATH_RSS: string;
   export const TO_RSS: () => string;
 }

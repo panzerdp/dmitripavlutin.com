@@ -25,7 +25,7 @@ export default function AboutAuthorConcise({ authorInfo, authorStats, authorProf
             href={`mailto:${authorInfo.email}`}
             title={`Write a message to ${authorInfo.name}`}
           >
-            <img alt="Email address" src="/email.svg" />
+            <img alt="Email address" src="/icons/email.svg" />
           </a>
           <a
             className={styles.text}

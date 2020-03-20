@@ -99,6 +99,6 @@ module.exports = {
     require('./gatsby/config/gatsby-plugin-sass'),
     'gatsby-plugin-minify-classnames',
     require('./gatsby/config/gatsby-plugin-feed'),
-    'gatsby-plugin-netlify-cache',
+    'gatsby-plugin-netlify-cache'
   ],
 };
