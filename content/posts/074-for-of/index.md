@@ -1,5 +1,5 @@
 ---
-title: "JavaScript for..of: Some Neat Use-Cases"
+title: "Neat Use-Cases of JavaScript for..of"
 description: 'for..of cycle in JavaScript iterates over the items of an iterable.'
 published: '2020-03-31T12:00Z'
 modified: '2020-03-31T12:00Z'
