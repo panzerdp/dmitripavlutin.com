@@ -6,8 +6,6 @@ import SubscriptionRegion from 'components/Subscription/Region';
 import AboutAuthorFetch from 'components/AboutAuthor/Fetch';
 import AboutAuthorDetailed from 'components/AboutAuthor/Detailed';
 import AboutAuthorContact from 'components/AboutAuthor/Contact';
-import CarbonFetch from 'components/Carbon/Fetch';
-import CarbonAd from 'components/Carbon/Ad';
 
 const authorProfilePictureBig: FluidImage = {
   src: 'source',
@@ -53,23 +51,10 @@ const fetchData = {
   },
 };
 
-const carbonAdsService: CarbonAdsService = {
-  isEnabled: true,
-  isProductionMode: true,
-  scriptSrc: 'http://site.com/script.js',
-};
-
 describe('<SidebarItemsCommon />', function() {
   it('should render subscription form', function() {
     const wrapper = shallow(<SidebarItemsCommon />);
     expect(wrapper.find(SubscriptionRegion)).toHaveLength(1);
-  });
-
-  it('should render carbon ads', function() {
-    const wrapper = shallow(<SidebarItemsCommon />)
-      .find(CarbonFetch)
-      .renderProp('render')(carbonAdsService);
-    expect(wrapper.find(<CarbonAd carbonAdsService={carbonAdsService} />));
   });
 
   it('should render about author info', function() {

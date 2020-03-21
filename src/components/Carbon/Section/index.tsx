@@ -2,10 +2,17 @@ import * as React from 'react';
 
 import styles from './index.module.scss';
 
-interface CarbonSectionProps {
-  children: React.ReactNode;
+import CarbonFetch from 'components/Carbon/Fetch';
+import CarbonAd from 'components/Carbon/Ad';
+
+export default function CarbonSection(): JSX.Element {
+  return (
+    <div className={styles.carbonSection}>
+      <CarbonFetch render={renderCarbon} />
+    </div>
+  );
 }
 
-export default function CarbonSection(props: CarbonSectionProps): JSX.Element {
-  return <div className={styles.carbonSection}>{props.children}</div>;
+function renderCarbon(service: CarbonAdsService): JSX.Element {
+  return <CarbonAd carbonAdsService={service} />;
 }
