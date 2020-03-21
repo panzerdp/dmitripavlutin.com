@@ -4,6 +4,7 @@
   #carbonads {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue',
       Helvetica, Arial, sans-serif;
+    max-width: 250px;
   }
 
   #carbonads {
@@ -27,6 +28,8 @@
 
   #carbonads .carbon-wrap {
     display: flex;
+    flex-flow: column;
+    align-items: center;
   }
 
   .carbon-img {

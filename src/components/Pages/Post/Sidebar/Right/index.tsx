@@ -6,7 +6,6 @@ import PopularPosts from 'components/Popular/Posts';
 import PopularTagsFetch from 'components/Popular/Tags/Fetch';
 import PopularTagsList from 'components/Popular/Tags/List';
 import SidebarItemsCommon from 'components/SidebarItems/Common';
-import 
 
 interface PostRightSidebarProps {
   popularPosts: Post<FixedImage>[];
