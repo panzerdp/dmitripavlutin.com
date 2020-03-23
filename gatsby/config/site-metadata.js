@@ -29,7 +29,7 @@ module.exports = {
     },
   },
   authorStats: {
-    twitterFollowersCount: '1.3K',
+    twitterFollowersCount: '1.4K',
   },
   emailSubscriptionService: {
     endpoint: 'https://dmitripavlutin.us13.list-manage.com/subscribe/post?u=7cedcb1f5ab74eb7c907e768e&id=75f44f92b9',
