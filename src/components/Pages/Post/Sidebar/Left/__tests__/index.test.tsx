@@ -3,6 +3,8 @@ import { shallow } from 'enzyme';
 
 import PostLeftSidebar from '../index';
 import ShareGroupVertical from 'components/Pages/Post/Share/Group/Vertical';
+import CardonSection from 'components/Carbon/Section';
+
 import { TO_POST } from 'routes/path';
 
 const post: PostPlain = {
@@ -34,6 +36,15 @@ describe('<PostLeftSidebar />', function() {
           show={props.showShareButtons}
           twitterName={props.twitterName}
         />
+      )
+    ).toBe(true);
+  });
+
+  it('should render carbon', function () {
+    const wrapper = shallow(<PostLeftSidebar {...props} />);
+    expect(
+      wrapper.contains(
+        <CardonSection />
       )
     ).toBe(true);
   });
