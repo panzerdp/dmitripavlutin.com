@@ -29,13 +29,37 @@ The usability of `for...of` statement is not limited to short syntax to iterate 
 
 Even better, `for...of` accepts any iterable. This property leads to a great amount of flexivility to iterate over many object types, including the primitive string.  
 
-## 1. Array items iteration
+## 1. Array iteration
 
-## 2. Array-like items iteration
+As seen in the introduction, you can easily iterate over the items of an array using `for...of` statement:
 
-## 2. String characters iteration
+```javascript{3-5}
+const essentials = ['toilet paper', 'sanitizer'];
 
-## 3. Map key/value pairs iteration
+for (const essential of essentials) {
+  console.log(essential);
+}
+// logs 'toilet paper'
+// logs 'sanitizer'
+```
+
+`for...of` cycle iterates over every item of the `essentials`. At each cycle, the iterated item is assigned to the variable `essential`.  
+
+The syntax of `for...of` cycle is:
+
+```javascript
+for (LeftHandSideExpression of AssignmentExpression) {
+  // statements
+}
+```
+
+Note that instead of `const product` you can insert any expression that can be on the right side of an assignment. 
+
+## 2. Array-like iteration
+
+## 3. String characters iteration
+
+## 4. Map key/value pairs iteration
 
 ## 5. Iterate plain JavaScript objects
 
