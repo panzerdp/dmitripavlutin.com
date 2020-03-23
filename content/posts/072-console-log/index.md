@@ -22,7 +22,10 @@ console.log(myVar);
 // logs 12
 ```
 
-This post presents 5 useful tips to make you more productive when using `console.log()`.
+This post presents 5 useful tips to help you become more productive when using `console.log()`.
+
+```toc
+```
 
 ## 1. Naming logged variables
 
@@ -158,7 +161,7 @@ In Chrome console, the DOM element can be expanded and its content can be explor
 
 ![Console log of an array](./images/console-dom.png)
 
-### 4.4 Interactive log inside messages
+### 4.4 Interactive logs inside messages
 
 The `%o` specifier (which associates the right log formatting for the value) can insert arrays, objects, DOM elements, and regular text into a textual message, without losing the interactivity.  
 
@@ -201,6 +204,8 @@ When running the script, the object of `propC` is logged as `[Object]`:
 
 ![Console in Node cuts the deep object](./images/console-node-cut.png)
 
+### 5.1 Stringify the big object
+
 To see the full object structure, I log the JSON representation of the object using `JSON.stringify()`:
 
 ```javascript
@@ -219,9 +224,33 @@ console.log(JSON.stringify(myObject, null, 2));
 
 `JSON.stringify(myObject, null, 2)` returns a JSON representation of the object. The third argument `2` sets the indent size in spaces.  
 
-Now the object is logged fully and nicely formatted:
+Now the object is logged entirely and nicely formatted:
 
 ![Console in Node cuts the deep object](./images/console-node-full.png)
+
+### 5.2 console.dir() with unlimited depth
+
+A good alternative in displaying the object in depth is to invoke [console.dir()](https://nodejs.org/api/console.html#console_console_dir_obj_options) without limiting the depth of the object:
+
+```javascript
+const myObject = {
+  propA: {
+    propB: {
+      propC: {
+        propD: 'hello'
+      }
+    }
+  }
+};
+
+console.dir(myObject, { depth: null });
+```
+
+`console.dir()` invoked with `{ depth: null }` as the second argument logs the object in depth.  
+
+Here's how the log looks in console:
+
+![Use console.dir() to log big objects](./images/console-dir-2.png)
 
 Hopefully, these 5 tips will make your logging experience in JavaScript more productive.  
 
