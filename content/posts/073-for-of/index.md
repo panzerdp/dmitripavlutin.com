@@ -29,9 +29,6 @@ The usability of `for...of` statement is not limited to short syntax to iterate 
 
 Even better, `for...of` accepts any iterable. This property brings the possibilities to iterate over many object types, including the primitive string.  
 
-```toc
-```
-
 ## 1. Array iteration
 
 As seen in the introduction, you can easily iterate over the items of an array using `for...of` statement:
