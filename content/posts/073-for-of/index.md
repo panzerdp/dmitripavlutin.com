@@ -3,7 +3,7 @@ title: "Why for...of Loop in JavaScript is a Gem"
 description: 'for...of cycle in JavaScript iterates over the items of an iterable.'
 published: '2020-03-31T12:00Z'
 modified: '2020-03-31T12:00Z'
-thumbnail: './images/cover-2.png'
+thumbnail: './images/cover-4.png'
 slug: javascript-for-of
 tags: ['javascript', 'for']
 recommended: ['foreach-iterate-array-javascript', 'how-to-iterate-easily-over-object-properties-in-javascript']
