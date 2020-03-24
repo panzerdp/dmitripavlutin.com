@@ -12,14 +12,14 @@ export default function SubscriptionForm({
   return (
     <div className={styles.subscriptionForm}>
       <div className={styles.message}>
-        <h2>Quality posts to your inbox</h2>
+        <h2>Quality posts into your inbox</h2>
         <p>I regularly publish posts containing: </p>
         <ul>
           <li>Important JavaScript concepts explained in simple words</li>
           <li>Overview of new JavaScript features</li>
           <li>React best practices and design patterns</li>
         </ul>
-        <p>Subscribe to my newsletter to get them right to your inbox.</p>
+        <p>Subscribe to my newsletter to get them right into your inbox.</p>
       </div>
       <form action={endpoint} method="post" name="mc-embedded-subscribe-form" target="_blank" className={styles.form}>
         <div className={styles.emailField}>

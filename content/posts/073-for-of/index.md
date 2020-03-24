@@ -29,6 +29,9 @@ The usability of `for...of` statement is not limited to short syntax to iterate 
 
 Even better, `for...of` accepts any iterable. This property brings the possibilities to iterate over many object types, including the primitive string.  
 
+```toc
+```
+
 ## 1. Array iteration
 
 As seen in the introduction, you can easily iterate over the items of an array using `for...of` statement:
@@ -44,6 +47,8 @@ for (const essential of essentials) {
 ```
 
 `for...of` cycle iterates over every item of the `essentials`. At each cycle, the iterated item is assigned to the variable `essential`.  
+
+### 1.1 In place item destructuring
 
 The syntax of `for...of` cycle is:
 
@@ -204,7 +209,7 @@ for (const image of allImages) {
 
 In other words, if you'd like to iterate over different kinds of collections in DOM, `for...of` statement is a good option.  
 
-## 7. Performance nuance
+## 7. Performance
 
 When iterating large arrays, `for...of` might perform slower than classic `for`:
 
@@ -221,7 +226,7 @@ This detail is important in applications operating with large arrays and where t
 
 ## 7. Conclusion
 
-There are 4 good things I like about `for...of`:
+`for...of` is a gem because it can has the following properties:
 
 1. It's concise
 2. It iterates iterables
