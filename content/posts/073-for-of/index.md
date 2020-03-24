@@ -11,7 +11,7 @@ type: post
 commentsThreadId: javascript-for-of
 ---
 
-The `for...of` statement (starting ES2015) creates a loop that iterates over array items, and generally any iterable objects.  
+The `for...of` statement (starting ES2015) creates a loop that iterates over array items and generally any iterable objects.  
 
 The best thing I like about `for...of` is the consize syntax:
 
@@ -54,7 +54,7 @@ for (LeftHandSideExpression of Expression) {
 ```
 
 `LeftHandSideExpression` expression can be replaced with anything that stands on the left side of an assignment expression. In the previous example, 
-it was `const essential`, but more can done.
+it was `const essential`, but more can be done.
 
 What I enjoy is the ability of `for...of` to destructure the iterated item in place.
 
@@ -99,7 +99,7 @@ At each iteration, the `for...of` cycle iterates over each item of `arguments`, 
 
 ## 3. String characters iteration
 
-The string primitive in JavaScript is an iterable. Thus, you could easily iterate over the characters of a string.  
+The string primitive in JavaScript is iterable. Thus, you could easily iterate over the characters of a string.  
 
 ```javascript{3}
 const message = 'hello';
@@ -118,7 +118,7 @@ for (const character of message) {
 
 ## 4. Map key/value pairs iteration
 
-`Map` is a special object that lets you associate key to value pairs, where key can be of any primitive type (usually strings, but could be numbers, etc).  
+`Map` is a special object that lets you associate key to value pairs, where the key can be of any primitive type (usually strings, but could be numbers, etc).  
 
 Because `Map` object is also an iterable (which iterates over the key/value pairs), it can be used with `for...of`.  
 
@@ -142,7 +142,7 @@ On each cycle the iterable returns an array `[key, value]`, and this pair is des
 
 ## 5. Iterate plain JavaScript objects
 
-I always felft some pain when trying to iterate the property/value pairs of plain JavaScript objects.  
+I always felt some pain when trying to iterate the property/value pairs of plain JavaScript objects.  
 
 Usually, there are 2 possibilities: using `for...in` cycle, or something functional like `Object.keys()`.
 
@@ -159,7 +159,7 @@ Object.keys(person, prop => {
 // 'job', 'agent'
 ```
 
-Fortunately, using the new `Object.entries()` method in combination with `for...of` offers a good alternative:
+Fortunately, using the new `Object.entries()` function in combination with `for...of` offers a good alternative:
 
 ```javascript
 const person = {
@@ -202,7 +202,7 @@ for (const image of allImages) {
 }
 ```
 
-In other words, if you'd like to iterate over different kind of collections in DOM, `for...of` statement is a good option.  
+In other words, if you'd like to iterate over different kinds of collections in DOM, `for...of` statement is a good option.  
 
 ## 7. Performance nuance
 
@@ -230,4 +230,4 @@ There are 4 good things I like about `for...of`:
 
 `for...of` iterates arrays, maps, sets, plain objects (with the addition of `Object.entries()`), and DOM collections.  
 
-*Do you prefer `array.forEach()` or `for...of` statement?*
+*Would you iterate an array using `array.forEach()` or `for..of` statement?*
