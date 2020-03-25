@@ -88,7 +88,7 @@ for (const { name } of persons) {
 // 'Jane Doe'
 ```
 
-The cycle `for (const { name } of persons)` iterates the items of `persons` array, but also destructures the iterated item in place `{ name }`.  
+The cycle `for (const { name } of persons)` iterates the objects of `persons` array, but also destructures the person object in place `{ name }`.  
 
 ## 2. Array-like iteration
 
@@ -167,7 +167,7 @@ const person = {
   job: 'agent'
 };
 
-Object.keys(person, prop => {
+Object.keys(person).forEach(prop => {
   console.log(prop, person[prop]);
 });
 // 'name', 'John Smith'
@@ -225,7 +225,7 @@ When iterating large arrays, `for...of` might perform slower than classic `for`:
 
 ```javascript
 const a = [/* big array */];
-for (let i = 0; i < a.length; i++) { 
+for (let i = 0; i < a.length; i++) {
   console.log(a[i]);
 }
 ```
@@ -241,6 +241,4 @@ Calling the iterator at each iteration is more expensive than accessing the item
 3. It accepts array-like objects
 4. The iterated item can be destructured in-place.
 
-
-
-*What is your preferred way to iterate array items?*
+*What is your preferred way to iterate array items?* 😎
