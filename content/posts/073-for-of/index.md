@@ -1,6 +1,6 @@
 ---
-title: "Why for...of Loop in JavaScript is a Gem"
-description: 'for...of cycle in JavaScript iterates over the items of an iterable.'
+title: 'Why for...of Loop in JavaScript is a Gem'
+description: 'for...of cycle in JavaScript iterates arrays, maps, sets, array-like objects, iterables, plus supports in-place destructuring.'
 published: '2020-03-25T12:00Z'
 modified: '2020-03-25T12:00Z'
 thumbnail: './images/cover-4.png'
@@ -22,8 +22,8 @@ In this post, I will demonstrate all the nice possibilities of `for...of`.
 
 ## 1. Array iteration
 
-The first and most common application of `for...of` is iterating over the items of an array. The cycle does it nicely and shortly, without the need of
-additional variables to keep an index.
+The most common application of `for...of` is iteration over the items of an array. The cycle does it nicely and shortly, without the need of
+additional variables to keep an index.   
 
 For example:
 
@@ -37,11 +37,11 @@ for (const product of products) {
 // 'apples'
 ```
 
-`for...of` cycle iterates over every item of `products`. During each `for...of` cycle, the iterated item is assigned to the variable `product`.  
+`for...of` cycle iterates over every item of `products`. The iterated item is assigned to the variable `product`.  
 
-To access the index of the iterated item, use the array method [entries()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries). The method returns at each iteration a pair of `[index, item]`.  
+The array method [entries()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries) can be used to access the index of the iterated item. The method returns at each iteration a pair of `[index, item]`.  
 
-Let's access both the index and item on each cycle:
+Let's access both the index and item at iteration each cycle:
 
 ```javascript{3}
 const products = ['oranges', 'apples'];
@@ -53,11 +53,11 @@ for (const [index, product] of products.entries()) {
 // 1, 'apples'
 ```
 
-`const [index, product]` destructures the pair of index and item returned by `products.entries()`. 
+At each iteration `products.entries()` returns a pair of index and value, which is destructured by `const [index, product]` expression.  
 
 The in-place destructuring is another great feature of `for...of`, and let's check it in more detail in the next section.  
 
-### 1.1 In place item destructuring
+### 1.1 In-place destructuring
 
 First, let's look at the syntax of `for...of` cycle:
 
@@ -69,11 +69,11 @@ for (LeftHandSideExpression of Expression) {
 
 `LeftHandSideExpression` expression can be replaced with anything that stands on the left side of an assignment expression.  
 
-In the previous examples, `LeftHandSideExpression` was `const products` and `const [index, product]`.  
+In the previous examples, `LeftHandSideExpression` was a variable declaration `const products` and even a destructuring `const [index, product]`.  
 
-This is what gives the ability to destructure the iterated item in place.  
+So, the syntax of `for...of` enables the destructuring of the iterated item.  
 
-For example, let's iterate over an array of objects, and destructure the iterated object:  
+Let's iterate over an array of objects, extracting the property `name` of each one:
 
 ```javascript{6}
 const persons = [
@@ -157,7 +157,7 @@ On each cycle the iterable returns an array `[key, value]`, and this pair is des
 
 ## 5. Iterate plain JavaScript objects
 
-I always felt some pain when trying to iterate the property/value pairs of plain JavaScript objects.  
+Trying to iterate the property/value pairs of plain JavaScript objects was always a pain.  
 
 Usually, I had been using something like [Object.keys()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys):
 
@@ -174,7 +174,7 @@ Object.keys(person).forEach(prop => {
 // 'job', 'agent'
 ```
 
-Fortunately, using the new `Object.entries()` function in combination with `for...of` offers a good alternative:
+Fortunately, using the new [Object.entries()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) function in combination with `for...of` offers a good alternative:
 
 ```javascript
 const person = {
@@ -217,7 +217,7 @@ for (const image of allImages) {
 }
 ```
 
-In other words, if you'd like to iterate over different kinds of collections in DOM, `for...of` statement is a good option.  
+If you'd like to iterate over different kinds of collections in DOM, `for...of` statement is a good option.  
 
 ## 7. Performance
 
