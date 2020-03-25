@@ -1,8 +1,8 @@
 ---
 title: 'Why for...of Loop in JavaScript is a Gem'
 description: 'for...of cycle in JavaScript iterates arrays, maps, sets, array-like objects, iterables, plus supports in-place destructuring.'
-published: '2020-03-25T12:00Z'
-modified: '2020-03-25T12:00Z'
+published: '2020-03-25T13:40Z'
+modified: '2020-03-25T13:40Z'
 thumbnail: './images/cover-4.png'
 slug: javascript-for-of
 tags: ['javascript', 'for']
@@ -18,7 +18,7 @@ This is the case of `for...of` statement in JavaScript, which is available start
 `for...of` iterates arrays, array-like objects, and generally any iterable (maps, sets, DOM collections). You can destructure the iterated item in place. 
 On top of that, `for...of` has a short syntax.  
 
-In this post, I will demonstrate all the nice possibilities of `for...of`.  
+In this post, I will demonstrate the useful possibilities of `for...of`.  
 
 ## 1. Array iteration
 
@@ -112,7 +112,23 @@ sum(1, 2, 3); // => 6
 
 At each iteration, the `for...of` cycles over each number of array-like object `arguments`, calculating the sum.  
 
-## 3. String characters iteration
+## 3. A quick overview of iterables
+
+What is an iterable object in JavaScript? It's an object that supports the [iterable protocol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#iterable).  
+
+To check whether a data type is iterable look at the method `Symbol.iterator`. For example, here's a demo showing that the array is iterable:
+
+```javascript
+const array = [1, 2, 3];
+const iterator1 = array[Symbol.iterator]();
+iterator1.next(); // => { value: 1, done: false }
+```
+
+If you'd like to know more, feel free to follow my [explanation of iterables](https://dmitripavlutin.com/how-three-dots-changed-javascript/#5-spread-operator-and-iteration-protocols).  
+
+`for...of` accepts iterables. This is great because now you can iterate over types (strings) and data structures (arrays, typed arrays, sets, maps), while still enjoying the simplicity and conciseness of `for...of`.  
+
+## 4. String characters iteration
 
 The string primitive in JavaScript is iterable. Thus, you could easily iterate over the characters of a string.  
 
@@ -131,9 +147,9 @@ for (const character of message) {
 
 `message` contains a string value. Because `message` is also an iterable, the `for...of` cycle iterates over the characters of `message`.  
 
-## 4. Map key/value pairs iteration
+## 5. Maps and Sets iteration
 
-`Map` is a special object that lets you associate a key to a value. The key can be of any primitive type (usually strings, but could be numbers, etc).  
+[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) is a special object that lets you associate a key to a value. The key can be of any primitive type (usually strings, but could be numbers, etc).  
 
 Fortunately, `Map` is also an iterable (which iterates over the key/value pairs) and `for...of` can easily cycle over all key/value pairs.  
 
@@ -153,9 +169,22 @@ for (const [number, name] of names) {
 
 `for (const [number, name] of names)` iterates over the key/value pairs of `names` map.  
 
-On each cycle the iterable returns an array `[key, value]`, and this pair is destructured right away using `const [number, name]`.
+On each cycle the iterable returns an array `[key, value]`, and this pair is destructured right away using `const [number, name]`.  
 
-## 5. Iterate plain JavaScript objects
+Same way you can loop through the items of a [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set):
+
+```javascript
+const colors = new Set(['white', 'blue', 'red', 'white']);
+
+for (color of colors) {
+  console.log(color);
+}
+// 'white'
+// 'blue'
+// 'red'
+```
+
+## 6. Iterate plain JavaScript objects
 
 Trying to iterate the property/value pairs of plain JavaScript objects was always a pain.  
 
@@ -193,7 +222,7 @@ for (const [prop, value] of Object.entries(person)) {
 
 Then the `for...of` cycle iterates over the tuples, and destructures each tuple into `const [prop, value]`.  
 
-## 6. Iterate DOM collections
+## 7. Iterate DOM collections
 
 You might know how [frustrating](https://stackoverflow.com/q/35969974/1894471) could be to work with [HTMLCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection) in DOM. All because `HTMLCollection` is an array-like object (instead of a regular array), so you don't have access to regular array methods.  
 
@@ -219,7 +248,7 @@ for (const image of allImages) {
 
 If you'd like to iterate over different kinds of collections in DOM, `for...of` statement is a good option.  
 
-## 7. Performance
+## 8. Performance
 
 When iterating large arrays, `for...of` might perform slower than classic `for`:
 
@@ -230,9 +259,9 @@ for (let i = 0; i < a.length; i++) {
 }
 ```
 
-Calling the iterator at each iteration is more expensive than accessing the item by an increasing index. But this nuance is important in applications operating with large arrays and where the performance is critical.
+Calling the iterator at each iteration is more expensive than accessing the item by an increasing index. However, this nuance is important in applications operating with large arrays and where the performance is critical, which happens rarely.  
 
-## 8. Conclusion
+## 9. Conclusion
 
 `for...of` is a gem because:
 
