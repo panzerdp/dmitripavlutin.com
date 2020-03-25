@@ -1,8 +1,8 @@
 ---
 title: "Why for...of Loop in JavaScript is a Gem"
 description: 'for...of cycle in JavaScript iterates over the items of an iterable.'
-published: '2020-03-31T12:00Z'
-modified: '2020-03-31T12:00Z'
+published: '2020-03-25T12:00Z'
+modified: '2020-03-25T12:00Z'
 thumbnail: './images/cover-4.png'
 slug: javascript-for-of
 tags: ['javascript', 'for']
@@ -11,43 +11,55 @@ type: post
 commentsThreadId: javascript-for-of
 ---
 
-The `for...of` statement (starting ES2015) creates a loop that iterates over array items and generally any iterable objects.  
+What makes a programming language feature great? When the feature can combine multiple other language features.  
 
-The best thing I like about `for...of` is the consize syntax:
+This is the case of `for...of` statement in JavaScript, which is available starting ES2015.   
 
-```javascript{3}
-const colors = ['blue', 'red'];
+`for...of` iterates arrays, array-like objects, and generally any iterable (maps, sets, DOM collections). You can destructure the iterated item in place. 
+On top of that, `for...of` has a short syntax.  
 
-for (const color of colors) {
-  console.log(color);
-}
-// 'blue'
-// 'red'
-```
-
-The usability of `for...of` statement is not limited to short syntax to iterate array. 
-
-Even better, `for...of` accepts any iterable. This property brings the possibilities to iterate over many object types, including the primitive string.  
+In this post, I will demonstrate all the nice possibilities of `for...of`.  
 
 ## 1. Array iteration
 
-As seen in the introduction, you can easily iterate over the items of an array using `for...of` statement:
+The first and most common application of `for...of` is iterating over the items of an array. The cycle does it nicely and shortly, without the need of
+additional variables to keep an index.
+
+For example:
 
 ```javascript{3}
-const essentials = ['toilet paper', 'sanitizer'];
+const products = ['oranges', 'apples'];
 
-for (const essential of essentials) {
-  console.log(essential);
+for (const product of products) {
+  console.log(product);
 }
-// 'toilet paper'
-// 'sanitizer'
+// 'oranges'
+// 'apples'
 ```
 
-`for...of` cycle iterates over every item of the `essentials`. At each cycle, the iterated item is assigned to the variable `essential`.  
+`for...of` cycle iterates over every item of `products`. During each `for...of` cycle, the iterated item is assigned to the variable `product`.  
+
+To access the index of the iterated item, use the array method [entries()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries). The method returns at each iteration a pair of `[index, item]`.  
+
+Let's access both the index and item on each cycle:
+
+```javascript{3}
+const products = ['oranges', 'apples'];
+
+for (const [index, product] of products.entries()) {
+  console.log(index, product);
+}
+// 0, 'oranges'
+// 1, 'apples'
+```
+
+`const [index, product]` destructures the pair of index and item returned by `products.entries()`. 
+
+The in-place destructuring is another great feature of `for...of`, and let's check it in more detail in the next section.  
 
 ### 1.1 In place item destructuring
 
-The syntax of `for...of` cycle is:
+First, let's look at the syntax of `for...of` cycle:
 
 ```javascript
 for (LeftHandSideExpression of Expression) {
@@ -55,12 +67,13 @@ for (LeftHandSideExpression of Expression) {
 }
 ```
 
-`LeftHandSideExpression` expression can be replaced with anything that stands on the left side of an assignment expression. In the previous example, 
-it was `const essential`, but more can be done.
+`LeftHandSideExpression` expression can be replaced with anything that stands on the left side of an assignment expression.  
 
-What I enjoy is the ability of `for...of` to destructure the iterated item in place.
+In the previous examples, `LeftHandSideExpression` was `const products` and `const [index, product]`.  
 
-For example, let's iterate over an array of objects, and destructure the iterated object in place:
+This is what gives the ability to destructure the iterated item in place.  
+
+For example, let's iterate over an array of objects, and destructure the iterated object:  
 
 ```javascript{6}
 const persons = [
@@ -83,7 +96,7 @@ The cycle `for (const { name } of persons)` iterates the items of `persons` arra
 
 `arguments` special variable, inside a function body, contains all the arguments of the function. And this is a classic example of an array-like object.  
 
-Let's iterate over the items of `arguments` using `for...of` cycle:
+Let's write a function `sum(num1, num2, ..., numN)` that sums all its arguments:
 
 ```javascript{3}
 function sum() {
@@ -97,7 +110,7 @@ function sum() {
 sum(1, 2, 3); // => 6
 ```
 
-At each iteration, the `for...of` cycle iterates over each item of `arguments`, and calculates the sum.  
+At each iteration, the `for...of` cycles over each number of array-like object `arguments`, calculating the sum.  
 
 ## 3. String characters iteration
 
@@ -120,9 +133,9 @@ for (const character of message) {
 
 ## 4. Map key/value pairs iteration
 
-`Map` is a special object that lets you associate key to value pairs, where the key can be of any primitive type (usually strings, but could be numbers, etc).  
+`Map` is a special object that lets you associate a key to a value. The key can be of any primitive type (usually strings, but could be numbers, etc).  
 
-Because `Map` object is also an iterable (which iterates over the key/value pairs), it can be used with `for...of`.  
+Fortunately, `Map` is also an iterable (which iterates over the key/value pairs) and `for...of` can easily cycle over all key/value pairs.  
 
 Let's try that:
 
@@ -146,7 +159,7 @@ On each cycle the iterable returns an array `[key, value]`, and this pair is des
 
 I always felt some pain when trying to iterate the property/value pairs of plain JavaScript objects.  
 
-Usually, there are 2 possibilities: using `for...in` cycle, or something functional like `Object.keys()`.
+Usually, I had been using something like [Object.keys()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys):
 
 ```javascript
 const person = {
@@ -182,7 +195,7 @@ Then the `for...of` cycle iterates over the tuples, and destructures each tuple 
 
 ## 6. Iterate DOM collections
 
-When working directly with the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction), you might know how [frustrating](https://stackoverflow.com/q/35969974/1894471) it is to work with [HTMLCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection). All because `HTMLCollection` is an array-like object (instead of a regular array), so you don't have access to regular array methods.  
+You might know how [frustrating](https://stackoverflow.com/q/35969974/1894471) could be to work with [HTMLCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection) in DOM. All because `HTMLCollection` is an array-like object (instead of a regular array), so you don't have access to regular array methods.  
 
 For example, the `children` property of every DOM element is an `HTMLCollection`. So, since `for...of` can iterate also over array-like objects, you can can iterate the children with ease:
 
@@ -217,19 +230,17 @@ for (let i = 0; i < a.length; i++) {
 }
 ```
 
-Calling the iterator at each iteration is more expensive than by accessing the item by an increasing index. 
+Calling the iterator at each iteration is more expensive than accessing the item by an increasing index. But this nuance is important in applications operating with large arrays and where the performance is critical.
 
-This detail is important in applications operating with large arrays and where the performance is critical.
+## 8. Conclusion
 
-## 7. Conclusion
-
-`for...of` is a gem because it can has the following properties:
+`for...of` is a gem because:
 
 1. It's concise
-2. It iterates iterables
-3. It iterates array-like objects
-4. You can apply destructuring on the iterated item
+2. It accepts iterables, including arrays, strings, maps, sets, DOM collections
+3. It accepts array-like objects
+4. The iterated item can be destructured in-place.
 
-`for...of` iterates arrays, maps, sets, plain objects (with the addition of `Object.entries()`), and DOM collections.  
 
-*Would you iterate an array using `array.forEach()` or `for..of` statement?*
+
+*What is your preferred way to iterate array items?*
