@@ -188,7 +188,7 @@ for (color of colors) {
 
 Trying to iterate the property/value pairs of plain JavaScript objects was always a pain.  
 
-Usually, I had been using something like [Object.keys()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys):
+Usually, I had been extracting the object keys using [Object.keys()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys), then use `forEach()` to iterate the array of keys:
 
 ```javascript
 const person = {
@@ -203,7 +203,7 @@ Object.keys(person).forEach(prop => {
 // 'job', 'agent'
 ```
 
-Fortunately, using the new [Object.entries()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) function in combination with `for...of` offers a good alternative:
+Fortunately, the new [Object.entries()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) function in combination with `for...of` offers a good alternative:
 
 ```javascript
 const person = {
@@ -218,9 +218,7 @@ for (const [prop, value] of Object.entries(person)) {
 // 'job', 'agent'
 ```
 
-`Object.entries(person)` returnes an array where of tuples consisting of key and value of each property: `[['name', 'John Smith'], ['job', 'agent']]`.  
-
-Then the `for...of` cycle iterates over the tuples, and destructures each tuple into `const [prop, value]`.  
+`Object.entries(person)` returnes an array of key and value tuples: `[['name', 'John Smith'], ['job', 'agent']]`. Then `for...of` cycle iterates over the tuples, and destructures each tuple into `const [prop, value]`.  
 
 ## 7. Iterate DOM collections
 
