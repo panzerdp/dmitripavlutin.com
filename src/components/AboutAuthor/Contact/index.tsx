@@ -9,17 +9,21 @@ interface AboutAuthorContact {
 export default function AboutAuthorContact({ authorInfo }: AboutAuthorContact) {
   return (
     <div className={styles.contactAuthor}>
-      <h3>Contact me</h3>
+      <h3>JavaScript Personal Training</h3>
       <div className={styles.description}>
-        You&apos;re welcome to contact me regarding job opportunities, discussing a blog post, speaking at conference,
-        or just to say thanks.
+        <p>
+          I know how cumbersome are closures, prototypes, hoisting, <i>this</i>, and other JavaScript concepts. 
+        </p>
+        <p>
+          Book a personal JavaScript training session and I will help you overcome the difficulties.  
+        </p>
       </div>
       <div className={styles.links}>
         <a className={styles.icon} href={`mailto:${authorInfo.email}`} title={`Write a message to ${authorInfo.name}`}>
           <img alt="Email address" src="/icons/email.svg" />
         </a>
-        <a className={styles.text} href={`mailto:${authorInfo.email}`} title={`Write a message to ${authorInfo.name}`}>
-          Write me an email
+        <a className={styles.text} href={`mailto:${authorInfo.email}?subject=Book a JavaScript training session`} title={`Write a message to ${authorInfo.name}`}>
+          Book a Training Session
         </a>
       </div>
     </div>
