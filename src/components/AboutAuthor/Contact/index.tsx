@@ -12,13 +12,14 @@ export default function AboutAuthorContact({ authorInfo }: AboutAuthorContact) {
       <h3>Your JavaScript Coach</h3>
       <div className={styles.description}>
         <p>
-          I know how cumbersome are JavaScript concepts like closures, prototypes, hoisting, <i>this</i>.   
+          I know how cumbersome are closures, scopes, prototypes, inheritance, async functions, <i>this</i> concepts in JavaScript. 
         </p>
-        <p>Let me be your JavaScript coach:</p>
+        <p>I'm excited to start my coaching program to help you advance your JavaScript knowledge.</p>
+        <p>You can have direct access to me through:</p>
         <ul>
-          <li>I will help you overcome your difficulties in understanding JavaScript</li>
-          <li>One-to-one, remote, 1 hour sessions</li>
-          <li>Informal, conversational and friendly format</li>
+          <li>1 hour, one-to-one, video coaching sessions</li>
+          <li>JavaScript concepts teaching, workshops, or interview preparation (you choose!)</li>
+          <li>Conversational and friendly format</li>
         </ul>
       </div>
       <div className={styles.links}>
