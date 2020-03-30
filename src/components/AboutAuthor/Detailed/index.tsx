@@ -1,16 +1,16 @@
 import * as React from 'react';
 import Img from 'gatsby-image';
-import Link from 'gatsby-link';
 
 import styles from './index.module.scss';
-import { TO_ABOUT_ME } from 'routes/path';
+import TwitterFollowButton from 'components/AboutAuthor/TwitterFolowButton';
 
 interface AboutAuthorDetailed {
   authorInfo: AuthorInfo;
   authorProfilePicture: FluidImage;
+  authorStats: AuthorStats;
 }
 
-export default function AboutAuthorDetailed({ authorInfo, authorProfilePicture }: AboutAuthorDetailed) {
+export default function AboutAuthorDetailed({ authorInfo, authorProfilePicture, authorStats }: AboutAuthorDetailed) {
   return (
     <div className={styles.aboutAuthor}>
       <div className={styles.authorInfo}>
@@ -20,12 +20,11 @@ export default function AboutAuthorDetailed({ authorInfo, authorProfilePicture }
       </div>
       <div className={styles.readMore}>
         <div className={styles.links}>
-          <Link className={styles.icon} to={TO_ABOUT_ME()} title={`About ${authorInfo.name}`}>
-            <img alt={`About ${authorInfo.name}`} src="/icons/person.svg" />
-          </Link>
-          <Link className={styles.text} to={TO_ABOUT_ME()} title={`About ${authorInfo.name}`}>
-            More about me
-          </Link>
+          <TwitterFollowButton
+            authorName={authorInfo.name}
+            twitterFollowersCount={authorStats.twitterFollowersCount}
+            username={authorInfo.nicknames.twitter}
+          />
         </div>
       </div>
     </div>
