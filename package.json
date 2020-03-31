@@ -61,7 +61,7 @@
     "react-dom": "16.13.1",
     "react-helmet": "5.2.1",
     "react-media": "1.10.0",
-    "ts-jest": "25.3.0",
+    "ts-jest": "25.2.1",
     "typescript": "3.8.3"
   },
   "devDependencies": {},

@@ -48,9 +48,4 @@ describe('<PostAboutAuthorDetailed />', function() {
     const wrapper = shallow(<AboutAuthorDetailed {...props} />);
     expect(wrapper.text()).toContain(props.authorInfo.description);
   });
-
-  it('should render about me link', function() {
-    const wrapper = shallow(<AboutAuthorDetailed {...props} />);
-    expect(wrapper.find({ to: TO_ABOUT_ME() }).length).toBeGreaterThanOrEqual(1);
-  });
 });
