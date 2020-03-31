@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 import Img from 'gatsby-image';
 
 import AboutAuthorDetailed from '../index';
-import { TO_ABOUT_ME } from 'routes/path';
 
 const authorProfilePicture: FluidImage = {
   src: 'source',
