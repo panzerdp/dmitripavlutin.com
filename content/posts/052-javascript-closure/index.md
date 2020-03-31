@@ -11,7 +11,7 @@ type: post
 commentsThreadId: explanation-of-javascript-closures
 ---
 
-The callbacks, event handlers, higher-order functions can access outer scope variables thanks to closures. Closures are important in functional programming, and are often asked during the JavaScript coding interview.     
+The callbacks, event handlers, higher-order functions can access outer scope variables thanks to closures. Closures are important in functional programming, and are often asked during the JavaScript coding interview.  
 
 While being used everywhere, closures are difficult to grasp. If you haven't had your "Aha!" moment in understanding closures, then this post is for you.  
 
@@ -337,6 +337,6 @@ Finally, a closure is a function that captures variables from its lexical scope.
 
 Closures capture variables inside event handlers, callbacks. They're used in functional programming. Moreover, you could be asked how closures work during a Frontend job interview.  
 
-Every JavaScript developer must know how closures work. Take it for granted.  
+Every JavaScript developer must know how closures work. Deal with it <nobr>⌐■_■</nobr>.
 
 *Do you still struggle to understand closures? If so, ask me a question in a comment below!*
