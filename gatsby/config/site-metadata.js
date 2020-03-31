@@ -14,7 +14,7 @@ module.exports = {
   authorInfo: {
     name: 'Dmitri Pavlutin',
     description:
-      'I\'m a passionate software developer, tech writer and coach. My daily routine consists of (but not limited to) drinking coffee, coding, writing, coaching, fighting boredom 😉.',
+      'I\'m a passionate software developer, tech writer and coach. My daily routine consists of (but not limited to) drinking coffee, coding, writing, coaching, overcoming boredom 😉.',
     email: 'dmitripavlutin@gmail.com',
     jobTitle: 'Software Developer',
     profiles: {
