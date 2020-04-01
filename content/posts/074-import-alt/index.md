@@ -82,15 +82,15 @@ The only solution I could find to enable autocomplete on named imports in JavaSc
 
 For example, in [Visual Studio Code](https://code.visualstudio.com/), you could install the [JavaScript (ES6) code snippets](https://marketplace.visualstudio.com/items?itemName=xabikos.JavaScriptSnippets) plugin.  
 
-Having the plugin enabled, by using the `imd` snippet and hitting `tab` key, the cursor first jumps into the position where you write the module path. Then, after pressing the `tab` key, the cursor jumps back to the import position. Here's how it works:
+Having the plugin enabled, by using the `imd` snippet and hitting `tab` key, the cursor first jumps into the position where you write the module path. Then, after pressing the `tab` key, the cursor jumps back to the import position inside the curly brackets. Here's how it works:
 
 ![JavaScript Import Module Autocomplete With Plugin](./images/javascript-import-plugin.gif)
 
 ## 4. Conclusion
 
-In JavaScript, you have to first indicate the components you'd like to import, only after the module from where you import. This syntax is not autocomplete friendly and makes it difficult to import named components on the fly.  
+In JavaScript, the import syntax forces you to indicate first the items (functions, classes, variables) you'd like to import, then the path to module. This approach is not autocomplete friendly.  
 
-In Python, on the opposite, you indicate first the module name, then the components you'd like to import: `from stringUtils import equalsIgnoreCase`. This syntax enables easy autocomplete of items to import.  
+In Python, on the opposite, you indicate first the module name, then the components you'd like to import: `from stringUtils import equalsIgnoreCase`. This syntax enables easy autocomplete of the imported items.  
 
 With the use of IDEs possibilities, like the ES6 code snippet plugin, you could mitigate the problem of named import autocomplete in JavaScript. Still better than nothing.  
 
