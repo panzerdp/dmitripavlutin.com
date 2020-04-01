@@ -14,8 +14,8 @@ The tech stack I'm currently working with is JavaScript, TypeScript, React, CSS.
 
 I practice SOLID principles, Test-driven development (TDD), Domain-Driven Design, careful organization of system design in my daily coding challenges. 
 
-I maintain an open source JavaScript library [vocajs.com](https://vocajs.com). From time to time I help fellow developers on [Stackoverflow](http://stackoverflow.com/users/1894471/dmitri-pavlutin). 
+I maintain an open source JavaScript library [vocajs.com](https://vocajs.com). From time to time I help fellow developers on [Stackoverflow](http://stackoverflow.com/users/1894471/dmitri-pavlutin).  
+
+![Dmitri Pavlutin in Rome](./images/dmitri-pavlutin-rome.jpg)
 
 If you'd like to discuss with me (about blogging, hiring, conferences, just to say thanks), send me a message to [dmitripavlutin@gmail.com](mailto:dmitripavlutin@gmail.com).  
-
-![Dmitri Pavlutin At Versailles](./images/dmitri-pavlutin-versailles.png)
