@@ -59,7 +59,7 @@ def equalsIgnoreCase(string1, string2):
 
 In Python, you don't have to explicitly indicate the functions to export.  
 
-Now, let's try to import the function `equalsIgnoreCase` from `stringUtils` from module inside of another Python module `app`:
+Now, inside of another Python module `app`, let's try to import the function `equalsIgnoreCase` from `stringUtils`:
 
 ```python
 # app.py
@@ -68,11 +68,11 @@ from stringUtils import equalsIgnoreCase
 equalsIgnoreCase('Hello', 'hello') # => true
 ```
 
-Here's how the process of writing of `app` module and importing of `equalsIgnoreCase` looks like:
+Most likely, you would write `app` module the following way:
 
 ![Python Import Module Good Autocomplete](./images/python-import-2.gif)
 
-In Python, first, indicate the module you're importing from `from stringUtils`. Then you write what to import `import ...`.  
+In Python, first, indicate the module you're importing from: `from stringUtils`. Then you write what to import `import ...`.  
 
 If you'd like to know the functions available for import, the editor already knows the module name and gives the necessary suggestions. Way better!
 
