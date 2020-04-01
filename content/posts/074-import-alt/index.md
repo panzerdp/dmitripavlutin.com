@@ -11,7 +11,7 @@ type: post
 commentsThreadId: javascript-import-module-drawback
 ---
 
-## 1. Named Import in JavaScript is Not Autocomplete Friendly
+## 1. Named imports and autocomplete
 
 Let's say you write a simple JavaScript module:
 
@@ -41,7 +41,7 @@ equalsIgnoreCase('Hello', 'hello'); // => true
 
 First, you have to write the import names `import { }`. At this step, the IDE cannot give any suggestions about the available names to import.  
 
-Then you continue writing `from './stringUtils'`. Then *move back to curly brackets and expand autocomplete to select the names to import*.  
+Then you continue writing `from './stringUtils'`. Then *move back to curly brackets* and expand autocomplete to select the names to import.  
 
 Despite all the good things about ES2015 modules, the import module syntax makes difficult to use autocomplete.  
 
