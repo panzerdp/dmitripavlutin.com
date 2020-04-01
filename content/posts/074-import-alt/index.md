@@ -1,6 +1,6 @@
 ---
 title: 'The Module Import in JavaScript Has a Drawback'
-description: "The module import syntax in JavaScript makes difficult the autocomplete suggestions of named imports. Let's study the problem and find a solution."
+description: "In JavaScript you might have difficulties to use autocomplete on named imports. Let's study the problem and find a solution."
 published: '2020-04-01T14:15Z'
 modified: '2020-04-01T14:15Z'
 thumbnail: './images/javascript-import-module-drawback-cover-3.png'
