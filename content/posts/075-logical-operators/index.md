@@ -27,7 +27,7 @@ Can you use `&&` and `||` with operands of a different kind that boolean? Turns 
 
 Before understanding how the logical operators can work on any value type, let's understand what truthy and falsy values are.  
 
-## 1. Falsy values
+## 1. Falsy value
 
 *Falsy* is a value for which `Boolean(value)` return `false`. Falsy values in JavaScript are `false`, `0`, `''`, `null`, `undefined` and `NaN`.  
 
