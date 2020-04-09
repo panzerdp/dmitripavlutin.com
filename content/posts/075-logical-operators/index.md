@@ -1,8 +1,8 @@
 ---
 title: 'How && and || Operators Really Work in JavaScript'
 description: '&& and || operate not only on boolean types, but also on falsy and truty values.'
-published: '2020-04-07T12:00Z'
-modified: '2020-04-07T12:00Z'
+published: '2020-04-09T12:00Z'
+modified: '2020-04-09T12:00Z'
 thumbnail: './images/javascript-import-module-drawback-cover-3.png'
 slug: javascript-and-or-logical-operators
 tags: ['javascript']
@@ -127,6 +127,8 @@ Having some numbers as operands:
 
 The first operand `0` is falsy, so the evaluation continues. The second argument `-1` is already truthy, so the evaluation stops, and the result is `-1`.
 
+### 3.1 Default value when accessing properties
+
 You can use this effect to access the properties of an object, and default to a value when the property doesn't exist:
 
 ```javascript
@@ -138,6 +140,20 @@ person.name || 'Unknown'; // => 'John'
 person.job  || 'Unknown'; // => 'Unknown'
 ```
 
+`person.name || 'Unknown'`: because the first operand `person.name` is `'John'` (a truthy value), the expresson evaluates to `'John'`.  
+
+The second expression `person.job  || 'Unknown'` is different. `person` object doesn't have a `job` property, thus `person.job` is `undefined`. In the expression `undefined || 'Unknown'` JavaScript skips the first operand `undefined` (because it is falsy), and returns the second truthy value `'Unknown'`.  
+
 ## 5. Summary
 
-Because JavaScript is a loosely typed language, with `&&` and `||` you can use 
+Because JavaScript is a loosely typed language, the operands of `&&` and `||` can be of any type.  
+
+To deal with types coersion within boolean operators, the concepts of falsy and truthy values are useful. Falsy values are `false`, `0`, `''`, `null`, `undefined` and `NaN`, while the truthy are the rest of values.  
+
+`&&` operator evaluates the operands from left to right and returns the first falsy value encountered. If no operand is falsy, the latest operand is returned.  
+
+The same way `||` operator evaluates the operands from left to right, but returns the first truthy value encountered. If no truthy value was found, the latest operand is returned.  
+
+While `&&` and `||` evaluation algorithms seem weird at first, in my opinion they're quite efficient. The early exit is a good optimization.  
+
+In terms of usage, I recommend to use booleans as operands for both `&&` and `||`, and avoid other types if possible.
