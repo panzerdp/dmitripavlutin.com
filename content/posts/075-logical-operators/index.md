@@ -1,6 +1,6 @@
 ---
 title: 'How && and || Operators Really Work in JavaScript'
-description: 'How && and || Operators Really Work in JavaScript'
+description: '&& and || operate not only on boolean types, but also on falsy and truty values.'
 published: '2020-04-07T12:00Z'
 modified: '2020-04-07T12:00Z'
 thumbnail: './images/javascript-import-module-drawback-cover-3.png'
@@ -10,3 +10,134 @@ recommended: ['javascript-modules-best-practices', 'javascript-utility-libraries
 type: post
 commentsThreadId: javascript-and-or-logical-operators
 ---
+
+The logical *and* (`&&`) and *or* (`||`) are common logical operators used in JavaScript. 
+
+Normally you're using these operators with operands of boolean type:
+
+```javascript
+true && true   // => true
+true && false  // => false
+
+true || true   // => true
+true || false  // => true
+```
+
+Can you use `&&` and `||` with operands of differend kind that boolean? Turns out in JavaScript you *can*. 
+
+Before understanding how the logical operators can work on any value type, let's understand what truty and falsy values are.  
+
+## 1. Falsy values
+
+*Falsy* is a value for which `Boolean(value)` return `false`. Falsy values in JavaScript are `false`, `0`, `''`, `null`, `undefined` and `NaN`.  
+
+Here's a quick demonstration that the provided values are falsy:
+
+```javascript
+Boolean(false);     // => false
+Boolean(0);         // => false
+Boolean('');        // => false
+Boolean(null);      // => false
+Boolean(undefined); // => false
+Boolean(NaN);       // => false
+```
+
+## 2. Truthy value
+
+*Truthy* is a value for which `Boolean(value)` returns `true`. Saying it differently, the truthy values are values that are not falsy. 
+
+Examples of truthy values are `true`, `4`, `'Hello'`, `{ name: 'John' }` and everything else that's *not falsy*. 
+
+```javascript
+Boolean(true);             // => true
+Boolean(4);                // => true
+Boolean('Hello');          // => true
+Boolean({ name: 'John' }); // => true
+```
+
+## 3. How && operator works
+
+Knowing what truty and falsy values are, let's check into more detail how the logical and `&&` operator really works.  
+
+Here's a generalized syntax of an `&&` operator that involves a chain of operators:
+
+```
+operand1 && operand2 && ... && operandN
+```
+
+The expression is evaluated as follows: 
+
+> Starting from left and moving to right, return the *first* operand that is *falsy*. If no falsy operand was found, return the *latest* operand.
+
+While at first this way of evaluation and seems surpising, it gives the ability to have operands of any type.  
+
+Let's evaluate a few examples.  
+ 
+When the operands are booleans, it's simple:
+
+```javascript
+true && false && true; // => false
+```
+The evaluation starts from left and moves to right. Passing the first `true` operand, the second operand `false` is a falsy value. Thus `false` becomes the result of the entire expression. The third operand `true` is not evaluated.  
+
+When operands are numbers:
+
+```javascript
+3 && 1 && 0 && 10; // => 0
+```
+
+The evaluation starts from left and moves to right. Passing the first `3` and second `1` operands, JavaScript stops at the third operand `0` since it's falsy. `0` becomes the result of the entire expression. The fourth operand `10` is not evaluated.  
+
+A slighly more complex example with different types:
+
+```javascript
+true && 1 && { name: 'John' }
+```
+
+Again, from left to right, the operands are checked for falsy. No operand is falsy, so the last operand is returned. The evaluation result is `{ name: 'John' }`.
+
+## 4. How || operator works
+
+Here's a generalized syntax of `||` operator in chain:
+
+```
+operand1 || operand2 || ... || operandN
+```
+
+JavaScript evaluates the expression this way: 
+
+> Starting from left and moving to right, return the *first* operand that is *truthy*. If no truthy operand was found, return the *latest* operand.
+
+`||` works same way as `&&`, with the only difference that `||` stops evaluation on a truthy operand.  
+
+Let's study some examples.  
+
+A simple expression having 2 booleans:
+
+```javascript
+true || false; // => true
+```
+The evaluation starts from left and moves to right. Luckily, the first operand `true` is a truthy value, so the whole expression evaluates as `true`. The second operand `false` is not checked.
+
+Having some numbers as operands:
+
+```javascript
+0 || -1 || 10; // => -1
+```
+
+The first operand `0` is falsy, so the evaluation continues. The second argument `-1` is already truthy, so the evaluation stops, and the result is `-1`.
+
+You can use this effect to access the properties of an object, and default to a value when the property doesn't exist:
+
+```javascript
+const person = {
+  name: 'John'
+};
+
+person.name || 'Unknown'; // => 'John'
+person.job  || 'Unknown'; // => 'Unknown'
+```
+
+## 5. Summary
+
+Because JavaScript is a loosely typed language, with `&&` and `||` you can use 
