@@ -1,8 +1,8 @@
 ---
 title: 'How && and || Operators Really Work in JavaScript'
 description: "Do you know that && and || in JavaScript can operate not only on booleans, but on any data types?"
-published: '2020-04-09T11:30Z'
-modified: '2020-04-09T11:30Z'
+published: '2020-04-09T12:10Z'
+modified: '2020-04-09T12:10Z'
 thumbnail: './images/cover-2.png'
 slug: javascript-and-or-logical-operators
 tags: ['javascript']
@@ -25,15 +25,15 @@ true || false  // => true
 
 However, can you use `&&` and `||` with operands of any type? Turns out, you *can*!
 
-This post explains in detail and examples of how `&&` and `||` operators work in JavaScript. 
+This post explains in detail and examples how `&&` and `||` operators work in JavaScript. 
 
-Let's start with understanding *truthy* and *falsy* concepts.
+Let's start with *truthy* and *falsy* concepts.
 
 ## 1. Falsy value
 
-The boolean type has only 2 values: `true` and `false`. However, JavaScript is a loosely typed language, so the logical operations can be performed on values other than booleans. 
+The boolean type has only 2 values: `true` and `false`. However, JavaScript is a loosely typed language, so the logical operations might be performed on any type of values.  
 
-It might be useful to think about `null`, `undefined`, `0` as equivalent to boolean `false`, and `1`, `'non-empty string'` as equivalent to boolean `true` in logical operations. Thus the concepts of *falsy* and *truthy* are introduced. 
+How does JavaScript perform logical operations on values of any type? It decides whether a particular value can be considered *falsy* (an equivalent of `false`) or *truthy* (an equivalent of `true`).  
 
 *Falsy* is a value for which `Boolean(value)` return `false`. 
 
@@ -65,7 +65,7 @@ Boolean({ name: 'John' }); // => true
 
 ## 3. How && operator works
 
-Knowing what truthy and falsy values are, let's check into more detail how the logical `&&` operator works.  
+Knowing what truthy and falsy values are, let's check into detail how the logical `&&` operator works.  
 
 Here's the syntax of the `&&` operator that involves a chain of operators:
 
@@ -94,7 +94,7 @@ When operands are numbers:
 3 && 1 && 0 && 10; // => 0
 ```
 
-The evaluation starts from left and moves to the right. Checking the first `3` and second `1`, JavaScript stops at the third operand `0` since it's falsy. `0` becomes the result of the entire expression. The fourth operand `10` is not evaluated.  
+The evaluation is perfomed from left to right. `3` and `1` are passed because they are truthy. But the evaluation stops at the third operand `0` since it's falsy. `0` becomes the result of the entire expression. The fourth operand `10` is not evaluated.  
 
 A slighly more complex example with different types:
 
