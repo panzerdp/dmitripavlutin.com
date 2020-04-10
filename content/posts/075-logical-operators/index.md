@@ -65,9 +65,9 @@ Boolean({ name: 'John' }); // => true
 
 ## 3. How && operator works
 
-Knowing what truthy and falsy values are, let's check into detail how the logical `&&` operator works.  
+Knowing what truthy and falsy values are, let's dive into how the logical `&&` operator works.  
 
-Here's the syntax of the `&&` operator that involves a chain of operators:
+Here's the syntax of the `&&` operator in a chain:
 
 ```
 operand1 && operand2 && ... && operandN
@@ -135,7 +135,7 @@ Having some numbers as operands:
 
 The first operand `0` is falsy, so the evaluation continues. The second argument `-1` is already truthy, so the evaluation stops, and the result is `-1`.
 
-### 3.1 Default value when accessing properties
+### 4.1 Default value when accessing properties
 
 You can use a side-effect of the `||` evaluation to access an object property providing a default value when the property is missing.  
 
