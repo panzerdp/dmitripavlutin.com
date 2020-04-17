@@ -1,6 +1,6 @@
 ---
 title: 'How && and || Operators Really Work in JavaScript'
-description: "In-depth post that explains in examples how exactly && and || operators work in JavaScript"
+description: "In-depth post on how && (logical and) and || (logical or) operators work in JavaScript."
 published: '2020-04-09T12:10Z'
 modified: '2020-04-14T20:30Z'
 thumbnail: './images/cover-2.png'
