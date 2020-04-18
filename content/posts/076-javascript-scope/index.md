@@ -3,7 +3,7 @@ title: 'JavaScript Scope Explained in Simple Words'
 description: 'The scope in JavaScript manages the availability of variables.'
 published: '2020-04-14T12:00Z'
 modified: '2020-04-14T12:00Z'
-thumbnail: './images/cover-2.png'
+thumbnail: './images/javascript-scope-cover-2.png'
 slug: javascript-scope
 tags: ['javascript', 'scope', 'variable']
 recommended: ['simple-explanation-of-javascript-closures', 'gentle-explanation-of-this-in-javascript']
