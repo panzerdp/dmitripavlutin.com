@@ -1,6 +1,6 @@
 ---
 title: 'JavaScript Scope Explained in Simple Words'
-description: 'This post explains step by step what a scope is in JavaScript.'
+description: 'The scope in JavaScript manages the availability of variables.'
 published: '2020-04-14T12:00Z'
 modified: '2020-04-14T12:00Z'
 thumbnail: './images/cover-2.png'
@@ -11,13 +11,13 @@ type: post
 commentsThreadId: javascript-scope
 ---
 
-The concepts like data types, variables, functions, scope, closures are a must to understand in order to be able to code.    
+The understanding of concepts like data types, variables, functions, scope, closures is a must to be able to code.    
 
-The scope manages the availability of variables. It indicates where a variable can be access, and where cannot.  
+The scope manages the availability of variables. It indicates where a variable can be accessed, and where it cannot.  
 
-The scope also stays at the base of other important concepts like closures.  
+The scope also stays at the base of other important concepts like global variables, encapsulation and closures.  
 
-If you want to master JavaScript, and specifically the scope, then this post is for you. I will explain in-depth, but step by step, what scope is in JavaScript.  
+If you want to understand well the scope in JavaScript, then this post is for you. I will explain in-depth, step by step, what the scope is in JavaScript.  
 
 ```toc
 ```
@@ -48,7 +48,7 @@ This time, the variable `message` is not available outside of `if` block. When t
 
 Why does it happen? 
 
-The `if` code block creates a *scope* for `message` variable. `message` variable can be access *only* within `if` code block scope.  
+The `if` code block creates a *scope* for `message` variable. `message` variable can be accessed *only* within `if` code block scope.  
 
 At a higher level, the accessibility of variables is managed by scope. You are free to access the variable defined within its scope. But outside of its scope, the variable is inaccessible.  
 
@@ -191,7 +191,7 @@ console.log(pi); // 3.14159
 // Usage of pi
 ```
 
-`pi` variable is declared within the scope of `circle` module. Also the variable `pi` is not exported from the module.
+`pi` variable is declared within the scope of `circle` module. Also, the variable `pi` is not exported from the module.
 
 Then the `circle` module is imported:
 
@@ -201,9 +201,9 @@ import './circle';
 console.log(pi); // throws ReferenceError
 ```
 
-The variable `pi` is not accessible outside of `circle` module (unless explicitely exported using `export`).  
+The variable `pi` is not accessible outside of `circle` module (unless explicitly exported using `export`).  
 
-At the module level the scope  is important for module encapsulation. Every private variable (that's not exported) remains an internal detail of the module, and the module scope protects these variable from being accessed outside of the module.  
+At the module level, the scope supports module encapsulation. Every private variable (that's not exported) remains an internal detail of the module, and the module scope protects these variables from being accessed outside of the module.  
 
 The scope is an encapsulation mechanism starting from code blocks, functions, and ending with modules.  
 
@@ -234,7 +234,7 @@ The scope contained within another scope is named *inner scope*. In the example,
 
 The scope that wraps another scope is named *outer scope*. In the example, `run()` function scope is an outer scope to `if` code block scope.  
 
-What about the variables accessibility? Here are the simple 2 rules to remember:
+What about the variable's accessibility? Here are the simple 2 rules to remember:
 
 > An *inner scope* can access the variables of an *outer scope*. However, an *outer scope* cannot access variables of an *inner scope*.
 
@@ -265,7 +265,7 @@ In the previous code snippet, `counter` is a global variable.
 
 The global scope is a mechanism that lets the host of JavaScript (browser, Node) supply applications with host-specific functions as global variables.  
 
-In a browser environment, examples of host global variables are `window`, `document`. In Node environment, you can access `process` object as a global variable.  
+In a browser environment, examples of host global variables are `window`, `document`. In the Node environment, you can access `process` object as a global variable.  
 
 ## 7. Lexical scope
 
@@ -302,7 +302,7 @@ The `innerFunc()` is a *closure* because it captures the variable `outerVar` fro
 
 If you'd like to master the closure concept, I highly recommend reading my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/#4-the-closure).  
 
-### 8. Variables isolation
+## 8. Variables isolation
 
 An immediate property of scope arises: the scope isolates the variables' names. Different scopes can have variables with the same name.  
 
@@ -339,5 +339,4 @@ Scopes can be nested. The variables of outer scope are accessible within the inn
 
 The lexical scope consists of the outer function scopes determined statically. Any function, no matter the place where being executed, can access the variables of its lexical scope (this is the concept of [closure](/simple-explanation-of-javascript-closures/)).  
 
-The scope is a crucial concept that every JavaScript developer should master well.  
-
+The scope is a crucial concept that every JavaScript developer must understand.
