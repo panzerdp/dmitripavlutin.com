@@ -1,6 +1,6 @@
 ---
 title: 'JavaScript Scope Explained in Simple Words'
-description: 'The scope manages the availability of variables. This post explains in-depth, but step by step, what a scope is in JavaScript.'
+description: 'This post explains step by step what a scope is in JavaScript.'
 published: '2020-04-14T12:00Z'
 modified: '2020-04-14T12:00Z'
 thumbnail: './images/cover-2.png'
@@ -11,28 +11,31 @@ type: post
 commentsThreadId: javascript-scope
 ---
 
-There are important concepts you must understand to be able to code. Such crucial concepts
-are data types, variables, functions, scope, closures. Mastering these concepts is a must.  
+The concepts like data types, variables, functions, scope, closures are a must to understand in order to be able to code.    
 
-This post explains in-depth, but step by step, what scope is in JavaScript. 
+The scope manages the availability of variables. It indicates where a variable can be access, and where cannot.  
+
+The scope also stays at the base of other important concepts like closures.  
+
+If you want to master JavaScript, and specifically the scope, then this post is for you. I will explain in-depth, but step by step, what scope is in JavaScript.  
 
 ```toc
 ```
 
 ## 1. What is scope
 
-Before diving into what the scope is, let's try an experiment that demonstrates the effects of scope.  
+Before diving into what the scope is, let's try an experiment that demonstrates how the scope manifests itself.  
 
-Let's say you define a variable named `message`:
+Let's say you define a variable `message`:
 
 ```javascript
 const message = 'Hello';
 console.log(message); // 'Hello'
 ```
 
-Then, you could easily log this variable in the next line after the declaration. 
+Then, you could easily log this variable in the next line after the declaration. No questions here.  
 
-Now, let's change slightly the code sample. The declaration of `message` is moved inside of an `if` block:
+Now, let's move the declaration of `message` inside of an `if` code block:
 
 ```javascript
 if (true) {
@@ -41,17 +44,17 @@ if (true) {
 console.log(message); // ReferenceError: message is not defined
 ```
 
-Unfortunately, this time the variable `message` is not available outside of `if` block. When trying to log the variable, JavaScript throws `ReferenceError: message is not defined`.   
+This time, the variable `message` is not available outside of `if` block. When trying to log the variable, JavaScript throws `ReferenceError: message is not defined`.   
 
-Why does it happen? Because `if` code block creates a *scope* for variables defined within this code block. Thus `message` variable, being defined inside `if` code block, is accessible only within this scope, and inaccessible outside.  
+Why does it happen? 
+
+The `if` code block creates a *scope* for `message` variable. `message` variable can be access *only* within `if` code block scope.  
 
 At a higher level, the accessibility of variables is managed by scope. You are free to access the variable defined within its scope. But outside of its scope, the variable is inaccessible.  
 
 Now, let's put down a general definition of scope:
 
-> *The scope* is a policy that manages the accessibility of variables.  
-
-
+> *The scope* is a policy that manages the accessibility of variables.
 
 ## 2. Block scope
 
@@ -66,9 +69,13 @@ if (true) {
 console.log(message); // throws ReferenceError
 ```
 
-The statement `if`, `for`, `while` makes use of code blocks where a scope is defined.
+The first `console.log(message)` correctly logs the variable because `message` is accessed from the scope where it is defined. 
 
-In the following example `for` loop defines a scope within its code block:
+On the other side, the second `console.log(message)` throws a reference error because `message` variable is accessed outside of its scope and simply doesn't exist here.  
+
+The code block of `if`, `for`, `while` statements also create a scope.  
+
+In the following example `for` loop defines a scope:
 
 ```javascript
 for (const color of ['green', 'red', 'blue']) {
@@ -83,7 +90,7 @@ console.log(message); // throws ReferenceError
 
 `color` and `message` variables exist within the scope of `while` code block.  
 
-The same way cycled code block of `while` statement creates a scope for its variables:
+Same way the code block of `while` statement creates a scope for its variables:
 
 ```javascript
 while (/* condition */) {
@@ -96,7 +103,7 @@ console.log(message); // => throws ReferenceError
 
 `message` is defined within `while()` body, consequently `message` is accessible only within `while()` body.  
 
-In JavaScript you can define standalone code blocks. These also delimit a scope:
+In JavaScript you can define standalone code blocks. The standalone code blocks also delimit a scope:
 
 ```javascript{4,6}
 {
@@ -109,11 +116,11 @@ console.log(message); // throws ReferenceError
 
 ### 2.1 *var* is not block scoped
 
-As seen in the previous section, the variables declared using `const` and `let` within a code block are scoped to that code block.  
+As seen in the previous section, the variables declared using `const` and `let` are scoped by code blocks.  
 
 However, this isn't the case for variables declared using `var`.  
 
-The following `var` variable `count` is defined inside an `if` code block:
+Let's see an example. The snippet declares a variable `count` using `var` statement:
 
 ```javascript{4,6}
 if (true) {
@@ -126,7 +133,9 @@ console.log(count); // 0
 
 `count` variable, as expected, is accessible within the scope of `if` code block. However, `count` variable is also accessible outside!  
 
-`var` variables are scoped by a function body, rather than a code block. Let's continue on the function scope in the next section.  
+A code block *does not create a scope* for `var` variables, but a function body does.  
+
+Let's continue on the function scope in the next section.  
 
 ## 3. Function scope
 
@@ -171,33 +180,38 @@ console.log(run2);  // throws ReferenceError
 
 ES2015 module also creates a scope for variables, functions, classes.  
 
-For example, a simple module `math` defines a constant `pi`:
+For example, the module `curcle` defines a constant `pi` for some internal usuage:
 
 ```javascript
 // "circle" module scope
 const pi = 3.14159;
 
 console.log(pi); // 3.14159
+
+// Usage of pi
 ```
 
-`pi` variable is declared within the scope of `circle` module.  
+`pi` variable is declared within the scope of `circle` module. Also the variable `pi` is not exported from the module.
 
-When `circle` module is imported into another module `app`:
+Then the `circle` module is imported:
 
 ```javascript
-// app.js
 import './circle';
 
 console.log(pi); // throws ReferenceError
 ```
 
-The variable `pi` is not accessible inside `app` module. `pi` variable availability is limited only to `circle` module scope.  
+The variable `pi` is not accessible outside of `circle` module (unless explicitely exported using `export`).  
+
+At the module level the scope  is important for module encapsulation. Every private variable (that's not exported) remains an internal detail of the module, and the module scope protects these variable from being accessed outside of the module.  
+
+The scope is an encapsulation mechanism starting from code blocks, functions, and ending with modules.  
 
 ## 5. Scopes can be nested
 
 An interesting property of scopes is that they can be nested.  
 
-In the following example a scope is created by the function `run()`, and other scope created by `if` condition code block: 
+In the following example the function `run()` creates a scope, and inside an `if` condition code block creates another scope: 
 
 ```javascript{8,11}
 function run() {
@@ -214,17 +228,15 @@ function run() {
 }
 ```
 
-`if` code block scope is nested inside the `run()` function scope. Thus, scopes can be nested.  
+`if` code block scope is nested inside the `run()` function scope. Scopes of any type (code block, function, module) can be nested.  
 
-If a scope is contained within another scope, then the contained scope is called *inner scope*. In the example, `if` code block scope is an inner scope of `run()` function scope.  
+The scope contained within another scope is named *inner scope*. In the example, `if` code block scope is an inner scope of `run()` function scope.  
 
-If a scope wraps another scope, then the scope that wraps is named *outer scope*. In the example, `run()` function scope is an outer scope to `if` code block scope.  
-
-> An *outer scope* wraps an *inner scope*.
+The scope that wraps another scope is named *outer scope*. In the example, `run()` function scope is an outer scope to `if` code block scope.  
 
 What about the variables accessibility? Here are the simple 2 rules to remember:
 
-> An *inner scope* can access the variables of an *outer scope*. However, an *outer scope* cannot access 
+> An *inner scope* can access the variables of an *outer scope*. However, an *outer scope* cannot access variables of an *inner scope*.
 
 `message` variable, which is a part of the `run()` function scope (outer scope), is accessible inside `if` code block scope (*inner scope*).  
 
@@ -232,22 +244,28 @@ However, the inner scope `friend` variable is not accessible in the outer scope.
 
 ## 6. Global scope
 
-The global scope is the outermost scope. The global scope is the outer scope of all scopes and is accessible from any inner scope.  
+The global scope is the outermost scope. The global scope is the outer scope of all scopes and is accessible from any inner (aka *local*) scope.  
 
-In a browser environment, the JavaScript code put inside the `<script>` tag is executed in the global scope:
+In a browser environment, the topmost scope of JavaScript file loaded using `<script>` tag:
 
 ```html
-<script>
-// Global scope
-let count = 1;
-</script>
+<script src="myScript.js"></script>
 ```
 
-The variable declared inside the global scope is named *global* variable. In the previous code snippet, `counter` is a global variable. 
+```javascript
+// myScript.js
 
-Global variables are accessible from any inner scope.  
+// "global" scope
+let counter = 1;
+```
 
-In a browser environment, examples of built-in global variables are `window`, `document`.  
+The variable declared inside the global scope is named *global* variable. Global variables are accessible from any inner scope.  
+
+In the previous code snippet, `counter` is a global variable. 
+
+The global scope is a mechanism that lets the host of JavaScript (browser, Node) supply applications with host-specific functions as global variables.  
+
+In a browser environment, examples of host global variables are `window`, `document`. In Node environment, you can access `process` object as a global variable.  
 
 ## 7. Lexical scope
 
@@ -270,19 +288,19 @@ const inner = outerFunc();
 inner();
 ```
 
-Note that the `innerFunc()` invokation happens outside of `outerFunc()` scope. Still, how does JavaScript understand that `outerVar` inside `innerFunc()` corresponds to the variable `outerVar` of `outerFunc()`?  
+Take a look at the last line of the snippet `inner()`: the `innerFunc()` invokation happens outside of `outerFunc()` scope. Still, how does JavaScript understand that `outerVar` inside `innerFunc()` corresponds to the variable `outerVar` of `outerFunc()`?  
 
-JavaScript implements a scoping mechanism named lexical scoping (or static scoping). Lexical scoping means that the accessibility of variables is determined statically by the position of the variables within the nested function scopes: *the outer function scope variables are accessible within the inner function scope*.    
-
-In the example, the lexical scope of `innerFunc()` consists of the scope of `outerFunc()`.  
+JavaScript implements a scoping mechanism named lexical scoping (or static scoping). Lexical scoping means that the accessibility of variables is determined statically by the position of the variables within the nested function scopes: *the inner function scope can access variables from the outer function scope*.  
 
 A formal definition of lexical scope:
 
 > The *lexical scope* consists of outer scopes determined statically.  
 
+In the example, the lexical scope of `innerFunc()` consists of the scope of `outerFunc()`.  
+
 The `innerFunc()` is a *closure* because it captures the variable `outerVar` from the lexical scope. 
 
-If you'd like to master the closure concept, I highly recommend reading my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).  
+If you'd like to master the closure concept, I highly recommend reading my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/#4-the-closure).  
 
 ### 8. Variables isolation
 
@@ -313,7 +331,9 @@ bar();
 
 The scope is a policy that manages the availability of variables. A variable defined inside the scope is accessible only within than scope, and inaccessible outside.  
 
-In JavaScript, scopes are created by code blocks and functions. While `const` and `let` variables are scoped by code blocks and functions, `var` variables are scoped only by functions.  
+In JavaScript, scopes are created by code blocks, functions, modules. 
+
+While `const` and `let` variables are scoped by code blocks, functions or modules, `var` variables are scoped only by functions or modules.  
 
 Scopes can be nested. The variables of outer scope are accessible within the inner scope.  
 
