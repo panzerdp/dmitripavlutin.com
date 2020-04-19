@@ -48,6 +48,8 @@ Why does it happen?
 
 The `if` code block creates a *scope* for `message` variable. And `message` variable can be accessed *only* within this scope.  
 
+![JavaScript Scope](./images/javascript-scope-2.png)
+
 At a higher level, the accessibility of variables is limited by the scope where they're created. You are free to access the variable defined within its scope. But outside of its scope, the variable is inaccessible.  
 
 Now, let's put down a general definition of scope:
@@ -231,6 +233,8 @@ run();
 The scope contained within another scope is named *inner scope*. In the example, `if` code block scope is an inner scope of `run()` function scope.  
 
 The scope that wraps another scope is named *outer scope*. In the example, `run()` function scope is an outer scope to `if` code block scope.  
+
+![JavaScript Nested Scopes](./images/javascript-nested-scopes.png)
 
 What about the variable's accessibility? Here's one simple rule to remember:
 
