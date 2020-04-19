@@ -222,6 +222,8 @@ function run() {
 
   console.log(friend); // throws ReferenceError
 }
+
+run();
 ```
 
 `if` code block scope is nested inside the `run()` function scope. Scopes of any type (code block, function, module) can be nested.  
@@ -268,11 +270,11 @@ Let's define 2 functions, having the function `innerFunc()` is nested inside `ou
 ```javascript{7,14}
 function outerFunc() {
   // the outer scope
-  let outerVar = 'I am outside!';
+  let outerVar = 'I am from outside!';
 
   function innerFunc() {
     // the inner scope
-    console.log(outerVar); // 'I am outside!'
+    console.log(outerVar); // 'I am from outside!'
   }
 
   return innerFunc;
