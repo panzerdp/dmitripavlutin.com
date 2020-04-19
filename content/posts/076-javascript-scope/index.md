@@ -1,6 +1,6 @@
 ---
 title: 'JavaScript Scope Explained in Simple Words'
-description: 'The JavaScript scope manages the availability of variables.'
+description: 'The scope is an important concent that manages variables accessibility. I will explain step by step, in-depth, what the scope is in JavaScript.'
 published: '2020-04-14T12:00Z'
 modified: '2020-04-14T12:00Z'
 thumbnail: './images/javascript-scope-cover-2.png'
@@ -11,13 +11,13 @@ type: post
 commentsThreadId: javascript-scope
 ---
 
-The understanding of concepts like data types, variables, functions, scope, closures is a must to be able to code.    
+Data types, variables, functions, scope, closures are must-know to be able to code.    
 
 The scope manages the availability of variables. It indicates where a variable can be accessed.  
 
 The scope stays at the base of other important concepts like global variables, encapsulation and closures.  
 
-If you want to understand the scope in JavaScript, then this post is for you. I will explain in-depth, step by step, what the scope is in JavaScript.  
+If you want to understand the scope in JavaScript, then this post is for you. I will explain  step by step, in-depth, what the scope is in JavaScript.  
 
 ```toc
 ```
@@ -337,4 +337,5 @@ Scopes can be nested. Inside an inner scope you can access the variables of an o
 
 The lexical scope consists of the outer function scopes determined statically. Any function, no matter the place where being executed, can access the variables of its lexical scope (this is the concept of [closure](/simple-explanation-of-javascript-closures/)).  
 
-The scope is a crucial concept that every JavaScript developer must understand.
+Hopefully, my post has helped you understand the scope better!
+
