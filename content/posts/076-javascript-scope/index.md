@@ -11,18 +11,16 @@ type: post
 commentsThreadId: javascript-scope
 ---
 
-Data types, variables, functions, scope, closures are must-know to be able to code.    
+Data types, variables, functions, scope, closures, prototype are must-know to be able to code in JavaScript.    
 
-The scope manages the availability of variables. It indicates where a variable can be accessed.  
-
-The scope stays at the base of other important concepts like global variables, encapsulation and closures.  
+The scope concept manages the availability of variables. Plus, the closure stays at the base of global variables, closures.  
 
 If you want to understand the scope in JavaScript, then this post is for you. I will explain  step by step, in-depth, what the scope is in JavaScript.  
 
 ```toc
 ```
 
-## 1. What is scope
+## 1. What's scope
 
 Before diving into what the scope is, let's try an experiment that demonstrates how the scope manifests itself.  
 
@@ -257,7 +255,7 @@ let counter = 1;
 
 A variable declared inside the global scope is named *global* variable. Global variables are accessible from any scope.  
 
-In the previous code snippet, `counter` is a global variable. 
+In the previous code snippet, `counter` is a global variable. This variable can be accessed from any place of the webpage's JavaScript.  
 
 The global scope is a mechanism that lets the host of JavaScript (browser, Node) supply applications with host-specific functions as global variables.  
 
@@ -286,7 +284,7 @@ inner();
 
 Look at the last line of the snippet `inner()`: the `innerFunc()` invokation happens outside of `outerFunc()` scope. Still, how does JavaScript understand that `outerVar` inside `innerFunc()` corresponds to the variable `outerVar` of `outerFunc()`?  
 
-The answer is due to lexical scope.  
+The answer is due to lexical scoping.  
 
 JavaScript implements a scoping mechanism named lexical scoping (or static scoping). Lexical scoping means that the accessibility of variables is determined statically by the position of the variables within the nested function scopes: *the inner function scope can access variables from the outer function scope*.  
 

@@ -96,7 +96,7 @@ true && 1 && { name: 'John' }
 
 Again, from left to right, the operands are checked for falsy. No operand is falsy, so the last operand is returned. The evaluation result is `{ name: 'John' }`.
 
-## 3.1 Skipping operands
+### 3.1 Skipping operands
 
 The `&&` evaluation algorithm is optimal because the evaluation of operands stops as soon as a falsy value is encountered.  
 
