@@ -1,8 +1,8 @@
 ---
 title: 'JavaScript Scope Explained in Simple Words'
 description: 'The scope is an important concent that manages variables accessibility. I will explain step by step, in-depth, what the scope is in JavaScript.'
-published: '2020-04-14T12:00Z'
-modified: '2020-04-14T12:00Z'
+published: '2020-04-20T12:30Z'
+modified: '2020-04-20T12:30Z'
 thumbnail: './images/javascript-scope-cover-2.png'
 slug: javascript-scope
 tags: ['javascript', 'scope', 'variable']
