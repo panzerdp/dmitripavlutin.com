@@ -5,7 +5,7 @@ published: '2019-10-25T04:00Z'
 modified: '2019-11-27T14:00Z'
 thumbnail: './images/bulb.jpg'
 slug: simple-explanation-of-javascript-closures
-tags: ['javascript', 'closure']
+tags: ['javascript', 'closure', 'scope']
 recommended: ['6-ways-to-declare-javascript-functions', 'when-not-to-use-arrow-functions-in-javascript']
 type: post
 commentsThreadId: explanation-of-javascript-closures
