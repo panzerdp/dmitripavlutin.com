@@ -31,7 +31,7 @@ The variable `message` is accessible inside the scope of `if` code block. Howeve
 That was a short intro to scopes. If you'd like to learn more, I recommend reading my post [JavaScript Scope Explained in Simple Words
 ](/javascript-scope/).  
 
-What follows are 5 interesting cases when the JavaScript scopes behaves differently than you expect. You might study these cases to improve your knowledge of scopes, or just prepare for a fancy coding interview.  
+What follows are 5 interesting cases when the JavaScript scopes behaves differently than you expect. You might study these cases to improve your knowledge of scopes, or just to prepare for a fancy coding interview.  
 
 ##1. *var* variables inside *for* cycle
 
@@ -40,8 +40,14 @@ Consider the following code snippet:
 ```javascript
 const colors = ['red', 'blue', 'white'];
 
-
+for (let i = 0, var l = colors.length; i < l; i++) {
+  console.log(colors[i]); // 'red', 'blue', 'white'
+}
+console.log(l); // ???
+console.log(i); // ???
 ```
+
+
 
 ##2. function declaration inside code blocks
 
@@ -51,3 +57,15 @@ const colors = ['red', 'blue', 'white'];
 
 ##5. Function declaration vs class declaration
 
+##6. Summary
+
+In the presented cases you saw different specifics of JavaScript scope. The key takeaways are:
+
+1. `var` variables, contrary to `let` and `const`, are function scoped
+2. Don't use function declaration syntax inside code blocks
+3. Function parameters have scope too
+4. Function declaration syntax is function scoped, while class declaration is block scoped
+
+Anyways, why these nuances exist?  
+
+JavaScript has come a long way. Some early language design decisions (like making `var` function scoped) were not the most successful. Every new JavaScript version has maintain backwards compatibility, so these weird cases will remain forever.  
