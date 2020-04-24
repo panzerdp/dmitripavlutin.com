@@ -2,7 +2,7 @@
 title: 'JavaScript Scope Explained in Simple Words'
 description: 'The scope is an important concent that manages variables accessibility. I will explain step by step, in-depth, what the scope is in JavaScript.'
 published: '2020-04-20T12:30Z'
-modified: '2020-04-20T12:30Z'
+modified: '2020-04-24T16:00Z'
 thumbnail: './images/javascript-scope-cover-2.png'
 slug: javascript-scope
 tags: ['javascript', 'scope', 'variable']
@@ -11,11 +11,11 @@ type: post
 commentsThreadId: javascript-scope
 ---
 
-Data types, variables, functions, scope, closures, prototype are must-know to be able to code in JavaScript.    
+The scope is an important concept that manages the availability of variables. The scope is at the base closures, defines the idea of global and local variables.  
 
-The scope concept manages the availability of variables. Plus, the closure stays at the base of global variables, closures.  
+If you'd like to code in JavaScript, understanding the scope of variables is a must.  
 
-If you want to understand the scope in JavaScript, then this post is for you. I will explain  step by step, in-depth, what the scope is in JavaScript.  
+In this post, I will explain step by step, in-depth, how the scope works in JavaScript.  
 
 ```toc
 ```
@@ -42,7 +42,7 @@ if (true) {
 console.log(message); // ReferenceError: message is not defined
 ```
 
-This time, the variable `message` is not available outside of `if` block. When trying to log the variable, JavaScript throws `ReferenceError: message is not defined`.   
+This time, when trying to log the variable, JavaScript throws `ReferenceError: message is not defined`.   
 
 Why does it happen? 
 
@@ -118,7 +118,7 @@ console.log(message); // throws ReferenceError
 
 As seen in the previous section, the code block creates a scope for variables declared using `const` and `let`. However, that's not the case of variables declared using `var`.
 
-Let's see an example. The snippet below declares a variable `count` using a `var` statement:
+The snippet below declares a variable `count` using a `var` statement:
 
 ```javascript
 if (true) {
@@ -178,7 +178,7 @@ console.log(run2);  // throws ReferenceError
 
 ES2015 module also creates a scope for variables, functions, classes.  
 
-For example, the module `curcle` defines a constant `pi` for some internal usuage:
+The module `circle` defines a constant `pi` (for some internal usuage):
 
 ```javascript
 // "circle" module scope
@@ -201,9 +201,9 @@ console.log(pi); // throws ReferenceError
 
 The variable `pi` is not accessible outside of `circle` module (unless explicitly exported using `export`).  
 
-At the module level, the scope supports module encapsulation. Every private variable (that's not exported) remains an internal detail of the module, and the module scope protects these variables from being accessed outside of the module.  
+The module scope makes the module encapsulated. Every private variable (that's not exported) remains an internal detail of the module, and the module scope protects these variables from being accessed outside.  
 
-The scope is an encapsulation mechanism starting from code blocks, functions, and ending with modules.  
+Looking from another angle, the scope is an encapsulation mechanism for code blocks, functions, and modules.  
 
 ## 5. Scopes can be nested
 
