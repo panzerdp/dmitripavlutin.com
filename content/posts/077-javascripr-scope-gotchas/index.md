@@ -1,8 +1,8 @@
 ---
 title: '5 JavaScript Scope Gotchas'
 description: '5 situations when the JavaScript scope behaves differently than you expect.'
-published: '2020-04-24T12:00Z'
-modified: '2020-04-24T12:00Z'
+published: '2020-04-26T17:30Z'
+modified: '2020-04-26T17:30Z'
 thumbnail: './images/javascript-scope-cover-2.png'
 slug: javascript-scope-gotchas
 tags: ['javascript', 'scope', 'variable']
@@ -11,9 +11,7 @@ type: post
 commentsThreadId: javascript-scope-gotchas
 ---
 
-In JavaScript a code block, a function or module create scopes for variables. The interesting part is that a variable is accessible only within its scope.  
-
-For example, the `if` code block creates a scope for the variable `message`:
+In JavaScript, a code block, a function, or module create scopes for variables. For example, the `if` code block creates a scope for the variable `message`:
 
 ```javascript{3,5}
 if (true) {
@@ -23,12 +21,12 @@ if (true) {
 console.log(message); // throws ReferenceError
 ```
 
-`message` is accessible inside the scope of `if` code block. However, outside of the scope the variable is not accessible.  
+`message` is accessible inside the scope of `if` code block. However, outside of the scope, the variable is not accessible.  
 
 Ok, that was a short intro to scopes. If you'd like to learn more, I recommend reading my post [JavaScript Scope Explained in Simple Words
 ](/javascript-scope/).  
 
-What follows are 5 interesting cases when the JavaScript scopes behaves differently than you expect. You might study these cases to improve your knowledge of scopes, or just to prepare for a fancy coding interview.  
+What follows are 5 interesting cases when the JavaScript scope behaves differently than you expect. You might study these cases to improve your knowledge of scopes, or just to prepare for a fancy coding interview.  
 
 ## 1. *var* variables inside *for* cycle
 
@@ -48,11 +46,11 @@ What happens when you log `l` and `i` variables?
 
 ### The answer
 
-`console.log(l)` logs the number `3`, while `console.log(l)` throws a `ReferenceError`.  
+`console.log(l)` logs the number `3`, while `console.log(i)` throws a `ReferenceError`.  
 
-The `l` variable is declared using the `var` statement. As you might know already, `var` variables are scoped only by a function body and not by a code block.  
+The `l` variable is declared using a `var` statement. As you might know already, `var` variables are [scoped only by a function body](/javascript-scope/#21-var-is-not-block-scoped) and not by a code block.  
 
-However, the variable `i` is declared using a `let` statement, which is code block scoped. Outside of the `for` cycle, the variable `i` is not accessible. 
+On the opposite, the variable `i` is declared using a `let` statement. Because `let` variables are block scoped, `i` is accessible only within the scope of `for` cycle.  
 
 ### The fix
 
@@ -76,11 +74,9 @@ What happens when you invoke `hello()`? *(consider the snippet is executed in ES
 
 ### The answer
 
-Invoking `hello()` in ES2015 environment throws `ReferenceError: hello is not defined`. 
+Because the code block creates a scope for the function declaration, invoking `hello()` (in ES2015 environment) throws `ReferenceError: hello is not defined`. 
 
-The code block creates a scope for the function declaration.  
-
-Interestignly that in a pre-ES2015 environment executing the above code snippet works without throwing any errors. *Do you know why? If so, please write your answer in a comment below!*
+Interestingly that in a pre-ES2015 environment executing the above code snippet works without throwing errors. *Do you know why? If so, please write your answer in a comment below!*
 
 ## 3. Where can you import a module?
 
@@ -95,13 +91,13 @@ if (true) {
 
 ### The answer
 
-The script above would trigger an error: `'import' and 'export' may only appear at the top level`. 
+The script above would trigger an error: `'import' and 'export' may only appear at the top-level`. 
 
-You can import a module only at the top most scope of the module file, aka the [module scope](/javascript-scope/#4-module-scope).  
+You can import a module only at the topmost scope of the module file, also named the [module scope](/javascript-scope/#4-module-scope).  
 
 ### The fix
 
-Always import modules from the module scope. And a good practice is to place the `import` statements at the beginning of the source file:  
+Always import modules from the module scope. Plus a good practice is to place the `import` statements at the beginning of the source file:  
 
 ```javascript
 import { myFunc } from 'myModule';
@@ -111,7 +107,7 @@ if (true) {
 }
 ```
 
-ES2015 modules system is static. The modules dependencies are determined by analyzing the JavaScript source code, without executing it. Thus you cannot have `import` statements inside code blocks or functions.  
+ES2015 modules system is static. The modules dependencies are determined by analyzing the JavaScript source code, without executing it. Thus you cannot have `import` statements inside code blocks or functions since they are executed during runtime.  
 
 ## 4. Function parameters scope
 
@@ -137,7 +133,7 @@ It happens because the function parameters have their own scope (separated from 
 
 Let's take a closer look at `p = p + 1`. 
 
-First, a variable `p` is defined. Then JavaScript tries to evaluate the default value expression `p + 1`, but the binding `p` is already created but not yet initialized. Thus an error is thrown that `p` is accessed before initialization.  
+First, a variable `p` is defined. Then JavaScript tries to evaluate the default value expression `p + 1`, but the binding `p` is already created but not yet initialized (the variable `let p = 1` of the outer scope is not accessed). Thus an error is thrown that `p` is accessed before initialization.  
 
 ### The fix
 
@@ -155,7 +151,7 @@ function myFunc(q = p + 1) {
 myFunc(); // => 2
 ```
 
-The function parameter was renamed from `p` to `q`. When the invocation happens `myFunc()`, the argument is not specified, thus the parameter `q` is initialized with the value `p + 1 = 1 + 1 = 2`.  
+The function parameter was renamed from `p` to `q`. When the invocation happens `myFunc()`, the argument is not specified, thus the parameter `q` is initialized with a default value `p + 1`. To evaluate `p + 1`, the variable `p` of the outer scope is accessed: `p + 1 = 1 + 1 = 2`.  
 
 ## 5. Function declaration vs class declaration
 
@@ -176,7 +172,7 @@ greet();       // ???
 new Greeter(); // ???
 ```
 
-Are both `greet` and `Greeter` accessible outside of the block scope? (consider ES2015 environment)
+Are both `greet` and `Greeter` accessible outside of the block scope? *(consider ES2015 environment)*
 
 ### The answer
 
@@ -184,10 +180,14 @@ Both `function` and `class` declarations are block scoped. So invoking the funct
 
 ## 6. Summary
 
-In the presented cases you saw different specifics of JavaScript scope. 
+Care must be taken with `var` variables because they are function scoped, even being defined inside a code block.  
 
-Care must be taken with `var` variables, because they are function scoped, no matter if you define it inside of a block scope. Still `var` declaration has its own place if you want to exactly indicate that your variable is function scoped. However, most of the times, it's wiser just to use `let` and `const`.  
+Because the ES2015 modules system is static, you have to use the `import` syntax (as well as `export`) at the module scope. 
 
-Because the ES2015 modules system is static, you have to use the `import` syntax (as well as export) at the module scope. 
+The function parameters have their scope. When setting up a default parameter value, be sure that the variables inside the default expression are initialized with values. 
+
+In an ES2015 runtime environment, the function and class declarations are block scoped. However, a pre-ES2015 env, the function declarations are only function scoped.   
+
+Hopefully, these gotchas have helped you solidify your scope knowledge!
 
 *What other scope gotchas have you encountered?*
