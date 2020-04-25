@@ -3,7 +3,7 @@ title: '5 JavaScript Scope Gotchas'
 description: '5 situations when the JavaScript scope behaves differently than you expect.'
 published: '2020-04-26T17:30Z'
 modified: '2020-04-26T17:30Z'
-thumbnail: './images/javascript-scope-cover-2.png'
+thumbnail: './images/javascript-scope-gotchas-cover-2.png'
 slug: javascript-scope-gotchas
 tags: ['javascript', 'scope', 'variable']
 recommended: ['simple-explanation-of-javascript-closures', 'javascript-scope']
