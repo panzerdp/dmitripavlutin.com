@@ -17,7 +17,8 @@ export default function SubscriptionForm({
         <ul>
           <li>Important JavaScript concepts explained in simple words</li>
           <li>Overview of new JavaScript features</li>
-          <li>React best practices and design patterns</li>
+          <li>How to benefit from typing and TypeScript</li>
+          <li>Design patterns and good coding practices</li>
         </ul>
         <p>Subscribe to my newsletter to get them right into your inbox.</p>
       </div>
