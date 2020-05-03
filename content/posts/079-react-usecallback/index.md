@@ -21,7 +21,7 @@ function MyComponent() {
     // handle the click event
   }, []);
 
-  return <button onClick={handleClick}>Click me</button>;
+  return <MyChild onClick={handleClick} />;
 }
 ```
 
@@ -71,7 +71,7 @@ function MyComponent() {
     console.log('Clicked!');
   };
 
-  return <button onClick={handleClick}>Click me</button>;
+  return <MyChild onClick={handleClick} />;
 }
 ```
 
@@ -79,19 +79,79 @@ function MyComponent() {
 
 Because inline functions are cheap, the re-creation of functions on each rendering is not a problem. *A few inline functions per component are acceptable.*  
 
-However, there are cases when you need exactly the same instance of a function. 
+However, there are cases when you need to keep one instance of a function:
 
-Going back to `useCallback()` hook, it is exactly what is solves: giving the same dependency values, the hook returns the same function instance between renderings.  
+1. When a component is wrapped inside `React.memo()` (or `shouldComponentUpdate`) and you'd like make the moization work
+2. When the function is used as a depedency to other hooks.
 
+That's the case when `useCallback(callbackFun, deps)` helps you: giving the same dependency values `deps`, the hook returns the same function instance between renderings:
 
+```jsx{5-7}
+import React, { useCallback } from 'react';
+
+function MyComponent() {
+  // handleClick is the same function object
+  const handleClick = useCallback(() => {
+    console.log('Clicked!');
+  }, []);
+
+  return <MyChild onClick={handleClick} />;
+}
+```
+
+`handleClick` variable will have always the same object of the callback function between renderings of `MyComponent`. 
 
 ## 3. A good use case
 
+Imagine you have a component that renders a big list of items:
+
+```jsx
+import React from 'react';
+
+function MyBigList({ items, handleClick }) {
+  const map = (item, index) => (
+    <div onClick={() => handleClick(index)}>{item}</div>;
+  );
+  return <div>{items.map(map)}</div>;
+}
+
+export const MyBigList = React.memo(MyBigList);
+```
+
+`MyBigList` renders a list of items. Knowing the list could be big, probably a few hunders of items. To preserve the list re-rendering, you wrap it into `React.memo`.  
+
+The parent component of `MyBigList` needs to provide the list of items, and the handler function when an item is clicked.  
+
+```jsx
+import React from 'react';
+
+function MyParent({ term }) {
+  const handleClick = useCallback((item) => {
+    console.log('You clicked ', item);
+  }, [term]);
+
+  const items = useSearch(term);
+
+  return (
+    <MyBigList
+      items={items}
+      handleClick={handleClick}
+    />
+  );
+}
+```
+
+`handleClick` callback is memoizied by `useCallback()`. As long as `term` variable stays the same, `useCallback()` returns the same function object.  
+
+Even if for some reason `MyParent` component is re-renders, `handleClick` statys the same and doesn't break the memoization of `MyBigList`.
+
 ## 4. Another good use case
+
+Imagine a component that supplies an async fetch function:
+
+
 
 ## 5. A bad use case
 
-## 6. The ballancing forces
-
-## 7. useCallback() usage checklist
+## 6. useCallback() usage checklist
 
