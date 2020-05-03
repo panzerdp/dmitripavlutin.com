@@ -3,7 +3,7 @@ title: "Don't Overuse React.useCallback()"
 description: "React.useCallback() memoizes callback functions and prevents unnecessary re-rendering of child components."
 published: "2020-05-02T12:30Z"
 modified: "2020-05-02T12:30Z"
-thumbnail: "./images/cover.jpg"
+thumbnail: "./images/cover-1.jpg"
 slug: dont-overuse-react-usecallback
 tags: ["react", "component", "memoization"]
 recommended: ["use-react-memo-wisely", "react-usestate-hook-guide"]
@@ -31,13 +31,13 @@ This statement is far from truth. Moreover, such usage of `useCallback()` makes 
 
 In this post, I'm going to explain how to use correctly `useCallback()`.   
 
-## 1. The purpose of useCallback()
+## 1. Understanding functions equality check
 
-Before diving into `useCallback()` usage, let's distinguish the problem it solves.  
+Before diving into `useCallback()` usage, let's distinguish the problem the hook solves: functions equality check.    
 
-A function `factory()` returns functions that sum numbers: 
+Let's define a function named `factory()` that returns functions: 
 
-```javascript{11}
+```javascript{11-12}
 function factory() {
   return (a, b) => a + b;
 }
@@ -52,17 +52,46 @@ sum1 === sum2; // => false
 sum1 === sum1; // => true
 ```
 
-`sum1` and `sum2` are functions that sum two numbers. They were both created by the `factory()` function.  
+`sum1` and `sum2` are functions that sum two numbers. They've been created by the `factory()` function.  
 
-The function `sum1` and `sum2` functions share the same code source, however, they are different objects. Comparing `sum1 === sum2` evaluates to `false`.  
+The functions `sum1` and `sum2` share the same code source, however, they are different objects: comparing them `sum1 === sum2` evaluates to `false`.  
 
-## 2. A good use case
+That's just how JavaScript works. An object (including a function object) [equals](/the-legend-of-javascript-equality-operator/#the-identity-operator) only to itself.  
 
-## 3. Another good use case
+## 2. The purpose of useCallback()
 
-## 4. A bad use case
+Different function instances sharing same code are often created inside React components. When you create a plain function (e.g. a callback or event handler), this function will be re-created on every rendering:  
 
-## 5. The ballancing forces
+```jsx{5-7}
+import React from 'react';
 
-## 6. useCallback() usage checklist
+function MyComponent() {
+  // handleClick is re-created on each render
+  const handleClick = () => {
+    console.log('Clicked!');
+  };
+
+  return <button onClick={handleClick}>Click me</button>;
+}
+```
+
+`handleClick` is going to be a different function object on every rendering of `MyComponent`.  
+
+Because inline functions are cheap, the re-creation of functions on each rendering is not a problem. *A few inline functions per component are acceptable.*  
+
+However, there are cases when you need exactly the same instance of a function. 
+
+Going back to `useCallback()` hook, it is exactly what is solves: giving the same dependency values, the hook returns the same function instance between renderings.  
+
+
+
+## 3. A good use case
+
+## 4. Another good use case
+
+## 5. A bad use case
+
+## 6. The ballancing forces
+
+## 7. useCallback() usage checklist
 
