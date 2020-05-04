@@ -170,7 +170,7 @@ Does it makes sense to memoize `handleClick`?
 
 No, because calling `useCallback()` requires lots of things working. Every time `MyComponent` is invoked, `useCallback()` hook is called and internally React makes some verifications to return the same object function. Even so, the inline function is still created on every render, `useCallback()` just skips it.   
 
-Even having `useCallback()` returning the same function instance, it doesn't bring any benefits because the memoization costs more than not having the optimization.  
+Even having `useCallback()` returning the same function instance, it doesn't bring any benefits because the memoization costs more than not having the optimization at all.  
 
 Don't forget about the increased complexity of the code. You have to make sure to keep the deps of `useCallback()` in sync with what actually you're using inside the memoized callback.  
 
