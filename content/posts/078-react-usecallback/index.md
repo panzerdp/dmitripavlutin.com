@@ -1,9 +1,9 @@
 ---
-title: "Don't Overuse React.useCallback()"
+title: "Your Guide to React.useCallback()"
 description: "React.useCallback() memoizes callback functions. In this post I will explain when to and when not to use React.useCallback()."
 published: "2020-05-04T08:40Z"
 modified: "2020-05-04T08:40Z"
-thumbnail: "./images/cover-1.jpg"
+thumbnail: "./images/cover-6.png"
 slug: dont-overuse-react-usecallback
 tags: ["react", "component", "memoization"]
 recommended: ["use-react-memo-wisely", "react-usestate-hook-guide"]
@@ -11,7 +11,7 @@ type: post
 commentsThreadId: react-usecallback
 ---
 
-A reader of my blog reached me on Facebook with an interesting question. He said his teammates are wrapping every callback function inside `useCallback()`, no matter the situation:
+A reader of my blog reached me on Facebook with an interesting question. He said his teammates were wrapping every callback function inside `useCallback()`, no matter the situation:
 
 ```jsx{4-6}
 import React, { useCallback } from 'react';
