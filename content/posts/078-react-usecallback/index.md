@@ -11,7 +11,7 @@ type: post
 commentsThreadId: react-usecallback
 ---
 
-A reader of my blog reached me on Facebook with an interesting question. He said his teammates were wrapping every callback function inside `useCallback()`, no matter the situation:
+A reader of my blog reached me on Facebook with an interesting question. He said his teammates, no matter the situation, were wrapping every callback function inside `useCallback()`:
 
 ```jsx{4-6}
 import React, { useCallback } from 'react';
@@ -147,7 +147,7 @@ function MyParent({ term }) {
 
 `handleClick` callback is memoizied by `useCallback()`. As long as `term` variable stays the same, `useCallback()` returns the same function object.  
 
-Even if for some reason `MyParent` component is re-renders, `handleClick` stays the same and doesn't break the memoization of `MyBigList`.
+Even if for some reason `MyParent` component re-renders, `handleClick` stays the same and doesn't break the memoization of `MyBigList`.
 
 ## 4. A bad use case
 
