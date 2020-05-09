@@ -187,10 +187,14 @@ Now, instead of being `undefined`, the variable `enemies` defaults to `['Joker']
 
 ## 5. Aliases
 
-If you'd like to create variables of different names that the 
+If you'd like to create variables of different names that the property names, then you can use the aliasing feature of object destructuring.  
+
+
 
 ## 6. Extracting properties from nested objects
 
-## 7. Common use cases
+## 7. Extracting property with dynamic name
 
-## 8. Summary
+## 8. Common use cases
+
+## 9. Summary
