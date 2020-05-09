@@ -11,14 +11,14 @@ type: post
 commentsThreadId: javascript-object-destructuring
 ---
 
-The object destructuring in JavaScript is a greate feature that let's you extract properties from objects.  
+The object destructuring in JavaScript is a great feature that lets you extract properties from objects.  
 
 What's better, object destructuring extracts more than one property in one statement, extracts properties from deep objects, and sets a default
 value if the property doesn't exist.  
 
 In this post, I'll explain all you need to know about object destructuring in JavaScript.  
 
-## 1. The need of object destructuring
+## 1. The need for object destructuring
 
 Having an object, imagine you'd like to extract a few properties from this object into some variables.  
 
@@ -39,7 +39,7 @@ realName; // => 'Bruce Wayne'
 
 The last 2 lines of code access the property `hero.name` into the variable `name`. The same happens with the `realName` variable.  
 
-You can notice the inneficient syntax of such way to access the property and creation of the variable. Writing `var name = hero.name` forces you to indicate the `name` property 2 times.  
+You can notice the inefficient syntax of such a way to access the property and the creation of the variable. Writing `var name = hero.name` forces you to indicate the `name` property 2 times.  
 
 That's were the object destructuring syntax is useful. It allows you to create the variable and extract the property by writing the property name a single time.  
 
@@ -70,7 +70,7 @@ const realName = hero.realName;
 const { name, realName } = hero;
 ```
 
-The object destructuring is concise because neither the property names, nor the object variable are duplicated.  
+The object destructuring is concise because neither the property names nor the object variable is duplicated.  
 
 ## 2. Extracting a property
 
@@ -107,7 +107,7 @@ To extract more than one property, just enumerate all the properties separated w
 const { identifier1, identifier2, ..., identifierN } = expression;
 ```
 
-Where `identifier1`, ..., `identifierN` are names of properties to access and `expression` should evaluate to an object. After the destructuring, the variables `identifier1`, ..., `identifierN` contain corresponding properties values.  
+Where `identifier1`, ..., `identifierN` are names of properties to access, and `expression` should evaluate to an object. After the destructuring, the variables `identifier1`, ..., `identifierN` contain corresponding properties values.  
 
 Let's take a look again at the example from the first section, where 2 properties are extracted:
 
@@ -150,7 +150,7 @@ Fortunately, you can set a default value inside a destructuring of an object. He
 const { identifier = defaultValue } = expression;
 ```
 
-Where `identifier` is the name of the property to access and `expression` should evaluate to an object. After the destructuring, the variable `identifier` contains the property value, or is assigned with `defaultValue` if `identifier` property doesn't exist.  
+Where `identifier` is the name of the property to access and `expression` should evaluate to an object. After the destructuring, the variable `identifier` contains the property value or is assigned with `defaultValue` if `identifier` property doesn't exist.  
 
 Let's change the previous code sample, and use the default value feature:
 
@@ -194,7 +194,7 @@ secretName; // => 'John Wayne'
 
 ## 6. Extracting properties from nested objects
 
-In all of the previous examples the object were plain: the properties contain primitive data types like strings.  
+In all of the previous examples, the objects were plain: the properties contain primitive data types like strings.  
 
 As it happens often in JavaScript, objects can be nested in other objects. In other words, some properties can contain objects.  
 
@@ -233,7 +233,7 @@ city; // => 'Gotham'
 
 The object destructuring `const { address: { city } } = hero` let's you access the property `city` out of the nested object.  
 
-## 7. Extracting property with dynamic name
+## 7. Extracting property with a dynamic name
 
 You can extract to variables properties with the dynamic name (when you determine the property name at runtime):
 
@@ -265,7 +265,7 @@ name; // => 'Batman'
 
 As seen in many examples before, the object destructuring binds property values to variables.  
 
-Even if in the examples were used `const` statement, the object destructuring can assign values to variables declared using `let` and even `var`, or even no declaration statement at all.
+Even if the examples have used `const` statement, the object destructuring can assign values to variables declared using `let` and even `var`, or even no declaration statement at all.
 
 
 For example here's how to destructure using `let` statement:
@@ -341,11 +341,9 @@ names; // => ['Batman', 'Joker']
 
 `function({ name })` destructures the function parameter inline and defines a variable `name` that holds the value of property `name`.  
 
-
-
 ## 9. Summary
 
-The object destructuring is a powerful feature of JavaScript that let's you easily extract properties from object, and right away bind these values to variables.  
+The object destructuring is a powerful feature of JavaScript that lets you easily extract properties from an object, and right away bind these values to variables.  
 
 What I especially like about object destructuring is the concise syntax, and the ability to extract multiple variables in just one statement.  
 
