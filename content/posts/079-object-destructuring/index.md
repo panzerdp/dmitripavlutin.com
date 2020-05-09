@@ -110,7 +110,7 @@ Can you extract more than one property? Yes!
 
 ## 3. Extracting multiple properties
 
-To extract more than one property, just enumerate all the necessary properties with a comma `,` separator:
+To extract more than one property, just enumerate all the properties separated with a comment `,`:
 
 ```javascript
 const { identifier1, identifier2, ..., identifierN } = expression;
@@ -118,11 +118,76 @@ const { identifier1, identifier2, ..., identifierN } = expression;
 
 Where `identifier1`, ..., `identifierN` are names of properties to access and `expression` should evaluate to an object. After the destructuring, the variables `identifier1`, ..., `identifierN` contain corresponding properties values.  
 
+Let's take a look again at the example from the first section, where 2 properties are extracted:
 
+```javascript{9}
+const hero = {
+  name: 'Batman',
+  realName: 'John Wayne',
+  address: {
+    city: 'Gotham'
+  }
+};
+
+const { name, realName } = hero;
+
+name;     // => 'Batman',
+realName; // => 'Bruce Wayne'
+```
+
+Again, `const { name, realName } = hero` creates 2 variables `name` and `realName` having the values of corresponding properties `hero.name` and `hero.realName`. 
 
 ## 4. Default values
 
+In case if the destructured object doesn't have the property specified in the destructuring assignment, then the variable is going to be assigned with `undefined` value.  
+
+Here's an example:
+
+```javascript{9}
+const hero = {
+  name: 'Batman',
+  realName: 'John Wayne',
+  address: {
+    city: 'Gotham'
+  }
+};
+
+const { enemies } = hero;
+
+enemies;     // => undefined
+```
+
+Because the property `enemies` doesn't exist in the object `hero`, after the destructuring the variable `enemies` is `undefined`.  
+
+Fortunately, you can set a default value inside a destructuring of an object. Here's the basic syntax:
+
+```javascript
+const { identifier = defaultValue } = expression;
+```
+
+Where `identifier` is the name of the property to access and `expression` should evaluate to an object. After the destructuring, the variable `identifier` contains the property value, or is assigned with `defaultValue` if `identifier` property doesn't exist.  
+
+Let's change the previous code sample, and use the default value feature:
+
+```javascript{9}
+const hero = {
+  name: 'Batman',
+  realName: 'John Wayne',
+  address: {
+    city: 'Gotham'
+  }
+};
+
+const { enemies = ['Joker'] } = hero;
+
+enemies;     // => ['Joker']
+```
+
+Now, instead of being `undefined`, the variable `enemies` defaults to `['Joker']`.  
+
 ## 5. Aliases
+
+If you'd like to create variables of different names that the 
 
 ## 6. Extracting properties from nested objects
 
