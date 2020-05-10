@@ -1,8 +1,8 @@
 ---
 title: "How to Use Object Destructuring in JavaScript"
 description: "Object destructuring in JavaScript let's you extract properties from objects in one statement."
-published: "2020-05-09T12:00Z"
-modified: "2020-05-09T12:00Z"
+published: "2020-05-10T13:40Z"
+modified: "2020-05-10T13:40Z"
 thumbnail: "./images/cover.png"
 slug: javascript-object-destructuring
 tags: ["react", "component", "memoization"]
@@ -153,7 +153,7 @@ const { enemies } = hero;
 enemies;     // => undefined
 ```
 
-Because the property `enemies` doesn't exist in the object `hero`, after the destructuring the variable `enemies` is `undefined`.  
+After destructuring the variable `enemies` is `undefined` because the property `enemies` doesn't exist in the object `hero`.  
 
 Fortunately, you can set a default value inside a destructuring of an object. Here's the basic syntax:
 
@@ -381,5 +381,5 @@ names; // => ['Batman', 'Joker']
 
 The object destructuring is a powerful feature of JavaScript that lets you easily extract properties from an object and bind these values to variables.  
 
-What I especially like about object destructuring is the concise syntax and ability to extract multiple variables in one statement.  
+I especially like about object destructuring is the concise syntax and ability to extract multiple variables in one statement.  
 
