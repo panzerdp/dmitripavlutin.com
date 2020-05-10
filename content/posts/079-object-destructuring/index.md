@@ -11,7 +11,7 @@ type: post
 commentsThreadId: javascript-object-destructuring
 ---
 
-The object destructuring is a great JavaScript feature that lets you extract properties from objects in a clear and concise manner.  
+The object destructuring is a great JavaScript feature that lets you extract properties from objects clearly and concisely.  
 
 What's better, object destructuring can extract more than one property in one statement, can access properties from nested objects, and can set a default
 value if the property doesn't exist.  
@@ -35,9 +35,9 @@ name;     // => 'Batman',
 realName; // => 'Bruce Wayne'
 ```
 
-The property `hero.name` value is assigned to the variable `name`. The same happens with `hero.realName` propery and `realName` variable.  
+The property `hero.name` value is assigned to the variable `name`. The same happens with `hero.realName` property and `realName` variable.  
 
-You can notice the inneficient syntax of such a way to access the property and the creation of the variable. By writing `var name = hero.name` you have to mention the `name` binding 2 times.  
+You can notice the inefficient syntax of such a way to access the property and the creation of the variable. By writing `var name = hero.name` you have to mention the `name` binding 2 times.  
 
 That's were the object destructuring syntax is useful: you can read the property and assign the value to a variable without duplicating the property name.  More than that, you can read multiple properties from the same object in just one statement!
 
@@ -218,7 +218,7 @@ Looking at `const { realName: secretName } = hero`, the destucturing defines a n
 
 ## 6. Extracting properties from nested objects
 
-In the previous examples the objects were plain: the properties have primitive data types (e.g. strings).  
+In the previous examples, the objects were plain: the properties have primitive data types (e.g. strings).  
 
 As it happens often in JavaScript, objects can be nested in other objects. In other words, some properties can contain objects.  
 
@@ -238,9 +238,13 @@ The above syntax is equivalent to:
 const identifierNested = expression.identifier.identifierNested;
 ```
 
-Note that you're not limited on the level of nesting to extract properties.  
+Note that the level of nesting you can extract properties is unlimited. All you have to do is add more nested curly braces:
 
-For example, the object `hero` contains a nested object `{ city: 'Gotham'}`:
+```javascript
+const { propA: { propB: { propC: { .... } } } } = object;
+```
+
+For example, the object `hero` contains a property `address` which is nested object `{ city: 'Gotham'}`:
 
 ```javascript{10}
 const hero = {
@@ -334,7 +338,7 @@ const hero = {
   name: 'Batman',
 };
 
-{ name } = hero;
+({ name } = hero);
 
 name; // => 'Batman'
 ```
