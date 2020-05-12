@@ -2,7 +2,7 @@
 title: "How to Use Object Destructuring in JavaScript"
 description: "Object destructuring in JavaScript let's you extract properties from objects in one statement."
 published: "2020-05-10T13:40Z"
-modified: "2020-05-10T13:40Z"
+modified: "2020-05-12T11:30Z"
 thumbnail: "./images/cover.png"
 slug: javascript-object-destructuring
 tags: ["javascript", "destructuring"]
@@ -229,17 +229,17 @@ Often objects can be nested in other objects. In other words, some properties ca
 In such case, you still can use the object destructuring and access properties from deep. Here's the basic syntax:
 
 ```javascript
-const { nestedObjectProp: { identifierNested } } = expression;
+const { nestedObjectProp: { identifier } } = expression;
 ```
 
-`nestedObjectProp` is the name of the property that holds a nested object. `identifierNested` is the property name to access from the nested object. `expression` should evaluate to the destructured object.  
+`nestedObjectProp` is the name of the property that holds a nested object. `identifier` is the property name to access from the nested object. `expression` should evaluate to the destructured object.  
 
-After the destructuring, the variable `identifierNested` contains the property value of the nested object.  
+After the destructuring, the variable `identifier` contains the property value of the nested object.  
 
 The above syntax is equivalent to:
 
 ```javascript
-const identifierNested = expression.identifier.identifierNested;
+const identifier = expression.nestedObjectProp.identifier;
 ```
 
 The level of nesting you can extract properties from is unlimited. If you want to extract properties from deep, just add more nested curly braces:
