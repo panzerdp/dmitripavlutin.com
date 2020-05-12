@@ -11,7 +11,7 @@ type: post
 commentsThreadId: string-interpolation-in-javascript
 ---
 
-The evaluation of a string literal which placeholders are replaced with values is named string interpolation.  
+Replacing placeholders with values inside of a string literal is named string interpolation.  
 
 In JavaScript, the template literals (strings wrapped in backticks `` ` ``) and `${expression}` as placeholder perform the string interpolation:
 
