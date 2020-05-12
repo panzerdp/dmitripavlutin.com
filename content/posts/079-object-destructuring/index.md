@@ -74,6 +74,8 @@ const { name, realName } = hero;
 
 it's visible that the object destructuring is handier because neither the property names nor the object variable is duplicated.  
 
+![JavaScript Object Destructuring Inforgraphic](./images/javascript-object-destructuring-infographic-1.png)
+
 ## 2. Extracting a property
 
 The basic syntax of object destructuring is pretty simple:
