@@ -1,6 +1,6 @@
 ---
 title: "How to Use Object Destructuring in JavaScript"
-description: "Object destructuring in JavaScript let's you extract properties from objects in one statement."
+description: "The object destructuring is a JavaScript feature to extract properties from objects and bind them to variables."
 published: "2020-05-10T13:40Z"
 modified: "2020-05-12T11:30Z"
 thumbnail: "./images/cover.png"
