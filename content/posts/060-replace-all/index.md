@@ -13,7 +13,7 @@ commentsThreadId: replace-all-string-occurrences-javascript
 
 There's no easy way in JavaScript to replace all string occurrences. Java, which had served an inspiration for JavaScript in the first days, has `replaceAll()` method on strings since 1995!  
 
-In this post, I will show you 2 ways on how to replace all string occurrences in JavaScript: splitting andjoining a string, and `replace()` combined with a global regular expression. 
+In this post, I will show you 2 ways on how to replace all string occurrences in JavaScript: splitting and joining a string, and `replace()` combined with a global regular expression.  
 
 Finally, you'll read about the new proposal [String.prototype.replaceAll()](https://github.com/tc39/proposal-string-replaceall) (at stage 3) that brings the `replaceAll()` method to strings.   
 
