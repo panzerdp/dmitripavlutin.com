@@ -229,9 +229,9 @@ myEmptyFunction2(); // => undefined
 
 ### 4.2 Arrow function
 
-The arrow function behaves same way as a regular function, with one interesting exception.  
+The arrow function behaves same way as a regular function, with one useful exception.  
 
-If the arrow function contains a single expression, and you omit the curly braces, then this expression is explicitely returned. 
+If the arrow function contains a single expression, and you omit the curly braces, then the expression is explicitely returned. 
 
 ```javascript
 const increment = (num) => num + 1;
@@ -241,10 +241,85 @@ increment(41); // => 42
 
 The `increment()` arrow consists of only one expression: `num + 1`. The expression is implicitely returned by the arrow function without the use of `return` keyword.  
 
-
-
 ## 5. Methods
 
 ### 5.1 Regular function
 
+The regular functions are the usual way to define methods on classes.  
+
+In the following class `Hero` the method `logName()` is defined as a regular function:
+
+```javascript{6-8}
+class Hero {
+  constructor(heroName) {
+    this.heroName = heroName;
+  }
+
+  logName() {
+    console.log(this.heroName);
+  }
+}
+
+const batman = new Hero('Batman');
+```
+
+Usually the regular functions as methods are the way to go.  
+
+But in some situations you might need to use the method as a callback function. In such case you might find difficulties to access `this` value when the method as callback is invoked.  
+
+For example, let's use use `logName()` method as a callback to setTimeout():
+
+```javascript
+setTimeout(batman.logName, 1000);
+// after 1 second logs "undefined"
+```
+
+Unfortunately, after 1 second `undefined` is logged to console. All because `setTimeout()` performs a simple invocation of `logName`.  
+
+To make it work as expected, you have to bind `logName()` method to the instance manually:
+
+```javascript
+setTimeout(batman.logName.bind(batman), 1000);
+// after 1 second logs "Batman"
+```
+
+Calling `bind()` on the method `batman.logName.bind(batman)` binds `this` value to `batman` instance. Then you can be sure that the method doesn't lose the context.   
+
+Binding manually `this` is daunting, especially if you have lots of methods. There's a better way, to arrow functions in classes properties.
+
 ### 5.2 Arrow function
+
+Thanks to [Class fields proposal](https://github.com/tc39/proposal-class-fields) (at this moment at stage 3) you can use arrow function as methods in classes.  
+
+Now, in contrast with regular functions, the method defined using an arrow function binds `this` lexically to the instance of the class.  
+
+Let's use the arrow function as a field:
+
+```javascript{6-8}
+class Hero {
+  constructor(heroName) {
+    this.heroName = heroName;
+  }
+
+  logName = () => {
+    console.log(this.heroName);
+  }
+}
+
+const batman = new Hero('Batman');
+```
+
+Now you can easily supply `batman.logName` as a callback without any manual binding of `this`. The value of `this` is already bound to the instance `batman`:
+
+```javascript
+setTimeout(batman.logName, 1000);
+// after 1 second logs "Batman"
+```
+
+## 6. Summary
+
+Both regular functions and arrow functions have their good place in JavaScript. 
+
+Knowing well the differences between the two will help you make better decisions when it's right to use a specific type of function.  
+
+*What other differences between arrow and regular functions do you know?*
