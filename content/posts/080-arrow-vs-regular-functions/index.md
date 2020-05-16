@@ -120,9 +120,44 @@ myObject.myMethod([1, 2, 3]); // logs "myObject" 3 times
 
 `this` bound lexically is one of the great features of arrow functions. It doesn't change `this` value, thus you can easily access `this` value of the outer function in callbacks.  
 
-## 2. *arguments* object
+## 2. Constructors
 
-### 2.1 Regular function
+## 2.1 Regular function
+
+As seen in the previous section, the regular function can easily serve as a constructor for instances.  
+
+For example, the following function creates instances of a car:
+
+```javascript
+function Car(color) {
+  this.color = color;
+}
+
+const redCar = new Car('red');
+redCar instanceof Car; // => true
+```
+
+`Car` is a regular function, and when invoked with `new` keyword, it creates new instances.  
+
+## 2.2 Arrow function
+
+A direct consequence of arrow function binding `this` lexically is that you cannot use the arrow functions as a constructor.  
+
+If you try to invoke an arrow function prefixed with `new` keyword, JavaScrip throws an error:
+
+```javascript
+const Car = (color) => {
+  this.color = color;
+};
+
+const redCar = new Car('red'); // TypeError: Car is not a constructor 
+```
+
+Invoking `new Car('red')` where `Car` is an arrow function throws `TypeError: Car is not a constructor`. 
+
+## 3. *arguments* object
+
+### 3.1 Regular function
 
 Inside the body of a regular function, `arguments` is a special array-like object that contains the list of argument with which the function was invoked.  
 
@@ -138,7 +173,7 @@ myFunction('a', 'b'); // logs { 0: 'a', 1: 'b'}
 
 `argument` array-object contains all three arguments `'a'`, `'b'`.  
 
-### 2.2 Arrow function
+### 3.2 Arrow function
 
 On the other side, no `arguments` special keyword is defined inside of the arrow function. 
 
@@ -160,21 +195,55 @@ myRegularFunction('a', 'b'); // logs { 0: 'a', 1: 'b' }
 
 The arrow function `myArrowFunction()` is invoked with the arguments `'c'`, `'d'`. Still, inside of its body, `arguments` object equals to the arguments of `myRegularFunction()` invocation: `'a'`, `'b'`.  
 
-## 3. Implicit *return*
-
-### 3.1 Regular function
-
-
-
-### 3.2 Arrow function
-
-## 4. Methods
+## 4. Implicit *return*
 
 ### 4.1 Regular function
 
+If you want to return a result from a regular function, all you have to do is write `return expression` statement:
+
+```javascript
+function myFunction() {
+  return 42;
+}
+
+myFunction(); // => 42
+```
+
+However, in case if the `return` statement is missing, or there no expression after return statement, the function returns `undefined`:
+
+```javascript
+function myEmptyFunction() {
+  42;
+}
+
+function myEmptyFunction2() {
+  42;
+  return;
+}
+
+myEmptyFunction();  // => undefined
+myEmptyFunction2(); // => undefined
+```
+
+`myEmptyFunction()` doesn't have a `return` statement at all, and `myEmptyFunction2()` doesn't have any expressions after `return` keyword. Boths function return implicitly `undefined` value.  
+
 ### 4.2 Arrow function
 
-## 5. Constructors
+The arrow function behaves same way as a regular function, with one interesting exception.  
+
+If the arrow function contains a single expression, and you omit the curly braces, then this expression is explicitely returned. 
+
+```javascript
+const increment = (num) => num + 1;
+
+increment(41); // => 42
+```
+
+The `increment()` arrow consists of only one expression: `num + 1`. The expression is implicitely returned by the arrow function without the use of `return` keyword.  
+
+
+
+## 5. Methods
 
 ### 5.1 Regular function
 
