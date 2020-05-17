@@ -11,7 +11,7 @@ type: post
 commentsThreadId: differences-between-arrow-and-regular-functions
 ---
 
-In JavaScript you can define functions in many ways.  
+In JavaScript, you can define functions in many ways.  
 
 The first standard way is by using the `function` keyword:
 
@@ -159,7 +159,7 @@ Invoking `new Car('red')` where `Car` is an arrow function throws `TypeError: Ca
 
 ### 3.1 Regular function
 
-Inside the body of a regular function, `arguments` is a special array-like object that contains the list of argument with which the function was invoked.  
+Inside the body of a regular function, `arguments` is a special array-like object that contains the list of arguments with which the function was invoked.  
 
 Let's invoke the following function with 3 arguments:
 
@@ -229,9 +229,9 @@ myEmptyFunction2(); // => undefined
 
 ### 4.2 Arrow function
 
-The arrow function behaves same way as a regular function, with one useful exception.  
+The arrow function behaves the same way as a regular function, with one useful exception.  
 
-If the arrow function contains a single expression, and you omit the curly braces, then the expression is explicitely returned. 
+If the arrow function contains a single expression, and you omit the curly braces, then the expression is explicitly returned. 
 
 ```javascript
 const increment = (num) => num + 1;
@@ -239,7 +239,7 @@ const increment = (num) => num + 1;
 increment(41); // => 42
 ```
 
-The `increment()` arrow consists of only one expression: `num + 1`. The expression is implicitely returned by the arrow function without the use of `return` keyword.  
+The `increment()` arrow consists of only one expression: `num + 1`. The expression is implicitly returned by the arrow function without the use of `return` keyword.  
 
 ## 5. Methods
 
@@ -263,9 +263,9 @@ class Hero {
 const batman = new Hero('Batman');
 ```
 
-Usually the regular functions as methods are the way to go.  
+Usually, the regular functions as methods are the way to go.  
 
-But in some situations you might need to use the method as a callback function. In such case you might find difficulties to access `this` value when the method as callback is invoked.  
+But in some situations, you might need to use the method as a callback function. In such a case you might find difficulties to access `this` value when the method as the callback is invoked.  
 
 For example, let's use use `logName()` method as a callback to setTimeout():
 
@@ -285,11 +285,11 @@ setTimeout(batman.logName.bind(batman), 1000);
 
 Calling `bind()` on the method `batman.logName.bind(batman)` binds `this` value to `batman` instance. Then you can be sure that the method doesn't lose the context.   
 
-Binding manually `this` is daunting, especially if you have lots of methods. There's a better way, to arrow functions in classes properties.
+Binding manually `this` is daunting, especially if you have lots of methods. There's a better way, to arrow functions in class properties.
 
 ### 5.2 Arrow function
 
-Thanks to [Class fields proposal](https://github.com/tc39/proposal-class-fields) (at this moment at stage 3) you can use arrow function as methods in classes.  
+Thanks to [Class fields proposal](https://github.com/tc39/proposal-class-fields) (at this moment at stage 3) you can use the arrow function as methods in classes.  
 
 Now, in contrast with regular functions, the method defined using an arrow function binds `this` lexically to the instance of the class.  
 
@@ -318,7 +318,7 @@ setTimeout(batman.logName, 1000);
 
 ## 6. Summary
 
-Both regular functions and arrow functions have their good place in JavaScript. 
+Both regular and arrow functions have their good place in JavaScript.  
 
 Knowing well the differences between the two will help you make better decisions when it's right to use a specific type of function.  
 
