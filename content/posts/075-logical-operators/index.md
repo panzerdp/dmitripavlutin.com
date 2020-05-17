@@ -158,7 +158,7 @@ person.job  || 'Unknown'; // => 'Unknown'
 
 Let's look at the expression `person.name || 'Unknown'`. Because the first operand `person.name` is `'John'` (a truthy value), the evaluation early exists with the truthy value as a result. The expression evaluates to `'John'`.  
 
-`person.job  || 'Unknown'` operates differently. `person.job` is `undefined`, so the expression is the same as `undefined || 'Unknown'`. The `&&` evaluation algorithm says that the expression should return the first operand that is truthy, which in this case is `'Unknown'`.  
+`person.job  || 'Unknown'` operates differently. `person.job` is `undefined`, so the expression is the same as `undefined || 'Unknown'`. The `||` evaluation algorithm says that the expression should return the first operand that is truthy, which in this case is `'Unknown'`.  
 
 ## 5. Summary
 
