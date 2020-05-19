@@ -2,7 +2,7 @@
 title: "What every JavaScript developer should know about Unicode"
 description: "Unicode in JavaScript: basic concepts, escape sequences, normalization, surrogate pairs, combining marks and how to avoid pitfalls"
 published: "2016-09-14"
-modified: "2019-07-24T08:00Z"
+modified: "2020-05-19T08:50Z"
 thumbnail: "./images/cover.jpg"
 slug: what-every-javascript-developer-should-know-about-unicode
 tags: ["javascript", "string", "unicode"]
@@ -38,18 +38,18 @@ Let's start with an elementary question. How are you able to read and understand
 
 Why are you able to understand the meaning of letters? Simply: because you (reader) and me (writer) have an agreement over the association between the graphical symbol (what is seen on the screen) and the English language letter (the meaning).  
 
-Almost the same happens with computers. One difference is that computers don't understand the meaning of letters: these are sequences of bits.  
+The same happens with computers. The difference is that computers don't understand the meaning of letters: these are just sequences of bits.  
 
-Imagine a scenario when the computer of *User1* sends a message `'hello'` to the computer of *User2*.  
+Imagine a scenario when *User1* sends a message `'hello'` to *User2* through network.  
 
-The computer doesn't know the meaning of letters. So the computer of *User1* transforms  `'hello'` message into a sequence of numbers `0x68 0x65 0x6C 0x6C 0x6F`, where each letter uniquely corresponds to a number: `h` is `0x68`, `e` is `0x65`, etc. 
-Then sends these numbers to *User2*'s computer.  
+*User1*'s computer doesn't know the meaning of letters. So it transforms `'hello'` into a sequence of numbers `0x68 0x65 0x6C 0x6C 0x6F`, where each letter uniquely corresponds to a number: `h` is `0x68`, `e` is `0x65`, etc. 
+These numbers are sent to *User2*'s computer.  
 
 When the computer of *User2* receives the sequence of numbers `0x68 0x65 0x6C 0x6C 0x6F`, it uses the same letter to number correspondence and restores the message. Then it displays the correct message: `'hello'`.  
 
 The agreement between the two computers about the correspondence between letters and numbers is what **Unicode** standardizes.  
 
-In terms of Unicode, `h` is an abstract character named *LATIN SMALL LETTER H*. This character has the corresponding number `0x68`, which is a code point in notation `U+0068`.  These terms are described in the chapter below.  
+In terms of Unicode, `h` is an abstract character named *LATIN SMALL LETTER H*. This character has the corresponding number `0x68`, which is a code point in notation `U+0068`.  
 
 The role of Unicode is to provide a list of abstract characters (character set) and assign to each character a unique identifier code point (coded character set).  
 
@@ -66,7 +66,7 @@ Unicode is a universal character set that defines the list of characters from th
 
 ![Unicode logo](./images/unicode-logo.svg)
 
-Unicode includes characters from most of today languages, punctuation marks, diacritics, mathematical symbols, technical symbols, arrows, emoji and more.  
+Unicode includes characters from most of today's languages, punctuation marks, diacritics, mathematical symbols, technical symbols, arrows, emoji, and more.  
 
 The first Unicode version 1.0 was published in October 1991 and had 7,161 characters. The latest version 9.0 (published in June 2016) provides codes for 128,172 characters.  
 
@@ -74,28 +74,28 @@ The universal and embracing approach of Unicode solves a major problem that exis
 
 It was complicated to create an application that supports all character sets and encodings. 
 
-If you have an opinion that Unicode is hard, programming without it would be even more difficult. 
+If you have thought that Unicode is hard, programming without Unicode would be even more difficult. 
 
 I still remember picking randomly charsets and encodings to read the content of files. Pure lottery!
 
 ### 2.1 Characters and code points
 
-> **Abstract character** (or character) is a unit of information used for the organization, control or representation of textual data.  
+> **Abstract character** (or character) is a unit of information used for the organization, control, or representation of textual data.  
 
 Unicode deals with characters as abstract terms. Every abstract character has an associated name, e.g. *LATIN SMALL LETTER A*. The rendered form (glyph) of this character is `a`.  
 
 > **Code point** is a number assigned to a single character.
 
-The code point is presented in the format `U+<hex>`, where `U+` is a prefix that means Unicode and `<hex>` is a number in hexadecimal. For example `U+0041` and `U+2603` are code points.  
+Code points are numbers in the range from `U+0000` to `U+10FFFF`.  
 
-Code points are numbers in the range from `U+0000` to `U+10FFFF`. 
+`U+<hex>` is the format of code points, where `U+` is a prefix meaning **U**nicode and `<hex>` is a number in hexadecimal. For example, `U+0041` and `U+2603` are code points.  
 
-Remember that code point is a simple number. And that's how you should think about it. 
+Remember that a code point is a simple number. And that's how you should think about it. 
 The code point is a kind of index of an element in an array.  
 
 The magic happens because Unicode associates a code point with a character. For example `U+0041` corresponds to the character named *LATIN CAPITAL LETTER A* (rendered as `A`), or `U+2603` corresponds to the character named *SNOWMAN* (rendered as `☃`).  
 
-Notice that not all code points have associated characters. `1,114,112` code points are available (the range `U+0000` to `U+10FFFF`), but only `137,929` (as of May 2019) have assigned characters.  
+Not all code points have associated characters. `1,114,112` code points are available (the range `U+0000` to `U+10FFFF`), but only `137,929` (as of May 2019) have assigned characters.  
 
 ### 2.2 Unicode planes
 
@@ -116,7 +116,7 @@ Planes split Unicode code points into 17 equal groups:
 
 As mentioned above, the code points from the Basic Multilingual Plane are in the range from `U+0000` to `U+FFFF` and can have up to 4 hexadecimal digits.  
 
-Basically, the developer deals with characters from BMP. It contains most of the necessary characters. 
+The developer usually deals with characters from BMP. It contains most of the necessary characters. 
 
 Some characters from BMP:
 
@@ -147,7 +147,7 @@ It needs a physical way to represent Unicode code points: the code units.
 
 > **Code unit** is a bit sequence used to encode each character within a given encoding form.  
 
-The [character encoding](https://en.wikipedia.org/wiki/Character_encoding) is what makes the transformation from abstract code points into physical bits: code units.  
+The [character encoding](https://en.wikipedia.org/wiki/Character_encoding) is what transforms abstract code points into physical bits: code units.  
 In other words, the character encoding translates the Unicode code points to unique code unit sequences.
 
 Popular encodings are [UTF-8](https://en.wikipedia.org/wiki/UTF-8), [UTF-16](https://en.wikipedia.org/wiki/UTF-16) and [UTF-32](https://en.wikipedia.org/wiki/UTF-32).  
@@ -232,7 +232,7 @@ Combining marks normally are not used in isolation, i.e. without the base charac
 
 As well as the surrogate pairs, combining marks are tough to handle in JavaScript.  
 
-A combining character sequence (base character + combining mark) is distinguished by the user as a single symbol (e.g. `'\u0061\u030A'` is `'å'`). But the developer must determine that actually 2 code points `U+0061` and `U+030A` are used to construct `å`.  
+A combining character sequence (base character + combining mark) is distinguished by the user as a single symbol (e.g. `'\u0061\u030A'` is `'å'`). But the developer must determine that 2 code points `U+0061` and `U+030A` are used to construct `å`.  
 
 ![Unicode basic terms](./images/unicode-terms.png)
 
@@ -252,7 +252,7 @@ Every element of a string is interpreted by the engine as a code unit. The way a
 console.log('cafe\u0301'); // => 'café'
 console.log('café');       // => 'café'
 ```
-`'cafe\u0301'` and `'café'` literals have slightly different code units, but both are rendered the same symbols sequence `café`.  
+`'cafe\u0301'` and `'café'` literals have slightly different code units, but both are rendered the same sequence of symbols `café`.  
 
 > **The length of a String** is the number of elements (i.e., 16-bit values) within it. [...] Where ECMAScript operations interpret String values, each element is interpreted as a single UTF-16 code unit.
 
@@ -616,7 +616,7 @@ const regex = /[😀-😎]/;
 // Range out of order in character class
 ```
 
-The astral code points are encoded to surrogate pairs. So JavaScript represents the regular expression using code units `/[\uD83D\uDE00-\uD83D\uDE0E]/`. Each code unit is considered a separated element in the pattern, so the regular expression ignores the concept of a surrogate pair.  
+The astral code points are encoded to surrogate pairs. So JavaScript represents the regular expression using code units `/[\uD83D\uDE00-\uD83D\uDE0E]/`. Each code unit is considered a separate element in the pattern, so the regular expression ignores the concept of a surrogate pair.  
 The `\uDE00-\uD83D` part of the character class is not valid, because `\uDE00` is greater than `\uD83D`. As a result, an error is generated.  
 
 #### Regular expression *u* flag
@@ -665,7 +665,7 @@ console.log(regex2.test(drink)); // => true
 The string rendered has 4 symbols `café`.  
 Nevertheless, the regular expression matches `'cafe\u0301'` as a sequence of 5 elements `/^.{5}$/`.  
 
-## 4. Final words
+## 4. Summary
 
 Probably the most important concept about Unicode in JavaScript is **to treat strings as sequences of code units**, as they really are.  
 
