@@ -22,12 +22,14 @@ Finally, you'll read about the new proposal [String.prototype.replaceAll()](http
 If you google how to replace all string occurrences in JavaScript, most likely the first approach you'll find is the use of an intermediate array. Here's how it works:
 
 1) Split the string into pieces by the search string.
-2) Then join the pieces back having the replace string between the pieces.  
+2) Then join the pieces with the replace string in between.  
 
-For example, let's replace `+` with `-` in the string `'1+2+3'`. 
-Then the pieces are joined with an `-` in between, which results in `'1-2-3'`.  
+For example, let's replace `+` with `*` in the string `'1+2+3'`:
 
-Here's how you can use `split()` and `join()` methods to achieve this in JavaScript:
+* First, splitting `'1+2+3'` into pieces by `+` results in `['1', '2', '3']`  
+* Then joining `['1', '2', '3']` with `*` in between results in `'1*2*3'`.  
+
+Here's how you can use `split()` and `join()` methods to achieve the same in JavaScript:
 
 ```javascript{4}
 const search = 'duck';
