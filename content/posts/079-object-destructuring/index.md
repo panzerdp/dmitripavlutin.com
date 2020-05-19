@@ -365,7 +365,7 @@ for (const { name } of heroes) {
 
 Generally, the object destructuring can be placed anywhere where an assignment happens. 
 
-For instance, you could could destruct an object right inside the parameters list of a function:
+For instance, you could destruct an object right inside the parameters list of a function:
 
 ```javascript{7}
 const heroes = [
