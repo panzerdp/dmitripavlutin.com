@@ -2,7 +2,7 @@
 title: "5 Differences Between Arrow and Regular Functions"
 description: "The 5 must-know differences between arrow and regular functions in JavaScript."
 published: "2020-05-16T12:00Z"
-modified: "2020-05-17T17:20Z"
+modified: "2020-05-19T09:00Z"
 thumbnail: "./images/cover-3.png"
 slug: differences-between-arrow-and-regular-functions
 tags: ["javascript", "function", "arrow function"]
