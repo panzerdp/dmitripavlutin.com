@@ -2,7 +2,7 @@
 title: "5 Differences Between Arrow and Regular Functions"
 description: "The 5 must-know differences between arrow and regular functions in JavaScript."
 published: "2020-05-16T12:00Z"
-modified: "2020-05-19T09:00Z"
+modified: "2020-05-20T17:00Z"
 thumbnail: "./images/cover-3.png"
 slug: differences-between-arrow-and-regular-functions
 tags: ["javascript", "function", "arrow function"]
@@ -41,7 +41,7 @@ const greet = (who) => {
 
 While both the regular and arrow syntaxes define functions, when would you choose one instead of another? That's a good question.  
 
-In this post, I'm going to show the main differences between the regular and arrow functions, so you could choose the right syntax for your needs.  
+In this post, I'm going to show the main differences between the two, so you could choose the right syntax for your needs.  
 
 ## 1. *this* value
 
@@ -99,9 +99,9 @@ new MyFunction(); // logs an instance of MyFunction
 
 ### 1.2 Arrow function
 
-The behavior of `this` value is inside of an arrow function differs considerably from the regular function `this` behavior.  
+The behavior of `this` inside of an arrow function differs considerably from the regular function's `this` behavior.  
 
-No matter how or where being executed, `this` value inside of an array function always equals `this` value from the outer function. In other words, the arrow function binds `this` lexically.  
+No matter how or where being executed, `this` value inside of an array function always equals `this` value from the outer function. In other words, the arrow function resolves `this` lexically. In another words, the arrow function doesn't define its own execution context.  
 
 In the following example, `myMethod()` is an outer function of `callback()` arrow function:
 
@@ -121,7 +121,7 @@ myObject.myMethod([1, 2, 3]);
 
 `this` value inside the arrow function `callback()` equals to `this` of the outer function `myMethod()`.  
 
-`this` bound lexically is one of the great features of arrow functions. If you use callbacks inside of methods, you can be sure the arrow function `this` value of the method.  
+`this` resolved lexically is one of the great features of arrow functions. When using callbacks inside methods you are sure the arrow function doesn't define its own `this`: no more `const self = this` or `callback.bind(this)` workarounds.  
 
 ## 2. Constructors
 
@@ -144,7 +144,7 @@ redCar instanceof Car; // => true
 
 ## 2.2 Arrow function
 
-A consequence of arrow function binding `this` lexically is that you cannot use the arrow functions as a constructor.  
+A consequence of `this` resolved lexically is that an arrow function cannot be used as a constructor.  
 
 If you try to invoke an arrow function prefixed with `new` keyword, JavaScrip throws an error:
 
@@ -156,7 +156,7 @@ const Car = (color) => {
 const redCar = new Car('red'); // TypeError: Car is not a constructor 
 ```
 
-Invoking `new Car('red')` where `Car` is an arrow function throws `TypeError: Car is not a constructor`. 
+Invoking `new Car('red')`, where `Car` is an arrow function, throws `TypeError: Car is not a constructor`. 
 
 ## 3. *arguments* object
 
@@ -164,7 +164,7 @@ Invoking `new Car('red')` where `Car` is an arrow function throws `TypeError: Ca
 
 Inside the body of a regular function, `arguments` is a special array-like object containing the list of arguments with which the function has been invoked.  
 
-Let's invoke the following function with 3 arguments:
+Let's invoke `myFunction` function with 3 arguments:
 
 ```javascript{2}
 functin myFunction() {
@@ -174,13 +174,13 @@ functin myFunction() {
 myFunction('a', 'b'); // logs { 0: 'a', 1: 'b'}
 ```
 
-`argument` array-like object contains all the arguments `'a'`, `'b'`.  
+`arguments` array-like object contains the invocation arguments: `'a'` and `'b'`.  
 
 ### 3.2 Arrow function
 
-On the other side, no `arguments` special keyword is defined inside of the arrow function. 
+On the other side, no `arguments` special keyword is defined inside an arrow function. 
 
-Again (same as with `this` value), the `arguments` object is bound lexically: the arrow function accesses `arguments` from the outer function.  
+Again (same as with `this` value), the `arguments` object is resolved lexically: the arrow function accesses `arguments` from the outer function.  
 
 Let's try to access `arguments` inside of an arrow function:
 
@@ -212,7 +212,7 @@ function myRegularFunction() {
 myRegularFunction('a', 'b'); // logs { 0: 'c', 1: 'd' }
 ```
 
-`...args` rest parameter collects all the execution arguments of the arrow function: `{ 0: 'c', 1: 'd' }`.  
+`...args` rest parameter collects the execution arguments of the arrow function: `{ 0: 'c', 1: 'd' }`.  
 
 ## 4. Implicit *return*
 
@@ -248,7 +248,7 @@ myEmptyFunction2(); // => undefined
 
 You can return values from the arrow function the same way as from a regular function, but with one useful exception.  
 
-If the arrow function contains one expression, and you omit the function's curly braces, then the expression is explicitly returned. 
+If the arrow function contains one expression, and you omit the function's curly braces, then the expression is explicitly returned. These are [the inline arrows function](/javascript-arrow-functions-best-practices/#2-inline-when-possible).  
 
 ```javascript
 const increment = (num) => num + 1;
@@ -264,7 +264,7 @@ The `increment()` arrow consists of only one expression: `num + 1`. This express
 
 The regular functions are the usual way to define methods on classes.  
 
-In the following class `Hero` the method `logName()` is defined using a regular function:
+In the following class `Hero`, the method `logName()` is defined using a regular function:
 
 ```javascript{6-8}
 class Hero {
@@ -282,7 +282,7 @@ const batman = new Hero('Batman');
 
 Usually, the regular functions as methods are the way to go.  
 
-Sometimes you'd need to supply the method as a callback, for example to `setTimeout()` or to an event listener. In such cases, you might encounter difficulties to access `this` value.  
+Sometimes you'd need to supply the method as a callback, for example to `setTimeout()` or an event listener. In such cases, you might encounter difficulties to access `this` value.  
 
 For example, let's use use `logName()` method as a callback to `setTimeout()`:
 
@@ -300,9 +300,9 @@ setTimeout(batman.logName.bind(batman), 1000);
 // after 1 second logs "Batman"
 ```
 
-`batman.logName.bind(batman)` binds `this` value to `batman` instance. Now you can be sure that the method doesn't lose the context.   
+`batman.logName.bind(batman)` binds `this` value to `batman` instance. Now you're sure that the method doesn't lose the context.   
 
-Binding `this` manually is daunting, especially if you have lots of methods. There's a better way: the arrow functions as a class field.  
+Binding `this` manually requires boilerplate code, especially if you have lots of methods. There's a better way: the arrow functions as a class field.  
 
 ### 5.2 Arrow function
 
@@ -345,6 +345,6 @@ If the arrow function has one expression, then the expression is returned implic
 
 Last but not least, you can define methods using the arrow function syntax inside classes. Fat arrow methods bind `this` value to the class instance.  
 
-No matter how the fat arrow method is invoked, `this` always equals to the class instance, which is useful when the methods are used as callbacks.  
+Anyhow the fat arrow method is invoked, `this` always equals to the class instance, which is useful when the methods are used as callbacks.  
 
 *What other differences between arrow and regular functions do you know?*
