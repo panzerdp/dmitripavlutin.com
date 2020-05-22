@@ -167,7 +167,7 @@ Inside the body of a regular function, `arguments` is a special array-like objec
 Let's invoke `myFunction` function with 3 arguments:
 
 ```javascript{2}
-functin myFunction() {
+function myFunction() {
   console.log(arguments);
 }
 
