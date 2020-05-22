@@ -125,7 +125,7 @@ myObject.myMethod([1, 2, 3]);
 
 ## 2. Constructors
 
-## 2.1 Regular function
+### 2.1 Regular function
 
 As seen in the previous section, the regular function can easily construct objects.  
 
@@ -142,7 +142,7 @@ redCar instanceof Car; // => true
 
 `Car` is a regular function, and when invoked with `new` keyword, it creates new instances of `Car` type.  
 
-## 2.2 Arrow function
+### 2.2 Arrow function
 
 A consequence of `this` resolved lexically is that an arrow function cannot be used as a constructor.  
 
