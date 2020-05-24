@@ -101,7 +101,7 @@ new MyFunction(); // logs an instance of MyFunction
 
 The behavior of `this` inside of an arrow function differs considerably from the regular function's `this` behavior.  
 
-No matter how or where being executed, `this` value inside of an array function always equals `this` value from the outer function. In other words, the arrow function resolves `this` lexically. In another words, the arrow function doesn't define its own execution context.  
+No matter how or where being executed, `this` value inside of an arrow function always equals `this` value from the outer function. In other words, the arrow function resolves `this` lexically. In another words, the arrow function doesn't define its own execution context.  
 
 In the following example, `myMethod()` is an outer function of `callback()` arrow function:
 
