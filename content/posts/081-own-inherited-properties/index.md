@@ -11,9 +11,9 @@ type: post
 commentsThreadId: own-and-inherited-properties-in-javascript
 ---
 
-In JavaScript, contrary to other programming languages like Java or Python, there is no concept of class as a template for creating objects.  
+In JavaScript, contrary to other programming languages like Java or Python, there's no template (e.g. classes) concept for creating objects.  
 
-In JavaScript exists only objects or primitive types. Every object links to another special object named prototype, from which the object inherits properties.  
+In JavaScript there are objects or primitive types. Every object links to another special object named prototype, from which the object inherits properties.  
 
 In this post, I'll describe the difference between own and inherited properties. This will help you understand the *slightly unusual* inheritance mechanism of JavaScript.  
 
@@ -21,7 +21,7 @@ In this post, I'll describe the difference between own and inherited properties.
 
 > *An own property* is a property defined directly on the object.  
 
-In the following example:
+Let's define a plain JavaScript object with one property:
 
 ```javascript
 const myObject = {
@@ -33,9 +33,9 @@ myObject.myProp; // => 'Value'
 
 `myObject` is a plain JavaScript object. The property `myProp` is defined directly on `myObject`, being an *own property*.  
 
-If you'd like to list the own properties of an object, you can use `Object.getOwnPropertyNames(object)`.  
+To list the own properties of an object use the built-in utility function `Object.getOwnPropertyNames(object)`.  
 
-Let's use `myObject` and list all of its own properties:
+Let's list the own properties of `myObject`:
 
 ```javascript
 const myObject = {
@@ -45,15 +45,15 @@ const myObject = {
 Object.getOwnPropertyNames(myObject); // => ['myProp']
 ```
 
-Because `myObject` has one own property `myProp`, invoking `Object.getOwnPropertyNames(myObject)` returns an array having this property name: `['myProp']`.  
+`Object.getOwnPropertyNames(myObject)` returns an array having one own property name: `['myProp']`.  
 
 ## 2. Inherited properties
 
 > *An inherited property* is a property the object inherits from the prototype object.  
 
-Every object in JavaScript links to an object from which it inherties properties: this object named *prototype*.  
+Every object in JavaScript links to an object (the prototype object) from which it inherits properties.  
 
-Let's use again `myObject`. But this time access a property that you haven't defined upon `myObject`:
+Let's use again `myObject`. This time let's access a property that you haven't defined upon `myObject` directly:
 
 ```javascript
 const myObject = {
@@ -65,14 +65,11 @@ myObject.toString; // => function() {...}
 
 The property accessor `myObject.toString` evaluates to a function.  
 
-Even if directly upon `myObject` there isn't defined a property `toString`, still as the code snippets show there is a value on this property. How does it happen?  
+`toString` is an inherited property. In other words, `myObject` inherits `toString` property from its prototype object.  
 
-The answer is `toString` of `myObject` is an inhertied property. In other words, `myObject` inherits `toString` property from its prototype object.  
+When JavaScript evaluates the expression `myObject.toString`, first, it tries to find the property `toString` within the own properties - however it cannot find one (`myObject` has just one own property `myProp`). Then JavaScript looks inside the prototype object of `myObject`, and finally finds a property `toString`.  
 
-When JavaScript evaluates the expression `myObject.toString`, first, it tries to find the property `toString` within the own properties - however it 
-cannot find one (recall that `myObject` has just one own property `myProp`). Then JavaScript looks inside the prototype object of `myObject`, and finally finds the property `toString`.  
-
-Let's compare the value of property `toString` from the prototype object against the one from `myObject`. Are they the same?  
+Inherited `toString` property of `myObject` equals to the same property access directly from the prototype object:
 
 ```javascript
 const myObject = {
@@ -84,19 +81,17 @@ const myObjectProto = Object.getPrototypeOf(myObject);
 myObject.toString === myObjectProto.toString; // => true
 ```
 
-`Object.getPrototypeOf(myObject)` returns the prototype object of `myObject`.  
+Where `Object.getPrototypeOf(object)` is an utility function that returns an object's prototype.  
 
-As expected, `toString` property of `myObject` equals to the same property access directly from the prototype object `myObjectProto`.  
+## 3. Prototype as a source of inherited properties
 
-## 3. Prototype object as source of properties
+When I was trying to understand the prototypal inheritance in JavaScript, I was thinking that the prototype object is a complex or special God object. But it's much simpler.  
 
-When I was trying to understand the prototypes in JavaScript, I was thinking that the prototype object is a complex and special God object. But it's much simpler.  
-
-Think about the prototype object as a source of inherited properties for the object. And that's all.  
+Think about the prototype object as a source of inherited properties for an object.  
 
 ## 4. Own vs inherited
 
-Let's slightly modify `myObject` and defined a method `toString` directly upon it.  
+Let's slightly modify `myObject` and define a method `toString` directly on it:  
 
 ```javascript
 const myObject = {
@@ -115,7 +110,7 @@ Because `myObject` has an own property `toString`, the object does no longer inh
 
 When an object has an own property and inherits a property with the same name, the own property takes precedence over the inherited one.  
 
-If you have defined an own property, then delete the property, the inheritance activates again:
+If an own property gets deleted, then the inheritance re-activates:
 
 ```javascript
 const myObject = {
@@ -125,21 +120,30 @@ const myObject = {
   }
 };
 
+// Own properties
 myObject.toString(); // => '[object MyObject]'
+myObject.myProp;     // => 'Value'
 
 delete myObject.toString;
+delete myObject.myProp;
 
+// Inherited property
 myObject.toString(); // => '[object Object]'
+
+// No inherited property
+myObject.myProp;     // => undefined
 ```
 
-The first method invocation `myObject.toString()` uses the own property. Then `delete myObject.toString` deletes the own property.  
+The first method invocation `myObject.toString()` uses the own property. Then `delete myObject.toString` deletes the own property. 
 
-Later, however, even having the own property `toString` deleted, calling `myObject.toString()` uses the property `toString` from the prototype object.  
+The second invocation `myObject.toString()`, even having the own property `toString` deleted, uses the inherited `toString` property from the prototype object.  
 
-### 4. Summary
+However, there's no `myProp` inherited from the prototype. When the own prop `myProp` is deleted from the object `delete myObject.myProp`, later the expression `myObject.myProp` evaluates to `undefined`.  
+
+### 5. Summary
 
 A JavaScript object can have either own or inherited properties.  
 
-The own property means is the property is defined directly on the object. On the other side, the inhertied property is the one inherited from the prototype object.  
+The own property means that the property is defined directly on the object. On the other side, the inherited property is the one inherited from the prototype object.  
 
-If my post has help you understand the difference between own and inhertied properties, then congrats! You've made a good step in understand the prototypal inheritance.  
+Knowing the difference between own and inherited properties is a big step in understanding the prototypal inheritance of JavaScript.  
