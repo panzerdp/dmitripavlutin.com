@@ -1,8 +1,8 @@
 ---
 title: "Own and Inherited Properties in JavaScript"
-description: "Knowing the difference between own and inherited properties helps understanding the prototypal inheritance."
-published: "2020-05-23T12:00Z"
-modified: "2020-05-23T12:00Z"
+description: "Knowing the difference between own and inherited properties helps understanding the JavaScript prototypal inheritance."
+published: "2020-05-24T18:00Z"
+modified: "2020-05-24T18:00Z"
 thumbnail: "./images/cover.png"
 slug: own-and-inherited-properties-in-javascript
 tags: ["javascript", "object"]
