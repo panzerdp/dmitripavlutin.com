@@ -2,7 +2,7 @@
 title: "Own and Inherited Properties in JavaScript"
 description: "Knowing the difference between own and inherited properties helps understanding the JavaScript prototypal inheritance."
 published: "2020-05-24T18:00Z"
-modified: "2020-05-24T18:00Z"
+modified: "2020-05-26T07:30Z"
 thumbnail: "./images/cover.png"
 slug: own-and-inherited-properties-in-javascript
 tags: ["javascript", "object"]
@@ -11,11 +11,11 @@ type: post
 commentsThreadId: own-and-inherited-properties-in-javascript
 ---
 
-In JavaScript, contrary to other programming languages like Java or Python, there's no template (e.g. classes) concept for creating objects.  
+In JavaScript, contrary to other programming languages like Java or Python, there's no template (e.g. class) concept for creating objects.  
 
-In JavaScript there are objects or primitive types. Every object links to another special object named prototype, from which the object inherits properties.  
+Every JavaScript object links to another object named prototype, from which the object inherits properties.  
 
-In this post, I'll describe the difference between own and inherited properties. This will help you understand the *slightly unusual* inheritance mechanism of JavaScript.  
+In this post, I'll describe the difference between own and inherited properties. It's a good way to understand the *slightly unusual* inheritance mechanism of JavaScript.  
 
 ## 1. Own properties
 
@@ -51,7 +51,7 @@ Object.getOwnPropertyNames(myObject); // => ['myProp']
 
 > *An inherited property* is a property the object inherits from the prototype object.  
 
-Every object in JavaScript links to an object (the prototype object) from which it inherits properties.  
+Every object in JavaScript links to an object, the prototype, from which it inherits properties.  
 
 Let's use again `myObject`. This time let's access a property that you haven't defined upon `myObject` directly:
 
@@ -81,7 +81,7 @@ const myObjectProto = Object.getPrototypeOf(myObject);
 myObject.toString === myObjectProto.toString; // => true
 ```
 
-Where `Object.getPrototypeOf(object)` is an utility function that returns an object's prototype.  
+Where `Object.getPrototypeOf(object)` is an utility function that returns the object's prototype.  
 
 ## 3. Prototype as a source of inherited properties
 

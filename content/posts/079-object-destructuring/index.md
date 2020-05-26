@@ -2,7 +2,7 @@
 title: "How to Use Object Destructuring in JavaScript"
 description: "The object destructuring is a JavaScript feature to extract properties from objects and bind them to variables."
 published: "2020-05-10T13:40Z"
-modified: "2020-05-12T11:30Z"
+modified: "2020-05-26T07:50Z"
 thumbnail: "./images/cover.png"
 slug: javascript-object-destructuring
 tags: ["javascript", "destructuring"]
@@ -299,9 +299,38 @@ name; // => 'Batman'
 
 `const { [prop]: name } = hero` is an object destructuring that assigns to variable `name` the value `hero[prop]`, where `prop` is a variable holding the property name.  
 
-## 8. Common use cases
+## 8. Rest object after destructuring
 
-### 8.1 Bind properties to variables
+The rest syntax is useful to collect the remaining properties after the destructuring:
+
+```javascript
+const { identifier, ...rest } = expression;
+```
+
+Where `identifier` is the name of the property to access and `expression` should evaluate to an object.  
+
+After the destructuring, the variable `identifier` contains the property value. `rest` variable is a plain object with the remaining properties.  
+
+For example, let's extract the property `name`, but keep the rest of the properties:
+
+```javascript{6}
+const hero = {
+  name: 'Batman',
+  realName: 'Bruce Wayne'
+};
+
+const { name, ...realHero } = hero;
+
+realHero; // => { realName: 'Bruce Wayne' }
+```
+
+The destructuring `const { name, ...realHero } = hero` extracts the property `name`. 
+
+At the same time, the remaining properties (`realName` in this case) are collected into the variable `realHero`: `{ realName: 'Bruce Wayne' }`.  
+
+## 9. Common use cases
+
+### 9.1 Bind properties to variables
 
 As seen in many examples before, the object destructuring binds property values to variables.  
 
@@ -361,7 +390,7 @@ for (const { name } of heroes) {
 }
 ```
 
-### 8.2 Function parameter destructuring
+### 9.2 Function parameter destructuring
 
 Generally, the object destructuring can be placed anywhere where an assignment happens. 
 
@@ -384,7 +413,7 @@ names; // => ['Batman', 'Joker']
 
 `function({ name })` destructures the function parameter, creating a variable `name` holding the value of `name` property.  
 
-## 9. Summary
+## 10. Summary
 
 The object destructuring is a powerful feature that lets you extract properties from an object and bind these values to variables.   
 
