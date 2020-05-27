@@ -164,7 +164,7 @@ Invoking `new Car('red')`, where `Car` is an arrow function, throws `TypeError: 
 
 Inside the body of a regular function, `arguments` is a special array-like object containing the list of arguments with which the function has been invoked.  
 
-Let's invoke `myFunction` function with 3 arguments:
+Let's invoke `myFunction` function with 2 arguments:
 
 ```javascript{2}
 function myFunction() {
