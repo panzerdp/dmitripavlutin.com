@@ -15,7 +15,7 @@ export class PostShareSocialFacebook extends React.Component<PostShareSocialFace
   public render() {
     return (
       <PostShareButton
-        title="Share on Twitter"
+        title="Share on Facebook"
         href={this.getFacebookShareUrl()}
         onClick={this.handleClick}
         className={styles.facebook}
