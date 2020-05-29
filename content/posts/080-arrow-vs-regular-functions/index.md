@@ -2,7 +2,7 @@
 title: "5 Differences Between Arrow and Regular Functions"
 description: "The 5 must-know differences between arrow and regular functions in JavaScript."
 published: "2020-05-16T12:00Z"
-modified: "2020-05-20T17:00Z"
+modified: "2020-05-29T10:00Z"
 thumbnail: "./images/cover-4.png"
 slug: differences-between-arrow-and-regular-functions
 tags: ["javascript", "function", "arrow function"]
@@ -71,10 +71,10 @@ const myObject = {
   }
 };
 // Method invocation
-myObject.method(); // logs "myObject"
+myObject.method(); // logs myObject
 ```
 
-During an *indirect invocation* using `myFunc.call(context, arg1, ..., argN)` or `myFunc.apply(context, [arg1, ..., argN])` the value of `this` equals to the first argument:
+During an *indirect invocation* using `myFunc.call(thisVal, arg1, ..., argN)` or `myFunc.apply(thisVal, [arg1, ..., argN])` the value of `this` equals to the first argument:
 
 ```javascript
 function myFunction() {
@@ -108,9 +108,9 @@ In the following example, `myMethod()` is an outer function of `callback()` arro
 ```javascript{3,5}
 const myObject = {
   myMethod(items) {
-    console.log(this); // logs "myObject"
+    console.log(this); // logs myObject
     const callback = () => {
-      console.log(this); // logs "myObject"
+      console.log(this); // logs myObject
     };
     items.forEach(callback);
   }
@@ -122,6 +122,8 @@ myObject.myMethod([1, 2, 3]);
 `this` value inside the arrow function `callback()` equals to `this` of the outer function `myMethod()`.  
 
 `this` resolved lexically is one of the great features of arrow functions. When using callbacks inside methods you are sure the arrow function doesn't define its own `this`: no more `const self = this` or `callback.bind(this)` workarounds.  
+
+Contraty to a regular function, the indirect invocation of an arrow function using `myArrowFunc.call(thisVal)` or `myArrowFunc.apply(thisVal)` doesn't change the value of `this`: the context value is always resolved lexically.    
 
 ## 2. Constructors
 
