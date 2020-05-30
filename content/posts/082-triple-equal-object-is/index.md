@@ -80,9 +80,21 @@ NaN === 1;   // => false
 NaN === NaN; // => false
 ```
 
-Secondly, 
+Secondly, the strict equality operator doesn't distinguish from `-0` and `+0`:  
+
+```javascript
+-0 === +0; // => true
+```
 
 ## 2. Object.is()
+
+The Object.is(valueA, valueB) function check the arguments for equality same way as the strict eqality operator, with the 2 differences.  
+
+Firstly, `NaN` can equal to another `NaN` value:
+
+```javasript
+
+```
 
 ## 3. When to use Object.is()
 
