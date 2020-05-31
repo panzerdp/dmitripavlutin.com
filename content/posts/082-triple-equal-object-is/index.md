@@ -1,8 +1,8 @@
 ---
 title: "Object.is() vs Strict Equality Operator in JavaScript"
 description: "When should you use Object.is() instead of strict equality check in JavaScript?"
-published: "2020-05-30T12:00Z"
-modified: "2020-05-30T12:00Z"
+published: "2020-05-31T13:00Z"
+modified: "2020-05-31T13:00Z"
 thumbnail: "./images/cover-3.png"
 slug: object-is-vs-strict-equality-operator
 tags: ["javascript", "equality"]
@@ -27,11 +27,11 @@ Object.is(1, '1');  // => false
 Object.is(1, true); // => false
 ```
 
-The main question is when would you use Object.is() instead of strict equality check? Let's find out.  
+The main question is when would you use Object.is() instead of a strict equality check? Let's find out.  
 
 ## 1. Strick equality check operator
 
-To begin with, let's refresh quickly how the strick equality operator works. 
+To begin with, let's refresh quickly how the strict equality operator works. 
 
 The strict equality check operator evaluates to `true` when both values are of the same type and hold the same value.  
 
@@ -69,33 +69,48 @@ const myObject2 = { prop: 'Value' };
 myObject1 === myObject2; // => false
 ```
 
-All the above comparison scenarios work exactly the same in `Object.is(valueA, valueB)`. 
+The above comparison scenarios work exactly the same in `Object.is(valueA, valueB)`. 
 
-So here's what makes the difference between the strict equality operator and `Object.is()`.  
+The difference between strict equality check and `Object.is()` lies in how `NaN` and how negative zero `-0` are treated.  
 
 Firstly, `NaN` ([Not A Number](/nan-in-javascript/)) isn't strictly equal to any other value, even with another `NaN`:
 
 ```javascript
-NaN === 1;   // => false
 NaN === NaN; // => false
+NaN === 1;   // => false
 ```
 
-Secondly, the strict equality operator doesn't distinguish from `-0` and `+0`:  
+Secondly, the strict equality operator doesn't distinguish `-0` from `+0`:  
 
 ```javascript
 -0 === +0; // => true
 ```
 
+The strict equality operator uses the [Strict Equality Comparison](http://www.ecma-international.org/ecma-262/7.0/index.html#sec-strict-equality-comparison) algorithm.  
+
 ## 2. Object.is()
 
-The Object.is(valueA, valueB) function check the arguments for equality same way as the strict eqality operator, with the 2 differences.  
+`Object.is(valueA, valueB)` checks the arguments for equality the same way as the strict equality operator, but with the 2 differences.  
 
-Firstly, `NaN` can equal to another `NaN` value:
+Firstly, `NaN` equals to another `NaN` value:
 
-```javasript
-
+```javascript
+Object.is(NaN, NaN); // => true
+Object.is(NaN, 1);   // => false
 ```
 
-## 3. When to use Object.is()
+Secondly, `Object.is()` makes the distinction between `-0` and `+0`:
 
-## 4. Summary
+```javascript
+Object.is(-0, +0); // => false
+```
+
+`Object.is()`, in contrast to strict equality operator, uses [Same Value Comparison](http://www.ecma-international.org/ecma-262/7.0/index.html#sec-samevalue) algorithm.
+
+## 3. Summary
+
+In most of the situations, the strict equality operator should be the default way to compare values.  
+
+If you'd like to check directly for `NaN` values or make a more strict distinction between negative and positive zeros, then `Object.is()` is a good choice.  
+
+Also `Object.is()` can be used as a functional way to compare values, for example in functional programming.  
