@@ -2,7 +2,7 @@
 title: "Object.is() vs Strict Equality Operator in JavaScript"
 description: "When should you use Object.is() instead of strict equality check in JavaScript?"
 published: "2020-05-31T13:00Z"
-modified: "2020-05-31T13:00Z"
+modified: "2020-06-02T10:00Z"
 thumbnail: "./images/cover-3.png"
 slug: object-is-vs-strict-equality-operator
 tags: ["javascript", "equality"]
@@ -11,7 +11,7 @@ type: post
 commentsThreadId: object-is-vs-strict-equality-operator
 ---
 
-The tripe equality operator checks strictly whether 2 values are the same:
+The triple equality operator `===` checks strictly whether 2 values are the same:
 
 ```javascript
 1 === 1;    // => true
@@ -27,7 +27,7 @@ Object.is(1, '1');  // => false
 Object.is(1, true); // => false
 ```
 
-The main question is when would you use Object.is() instead of a strict equality check? Let's find out.  
+The main question is: when would you use Object.is() instead of a strict equality check? Let's find out.  
 
 ## 1. Strick equality check operator
 
@@ -45,10 +45,10 @@ null      === null;      // => true
 undefined === undefined; // => true
 ```
 
-The strict equality operator doesn't perform type coersion of operators. Even if operators hold *reasonable* the same value, but nevertheless of different types, they aren't strictly equal:
+The strict equality operator doesn't perform type coersion of operators. Even if operators hold *reasonable* same values, but nevertheless of different types, they aren't strictly equal:
 
 ```javascript
-'1'  === 1;         // => false
+1    === '1';       // => false
 1    === true;      // => false
 null === undefined; // => false
 ```
@@ -60,8 +60,7 @@ const myObject = { prop: 'Value' };
 myObject === myObject;  // => true
 ```
 
-Even if 2 objects have exactly the same properties and values, the strict equality operator considers them different
-values:
+Even if 2 objects have exactly the same properties and values, they're different values:
 
 ```javascript
 const myObject1 = { prop: 'Value' };
@@ -109,8 +108,8 @@ Object.is(-0, +0); // => false
 
 ## 3. Summary
 
-In most of the situations, the strict equality operator should be the default way to compare values.  
+In most of the situations, the strict equality operator is a good way to compare values.  
 
 If you'd like to check directly for `NaN` values or make a more strict distinction between negative and positive zeros, then `Object.is()` is a good choice.  
 
-Also `Object.is()` can be used as a functional way to compare values, for example in functional programming.  
+Also `Object.is()` is useful as a functional way to compare values, for example in functional programming.  
