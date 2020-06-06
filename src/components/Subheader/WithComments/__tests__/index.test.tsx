@@ -23,7 +23,19 @@ const props = {
 describe('<SubheaderWithComments />', function() {
   it('should render post published date', function() {
     const wrapper = shallow(<SubheaderWithComments {...props} />);
-    expect(wrapper.text()).toContain(formatDate(post.published));
+    expect(wrapper.text()).toContain(`Posted ${formatDate(post.published)}`);
+  });
+
+  it('should render post modified date', function() {
+    const updatedProps = {
+      ...props,
+      post: {
+        ...post,
+        modified: '2019-03-05'
+      }
+    };
+    const wrapper = shallow(<SubheaderWithComments {...updatedProps} />);
+    expect(wrapper.text()).toContain(`Updated ${formatDate(updatedProps.post.modified)}`);
   });
 
   it('should render the comments count', function() {
