@@ -11,12 +11,22 @@ interface SubheaderWithCommentsProps {
   siteUrl: string;
 }
 
+const MONTH = 31 * 24 * 60 * 60 * 1000;
+
 export default function SubheaderWithComments({ post, siteUrl }: SubheaderWithCommentsProps) {
   const postUrl = TO_POST({ slug: post.slug });
   const url = siteUrl + postUrl;
+  const publishedDate = new Date(post.published);
+  const modifiedDate = new Date(post.modified);
+  let postDateType = 'Posted';
+  let postDateFormatted = formatDate(post.published);
+  if (modifiedDate.getTime() - publishedDate.getTime() >= MONTH) {
+    postDateType = 'Updated';
+    postDateFormatted = formatDate(post.modified);
+  }
   return (
     <div className={styles.subheader}>
-      <div className={styles.published}>{formatDate(post.published)}</div>
+      <div className={styles.published}>{postDateType} {postDateFormatted}</div>
       <div className={styles.line}>
         <div className={styles.tags}>{post.tags.map(mapTag)}</div>
         <div className={styles.commentsCount}>
