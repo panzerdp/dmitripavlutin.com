@@ -22,7 +22,46 @@ eqality operators, for example the strict equality operator:
 Object have structured data, thus they are more difficult to compare. In this post, you will learn how to 
 efficiently compare objects in JavaScript.  
 
-## 1. Reference equality
+## 1. Referencial equality
+
+JavaScript provides 3 ways to compare values: 
+
+* The loose equality operator `===`
+* The strict equality operator `==` 
+* `Object.is()` function
+
+When comparing objects using any of these, the comparison evaluates to `true` only if the compared values point to *the same
+object instance*. This is *the referencial equality*.    
+
+Let's define 2 objects `hero1` and `hero2`, and see the referential equality in practice:
+
+```javascript
+const hero1 = {
+  name: 'Batman'
+};
+const hero2 = {
+  name: 'Batman'
+};
+
+hero1 === hero1; // => true
+hero1 === hero2; // => false
+
+hero1 == hero1; // => true
+hero1 == hero2; // => false
+
+Object.is(hero1, hero1); // => true
+Object.is(hero1, hero2); // => false
+```
+
+`hero1 === hero1` evaluates to `true` because both operands point to the same object instance `hero1`.  
+
+On the other side, `hero1 === hero2` evaluates to `false` because the operands `hero1` and `hero2` are different object instances.  
+
+Interestingly `hero1` and `hero2` objects have the same content: both objects have one property `name` with the value `'Batman'`. Still, even comparing objects of exactly the same structure, `hero1 === hero2` evaluates to `false`.  
+
+Referenctial equality is useful when you'd like to compare object references, rather than their content. However, in most of the situations, you'd like to compare the actual content of the objects: the properties and their values.  
+
+Let's see how to compare for equality the actual content of the objects.  
 
 ## 2. Manual comparison
 
