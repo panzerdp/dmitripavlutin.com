@@ -80,8 +80,12 @@ const hero1 = {
 const hero2 = {
   name: 'Batman'
 };
+const hero3 = {
+  name: 'Joker'
+};
 
-isHeroEqual(object1, object2); // => true
+isHeroEqual(hero1, hero2); // => true
+isHeroEqual(hero1, hero3); // => false
 ```
 
 `isHeroEqual()` accesses the property `name` of both objects and compare them.  
@@ -94,8 +98,150 @@ Let's see how the shallow equality of objects can help.
 
 ## 3. Shallow equality
 
+During *shallow equality* check of objects you have to get the list of properties (using `Object.keys()`), then check the properties values for equality.  
+
+Here's a possible implementation of shallow equality check of objects:
+
+```javascript
+function shallowEqual(object1, object2) {
+  const keys1 = Object.keys(object1);
+  const keys2 = Object.keys(object2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for (let index = 0; index < keys1.length; index++) {
+    const k1 = keys1[index];
+    const k2 = keys2[index];
+    if (object1[k1] !== object2[k2]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+```
+
+Inside the function, `keys1` and `keys2` are arrays containing correspondigly the property names of `object1` and `object2`. 
+
+`for` cycle iterates over the keys, and compares each property of `object1` and `object2` for equality `object1[k1] !== object2[k2]`.  
+
+Now using the shallow equality you could check object of many properties:
+
+```javascript
+const hero1 = {
+  name: 'Batman',
+  realName: 'Bruce Wayne'
+};
+const hero2 = {
+  name: 'Batman',
+  realName: 'Bruce Wayne'
+};
+const hero3 = {
+  name: 'Joker'
+};
+
+shallowEqual(hero1, hero2); // => true
+shallowEqual(hero1, hero3); // => false
+```
+
+`shallowEqual(hero1, hero2)` returns `true` because the objects `hero1` and `hero2` have the same properties (`name` and `realName`) with the same values.  
+
+On the other side, `shallowEqual(hero1, hero3)` returns `false` since `hero1` and `hero3` have different properties.  
+
+But objects in JavaScript can be nested. In such a case, unfortunately, the shallow equality doesn't work well.  
+
+Let's perform a shallow equality on nested objects having same content:
+
+```javascript
+const hero1 = {
+  name: 'Batman',
+  address: {
+    city: 'Gotham'
+  }
+};
+const hero2 = {
+  name: 'Batman',
+  address: {
+    city: 'Gotham'
+  }
+};
+
+shallowEqual(hero1, hero2); // => false
+```
+
+This time, even both objects `hero1` and `hero2` have exactly the same content, `shallowEqual(hero1, hero2)` return `false`.  
+
+It happens because the nested objects `hero1.address` and `hero2.address` are different object instances. Thus the shallow equality considers that 
+`hero1.address` and `hero2.address` are different values.  
+
+Solving the problem of nested objects helps the deep equality check of objects.  
+
 ## 4. Deep equality
 
-### 4.1 Deep equality utilities
+The deep equality check helps perfoming the equality check on objects that contain other objects, aka nested.  
+
+The deep equaly check is similar to shallow equality check of objects, with the difference that when a property has an object, another recursive shallow equality check starts on this object.  
+
+Let's see an implementation of deep equality check:
+
+```javascript{15}
+function deepEqual(object1, object2) {
+  const keys1 = Object.keys(object1);
+  const keys2 = Object.keys(object2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for (let index = 0; index < keys1.length; index++) {
+    const value1 = object1[keys1[index]];
+    const value2 = object2[keys2[index]];
+    if (
+         typeof value1 === 'object' 
+      && typeof value2 === 'object'
+      && !deepEqual(value1, value2)
+      || value1 !== value2
+    ) {
+      return false;
+    }
+  }
+
+  return true;
+}
+```
+
+Now let's use the `deepEquality()` to compare object nested objects:
+
+```javascript
+const hero1 = {
+  name: 'Batman',
+  address: {
+    city: 'Gotham'
+  }
+};
+const hero2 = {
+  name: 'Batman',
+  address: {
+    city: 'Gotham'
+  }
+};
+
+deepEqual(hero1, hero2); // => true
+```
+
+The deep equal comparison function correctly determines that the objects have the same properties and values, even the nested objects.  
 
 ## 5. Summary
+
+The referencial equality (using `===`, `==` or `Object.is()`) determines whether the operands are the same object instance.  
+
+The manual equality check of objects requires manual comparison of object values. While this check requires writing by hand the properties checks, I often find it 
+useful to compare simple objects.  
+
+When the compared objects have a big list of properties of the objects structure is determined during runtime, a better approach is to use shallow check.  
+
+In case if the compared objects have nested objects, the deep equality check is the way to go.  
+
+Hopefully, my post has helped you understand the specifics of checking object in JavaScript.  
