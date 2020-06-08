@@ -1,8 +1,8 @@
 ---
 title: "How to Compare Objects in JavaScript"
-description: "How to compare objects in JavaScript: referential equality, shallow and deep comparison."
-published: "2020-06-09T12:00Z"
-modified: "2020-06-09T12:00Z"
+description: "How to compare objects in JavaScript: referential, manual, shallow and deep equality."
+published: "2020-06-08T08:00Z"
+modified: "2020-06-08T08:00Z"
 thumbnail: "./images/cover-3.png"
 slug: how-to-compare-objects-in-javascript
 tags: ["javascript", "equality", "object"]
@@ -20,7 +20,7 @@ eqality operators, for example the strict equality operator:
 ```
 
 Objects have structured data, thus they are more difficult to compare. In this post, you will learn how to 
-efficiently compare objects in JavaScript.  
+correctly compare objects in JavaScript.  
 
 ## 1. Referential equality
 
@@ -112,9 +112,9 @@ function shallowEqual(object1, object2) {
   }
 
   for (let index = 0; index < keys1.length; index++) {
-    const k1 = keys1[index];
-    const k2 = keys2[index];
-    if (object1[k1] !== object2[k2]) {
+    const val1 = object1[keys1[index]];
+    const val2 = object2[keys2[index]];
+    if (val1 !== val2) {
       return false;
     }
   }
@@ -152,7 +152,7 @@ On the other side, `shallowEqual(hero1, hero3)` returns `false` since `hero1` an
 
 But objects in JavaScript can be nested. In such a case, unfortunately, the shallow equality doesn't work well.  
 
-Let's perform a shallow equality on nested objects having same content:
+Let's perform a shallow equality on objects having other nested objects:
 
 ```javascript
 const hero1 = {
@@ -178,6 +178,8 @@ It happens because the nested objects `hero1.address` and `hero2.address` are di
 
 Solving the problem of nested objects helps the deep equality check of objects.  
 
+
+
 ## 4. Deep equality
 
 The deep equality check helps to perform the equality check on objects that contain other objects, aka nested.  
@@ -186,7 +188,7 @@ The deep equality check is similar to the shallow equality check of objects, wit
 
 Let's see an implementation of deep equality check:
 
-```javascript{15}
+```javascript{14}
 function deepEqual(object1, object2) {
   const keys1 = Object.keys(object1);
   const keys2 = Object.keys(object2);
@@ -196,13 +198,12 @@ function deepEqual(object1, object2) {
   }
 
   for (let index = 0; index < keys1.length; index++) {
-    const value1 = object1[keys1[index]];
-    const value2 = object2[keys2[index]];
+    const val1 = object1[keys1[index]];
+    const val2 = object2[keys2[index]];
+    const areObjects = isObject(val1) && isObject(val2);
     if (
-         typeof value1 === 'object' 
-      && typeof value2 === 'object'
-      && !deepEqual(value1, value2)
-      || value1 !== value2
+      areObjects && !deepEqual(val1, val2) ||
+      !areObjects && val1 !== val2
     ) {
       return false;
     }
@@ -210,9 +211,16 @@ function deepEqual(object1, object2) {
 
   return true;
 }
+
+function isObject(object) {
+  return object != null && typeof object === 'object';
+}
 ```
 
-Now let's use the `deepEquality()` to compare object nested objects:
+The highlighted line `areObjects && !deepEqual(val1, val2)` indicates that as soon as the checked properties are objects, a recursive call starts to verify
+whether the nested objects are equal too.  
+
+Now let's use the `deepEquality()` to compare objects having nested objects:
 
 ```javascript
 const hero1 = {
@@ -231,7 +239,9 @@ const hero2 = {
 deepEqual(hero1, hero2); // => true
 ```
 
-The deep equal comparison function correctly determines that the objects have the same properties and values, even the nested objects.  
+The deep equality function correctly determines that `hero1` and `hero2` have the same properties and values, including the equality of the nested objects `hero1.address` and `hero2.address`.  
+
+To deeply compare objects I recommend to use [isDeepStrictEqual(object1, object2)](https://nodejs.org/api/util.html#util_util_isdeepstrictequal_val1_val2) of Node built-in `util` module, or [_.isEqual(object1, object2)](https://lodash.com/docs/4.17.15#isEqual) of `lodash` library.  
 
 ## 5. Summary
 
@@ -241,6 +251,8 @@ The manual equality check of objects requires a manual comparison of properties'
 
 When the compared objects have a lot of properties or the structure of the objects is determined during runtime, a better approach is to use shallow check.  
 
-In case if the compared objects have nested objects, the deep equality check is the way to go.  
+If the compared objects have nested objects, the deep equality check is the way to go.  
 
 Hopefully, my post has helped you understand the specifics of checking objects in JavaScript.  
+
+*What is the main issue when using `JSON.stringify(object1) === JSON.stringify(object2)` to compare objects?*
