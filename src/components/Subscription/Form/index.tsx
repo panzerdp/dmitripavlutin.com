@@ -4,10 +4,12 @@ import styles from './index.module.scss';
 
 interface SubscriptionFormProps {
   emailSubscriptionService: EmailSubscriptionService;
+  count: number;
 }
 
 export default function SubscriptionForm({
   emailSubscriptionService: { endpoint, hiddenFieldName },
+  count
 }: SubscriptionFormProps) {
   return (
     <div className={styles.subscriptionForm}>
@@ -33,6 +35,7 @@ export default function SubscriptionForm({
           <input type="text" name={hiddenFieldName} tabIndex={-1} />
         </div>
       </form>
+      <div className={styles.subscribersCount}>Join {count} other subscribers today.</div>
     </div>
   );
 }

@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env`
+});
+
 module.exports = {
   siteMetadata: require('./gatsby/config/site-metadata'),
   pathPrefix: '/',
@@ -99,6 +103,13 @@ module.exports = {
     require('./gatsby/config/gatsby-plugin-sass'),
     'gatsby-plugin-minify-classnames',
     require('./gatsby/config/gatsby-plugin-feed'),
-    'gatsby-plugin-netlify-cache'
+    'gatsby-plugin-netlify-cache',
+    {
+      resolve: `@rogovdm/gatsby-source-mailchimp`,
+      options: {
+        id: '75f44f92b9',
+        key: process.env.MAILCHIMP_API_KEY
+      }
+    }
   ],
 };

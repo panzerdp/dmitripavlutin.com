@@ -10,3 +10,4 @@ src/typings/graphql.d.ts
 .DS_Store
 
 .env*
+!.env.example

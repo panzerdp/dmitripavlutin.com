@@ -7,6 +7,6 @@ export default function SubscriptionRegion() {
   return <SubscriptionFetch render={renderSubscriptionForm} />;
 }
 
-function renderSubscriptionForm(emailSubscriptionService: EmailSubscriptionService) {
-  return <SubscriptionForm emailSubscriptionService={emailSubscriptionService} />;
+function renderSubscriptionForm(emailSubscriptionService: EmailSubscriptionService, count: number) {
+  return <SubscriptionForm emailSubscriptionService={emailSubscriptionService} count={count} />;
 }

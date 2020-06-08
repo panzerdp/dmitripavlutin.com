@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 
-import { EmailSubscriptionServiceQuery } from 'typings/graphql';
+import { EmailSubscriptionQuery } from 'typings/graphql';
 
 interface CarbonAdsFetchProps {
-  render(emailSubscriptionService: EmailSubscriptionService): React.ReactNode;
+  render(emailSubscriptionService: EmailSubscriptionService, count: number): React.ReactNode;
 }
 
 /* istanbul ignore next */
@@ -12,7 +12,7 @@ export default function SubscriptionFetch({ render }: CarbonAdsFetchProps) {
   return (
     <StaticQuery
       query={graphql`
-        query EmailSubscriptionService {
+        query EmailSubscription {
           site {
             siteMetadata {
               emailSubscriptionService {
@@ -21,9 +21,23 @@ export default function SubscriptionFetch({ render }: CarbonAdsFetchProps) {
               }
             }
           }
+          allMailchimpList {
+            edges {
+              node {
+                stats {
+                  member_count
+                }
+              }
+            }
+          }
         }
       `}
-      render={(data: EmailSubscriptionServiceQuery) => render(data.site.siteMetadata.emailSubscriptionService)}
+      render={(data: EmailSubscriptionQuery) => {
+        return render(
+          data.site.siteMetadata.emailSubscriptionService, 
+          data.allMailchimpList.edges[0].node.stats.member_count
+        );
+      }}
     />
   );
 }
