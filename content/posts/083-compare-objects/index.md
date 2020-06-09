@@ -26,8 +26,8 @@ correctly compare objects in JavaScript.
 
 JavaScript provides 3 ways to compare values: 
 
-* The loose equality operator `===`
-* The strict equality operator `==` 
+* The strict equality operator `===`
+* The loose equality operator `==` 
 * `Object.is()` function
 
 When comparing objects using any of the above, the comparison evaluates to `true` only if the compared values reference *the same
