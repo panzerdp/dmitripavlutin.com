@@ -125,7 +125,7 @@ export const MyBigList = React.memo(MyBigList);
 The parent component of `MyBigList` needs to provide the list of items and the handler function when an item is clicked.  
 
 ```jsx
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import useSearch from './fetch-items';
 

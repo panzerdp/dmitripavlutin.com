@@ -19,8 +19,8 @@ export default function SubscriptionForm({
         <ul>
           <li>Important JavaScript concepts explained in simple words</li>
           <li>Overview of new JavaScript features</li>
-          <li>How to benefit from typing and TypeScript</li>
-          <li>Design patterns and good coding practices</li>
+          <li>How to use TypeScript and typing</li>
+          <li>Software design and good coding practices</li>
         </ul>
         <p>Subscribe to my newsletter to get them right into your inbox.</p>
       </div>
@@ -35,7 +35,7 @@ export default function SubscriptionForm({
           <input type="text" name={hiddenFieldName} tabIndex={-1} />
         </div>
       </form>
-      <div className={styles.subscribersCount}>Join {count} other subscribers today.</div>
+      <div className={styles.subscribersCount}>Join {count} other subscribers.</div>
     </div>
   );
 }
