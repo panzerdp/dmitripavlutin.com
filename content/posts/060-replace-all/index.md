@@ -17,6 +17,10 @@ In this post, I will show you 2 ways on how to replace all string occurrences in
 
 Finally, you'll read about the new proposal [String.prototype.replaceAll()](https://github.com/tc39/proposal-string-replaceall) (at stage 3) that brings the `replaceAll()` method to strings.   
 
+```toc
+toHeading: 2
+```
+
 ## 1. Split and join an array
 
 If you google how to replace all string occurrences in JavaScript, most likely the first approach you'll find is the use of an intermediate array. Here's how it works:
