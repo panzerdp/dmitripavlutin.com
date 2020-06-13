@@ -150,9 +150,9 @@ shallowEqual(hero1, hero3); // => false
 
 On the other side, `shallowEqual(hero1, hero3)` returns `false` since `hero1` and `hero3` have different properties.  
 
-If the properties' values of objects to compare contain primitive values, the shallow equality check is the way to go.  
+If the properties' values of objects to compare are primitive values, the shallow equality check is the way to go.  
 
-However, rembember an exception: objects in JavaScript can be nested. In such a case, unfortunately, the shallow equality doesn't work well.  
+But objects in JavaScript can be nested. In such a case, unfortunately, the shallow equality doesn't work well.    
 
 Let's perform a shallow equality check on objects having nested objects:
 
@@ -173,16 +173,16 @@ const hero2 = {
 shallowEqual(hero1, hero2); // => false
 ```
 
-This time, even both objects `hero1` and `hero2` have the same content, `shallowEqual(hero1, hero2)` return `false`.  
+This time, even both `hero1` and `hero2` having the same content, `shallowEqual(hero1, hero2)` returns `false`.  
 
 The nested objects `hero1.address` and `hero2.address` are different object instances. Thus the shallow equality considers that 
 `hero1.address` and `hero2.address` are different values.  
 
-Solving the problem of nested objects helps the deep equality check.  
+Fortuntately, the deep equality correctly compares the objects containing other objects. Let's see how it works.  
 
 ## 4. Deep equality
 
-The deep equality is similar to the shallow equality, but with one difference. If during the shallow check the compared properties are objects, a recursive shallow equality check is performed on these nested objects.  
+The deep equality is similar to the shallow equality, but with one difference. During the shallow check, if the compared properties are objects, a recursive shallow equality check is performed on these nested objects.  
 
 Let's see an implementation of deep equality check:
 
@@ -215,10 +215,10 @@ function isObject(object) {
 }
 ```
 
-The highlighted line `areObjects && !deepEqual(val1, val2)` indicates that as soon as the checked properties are objects, a recursive call starts to verify
+The highlighted line `areObjects && !deepEqual(val1, val2)` indicates that as soon as the compared properties are objects, a recursive call starts to verify
 whether the nested objects are equal too.  
 
-Now let's use the `deepEquality()` to compare objects having nested objects:
+Now, let's see an example of `deepEquality()`:
 
 ```javascript
 const hero1 = {
