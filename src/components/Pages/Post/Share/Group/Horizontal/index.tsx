@@ -3,7 +3,6 @@ import * as React from 'react';
 import styles from './index.module.scss';
 
 import ShareSocialFacebook from 'components/Pages/Post/Share/Social/Facebook';
-import ShareSocialReddit from 'components/Pages/Post/Share/Social/Reddit';
 import PostShareSocialTwitter from 'components/Pages/Post/Share/Social/Twitter';
 
 interface ShareButtonsHorizontalProps {
@@ -23,7 +22,6 @@ export default function ShareButtonsHorizontal({ url, text, tags, twitterName }:
     <div className={styles.horizontalGroup}>
       <PostShareSocialTwitter {...shareProps} twitterName={twitterName} />
       <ShareSocialFacebook {...shareProps} />
-      <ShareSocialReddit {...shareProps} />
     </div>
   );
 }
