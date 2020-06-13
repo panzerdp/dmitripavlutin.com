@@ -2,7 +2,7 @@
 title: "How to Compare Objects in JavaScript"
 description: "How to compare objects in JavaScript: referential, manual, shallow and deep equality."
 published: "2020-06-08T08:00Z"
-modified: "2020-06-12T15:00Z"
+modified: "2020-06-13T19:30Z"
 thumbnail: "./images/cover-3.png"
 slug: how-to-compare-objects-in-javascript
 tags: ["javascript", "equality", "object"]
