@@ -2,7 +2,7 @@
 title: "How to Compare Objects in JavaScript"
 description: "How to compare objects in JavaScript: referential, manual, shallow and deep equality."
 published: "2020-06-08T08:00Z"
-modified: "2020-06-13T19:30Z"
+modified: "2020-06-15T12:30Z"
 thumbnail: "./images/cover-3.png"
 slug: how-to-compare-objects-in-javascript
 tags: ["javascript", "equality", "object"]
@@ -111,10 +111,8 @@ function shallowEqual(object1, object2) {
     return false;
   }
 
-  for (let index = 0; index < keys1.length; index++) {
-    const val1 = object1[keys1[index]];
-    const val2 = object2[keys2[index]];
-    if (val1 !== val2) {
+  for (let key of keys1) {
+    if (object1[key] !== object2[key]) {
       return false;
     }
   }
@@ -125,7 +123,7 @@ function shallowEqual(object1, object2) {
 
 Inside the function, `keys1` and `keys2` are arrays containing correspondingly the property names of `object1` and `object2`. 
 
-`for` cycle iterates over the keys, and compares each property of `object1` and `object2` for equality `val1 !== val2`.  
+`for` cycle iterates over the keys, and compares each property of `object1` and `object2` for equality `object1[key] !== object2[key]`.  
 
 Let's use the shallow equality to compare objects with many properties:
 
@@ -195,9 +193,9 @@ function deepEqual(object1, object2) {
     return false;
   }
 
-  for (let index = 0; index < keys1.length; index++) {
-    const val1 = object1[keys1[index]];
-    const val2 = object2[keys2[index]];
+  for (const key of keys1) {
+    const val1 = object1[key];
+    const val2 = object2[key];
     const areObjects = isObject(val1) && isObject(val2);
     if (
       areObjects && !deepEqual(val1, val2) ||
