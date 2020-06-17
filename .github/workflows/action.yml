@@ -15,6 +15,8 @@ jobs:
         run: yarn
       - name: Build
         run: yarn build
+        env:
+          MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
