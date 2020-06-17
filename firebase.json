@@ -6,5 +6,8 @@
       "**/.*",
       "**/node_modules/**"
     ]
-  } 
+  },
+  "projects": {
+    "default": "endless-galaxy-280607"
+  }
 }
