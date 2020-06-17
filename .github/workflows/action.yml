@@ -18,7 +18,7 @@ jobs:
         env:
           MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
       - name: Install firebase CLI
-        run: yarn add global firebase-tools
+        run: yarn global add firebase-tools
       - name: Deploy
         run: firebase deploy
         env:
