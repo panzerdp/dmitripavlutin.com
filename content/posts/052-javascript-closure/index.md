@@ -190,7 +190,7 @@ Inside the `innerFunc()` scope, the variable `outerVar` is accessed from the lex
 
 Note that `innerFunc()` invocation happens inside its lexical scope (the scope of `outerFunc()`).  
 
-Let's make a change: `innerFunc()` to be invoked outside of its lexical scope (outside of `outerFunc()`). Would `innerInc()` still be able to access `outerVar`?  
+Let's make a change: `innerFunc()` to be invoked outside of its lexical scope (outside of `outerFunc()`). Would `innerFunc()` still be able to access `outerVar`?  
 
 Let's make the adjustments to the code snippet:
 
