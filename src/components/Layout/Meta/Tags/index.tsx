@@ -5,7 +5,7 @@ interface LayoutMetaTagsProps {
   siteInfo: SiteInfo;
 }
 
-export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps) {
+export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.Element {
   return (
     <Helmet>
       <link rel="preconnect" href="//fonts.gstatic.com/" crossOrigin="" />
@@ -21,6 +21,7 @@ export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps) {
       <link rel="shortcut icon" href="/favicon.ico" />
       <meta name="referrer" content="no-referrer-when-downgrade" />
       <meta name="robots" content="index, follow" />
+      <meta name="monetization" content="$ilp.uphold.com/fpXqxfkAKLb8" />
       <html lang="en" />
     </Helmet>
   );
