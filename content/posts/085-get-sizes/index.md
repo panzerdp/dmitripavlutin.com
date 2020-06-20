@@ -21,12 +21,16 @@ How exactly are these sizes defined, and, importantly, how to access them is wha
 
 ## 1. The screen
 
-## 1.1 The screen size
+The screen size consists of the width and height of the active screen: the monitor (in case of a desktop or laptop OS), or the mobile screen (in case of a mobile device).  
+
+
+
+### 1.1 The screen size
 
 ## 2. The window
 
-## 2.1 The window size
+### 2.1 The window size
 
 ## 3. The web page
 
-## 3.1 The web page size
+### 3.1 The web page size
