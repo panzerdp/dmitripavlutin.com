@@ -1,9 +1,9 @@
 ---
 title: "How to Get the Screen, Window, and Web Page Sizes in JavaScript"
-description: "How to Get the Screen, Window, and Web Page Sizes in JavaScript."
+description: "How to get the screen, browser window, and web page sizes (width and height) in JavaScript."
 published: "2020-06-23T12:00Z"
 modified: "2020-06-23T12:00Z"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover-1.png"
 slug: screen-window-page-sizes
 tags: ["browser", "window"]
 recommended: ["7-tips-to-handle-undefined-in-javascript", "own-and-inherited-properties-in-javascript"]
@@ -11,11 +11,9 @@ type: post
 commentsThreadId: screen-window-page-sizes
 ---
 
-To detect whether the browser window is in landscape or portrait mode, one way to find out this information is to compare the window's width and height.  
+To detect whether the browser window is in landscape or portrait mode, you can compare the browser window's width and height.  
 
-To determine the device orientation you need to access the window width and height.  
-
-From my experience, it's easy to get confused in a bunch of sizes: screen, window, web page sizes. 
+However, from my experience, it's easy to get confused in a bunch of sizes: screen, window, web page sizes. 
 
 How exactly are these sizes defined, and, importantly, how to access them is what I'm going to discuss with you.  
 
@@ -54,7 +52,7 @@ const availScreenHeight = window.screen.availHeight;
 
 ### 2.1 The window outer size
 
-> *The outer window size* consists of the width and height of the entire browser window, including the address bar, tabs bar, and other browser bars or panels.  
+> *The window outer size* consists of the width and height of the entire browser window, including the address bar, tabs bar, and other browser panels.  
 
 ![Window outer size](./images/window-outer-size-2.png)
 
