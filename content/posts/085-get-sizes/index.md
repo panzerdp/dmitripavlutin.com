@@ -5,7 +5,7 @@ published: "2020-06-23T12:00Z"
 modified: "2020-06-23T12:00Z"
 thumbnail: "./images/cover.png"
 slug: screen-window-page-sizes
-tags: ["browser"]
+tags: ["browser", "window"]
 recommended: ["7-tips-to-handle-undefined-in-javascript", "own-and-inherited-properties-in-javascript"]
 type: post
 commentsThreadId: screen-window-page-sizes
@@ -13,9 +13,9 @@ commentsThreadId: screen-window-page-sizes
 
 To detect whether the browser window is in landscape or portrait mode, one way to find out this information is to compare the window's width and height.  
 
-To determine the device orientation you need to access the window width's and height.  
+To determine the device orientation you need to access the window width and height.  
 
-From my experience, it's easy to get confused in the bunch of sizes: screen, window, web page sizes. 
+From my experience, it's easy to get confused in a bunch of sizes: screen, window, web page sizes. 
 
 How exactly are these sizes defined, and, importantly, how to access them is what I'm going to discuss with you.  
 
@@ -26,7 +26,7 @@ How exactly are these sizes defined, and, importantly, how to access them is wha
 
 ### 1.1 The screen size
 
-> *The screen size* consists of the width and height of the screen: a the monitor (in case of a desktop or laptop OS), or a mobile screen (in case of a mobile device).  
+> *The screen size* is the width and height of the screen: a monitor (in case of a desktop or laptop OS), or a mobile screen (in case of a mobile device).  
 
 ![Screen size](./images/screen-size-2.png)
 
@@ -102,10 +102,10 @@ const pageHeight = docElement.scrollHeight;
 
 ## 4. Summary
 
-Hopefully, now you have a better idea on how to determine different kind of sizes.  
+Hopefully, now you have a better idea of how to determine different kinds of sizes.  
 
-*The screen size* is the size of your entire screen (or monitor), while *the available screen size* is the size of the monitor excluding the OS task bars or toolbars.  
+*The screen size* is the size of your entire screen (or monitor), while *the available screen size* is the size of the monitor excluding the OS taskbars or toolbars.  
 
-*The window outer size* measures the entire browser window (including the address bar, tabs bar, side panels if opened), while *the window inner size* is the size of viewport where the web page is rendered.  
+*The window outer size* measures the entire browser window (including the address bar, tabs bar, side panels if opened), while *the window inner size* is the size of viewport where the web page renders.  
 
-Finally, the web page sizes is the size of the entire web page.  
+Finally, the web page size is the size of the entire web page.  
