@@ -6,16 +6,16 @@ modified: "2020-06-23T12:00Z"
 thumbnail: "./images/cover-1.png"
 slug: screen-window-page-sizes
 tags: ["browser", "window"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "own-and-inherited-properties-in-javascript"]
+recommended: ["javascript-modules-best-practices", "react-playground-setup"]
 type: post
 commentsThreadId: screen-window-page-sizes
 ---
 
 To detect whether the browser window is in landscape or portrait mode, you can compare the browser window's width and height.  
 
-However, from my experience, it's easy to get confused in a bunch of sizes: screen, window, web page sizes. 
+But from my experience it's easy to get confused in the bunch of sizes: screen, window, web page sizes. 
 
-How exactly are these sizes defined, and, importantly, how to access them is what I'm going to discuss with you.  
+How are these sizes defined, and, importantly, how to access them is what I'm going to discuss in this post. 
 
 ```toc
 ```
@@ -79,24 +79,24 @@ const windowInnerHeight = window.innerHeight;
 If you'd like to access the window inner size *without the scrollbars*, you can use the following:
 
 ```javascript
-const docElement = document.documentElement;
-const windowInnerWidth  = docElement.clientWidth;
-const windowInnerHeight = docElement.clientHeigh;
+const windowInnerWidth  = document.documentElement.clientWidth;
+const windowInnerHeight = document.documentElement.clientHeigh;
 ```
 
 ## 3. The web page size
 
-> *The web page size* consists of the width and height of the entire web page content.  
+> *The web page size* consists of the width and height of the page content rendered.  
 
 ![Web page size](./images/web-page-size.png)
 
-Use the following to access the entire size of the web page:
+Use the following to access the entire size of the web page (includes the page's padding, but not border, margin or scrollbars):
 
 ```javascript
-const docElement = document.documentElement;
-const pageWidth  = docElement.scrollWidth;
-const pageHeight = docElement.scrollHeight;
+const pageWidth  = document.documentElement.scrollWidth;
+const pageHeight = document.documentElement.scrollHeight;
 ```
+
+If `pageHeight` is bigger than the window inner height, then a vertical scrollbar is displayed.  
 
 ## 4. Summary
 
@@ -106,4 +106,4 @@ Hopefully, now you have a better idea of how to determine different kinds of siz
 
 *The window outer size* measures the entire browser window (including the address bar, tabs bar, side panels if opened), while *the window inner size* is the size of viewport where the web page renders.  
 
-Finally, the web page size is the size of the entire web page.  
+Finally, the web page size is the size of the web page with its content.  
