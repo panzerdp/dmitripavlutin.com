@@ -67,7 +67,7 @@ const windowOuterHeight = window.outerHeight;
 
 ### 2.2 The window inner size
 
-> *The inner window size* consists of the width and height of the browser panel that displays the web page.  
+> *The inner window size* (aka *viewport size*) consists of the width and height of the viewport that displays the web page.  
 
 ![Window inner size](./images/window-inner-size-2.png)
 
@@ -78,12 +78,34 @@ const windowInnerWidth  = window.innerWidth;
 const windowInnerHeight = window.innerHeight;
 ```
 
+If you'd like to access the window inner size *without the scrollbars*, you can use the following:
+
+```javascript
+const docElement = document.documentElement;
+const windowInnerWidth  = docElement.clientWidth;
+const windowInnerHeight = docElement.clientHeigh;
+```
+
 ## 3. The web page size
 
-> The web page size consists of the width and height of the web page content, and particularly the size of the `<body>` DOM element.  
+> *The web page size* consists of the width and height of the entire web page content.  
 
 ![Web page size](./images/web-page-size.png)
 
+Use the following to access the entire size of the web page:
 
+```javascript
+const docElement = document.documentElement;
+const pageWidth  = docElement.scrollWidth;
+const pageHeight = docElement.scrollHeight;
+```
 
 ## 4. Summary
+
+Hopefully, now you have a better idea on how to determine different kind of sizes.  
+
+*The screen size* is the size of your entire screen (or monitor), while *the available screen size* is the size of the monitor excluding the OS task bars or toolbars.  
+
+*The window outer size* measures the entire browser window (including the address bar, tabs bar, side panels if opened), while *the window inner size* is the size of viewport where the web page is rendered.  
+
+Finally, the web page sizes is the size of the entire web page.  
