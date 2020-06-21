@@ -89,7 +89,7 @@ const windowInnerHeight = document.documentElement.clientHeigh;
 
 ![Web page size](./images/web-page-size.png)
 
-Use the following to access the entire size of the web page (includes the page's padding, but not border, margin or scrollbars):
+Use the following to access the size of the web page content (includes the page's padding, but not border, margin or scrollbars):
 
 ```javascript
 const pageWidth  = document.documentElement.scrollWidth;
