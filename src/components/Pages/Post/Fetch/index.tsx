@@ -112,7 +112,7 @@ export const pageQuery = graphql`
         commentsThreadId
         thumbnail {
           childImageSharp {
-            fluid(maxWidth: 720, maxHeight: 400, quality: 90) {
+            fluid(maxWidth: 650, maxHeight: 360, quality: 90) {
               ...GatsbyImageSharpFluid_withWebp
             }
           }
