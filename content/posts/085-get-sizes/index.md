@@ -1,8 +1,8 @@
 ---
 title: "How to Get the Screen, Window, and Web Page Sizes in JavaScript"
 description: "How to get the screen, browser window, and web page sizes (width and height) in JavaScript."
-published: "2020-06-23T12:00Z"
-modified: "2020-06-23T12:00Z"
+published: "2020-06-23T06:50Z"
+modified: "2020-06-23T06:50Z"
 thumbnail: "./images/cover-1.png"
 slug: screen-window-page-sizes
 tags: ["browser", "window"]
