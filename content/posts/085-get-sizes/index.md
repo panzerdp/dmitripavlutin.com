@@ -24,7 +24,7 @@ How are these sizes defined, and, importantly, how to access them is what I'm go
 
 ### 1.1 The screen size
 
-> *The screen size* is the width and height of the screen: a monitor (in case of a desktop or laptop OS), or a mobile screen (in case of a mobile device).  
+> *The screen size* is the width and height of the screen: a monitor or a mobile screen.  
 
 ![Screen size](./images/screen-size-2.png)
 
@@ -65,7 +65,7 @@ const windowOuterHeight = window.outerHeight;
 
 ### 2.2 The window inner size
 
-> *The inner window size* (aka *viewport size*) consists of the width and height of the viewport that displays the web page.  
+> *The window inner size* (aka *viewport size*) consists of the width and height of the viewport that displays the web page.  
 
 ![Window inner size](./images/window-inner-size-2.png)
 
