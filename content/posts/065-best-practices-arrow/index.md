@@ -134,14 +134,19 @@ const array = [1, 2, 3];
 array.map(number => ({ 'number': number }));
 ```
 
-If the object literal has lots of properties, you can even use newlines, while still keeping the arrow function inline:
+If the object literal has just one property, the function can be simplified:
+```
+array.map(number => ({ number }));
+```
+
+Otherwise, you can use newlines, while still keeping the arrow function inline:
 
 ```javascript
 const array = [1, 2, 3];
 
 // Works!
 array.map(number => ({
-  'number': number
+  'number': number,
   'propA': 'value A',
   'propB': 'value B'
 }));
