@@ -127,6 +127,8 @@ To detect an array my recommendation is to use `Array.isArray(value)`. The funct
 
 Another approach is `value instanceof Array` expression that evaluates to `true` if `value` is an array. This approach uses the idea that `Array` function is the constructor of the arrays.  
 
-Finally, (maybe not the most aesthetic approach) is to use the expression `({}).toString.call(value) === '[object Array]'` that is `true` if `value` is an array. `Object.prototype.toString()` returns the type representation of the object it was invoked upon, and the type representation of arrays is `'[object Array]'`.
+Finally, not the most aesthetic approach is to use the expression `({}).toString.call(value) === '[object Array]'` that is `true` if `value` is an array. 
+
+`Object.prototype.toString()` returns the type representation of the object it was invoked upon, and the type representation of arrays is `'[object Array]'`.
 
 *What is your favorite way to detect arrays in JavaScript?*
