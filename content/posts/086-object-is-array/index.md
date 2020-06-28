@@ -1,14 +1,14 @@
 ---
-title: "3 Ways to Check if a Value is an Array in JavaScript"
+title: "3 Ways to Detect an Array in JavaScript"
 description: "3 ways to check if a value is an array in JavaScript: Array.isArray(), instanceof Array and toString() === '[object Array]'."
 published: "2020-06-28T12:00Z"
 modified: "2020-06-29T12:00Z"
 thumbnail: "./images/cover-1.png"
-slug: value-is-array-javascript
+slug: is-array-javascript
 tags: ["javascript", "array"]
 recommended: ["operations-on-arrays-javascript", "the-magic-behind-array-length-property"]
 type: post
-commentsThreadId: value-is-array-javascript
+commentsThreadId: is-array-javascript
 ---
 
 Checking whether a value is an array in JavaScrit might happen when you'd like to work with arrays,
@@ -55,7 +55,7 @@ const array = [1, 2, 3];
 array.constructor === Array;
 ```
 
-And what is the JavaScript operator that verifies whether a function is the constructor of an instance? `instanceof`!  
+What is the operator that verifies whether a function is the constructor of an instance? `instanceof`!  
 
 Now emerges the next way to verify if a value is an array: `value instance Array` evaluates to `true` if `value` is an array.  
 
@@ -75,12 +75,53 @@ Resuming:
 
 > `value instanceof Array` expressions evaluates to `true` if `value` is an array, or `false` otherwise.
 
-*Note: `value instanceof Array` incorrectly evaluates to `false` if `value` array has been created in a different iframe than the `Array` constructor function. If you're not writing cross-iframes JavaScript, use this approach without worries.*  
+*Note: `value instanceof Array` incorrectly evaluates to `false` when `value` is an array created in a different iframe than the `Array` constructor function. If you're not writing cross-frames JavaScript, use this approach without worries.*  
 
-## 3. *({}).toString.apply(value)*
+## 3. *({}).toString.call(value)*
 
+What's nice about `toString()` of a plain JavaScript object is that it returns `'[object <type>]'`, where `<type>` is the object type it was called upon. Take a look at the [specification](http://www.ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring) which indicates how exactly `Object.prototype.toString()` works.  
 
+In the simplest case, when `toString()` method is invoked directly on a plain object, it returns `'[object Object]'`:
 
-## 4. Extending the Array class
+```javascript
+({}).toString(); // => '[object Object]'
+```
 
-## 5. Summary
+However, you can use an [indirect call](/gentle-explanation-of-this-in-javascript/#5-indirect-invocation) of `toString()` on different types of values, and the method returns the corresponding string representation of the type:
+
+```javascript{7}
+const array = [1, 2];
+const object = { message: 'Hello' };
+const string = 'Hello!';
+const nothing = undefined;
+const empty = null;
+
+({}).toString.call(array);   // => '[object Array]'
+({}).toString.call(object);  // => '[object Object]'
+({}).toString.call(string);  // => '[object String]'
+({}).toString.call(nothing); // => '[object Undefined]'
+({}).toString.call(empty);   // => '[object Null]'
+```
+
+Now you can spot the idea: `({}).toString.call(value)` equals to `'[object Array]'` if `value` is an array.  
+
+```javascript
+const array = [1, 2, 3];
+({}).toString.call(array) === '[object Array]'; // => true
+```
+
+In conclusion:
+
+> `({}).toString.call(value) === '[object Array]'` expression evaluates to `true` if `value` is an array.
+
+## 4. Summary
+
+This post presented 3 ways how to detect an array in JavaScript.  
+
+My recommendation is to use the first approach `Array.isArray(value)` utility function.  
+
+Another approach `value instanceof Array`, which uses the idea that the constructor of the array is `Array` function.  
+
+Finally, and maybe not the most aesthetic approach, is to use the expression `({}).toString.call(value) === '[object Array]'` which evaluates to `true` if `value` is an array. This approach uses the idea that `Object.prototype.toString()` returns the type representation of the object it was invoked upon.  
+
+*What is your favorite approach to detect arrays in JavaScript?*
