@@ -1,8 +1,8 @@
 ---
 title: "3 Ways to Detect an Array in JavaScript"
 description: "3 ways to check if a value is an array in JavaScript: Array.isArray(), instanceof Array and toString() === '[object Array]'."
-published: "2020-06-28T12:00Z"
-modified: "2020-06-29T12:00Z"
+published: "2020-06-30T05:40Z"
+modified: "2020-06-30T05:40Z"
 thumbnail: "./images/cover-1.png"
 slug: is-array-javascript
 tags: ["javascript", "array"]
@@ -11,16 +11,16 @@ type: post
 commentsThreadId: is-array-javascript
 ---
 
-Checking whether a value is an array in JavaScript might be necessary when a variable is expected to be an array,
-but it could be a `null`, or a plain object.  
+Checking whether a value is an array in JavaScript is necessary when a variable is expected to be an array,
+but it could be a plain object or even a primitive.  
 
-In this post, you'll find 3 good ways to detect a JavaScript array.
+In this post, you'll find 3 good ways to detect an array instance in JavaScript.
 
 ## 1. *Array.isArray(value)*
 
-If you don't have time to read the entire post, here's a good idea how to detect an array in JavaScript: just use `Array.isArray(value)` utility function.  
+If you don't have time to read the entire post, here's a good way to detect an array in JavaScript: just use `Array.isArray(value)` utility function.  
 
-If you want to know more, let's continue.  
+But if you want to know more, let's continue.  
 
 Here are a few examples of using `Array.isArray()`:
 
@@ -45,7 +45,7 @@ for an array in JavaScript.
 
 An array is an object. And like any object in JavaScript, the array instance has a constructor function &mdash; `Array`.  
 
-`Array` invoked as a constructor (prefixed with `new` keyword) easily creates array instances:   
+`Array` invoked as a constructor (prefixed with `new` keyword) creates array instances:   
 
 ```javascript
 const array = new Array(1, 2, 3);
@@ -63,7 +63,7 @@ array.constructor === Array; // => true
 
 What is the operator that verifies whether a function is the constructor of an instance? `instanceof`!  
 
-Now emerges the next way to verify if a value is an array: `value instance Array` evaluates to `true` if `value` is an array.  
+Now emerges the next way to detect an array: `value instance Array` evaluates to `true` if `value` is an array.  
 
 Let's see a few examples:
 
