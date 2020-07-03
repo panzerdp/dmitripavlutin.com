@@ -1,9 +1,9 @@
 ---
-title: "How to Parse URLs in JavaScript: hostname, pathname, query, hash"
-description: "How access the hostname, pathname, query, hash of an URL in JavaScript."
+title: "How to Parse URL in JavaScript: hostname, pathname, query, hash"
+description: "How access the hostname, pathname, query, or hash of an URL in JavaScript."
 published: "2020-07-07T12:00Z"
 modified: "2020-07-07T12:00Z"
-thumbnail: "./images/cover-7.png"
+thumbnail: "./images/cover-8.png"
 slug: parse-url-javascript
 tags: ["url", "hostname", "pathname", "query", "hash"]
 recommended: ['replace-all-string-occurrences-javascript', 'what-every-javascript-developer-should-know-about-unicode']
@@ -21,20 +21,23 @@ For example, here's the URL of this blog post:
 https://dmitripavlutin.com/parse-url-javascript/
 ```
 
-To access parts of the URL like the *hostname* (e.g. `dmitripavlutin.com`), or *pathname* (e.g. `/parse-url-javascript/`) you need to invoke a parsing function. A convinient and well supported by modern browsers parser is the `URL()` constructor.  
+Accessing parts of an URL like the *hostname* (e.g. `dmitripavlutin.com`), or *pathname* (e.g. `/parse-url-javascript/`) requires a parser function. A convinient and supported by modern browsers parser is the `URL()` constructor.  
 
-In this post, I'm going to show you the structure of an URL. Then, you're going to use the `URL()` constructor to easily pick parts of an URL like hostname, pathname, query, or hash.   
+In this post, I'm going to show you the structure of an URL. Then, you're going to use the `URL()` constructor to easily pick parts of an URL like hostname, pathname, query, or hash.  
 
-## 1. The structure of an URL
+```toc
+```
 
-## 2. Access the *hostname*
+## 1. URL structure
 
-## 3. Access the *pathname*
+## 2. *hostname*
 
-## 4. Access the *query*
+## 3. *pathname*
 
-## 5. Access the *hash*
+## 4. *query*
 
-## 6. Access other URL parts
+## 5. *hash*
+
+## 6. Other URL parts
 
 ## 7. Summary
