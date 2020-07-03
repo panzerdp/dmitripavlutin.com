@@ -22,6 +22,9 @@ eqality operators, for example the strict equality:
 Objects, however, are more difficult to compare because they are structured data. In this post, you will learn how to 
 correctly compare objects in JavaScript.  
 
+```toc
+```
+
 ## 1. Referential equality
 
 JavaScript provides 3 ways to compare values: 
