@@ -305,7 +305,7 @@ const obj = {
     return new Date().toString();
   }
 };
-obj.myFunction(); // method invocation
+obj.myMethod(); // method invocation
 
 const func = obj.myMethod;
 func();              // function invocation
