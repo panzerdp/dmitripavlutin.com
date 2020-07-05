@@ -11,9 +11,7 @@ type: post
 commentsThreadId: parse-url-javascript
 ---
 
-A Uniform Resource Locator, abbreviated **URL**, is a reference to a web resource (web page, image, file). The URL specifies the resource location and a mechanism of retrieving the resource (http, ftp, mailto).  
-
-In simple words, the URL is an address where a web page (or generally a resource) is located.  
+A Uniform Resource Locator, abbreviated **URL**, is a reference to a web resource (web page, image, file). The URL specifies the resource location and a mechanism to retrieve the resource (http, ftp, mailto).  
 
 For example, here's the URL of this blog post:
 
@@ -21,16 +19,20 @@ For example, here's the URL of this blog post:
 https://dmitripavlutin.com/parse-url-javascript
 ```
 
-Accessing components of an URL like the *hostname* (e.g. `dmitripavlutin.com`), or *pathname* (e.g. `/parse-url-javascript`) requires a parser function. A convinient parser is the `URL()` constructor.  
+Often you need to access specific components of an URL. These might be the *hostname* (e.g. `dmitripavlutin.com`), or *pathname* (e.g. `/parse-url-javascript`).   
 
-In this post, I'm going to show you the structure of an URL. Then, you're going to use the `URL()` constructor to easily pick parts of an URL like hostname, pathname, query, or hash.  
+A convinient parser to access components of an URL is the `URL()` constructor.    
+
+In this post, I'm going to show you the structure of an URL and its main components.    
+
+Then, I'm going to describe how to use the `URL()` constructor to easily pick components of an URL like hostname, pathname, query, or hash. 
 
 ```toc
 ```
 
 ## 1. URL structure
 
-In the following image you can find the structure of an URL with its components:
+An image worth a thousand words. Without much textual description, in the following image you can find the main components of an URL:
 
 ![URL() constructor components in JavaScript](./images/url-constructor-components-10.png)
 
@@ -42,7 +44,7 @@ The `URL()` is a constuctor function that enables the parsing of components of a
 const url = new URL(absoluteOrRelative [, absoluteBase]);
 ```
 
-`relativeOrAbsolute` argument can be either an absolute or relative URL. If the first argument is relative, then the second argument `absoluteBase` is obligatory and has to be an absolute URL being the base for the first argument.   
+`relativeOrAbsolute` argument can be either an absolute or relative URL. If the first argument is relative, then the second argument `absoluteBase` is obligatory and must be an absolute URL being the base for the first argument.   
 
 For example, let's initialize `URL()` with an absolute URL:
 
@@ -62,7 +64,7 @@ url.href; // => 'http://example.com/path/index.html'
 
 The `href` property of the `URL()` instance returns the entire URL string.  
 
-After creating an `URL()` instance, you can access the URL components presented in the [previous picture](#1-url-structure):
+After creating an `URL()` instance, you can access any URL component presented in the [previous picture](#1-url-structure). For reference, here's the `URL()` instance interface:
 
 ```typescript
 interface URL {
@@ -85,26 +87,6 @@ interface URL {
 ```
 
 where `USVString` type maps to a string when returned in JavaScript.  
-
-### 2.1 URL validation
-
-When `new URL()` constructor creates an instance, as a side effect, it also validates
-the URL for correctness. If the URL string is invalid, the `URL()` constructor throws a `TypeError`.  
-
-In the following example the URL is not valid, thus a `TypeError` is thrown:
-
-```javascript{7}
-try {
-  const url = new URL('http ://example.com');
-} catch (error) {
-  error; // => TypeError, "Failed to construct 'URL': Invalid URL"
-}
-```
-
-`http ://example.com` is an invalid URL because of the space character after `http`.  
-
-Now it's the time to explore how can you access the different components of the URL. I'll start with
-the most used component: the query string.  
 
 ## 3. Query string
 
@@ -190,7 +172,7 @@ const url = new URL('http://example.com/path/index.html#bottom');
 url.hash; // => '#bottom'
 ```
 
-When the hash in the URL is missing, `url.hash` evaluates to an empty string:
+When the hash in the URL is missing, `url.hash` evaluates to an empty string `''`:
 
 ```javascript
 const url = new URL('http://example.com/path/index.html');
@@ -198,7 +180,44 @@ const url = new URL('http://example.com/path/index.html');
 url.hash; // => ''
 ```
 
-## 7. Summary
+## 7. URL validation
+
+When `new URL()` constructor creates an instance, as a side effect, it also validates
+the URL for correctness. If the URL value is invalid, a `TypeError` is thrown.  
+
+For example, `http ://example.com` is an invalid URL because of the space character after `http`.  
+
+Let's use this invalid URL to initialize the parser:  
+
+```javascript{7}
+try {
+  const url = new URL('http ://example.com');
+} catch (error) {
+  error; // => TypeError, "Failed to construct 'URL': Invalid URL"
+}
+```
+
+Because `'http ://example.com'` is an invalid URL, as expected, `new URL('http ://example.com')` throws a `TypeError`.  
+
+## 8. URL manipulation
+
+Aside from accessing URL components, the properties like `search`, `hostname`, `pathname`, `hash` are writeable &mdash; thus you can manipulate the URL.  
+
+For example, let's modify the hostname of an existing URL from `red.com` to `blue.io`:
+
+```javascript
+const url = new URL('http://red.com/path/index.html');
+
+url.href; // => 'http://red.com/path/index.html'
+
+url.hostname = 'blue.io';
+
+url.href; // => 'http://blue.io/path/index.html'
+```
+
+Note that only `origin` and `searchParams` properties of the `URL()` instance are readonly. All the other one are writable and modify the URL when you change them.
+
+## 9. Summary
 
 The `URL()` constructor is handy to parse (and validate) URLs in JavaScript.  
 
@@ -211,7 +230,5 @@ After creating the `URL()` instance, you can easily access the most common URL c
 * `url.hostname` to access the hostname
 * `url.pathname` to read the pathname
 * `url.hash` to determine the hash value
-
-Aside from accessing URL components, the properties like `search`, `hostname`, `pathname`, `hash` are writeable &mdash; thus you can manipulate the URL.  
 
 *What is your favorite tool to parse URLs in JavaScript?*
