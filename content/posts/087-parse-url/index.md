@@ -193,7 +193,7 @@ Let's use this invalid URL to initialize the parser:
 try {
   const url = new URL('http ://example.com');
 } catch (error) {
-  error; // => TypeError, "Failed to construct 'URL': Invalid URL"
+  error; // => TypeError, "Failed to construct URL: Invalid URL"
 }
 ```
 
