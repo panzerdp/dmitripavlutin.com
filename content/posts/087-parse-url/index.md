@@ -13,15 +13,15 @@ commentsThreadId: parse-url-javascript
 
 A Uniform Resource Locator, abbreviated **URL**, is a reference to a web resource (web page, image, file). The URL specifies the resource location and a mechanism of retrieveing the resource (http, ftp, mailto).  
 
-In simple words, the URL is an address where a specific web page (or an image) can be found.  
+In simple words, the URL is an address where a web page (or generally a resource) is located.  
 
 For example, here's the URL of this blog post:
 
 ```
-https://dmitripavlutin.com/parse-url-javascript/
+https://dmitripavlutin.com/parse-url-javascript
 ```
 
-Accessing parts of an URL like the *hostname* (e.g. `dmitripavlutin.com`), or *pathname* (e.g. `/parse-url-javascript/`) requires a parser function. A convinient and supported by modern browsers parser is the `URL()` constructor.  
+Accessing components of an URL like the *hostname* (e.g. `dmitripavlutin.com`), or *pathname* (e.g. `/parse-url-javascript`) requires a parser function. A convinient parser is the `URL()` constructor.  
 
 In this post, I'm going to show you the structure of an URL. Then, you're going to use the `URL()` constructor to easily pick parts of an URL like hostname, pathname, query, or hash.  
 
@@ -30,9 +30,9 @@ In this post, I'm going to show you the structure of an URL. Then, you're going 
 
 ## 1. URL structure
 
-In the following image you can find the structure of an URL and the important components:
+In the following image you can find the structure of an URL with its components:
 
-!!!Insert Image HERE
+![URL() constructor components in JavaScript](./images/url-constructor-components-10.png)
 
 ## 2. *URL()* constructor
 
@@ -44,8 +44,7 @@ const url = new URL(absoluteOrRelative [, absoluteBase]);
 
 `relativeOrAbsolute` argument can be either an absolute or relative URL. If the first argument is relative, then the second argument `absoluteBase` is obligatory and have to be an absolute URL being the base for the first argument.   
 
-
-For example, let's initialize `URL()` with one absolute URL argument:
+For example, let's initialize `URL()` with an absolute URL:
 
 ```javascript
 const url = new URL('http://example.com/path/index.html');
@@ -71,16 +70,11 @@ the URL value. If the URL string is not valid, the `URL()` constructor throws a 
 In the following example the URL is not valid, thus a `TypeError` is thrown:
 
 ```javascript{7}
-let isValidURL;
 try {
   const url = new URL('http ://example.com');
-  isValidURL = true;
 } catch (error) {
-  isValidURL = false;
-  error; // TypeError: "Failed to construct 'URL': Invalid URL"
+  error; // => TypeError, "Failed to construct 'URL': Invalid URL"
 }
-
-isValidURL; // => false
 ```
 
 `http ://example.com` is an invalid URL because of the space character after `http`.  
@@ -97,10 +91,10 @@ const url = new URL(
   'http://example.com/path/index.html?message=hello&who=world'
 );
 
-url.search; // => 'message=hello&who=world'
+url.search; // => '?message=hello&who=world'
 ```
 
-If there are no query string parameters, `url.search` evaluates to an empty string `''`:
+If the query string is missing, `url.search` evaluates to an empty string `''`:
 
 ```javascript
 const url1 = new URL('http://example.com/path/index.html');
@@ -114,7 +108,7 @@ url2.search; // => ''
 
 More handy than accessing the raw query string is to access the query parameters.  
 
-An easy access of query parameters gives `url.searchParams` property. This property holds an instance of [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams).  
+An easy way to pick query parameters gives `url.searchParams` property. This property holds an instance of [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams).  
 
 `URLSearchParams` object provides lots of method (like `get(param)`, `has(param)`) to access the query string parameters.  
 
@@ -182,17 +176,19 @@ url.hash; // => ''
 
 ## 7. Summary
 
-The `URL()` constructor is useful and handy in parsing URLs in JavaScript.  
+The `URL()` constructor is handy to parse (and validate) URLs in JavaScript.  
 
 The constructor `new URL(relativeOrAbsolute [, absoluteBase])` accepts as first argument an absolute or relative URL.  
 
 After creating the `URL()` instance, you can easily access the most important URL components like:
 
 * `url.search` for raw query string
-* `url.searchParams` for an instance of `URLSearchParams` to access the query string parameters
+* `url.searchParams` for an instance of `URLSearchParams` to pick query string parameters
 * `url.hostname` to acccess the hostname
 * `url.pathname` to read the pathname
 * `url.hash` to determine the hash value
 
-Note that aside from accessing URL components, the properties like `search`, `hostname` are writeable &mdash; modifying the URL.  
+Note that aside from accessing URL components, the properties like `search`, `hostname` are writeable &mdash; thus you can even manipulate the URL.  
+
+*What is your favorite tool to parse URLs in JavaScript?*
 
