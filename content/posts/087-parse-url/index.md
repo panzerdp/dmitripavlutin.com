@@ -1,11 +1,11 @@
 ---
 title: "How to Parse URL in JavaScript: hostname, pathname, query, hash"
 description: "How access the hostname, pathname, query, or hash of an URL in JavaScript."
-published: "2020-07-07T12:00Z"
-modified: "2020-07-07T12:00Z"
+published: "2020-07-07T06:30Z"
+modified: "2020-07-07T06:30Z"
 thumbnail: "./images/cover-8.png"
 slug: parse-url-javascript
-tags: ["url", "hostname", "pathname", "query", "hash"]
+tags: ["url", "hostname", "pathname", "query string", "hash"]
 recommended: ['replace-all-string-occurrences-javascript', 'what-every-javascript-developer-should-know-about-unicode']
 type: post
 commentsThreadId: parse-url-javascript
