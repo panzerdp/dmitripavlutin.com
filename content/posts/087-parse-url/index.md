@@ -131,8 +131,7 @@ url.searchParams.get('missing'); // => null
 
 `url.searchParams.get('message')` returns the value of `message` query parameter &mdash; `'hello'`.  
 
-The query string doesn't contain a parameter `missing`. That's why accessing a non-existing parameter `url.searchParams.get('missing')` evaluates to 
-`null`.  
+However accessing a non-existing parameter `url.searchParams.get('missing')` evaluates to `null`.  
 
 ## 4. *hostname*
 
