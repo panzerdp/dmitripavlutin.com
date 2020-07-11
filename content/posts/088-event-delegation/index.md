@@ -3,13 +3,15 @@ title: "A Simple Explanation of Event Delegation in JavaScript"
 description: "A Simple Explanation of Event Delegation in JavaScript."
 published: "2020-07-14T12:00Z"
 modified: "2020-07-14T12:00Z"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover-2.png"
 slug: javascript-event-delegation
-tags: ['event delegation']
+tags: ['javascript', 'event delegation']
 recommended: ['simple-explanation-of-javascript-closures', 'simple-but-tricky-javascript-interview-questions']
 type: post
 commentsThreadId: javascript-event-delegation
 ---
+
+## 1. Why event delegation?
 
 Let's say you'd like to log a message to console when a simple HTML button is clicked.
 
@@ -24,15 +26,15 @@ What you need to do is select the button, and use the `addEventListener()` DOM e
 </script>
 ```
 
-When you'd like to listen for events on a single button, that a good way to go.  
+That's a the way to go when you'd like to listen for events on a single button.   
 
-What about a situation when you'd like to listen for click on a big list of buttons:
+What about listening for click events on a large list of buttons? Let's look at a possible implementation:
 
 ```html{10-13}
 <div id="list">
   <button class="buttonClass">Click me</button>
   <button class="buttonClass">Click me</button>
-  <!-- many buttons... -->
+  <!-- buttons... -->
   <button class="buttonClass">Click me</button>
 </div>
 
@@ -44,7 +46,16 @@ What about a situation when you'd like to listen for click on a big list of butt
 </script>
 ```
 
-## 1. Event propagation
+The code sample shows that you had to manually iterate the whole list of buttons, and add event listeners to each and every button.  
 
-## 2. Event delegation
+This approach becomes problematic when the buttons list changes: for example you can add new buttons or remove existing. You have to manually remove or attach event listeners each time a button is added or removed.  
+
+Fortunately, the *event delegation* pattern provides a simpler and elegant solution. With using event delegation just one event listener is needed,
+even if you'd like to listen for events on multiple elements.  
+
+The event delegation pattern makes use of the event propagation mechanism of DOM events. If you'd like to understand how event delegation works, first, you'll have to understand the event propagation, particularly the even bubbling and event capturing.  
+
+## 2. Event propagation
+
+## 3. Event delegation
 
