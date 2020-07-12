@@ -1,6 +1,6 @@
 ---
 title: "A Simple Explanation of Event Delegation in JavaScript"
-description: "A Simple Explanation of Event Delegation in JavaScript."
+description: "The event delegation is an useful pattern to listen for events on multiple elements using just one event handler."
 published: "2020-07-14T12:00Z"
 modified: "2020-07-14T12:00Z"
 thumbnail: "./images/cover-3.png"
@@ -13,7 +13,7 @@ commentsThreadId: javascript-event-delegation
 
 ## 1. Why event delegation?
 
-Let's log a message to console when an HTML button is clicked.  
+Let's log a message to the console when an HTML button is clicked.  
 
 To make it work, you need to select the button, then `addEventListener()` method to attach the click event listener:
 
@@ -54,11 +54,11 @@ Is there a better approach?
 
 Fortunately, when using *event delegation* pattern, listening for events on multiple elements requires just one event listener.  
 
-The event delegation uses specifics of *event propagation* mechanism. To understand how event delegation works, first, I recommend to understand the event propagation.  
+The event delegation uses specifics of *event propagation* mechanism. To understand how event delegation works, I recommend understanding the event propagation first.   
 
 ## 2. Event propagation
 
-Let's take a closer look at what happens when a button is clicked:
+When you click the button in the following sample html:
 
 ```html{4}
 <html>
@@ -70,11 +70,11 @@ Let's take a closer look at what happens when a button is clicked:
 </html>
 ```
 
-When you click the above button, the click event propagates in the following sequence of phases: 
+the click event propagates in a sequence of 3 phases: 
 
 1. *Capture phase* &mdash; Starting from `window`, `document` and the root element, the event dives down through ancestors until the target element
 2. *Target phase* &mdash; The event gets triggered on the element on which the user made a click
-3. *Bubble phase* &mdash; Finally, the event bubbles up through ancestors of the target element until the root element, `document` and `window`.  
+3. *Bubble phase* &mdash; Finally, the event bubbles up through ancestors of the target element until the root element, `document`, and `window`.  
 
 ![JavaScript Event Propagation](./images/javascript-event-propagation-4.png)
 
@@ -87,7 +87,7 @@ In this [Codesandbox demo](https://codesandbox.io/s/event-propagation-example-71
 
 Ok, how does event propagation help capturing events of multiple buttons? 
 
-The algorithm is simple: attach the event listener to the parent of buttons, and catch the bubbling event when a button is clicked. Let's see how it's done in the next section.  
+The algorithm is simple: attach the event listener to the parent of buttons, and catch the bubbling event when a button is clicked. This is exactly how event delegation works.  
 
 ## 3. Event delegation
 
@@ -113,13 +113,15 @@ Let's use the event delegation to catch the clicks on multiple buttons. Here's a
 
 Open the [Codesandbox demo](https://codesandbox.io/s/event-delegation-example-6y6gc?file=/index.html) and click any button &mdash; you'll see `'Click!'` message logged to console.  
 
+The idea of event delegation is simple. Instead of attaching the event listeners directly to the buttons, you *delegate* listening to the parent element of buttons  `<div id="buttons">`. And when a button is clicked, the listener of the parent element catches the *bubbling event* (recall the event propagation?) from the button.   
+
 Using the event delegation requires 3 steps:
 
 #### Step 1. Determine the parent of elements to watch for events
 
 In the example above, `<div id="buttons"></div>` is the parent element of the buttons.  
 
-#### Step 2. Attach the event listener to parent element
+#### Step 2. Attach the event listener to the parent element
 
 `document.getElementById('buttons').addEventListener('click', handler)` attaches the event listener to the parent element of buttons. Due to the event propagation mechanism, this event listener reacts also to buttons clicks, because the *button click event bubbles through ancestors*.  
 
@@ -145,15 +147,15 @@ Now you can see the *benefit* of event delegation pattern: *instead of attaching
 The idea of event delegation is based on the event propagation mechanism. When a click event happens (or any other event that propagates):
 
 * The event travels down from `window`, `document`, root element and through the ancestors of the target element (capture phase)
-* The event occurrs on the target (the target phase) 
-* Finally, the event bubbles up through target's ancestors until the root element, `document` and `window` (the bubble phase).  
+* The event occurs on the target (the target phase) 
+* Finally, the event bubbles up through the target's ancestors until the root element, `document` and `window` (the bubble phase).  
 
-The event delegation is an useful pattern because it let's you listen for events on multiple elements with just one event handler.  
+The event delegation is a useful pattern because it lets you listen for events on multiple elements with just one event handler.  
 
 Making the event delegation work requires 3 steps:
 
 1. Determine the parent of elements to watch for events
-2. Attach the event listener to parent element
+2. Attach the event listener to the parent element
 3. Use `event.target` to select the target elements
 
 *Do you have any questions regarding the event propagation or event delegation? If so, please write a comment below!*
