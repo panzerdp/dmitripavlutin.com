@@ -15,7 +15,7 @@ commentsThreadId: javascript-event-delegation
 
 Let's log a message to the console when an HTML button is clicked.  
 
-To make it work, you need to select the button, then `addEventListener()` method to attach the click event listener:
+To make it work, you need to select the button, then use `addEventListener()` method to attach an event listener:
 
 ```html{5}
 <button id="buttonId">Click me</button>
@@ -26,9 +26,9 @@ To make it work, you need to select the button, then `addEventListener()` method
 </script>
 ```
 
-That's the way to go when you'd like to listen for events on a single element, particularly a button.   
+That's the way to go to listen for events on a single element, particularly a button.   
 
-What about listening for events on a large list of buttons? Here's a <span id="many-event-listeners">possible implementation</span>:
+What about listening for events on multiple buttons? Here's a <span id="many-event-listeners">possible implementation</span>:
 
 ```html{10-13}
 <div id="buttons">
@@ -70,18 +70,24 @@ When you click the button in the following sample html:
 </html>
 ```
 
-the click event propagates in a sequence of 3 phases: 
+the click event propagates in 3 phases: 
 
-1. *Capture phase* &mdash; Starting from `window`, `document` and the root element, the event dives down through ancestors until the target element
+1. *Capture phase* &mdash; Starting from `window`, `document` and the root element, the event dives down through ancestors of the target element
 2. *Target phase* &mdash; The event gets triggered on the element on which the user made a click
 3. *Bubble phase* &mdash; Finally, the event bubbles up through ancestors of the target element until the root element, `document`, and `window`.  
 
 ![JavaScript Event Propagation](./images/javascript-event-propagation-4.png)
 
-You need to indicate specific arguments on the `addEventListener()` method to attach to events in a particular phase:
+The third argument `captureOrOptions` of the method:
 
-* `element.addEventListener('eventType', handler)` captures the events of *target and bubble phases*  
-* `element.addEventListener('eventType', handler, true)` (the 3rd argument being `true` or `{ capture: true }`) captures the events of *capture phase*  
+```javascript
+element.addEventListener(eventType, handler[, captureOrOptions]);
+``` 
+
+let's you catch events from different phases.
+
+* If `captureOrOptions` argument is missing, `false` or `{ capture: false }`, then the listener captures the events of *target and bubble phases*
+* If the argument is `true` or `{ capture: true }`, then the listener listens to events of *capture phase*.  
 
 In this [Codesandbox demo](https://codesandbox.io/s/event-propagation-example-71yvl?file=/src/index.js), when clicking on the button, you can see in console how the event propagates.  
 
@@ -113,13 +119,13 @@ Let's use the event delegation to catch the clicks on multiple buttons. Here's a
 
 Open the [Codesandbox demo](https://codesandbox.io/s/event-delegation-example-6y6gc?file=/index.html) and click any button &mdash; you'll see `'Click!'` message logged to console.  
 
-The idea of event delegation is simple. Instead of attaching the event listeners directly to the buttons, you *delegate* listening to the parent element of buttons  `<div id="buttons">`. And when a button is clicked, the listener of the parent element catches the *bubbling event* (recall the event propagation?) from the button.   
+The idea of event delegation is simple. Instead of attaching the event listeners directly to the buttons, you *delegate* listening to the parent `<div id="buttons">`. When a button is clicked, the listener of the parent element catches the *bubbling event* (recall the event propagation?).   
 
 Using the event delegation requires 3 steps:
 
 #### Step 1. Determine the parent of elements to watch for events
 
-In the example above, `<div id="buttons"></div>` is the parent element of the buttons.  
+In the example above, `<div id="buttons">` is the parent element of the buttons.  
 
 #### Step 2. Attach the event listener to the parent element
 
