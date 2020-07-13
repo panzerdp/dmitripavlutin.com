@@ -89,7 +89,15 @@ let's you catch events from different phases.
 * If `captureOrOptions` argument is missing, `false` or `{ capture: false }`, then the listener captures the events of *target and bubble phases*
 * If the argument is `true` or `{ capture: true }`, then the listener listens to events of *capture phase*.  
 
-In this [Codesandbox demo](https://codesandbox.io/s/event-propagation-example-71yvl?file=/src/index.js), when clicking on the button, you can see in console how the event propagates.  
+In the following code sample you listen for click events of capture phases that occur on `<body>` element:
+
+```javascript{3}
+document.body.addEventListener('click', () => {
+  console.log('Body click event in capture phase');
+}, true);
+```
+
+In this [Codesandbox demo](https://codesandbox.io/s/event-propagation-example-71yvl?file=/src/index.js), when clicking the button, you can see in console how the event propagates.  
 
 Ok, how does event propagation help capturing events of multiple buttons? 
 
