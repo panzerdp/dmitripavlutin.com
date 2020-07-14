@@ -41,7 +41,7 @@ An image worth a thousand words. Without much textual description, in the follow
 The `URL()` is a constuctor function that enables the parsing of components of an URL:
 
 ```javascript
-const url = new URL(absoluteOrRelative [, absoluteBase]);
+const url = new URL(relativeOrAbsolute [, absoluteBase]);
 ```
 
 `relativeOrAbsolute` argument can be either an absolute or relative URL. If the first argument is relative, then the second argument `absoluteBase` is obligatory and must be an absolute URL being the base for the first argument.   
