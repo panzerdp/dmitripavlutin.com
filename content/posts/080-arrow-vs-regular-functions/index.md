@@ -250,7 +250,7 @@ myEmptyFunction2(); // => undefined
 
 You can return values from the arrow function the same way as from a regular function, but with one useful exception.  
 
-If the arrow function contains one expression, and you omit the function's curly braces, then the expression is explicitly returned. These are [the inline arrows function](/javascript-arrow-functions-best-practices/#2-inline-when-possible).  
+If the arrow function contains one expression, and you omit the function's curly braces, then the expression is implicitely returned. These are [the inline arrows function](/javascript-arrow-functions-best-practices/#2-inline-when-possible).  
 
 ```javascript
 const increment = (num) => num + 1;
