@@ -11,7 +11,7 @@ type: post
 commentsThreadId: javascript-array-contains-value
 ---
 
-JavaScript offers a bunch of useful array methods to to check whether an array contains a particular value.  
+JavaScript offers a bunch of useful array methods to check whether an array contains a particular value.  
 
 While searching for primitive values like numbers and strings is easy, searching for objects is slightly more complicated.  
 
@@ -29,7 +29,7 @@ This method accepts the following arguments:
 const hasValue = array.includes(value[, fromIndex]);
 ```
 
-The fist argument `value` is the value to search for in array. The second, optional, argument `fromIndex` is the index from where to start searching. Finally, the method returns a boolean indicating whether `value` has been found.  
+The first argument `value` is the value to search for in array. The second, optional, argument `fromIndex` is the index from where to start searching. Finally, the method returns a boolean indicating whether `value` has been found.  
 
 For example, let's search determine whether an array of greetings contains the values `'hi'` and `'hey'`:
 
@@ -44,7 +44,7 @@ greetings.includes('hey'); // => false
 
 At the same time, `greetings.includes('hey')` correctly returns `false`, denoting that `'hey'` is missing in the `greetings` array.  
 
-### 1.1 Searching from index
+### 1.1 Searching from an index
 
 As mentioned above, `array.includes(value, fromIndex)` accepts an optional second argument to start searching from a specific index.  
 
@@ -87,11 +87,11 @@ const toSearch = { message: 'hi' };
 greetings.includes(toSearch); // => false
 ```
 
-`greetings.includes(toSearch)` returns `false`, because the array doesn't contain `toSearch` object reference. That's despite the fact that the array contains the object `hi` that's equivalent by content with `toSearch`.  
+`greetings.includes(toSearch)` returns `false`, because the array doesn't contain `toSearch` object reference. That's although the array contains the object `hi` that's equivalent by content with `toSearch`.  
 
-Ok. Now you can see the problem of searching object by content. How do you solve this? Using `array.some()` method in combination with shallow or deep eqaulity check of objects.  
+Ok. Now you can see the problem of the searching object by content. How do you solve this? Using `array.some()` method in combination with shallow or deep equality check of objects.  
 
-During *shallow equality* check of objects the list of properties of both objects are checked for equality.  
+During *shallow equality* check of objects the list of properties of both objects is checked for equality.  
 
 Here's a possible implementation of shallow equality check:
 
