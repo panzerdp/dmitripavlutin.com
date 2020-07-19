@@ -3,7 +3,7 @@ title: "Checking if an Array Contains a Value in JavaScript"
 description: "Checking if an Array Contains a Value in JavaScript"
 published: "2020-07-21T12:00Z"
 modified: "2020-07-21T12:00Z"
-thumbnail: "./images/cover-3.png"
+thumbnail: "./images/cover-2.png"
 slug: javascript-array-contains-value
 tags: ['javascript', 'event delegation']
 recommended: ['simple-explanation-of-javascript-closures', 'simple-but-tricky-javascript-interview-questions']
