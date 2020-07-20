@@ -27,7 +27,7 @@ The easiest way to determine if an array contains a primitive value is to use `a
 const hasValue = array.includes(value[, fromIndex]);
 ```
 
-The first argument `value` is the value to search in array. The second, optional, argument `fromIndex` is the index from where to start searching. The method returns a boolean indicating whether `array` contains `value`.   
+The first argument `value` is the value to search in the array. The second, optional, argument `fromIndex` is the index from where to start searching. The method returns a boolean indicating whether `array` contains `value`.   
 
 For example, let's determine whether an array of greeting words contains the values `'hi'` and `'hey'`:
 
@@ -85,9 +85,9 @@ const toSearch = { message: 'hi' };
 greetings.includes(toSearch); // => false
 ```
 
-`greetings.includes(toSearch)` returns `false`, because the array doesn't contain `toSearch` object reference. Despite the fact that the array contains the object `hi` that looks exactly like `toSearch`.  
+`greetings.includes(toSearch)` returns `false`, because the array doesn't contain `toSearch` object reference. Although the array contains the object `hi` that looks exactly like `toSearch`.  
 
-Ok, so how do you solve determine if the array contains an object by content, rather than reference? Using `array.some()` method in combination with shallow or deep equality check of objects.  
+Ok, so how do you determine if the array contains an object by content, rather than reference? Using `array.some()` method in combination with shallow or deep equality check of objects.  
 
 During *shallow equality* check of objects the list of properties of both objects is checked for equality.  
 
@@ -127,9 +127,9 @@ shallowEqual(hi, hello);  // => false
 
 As a reminder, the array method `array.some(callback)` returns `true` if at least one time `callback` function returns `true`.  
 
-Now, let's use the shallow equality function in combination with `array.some(callback)` method to find if the array contains an object by content.  
+Now, let's use the shallow equality function in combination with `array.some(callback)` method to find if the array contains an object by content:  
 
-```javascript
+```javascript{5}
 const greetings = [{ message: 'hi' }, { message: 'hello' }];
 
 const toSearch = { message: 'hi' };
