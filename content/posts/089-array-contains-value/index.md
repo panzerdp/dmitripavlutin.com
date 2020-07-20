@@ -1,6 +1,6 @@
 ---
 title: "Checking if an Array Contains a Value in JavaScript"
-description: "In this post, you will read about how to determine if an array contains a particular value, being a primitive or object.  "
+description: "How to determine if a JavaScript array contains a particular value, being a primitive or object.  "
 published: "2020-07-21T12:00Z"
 modified: "2020-07-21T12:00Z"
 thumbnail: "./images/cover-2.png"
