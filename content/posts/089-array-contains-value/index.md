@@ -1,6 +1,6 @@
 ---
 title: "Checking if an Array Contains a Value in JavaScript"
-description: "Checking if an Array Contains a Value in JavaScript"
+description: "In this post, you will read about how to determine if an array contains a particular value, being a primitive or object.  "
 published: "2020-07-21T12:00Z"
 modified: "2020-07-21T12:00Z"
 thumbnail: "./images/cover-2.png"
@@ -13,7 +13,7 @@ commentsThreadId: javascript-array-contains-value
 
 JavaScript offers a bunch of useful array methods to check whether an array contains a particular value.  
 
-While searching for primitive values like numbers and strings is easy, searching for objects is slightly more complicated.  
+While searching for primitive value like number or string is relatively easy, searching for objects is slightly more complicated.  
 
 In this post, you will read about how to determine if an array contains a particular value, being a primitive or object.  
 
@@ -21,17 +21,15 @@ In this post, you will read about how to determine if an array contains a partic
 
 A primitive value in JavaScript is a string, number, boolean, symbol, and special value `undefined`.  
 
-The easiest way to determine if an array contains a primitive value is to use `array.includes(value)` array method.  
-
-This method accepts the following arguments:
+The easiest way to determine if an array contains a primitive value is to use `array.includes()` ES2015 array method:
 
 ```javascript
 const hasValue = array.includes(value[, fromIndex]);
 ```
 
-The first argument `value` is the value to search for in array. The second, optional, argument `fromIndex` is the index from where to start searching. Finally, the method returns a boolean indicating whether `value` has been found.  
+The first argument `value` is the value to search in array. The second, optional, argument `fromIndex` is the index from where to start searching. The method returns a boolean indicating whether `array` contains `value`.   
 
-For example, let's search determine whether an array of greetings contains the values `'hi'` and `'hey'`:
+For example, let's determine whether an array of greeting words contains the values `'hi'` and `'hey'`:
 
 ```javascript
 const greetings = ['hi', 'hello'];
@@ -42,13 +40,13 @@ greetings.includes('hey'); // => false
 
 `greetings.includes('hi')` returns `true` because the array contains `'hi'` item.  
 
-At the same time, `greetings.includes('hey')` correctly returns `false`, denoting that `'hey'` is missing in the `greetings` array.  
+But `greetings.includes('hey')` returns `false`, denoting that `'hey'` is missing in the `greetings` array.  
 
 ### 1.1 Searching from an index
 
-As mentioned above, `array.includes(value, fromIndex)` accepts an optional second argument to start searching from a specific index.  
+`array.includes(value, fromIndex)` also accepts an optional second argument to start search for value starting an index.  
 
-For example, let's start searching from the second item in the array:
+For example, let's start searching from the second item (index `1` and up) in the array:
 
 ```javascript
 const letters = ['a', 'b', 'c', 'd'];
@@ -63,7 +61,7 @@ However, `letters.includes('a', 1)` returns `false` because the array from index
 
 ## 2. Array contains an object
 
-Checking if an array contains an object is slightly more complex than searching for primitive values.  
+Checking if an array contains an object is slightly more complex than searching for primitive values.   
 
 Determining if an array contains a reference to an object is easy &mdash; just use the `array.includes()` method. For example:
 
@@ -75,9 +73,9 @@ const toSearch = greetings[0];
 greetings.includes(hi); // => true
 ```
 
-`greetings.includes(hi)` returns `true` because the `greetings` array contains `toSearch` object reference.  
+`greetings.includes(hi)` returns `true` because the `greetings` array contains `toSearch` object reference (which points to the first item of the array).  
 
-But more often, instead of searching by reference, you'd like to search for objects by their content. In such a case `array.includes()` doesn't work.  
+But more often, instead of searching by reference, you'd like to search for objects by their content. In such a case `array.includes()` won't work: 
 
 ```javascript
 const greetings = [{ message: 'hi' }, { message: 'hello' }];
@@ -87,9 +85,9 @@ const toSearch = { message: 'hi' };
 greetings.includes(toSearch); // => false
 ```
 
-`greetings.includes(toSearch)` returns `false`, because the array doesn't contain `toSearch` object reference. That's although the array contains the object `hi` that's equivalent by content with `toSearch`.  
+`greetings.includes(toSearch)` returns `false`, because the array doesn't contain `toSearch` object reference. Despite the fact that the array contains the object `hi` that looks exactly like `toSearch`.  
 
-Ok. Now you can see the problem of the searching object by content. How do you solve this? Using `array.some()` method in combination with shallow or deep equality check of objects.  
+Ok, so how do you solve determine if the array contains an object by content, rather than reference? Using `array.some()` method in combination with shallow or deep equality check of objects.  
 
 During *shallow equality* check of objects the list of properties of both objects is checked for equality.  
 
@@ -114,7 +112,9 @@ function shallowEqual(object1, object2) {
 }
 ```
 
-The function `shallowEqual()` returns `true` in case if both compared objects have the same set of properties with the same values:
+`shallowEqual(object1, object2)` returns `true` in case if both compared objects `object1` and `object2` have the same set of properties with the same values.  
+
+In the following code snippet `hi` and `hiCopy` are equal by content, while `hi` and `hello` are not:
 
 ```javascript
 const hi     = { message: 'hi' };
@@ -151,6 +151,6 @@ Determining if an array contains an object by content needs more moving parts. Y
 array.some(item => shallowEqual(item, value));
 ```
 
-Note that the presented approaches are not by far the only ones. E.g. for a long time `array.indexOf(value) !== -1` has been used to determine if the `array` contains `value`.  
+Note that the presented approaches are not the only ones. E.g. for a long time `array.indexOf(value) !== -1` expression (which is slighlty clumsy) has been used to determine if the `array` contains `value`.  
 
 *What other ways to detect if an array contains a value do you know?*
