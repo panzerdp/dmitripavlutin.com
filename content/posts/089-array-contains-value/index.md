@@ -70,10 +70,10 @@ const greetings = [{ message: 'hi' }, { message: 'hello' }];
 
 const toSearch = greetings[0];
 
-greetings.includes(hi); // => true
+greetings.includes(toSearch); // => true
 ```
 
-`greetings.includes(hi)` returns `true` because the `greetings` array contains `toSearch` object reference (which points to the first item of the array).  
+`greetings.includes(toSearch)` returns `true` because the `greetings` array contains `toSearch` object reference (which points to the first item of the array).  
 
 But more often, instead of searching by reference, you'd like to search for objects by their content. In such a case `array.includes()` won't work: 
 
