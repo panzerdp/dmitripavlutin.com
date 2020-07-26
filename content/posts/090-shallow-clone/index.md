@@ -21,9 +21,9 @@ That's not all. As a bonus, I'm going to show how when cloning objects, you can 
 
 ### Note
 
-Before starting, be aware that the following ways to clone objects perform only a *shallow copy* of objects.  
+The following ways to clone objects perform *shallow copy*.  
 
-Shallow copy means that only the actual object gets copied. If the copied object conatins nested objects &mdash; these nested objects *are not copied* during a shallow copy.  
+Shallow copy means that only the actual object gets copied. If the copied object conatins nested objects &mdash; these nested objects *aren't get cloned*.  
 
 ```toc
 toHeading: 2
@@ -142,7 +142,7 @@ const { city, ...heroClone } = {
 heroClone; // { name: 'Batman', realName: 'Bruce Wayne' }
 ```
 
-Combinging the object spread and rest to clone object and perform properties manipulation in a single statement is great!  
+Combining the object spread and rest to clone object and perform properties manipulation in a single statement is great!  
 
 ## 3. Cloning using *Object.assign()*
 
