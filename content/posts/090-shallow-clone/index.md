@@ -11,19 +11,54 @@ type: post
 commentsThreadId: javascript-shallow-clone-objects
 ---
 
-Immutability gives you more control and easier debugging of how data flows within the application.  
+Immutability is great because it enables easier control of how data is changed and flows through the application.  
 
-Since immutability forbinds updating the object directly, an important instrument when embracing immutability is the process of copying, or cloning, objects.  
+Since immutability requires no direct modification of objects, you can perform an object modification only on a clone.  
 
-In this post, I'm going to show you 3 easy ways how to shallow clone objects in JavaScript. 
+In this post, you'll find 3 easy ways to perform shallow clone (aka copy) of objects in JavaScript.  
 
-Also, as a nice bonus, I'm going to demonstrate how to clone objects, and at the same time perform immutable adding, updating or deleting of properties of the cloned object.  
+That's not all. As a bonus, I'm going to show how when cloning objects, you can also update, add, or remove properties in place on the clone.  
+
+### Note
+
+Before starting, be aware that the following ways to clone objects perform only a *shallow copy* of objects.  
+
+Shallow copy means that only the actual object gets copied. If the copied object conatins nested objects &mdash; these nested objects *are not copied* during a shallow copy.  
 
 ```toc
 toHeading: 2
 ```
 
 ## 1. Cloning using object spread
+
+The simplest way to clone a plain JavaScript object is to invoke the object spread operator:
+
+```javascript
+const clone = {
+  ...object
+};
+```
+
+For example, let's a copy of the `hero` object:
+
+```javascript{6-8}
+const hero = {
+  name: 'Batman',
+  city: 'Gotham'
+};
+
+const heroClone = {
+  ...hero
+};
+
+heroClone; // { name: 'Batman', city: 'Gotham' }
+
+hero === heroClone; // => false
+```
+
+`heroClone` is a clone object of `hero`, meaning that it contains all the properties of `hero`.  
+
+At the same time, `hero === heroClone` evalutes to `false`, meaning that `hero` and `heroClone` are difference object instances.  
 
 ### 1.1 Object spread bonus: add or update cloned props
 
