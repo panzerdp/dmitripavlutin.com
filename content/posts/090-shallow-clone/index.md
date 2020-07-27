@@ -1,6 +1,6 @@
 ---
 title: "3 Ways to Shallow Clone Objects in JavaScript (w/ bonuses)"
-description: "3 Ways to Shallow Clone Objects in JavaScript."
+description: "In this post, you’ll find 3 ways to perform shallow clone (aka copy) of objects in JavaScript."
 published: "2020-07-28T12:00Z"
 modified: "2020-07-28T12:00Z"
 thumbnail: "./images/cover-2.png"
@@ -11,17 +11,18 @@ type: post
 commentsThreadId: javascript-shallow-clone-objects
 ---
 
-Immutability is great because it enables easier control of how data is changed and flows through the application.  
+Immutability is great because of easier control of how data is changed through the application.  
 
-Since immutability requires no direct modification of objects, you can perform an object modification only on a clone.  
+Immutability requires no direct modification of objects, so a modification can be performed only on a clone.  
 
 In this post, you'll find 3 easy ways to perform shallow clone (aka copy) of objects in JavaScript.  
 
-That's not all. As a bonus, I'm going to show how when cloning objects, you can also update, add, or remove properties in place on the clone.  
+As a bonus, I'm going to show how you can also update, add, or remove properties in place on the clone. That's useful when you want to perform an update on the object
+in an immutable manner.    
 
 ### Note
 
-The following ways to clone objects perform *shallow copy*.  
+The 3 ways to clone objects described in this post perform *shallow copy*.  
 
 Shallow copy means that only the actual object gets copied. If the copied object conatins nested objects &mdash; these nested objects *aren't get cloned*.  
 
@@ -39,7 +40,9 @@ const clone = {
 };
 ```
 
-For example, let's a copy of the `hero` object:
+Where `object` is the object you'd like to copy, and `clone` is the shallow copy of `object`.  
+
+For example, let's create a shallow copy of `hero` object:
 
 ```javascript{6-8}
 const hero = {
@@ -58,13 +61,13 @@ hero === heroClone; // => false
 
 `heroClone` is a clone object of `hero`, meaning that it contains all the properties of `hero`.  
 
-`hero === heroClone` evalutes to `false`, meaning that `hero` and `heroClone` are difference object instances.  
+`hero === heroClone` evalutes to `false` &mdash; `hero` and `heroClone` are, nevertheless, difference object instances.  
 
 ### 1.1 Object spread bonus: add or update cloned props
 
 An immediate benefit of using object spread is that you can update or add new properties to the cloned object in place, if you need.  
 
-Let's clone the `hero` object, but at the same time update `name` property and add a new property `realName`:  
+Let's clone the `hero` object, but update `name` property to a different value and add a new property `realName`:  
 
 ```javascript{6-10}
 const hero = {
@@ -84,7 +87,7 @@ heroEnhancedClone;
 
 ## 2. Cloning using object rest
 
-Another good way to shallow clone objects is by using the object spread opeartor:
+Another good way to shallow clone objects is by using the object rest operator:
 
 ```javascript
 const { ...clone } = object;
@@ -101,13 +104,17 @@ const hero = {
 const { ...heroClone } = hero;
 
 heroClone; // { name: 'Batman', city: 'Gotham' }
+
+hero === heroClone; // => false
 ```
+
+After applying the rest operator `const { ...heroClone } = hero`, the `heroClone` variable contains a copy of `hero` object.  
 
 ### 2.1 Object rest bonus: skip cloned props
 
-A nice bonus when using object rest to clone objects is the ability to skip properties when cloning.  
+A nice bonus when using object rest is the ability to skip certain properties when cloning.  
 
-Let's create a clone of `hero` object, but skip `city` property in the clone:
+For example, let's create a clone of `hero` object, but skip `city` property in the clone:
 
 ```javascript{6}
 const hero = {
@@ -122,9 +129,9 @@ heroClone; // { name: 'Batman' }
 
 ### 2.2 Super bonus: combining object spread and rest
 
-Object spread brings the bonus of updating or adding new properties, while object rest has the benefit of skipping properties.  
+Object spread brings the bonus of updating or adding new properties, while object rest has the benefit of skipping properties in the resulting clone.  
 
-Can you combine object spread and rest to inherit all these benefits? Yes, you can!
+Can you combine object spread and rest into one statement to inherit all these benefits? Yes, you can!
 
 Let's clone the `hero` object, also adding a new property `realName` and skipping the property `city`:
 
@@ -167,9 +174,11 @@ heroClone; // { name: 'Batman', city: 'Gotham' }
 hero === heroClone; // => false
 ```
 
+`Object.assign({}, hero)` creates a clone of `hero` object by merging the second argument `hero` into the first argument `{}`.  
+
 ### 3.1 *Object.assign()* bonus: add or update cloned props
 
-`Object.assign()`, aside from cloning the object, enables you to update or add new properties to the clone.  
+`Object.assign()` enables also to update or add new properties to the clone.  
 
 Let's copy the `hero` object, but at the same time update `name` property:
 
@@ -188,16 +197,18 @@ heroClone; // { name: 'Batman Clone', city: 'Gotham' }
 
 First, the second argument `hero` is merged into the first argument `{}`. This equals to `{ name: 'Batman', city: 'Gotham' }`.  
 
-Second, the third argument `{ name: 'Batman Clone' }` is merged into the result from previous step, which actually overwrites the property `name`. And you get the final object `{ name: 'Batman Clone', city: 'Gotham' }`.  
+Second, the third argument `{ name: 'Batman Clone' }` is merged into the result from previous step, overwriting the property `name`. Finally, you get the object `{ name: 'Batman Clone', city: 'Gotham' }`.  
 
 ## 4. Summary
 
 JavaScript provides 3 good ways to clone objects: using spread operator, rest operator and `Object.assign()` function.  
 
-Aside from just cloning objects, using object spread and `Object.assign()` let's you add or updated properties when performing the clone.  
+Aside from just cloning objects, using object spread and `Object.assign()` let's you add or updated properties when creating the clone.  
 
-Rest operator also gives the benefit of skipping certain properties from cloning.  
+Rest operator also gives the benefit of skipping certain properties when cloning.  
 
-And what's really great, you can combine the object spread and rest in a single statement, so you can clone the object, and at the same time add, update or skip properties from being cloned. That's useful if you'd like to embrace the immutability and be able to manipulate object properties with ease.  
+And what's really great, you can combine the object spread and rest in a single statement, so you can clone the object, and at the same time add, update or skip properties from being cloned. 
+
+That's useful if you'd like to embrace the immutability and be able to manipulate cloned object's properties in place.  
 
 *What other good ways to clone objects in JavaScript do you know?*
