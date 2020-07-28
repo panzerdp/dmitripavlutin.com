@@ -11,10 +11,6 @@ type: post
 commentsThreadId: javascript-shallow-clone-objects
 ---
 
-Immutability is great because of easier control of how data is changed through the application.  
-
-Immutability requires no direct modification of objects, so a modification can be performed only on a clone.  
-
 In this post, you'll find 3 easy ways to perform shallow clone (aka copy) of objects in JavaScript.  
 
 As a bonus, I'm going to show how you can also update, add, or remove properties in place on the clone. That's useful when you want to perform an update on the object
