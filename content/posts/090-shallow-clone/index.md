@@ -1,8 +1,8 @@
 ---
 title: "3 Ways to Shallow Clone Objects in JavaScript (w/ bonuses)"
 description: "In this post, you’ll find 3 ways to perform shallow clone (aka copy) of objects in JavaScript."
-published: "2020-07-28T12:00Z"
-modified: "2020-07-28T12:00Z"
+published: "2020-07-28T11:00Z"
+modified: "2020-07-28T11:00Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-shallow-clone-objects
 tags: ['object']
