@@ -2,7 +2,7 @@
 title: 'String Interpolation in JavaScript'
 description: 'How to use template literals to perform string interplation in JavaScript (w/ examples and best practices).'
 published: '2020-01-22T11:30Z'
-modified: '2020-01-29T14:00Z'
+modified: '2020-07-31T15:00Z'
 thumbnail: './images/string-interpolation.png'
 slug: string-interpolation-in-javascript
 tags: ['javascript', 'string', 'es2015']
@@ -11,9 +11,9 @@ type: post
 commentsThreadId: string-interpolation-in-javascript
 ---
 
-Replacing placeholders with values inside of a string literal is named string interpolation.  
+*String interpolation* is replacing placeholders with values in a string literal.  
 
-In JavaScript, the template literals (strings wrapped in backticks `` ` ``) and `${expression}` as placeholder perform the string interpolation:
+The string interpolation in JavaScript is performed by template literals (strings wrapped in backticks `` ` ``) and `${expression}` as a placeholder. For example:
 
 ```javascript
 const number = 42;
@@ -75,7 +75,7 @@ message; // => 'Hello, World!'
 
 On script execution, the first placeholder `${greeting}` is replaced with the value of `greeting` variable, and the same for `${who}`. The string interpolation result is `'Hello, World!'`.  
 
-The sky is the limit for the expression you can put inside the placeholder. It can be an operator, a function call, or even more complex expressions:
+You can put any expression inside the placeholder: either an operator, a function call, or even more complex expressions.  
 
 ```javascript{4,10}
 const n1 = 2;
@@ -91,7 +91,9 @@ const message2 = `The sum is ${sum(n1, n2)}`;
 message2; // => 'The sum is 5'
 ```
 
-`${n1 + n2}` is a placeholder consisting of the addition operator and 2 operands. `${sum(n1, n2)}` contains a function invocation.  
+`${n1 + n2}` is a placeholder consisting of the addition operator and 2 operands. 
+
+While the placeholder `${sum(n1, n2)}` contains a function invocation.  
 
 ### 2.1 Implicit to string conversion 
 
@@ -212,7 +214,7 @@ const message = `Sum: ${sum}, difference: ${diff}, pow: ${pow}`;
 message; // => 'Sum: 5, difference: -1, pow: 8'
 ```
 
-With the introduction of helper variables `sum`, `diff` and `pow`, the template string becomes lighter. Additionally, the code self-documents when the intermediate variables are used.  
+With the introduction of helper variables `sum`, `diff`, and `pow`, the template string becomes lighter. Additionally, the code self-documents when the intermediate variables are used.  
 
 ### 4.3 Single quotes in placeholders
 
@@ -277,9 +279,9 @@ function LoadingMessage({ isLoading, isModal }) {
 }
 ```
 
-This version of the component, which uses the classnames tool, is easier to understand than the template string version.  
+This version of the component, which uses the `classnames` tool, is easier to understand than the template string version.  
 
-If you'd need to add more CSS classes (for example to handle `isErrorLoading`), the version that uses classnames grows without significantly affecting the readability. 
+Adding more CSS classes (for example to handle `isErrorLoading`) would not decrease the readability of the version that uses `classnames` utility (contrary to using a template literal).  
 
 ## 5. String interpolation in TypeScript
 
@@ -294,7 +296,7 @@ message; // => 'You have 10 products'
 
 ## 6. String interpolation in React
 
-The string interpolation in React consists of:
+The string interpolation in React consists of 2 cases:
 
 * Attribute interpolation: ``attribute={`My string ${placeholder}`}``
 * Element's text interpolation: `<span>My string {placeholder}</span>`
@@ -328,7 +330,7 @@ During the interpolation of both attribute and text strings, placeholders `${cou
 
 ## 7. Conclusion
 
-The string interpolation is a great feature. It helps in inserting values into string literals in a concise and readable manner. And avoid the clumsy string concatenation approach.
+The string interpolation is a great feature because it helps to insert values into string literals in a concise and readable manner. And avoid the clumsy string concatenation approach.
 
 In JavaScript, the template string implements the string interpolation.
 
