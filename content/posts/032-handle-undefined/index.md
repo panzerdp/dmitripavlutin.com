@@ -2,7 +2,7 @@
 title: 7 Tips to Handle undefined in JavaScript
 description: A detailed article about 'undefined' keyword in JavaScript. 7 tips on how to handle correctly 'undefined' and increase code durability.
 published: "2017-04-15"
-modified: "2019-10-28T13:00Z"
+modified: "2020-08-02T08:50Z"
 thumbnail: "./images/blade-runner-rachel.png"
 slug: 7-tips-to-handle-undefined-in-javascript
 tags: ["javascript", "undefined"]
@@ -10,7 +10,7 @@ recommended: ["when-not-to-use-arrow-functions-in-javascript", "object-rest-spre
 type: post
 ---
 
-Most of the modern languages like Ruby, Python or Java have a single null value (`nil` or `null`), which seems a reasonable approach.  
+Most of the modern languages like Ruby, Python, or Java have a single null value (`nil` or `null`), which seems a reasonable approach.  
 
 But JavaScript is different.  
 
@@ -75,7 +75,7 @@ From 6 primitive types `undefined` is a special value with its own type Undefine
 
 > **Undefined value** primitive value is used when a variable has not been assigned a value. 
 
-The standard clearly defines that you will receive `undefined` when accessing uninitialized variables, non-existing object properties, non-existing array elements and alike. 
+The standard clearly defines that you will receive `undefined` when accessing uninitialized variables, non-existing object properties, non-existing array elements, and alike. 
 
 A few examples:
 
@@ -203,7 +203,7 @@ Encouraging the usage of `const` for immutable bindings or `let` otherwise ensur
 
 [Cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)) characterizes the degree to which the elements of a module (namespace, class, method, block of code) belong together. The cohesion can be *high* or *low*.  
 
-High cohesion module is preferable because the elements of such module focus solely on a single task. It makes the module:
+A high cohesion module is preferable because the elements of such a module focus solely on a single task. It makes the module:
 
 * *Focused* and *understandable*: easier to understand what the module does
 * *Maintainable* and *easier to refactor*: the change in the module affects fewer modules
@@ -331,7 +331,7 @@ append([10], { first: 0, last: false }); // => [10]
 
 `0` and `false` are falsy. Because `if(toAppend.first){}` and `if(toAppend.last){}` actually  compare against falsy, these elements are not inserted into the array. The function returns the initial array `[10]` without modifications, instead of the expected `[0, 10, false]`.  
 
-The tips that follow explain how to correctly check the property existence.
+The tips that follow explain how to correctly check the property's existence.
 
 **Tip 3: Check the property existence**
 
@@ -443,7 +443,7 @@ The destructuring assignment replaces the `config` parameter in the function's s
 
 `= {}` on the right side of the destructuring assignment ensures that an empty object is used if the second argument is not specified at all `quote('Sunny day')`.  
 
-Object destructuring is a powerful feature that handles efficiently the extraction of properties from objects. I like the possibility to specify a default value to be returned when the accessed property doesn't exist. As a result, you avoid `undefined` and the hassle  around it.  
+Object destructuring is a powerful feature that handles efficiently the extraction of properties from objects. I like the possibility to specify a default value to be returned when the accessed property doesn't exist. As a result, you avoid `undefined` and the hassle around it.  
 
 **Tip 5: Fill the object with default properties**
 
@@ -451,7 +451,7 @@ If there is no need to create variables for every property, as the destructuring
 
 The ES2015 `Object.assign(target, source1, source2, ...)` copies the values of all enumerable own properties from one or more source objects into the target object. The function returns the target object.  
 
-For instance, you need to access the properties of `unsafeOptions` object that doesn't  always contain its full set of properties.  
+For instance, you need to access the properties of `unsafeOptions` object that doesn't always contain its full set of properties.  
 
 To avoid `undefined` when accessing a non-existing property from `unsafeOptions`, let's make some adjustments:  
 
@@ -478,7 +478,7 @@ The order in which the source objects are enumerated does matter: later source o
 
 You are now safe to access any property of `options` object, including `options.color` that wasn't available in `unsafeOptions` initially.  
 
-Fortunately an easier alternative to fill the object with default properties exists. I recommend to use the [spread properties in object initializers](/object-rest-spread-properties-javascript/#2-object-spread-properties).  
+Fortunately, an easier alternative to fill the object with default properties exists. I recommend to use the [spread properties in object initializers](/object-rest-spread-properties-javascript/#2-object-spread-properties).  
 
 Instead of `Object.assign()` invocation, use the object spread syntax to copy into target object all own and enumerable properties from source objects:
 
@@ -509,7 +509,7 @@ The operator [nullish coalescing](/javascript-optional-chaining/#3-default-with-
 const value = nullOrUndefinedValue ?? defaultValue;
 ```
 
-Nullish coalescing operator is convenient to access an object property, while having a default value when this property is `undefined` or `null`:  
+Nullish coalescing operator is convenient to access an object property while having a default value when this property is `undefined` or `null`:  
 
 ```javascript
 const styles = {
@@ -573,7 +573,7 @@ function multiply(a, b) {
 }
 multiply(5); // => 10
 ```
-The function is invoked with a single argument `multiply(5)`. Initially `a` parameter is `2` and `b` is `undefined`.  
+The function is invoked with a single argument `multiply(5)`. Initially, `a` parameter is `2` and `b` is `undefined`.  
 The conditional statement verifies whether `b` is `undefined`. If it happens, `b = 2` assignment sets a default value.  
 
 While the provided way to assign default values works, I don't recommend comparing directly against `undefined`. It's verbose and looks like a hack.  
@@ -733,7 +733,7 @@ const colors = ['blue', 'white', 'red'];
 colors[5];  // => undefined
 colors[-1]; // => undefined
 ```
-`colors` array has 3 elements, thus valid indexes are `0`, `1` and `2`.  
+`colors` array has 3 elements, thus valid indexes are `0`, `1`, and `2`.  
 
 Because there are no array elements at indexes `5` and `-1`, the accessors `colors[5]` and  `colors[-1]` are `undefined`.  
 
@@ -764,7 +764,7 @@ When working with arrays, to avoid `undefined`, be sure to use valid array index
 
 What is the main difference between `undefined` and `null`? Both special values imply an empty state.  
 
-> `undefined` represents the value of a variable that *hasnt't been yet initialized*, while `null` represents an intentional *absence of an object*.  
+> `undefined` represents the value of a variable that *hasn't been yet initialized*, while `null` represents an intentional *absence of an object*.  
 
 Let's explore the difference in some examples.
 
@@ -799,7 +799,7 @@ clone({name: 'John'}); // => {name: 'John'}
 clone(15);             // => null
 clone(null);           // => null
 ``` 
-However `clone()` might be invoked with a non-object argument: `15` or `null`. In such case the function cannot create a clone, so it returns `null` &mdash; the indicator of a missing object.  
+However `clone()` might be invoked with a non-object argument: `15` or `null`. In such a case, the function cannot create a clone, so it returns `null` &mdash; the indicator of a missing object.  
 
 `typeof` operator makes the distinction between `undefined` and `null`:
 
