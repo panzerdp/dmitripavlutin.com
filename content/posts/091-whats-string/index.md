@@ -100,5 +100,22 @@ smile.length;  // => 2
 
 The sequence `\uD83D\uDE00` is a special pair named *surrogate pair*. It is used to represent the code units bigger than `0xFFFF`.  
 
+`smile.length` evaluates to `2`, which denotes that the `length` property of the string primitive actually determines the number of *code units*.  
+
+The string iterator is aware of the surrogate pairs. When you invoke the string iterator, for example using the spread operator `...`, it gives the expected numbers of characters:  
+
+```javascript
+const message = 'Hello!';
+const smile = '😀';
+
+[...message].length; // => 6
+[...smile].length;   // => 1
+```
+
 ## 3. Summary
 
+The simplest way to think about JavaScript string is a simple sequence of characters. This approach works well for regular English letters, numbers. 
+
+However, saying it more strictly, a string in JavaScript is a sequence of UTF-16 code units.  
+
+Understanding that a string is a sequence of code units is necessary if you work with characters outside of Basic Multilangual Plane.  
