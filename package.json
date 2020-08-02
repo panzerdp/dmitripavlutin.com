@@ -78,7 +78,7 @@
     "url": "git+https://github.com/panzerdp/dmitripavlutin.com.git"
   },
   "scripts": {
-    "dev": "gatsby develop",
+    "dev": "gatsby develop --port 3000",
     "lint": "eslint 'src/**/*.ts?(x)'",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",
