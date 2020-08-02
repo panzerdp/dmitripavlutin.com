@@ -2,7 +2,7 @@
 title: 7 Tips to Handle undefined in JavaScript
 description: A detailed article about 'undefined' keyword in JavaScript. 7 tips on how to handle correctly 'undefined' and increase code durability.
 published: "2017-04-15"
-modified: "2019-10-28T13:00Z"
+modified: "2020-08-02T08:50Z"
 thumbnail: "./images/blade-runner-rachel.png"
 slug: 7-tips-to-handle-undefined-in-javascript
 tags: ["javascript", "undefined"]
@@ -10,13 +10,13 @@ recommended: ["when-not-to-use-arrow-functions-in-javascript", "object-rest-spre
 type: post
 ---
 
-When I started to learn JavaScript about eight years ago, I found bizarre that both `undefined` and `null` represent empty values. What's the exact difference between them? Both seem to define empty values, and the comparison `null == undefined` evaluates to `true`.  
-
-Most of the modern languages like Ruby, Python or Java have a single null value (`nil` or `null`), which seems a reasonable approach.  
+Most of the modern languages like Ruby, Python, or Java have a single null value (`nil` or `null`), which seems a reasonable approach.  
 
 But JavaScript is different.  
 
-The JavaScript interpreter returns `undefined` when accessing a variable or object property that is not yet initialized. For example:
+`null`, but also `undefined`, represent in JavaScript empty values. So what's the exact difference between them? 
+
+The short answer is that JavaScript interpreter returns `undefined` when accessing a variable or object property that is not yet initialized. For example:
 
 ```javascript
 let company;
@@ -53,9 +53,7 @@ function undefined() {
 }
 ```
 
-To reduce the risk of such errors, you have to understand the cases when `undefined` is generated. And more important, suppress its appearance and spread  within your application, increasing code durability.  
-
-Let's explore `undefined` and its effect on code safety.  
+To reduce such errors, you have to understand the cases when `undefined` is generated. Let's explore `undefined` and its effect on code safety.  
 
 ```toc
 ```
@@ -77,7 +75,7 @@ From 6 primitive types `undefined` is a special value with its own type Undefine
 
 > **Undefined value** primitive value is used when a variable has not been assigned a value. 
 
-The standard clearly defines that you will receive `undefined` when accessing uninitialized variables, non-existing object properties, non-existing array elements and alike. 
+The standard clearly defines that you will receive `undefined` when accessing uninitialized variables, non-existing object properties, non-existing array elements, and alike. 
 
 A few examples:
 
@@ -99,7 +97,7 @@ The above example demonstrates that accessing:
 
 are evaluated to `undefined`.  
 
-The ECMAScript specification defines the type of `undefined`   value:
+The ECMAScript specification defines the type of `undefined` value:
 > **Undefined type** is a type whose sole value is the `undefined` value.
 
 In this sense, `typeof` operator returns `'undefined'` string for an `undefined` value:
@@ -114,11 +112,11 @@ let nothing;
 typeof nothing === 'undefined';   // => true
 ```
 
-## 2. Common scenarios that create undefined
+## 2. Scenarios that create undefined
 
 ### 2.1 Uninitialized variable
 
-> A declared variable that is not yet assigned with a value (*uninitialized*) is by default `undefined`.
+> A declared variable but not yet assigned with a value (*uninitialized*) is by default `undefined`.
 
 Plain and simple:
 
@@ -129,7 +127,9 @@ myVariable; // => undefined
 
 `myVariable` is declared and not yet assigned with a value. Accessing the variable evaluates to `undefined`.  
 
-An efficient approach to solve the troubles of uninitialized variables is whenever possible *assign an initial value*. The less the variable exists in an uninitialized state,  the better. Ideally, you would assign a value right away after declaration `const myVariable = 'Initial value'`. But this is not always possible.  
+An efficient approach to solve the troubles of uninitialized variables is whenever possible *assign an initial value*. The less the variable exists in an uninitialized state,  the better.  
+
+Ideally, you would assign a value right away after declaration `const myVariable = 'Initial value'`. But that's not always possible.  
 
 **Tip 1: Favor `const`, otherwise use `let`, but say goodbye to `var`**
 
@@ -139,11 +139,11 @@ In my opinion, one of the best features of ECMAScript 2015 is the new way to dec
 
 I recommend `const` variable when its value is not going to change. It creates an [immutable binding](https://mathiasbynens.be/notes/es6-const).  
 
-One of the nice features of `const` is that *you must assign an initial value* to the variable `const myVariable = 'initial'`. The variable is not exposed to the uninitialized state and accessing `undefined` is simply not possible.  
+One of the nice features of `const` is that *you must assign an initial value* to the variable `const myVariable = 'initial'`. The variable is not exposed to the uninitialized state and accessing `undefined` is impossible.  
 
 Let's check the function that verifies whether a word is a palindrome:
 
-```javascript
+```javascript{2-3}
 function isPalindrome(word) {
   const length = word.length;
   const half = Math.floor(length / 2);
@@ -158,15 +158,15 @@ isPalindrome('madam'); // => true
 isPalindrome('hello'); // => false
 ```
 
-`length` and `half` variables are assigned with a value once. It seems reasonable to declare them as `const` since these variables are not going to change. 
+`length` and `half` variables are assigned with a value once. It seems reasonable to declare them as `const` since these variables aren't going to change. 
 
-If you need to rebind the variable (i.e. assign multiple times), apply a `let` declaration. Whenever possible assign an initial value right away, e.g. `let index = 0`.
+Use `let` declaration for variables whose value can change. Whenever possible assign an initial value right away, e.g. `let index = 0`.
 
-What about the old school `var`? In terms of ES2015, my suggestion is [stop using it at all](https://medium.com/javascript-scene/javascript-es6-var-let-or-const-ba58b8dcde75#.hvdxtd30t).  
+What about the old school `var`? My suggestion is [to stop using it](https://medium.com/javascript-scene/javascript-es6-var-let-or-const-ba58b8dcde75#.hvdxtd30t).  
 
 ![Do not write var, write const and let in JavaScript](./images/no-var.png)
 
-`var` declaration problem is the [variable hoisting](/javascript-hoisting-in-details/#hoisting-and-var) in the entire function scope. You can declare a `var` variable somewhere at the end of the function scope, but still, it can be accessed before declaration: and you'll get an `undefined`.  
+`var` declaration problem is [the variable hoisting](/javascript-hoisting-in-details/#hoisting-and-var) within the function scope. You can declare a `var` variable somewhere at the end of the function scope, but still, you can access it before declaration: and you'll get an `undefined`.  
 
 ```javascript
 function bigFunction() {
@@ -181,7 +181,7 @@ bigFunction();
 ```
 `myVariable` is accessible and contains `undefined` even before the declaration line: `var myVariable = 'Initial value'`.
 
-Contrary, a `let` (including `const`) variable cannot be accessed before the declaration line. It happens because the variable is in a [temporal dead zone](/variables-lifecycle-and-why-let-is-not-hoisted/#5-let-variables-lifecycle) before the declaration. And that's nice because you have less chance to access an `undefined`.
+Contrary, a `const` or `let` variable cannot be accessed before the declaration line &mdash; the variable is in a [temporal dead zone](/variables-lifecycle-and-why-let-is-not-hoisted/#5-let-variables-lifecycle) before the declaration. And that's nice because you have less chance to access an `undefined`.
 
 The above example updated with `let` (instead of `var`) throws a `ReferenceError` because the variable in the temporal dead zone is not accessible. 
 
@@ -201,9 +201,9 @@ Encouraging the usage of `const` for immutable bindings or `let` otherwise ensur
 
 **Tip 2: Increase cohesion**
 
-[Cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)) characterizes the degree to which the elements of a module (namespace, class, method, block of code) belong together. The measurement of the cohesion is usually described as *high cohesion*  or *low cohesion*.  
+[Cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)) characterizes the degree to which the elements of a module (namespace, class, method, block of code) belong together. The cohesion can be *high* or *low*.  
 
-High cohesion is preferable because it suggests designing the elements of the module to focus solely on a single task. It makes the module:
+A high cohesion module is preferable because the elements of such a module focus solely on a single task. It makes the module:
 
 * *Focused* and *understandable*: easier to understand what the module does
 * *Maintainable* and *easier to refactor*: the change in the module affects fewer modules
@@ -216,11 +216,11 @@ High cohesion accompanied by [loose coupling](https://en.wikipedia.org/wiki/Loos
 
 A code block can be considered a small module. To profit from the benefits of high cohesion, keep the variables as close as possible to the code block that uses them.  
 
-For instance, if a variable solely exists to form the logic of block scope, then declare and make the variable live only within that block (using `const` or `let` declarations). Do not expose this variable to the outer block scope, since the outer block shouldn't care about this variable.
+For instance, if a variable solely exists to form the logic of block scope, then declare and make the variable alive only within that block (using `const` or `let` declarations). Do not expose this variable to the outer block scope, since the outer block shouldn't care about this variable.
 
 One classic example of the unnecessarily extended life of variables is the usage of `for` cycle inside a function:
 
-```javascript
+```javascript{2}
 function someFunc(array) {
   var index, item, length = array.length;
   // some code...
@@ -238,7 +238,7 @@ Between the declaration at the top and the usage in `for` statement the variable
 
 A better approach is to move these variables as close as possible to their usage place:
 
-```javascript
+```javascript{4-6}
 function someFunc(array) {
   // some code...
   // some code...
@@ -257,9 +257,9 @@ Why is the modified version better than the initial one? Let's see:
 
 * The variables are not exposed to uninitialized state, thus you have no risk of accessing `undefined`
 * Moving the variables as close as possible to their usage place increases the code readability
-* High cohesive chunks of code are easier to refactor and extract into separated functions, if necessary
+* High cohesive chunks of code are easier to refactor and extract into separate functions, if necessary
 
-### 2.2 Accessing non-existing property
+### 2.2 Accessing a non-existing property
 
 > When accessing a **non-existing object property**, JavaScript returns `undefined`. 
 
@@ -272,9 +272,9 @@ let favoriteMovie = {
 favoriteMovie.actors; // => undefined
 ```
 
-`favoriteMovie` is an object with a single property `title`. Accessing a non-existing property `actors` using a property accessor `favoriteMovie.actors` is evaluated to `undefined`.
+`favoriteMovie` is an object with a single property `title`. Accessing a non-existing property `actors` using a property accessor `favoriteMovie.actors` evaluates to `undefined`.
 
-Accessing a non-existing property does not throw an error. The real problem appears when trying to get data from the non-existing property value. This is the most common `undefined`  trap, reflected in the well-known error message `TypeError: Cannot read property <prop> of undefined`.  
+Accessing a non-existing property does not throw an error. The problem appears when trying to get data from the non-existing property, which is the most common `undefined`  trap, reflected in the well-known error message `TypeError: Cannot read property <prop> of undefined`.  
 
 Let's slightly modify the previous code snippet to illustrate a `TypeError` throw:
 
@@ -286,9 +286,10 @@ favoriteMovie.actors[0];
 // TypeError: Cannot read property '0' of undefined
 ```
 `favoriteMovie` does not have the property `actors`, so `favoriteMovie.actors` evaluates to `undefined`.  
+
 As a result, accessing the first item of an `undefined` value using the expression `favoriteMovie.actors[0]` throws a `TypeError`.  
 
-The permissive nature of JavaScript that allows accessing non-existing properties is a source of nondeterminism: the property may be set or not. The ideal way to bypass this problem is to restrict the object to have always defined the properties that it holds.  
+The permissive nature of JavaScript that allows accessing non-existing properties is a source of nondeterminism: the property may be set or not. The good way to bypass this problem is to restrict the object to have always defined the properties that it holds.  
 
 Unfortunately, often you don't have control over the objects. Such objects may have a different set of properties in diverse scenarios. So you have to handle all these scenarios manually.  
 
@@ -297,7 +298,7 @@ Let's implement a function `append(array, toAppend)` that adds at the beginning 
 * `first`: element inserted at the beginning of `array`
 * `last`: element inserted at the end of `array`.
 
-The function returns a new array instance, without altering the original array (i.e. it's a [pure function](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.tyinnrzbi)).  
+The function returns a new array instance, without altering the original array.  
 
 The first version of `append()`, a bit naive, may look like this:
 
@@ -330,11 +331,11 @@ append([10], { first: 0, last: false }); // => [10]
 
 `0` and `false` are falsy. Because `if(toAppend.first){}` and `if(toAppend.last){}` actually  compare against falsy, these elements are not inserted into the array. The function returns the initial array `[10]` without modifications, instead of the expected `[0, 10, false]`.  
 
-The tips that follow explain how to correctly check the property existence.
+The tips that follow explain how to correctly check the property's existence.
 
 **Tip 3: Check the property existence**
 
-Fortunately, JavaScript offers a bunch of ways to determine if the object has a specific property:  
+Fortunately, JavaScript offers a bunch of [ways](/check-if-object-has-property-javascript) to determine if the object has a specific property:  
 
 * `obj.prop !== undefined`: compare against `undefined` directly
 * `typeof obj.prop !== 'undefined'`: verify the property value type
@@ -346,8 +347,6 @@ My recommendation is to use `in` operator. It has a short and sweet syntax. `in`
 ![Do not write var, write const and let in JavaScript](./images/favor-explicit.png)
 
 `obj.hasOwnProperty('prop')` is a nice solution too. It's slightly longer than `in` operator and verifies only in the object's own properties.   
-
-The 2 ways that involve comparing with `undefined` might work... But it seems to me that `obj.prop !== undefined` and `typeof obj.prop !== 'undefined'` look verbose and weird, and expose to a suspicions path of dealing directly with `undefined`.  
 
 Let's improve `append(array, toAppend)` function using `in` operator:
 
@@ -371,7 +370,7 @@ append([10], { first: 0, last: false });  // => [0, 10, false]
 
 **Tip 4: Destructuring to access object properties**
 
-When accessing an object property, sometimes it's necessary to indicate a default value if the property does not exist.  
+When accessing an object property, sometimes it's necessary to set a default value if the property does not exist.  
 
 You might use `in` accompanied with ternary operator to accomplish that:
 
@@ -385,7 +384,7 @@ Ternary operator syntax becomes daunting when the number of properties to check 
 
 To use a more elegant approach, let's get familiar with a great ES2015 feature called *object destructuring*.  
 
-[Object destructuring](/object-rest-spread-properties-javascript/#3-object-rest-properties) allows inline extraction of object property values directly into variables and setting a default value if the property does not exist. A convenient syntax to avoid dealing directly with `undefined`.
+[Object destructuring](/javascript-object-destructuring) allows inline extraction of object property values directly into variables and setting a default value if the property does not exist. A convenient syntax to avoid dealing directly with `undefined`.
 
 Indeed, the property extraction is now precise:
 
@@ -396,6 +395,7 @@ prop; // => 'default'
 ```
 
 To see things in action, let's define a useful function that wraps a string in quotes.  
+
 `quote(subject, config)` accepts the first argument as the string to be wrapped. The second argument `config` is an object with the properties:
 
 * `char`: the quote char, e.g. `'` (single quote) or `"` (double quote). Defaults to `"`.
@@ -423,7 +423,7 @@ If some properties are missing in the `config` object, the destructuring assignm
 
 Fortunately, the function still has room for improvement.  
 
-Let's move the destructuring assignment right into the parameters section. And set a default value (an empty object `{ }`) for the `config` parameter, to skip the second argument when default settings are enough.  
+Let's move the destructuring assignment into the parameters section. And set a default value (an empty object `{ }`) for the `config` parameter, to skip the second argument when default settings are enough.  
 
 ```javascript
 function quote(str, { char = '"', skipIfQuoted = true } = {}) {
@@ -443,7 +443,7 @@ The destructuring assignment replaces the `config` parameter in the function's s
 
 `= {}` on the right side of the destructuring assignment ensures that an empty object is used if the second argument is not specified at all `quote('Sunny day')`.  
 
-Object destructuring is a powerful feature that handles efficiently the extraction of properties from objects. I like the possibility to specify a default value to be returned when the accessed property doesn't exist. As a result, you avoid `undefined` and the hassle  around it.  
+Object destructuring is a powerful feature that handles efficiently the extraction of properties from objects. I like the possibility to specify a default value to be returned when the accessed property doesn't exist. As a result, you avoid `undefined` and the hassle around it.  
 
 **Tip 5: Fill the object with default properties**
 
@@ -451,7 +451,7 @@ If there is no need to create variables for every property, as the destructuring
 
 The ES2015 `Object.assign(target, source1, source2, ...)` copies the values of all enumerable own properties from one or more source objects into the target object. The function returns the target object.  
 
-For instance, you need to access the properties of `unsafeOptions` object that doesn't  always contain its full set of properties.  
+For instance, you need to access the properties of `unsafeOptions` object that doesn't always contain its full set of properties.  
 
 To avoid `undefined` when accessing a non-existing property from `unsafeOptions`, let's make some adjustments:  
 
@@ -478,7 +478,7 @@ The order in which the source objects are enumerated does matter: later source o
 
 You are now safe to access any property of `options` object, including `options.color` that wasn't available in `unsafeOptions` initially.  
 
-Fortunately exists an easier and lighter way to fill the object with default properties. I recommend to use the [spread properties in object initializers](/object-rest-spread-properties-javascript/#2-object-spread-properties).  
+Fortunately, an easier alternative to fill the object with default properties exists. I recommend to use the [spread properties in object initializers](/object-rest-spread-properties-javascript/#2-object-spread-properties).  
 
 Instead of `Object.assign()` invocation, use the object spread syntax to copy into target object all own and enumerable properties from source objects:
 
@@ -503,13 +503,13 @@ Filling an incomplete object with default property values is an efficient strate
 
 **Bonus tip: nullish coalescing**
 
-A new operator named [nullish coalescing](https://github.com/tc39/proposal-nullish-coalescing) (a proposal at stage 3 as of August 2019) evaluates to a default value when its operand is `undefined` or `null`:  
+The operator [nullish coalescing](/javascript-optional-chaining/#3-default-with-nullish-coalescing) evaluates to a default value when its operand is `undefined` or `null`:  
 
 ```javascript
 const value = nullOrUndefinedValue ?? defaultValue;
 ```
 
-Nullish coalescing operator is convenient to access an object property, while having a default value when this property is `undefined` or `null`:  
+Nullish coalescing operator is convenient to access an object property while having a default value when this property is `undefined` or `null`:  
 
 ```javascript
 const styles = {
@@ -529,7 +529,7 @@ styles.fontSize ?? 16;   // => 18
 
 > The function parameters implicitly default to `undefined`.
 
-Normally a function that is defined with a specific number of parameters should be invoked with the same number of arguments. That's when the parameters get the values you expect:
+Usually a function defined with a specific number of parameters should be invoked with the same number of arguments. That's when the parameters get the values you expect:
 
 ```javascript
 function multiply(a, b) {
@@ -554,14 +554,13 @@ function multiply(a, b) {
 multiply(5); // => NaN
 ```
 
-`function multiply(a, b) { }` is defined with two parameters `a` and `b`.   
 The invocation `multiply(5)` is performed with a single argument: as result `a` parameter is `5`, but the `b` parameter is `undefined`.  
 
 **Tip 6: Use default parameter value**
 
 Sometimes a function does not require the full set of arguments on invocation. You can set defaults for parameters that don't have a value.   
 
-Recalling the previous example, let's make an improvement. If `b` parameter is `undefined`, let's make it default to `2`:
+Recalling the previous example, let's make an improvement. If `b` parameter is `undefined`, let default it to `2`:
 
 ```javascript{2-4}
 function multiply(a, b) {
@@ -574,14 +573,14 @@ function multiply(a, b) {
 }
 multiply(5); // => 10
 ```
-The function is invoked with a single argument `multiply(5)`. Initially `a` parameter is `2` and `b` is `undefined`.  
+The function is invoked with a single argument `multiply(5)`. Initially, `a` parameter is `2` and `b` is `undefined`.  
 The conditional statement verifies whether `b` is `undefined`. If it happens, `b = 2` assignment sets a default value.  
 
 While the provided way to assign default values works, I don't recommend comparing directly against `undefined`. It's verbose and looks like a hack.  
 
 A better approach is to use the ES2015 [default parameters](/javascript-function-parameters/#2-default-parameters) feature. It's short, expressive and no direct comparisons with `undefined`.  
 
-Modifying the previous example with a default parameter for `b` indeed looks great:
+Adding a default value to parameter `b = 2` looks better:
 
 ```javascript
 function multiply(a, b = 2) {
@@ -592,7 +591,7 @@ function multiply(a, b = 2) {
 multiply(5);            // => 10
 multiply(5, undefined); // => 10
 ```
-`b = 2` in the function signature makes sure that if `b` is `undefined`, the parameter is defaulted to `2`.  
+`b = 2` in the function signature makes sure that if `b` is `undefined`, the parameter defaults to `2`.  
 
 ES2015 default parameters feature is intuitive and expressive. Always use it to set default values for optional parameters.  
 
@@ -600,7 +599,7 @@ ES2015 default parameters feature is intuitive and expressive. Always use it to 
 
 > Implicitly, without `return` statement, a JavaScript function returns `undefined`.
 
-In JavaScript, a function that doesn't have `return` statement implicitly returns `undefined`:  
+A function that doesn't have `return` statement implicitly returns `undefined`:  
 
 ```javascript
 function square(x) {
@@ -612,7 +611,7 @@ square(2); // => undefined
 
 The same situation happens when `return` statement is present, but without an expression nearby:  
 
-```javascript
+```javascript{3}
 function square(x) {
   const res = x * x;
   return;
@@ -657,9 +656,7 @@ getNum(); // => 1
 
 At the end of both `let` declaration and `return` statement an obligatory semicolon is written.
 
-What happens when you don't want to indicate these semicolons? For instance to reduce the size of the source file.  
-
-In such a situation ECMAScript provides an [Automatic Semicolon Insertion](http://www.ecma-international.org/ecma-262/6.0/index.html#sec-automatic-semicolon-insertion) (ASI) mechanism, which inserts for you the missing semicolons.
+What happens when you don't want to indicate these semicolons? In such a situation ECMAScript provides an [Automatic Semicolon Insertion](http://www.ecma-international.org/ecma-262/6.0/index.html#sec-automatic-semicolon-insertion) (ASI) mechanism, which inserts for you the missing semicolons.
 
 Helped by ASI, you can remove the semicolons from the previous example: 
 
@@ -736,7 +733,8 @@ const colors = ['blue', 'white', 'red'];
 colors[5];  // => undefined
 colors[-1]; // => undefined
 ```
-`colors` array has 3 elements, thus valid indexes are `0`, `1` and `2`.  
+`colors` array has 3 elements, thus valid indexes are `0`, `1`, and `2`.  
+
 Because there are no array elements at indexes `5` and `-1`, the accessors `colors[5]` and  `colors[-1]` are `undefined`.  
 
 In JavaScript, you might encounter so-called sparse arrays. Theses are arrays that have gaps, i.e. at some indexes, no elements are defined. 
@@ -754,17 +752,19 @@ const sparse2 = ['white',  ,'blue']
 sparse2;       // => ['white', <empty slot>, 'blue']
 sparse2[1];    // => undefined
 ```
-`sparse1` is created corresponding by invoking an `Array` constructor with a numeric first argument. It has 3 empty slots.  
+`sparse1` is created by invoking an `Array` constructor with a numeric first argument. It has 3 empty slots.  
+
 `sparse2` is created with an array literal with the missing second element.  
+
 In any of these sparse arrays accessing an empty slot evaluates to `undefined`.  
 
-When working with arrays, to escape catching `undefined`, be sure to use valid array indexes and avoid at all creating sparse arrays.  
+When working with arrays, to avoid `undefined`, be sure to use valid array indexes and prevent the creation of sparse arrays.  
 
 ## 4. Difference between undefined and null
 
 What is the main difference between `undefined` and `null`? Both special values imply an empty state.  
 
-The main difference is that `undefined` represents the value of a variable that *wasn't yet initialized*, while `null` represents an intentional *absence of an object*.  
+> `undefined` represents the value of a variable that *hasn't been yet initialized*, while `null` represents an intentional *absence of an object*.  
 
 Let's explore the difference in some examples.
 
@@ -782,7 +782,7 @@ The same uninitialized concept happens when a *non-existing object property* is 
 const obj = { firstName: 'Dmitri' };
 obj.lastName; // => undefined
 ```
-Because `lastName` property does not exist in `obj`, JavaScript correctly evaluates `obj.lastName` to `undefined`.  
+Because `lastName` property does not exist in `obj`, JavaScript evaluates `obj.lastName` to `undefined`.  
 
 On the other side, you know that a variable expects an object. But for some reason, you can't instantiate the object. In such case `null` is a meaningful indicator of a *missing object*.
 
@@ -799,16 +799,16 @@ clone({name: 'John'}); // => {name: 'John'}
 clone(15);             // => null
 clone(null);           // => null
 ``` 
-However `clone()` might be invoked with a non-object argument: `15` or `null` (or generally a primitive value, `null` or `undefined`). In such case the function cannot create a clone, so it returns `null` - the indicator of a missing object.  
+However `clone()` might be invoked with a non-object argument: `15` or `null`. In such a case, the function cannot create a clone, so it returns `null` &mdash; the indicator of a missing object.  
 
-`typeof` operator makes the distinction between the two values:
+`typeof` operator makes the distinction between `undefined` and `null`:
 
 ```javascript
 typeof undefined; // => 'undefined'
 typeof null;      // => 'object'
 ```
 
-The [strict quality operator](/the-legend-of-javascript-equality-operator) `===` correctly differentiates `undefined` from `null`:
+Also the [strict quality operator](/the-legend-of-javascript-equality-operator/#the-identity-operator) `===` correctly differentiates `undefined` from `null`:
 
 ```javascript
 let nothing = undefined;
@@ -818,24 +818,24 @@ nothing === missingObject; // => false
 
 ## 5. Conclusion
 
-The existence of `undefined` is a consequence of JavaScript's permissive nature that allows the usage of:
+`undefined` existence is a consequence of JavaScript's permissive nature that allows the usage of:
 
 - uninitialized variables
 - non-existing object properties or methods
 - out of bounds indexes to access array elements
 - the invocation result of a function that returns nothing
 
-Comparing directly against `undefined` is mostly a bad practice because you might rely on a permitted but discouraged practice mentioned above.  
+Comparing directly against `undefined` is unsafe because you rely on a permitted but discouraged practice mentioned above.  
 
-An efficient strategy is to reduce at minimum the appearance of `undefined` keyword in your code. In the meantime, *always* remember about its surprising appearance and prevent that by applying beneficial habits such as:
+An efficient strategy is to reduce at minimum the appearance of `undefined` keyword in your code by applying good habits such as:
 
 * reduce the usage of uninitialized variables 
 * make the variables lifecycle short and close to the source of their usage
-* whenever possible assign an initial value to variables
+* whenever possible assign initial values to variables
 * favor `const`, otherwise use `let`
 * use default values for insignificant function parameters
 * verify the properties existence or fill the unsafe objects with default properties
 * avoid the usage of sparse arrays
 
 
-*What's your opinion about `undefined` in JavaScript? Feel free to write a comment below!*
+*Is it good that JavaScript has both `undefined` and `null` to represent empty values?*
