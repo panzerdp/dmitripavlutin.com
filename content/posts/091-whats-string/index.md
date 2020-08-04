@@ -66,7 +66,7 @@ Simply saying, the strings in JavaScript are a sequence of numbers, exactly UTF-
 
 *A code unit* is just a number from `0x0000` until `0xFFFF`. The magic happens because there is a mapping between the code unit value and a specific character.  
 
-For example, the code unit `0x0048` is rendered to the actual character `H` using the unicode escape sequence `\u0046`:  
+For example, the code unit `0x0048` is rendered to the actual character `H` using the *unicode escape sequence* `\u0046`:  
 
 ```javascript
 const letter = '\u0048';
@@ -74,7 +74,7 @@ const letter = '\u0048';
 letter === 'H' // => true
 ```
 
-Now let's UTF-16 code units directly to create the `'Hello!'` string:
+Now let's use UTF-16 code units directly to create the `'Hello!'` string:
 
 ```javascript
 const message = '\u0048\u0065\u006C\u006C\u006F\u0021';
@@ -85,7 +85,7 @@ message.length;       // => 6
 
 `\u0048\u0065\u006C\u006C\u006F\u0021` is how JavaScript sees the strings: as a sequence of code units. Note that the presented sequence has 6 code units, which corresponds to the number of visible characters in the `'Hello!'` string.  
 
-Any Unicode character from [Basic Multilangual Plane](https://www.compart.com/en/unicode/plane/U+0000) is encoded with one code unit in UTF-16.  
+An Unicode character from [Basic Multilangual Plane](https://www.compart.com/en/unicode/plane/U+0000) is encoded with one code unit in UTF-16.  
 
 However, characters from non-Basic Multilangual Plane:
 
@@ -93,9 +93,9 @@ However, characters from non-Basic Multilangual Plane:
 * [Supplementary Ideographic Plane](https://en.wikipedia.org/wiki/Plane_(Unicode)#Supplementary_Ideographic_Plane)
 * [Tertiary Ideographic Plane](https://en.wikipedia.org/wiki/Plane_(Unicode)#Tertiary_Ideographic_Plane)
 
-require 2 code units to be encoded in UTF-16.  
+require an unseparable pair of code units (named surrogate pair) to be encoded in UTF-16.  
 
-For example, the grinning face character `'😀'` is encoded with a sequence of 2 code units `\uD83D\uDE00`:
+For example, the grinning face character `'😀'`, which would have the code unit of `0x1F600` (the number `0x1F600` is bigger than `0xFFFF` thus doesn't fit into 16 bits), is encoded with a sequence of 2 code units `0xD83D0xDE00`:
 
 ```javascript
 const smile = '\uD83D\uDE00';
@@ -104,7 +104,7 @@ smile === '😀'; // => true
 smile.length;  // => 2
 ```
 
-The sequence `\uD83D\uDE00` is a special pair named *surrogate pair*. It represents the code units bigger than `0xFFFF`.  
+The sequence `\uD83D\uDE00` is a special pair named *surrogate pair*.  
 
 `smile.length` evaluates to `2`, which denotes that the `length` property of the string primitive determines the number of *code units*.  
 
