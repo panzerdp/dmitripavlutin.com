@@ -1,6 +1,6 @@
 ---
 title: "What Actually is a String in JavaScript?"
-description: "Saying it strictly, a string in JavaScript is a sequence of UTF-16 code units."
+description: "Strictly saying, a string in JavaScript is a sequence of UTF-16 code units."
 published: "2020-08-04T07:00Z"
 modified: "2020-08-04T07:00Z"
 thumbnail: "./images/cover-2.png"
@@ -125,3 +125,5 @@ The simplest way to think about JavaScript string is a sequence of visible chara
 However, saying it strictly, a string in JavaScript is a sequence of UTF-16 code units. `string.length` property determines the number of code units, rather than the number of visible characters.  
 
 Understanding that a string is a sequence of code units is necessary if you work with characters above the Basic Multilingual Plane.  
+
+To solidify your knowledge on Unicode, code units, etc, I recommend reading my post [What every JavaScript developer should know about Unicode](https://dmitripavlutin.com/what-every-javascript-developer-should-know-about-unicode/).  
