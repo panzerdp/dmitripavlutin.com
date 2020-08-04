@@ -1,8 +1,8 @@
 ---
 title: "What Actually is a String in JavaScript?"
 description: "Saying it strictly, a string in JavaScript is a sequence of UTF-16 code units."
-published: "2020-08-04T06:30Z"
-modified: "2020-08-04T06:30Z"
+published: "2020-08-04T07:00Z"
+modified: "2020-08-04T07:00Z"
 thumbnail: "./images/cover-2.png"
 slug: what-is-string-in-javascript
 tags: ['javascript', 'string']
