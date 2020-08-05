@@ -66,7 +66,7 @@ Simply saying, the strings in JavaScript are a sequence of numbers, exactly UTF-
 
 *A code unit* is just a number from `0x0000` until `0xFFFF`. The magic happens because there is a mapping between the code unit value and a specific character.  
 
-For example, the code unit `0x0048` is rendered to the actual character `H` using the *unicode escape sequence* `\u0046`:  
+For example, the code unit `0x0048` is rendered to the actual character `H` using the *unicode escape sequence* `\u0048`:  
 
 ```javascript
 const letter = '\u0048';
