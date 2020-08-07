@@ -2,7 +2,7 @@
 title: "3 Ways to Check If an Object Has a Property in JavaScript"
 description: "The 3 ways to check if an object has a property in JavaScript: hasOwnProperty() method, in operator, comparing with undefined."
 published: "2020-06-16T09:00Z"
-modified: "2020-06-16T09:00Z"
+modified: "2020-08-07T10:40Z"
 thumbnail: "./images/cover.png"
 slug: check-if-object-has-property-javascript
 tags: ["javascript", "object"]
@@ -34,9 +34,9 @@ The property `name` exists in the object `hero`: thus `hero.hasOwnProperty('name
 
 On the other side, `realName` property doesn't exist in the object `hero`. As expected, `hero.hasOwnProperty('realName')` returns `false` &mdash; denoting a missing property.  
 
-The method name `hasOwnProperty()` suggests that it looks for properties in the [own properties](/own-and-inherited-properties-in-javascript/#1-own-properties) of the object. In simple words, the own properties are those defined directly upon the object. 
+The method name `hasOwnProperty()` suggests that it looks for properties in the [own properties](/own-and-inherited-properties-in-javascript/#1-own-properties) of the object. The own properties are those defined directly upon the object.  
 
-Even if every JavaScript object has an inherited property `toString` (which is a method inherited from the object's prototype), `hasOwnProperty()` doesn't detect it as a property:
+Despite that every JavaScript object has an inherited property `toString` (which is a method inherited from the object's prototype), `hasOwnProperty()` doesn't detect it as a property:
 
 ```javascript
 const hero = {
@@ -50,7 +50,7 @@ hero.hasOwnProperty('toString'); // => false
 
 ## 2. *in* operator
 
-The `in` operator `propName in object` also determines whether `propName` property exists in `object`. 
+The `in` operator `propName in object` also determines whether `propName` property exists in `object`.  
 
 Let's use `in` operator to detect the existence of a property:
 
@@ -63,24 +63,25 @@ const hero = {
 'realName' in hero; // => false
 ```
 
-`'name' in hero` evaluates as expected to `true` because `hero` has a property `name`. 
+`'name' in hero` evaluates to `true` because `hero` has a property `name`. 
 
-However, `hero` doesn't have a property named `'realName'`. As a result, `'realName' in hero` evaluates to `false`.  
+On the other side, `'realName' in hero` evaluates to `false` because `hero` doesn't have a property named `'realName'`.  
 
 `in` operator has a short syntax, and I prefer it over `hasOwnProperty()` method in most of the cases.  
 
-Here's the main difference between `hasOwnProperty()` method and `in` operator: the latter checks within the own properties, but also in the list of inherited properties.  
+The main difference between `hasOwnProperty()` method and `in` operator is that the latter checks within the own properties and also in the list of inherited properties.  
 
 That's why, in contrast to `hasOwnProperty()`, the `in` operator detects that the inherited property `toString` exists inside `hero` object:
 
-```javascript
+```javascript{7-8}
 const hero = {
   name: 'Batman'
 };
 
 hero.toString; // => function() {...}
 
-'toString' in hero; // => true
+'toString' in hero;              // => true
+hero.hasOwnProperty('toString'); // => false
 ```
 
 ## 3. Comparing with *undefined*
@@ -113,7 +114,7 @@ hero.realName !== undefined; // => false
 
 On the other side, `hero.realName !== undefined` is `false`, which indicates the `realName` is missing.  
 
-I've been comparing with `undefined` to detect the existence of property for quite some time. It's a cheap and dirty approach.  
+Comparing with `undefined` to detect the existence of property is a cheap and dirty approach. 
 
 Note that this approach can generate a false-negative. If the property exists, but has `undefined` value (case, however, rarely happening), comparing against `undefined` evaluates incorrectly to `false`:
 
@@ -133,7 +134,7 @@ There are mainly 3 ways to check if the property exists.
 
 The first way is to invoke `object.hasOwnProperty(propName)`. The method returns `true` if the `propName` exists inside `object`, and `false` otherwise.  
 
-Note that `hasOwnProperty()` searches only within the [own](/own-and-inherited-properties-in-javascript/#1-own-properties) properties of the object.  
+`hasOwnProperty()` searches only within the [own](/own-and-inherited-properties-in-javascript/#1-own-properties) properties of the object.  
 
 The second approach makes use of `propName in object` operator. As well, the operator evaluates to `true` for an existing property, and `false` otherwise.  
 
