@@ -2,7 +2,7 @@
 title: "Your Guide to React.useCallback()"
 description: "React.useCallback() memoizes callback functions. In this post I will explain when to and when not to use React.useCallback()."
 published: "2020-05-04T08:40Z"
-modified: "2020-05-04T08:40Z"
+modified: "2020-08-07T12:00Z"
 thumbnail: "./images/cover-6.png"
 slug: dont-overuse-react-usecallback
 tags: ["react", "component", "memoization"]
@@ -62,7 +62,7 @@ That's just how JavaScript works. An object (including a function object) [equal
 
 Different function instances sharing the same code are often created inside React components. 
 
-When the React component body creates a function (e.g. a callback or event handler), this function is re-created on every rendering:  
+When inside a React component body a function is defined (e.g. a callback or event handler), this function is re-created on every rendering:  
 
 ```jsx{5-7}
 import React from 'react';
@@ -109,43 +109,41 @@ Imagine you have a component that renders a big list of items:
 
 ```jsx
 import React from 'react';
+import useSearch from './fetch-items';
 
-function MyBigList({ items, handleClick }) {
-  const map = (item, index) => (
-    <div onClick={() => handleClick(index)}>{item}</div>;
-  );
-  return <div>{items.map(map)}</div>;
+function MyBigList({ term, handleClick }) {
+  const items = useSearch(term);
+
+  const itemToElement = item => <div onClick={handleClick}>{item}</div>;
+
+  return <div>{items.map(itemToElement)}</div>;
 }
 
-export const MyBigList = React.memo(MyBigList);
+export default React.memo(MyBigList);
 ```
 
 `MyBigList` renders a list of items. Knowing the list could be big, probably a few hundreds of items. To preserve the list re-rendering, you wrap it into `React.memo`.  
 
-The parent component of `MyBigList` needs to provide the list of items and the handler function when an item is clicked.  
+The parent component of `MyBigList` needs provides a handler function when an item is clicked.  
 
 ```jsx
 import React, { useCallback } from 'react';
 
-import useSearch from './fetch-items';
-
-function MyParent({ term }) {
-  const handleClick = useCallback((item) => {
+export default function MyParent({ term }) {
+  const handleClick = useCallback(item => {
     console.log('You clicked ', item);
   }, [term]);
 
-  const items = useSearch(term);
-
   return (
     <MyBigList
-      items={items}
+      term={term}
       handleClick={handleClick}
     />
   );
 }
 ```
 
-`handleClick` callback is memoizied by `useCallback()`. As long as `term` variable stays the same, `useCallback()` returns the same function object.  
+`handleClick` callback is memoizied by `useCallback()`. As long as `term` variable stays the same, `useCallback()` returns the same function instance.  
 
 Even if for some reason `MyParent` component re-renders, `handleClick` stays the same and doesn't break the memoization of `MyBigList`.
 
@@ -171,7 +169,7 @@ function MyChild ({ onClick }) {
 
 Does it make sense to memoize `handleClick`?  
 
-No, because calling `useCallback()` requires lots of things working. Every time `MyComponent` is rendered the `useCallback()` hook is called. Iternally React makes sure to return the same object function. Even so, the inline function is still created on every render, `useCallback()` just skips it.   
+No, because calling `useCallback()` requires lots of things working. Every time `MyComponent` is rendered the `useCallback()` hook is called. Iternally React makes sure to return the same object function. Even so, the inline function is still created on every render (`useCallback()` just skips it).   
 
 Even having `useCallback()` returning the same function instance, it doesn't bring any benefits because *the optimization costs more than not having the optimization*.  
 
