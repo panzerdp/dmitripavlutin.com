@@ -49,6 +49,8 @@ Object.keys(hero); // => ['name', 'city']
 
 `Object.keys(hero)` returns the list `['name', 'city']`, which, as expected, are the keys of `hero` object.  
 
+### 1.1 Keys in practice: detect if object is empty
+
 ## 2. *Object.values()* returns values
 
 `Object.values(object)` is the JavaScript utility function that returns the list of values of `object`.  
@@ -66,6 +68,8 @@ Object.values(hero); // => ['Batman', 'Gotham']
 
 `Object.values(hero)` returns the values of `hero`: `['Batman', 'Gotham']`.  
 
+### 2.1 Values in practice: calculate properties sum
+
 ## 3. *Object.entries()* returns entries
 
 Finally, `Object.entries(object)` is an useful function to access the entries of `object`.  
@@ -78,10 +82,12 @@ const hero = {
   city: 'Gotham'  
 };
 
-Object.entries(hero); // => ['Batman', 'Gotham']
+Object.entries(hero); // => `[['name', 'Batman'], ['city', 'Gotham']]`
 ```
 
 `Object.entries(hero)` returns the entries of `hero`: `[['name', 'Batman'], ['city', 'Gotham']]`.  
+
+### 3.1 Entries in practice: find the property having 0 value
 
 ## 4. Summary
 
