@@ -85,7 +85,7 @@ message.length;       // => 6
 
 `\u0048\u0065\u006C\u006C\u006F\u0021` is how JavaScript sees the strings: as a sequence of code units. Note that the presented sequence has 6 code units, which corresponds to the number of visible characters in the `'Hello!'` string.  
 
-An Unicode character from [Basic Multilangual Plane](https://www.compart.com/en/unicode/plane/U+0000) is encoded with one code unit in UTF-16.  
+A Unicode character from [Basic Multilangual Plane](https://www.compart.com/en/unicode/plane/U+0000) is encoded with one code unit in UTF-16.  
 
 However, characters from non-Basic Multilangual Plane:
 

@@ -11,15 +11,15 @@ type: post
 commentsThreadId: access-object-keys-values-entries
 ---
 
-When working with plain JavaScript objects, you often need to look through all the properties and values of it.  
+You often need to look through the properties and values of plain JavaScript objects.  
 
-Here are the common lists that you might be interested to extract from an object:
+Here are the common lists to extract from an object:
 
 * *The keys* of an object is the list of property names. 
 * *The values* of an object is the list of property values. 
 * *The entries* of an object is the list of pairs of property names and corresponding values.  
 
-As a reference, let's consider the following JavaScript object:
+Let's consider the following JavaScript object:
 
 ```javascript
 const hero = {
@@ -53,13 +53,13 @@ Object.keys(hero); // => ['name', 'city']
 
 If you'd like to quickly check if an object is empty (has no own properties), then a good approach is to check whether the keys list is empty.  
 
-To check if the object is empty, all you need to do is verify the length property of the array returned by `Object.keys()`:
+To check if the object is empty, all you need to do is verify the length property of the array returned by `Object.keys(object)`:
 
 ```javascript
 const isObjectEmpty = Object.key(object).length === 0;
 ```
 
-In the following example, `empty` has no properties, while `nonEmpty` object has one properties:
+In the following example, `empty` has no properties, while `nonEmpty` object has one property:
 
 ```javascript
 const empty = {};
@@ -88,11 +88,11 @@ Object.values(hero); // => ['Batman', 'Gotham']
 
 `Object.values(hero)` returns the values of `hero`: `['Batman', 'Gotham']`.  
 
-### 2.1 Values in practice: calculate values sum
+### 2.1 Values in practice: calculate properties sum
 
 `books` is an object that holds the prices of some books. The property key is the book name, while the value is the book price.  
 
-How would you determine the sum of all books from the object? By accessing the values of the object, and summing them.  
+How would you determine the sum of all books from the object? By accessing the *values* of the object, and summing them.  
 
 Let's see how to do that:
 
@@ -135,7 +135,7 @@ Object.entries(hero); // => `[['name', 'Batman'], ['city', 'Gotham']]`
 
 ### 3.1 Entries in practice: find the property having 0 value
 
-Again, let's use the `books` object that holds the prices of some books. But this time, due to a mistake, one of the books has been assigned with a price `0`.  
+Again, let's use the `books` object that holds the prices of some books. This time, due to a mistake, one of the books has been assigned with the price `0`.  
 
 Let's find the book with the price `0` and log its name to console.  
 
@@ -156,9 +156,9 @@ for (const [book, price] of Object.entries(books)) {
 // logs '1984'
 ```
 
-`Object.entries(books)` returns a list of tuples: the book name and price. `const [book, price]` extracts from the tuple the book name and price in place.  
+`Object.entries(books)` returns a list of tuples: the book name and price. `const [book, price]` extracts in place from the tuple the book name and price.  
 
-Finally, inside the `for..of` cycle, you can check which book price is `0`, and log the book name to console if that's the case.  
+Finally, inside the `for..of` cycle, you can check which book price is `0`, and log the name to console if that's the case.  
 
 ## 4. Summary
 
