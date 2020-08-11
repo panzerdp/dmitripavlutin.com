@@ -16,8 +16,8 @@ When working with plain JavaScript objects, you often need to look through all t
 Here are the common lists that you might be interested to extract from an object:
 
 * *The keys* of an object is the list of property names. 
-* *The values* of an object is the list og property values. 
-* *The entries* of an object is the list of pairs of property name and corresponding value.  
+* *The values* of an object is the list of property values. 
+* *The entries* of an object is the list of pairs of property names and corresponding values.  
 
 As a reference, let's consider the following JavaScript object:
 
@@ -30,11 +30,11 @@ const hero = {
 
 The keys of `hero` are `['name', 'city']`. The values are `['Batman', 'Gotham']`. And the entries are `[['name', 'Batman'], ['city', 'Gotham']]`.  
 
-Let's see what utility functions provide JavaScript to extract the keys, values and entries from an object.  
+Let's see what utility functions provide JavaScript to extract the keys, values, and entries from an object.  
 
 ## 1. *Object.keys()* returns keys
 
-`Object.keys(object)` is an utility function that returns the list of keys of `object`.  
+`Object.keys(object)` is a utility function that returns the list of keys of `object`.  
 
 Let's use `Object.keys()` to get the keys of `hero` object:
 
@@ -135,9 +135,9 @@ Object.entries(hero); // => `[['name', 'Batman'], ['city', 'Gotham']]`
 
 ### 3.1 Entries in practice: find the property having 0 value
 
-Again, let's use the `books` object that holds the prices of some books. But this time, due to a mistake, one of the books has been assigned with price `0`.  
+Again, let's use the `books` object that holds the prices of some books. But this time, due to a mistake, one of the books has been assigned with a price `0`.  
 
-Let's find the book with price `0` and log its name to console.  
+Let's find the book with the price `0` and log its name to console.  
 
 Using the object's entries list fits well to solve this task:
 
@@ -162,7 +162,7 @@ Finally, inside the `for..of` cycle, you can check which book price is `0`, and 
 
 ## 4. Summary
 
-The keys, values and entries are 3 common lists you might need to extract from a JavaScript object for further processing.  
+The keys, values, and entries are 3 common lists to extract from a JavaScript object for further processing.  
 
 JavaScript provides the necessary utility function to access these lists:
 
