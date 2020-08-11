@@ -1,9 +1,9 @@
 ---
 title: "How to Access Object's Keys, Values, and Entries in JavaScript"
 description: "Let's see what utility functions provide JavaScript to extract the keys, values and entries from an object."
-published: "2020-08-11T12:00Z"
-modified: "2020-08-11T12:00Z"
-thumbnail: "./images/cover-2.png"
+published: "2020-08-11T07:30Z"
+modified: "2020-08-11T07:30Z"
+thumbnail: "./images/cover.png"
 slug: access-object-keys-values-entries
 tags: ['javascript', 'object']
 recommended: ['how-to-compare-objects-in-javascript', 'check-if-object-has-property-javascript']
@@ -105,9 +105,9 @@ const books = {
 
 const prices = Object.values(books);
 
-prices; // => [5.50, 10.00, 4.35]
+prices; // => [4.35, 5.5, 10]
 
-const sum = prices.reduce(Math.sum);
+const sum = prices.reduce((sum, price) => sum + price);
 
 sum; // => 19.85
 ```
