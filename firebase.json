@@ -2,6 +2,11 @@
   "hosting": {
     "public": "public",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "redirects": [{
+      "source": "/rss",
+      "destination": "/rss.xml",
+      "type": 301
+    }],
     "headers": [
       {
         "source": "**/*",
