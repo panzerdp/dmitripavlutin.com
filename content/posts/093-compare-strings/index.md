@@ -10,3 +10,22 @@ recommended: ['how-to-compare-objects-in-javascript', 'what-is-string-in-javascr
 type: post
 commentsThreadId: compare-javascript-strings
 ---
+
+Let's compare 2 strings:
+
+```javascript
+const str1 = 'Hello!';
+const str2 = 'Hello!';
+
+str1 === str2; // => true
+```
+
+You guessed right that `str1` and `str2` are equal strings, because they have the same characters.  
+
+Is that always the case when 2 strings look the same, and are equal?  
+
+Let's try another example:
+
+```javascript
+
+```
