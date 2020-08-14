@@ -88,6 +88,20 @@ where `\u0301` is the unicode escape sequence of the combining mark ◌́ .
 
 Having a better understanding of graphemes, here are a couple of rules for safer strings comparison in JavaScript.  
 
-First, you are safe to compare strings that contain characters from Basic Multilangual Plane. 
+First, you are safe to compare strings that contain characters from Basic Multilangual Plane using regular comparison operators `===`, `==` or utility function `Object.is()`.  
+
+Secondly, if there are chances that you deal with strings above the Basic Multilangual Plane with combining marks, then you aren't safe to compare strings using `===`, `==` and `Object.is()`. What you need to do additionally is to *normalize* the compared strings:
+
+```javascript
+const str1 = 'café';
+const str2 = 'café';
+
+str1 === str2;                         // => false
+str1.normalize() === str2.normalize(); // => true
+```
 
 ## 4. Summary
+
+You're safe to compare strings directly when the characters of the string are from the Basic Multilangual Plane.  
+
+However, if the string can contain combining characters, then it would be safe to normalize both compared string to the same form using `string.normalize()` function, then perform the comparison.  
