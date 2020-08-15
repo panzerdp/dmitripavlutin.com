@@ -52,7 +52,7 @@ Here's a formal definition of a grapheme:
 
 > *Grapheme* is a minimally distinctive unit of writing in the context of a particular writing system.  
 
-Ok, that's all interesting, but how does it relate to the safe comparison of strings? Using *different sets of characters* you can render *the same grapheme*.  
+Ok, that's all interesting, but how does it relate to the safe comparison of strings? Some *graphemes* can be rendered using *different sequences of characters*.  
 
 Particularly, there is a special set of characters named *combining characters* that modify the previous character to create new graphemes. Let's detail combining characters.  
 
@@ -62,7 +62,7 @@ Particularly, there is a special set of characters named *combining characters* 
 
 Combining character include accents, diacritics, Hebrew points, Arabic vowel signs, and Indic matras.
 
-Combining character always require a base character to be applied to. You should avoid displaying them isolated.  
+Combining character always require a *base character* to be applied to. You should avoid displaying them isolated.  
 
 For example, `é` is an atomic grapheme. You can take a *lowercase e* (the base character) and combine it with *combining acute accent* ◌́  (the combining character) to render the grapheme: e + ◌́  = é.  
 
@@ -106,7 +106,7 @@ str1 === str2; // => true
 
 Both `str1` and `str2` contain ASCII characters, so you can safely compare them using comparison operators.  
 
-Secondly, if you deal with characters above the Basic Multilingual Plane, including combining characters, then you aren't safe to compare strings using `===`, `==` and `Object.is()`. What you need to do additionally is to *normalize* the compared strings.  
+Secondly, if you deal with characters above the Basic Multilingual Plane, including combining characters, then you aren't safe to compare strings using `===`, `==` and `Object.is()`. What you need to do additionally is to normalize the compared strings.  
 
 ```javascript
 const str1 = 'café';
@@ -116,7 +116,7 @@ str1 === str2;                         // => false
 str1.normalize() === str2.normalize(); // => true
 ```
 
-In simple words, the string normalization is the process of ensuring that canonical-equivalent strings (that have the same graphemes) have unique representations and can be safely compared.    
+In simple words, the string *normalization* is the process of ensuring that canonical-equivalent strings (that have the same graphemes) have unique representations and can be safely compared.    
 
 ## 4. Summary
 
