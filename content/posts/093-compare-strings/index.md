@@ -1,12 +1,12 @@
 ---
 title: "Is it Safe to Compare JavaScript Strings?"
-description: "Is it Safe to Compare JavaScript Strings?"
+description: "How 2 same looking strings might now be equal and how to safely compare strings in JavaScript."
 published: "2020-08-18T12:00Z"
 modified: "2020-08-18T12:00Z"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover-4.png"
 slug: compare-javascript-strings
 tags: ['javascript', 'equality', 'string']
-recommended: ['how-to-compare-objects-in-javascript', 'what-is-string-in-javascript']
+recommended: ['what-every-javascript-developer-should-know-about-unicode', 'what-is-string-in-javascript']
 type: post
 commentsThreadId: compare-javascript-strings
 ---
@@ -54,40 +54,46 @@ Here's a formal definition of a grapheme:
 
 Ok, that's all interesting, but how does it relate to the safe comparison of strings? Using *different sets of characters* you can render *the same grapheme*.  
 
-Particularly, there is a special set of characters named *combining marks* that modify the previous character to create new graphemes. Let's detail combining marks.  
+Particularly, there is a special set of characters named *combining characters* that modify the previous character to create new graphemes. Let's detail combining characters.  
 
-## 2. What's a combining mark
+## 2. What's a combining character
 
-> *Combining mark* is a character that applies to the precedent base character to create a grapheme.  
+> *Combining character* is a character that applies to the precedent base character to create a grapheme.  
 
-Combining marks include accents, diacritics, Hebrew points, Arabic vowel signs, and Indic matras.
+Combining character include accents, diacritics, Hebrew points, Arabic vowel signs, and Indic matras.
 
-Combining marks always require a base character to be applied to. You should avoid displaying them isolated.  
+Combining character always require a base character to be applied to. You should avoid displaying them isolated.  
 
-For example, `é` is an atomic grapheme. Let's see the 2 ways you can render this grapheme.  
-
-The first way to render it, as you might know already, is just to use the *lowercase e with acute* character:
+For example, `é` is an atomic grapheme. You can take a *lowercase e* (the base character) and combine it with *combining acute accent* ◌́  (the combining character) to render the grapheme: e + ◌́  = é.  
 
 ```javascript
-const e1 = 'é';
+const e1 = 'e\u0301';
 
 e1; // renders as "é"
 ```
 
-However, that's not the only way you could render this grapheme. You can take a *lowercase e* and combine it with a combining mark *combining acute accent* ◌́ to achieve the same result: e + ◌́  = é.  
+where `\u0301` is the [unicode escape sequence](/what-every-javascript-developer-should-know-about-unicode/#unicode-escape-sequence) of the combining character ◌́.  
+
+Note, however, that the same `é` can be represented in a different way using the *lowercase e with acute* character:
 
 ```javascript
-const e2 = 'e\u0301';
+const e2 = 'é';
 
 e2; // renders as "é"
 ```
 
-where `\u0301` is the [unicode escape sequence](/what-every-javascript-developer-should-know-about-unicode/#unicode-escape-sequence) of the combining mark ◌́.  
+Even tought `e1` and `e2` render the same grapheme, nevetheless, they are different string values:
 
+```javascript
+const e1 = 'e\u0301';
+const e2 = 'é';
+
+e1 === e2; // => false
+```
 
 ## 3. Safe comparison of strings
 
-Having a better understanding of graphemes, here are a couple of rules for safer strings comparison in JavaScript.  
+Having a better understanding of graphemes and combining characters, here are a couple of rules for safer strings comparison in JavaScript.  
 
 Firstly, you are safe to compare strings that contain characters from [Basic Multilangual Plane](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane) (including the [ASCII characters](https://en.wikipedia.org/wiki/Basic_Latin_(Unicode_block))) using regular comparison operators `===`, `==` or utility function `Object.is()`.  
 
@@ -100,18 +106,20 @@ str1 === str2; // => true
 
 Both `str1` and `str2` contain ASCII characters, so you can safely compare them using comparison operators.  
 
-Secondly, if you deal with characters above the Basic Multilingual Plane, including combining marks, then you aren't safe to compare strings using `===`, `==` and `Object.is()`. What you need to do additionally is to *normalize* the compared strings.  
+Secondly, if you deal with characters above the Basic Multilingual Plane, including combining characters, then you aren't safe to compare strings using `===`, `==` and `Object.is()`. What you need to do additionally is to *normalize* the compared strings.  
 
 ```javascript
 const str1 = 'café';
-const str2 = 'café';
+const str2 = 'cafe\u0301'; // same as 'café'
 
 str1 === str2;                         // => false
 str1.normalize() === str2.normalize(); // => true
 ```
 
+In simple words, the string normalization is the process of ensuring that canonical-equivalent strings (that have the same graphemes) have unique representations and can be safely compared.    
+
 ## 4. Summary
 
-You're safe to compare strings directly when the characters are from the Basic Multilingual Plane.  
+You're safe to compare strings directly when their characters are from the Basic Multilingual Plane.  
 
-However, if the string can contain combining characters, then it would be safer to normalize both compared string to the same form using `string.normalize()` function. Then perform the comparison on the normalized strings.  
+However, if the strings can contain combining characters, then it would be safer to normalize the compared strings to the same form using `string.normalize()` function. Then perform the comparison on the normalized strings.  
