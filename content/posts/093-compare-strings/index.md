@@ -1,6 +1,6 @@
 ---
 title: "Is it Safe to Compare JavaScript Strings?"
-description: "How 2 similar looking strings might not be equal and how to safely compare strings in JavaScript."
+description: "2 similar-looking strings in JavaScript might not be equal... so how would you safely compare strings?"
 published: "2020-08-18T10:15Z"
 modified: "2020-08-18T10:15Z"
 thumbnail: "./images/cover-4.png"
