@@ -33,8 +33,7 @@ str1 === str2; // => false
 
 While `str1` and `str2` look the same, the comparison `str1 === str2` evaluates to `false`. How's that possible?
 
-Let's detail into how to correctly compare strings in JavaScript. Before starting, I'm going to familiarize you with different points of view of what a character is in JavaScript: as a unit of writing, and rendered character.  
-
+Let's detail into how to correctly compare strings in JavaScript. Before starting, I'm going to familiarize you with the terms of grapheme (a unit of writing) and combining character (specialized character that modify the look of a base character).  
 
 ## 1. What's a grapheme
 
