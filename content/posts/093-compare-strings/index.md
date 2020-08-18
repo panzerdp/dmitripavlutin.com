@@ -115,7 +115,7 @@ str1 === str2;                         // => false
 str1.normalize() === str2.normalize(); // => true
 ```
 
-In simple words, the string *normalization* makes canonical-equivalent strings (`'café'` and `'cafe\u0301'` are equivalent because they represent the same graphemes) to have a unique representation (both `'café'` and `'cafe\u0301'` are normalized to a unique `'café'`) &mdash; thus being able to be safely compared.  
+In simple words, the string *normalization* makes canonical-equivalent strings (`'café'` and `'cafe\u0301'` are equivalent because they represent the same graphemes) to have a unique representation (both `'café'` and `'cafe\u0301'` are normalized to a unique `'café'`).  
 
 ## 4. Summary
 
