@@ -123,7 +123,7 @@ myObject.myMethod([1, 2, 3]);
 
 `this` resolved lexically is one of the great features of arrow functions. When using callbacks inside methods you are sure the arrow function doesn't define its own `this`: no more `const self = this` or `callback.bind(this)` workarounds.  
 
-Contraty to a regular function, the indirect invocation of an arrow function using `myArrowFunc.call(thisVal)` or `myArrowFunc.apply(thisVal)` doesn't change the value of `this`: the context value is always resolved lexically.    
+Contrary to a regular function, the indirect invocation of an arrow function using `myArrowFunc.call(thisVal)` or `myArrowFunc.apply(thisVal)` doesn't change the value of `this`: the context value is always resolved lexically.    
 
 ## 2. Constructors
 
