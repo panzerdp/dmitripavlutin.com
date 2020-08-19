@@ -26,7 +26,7 @@ Is it always the case that 2 strings looking the same are equal? Let's try anoth
 
 ```javascript
 const str1 = 'café';
-const str2 = 'café';
+const str2 = 'café';
 
 str1 === str2; // => false
 ```
