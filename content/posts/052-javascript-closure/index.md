@@ -2,11 +2,11 @@
 title: A Simple Explanation of JavaScript Closures
 description: A closure is a function that captures variables from where it is defined (or its lexical scope).  
 published: '2019-10-25T04:00Z'
-modified: '2019-11-27T14:00Z'
+modified: '2020-08-20T16:50Z'
 thumbnail: './images/bulb.jpg'
 slug: simple-explanation-of-javascript-closures
 tags: ['javascript', 'closure', 'scope']
-recommended: ['6-ways-to-declare-javascript-functions', 'when-not-to-use-arrow-functions-in-javascript']
+recommended: ['6-ways-to-declare-javascript-functions', 'javascript-scope']
 type: post
 commentsThreadId: explanation-of-javascript-closures
 ---
@@ -15,9 +15,7 @@ The callbacks, event handlers, higher-order functions can access outer scope var
 
 While being used everywhere, closures are difficult to grasp. If you haven't had your "Aha!" moment in understanding closures, then this post is for you.  
 
-I will start with the fundamental terms: scope and lexical scope. Then, after grasping the basics, you'll need just one step to finally understand closures.  
-
-A nice bonus awaits at the end: the closure concept explained with a real-world example.  
+I'll start with the fundamental terms: scope and lexical scope. Then, after grasping the basics, you'll need just one step to finally understand closures.  
 
 Before starting, I suggest you resist the urge to skip the scope and lexical scope sections. These concepts are crucial to closures, and if you get them well, the idea of closure becomes self-evident.  
 
@@ -54,7 +52,7 @@ Now, let's see a general formulation:
 
 > *The scope* is a space policy that rules the accessibility of variables.  
 
-An immediate property arises: the scope *isolates* its variables. That's great because *different scopes can have variables with the same name*.  
+An immediate property arises: the scope *isolates* variables. That's great because *different scopes can have variables with the same name*.  
 
 You can reuse common variables names (`count`, `index`, `current`, `value`, etc) in different scopes without collisions.  
 
@@ -309,25 +307,7 @@ Currying, an important concept of functional programming, is also possible thank
 
 `executeMultiply(b)` is a closure that captures `a` from its lexical scope. When the closure is invoked, the captured variable `a` and the parameter `b` are used to calculate `a * b`.  
 
-## 6. A real-world example of closure
-
-I know closures might be difficult to grasp. But once you *get it*, it's forever. 
-
-You can model them in your mind the following way. 
-
-Imagine a magical paintbrush with an interesting property. If you paint with it some objects from real life, then the painting becomes a window you can interact with.  
-
-![Painting as a model of JavaScript closures](./images/rose.jpg)
-
-Through this window, you can move the painted objects with your hands.  
-
-Moreover, you can carry the magical painting anywhere, even far from the place where you've painted the objects. From there, through the magical painting as a window, you can still move the objects with your hands.  
-
-The magical painting is a *closure*, while the painted objects are the *lexical scope*.  
-
-Isn't JavaScript magic? &#x263a;
-
-## 7. Conclusion
+## 6. Conclusion
 
 The scope is what rules the accessibility of variables in JavaScript. There can be a function or a block scope.  
 
