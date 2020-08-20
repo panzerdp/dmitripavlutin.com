@@ -230,4 +230,6 @@ After creating the `URL()` instance, you can easily access the most common URL c
 * `url.pathname` to read the pathname
 * `url.hash` to determine the hash value
 
+Regarding browser support, `URL` constructor is [available](https://caniuse.com/#feat=url) in modern browsers. It is not, however, available in Internet Explorer.  
+
 *What is your favorite tool to parse URLs in JavaScript?*
