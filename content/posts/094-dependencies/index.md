@@ -1,9 +1,9 @@
 ---
-title: "Front-end Architecture: Stable and Volatile Depenedncies"
-description: "Stable and Volatile Depenencies."
+title: "Front-end Architecture: Stable and Volatile Dependencies"
+description: "Designing correctly the dependencies is important for creating flexible Front-end applications. The first step is to identify and separate the stable and volatile dependencies."
 published: "2020-08-25T12:00Z"
 modified: "2020-08-25T12:00Z"
-thumbnail: "./images/cover-4.png"
+thumbnail: "./images/cover-5.png"
 slug: frontend-architecture-stable-and-volatile-dependencies
 tags: ['architecture', 'clean code', 'dependency']
 recommended: ['7-architectural-attributes-of-a-reliable-react-component', 'the-art-of-writing-small-and-plain-functions']
@@ -30,22 +30,24 @@ The component `CountWords` uses the library `lodash.words` to count the number o
 
 `CountWords` component has a dependency on `lodash.words` library.  
 
-The good part about components using depenencies is the code reuse: you simply import the necessary library and invoke it.  
+The good part about components using depenencies is the code reuse: you simply import the necessary library and use it.  
 
-On the other side, components using dependencies become completely depedent on the library it imports. Any bugs or API changes of the dependency influence directly your dependent component.  
+On the other side, the API changes, limited flexibility or even bugs of the dependency influence directly the dependent component.  
 
-What's even worse, your component might need to use different dependency implementations for different envirouments.  
+Your component might need to use diverse dependency implementations for various envirouments (client-side, server-side, testing environment). In such a case, unfortunately, importing directly the dependency is a bad practice.  
 
+Designing correctly the dependencies is an important skill to architect flexible Front-end applications. The first step to create a good design is to identify the *stable* and *volatile* dependencies.  
 
+## 1. Stable dependencies
 
-## 1. Stable and volatile Dependencies
+## 2. Volatile dependencies
 
-## 2. Incorrect depenendencies design
+## 3. Incorrect depenendencies design
 
-### 2.1 Difficult to test
+### 3.1 Difficult to test
 
-## 3. Correct dependencies design
+## 4. Good dependencies design
 
-### 3.1 Easy to test
+### 4.1 Easy to test
 
-## 4. Summary
+## 5. Summary
