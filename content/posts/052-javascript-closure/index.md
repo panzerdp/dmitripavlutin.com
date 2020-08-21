@@ -3,7 +3,7 @@ title: A Simple Explanation of JavaScript Closures
 description: A closure is a function that captures variables from where it is defined (or its lexical scope).  
 published: '2019-10-25T04:00Z'
 modified: '2020-08-20T16:50Z'
-thumbnail: './images/bulb.jpg'
+thumbnail: './images/cover-2.png'
 slug: simple-explanation-of-javascript-closures
 tags: ['javascript', 'closure', 'scope']
 recommended: ['6-ways-to-declare-javascript-functions', 'javascript-scope']
