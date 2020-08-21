@@ -32,9 +32,7 @@ The component `CountWords` uses the library `lodash.words` to count the number o
 
 The good part about components using depenencies is the code reuse: you simply import the necessary library and use it.  
 
-On the other side, the API changes, limited flexibility or even bugs of the dependency influence directly the dependent component.  
-
-Your component might need to use diverse dependency implementations for various envirouments (client-side, server-side, testing environment). In such a case, unfortunately, importing directly the dependency is a bad practice.  
+However, your component might need diverse dependency implementations for various environments (client-side, server-side, testing environment). In such a case importing directly the dependency is a bad practice.  
 
 Designing correctly the dependencies is an important skill to architect flexible Front-end applications. The first step to create a good design is to identify the *stable* and *volatile* dependencies.  
 
