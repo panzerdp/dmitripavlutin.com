@@ -685,6 +685,6 @@ String iterator `String.prototype[@@iterator]()` is Unicode-aware. You can use t
 
 If you need a better way to process Unicode characters, you can use [punycode](https://github.com/bestiejs/punycode.js/) library or [generate](https://github.com/mathiasbynens/regenerate) specialized regular expressions.  
 
-I hope the article helped you master the Unicode!
+I hope the article has helped you master the Unicode!
 
 *Do you know other interesting Unicode nuances in JavaScript? Feel free to write a comment below!*
