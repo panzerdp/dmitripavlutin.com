@@ -36,6 +36,9 @@ However, your component might need diverse dependency implementations for variou
 
 Designing correctly the dependencies is an important skill to architect Front-end applications. The first step to create a good design is to identify the *stable* and *volatile* dependencies, and treat them accordingly.  
 
+```toc
+```
+
 ## 1. Stable dependencies
 
 Let's recall the example component `CountWords` from the introduction:  
@@ -88,7 +91,7 @@ To determine whether `loggedIn` cookie is set-up, you have to consider the envir
 
 The cookie management is a *volatile dependency*, because the component choose the concrete dependency implementation by environment: client-side or server-side.  
 
-### 2.1 Bad design of volatile dependency
+### 2.1 A bad design example
 
 The important thing about volatile dependencies is that your component should not directly depend upon them. Let's deliberately make this mistake:  
 
@@ -121,27 +124,77 @@ Let's distinguish why implementing the cookie management volatile dependency suc
 
 Making a better design to handle volatile dependencies requires a bit more work, but the outcome and improved design worth it.  
 
-### 2.2 Better design of volatile dependency
+### 2.2 A better design example
 
-First, let's define an interface `CookieManagement` that describes what methods a cookie library should implement:
+First, let's define an interface `Cookie` that describes what methods a cookie library should implement:
 
 ```tsx
-// CookieManagement.tsx
+// Cookie.tsx
 
-export interface CookieManagement {
+export interface Cookie {
   get(name: string): string | null;
-  set(name: string, value: string);
+  set(name: string, value: string): void;
 }
 ```
 
-Then, in order to supply the library into the `Page` component, let's create a Context:
+Now let's define the React context that's going to hold a specific implementation of the cookie management library:
 
 ```tsx
-// cookieManagementContext.tsx
+// cookieContext.tsx
 
-import { CookieManagement } from './CookieManagement';
+import { createContext } from 'react';
+import { Cookie } from './Cookie';
 
-
+export const cookieContext = createContext<Cookie>(null as Cookie);
 ```
 
+`cookieContext` now injects the dependency into the `Page` component:
+
+```tsx{3,8}
+import { useContext } from 'react';
+
+import { Cookie } from './Cookie';
+import { cookieContext } from './cookieContext';
+import { LoginForm } from 'Components/LoginForm';
+
+export function Page(): JSX.Element {
+  const cookie: Cookie = useContext(cookieContext);
+
+  if (cookie.get('loggedIn') === '1') {
+    return <div>You are logged in</div>;
+  } else {
+    return <LoginForm />
+  }
+}
+```
+
+The `Page` component now doesn't depend directly on neither `cookieClient`, nor `cookieServer` libraries. The only thing that `Page` component knows is about the `Cookie` interface, and nothing more.  
+
+`Page` component doesn't care about what concrete implementation it gets: it's important the implementation to conform to `Cookie` interface.  
+
+The concrete implementation of cookie management library is injected in the bootstrap scripts on both client and server sides.  
+
+```tsx
+// index.client.tsx
+```
+
+```tsx
+// index.server.tsx
+```
+
+The benefits of correctly designing the injection of volatile dependencies gives:
+
+* The component doesn't depend on the many possible implementations or changes of dependencies
+* The component depends only upon on abstract interface that describes the dependency
+* Because the component knows only about the interface, you can easily test such a component.  
+
 ## 3. Summary
+
+The components of your Front-end application can use a multitude of 3-rd party libraries.  
+
+Some of these libraries, like `lodash` or event the built-in JavaScript's utilities are *stable* dependencies, and your components
+are free to depend directly on them.  
+
+However, sometimes the component requires dependencies that may change either during runtime, either depenending on the environment, either other reason to change. These dependencies fall in the category of *volatile*.  
+
+A good design makes the components not depend directly upon volatile dependency, but rather depend on a stable interface (by using the Dependency Inversion Principle) that describes the dependency, and then allows a dependency injection mechanism (like React context) to supply the concrete dependency implementation.  
