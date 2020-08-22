@@ -3,7 +3,7 @@ title: "Front-end Architecture: Stable and Volatile Dependencies"
 description: "Designing correctly the dependencies is important for creating flexible Front-end applications. The first step is to identify and separate the stable and volatile dependencies."
 published: "2020-08-25T12:00Z"
 modified: "2020-08-25T12:00Z"
-thumbnail: "./images/cover-6.png"
+thumbnail: "./images/cover-7.png"
 slug: frontend-architecture-stable-and-volatile-dependencies
 tags: ['architecture', 'clean code', 'dependency']
 recommended: ['7-architectural-attributes-of-a-reliable-react-component', 'the-art-of-writing-small-and-plain-functions']
@@ -70,14 +70,10 @@ Moreover, the JavaScript language itself provides:
 
 All the built-in functions that the language provides are also considered stable dependencies. You can use them safely and depend directly upon them.  
 
+However, aside from stable dependencies, there are dependencies that may change under certain circumstances. In such case, such *volatile* dependencies have to be distinguished from stable ones, and designed in a different manner to *avoid your components depend directly upon them*.  
+
 ## 2. Volatile dependencies
 
-## 3. Incorrect depenendencies design
 
-### 3.1 Difficult to test
 
-## 4. Good dependencies design
-
-### 4.1 Easy to test
-
-## 5. Summary
+## 3. Summary
