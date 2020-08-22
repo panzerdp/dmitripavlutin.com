@@ -3,7 +3,7 @@ title: "Front-end Architecture: Stable and Volatile Dependencies"
 description: "Designing correctly the dependencies is important for creating flexible Front-end applications. The first step is to identify and separate the stable and volatile dependencies."
 published: "2020-08-25T12:00Z"
 modified: "2020-08-25T12:00Z"
-thumbnail: "./images/cover-5.png"
+thumbnail: "./images/cover-6.png"
 slug: frontend-architecture-stable-and-volatile-dependencies
 tags: ['architecture', 'clean code', 'dependency']
 recommended: ['7-architectural-attributes-of-a-reliable-react-component', 'the-art-of-writing-small-and-plain-functions']
@@ -58,6 +58,8 @@ The component `CountWords` is going to use the same library `lodash.words` no ma
 At the same time, `lodash.words` is a simple utility function: `const arrayOfWords = words(string)`. The signature of the function won't change much in the future.  
 
 Because the dependent component uses a single dependency implementation, and the dependency won't change in the future &mdash; such dependency is considered *stable*.  
+
+![Stable dependency](./images/diagram-stable-dependency-2.svg)
 
 Examples of stable dependencies are the utility libraries like `lodash`, `ramda`.  
 

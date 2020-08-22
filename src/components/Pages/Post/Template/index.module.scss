@@ -46,7 +46,7 @@
     background: left center / 22px no-repeat url('/icons/codesandbox.svg');
   }
 
-  img[src$='.gif'] {
+  img[src$='.gif'], img[src$='.svg'] {
     margin: 0 auto;
     display: block;
     max-width: 100%;
