@@ -57,7 +57,7 @@ The component `CountWords` is going to use the same library `lodash.words` no ma
 
 At the same time, `lodash.words` is a simple utility function: `const arrayOfWords = words(string)`. The signature of the function won't change much in the future.  
 
-Because the dependent component uses a single dependency implementation, and the dependency won't change in the future &mdash; such dependency is considered *stable*.  
+Because the dependent component always uses one dependency implementation, and the dependency won't change in the future &mdash; such dependency is considered *stable*.  
 
 ![Stable dependency](./images/diagram-stable-dependency-2.svg)
 
@@ -70,10 +70,78 @@ Moreover, the JavaScript language itself provides:
 
 All the built-in functions that the language provides are also considered stable dependencies. You can use them safely and depend directly upon them.  
 
-However, aside from stable dependencies, there are dependencies that may change under certain circumstances. In such case, such *volatile* dependencies have to be distinguished from stable ones, and designed in a different manner to *avoid your components depend directly upon them*.  
+However, aside from stable dependencies, there are dependencies that may change under certain circumstances. Such *volatile* dependencies have to be separated from stable ones, and designed in a different manner to *avoid your components depend on volatile dependencies directly*.  
+
+Let's see what volatile dependencies are in the next section.  
 
 ## 2. Volatile dependencies
 
+Consider a Front-end application that supports also Server-Side Rendering. Your task is to implement user login functionality. 
 
+When the user first loads the app a login form is displayed. If the user introduces the correct username and password (`"user"` and `"12345"`) in the login form and hits submit, then you create a cookie `loggedIn` with value `1`.  
+
+As long as the user is logged in (the cookie `loggedIn` is set and has value `1`) display a message `'You are logged in'`. Otherwise, just display the login form.  
+
+Having the app requirements setup, let's discuss potential ways of implementation.  
+
+To determine whether `loggedIn` cookie is set-up, you have to consider the environment where the application runs. On client side you can the access the cookie from `document.cookie` property, while on server side you'd need to read the HTTP request header `cookie`.  
+
+The cookie management is a *volatile dependency*, because the component choose the concrete dependency implementation by environment: client-side or server-side.  
+
+### 2.1 Bad design of volatile dependency
+
+The important thing about volatile dependencies is that your component should not directly depend upon them. Let's deliberately make this mistake:  
+
+```tsx{1-2}
+import cookieClient from 'libs/cookie-client';
+import cookieServer from 'libs/cookie-server';
+
+import LoginForm from 'Components/LoginForm';
+
+export function Page(): JSX.Element {
+  const cookieManagement = typeof window === 'undefined' 
+    ? cookieServer : cookieClient;
+
+  if (cookieManagement.get('loggedIn') === '1') {
+    return <div>You are logged in</div>;
+  } else {
+    return <LoginForm />
+  }
+}
+```
+
+`Page` components depends directly on both `cookieClient` and `cookieServer` libraries. Then it selects the necessary implementation by checking whether the `window` global variable is setup to determine the client or server side.   
+
+Let's distinguish why implementing the cookie management volatile dependency such way is a problem:
+
+* *Too much dependencies.* The component `Page` depends directly on 2 libraries: `cookieClient` and `cookieServer`
+* *Boilerplate code.* Every time you need the cookie management library, you have invoke the expression `typeof window === 'undefined'` to determine whether the app runs on client or server side, and choose the according cookie management implementation
+* *Unnecessary code.* The client-side bundle is going to include the `cookieServer` library which isn't used on client side
+* *Difficult testing.* The unit tests of `Page` component would require lots of mockups like setting `window` variable and mockup `document.cookie`
+
+Making a better design to handle volatile dependencies requires a bit more work, but the outcome and improved design worth it.  
+
+### 2.2 Better design of volatile dependency
+
+First, let's define an interface `CookieManagement` that describes what methods a cookie library should implement:
+
+```tsx
+// CookieManagement.tsx
+
+export interface CookieManagement {
+  get(name: string): string | null;
+  set(name: string, value: string);
+}
+```
+
+Then, in order to supply the library into the `Page` component, let's create a Context:
+
+```tsx
+// cookieManagementContext.tsx
+
+import { CookieManagement } from './CookieManagement';
+
+
+```
 
 ## 3. Summary
