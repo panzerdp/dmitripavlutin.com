@@ -30,11 +30,11 @@ The component `CountWords` uses the library `lodash.words` to count the number o
 
 `CountWords` component has a dependency on `lodash.words` library.  
 
-The good part about components using dependencies is the code reuse: you simply import the necessary library and use it.  
+The components using dependencies benefit from the code reuse: you simply import the necessary library and use it.  
 
-However, your component might need diverse dependency implementations for various environments (client-side, server-side, testing environment). In such a case importing directly a concrete dependency is a bad practice.  
+However, your component might need diverse dependency implementations for various environments (client-side, server-side, testing environment). In such a case importing directly a  dependency is a risk.  
 
-Designing correctly the dependencies is an important skill to architect Front-end applications. The first step to creating a good design is to identify the *stable* and *volatile* dependencies and treat them accordingly.  
+Designing correctly the dependencies is an important skill to architect Front-end applications. The first step to creating a good design is to identify the *stable* and *volatile* dependencies and treat them accordingly. In this post, you're going to find out how.  
 
 ```toc
 ```
@@ -54,11 +54,15 @@ function CountWords({ text }: { text: string }): JSX.Element {
 }
 ```
 
-Clearly `lodash.words` is a dependency of `CountWords` component.  
+The component `CountWords` is going to use the same library `lodash.words` no matter the environment: be it on client-side, be it running on the server-side (if you implement Server-Side Rendering), or even when running unit tests.  
 
-The component `CountWords` is going to use the same library `lodash.words` no matter the environment: be it on client-side, be it running on the server-side (if you implement Server-Side Rendering), or even when running unit tests of `Count words`.    
+At the same time, `lodash.words` is a simple utility function: 
 
-At the same time, `lodash.words` is a simple utility function: `const arrayOfWords = words(string)`. The signature of the function won't change much in the future.  
+```tsx
+const arrayOfWords = words(string);
+```
+
+The signature of `words` function won't change much in the future.  
 
 Because the dependent component always uses one dependency implementation, and the dependency won't change in the future &mdash; such dependency is considered *stable*.  
 
@@ -73,15 +77,15 @@ Moreover, the JavaScript language itself provides:
 
 All the built-in functions that the language provides are also considered stable dependencies. You can use them safely and depend directly upon them.  
 
-However, aside from stable dependencies, some dependencies may change under certain circumstances. Such *volatile* dependencies have to be segregated from stable ones and designed differently to *avoid your components depend on volatile dependencies directly*.  
+However, aside from stable ones, some dependencies may change under certain circumstances. Such *volatile* dependencies have to be segregated from stable ones and designed differently.  
 
 Let's see what volatile dependencies are in the next section.  
 
 ## 2. Volatile dependencies
 
-Consider a Front-end application that supports also Server-Side Rendering. Your task is to implement user login functionality. 
+Consider a Front-end application that supports also Server-Side Rendering. Your task is to implement a user login page. 
 
-A login form is displayed when the user first loads the app. If the user introduces the correct username and password (`"user"` and `"12345"`) in the login form and hits submit, then you create a cookie `loggedIn` with value `1`.  
+A login form is displayed when the user first loads the login page. If the user introduces the correct username and password in the login form and hits submit, then you create a cookie `loggedIn` with value `1`.  
 
 As long as the user is logged in (the cookie `loggedIn` is set and has value `1`) display a message `'You are logged in'`. Otherwise, just display the login form.  
 
@@ -128,7 +132,7 @@ export function Page(): JSX.Element {
 Let's distinguish why implementing the cookie management volatile dependency such way is a problem:
 
 * *Tight coupling to all dependency implementations.* The component `Page` depends directly on 2 implementations: `cookieClient` and `cookieServer`
-* *Boilerplate code.* Every time you need the cookie management library, you have to invoke the expression `typeof window === 'undefined'` to determine whether the app runs on the client or server-side, and choose according to cookie management implementation.
+* *Dependency on environment.* Every time you need the cookie management library, you have to invoke the expression `typeof window === 'undefined'` to determine whether the app runs on the client or server-side, and choose according to cookie management implementation.
 * *Unnecessary code.* The client-side bundle is going to include the `cookieServer` library which isn't used on the client-side. The same for server-side code.  
 * *Difficult testing.* The unit tests of `Page` component would require lots of mockups like setting `window` variable and mockup `document.cookie`
 
@@ -138,7 +142,7 @@ Is there a better design? Let's try it!
 
 Making a better design to handle volatile dependencies requires a bit more work, but the outcome worth it.  
 
-The idea consists in applying the [Dependency Inversion Principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) and decouple `Page` component from `cookieClient` and `cookieServer`. Instead, `Page` component is going to depend on an abstract interface `Cookie`.  
+The idea consists in applying the [Dependency Inversion Principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) and decouple `Page` component from `cookieClient` and `cookieServer`. Instead, let's make the `Page` component depend on an abstract interface `Cookie`.  
 
 First, let's define an interface `Cookie` that describes what methods a cookie library should implement:
 
@@ -185,7 +189,7 @@ Now `Page` component doesn't depend directly on either `cookieClient`, or `cooki
 
 The only thing that `Page` component knows about is the `Cookie` interface, and nothing more. The component is decoupled from the implementation details of how cookies are accessed.   
 
-`Page` component doesn't care about what concrete implementation it gets. The only requirement is that the implementation to conform to the `Cookie` interface.  
+`Page` component doesn't care about what concrete implementation it gets. The only requirement is that the injected dependency to conform to the `Cookie` interface.  
 
 ![Volatile Dependency Better Design](./images/volatile-dependency-better-design.svg)
 
@@ -247,9 +251,10 @@ app.listen(env.PORT ?? 3000, () => console.log('Started'));
 
 The benefits of correctly designing the injection of volatile dependencies:
 
-* *Loose coupling.* The component `Page` doesn't depend on all possible implementations or changes of dependencies
+* *Loose coupling.* The component `Page` doesn't depend on all possible implementations
+* *No implementation details*. The component doesn't care whether it runs on client or server-side
 * *Dependency upon stable abstraction.* The component depends only on an abstract interface `Cookie`
-* *Easy testing.* Because the component knows only about the interface, you can easily test such a component.  
+* *Easy testing.* Because the component knows only about the interface, you can easily test such a component
 
 ### 2.3 Be aware of added complexity
 
