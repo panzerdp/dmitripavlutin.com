@@ -81,7 +81,7 @@ Let's see what volatile dependencies are in the next section.
 
 Consider a Front-end application that supports also Server-Side Rendering. Your task is to implement user login functionality. 
 
-When the user first loads the app a login form is displayed. If the user introduces the correct username and password (`"user"` and `"12345"`) in the login form and hits submit, then you create a cookie `loggedIn` with value `1`.  
+A login form is displayed when the user first loads the app. If the user introduces the correct username and password (`"user"` and `"12345"`) in the login form and hits submit, then you create a cookie `loggedIn` with value `1`.  
 
 As long as the user is logged in (the cookie `loggedIn` is set and has value `1`) display a message `'You are logged in'`. Otherwise, just display the login form.  
 
@@ -89,15 +89,23 @@ Having the app requirements setup, let's discuss potential ways of implementatio
 
 To determine whether `loggedIn` cookie is set-up, you have to consider the environment where the application runs. On the client-side, you can access the cookie from `document.cookie` property, while on the server-side you'd need to read the HTTP request header `cookie`.  
 
-The cookie management is a *volatile dependency* because the component chooses the concrete dependency implementation by environment: client-side or server-side.  
+The cookie management is a *volatile dependency* because the component chooses the concrete implementation by environment: client-side or server-side.  
+
+Generally, the dependency is volatile is the following any of the criteria are met:
+
+* The dependency requires setup of the runtime environment for the application (network access, web services, file system)
+* The dependency doesn't yet exist or is in development
+* The dependency has non-deterministic behavior (random number generator, access of current date, etc).
 
 ### 2.1 A bad design
 
-The important thing about volatile dependencies is that your component should not directly depend upon them. Let's deliberately make this mistake:  
+The important thing about volatile dependencies is that your component should not directly depend upon them. 
+
+However, let's deliberately make this mistake:  
 
 ```tsx{1-2}
-import cookieClient from 'libs/cookie-client';
-import cookieServer from 'libs/cookie-server';
+import { cookieClient } from './libs/cookie-client';
+import { cookieServer } from './libs/cookie-server';
 
 import LoginForm from 'Components/LoginForm';
 
@@ -135,8 +143,7 @@ The idea consists in applying the [Dependency Inversion Principle](https://en.wi
 First, let's define an interface `Cookie` that describes what methods a cookie library should implement:
 
 ```tsx
-// Cookie.tsx
-
+// Cookie.ts
 export interface Cookie {
   get(name: string): string | null;
   set(name: string, value: string): void;
@@ -146,22 +153,22 @@ export interface Cookie {
 Now let's define the React context that's going to hold a specific implementation of the cookie management library:
 
 ```tsx
-// cookieContext.tsx
-
+// CookieContext.tsx
 import { createContext } from 'react';
 import { Cookie } from './Cookie';
 
 export const cookieContext = createContext<Cookie>(null as Cookie);
 ```
 
-`cookieContext` now injects the dependency into the `Page` component:
+`CookieContext` injects the dependency into the `Page` component:
 
-```tsx{3,8}
+```tsx{9}
+// Page.tsx
 import { useContext } from 'react';
 
-import { Cookie } from './Cookie';
-import { cookieContext } from './cookieContext';
-import { LoginForm } from 'Components/LoginForm';
+import { Cookie }        from './Cookie';
+import { CookieContext } from './CookieContext';
+import { LoginForm }     from './LoginForm';
 
 export function Page(): JSX.Element {
   const cookie: Cookie = useContext(cookieContext);
@@ -174,27 +181,81 @@ export function Page(): JSX.Element {
 }
 ```
 
-The `Page` component now doesn't depend directly on either `cookieClient`, or `cookieServer` libraries. The only thing that `Page` component knows is about the `Cookie` interface, and nothing more.  
+Now `Page` component doesn't depend directly on either `cookieClient`, or `cookieServer` libraries. 
 
-`Page` component doesn't care about what concrete implementation it gets: it's important the implementation to conform to the `Cookie` interface.  
+The only thing that `Page` component knows about is the `Cookie` interface, and nothing more. The component is decoupled from the implementation details of how cookies are accessed.   
 
-The right implementation of the cookie management library is injected in the bootstrap scripts on both client and server sides.  
-
-```tsx
-// index.client.tsx
-```
-
-```tsx
-// index.server.tsx
-```
+`Page` component doesn't care about what concrete implementation it gets. The only requirement is that the implementation to conform to the `Cookie` interface.  
 
 ![Volatile Dependency Better Design](./images/volatile-dependency-better-design.svg)
+
+The implementation of the cookie management library is injected by the bootstrap scripts on both client and server sides.  
+
+Here's how you would compose the cookie management dependency on client-side:
+
+```tsx{6,9}
+// index.client.tsx
+import ReactDOM from 'react-dom';
+
+import { Page }          from './Page';
+import { CookieContext } from './CookieContext';
+import { cookieClient }  from './libs/cookie-client';
+
+ReactDOM.hydrate(
+  <CookieContext.Provider value={cookieClient}>
+    <Page />
+  </CookieContext.Provider>,
+  document.getElementById('root')
+);
+```
+
+and on the server-side:
+
+```tsx{7,13}
+// index.server.tsx
+import express from 'express';
+import { renderToString } from 'react-dom/server';
+
+import { Page }          from './Page';
+import { CookieContext } from './CookieContext';
+import { cookieServer }  from './libs/cookie-server';
+
+const app = express();
+
+app.get('/', (req, res) => {
+  const content = renderToString(
+    <CookieContext.Provider value={cookieServer}>
+      <Page />
+    </CookieContext.Provider>
+  );
+  res.send(`
+    <html>
+      <head><script src="./bundle.js"></script></head>
+      <body>
+        <div id="root">
+          ${content}
+        </div>
+      </body>
+    </html>
+  `);
+})
+
+app.listen(env.PORT ?? 3000, () => console.log('Started'));
+
+
+```
 
 The benefits of correctly designing the injection of volatile dependencies:
 
 * *Loose coupling.* The component `Page` doesn't depend on all possible implementations or changes of dependencies
-* *Dependency upon stable abstraction.* The component depends only upon an abstract interface `Cookie` that describes the dependency.
+* *Dependency upon stable abstraction.* The component depends only on an abstract interface `Cookie`
 * *Easy testing.* Because the component knows only about the interface, you can easily test such a component.  
+
+### 2.3 Be aware of added complexity
+
+The improved design requires more moving parts: a new interface that describes the dependency and a way to inject the dependency. 
+
+All these moving parts add in complexity. So you should carefuly consider whether the benefits of this design outweights the added complexity.  
 
 ## 3. Summary
 
