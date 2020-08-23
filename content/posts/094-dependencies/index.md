@@ -119,14 +119,18 @@ export function Page(): JSX.Element {
 
 Let's distinguish why implementing the cookie management volatile dependency such way is a problem:
 
-* *Multiple dependencies.* The component `Page` depends directly on 2 implementations: `cookieClient` and `cookieServer`
-* *Boilerplate code.* Every time you need the cookie management library, you have invoke the expression `typeof window === 'undefined'` to determine whether the app runs on client or server side, and choose the according cookie management implementation
-* *Unnecessary code.* The client-side bundle is going to include the `cookieServer` library which isn't used on client side
+* *Many dependencies.* The component `Page` depends directly on 2 implementations: `cookieClient` and `cookieServer`
+* *Boilerplate code.* Every time you need the cookie management library, you have invoke the expression `typeof window === 'undefined'` to determine whether the app runs on client or server side, and choose the according cookie management implementation.
+* *Unnecessary code.* The client-side bundle is going to include the `cookieServer` library which isn't used on client side. The same for server side code.  
 * *Difficult testing.* The unit tests of `Page` component would require lots of mockups like setting `window` variable and mockup `document.cookie`
 
-Making a better design to handle volatile dependencies requires a bit more work, but the outcome and improved design worth it.  
+Is there a better design? Let's try!
 
 ### 2.2 A better design example
+
+Making a better design to handle volatile dependencies requires a bit more work, but the outcome worth it.  
+
+The idea consists in applying the [Dependency Inversion Principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) and decouple `Page` component from `cookieClient` and `cookieServer`. Instead, `Page` component is going to depend on an abstract interface `Cookie`.  
 
 First, let's define an interface `Cookie` that describes what methods a cookie library should implement:
 
@@ -174,7 +178,7 @@ The `Page` component now doesn't depend directly on neither `cookieClient`, nor 
 
 `Page` component doesn't care about what concrete implementation it gets: it's important the implementation to conform to `Cookie` interface.  
 
-The concrete implementation of cookie management library is injected in the bootstrap scripts on both client and server sides.  
+The right implementation of cookie management library is injected in the bootstrap scripts on both client and server sides.  
 
 ```tsx
 // index.client.tsx
@@ -186,11 +190,11 @@ The concrete implementation of cookie management library is injected in the boot
 
 ![Volatile Dependency Better Design](./images/volatile-dependency-better-design.svg)
 
-The benefits of correctly designing the injection of volatile dependencies gives:
+The benefits of correctly designing the injection of volatile dependencies:
 
-* The component doesn't depend on the many possible implementations or changes of dependencies
-* The component depends only upon on abstract interface that describes the dependency
-* Because the component knows only about the interface, you can easily test such a component.  
+* *Loose coupling.* The component `Page` doesn't depend on all possible implementations or changes of dependencies
+* *Dependency upon stable abstraction.* The component depends only upon on abstract interface `Cookie` that describes the dependency.
+* *Easy testing.* Because the component knows only about the interface, you can easily test such a component.  
 
 ## 3. Summary
 
