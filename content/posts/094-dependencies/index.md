@@ -62,7 +62,7 @@ At the same time, `lodash.words` is a simple utility function: `const arrayOfWor
 
 Because the dependent component always uses one dependency implementation, and the dependency won't change in the future &mdash; such dependency is considered *stable*.  
 
-![Stable dependency](./images/diagram-stable-dependency-2.svg)
+![Stable dependency](./images/stable-dependency-5.svg)
 
 Examples of stable dependencies are the utility libraries like `lodash`, `ramda`.  
 
@@ -115,9 +115,11 @@ export function Page(): JSX.Element {
 
 `Page` components depends directly on both `cookieClient` and `cookieServer` libraries. Then it selects the necessary implementation by checking whether the `window` global variable is setup to determine the client or server side.   
 
+![Volatile Dependency Bad Design](./images/volatile-dependency-bad-design.svg)
+
 Let's distinguish why implementing the cookie management volatile dependency such way is a problem:
 
-* *Too much dependencies.* The component `Page` depends directly on 2 libraries: `cookieClient` and `cookieServer`
+* *Multiple dependencies.* The component `Page` depends directly on 2 implementations: `cookieClient` and `cookieServer`
 * *Boilerplate code.* Every time you need the cookie management library, you have invoke the expression `typeof window === 'undefined'` to determine whether the app runs on client or server side, and choose the according cookie management implementation
 * *Unnecessary code.* The client-side bundle is going to include the `cookieServer` library which isn't used on client side
 * *Difficult testing.* The unit tests of `Page` component would require lots of mockups like setting `window` variable and mockup `document.cookie`
@@ -182,6 +184,8 @@ The concrete implementation of cookie management library is injected in the boot
 // index.server.tsx
 ```
 
+![Volatile Dependency Better Design](./images/volatile-dependency-better-design.svg)
+
 The benefits of correctly designing the injection of volatile dependencies gives:
 
 * The component doesn't depend on the many possible implementations or changes of dependencies
@@ -190,9 +194,9 @@ The benefits of correctly designing the injection of volatile dependencies gives
 
 ## 3. Summary
 
-The components of your Front-end application can use a multitude of 3-rd party libraries.  
+The components of your Front-end application can use a multitude libraries.  
 
-Some of these libraries, like `lodash` or event the built-in JavaScript's utilities are *stable* dependencies, and your components
+Some of these libraries, like `lodash` or even the built-in JavaScript's utilities are *stable* dependencies, and your components
 are free to depend directly on them.  
 
 However, sometimes the component requires dependencies that may change either during runtime, either depenending on the environment, either other reason to change. These dependencies fall in the category of *volatile*.  
