@@ -95,7 +95,7 @@ To determine whether `loggedIn` cookie is set-up, you have to consider the envir
 
 The cookie management is a *volatile dependency* because the component chooses the concrete implementation by environment: client-side or server-side.  
 
-Generally, the dependency is volatile is the following any of the criteria are met:
+Generally, the dependency is volatile if any of the following criterias are met:
 
 * The dependency requires runtime environment setup for the application (network access, web services, file system)
 * The dependency is in development
@@ -105,7 +105,7 @@ Generally, the dependency is volatile is the following any of the criteria are m
 
 Your component should not directly import volatile dependencies. 
 
-However, let's deliberately make this mistake:  
+But let's deliberately make this mistake:  
 
 ```tsx{1-2}
 import { cookieClient } from './libs/cookie-client';
@@ -125,7 +125,7 @@ export function Page(): JSX.Element {
 }
 ```
 
-`Page` components depends directly on both `cookieClient` and `cookieServer` libraries. The component selects the necessary implementation by checking whether the `window` global variable is setup to determine the client or server-side.   
+`Page` component depends directly on both `cookieClient` and `cookieServer` libraries. The component selects the necessary implementation by checking whether the `window` global variable is available (meaning the app runs in a browser) or not (meaning the app runs on server).  
 
 ![Volatile Dependency Bad Design](./images/volatile-dependency-bad-design.svg)
 
@@ -133,7 +133,7 @@ Why implementing the cookie management volatile dependency such way is a problem
 
 * *Tight coupling to all dependency implementations.* The component `Page` depends directly on `cookieClient` and `cookieServer` implementations
 * *Dependency on the environment.* Every time you need the cookie management library, you have to invoke the expression `typeof window === 'undefined'` to determine whether the app runs on the client or server-side, and choose according to cookie management implementation.
-* *Unnecessary code.* The client-side bundle is going to include the `cookieServer` library which isn't used on the client-side. And vice-versa for server-side code.  
+* *Unnecessary code.* The client-side bundle is going to include the `cookieServer` library which isn't used on the client-side. And vice-versa for server-side.  
 * *Difficult testing.* The unit tests of `Page` component would require lots of mockups like setting `window` variable and mockup `document.cookie`
 
 Is there a better design? Let's find out!
