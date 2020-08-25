@@ -1,8 +1,8 @@
 ---
 title: "Front-end Architecture: Stable and Volatile Dependencies"
 description: "Designing correctly the dependencies, both stable and volatile ones, is an important skill to architect Front-end applications."
-published: "2020-08-25T12:00Z"
-modified: "2020-08-25T12:00Z"
+published: "2020-08-25T07:50Z"
+modified: "2020-08-25T07:50Z"
 thumbnail: "./images/cover-7.png"
 slug: frontend-architecture-stable-and-volatile-dependencies
 tags: ['architecture', 'clean code', 'dependency']
@@ -97,13 +97,13 @@ The cookie management is a *volatile dependency* because the component chooses t
 
 Generally, the dependency is volatile is the following any of the criteria are met:
 
-* The dependency requires setup of the runtime environment for the application (network access, web services, file system)
-* The dependency doesn't yet exist or is in development
+* The dependency requires runtime environment setup for the application (network access, web services, file system)
+* The dependency is in development
 * The dependency has non-deterministic behavior (random number generator, access of current date, etc).
 
 ### 2.1 A bad design
 
-The important thing about volatile dependencies is that your component should not directly depend upon them. 
+Your component should not directly import volatile dependencies. 
 
 However, let's deliberately make this mistake:  
 
@@ -125,18 +125,18 @@ export function Page(): JSX.Element {
 }
 ```
 
-`Page` components depends directly on both `cookieClient` and `cookieServer` libraries. Then it selects the necessary implementation by checking whether the `window` global variable is setup to determine the client or server-side.   
+`Page` components depends directly on both `cookieClient` and `cookieServer` libraries. The component selects the necessary implementation by checking whether the `window` global variable is setup to determine the client or server-side.   
 
 ![Volatile Dependency Bad Design](./images/volatile-dependency-bad-design.svg)
 
-Let's distinguish why implementing the cookie management volatile dependency such way is a problem:
+Why implementing the cookie management volatile dependency such way is a problem? Let's see:
 
-* *Tight coupling to all dependency implementations.* The component `Page` depends directly on 2 implementations: `cookieClient` and `cookieServer`
-* *Dependency on environment.* Every time you need the cookie management library, you have to invoke the expression `typeof window === 'undefined'` to determine whether the app runs on the client or server-side, and choose according to cookie management implementation.
-* *Unnecessary code.* The client-side bundle is going to include the `cookieServer` library which isn't used on the client-side. The same for server-side code.  
+* *Tight coupling to all dependency implementations.* The component `Page` depends directly on `cookieClient` and `cookieServer` implementations
+* *Dependency on the environment.* Every time you need the cookie management library, you have to invoke the expression `typeof window === 'undefined'` to determine whether the app runs on the client or server-side, and choose according to cookie management implementation.
+* *Unnecessary code.* The client-side bundle is going to include the `cookieServer` library which isn't used on the client-side. And vice-versa for server-side code.  
 * *Difficult testing.* The unit tests of `Page` component would require lots of mockups like setting `window` variable and mockup `document.cookie`
 
-Is there a better design? Let's try it!
+Is there a better design? Let's find out!
 
 ### 2.2 A better design
 
@@ -161,7 +161,7 @@ Now let's define the React context that's going to hold a specific implementatio
 import { createContext } from 'react';
 import { Cookie } from './Cookie';
 
-export const cookieContext = createContext<Cookie>(null as Cookie);
+export const CookieContext = createContext<Cookie>(null);
 ```
 
 `CookieContext` injects the dependency into the `Page` component:
@@ -185,15 +185,13 @@ export function Page(): JSX.Element {
 }
 ```
 
-Now `Page` component doesn't depend directly on either `cookieClient`, or `cookieServer` libraries. 
-
 The only thing that `Page` component knows about is the `Cookie` interface, and nothing more. The component is decoupled from the implementation details of how cookies are accessed.   
 
 `Page` component doesn't care about what concrete implementation it gets. The only requirement is that the injected dependency to conform to the `Cookie` interface.  
 
 ![Volatile Dependency Better Design](./images/volatile-dependency-better-design.svg)
 
-The implementation of the cookie management library is injected by the bootstrap scripts on both client and server sides.  
+The necessary implementation of the cookie management library is setup by the bootstrap scripts on both client and server sides.  
 
 Here's how you would compose the cookie management dependency on client-side:
 
@@ -244,23 +242,23 @@ app.get('/', (req, res) => {
   `);
 })
 
-app.listen(env.PORT ?? 3000, () => console.log('Started'));
-
-
+app.listen(env.PORT ?? 3000);
 ```
 
-The benefits of correctly designing the injection of volatile dependencies:
+The concrete implementation of a volatile dependency is composed close to the bootstrap (or main) scripts of the application. This place is named [Composition Root](https://stackoverflow.com/a/6277806).  
 
-* *Loose coupling.* The component `Page` doesn't depend on all possible implementations
-* *No implementation details*. The component doesn't care whether it runs on client or server-side
+The benefits of good design of volatile dependencies:
+
+* *Loose coupling.* The component `Page` doesn't depend on all possible implementations of the dependency
+* *Free of implementation details and environment*. The component doesn't care whether it runs on the client or server-side
 * *Dependency upon stable abstraction.* The component depends only on an abstract interface `Cookie`
-* *Easy testing.* Because the component knows only about the interface, you can easily test such a component
+* *Easy testing.* The component knows only about the interface, you can easily test such a component by injecting dummy implementations using context.
 
 ### 2.3 Be aware of added complexity
 
 The improved design requires more moving parts: a new interface that describes the dependency and a way to inject the dependency. 
 
-All these moving parts add in complexity. So you should carefuly consider whether the benefits of this design outweights the added complexity.  
+All these moving parts add complexity. So you should carefully consider whether the benefits of this design outweigh the added complexity.  
 
 ## 3. Summary
 
@@ -272,3 +270,5 @@ are free to depend directly on them.
 However, sometimes the component requires dependencies that may change either during runtime, either depending on the environment, either other reason to change. These dependencies fall in the category of *volatile*.  
 
 Good design makes the components not depend directly upon volatile dependency, but rather depend on a stable interface (by using the Dependency Inversion Principle) that describes the dependency, and then allows a dependency injection mechanism (like React context) to supply the concrete dependency implementation.  
+
+*Does the volatile dependencies good design worths the added complexity?*
