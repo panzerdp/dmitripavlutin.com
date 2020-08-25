@@ -271,4 +271,4 @@ However, sometimes the component requires dependencies that may change either du
 
 Good design makes the components not depend directly upon volatile dependency, but rather depend on a stable interface (by using the Dependency Inversion Principle) that describes the dependency, and then allows a dependency injection mechanism (like React context) to supply the concrete dependency implementation.  
 
-*Does the volatile dependencies good design worths the added complexity?*
+*What's your opinion: does good design of volatile dependencies worth added complexity?*
