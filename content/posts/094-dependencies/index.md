@@ -95,11 +95,17 @@ To determine whether `loggedIn` cookie is set-up, you have to consider the envir
 
 The cookie management is a *volatile dependency* because the component chooses the concrete implementation by environment: client-side or server-side.  
 
-Generally, the dependency is volatile if any of the following criterias are met:
+Generally, the dependency is volatile if any of the following criteria are met:
 
 * The dependency requires runtime environment setup for the application (network access, web services, file system)
 * The dependency is in development
 * The dependency has non-deterministic behavior (random number generator, access of current date, etc).
+
+An example of volatile dependency is, as mentioned, the cookie management library which has different implementations on client and server-side. Another example of volatile dependency is the library to access a database or a fetching library that accesses the network.  
+
+Even a dependency that is still in development or one you can probably change for an alternative solution in the future can also be volatile.  
+
+A good rule of thumb to distinguish a volatile dependency is to analyze how easy you can unit test the component that depends on it. If the dependency requires a lot of setup ceremony and mocks to be tested (e.g. a fetching library requires mocking network requests), then most likely you're dealing with something volatile.  
 
 ### 2.1 A bad design
 
