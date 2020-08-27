@@ -1,5 +1,5 @@
 ---
-title: 'JavaScript Scope Explained in Simple Words'
+title: 'A Simple Explanation of Scope in JavaScript'
 description: 'The scope is an important concent that manages variables accessibility. I will explain step by step, in-depth, what the scope is in JavaScript.'
 published: '2020-04-20T12:30Z'
 modified: '2020-04-24T16:00Z'
@@ -20,7 +20,7 @@ In this post, I will explain step by step, in-depth, how the scope works in Java
 ```toc
 ```
 
-## 1. What's scope
+## 1. The scope
 
 Before diving into what the scope is, let's try an experiment that demonstrates how the scope manifests itself.  
 
