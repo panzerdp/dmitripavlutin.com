@@ -2,7 +2,7 @@
 title: "Front-end Architecture: Stable and Volatile Dependencies"
 description: "Designing correctly the dependencies, both stable and volatile ones, is an important skill to architect Front-end applications."
 published: "2020-08-25T07:50Z"
-modified: "2020-08-25T07:50Z"
+modified: "2020-08-27T06:15Z"
 thumbnail: "./images/cover-7.png"
 slug: frontend-architecture-stable-and-volatile-dependencies
 tags: ['architecture', 'clean code', 'dependency']
@@ -105,7 +105,7 @@ An example of volatile dependency is, as mentioned, the cookie management librar
 
 Even a dependency that is still in development or one you can probably change for an alternative solution in the future can also be volatile.  
 
-A good rule of thumb to distinguish a volatile dependency is to analyze how easy you can unit test the component that depends on it. If the dependency requires a lot of setup ceremony and mocks to be tested (e.g. a fetching library requires mocking network requests), then most likely you're dealing with something volatile.  
+A good rule of thumb to distinguish a volatile dependency is to analyze how easy you can unit test the component that depends on it. If the dependency requires a lot of setup ceremony and mocks to be tested (e.g. a fetching library requires [mocking](https://jestjs.io/docs/en/mock-functions#mocking-modules) network requests), then most likely it's a volatile.  
 
 ### 2.1 A bad design
 
