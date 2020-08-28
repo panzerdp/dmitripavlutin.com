@@ -58,7 +58,7 @@ Let's see in more detail what strings are in JavaScript.
 
 ## 2. Modeling by code units
 
-The specification [says](https://tc39.es/ecma262/#sec-ecmascript-language-types-string-type) exactly strings are in JavaScript:
+The specification [says](https://tc39.es/ecma262/#sec-ecmascript-language-types-string-type) what strings are in JavaScript:
 
 > *The String type* is the set of all ordered sequences of zero or more 16-bit unsigned integer values (“elements”). The String type is generally used to represent textual data in a running ECMAScript program, in which case each element in the String is treated as a **UTF-16 code unit value**.  
 
