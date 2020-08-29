@@ -129,7 +129,7 @@ JavaScript does the following when reaches the expression `const newSalary = awa
 
 Despite the fact that `return newSalary` returns the number `1100`, if you look at the actual value returned by the function `increaseSalary(1000, 100)` &mdash; it is still a promise!  
 
-The function returned by an `async` function is always a promise, which resolves to the value returned by the function:
+An `async` function always returns a promise, which resolves to the value of `return value` inside the function body:
 
 ```javascript
 increaseSalary(1000, 100).then(salary => {
