@@ -101,7 +101,7 @@ increaseSalary(1000, 100); // => [object Promise]
 // Logs "New salary [object Promise]"
 ```
 
-Unfortunately, the function `increaseSalary()` doesn't know how to handle the promise.  
+Unfortunately, the function `increaseSalary()` doesn't know how to handle promises.  
 
 Now it's the right time to make the `increaseSalary()` aware about the async function `slowAddition()` using the `async/await` syntax.  
 
@@ -120,12 +120,15 @@ increaseSalary(1000, 100); // => [object Promise]
 // After 2 seconds logs "New salary 1100"
 ```
 
-JavaScript does the following when reaches the expression `const newSalary = await slowAddition(base, increase)`:
+JavaScript evaluates `const newSalary = await slowAddition(base, increase)` the following way:
 
-1. Pauses `increaseSalary()` function execution (in a non-blocking manner) 
-2. *Waits* 2 seconds until the promise returned by `slowAddition(base, increase)` is resolved
-3. `newSalary` variable is assigned with the resolve value `1100` (`1000+100`)
-4. Then `slowAddition()` function execution continues as usual, in a sync manner.  
+1. `await slowAddition(base, increase)` pauses the `increaseSalary()` function execution
+* After 2 seconds, the promise returned by `slowAddition(base, increase)` is resolved
+* `increaseSalary()` function execution resumes
+* `newSalary` is assigned with the promise's resolved value `1100` (`1000+100`)  
+* The function execution continues as usual, in a sync manner.  
+
+In simple words, when JavaScript encounters `await promise` in an `async` function, it pauses the function execution until the promise is resolved. The promise's resolved value becomes the result of `await promise` evaluation.  
 
 Despite the fact that `return newSalary` returns the number `1100`, if you look at the actual value returned by the function `increaseSalary(1000, 100)` &mdash; it is still a promise!  
 
@@ -137,7 +140,7 @@ increaseSalary(1000, 100).then(salary => {
 });
 ```
 
-`async` functions returning promises is a good thing because you can [nest](#4-nesting-asynchornous-functions) `async` function, and handle async tasks in a sync way.
+`async` functions returning promises is a good thing because you can [nest](#4-nesting-asynchornous-functions) `async` functions.  
 
 ## 3. The broken asynchronous addition
 
