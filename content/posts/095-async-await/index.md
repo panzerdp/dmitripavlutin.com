@@ -3,7 +3,7 @@ title: "An Interesting Explanation of async/await in JavaScript"
 description: "async/await syntax in JavaScript let's you write async code in a sync way."
 published: "2020-09-01"
 modified: "2020-09-01"
-thumbnail: "./images/cover-7.png"
+thumbnail: "./images/cover.png"
 slug: javascript-async-await
 tags: ['javacript', 'async await']
 recommended: ['7-architectural-attributes-of-a-reliable-react-component', 'the-art-of-writing-small-and-plain-functions']
