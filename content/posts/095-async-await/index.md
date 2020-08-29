@@ -1,6 +1,6 @@
 ---
 title: "An Interesting Explanation of async/await in JavaScript"
-description: "async/await syntax in JavaScript let's you write async code in a sync way."
+description: "async/await syntax in JavaScript is a syntactic sugar around promises."
 published: "2020-09-01"
 modified: "2020-09-01"
 thumbnail: "./images/cover-2.png"
@@ -116,8 +116,8 @@ async function increaseSalary(base, increase) {
   return newSalary;
 }
 
-increaseSalary(1000, 100); // => [object Promise]
-// After 2 seconds logs "New salary 1100"
+increaseSalary(1000, 200); // => [object Promise]
+// After 2 seconds logs "New salary 1200"
 ```
 
 JavaScript evaluates `const newSalary = await slowAddition(base, increase)` the following way:
@@ -125,12 +125,12 @@ JavaScript evaluates `const newSalary = await slowAddition(base, increase)` the 
 1. `await slowAddition(base, increase)` pauses the `increaseSalary()` function execution
 * After 2 seconds, the promise returned by `slowAddition(base, increase)` is resolved
 * `increaseSalary()` function execution resumes
-* `newSalary` is assigned with the promise's resolved value `1100` (`1000+100`)  
+* `newSalary` is assigned with the promise's resolved value `1200` (`1000+200`)  
 * The function execution continues as usual, in a sync manner.  
 
 In simple words, when JavaScript encounters `await promise` in an `async` function, it pauses the function execution until the promise is resolved. The promise's resolved value becomes the result of `await promise` evaluation.  
 
-Despite the fact that `return newSalary` returns the number `1100`, if you look at the actual value returned by the function `increaseSalary(1000, 100)` &mdash; it is still a promise!  
+Despite the fact that `return newSalary` returns the number `1200`, if you look at the actual value returned by the function `increaseSalary(1000, 200)` &mdash; it is still a promise!  
 
 An `async` function always returns a promise, which resolves to the value of `return value` inside the function body:
 
@@ -144,7 +144,41 @@ increaseSalary(1000, 100).then(salary => {
 
 ## 3. The broken asynchronous addition
 
+It's unfair that the boss has put a requirement to increase slowly the salary. So, to fight the boss, you've decided to sabotage the `slowAddition()` function.  
+
+Now, the slow addition function is going to reject the numbers addition:
+
+```javascript
+function slowAdditionBroken(n1, n2) {
+  return new Promise((resolve) => {
+    setTimeout(() => reject(new Error('Unable to sum numbers'), 3000);
+  });
+}
+
+slowAdditionBroken(1, 5).catch(e => console.log(e.message));
+// After 3 seconds logs "Unable to sum numbers"
+```
+
+Knowing that `slowAdditionBroken()` is unable to sum number and the promise is rejected, how would you handle such cases insisde the `calculateSalary()` async function?  
+
+All you need to do is wrap the `await` operator in an `try/catch` clause:
+
+```javascript
+async function increaseSalary(base, increase) {
+  let newSalary;
+  try {
+    newSalary = await slowAdditionBroken(base, increase);
+  } catch (e) {
+    console.log('Error: ', e.message);
+    newSalary = base * 2;
+  }
+  console.log(`New salary: ${newSalary}`);
+  return newSalary;
+}
+
+increaseSalary(1000, 200)
+```
+
 ## 4. Nesting asynchornous functions
 
-## 4. *async/await* rules
-
+## 5. Parallel async
