@@ -120,7 +120,7 @@ increaseSalary(1000, 100); // => [object Promise]
 // After 2 seconds logs "New salary 1100"
 ```
 
-When JavaScript reaches the expression `const newSalary = await slowAddition(base, increase)` it does:
+JavaScript does the following when reaches the expression `const newSalary = await slowAddition(base, increase)`:
 
 1. Pauses `increaseSalary()` function execution (in a non-blocking manner) 
 2. *Waits* 2 seconds until the promise returned by `slowAddition(base, increase)` is resolved
@@ -137,7 +137,7 @@ increaseSalary(1000, 100).then(salary => {
 });
 ```
 
-`async` functions returning promises is a good thing because you can [nest](##4-nesting-asynchornous-functions) them, and handle async tasks in a sync way!
+`async` functions returning promises is a good thing because you can [nest](#4-nesting-asynchornous-functions) `async` function, and handle async tasks in a sync way.
 
 ## 3. The broken asynchronous addition
 
