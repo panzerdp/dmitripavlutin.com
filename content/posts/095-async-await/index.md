@@ -67,7 +67,7 @@ increaseSalary(1000, 100); // => 1100
 
 `increaseSalary()` is a function that sums 2 numbers. `n1 + n2` is a synchronous operation.   
 
-The boss doesn't want a quick increase in the employee's salary ☹. So you're not allowed to use the addition operator `+` in `increaseSalary()` function. 
+The boss doesn't want a quick increase of the employee's salary ☹. So you're not allowed to use the addition operator `+` in `increaseSalary()` function. 
 
 Instead, you have to use a slow function that requires 2 seconds to summarize numbers. Let's name the function `slowAddition()`:
 
