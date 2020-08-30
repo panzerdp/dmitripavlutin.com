@@ -146,12 +146,12 @@ increaseSalary(1000, 100).then(salary => {
 
 It's unfair that the boss has put a requirement to increase slowly the salary. So, to fight the boss, you've decided to sabotage the `slowAddition()` function.  
 
-Now, the slow addition function is going to reject the numbers addition:
+The slow addition function is going to reject the numbers addition:
 
 ```javascript
 function slowAdditionBroken(n1, n2) {
-  return new Promise((resolve) => {
-    setTimeout(() => reject(new Error('Unable to sum numbers'), 3000);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => reject(new Error('Unable to sum numbers')), 3000);
   });
 }
 
@@ -159,26 +159,34 @@ slowAdditionBroken(1, 5).catch(e => console.log(e.message));
 // After 3 seconds logs "Unable to sum numbers"
 ```
 
-Knowing that `slowAdditionBroken()` is unable to sum number and the promise is rejected, how would you handle such cases insisde the `calculateSalary()` async function?  
+Knowing that `slowAdditionBroken()` is unable to sum number and the promise is rejected, how to handle that insisde the `calculateSalary()` async function?  
 
 All you need to do is wrap the `await` operator in an `try/catch` clause:
 
 ```javascript
-async function increaseSalary(base, increase) {
+async function increaseSalaryBroken(base, increase) {
   let newSalary;
   try {
     newSalary = await slowAdditionBroken(base, increase);
   } catch (e) {
-    console.log('Error: ', e.message);
+    console.log(`Error: ${e.message}`);
     newSalary = base * 2;
   }
-  console.log(`New salary: ${newSalary}`);
   return newSalary;
 }
 
-increaseSalary(1000, 200)
+increaseSalaryBroken(1000, 200).then(newSalary => {
+  newSalary; // => 2000
+});
+// After 3 seconds logs "Error: Unable to sum numbers"
 ```
 
+JavaScript pauses the function execution at the expression `await slowAdditionBroken(base, increase)` and wait until the promise is resolved or rejected.  
+
+After 3 seconds, the promise is rejected with an error new `Error('Unable to sum numbers')`. Because of the promise rejection, the function execution jumps into the `catch (e){ }` clause where the base salary is multiplied by 2.  
+
 ## 4. Nesting asynchornous functions
+
+
 
 ## 5. Parallel async
