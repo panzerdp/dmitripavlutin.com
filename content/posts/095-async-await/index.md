@@ -13,7 +13,7 @@ commentsThreadId: javascript-async-await
 
 JavaScript has taken a long way to simplify the coding of async tasks.  
 
-The first approach are the callbacks. When an async operation had been completed,
+The first approach is callbacks. When an async operation had been completed,
 a special function named *callback* is called:
 
 ```javascript
@@ -22,9 +22,9 @@ asyncOperation(params, function callback(result) {
 });
 ```
 
-But as soon as you handle multiple async operations, the callback functions nest into each other ending in a callback hell. That's the main problem of callbacks.  
+But as soon as you handle multiple async operations, the callback functions nest into each other ending in callback hell. That's the main problem with callbacks.  
 
-A promise is placeholder object for results of an async task. With the use of promises you can handle the async operations easier.
+A promise is a placeholder object for the results of an async task. With the use of promises, you can handle the async operations easier.
 
 ```javascript
 const promise = asyncOperation(params);
@@ -36,7 +36,7 @@ promise.then(function resolved(result) {
 
 Have you seen the  `.then().then()...then()` chains of promises 🚂🚃🚃🚃🚃?  An issue of promises is their verbosity.  
 
-Finally, the third attempt is the `async/await` syntax (starting ES2017). It let's you write async code in a concise and sync manner, solving the verbosity of promises:    
+Finally, the third attempt is the `async/await` syntax (starting ES2017). It lets you write async code in a concise and sync manner, solving the verbosity of promises:    
 
 ```javascript
 (async function() {
@@ -47,7 +47,7 @@ Finally, the third attempt is the `async/await` syntax (starting ES2017). It let
 
 In this post I'm going to explain, step by step, how to use `async/await` in JavaScript.  
 
-**Note**: *`async/await` is a syntactic sugar on top of promises*. I recommend getting familiar with [promises](https://www.freecodecamp.org/news/javascript-promises-explained/) before continuing.  
+**Note**: *`async/await` is syntactic sugar on top of promises*. I recommend getting familiar with [promises](https://www.freecodecamp.org/news/javascript-promises-explained/) before continuing.  
 
 ## 1. The synchronous addition
 
@@ -67,7 +67,7 @@ increaseSalary(1000, 100); // => 1100
 
 `increaseSalary()` is a function that sums 2 numbers. `n1 + n2` is a synchronous operation.   
 
-The boss doesn't want a quick increase of employee's salary ☹. So you're not allowed to use the addition operator `+` in `increaseSalary()` function. 
+The boss doesn't want a quick increase in the employee's salary ☹. So you're not allowed to use the addition operator `+` in `increaseSalary()` function. 
 
 Instead, you have to use a slow function that requires 2 seconds to summarize numbers. Let's name the function `slowAddition()`:
 
@@ -130,7 +130,7 @@ JavaScript evaluates `const newSalary = await slowAddition(base, increase)` the 
 
 In simple words, when JavaScript encounters `await promise` in an `async` function, it pauses the function execution until the promise is resolved. The promise's resolved value becomes the result of `await promise` evaluation.  
 
-Despite the fact that `return newSalary` returns the number `1200`, if you look at the actual value returned by the function `increaseSalary(1000, 200)` &mdash; it is still a promise!  
+Even though `return newSalary` returns the number `1200`, if you look at the actual value returned by the function `increaseSalary(1000, 200)` &mdash; it is still a promise!  
 
 An `async` function always returns a promise, which resolves to the value of `return value` inside the function body:
 
@@ -159,7 +159,7 @@ slowAdditionBroken(1, 5).catch(e => console.log(e.message));
 // After 3 seconds logs "Unable to sum numbers"
 ```
 
-Knowing that `slowAdditionBroken()` is unable to sum number and the promise is rejected, how to handle that insisde the `calculateSalary()` async function?  
+Knowing that `slowAdditionBroken()` is unable to sum number and the promise is rejected, how to handle that inside the `calculateSalary()` async function?  
 
 All you need to do is wrap the `await` operator in an `try/catch` clause:
 
@@ -198,11 +198,11 @@ increaseSalaryBroken(1000, 200).catch(e => {
 });
 ```
 
-## 4. Nesting asynchornous functions
+## 4. Nesting asynchronous functions
 
-Even if the `return <value>;` expression inside an async function returns the payload value, still, when the async function is invoked it returns a promise.  
+Even if the `return <value>;` expression inside an async function returns the payload value, still when the async function is invoked it returns a promise.  
 
-That's a good thing because you can nest asynchornous functions!  
+That's a good thing because you can nest asynchronous functions!  
 
 For example, let's write a function that increases an array of salaries using the `slowAddition()` function:  
 
@@ -251,19 +251,19 @@ increaseSalaries([950, 800, 1000], 100);
 
 The salary increase async tasks start right away (`await` isn't used near `increaseSalary(baseSalary, increase)`) and promises are collected in `salariesPromises`.  
 
-`await Promise.all(salariesPromises)` then pauses the function execution until all the async operations processed in parallel are done. Finally, only after 2 seconds, `newSalaries` variables contains the increased salaries.  
+`await Promise.all(salariesPromises)` then pauses the function execution until all the async operations processed in parallel are done. Finally, only after 2 seconds, `newSalaries` variable contains the increased salaries.  
 
 This way you've managed to increase the salaries of employees faster, even if the boss has put a requirement of increasing the salary slowly.  
 
 ## 6. Conclusion
 
-`async/await` is a syntactic sugar on top of the promises and provides a way to handle the asynchornous tasks in a synchornous manner.  
+`async/await` is syntactic sugar on top of the promises and provides a way to handle the asynchronous tasks in a synchronous manner.  
 
-The are 4 simple rules to use `async/await`:
+Remember 4 simple rules about `async/await`:
 
-1. A function handling asynchornous task must be marked using `async` keyword
+1. A function handling asynchronous task must be marked using `async` keyword
 2. `await promise` operator pauses the function execution until `promise` is either resolved or rejected
-3. If `promise` is resolved succesfully, the `await` operator returns the resolved value: `const resolvedValue = await promise`
+3. If `promise` resolves successfully, the `await` operator returns the resolved value: `const resolvedValue = await promise`
 4. An async function always returns a promise, which gives the ability to easily nest async functions.
 
 *Is it an error in an async function to await for primitive values, e.g. `await 3`?*
