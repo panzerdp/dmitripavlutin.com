@@ -249,21 +249,21 @@ increaseSalaries([950, 800, 1000], 100);
 // After 2 seconds logs [1050, 900, 1100]
 ```
 
-The salary increase async tasks start right away (`await` isn't used near `increaseSalary(baseSalary, increase)`) and promises are collected in `salariesPromises`.  
+The salary increase tasks start right away (`await` isn't used near `increaseSalary(baseSalary, increase)`) and promises are collected in `salariesPromises`.  
 
-`await Promise.all(salariesPromises)` then pauses the function execution until all the async operations processed in parallel are done. Finally, only after 2 seconds, `newSalaries` variable contains the increased salaries.  
+`await Promise.all(salariesPromises)` then pauses the function execution until all the async operations processed in parallel finish. Finally, only after 2 seconds, `newSalaries` variable contains the increased salaries.  
 
-This way you've managed to increase the salaries of employees faster, even if the boss has put a requirement of increasing the salary slowly.  
+You've managed to increase the salaries of employees faster, even if the boss has put a requirement to defer the salaries increase.
 
 ## 6. Conclusion
 
 `async/await` is syntactic sugar on top of the promises and provides a way to handle the asynchronous tasks in a synchronous manner.  
 
-Remember 4 simple rules about `async/await`:
+Remember 4 simple rules of `async/await`:
 
 1. A function handling asynchronous task must be marked using `async` keyword
 2. `await promise` operator pauses the function execution until `promise` is either resolved or rejected
 3. If `promise` resolves successfully, the `await` operator returns the resolved value: `const resolvedValue = await promise`
-4. An async function always returns a promise, which gives the ability to easily nest async functions.
+4. An async function always returns a promise, which gives the ability to nest async functions.
 
 *Is it an error in an async function to await for primitive values, e.g. `await 3`?*
