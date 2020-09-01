@@ -1,8 +1,8 @@
 ---
 title: "An Interesting Explanation of async/await in JavaScript"
 description: "JavaScript async/await syntax is a syntactic sugar on top of promises to easily code async tasks in a sync manner."
-published: "2020-09-01"
-modified: "2020-09-01"
+published: "2020-09-01T08:10Z"
+modified: "2020-09-01T08:101Z"
 thumbnail: "./images/cover-4.png"
 slug: javascript-async-await
 tags: ['javacript', 'async await']
@@ -47,7 +47,7 @@ Finally, the third attempt is the `async/await` syntax (starting ES2017). It let
 
 In this post I'm going to explain, step by step, how to use `async/await` in JavaScript.  
 
-**Note**: *`async/await` is syntactic sugar on top of promises*. I recommend getting familiar with [promises](https://javascript.info/promise-basics) before continuing.  
+Note: *`async/await` is syntactic sugar on top of promises*. I recommend getting familiar with [promises](https://javascript.info/promise-basics) before continuing.  
 
 ## 1. The synchronous addition
 
@@ -218,7 +218,7 @@ async function increaseSalaries(baseSalaries, increase) {
 }
 
 increaseSalaries([950, 800, 1000], 100);
-// After 6 seconds logs "New salaries: [1050, 900, 1100]"
+// After 6 seconds logs "New salaries: 1050,900,1100"
 ```
 
 `await salaryIncrease(baseSalary, increase)` is called 3 times for each salary in the array. Each time JavaScript waits 2 seconds until the sum is calculated.  
@@ -245,7 +245,7 @@ async function increaseSalaries(baseSalaries, increase) {
 }
 
 increaseSalaries([950, 800, 1000], 100);
-// After 2 seconds logs [1050, 900, 1100]
+// After 2 seconds logs "New salaries: 1050,900,1100"
 ```
 
 The salary increase tasks start right away (`await` isn't used near `increaseSalary(baseSalary, increase)`) and promises are collected in `salariesPromises`.  
