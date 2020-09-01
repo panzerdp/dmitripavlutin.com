@@ -11,7 +11,7 @@ type: post
 commentsThreadId: javascript-async-await
 ---
 
-In JavaScript you can code async tasks mainly in 3 ways.  
+In JavaScript, you can code async tasks in 3 ways.  
 
 The first approach is callbacks. When an async operation had been completed,
 a special function named *callback* is called:
@@ -51,7 +51,7 @@ In this post I'm going to explain, step by step, how to use `async/await` in Jav
 
 ## 1. The synchronous addition
 
-Because the title of the post mentions an *interesting* explanation, I'm going to gradually explain `async/await` in regards of a greedy boss story.  
+Because the title of the post mentions an *interesting* explanation, I'm going to gradually explain `async/await` in regards to a greedy boss story.  
 
 Let's start with a simple (synchronous) function which task is to calculate the salary increase:
 
@@ -68,7 +68,7 @@ increaseSalary(1000, 200); // => 1200
 
 `increaseSalary()` is a function that sums 2 numbers. `n1 + n2` is a synchronous operation.   
 
-The boss doesn't want a quick increase of the employee's salary ☹. So you're not allowed to use the addition operator `+` in `increaseSalary()` function. 
+The boss doesn't want a quick increase in the employee's salary ☹. So you're not allowed to use the addition operator `+` in `increaseSalary()` function. 
 
 Instead, you have to use a slow function that requires 2 seconds to summarize numbers. Let's name the function `slowAddition()`:
 
@@ -180,7 +180,7 @@ increaseSalaryBroken(1000, 200);
 // "Error: Unable to sum numbers", "New salary: 2000"
 ```
 
-At the expression `await slowAdditionBroken(base, increase)` JavaScript pauses the function execution and waits until the promise is fullfilled (the promise successfully resolved) or rejected (an error has occurred).  
+At the expression `await slowAdditionBroken(base, increase)` JavaScript pauses the function execution and waits until the promise is fulfilled (the promise successfully resolved) or rejected (an error has occurred).  
 
 After 3 seconds, the promise is rejected with `new Error('Unable to sum numbers')`. Because of rejection, the function execution jumps into the `catch (e){ }` clause where the base salary is multiplied by 2.  
 
@@ -258,11 +258,11 @@ You've managed to increase the salaries of employees faster, even if the boss ha
 
 `async/await` is syntactic sugar on top of the promises and provides a way to handle the asynchronous tasks in a synchronous manner.  
 
-`async/await` has 5 simple rules:
+`async/await` has 4 simple rules:
 
-1. A function handling asynchronous task must be marked using `async` keyword.
+1. A function handling an asynchronous task must be marked using the `async` keyword.
 2. `await promise` operator pauses the function execution until `promise` is either resolved successfully or rejected.
-3. If `promise` resolves successfully, the `await` operator returns the resolved value: `const resolvedValue = await promise`. Otherwise you can catch a rejected promise inside `try/catch`.  
+3. If `promise` resolves successfully, the `await` operator returns the resolved value: `const resolvedValue = await promise`. Otherwise, you can catch a rejected promise inside `try/catch`.  
 4. An async function always returns a promise, which gives the ability to nest async functions. 
 
-*Quizz: Is it an error to await for primitive values, e.g. `await 3`?*
+*Quiz: Is it an error to await for primitive values, e.g. `await 3`?*
