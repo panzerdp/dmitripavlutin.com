@@ -254,7 +254,7 @@ The salary increase tasks start right away (`await` isn't used near `increaseSal
 
 `await Promise.all(salariesPromises)` then pauses the function execution until all the async operations processed in parallel finish. Finally, only after 2 seconds, `newSalaries` variable contains the increased salaries.  
 
-You've managed to increase the salaries of employees faster, even if the boss has put a requirement to defer the salaries increase.
+You've managed to increase the salaries of all employees in just 2 seconds, even if each operation is slow and requires 2 seconds. You've tricked the boss again!  
 
 ## 6. Conclusion
 
