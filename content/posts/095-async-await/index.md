@@ -3,7 +3,7 @@ title: "An Interesting Explanation of async/await in JavaScript"
 description: "JavaScript async/await syntax is a syntactic sugar on top of promises to easily code async tasks in a sync manner."
 published: "2020-09-01T08:10Z"
 modified: "2020-09-01T08:101Z"
-thumbnail: "./images/cover-4.png"
+thumbnail: "./images/cover-5.png"
 slug: javascript-async-await
 tags: ['javacript', 'async await']
 recommended: ['7-architectural-attributes-of-a-reliable-react-component', 'the-art-of-writing-small-and-plain-functions']
@@ -184,6 +184,8 @@ At the expression `await slowAdditionBroken(base, increase)` JavaScript pauses t
 
 After 3 seconds, the promise is rejected with `new Error('Unable to sum numbers')`. Because of rejection, the function execution jumps into the `catch (e){ }` clause where the base salary is multiplied by 2.  
 
+Miser pays twice. Now the boss has to pay double salaries. Nice one!
+
 If you don't catch a rejected promise, then the error propagates and the promise returned by the `async` function gets rejected:
 
 ```javascript
@@ -221,7 +223,7 @@ increaseSalaries([950, 800, 1000], 100);
 // After 6 seconds logs "New salaries: 1050,900,1100"
 ```
 
-`await salaryIncrease(baseSalary, increase)` is called 3 times for each salary in the array. Each time JavaScript waits 2 seconds until the sum is calculated.  
+`await salaryIncrease(baseSalary, increase)` is called 3 times for each salary in the array. Each time JavaScript waits 2 seconds until the sum is calculated.    
 
 This way you can nest `async` function into `async` functions.  
 
