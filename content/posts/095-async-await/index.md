@@ -141,7 +141,7 @@ increaseSalary(1000, 200).then(salary => {
 });
 ```
 
-`async` functions returning promises is a good thing because you can [nest](#4-nesting-asynchornous-functions) `async` functions.  
+`async` functions returning promises is a good thing because you can [nest](#4-nesting-asynchronous-functions) `async` functions.  
 
 ## 3. The broken asynchronous addition
 
