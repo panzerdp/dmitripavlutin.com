@@ -1,6 +1,6 @@
 ---
 title: "An Interesting Explanation of async/await in JavaScript"
-description: "JavaScript async/await syntax is a syntactic sugar on top of promises to easily code async tasks in a sync manner."
+description: "In this post I’m going to explain, step by step, how to use async/await in JavaScript."
 published: "2020-09-01T08:10Z"
 modified: "2020-09-02T08:311Z"
 thumbnail: "./images/cover-5.png"
