@@ -2,11 +2,11 @@
 title: "An Interesting Explanation of async/await in JavaScript"
 description: "JavaScript async/await syntax is a syntactic sugar on top of promises to easily code async tasks in a sync manner."
 published: "2020-09-01T08:10Z"
-modified: "2020-09-01T08:101Z"
+modified: "2020-09-02T08:311Z"
 thumbnail: "./images/cover-5.png"
 slug: javascript-async-await
 tags: ['javacript', 'async await']
-recommended: ['7-architectural-attributes-of-a-reliable-react-component', 'the-art-of-writing-small-and-plain-functions']
+recommended: ['react-fetch-lifecycle-methods-hooks-suspense', 'javascript-arrow-functions-best-practices']
 type: post
 commentsThreadId: javascript-async-await
 ---
@@ -49,7 +49,10 @@ In this post I'm going to explain, step by step, how to use `async/await` in Jav
 
 Note: *`async/await` is syntactic sugar on top of promises*. I recommend getting familiar with [promises](https://javascript.info/promise-basics) before continuing.  
 
-## 1. The synchronous addition
+```toc
+```
+
+## 1. The sync addition
 
 Because the title of the post mentions an *interesting* explanation, I'm going to gradually explain `async/await` in regards to a greedy boss story.  
 
@@ -87,7 +90,7 @@ slowAddition(1, 5).then(sum => console.log(sum));
 
 How to update the `increaseSalary()` function to support the slow addition?
 
-## 2. The asynchronous addition
+## 2. The async addition
 
 The first naive attemtp is to replace the `n1 + n2` expression with a call to `slowAddition(n1, n2)`:
 
@@ -143,7 +146,7 @@ increaseSalary(1000, 200).then(salary => {
 
 `async` functions returning promises is a good thing because you can [nest](#4-nesting-asynchronous-functions) `async` functions.  
 
-## 3. The broken asynchronous addition
+## 3. The broken async addition
 
 It's unfair that the boss has put a requirement to increase slowly the salary. You've decided to sabotage the `slowAddition()` function.  
 
@@ -199,7 +202,7 @@ increaseSalaryBroken(1000, 200).catch(e => {
 });
 ```
 
-## 4. Nesting asynchronous functions
+## 4. Nesting async functions
 
 Despite `return <value>` expression inside an async function returning the payload value and not a promise, still, when the async function is invoked it returns a promise.  
 
@@ -256,7 +259,28 @@ The salary increase tasks start right away (`await` isn't used near `increaseSal
 
 You've managed to increase the salaries of all employees in just 2 seconds, even if each operation is slow and requires 2 seconds. You've tricked the boss again!  
 
-## 6. Conclusion
+## 6. Practical async example
+
+A common situation when you'd want to use `async/await` syntax is to fetch remote data. 
+
+`fetch()` method is a good candidate to be used with `async/await` because it returns a promise that resolves to the value returned by a remote API.  
+
+For example, here's how you would fetch a list of movies from a remote server:
+
+```javascript{2}
+async function fetchMovies() {
+  const response = await fetch('https://api.example.com/movies');
+  if (!response.ok) {
+    throw new Error('Failed to fetch movies');
+  }
+  const movies = response.json();
+  return movies;
+}
+```
+
+`await fetch('https://api.example.com/movies')` is going to pause `fetchMovies()` execution until the request is completed. Then you can extract the actual moving using `response.json()` method.  
+
+## 7. Conclusion
 
 `async/await` is syntactic sugar on top of the promises and provides a way to handle the asynchronous tasks in a synchronous manner.  
 

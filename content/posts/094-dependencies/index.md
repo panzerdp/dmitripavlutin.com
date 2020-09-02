@@ -2,7 +2,7 @@
 title: "Front-end Architecture: Stable and Volatile Dependencies"
 description: "Designing correctly the dependencies, both stable and volatile ones, is an important skill to architect Front-end applications."
 published: "2020-08-25T07:50Z"
-modified: "2020-08-27T06:15Z"
+modified: "2020-09-02T08:311Z"
 thumbnail: "./images/cover-7.png"
 slug: frontend-architecture-stable-and-volatile-dependencies
 tags: ['architecture', 'clean code', 'dependency']
@@ -265,6 +265,32 @@ The benefits of good design of volatile dependencies:
 The improved design requires more moving parts: a new interface that describes the dependency and a way to inject the dependency. 
 
 All these moving parts add complexity. So you should carefully consider whether the benefits of this design outweigh the added complexity.  
+
+### 2.4 Injection mechanisms
+
+While in the the previous example React context was injecting the concerete implementation &mdash; React context is only one of the possible options.  
+
+The same way you can inject implementations using props:
+
+```tsx{6,9}
+// Page.tsx
+import { Cookie }        from './Cookie';
+import { LoginForm }     from './LoginForm';
+
+interface PageProps {
+  cookie: Cookie;
+}
+
+export function Page({ cookie }: PageProps): JSX.Element {
+  if (cookie.get('loggedIn') === '1') {
+    return <div>You are logged in</div>;
+  } else {
+    return <LoginForm />
+  }
+}
+```
+
+However, if the component using volatile dependencies is deep inside the components hierarchy (i.e. is far from Composition Root), you might end up in [props drilling](https://kentcdodds.com/blog/prop-drilling). React context, while requiring more setup (context object, `useContext()` hook), doesn't have this problem.  
 
 ## 3. Summary
 
