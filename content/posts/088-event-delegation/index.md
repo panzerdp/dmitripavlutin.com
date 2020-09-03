@@ -78,7 +78,7 @@ A click event propagates in 3 phases:
 2. *Target phase* &mdash; The event gets triggered on the element on which the user made a click
 3. *Bubble phase* &mdash; Finally, the event bubbles up through ancestors of the target element until the root element, `document`, and `window`.  
 
-![JavaScript Event Propagation](./images/javascript-event-propagation-4.png)
+![JavaScript Event Propagation](./images/javascript-event-propagation-5.png)
 
 The third argument `captureOrOptions` of the method:
 
