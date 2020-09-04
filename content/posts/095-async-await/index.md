@@ -2,7 +2,7 @@
 title: "An Interesting Explanation of async/await in JavaScript"
 description: "In this post I’m going to explain, step by step, how to use async/await in JavaScript."
 published: "2020-09-01T08:10Z"
-modified: "2020-09-02T08:311Z"
+modified: "2020-09-02T08:30Z"
 thumbnail: "./images/cover-5.png"
 slug: javascript-async-await
 tags: ['javacript', 'async await']
