@@ -3,7 +3,7 @@ title: "Understanding Arrow Functions in 5 Easy Steps"
 description: "I'm going to explain, in 5 easy steps, how to use arrow functions in JavaScript."
 published: "2020-09-08T12:00Z"
 modified: "2020-09-08T12:00Z"
-thumbnail: "./images/cover-11.png"
+thumbnail: "./images/cover-12.png"
 slug: javascript-arrow-functions
 tags: ['javacript', 'arrow function', 'function']
 recommended: ['differences-between-arrow-and-regular-functions', 'javascript-arrow-functions-best-practices']
