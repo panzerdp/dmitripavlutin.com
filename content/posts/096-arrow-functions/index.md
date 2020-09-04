@@ -11,24 +11,28 @@ type: post
 commentsThreadId: javascript-arrow-functions
 ---
 
-## 1. Step 1: the syntax
+```toc
+toHeading: 2
+```
 
-## 2. Step 2: *this* value
+## Step 1: syntax
 
-## 3. Step 3: shortening
+## Step 2: *this* value
 
-### 3.1 Omitting parenthesis
+## Step 3: shortening
 
-### 3.2 Implicit return
+### Omitting parenthesis
 
-## 4. Step 4: *arguments* object
+### Implicit return
 
-## 5. Step 5: limitations
+## Step 4: *arguments* object
 
-### 5.1 Cannot be a generator function
+## Step 5: limitations
 
-### 5.2 Cannot be a constructor
+### Cannot be a generator function
 
-### 5.3 Cannot be a method
+### Cannot be a constructor
 
-## 6. Summary
+### Cannot be a method
+
+## Summary
