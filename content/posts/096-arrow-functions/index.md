@@ -1,6 +1,6 @@
 ---
 title: "Understanding Arrow Functions in 5 Easy Steps"
-description: "In this post I’m going to explain the arrow functions in JavaScript"
+description: "I'm going to explain, in 5 easy steps, how to use arrow functions in JavaScript."
 published: "2020-09-08T12:00Z"
 modified: "2020-09-08T12:00Z"
 thumbnail: "./images/cover-5.png"
@@ -15,15 +15,19 @@ commentsThreadId: javascript-arrow-functions
 toHeading: 2
 ```
 
+Aside from variables, the function are the most common structures used to create an application.  
+
+
+
 ## Step 1: syntax
 
-## Step 2: *this* value
-
-## Step 3: shortening
+## Step 2: shortening
 
 ### Omitting parenthesis
 
 ### Implicit return
+
+## Step 3: *this* value
 
 ## Step 4: *arguments* object
 
@@ -34,5 +38,3 @@ toHeading: 2
 ### Cannot be a constructor
 
 ### Cannot be a method
-
-## Summary
