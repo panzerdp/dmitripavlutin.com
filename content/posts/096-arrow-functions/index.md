@@ -37,7 +37,7 @@ I'm going to explain, in 5 easy steps, how to use arrow functions in JavaScript.
 
 ## Step 1: syntax
 
-When defining an arrow function the central symbol is the fat arrow `=>`:  
+The central symbol is the fat arrow `=>`  When defining an arrow function
 
 * On the left side enumarate the parameters `(param1, param2, ..., paramN) `
 * On the right side write the body `{ ... }`
@@ -51,7 +51,7 @@ Let's define an arrow function to greet a person:
 ```javascript
 const greet = (who) => {
   return `Hello, ${who}!`;
-}
+};
 
 greet('Eric Cartman'); // => 'Hello, Eric Cartman!'
 ```
@@ -82,6 +82,10 @@ In the previous examples the arrow function was used in the long form: both pare
 
 You can omit the parentheses that wrap the arrow function parameters when it has *only one parameter*.  
 
+```javascript
+param => { ... };
+```
+
 For example, the `greet` function has only one parameter `who`. That's good, because you can omit the parentheses around `(who)`:
 
 ```javascript
@@ -107,15 +111,40 @@ sayHello();                  // => 'Hello!'
 greetPeople('Eric', 'Stan'); // => 'Hello, Eric and Stan!'
 ```
 
-### Omitting curly braces and *return*
+### Omitting curly braces
 
-When the arrow function body has one statement you can also the curly braces.  
-
-Fortunately, `greet` contains one statement, so it is possible to omit the curly braces and `return` keyword:
+When the arrow function body has one statement you can also omit the curly braces.  
 
 ```javascript
-
+(param1, param2, ..., paramN) => statement;
 ```
+
+Fortunately, `greet` contains one statement, so let's omit the curly braces and `return` keyword:
+
+```javascript
+const greet = who => return `Hello, ${who}!`;
+
+greet('Eric Cartman'); // => 'Hello, Eric Cartman!'
+```
+
+### Implicit *return*
+
+That's not all! If the arrow function contains one `return expression` statement, you can also skip the `return` keyword at all. `expression` is going to be implicitely returned by the arrow function.  
+
+```javascript
+ // expression is returned implicitely
+(param1, param2, ..., paramN) => expression;
+```
+
+Let's continue shortening the `greet` function. Because it has one `` return `Hello, ${who}!` `` statement, simpliy omit `return`:
+
+```javascript
+const greet = who => `Hello, ${who}!`;
+
+greet('Eric Cartman'); // => 'Hello, Eric Cartman!'
+```
+
+In the arrow function `` who => `Hello, ${who}!` `` the expression `` `Hello, ${who}!` `` is implicitely returned.
 
 ## Step 3: *this* value
 
