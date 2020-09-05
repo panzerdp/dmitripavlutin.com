@@ -273,12 +273,12 @@ async function fetchMovies() {
   if (!response.ok) {
     throw new Error('Failed to fetch movies');
   }
-  const movies = response.json();
+  const movies = await response.json();
   return movies;
 }
 ```
 
-`await fetch('https://api.example.com/movies')` is going to pause `fetchMovies()` execution until the request is completed. Then you can extract the actual moving using `response.json()` method.  
+`await fetch('https://api.example.com/movies')` is going to pause `fetchMovies()` execution until the request is completed. Then you can extract the actual using `await response.json()`.  
 
 ## 7. Conclusion
 
