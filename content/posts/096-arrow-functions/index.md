@@ -60,13 +60,62 @@ greet('Eric Cartman'); // => 'Hello, Eric Cartman!'
 
 `greet('Eric Cartman')` is how you call an arrow function. There's no difference between calling a regular function and an arrow function.  
 
-The arrow functions fit well as callback functions because of their consize syntax.  
+The arrow function fits well as callback function because of consize syntax. For example, here's how you could sum an array of numbers:
+
+```javascript
+const numbers = [4, 5, 2, 6];
+
+const duplicated = numbers.map((number) => {
+  return number * 2;
+});
+
+duplicated; // => [8, 10, 4, 12]
+```
+
+`(number) => { return number * 2; }` is an arrow function used as a callback to `number.map()` method.  
 
 ## Step 2: shortening
 
+In the previous examples the arrow function was used in the long form: both parentheses and curly braces were present. But under certain conditions you can omit these too, making the arrow function event shorter!  
+
 ### Omitting parenthesis
 
-### Implicit return
+You can omit the parentheses that wrap the arrow function parameters when it has *only one parameter*.  
+
+For example, the `greet` function has only one parameter `who`. That's good, because you can omit the parentheses around `(who)`:
+
+```javascript
+const greet = who => {
+  return `Hello, ${who}!`;
+}
+
+greet('Eric Cartman'); // => 'Hello, Eric Cartman!'
+```
+
+Nevetheless, if the arrow function accepts no parameters or a rest parameter, then you have to *keep the parentheses*:
+
+```javascript
+const sayHello = () => {
+  return 'Hello!';
+}
+
+const greetPeople = (...args) => {
+  return `Hello, ${args.join(' and ')}!`;
+}
+
+sayHello();                  // => 'Hello!'
+greetPeople('Eric', 'Stan'); // => 'Hello, Eric and Stan!'
+```
+
+### Omitting curly braces and *return*
+
+When the arrow function body has one statement you can also the curly braces.  
+
+Fortunately, `greet` contains one statement, so it is possible to omit the curly braces and `return` keyword:
+
+```javascript
+
+```
 
 ## Step 3: *this* value
 
