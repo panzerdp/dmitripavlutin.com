@@ -37,7 +37,7 @@ I'm going to explain, in 5 easy steps, how to use arrow functions in JavaScript.
 
 ## Step 1: syntax
 
-> The central symbol of an arrow function is the fat arrow `=>`. On the left side enumarate the parameters `(param1, param2, ..., paramN) ` and on the right side write the body `{ ... }`.
+> The central symbol of an arrow function is the fat arrow `=>`. On the left side enumerate the parameters `(param1, param2, ..., paramN) ` and on the right side write the body `{ ... }`.
 
 ```javascript
 (param1, param2, ..., paramN) => { ... };
@@ -57,7 +57,7 @@ greet('Eric Cartman'); // => 'Hello, Eric Cartman!'
 
 `greet('Eric Cartman')` is how you call an arrow function. There's no difference between calling a regular function and an arrow function.  
 
-The arrow function fits well as callback function because of consize syntax. For example, here's how you could sum an array of numbers:
+The arrow function fits well as a callback function because of the concise syntax. For example, here's how you could sum an array of numbers:
 
 ```javascript
 const numbers = [4, 5, 2, 6];
@@ -73,17 +73,17 @@ duplicated; // => [8, 10, 4, 12]
 
 ## Step 2: shortening
 
-In the previous examples the arrow function was used in the long form: both parentheses and curly braces were present. But under certain conditions you can omit these too, making the arrow function event shorter!  
+In the previous examples, the arrow function has been used in the long form: both parentheses and curly braces were present. But under certain conditions you can omit these too, making the arrow function event shorter!  
 
 ### Omitting parenthesis
 
-> If the arrow function has one parameter, the parentheses around this paremeter can be omitted.  
+> If the arrow function has one parameter, the parentheses around this parameter can be omitted.  
 
 ```javascript
 param => { ... };
 ```
 
-For example, the `greet` function has only one parameter `who`. That's good, because you can omit the parentheses the one parameter:
+For example, the `greet` function has only one parameter `who`. That's good because you can omit the parentheses the one parameter:
 
 ```javascript
 const greet = who => {
@@ -93,7 +93,7 @@ const greet = who => {
 greet('Eric Cartman'); // => 'Hello, Eric Cartman!'
 ```
 
-Nevetheless, if the arrow function accepts no parameters or uses a rest parameter, then you have to *keep the parentheses*:
+Nevertheless, if the arrow function accepts no parameters or uses a rest parameter, then you have to *keep the parentheses*:
 
 ```javascript
 const sayHello = () => {
@@ -170,7 +170,7 @@ myObject.myMethod([1, 2, 3]);
 
 `myObject.myMethod([1, 2, 3])` is a [method invocation](/gentle-explanation-of-this-in-javascript/#3-method-invocation), that's why  `this` value inside the arrow function equals to `this` of the outer function `method()`.   
 
-`this` resolved lexically is a great features of arrow functions. When using callbacks inside methods you are sure the arrow function doesn't define its own `this`.  
+`this` resolved lexically is a great feature of arrow functions. When using callbacks inside methods you are sure the arrow function doesn't define its own `this`.  
 
 ## Step 4: *arguments* object
 
@@ -229,7 +229,7 @@ const collection = {
 collection.isEmpty(); // => false
 ```
 
-`collection.isEmpty()` is a method invocation. Inside of the method `isEmpty()` you can access the special value `this`, which equals to the object upon which the method was called: `collection`.  
+`collection.isEmpty()` is a method invocation. Inside of the method `isEmpty()`, you can access the special value `this`, which equals to the object upon which the method was called: `collection`.  
 
 However, from a [previous section](#step-3-this-value) you know that `this` inside of an arrow function equals to `this` value of from the outer scope. That's why you normally cannot use an arrow function as a method:
 
@@ -274,7 +274,7 @@ const user = new User('Eric Cartman');
 // throws "TypeError: User is not a constructor"
 ```
 
-When `User` is an arrow function, invoking `new User('Eric Cartman')` throws an `TypeError` simply meaning that the arrow function is not a constructor.  
+When `User` is an arrow function, invoking `new User('Eric Cartman')` throws a `TypeError` simply meaning that the arrow function is not a constructor.  
 
 ### Cannot be a generator function
 
@@ -309,16 +309,18 @@ gen.next(); // => { value: undefined, done: true }
 
 ## Summary
 
-These were the 5 steps to understand arrow functions in JavaScript. 
+The central symbol of an arrow function is the fat arrow `=>`: on the left side of it enumerate the params, and on the right side write the function body:
 
-The central symbol of an arrow function is the fat arrow `=>`: on the left side of it enumarate the params, and on the ride side write the function body.  
+```javascript
+(param1, param2, ..., paramN) => { ... };
+```
 
-The arrow function can be greatly shortended: when it has one parameter you can omit the parentheses `param => { ... }`, and when it has one statement you can omit the curly braces `param => statement`.  
+The arrow function can be greatly shortened: when it has one parameter you can omit the parentheses `param => { ... }`, and when it has one statement you can omit the curly braces `param => statement`.  
 
 `this` and `arguments` inside of an arrow function are resolved lexically, meaning that they're taken from the outer function scope.  
 
-Finally, the arrow function has a few limitations. Particularly, you cannot use it as a method on an object, constructor or generator function.  
+Finally, the arrow function has a few limitations. Particularly, you cannot use it as a method on an object, constructor, or generator function.  
 
-Arrow functions are lighweight, inline and easy to read (when not being nested too much) &mdash; be free to use them as much as you can in your code.    
+Arrow functions are lightweight, inline, and easy to read (when not being nested too much) &mdash; use them as much as you want in your code.    
 
 *What other nuances of arrow functions in JavaScript do you know?*
