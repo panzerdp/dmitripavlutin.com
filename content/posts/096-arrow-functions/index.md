@@ -1,6 +1,6 @@
 ---
 title: "Understanding Arrow Functions in 5 Easy Steps"
-description: "I'm going to explain, in 5 easy steps, how to use arrow functions in JavaScript."
+description: "Take 5 easy steps to understand arrow functions in JavaScript: syntax, shortening, this value, arguments, and limitations."
 published: "2020-09-08T12:00Z"
 modified: "2020-09-08T12:00Z"
 thumbnail: "./images/cover-12.png"
@@ -129,14 +129,14 @@ greet('Eric Cartman'); // => 'Hello, Eric Cartman!'
 
 ### Implicit *return*
 
-That's not all! If the arrow function contains one `return expression` statement, you can also skip the `return` keyword at all. `expression` is going to be implicitely returned by the arrow function.  
+That's not all! If the arrow function contains one `return expression` statement, you can also skip the `return` keyword. `expression` is going to be implicitely returned by the arrow function:  
 
 ```javascript
  // expression is returned implicitely
 (param1, param2, ..., paramN) => expression;
 ```
 
-Let's continue shortening the `greet` function. Because it has one `` return `Hello, ${who}!` `` statement, simpliy omit `return`:
+Let's continue shortening the `greet` function. Because it has one `` return `Hello, ${who}!` `` statement, let's omit `return`:
 
 ```javascript
 const greet = who => `Hello, ${who}!`;
@@ -148,11 +148,86 @@ In the arrow function `` who => `Hello, ${who}!` `` the expression `` `Hello, ${
 
 ## Step 3: *this* value
 
+The arrow function resolves `this` lexically. 
+
+In other words, `this` value inside of an arrow function always equals `this` value from the outer function. Simpler, the arrow function doesn't define its own execution context.  
+
+In the following example, `method()` is an outer function of an arrow function:
+
+```javascript{4-6}
+const object = {
+  method(items) {
+    console.log(this === object); // => true
+    items.forEach(() => {
+      console.log(this === object); // => true
+    });
+  }
+};
+
+myObject.myMethod([1, 2, 3]); 
+```
+
+`myObject.myMethod([1, 2, 3])` is a [method invocation](/gentle-explanation-of-this-in-javascript/#3-method-invocation), that's why  `this` value inside the arrow function equals to `this` of the outer function `method()`.   
+
+`this` resolved lexically is a great features of arrow functions. When using callbacks inside methods you are sure the arrow function doesn't define its own `this`.  
+
 ## Step 4: *arguments* object
+
+The arrow function accesses `arguments` from the outer function.  
+
+Let's try to access `arguments` inside of an arrow function:
+
+```javascript
+function regularFunction() {
+  const arrowFunction = () => {
+    console.log(arguments);
+  }
+
+  arrowFunction('C', 'D');
+}
+
+myRegularFunction('A', 'B'); // logs { 0: 'A', 1: 'B' }
+```
+
+The arrow function `arrowFunction()` is invoked with the arguments `'C'`, `'D'`. Still, inside of its body, `arguments` object equals to the arguments of `regularFunction()` invocation: `'a'`, `'b'`.  
+
+To access the direct arguments of the arrow function use [a rest parameter](/javascript-function-parameters/#5-rest-parameters):
+
+```javascript
+function regularFunction() {
+  const arrowFunction = (...args) => {
+    console.log(args);
+  }
+
+  arrowFunction('C', 'D');
+}
+
+regularFunction('A', 'B'); // logs ['C', 'D']
+```
+
+`...args` rest parameter collects the arguments of the arrow function: `['C', 'D']`.  
 
 ## Step 5: limitations
 
 ### Cannot be a method
+
+A method is a special function that is attached to an object. Inside of a method, `this` value equals to the object upon which the method was called on.
+
+Let's consider the method `isEmpty()` in the following object:
+```javascript
+const collection = {
+  items: [1, 2, 3],
+  isEmpty() {
+    return this.items.length === 0;
+  }
+};
+
+collection.isEmpty(); // => true
+```
+
+`collection.isEmpty()` is a method invocation. Inside of the method `isEmpty()` you can access the special value `this`, which equals to the object `collection` upon which the method was called.  
+
+
 
 ### Cannot be a constructor
 
