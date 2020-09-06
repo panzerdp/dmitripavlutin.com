@@ -37,10 +37,7 @@ I'm going to explain, in 5 easy steps, how to use arrow functions in JavaScript.
 
 ## Step 1: syntax
 
-The central symbol is the fat arrow `=>`  When defining an arrow function
-
-* On the left side enumarate the parameters `(param1, param2, ..., paramN) `
-* On the right side write the body `{ ... }`
+> The central symbol of an arrow function is the fat arrow `=>`. On the left side enumarate the parameters `(param1, param2, ..., paramN) ` and on the right side write the body `{ ... }`.
 
 ```javascript
 (param1, param2, ..., paramN) => { ... };
@@ -80,13 +77,13 @@ In the previous examples the arrow function was used in the long form: both pare
 
 ### Omitting parenthesis
 
-You can omit the parentheses that wrap the arrow function parameters when it has *only one parameter*.  
+> If the arrow function has one parameter, the parentheses around this paremeter can be omitted.  
 
 ```javascript
 param => { ... };
 ```
 
-For example, the `greet` function has only one parameter `who`. That's good, because you can omit the parentheses around `(who)`:
+For example, the `greet` function has only one parameter `who`. That's good, because you can omit the parentheses the one parameter:
 
 ```javascript
 const greet = who => {
@@ -96,7 +93,7 @@ const greet = who => {
 greet('Eric Cartman'); // => 'Hello, Eric Cartman!'
 ```
 
-Nevetheless, if the arrow function accepts no parameters or a rest parameter, then you have to *keep the parentheses*:
+Nevetheless, if the arrow function accepts no parameters or uses a rest parameter, then you have to *keep the parentheses*:
 
 ```javascript
 const sayHello = () => {
@@ -113,7 +110,7 @@ greetPeople('Eric', 'Stan'); // => 'Hello, Eric and Stan!'
 
 ### Omitting curly braces
 
-When the arrow function body has one statement you can also omit the curly braces.  
+> If the arrow function body contains one statement, you can omit the curly braces.  
 
 ```javascript
 (param1, param2, ..., paramN) => statement;
@@ -129,7 +126,11 @@ greet('Eric Cartman'); // => 'Hello, Eric Cartman!'
 
 ### Implicit *return*
 
-That's not all! If the arrow function contains one `return expression` statement, you can also skip the `return` keyword. `expression` is going to be implicitely returned by the arrow function:  
+That's not all! 
+
+> If the arrow function contains one `return expression` statement, you can skip the `return` keyword. 
+
+`expression` is going to be implicitely returned by the arrow function:  
 
 ```javascript
  // expression is returned implicitely
@@ -148,11 +149,11 @@ In the arrow function `` who => `Hello, ${who}!` `` the expression `` `Hello, ${
 
 ## Step 3: *this* value
 
-The arrow function resolves `this` lexically. 
+> The arrow function resolves `this` lexically. 
 
-In other words, `this` value inside of an arrow function always equals `this` value from the outer function. Simpler, the arrow function doesn't define its own execution context.  
+`this` value inside of an arrow function always equals `this` value from the outer function. In other words, the arrow function doesn't define its own execution context.  
 
-In the following example, `method()` is an outer function of an arrow function:
+In the following example, an arrow function is defined inside a method:  
 
 ```javascript{4-6}
 const object = {
@@ -173,7 +174,7 @@ myObject.myMethod([1, 2, 3]);
 
 ## Step 4: *arguments* object
 
-The arrow function accesses `arguments` from the outer function.  
+> The arrow function accesses `arguments` from the outer function.  
 
 Let's try to access `arguments` inside of an arrow function:
 
@@ -211,9 +212,12 @@ regularFunction('A', 'B'); // logs ['C', 'D']
 
 ### Cannot be a method
 
-A method is a special function that is attached to an object. Inside of a method, `this` value equals to the object upon which the method was called on.
+> Don't use arrow functions to define methods.  
 
-Let's consider the method `isEmpty()` in the following object:
+A method is a special function attached to an object. Inside of a method, `this` value equals to the object upon which the method was called on.
+
+Let's consider the method `isEmpty()` in the `collection` object:
+
 ```javascript
 const collection = {
   items: [1, 2, 3],
@@ -222,13 +226,99 @@ const collection = {
   }
 };
 
-collection.isEmpty(); // => true
+collection.isEmpty(); // => false
 ```
 
-`collection.isEmpty()` is a method invocation. Inside of the method `isEmpty()` you can access the special value `this`, which equals to the object `collection` upon which the method was called.  
+`collection.isEmpty()` is a method invocation. Inside of the method `isEmpty()` you can access the special value `this`, which equals to the object upon which the method was called: `collection`.  
 
+However, from a [previous section](#step-3-this-value) you know that `this` inside of an arrow function equals to `this` value of from the outer scope. That's why you normally cannot use an arrow function as a method:
 
+```javascript
+const collection = {
+  items: [1, 2, 3],
+  isEmpty: () => {
+    console.log(this === window); // => true
+    return this.items.length === 0;
+  }
+};
+
+collection.isEmpty(); // throws "TypeError: this.items is undefined"
+```
+
+When permorming a method invocation `collection.isEmpty()` JavaScript throws a `TypeError this.items is undefined`. All because `this` inside of the arrow function to `window` (when running in a browser).  
 
 ### Cannot be a constructor
 
+> The arrow function cannot be used as a constructor of objects.  
+
+
+When you define a function using a function declaration, you can easily use this function as a constructor of instances:
+
+```javascript
+function User(name) {
+  this.name = name;
+}
+
+const user = new User('Eric Cartman');
+user instance User; // => true
+```
+
+However, the arrow function cannot be used as a constructor:
+
+```javascript
+const User = (name) => {
+  this.name = name;
+}
+
+const user = new User('Eric Cartman');
+// throws "TypeError: User is not a constructor"
+```
+
+When `User` is an arrow function, invoking `new User('Eric Cartman')` throws an `TypeError` simply meaning that the arrow function is not a constructor.  
+
 ### Cannot be a generator function
+
+> The arrow function cannot be a generator function.  
+
+Finally, because arrow functions are meant to be light functions, they cannot be used as generator functions:
+
+```javascript
+const getNumbersArrow = *() => {
+  yield 1;
+  yield 2;
+};
+// SyntaxError: Unexpected token '*'
+```
+
+When using an asterisk `*` to mark an arrow function as a generator, JavaScript throws a syntax error.  
+
+However, `getNumbersRegular()` is generator function defined using a function declaration with an `*`. It works correctly:
+
+```javascript
+function *getNumbersRegular() {
+  yield 1;
+  yield 2;
+}
+
+// Works!
+const gen = getNumbersRegular();
+gen.next(); // => { value: 1, done: false }
+gen.next(); // => { value: 2, done: false }
+gen.next(); // => { value: undefined, done: true }
+```
+
+## Summary
+
+These were the 5 steps to understand arrow functions in JavaScript. 
+
+The central symbol of an arrow function is the fat arrow `=>`: on the left side of it enumarate the params, and on the ride side write the function body.  
+
+The arrow function can be greatly shortended: when it has one parameter you can omit the parentheses `param => { ... }`, and when it has one statement you can omit the curly braces `param => statement`.  
+
+`this` and `arguments` inside of an arrow function are resolved lexically, meaning that they're taken from the outer function scope.  
+
+Finally, the arrow function has a few limitations. Particularly, you cannot use it as a method on an object, constructor or generator function.  
+
+Arrow functions are lighweight, inline and easy to read (when not being nested too much) &mdash; be free to use them as much as you can in your code.    
+
+*What other nuances of arrow functions in JavaScript do you know?*
