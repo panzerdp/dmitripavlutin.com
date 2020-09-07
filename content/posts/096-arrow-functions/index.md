@@ -241,8 +241,6 @@ fetchMovies().then(movies => {
 
 ### Cannot be a method
 
-> Don't use arrow functions to define methods.  
-
 A method is a special function attached to an object. Inside of a method, `this` value equals to the object upon which the method was called on.
 
 Let's consider the method `isEmpty()` in the `collection` object:
@@ -277,8 +275,6 @@ collection.isEmpty(); // throws "TypeError: this.items is undefined"
 When permorming a method invocation `collection.isEmpty()` JavaScript throws a `TypeError this.items is undefined`. All because `this` inside of the arrow function equals to `window` (when running in a browser).  
 
 ### Cannot be a constructor
-
-> The arrow function cannot be used as a constructor of objects.  
 
 When you define a function using a function declaration, you can easily use it as a [constructor](/gentle-explanation-of-this-in-javascript/#4-constructor-invocation) of instances:
 
