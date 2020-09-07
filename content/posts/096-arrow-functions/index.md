@@ -3,7 +3,7 @@ title: "Understanding Arrow Functions in 5 Easy Steps"
 description: "Take 5 easy steps to understand arrow functions in JavaScript: syntax, shortening, this value, arguments, and limitations."
 published: "2020-09-08T12:00Z"
 modified: "2020-09-08T12:00Z"
-thumbnail: "./images/cover-12.png"
+thumbnail: "./images/cover.png"
 slug: javascript-arrow-functions
 tags: ['javascript', 'arrow function', 'function']
 recommended: ['differences-between-arrow-and-regular-functions', 'javascript-arrow-functions-best-practices']
@@ -221,7 +221,23 @@ regularFunction('A', 'B');
 
 `...args` rest parameter collects the arguments of the arrow function invocation: `['C', 'D']`.  
 
-## Step 5: limitations
+## Step 5: Dos and don'ts
+
+### Can be asynchornous
+
+You can make an arrow function asynchornous using the `async/await` syntax: 
+
+```javascript
+const fetchMovies = async () => { 
+  const response = await fetch('/api/movies');
+  const movies = await response.json();
+  return movies;
+};
+
+fetchMovies().then(movies => {
+  // Movies fetched
+})
+```
 
 ### Cannot be a method
 
@@ -317,16 +333,6 @@ const gen = getNumbersRegular();
 gen.next(); // => { value: 1, done: false }
 gen.next(); // => { value: 2, done: false }
 gen.next(); // => { value: undefined, done: true }
-```
-
-As a side note, you can make an arrow function asynchornous using the `async/await` syntax: 
-
-```javascript
-const fetchMovies = async () => { 
-  const response = await fetch('/api/movies');
-  const movies = await response.json();
-  return movies;
-};
 ```
 
 ## Summary
