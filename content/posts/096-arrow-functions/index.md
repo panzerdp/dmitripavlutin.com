@@ -5,7 +5,7 @@ published: "2020-09-08T12:00Z"
 modified: "2020-09-08T12:00Z"
 thumbnail: "./images/cover-12.png"
 slug: javascript-arrow-functions
-tags: ['javacript', 'arrow function', 'function']
+tags: ['javascript', 'arrow function', 'function']
 recommended: ['differences-between-arrow-and-regular-functions', 'javascript-arrow-functions-best-practices']
 type: post
 commentsThreadId: javascript-arrow-functions

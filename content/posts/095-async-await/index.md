@@ -5,7 +5,7 @@ published: "2020-09-01T08:10Z"
 modified: "2020-09-02T08:30Z"
 thumbnail: "./images/cover-5.png"
 slug: javascript-async-await
-tags: ['javacript', 'async await']
+tags: ['javascript', 'async await']
 recommended: ['react-fetch-lifecycle-methods-hooks-suspense', 'javascript-arrow-functions-best-practices']
 type: post
 commentsThreadId: javascript-async-await
