@@ -81,7 +81,7 @@ const e2 = 'é';
 e2; // renders as "é"
 ```
 
-Even tought `e1` and `e2` render the same grapheme, nevetheless, they are different string values:
+Even though `e1` and `e2` render the same grapheme, nevertheless, they are different string values:
 
 ```javascript
 const e1 = 'e\u0301';
