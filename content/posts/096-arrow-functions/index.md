@@ -11,10 +11,6 @@ type: post
 commentsThreadId: javascript-arrow-functions
 ---
 
-```toc
-toHeading: 2
-```
-
 The usual way to define JavaScript functions is using the *function declaration* or *function expression*:
 
 ```javascript
@@ -32,6 +28,10 @@ const greetExpression = function(who) {
 But functions can be further improved. Making the syntax shorter (useful for writing short callbacks) and ease the resolving of `this` created in a new type of functions named *arrow functions*.  
 
 I'm going to explain, in 5 easy steps, how to use arrow functions in JavaScript.
+
+```toc
+toHeading: 2
+```
 
 ## Step 1: syntax
 
@@ -71,7 +71,7 @@ duplicated; // => [8, 10, 4, 12]
 
 ## Step 2: shortening
 
-In the previous examples, the arrow function has been used in the long form: both parentheses and curly braces were present. But under certain conditions you can omit these, making the arrow function event shorter!  
+In the previous examples, the arrow function has been used in the long form: both parentheses and curly braces were present. But under certain conditions you can omit these, making the arrow function even more shorter!  
 
 ### Omitting parenthesis
 
@@ -130,7 +130,7 @@ const greetObject = who => ({ message: `Hello, ${who}!` });
 greetObject('Eric Cartman'); // => { message: `Hello, Eric Cartman!` }
 ```
 
-Otherwise, JavaScript confuses the curly braces that delimit the function body with the curly braces of the object literal.  
+Otherwise, JavaScript [confuses](/javascript-arrow-functions-best-practices/#4-constructing-plain-objects) the curly braces that delimit the function body with the curly braces of the object literal.  
 
 ### Implicit *return*
 
@@ -264,7 +264,7 @@ When permorming a method invocation `collection.isEmpty()` JavaScript throws a `
 
 > The arrow function cannot be used as a constructor of objects.  
 
-When you define a function using a function declaration, you can easily use it as a constructor of instances:
+When you define a function using a function declaration, you can easily use it as a [constructor](/gentle-explanation-of-this-in-javascript/#4-constructor-invocation) of instances:
 
 ```javascript
 function User(name) {
@@ -319,12 +319,22 @@ gen.next(); // => { value: 2, done: false }
 gen.next(); // => { value: undefined, done: true }
 ```
 
+As a side note, you can make an arrow function asynchornous using the `async/await` syntax: 
+
+```javascript
+const fetchMovies = async () => { 
+  const response = await fetch('/api/movies');
+  const movies = await response.json();
+  return movies;
+};
+```
+
 ## Summary
 
 The central symbol of an arrow function is the fat arrow `=>`: on the left side of it enumerate the params, and on the right side write the function body:
 
 ```javascript
-(param1, param2, ..., paramN) => { ... };
+(param1, param2, ..., paramN) => { ... }
 ```
 
 The arrow function can be greatly shortened: when it has one parameter you can omit the parentheses `param => { ... }`, and when it has one statement you can omit the curly braces `param => statement`.  
@@ -333,6 +343,6 @@ The arrow function can be greatly shortened: when it has one parameter you can o
 
 Finally, the arrow function has a few limitations: you cannot use it as a method on an object, constructor, or generator function.  
 
-Arrow functions are lightweight, inline, and easy to read (when not being nested too much) &mdash; use them as much as you want in your code.    
+Arrow functions are lightweight, inline, and easy to read ([when not being nested too much](/javascript-arrow-functions-best-practices/#5-be-aware-of-excessive-nesting)) &mdash; use them as much as you want in your code.
 
 *What other nuances of arrow functions do you know?*
