@@ -93,19 +93,24 @@ const greet = who => {
 greet('Eric Cartman'); // => 'Hello, Eric Cartman!'
 ```
 
-Nevertheless, if the arrow function accepts no parameters or uses a rest parameter, then you have to *keep the parentheses*:
+Nevertheless, if the arrow function accepts a rest parameter, destructures the parameter or has no parameters, then you have to *keep the parentheses*:
 
 ```javascript
-const sayHello = () => {
-  return 'Hello!';
+const greetObject = ({ name }) => {
+  return `Hello, ${name}!`;
 }
 
 const greetPeople = (...args) => {
   return `Hello, ${args.join(' and ')}!`;
 }
 
-sayHello();                  // => 'Hello!'
-greetPeople('Eric', 'Stan'); // => 'Hello, Eric and Stan!'
+const sayHello = () => {
+  return 'Hello!';
+}
+
+greetObject({ name: 'Eric' }); // => 'Hello, Eric!'
+greetPeople('Eric', 'Stan');   // => 'Hello, Eric and Stan!'
+sayHello();                    // => 'Hello!'
 ```
 
 ### Omitting curly braces
