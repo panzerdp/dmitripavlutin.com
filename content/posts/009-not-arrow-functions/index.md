@@ -5,7 +5,7 @@ published: "2016-06-06"
 modified: "2019-07-18T08:00Z"
 thumbnail: "./images/cover.png"
 slug: when-not-to-use-arrow-functions-in-javascript
-tags: ["javascript", "arrow function"]
+tags: ["javascript", "arrow function", "function"]
 recommended: ["6-ways-to-declare-javascript-functions", "javascript-arrow-functions-shortening-recipes"]
 type: post
 ---
