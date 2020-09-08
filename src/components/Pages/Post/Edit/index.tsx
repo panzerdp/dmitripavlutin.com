@@ -11,7 +11,7 @@ export default function PostEdit({ url }: PostEditProps) {
     <div className={styles.postEdit}>
       <a href={url} target="_blank" rel="noopener noreferrer">
         <img alt="GitHub Logo" src="/icons/github.svg" />
-        <span>Edit on GitHub</span>
+        <span>Suggest Improvement</span>
       </a>
     </div>
   );
