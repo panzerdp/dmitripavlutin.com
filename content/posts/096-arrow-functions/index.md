@@ -51,7 +51,7 @@ const greet = (who) => {
 greet('Eric Cartman'); // => 'Hello, Eric Cartman!'
 ```
 
-`greet` is an arrow function. The symbol `=>` delimits the parameters in parenthesis `(who)` and the function body consisting of ``return `Hello, ${who}!` ``.  
+`greet` is an arrow function. The symbol `=>` delimits the parameters in parentheses `(who)` and the function body consisting of ``return `Hello, ${who}!` ``.  
 
 `greet('Eric Cartman')` is how you call an arrow function. There's no difference between calling a regular function and an arrow function.  
 
