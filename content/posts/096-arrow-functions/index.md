@@ -1,8 +1,8 @@
 ---
 title: "Understanding Arrow Functions in 5 Easy Steps"
 description: "Walk 5 easy steps to understand arrow functions in JavaScript: syntax, shortening, this value, arguments, and limitations."
-published: "2020-09-08T12:00Z"
-modified: "2020-09-08T12:00Z"
+published: "2020-09-08T07:50Z"
+modified: "2020-09-08T07:50Z"
 thumbnail: "./images/cover.png"
 slug: javascript-arrow-functions
 tags: ['javascript', 'arrow function', 'function']
@@ -110,33 +110,15 @@ greetPeople('Eric', 'Stan'); // => 'Hello, Eric and Stan!'
 
 ### Omitting curly braces
 
-> If the arrow function body contains one statement, you can omit the curly braces.  
+> If the arrow function body contains one statement, you can omit the curly braces and the expression is going to be implicitely returned.  
 
 ```javascript
-(param1, param2, ..., paramN) => { statement }
+(param1, param2, ..., paramN) => { return statement; }
 // can be simplified to:
 (param1, param2, ..., paramN) => statement
 ```
 
 Fortunately, `greet` contains one statement, so let's omit the curly braces around the function body:
-
-```javascript
-const greet = who => return `Hello, ${who}!`;
-
-greet('Eric Cartman'); // => 'Hello, Eric Cartman!'
-```
-
-### Implicit *return*
-
-> If the arrow function contains just a `return expression` statement, you can skip the `return` keyword and `expression` is going to be implicitly returned.
-
-```javascript
-(param1, param2, ..., paramN) => return expression
-// can be simplified to:
-(param1, param2, ..., paramN) => expression
-```
-
-Let's continue shortening the `greet` function. Because it has one `` return `Hello, ${who}!` `` statement, you can omit the `return` keyword:
 
 ```javascript
 const greet = who => `Hello, ${who}!`;
@@ -176,15 +158,17 @@ In the following example, an arrow function is defined inside a method:
 
 ```javascript
 const object = {
+  items: [1, 2],
+
   method() {
     this === object; // => true
-    items.forEach(() => {
+    this.items.forEach(() => {
       this === object; // => true
     });
   }
 };
 
-myObject.myMethod([1, 2, 3]); 
+object.method();
 ```
 
 `myObject.myMethod([1, 2, 3])` is a [method invocation](/gentle-explanation-of-this-in-javascript/#3-method-invocation). `this` value inside the arrow function equals to `this` of the outer `method()` &mdash; `object`.
@@ -193,7 +177,9 @@ myObject.myMethod([1, 2, 3]);
 
 ## Step 4: *arguments* object
 
-> The arrow function accesses `arguments` from the outer function.  
+> The arrow function resolves `arguments` lexically. 
+
+The `arguments` object inside of an arrow function equals to `arguments` of the outer function.  
 
 Let's try to access `arguments` inside of an arrow function:
 
@@ -216,7 +202,7 @@ To access the direct arguments of the arrow function use a [rest parameter](/jav
 ```javascript
 function regularFunction() {
   const arrowFunction = (...args) => {
-    console.log(args);  // logs ['C', 'D']
+    args; // => ['C', 'D']
   }
 
   arrowFunction('C', 'D');
@@ -292,7 +278,7 @@ function User(name) {
 }
 
 const user = new User('Eric Cartman');
-user instance User; // => true
+user instanceof User; // => true
 ```
 
 However, the arrow function cannot be used as a constructor:
@@ -301,7 +287,6 @@ However, the arrow function cannot be used as a constructor:
 const User = (name) => {
   this.name = name;
 }
-
 
 const user = new User('Eric Cartman');
 // throws "TypeError: User is not a constructor"
