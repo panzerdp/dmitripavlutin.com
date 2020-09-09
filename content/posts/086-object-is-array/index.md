@@ -63,7 +63,7 @@ array.constructor === Array; // => true
 
 What is the operator that verifies whether a function is the constructor of an instance? `instanceof`!  
 
-Now emerges the next way to detect an array: `value instance Array` evaluates to `true` if `value` is an array.  
+Now emerges the next way to detect an array: `value instanceof Array` evaluates to `true` if `value` is an array.  
 
 Let's see a few examples:
 
