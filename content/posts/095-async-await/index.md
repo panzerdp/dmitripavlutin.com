@@ -13,13 +13,13 @@ commentsThreadId: javascript-async-await
 
 In JavaScript, you can code async tasks in 3 ways.  
 
-The first approach is callbacks. When an async operation had been completed,
-a special function named *callback* is called:
+The first approach is using callbacks. When an async operation had been completed, a *callback* function (meaning *call me back when the operation has been completed*) is executed:
 
 ```javascript
-asyncOperation(params, result => {
+const callbackFunction = result = {
   // Called when the operation completes
-});
+};
+asyncOperation(params, callbackFunction);
 ```
 
 But as soon as you handle multiple async operations, the callback functions nest into each other ending in callback hell.  
