@@ -24,7 +24,7 @@ Before starting, I recommend [familiarizing](/javascript-async-await/) with `asy
 ```toc
 ```
 
-## 1. Simplest fetch request
+## 1. Intro to *fetch()*
 
 The Fetch API fetches resources, usually accross the network. To start a fetch request, you need to call the function `fetch`:
 
@@ -59,7 +59,7 @@ The response object returned by the `fetch()` is generic placeholder for multipl
 
 ## 3. Handling fetch errors
 
-When I was getting familiar with `fetch()`, I was a surprised that when the server returns an http error status like `404` the `fetch()` doesn't trigger an error.  
+When I was getting familiar with `fetch()`, I was a surprised that when the server returns an http error status like `404` the `fetch()` doesn't reject the promise with an error.  
 
 
 
