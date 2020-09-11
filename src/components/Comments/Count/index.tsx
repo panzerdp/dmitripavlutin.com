@@ -11,7 +11,7 @@ export default function CommentsCount({ url, title, commentsTheadId }: CommentsC
   const disqusConfig = {
     url,
     title,
-    identifier: commentsTheadId,
+    identifier: commentsTheadId ?? '',
   };
   return <CommentCount config={disqusConfig} placeholder="... Comments" />;
 }
