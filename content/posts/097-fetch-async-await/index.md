@@ -17,9 +17,12 @@ While the Fetch API is pretty good, sometimes you might be surprised how it work
 
 On the other side, JavaScript provides the [async/await](/javascript-async-await/) syntax to easily handle the asynchronous operations.  
 
-In this post, I'm going to show the common scenarios how to use Fetch API with async/await syntax. The goal is to make you confident on how to fetch data, handle fetch errors, cancel a fetch request, and more.  
+In this post, I'm going to show the common scenarios how to use Fetch API with async/await syntax. The goal is to make you confident on how to fetch data, handle fetch errors, cancel a fetch request, and more goodies.  
+
+Before starting, I recommend [getting familiar](/javascript-async-await/) with `async/await` syntax, in case if you're not. In the examples below I'm going to use it extensively.  
 
 ## 1. Simplest fetch request
+
 
 ## 2. Fetching JSON data
 
