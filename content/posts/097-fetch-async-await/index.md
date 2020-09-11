@@ -32,24 +32,42 @@ The Fetch API fetches resources, usually accross the network. To start a fetch r
 const response = await fetch(resource[, options]);
 ```
 
-`fetch` accepts the arguments:
+`fetch` accepts 2 arguments:
 
 * `resource` can be either the URL to resource, or a [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) object  
 * `options` is an object to configure the request with properties like `method` (`'GET'`, `'POST'`), `headers`, `body`, `credentials`, [and more](https://javascript.info/fetch-api).  
 
-Calling `fetch()` starts the request and returns a promise. When the request completes, the promise is resolved with the [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object, from where you can extract useful data.  
+Calling `fetch()` starts the request and returns a promise. When the request completes, the promise is resolved with the [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object from where you can extract useful data like JSON.  
 
+Because `fetch()` returns a promise, `async/await` syntax fits great here.    
 
+For example, let's make a request to fetch a list of movies:
+
+```javascript
+async function fetchMovies() {
+  const response = await fetch('/movies');
+  // waits until the request completes...
+  console.log(response);
+}
+```
+
+[Try the demo]() and see how the response is logged to console.  
 
 ## 2. Fetching JSON
 
+The response object returned by the `fetch()` is generic placeholder for multiple data formats.  
+
 ## 3. Handling fetch errors
+
+When I was getting familiar with `fetch()`, I was a surprised that when the server returns an http error status like `404` the `fetch()` doesn't trigger an error.  
+
+
 
 ## 4. Cancelling a fetch request
 
 ## 5. Parallel fetch requests
 
-## 6. Fetch request with progress
+## 6. Watch the progress of a fetch request
 
 ## 7. Intercepting fetch requests
 
