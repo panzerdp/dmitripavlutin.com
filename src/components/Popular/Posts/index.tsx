@@ -35,7 +35,7 @@ export default function PopularPostsList({ posts, siteUrl }: PopularPostsListPro
                     <PostCommentsCount
                       title={post.title}
                       url={siteUrl + toPost}
-                      commentsTheadId={post.commentsThreadId}
+                      commentsTheadId={post.commentsThreadId ?? ''}
                     />
                   </Link>
                 </div>

@@ -7,7 +7,7 @@ interface CommentsCountProps {
   commentsTheadId: string | undefined;
 }
 
-export default function CommentsCount({ url, title, commentsTheadId }: CommentsCountProps) {
+export default function CommentsCount({ url, title, commentsTheadId }: CommentsCountProps): JSX.Element {
   const disqusConfig = {
     url,
     title,
