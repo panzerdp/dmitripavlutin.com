@@ -15,6 +15,9 @@ Due to the dynamic nature of JavaScript, you might need to verify if a specific 
 
 In this post, you'll read about the 3 common ways to check whether a property exists in an object.
 
+```toc
+```
+
 ## 1. *hasOwnProperty()* method
 
 The JavaScript object has a special method `object.hasOwnProperty(propName)` that returns a boolean that indicates whether `object` has a property `propName`. 
