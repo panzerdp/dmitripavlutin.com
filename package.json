@@ -96,5 +96,8 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "resolutions": {
+    "gatsby-react-router-scroll": "3.0.3"
   }
 }
