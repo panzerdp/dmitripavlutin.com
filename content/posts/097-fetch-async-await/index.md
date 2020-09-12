@@ -51,8 +51,6 @@ async function fetchMovies() {
 }
 ```
 
-[Try the demo]() and see how the response is logged to console.  
-
 ## 2. Fetching JSON
 
 The response object returned by the `fetch()` is generic placeholder for multiple data formats.  
@@ -76,11 +74,11 @@ Note that `response.json()` returns a promise, thus you have to use `await` in o
 
 When I was familiarizing with `fetch()`, I was surprised that `fetch()` doesn't throw an error when the server returns an http error status, e.g. `404`.  
 
-For example, let's try to access a non-existing page `'https://movies.com/listzzz'` on the server. As expected, such request would end up in a `404` response status:
+For example, let's try to access a non-existing page `'https://movies.com/oops'` on the server. As expected, such request would end up in a `404` response status:
 
 ```javascript
 async function fetchMovies404() {
-  const response = await fetch('https://movies.com/listzzz');
+  const response = await fetch('https://movies.com/oops');
   
   response.ok;     // => false
   response.status; // => 404
@@ -94,7 +92,7 @@ fetchMovies404().then(text => {
 });
 ```
 
-The server cannot find the URL `https://movies.com/listzzz` and thus a response with status `404` and the text `'Page not found'` is returned. `fetch()` doesn't throw an error, but rather considers this as a "completed" http request.  
+The server cannot find the URL `https://movies.com/oops` and thus a response with status `404` and the text `'Page not found'` is returned. `fetch()` doesn't throw an error, but rather considers this as a "completed" http request.  
 
 `fetch()` rejects only if a request cannot be made or a response cannot be retrieved. Often it happens because of network problems: no internet connection, host not found, the server is not responding to requests.  
 
@@ -106,7 +104,7 @@ If you'd like to throw a rejection if the response status is outside of the rang
 
 ```javascript{4-7}
 async function fetchMovies404WithThrow() {
-  const response = await fetch('https://movies.com/listzzz');
+  const response = await fetch('https://movies.com/oops');
 
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
@@ -174,15 +172,19 @@ First, let's define a simple class `Fetcher` which has only a `fetch()` method:
 
 ```javascript
 class Fetcher {
-  fetch(...args) {
-    return fetch(...args);
+  fetch(resource, options) {
+    return fetch(resource, options);
   }
 }
+```
 
+Then let's create an instance of `Fetcher` class, and use to fetch movies list:
+
+```javascript
 const myFetcher = new Fetcher();
 
 async function fetchMovies404WithThrow() {
-  const response = await myFetcher.fetch('https://movies.com/listzzz');
+  const response = await myFetcher.fetch('https://movies.com/oops');
 
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
@@ -197,8 +199,60 @@ fetchMovies404WithThrow().catch(error => {
 });
 ```
 
-`myFetcher` is an intance of `Fetcher()` class. If you'd like to start a fetch request, simply invoke `await myFetcher.fetch('https://movies.com/listzzz')`.
+`await myFetcher.fetch('https://movies.com/oops')` performs the request.  
 
+The logic inside the if statement `if (!response.ok) { ... }` throws an error if the response status is outside `200` to `299` range. This logic should be refactored into an interceptor, because it performs changes to the response. Let's move this logic into a decorator `FetchDecoratorBadStatus`:
 
+```javascript
+class FetchDecoratorBadStatus extends Fetcher {
+  decoratee;
+
+  constructor(decoratee) {
+    this.decoratee = decoratee;
+  }
+
+  async fetch(resource, options) {
+    const response = await this.decoratee.fetch(resource, options);
+
+    if (!response.ok) {
+      const message = `An error has occured: ${response.status}`;
+      throw new Error(message);
+    }
+
+    return response;
+  }
+}
+```
+
+`FetchDecoratorBadStatus` wraps a `Fetcher` instance (the `decoratee` property). Instance the `fetch()` method it calls `this.decoratee.fetch(resource, options)` (the decorated fetcher instance), and after makes the `if (!response.ok) { ... }` status checks.  
+
+Now, since the status verification logic is moved to decorator, the function that makes the request can be simplified:
+
+```javascript{1-3}
+const myFetcher = new FetchDecoratorBadStatus(
+  new Fetcher()
+);
+
+async function fetchMovies404WithThrow() {
+  const response = await myFetcher.fetch('https://movies.com/listzz');
+  return response;
+}
+
+fetchMovies404WithThrow().catch(error => {
+  error.message; // 'An error has occurred: 404'
+});
+```
+
+Using decorators, you can easily intercept the requests and make the necessary adjustments. What's good in regards of design, both `Fetcher` and `FetchDecoratorBadStatus` are loosely coupled. 
+
+Even better, you can wrap your fetcher in as many decorators as you want. You can also remove and decorators without affecting the users of the fetcher.  
 
 ## 7. Summary
+
+When called, `fetch()` starts a request and right away returns a promise. When the request completes, the promise resolves with the response object. From the response object you can extract data in any format you need: JSON, Blob, or even raw text.  
+
+Because `fetch()` returns a promise, you can greatly simplify the logic of fetching data by using the `async/await` syntax.  
+
+In this post, you've found out how to use `fetch()` accompanied with `async/await` to fetch JSON data, handle fetching errors, cancel a request, perform parallel requests, and even how to intercept the requests with custom logic using decorators.  
+
+*Do you prefer native `fetch()` API, or rather use a utility library like `axios`?*
