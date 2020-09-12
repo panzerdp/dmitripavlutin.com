@@ -103,7 +103,7 @@ In the above example, the `response.ok` property is `false` because the response
 If you'd like to throw a rejection if the response status is outside of the range `200-299` (e.g. `404`, `500`, `502`), you can make some adjustements and throw an error manually:
 
 ```javascript{4-7}
-async function fetchMovies404WithThrow() {
+async function fetchMoviesBadStatus() {
   const response = await fetch('https://movies.com/oops');
 
   if (!response.ok) {
@@ -111,10 +111,11 @@ async function fetchMovies404WithThrow() {
     throw new Error(message);
   }
 
-  return response;
+  const movies = await response.json();
+  return movies;
 }
 
-fetchMovies404WithThrow().catch(error => {
+fetchMoviesBadStatus().catch(error => {
   error.message; // 'An error has occurred: 404'
 });
 ```
@@ -127,18 +128,45 @@ Sometimes, you might want to cancel a fetch request that is in progress.
 
 In such a case you need an additional tool named `AbortController`, which allows you to cancel the fetch requests.  
 
+For example, let's have a button "Cancel request" that when clicked cancels the current request of movies.  
+
+```javascript{3,9}
+async function fetchMoviesWithCancel(controller) {
+  const response = await fetch('https://movies.com/list', { 
+    signal: controller.signal
+  });
+  const movies = await response.json();
+  return movies;
+}
+
+const controller = new AbortController();
+cancelRequestButton.addEventListener('click', () => {
+ controller.abort();
+});
+
+fetchMoviesWithCancel(controller).catch(error => {
+  // when aborted
+  error.name; // => 'AbortError'
+});
+```
+
+`const controller = new AbortController()` creates an instance of the abort controller. Then `controller.signal` property should be used as an option when starting the request: `fetch(..., {  signal: controller.signal })`.  
+
+Finally, when calling `controller.abort()` inside the event handler, the controller signals to the fetch to abort the request.  
+
+Note that when a fetch request is aborted, the promise gets rejected with an abort error.  
+
 ## 5. Parallel fetch requests
 
 If you'd like to make parallel fetch requests, it is also easy. What you need to do is start the requests using `Promise.all()` helper function.
 
-
 For example, let's start 2 parallel requests to fetch movies and categories:
 
-```javascript
+```javascript{2-4}
 async function fetchMoviesAndCategories() {
   const [moviesResponse, categoriesResponse] = await Promise.all([
     fetch('https://movies.com/list'),
-    fetch('https://movies.com/categories-list')
+    fetch('https://categories.com/list')
   ]);
 
   const movies = await moviesResponse.json();
@@ -178,28 +206,33 @@ class Fetcher {
 }
 ```
 
-Then let's create an instance of `Fetcher` class, and use to fetch movies list:
+Then let's create an instance of `Fetcher` class, and use it to fetch the movies list:
 
 ```javascript
-const myFetcher = new Fetcher();
+const fetcher = new Fetcher();
 
-async function fetchMovies404WithThrow() {
-  const response = await myFetcher.fetch('https://movies.com/oops');
+async function fetchMoviesBadStatus() {
+  const response = await fetcher.fetch('https://movies.com/list');
 
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
     throw new Error(message);
   }
 
-  return response;
+  const movies = await response.json();
+  return movies;
 }
 
-fetchMovies404WithThrow().catch(error => {
-  error.message; // 'An error has occurred: 404'
+fetchMoviesBadStatus().then(movies => {
+  // When fetch succeeds
+  movies;
+}).catch(error => {
+  // When fetch ends with a bad http status
+  error.message;
 });
 ```
 
-`await myFetcher.fetch('https://movies.com/oops')` performs the request.  
+`await fetcher.fetch('https://movies.com/list')` performs the request.  
 
 The logic inside the if statement `if (!response.ok) { ... }` throws an error if the response status is outside `200` to `299` range. This logic should be refactored into an interceptor, because it performs changes to the response. Let's move this logic into a decorator `FetchDecoratorBadStatus`:
 
@@ -229,23 +262,27 @@ class FetchDecoratorBadStatus extends Fetcher {
 Now, since the status verification logic is moved to decorator, the function that makes the request can be simplified:
 
 ```javascript{1-3}
-const myFetcher = new FetchDecoratorBadStatus(
+const fetcher = new FetchDecoratorBadStatus(
   new Fetcher()
 );
 
-async function fetchMovies404WithThrow() {
-  const response = await myFetcher.fetch('https://movies.com/listzz');
+async function fetchMoviesBadStatus() {
+  const response = await fetcher.fetch('https://movies.com/list');
   return response;
 }
 
-fetchMovies404WithThrow().catch(error => {
-  error.message; // 'An error has occurred: 404'
+fetchMoviesBadStatus().then(movies => {
+  // When fetch succeeds
+  movies;
+}).catch(error => {
+  // When fetch ends with a bad http status
+  error.message;
 });
 ```
 
-Using decorators, you can easily intercept the requests and make the necessary adjustments. What's good in regards of design, both `Fetcher` and `FetchDecoratorBadStatus` are loosely coupled. 
+Using decorators, you can easily intercept the requests and make the necessary adjustments. What's good in regards of design, both `Fetcher` and `FetchDecoratorBadStatus` are loosely coupled.  
 
-Even better, you can wrap your fetcher in as many decorators as you want. You can also remove and decorators without affecting the users of the fetcher.  
+Even better, you can wrap your fetcher in as many decorators as you want. You can also remove and add decorators without affecting the users of the fetcher.  
 
 ## 7. Summary
 
