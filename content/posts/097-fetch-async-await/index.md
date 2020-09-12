@@ -237,7 +237,7 @@ fetchMoviesBadStatus().then(movies => {
 The logic inside the if statement `if (!response.ok) { ... }` throws an error if the response status is outside `200` to `299` range. This logic should be refactored into an interceptor, because it performs changes to the response. Let's move this logic into a decorator `FetchDecoratorBadStatus`:
 
 ```javascript
-class FetchDecoratorBadStatus extends Fetcher {
+class FetchDecoratorBadStatus {
   decoratee;
 
   constructor(decoratee) {
@@ -268,7 +268,8 @@ const fetcher = new FetchDecoratorBadStatus(
 
 async function fetchMoviesBadStatus() {
   const response = await fetcher.fetch('https://movies.com/list');
-  return response;
+  const movies = await response.json();
+  return movies;
 }
 
 fetchMoviesBadStatus().then(movies => {
@@ -280,7 +281,7 @@ fetchMoviesBadStatus().then(movies => {
 });
 ```
 
-Using decorators, you can easily intercept the requests and make the necessary adjustments. What's good in regards of design, both `Fetcher` and `FetchDecoratorBadStatus` are loosely coupled.  
+Using decorators, you can easily intercept the requests and make the necessary adjustments. What's good in regards of design, both `Fetcher` and `FetchDecoratorBadStatus` are loosely coupled.   
 
 Even better, you can wrap your fetcher in as many decorators as you want. You can also remove and add decorators without affecting the users of the fetcher.  
 
