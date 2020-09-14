@@ -17,7 +17,7 @@ While the Fetch API is pretty good, sometimes you might be surprised how it work
 
 On the other side, JavaScript provides the `async/await` syntax to easily handle the asynchronous operations.  
 
-In this post, I'm going to show the common scenarios how to use Fetch API with async/await syntax. The goal is to make you confident on how to fetch data, handle fetch errors, cancel a fetch request, and more goodies.  
+In this post, I'm going to show the common scenarios of how to use Fetch API with async/await syntax. The goal is to make you confident on how to fetch data, handle fetch errors, cancel a fetch request, and more goodies.  
 
 Before starting, I recommend [familiarizing](/javascript-async-await/) with `async/await` syntax. I'm going to use it extensively in the examples below.  
 
@@ -26,7 +26,7 @@ Before starting, I recommend [familiarizing](/javascript-async-await/) with `asy
 
 ## 1. Intro to *fetch()*
 
-The Fetch API fetches resources, usually accross the network. To start a fetch request, you need to call the function `fetch`:
+The Fetch API fetches resources, usually across the network. To start a fetch request, you need to call the function `fetch`:
 
 ```javascript
 const response = await fetch(resource[, options]);
@@ -53,7 +53,7 @@ async function fetchMovies() {
 
 ## 2. Fetching JSON
 
-The response object returned by the `fetch()` is generic placeholder for multiple data formats.  
+The response object returned by the `fetch()` is a generic placeholder for multiple data formats.  
 
 Here's how you could fetch movies as JSON data from the server:
 
@@ -65,10 +65,10 @@ async function fetchMoviesJSON() {
 }
 ```
 
-In the above example, `response.json()` is a method on the Response object that let's you extract parse a JSON object
+In the above example, `response.json()` is a method on the Response object that lets you extract parse a JSON object
 from the response.  
 
-Note that `response.json()` returns a promise, thus you have to use `await` in order to get the resolved JSON object: `await response.json()`.  
+Note that `response.json()` returns a promise, thus you have to use `await` to get the resolved JSON object: `await response.json()`.  
 
 ## 3. Handling fetch errors
 
@@ -96,7 +96,7 @@ The server cannot find the URL `https://movies.com/oops` and thus a response wit
 
 `fetch()` rejects only if a request cannot be made or a response cannot be retrieved. Often it happens because of network problems: no internet connection, host not found, the server is not responding to requests.  
 
-Fortuntately, `response.ok` property let's you separate successfull from unsuccessfull http requests. The property is set to `true` only if the response has status from `200` to `299` inclusive. 
+Fortunately, `response.ok` the property lets you separate successful from unsuccessful HTTP requests. The property is set to `true` only if the response has status from `200` to `299` inclusive. 
 
 In the above example, the `response.ok` property is `false` because the response has status `404`.
 
@@ -120,9 +120,9 @@ fetchMoviesBadStatus().catch(error => {
 });
 ```
 
-If `reponse.ok` is `false`, just throw an error indicating that the response didn't end up successfully.  
+If `response.ok` is `false`, just throw an error indicating that the response didn't end up successfully.  
 
-## 4. Cancelling a fetch request
+## 4. Canceling a fetch request
 
 Sometimes, you might want to cancel a fetch request that is in progress.  
 
@@ -188,11 +188,11 @@ fetchMoviesAndCategories().then(({ movies, categories }) => {
 
 ## 6. Intercepting fetch requests
 
-Sometimes you might want to do some work before sending the request, or after recieveing the response: this is named intercepting a request.  
+Sometimes you might want to do some work before sending the request, or after receiving the response: this is named intercepting a request.  
 
 A good use case to intercept and perform some behavior after the request completes is to perform the fixes that were made [Handling fetch errors](#3-handling-fetch-errors): throw an error if the response status is not within the range `200` to `299`.  
 
-The thing is that `fetch()` API doesn't provide any functionality by itself to intercept the requests. That's understendable, because `fetch()` API is designed to be simple.  
+The thing is that `fetch()` API doesn't provide any functionality by itself to intercept the requests. That's understandable, because `fetch()` API is designed to be simple.  
 
 While not being the only solution, the decorator pattern is a good solution to implement the interception of `fetch()` requests.  
 
@@ -234,7 +234,7 @@ fetchMoviesBadStatus().then(movies => {
 
 `await fetcher.fetch('https://movies.com/list')` performs the request.  
 
-The logic inside the if statement `if (!response.ok) { ... }` throws an error if the response status is outside `200` to `299` range. This logic should be refactored into an interceptor, because it performs changes to the response. Let's move this logic into a decorator `FetchDecoratorBadStatus`:
+The logic inside the if statement `if (!response.ok) { ... }` throws an error if the response status is outside `200` to `299` range. This logic should be refactored into an interceptor because it performs changes to the response. Let's move this logic into a decorator `FetchDecoratorBadStatus`:
 
 ```javascript
 class FetchDecoratorBadStatus {
@@ -281,15 +281,15 @@ fetchMoviesBadStatus().then(movies => {
 });
 ```
 
-Using decorators, you can easily intercept the requests and make the necessary adjustments. What's good in regards of design, both `Fetcher` and `FetchDecoratorBadStatus` are loosely coupled.   
+Using decorators, you can easily intercept the requests and make the necessary adjustments. Both `Fetcher` and `FetchDecoratorBadStatus` are loosely coupled.   
 
 Even better, you can wrap your fetcher in as many decorators as you want. You can also remove and add decorators without affecting the users of the fetcher.  
 
 ## 7. Summary
 
-When called, `fetch()` starts a request and right away returns a promise. When the request completes, the promise resolves with the response object. From the response object you can extract data in any format you need: JSON, Blob, or even raw text.  
+When called, `fetch()` starts a request and right away returns a promise. When the request completes, the promise resolves with the response object. From the response object, you can extract data in any format you need: JSON, Blob, or even raw text.  
 
-Because `fetch()` returns a promise, you can greatly simplify the logic of fetching data by using the `async/await` syntax.  
+Because `fetch()` returns a promise, you can simplify the logic of fetching data by using the `async/await` syntax.  
 
 In this post, you've found out how to use `fetch()` accompanied with `async/await` to fetch JSON data, handle fetching errors, cancel a request, perform parallel requests, and even how to intercept the requests with custom logic using decorators.  
 
