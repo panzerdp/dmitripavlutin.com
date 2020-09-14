@@ -1,6 +1,6 @@
 ---
 title: "How to use Fetch with async/await"
-description: "In this post, accompanied with useful demos, you'll learn how to use Fetch API with async/await syntax in JavaScript."
+description: "How to use fetch API with async/await syntax in JavaScript."
 published: "2020-09-15T12:00Z"
 modified: "2020-09-15T12:00Z"
 thumbnail: "./images/cover-4.png"
@@ -11,13 +11,11 @@ type: post
 commentsThreadId: javascript-fetch-async-await
 ---
 
-The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) has become the native way to fetch data in Frontend applications.  
+The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) has become the native way to fetch resources in Frontend applications.  
 
-While the Fetch API is pretty good, sometimes you might be surprised how it works. For example, if the http request completes with status `4xx` or `5xx`, the fetch doesn't reject the promise. 
+JavaScript also provides the `async/await` syntax to easily handle the asynchronous operations. This syntactic sugar works well `fetch()`.  
 
-On the other side, JavaScript provides the `async/await` syntax to easily handle the asynchronous operations.  
-
-In this post, I'm going to show the common scenarios of how to use Fetch API with async/await syntax. The goal is to make you confident on how to fetch data, handle fetch errors, cancel a fetch request, and more goodies.  
+In this post, I'm going to show the common scenarios of how to use Fetch API with async/await syntax. The goal is to make you confident on how to fetch data, handle fetch errors, cancel a fetch request, and more.  
 
 Before starting, I recommend [familiarizing](/javascript-async-await/) with `async/await` syntax. I'm going to use it extensively in the examples below.  
 
@@ -26,18 +24,20 @@ Before starting, I recommend [familiarizing](/javascript-async-await/) with `asy
 
 ## 1. Intro to *fetch()*
 
-The Fetch API fetches resources, usually across the network. To start a fetch request, you need to call the function `fetch`:
+The Fetch API fetches resources, usually across the network. Fetch API is useful to make HTTP requests (either `GET`, `POST`), download files.  
+
+To start a request, you need to call the special function `fetch()`:
 
 ```javascript
 const response = await fetch(resource[, options]);
 ```
 
-`fetch` accepts 2 arguments:
+`fetch()` accepts 2 arguments:
 
-* `resource` can be either the URL to resource, or a [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) object  
+* `resource` can be either a URL string, or a [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) object  
 * `options` is an object to configure the request with properties like `method` (`'GET'`, `'POST'`), `headers`, `body`, `credentials`, [and more](https://javascript.info/fetch-api).  
 
-Calling `fetch()` starts the request and returns a promise. When the request completes, the promise is resolved with the [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object from where you can extract useful data like JSON.  
+Calling `fetch()` starts a request and returns a promise. When the request completes, the promise is resolved with the [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object from where you can extract useful data like JSON. If the request fails due some network problems, the promsime is rejected.    
 
 Because `fetch()` returns a promise, `async/await` syntax fits great here.    
 
@@ -45,11 +45,15 @@ For example, let's make a request to fetch a list of movies:
 
 ```javascript
 async function fetchMovies() {
-  const response = await fetch('https://movies.com');
+  const response = await fetch('/api/movies/list');
   // waits until the request completes...
   console.log(response);
 }
 ```
+
+`fetchMovies()` is an asynchornous function since it's marked with `async` keyword.  
+
+`await fetch('/api/movies/list')` starts an HTTP request to `'/api/movies/list'` URL.  Because `await` keyword is present, the asynchornous function is paused until the request completes. 
 
 ## 2. Fetching JSON
 
@@ -59,26 +63,26 @@ Here's how you could fetch movies as JSON data from the server:
 
 ```javascript
 async function fetchMoviesJSON() {
-  const response = await fetch('https://movies.com/list');
-  const moviesJSON = await response.json();
-  return moviesJSON;
+  const response = await fetch('/api/movies/list');
+  const movies = await response.json();
+  return movies;
 }
 ```
 
-In the above example, `response.json()` is a method on the Response object that lets you extract parse a JSON object
+`response.json()` is a method on the Response object that lets you extract parse a JSON object
 from the response.  
 
-Note that `response.json()` returns a promise, thus you have to use `await` to get the resolved JSON object: `await response.json()`.  
+To get the response data as JSON you have to use `await response.json()` because `response.json()` returns a promise.  
 
 ## 3. Handling fetch errors
 
-When I was familiarizing with `fetch()`, I was surprised that `fetch()` doesn't throw an error when the server returns an http error status, e.g. `404`.  
+When I was familiarizing with `fetch()`, I was surprised that `fetch()` doesn't throw an error when the server returns an HTTP error status, e.g. `404`.  
 
 For example, let's try to access a non-existing page `'https://movies.com/oops'` on the server. As expected, such request would end up in a `404` response status:
 
 ```javascript
 async function fetchMovies404() {
-  const response = await fetch('https://movies.com/oops');
+  const response = await fetch('/api/oops/list');
   
   response.ok;     // => false
   response.status; // => 404
@@ -92,19 +96,19 @@ fetchMovies404().then(text => {
 });
 ```
 
-The server cannot find the URL `https://movies.com/oops` and thus a response with status `404` and the text `'Page not found'` is returned. `fetch()` doesn't throw an error, but rather considers this as a "completed" http request.  
+A response with status `404` and the text `'Page not found'` is returned because the URL `'/api/oops/list'` doesn't exist. `fetch()` doesn't throw an error for a missing URL, but considers this as a *completed* HTTP request.  
 
-`fetch()` rejects only if a request cannot be made or a response cannot be retrieved. Often it happens because of network problems: no internet connection, host not found, the server is not responding to requests.  
+`fetch()` rejects only if a request cannot be made or a response cannot be retrieved. Often it happens because of network problems: no internet connection, host not found, the server is not responding.  
 
-Fortunately, `response.ok` the property lets you separate successful from unsuccessful HTTP requests. The property is set to `true` only if the response has status from `200` to `299` inclusive. 
+Fortunately, `response.ok` property lets you separate successful from bad HTTP response statuses. The property is set to `true` only if the response has status from `200` to `299`, inclusive. 
 
 In the above example, the `response.ok` property is `false` because the response has status `404`.
 
-If you'd like to throw a rejection if the response status is outside of the range `200-299` (e.g. `404`, `500`, `502`), you can make some adjustements and throw an error manually:
+If you'd like to throw a rejection on a *bad* HTTP status (outside of the range `200-299`), you can make some adjustements and throw an error manually:
 
 ```javascript{4-7}
 async function fetchMoviesBadStatus() {
-  const response = await fetch('https://movies.com/oops');
+  const response = await fetch('/api/oops/list');
 
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
@@ -120,19 +124,17 @@ fetchMoviesBadStatus().catch(error => {
 });
 ```
 
-If `response.ok` is `false`, just throw an error indicating that the response didn't end up successfully.  
+If `response.ok` is `false`, just throw an error indicating that the response hadn't completed successfully.  
 
 ## 4. Canceling a fetch request
 
-Sometimes, you might want to cancel a fetch request that is in progress.  
+To cancel a fetch request you need an additional tool `AbortController`.  
 
-In such a case you need an additional tool named `AbortController`, which allows you to cancel the fetch requests.  
+In the following example a button "Cancel" when clicked cancels the current `fetch()` request:  
 
-For example, let's have a button "Cancel request" that when clicked cancels the current request of movies.  
-
-```javascript{3,9}
+```javascript{3,9,12}
 async function fetchMoviesWithCancel(controller) {
-  const response = await fetch('https://movies.com/list', { 
+  const response = await fetch('/api/movies/list', { 
     signal: controller.signal
   });
   const movies = await response.json();
@@ -140,33 +142,33 @@ async function fetchMoviesWithCancel(controller) {
 }
 
 const controller = new AbortController();
+
 cancelRequestButton.addEventListener('click', () => {
- controller.abort();
+  controller.abort();
 });
 
 fetchMoviesWithCancel(controller).catch(error => {
-  // when aborted
   error.name; // => 'AbortError'
 });
 ```
 
-`const controller = new AbortController()` creates an instance of the abort controller. Then `controller.signal` property should be used as an option when starting the request: `fetch(..., {  signal: controller.signal })`.  
+`const controller = new AbortController()` creates an instance of the abort controller. Then `controller.signal` property is used as an option when starting the request: `fetch(..., {  signal: controller.signal })`.  
 
-Finally, when calling `controller.abort()` inside the event handler, the controller signals to the fetch to abort the request.  
+When `controller.abort()` is called inside the event handler, the controller cancels the request.  
 
 Note that when a fetch request is aborted, the promise gets rejected with an abort error.  
 
 ## 5. Parallel fetch requests
 
-If you'd like to make parallel fetch requests, it is also easy. What you need to do is start the requests using `Promise.all()` helper function.
+To perform parallel fetch requests use the `Promise.all()` helper function.  
 
 For example, let's start 2 parallel requests to fetch movies and categories:
 
-```javascript{2-4}
+```javascript{2-5}
 async function fetchMoviesAndCategories() {
   const [moviesResponse, categoriesResponse] = await Promise.all([
-    fetch('https://movies.com/list'),
-    fetch('https://categories.com/list')
+    fetch('/api/movies/list'),
+    fetch('/api/categories/list')
   ]);
 
   const movies = await moviesResponse.json();
@@ -179,8 +181,8 @@ async function fetchMoviesAndCategories() {
 }
 
 fetchMoviesAndCategories().then(({ movies, categories }) => {
-  movies;     // the list of fetched movies
-  categories; // the list of fetched categories
+  movies;     // fetched movies
+  categories; // fetched categories
 });
 ```
 
@@ -212,7 +214,7 @@ Then let's create an instance of `Fetcher` class, and use it to fetch the movies
 const fetcher = new Fetcher();
 
 async function fetchMoviesBadStatus() {
-  const response = await fetcher.fetch('https://movies.com/list');
+  const response = await fetcher.fetch('/api/movies/list');
 
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
@@ -232,7 +234,7 @@ fetchMoviesBadStatus().then(movies => {
 });
 ```
 
-`await fetcher.fetch('https://movies.com/list')` performs the request.  
+`await fetcher.fetch('/api/movies/list')` performs the request.  
 
 The logic inside the if statement `if (!response.ok) { ... }` throws an error if the response status is outside `200` to `299` range. This logic should be refactored into an interceptor because it performs changes to the response. Let's move this logic into a decorator `FetchDecoratorBadStatus`:
 
@@ -259,7 +261,7 @@ class FetchDecoratorBadStatus {
 
 `FetchDecoratorBadStatus` wraps a `Fetcher` instance (the `decoratee` property). Instance the `fetch()` method it calls `this.decoratee.fetch(resource, options)` (the decorated fetcher instance), and after makes the `if (!response.ok) { ... }` status checks.  
 
-Now, since the status verification logic is moved to decorator, the function that makes the request can be simplified:
+`fetchMoviesBadStatus()` can be simplified because the status verification logic has been moved to `FetchDecoratorBadStatus` decorator:
 
 ```javascript{1-3}
 const fetcher = new FetchDecoratorBadStatus(
@@ -267,7 +269,7 @@ const fetcher = new FetchDecoratorBadStatus(
 );
 
 async function fetchMoviesBadStatus() {
-  const response = await fetcher.fetch('https://movies.com/list');
+  const response = await fetcher.fetch('/api/movies/list');
   const movies = await response.json();
   return movies;
 }
@@ -276,7 +278,7 @@ fetchMoviesBadStatus().then(movies => {
   // When fetch succeeds
   movies;
 }).catch(error => {
-  // When fetch ends with a bad http status
+  // When fetch ends with a bad HTTP status, e.g. 404
   error.message;
 });
 ```
