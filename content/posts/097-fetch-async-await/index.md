@@ -57,7 +57,7 @@ async function fetchMovies() {
 
 ## 2. Fetching JSON
 
-The response object returned by the `fetch()` is a generic placeholder for multiple data formats.  
+The `Response` object returned by the `fetch()` is a generic placeholder for multiple data formats.  
 
 Here's how you could fetch movies as JSON data from the server:
 
@@ -104,7 +104,7 @@ Fortunately, `response.ok` property lets you separate successful from bad HTTP r
 
 In the above example, the `response.ok` property is `false` because the response has status `404`.
 
-If you'd like to throw a rejection on a *bad* HTTP status (outside of the range `200-299`), you can make some adjustements and throw an error manually:
+If you'd like to throw an error on a *bad HTTP status* (outside of the range `200-299`), check the value of `response.ok` property and throw an error manually:
 
 ```javascript{4-7}
 async function fetchMoviesBadStatus() {
@@ -124,13 +124,22 @@ fetchMoviesBadStatus().catch(error => {
 });
 ```
 
-If `response.ok` is `false`, just throw an error indicating that the response hadn't completed successfully.  
-
 ## 4. Canceling a fetch request
 
-To cancel a fetch request you need an additional tool `AbortController`.  
+To cancel a fetch request you need an additional tool `AbortController`:
 
-In the following example a button "Cancel" when clicked cancels the current `fetch()` request:  
+```javascript
+// instantiate the abort controller
+const controller = new AbortController();
+
+// make the fetch() aware of controller.signal
+fetch(..., { signal: controller.signal });
+
+// call to cancel the request
+controller.abort();
+```
+
+In the following example, a `fetch()` request is cancelled when clicking a button "Cancel":  
 
 ```javascript{3,9,12}
 async function fetchMoviesWithCancel(controller) {
@@ -143,7 +152,7 @@ async function fetchMoviesWithCancel(controller) {
 
 const controller = new AbortController();
 
-cancelRequestButton.addEventListener('click', () => {
+cancelButton.addEventListener('click', () => {
   controller.abort();
 });
 
@@ -154,9 +163,9 @@ fetchMoviesWithCancel(controller).catch(error => {
 
 `const controller = new AbortController()` creates an instance of the abort controller. Then `controller.signal` property is used as an option when starting the request: `fetch(..., {  signal: controller.signal })`.  
 
-When `controller.abort()` is called inside the event handler, the controller cancels the request.  
+When `controller.abort()` is called inside the button click event handler, the controller cancels the request.  
 
-Note that when a fetch request is aborted, the promise gets rejected with an abort error.  
+Note that when a fetch request is cancelled, the promise returned by `fetch()` is rejected with an abort error.  
 
 ## 5. Parallel fetch requests
 
