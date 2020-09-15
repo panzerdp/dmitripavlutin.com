@@ -45,7 +45,7 @@ For example, let's make a request to fetch a list of movies:
 
 ```javascript
 async function fetchMovies() {
-  const response = await fetch('/api/movies/list');
+  const response = await fetch('/movies');
   // waits until the request completes...
   console.log(response);
 }
@@ -53,7 +53,7 @@ async function fetchMovies() {
 
 `fetchMovies()` is an asynchornous function since it's marked with `async` keyword.  
 
-`await fetch('/api/movies/list')` starts an HTTP request to `'/api/movies/list'` URL.  Because `await` keyword is present, the asynchornous function is paused until the request completes. 
+`await fetch('/movies')` starts an HTTP request to `'/movies'` URL.  Because `await` keyword is present, the asynchornous function is paused until the request completes. 
 
 ## 2. Fetching JSON
 
@@ -63,10 +63,14 @@ Here's how you could fetch movies as JSON data from the server:
 
 ```javascript
 async function fetchMoviesJSON() {
-  const response = await fetch('/api/movies/list');
+  const response = await fetch('/movies');
   const movies = await response.json();
   return movies;
 }
+
+fetchMoviesJSON().then(movies => {
+  movies; // fetched movies
+});
 ```
 
 `response.json()` is a method on the Response object that lets you extract parse a JSON object
@@ -82,7 +86,7 @@ For example, let's try to access a non-existing page `'https://movies.com/oops'`
 
 ```javascript
 async function fetchMovies404() {
-  const response = await fetch('/api/oops/list');
+  const response = await fetch('/oops');
   
   response.ok;     // => false
   response.status; // => 404
@@ -96,7 +100,7 @@ fetchMovies404().then(text => {
 });
 ```
 
-A response with status `404` and the text `'Page not found'` is returned because the URL `'/api/oops/list'` doesn't exist. `fetch()` doesn't throw an error for a missing URL, but considers this as a *completed* HTTP request.  
+A response with status `404` and the text `'Page not found'` is returned because the URL `'/oops'` doesn't exist. `fetch()` doesn't throw an error for a missing URL, but considers this as a *completed* HTTP request.  
 
 `fetch()` rejects only if a request cannot be made or a response cannot be retrieved. Often it happens because of network problems: no internet connection, host not found, the server is not responding.  
 
@@ -108,7 +112,7 @@ If you'd like to throw an error on a *bad HTTP status* (outside of the range `20
 
 ```javascript{4-7}
 async function fetchMoviesBadStatus() {
-  const response = await fetch('/api/oops/list');
+  const response = await fetch('/oops');
 
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
@@ -143,7 +147,7 @@ In the following example, a `fetch()` request is cancelled when clicking a butto
 
 ```javascript{3,9,12}
 async function fetchMoviesWithCancel(controller) {
-  const response = await fetch('/api/movies/list', { 
+  const response = await fetch('/movies', { 
     signal: controller.signal
   });
   const movies = await response.json();
@@ -176,8 +180,8 @@ For example, let's start 2 parallel requests to fetch movies and categories:
 ```javascript{2-5}
 async function fetchMoviesAndCategories() {
   const [moviesResponse, categoriesResponse] = await Promise.all([
-    fetch('/api/movies/list'),
-    fetch('/api/categories/list')
+    fetch('/movies'),
+    fetch('/categories')
   ]);
 
   const movies = await moviesResponse.json();
@@ -223,7 +227,7 @@ Then let's create an instance of `Fetcher` class, and use it to fetch the movies
 const fetcher = new Fetcher();
 
 async function fetchMoviesBadStatus() {
-  const response = await fetcher.fetch('/api/movies/list');
+  const response = await fetcher.fetch('/movies');
 
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
@@ -243,7 +247,7 @@ fetchMoviesBadStatus().then(movies => {
 });
 ```
 
-`await fetcher.fetch('/api/movies/list')` performs the request.  
+`await fetcher.fetch('/movies')` performs the request.  
 
 The logic inside the if statement `if (!response.ok) { ... }` throws an error if the response status is outside `200` to `299` range. This logic should be refactored into an interceptor because it performs changes to the response. Let's move this logic into a decorator `FetchDecoratorBadStatus`:
 
@@ -278,7 +282,7 @@ const fetcher = new FetchDecoratorBadStatus(
 );
 
 async function fetchMoviesBadStatus() {
-  const response = await fetcher.fetch('/api/movies/list');
+  const response = await fetcher.fetch('/movies');
   const movies = await response.json();
   return movies;
 }
