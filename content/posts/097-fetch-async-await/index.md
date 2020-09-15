@@ -1,6 +1,6 @@
 ---
 title: "How to Use Fetch with async/await"
-description: "How to use fetch()  with async/await syntax in JavaScript: fetch JSON data, handle errors, make parallel requests, intercept requests."
+description: "How to use fetch() with async/await syntax in JavaScript: fetch JSON data, handle errors, make parallel requests, cancel and intercept requests."
 published: "2020-09-15T08:40Z"
 modified: "2020-09-15T08:40Z"
 thumbnail: "./images/cover-4.png"
