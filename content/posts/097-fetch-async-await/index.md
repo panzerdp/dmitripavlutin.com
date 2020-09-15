@@ -13,8 +13,6 @@ commentsThreadId: javascript-fetch-async-await
 
 The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) has become the native way to fetch resources in Frontend applications.  
 
-JavaScript also provides the `async/await` syntax to easily handle the asynchronous operations. This syntactic sugar works well `fetch()`.  
-
 In this post, I'm going to show the common scenarios of how to use Fetch API with async/await syntax. The goal is to make you confident on how to fetch data, handle fetch errors, cancel a fetch request, and more.  
 
 Before starting, I recommend [familiarizing](/javascript-async-await/) with `async/await` syntax. I'm going to use it extensively in the examples below.  
