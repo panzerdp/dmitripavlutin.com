@@ -86,9 +86,9 @@ The response object offers a lot of useful methods (all returning promises):
 
 ## 3. Handling fetch errors
 
-When I was familiarizing with `fetch()`, I was surprised that `fetch()` doesn't throw an error when the server returns an HTTP error status, e.g. `404`.  
+When I was familiarizing with `fetch()`, I was surprised that `fetch()` doesn't throw an error when the server returns a bad HTTP status, e.g. `404` or `502`.  
 
-For example, let's try to access a non-existing page `'https://movies.com/oops'` on the server. As expected, such request would end up in a `404` response status:
+Let's try to access a non-existing page `'/oops'` on the server. As expected, such request ends in a `404` response status:
 
 ```javascript
 async function fetchMovies404() {
@@ -110,7 +110,7 @@ A response with status `404` and the text `'Page not found'` is returned because
 
 `fetch()` rejects only if a request cannot be made or a response cannot be retrieved. Often it happens because of network problems: no internet connection, host not found, the server is not responding.  
 
-Fortunately, `response.ok` property lets you separate successful from bad HTTP response statuses. The property is set to `true` only if the response has status from `200` to `299`, inclusive. 
+Fortunately, `response.ok` property lets you separate good from bad HTTP response statuses. The property is set to `true` only if the response has status from `200` to `299`, inclusive. 
 
 In the above example, the `response.ok` property is `false` because the response has status `404`.
 
