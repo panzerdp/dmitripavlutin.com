@@ -22,22 +22,22 @@ Before starting, I recommend [familiarizing](/javascript-async-await/) with `asy
 
 ## 1. Intro to *fetch()*
 
-The Fetch API fetches resources, usually across the network. Fetch API is useful to make HTTP requests (either `GET`, `POST`), download files.  
+The Fetch API fetches resources, usually across the network. You can make HTTP requests (`GET`, `POST`), download and upload files.  
 
-To start a request, you need to call the special function `fetch()`:
+To start a request, call the special function `fetch()`:
 
 ```javascript
 const response = await fetch(resource[, options]);
 ```
 
-`fetch()` accepts 2 arguments:
+which accepts 2 arguments:
 
 * `resource` can be either a URL string, or a [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) object  
 * `options` is an object to configure the request with properties like `method` (`'GET'`, `'POST'`), `headers`, `body`, `credentials`, [and more](https://javascript.info/fetch-api).  
 
-Calling `fetch()` starts a request and returns a promise. When the request completes, the promise is resolved with the [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object from where you can extract useful data like JSON. If the request fails due to some network problems, the promise is rejected.    
+`fetch()` starts a request and returns a promise. When the request completes, the promise is resolved with the [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object from where you can extract useful data like JSON. If the request fails due to some network problems, the promise is rejected.    
 
-Because `fetch()` returns a promise, `async/await` syntax fits great here.    
+`async/await` syntax fits great with `fetch()` because it simplifies the work with promises.      
 
 For example, let's make a request to fetch a list of movies:
 
@@ -75,6 +75,14 @@ fetchMoviesJSON().then(movies => {
 from the response.  
 
 To get the response data as JSON you have to use `await response.json()` because `response.json()` returns a promise.  
+
+The response object offers a lot of useful methods (all returning promises):
+
+* `response.json()` returns a promise resolved to a JSON object
+* `response.text()` returns a promise resolved to raw text
+* `response.formData()` returns a promise resolved to [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData)
+* `response.blob()` returns a promise resolved to a [Blog](https://developer.mozilla.org/en-US/docs/Web/API/Blob) (a file-like object of raw data)
+* `response.arrayBuffer()()` returns a promise resolved to an [ArryBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) (raw generic binary data)
 
 ## 3. Handling fetch errors
 
@@ -298,7 +306,7 @@ fetchMoviesBadStatus().then(movies => {
 
 The good thing about decorators approach is making `Fetcher` and `FetchDecoratorBadStatus` loosely coupled.  
 
-Even better, you can wrap your fetcher in as many decorators as you want: 
+Even better, you can wrap the fetcher in as many decorators as you want: 
 
 ```javascript
 const fetcher = new FetchDecorator1(
