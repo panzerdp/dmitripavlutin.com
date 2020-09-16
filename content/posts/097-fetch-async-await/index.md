@@ -213,9 +213,9 @@ Sometimes you might want to do some work before sending the request, or after re
 
 A good use case to intercept and perform some behavior after the request completes is to perform the fixes that were made [Handling fetch errors](#3-handling-fetch-errors): throw an error if the response status is not within the range `200` to `299`.  
 
-The thing is that `fetch()` API doesn't provide any functionality by itself to intercept the requests. That's understandable, because `fetch()` API is designed to be simple.  
+`fetch()` API doesn't provide any functionality to intercept the requests. That's understandable, because `fetch()` API is designed to be simple.  
 
-While not being the only solution, the [decorator pattern](https://refactoring.guru/design-patterns/decorator) is a good solution to implement the interception of `fetch()` requests.  
+The [decorator pattern](https://refactoring.guru/design-patterns/decorator) is a good solution to design the interception of `fetch()` requests.  
 
 First, let's define a simple class `Fetcher` which has only a `fetch()` method:
 
@@ -304,7 +304,7 @@ fetchMoviesBadStatus().then(movies => {
 
 `new FetchDecoratorBadStatus(new Fetcher())` is how you decorate the regular `Fetcher` instance. Because the decorator doesn't change the interface of the decorated `Fetcher`, you can fetch movies as before: `await fetcher.fetch('/movies')`.  
 
-The good thing about decorators approach is making `Fetcher` and `FetchDecoratorBadStatus` loosely coupled.  
+The decorator makes `Fetcher` and `FetchDecoratorBadStatus` loosely coupled.  
 
 Even better, you can wrap the fetcher in as many decorators as you want: 
 
