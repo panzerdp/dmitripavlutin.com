@@ -224,7 +224,7 @@ Let's use the ternary operator. When the placeholder uses backticks `` ` `` it's
 
 ```javascript{2}
 function getLoadingMessage(isLoading) {
-  return `Data is ${isLoading: `loading...` : `done!`}`;
+  return `Data is ${isLoading ? `loading...` : `done!`}`;
 }
 ```
 
@@ -232,7 +232,7 @@ But using single quotes inside the placeholder just looks better:
 
 ```javascript{2}
 function getLoadingMessage(isLoading) {
-  return `Data is ${isLoading: 'loading...' : 'done!'}`;
+  return `Data is ${isLoading ? 'loading...' : 'done!'}`;
 }
 ```
 
