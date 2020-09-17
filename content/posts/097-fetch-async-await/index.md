@@ -39,7 +39,7 @@ Executing `fetch()` starts a request and returns a promise. When the request com
 
 `async/await` syntax fits great with `fetch()` because it simplifies the work with promises.      
 
-For example, let's make a request to fetch a some movies:
+For example, let's make a request to fetch some movies:
 
 ```javascript
 async function fetchMovies() {
