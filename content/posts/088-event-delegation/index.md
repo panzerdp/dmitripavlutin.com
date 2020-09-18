@@ -91,7 +91,7 @@ lets you catch events from different phases.
 * If `captureOrOptions` argument is missing, `false` or `{ capture: false }`, then the listener captures the events of *target and bubble phases*
 * If the argument is `true` or `{ capture: true }`, then the listener listens for events of *capture phase*.  
 
-The following event handler listens for click events of capture phases occured on `<body>` element:
+The following event handler listens for click events in capture phase occured on `<body>` element:
 
 ```javascript{3}
 document.body.addEventListener('click', () => {
