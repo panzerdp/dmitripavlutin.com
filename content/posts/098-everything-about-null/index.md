@@ -96,17 +96,122 @@ if (null) {
 
 ### 2.2 *typeof null*
 
-You might be aware already of the `typeof value` operator that determines the type of value. 
+`typeof value` operator determines the type of value. For example `typoeof 15` is `'number'`, `typeof false` is `'boolean'`, `typeof { prop: 'Value' }` evaluates to `'object'`, etc.
 
-The operator evaluates to one of the following string values:
+However, to what value would `type null` evaluate to? 
 
-* `'number'` for numbers like `0`, `1.5`
-* `'boolean'` for booleans like `true` or `false`
-* 
+```javascript
+const missingObject = null;
+
+typeof missingObject; // => 'object'
+```
+
+How could the type of a *missing object* could evaluate to `'object'`? Turns out `typoef null` evaluating `'object'` was a mistake in the early JavaScript implementation.  
+
+If you'd like to check whether a variable contains an object using `typoeof` operator, you have to check againts `null` too:
+
+```javascript
+function isObject(object) {
+  return typoeof object === 'object' && object !== null;
+}
+
+isObject({ prop: 'Value' }); // => true
+isObject(15);                // => false
+isObject(null);              // => false
+```
 
 ## 3. null vs undefined
 
-## 4. Alternatives to null
+`undefined` is also a special value meaning a missing value. However, stricter `undefined` means a variable or object property that is in an unitialized state.  
+
+For example, if you declare a variable without assigning an initial value, accessing such variable evaluates to `undefined`:
+
+```javascript
+let myVariable;
+
+myVariable; // => undefined
+```
+
+The main difference between `null` and `undefined` is that `null` represents a missing object, while `undefined` represents unitialized state.  
+
+The strict equality operator `===` distinguishes `null` from `undefined`:
+
+```javascript
+null === undefined; // => false
+```
+
+While loose equality operator `==` considers `null` and `undefined` equal:
+
+```javascript
+null == undefined; // => true
+```
+
+I use the loose equality operator to check whether a variable is `null` or `undefined`:
+
+```javascript
+function isEmpty(value) {
+  return value == null;
+}
+
+isEmpty(42);                // => false
+isEmpty({ prop: 'Value' }); // => false
+isEmpty(null);              // => true
+isEmpty(undefined);         // => true
+```
+
+## 4. Alternatives to *null*
+
+It's tempting to return `null` when you cannot construct an object. Unfortunetely, this practice has downsides.  
+
+As soon as `null` appears within your execution stack, you always have to check for it and handle it separately.  
+
+I try to avoid returning `null` in favor of other approaches:
+
+* return default object instead of `null`
+* throw an error instead of returning `null`
+
+Let's recall the `greetObject()` function that returns greeting objects. 
+
+Instead of returning `null` when the argument is missing, you could either return a default object:
+
+```javascript
+function greetObject(who) {
+  if (!who) {
+    who = 'Unknown';
+  }
+  return { message: `Hello, ${who}!` };
+}
+
+greetObject('Eric'); // => { message: 'Hello, Eric!' }
+greetObject();       // => { message: 'Hello, Unknown!' }
+```
+
+either throw an error:
+
+```javascript
+function greetObject(who) {
+  if (!who) {
+    throw new Error('"who" argument is missing');
+  }
+  return { message: `Hello, ${who}!` };
+}
+
+greetObject('Eric'); // => { message: 'Hello, Eric!' }
+greetObject();       // => throws an error
+```
 
 ## 5. Summary
 
+`null` is a special value in JavaScript that represents a missing object.  
+
+The strict equality operator can be used to check whether a variable is null: `variable === null`.  
+
+`typoef` operator is useful to determine the type of a variable (number, string, boolean). However, `typeof` is misleading in case of `null`: `typoeof null` evaluates to `'object'`.  
+
+`null` and `undefined` as somehow equal, still, `null` represents a missing object, while `undefined` unitialized state.  
+
+I advise to avoid if possible returning `null` or setting variables to `null`. That would lead to a spread of null values and verifications for `null`. Instead, try to use approaches like using object with default props, or even throw errors.  
+
+Either way, `null` is an important value in JavaScript. Hopefully, this post has helped you understand it.  
+
+*What condition do you use to check for `null` value?*
