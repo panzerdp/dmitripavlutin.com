@@ -1,9 +1,9 @@
 ---
-title: "Everything About null in JavaScript"
+title: "Everything about null in JavaScript"
 description: "In JavaScript null is a special value  that represents a missing object."
 published: "2020-09-22T08:00Z"
 modified: "2020-09-22T08:00Z"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover-2.png"
 slug: javascript-null
 tags: ['javascript', 'null', 'object']
 recommended: ['7-tips-to-handle-undefined-in-javascript', 'nan-in-javascript']
@@ -31,7 +31,10 @@ let myObject = null;
 
 In this post you will learn about `null` value in JavaScript: its meaning, how to detect it, and the difference between `undefined` and `null`, and more.  
 
-## 1. What is null
+```toc
+```
+
+## 1. What is *null*
 
 Here's what the JavaScript [specification](https://tc39.es/ecma262/#sec-null-value) says about `null`:
 
@@ -61,7 +64,7 @@ When invoking the function with a string argument like `greetObject('Eric')`, as
 
 However, when invoking the function with no arguments &mdash; `greetObject()` &mdash; the function returns `null`, which means a missing object. Returning `null` is reasonable because `who` parameter has no value, and the greeting object cannot be created.  
 
-## 2. How to check for null
+## 2. How to check for *null*
 
 The simplest and the most correct way to check for `null` value is by using the strict equality operator:
 
@@ -77,7 +80,29 @@ existingObject === null; // => false
 
 If the variable contains a non-null value, like an object, the expression `existingObject === null` evaluates to `false`.  
 
-It worth mentioning that `null`, alongside with `false`, `0`, `''`, `undefined`, `NaN` are falsy values. If a falsy value is encountered in conditionals, then JavaScript transforms this value to `false`.  
+### 2.1 *null* is falsy
+
+It worth mentioning that `null`, alongside with `false`, `0`, `''`, `undefined`, `NaN` are falsy values. If a falsy value is encountered in conditionals, then JavaScript coerces falsy to `false`.  
+
+```javascript
+Boolean(null); // => false
+
+if (null) {
+  console.log('null is truthy');
+} else {
+  console.log('null is falsy'); // logs 'null is falsy'
+}
+```
+
+### 2.2 *typeof null*
+
+You might be aware already of the `typeof value` operator that determines the type of value. 
+
+The operator evaluates to one of the following string values:
+
+* `'number'` for numbers like `0`, `1.5`
+* `'boolean'` for booleans like `true` or `false`
+* 
 
 ## 3. null vs undefined
 
