@@ -33,14 +33,32 @@ In this post you will learn about `null` value in JavaScript: its meaning, how t
 
 ## 1. What is null
 
-A good way to find the correct information about a particular value is to look directly into the JavaScript specification.  
+Here's what the JavaScript [specification](https://tc39.es/ecma262/#sec-null-value) says about `null`:
 
-Here's what it says about `null`:
+> `null` is a primitive value that represents *the intentional absence of any object value*.
 
-> 
+If you see a `null` value, then at that place should have been an object, but for some reason an object wasn't created.  
+
+For example, let's create a function that creates object with greetings messages:
+
+```javascript
+function greetObject(who) {
+  if (!who) {
+    return null;
+  }
+  return {
+    message: `Hello, ${who}!`;
+  };
+}
+
+
+```
 
 ## 2. How to check for null
 
 ## 3. null vs undefined
 
 ## 4. Alternatives to null
+
+## 5. Summary
+
