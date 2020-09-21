@@ -11,11 +11,9 @@ type: post
 commentsThreadId: javascript-null
 ---
 
-In JavaScript there 2 main categories of types: primitives (strings, booleans, numbers, symbols) and objects.  
+JavaScript has 2 categories of types: primitives (strings, booleans, numbers, symbols) and objects.  
 
-Objects are complex data structures. The simplest object in JavaScript is the plain object: a collection of keys and associated values. 
-
-For example the variable `myObject` contains a plain object defined using an object literal:
+Objects are complex data structures. The simplest object in JavaScript is the plain object &mdash; a collection of keys and associated values:
 
 ```javascript
 let myObject = {
@@ -29,7 +27,7 @@ But there are situations when for some reason an object cannot be created. In su
 let myObject = null;
 ```
 
-In this post you will learn about `null` value in JavaScript: its meaning, how to detect it, and the difference between `undefined` and `null`, and more.  
+In this post, you will learn about `null` value in JavaScript: its meaning, how to detect `null`, understand the difference between `undefined` and `null`.  
 
 ```toc
 ```
@@ -42,9 +40,7 @@ Here's what the JavaScript [specification](https://tc39.es/ecma262/#sec-null-val
 
 If you see `null` (either assigned to a variable or returned by a function), then at that place should have been an object, but for some reason an object wasn't created.  
 
-Let's study the idea of `null` from an example. 
-
-The function `greetObject()` creates objects, but also can return `null` when an object cannot be created:
+For example, the function `greetObject()` creates greeting objects, but also can return `null` when an object cannot be created:
 
 ```javascript{3}
 function greetObject(who) {
@@ -57,8 +53,6 @@ function greetObject(who) {
 greetObject('Eric'); // => { message: 'Hello, Eric!' }
 greetObject();       // => null
 ```
-
-`greetObject(who)` creates plain JavaScript objects with a `message` property.  
 
 When invoking the function with a string argument like `greetObject('Eric')`, as expected, the function returns an object `{ message: 'Hello, Eric!' }`. 
 
@@ -82,7 +76,7 @@ If the variable contains a non-null value, like an object, the expression `exist
 
 ### 2.1 *null* is falsy
 
-It worth mentioning that `null`, alongside with `false`, `0`, `''`, `undefined`, `NaN` are falsy values. If a falsy value is encountered in conditionals, then JavaScript coerces falsy to `false`.  
+It worth mentioning that `null`, alongside with `false`, `0`, `''`, `undefined`, `NaN`, is a falsy value. If a falsy value is encountered in conditionals, then JavaScript coerces falsy to `false`.  
 
 ```javascript
 Boolean(null); // => false
@@ -96,9 +90,9 @@ if (null) {
 
 ### 2.2 *typeof null*
 
-`typeof value` operator determines the type of value. For example `typoeof 15` is `'number'`, `typeof false` is `'boolean'`, `typeof { prop: 'Value' }` evaluates to `'object'`, etc.
+`typeof value` operator determines the type of value. For example `typoeof 15` is `'number'` and `typeof { prop: 'Value' }` evaluates to `'object'`.  
 
-However, to what value would `type null` evaluate to? 
+Interestingly, to what value `type null` evaluates to? 
 
 ```javascript
 const missingObject = null;
@@ -122,7 +116,7 @@ isObject(null);              // => false
 
 ## 3. null vs undefined
 
-`undefined` is also a special value meaning a missing value. However, stricter `undefined` means a variable or object property that is in an unitialized state.  
+`undefined` is also a special value meaning a missing value. `undefined` means a variable or object property that is unitialized.
 
 For example, if you declare a variable without assigning an initial value, accessing such variable evaluates to `undefined`:
 
@@ -161,13 +155,13 @@ isEmpty(undefined);         // => true
 
 ## 4. Alternatives to *null*
 
-It's tempting to return `null` when you cannot construct an object. Unfortunetely, this practice has downsides.  
+It's tempting to return `null` when you cannot construct an object. But this practice has downsides.  
 
 As soon as `null` appears within your execution stack, you always have to check for it and handle it separately.  
 
-I try to avoid returning `null` in favor of other approaches:
+I try to avoid returning `null` in favor of other practices like:
 
-* return default object instead of `null`
+* return a default object instead of `null`
 * throw an error instead of returning `null`
 
 Let's recall the `greetObject()` function that returns greeting objects. 
@@ -204,14 +198,14 @@ greetObject();       // => throws an error
 
 `null` is a special value in JavaScript that represents a missing object.  
 
-The strict equality operator can be used to check whether a variable is null: `variable === null`.  
+The strict equality operator determines whether a variable is null: `variable === null`.  
 
 `typoef` operator is useful to determine the type of a variable (number, string, boolean). However, `typeof` is misleading in case of `null`: `typoeof null` evaluates to `'object'`.  
 
-`null` and `undefined` as somehow equal, still, `null` represents a missing object, while `undefined` unitialized state.  
+`null` and `undefined` as somehow equivalent, still, `null` represents a missing object, while `undefined` unitialized state.  
 
-I advise to avoid if possible returning `null` or setting variables to `null`. That would lead to a spread of null values and verifications for `null`. Instead, try to use approaches like using object with default props, or even throw errors.  
+I advise to avoid if possible returning `null` or setting variables to `null`. This practices leads to spread of null values and verifications for `null`. Instead, try to use objects with default properties, or even throw errors.  
 
-Either way, `null` is an important value in JavaScript. Hopefully, this post has helped you understand it.  
+Either way, `null` is an important concept in JavaScript.  
 
 *What condition do you use to check for `null` value?*
