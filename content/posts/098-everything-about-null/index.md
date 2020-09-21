@@ -38,7 +38,7 @@ Here's what the JavaScript [specification](https://tc39.es/ecma262/#sec-null-val
 
 > `null` is a primitive value that represents *the intentional absence of any object value*.
 
-If you see `null` (either assigned to a variable or returned by a function), then at that place should have been an object, but for some reason an object wasn't created.  
+If you see `null` (either assigned to a variable or returned by a function), then at that place should have been an object, but for some reason, an object wasn't created.  
 
 For example, the function `greetObject()` creates greeting objects, but also can return `null` when an object cannot be created:
 
@@ -76,7 +76,7 @@ If the variable contains a non-null value, like an object, the expression `exist
 
 ### 2.1 *null* is falsy
 
-It worth mentioning that `null`, alongside with `false`, `0`, `''`, `undefined`, `NaN`, is a falsy value. If a falsy value is encountered in conditionals, then JavaScript coerces falsy to `false`.  
+It worth mentioning that `null`, alongside `false`, `0`, `''`, `undefined`, `NaN`, is a falsy value. If a falsy value is encountered in conditionals, then JavaScript coerces falsy to `false`.  
 
 ```javascript
 Boolean(null); // => false
@@ -116,7 +116,7 @@ isObject(null);              // => false
 
 ## 3. null vs undefined
 
-`undefined` is also a special value meaning a missing value. `undefined` means a variable or object property that is unitialized.
+`undefined` is also a special value meaning a missing value. `undefined` means a variable or object property that is uninitialized.
 
 For example, if you declare a variable without assigning an initial value, accessing such variable evaluates to `undefined`:
 
@@ -126,7 +126,7 @@ let myVariable;
 myVariable; // => undefined
 ```
 
-The main difference between `null` and `undefined` is that `null` represents a missing object, while `undefined` represents unitialized state.  
+The main difference between `null` and `undefined` is that `null` represents a missing object, while `undefined` represents an uninitialized state.  
 
 The strict equality operator `===` distinguishes `null` from `undefined`:
 
@@ -202,9 +202,9 @@ The strict equality operator determines whether a variable is null: `variable ==
 
 `typoef` operator is useful to determine the type of a variable (number, string, boolean). However, `typeof` is misleading in case of `null`: `typoeof null` evaluates to `'object'`.  
 
-`null` and `undefined` as somehow equivalent, still, `null` represents a missing object, while `undefined` unitialized state.  
+`null` and `undefined` as somehow equivalent, still, `null` represents a missing object, while `undefined` uninitialized state.  
 
-I advise to avoid if possible returning `null` or setting variables to `null`. This practices leads to spread of null values and verifications for `null`. Instead, try to use objects with default properties, or even throw errors.  
+I advise avoiding if possible returning `null` or setting variables to `null`. This practice leads to the spread of null values and verifications for `null`. Instead, try to use objects with default properties, or even throw errors.  
 
 Either way, `null` is an important concept in JavaScript.  
 
