@@ -56,7 +56,7 @@ greetObject();       // => null
 
 When invoking the function with a string argument like `greetObject('Eric')`, as expected, the function returns an object `{ message: 'Hello, Eric!' }`. 
 
-However, when invoking the function with no arguments &mdash; `greetObject()` &mdash; the function returns `null`, which means a missing object. Returning `null` is reasonable because `who` parameter has no value, and the greeting object cannot be created.  
+However, when invoking the function with no arguments &mdash; `greetObject()` &mdash; the function returns `null`. Returning `null` is reasonable because `who` parameter has no value, and the greeting object cannot be created.  
 
 ## 2. How to check for *null*
 
@@ -90,23 +90,23 @@ if (null) {
 
 ### 2.2 *typeof null*
 
-`typeof value` operator determines the type of value. For example `typoeof 15` is `'number'` and `typeof { prop: 'Value' }` evaluates to `'object'`.  
+`typeof value` operator determines the type of value. For example `typeof 15` is `'number'` and `typeof { prop: 'Value' }` evaluates to `'object'`.  
 
 Interestingly, to what value `type null` evaluates to? 
 
 ```javascript
-const missingObject = null;
-
-typeof missingObject; // => 'object'
+typeof null; // => 'object'
 ```
 
-How could the type of a *missing object* could evaluate to `'object'`? Turns out `typoef null` evaluating `'object'` was a mistake in the early JavaScript implementation.  
+How could the type of a *missing object* could evaluate to `'object'`? Turns out `typoef null` evaluating `'object'` was a [mistake](https://2ality.com/2013/10/typeof-null.html) in the early JavaScript implementation.  
 
-If you'd like to check whether a variable contains an object using `typoeof` operator, you have to check againts `null` too:
+Do not use `typeof` operator to detect a `null` value. As mentioned previously, use the strict equality operator.  
+
+If you'd like to check whether a variable contains an object using `typeof` operator, you have to check againts `null` too:
 
 ```javascript
 function isObject(object) {
-  return typoeof object === 'object' && object !== null;
+  return typeof object === 'object' && object !== null;
 }
 
 isObject({ prop: 'Value' }); // => true
@@ -114,7 +114,76 @@ isObject(15);                // => false
 isObject(null);              // => false
 ```
 
-## 3. null vs undefined
+## 3. The trap of *null*
+
+`null` might appear in situations when you expect an object. Then if you try to extract a property from `null`, JavaScript throws an error.  
+
+Let's use again `greetObject()` function:
+
+```javascript
+let who;
+who = '';
+
+greetObject(who).message; 
+// throws "TypeError: greetObject() is null"
+```
+
+Because `who` variable is an empty string, the function returns `null`. When accessing `message` property from `null`, a TypeError error is thrown.  
+
+You can handle `null` by either using the [optional chaining](https://dmitripavlutin.com/javascript-optional-chaining/) with nullish colescing:
+
+```javascript
+let who;
+who = '';
+
+greetObject(who)?.message ?? 'Hello, Stranger!';  
+// => 'Hello, Stranger!'
+```
+
+or use 2 alternatives described in the next section.  
+
+## 4. Alternatives to *null*
+
+It's tempting to return `null` when you cannot construct an object. But this practice has downsides.  
+
+As soon as `null` appears within your execution stack, you always have to check for it and handle it separately.  
+
+I try to avoid returning `null` in favor of other practices like:
+
+* return a default object instead of `null`
+* throw an error instead of returning `null`
+
+Let's recall the `greetObject()` function that returns greeting objects. 
+
+Instead of returning `null` when the argument is missing, you could either return a default object:
+
+```javascript
+function greetObject(who) {
+  if (!who) {
+    who = 'Stranger';
+  }
+  return { message: `Hello, ${who}!` };
+}
+
+greetObject('Eric'); // => { message: 'Hello, Eric!' }
+greetObject();       // => { message: 'Hello, Stranger!' }
+```
+
+either throw an error:
+
+```javascript
+function greetObject(who) {
+  if (!who) {
+    throw new Error('"who" argument is missing');
+  }
+  return { message: `Hello, ${who}!` };
+}
+
+greetObject('Eric'); // => { message: 'Hello, Eric!' }
+greetObject();       // => throws an error
+```
+
+## 5. *null* vs *undefined*
 
 `undefined` is also a special value meaning a missing value. `undefined` means a variable or object property that is uninitialized.
 
@@ -153,54 +222,13 @@ isEmpty(null);              // => true
 isEmpty(undefined);         // => true
 ```
 
-## 4. Alternatives to *null*
-
-It's tempting to return `null` when you cannot construct an object. But this practice has downsides.  
-
-As soon as `null` appears within your execution stack, you always have to check for it and handle it separately.  
-
-I try to avoid returning `null` in favor of other practices like:
-
-* return a default object instead of `null`
-* throw an error instead of returning `null`
-
-Let's recall the `greetObject()` function that returns greeting objects. 
-
-Instead of returning `null` when the argument is missing, you could either return a default object:
-
-```javascript
-function greetObject(who) {
-  if (!who) {
-    who = 'Unknown';
-  }
-  return { message: `Hello, ${who}!` };
-}
-
-greetObject('Eric'); // => { message: 'Hello, Eric!' }
-greetObject();       // => { message: 'Hello, Unknown!' }
-```
-
-either throw an error:
-
-```javascript
-function greetObject(who) {
-  if (!who) {
-    throw new Error('"who" argument is missing');
-  }
-  return { message: `Hello, ${who}!` };
-}
-
-greetObject('Eric'); // => { message: 'Hello, Eric!' }
-greetObject();       // => throws an error
-```
-
-## 5. Summary
+## 6. Summary
 
 `null` is a special value in JavaScript that represents a missing object.  
 
 The strict equality operator determines whether a variable is null: `variable === null`.  
 
-`typoef` operator is useful to determine the type of a variable (number, string, boolean). However, `typeof` is misleading in case of `null`: `typoeof null` evaluates to `'object'`.  
+`typoef` operator is useful to determine the type of a variable (number, string, boolean). However, `typeof` is misleading in case of `null`: `typeof null` evaluates to `'object'`.  
 
 `null` and `undefined` as somehow equivalent, still, `null` represents a missing object, while `undefined` uninitialized state.  
 
