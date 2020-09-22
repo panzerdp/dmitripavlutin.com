@@ -62,7 +62,7 @@ However, when invoking the function with no arguments &mdash; `greetObject()` &m
 
 Thinking about a real-world analogy, you can imagine a variable as being a box. Just like a variable can hold an object, the box can contain objects like a teapot.  
 
-But once you receive a box and open it &mdash; there's *nothing* there. Someone made a mistake and sent you an empty box. The box contains no objects, or, saying it differently, contains a `null` value.  
+But once you receive a box and open it... and *nothing* there! Someone made a mistake and sent you an empty box. The box contains nothing, or, saying it differently, contains a `null` value.  
 
 ## 2. How to check for *null*
 
