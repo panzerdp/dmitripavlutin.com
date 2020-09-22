@@ -58,7 +58,7 @@ When invoking the function with a string argument like `greetObject('Eric')`, as
 
 However, when invoking the function with no arguments &mdash; `greetObject()` &mdash; the function returns `null`. Returning `null` is reasonable because `who` parameter has no value, and the greeting object cannot be created.  
 
-### 2.1 Real-world analogy of *null*
+### 1.1 Real-world analogy of *null*
 
 Thinking about a real-world analogy, you can imagine a variable as being a box. Just like a variable can hold an object, the box can contain objects like a teapot.  
 
