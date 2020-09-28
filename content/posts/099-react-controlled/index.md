@@ -3,7 +3,7 @@ title: "Controlled Inputs Using React Hooks"
 description: "How to implement a controlled inputs using React hooks."
 published: "2020-09-29T12:00Z"
 modified: "2020-09-29T12:00Z"
-thumbnail: "./images/cover-2.png"
+thumbnail: "./images/cover.png"
 slug: controlled-inputs-using-react-hooks
 tags: ['react', 'input', 'hook']
 recommended: ['use-react-memo-wisely', 'react-state-management']
@@ -135,7 +135,7 @@ The controlled input is a convinient technique to access the value of input fiel
 Setting up the controlled input requires 3 easy steps:  
 
 1. Create the state to hold the input value: `[val, setVal] = useState('')`
-* Define the event handler to update the state: `onChange = (event) => setVal(event.target.value)`
+* Define the event handler to update the state: `onChange = event => setVal(event.target.value)`
 * Attach the event handler and set `value` attribute on the input field: `<input onChange={onChange} value={val} />`.  
 
 To debounce the changing value of the input you need to use a separate state holding the debounced value. For such cases use the specialized hook `debouncedQuery = useDebouncedValue(value, wait)`.  
