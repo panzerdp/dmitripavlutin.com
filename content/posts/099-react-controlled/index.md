@@ -130,14 +130,14 @@ export function useDebouncedValue(value, wait) {
 
 ## 3. Summary
 
-The controlled inputs are a good way to access the values of input fields in React. The controlled inputs approach doesn't use references and enables having a single source of truth.  
+The controlled input is a convinient technique to access the value of input fields in React. It doesn't use references and creates a single source of truth to access the input value.  
 
-Setting up controlled inputs requires 3 easy steps:  
+Setting up the controlled input requires 3 easy steps:  
 
 1. Create the state to hold the input value: `[val, setVal] = useState('')`
 * Define the event handler to update the state: `onChange = (event) => setVal(event.target.value)`
-* Attach the event handler and set value attribute on the input: `<input value={val} onChange={onChange} />`.  
+* Attach the event handler and set `value` attribute on the input field: `<input onChange={onChange} value={val} />`.  
 
-To debounce the changing value of the input you need to use a separate state holding the debounced value. For such cases use the specialized hook `useDebouncedValue(value, wait)`.  
+To debounce the changing value of the input you need to use a separate state holding the debounced value. For such cases use the specialized hook `debouncedQuery = useDebouncedValue(value, wait)`.  
 
 *Do you prefer controlled or uncontrolled components?*
