@@ -1,8 +1,8 @@
 ---
 title: "Controlled Inputs Using React Hooks"
-description: "Let’s see how to design controlled inputs using React hooks."
-published: "2020-09-29T12:00Z"
-modified: "2020-09-29T12:00Z"
+description: "Let’s see how to design controlled inputs using React hooks (also w/ debouncing explanation)."
+published: "2020-09-29T07:20Z"
+modified: "2020-09-29T07:20Z"
 thumbnail: "./images/cover.png"
 slug: controlled-inputs-using-react-hooks
 tags: ['react', 'input', 'hook']
@@ -19,11 +19,13 @@ The second approach, which I like because it doesn't use references, is using a 
 
 ## 1. The controlled input
 
+A good way to understand how controlled inputs works is by studying an example.  
+
 A web page consists of a list of employees' names. Your task is to add an input field on this page. When the user types into this field the list of employees is filtered by the names that contain the typed query.  
 
 That's a good scenario when you can use a controlled input. Here's a possible implementation:
 
-```jsx{2,4,15-17}
+```jsx{2,4,15-16}
 function FilteredEmployeesList({ employees }) {
   const [query, setQuery] = useState('');
   
@@ -49,7 +51,9 @@ function FilteredEmployeesList({ employees }) {
 }
 ```
 
-Open the [demo]() and enter a query in the input field. You'll see how the list of employees is filtered.  
+Open the [demo](https://codesandbox.io/s/gracious-dawn-29qi6?file=/src/App.js) and enter a query in the input field. You'll see how the list of employees is filtered.  
+
+The input field is *controlled* because React sets its value from the state. When user types into the input field, the `onChange` handler updates the state with the input's value accessed from the event object: `event.target.value`.  
 
 Setting up the controlled input requires 3 steps.
 
@@ -57,7 +61,7 @@ Setting up the controlled input requires 3 steps.
 
 Define the state that's going to hold the controlled input value: `const [query, setQuery] = useState('')`.  
 
-### Step 2. On change event handler
+### Step 2. Define on change event handler
 
 Then define an event handler that updates the state when the input value changes:
 
@@ -69,13 +73,11 @@ const onChange = event => setQuery(event.target.value);
 
 Finally, set on the input field the value attribute as the state value, as well attach the event handler: `<input type="text" value={query} onChange={onChange} />`. 
 
-Now the input field is *controlled* because React sets the value of the input from the state.   
-
 ## 2. Debouncing the controlled input
 
 You might notice in the previous implementation that as soon as you type a character into the input field, the list gets filtered right away. That's not always convenient because it distracts the user when typing the query. 
 
-Let's improve the user experience with debouncing: when the user types the query, let's filter the list after a timeout of 400ms.  
+Let's improve the user experience with debouncing: let's filter the list only after passing 400ms after the last change of the input field.  
 
 Let's see a possible implementation of a debounced controlled input:
 
@@ -108,11 +110,9 @@ function FilteredEmployeesList({ employees }) {
 }
 ```
 
-Open the [demo](), then enter a query into the input field. The employees' list doesn't filter while you type, but after passing 400ms after the latest keypress.  
+Open the [demo](https://codesandbox.io/s/affectionate-swartz-9yk2u?file=/src/App.js), then enter a query into the input field. The employees' list doesn't filter while you type, but after passing 400ms after the latest keypress.  
 
-`debouncedQuery` is the state value used to filter the employees' list requires and is separate from the input value state. This is the debounced state value, and it changes differently than the input state.  
-
-`debouncedQuery` state value is managed by a specialized hook `useDebouncedValue(query, 400) ` that implements the debouncing.  
+The new state value `debouncedQuery` value is managed by a specialized hook `useDebouncedValue(query, 400) ` that implements the debouncing. `debouncedQuery` state value is used to filter the employees' list and is derived from the input value state.  
 
 Here's the implementation of `useDebouncedValue()`:
 
@@ -129,6 +129,10 @@ export function useDebouncedValue(value, wait) {
 }
 ```
 
+`useDebouncedValue()` hook creates a new state derived from the main state.  
+
+The `useEffect()` hook uses `setTimeout()` to delay `wait` time the update of `debouncedValue` state when the main `value` state changes.  
+
 ## 3. Summary
 
 The controlled input is a convenient technique to access the value of input fields in React. It doesn't use references and serves as a single source of truth to access the input value.  
@@ -136,9 +140,9 @@ The controlled input is a convenient technique to access the value of input fiel
 Setting up a controlled input requires 3 steps:  
 
 1. Create the state to hold the input value: `[val, setVal] = useState('')`
-* Define the event handler to update the state: `onChange = event => setVal(event.target.value)`
+* Define the event handler to update the state when the user types into the input: `onChange = event => setVal(event.target.value)`
 * Attach the event handler and set `value` attribute on the input field: `<input onChange={onChange} value={val} />`.  
 
-To debounce the changing value of the input you need to create a new state holding the debounced value. Use the specialized hook `debouncedQuery = useDebouncedValue(value, wait)`.  
+Debouncing of the input value state requires creating a new derived state using the specialized hook `debouncedQuery = useDebouncedValue(value, wait)`.  
 
 *Do you prefer controlled or uncontrolled components?*
