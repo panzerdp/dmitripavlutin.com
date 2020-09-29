@@ -1,6 +1,6 @@
 ---
 title: "Controlled Inputs Using React Hooks"
-description: "Let’s see how to design controlled inputs using React hooks (also w/ debouncing explanation)."
+description: "How to make controlled inputs using React hooks (w/ debouncing)."
 published: "2020-09-29T07:20Z"
 modified: "2020-09-29T07:20Z"
 thumbnail: "./images/cover.png"
