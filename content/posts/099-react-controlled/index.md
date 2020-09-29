@@ -19,7 +19,7 @@ The second approach, which I like because it doesn't use references, is using a 
 
 ## 1. The controlled input
 
-A good way to understand how controlled inputs works is by studying an example.  
+A good way to understand how controlled inputs work is by studying an example.  
 
 A web page consists of a list of employees' names. Your task is to add an input field on this page. When the user types into this field the list of employees is filtered by the names that contain the typed query.  
 
