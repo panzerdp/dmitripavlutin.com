@@ -1,10 +1,10 @@
 ---
-title: "A Simple Explanation of JavaScript Iterables"
+title: "A Simple Explanation of JavaScript Iterators"
 description: "What are iterables and iterators in JavaScript, how to use them to iterate collections, and what data types are iterables."
 published: "2020-10-06T12:00Z"
 modified: "2020-10-06T12:00Z"
-thumbnail: "./images/cover-4.png"
-slug: javascript-iterables
+thumbnail: "./images/cover.png"
+slug: javascript-iterators
 tags: ['javascript', 'iterable', 'iterator', 'array']
 recommended: ['use-react-memo-wisely', 'react-state-management']
 type: post
@@ -23,7 +23,7 @@ const numbers = [1, 3, 4]; // consists of 1, 3 and 4
 
 To help you easily access the elements of collections, JavaScript implements a special pattern named iterator. 
 
-In this post, you will find what are iterables and iterators and how iterables are consumed in order to access each item of the collection.  
+In this post, you will find what are iterables and iterators and how iterables are consumed to access each item of the collection.  
 
 ```toc
 ```
@@ -58,9 +58,9 @@ for (const prop of person) {
 
 Unfortunately, `for...of` cycle cannot iterate over the properties of `person` object. 
 
-And the answer is seen from the error message: `TypeError: person is not iterable`. Clearly, `for...of` cycle requires an iterable collection to iterate over its items.  
+And the answer is seen from the error message: `TypeError: person is not iterable`. The `for...of` cycle requires an iterable collection to iterate over its items.  
 
-So, the first rule of thumb wheather a data structure is iterable is whether it is accepted by `for...of`.  
+So, the first rule of thumb whether a data structure is iterable is whether it is accepted by `for...of`.  
 
 Having this warm-up experiment, let's state stricter what an iterable is in the next section.   
 
@@ -95,11 +95,11 @@ interface Iterator {
 }
 ```
 
-I know that these theoretical terms are slighly confusing. But stay with me.  
+I know that these theoretical terms are slightly confusing. But stay with me.  
 
 ### 2.1 How array conforms to iterable
 
-As you know already from the warm-up experiment, the array is an iterables. How does the array conform to Iterable protocol?  
+As you know already from the warm-up experiment, the array is an iterables. How does the array conform to the Iterable protocol?  
 
 ```javascript
 const numbers = [1, 3, 4];
@@ -107,7 +107,7 @@ const numbers = [1, 3, 4];
 numbers[Symbol.iterator](); // => object
 ```
 
-Invoking the expression `numbers[Symbol.iterator]()` shows that the array instance contains the special method `Symbol.iterator`. This makes the array conform to Iterable protocol.  
+Invoking the expression `numbers[Symbol.iterator]()` shows that the array instance contains the special method `Symbol.iterator`. This makes the array conform to the Iterable protocol.  
 
 However, the `Symbol.iterator` method must return an object which conforms to `Iterator` protocol: let's name it the iterator object. 
 
