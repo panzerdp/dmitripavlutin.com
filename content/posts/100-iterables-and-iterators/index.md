@@ -11,19 +11,19 @@ type: post
 commentsThreadId: javascript-iterables
 ---
 
-In JavaScript some primitive types and data structures of type collection hold elements.  
+A collection is a data structure that contains some elements. 
 
-For example, a string type consists of characters, and an array contains items:
+For example, a string is a collection of characters, also an array is a collection of ordered items:  
 
 ```javascript
-const message = 'Hi!';     // consists of chars 'H', 'i' and '!'
+const message = 'Hi!';     // consists of 'H', 'i' and '!'
 
 const numbers = [1, 3, 4]; // consists of 1, 3 and 4
 ```
 
-To help you easily access the elements of collections, JavaScript implements a special pattern named iterator. 
+To help you easily access elements of collections of different structure, JavaScript implements a special pattern named [iterator](https://refactoring.guru/design-patterns/iterator). 
 
-In this post, you will find what are iterables and iterators and how iterables are consumed to access each item of the collection.  
+In this post, you will learn what are *iterables* and *iterators*. You'll also learn how to consum the iterables: how to iterate over the collection using `for...of` cycle, transform any iterable to an array using the spread operator `[...iterable]`, and more.   
 
 ```toc
 ```
@@ -43,7 +43,7 @@ for (const item of numbers) {
 // logs 1, 3, 4
 ```
 
-As expected, the loop `for...of` logs to console each item of `numbers` array. Good.
+As expected, the `for...of` loop logs to console each item of `numbers` array. Good.
 
 Now let's try another experiment. Can `for...of` enumerate each property of a plain JavaScript object?  
 
@@ -56,9 +56,9 @@ for (const prop of person) {
 // Throws "TypeError: person is not iterable"
 ```
 
-Unfortunately, `for...of` cycle cannot iterate over the properties of `person` object. 
+Not this time. `for...of` cycle cannot iterate over the properties of `person` object. 
 
-And the answer is seen from the error message: `TypeError: person is not iterable`. The `for...of` cycle requires an iterable collection to iterate over its items.  
+And the answer is seen from the error message: `TypeError: person is not iterable`. The `for...of` cycle requires an *iterable* collection to iterate over its items.  
 
 So, the first rule of thumb whether a data structure is iterable is whether it is accepted by `for...of`.  
 
@@ -66,9 +66,9 @@ Having this warm-up experiment, let's state stricter what an iterable is in the 
 
 ## 2. Iterable and iterator interfaces
 
-> An object is *Iterable* when it conforms to [iterable protocol](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Iteration_protocols#iterable). 
+> An object is *Iterable* when it conforms to `Iterable` interface.  
 
-The iterable protocol requires the iterable object to contain a special method [`Symbol.iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator) and value as a function that returns an iterator object.
+The `Iterable` interface requires the object to contain a method [`Symbol.iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator) that must return an *Iterator* object.  
 
 ```javascript
 interface Iterable {
@@ -79,9 +79,9 @@ interface Iterable {
 }
 ```
 
-> The *Iterator* object must conform to [iterator protocol](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Iteration_protocols#iterator).  
+> The *Iterator* object must conform to `Iterator` interface.  
 
-It needs to provide a property `next`, which value is a function that returns an object with properties `done` (a boolean to indicate the end of iteration) and `value` (the iteration result).  
+In simple words, the *Iterator* object must have a method `next()` that returns an object with properties `done` (a boolean indicating the end of iteration) and `value` (the item extracted from the collection at the iteration).  
 
 ```javascript
 interface Iterator {
@@ -95,11 +95,11 @@ interface Iterator {
 }
 ```
 
-I know that these theoretical terms are slightly confusing. But stay with me.  
+I know that these theoretical terms are confusing. But stay with me.  
 
 ### 2.1 How array conforms to iterable
 
-As you know already from the warm-up experiment, the array is an iterables. How does the array conform to the Iterable protocol?  
+You know from the warm-up experiment that the array is an iterable. How does the array conform to the `Iterable` protocol?  
 
 ```javascript
 const numbers = [1, 3, 4];
@@ -109,9 +109,9 @@ numbers[Symbol.iterator](); // => object
 
 Invoking the expression `numbers[Symbol.iterator]()` shows that the array instance contains the special method `Symbol.iterator`. This makes the array conform to the Iterable protocol.  
 
-However, the `Symbol.iterator` method must return an object which conforms to `Iterator` protocol: let's name it the iterator object. 
+The `numbers[Symbol.iterator]()` method must return the *iterator object* (which conforms to `Iterator` interface).  
 
-In simple words, the iterator object's sole purpose is to iterate the array items. Simply invoke the `iterator.next()` to access each item of the array!
+The iterator object is the one that actually performs the iteration over the array item. Just call `iterator.next()` to access each item of the array!
 
 ```javascript
 const numbers = [1, 3, 4];
@@ -124,19 +124,13 @@ iterator.next(); // => { value: 3, done: false }
 iterator.next(); // => { value: undefined, done: true }
 ```
 
-As the example demonstrates, each invocation of `iterator.next()` returns an array item in an object `{ value: <item>, done: <boolean> }`.  
+Each invocation of `iterator.next()` returns an object `{ value: <item>, done: <boolean> }`.  
 
-The `value` property contains the iterated item, while `done` property indicates whether the iteration is complete.  
+The `value` property contains the iterated item, while `done` indicates whether the iteration is complete.  
 
 When there are no more items to iterate, `iterator.next()` returns `{ value: undefined, done: true }`.  
 
-You can always define 
-
 ## 3. Consumers of iterables
-
-Hopefully, you might have now the first grasp of iterable. But why are they needed?  
-
-Iteration protocols is contract between iterable collections (e.g. arrays, strings) and the consumers of iterables (e.g. `for...of` cycle, `Array.from()`).  
 
 JavaScript provides a good set of cycles and functions that consume iterables.
 
@@ -153,11 +147,11 @@ for (const char of message) {
 // logs 'H', 'i', '!'
 ```
 
-In the above example, `message` is a string type which is also an iterable. `for...of` cycle iterates over the characters in the string.  
+In the above example, `message` is a string type that is an iterable. `for...of` cycle iterates over the characters in the string.  
 
 ### 3.2 Spread operator
 
-Another great consumer of iterable is the spread operator `[...iterable]`:
+Another great consumer of iterables is the spread operator `[...iterable]`:
 
 ```javascript
 const message = 'Hi!';
@@ -183,7 +177,7 @@ restChars; // => ['i', '!']
 
 `[firstChar, restChars] = message` is a destructuring assignment that destructures the iterable string `message`. 
 
-`firstChar` is assigned with the first character `'H'`. The rest of characters `['i', '!']` are stored into an array `restChars`.  
+`firstChar` is assigned with the first character `'H'`. The rest of characters `['i', '!']` are stored into the array `restChars`.  
 
 ### 3.4 Array.from()
 
@@ -198,9 +192,9 @@ chars; // => ['H', 'i', '!']
 
 ## 4. Native iterable types
 
-A lot of native data types in JavaScript are iterables. Any iterable can be consumed by an iterable consumer.  
+Many native data types in JavaScript are iterables. And *any iterable can be consumed by any iterable consumer*.  
 
-Here's a list of most used iterables in JavaScript.  
+Here's a list of the most popular iterable data type in JavaScript.  
 
 ### 4.1 Iterable array
 
@@ -230,7 +224,7 @@ for (const char of message) {
 
 ### 4.3 Iterable Map
 
-The `Map` object is iterable over its key, value pairs.
+The `Map` object is iterable over its key and value pairs.
 
 ```javascript
 const map = new Map();
@@ -259,8 +253,10 @@ for (const item of set) {
 
 ## 5. Summary
 
-Iterables are data types that can be iterated. The common iterables are arrays, strings, maps, sets.  
+Iterables are collections that can be iterated. To be an iterable, the object must conform to `Iterable` protocol.  
 
-Iterable consumers are language constructs to accepts iterables and consume their items. The most common iterable consumers are `for...of` cycle, spread operator `[...iterable]`.  
+Iterable consumers are language constructs that consume iterables. `for...of` cycle is an iterable consumer that simply cycles over each item of the iterable, spread operator `[...iterable]` creates an array from the iterable's items.  
 
-*Challenge: how would you implement an iterable that returns `n` random numbers from `0` to `100`?*  
+What makes the iterator pattern so useful is that any iterable can be used by any iterable consumer. Even more: you can define your own iterable types, and even define your own iterable consumers!
+
+*Challenge: how would you implement an iterable that generates `n` random numbers from `0` to `100`?*  
