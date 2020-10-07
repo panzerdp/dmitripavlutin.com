@@ -6,7 +6,7 @@ modified: "2020-10-06T08:30Z"
 thumbnail: "./images/cover.png"
 slug: javascript-iterators
 tags: ['javascript', 'iterable', 'iterator', 'array']
-recommended: ['use-react-memo-wisely', 'react-state-management']
+recommended: ['simple-explanation-of-javascript-closures', 'javascript-array-from-applications']
 type: post
 commentsThreadId: javascript-iterables
 ---
