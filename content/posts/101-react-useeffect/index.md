@@ -1,6 +1,6 @@
 ---
 title: "Learning React.useEffect() from Examples"
-description: "In this post you'll learn how to use React useEffect() from examples."
+description: "Learn how to use React useEffect() hook from examples and demos."
 published: "2020-10-13T12:00Z"
 modified: "2020-10-13T12:00Z"
 thumbnail: "./images/effect-4.jpg"
