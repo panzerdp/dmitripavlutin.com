@@ -13,10 +13,18 @@ commentsThreadId: react-useeffect-by-examples
 
 When I first read about the new React hooks feature, I was impressed by the expressiveness and their possibilities.  
 
+But the expressiveness and brevity of hooks comes with a price &mdash; it's relatively difficult to get started with them.  
+
+I had difficulties in understanding the `useEffect()` hook: the one that manages side-effects inside of your React
+components.  
+
+While you'll read some theory of `useEffect()` in the first section, in this post I'll put accent on explaining `useEffect()` from interesting examples and demos.  
+
 ```toc
 ```
 
 ## 1. useEffect() API
+
 
 ## 2. Component did mount
 
