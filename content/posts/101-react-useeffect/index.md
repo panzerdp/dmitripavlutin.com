@@ -269,4 +269,4 @@ The callback supplied to `useEffect()` returns a cleanup function that stops the
 
 Because `useEffect()` hook heavily relies on closures, you might need to [get them well](/simple-explanation-of-javascript-closures/). Also be aware of [stale closures issue](/react-hooks-stale-closures/).  
 
-*Still have questions about `useEffect()` hook? Feel free to ask questions in the comments below.*
+*Still have questions about `useEffect()` hook? Feel free to ask in the comments below.*
