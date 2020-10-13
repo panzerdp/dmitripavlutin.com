@@ -261,4 +261,4 @@ Iterable consumers are language constructs that consume iterables. `for...of` cy
 
 What makes the iterator pattern so useful is that any iterable can be used by any iterable consumer. Even more: you can define your own iterable types, and even define your own iterable consumers!
 
-*Challenge: how would you implement an iterable that generates `n` random numbers from `0` to `100`?*  
+*Challenge: how would you implement an iterable that generates `n` random numbers?*  
