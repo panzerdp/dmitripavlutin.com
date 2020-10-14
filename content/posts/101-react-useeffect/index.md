@@ -213,7 +213,7 @@ After initial rendering, `useEffect()` simply invokes the callback having the si
 
 On subsequent renderings, `useEffect()` is going to invoke the `cleanup` function from the previous side-effect execution (to clean up everything after the previous side-effect), then run the current side-effect.  
 
-Finally, after unmounting the component, the cleanup function from the latest side-effect is invoked.  
+Finally, after unmounting the component, `useEffect()` invokes the cleanup function from the latest side-effect.  
 
 For example, let's log a message to console every 3 seconds:
 
