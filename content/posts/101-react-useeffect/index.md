@@ -211,7 +211,7 @@ useEffect(() => {
 
 After initial rendering, `useEffect()` simply invokes the callback having the side-effect. `cleanup` function isn't invoked.  
 
-On subsequent renderings, `useEffect()` is going to invoke the `cleanup` function from the previous side-effect execution (to clean up everything after the previous side-effect), then run the current side-effect.  
+On subsequent renderings, `useEffect()` is going to invoke the `cleanup` function from the previous side-effect execution (to clean up everything after the previous side-effect), then runs the current side-effect.  
 
 Finally, after unmounting the component, `useEffect()` invokes the cleanup function from the latest side-effect.  
 
