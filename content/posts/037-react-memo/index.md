@@ -6,7 +6,7 @@ modified: "2020-09-19T09:00Z"
 thumbnail: "./images/instruments.jpg"
 slug: use-react-memo-wisely
 tags: ["react", "component", "memoization"]
-recommended: ["7-architectural-attributes-of-a-reliable-react-component", "react-usestate-hook-guide"]
+recommended: ["react-useeffect-explanation", "dont-overuse-react-usecallback"]
 type: post
 ---
 
