@@ -42,11 +42,11 @@ module.exports = {
   },
   featured: {
     popular: [
-      'javascript-arrow-functions-best-practices',
-      '7-tips-to-handle-undefined-in-javascript',
-      '6-ways-to-declare-javascript-functions',
-      '5-interesting-uses-javascript-destructuring',
+      'simple-explanation-of-javascript-closures',
       'simple-but-tricky-javascript-interview-questions',
+      'how-to-compare-objects-in-javascript',
+      'javascript-arrow-functions-best-practices',
+      'use-react-memo-wisely'
     ],
   },
   googleCustomSearchId: '004443697379288327791:1zr8pgnumxn'
