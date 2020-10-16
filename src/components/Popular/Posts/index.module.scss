@@ -14,45 +14,22 @@
   .list {
     .item {
       align-items: center;
-      padding: 1rem 0;
-      border-bottom: 1px solid $border-color;
+      padding: 0.75rem 0;
+      display: flex;
+      align-items: flex-start;
+
+      .square {
+        margin-right: 0.5rem;
+        color: $anchor-color;
+        font-size: 1.2rem;
+      }
   
       &:last-child {
-        border-bottom: none;
         padding-bottom: 0;
       }
 
       .link {
         font-size: 1.3rem;
-      }
-
-      .tagsAndComments {
-        margin-top: 0.25rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .tags {
-          display: flex;
-        }
-
-        .commentsCount {
-          text-align: right;
-  
-          .icon {
-            vertical-align: middle;
-            width: 1rem;
-            margin-right: 0.25rem;
-          }
-  
-          a {
-            vertical-align: middle;
-            font-size: 1rem;
-            text-decoration: underline;
-  
-            line-height: 1.4;
-          }
-        }
       }
     }
   }
