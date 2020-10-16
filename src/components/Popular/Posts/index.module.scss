@@ -4,7 +4,7 @@
   box-shadow: $box-shadow;
   border-radius: 8px;
   font-size: 1.3rem;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem;
 
   h3 {
     margin: 0;
@@ -13,41 +13,45 @@
 
   .list {
     .item {
-      display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-top: 1.25rem;
-
-      &:first-child {
-        margin-top: 1rem;
-      }
-
-      .thumbnail {
-        border-radius: 4px;
-        display: block !important;
-        min-width: 70px;
-        margin-right: 0.5rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid $border-color;
+  
+      &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
       }
 
       .link {
         font-size: 1.3rem;
       }
 
-      .commentsCount {
+      .tagsAndComments {
         margin-top: 0.25rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-        .icon {
-          vertical-align: middle;
-          width: 1rem;
-          margin-right: 0.25rem;
+        .tags {
+          display: flex;
         }
 
-        a {
-          vertical-align: middle;
-          font-size: 1rem;
-          text-decoration: underline;
-
-          line-height: 1.4;
+        .commentsCount {
+          text-align: right;
+  
+          .icon {
+            vertical-align: middle;
+            width: 1rem;
+            margin-right: 0.25rem;
+          }
+  
+          a {
+            vertical-align: middle;
+            font-size: 1rem;
+            text-decoration: underline;
+  
+            line-height: 1.4;
+          }
         }
       }
     }

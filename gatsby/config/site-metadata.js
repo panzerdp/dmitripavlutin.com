@@ -42,11 +42,11 @@ module.exports = {
   },
   featured: {
     popular: [
-      'simple-explanation-of-javascript-closures',
       'simple-but-tricky-javascript-interview-questions',
       'how-to-compare-objects-in-javascript',
       'javascript-arrow-functions-best-practices',
-      'use-react-memo-wisely'
+      'use-react-memo-wisely',
+      'simple-explanation-of-javascript-closures'
     ],
   },
   googleCustomSearchId: '004443697379288327791:1zr8pgnumxn'
