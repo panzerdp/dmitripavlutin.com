@@ -1,6 +1,6 @@
 ---
 title: "How to Learn JavaScript If You're a Beginner"
-description: "The roadmap to learning JavaScript language if you're just getting started."
+description: "The roadmap to learning JavaScript language if you're just starting."
 published: "2020-10-20T12:00Z"
 modified: "2020-10-14T12:00Z"
 thumbnail: "./images/cover.png"
@@ -30,19 +30,22 @@ There are no shortucts or silver bullets to write a good book: you write one wor
 
 This principle applies to learning, including of the JavaScript language. There are no shortcuts or silver bullets on how to learn JavaScript: you need, step by step, to understand each concept of the language.  
 
-## 2. Learn how it works for you
+## 2. Learn the way *you* like it
 
-The good news are that in 2020 there plenty of ways you can learn JavaScript: from books, video courses, attending a bootcamp.  
+The good news are that in 2020 there plenty of ways you can learn JavaScript: by reading books, watching video courses, attending a bootcamp.  
 
-I've always liked learning from books. Books let me understand the information in my own pace, easily re-read what I find hard to understand.  
+I've always liked learning from books. Books let you understand the information in your own pace, allow re-read what is difficult to understand.  
 
-The game changer book for me was reading from cover to cover [JavaScript: The Definitive Guide](https://www.amazon.com/JavaScript-Definitive-Guide-Activate-Guides/dp/0596805527), the 6th edition. The book covers in an accessible manner the simple to advanced concepts of all JavaScript.  
+The game changer for me in understanding JavaScript was reading [JavaScript: The Definitive Guide](https://www.amazon.com/JavaScript-Definitive-Guide-Activate-Guides/dp/0596805527) (6th edition). The book covers in an accessible manner all simple to advanced concepts of JavaScript.  
 
-It's not enough only to follow the book. You need a way to retain the information. 
+It's not enough only to follow the book. You need a way to retain the information. I find useful the following practices to solidify the knowledge:
+
+1. Write notes on important topics into a notebook
+2. Play with the JavaScript code snippets you encounter in a REPL
 
 If books are your thing, I recommend to start with any of the following:
 
-* [JavaScript: The Definitive Guide](https://www.amazon.com/JavaScript-Definitive-Most-Used-Programming-Language/dp/1491952024/), the 7th edition
+* [JavaScript: The Definitive Guide](https://www.amazon.com/JavaScript-Definitive-Most-Used-Programming-Language/dp/1491952024/) (7th edition)
 * [Head First JavaScript Programming](https://www.amazon.com/Head-First-JavaScript-Programming-Brain-Friendly/dp/144934013X)
 
 ## 3. Done is better than perfect
