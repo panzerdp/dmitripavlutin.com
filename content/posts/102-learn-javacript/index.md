@@ -43,6 +43,10 @@ It's not enough only to follow the book. You need a way to retain the informatio
 1. Write notes on important topics into a notebook
 2. Play with the JavaScript code snippets you encounter in a REPL
 
+Here are my notes taken:
+
+![Writing notes when learning JavaScript](./images/notebook.jpg)
+
 If books are your thing, I recommend to start with any of the following:
 
 * [JavaScript: The Definitive Guide](https://www.amazon.com/JavaScript-Definitive-Most-Used-Programming-Language/dp/1491952024/) (7th edition)
