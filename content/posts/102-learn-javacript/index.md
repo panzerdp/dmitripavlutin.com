@@ -14,7 +14,7 @@ commentsThreadId: how-to-learn-javascript
 If you've just started learning JavaScript, you might be upset by the long journey.  
 
 I had been in your situation, and I have taken this journey. In this post, I'm going to share
-the principlies to learn JavaScript efficiently, and stay motivated to learn it along the way.  
+the principles to learn JavaScript efficiently, and stay motivated to learn it along the way.  
 
 ## 1. Step by step
 
@@ -26,23 +26,23 @@ When King was asked in an interview "How do you write?", he answered:
 
 While the answer might be funny at first, it is a deep one.  
 
-There are no shortucts or silver bullets to write a good book: you write one word at a time. Word by word, minute by minute, hour by hour until you complete the book.  
+There are no shortcuts or silver bullets to write a good book: you write one word at a time. Word by word, minute by minute, hour by hour until you complete the book.  
 
-This principle applies to learning, including of the JavaScript language. There are no shortcuts or silver bullets on how to learn JavaScript: you need, step by step, to understand each concept of the language.  
+Step by step principle applies to learn too, including of the JavaScript language. There are no shortcuts or silver bullets on how to learn JavaScript: you need, step by step, to understand each concept of the language.  
 
 ## 2. Learn the way *you* like it
 
-The good news are that in 2020 there plenty of ways you can learn JavaScript: by reading books, watching video courses, attending [freeCodeCamp](https://www.freecodecamp.org/learn).  
+The good news is that in 2020 there plenty of ways you can learn JavaScript: by reading books, watching video courses, attending [freeCodeCamp](https://www.freecodecamp.org/learn).  
 
 ### 2.1 Books
 
-My prefrence is to learn from books. Books let you understand the information at your own pace, allow re-read what is difficult to understand.  
+My preference is to learn from books. Books let you understand the information at your own pace, allow re-read what is difficult to understand.  
 
-The game changer for me in understanding JavaScript was reading from cover to cover [JavaScript: The Definitive Guide](https://www.amazon.com/JavaScript-Definitive-Guide-Activate-Guides/dp/0596805527) (6th edition). The book teaches in an accessible manner all simple to advanced concepts of JavaScript.  
+The game-changer for me in understanding JavaScript was reading from cover to cover [JavaScript: The Definitive Guide](https://www.amazon.com/JavaScript-Definitive-Guide-Activate-Guides/dp/0596805527) (6th edition). The book teaches in an accessible manner all simple to advanced concepts of JavaScript.  
 
-However, it's not enough only to read the book. You need a way to retain the information. I use these practices to solidify the knowledge during reading:
+However, it's not enough only to read the book. You need a way to retain the information. I use these practices to solidify knowledge during reading:
 
-1. Note important ideas into a notebook
+1. Note important ideas in a notebook
 2. Play with the JavaScript code snippets in a REPL
 
 Here's a page with notes I had taken when reading "JavaScript: The Definitive Guide":
@@ -59,7 +59,7 @@ If books are your thing, I recommend the following:
 
 Video courses have the benefit of being more interactive than books.  
 
-The course author can explain the difficult concepts in an human-understendable way. Plus, guided by the author, you can practice by creating real-world applications.  
+The course author can explain the difficult concepts in a human-understandable way. Plus, guided by the author, you can practice by creating real-world applications.  
 
 A list of JavaScript beginner courses you might try:
 
@@ -70,31 +70,31 @@ A list of JavaScript beginner courses you might try:
 
 You can also attend to learn JavaScript at [freeCodeCamp](https://www.freecodecamp.org/learn). Choose the course `JavaScript Algorithms and Data Structures Certification`. 
 
-First, it's completely free. Second, you can achieve great results by learning JavaScript from there because it presents lessons, as well as exercises to solidify what you've learnt.  
+First, it's completely free. Second, you can achieve great results by learning JavaScript from there because it presents lessons, as well as exercises to solidify what you've learned.  
 
 ## 3. Done is better than perfect
 
 Whatever option you've chosen to learn JavaScript &mdash; from a book, video course, or freeCodeCamp &mdash; complete it from *the start until the end*.  
 
-It is vital to have full fundamental knowledge of JavaScript. Having knowledge gaps is always going to slow you down and put into trouble. Half-knowledge is no knowledge.  
+It is vital to have a full fundamental knowledge of JavaScript. Having knowledge gaps is always going to slow you down and put into trouble. Half-knowledge is no knowledge.  
 
 I know that sometimes, especially around the middle of the book or course, things can become *boring*. Or you can think that the explained feature *isn't needed*. Or you might want to *skip because it's complicated*. 
 
-Resists the urge to abandon at the middle, and motivate yourself to complete until the end. It's OK if you dont' undestand everything, it's OK if you still have questions: *done is better than perfect*.  
+Resists the urge to abandon at the middle, and motivate yourself to complete until the end. It's OK if you don't' understand everything, it's OK if you still have questions: *done is better than perfect*.  
 
-## 4. Don't cherry pick
+## 4. Don't cherry-pick
 
 Long time I was working as a developer without having a solid understanding of JavaScript. I was cherry-picking information from random posts, Stackoverflow.  
 
 Being tired of troubles because of knowledge gaps, I started reading "JavaScript: The Definitive Guide" in detail. After understanding the features of JavaScript I had been so long having troubles, I was constantly telling myself: *why didn't I took this book much earlier and avoided all the troubles?*  
 
-Don't make my mistake. Don't cherry pick information about JavaScript fundamentals (keywords, syntax, expressions, variables, functions, closure, prototype, classes, objects). 
+Don't make my mistake. Don't cherry-pick information about JavaScript fundamentals (keywords, syntax, expressions, variables, functions, closure, prototype, classes, objects). 
 
 Follow a JavaScript fundamentals book or course, and complete it from the start until the end.  
 
 ## 5. Pure JavaScript
 
-A specific of Frontend development, where JavaScript is involved, is the abunandance of UI libraries and frameworks like [React](https://reactjs.org/), [Vue](https://vuejs.org/), [Angular](https://angular.io/), and many more.  
+A specific of Frontend development, where JavaScript is involved, is the abundance of UI libraries and frameworks like [React](https://reactjs.org/), [Vue](https://vuejs.org/), [Angular](https://angular.io/), and many more.  
 
 A lot of beginner developers make the mistake of skipping JavaScript fundamentals, in the hope that a good UI library, like React, is going to compensate that.  
 
@@ -110,13 +110,13 @@ The morning hours (from 07:00 AM until 12:00 AM) are the most productive in lear
 
 ### 6.2 End the lesson on the most interesting moment
 
-Sometimes, after a few dozesns of learning session, you might find complicated to motivate yourself to continue learning. 
+Sometimes, after a few dozens of learning sessions, you might find it complicated to motivate yourself to continue learning. 
 
-I overcome this by closing the current learning session on the most interesting part, this way I have interest and motivation to start next time.  
+I overcome this by closing the current learning session on the most interesting part, this way I have the interest and motivation to start next time.  
 
 ## 7. Summary
 
-That's how I recommend getting started with JavaScript if you're a beginner. I've took this path by myself, and hopefully, these practices are going to work for you too. 
+That's how I recommend getting started with JavaScript if you're a beginner. I've taken this path by myself, and hopefully, these practices are going to work for you too. 
 
 Are you ready to become a JavaScript developer? Find your book or course, and get started *today*!
 
