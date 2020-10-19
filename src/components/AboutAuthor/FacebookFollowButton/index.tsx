@@ -17,7 +17,7 @@ export default function FacebookFollowButton({
       <div className={styles.btnO}>
         <a
           className={`${styles.btn} ${styles.followButton}`}
-          title={`Follow ${authorName} on Facebook`}
+          title={`Like ${authorName} Page on Facebook`}
           href={url}
         >
           <i></i>
