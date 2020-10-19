@@ -2,7 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import AboutAuthorFollow from '../index';
-import TwitterFollowButton from 'components/AboutAuthor/TwitterFolowButton';
+import TwitterFollowButton from 'components/AboutAuthor/TwitterFollowButton';
 
 const props = {
   authorInfo: {

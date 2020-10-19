@@ -2,7 +2,7 @@ import * as React from 'react';
 import Img from 'gatsby-image';
 
 import styles from './index.module.scss';
-import TwitterFollowButton from 'components/AboutAuthor/TwitterFolowButton';
+import TwitterFollowButton from 'components/AboutAuthor/TwitterFollowButton';
 
 interface AboutAuthorConcise {
   authorInfo: AuthorInfo;

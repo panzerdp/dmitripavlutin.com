@@ -2,7 +2,8 @@ import * as React from 'react';
 import Img from 'gatsby-image';
 
 import styles from './index.module.scss';
-import TwitterFollowButton from 'components/AboutAuthor/TwitterFolowButton';
+import TwitterFollowButton from 'components/AboutAuthor/TwitterFollowButton';
+import FacebookFollowButton from 'components/AboutAuthor/FacebookFollowButton';
 
 interface AboutAuthorDetailed {
   authorInfo: AuthorInfo;
@@ -24,6 +25,10 @@ export default function AboutAuthorDetailed({ authorInfo, authorProfilePicture, 
             authorName={authorInfo.name}
             twitterFollowersCount={authorStats.twitterFollowersCount}
             username={authorInfo.nicknames.twitter}
+          />
+          <FacebookFollowButton
+            authorName={authorInfo.name}
+            facebookPageUrl={authorInfo.profiles.facebook}
           />
         </div>
       </div>

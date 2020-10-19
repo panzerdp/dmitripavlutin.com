@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import './index.module.scss';
+import styles from './index.module.scss';
 import withWindowOpen, { WindowOpenOptions } from 'components/With/WindowOpen';
 
 const TWITTER_FOLLOW_URL = 'https://twitter.com/intent/user?screen_name=';
@@ -17,7 +17,7 @@ export function TwitterFollowButton({
   username,
   authorName,
   windowOpen,
-}: TwitterFollowButtonProps) {
+}: TwitterFollowButtonProps): JSX.Element {
   const url = TWITTER_FOLLOW_URL + username;
   function openFollowWindow(event: React.MouseEvent) {
     event.preventDefault();
@@ -29,26 +29,25 @@ export function TwitterFollowButton({
     });
   }
   return (
-    <div className="hcount">
-      <div id="widget">
-        <div className="btn-o">
+    <div className={styles.hcount}>
+      <div className={styles.widget}>
+        <div className={styles.btnO}>
           <a
-            id="follow-button"
-            className="btn"
+            className={`${styles.btn} ${styles.followButton}`}
             title={`Follow ${authorName} (${username}) on Twitter`}
             href={url}
             onClick={openFollowWindow}
           >
             <i></i>
-            <span className="label" id="l">
+            <span className={styles.label}>
               Follow <b>@{username}</b>
             </span>
           </a>
         </div>
-        <div className="count-o" id="c" data-scribe="component:count">
+        <div className={styles.countO} data-scribe="component:count">
           <i></i>
           <u></u>
-          <a id="count" className="note" href={url} onClick={openFollowWindow}>
+          <a className={`${styles.count} ${styles.note}`} href={url} onClick={openFollowWindow}>
             {twitterFollowersCount} followers
           </a>
         </div>

@@ -38,6 +38,9 @@ export function Footer({ authorInfo: { profiles, name, email } }: FooterProps) {
             <a href={profiles.twitter} title={`${name}'s Twitter profile`}>
               <img alt="Twitter profile" src="/icons/twitter.svg" />
             </a>
+            <a href={profiles.facebook} title={`${name}'s Facebook page`}>
+              <img alt="Facebook page" src="/icons/facebook.svg" />
+            </a>
             <a href={profiles.linkedin} title={`${name}'s Linkedin profile`}>
               <img alt="LinkedIn profile" src="/icons/linkedin.svg" />
             </a>
