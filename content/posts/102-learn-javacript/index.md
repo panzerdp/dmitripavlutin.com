@@ -11,23 +11,23 @@ type: post
 commentsThreadId: how-to-learn-javascript
 ---
 
-You've decided to learn JavaScript because you want to become a Frontend or Backend developer.  
+You've decided to learn JavaScript because you want to become a Frontend or Backend developer. 
 
-I had taken the whole journey from a beginner to (hopefully!) a good JavaScript developer. During my learning journey I made mistakes, and I made good decisions.  
+But how do you start? Which road to take to learn JavaScript efficiently, and, if possible, less painful?  
 
-In this post I want to share with you my experience and principles on how to learn JavaScript language efficiently, and stay motivated in the long run. 
+I want to share with you my experience and principles on how to learn JavaScript fundamentals and stay motivated in the process.  
 
-Note: JavaScript fundamentals I consider the  keywords, operators, variables, expressions, functions, closures, objects, prototypal inheritance, classes, promises, `async/await`, `this`.  
+Note: JavaScript fundamentals I consider the  keywords, data types, operators, variables, expressions, functions, closures, objects, prototypal inheritance, classes, `this`, promises, `async/await`.  
 
 ## 1. Step by step
 
-Stephen King is one of my favorite writers. He is very productive writer and has published around 61 novels. Many of these have been adapted into movies and TV series.  
+Stephen King is one of my favorite writers. He has published around 61 novels. Many of these have been adapted into movies and TV series.  
 
 When King was asked in an interview "How do you write?", he answered:
 
 > One word at a time.
 
-There are no shortcuts or silver bullets to write a good book: you write one word at a time. Any book is written word by word, minute by minute, hour by hour until completed.  
+There are no shortcuts or silver bullets to write a good book: you write one word at a time. He writes a book word by word, minute by minute, hour by hour until it's completed.  
 
 Step by step principle applies to learning JavaScript language too. There are no shortcuts or silver bullets on how to learn JavaScript: you need, step by step, to understand each concept of the language.  
 
@@ -47,18 +47,15 @@ If books are your thing, I recommend the following:
 * [Head First JavaScript Programming](https://www.amazon.com/Head-First-JavaScript-Programming-Brain-Friendly/dp/144934013X)
 * [You Don't Know JS Book Series](https://www.amazon.com/gp/bookseries/B01N9EBP9V)
 
-However, it's not enough only to read the book. You need a way to retain the information. I use these practices to solidify knowledge during reading:
+It's not enough only to read the book. You need a way to retain the information. I use these practices to solidify knowledge while reading.  
 
-1. Note important ideas in a notebook
-2. Play with the JavaScript code snippets in a REPL
+First, *write notes of important ideas in a notebook* while reading. That's efficient because when you note the idea, you think more about it and retain better. Repetition is the mother of skill.   
 
-While reading, write notes of important ideas in a notebook. That's efficient because when you note the idea, you think more about it and retain better.  
-
-Here's a page with notes I had taken when reading "JavaScript: The Definitive Guide":
+A page with notes I had taken when reading "JavaScript: The Definitive Guide":
 
 ![Writing notes when learning JavaScript](./images/notebook.jpg)
 
-Another productive practice is to play with the code snippets you encounter in an online JavaScript editor, for example in [jsitor](https://jsitor.com/). 
+Second, *play with the code snippets* you encounter in an online JavaScript editor, for example in [jsitor](https://jsitor.com/) or [codesandbox](https://codesandbox.io/). 
 
 ### 2.2 Video courses
 
@@ -77,7 +74,7 @@ You can also attend to learn JavaScript at [freeCodeCamp](https://www.freecodeca
 
 First, freeCodeCamp is completely free.  
 
-Second, the lessons are high quality, as well you can take exercises to solidify what you've learned.  
+Second, the lessons are high quality and at the end of each lesson you can practice exercises to solidify what you've learned.  
 
 ## 3. Done is better than perfect
 
@@ -87,13 +84,13 @@ It is vital to have a full understanding of JavaScript fundamentals. Having know
 
 I know that sometimes, especially around the middle of the book or course, things can become *boring*. Or you can think that the explained feature *isn't needed*. Or you might want to *skip because it's complicated*. 
 
-Resists the urge to abandon at the middle, and motivate yourself to complete until the end. It's OK if you don't understand everything, it's OK if you still have questions: *done is better than perfect*.  
+Resists the urge to abandon at the middle, and push yourself to study until the end. It's OK if you don't understand everything, it's OK if you still have questions: *done is better than perfect*.  
 
 ## 4. Don't cherry-pick
 
 Long time I was working as a developer without having a solid understanding of JavaScript. I was cherry-picking information from random posts, Stackoverflow.  
 
-Being tired of troubles because of knowledge gaps, I started reading "JavaScript: The Definitive Guide" in detail. After understanding the features of JavaScript I had been having troubles so long, I was blaming myself: *why didn't I took this book much earlier and avoided all the troubles?*  
+Being tired of troubles because of knowledge gaps, I started reading "JavaScript: The Definitive Guide" in detail. After understanding the features of JavaScript I had been having troubles so long, I was blaming myself: *why haven't I read this book earlier and avoided all the troubles?*  
 
 *Please don't make my mistake*. Don't cherry-pick information about JavaScript fundamentals. Instead, follow a JavaScript fundamentals book or course, and complete it from the start until the end.  
 
@@ -119,7 +116,7 @@ If you have the possibility, get up early morning, and commit to learning JavaSc
 
 ### 6.2 End the lesson on the most interesting moment
 
-Sometimes, after a few dozens of chapters or lessons, you might find it complicated to motivate yourself to continue learning. 
+Sometimes, after a few dozens of chapters or lessons, you may find difficult to motivate yourself to continue learning. 
 
 I overcome this by finishing the current session on the most interesting part. This way I have the interest to start next time.  
 
