@@ -65,8 +65,8 @@ The course author can explain the difficult concepts in a human-understandable w
 
 A list of JavaScript beginner courses to consider:
 
+* [Modern JavaScript From The Beginning](https://www.udemy.com/course/modern-javascript-from-the-beginning/) (by Brad Traversy)
 * [The Modern Javascript Bootcamp Course](https://www.udemy.com/course/javascript-beginners-complete-tutorial/) (by Colt Steele and Stephen Grider)
-* [The Modern JavaScript Bootcamp ](https://www.udemy.com/course/modern-javascript/) (by Andrew Mead)
 
 ### 2.3 freeCodeCamp
 
