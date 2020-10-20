@@ -1,8 +1,8 @@
 ---
 title: "How to Learn JavaScript If You're a Beginner"
 description: "The roadmap to learning JavaScript language, if you're just starting."
-published: "2020-10-20T12:00Z"
-modified: "2020-10-14T12:00Z"
+published: "2020-10-20T11:30Z"
+modified: "2020-10-14T11:30Z"
 thumbnail: "./images/cover.png"
 slug: how-to-learn-javascript
 tags: ['javascript', 'craftsmanship']
