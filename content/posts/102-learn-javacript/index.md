@@ -1,6 +1,6 @@
 ---
 title: "How to Learn JavaScript If You're a Beginner"
-description: "The roadmap to learning JavaScript language, if you're just starting."
+description: " I want to share with you my experience and principles on how to learn JavaScript fundamentals and stay motivated in the process."
 published: "2020-10-20T11:30Z"
 modified: "2020-10-14T11:30Z"
 thumbnail: "./images/cover.png"
