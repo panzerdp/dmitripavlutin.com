@@ -56,7 +56,7 @@ If you'd like to quickly check if an object is empty (has no own properties), th
 To check if the object is empty, all you need to do is verify the length property of the array returned by `Object.keys(object)`:
 
 ```javascript
-const isObjectEmpty = Object.key(object).length === 0;
+const isObjectEmpty = Object.keys(object).length === 0;
 ```
 
 In the following example, `empty` has no properties, while `nonEmpty` object has one property:
