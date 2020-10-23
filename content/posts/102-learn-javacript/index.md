@@ -1,6 +1,6 @@
 ---
 title: "How to Learn JavaScript If You're a Beginner"
-description: "In this post I share my experience on how to learn JavaScript fundamentals efficiently and without pain."
+description: "In this post I share my experience on how to learn JavaScript efficiently and stay motivated in the process."
 published: "2020-10-20T11:30Z"
 modified: "2020-10-14T11:30Z"
 thumbnail: "./images/cover.png"
