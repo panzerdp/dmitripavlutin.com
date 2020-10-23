@@ -17,8 +17,8 @@ export default function AboutAuthorContact({ authorInfo }: AboutAuthorContact) {
         <p>I'm excited to start my coaching program to help you advance your JavaScript knowledge.</p>
         <p>You can have direct access to me through:</p>
         <ul>
-          <li>1 hour, one-to-one, video coaching sessions</li>
-          <li>JavaScript concepts teaching, workshops, or interview preparation (you choose!)</li>
+          <li>1 hour, one-to-one, video or chat coaching sessions</li>
+          <li>JavaScript, TypeScript, React, Next teaching, workshops, or interview preparation (you choose!)</li>
           <li>Conversational and friendly format</li>
         </ul>
       </div>
