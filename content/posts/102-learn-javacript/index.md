@@ -1,6 +1,6 @@
 ---
 title: "How to Learn JavaScript If You're a Beginner"
-description: " I want to share with you my experience and principles on how to learn JavaScript fundamentals and stay motivated in the process."
+description: "In this post I share my experience on how to learn JavaScript fundamentals efficiently and without pain."
 published: "2020-10-20T11:30Z"
 modified: "2020-10-14T11:30Z"
 thumbnail: "./images/cover.png"
@@ -15,7 +15,7 @@ You've decided to learn JavaScript because you want to become a Frontend or Back
 
 But how do you start? Which road to take to learn JavaScript efficiently, and, if possible, less painful?  
 
-I want to share with you my experience and principles on how to learn JavaScript fundamentals and stay motivated in the process.  
+In this post I share my experience and principles on how to learn JavaScript fundamentals and stay motivated in the process.  
 
 Note: JavaScript fundamentals I consider the  keywords, data types, operators, variables, expressions, functions, closures, objects, prototypal inheritance, classes, `this`, promises, `async/await`.  
 
