@@ -42,7 +42,9 @@ async function fetchGames() {
 
 ## 2. Timeout a fetch() request
 
-Here's a possible implementation of a `fetch()` request that timeouts:
+Unfortunately, by default `fetch()` API doesn't allow you to cancel programmatically a request. To stop a request, additionally, an [abort controller](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) instance is needed.  
+
+Here's a possible implementation of starting requests that timeout:
 
 ```javascript
 async function fetchWithTimeout(resource, options) {
