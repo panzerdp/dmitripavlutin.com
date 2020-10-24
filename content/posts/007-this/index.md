@@ -23,13 +23,13 @@ In JavaScript the situation is different: `this` is the context of a function in
  * constructor invocation: `new RegExp('\\d')`
  * indirect invocation: `alert.call(undefined, 'Hello World!')`
 
-Each invocation type defines the context in its own way, so `this` behaves slightly different than the developer expects. 
+Each invocation type defines the context in its way, so `this` behaves differently than the developer expects. 
 
 ![The mystery of this in JavaScript](./images/Gentle-explanation-of-this--7--1.png)
 
 Moreover [strict mode](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Strict_mode) also affects the execution context. 
 
-> The key to understanding `this` keyword is having a clear view over function invocation and how it impacts the context.  
+> The key to understanding `this` keyword is having a clear view of function invocation and how it impacts the context.  
 
 This article focuses on the invocation explanation, how the function invocation influences `this` and demonstrates the common pitfalls of identifying the value of `this`.
 
@@ -536,7 +536,7 @@ const paris = new City('Paris', false);
 paris.travel();
 ```
 
-`new City('Paris')` is a constructor invocation. The object initialization is handled by a special method in the class: [`constructor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor), which has `this` as the newly created object.
+`new City('Paris')` is a constructor invocation. The object's initialization is handled by a special method in the class: [`constructor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor), which has `this` as the newly created object.
 
 The role of the constructor function is to initialize the instance. A constructor call creates a new empty object, which inherits properties from the constructor's prototype.  
 
@@ -970,4 +970,4 @@ For an arrow function ask yourself:
 
 This mindset is correct when dealing with `this` and will save you from the headache.
 
-*If you have an interesting example of context pitfall or just experience difficulties with a case, write a comment below and let's discuss!*
+*If you have an interesting example of context pitfall or just experience difficulties with a case, write a comment below, and let's discuss!*
