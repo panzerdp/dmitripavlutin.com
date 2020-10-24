@@ -21,9 +21,9 @@ The network is unreliable because an HTTP request or response can fail for many 
 * The server responds but with an error
 * and more.  
 
-Users are OK to wait up to 8 seconds for simple requests to complete. That's why you need to set a timeout on the network requests, and inform the user after 8 seconds about the network problems.  
+Users are OK to wait up to 8 seconds for simple requests to complete. That's why you need to set a timeout on the network requests and inform the user after 8 seconds about the network problems.  
 
-In this post, I'm going to show you have to use `setTimeout()`, Abort controller and `fetch()` API to start requests with a configurable timeout time.  
+In this post, I'm going to show you have to use `setTimeout()`, Abort controller, and `fetch()` API to start requests with a configurable timeout time.  
 
 ## 1. Default fetch() timeout
 
@@ -69,7 +69,7 @@ First, `const { timeout = 8000 } = options` extracts the timeout param in millis
 
 `const id = setTimeout(() => controller.abort(), timeout)` starts a timing function. After `timeout` time, if the timining function wasn't cleared, `controller.abort()` is going to abort (or cancel) the fetch request.  
 
-Next line `await fetch(resource, { ...option, signal: controller.signal })` starts properly the fetch request. Note the special property `singal` assigned with `controller.singal`: this is how you make the `fetch()` request being controlled by the abort controller.  
+Next line `await fetch(resource, { ...option, signal: controller.signal })` starts properly the fetch request. Note the special property `signal` assigned with `controller.signal`: this is how you make the `fetch()` request being controlled by the abort controller.  
 
 Finally, `clearTimeout(id)` clears the abort timining function.  
 
@@ -104,12 +104,12 @@ fetchGames().then(games => {
 
 By default a `fetch()` request timeouts at the time setup by the browser. In Chrome, for example, this setting equals 300 seconds. That's way more than a user would expect for a simple network request to complete.  
 
-A good approach when making newtork requests is to put a request timeout of about 8 - 10 seconds.  
+A good approach when making network requests is to put a request timeout of about 8 - 10 seconds.  
 
-As shown in the post, using `setTimeout()` and abort controller you can create `fetch()` requests onfigured to timeout when you'd like to.  
+As shown in the post, using `setTimeout()` and abort controller you can create `fetch()` requests configured to timeout when you'd like to.  
 
 Please check the [browser support](https://caniuse.com/?search=abort%20controller) of the abort controller because as of 2020 it is an experimental technology. There's also a [polyfill](https://github.com/mo/abortcontroller-polyfill) for it.  
 
-Without the use of abort controller there's no way you can stop a `fetch()` request. Be aware to not use solutions like [this](https://stackoverflow.com/a/46946573/1894471), where the abort controller isn't used.  
+Without the use of an abort controller, there's no way you can stop a `fetch()` request. Don't use solutions like [this](https://stackoverflow.com/a/46946573/1894471), where the abort controller isn't used.  
 
 *Do you consider timing out network requests a good practice?*
