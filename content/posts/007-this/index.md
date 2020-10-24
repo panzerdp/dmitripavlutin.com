@@ -123,7 +123,7 @@ The strict mode is available starting [ECMAScript 5.1](http://www.ecma-internati
 
 To enable the strict mode place the directive `'use strict'` at the top of a function body. 
 
-Once enabled, the strict mode affects the execution context, making `this` to be `undefined` in a regular function invocation. The execution context is **not** the global object anymore, contrary to above case [2.1](#21-this-in-function-invocation).
+Once enabled, the strict mode affects the execution context, making `this` to be `undefined` in a regular function invocation. The execution context is **not** the global object anymore, contrary to above case [2.1](#21-this-in-a-function-invocation).
 
 ![this in JavaScript function invocation, strict mode](./images/3-1.png)
 
@@ -195,7 +195,7 @@ strictSum(8, 12); // => 20
 
 👍 The context of the inner function (except arrow function) depends only on its own invocation type, but not on the outer function's context.  
 
-To make `this` have a desired value, modify the inner function's context with indirect invocation (using [`.call()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) or [`.apply()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply), see [5.](#5indirectinvocation)) or create a bound function (using [`.bind()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind), see [6.](#6boundfunction)).
+To make `this` have a desired value, modify the inner function's context with indirect invocation (using [`.call()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) or [`.apply()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply), see [5.](#5-indirect-invocation)) or create a bound function (using [`.bind()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind), see [6.](#6-bound-function)).
 
 The following example is calculating a sum of two numbers:
 
@@ -228,7 +228,7 @@ The invocation result of `numbers.sum()` is `NaN` (or an error is thrown `TypeEr
 
 👍To solve the problem, `calculate()` function must execute with the same context as the `numbers.sum()` method, to access `this.numberA` and `this.numberB` properties.  
 
-One solution is to change manually the context of `calculate()` to the desired one by calling `calculate.call(this)` (an indirect invocation of a function, see section [5.](#5indirectinvocation)):
+One solution is to change manually the context of `calculate()` to the desired one by calling `calculate.call(this)` (an indirect invocation of a function, see section [5.](#5-indirect-invocation)):
 
 ```javascript{13}
 const numbers = {
@@ -388,7 +388,7 @@ earth.getName(); // => 'Earth'
 
 ⚠️ A method can be extracted from an object into a separated variable `const alone = myObj.myMethod`. When the method is called alone `alone()`, detached from the original object, you might think that `this` is the object `myObject` on which the method was defined.  
 
-👍 Correctly if the method is called without an object, then a function invocation happens, where `this` is the global object `window` or `undefined` in strict mode (see [2.1](#21-this-in-function-invocation) and [2.2](#22-this-in-function-invocation-strict-mode)). 
+👍 Correctly if the method is called without an object, then a function invocation happens, where `this` is the global object `window` or `undefined` in strict mode (see [2.1](#21-this-in-a-function-invocation) and [2.2](#22-this-a-in-function-invocation-strict-mode)). 
 
 A bound function `const alone = myObj.myMethod.bind(myObj)` (using [`.bind()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind), see [6.](#6-bound-function)) fixes the context by binding `this` the object that owns the method.  
 
@@ -622,7 +622,7 @@ When executing `Vehicle('Car', 4)` an object `car` is returned, which has the co
 
 You might think it works well for creating and initializing new objects.  
 
-However, `this` is `window` object in a function invocation (see [2.1.](#21-this-in-function-invocation)), thus `Vehicle('Car', 4)` sets properties on the `window` object. This is a mistake. A new object is not created.  
+However, `this` is `window` object in a function invocation (see [2.1.](#21-this-in-a-function-invocation)), thus `Vehicle('Car', 4)` sets properties on the `window` object. This is a mistake. A new object is not created.  
 
 👍 Make sure to use `new` operator in cases when a constructor call is expected:
 
@@ -661,7 +661,7 @@ From the [list of methods](https://developer.mozilla.org/en-US/docs/Web/JavaScri
 
 `myFunction.call(thisArg, arg1, arg2, ...)` accepts the first argument `thisArg` as the context of the invocation and a list of arguments `arg1, args2, ...` that are passed as arguments to the called function.
 
-`myFunction.apply(thisArg, [arg1, arg2, ...])` accepts the first argument `thisArg` as the context of the invocation and an [array-like object](http://www.2ality.com/2013/05/quirk-array-like-objects.html) of values `[arg1, args, ...]` that are passed as arguments to the called function.
+`myFunction.apply(thisArg, [arg1, arg2, ...])` accepts the first argument `thisArg` as the context of the invocation and an array of arguments `[arg1, args, ...]` that are passed as arguments to the called function.
 
 The following example demonstrates the indirect invocation:
 
@@ -699,7 +699,7 @@ concatName.call(rabbit, 'Hello ');  // => 'Hello White Rabbit'
 concatName.apply(rabbit, ['Bye ']); // => 'Bye White Rabbit'
 ```
 
-The indirect invocation is useful when a function should be executed with a specific context. For example, to solve the context problems with function invocation, where `this` is always `window` or `undefined` in strict mode (see [2.3.](#23pitfallthisinaninnerfunction)). It can be used to simulate a method call on an object (see the previous code sample).
+The indirect invocation is useful when a function should be executed with a specific context. For example, to solve the context problems with function invocation, where `this` is always `window` or `undefined` in strict mode (see [2.3.](#23-pitfall-this-in-an-inner-function)). It can be used to simulate a method call on an object (see the previous code sample).
 
 Another practical example is creating hierarchies of classes in ES5 to call the parent constructor:
 
@@ -952,7 +952,7 @@ const walkPeriod = new Period(2, 30);
 walkPeriod.format(); // => '2 hours and 30 minutes'
 ```
 
-`walkPeriod.format()` is a method invocation on an object (see [3.1.](#31-this-in-method-invocation)) with the context `walkPeriod` object. `this.hours` evaluates to `2` and `this.minutes` to `30`, so the method returns the correct result: `'2 hours and 30 minutes'`.
+`walkPeriod.format()` is a method invocation on an object (see [3.1.](#31-this-in-a-method-invocation)) with the context `walkPeriod` object. `this.hours` evaluates to `2` and `this.minutes` to `30`, so the method returns the correct result: `'2 hours and 30 minutes'`.
 
 ## 8. Conclusion
 
