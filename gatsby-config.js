@@ -92,12 +92,6 @@ module.exports = {
     'gatsby-plugin-remove-serviceworker',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
-    {
-      resolve: 'gatsby-plugin-disqus',
-      options: {
-        shortname: 'rainsoft',
-      },
-    },
     'gatsby-plugin-webpack-size',
     require('./gatsby/config/gatsby-plugin-sass'),
     'gatsby-plugin-minify-classnames',
