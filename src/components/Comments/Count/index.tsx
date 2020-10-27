@@ -11,7 +11,7 @@ export default function CommentsCount({ postUrl }: CommentsCountProps): JSX.Elem
   useEffect(() => {
     const loadCommentsCount = async () => {
       const q = `${postUrl}+in:title+is:issue+repo:panzerdp/dmitripavlutin.com-comments`;
-      const respone = await fetch(`https://api.github.com/search/issues?q=${encodeURIComponent(q)}&per_page=1`);
+      const respone = await fetch(`https://api.github.com/search/issues?q=${q}&per_page=1`);
       const { items = [] } = await respone.json();
       if (items.length > 0) {
         const issue = items[0];
