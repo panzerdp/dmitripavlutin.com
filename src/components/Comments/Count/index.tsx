@@ -22,5 +22,5 @@ export default function CommentsCount({ postUrl }: CommentsCountProps): JSX.Elem
     };
     loadCommentsCount();
   }, []);
-  return <>{ count === 0 ? 'Start Discussion' : `${count} Comments` }</>;
+  return <>{ count === 0 ? 'Start discussion' : `${count} Comments` }</>;
 }
