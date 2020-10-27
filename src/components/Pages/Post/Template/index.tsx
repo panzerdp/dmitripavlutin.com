@@ -71,7 +71,7 @@ export default function PostTemplate({
           <Img fluid={post.thumbnail} />
         </div>
         <h1>{post.title}</h1>
-        <Subheader post={post} siteUrl={siteInfo.url} />
+        <Subheader post={post} siteUrl={siteInfo.url} loadCommentsCount={true} />
         <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
         <div className={styles.shareGroup}>
           <div className={styles.shareBottom}>

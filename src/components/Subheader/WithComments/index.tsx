@@ -9,13 +9,13 @@ import { TO_POST } from 'routes/path';
 interface SubheaderWithCommentsProps {
   post: PostPlain;
   siteUrl: string;
+  loadCommentsCount?: boolean;
 }
 
 const MONTH = 31 * 24 * 60 * 60 * 1000;
 
-export default function SubheaderWithComments({ post, siteUrl }: SubheaderWithCommentsProps) {
+export default function SubheaderWithComments({ post, siteUrl, loadCommentsCount = false }: SubheaderWithCommentsProps) {
   const postUrl = TO_POST({ slug: post.slug });
-  const url = siteUrl + postUrl;
   const publishedDate = new Date(post.published);
   const modifiedDate = new Date(post.modified);
   let postDateType = 'Posted';
@@ -32,7 +32,7 @@ export default function SubheaderWithComments({ post, siteUrl }: SubheaderWithCo
         <div className={styles.commentsCount}>
           <img alt="Comments" src="/icons/comments.svg" className={styles.icon} />
           <a href={`${postUrl}#comments`} title="Jump to comments section" className={styles.anchor}>
-            <PostCommentsCount title={post.title} url={url} commentsTheadId={post.commentsThreadId} />
+            {loadCommentsCount ? <PostCommentsCount postUrl={postUrl} /> : 'Start discussion'}
           </a>
         </div>
       </div>
