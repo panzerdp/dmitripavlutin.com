@@ -32,7 +32,7 @@ export default function SubheaderWithComments({ post, siteUrl, loadCommentsCount
         <div className={styles.commentsCount}>
           <img alt="Comments" src="/icons/comments.svg" className={styles.icon} />
           <a href={`${postUrl}#comments`} title="Jump to comments section" className={styles.anchor}>
-            {loadCommentsCount ? <PostCommentsCount postUrl={postUrl} /> : 'Start discussion'}
+            {loadCommentsCount ? <PostCommentsCount postUrl={postUrl} /> : 'Start Discussion'}
           </a>
         </div>
       </div>
