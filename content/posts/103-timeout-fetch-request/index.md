@@ -1,8 +1,8 @@
 ---
 title: "How to Timeout a fetch() Request"
 description: "How to timeout fetch() API requests using setTimeout() and abort controller."
-published: "2020-10-27T12:00Z"
-modified: "2020-10-27T12:00Z"
+published: "2020-10-27T09:00Z"
+modified: "2020-10-27T09:00Z"
 thumbnail: "./images/cover-5.png"
 slug: timeout-fetch-request
 tags: ['fetch']
@@ -11,7 +11,7 @@ type: post
 commentsThreadId: timeout-fetch-request
 ---
 
-When developing an application that makes requests over the network, the first rule to remember is *don't rely on the network*.  
+When developing an application that uses the network, the first rule to remember is *don't rely on the network*.  
 
 The network is unreliable because an HTTP request or response can fail for many reasons: 
 
@@ -23,7 +23,7 @@ The network is unreliable because an HTTP request or response can fail for many 
 
 Users are OK to wait up to 8 seconds for simple requests to complete. That's why you need to set a timeout on the network requests and inform the user after 8 seconds about the network problems.  
 
-In this post, I'm going to show you have to use `setTimeout()`, Abort controller, and `fetch()` API to make requests with a configurable timeout time.  
+In this post, I'm going to show you have to use `setTimeout()`, the abort controller, and `fetch()` API to make requests with a configurable timeout time.  
 
 ## 1. Default fetch() timeout
 
@@ -40,13 +40,13 @@ async function loadGames() {
 
 300 seconds and even 90 seconds are way more than a user would expect a simple network request to complete.  
 
-Open the [demo](https://codesandbox.io/s/strange-merkle-xqs7n?file=/src/index.html:271-470) and click *Load games* button. The `fetch()` request is going to timeout at 300 seconds (in Chrome).  
+In the [demo](https://codesandbox.io/s/strange-merkle-xqs7n?file=/src/index.html:271-470) the `/games` URL was configured to respond in 301 seconds. Click *Load games* button to start the request, and it will timeout at 300 seconds (in Chrome).  
 
 ## 2. Timeout a fetch() request
 
-`fetch()` API by itself doesn't allow you to cancel programmatically a request. To stop a request at the desired time you need additionally an [abort controller](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) instance.  
+`fetch()` API by itself doesn't allow canceling programmatically a request. To stop a request at the desired time you need additionally an [abort controller](https://developer.mozilla.org/en-US/docs/Web/API/AbortController).  
 
-Here's an implementation of how to create `fetch()` requests with a configurable timeout time:
+The following `fetchWithTimeout()` is an improved version of `fetch()` that creates requests with a configurable timeout:
 
 ```javascript
 async function fetchWithTimeout(resource, options) {
@@ -67,11 +67,11 @@ async function fetchWithTimeout(resource, options) {
 
 First, `const { timeout = 8000 } = options` extracts the timeout param in milliseconds from the `options` object (defaults to 8 seconds).   
 
-`const controller = new AbortController()` creates an instance of the [abort controller](https://developer.mozilla.org/en-US/docs/Web/API/AbortController). The controller that let's you stop `fetch()` requests at will.  
+`const controller = new AbortController()` creates an instance of the [abort controller](https://developer.mozilla.org/en-US/docs/Web/API/AbortController). This controller that let's you stop `fetch()` requests at will.  
 
 `const id = setTimeout(() => controller.abort(), timeout)` starts a timing function. After `timeout` time, if the timining function wasn't cleared, `controller.abort()` is going to abort (or cancel) the fetch request.  
 
-Next line `await fetch(resource, { ...option, signal: controller.signal })` starts properly the fetch request. Note the special property `signal` assigned with `controller.signal`: this is how you make the `fetch()` request being controlled by the abort controller.  
+Next line `await fetch(resource, { ...option, signal: controller.signal })` starts properly the fetch request. Note the special `controller.signal` value assigned to `signal` property: it connectes `fetch()` with the abort controller.  
 
 Finally, `clearTimeout(id)` clears the abort timing function if the request completes faster than `timeout` time.  
 
@@ -87,7 +87,7 @@ async function loadGames() {
 }
 ```
 
-`fetchWithTimeout()` (instead of simple `fetch()`) starts a request that timeouts at the time specified in `timeout` &mdash; 6 seconds.
+`fetchWithTimeout()` (instead of simple `fetch()`) starts a request that cancels at `timeout` time &mdash; 6 seconds.
 
 If the request to `/games` hasn't finished in 6 seconds, then the request is canceled and a timeout error is thrown:
 
@@ -113,8 +113,8 @@ A good approach when making network requests is to put a request timeout of abou
 
 As shown in the post, using `setTimeout()` and abort controller you can create `fetch()` requests configured to timeout when you'd like to.  
 
-Please check the [browser support](https://caniuse.com/?search=abort%20controller) of the abort controller because as of 2020 it is an experimental technology. There's also a [polyfill](https://github.com/mo/abortcontroller-polyfill) for it.  
+Check the [browser support](https://caniuse.com/?search=abort%20controller) of the abort controller because as of 2020 it is an experimental technology. There's also a [polyfill](https://github.com/mo/abortcontroller-polyfill) for it.  
 
 Please note that without the use of an abort controller there's no way you can stop a `fetch()` request. Don't use solutions like [this](https://stackoverflow.com/a/46946573/1894471).  
 
-*Do you consider timing out network requests a good practice?*
+*Do you consider a good practice to timeout network requests at 8-10 seconds?*
