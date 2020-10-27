@@ -34,14 +34,6 @@ declare module 'routes/path' {
   export const TO_RSS: () => string;
 }
 
-declare module 'gatsby-plugin-disqus' {
-  export const Disqus: (params: { config: { url?: string; title?: string; identifier?: string } }) => JSX.Element;
-  export const CommentCount: (params: {
-    config: { url?: string; title?: string; identifier?: string };
-    placeholder?: string;
-  }) => JSX.Element;
-}
-
 declare module 'react-twitter-embed' {
   export const TwitterFollowButton: (params: { screenName: string }) => JSX.Element;
 }
