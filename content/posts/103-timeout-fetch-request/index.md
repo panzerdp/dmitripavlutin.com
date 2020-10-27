@@ -1,6 +1,6 @@
 ---
 title: "How to Timeout a fetch() Request"
-description: "How to timeout fetch() API requests using setTimeout() and abort controller."
+description: "I’m going to show you have to use setTimeout(), the abort controller, and fetch() API to make requests with a configurable timeout."
 published: "2020-10-27T09:00Z"
 modified: "2020-10-27T09:00Z"
 thumbnail: "./images/cover-5.png"
