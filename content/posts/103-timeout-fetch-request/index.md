@@ -3,7 +3,7 @@ title: "How to Timeout a fetch() Request"
 description: "I’m going to show you have to use setTimeout(), the abort controller, and fetch() API to make requests with a configurable timeout."
 published: "2020-10-27T09:00Z"
 modified: "2020-10-27T09:00Z"
-thumbnail: "./images/cover-5.png"
+thumbnail: "./images/cover-2.png"
 slug: timeout-fetch-request
 tags: ['fetch']
 recommended: ['javascript-fetch-async-await', 'javascript-async-await']
