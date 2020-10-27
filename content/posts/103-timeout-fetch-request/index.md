@@ -23,7 +23,7 @@ The network is unreliable because an HTTP request or response can fail for many 
 
 Users are OK to wait up to 8 seconds for simple requests to complete. That's why you need to set a timeout on the network requests and inform the user after 8 seconds about the network problems.  
 
-In this post, I'm going to show you have to use `setTimeout()`, the abort controller, and `fetch()` API to make requests with a configurable timeout time.  
+I'm going to show you how to use `setTimeout()`, the abort controller, and `fetch()` API to make requests with a configurable timeout time (interesting demos included!).
 
 ## 1. Default fetch() timeout
 
