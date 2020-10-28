@@ -15,9 +15,7 @@ export default function CommentsCount({ postUrl }: CommentsCountProps): JSX.Elem
       const { items = [] } = await respone.json();
       if (items.length > 0) {
         const issue = items[0];
-        if (issue.title === postUrl) {
-          setCount(issue.comments);
-        }
+        setCount(issue.comments);
       }
     };
     loadCommentsCount();
