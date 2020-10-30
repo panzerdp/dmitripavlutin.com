@@ -5,7 +5,7 @@ published: "2020-05-24T18:00Z"
 modified: "2020-05-26T07:30Z"
 thumbnail: "./images/cover.png"
 slug: own-and-inherited-properties-in-javascript
-tags: ["javascript", "object"]
+tags: ["javascript", "prototype", "inheritance", "object"]
 recommended: ["access-object-properties-javascript", "javascript-object-destructuring"]
 type: post
 commentsThreadId: own-and-inherited-properties-in-javascript

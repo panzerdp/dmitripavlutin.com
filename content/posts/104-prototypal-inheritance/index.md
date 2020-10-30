@@ -1,12 +1,39 @@
 ---
-title: "A Simple Explanation of JavaScript Prototypal Inheritance"
-description: "A simple and accessible explanation of prototypal inheritance in JavaScript."
+title: "What Makes JavaScript JavaScript? Prototypal Inheritance"
+description: "You don't know JavaScript until you know prototypal inheritance. Follow up an accessible explanation of prototypal inheritance in JavaScript."
 published: "2020-11-03T12:00Z"
 modified: "2020-11-03T12:00Z"
-thumbnail: "./images/cover-2.png"
+thumbnail: "./images/cover.png"
 slug: javascript-prototypal-inheritance
 tags: ['javascript', 'prototype', 'inheritance']
 recommended: ['simple-explanation-of-javascript-closures', 'own-and-inherited-properties-in-javascript']
 type: post
 commentsThreadId: javascript-prototypal-inheritance
 ---
+
+Prototypal inheritance in JavaScript is a slightly conter-intuitive, nevertheless, an important concept. *You don't know JavaScript until you know prototypal inheritance.*  
+
+In this post you'll read an accessible explanation of prototypal inheritance in JavaScript.  
+
+## 1. Objects only
+
+I'm not going to throw you from the beginning into the "prototypal inheritance is blah blah...". I'd like to guide step by step to it.  
+
+In JavaScript there are only primitives types, `null`, `undefined` and objects. A big world of objects.  
+
+In Java or PHP languages there's a concept of *class*: a template or plan that describes the propeties and method of objects. 
+
+But JavaScript doesn't have the concept of class &mdash; there are only objects.  
+
+
+## 2. Inheritance
+
+## 3. The prototype object
+
+
+
+## 4. The prototype chain
+
+## 5. Object constructor
+
+## 6. Summary
