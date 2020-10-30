@@ -25,8 +25,35 @@ In Java or PHP languages there's a concept of *class*: a template or plan that d
 
 But JavaScript doesn't have the concept of class &mdash; there are only objects.  
 
-
 ## 2. Inheritance
+
+A primitive type is atomic, meaning that it cannnot be further deviced into smaller pieces. For example, a boolean `false` is atomic because you cannot divided into something smaller.
+
+An object, on the contrary to primitve types, is a composable structure. In JavaScript an object consists of multiple properties: key and value pairs.  
+
+For example, the following object `user` consists of 3 properties and associated values:
+
+```javascript
+const userJohn = {
+  email: 'john@site.com',
+  name: 'John Smith',
+  isAdmin: false
+};
+```
+
+`name` and `email` are properties containing string values, and `isAdmin` is a property holding a boolean.  
+
+The same way you can define another object, `userJane`, with the same property keys but different values:
+
+```javascript
+const userJane = {
+  email: 'jane@site.com',
+  name: 'Jane Doe',
+  isAdmin: false
+};
+```
+
+
 
 ## 3. The prototype object
 
