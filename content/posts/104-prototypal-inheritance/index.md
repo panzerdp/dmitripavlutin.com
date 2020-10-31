@@ -13,7 +13,7 @@ commentsThreadId: javascript-prototypal-inheritance
 
 Prototypal inheritance in JavaScript is a slightly conter-intuitive, nevertheless, an important concept. *You don't know JavaScript until you know prototypal inheritance.*  
 
-In this post you'll read an accessible explanation of prototypal inheritance in JavaScript.  
+In this post, you'll read an accessible explanation of prototypal inheritance in JavaScript.  
 
 ## 1. Objects only
 
@@ -32,70 +32,90 @@ An object, on the contrary to primitve types, is a composable structure. In Java
 For example, the following objects `cat` and `dog` each has 2 properties:
 
 ```javascript
-const cat = { sound: 'Meow!', limbs: 4 };
-const dog = { sound: 'Bark!', limbs: 4 };
+const cat = { sound: 'Meow!', legs: 4 };
+const dog = { sound: 'Bark!', legs: 4 };
 ```
 
-Being obsessed with "Do Not Repeat Yourself" (DRY) principle, I don't like that both objects have the property `limbs` with the same value `4`.  
+Following "Do Not Repeat Yourself" (DRY) principle, you don't want both objects to have the property `legs` with the same value `4`.  
 
-I want to extract the `limbs` property into a specialized object `mammal`, and remove `limbs` property from both `cat` and `dog`:
+Let's extract `legs` property into a specialized object `pet`:
 
 ```javascript
-const mammal = { limbs: 4 };
+const pet = { legs: 4 };
 
 const cat = { sound: 'Meow!' };
 const dog = { sound: 'Bark!' };
 
-cat.limbs; // => undefined
-dog.limbs; // => undefined
+cat.legs; // => undefined
+dog.legs; // => undefined
 ```
 
-Ok, I've made the refactoring. But I still want to have `limbs` property on `cat` and `dog`. How do I know connect the `cat` and `dog` object with `mammal`?  
+Ok, you've made the refactoring. 
 
-Welcome inheritance.
+But you still want to have `legs` property on `cat` and `dog`. How can you know connect `cat` and `dog` with `pet`?  
 
-> Inheritance is the mechanism when an object inherits properties from another object.  
+Inheritance can help you!
 
 ## 3. The prototype object
 
-How can you make `cat` and `dog` inherit the properties of `mammal` object in JavaScript?  
+You can make `pet` a *prototype object* of `cat` and `dog`. Then `cat` and `dog` will *inherit* `legs` property from `pet`.  
 
-You can make the `mammal` a prototype object (aka parent) of `cat` and `dog`. Then `cat` and `dog` will *inherit* `limbs` property from `mammal`.  
-
-In JavaScript `Object.create(prototype, object)` is an utility function that connects an `object` with a `prototype`. Let's use it:
+In JavaScript `Object.create(prototype, object)` is an utility function that connects an `object` with a `prototype`. Let's use it and make `pet` the prototype object of both `cat` and `dog`:
 
 ```javascript
-const mammal = { limbs: 4 };
+const pet = { legs: 4 };
 
-const cat = Object.create(mammal, { sound: 'Meow!' });
+const cat = Object.create(pet, { sound: 'Meow!' });
+const dog = Object.create(pet, { sound: 'Bark!' });
 
-const dog = Object.create(mammal, { sound: 'Bark!' });
-
-cat.limbs; // => 4
-dog.limbs; // => 4
+cat.legs; // => 4
+dog.legs; // => 4
 ```
 
-Great! Now `cat` and `dog` objects both inherit `limbs` property. Now you're able to access it using `cat.limbs` and `dog.limbs`.  
+Great! Now `cat` and `dog` objects both inherit `legs` property. Now you can access `cat.legs` and `dog.legs`.  
 
-`limbs` now is an *inherited property* since it's inherited from the prototype. `sound`, on the other side, is an *own property* because it's defined directly upon the object.  
+`legs` property inside `cat` and `dog` is now an *inherited property* the prototype object `pet`. `sound` property, on the other side, is an *own property* because it's defined directly upon the object.  
 
-That's the essense of protypal inheritance in JavaScript. Everything is an object, and objects can inherit properties from other objects (the prototypes).  
+> The essense of protypal inheritance in JavaScript: objects can inherit properties from other objects &mdash; the prototypes.  
 
-## 4. The prototype chain
+## 4. The default prototype
 
-Every time you create an object, if no prototype is explicitely set, JavaScript assigns a default prototype for the created object.  
+Every time you create an object, if no prototype is explicitely set, JavaScript assigns a default prototype specific to the type of object you've created.   
 
-Let's look again at the `mammal` object:
+Let's look again at the `pet` object:
 
 ```javascript
-const mammal = { limbs: 4 };
+const pet = { legs: 4 };
 
-mammal.toString(); // => `[object Object]`
+pet.toString(); // => `[object Object]`
 ```
 
+`pet` has just one property `legs`, however you can invoke the method `pet.toString()`. Where did `toString()` come from?  
 
+When you've created the `pet` object, JavaScript has assigned to it a default prototype object. From that object `pet` inherits `toString()` method:  
 
+```javascript
+const pet = { legs: 4 };
 
-## 5. Object constructor
+const petPrototype = Object.getPrototypeOf(pet);
 
-## 6. Summary
+pet.toString === petPrototype.toString; // => true
+```
+
+## 5. The prototype chain
+
+Let's return to the `cat` and `dog`. Can you run same way `toString()` method on them?  
+
+```javascript
+const pet = { legs: 4 };
+
+const cat = Object.create(pet, { sound: 'Meow!' });
+const dog = Object.create(pet, { sound: 'Bark!' });
+
+pet.toString(); // => `[object Object]`
+pet.toString(); // => `[object Object]`
+```
+
+## 6. Object constructor
+
+## 7. Summary
