@@ -78,9 +78,9 @@ Great! Now `cat` and `dog` objects both inherit `legs` property. Now you can acc
 
 > The essense of protypal inheritance in JavaScript: objects can inherit properties from other objects &mdash; the prototypes.  
 
-## 4. The default prototype
+## 4. The implicit prototype
 
-Every time you create an object, if no prototype is explicitely set, JavaScript assigns a default prototype specific to the type of object you've created.   
+Every time you create an object, if no prototype is explicitely set, JavaScript assigns an implicit prototype object specific to the type of object you've created.   
 
 Let's look again at the `pet` object:
 
@@ -92,7 +92,7 @@ pet.toString(); // => `[object Object]`
 
 `pet` has just one property `legs`, however you can invoke the method `pet.toString()`. Where did `toString()` come from?  
 
-When you've created the `pet` object, JavaScript has assigned to it a default prototype object. From that object `pet` inherits `toString()` method:  
+When you've created the `pet` object, JavaScript has assigned to an implicit prototype object. From that object `pet` inherits `toString()` method:  
 
 ```javascript
 const pet = { legs: 4 };
@@ -102,20 +102,90 @@ const petPrototype = Object.getPrototypeOf(pet);
 pet.toString === petPrototype.toString; // => true
 ```
 
+[Object.getPrototypeOf(object)]() is an utility function that returns the prototype of an object.  
+
 ## 5. The prototype chain
 
-Let's return to the `cat` and `dog`. Can you run same way `toString()` method on them?  
+Let's go deeper and create an object `tail`, and set this object as a prototype of `pet`:
 
 ```javascript
-const pet = { legs: 4 };
-
+const tail = { hasTail: true };
+const pet = Object.create(tail, { legs: 4 });
 const cat = Object.create(pet, { sound: 'Meow!' });
 const dog = Object.create(pet, { sound: 'Bark!' });
 
-pet.toString(); // => `[object Object]`
-pet.toString(); // => `[object Object]`
+cat.hasTail; // => true
+dog.hasTail; // => true
 ```
 
-## 6. Object constructor
+With these changes:
+
+* `pet` is the prototype of `cat` and `dog`
+* `tail` is the prototype of `pet`
+
+Interestringly, is that `cat` and `dog` object inherit the property `legs` from their direct prototype `pet`, but as well they inherit `hasTail` from the prototype of their prototype. 
+
+That's called the prototype chain.
+
+ JavaScript searches for inherited properties in chain: from the prototype of the object, then from the prototype's prototype and so on until it encounters `null` as the prototype.  
+
+## 6. But JavaScript has classes!
+
+You may be confused regarding the statement that JavaScript has only objects. You've probably already used `class` keyword in JavaScript!
+
+```javascript
+class Pet {
+  legs: 4;
+
+  constructor(sound) {
+    this.sound = sound;
+  }
+}
+
+const cat = new Pet('Moew');
+const dog = new Pet('Bark!');
+
+cat.legs; // => 4
+dog.legs; // => 4
+```
+
+The idea is that ES2015 `class` syntax is a syntactic sugar on top of prototypal inheritance. 
+
+Yes, you're dealing with the same prototypes, just beautified with classes syntax.  
+
+The above code snippet is equivalent to the following:
+
+```javascript
+const pet = {
+  legs: 4,
+  constructor: CreatePet
+};
+
+function CreatePet(sound) {
+  return Object.create(pet, {
+    sound
+  });
+}
+
+const cat = CreatePet('Moew');
+const dog = CreatePet('Bark!');
+
+cat.legs; // => 4
+dog.legs; // => 4
+```
+
+where `constructor` is a special property that links to the function that constructs the object, which in this case is `CreatePet`.  
 
 ## 7. Summary
+
+JavaScript has only primitive types, `null`, `undefined` and objects. 
+
+Compared to languages like Java or PHP, in JavaScript there's no concept of class that serves as a template to create objects.  
+
+Rather, in JavaScript objects inherit properties from other objects &mdash; the prototypes. That's the prototypal inheritance.  
+
+JavaScript looks for inherited properties not only in the direct prototype of the object, but also in the prototype of the prototype, and so on in chain.  
+
+Finally, JavaScript still provides the classic syntax of `class`-es. However, this syntax is only a syntactic sugar on top of prototypes.  
+
+*Have questions about protoypal inheritance? Ask in a comment bellow!*
