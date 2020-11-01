@@ -11,7 +11,7 @@ type: post
 commentsThreadId: javascript-prototypal-inheritance
 ---
 
-Prototypal inheritance in JavaScript is a slightly conter-intuitive, nevertheless, an important concept. *You don't know JavaScript until you know prototypal inheritance.*  
+Prototypal inheritance in JavaScript is an important concept, however, slightly conter-intuitive. *You don't know JavaScript until you know prototypal inheritance.*  
 
 In this post, you'll read an accessible explanation of prototypal inheritance in JavaScript.  
 
@@ -27,7 +27,7 @@ But JavaScript doesn't have the concept of class &mdash; there are only objects.
 
 A primitive type is atomic, meaning that it cannnot be further deviced into smaller pieces. For example, a boolean `false` is atomic because you cannot divided into something smaller.
 
-An object, on the contrary to primitve types, is a composable structure. In JavaScript an object consists of multiple properties: key and value pairs.  
+An object, however, is a composable structure. In JavaScript an object consists of multiple properties: key and value pairs.  
 
 For example, the following objects `cat` and `dog` each has 2 properties:
 
@@ -92,7 +92,7 @@ pet.toString(); // => `[object Object]`
 
 `pet` has just one property `legs`, however you can invoke the method `pet.toString()`. Where did `toString()` come from?  
 
-When you've created the `pet` object, JavaScript has assigned to an implicit prototype object. From that object `pet` inherits `toString()` method:  
+When you've created the `pet` object, JavaScript has assigned to it an implicit prototype object. From its prototype `pet` inherits `toString()` method:  
 
 ```javascript
 const pet = { legs: 4 };
@@ -149,9 +149,9 @@ cat.legs; // => 4
 dog.legs; // => 4
 ```
 
-The idea is that ES2015 `class` syntax is a syntactic sugar on top of prototypal inheritance. 
+ES2015 `class` syntax is a syntactic sugar on top of prototypal inheritance. 
 
-Yes, you're dealing with the same prototypes, just beautified with classes syntax.  
+Yes, you're dealing with the prototypal inheritance, just beautified with classes syntax.  
 
 The above code snippet is equivalent to the following:
 
