@@ -58,9 +58,13 @@ Inheritance can help you!
 
 ## 3. The prototype object
 
-You can make `pet` a *prototype object* of `cat` and `dog`. Then `cat` and `dog` will *inherit* `legs` property from `pet`.  
+In JavaScript you can make an object *inherit* the properties from another object. The object from where the properties are inherited is named *prototype*.  
 
-In JavaScript `Object.create(prototype, object)` is an utility function that connects an `object` with a `prototype`. Let's use it and make `pet` the prototype object of both `cat` and `dog`:
+Following the example, you can make `pet` a *prototype* of `cat` and `dog`. Then `cat` and `dog` will *inherit* `legs` property from `pet`.  
+
+[Object.create(prototype, propertiesObject)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create) is an utility function that creates a new object from `propertiesObject` and makes `prototype` as the prototype of the created object.  
+
+Let's use `Object.create()` and make `pet` the prototype object of both `cat` and `dog`:
 
 ```javascript
 const pet = { legs: 4 };
@@ -72,9 +76,7 @@ cat.legs; // => 4
 dog.legs; // => 4
 ```
 
-Great! Now `cat` and `dog` objects both inherit `legs` property. Now you can access `cat.legs` and `dog.legs`.  
-
-`legs` property inside `cat` and `dog` is now an *inherited property* the prototype object `pet`. `sound` property, on the other side, is an *own property* because it's defined directly upon the object.  
+`legs` property inside `cat` and `dog` is now an *inherited property*. `sound` property, on the other side, is an *own property* because it's defined directly upon the object.  
 
 > The essense of protypal inheritance in JavaScript: objects can inherit properties from other objects &mdash; the prototypes.  
 
@@ -118,20 +120,17 @@ cat.hasTail; // => true
 dog.hasTail; // => true
 ```
 
-With these changes:
+`cat` and `dog` inherit the property `legs` from their direct prototype `pet`, however they inherit `hasTail` from the prototype of their prototype. 
 
-* `pet` is the prototype of `cat` and `dog`
-* `tail` is the prototype of `pet`
+That's called the prototype chain.  
 
-Interestringly, is that `cat` and `dog` object inherit the property `legs` from their direct prototype `pet`, but as well they inherit `hasTail` from the prototype of their prototype. 
-
-That's called the prototype chain.
-
- JavaScript searches for inherited properties in chain: from the prototype of the object, then from the prototype's prototype and so on until it encounters `null` as the prototype.  
+JavaScript looks for inherited properties in chain. When you'd like to access a property `myObject.myProp`, JavaScript looks for `myProp` inside the own properties of `myObject`, then in the prototype of the object, then in the prototype's prototype and so on until it encounters `null` as the prototype.  
 
 ## 6. But JavaScript has classes!
 
 You may be confused regarding the statement that JavaScript has only objects. You've probably already used `class` keyword in JavaScript!
+
+For example, you can write a class `Pet`:
 
 ```javascript
 class Pet {
@@ -149,9 +148,9 @@ cat.legs; // => 4
 dog.legs; // => 4
 ```
 
-ES2015 `class` syntax is a syntactic sugar on top of prototypal inheritance. 
+and create `cat` and `dog` objects when instantiaging the class. 
 
-Yes, you're dealing with the prototypal inheritance, just beautified with classes syntax.  
+The answe is that even when using `class` syntax under the hood prototypes are used. ES2015 `class` syntax is a syntactic sugar on top of prototypal inheritance. 
 
 The above code snippet is equivalent to the following:
 
