@@ -78,7 +78,7 @@ dog.legs; // => 4
 
 `legs` property inside `cat` and `dog` is now an *inherited property*. `sound` property, on the other side, is an *own property* because it's defined directly upon the object.  
 
-![Prototypal Inheritance in JavaScript](./images/prototypal-inheritance-3.png)
+![Prototypal Inheritance in JavaScript](./images/prototypal-inheritance-4.png)
 
 > The essense of protypal inheritance in JavaScript: objects can inherit properties from other objects &mdash; the prototypes.  
 
@@ -124,9 +124,9 @@ dog.hasTail; // => true
 
 `cat` and `dog` inherit the property `legs` from their direct prototype `pet`, however they inherit `hasTail` from the prototype of their prototype. 
 
-That's called the prototype chain.  
+That's called prototype chain.  
 
-![Prototypal Inheritance Chain in JavaScript](./images/prototypal-inheritance-chain.png)
+![Prototypal Inheritance Chain in JavaScript](./images/prototypal-inheritance-chain-2.png)
 
 JavaScript looks for inherited properties in chain. When you'd like to access a property `myObject.myProp`, JavaScript looks for `myProp` inside the own properties of `myObject`, then in the prototype of the object, then in the prototype's prototype and so on until it encounters `null` as the prototype.  
 
