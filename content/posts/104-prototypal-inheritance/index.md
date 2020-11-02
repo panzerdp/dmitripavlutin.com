@@ -78,6 +78,8 @@ dog.legs; // => 4
 
 `legs` property inside `cat` and `dog` is now an *inherited property*. `sound` property, on the other side, is an *own property* because it's defined directly upon the object.  
 
+![Prototypal Inheritance in JavaScript](./images/prototypal-inheritance-3.png)
+
 > The essense of protypal inheritance in JavaScript: objects can inherit properties from other objects &mdash; the prototypes.  
 
 ## 4. The implicit prototype
@@ -124,6 +126,8 @@ dog.hasTail; // => true
 
 That's called the prototype chain.  
 
+![Prototypal Inheritance Chain in JavaScript](./images/prototypal-inheritance-chain.png)
+
 JavaScript looks for inherited properties in chain. When you'd like to access a property `myObject.myProp`, JavaScript looks for `myProp` inside the own properties of `myObject`, then in the prototype of the object, then in the prototype's prototype and so on until it encounters `null` as the prototype.  
 
 ## 6. But JavaScript has classes!
@@ -150,7 +154,7 @@ dog.legs; // => 4
 
 and create `cat` and `dog` objects when instantiaging the class. 
 
-The answe is that even when using `class` syntax under the hood prototypes are used. ES2015 `class` syntax is a syntactic sugar on top of prototypal inheritance. 
+The answer is that even when using `class` syntax, under the hood prototypes are used. ES2015 `class` syntax is a syntactic sugar on top of prototypal inheritance. 
 
 The above code snippet is equivalent to the following:
 
