@@ -87,7 +87,7 @@ Now you can access `legs` property on both `cat` and `dog` objects. `legs` prope
 
 You've probably wondering: why the need of inheritance in the first place? Life without it seems easier. 
 
-Inheritance solves the problem of data and logic duplication. By inheriting properties, objects can share the same properties and methods.  
+Inheritance solves the problem of data and logic duplication. By inheriting, objects can share the same properties and methods.  
 
 *Note: `__proto__` is deprecated, but I'm using it in examples for simplicity. In production code [Object.create()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create) is recommended.*
 
