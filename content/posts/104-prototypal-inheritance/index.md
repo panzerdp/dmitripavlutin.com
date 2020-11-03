@@ -34,8 +34,14 @@ An object, however, is a composable structure. An object consists of multiple pr
 For example, the following objects `cat` and `dog` contain 2 properties:
 
 ```javascript
-const cat = { sound: 'Meow!', legs: 4 };
-const dog = { sound: 'Bark!', legs: 4 };
+const cat = { 
+  sound: 'Meow!', 
+  legs: 4 
+};
+const dog = { 
+  sound: 'Bark!', 
+  legs: 4 
+};
 ```
 
 There's a small issue with these objects: they both contain the same property `{ legs : 4 }`.  
@@ -61,15 +67,15 @@ In JavaScript, you can make an object *inherit* properties of another object. Th
 
 Following the example, you can make `pet` a *prototype* of `cat` and `dog`. Then `cat` and `dog` will *inherit* `legs` property from `pet`.  
 
-[Object.create(prototype, propertiesObject)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create) is an utility function that creates a new object from `propertiesObject` and makes `prototype` as the prototype of the created object.  
+Inside of the object literal, the special property `__proto__` sets the prototype of the created object. 
 
-Let's use `Object.create()` and make `pet` the prototype object of both `cat` and `dog`:
+Let's use `__proto__` and make `pet` the prototype object of both `cat` and `dog`:
 
 ```javascript
 const pet = { legs: 4 };
 
-const cat = Object.create(pet, { sound: 'Meow!' });
-const dog = Object.create(pet, { sound: 'Bark!' });
+const cat = { sound: 'Meow!', __proto__: pet };
+const dog = { sound: 'Bark!', __proto__: pet };
 
 cat.legs; // => 4
 dog.legs; // => 4
@@ -83,6 +89,8 @@ Now you can access `legs` property on both `cat` and `dog` objects. `legs` prope
 
 > The essence of prototypal inheritance in JavaScript: objects can inherit properties from other objects &mdash; the prototypes.  
 
+*Note: `__proto__` is deprecated, but I'm using it in examples for simplicity. In production code [Object.create()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create) is recommended.*
+
 ### 3.1 Own vs inherited property
 
 If an object has an own property and an inherited property with the same name, then JavaScript *always picks the own property* of the object.    
@@ -91,7 +99,7 @@ In the following example `chicken` object has an own property `legs`, as well in
 ```javascript
 const pet = { legs: 4 };
 
-const chicken = Object.create(pet, { sound: 'Cluck!', legs: 2 });
+const chicken = { sound: 'Cluck!', legs: 2, __proto__: pet };
 
 chicken.legs; // => 2
 ```
@@ -105,10 +113,10 @@ What's interesting is that if you delete the own property, JavaScript will pick 
 ```javascript
 const pet = { legs: 4 };
 
-const chicken = Object.create(pet, { sound: 'Cluck!', legs: 2 });
+const chicken = { sound: 'Cluck!', legs: 2, __proto__: pet };
 
 chicken.legs; // => 2
-delete chicken.legs;
+delete chicken.legs; // no chicken were harmed!
 chicken.legs; // => 4
 ```
 
@@ -144,9 +152,11 @@ Let's go deeper and create an object `tail`, making it also a prototype of `pet`
 
 ```javascript
 const tail = { hasTail: true };
-const pet = Object.create(tail, { legs: 4 });
-const cat = Object.create(pet, { sound: 'Meow!' });
-const dog = Object.create(pet, { sound: 'Bark!' });
+
+const pet = { legs: 4, __proto__: tail };
+
+const cat = { sound: 'Meow!', __proto__: pet };
+const dog = { sound: 'Bark!', __proto__: pet };
 
 cat.hasTail; // => true
 dog.hasTail; // => true
@@ -170,18 +180,17 @@ For example, you can write a class `Pet`:
 
 ```javascript
 class Pet {
-  legs: 4;
+  legs = 4;
 
   constructor(sound) {
     this.sound = sound;
   }
 }
 
-const cat = new Pet('Moew');
-const dog = new Pet('Bark!');
+const cat = new Pet('Moew!');
 
-cat.legs; // => 4
-dog.legs; // => 4
+cat.legs;           // => 4
+cat instanceof Pet; // => true
 ```
 
 and create `cat` and `dog` objects when instantiating the class. 
@@ -192,24 +201,21 @@ The above `class`-based code snippet is equivalent to the following:
 
 ```javascript
 const pet = {
-  legs: 4,
-  constructor: CreatePet
+  legs: 4
 };
 
 function CreatePet(sound) {
-  return Object.create(pet, {
-    sound
-  });
+  return { sound, __proto__: pet };
 }
+CreatePet.prototype = pet;
 
-const cat = CreatePet('Moew');
-const dog = CreatePet('Bark!');
+const cat = CreatePet('Moew!');
 
-cat.legs; // => 4
-dog.legs; // => 4
+cat.legs;           // => 4
+cat instanceof Pet; // => true
 ```
 
-where `constructor` is a special property that links to the function that constructs the object, which in this case is `CreatePet`.  
+`CreatePet.prototype = pet` assignment is necessary to make `cat instanceof Pet` evaluate correctly that `cat` is an instance of `Pet`.  
 
 What I like about the `class` syntax in JavaScript is that being based on prototypes, when working with `class`-es you can completely forget about prototypes.  
 
