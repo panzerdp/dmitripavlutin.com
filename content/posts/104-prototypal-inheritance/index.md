@@ -13,7 +13,7 @@ commentsThreadId: javascript-prototypal-inheritance
 
 I believe that you don't know JavaScript until you know prototypal inheritance. 
 
-This concept is often asked during JavaScript coding inteviews. So if you're preparing for one, stay tuned.  
+This concept is often asked during JavaScript coding interviews. So if you're preparing for one, stay tuned.  
 
 In this post, you'll read an accessible explanation of prototypal inheritance in JavaScript.  
 
@@ -27,7 +27,7 @@ But JavaScript doesn't have the concept of class as a template &mdash; there are
 
 ## 2. Inheritance
 
-A primitive type is atomic, meaning that it can not be further divided into smaller pieces. For example, a boolean `false` is atomic because it divide into smaller pieces.  
+A primitive type is atomic, meaning that it can not be further divided into smaller pieces. For example, a boolean `false` is atomic because it cannot divide into smaller pieces.  
 
 An object, however, is a composable structure. An object consists of multiple properties: key and value pairs.  
 
@@ -154,7 +154,7 @@ dog.hasTail; // => true
 
 ![Prototypal Inheritance Chain in JavaScript](./images/prototypal-inheritance-chain-2.png)
 
-A prototype object can also have a prototype. For example `pet` is a prototype object of `cat` and `dog`, and at the same time `pet`'s prototype is `tail`.
+A prototype object can also have a prototype. For example, `pet` is a prototype object of `cat` and `dog`, and at the same time `pet`'s prototype is `tail`.
 
 Because prototypes can also have prototypes, JavaScript looks for inherited properties in the *chain of prototypes*.  
 
@@ -211,13 +211,13 @@ where `constructor` is a special property that links to the function that constr
 
 What I like about the `class` syntax in JavaScript is that being based on prototypes, when working with `class`-es you can completely forget about prototypes.  
 
-## 7. The benefits of prototypal inheritance
+## 7. The benefits
 
-While prototypal inheritance might seem clumsy at first, when you get a good grasp of it you can see how easy and powerful it. *Objects inherit properties from objects* &mdash; what could be simpler?  
+While prototypal inheritance might seem clumsy at first, when you understand it you could see its simplicity and possibilities. *Objects inherit properties from objects* &mdash; what could be simpler?  
 
-Prototypal inheritance can even emulate the "classic" classes.  
+First, prototypal inheritance can emulate the `classes` syntax.  
 
-Also prototypes are memory efficient. Any newly created object is linked to the same implicit prototype object. 
+Also, prototypes are memory efficient. Any newly created object is linked to the same implicit prototype object. 
 
 For example, if your application has created 100 plain JavaScript objects of data &mdash; then all these objects inherit from the *same prototype object*.  
 
@@ -241,6 +241,6 @@ Rather, in JavaScript objects inherit properties from other objects &mdash; the 
 
 JavaScript looks for inherited properties not only in the direct prototype of the object, but also in the prototype of the prototype, and so on in the chain of prototypes.  
 
-Finally, JavaScript still provides the classic syntax of `class`-es. However, this syntax is a syntactic sugar on top of prototypes.  
+Finally, JavaScript still provides the classic syntax of `class`-es, which is syntactic sugar on top of prototypes.  
 
 *Have questions about prototypal inheritance? Ask in a comment below!*
