@@ -11,11 +11,11 @@ type: post
 commentsThreadId: javascript-prototypal-inheritance
 ---
 
-I believe that you don't know JavaScript until you know prototypal inheritance. It enormously influences how objects work in JavaScript.
+I believe that you don't know JavaScript until you know prototypal inheritance. Prototypes greatly influence how objects work in JavaScript.
 
-The prototypal inheritance is often asked during JavaScript coding interviews.  
+The prototypal inheritance is often asked during coding interviews, since this knowledge is a good indicator of how deep you understand of JavaScript.    
 
-This guide will help you understand prototypal inheritance in JavaScript in an easy and accessible way.    
+This guide will help you easily understand prototypal inheritance in JavaScript.  
 
 ## 1. Objects only
 
@@ -23,7 +23,7 @@ JavaScript has only primitives types, `null`, `undefined` and objects. A big wor
 
 In Java or PHP languages there's a concept of *class*: a template or plan that describes the properties and method of objects. 
 
-But JavaScript doesn't have the concept of class as a template &mdash; there are only objects. That's a big idea of JavaScript to remember.
+But JavaScript doesn't have the concept of class as a template &mdash; there are only objects.  
 
 ## 2. Inheritance
 
