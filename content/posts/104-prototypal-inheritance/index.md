@@ -13,7 +13,7 @@ commentsThreadId: javascript-prototypal-inheritance
 
 I believe that you don't know JavaScript until you know prototypal inheritance. Prototypes greatly influence how objects work in JavaScript.
 
-The prototypal inheritance is often asked during coding interviews, since this knowledge is a good indicator of how deep you understand of JavaScript.    
+The prototypal inheritance is often asked during coding interviews, since this knowledge is an indicator of how you know JavaScript.    
 
 This guide will help you easily understand prototypal inheritance in JavaScript.  
 
