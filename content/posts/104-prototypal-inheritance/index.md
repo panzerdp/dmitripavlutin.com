@@ -15,7 +15,7 @@ I believe that you don't know JavaScript until you know prototypal inheritance. 
 
 The prototypal inheritance is often asked during JavaScript coding interviews.  
 
-This guide will make you understand prototypal inheritance in JavaScript, hopefully, without much effort.    
+This guide will make you understand prototypal inheritance in JavaScript in an easy and accessible way.    
 
 ## 1. Objects only
 
@@ -23,7 +23,7 @@ JavaScript has only primitives types, `null`, `undefined` and objects. A big wor
 
 In Java or PHP languages there's a concept of *class*: a template or plan that describes the properties and method of objects. 
 
-But JavaScript doesn't have the concept of class as a template &mdash; there are only objects. That's the first big idea of JavaScript that you should remember.  
+But JavaScript doesn't have the concept of class as a template &mdash; there are only objects. That's a big idea of JavaScript to remember.
 
 ## 2. Inheritance
 
@@ -34,14 +34,8 @@ An object, however, is a composable structure. An object consists of multiple pr
 For example, the following objects `cat` and `dog` contain 2 properties:
 
 ```javascript
-const cat = { 
-  sound: 'Meow!', 
-  legs: 4 
-};
-const dog = { 
-  sound: 'Bark!', 
-  legs: 4 
-};
+const cat = { sound: 'Meow!', legs: 4 };
+const dog = { sound: 'Bark!', legs: 4 };
 ```
 
 Both objects contain the same property `{ legs : 4 }`. Following "Don't repeat yourself" ([DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)) principle, let's extract `legs` property into a specialized object `pet`:
@@ -61,7 +55,7 @@ Inheritance can help you!
 
 ## 3. The prototype object
 
-In JavaScript, you can make an object *inherit* properties of another object. The object from where the properties are inherited is named *prototype*.  
+In JavaScript, an object can *inherit* properties of another object. The object from where the properties are inherited is named *prototype*.  
 
 Following the example, you can make `pet` a *prototype* of `cat` and `dog`. Then `cat` and `dog` will *inherit* `legs` property from `pet`.  
 
@@ -87,9 +81,9 @@ Now you can access `legs` property on both `cat` and `dog` objects. `legs` prope
 
 You've probably wondering: why the need of inheritance in the first place? Life without it seems easier. 
 
-Inheritance solves the problem of data and logic duplication. By inheriting, objects can share the same properties and methods.  
+Inheritance solves the problem of data and logic duplication. By inheriting, objects can share properties and methods.  
 
-*Note: `__proto__` is deprecated, but I'm using it in examples for simplicity. In production code [Object.create()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create) is recommended.*
+*Note: `__proto__` is deprecated, but I'm using it for simplicity. In production code [Object.create()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create) is recommended.*
 
 ### 3.1 Own vs inherited property
 
