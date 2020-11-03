@@ -57,7 +57,7 @@ Inheritance can help you!
 
 ## 3. The prototype object
 
-In JavaScript, you can make an object *inherit* the properties from another object. The object from where the properties are inherited is named *prototype*.  
+In JavaScript, you can make an object *inherit* properties of another object. The object from where the properties are inherited is named *prototype*.  
 
 Following the example, you can make `pet` a *prototype* of `cat` and `dog`. Then `cat` and `dog` will *inherit* `legs` property from `pet`.  
 
@@ -79,13 +79,13 @@ Now you can access `legs` property on both `cat` and `dog` objects. `legs` prope
 
 `sound` property, on the other side, is an *own property* because it's defined directly upon the object.  
 
-![Prototypal Inheritance in JavaScript](./images/prototypal-inheritance-5.png)
+![Inherited property from the prototype in JavaScript](./images/inherited-property-2.png)
 
 > The essence of prototypal inheritance in JavaScript: objects can inherit properties from other objects &mdash; the prototypes.  
 
 ### 3.1 Own vs inherited property
 
-If an object has an own property and an inherited property with the same name, then JavaScript *always picks the own property* of the object:  
+If an object has an own property and an inherited property with the same name, then JavaScript *always picks the own property* of the object.    
 
 In the following example `chicken` object has an own property `legs`, as well inherits a property with the same name `legs`:
 ```javascript
@@ -97,6 +97,8 @@ chicken.legs; // => 2
 ```
 
 `chicken.legs` evaluates to `2`, meaning that JavaScript picks the own property `legs` over the inherited `legs` from the prototype.  
+
+![Own vs inherited property in JavaScript](./images/own-vs-inherited-property-2.png)
 
 What's interesting is that if you delete the own property, JavaScript will pick the inherited one!
 
@@ -152,7 +154,7 @@ dog.hasTail; // => true
 
 `cat` and `dog` inherit the property `legs` from their direct prototype `pet`, and also, they inherit `hasTail` from the prototype of their prototype. 
 
-![Prototypal Inheritance Chain in JavaScript](./images/prototypal-inheritance-chain-2.png)
+![Prototypes chain in JavaScript](./images/prototypes-chain.png)
 
 A prototype object can also have a prototype. For example, `pet` is a prototype object of `cat` and `dog`, and at the same time `pet`'s prototype is `tail`.
 
