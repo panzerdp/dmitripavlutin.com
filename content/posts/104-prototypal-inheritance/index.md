@@ -13,79 +13,83 @@ commentsThreadId: javascript-prototypal-inheritance
 
 I believe that you don't know JavaScript until you know prototypal inheritance. Prototypes greatly influence how objects work in JavaScript.
 
-The prototypal inheritance is often asked during coding interviews, since this knowledge is an indicator of how you know JavaScript.    
+The prototypal inheritance is often asked during coding interviews since this knowledge is an indicator of how you know JavaScript.    
 
 This guide will help you easily understand prototypal inheritance in JavaScript.  
 
-## 1. Objects only
+## 1. Introduction
 
-JavaScript has only primitives types, `null`, `undefined` and objects. A big world of objects.  
+JavaScript has only primitives types, `null`, `undefined` and objects. A big world of objects. In JavaScript, contrary to languages like Java or PHP, there’s no concept of class that serves as a template to create objects.  
 
-In Java or PHP languages there's a concept of *class*: a template or plan that describes the properties and method of objects. 
+An object is a composable structure and consists of multiple properties: key and value pairs.  
 
-But JavaScript doesn't have the concept of class as a template &mdash; there are only objects.  
-
-## 2. Inheritance
-
-A primitive type is atomic, meaning that it can not be further divided into smaller pieces. For example, a boolean `false` is atomic because it cannot divide into smaller pieces.  
-
-An object, however, is a composable structure. An object consists of multiple properties: key and value pairs.  
-
-For example, the following objects `cat` and `dog` contain 2 properties:
+For example, the following object `cat` contains 2 properties:
 
 ```javascript
 const cat = { sound: 'Meow!', legs: 4 };
-const dog = { sound: 'Bark!', legs: 4 };
 ```
 
-Both objects contain the same property `{ legs : 4 }`. Following "Don't repeat yourself" ([DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)) principle, let's extract `legs` property into a specialized object `pet`:
+Since I'd like to reuse `legs` property in other objects, let's extract `legs` property into a specialized object `pet`:
 
 ```javascript{1}
 const pet = { legs: 4 };
 
 const cat = { sound: 'Meow!' };
-const dog = { sound: 'Bark!' };
 ```
 
-That looks better. Now no object has duplicated information.  
+That looks better.  
 
-But you still want to have `legs` property on `cat` and `dog`. How can you connect `cat` and `dog` with `pet`?  
+But I still want to have `legs` property on `cat`. How can you connect `cat` with `pet`?  
 
 Inheritance can help you!
 
-## 3. The prototype object
+## 2. The prototype object
 
 In JavaScript, an object can *inherit* properties of another object. The object from where the properties are inherited is named *prototype*.  
 
-Following the example, you can make `pet` a *prototype* of `cat` and `dog`. Then `cat` and `dog` will *inherit* `legs` property from `pet`.  
+Following the example, you can make `pet` a *prototype* of `cat` which will then *inherit* `legs` property.  
 
-Inside of the object literal, the special property `__proto__` sets the prototype of the created object. Let's use `__proto__` and make `pet` the prototype object of both `cat` and `dog`:
+The special property `__proto__` sets the prototype of the created object in an object literal. Let's use `__proto__` and make `pet` the prototype of `cat`:
+
+```javascript
+const pet = { legs: 4 };
+
+const cat = { sound: 'Meow!', __proto__: pet };
+
+cat.legs; // => 4
+```
+
+`legs` property inside `cat` is now an *inherited property*, thus you can easily access it `cat.legs`.  
+
+`sound` property, on the other side, is an *own property* because it's defined directly on the object.  
+
+![Inherited property from the prototype in JavaScript](./images/1.png)
+
+> The essence of prototypal inheritance in JavaScript: objects can inherit properties from other objects &mdash; the prototypes.  
+
+You've probably wondered: why the need for inheritance in the first place?  
+
+Inheritance solves the problem of data and logic duplication. By inheriting, objects can share properties and methods.  
+
+For example, you could easily reuse `legs` property to create more pets:
 
 ```javascript
 const pet = { legs: 4 };
 
 const cat = { sound: 'Meow!', __proto__: pet };
 const dog = { sound: 'Bark!', __proto__: pet };
+const pig = { sound: 'Grunt!', __proto__: pet };
 
 cat.legs; // => 4
 dog.legs; // => 4
+pig.legs; // => 4
 ```
 
-Now you can access `legs` property on both `cat` and `dog` objects. `legs` property inside `cat` and `dog` is now an *inherited property*.  
-
-`sound` property, on the other side, is an *own property* because it's defined directly upon the object.  
-
-![Inherited property from the prototype in JavaScript](./images/inherited-property-2.png)
-
-> The essence of prototypal inheritance in JavaScript: objects can inherit properties from other objects &mdash; the prototypes.  
-
-You've probably wondering: why the need of inheritance in the first place? Life without it seems easier. 
-
-Inheritance solves the problem of data and logic duplication. By inheriting, objects can share properties and methods.  
+`cat`, `dog`, and `pig` all reuse the property `legs`.  
 
 *Note: `__proto__` is deprecated, but I'm using it for simplicity. In production code [Object.create()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create) is recommended.*
 
-### 3.1 Own vs inherited property
+### 2.1 Own vs inherited property
 
 If an object has an own property and an inherited property with the same name, then JavaScript *always picks the own property*.  
 
@@ -100,7 +104,7 @@ chicken.legs; // => 2
 
 `chicken.legs` evaluates to `2`, meaning that JavaScript picks the own property `legs` over the inherited `legs` from the prototype.  
 
-![Own vs inherited property in JavaScript](./images/own-vs-inherited-property-2.png)
+![Own vs inherited property in JavaScript](./images/2.png)
 
 If you delete the own property, then JavaScript picks the inherited one!
 
@@ -114,7 +118,7 @@ delete chicken.legs; // no chicken were harmed!
 chicken.legs; // => 4
 ```
 
-## 4. The implicit prototype
+## 3. The implicit prototype
 
 When you create an object, and no prototype is explicitly set, JavaScript assigns an implicit prototype object specific to the type of object you've created.   
 
@@ -140,7 +144,7 @@ pet.toString === petPrototype.toString; // => true
 
 [Object.getPrototypeOf(object)]() is an utility function that returns the prototype of an object.  
 
-## 5. The prototype chain
+## 4. The prototype chain
 
 Let's go deeper and create an object `tail`, making it also a prototype of `pet`:
 
@@ -150,23 +154,19 @@ const tail = { hasTail: true };
 const pet = { legs: 4, __proto__: tail };
 
 const cat = { sound: 'Meow!', __proto__: pet };
-const dog = { sound: 'Bark!', __proto__: pet };
 
 cat.hasTail; // => true
-dog.hasTail; // => true
 ```
 
-`cat` and `dog` inherit the property `legs` from their direct prototype `pet`, and also, they inherit `hasTail` from the prototype of their prototype. 
+`cat` inherits the property `legs` from its direct prototype `pet`, and also, inherits `hasTail` from the prototype of its prototype.  
 
-![Prototypes chain in JavaScript](./images/prototypes-chain.png)
-
-A prototype object can also have a prototype. For example, `pet` is a prototype object of `cat` and `dog`, and at the same time `pet`'s prototype is `tail`.
-
-Because prototypes can also have prototypes, JavaScript looks for inherited properties in the *chain of prototypes*.  
+![Prototypes chain in JavaScript](./images/3.png)
 
 When accessing a property `myObject.myProp`, JavaScript looks for `myProp` inside the own properties of `myObject`, then in the prototype of the object, then in the prototype's prototype, and so on until it encounters `null` as the prototype.  
 
-## 6. But JavaScript has classes!
+Because prototypes can also have prototypes, JavaScript looks for inherited properties in the *chain of prototypes*.  
+
+## 5. But JavaScript has classes!
 
 You may be confused regarding the statement that JavaScript has only objects. You've probably already used the `class` keyword in JavaScript!
 
@@ -213,36 +213,12 @@ cat instanceof Pet; // => true
 
 Being based on prototypes, still, when working with `class`-es you can completely forget about prototypes.  
 
-## 7. The benefits
+## 6. Summary
 
-While prototypal inheritance might seem clumsy at first, when you understand it you could see its simplicity and possibilities. *Objects inherit properties from objects* &mdash; what could be simpler?  
-
-Prototypal inheritance can emulate the `classes` syntax.  
-
-Also, prototypes are memory efficient. Any newly created object is linked to the same implicit prototype object. 
-
-For example, if your application has created 100 plain JavaScript objects of data &mdash; then all these objects inherit from the *same prototype object*.  
-
-```javascript
-const obj1 = { prop: 'Value 1' };
-const obj2 = { prop: 'Value 2' };
-
-const proto1 = Object.getPrototypeOf(obj1);
-const proto2 = Object.getPrototypeOf(obj2);
-
-proto1 === proto2; // => true
-```
-
-## 8. Summary
-
-JavaScript has only primitive types, `null`, `undefined` and objects. 
-
-In JavaScript, contrary to languages like Java or PHP, there's no concept of class that serves as a template to create objects.  
-
-Rather, in JavaScript objects inherit properties from other objects &mdash; the prototypes. That's the prototypal inheritance.  
+In JavaScript, objects inherit properties from other objects &mdash; the prototypes. That's the idea of prototypal inheritance.  
 
 JavaScript looks for inherited properties not only in the direct prototype of the object, but also in the prototype of the prototype, and so on in the chain of prototypes.  
 
-Finally, JavaScript still provides the classic syntax of `class`-es, which is syntactic sugar on top of prototypes.  
+While prototypal inheritance seems clumsy at first, when understanding it you could enjoy its simplicity and possibilities. *Objects inherit properties from objects* &mdash; what could be simpler?  
 
 *Have questions about prototypal inheritance? Ask in a comment below!*
