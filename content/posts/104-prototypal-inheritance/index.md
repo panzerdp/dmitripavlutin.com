@@ -15,7 +15,7 @@ I believe that you don't know JavaScript until you know prototypal inheritance. 
 
 The prototypal inheritance is often asked during JavaScript coding interviews.  
 
-This guide will make you understand prototypal inheritance in JavaScript in an easy and accessible way.    
+This guide will help you understand prototypal inheritance in JavaScript in an easy and accessible way.    
 
 ## 1. Objects only
 
