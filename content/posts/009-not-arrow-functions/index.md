@@ -140,7 +140,7 @@ Executing `new Message('Hello World!')`, where `Message` is an arrow function, J
 
 I consider an efficient practice that ECMAScript 6 fails with verbose error messages in such situations. Contrary to *fail silently* specific to previous JavaScript versions.
 
-The above example is fixed using a [function expression](https://developer.mozilla.org/en/docs/web/JavaScript/Reference/Operators/function), which is the correct way (including the [function declaration](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/function)) to create constructors:
+The below example is fixed using a [function expression](https://developer.mozilla.org/en/docs/web/JavaScript/Reference/Operators/function), which is the correct way (including the [function declaration](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/function)) to create constructors:
 
 ```javascript
 const Message = function(text) {
