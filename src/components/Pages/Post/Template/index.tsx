@@ -1,5 +1,4 @@
 import Img from 'gatsby-image';
-import * as React from 'react';
 
 import 'prismjs/themes/prism.css';
 

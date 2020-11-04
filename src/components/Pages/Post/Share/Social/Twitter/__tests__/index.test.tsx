@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import { PostShareSocialTwitter, URL_SHARE_TWITTER } from '../index';

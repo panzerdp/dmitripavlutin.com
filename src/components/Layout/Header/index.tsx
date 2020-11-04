@@ -1,6 +1,6 @@
 import Img from 'gatsby-image';
 import Link from 'gatsby-link';
-import * as React from 'react';
+import { memo } from 'react';
 
 import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_SEARCH } from 'routes/path';
 import styles from './index.module.scss';
@@ -33,4 +33,4 @@ export function Header({ authorProfilePicture, siteInfo }: HeaderProps) {
   );
 }
 
-export default React.memo(Header);
+export default memo(Header);

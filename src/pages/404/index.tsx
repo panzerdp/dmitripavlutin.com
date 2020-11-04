@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import * as React from 'react';
 
 import Page404Template from 'components/Pages/404/Template';
 import { Page404Query } from 'typings/graphql';

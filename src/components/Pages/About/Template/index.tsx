@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import Layout from 'components/Layout/Fetch';
 import AboutMetaTags from 'components/Pages/About/Meta/Tags';
 import AboutMetaStructuredData from 'components/Pages/About/Meta/StructuredData';

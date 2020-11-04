@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import * as React from 'react';
 
 import PlainListAllTemplate from 'components/Pages/PlainListAll/Template';
 import { PlainListAllQuery } from 'typings/graphql';

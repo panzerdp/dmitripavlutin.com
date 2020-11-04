@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import ShareGroupHorizontal from '../Group/Horizontal';
 import styles from './index.module.scss';
 

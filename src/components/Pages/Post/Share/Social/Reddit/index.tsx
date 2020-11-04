@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import PostShareButton from '../../Button';
 import styles from './index.module.scss';
 

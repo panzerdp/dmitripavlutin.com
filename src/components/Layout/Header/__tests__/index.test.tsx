@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Img from 'gatsby-image';
 import { shallow } from 'enzyme';
 

@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import SubscriptionFetch from 'components/Subscription/Fetch';
 import SubscriptionForm from 'components/Subscription/Form';
 

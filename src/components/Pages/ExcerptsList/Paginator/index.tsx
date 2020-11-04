@@ -1,5 +1,5 @@
 import Link from 'gatsby-link';
-import * as React from 'react';
+import { Component } from 'react';
 
 import { TO_INDEX, TO_PAGE } from 'routes/path';
 import { generatePages } from './utils';
@@ -12,7 +12,7 @@ interface PaginatorProps {
   currentPage: number;
 }
 
-export default class Paginator extends React.Component<PaginatorProps> {
+export default class Paginator extends Component<PaginatorProps> {
   public render() {
     const { pagesSum, currentPage } = this.props;
     if (pagesSum === 0) {

@@ -1,5 +1,4 @@
 import Link from 'gatsby-link';
-import * as React from 'react';
 
 import styles from './index.module.scss';
 import { TO_POST } from 'routes/path';

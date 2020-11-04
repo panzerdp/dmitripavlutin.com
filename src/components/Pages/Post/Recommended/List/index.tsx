@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import RecommendedPost from '../Post';
 import styles from './index.module.scss';
 

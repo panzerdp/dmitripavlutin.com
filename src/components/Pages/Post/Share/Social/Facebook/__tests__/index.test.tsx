@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import { PostShareSocialFacebook, URL_SHARE_FACEBOOK } from '../index';

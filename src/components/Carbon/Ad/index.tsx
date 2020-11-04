@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useRef } from 'react';
 
 import styles from './index.module.scss';
 import CarbonBannerDemo from 'components/Carbon/Banner/Demo';
@@ -10,7 +10,7 @@ interface CarbonAdProps {
 
 export default function CarbonAd(props: CarbonAdProps): JSX.Element {
   const { isEnabled, isProductionMode, scriptSrc } = props.carbonAdsService;
-  const container = React.useRef();
+  const container = useRef();
 
   if (!isEnabled) {
     return null;

@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import SubscriptionRegion from 'components/Subscription/Region';
 import AboutAuthorDetailed from 'components/AboutAuthor/Detailed';
 import AboutAuthorContact from 'components/AboutAuthor/Contact';

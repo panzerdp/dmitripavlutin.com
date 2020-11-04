@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import * as React from 'react';
 
 import ExcerptsListTemplate from 'components/Pages/ExcerptsList/Template';
 import { ExcerptsListQuery } from 'typings/graphql';

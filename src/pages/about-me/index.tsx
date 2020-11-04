@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import * as React from 'react';
 
 import AboutTemplate from 'components/Pages/About/Template';
 import { AboutQuery } from 'typings/graphql';

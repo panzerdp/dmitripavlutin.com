@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Helmet } from 'react-helmet';
 
 import ClientOnly from '../../ClientOnly';

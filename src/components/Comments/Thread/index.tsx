@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { useRef, useEffect, memo } from 'react';
 
 export function CommentsThread(): JSX.Element {
-  const commentBox = React.useRef<HTMLDivElement>();
+  const commentBox = useRef<HTMLDivElement>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const scriptEl = document.createElement('script')
     scriptEl.async = true
     scriptEl.src = 'https://utteranc.es/client.js';
@@ -22,4 +22,4 @@ export function CommentsThread(): JSX.Element {
   return <div ref={commentBox}></div>;
 }
 
-export default React.memo(CommentsThread);
+export default memo(CommentsThread);

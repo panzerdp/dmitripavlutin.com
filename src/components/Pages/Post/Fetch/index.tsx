@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import * as React from 'react';
 
 import PostTemplate from 'components/Pages/Post/Template';
 import { PostBySlugQuery } from 'typings/graphql';

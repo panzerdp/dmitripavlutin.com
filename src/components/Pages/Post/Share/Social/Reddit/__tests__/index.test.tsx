@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import PostShareSocialReddit, { URL_SHARE_REDDIT } from '../index';

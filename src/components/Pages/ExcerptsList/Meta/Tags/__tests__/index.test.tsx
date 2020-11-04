@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-key */
-import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import MetaTags from '../index';

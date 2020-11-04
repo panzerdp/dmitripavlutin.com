@@ -1,6 +1,5 @@
 import Img from 'gatsby-image';
 import Link from 'gatsby-link';
-import * as React from 'react';
 
 import SubheaderWithComments from 'components/Subheader/WithComments';
 import { TO_POST } from 'routes/path';

@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import styles from './index.module.scss';
 
 import ShareSocialFacebook from 'components/Pages/Post/Share/Social/Facebook';

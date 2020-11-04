@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import Layout from 'components/Layout/Fetch';
 import Excerpt from 'components/Pages/ExcerptsList/Excerpt';
 import MetaPaginator from 'components/Pages/ExcerptsList/Meta/Paginator';

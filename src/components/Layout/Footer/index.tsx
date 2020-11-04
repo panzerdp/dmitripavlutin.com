@@ -1,5 +1,5 @@
 import Link from 'gatsby-link';
-import * as React from 'react';
+import { memo } from 'react';
 
 import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_RSS, TO_SEARCH } from 'routes/path';
 import styles from './index.module.scss';
@@ -57,4 +57,4 @@ export function Footer({ authorInfo: { profiles, name, email } }: FooterProps) {
   );
 }
 
-export default React.memo(Footer);
+export default memo(Footer);

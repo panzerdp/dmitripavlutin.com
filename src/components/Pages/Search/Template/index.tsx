@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import Layout from 'components/Layout/Fetch';
 import SearchRightSidebar from 'components/Pages/Search/Sidebar/Right';
 import SearchMetaTags from 'components/Pages/Search/Meta/Tags';

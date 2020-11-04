@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Media from 'react-media';
 
 import styles from './index.module.scss';

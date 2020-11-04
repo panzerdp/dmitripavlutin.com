@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import Tag from 'components/Tag';
 import PostCommentsCount from 'components/Comments/Count';
 import { formatDate } from 'utils/date';
