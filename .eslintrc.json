@@ -29,7 +29,9 @@
     "@typescript-eslint/no-explicit-any": "off",
     "react/jsx-closing-bracket-location": "error",
     "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
-    "react/jsx-curly-spacing": ["error", "never"]
+    "react/jsx-curly-spacing": ["error", "never"],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off"
   },
   "settings": {
     "react": {

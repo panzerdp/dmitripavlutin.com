@@ -5,7 +5,7 @@
     "esModuleInterop": true,
     "baseUrl": "./src",
     "rootDir": "./",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "module": "es2015",
     "moduleResolution": "node",
     "noEmit": true,

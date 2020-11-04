@@ -1,4 +1,3 @@
-const Promise = require('bluebird');
 const path = require('path');
 
 const createExcerptsList = require('./gatsby/node/excerpts-list');

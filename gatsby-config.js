@@ -24,9 +24,7 @@ module.exports = {
               linkImagesToOriginal: true,
               sizeByPixelDensity: false,
               quality: 90,
-              withWebp: {
-                quality: 90,
-              },
+              withWebp: true,
               wrapperStyle({ aspectRatio }) {
                 if (aspectRatio <= 0.8) {
                   return 'max-width: 560px !important;';
