@@ -209,7 +209,7 @@ cat.legs;                 // => 4
 cat instanceof CreatePet; // => true
 ```
 
-`CreatePet.prototype = pet` assignment is necessary to make `cat instanceof CreatePet` evaluate correctly that `cat` is an instance of `Pet`.  
+`CreatePet.prototype = pet` assignment is necessary to make `cat instanceof CreatePet` evaluate to `true`.  
 
 Being based on prototypes, still, when working with `class`-es you can completely forget about prototypes.  
 
