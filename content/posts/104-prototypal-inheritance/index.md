@@ -65,7 +65,7 @@ cat.legs; // => 4
 
 `sound` property, on the other side, is an *own property* because it's defined directly on the object.  
 
-![Inherited property from the prototype in JavaScript](./images/Selection_010.png)
+![Inherited property from the prototype in JavaScript](./images/Selection_013.png)
 
 > The essence of prototypal inheritance in JavaScript: objects can inherit properties from other objects &mdash; the prototypes.  
 
@@ -106,7 +106,7 @@ chicken.legs; // => 2
 
 `chicken.legs` evaluates to `2`. JavaScript picks the own property `legs` (which is `2`) over the inherited `legs` (which is `4`).  
 
-![Own vs inherited property in JavaScript](./images/Selection_011.png)
+![Own vs inherited property in JavaScript](./images/Selection_014.png)
 
 If you delete the own property, then JavaScript picks the inherited one!
 
@@ -162,7 +162,7 @@ cat.hasTail; // => true
 
 `cat` inherits the property `legs` from its direct prototype `pet`. But `cat` also inherits `hasTail` from the prototype of its prototype &mdash; `tail`!  
 
-![Prototypes chain in JavaScript](./images/Selection_012.png)
+![Prototypes chain in JavaScript](./images/Selection_015.png)
 
 When accessing a property `myObject.myProp`, JavaScript looks for `myProp` inside the own properties of `myObject`, then in the prototype of the object, then in the prototype's prototype, and so on until it encounters `null` as the prototype.  
 

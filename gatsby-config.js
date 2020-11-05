@@ -25,12 +25,7 @@ module.exports = {
               sizeByPixelDensity: false,
               quality: 90,
               withWebp: true,
-              wrapperStyle({ aspectRatio }) {
-                if (aspectRatio <= 0.8) {
-                  return 'max-width: 560px !important;';
-                }
-                return '';
-              },
+              maxWidth: 560,
             },
           },
           {
