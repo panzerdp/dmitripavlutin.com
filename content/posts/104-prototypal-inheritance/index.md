@@ -2,7 +2,7 @@
 title: "What Makes JavaScript JavaScript? Prototypal Inheritance"
 description: "The guide that will make you understand prototypal inheritance in JavaScript: prototype object, inherited propertes, chain of prototypes."
 published: "2020-11-03T10:00Z"
-modified: "2020-11-03T10:00Z"
+modified: "2020-11-05T14:30Z"
 thumbnail: "./images/cover.png"
 slug: javascript-prototypal-inheritance
 tags: ['javascript', 'prototype', 'inheritance']
@@ -11,7 +11,7 @@ type: post
 commentsThreadId: javascript-prototypal-inheritance
 ---
 
-I believe that you don't know JavaScript until you know prototypal inheritance. Prototypes greatly influence how objects work in JavaScript.
+You don't know JavaScript until you know prototypal inheritance. Prototypes greatly influence how objects work in JavaScript.
 
 The prototypal inheritance is often asked during coding interviews since this knowledge is an indicator of how you know JavaScript.    
 
@@ -49,7 +49,9 @@ In JavaScript, an object can *inherit* properties of another object. The object 
 
 Following the example, you can make `pet` a *prototype* of `cat` which will then *inherit* `legs` property.  
 
-The special property `__proto__` sets the prototype of the created object in an object literal. Let's use `__proto__` and make `pet` the prototype of `cat`:
+When creating an object using the object literal, you can as well use the special property `__proto__` to set the prototype of the created object.  
+
+Let's use `__proto__` and make `pet` the prototype of `cat`:
 
 ```javascript
 const pet = { legs: 4 };
@@ -59,7 +61,7 @@ const cat = { sound: 'Meow!', __proto__: pet };
 cat.legs; // => 4
 ```
 
-`legs` property inside `cat` is now an *inherited property*, thus you can easily access it `cat.legs`.  
+`cat` object now *inherits* `legs` from the prototype `pet`. Now you can use the property accessor `cat.legs` that evaluates to `4`.  
 
 `sound` property, on the other side, is an *own property* because it's defined directly on the object.  
 
@@ -67,7 +69,7 @@ cat.legs; // => 4
 
 > The essence of prototypal inheritance in JavaScript: objects can inherit properties from other objects &mdash; the prototypes.  
 
-You've probably wondered: why the need for inheritance in the first place?  
+You're probably wondering: why the need for inheritance in the first place?  
 
 Inheritance solves the problem of data and logic duplication. By inheriting, objects can share properties and methods.  
 
@@ -102,7 +104,7 @@ const chicken = { sound: 'Cluck!', legs: 2, __proto__: pet };
 chicken.legs; // => 2
 ```
 
-`chicken.legs` evaluates to `2`, meaning that JavaScript picks the own property `legs` over the inherited `legs` from the prototype.  
+`chicken.legs` evaluates to `2`. JavaScript picks the own property `legs` (which is `2`) over the inherited `legs` (which is `4`).  
 
 ![Own vs inherited property in JavaScript](./images/2.png)
 
@@ -114,13 +116,13 @@ const pet = { legs: 4 };
 const chicken = { sound: 'Cluck!', legs: 2, __proto__: pet };
 
 chicken.legs; // => 2
-delete chicken.legs; // no chicken were harmed!
+delete chicken.legs;
 chicken.legs; // => 4
 ```
 
 ## 3. The implicit prototype
 
-When you create an object, and no prototype is explicitly set, JavaScript assigns an implicit prototype object specific to the type of object you've created.   
+When you create an object, and no prototype is explicitly set, JavaScript assigns an implicit prototype specific to the type of object you've created.   
 
 Let's look again at the `pet` object:
 
@@ -158,13 +160,13 @@ const cat = { sound: 'Meow!', __proto__: pet };
 cat.hasTail; // => true
 ```
 
-`cat` inherits the property `legs` from its direct prototype `pet`, and also, inherits `hasTail` from the prototype of its prototype.  
+`cat` inherits the property `legs` from its direct prototype `pet`. But `cat` also inherits `hasTail` from the prototype of its prototype &mdash; `tail`!  
 
 ![Prototypes chain in JavaScript](./images/3.png)
 
 When accessing a property `myObject.myProp`, JavaScript looks for `myProp` inside the own properties of `myObject`, then in the prototype of the object, then in the prototype's prototype, and so on until it encounters `null` as the prototype.  
 
-Because prototypes can also have prototypes, JavaScript looks for inherited properties in the *chain of prototypes*.  
+In other words, JavaScript looks for inherited properties in the *chain of prototypes*.  
 
 ## 5. But JavaScript has classes!
 
@@ -211,13 +213,13 @@ cat instanceof CreatePet; // => true
 
 `CreatePet.prototype = pet` assignment is necessary to make `cat instanceof CreatePet` evaluate to `true`.  
 
-Being based on prototypes, still, when working with `class`-es you can completely forget about prototypes.  
+When working with `class`-es you can completely forget about prototypes.  
 
 ## 6. Summary
 
 In JavaScript, objects inherit properties from other objects &mdash; the prototypes. That's the idea of prototypal inheritance.  
 
-JavaScript looks for inherited properties not only in the direct prototype of the object, but also in the prototype of the prototype, and so on in the chain of prototypes.  
+JavaScript looks for inherited properties in the prototype of the object, but also in the prototype of the prototype, and so on in the chain of prototypes.  
 
 While prototypal inheritance seems clumsy at first, when understanding it you could enjoy its simplicity and possibilities. *Objects inherit properties from objects* &mdash; what could be simpler?  
 
