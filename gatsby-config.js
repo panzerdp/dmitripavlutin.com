@@ -93,12 +93,7 @@ module.exports = {
     require('./gatsby/config/gatsby-plugin-sass'),
     'gatsby-plugin-minify-classnames',
     require('./gatsby/config/gatsby-plugin-feed'),
-    {
-      resolve: `@rogovdm/gatsby-source-mailchimp`,
-      options: {
-        id: '75f44f92b9',
-        key: process.env.MAILCHIMP_API_KEY
-      }
-    }
+    require('./gatsby/config/gatsby-plugin-source-mailchimp'),
+    require('./gatsby/config/gatsby-source-graphql'),
   ],
 };

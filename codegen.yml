@@ -1,4 +1,4 @@
-schema: http://localhost:8000/___graphql
+schema: http://localhost:3000/___graphql
 documents:
   - ./src/**/*.{ts,tsx}
   - ./node_modules/gatsby-transformer-sharp/**/*.js

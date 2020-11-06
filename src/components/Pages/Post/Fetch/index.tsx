@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 
 import PostTemplate from 'components/Pages/Post/Template';
-import { PostBySlugQuery } from 'typings/graphql';
+import { GitHub_Issue, PostBySlugQuery } from 'typings/graphql';
 import { toPostImageFixed } from 'utils/mapper';
 
 interface PostTemplateFetchProps {
@@ -9,12 +9,17 @@ interface PostTemplateFetchProps {
 }
 
 export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
-  const { siteInfo, authorInfo } = data.site.siteMetadata;
+  const { siteInfo, authorInfo, githubCommentsRepository } = data.site.siteMetadata;
   const { markdownRemark, recommendedPosts, popularPosts, authorProfilePicture } = data;
+  let commentsCount = 0;
+  if (data.github.search.edges.length > 0) {
+    commentsCount = (data.github.search.edges[0].node as GitHub_Issue).comments.totalCount ?? 0;
+  }
   const post: PostDetailed = {
     ...markdownRemark.frontmatter,
     html: markdownRemark.html,
     thumbnail: markdownRemark.frontmatter.thumbnail.childImageSharp.fluid,
+    commentsCount
   };
   const postRelativePath = markdownRemark.fileAbsolutePath
     .split('/')
@@ -32,6 +37,7 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
       recommendedPosts={recommended}
       popularPosts={popular}
       authorProfilePictureSrc={authorProfilePicture.childImageSharp.resize.src}
+      githubCommentsRepository={githubCommentsRepository}
     />
   );
 }
@@ -83,7 +89,7 @@ export const pageQuery = graphql`
     commentsThreadId
   }
 
-  query PostBySlug($slug: String!, $recommended: [String]!, $popular: [String]!) {
+  query PostBySlug($slug: String!, $recommended: [String]!, $popular: [String]!, $githubIssueSearchQuery: String!) {
     site {
       siteMetadata {
         siteInfo {
@@ -92,6 +98,7 @@ export const pageQuery = graphql`
         authorInfo {
           ...AuthorInfoAll
         }
+        githubCommentsRepository
       }
     }
     authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {
@@ -144,6 +151,23 @@ export const pageQuery = graphql`
                 fixed(width: 70, height: 70, quality: 90) {
                   ...GatsbyImageSharpFixed_withWebp
                 }
+              }
+            }
+          }
+        }
+      }
+    }
+    github {
+      search(
+        query: $githubIssueSearchQuery,
+        type: ISSUE,
+        first: 1
+      ) {
+        edges {
+          node {
+            ... on GitHub_Issue {
+              comments {
+                totalCount
               }
             }
           }

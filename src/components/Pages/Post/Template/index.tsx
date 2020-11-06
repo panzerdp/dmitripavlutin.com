@@ -32,6 +32,7 @@ interface PostTemplateProps {
   recommendedPosts: Post<FixedImage>[];
   popularPosts: Post<FixedImage>[];
   authorProfilePictureSrc: string;
+  githubCommentsRepository: string;
 }
 
 export default function PostTemplate({
@@ -42,6 +43,7 @@ export default function PostTemplate({
   recommendedPosts,
   popularPosts,
   authorProfilePictureSrc,
+  githubCommentsRepository
 }: PostTemplateProps) {
   const relativePosition = useVerticalScroll(SHOW_SHARE_AFTER_Y);
   const showShareButtons = relativePosition === RelativePosition.Below;
@@ -70,7 +72,7 @@ export default function PostTemplate({
           <Img fluid={post.thumbnail} />
         </div>
         <h1>{post.title}</h1>
-        <Subheader post={post} siteUrl={siteInfo.url} loadCommentsCount={true} />
+        <Subheader post={post} siteUrl={siteInfo.url} />
         <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
         <div className={styles.shareGroup}>
           <div className={styles.shareBottom}>
@@ -101,7 +103,7 @@ export default function PostTemplate({
         </div>
         <div className={`${styles.delimiter} ${styles.comments}`} id="comments">
           <CommentsInView>
-            <CommentsThread url={postUrl} title={post.title} commentsTheadId={post.commentsThreadId} />
+            <CommentsThread githubCommentsRepository={githubCommentsRepository} />
           </CommentsInView>
         </div>
       </article>

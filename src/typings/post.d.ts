@@ -6,6 +6,7 @@ interface PostPlain {
   slug: string;
   tags: Tags;
   commentsThreadId: string | undefined;
+  commentsCount?: number;
 }
 
 interface Post<Image = FluidImage> extends PostPlain {

@@ -23,7 +23,7 @@ export default function ExcerptsListTemplate({
   authorProfilePictureSrc,
 }: ExcerptsTemplateProps) {
   return (
-    <Layout rightSidebar={<RightSidebar />} leftSidebar={<LeftSidebar/>}>
+    <Layout rightSidebar={<RightSidebar />} leftSidebar={<LeftSidebar />}>
       <MetaTags siteInfo={siteInfo} authorProfilePictureSrc={authorProfilePictureSrc} currentPage={currentPage} />
       <MetaStructuredData siteInfo={siteInfo} authorProfilePictureSrc={authorProfilePictureSrc} />
       <MetaPaginator currentPage={currentPage} pagesSum={pagesSum} siteUrl={siteInfo.url} />

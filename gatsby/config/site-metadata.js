@@ -14,7 +14,7 @@ module.exports = {
   authorInfo: {
     name: 'Dmitri Pavlutin',
     description:
-      'I\'m a passionate software developer, tech writer and coach. My daily routine consists of (but not limited to) drinking coffee, coding, writing, coaching, overcoming boredom 😉.',
+      'Software developer, tech writer and coach. My daily routine consists of (but not limited to) drinking coffee, coding, writing, coaching, overcoming boredom 😉.',
     email: 'dmitripavlutin@gmail.com',
     jobTitle: 'Software Developer',
     profiles: {
@@ -29,7 +29,7 @@ module.exports = {
     },
   },
   authorStats: {
-    twitterFollowersCount: '1.7K',
+    twitterFollowersCount: '1.8K',
   },
   emailSubscriptionService: {
     endpoint: 'https://dmitripavlutin.us13.list-manage.com/subscribe/post?u=7cedcb1f5ab74eb7c907e768e&id=75f44f92b9',
@@ -49,5 +49,6 @@ module.exports = {
       'simple-explanation-of-javascript-closures'
     ],
   },
-  googleCustomSearchId: '004443697379288327791:1zr8pgnumxn'
+  googleCustomSearchId: '004443697379288327791:1zr8pgnumxn',
+  githubCommentsRepository: 'panzerdp/dmitripavlutin.com-comments'
 };

@@ -11,6 +11,7 @@ const query = `
       featured {
         popular
       }
+      githubCommentsRepository
     }
   }
   allMarkdownRemark(
@@ -40,25 +41,22 @@ const query = `
   }
 }`;
 
-exports.createPages = ({ graphql, actions }) => {
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-  return new Promise(function(resolve, reject) {
-    const queryResult = graphql(query).then((result) => {
-      if (result.errors) {
-        // eslint-disable-next-line no-console
-        console.log(result.errors);
-        reject(result.errors);
-        return;
-      }
-      // Create blog posts pages.
-      const edges = result.data.allMarkdownRemark.edges;
-      createExcerptsList(createPage, edges);
-      const popular = result.data.site.siteMetadata.featured.popular;
-      createPost(createPage, edges, popular);
-      createPlainListByTag(createPage, edges);
-    });
-    resolve(queryResult);
-  });
+  const result = await graphql(query);
+  if (result.errors) {
+    // eslint-disable-next-line no-console
+    console.log(result.errors);
+    throw result.errors;
+  }
+  const githubCommentsRepository = result.data.site.siteMetadata.githubCommentsRepository;
+  // Create blog posts pages.
+  const edges = result.data.allMarkdownRemark.edges;
+  createExcerptsList(createPage, edges, githubCommentsRepository);
+  const popular = result.data.site.siteMetadata.featured.popular;
+  createPost(createPage, edges, popular, githubCommentsRepository);
+  createPlainListByTag(createPage, edges);
+  return result;  
 };
 
 exports.onCreateWebpackConfig = ({ stage, actions, getConfig  }) => {

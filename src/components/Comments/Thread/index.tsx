@@ -1,13 +1,17 @@
 import { useRef, useEffect, memo } from 'react';
 
-export function CommentsThread(): JSX.Element {
+interface CommentsThreadProps {
+  githubCommentsRepository: string;
+}
+
+export function CommentsThread({ githubCommentsRepository }: CommentsThreadProps): JSX.Element {
   const commentBox = useRef<HTMLDivElement>();
 
   useEffect(() => {
     const scriptEl = document.createElement('script')
     scriptEl.async = true
     scriptEl.src = 'https://utteranc.es/client.js';
-    scriptEl.setAttribute('repo', 'panzerdp/dmitripavlutin.com-comments');
+    scriptEl.setAttribute('repo', githubCommentsRepository);
     scriptEl.setAttribute('issue-term', 'pathname');
     scriptEl.setAttribute('id', 'utterances');
     scriptEl.setAttribute('theme', 'github-light');
