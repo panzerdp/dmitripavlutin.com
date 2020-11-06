@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 
 interface CommentsCountProps {
   postUrl: string;
+  githubCommentsRepository: string;
 }
 
-export default function CommentsCount({ postUrl }: CommentsCountProps): JSX.Element {
+export default function CommentsCount({ postUrl, githubCommentsRepository }: CommentsCountProps): JSX.Element {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
     const loadCommentsCount = async () => {
-      const q = `${postUrl}+in:title+is:issue+repo:panzerdp/dmitripavlutin.com-comments`;
+      const q = `${postUrl}+in:title+is:issue+repo:${githubCommentsRepository}`;
       const respone = await fetch(`https://api.github.com/search/issues?q=${q}&per_page=1`);
       const { items = [] } = await respone.json();
       if (items.length > 0) {

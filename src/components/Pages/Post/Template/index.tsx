@@ -19,6 +19,7 @@ import SubscriptionRegion from 'components/Subscription/Region';
 import CarbonFetch from 'components/Carbon/Fetch';
 import CarbonMetaTags from 'components/Carbon/Meta/Tags';
 import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll';
+import CommentsCount from 'components/Comments/Count';
 import { TO_POST } from 'routes/path';
 import styles from './index.module.scss';
 
@@ -72,7 +73,9 @@ export default function PostTemplate({
           <Img fluid={post.thumbnail} />
         </div>
         <h1>{post.title}</h1>
-        <Subheader post={post} siteUrl={siteInfo.url} />
+        <Subheader post={post}>
+          <CommentsCount postUrl={post.slug} githubCommentsRepository={githubCommentsRepository} />
+        </Subheader>
         <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
         <div className={styles.shareGroup}>
           <div className={styles.shareBottom}>

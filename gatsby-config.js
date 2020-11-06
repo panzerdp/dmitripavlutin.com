@@ -94,6 +94,5 @@ module.exports = {
     'gatsby-plugin-minify-classnames',
     require('./gatsby/config/gatsby-plugin-feed'),
     require('./gatsby/config/gatsby-plugin-source-mailchimp'),
-    require('./gatsby/config/gatsby-source-graphql'),
   ],
 };
