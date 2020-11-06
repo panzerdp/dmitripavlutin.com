@@ -17,6 +17,7 @@ jobs:
         run: yarn build
         env:
           MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
+          GTHB_PERSONAL_TOKEN: ${{ secrets.GTHB_PERSONAL_TOKEN }}
       - name: Install firebase CLI
         run: yarn add firebase-tools
       - name: Deploy
