@@ -6,7 +6,7 @@ module.exports = {
     url: "https://api.github.com/graphql",
     // HTTP headers
     headers: {
-      Authorization: `Bearer ${process.env.GITHUB_PERSONAL_TOKEN}`,
+      Authorization: `Bearer ${process.env.GTHB_PERSONAL_TOKEN}`,
     },
     fetchOptions: {},
     batch: true
