@@ -72,7 +72,6 @@
     "dev": "gatsby develop --port 3000",
     "lint": "eslint 'src/**/*.ts?(x)'",
     "lint:fix": "npm run lint -- --fix",
-    "test": "jest",
     "build": "gatsby build",
     "type:check": "tsc -p tsconfig.json --noEmit",
     "type:generate": "graphql-codegen",

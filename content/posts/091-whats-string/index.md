@@ -8,7 +8,6 @@ slug: what-is-string-in-javascript
 tags: ['javascript', 'string']
 recommended: ['what-every-javascript-developer-should-know-about-unicode', 'string-interpolation-in-javascript']
 type: post
-commentsThreadId:  what-is-string-in-javascript
 ---
 
 ## 1. Modeling by visible characters

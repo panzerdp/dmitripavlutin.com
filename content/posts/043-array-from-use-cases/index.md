@@ -8,7 +8,6 @@ slug: javascript-array-from-applications
 tags: ["javascript", "array", "es2015"]
 recommended: ["how-three-dots-changed-javascript", "power-up-the-array-creation-in-javascript"]
 type: post
-commentsThreadId: javascript-array-from-use-cases
 ---
 
 Any programming language has functions that go beyond the basic usage. It happens thanks to a successful design and a wide area of problems it tries to solve.  

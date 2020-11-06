@@ -8,7 +8,6 @@ slug: solve-react-render-props-callback-hell
 tags: ["react", "render prop"]
 recommended: ["use-react-memo-wisely", "7-architectural-attributes-of-a-reliable-react-component"]
 type: post
-commentsThreadId: solve-render-props-callback-hell-react
 ---
 
 A good design of React components is the key to a maintainable and easy to change codebase.  

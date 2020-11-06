@@ -8,7 +8,6 @@ slug: nan-in-javascript
 tags: ['javascript', 'number']
 recommended: ['infinity-in-javascript', '7-tips-to-handle-undefined-in-javascript']
 type: post
-commentsThreadId: nan-in-javascript
 ---
 
 The number type in JavaScript holds integers and floats:

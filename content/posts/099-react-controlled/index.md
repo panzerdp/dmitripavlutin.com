@@ -8,7 +8,6 @@ slug: controlled-inputs-using-react-hooks
 tags: ['react', 'input', 'hook']
 recommended: ['use-react-memo-wisely', 'react-state-management']
 type: post
-commentsThreadId: controlled-inputs-using-react-hooks
 ---
 
 There are 2 approaches to access the value of an input element in React.  

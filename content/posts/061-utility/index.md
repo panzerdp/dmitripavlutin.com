@@ -8,7 +8,6 @@ slug: javascript-utility-libraries
 tags: ['javascript', 'module']
 recommended: ['announcing-voca-the-ultimate-javascript-string-library', 'the-art-of-writing-small-and-plain-functions']
 type: post
-commentsThreadId: javascript-utility-libraries
 ---
 
 The big JavaScript bundle is a common performance problem in Frontend development. Nobody likes slow, heavy applications and looking at the loading spinner.  

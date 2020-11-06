@@ -8,7 +8,6 @@ slug: timeout-fetch-request
 tags: ['fetch']
 recommended: ['javascript-fetch-async-await', 'javascript-async-await']
 type: post
-commentsThreadId: timeout-fetch-request
 ---
 
 When developing an application that uses the network, the first rule to remember is *don't rely on the network*.  

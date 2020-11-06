@@ -8,7 +8,6 @@ slug: access-object-keys-values-entries
 tags: ['javascript', 'object']
 recommended: ['how-to-compare-objects-in-javascript', 'check-if-object-has-property-javascript']
 type: post
-commentsThreadId: access-object-keys-values-entries
 ---
 
 You often need to look through the properties and values of plain JavaScript objects.  

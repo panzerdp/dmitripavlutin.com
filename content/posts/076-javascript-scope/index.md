@@ -8,7 +8,6 @@ slug: javascript-scope
 tags: ['javascript', 'scope', 'variable']
 recommended: ['simple-explanation-of-javascript-closures', 'javascript-hoisting-in-details']
 type: post
-commentsThreadId: javascript-scope
 ---
 
 The scope is an important concept that manages the availability of variables. The scope is at the base closures, defines the idea of global and local variables.  

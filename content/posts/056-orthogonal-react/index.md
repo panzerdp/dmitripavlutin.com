@@ -8,7 +8,6 @@ slug: orthogonal-react-components
 tags: ['react', 'component', 'architecture']
 recommended: ['7-architectural-attributes-of-a-reliable-react-component', 'the-art-of-writing-small-and-plain-functions']
 type: post
-commentsThreadId: orthogonal-react-components
 ---
 
 ## 1. Why good system design is important

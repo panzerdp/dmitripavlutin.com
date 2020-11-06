@@ -8,7 +8,6 @@ slug: javascript-classes-complete-guide
 tags: ['javascript', 'class', 'instanceof']
 recommended: ['gentle-explanation-of-this-in-javascript', 'why-object-literals-in-javascript-are-cool']
 type: post
-commentsThreadId: javascript-classes-complete-guide
 ---
 
 JavaScript uses prototypal inheritance: every object inherits properties and methods from its prototype object.  

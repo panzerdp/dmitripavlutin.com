@@ -8,7 +8,6 @@ slug: frontend-architecture-stable-and-volatile-dependencies
 tags: ['architecture', 'clean code', 'dependency']
 recommended: ['7-architectural-attributes-of-a-reliable-react-component', 'the-art-of-writing-small-and-plain-functions']
 type: post
-commentsThreadId: frontend-architecture-stable-and-volatile-dependencies
 ---
 
 Many components (of libraries like React, Vue, Angular) use the functionality of utility libraries.  

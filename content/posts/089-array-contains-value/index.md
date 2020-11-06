@@ -8,7 +8,6 @@ slug: javascript-array-contains-value
 tags: ['javascript', 'array']
 recommended: ['simple-explanation-of-javascript-closures', 'simple-but-tricky-javascript-interview-questions']
 type: post
-commentsThreadId: javascript-array-contains-value
 ---
 
 JavaScript offers a bunch of useful array methods to check whether an array contains a particular value.  

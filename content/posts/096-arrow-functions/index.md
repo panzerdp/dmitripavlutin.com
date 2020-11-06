@@ -8,7 +8,6 @@ slug: javascript-arrow-functions
 tags: ['javascript', 'arrow function', 'function']
 recommended: ['differences-between-arrow-and-regular-functions', 'javascript-arrow-functions-best-practices']
 type: post
-commentsThreadId: javascript-arrow-functions
 ---
 
 ES2015 had introduced a new way to define functions in JavaScript: the arrow functions. They have a concise syntax, can be inlined, fit great as callbacks, and resolve `this` lexically.  

@@ -8,7 +8,6 @@ slug: console-log-tips
 tags: ['javascript', 'debugging']
 recommended: ['javascript-modules-best-practices', 'javascript-utility-libraries']
 type: post
-commentsThreadId: console-log-tips
 ---
 
 `console.log(message)` usage is simple: the argument `message` is logged to console.

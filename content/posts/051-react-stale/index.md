@@ -8,7 +8,6 @@ slug: react-hooks-stale-closures
 tags: ['react', 'hook']
 recommended: ['use-react-memo-wisely', 'simple-explanation-of-javascript-closures']
 type: post
-commentsThreadId: react-hooks-stale-closure
 ---
 
 Hooks replace class-based components by easying the reuse of state and side effects management. Additionally you can extract repeated logic into a custom hook to reuse across the application.  

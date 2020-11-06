@@ -8,7 +8,6 @@ slug: access-object-properties-javascript
 tags: ['javascript', 'object', 'destructuring']
 recommended: ['maps-vs-plain-objects-javascript', 'object-rest-spread-properties-javascript']
 type: post
-commentsThreadId: access-object-properties-javascript
 ---
 
 You can access the properties of an object in JavaScript in 3 ways: 

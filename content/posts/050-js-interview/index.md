@@ -8,7 +8,6 @@ slug: simple-but-tricky-javascript-interview-questions
 tags: ['javascript', 'closure', 'array', 'hoisting']
 recommended: ['simple-explanation-of-javascript-closures', 'javascript-variables-and-temporal-dead-zone']
 type: post
-commentsThreadId: simple-but-tricky-javascript-interview-questions
 ---
 
 My top stressing things in software development are:

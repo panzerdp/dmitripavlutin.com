@@ -8,7 +8,6 @@ slug: javascript-for-of
 tags: ['javascript', 'for']
 recommended: ['foreach-iterate-array-javascript', 'how-to-iterate-easily-over-object-properties-in-javascript']
 type: post
-commentsThreadId: javascript-for-of
 ---
 
 What makes a programming language feature great? When the feature can combine multiple other language features.  

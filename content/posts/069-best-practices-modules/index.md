@@ -8,7 +8,6 @@ slug: javascript-modules-best-practices
 tags: ['javascript', 'es2015', 'module', 'clean code']
 recommended: ['javascript-arrow-functions-best-practices', 'the-path-of-software-development-craftsmanship']
 type: post
-commentsThreadId: javascript-modules-best-practices
 ---
 
 Using ES2015 modules you can chunk the application code into reusable, encapsulated, one-task focused modules. 

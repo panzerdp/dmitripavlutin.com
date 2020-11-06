@@ -8,7 +8,6 @@ slug: fix-this-in-javascript
 tags: ["javascript", "this"]
 recommended: ["gentle-explanation-of-this-in-javascript", "5-interesting-uses-javascript-destructuring"]
 type: post
-commentsThreadId: how-to-fix-this-in-javascript
 ---
 
 I like in JavaScript the possibility to change the function execution context, also known as `this`.   

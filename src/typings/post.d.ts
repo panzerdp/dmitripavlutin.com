@@ -5,7 +5,6 @@ interface PostPlain {
   modified: string;
   slug: string;
   tags: Tags;
-  commentsThreadId: string | undefined;
   commentsCount?: number;
 }
 

@@ -8,7 +8,6 @@ slug: dont-overuse-react-usecallback
 tags: ["react", "component", "memoization"]
 recommended: ["use-react-memo-wisely", "react-usestate-hook-guide"]
 type: post
-commentsThreadId: react-usecallback
 ---
 
 A reader of my blog reached me on Facebook with an interesting question. He said his teammates, no matter the situation, were wrapping every callback function inside `useCallback()`:

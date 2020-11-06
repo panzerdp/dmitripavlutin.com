@@ -8,7 +8,6 @@ slug: javascript-scope-gotchas
 tags: ['javascript', 'scope', 'variable']
 recommended: ['simple-explanation-of-javascript-closures', 'javascript-scope']
 type: post
-commentsThreadId: javascript-scope-gotchas
 ---
 
 In JavaScript, a code block, a function, or module create scopes for variables. For example, the `if` code block creates a scope for the variable `message`:

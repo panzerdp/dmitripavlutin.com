@@ -8,7 +8,6 @@ slug: javascript-prototypal-inheritance
 tags: ['javascript', 'prototype', 'inheritance']
 recommended: ['simple-explanation-of-javascript-closures', 'own-and-inherited-properties-in-javascript']
 type: post
-commentsThreadId: javascript-prototypal-inheritance
 ---
 
 You don't know JavaScript until you know prototypal inheritance. Prototypes greatly influence how objects work in JavaScript.

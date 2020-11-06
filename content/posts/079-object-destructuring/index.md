@@ -8,7 +8,6 @@ slug: javascript-object-destructuring
 tags: ["javascript", "destructuring"]
 recommended: ["5-interesting-uses-javascript-destructuring", "object-rest-spread-properties-javascript"]
 type: post
-commentsThreadId: javascript-object-destructuring
 ---
 
 The object destructuring is a useful JavaScript feature to extract properties from objects and bind them to variables.    

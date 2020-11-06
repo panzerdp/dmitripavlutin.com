@@ -8,7 +8,6 @@ slug: javascript-type-checking-screwed
 tags: ['javascript', 'typeof', 'instanceof']
 recommended: ['7-tips-to-handle-undefined-in-javascript', 'the-legend-of-javascript-equality-operator']
 type: post
-commentsThreadId: javascript-type-checking-typeof-instanceof
 ---
 
 JavaScript's dynamic typing is good and bad at the same time. It's good because you don't have to indicate the variable's type. It's bad because you can never be sure about the variable's type.  

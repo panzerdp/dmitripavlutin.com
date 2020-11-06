@@ -8,7 +8,6 @@ slug: is-array-javascript
 tags: ["javascript", "array"]
 recommended: ["operations-on-arrays-javascript", "the-magic-behind-array-length-property"]
 type: post
-commentsThreadId: is-array-javascript
 ---
 
 Checking whether a value is an array in JavaScript is necessary when a variable is expected to be an array,

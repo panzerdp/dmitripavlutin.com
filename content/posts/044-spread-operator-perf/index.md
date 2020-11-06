@@ -8,7 +8,6 @@ slug: javascript-spread-operator-performance-optimization
 tags: ["javascript", "spread", "performance"]
 recommended: ["how-three-dots-changed-javascript", "object-rest-spread-properties-javascript"]
 type: post
-commentsThreadId: javascript-spread-operator-performance
 ---
 
 In this post, you will read an interesting investigation on how to boost the performance of the spread operator.  

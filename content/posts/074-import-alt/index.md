@@ -8,7 +8,6 @@ slug: javascript-import-module-drawback
 tags: ['javascript', 'es2015', 'module']
 recommended: ['javascript-modules-best-practices', 'javascript-utility-libraries']
 type: post
-commentsThreadId: javascript-import-module-drawback
 ---
 
 ## 1. Named imports and autocomplete

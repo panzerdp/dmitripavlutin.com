@@ -8,7 +8,6 @@ slug: swap-variables-javascript
 tags: ['javascript', 'variable']
 recommended: ['5-interesting-uses-javascript-destructuring', 'javascript-hoisting-in-details']
 type: post
-commentsThreadId: swap-variables-javascript
 ---
 
 A lot of algorithms require swapping 2 variables.  

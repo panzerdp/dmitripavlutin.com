@@ -8,7 +8,6 @@ slug: react-playground-setup
 tags: ['react']
 recommended: ['use-react-memo-wisely', 'react-fetch-lifecycle-methods-hooks-suspense']
 type: post
-commentsThreadId: react-demo-setup
 ---
 
 It's natural to learn new things playing and having fun. Children, kittens, puppies explore the world playing.  

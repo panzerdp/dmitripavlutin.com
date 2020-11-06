@@ -8,7 +8,6 @@ slug: javascript-iterators
 tags: ['javascript', 'iterable', 'iterator', 'array']
 recommended: ['simple-explanation-of-javascript-closures', 'javascript-array-from-applications']
 type: post
-commentsThreadId: javascript-iterables
 ---
 
 A collection is a data structure that contains elements. For example, a string is a collection of characters and an array is a collection of ordered items:  

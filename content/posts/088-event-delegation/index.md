@@ -8,7 +8,6 @@ slug: javascript-event-delegation
 tags: ['javascript', 'event delegation']
 recommended: ['simple-explanation-of-javascript-closures', 'simple-but-tricky-javascript-interview-questions']
 type: post
-commentsThreadId: javascript-event-delegation
 ---
 
 ## 1. Why event delegation?

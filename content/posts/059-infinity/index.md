@@ -8,7 +8,6 @@ slug: infinity-in-javascript
 tags: ['javascript', 'number']
 recommended: ['the-legend-of-javascript-equality-operator', '7-tips-to-handle-undefined-in-javascript']
 type: post
-commentsThreadId: infinity-in-javascript
 ---
 
 `Infinity` in JavaScript is a special number with an interesting property: it's bigger than any finite number.  

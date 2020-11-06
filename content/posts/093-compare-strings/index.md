@@ -8,7 +8,6 @@ slug: compare-javascript-strings
 tags: ['javascript', 'equality', 'string']
 recommended: ['what-every-javascript-developer-should-know-about-unicode', 'what-is-string-in-javascript']
 type: post
-commentsThreadId: compare-javascript-strings
 ---
 
 Let's compare 2 strings `str1` and `str2`:

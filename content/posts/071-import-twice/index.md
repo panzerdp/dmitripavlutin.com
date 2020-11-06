@@ -8,7 +8,6 @@ slug: javascript-module-import-twice
 tags: ['javascript', 'es2015', 'module']
 recommended: ['javascript-modules-best-practices', 'javascript-utility-libraries']
 type: post
-commentsThreadId: javascript-module-evaluation
 ---
 
 Let's start the post with a question.  

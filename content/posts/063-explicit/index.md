@@ -8,7 +8,6 @@ slug: explicit-coding-discipline
 tags: ['craftsmanship', 'clean code']
 recommended: ['become-better-software-developer-digging-climbing', 'the-path-of-software-development-craftsmanship']
 type: post
-commentsThreadId: explicit-coding-discipline
 ---
 
 The more I evaluate my experience as a software developer, the more I understand the importance of good communication. 

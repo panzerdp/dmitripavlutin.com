@@ -8,7 +8,6 @@ slug: react-state-management
 tags: ['javascript', 'react', 'state']
 recommended: ['react-usestate-hook-guide', 'use-react-memo-wisely']
 type: post
-commentsThreadId: react-state-management
 ---
 
 State inside a React component is the encapsulated data that is persistent between renderings. `useState()` is the React hook responsible for managing state inside a functional component. 

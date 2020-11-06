@@ -8,7 +8,6 @@ slug: javascript-arrow-functions-best-practices
 tags: ['javascript', 'arrow function', 'es2015', 'clean code']
 recommended: ['when-not-to-use-arrow-functions-in-javascript', '6-ways-to-declare-javascript-functions']
 type: post
-commentsThreadId: javascript-arrow-functions-best-practices
 ---
 
 The arrow function deserves the popularity. Its syntax is concise, binds `this` lexically, fits great as a callback. 

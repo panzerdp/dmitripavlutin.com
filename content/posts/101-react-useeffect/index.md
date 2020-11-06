@@ -8,7 +8,6 @@ slug: react-useeffect-explanation
 tags: ['react', 'hook', 'useeffect']
 recommended: ['dont-overuse-react-usecallback', 'use-react-memo-wisely']
 type: post
-commentsThreadId: react-useeffect-explanation
 ---
 
 I am impressed by the expressiveness of React hooks. You can do so much by writing so little.   

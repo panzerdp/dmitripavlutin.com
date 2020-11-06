@@ -8,7 +8,6 @@ slug: maps-vs-plain-objects-javascript
 tags: ['javascript', 'map', 'object']
 recommended: ['why-object-literals-in-javascript-are-cool', 'how-to-iterate-easily-over-object-properties-in-javascript']
 type: post
-commentsThreadId: use-map-instead-of-object-javascript
 ---
 
 The plain JavaScript object `{ key: 'value' }` holds structured data. Mostly it does this job well enough.  

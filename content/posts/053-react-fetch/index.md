@@ -8,7 +8,6 @@ slug: react-fetch-lifecycle-methods-hooks-suspense
 tags: ['react', 'lifecycle', 'hook', 'suspense']
 recommended: ['7-architectural-attributes-of-a-reliable-react-component', 'use-react-memo-wisely']
 type: post
-commentsThreadId: react-data-fetching-improvement
 ---
 
 When performing [I/O operations](https://en.wikipedia.org/wiki/Input/output) like data fetching, you have to initiate the fetch operation, wait for the response, save the response data to component's state, and finally render. 

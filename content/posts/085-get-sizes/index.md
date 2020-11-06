@@ -8,7 +8,6 @@ slug: screen-window-page-sizes
 tags: ["browser", "window"]
 recommended: ["javascript-modules-best-practices", "react-playground-setup"]
 type: post
-commentsThreadId: screen-window-page-sizes
 ---
 
 To detect whether the browser window is in landscape or portrait mode, you can compare the browser window's width and height.  

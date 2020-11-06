@@ -8,7 +8,6 @@ slug: how-to-learn-javascript
 tags: ['javascript', 'craftsmanship']
 recommended: ['unlearn-javascript-bad-coding-habits', 'the-path-of-software-development-craftsmanship']
 type: post
-commentsThreadId: how-to-learn-javascript
 ---
 
 You've decided to learn JavaScript because you want to become a Frontend or Backend developer. 

@@ -8,7 +8,6 @@ slug: how-to-compare-objects-in-javascript
 tags: ["javascript", "equality", "object"]
 recommended: ["the-legend-of-javascript-equality-operator", "object-is-vs-strict-equality-operator"]
 type: post
-commentsThreadId: how-to-compare-javascript-objects
 ---
 
 It's simple to compare primitive values in JavaScript. Just use any of the available

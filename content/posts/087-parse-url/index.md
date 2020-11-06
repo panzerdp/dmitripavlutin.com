@@ -8,7 +8,6 @@ slug: parse-url-javascript
 tags: ["url", "hostname", "pathname", "query string", "hash"]
 recommended: ['replace-all-string-occurrences-javascript', 'what-every-javascript-developer-should-know-about-unicode']
 type: post
-commentsThreadId: parse-url-javascript
 ---
 
 A Uniform Resource Locator, abbreviated **URL**, is a reference to a web resource (web page, image, file). The URL specifies the resource location and a mechanism to retrieve the resource (http, ftp, mailto).  

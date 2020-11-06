@@ -8,7 +8,6 @@ slug: object-is-vs-strict-equality-operator
 tags: ["javascript", "equality"]
 recommended: ["the-legend-of-javascript-equality-operator", "javascriptss-addition-operator-demystified"]
 type: post
-commentsThreadId: object-is-vs-strict-equality-operator
 ---
 
 The triple equality operator `===` checks strictly whether 2 values are the same:

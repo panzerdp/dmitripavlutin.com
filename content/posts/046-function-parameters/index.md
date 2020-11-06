@@ -8,7 +8,6 @@ slug: javascript-function-parameters
 tags: ["javascript", "function", "parameter"]
 recommended: ["6-ways-to-declare-javascript-functions", "when-not-to-use-arrow-functions-in-javascript"]
 type: post
-commentsThreadId: javascript-function-parameters
 ---
 
 A function is a cohesive piece of code coupled to perform a specific task. The function accesses the outer world using its parameters.  

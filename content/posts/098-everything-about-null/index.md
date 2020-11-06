@@ -8,7 +8,6 @@ slug: javascript-null
 tags: ['javascript', 'null', 'object']
 recommended: ['7-tips-to-handle-undefined-in-javascript', 'nan-in-javascript']
 type: post
-commentsThreadId: javascript-null
 ---
 
 JavaScript has 2 kinds of types: primitives (strings, booleans, numbers, symbols) and objects.  

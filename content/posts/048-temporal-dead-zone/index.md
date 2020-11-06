@@ -8,7 +8,6 @@ slug: javascript-variables-and-temporal-dead-zone
 tags: ['javascript', 'variable', 'tdz', 'es2015']
 recommended: ['variables-lifecycle-and-why-let-is-not-hoisted', 'javascript-hoisting-in-details']
 type: post
-commentsThreadId: temporal-dead-zone-in-javascript
 ---
 
 Let me ask you a simple question. Which of the following code snippets will generate an error?

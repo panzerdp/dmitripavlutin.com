@@ -86,7 +86,6 @@ export const pageQuery = graphql`
     modified
     slug
     tags
-    commentsThreadId
   }
 
   query PostBySlug($slug: String!, $recommended: [String]!, $popular: [String]!, $githubIssueSearchQuery: String!) {
@@ -115,7 +114,6 @@ export const pageQuery = graphql`
       frontmatter {
         ...Post
         recommended
-        commentsThreadId
         thumbnail {
           childImageSharp {
             fluid(maxWidth: 650, maxHeight: 360, quality: 90) {

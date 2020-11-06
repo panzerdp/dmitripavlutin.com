@@ -8,7 +8,6 @@ slug: javascript-async-await
 tags: ['javascript', 'async await']
 recommended: ['react-fetch-lifecycle-methods-hooks-suspense', 'javascript-arrow-functions-best-practices']
 type: post
-commentsThreadId: javascript-async-await
 ---
 
 In JavaScript, you can code async tasks in 3 ways.  

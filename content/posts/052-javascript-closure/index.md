@@ -8,7 +8,6 @@ slug: simple-explanation-of-javascript-closures
 tags: ['javascript', 'closure', 'scope']
 recommended: ['6-ways-to-declare-javascript-functions', 'javascript-scope']
 type: post
-commentsThreadId: explanation-of-javascript-closures
 ---
 
 The callbacks, event handlers, higher-order functions can access outer scope variables thanks to closures. Closures are important in functional programming, and are often asked during the JavaScript coding interview.  

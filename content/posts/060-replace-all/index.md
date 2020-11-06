@@ -8,7 +8,6 @@ slug: replace-all-string-occurrences-javascript
 tags: ['javascript', 'string']
 recommended: ['announcing-voca-the-ultimate-javascript-string-library', 'what-every-javascript-developer-should-know-about-unicode']
 type: post
-commentsThreadId: replace-all-string-occurrences-javascript
 ---
 
 There's no easy way to replace all string occurrences in JavaScript. Java, which had served an inspiration for JavaScript in the first days, has the `replaceAll()` method on strings since 1995!  

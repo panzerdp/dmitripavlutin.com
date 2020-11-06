@@ -8,7 +8,6 @@ slug: differences-between-arrow-and-regular-functions
 tags: ["javascript", "function", "arrow function"]
 recommended: ["when-not-to-use-arrow-functions-in-javascript", "6-ways-to-declare-javascript-functions"]
 type: post
-commentsThreadId: differences-between-arrow-and-regular-functions
 ---
 
 In JavaScript, you can define functions in many ways.  

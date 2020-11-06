@@ -8,7 +8,6 @@ slug: operations-on-arrays-javascript
 tags: ['javascript', 'array']
 recommended: ['power-up-the-array-creation-in-javascript', 'javascript-array-from-applications']
 type: post
-commentsThreadId: operations-on-arrays-javascript
 ---
 
 The array is a widely used data structure in JavaScript.

@@ -8,7 +8,6 @@ slug: javascript-and-or-logical-operators
 tags: ['javascript']
 recommended: ['javascript-modules-best-practices', 'javascript-utility-libraries']
 type: post
-commentsThreadId: javascript-and-or-logical-operators
 ---
 
 The logical *and* (`&&`) and *or* (`||`) are logical operators in JavaScript. Normally, you're using these operators on booleans:

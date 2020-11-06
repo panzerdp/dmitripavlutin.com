@@ -8,7 +8,6 @@ slug: react-usestate-hook-guide
 tags: ['react', 'state', 'hook']
 recommended: ['react-fetch-lifecycle-methods-hooks-suspense', 'use-react-memo-wisely']
 type: post
-commentsThreadId: react-usestate-wise-guide
 ---
 
 The state is information hidden inside a component. The component can modify its state, without parents knowing about it.  

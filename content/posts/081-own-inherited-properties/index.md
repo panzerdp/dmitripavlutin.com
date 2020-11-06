@@ -8,7 +8,6 @@ slug: own-and-inherited-properties-in-javascript
 tags: ["javascript", "prototype", "inheritance", "object"]
 recommended: ["access-object-properties-javascript", "javascript-object-destructuring"]
 type: post
-commentsThreadId: own-and-inherited-properties-in-javascript
 ---
 
 In JavaScript, contrary to other programming languages like Java or Python, there's no template (e.g. class) concept for creating objects.  

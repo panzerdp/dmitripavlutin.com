@@ -8,7 +8,6 @@ slug: check-if-object-has-property-javascript
 tags: ["javascript", "object"]
 recommended: ["7-tips-to-handle-undefined-in-javascript", "own-and-inherited-properties-in-javascript"]
 type: post
-commentsThreadId: check-if-object-has-property-javascript
 ---
 
 In this post, you'll read 3 common ways to check for property existence in a JavaScript object.  

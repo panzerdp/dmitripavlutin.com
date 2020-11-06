@@ -8,7 +8,6 @@ slug: javascript-shallow-clone-objects
 tags: ['javascript', 'object']
 recommended: ['object-rest-spread-properties-javascript', 'how-to-compare-objects-in-javascript']
 type: post
-commentsThreadId: javascript-shallow-clone-objects
 ---
 
 In this post, you'll find 3 easy ways to perform shallow clone (aka copy) of objects in JavaScript.  

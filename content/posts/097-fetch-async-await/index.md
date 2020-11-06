@@ -8,7 +8,6 @@ slug: javascript-fetch-async-await
 tags: ['fetch', 'async await']
 recommended: ['javascript-async-await', 'react-fetch-lifecycle-methods-hooks-suspense']
 type: post
-commentsThreadId: javascript-fetch-async-await
 ---
 
 The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) has become the native way to fetch resources in Frontend applications.  
