@@ -5,7 +5,7 @@ published: "2020-09-29T07:20Z"
 modified: "2020-09-29T07:20Z"
 thumbnail: "./images/cover.png"
 slug: controlled-inputs-using-react-hooks
-tags: ['react', 'input', 'hook']
+tags: ['react', 'input', 'form', 'hook']
 recommended: ['use-react-memo-wisely', 'react-state-management']
 type: post
 ---
