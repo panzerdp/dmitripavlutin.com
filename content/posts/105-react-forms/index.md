@@ -38,25 +38,22 @@ function RegisterYourCatForm() {
   return (
     <form>
       <h2>Register Your Cat</h2>
-      <div>
-        <label>Name*: </label>
-        <input />
-      </div>
-      <div>
-        <label>Color*:</label>
-        <select>
-          <option>Select color</option>
-          {COLORS.map(color => <option>{color}</option>)}
-        </select>
-      </div>
-      <div>
-        <label>Age*: </label>
-        <input />
-      </div>
-      <div>
-        <label>Habits: </label>
-        <textarea />
-      </div>
+
+      <label>Name*:</label>
+      <input />
+
+      <label>Color*:</label>
+      <select>
+        <option>Select color</option>
+        {COLORS.map(color => <option>{color}</option>)}
+      </select>
+
+      <label>Age*:</label>
+      <input />
+
+      <label>Habits:</label>
+      <textarea />
+
       <button type="submit">Submit</button>
     </form>
   );
@@ -79,9 +76,56 @@ Having the form inputs setup, the next step is to access and persist the input f
 
 ## 2. Form state
 
+Even if the user introduces data into the input fields, you still need a way to access these values inside of the component.  
 
+Here's how you could keep the form data into the component's state:
+
+```jsx
+import { useState } from 'react';
+
+const COLORS = ['white', 'red', 'blue', 'black', 'cream'];
+
+
+function RegisterYourCatForm() {
+  const [values, setValues] = useState({ 
+    name: '', color: '', age: '', habits: '' 
+  });
+
+  function onChange(name) {
+    return function ({ target: { value } }) {
+      setValues(oldValues => ({...oldValues, [name]: value}));
+    }
+  }
+
+  return (
+    <form>
+     
+        <input 
+          value={values.name} 
+          onChange={onChange('name')} 
+        />
+     
+        <select 
+          value={values.color} 
+          onChange={onChange('color')}
+        >
+     
+        </select>
+     
+        <textarea 
+          value={values.habits} 
+          onChange={onChange('habits')} 
+        />
+    //  ...
+     
+    </form>
+  );
+}
+```
 
 ## 3. Form validation
+
+
 
 ## 4. Form submission
 
