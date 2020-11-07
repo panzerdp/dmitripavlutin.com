@@ -2,15 +2,16 @@ import Tag from 'components/Tag';
 import { formatDate } from 'utils/date';
 import styles from './index.module.scss';
 import { TO_POST } from 'routes/path';
+import { ReactNode } from 'react';
 
 interface SubheaderWithCommentsProps {
   post: PostPlain;
-  siteUrl: string;
+  children?: ReactNode;
 }
 
 const MONTH = 31 * 24 * 60 * 60 * 1000;
 
-export default function SubheaderWithComments({ post, siteUrl }: SubheaderWithCommentsProps) {
+export default function SubheaderWithComments({ post, children }: SubheaderWithCommentsProps) {
   const postUrl = TO_POST({ slug: post.slug });
   const publishedDate = new Date(post.published);
   const modifiedDate = new Date(post.modified);
@@ -28,7 +29,7 @@ export default function SubheaderWithComments({ post, siteUrl }: SubheaderWithCo
         <div className={styles.commentsCount}>
           <img alt="Comments" src="/icons/comments.svg" className={styles.icon} />
           <a href={`${postUrl}#comments`} title="Jump to comments section" className={styles.anchor}>
-            {post.commentsCount ? `${post.commentsCount} Comments` : 'Start discussion'}
+            {children ?? 'Start discussion'}
           </a>
         </div>
       </div>
