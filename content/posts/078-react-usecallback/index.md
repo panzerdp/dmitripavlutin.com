@@ -2,7 +2,7 @@
 title: "Your Guide to React.useCallback()"
 description: "React.useCallback() memoizes callback functions. In this post I will explain when to and when not to use React.useCallback()."
 published: "2020-05-04T08:40Z"
-modified: "2020-08-07T12:00Z"
+modified: "2020-11-07T21:40Z"
 thumbnail: "./images/cover-6.png"
 slug: dont-overuse-react-usecallback
 tags: ["react", "component", "memoization"]
@@ -24,17 +24,17 @@ function MyComponent() {
 }
 ```
 
-*"Every callback function should be memoized to prevent useless re-rendering of child components which use the callback function"* is the reasoning of his teammates.   
+*"Every callback function should be memoized to prevent useless re-rendering of child components that use the callback function"* is the reasoning of his teammates.   
 
-This statement is far from the truth. Moreover, such usage of `useCallback()` makes the component slower, harming the performance.    
+This reasoning is far from the truth. Moreover, such usage of `useCallback()` makes the component slower.  
 
-In this post, I'm going to explain how to use correctly `useCallback()`.   
+In this post, I'm going to explain how to use correctly `useCallback()`.
 
 ## 1. Understanding functions equality check
 
-Before diving into `useCallback()` usage, let's distinguish the problem the hook solves: functions equality check.    
+Before diving into `useCallback()` usage, let's distinguish the problem `useCallback()` solves &mdash; the functions equality check.    
 
-Let's define a function named `factory()` that returns functions: 
+Let's write a function named `factory()` that returns functions: 
 
 ```javascript{11-12}
 function factory() {
@@ -53,15 +53,15 @@ sum1 === sum1; // => true
 
 `sum1` and `sum2` are functions that sum two numbers. They've been created by the `factory()` function.  
 
-The functions `sum1` and `sum2` share the same code source, however, they are different objects. Comparing them `sum1 === sum2` evaluates to `false`.  
+Functions in JavaScript are first-class citizens, meaning that a function is a regular object. The function object can be returned by other functions (like `factory()` does), be compared, etc.: anything you can do with an object.   
 
-That's just how JavaScript works. An object (including a function object) [equals](/the-legend-of-javascript-equality-operator/#the-identity-operator) only to itself.  
+The functions `sum1` and `sum2` share the same code source but they are different function objects. Comparing them `sum1 === sum2` evaluates to `false`.  
+
+That's just how JavaScript objects works. An object (including a function object) [equals](/the-legend-of-javascript-equality-operator/#the-identity-operator) only to itself.  
 
 ## 2. The purpose of useCallback()
 
-Different function instances sharing the same code are often created inside React components. 
-
-When inside a React component body a function is defined (e.g. a callback or event handler), this function is re-created on every rendering:  
+Different function objects sharing the same code are often created inside React components:
 
 ```jsx{5-7}
 import React from 'react';
@@ -80,12 +80,12 @@ function MyComponent() {
 
 Because inline functions are cheap, the re-creation of functions on each rendering is not a problem. *A few inline functions per component are acceptable.*  
 
-However, there are cases when you need to keep one instance of a function:
+But in some cases you need to maintain one function instance between renderings:
 
-1. A component wrapped inside `React.memo()` (or `shouldComponentUpdate`) accepts a callback prop
-2. When the function is used as a dependency to other hooks, e.g. `useEffect(..., [callback])`  
+1. A functional component wrapped inside `React.memo()` accepts a  function object prop
+2. When the function object is a dependency to other hooks, e.g. `useEffect(..., [callback])`  
 
-That's the case when `useCallback(callbackFun, deps)` helps you: giving the same dependency values `deps`, the hook returns the same function instance between renderings:
+That's when `useCallback(callbackFun, deps)` is helpful: given the same dependency values `deps`, the hook returns (aka memoizes) the function instance between renderings:
 
 ```jsx{5-7}
 import React, { useCallback } from 'react';
@@ -100,7 +100,7 @@ function MyComponent() {
 }
 ```
 
-`handleClick` variable will have always the same object of the callback function between renderings of `MyComponent`. 
+`handleClick` variable has always the same callback function object between renderings of `MyComponent`. 
 
 ## 3. A good use case
 
@@ -110,45 +110,47 @@ Imagine you have a component that renders a big list of items:
 import React from 'react';
 import useSearch from './fetch-items';
 
-function MyBigList({ term, handleClick }) {
+function MyBigList({ term, onItemClick }) {
   const items = useSearch(term);
 
-  const itemToElement = item => <div onClick={handleClick}>{item}</div>;
+  const map = item => <div onClick={onItemClick}>{item}</div>;
 
-  return <div>{items.map(itemToElement)}</div>;
+  return <div>{items.map(map)}</div>;
 }
 
 export default React.memo(MyBigList);
 ```
 
-`MyBigList` renders a list of items. Knowing the list could be big, probably a few hundreds of items. To preserve the list re-rendering, you wrap it into `React.memo`.  
+The list could be big, maybe hundreds of items. To prevent useless list re-renderings, you wrap it into `React.memo()`.  
 
-The parent component of `MyBigList` needs provides a handler function when an item is clicked.  
+The parent component of `MyBigList` provides a handler function to know when an item is clicked:  
 
 ```jsx
 import React, { useCallback } from 'react';
 
 export default function MyParent({ term }) {
-  const handleClick = useCallback(item => {
+  const onItemClick = useCallback(item => {
     console.log('You clicked ', item);
   }, [term]);
 
   return (
     <MyBigList
       term={term}
-      handleClick={handleClick}
+      onItemClick={onItemClick}
     />
   );
 }
 ```
 
-`handleClick` callback is memoizied by `useCallback()`. As long as `term` variable stays the same, `useCallback()` returns the same function instance.  
+`onItemClick` callback is memoized by `useCallback()`. As long as `term` is the same, `useCallback()` returns the same function object.  
 
-Even if for some reason `MyParent` component re-renders, `handleClick` stays the same and doesn't break the memoization of `MyBigList`.
+Even if for some reason `MyParent` component re-renders, `onItemClick` function object is the same and doesn't break the memoization of `MyBigList`.  
+
+That was a good use case of `useCallback()`.  
 
 ## 4. A bad use case
 
-Let's look back at the example in the introduction to the article:
+Let's look at another example:
 
 ```jsx{4-6}
 import React, { useCallback } from 'react';
@@ -166,15 +168,15 @@ function MyChild ({ onClick }) {
 }
 ```
 
-Does it make sense to memoize `handleClick`?  
+Does it make sense to apply `useCallback()`? Most likely not.  
 
-No, because calling `useCallback()` requires lots of things working. Every time `MyComponent` is rendered the `useCallback()` hook is called. Iternally React makes sure to return the same object function. Even so, the inline function is still created on every render (`useCallback()` just skips it).   
+`useCallback()` hook is called every time `MyComponent` renders. Even `useCallback()` returning the same function object, still, the inline function is re-created on every re-rendering (`useCallback()` just skips it).   
 
-Even having `useCallback()` returning the same function instance, it doesn't bring any benefits because *the optimization costs more than not having the optimization*.  
+This doesn't bring any benefits because *the optimization costs more than not having the optimization*.  
 
-Don't forget about the increased code complexity. You have to make sure to keep the deps of `useCallback()` in sync with what you're using inside the memoized callback.  
+Don't forget about the increased code complexity. You have to keep the `deps` of `useCallback(..., deps)` in sync with what you're using inside the memoized callback.  
 
-Simply accept that on each re-render new functions are created:
+Simply *accept* that on each re-rendering new functions are created:
 
 ```jsx{4-6}
 import React, { useCallback } from 'react';
@@ -194,14 +196,19 @@ function MyChild ({ onClick }) {
 
 ## 5. Summary
 
-Any optimization adds complexity. Any optimization added too early is a risk because the optimized code may change many times.  
-
-When thinking about performance tweaks, I always recall the [statement](https://wiki.c2.com/?ProfileBeforeOptimizing):
+When thinking about performance tweaks, recall the [statement](https://wiki.c2.com/?ProfileBeforeOptimizing):
 
 > Profile before optimizing
 
-These considerations apply to the usage of `useCallback()` hook. Its appropriate use case is to memoize the callback functions that are supplied to memoized child components. 
+Any optimization adds complexity. Any optimization added too early is a risk because the optimized code may change many times.  
 
-Either way, even if your situation fits, profile and then decide to apply `useCallback()`.  
+These considerations apply to `useCallback()` hook too. Its appropriate use case is to memoize the callback functions that are supplied to memoized *heavy* child components. 
 
-*What use cases of `useCallback()` do you know?*
+Either way:
+
+* profile
+* quantify the increased performance (e.g. `150ms` vs `50ms` render speed increase)
+
+Then ask yourself: does the increased performance, compared to increased complexity, worth using `useCallback()`?
+
+*Do you know use cases that worth using `useCallback()`? Please share your experience in a comment below.*
