@@ -18,6 +18,9 @@ In this tutorial, I'm going to start with a simple form "Register Your Cat", and
 
 Let's get started!
 
+```toc
+```
+
 ## 1. "Register Your Cat" form
 
 A 🐱 cat show event is going to happen in your city . Your task, as a web developer, is to implement a form to register cats for the show.  
@@ -72,7 +75,7 @@ The last element of the form is a `<button>` named *Submit*. When the user has i
 
 Open the [demo](https://codesandbox.io/s/competent-pond-uqdut?file=/src/App.js) as see how the form is rendered. At the moment the form doesn't do anything: just displays the fields.  
 
-Having the form inputs setup, the next step is to access and persist the input fields value into the component's state. Let's see how to do that.  
+The next step is to access and persist the input fields value into the component's state. Let's see how to do that.  
 
 ## 2. Form state
 
@@ -80,48 +83,52 @@ Even if the user introduces data into the input fields, you still need a way to 
 
 Here's how you could keep the form data into the component's state:
 
-```jsx
+```jsx{21,24,30,33}
 import { useState } from 'react';
 
 const COLORS = ['white', 'red', 'blue', 'black', 'cream'];
-
 
 function RegisterYourCatForm() {
   const [values, setValues] = useState({ 
     name: '', color: '', age: '', habits: '' 
   });
 
-  function onChange(name) {
-    return function ({ target: { value } }) {
-      setValues(oldValues => ({...oldValues, [name]: value}));
+  const set = name => {
+    return ({ target: { value } }) => {
+      setValues(oldValues => ({...oldValues, [name]: value }));
     }
-  }
+  };
 
   return (
     <form>
-     
-        <input 
-          value={values.name} 
-          onChange={onChange('name')} 
-        />
-     
-        <select 
-          value={values.color} 
-          onChange={onChange('color')}
-        >
-     
-        </select>
-     
-        <textarea 
-          value={values.habits} 
-          onChange={onChange('habits')} 
-        />
-    //  ...
-     
+      <h2>Register Your Cat</h2>
+
+      <label>Name*:</label>
+      <input value={values.name} onChange={set('name')} />
+
+      <label>Color*:</label>
+      <select value={values.color} onChange={set('color')}>
+        <option>Select color</option>
+        {COLORS.map(color => <option>{color}</option>)}
+      </select>
+
+      <label>Age*:</label>
+      <input value={values.age} onChange={set('age')} />
+
+      <label>Habits:</label>
+      <textarea value={values.habits} onChange={set('habits')} />
+
+      <button type="submit">Submit</button>
     </form>
   );
 }
 ```
+
+Open the [demo](https://codesandbox.io/s/zealous-margulis-es25p?file=/src/App.js), then type some values into the input fields. `values` state variable updates with the values that you introduced.  
+
+Now you have the form's data stored into the component's state. You can lately save this state to server... but before doing that, how can you be sure that user has introduced all the required information? 
+
+You need to perform the form validation.  
 
 ## 3. Form validation
 
@@ -129,6 +136,6 @@ function RegisterYourCatForm() {
 
 ## 4. Form submission
 
-## 5. Form initial data
+## 5. Set form's initial data
 
 ## 6. Summary
