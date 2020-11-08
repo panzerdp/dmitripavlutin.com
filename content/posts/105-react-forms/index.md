@@ -47,7 +47,7 @@ function RegisterYourCatForm() {
 
       <label>Color*:</label>
       <select>
-        <option>Select color</option>
+        <option value="">Select color</option>
         {COLORS.map(color => <option>{color}</option>)}
       </select>
 
@@ -108,7 +108,7 @@ function RegisterYourCatForm() {
 
       <label>Color*:</label>
       <select value={values.color} onChange={set('color')}>
-        <option>Select color</option>
+        <option value="">Select color</option>
         {COLORS.map(color => <option>{color}</option>)}
       </select>
 
@@ -132,10 +132,152 @@ You need to perform the form validation.
 
 ## 3. Form validation
 
+You can use built-in HTML5 validation of the input fields. They are powerful and useful.  
 
+First, let's mark `required={true}` the fields that are required for completion: *Name*, *Color*, and *Age*.  
+
+Second, let's make sure that user introduces a positive number inside the *Age* field by mark it as `type="number"` and `min="0"`.
+
+```jsx{13,19,28}
+// ...
+
+function RegisterYourCatForm() {
+
+  // ...
+
+  return (
+    <form>
+      <h2>Register Your Cat</h2>
+
+      <label>Name*:</label>
+      <input 
+        type="text" required={true} 
+        value={values.name} onChange={set('name')} 
+      />
+
+      <label>Color*:</label>
+      <select 
+        required={true} 
+        value={values.color} onChange={set('color')}
+      >
+        <option value="">Select color</option>
+        {COLORS.map(color => <option>{color}</option>)}
+      </select>
+
+      <label>Age*:</label>
+      <input
+        type="number" required={true}
+        value={values.age} onChange={set('age')} 
+      />
+
+      <label>Habits:</label>
+      <textarea value={values.habits} onChange={set('habits')} />
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+Now, if you open the demo and click *Submit* button, the form is going to be validated.  
+
+If, for example, you haven't introduce anything into the *Name* field and clicked *Submit*, then *Name* field is going to be highglighted and dependeing on the browser you'll be informed that the field is required.  
 
 ## 4. Form submission
 
+When clicking the Submit button, the browser performs a default submission of the form: making a POST request to the URL specific in the `action` attribute of the `<form>`. If not specified, `action` attribute equals to the current URL.  
+
+But, since the form is controlled by React, you woudn't need this to happens, since you'd like to save the data by yourself.  
+
+To prevent the browser from performing the default action on submit, simply attach `onSubmit` event handler to the form, then call `event.preventDefault()`. Also, in the `onSubmit` event handler you can perform a POST request by yourself to save the user form:
+
+```jsx{}
+// ...
+
+function RegisterYourCatForm() {
+  const [values, setValues] = useState({ 
+    name: '', color: '', age: '', habits: '' 
+  });
+
+  const onSubmit = (event) => {
+    event.preventDefault(); // Prevent default submission
+    try {
+      await fetch('/save', {
+        method: 'POST',
+        body: JSON.stringify(values)
+      });
+      // Handle submission success
+    } catch (e) {
+      // Handle submission error
+    }
+  }
+
+  // ...
+
+  return (
+    <form onSubmit={onSubmit}>
+      <h2>Register Your Cat</h2>
+
+     {/* ... */}
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
 ## 5. Set form's initial data
 
+To edit an existing registration, you would need to fill the form with initial data.  
+
+Because the inputs values are controlled by `values` state variable, what you need to do is simply load the registration data and update the `values` with the fetched data.  
+
+```jsx
+import { useEffect } from React;
+// ...
+
+function RegisterYourCatForm({ registrationId }) {
+  const [values, setValues] = useState({ 
+    name: '', color: '', age: '', habits: '' 
+  });
+
+  useEffect(() => {
+    loadFormData = async () => {
+      try {
+        const response = await fetch(`/registration/${registrationId}`);
+        const fetchedValues = await response.json();
+        setValue(fetchedValues);
+      } catch (e) {
+        // Handle loading error
+      }
+    }
+    loadFormData();
+  }, [registrationId]);
+
+  // ...
+
+  return (
+    <form onSubmit={onSubmit}>
+      <h2>Register Your Cat</h2>
+
+     {/* ... */}
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+`useEffect()` hook was used to initiate the loading of form data.  
+
 ## 6. Summary
+
+When working with forms in React, a good approach is to make the form controlled by a state variable that hold all the inputs values. 
+
+Use the HTML5 built-in form validation. That requires configuring your inputs with corresponding validation attributes, e.g. `required={true}` to make the input required.  
+
+By default, when clicking form's Submit button, the browser performs full page POST to request to URL specific in the `action` attribute of the `<form>`. Because the form is controlled by React, you can prevent browser's default behavior by attaching an event handler to `onSubmit` event and call `event.preventDefault()`.  
+
+Also, inside the same `onSubmit` event handler you can access the form data from the corresponding state variable, and save it manually using your preferred way: usually by making an async fetch POST request.  
+
+Finally, when you'd like to edit an entity, you can load the data directly into your component's form state variable.  
