@@ -129,8 +129,8 @@ The parent component of `MyBigList` provides a handler function to know when an 
 import React, { useCallback } from 'react';
 
 export default function MyParent({ term }) {
-  const onItemClick = useCallback(item => {
-    console.log('You clicked ', item);
+  const onItemClick = useCallback(event => {
+    console.log('You clicked ', event.currentTarget);
   }, [term]);
 
   return (
