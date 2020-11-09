@@ -73,7 +73,7 @@ The last element of the form is a `<button>` named *Submit*. When the user has i
 
 ![HTML Form](./images/html-form.png)
 
-Open the [demo](https://codesandbox.io/s/competent-pond-uqdut?file=/src/App.js) as see how the form is rendered. At the moment the form doesn't do anything: just displays the fields.  
+Open the [demo](https://codesandbox.io/s/initial-form-uqdut?file=/src/App.js) as see how the form is rendered. At the moment the form doesn't do anything: just displays the fields.  
 
 The next step is to access and persist the input fields value into the component's state. Let's see how to do that.  
 
@@ -124,7 +124,7 @@ function RegisterYourCatForm() {
 }
 ```
 
-Open the [demo](https://codesandbox.io/s/zealous-margulis-es25p?file=/src/App.js), then type some values into the input fields. `values` state variable updates with the values that you introduced.  
+Open the [demo](https://codesandbox.io/s/form-state-es25p?file=/src/App.js), then type some values into the input fields. `values` state variable updates with the values that you introduced.  
 
 Now you have the form's data stored into the component's state. You can lately save this state to server... but before doing that, how can you be sure that user has introduced all the required information? 
 
@@ -134,9 +134,11 @@ You need to perform the form validation.
 
 You can use built-in HTML5 validation of the input fields. They are powerful and useful.  
 
-First, let's mark `required={true}` the fields that are required for completion: *Name*, *Color*, and *Age*.  
+First, let's mark with `required` attribute the inputs that are required for completion: *Name*, *Color*, and *Age*.  
 
-Second, let's make sure that user introduces a positive number inside the *Age* field by mark it as `type="number"` and `min="0"`.
+Second, let's make sure that user introduces a positive number, bigger than `0`, inside the *Age* field by marking it `type="number"` and `min="0"`.
+
+No validation attributes are added to *Habits* textarea, because this field is optional and has no restrictions over the introduced text.
 
 ```jsx{13,19,28}
 // ...
@@ -151,13 +153,13 @@ function RegisterYourCatForm() {
 
       <label>Name*:</label>
       <input 
-        type="text" required={true} 
+        type="text" required
         value={values.name} onChange={set('name')} 
       />
 
       <label>Color*:</label>
       <select 
-        required={true} 
+        required
         value={values.color} onChange={set('color')}
       >
         <option value="">Select color</option>
@@ -166,7 +168,7 @@ function RegisterYourCatForm() {
 
       <label>Age*:</label>
       <input
-        type="number" required={true}
+        type="number" required min="1"
         value={values.age} onChange={set('age')} 
       />
 
@@ -179,7 +181,7 @@ function RegisterYourCatForm() {
 }
 ```
 
-Now, if you open the demo and click *Submit* button, the form is going to be validated.  
+Now, if you open the [demo](https://codesandbox.io/s/form-validation-sosi5?file=/src/App.js) and click *Submit* button, the form is going to be validated.  
 
 If, for example, you haven't introduce anything into the *Name* field and clicked *Submit*, then *Name* field is going to be highglighted and dependeing on the browser you'll be informed that the field is required.  
 
@@ -206,9 +208,12 @@ function RegisterYourCatForm() {
         method: 'POST',
         body: JSON.stringify(values)
       });
-      // Handle submission success
+      alert('Your registration was successfully submitted!');
+      setValues({ 
+        name: '', color: '', age: '', habits: '' 
+      });
     } catch (e) {
-      // Handle submission error
+      alert('Registration failed!');
     }
   }
 
@@ -216,11 +221,7 @@ function RegisterYourCatForm() {
 
   return (
     <form onSubmit={onSubmit}>
-      <h2>Register Your Cat</h2>
-
-     {/* ... */}
-
-      <button type="submit">Submit</button>
+      {/* ... */}
     </form>
   );
 }
@@ -236,7 +237,7 @@ Because the inputs values are controlled by `values` state variable, what you ne
 import { useEffect } from React;
 // ...
 
-function RegisterYourCatForm({ registrationId }) {
+function RegisterYourCatForm({ id }) {
   const [values, setValues] = useState({ 
     name: '', color: '', age: '', habits: '' 
   });
@@ -244,7 +245,7 @@ function RegisterYourCatForm({ registrationId }) {
   useEffect(() => {
     loadFormData = async () => {
       try {
-        const response = await fetch(`/registration/${registrationId}`);
+        const response = await fetch(`/registration/${id}`);
         const fetchedValues = await response.json();
         setValue(fetchedValues);
       } catch (e) {
@@ -258,11 +259,7 @@ function RegisterYourCatForm({ registrationId }) {
 
   return (
     <form onSubmit={onSubmit}>
-      <h2>Register Your Cat</h2>
-
-     {/* ... */}
-
-      <button type="submit">Submit</button>
+      {/* ... */}
     </form>
   );
 }
@@ -276,8 +273,8 @@ When working with forms in React, a good approach is to make the form controlled
 
 Use the HTML5 built-in form validation. That requires configuring your inputs with corresponding validation attributes, e.g. `required={true}` to make the input required.  
 
-By default, when clicking form's Submit button, the browser performs full page POST to request to URL specific in the `action` attribute of the `<form>`. Because the form is controlled by React, you can prevent browser's default behavior by attaching an event handler to `onSubmit` event and call `event.preventDefault()`.  
+By default, when clicking form's Submit button, the browser performs a full page POST request to URL specific in the `action` attribute of the `<form>`. But having the form controlled by React, you can prevent browser's default behavior by attaching an event handler to `onSubmit` event and calling `event.preventDefault()`.  
 
-Also, inside the same `onSubmit` event handler you can access the form data from the corresponding state variable, and save it manually using your preferred way: usually by making an async fetch POST request.  
+Also, inside the same `onSubmit` event handler you can access the form data from the corresponding state variable, and save it manually using your preferred way: by making an async fetch POST request.  
 
-Finally, when you'd like to edit an entity, you can load the data directly into your component's form state variable.  
+Finally, when you'd like to edit an entity using the form, you can load the initial data into your component's form state variable.  
