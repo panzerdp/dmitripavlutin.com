@@ -48,7 +48,7 @@ function RegisterYourCatForm() {
       <label>Color*:</label>
       <select>
         <option value="">Select color</option>
-        {COLORS.map(color => <option>{color}</option>)}
+        {COLORS.map(c => <option key={c}>{c}</option>)}
       </select>
 
       <label>Age*:</label>
@@ -109,7 +109,7 @@ function RegisterYourCatForm() {
       <label>Color*:</label>
       <select value={values.color} onChange={set('color')}>
         <option value="">Select color</option>
-        {COLORS.map(color => <option>{color}</option>)}
+        {COLORS.map(c => <option key={c}>{c}</option>)}
       </select>
 
       <label>Age*:</label>
@@ -163,7 +163,7 @@ function RegisterYourCatForm() {
         value={values.color} onChange={set('color')}
       >
         <option value="">Select color</option>
-        {COLORS.map(color => <option>{color}</option>)}
+        {COLORS.map(c => <option key={c}>{c}</option>)}
       </select>
 
       <label>Age*:</label>
@@ -204,7 +204,7 @@ function RegisterYourCatForm() {
   const onSubmit = (event) => {
     event.preventDefault(); // Prevent default submission
     try {
-      await fetch('/save', {
+      await fetch('/api/registration', {
         method: 'POST',
         body: JSON.stringify(values)
       });
@@ -245,7 +245,7 @@ function RegisterYourCatForm({ id }) {
   useEffect(() => {
     loadFormData = async () => {
       try {
-        const response = await fetch(`/registration/${id}`);
+        const response = await fetch(`api/registration/${id}`);
         const fetchedValues = await response.json();
         setValue(fetchedValues);
       } catch (e) {
