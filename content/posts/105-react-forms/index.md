@@ -227,7 +227,7 @@ function RegisterYourCatForm() {
 }
 ```
 
-## 5. Set form's initial data
+## 5. Form's initial data
 
 To edit an existing registration, you would need to fill the form with initial data.  
 
