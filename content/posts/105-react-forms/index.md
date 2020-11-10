@@ -1,8 +1,8 @@
 ---
 title: "React Forms Tutorial: How to Access Input Values, Validate, and Submit Forms"
 description: "A step by step tutorial on how to access input values, validate, and submit forms in React."
-published: "2020-11-10T18:00Z"
-modified: "2020-11-10T18:00Z"
+published: "2020-11-10T10:00Z"
+modified: "2020-11-10T10:00Z"
 thumbnail: "./images/cover-2.png"
 slug: react-forms-tutorial
 tags: ['react', 'form', 'input']
@@ -10,11 +10,11 @@ recommended: ['controlled-inputs-using-react-hooks', 'react-state-management']
 type: post
 ---
 
-Most of the HTML elements like headings `<h1>`, `<h2>`, paragraphs `<p>`, or simple textual output `<span>` are meant to display information.  
+HTML elements like headings `<h1>`, `<h2>`, paragraphs `<p>`, or simple textual output `<span>` are meant to display information.  
 
-The forms `<form>` and form elements like `<input>`, `<select>`, `<textarea>` are additionally meant to input the data into the application. Thus, managing forms and input fields require more effort: you have to fill the form with initial data, access data from inputs, validate the form.  
+On the other side, the forms `<form>` and input elements like `<input>`, `<select>`, `<textarea>` collect information from the user. Working with forms and input fields requires more effort: you have to access input values, validate the form, submit form data, and handle submission result.  
 
-In this tutorial, I'm going to start with a simple form "Register Your Cat", and gradually show you how to access the inputs values, how to submit, and validate the form in React.  
+In this tutorial, I'm going to show you how to access the form input values, how to validate and submit forms in React.  
 
 Let's get started!
 
@@ -63,25 +63,52 @@ function RegisterYourCatForm() {
 }
 ```
 
-`<RegisterYourCatForm />` component contains a `<form>` &mdash; the HTML element that holds a form.  
+`<RegisterYourCatForm />` component contains a `<form>` &mdash; the HTML element that defines a form.  
 
 The form contains input fields: `<input />` element is used to introduce *Name* and *Age*, `<select>` element to choose a *Color*, and `<textarea>` element to enter longer text of the cat's *Habits*.  
 
-`<label>` elements indicate the name of the corresponding field: "Name", "Color", "Age", and "Habits".  
+`<label>` elements display the name of the corresponding field: "Name", "Color", "Age", and "Habits".  
 
-The last element of the form is a `<button>` named *Submit*. When the user has introduced the pet's info into the input fields, by clicking the *Submit* button the data in the form should be validated and submitted.  
+The last element of the form is a `<button>` named *Submit*. When the user had introduced the pet's info into the input fields, by clicking the *Submit* button the data in the form should be validated and submitted.  
 
 ![HTML Form](./images/html-form.png)
 
-Open the [demo](https://codesandbox.io/s/initial-form-uqdut?file=/src/App.js) to see how the form is rendered. At the moment the form doesn't do anything: just displays the fields.  
+Open the [demo](https://codesandbox.io/s/initial-form-uqdut?file=/src/App.js) to see how the form is rendered. The form doesn't do anything: just displays the input fields.  
 
-The next step is to access and persist the input fields value into the component's state. Let's see how to do that.  
+The next step is to access the input fields values. Let's see how to do that.  
 
 ## 2. Form state
 
-Even if the user introduces data into the input fields, you still need a way to access these values inside of the component.  
+The user has introduced data into the input fields: but how do you access these values inside of the React component?
 
-Here's how you could keep the form data into the component's state:
+React offers 2 approaches to access the value of an input field: using [controlled](https://dmitripavlutin.com/controlled-inputs-using-react-hooks/) or [uncontrolled](https://reactjs.org/docs/uncontrolled-components.html) components. I prefer controlled components because you read and set the input value through the component's state.  
+
+Let's see an example of a controlled component in React:
+
+```jsx
+function MyControlledInput({ }) {
+  const [value, setValue] = useValue('');
+
+  const onChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  return (
+    <>
+      <div>Input value: {value}</div>
+      <input value={value} onChange={onChange} />
+    </>
+  );
+}
+```
+
+Open the [demo](https://codesandbox.io/s/controlled-component-uwf8n) and type into the input field. You can see that `value` state variable updates as soon as you type.  
+
+The input field is *controlled* because React sets its value from the state. When the user types into the input field, the `onChange` handler updates the state with the input’s value accessed from the event object: `event.target.value`.  
+
+The controlled components approach can help you access the value of any input field: being regular textual inputs, textareas, select fields.  
+
+Here's how you could keep the "Register Your Cat" form data into the component's state variable `values`:
 
 ```jsx{21,24,30,33}
 import { useState } from 'react';
@@ -89,7 +116,7 @@ import { useState } from 'react';
 const COLORS = ['white', 'red', 'blue', 'black', 'cream'];
 
 function RegisterYourCatForm() {
-  const [values, setValues] = useState({ 
+  const [values, setValues] = useState({
     name: '', color: '', age: '', habits: '' 
   });
 
@@ -124,21 +151,29 @@ function RegisterYourCatForm() {
 }
 ```
 
-Open the [demo](https://codesandbox.io/s/form-state-es25p?file=/src/App.js), then type some values into the input fields. `values` state variable updates with the values that you introduced.  
+`values` is the state variable that holds the data of the entire form. This is a plain JavaScript object with properties `name`, `color`, `age`, and `habits` corresponding to each input field in the form.  
 
-Now you have the form's data stored in the component's state. You can lately save this state to the server... but before doing that, how can you be sure that the user has introduced all the required information? 
+`set(key)` is a higher-order function that returns on change handlers. Its purpose is to avoid writing manually on change handlers for each field in the form.    
+
+Open the [demo](https://codesandbox.io/s/form-state-es25p?file=/src/App.js), then type some values into the input fields. `values` object updates accordingly.  
+
+Now you have the form's data stored in the component's state. You can send the form values to the server... but before doing that, how to be sure that the user has introduced all the required information? 
 
 You need to perform the form validation.  
 
 ## 3. Form validation
 
-You can use built-in HTML5 validation of the input fields. They are powerful and useful.  
+I like to use the built-in HTML5 form validation &mdash; it is declarative and easy to use.  
 
-First, let's mark with `required` attribute the inputs that are required for completion: *Name*, *Color*, and *Age*.  
+Using HTML form validation involves marking the input fields with special attributes: for example `required` marks the input field as required, `minlength` restricts the minimum length of the text in the field.  
 
-Second, let's make sure that the user introduces a positive number, bigger than `0`, inside the *Age* field by marking it `type="number"` and `min="0"`.
+Let's mark as `required` the inputs that are required for completion: *Name*, *Color*, and *Age*.  
+
+Then mark the *Age* field with `type="number"` and `min="0"`, to be sure that the user introduces here a positive number bigger than `0`.
 
 No validation attributes are added to *Habits* textarea because the field is optional and has no restrictions over the introduced text.
+
+The actual validation happens when the user clicks *Submit* button. If there are validation errors, they are displayed on the form, and the user can make corrections and click *Submit* again.  
 
 ```jsx{13,19,28}
 // ...
@@ -183,15 +218,19 @@ function RegisterYourCatForm() {
 
 Now, if you open the [demo](https://codesandbox.io/s/form-validation-sosi5?file=/src/App.js) and click the *Submit* button, the form is going to be validated.  
 
-If, for example, you haven't introduced anything into the *Name* field and clicked *Submit*, then the *Name* field is going to be highlighted, and depending on the browser you'll be informed that the field is required.  
+If, for example, you haven't introduced anything into the *Name* field and clicked *Submit*, then the *Name* field is going to be highlighted with a validation error message displayed nearby.  
+
+![Form validation error](./images/html-form-validation-error.png)
 
 ## 4. Form submission
 
-When clicking the Submit button, the browser performs a default form submission by making a POST request to the URL specified in the `action` attribute of the `<form>`. If not specified, the `action` attribute equals the current URL.  
+When *Submit* button is clicked, the browser performs a default form submission by making a full-page POST request to the URL specified in the `action` attribute of the `<form>`. If not specified, the `action` attribute equals the current URL.  
 
-But, since the form is controlled by React, you wouldn't need this to happen, since you'd like to save the data by yourself.  
+But, since the form is controlled by React, you wouldn't need this to happen.  
 
-To prevent the browser from performing the default action on submit, simply attach `onSubmit` event handler to the form, then call `event.preventDefault()`. Also, in the `onSubmit` event handler you can perform a POST request by yourself to save the user form:
+To prevent the browser from performing the default action on submit, simply attach `onSubmit` event handler to the form, then call `event.preventDefault()`. 
+
+Moreover, inside the `onSubmit` event handler you can perform a POST request by yourself to save the user form:
 
 ```jsx{}
 // ...
@@ -234,19 +273,27 @@ function RegisterYourCatForm() {
 }
 ```
 
-Open the [demo](https://codesandbox.io/s/form-submission-k5f3l?file=/pages/index.js), fill the registration form, and click *Submit*. The form's values are going to be sent as a `POST` request to `/api/registration` URL.  
+`onSubmit()` is an event handler attached to the form submission event `<form onSubmit={onSubmit}>`. React invokes `onSubmit()` handler when the form is submitted, i.e. the user clicks *Submit* button.  
+
+If the form validation fails, then `onSubmit()` event handler is *not invoked*.  
+
+Inside `onSubmit()`, the async function `saveFormData()` makes a `fetch()` `POST` request to `/api/registration`. The body of the request contains the serialized form's state variable: `JSON.stringify(values)`.  
+
+Open the [demo](https://codesandbox.io/s/form-submission-k5f3l?file=/pages/index.js), fill the registration form, and click *Submit*. The form's values are sent as a `POST` request to `/api/registration` URL.  
+
+Note that while a client-side validation is performed, you always need to validate the data on the server-side too.  
 
 ## 5. Form's initial data
 
 To edit an existing registration, you would need to fill the form with initial data.  
 
-Because the input values are controlled by `values` state variable, what you need to do is simply load the registration data and update the `values` with the fetched data.  
+Because the input values are controlled by `values` state variable, just initialize the form's state using the initial data:
 
 ```jsx
 // ...
 
-function RegisterYourCatForm({ id, initialValues }) {
-  const [values, setValues] = useState({ initialValues });
+function EditRegistrationForm({ registrationId, initialValues }) {
+  const [values, setValues] = useState(initialValues);
 
   // ...
 
@@ -258,13 +305,11 @@ function RegisterYourCatForm({ id, initialValues }) {
 }
 ```
 
-`useEffect()` hook was used to initiate the loading of form data.  
-
 ## 6. Summary
 
-When working with forms in React, a good approach is to make the form controlled by a state variable that holds all the inputs values. 
+When working with forms in React make the form controlled by a state variable holding the input fields values. 
 
-Use the HTML5 built-in form validation. That requires configuring your inputs with corresponding validation attributes, e.g. `required={true}` to make the input required.  
+Use the HTML5 built-in form validation. That requires configuring your inputs with corresponding validation attributes, e.g. `required` to make the input required.  
 
 By default, when clicking the form's *Submit* button, the browser performs a full-page POST request to the URL specified in the `action` attribute of the `<form>`. But having the form controlled by React, you can prevent browser's default behavior by attaching an event handler to `onSubmit` event and calling `event.preventDefault()`.  
 
