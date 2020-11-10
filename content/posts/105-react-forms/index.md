@@ -104,7 +104,7 @@ function MyControlledInput({ }) {
 
 Open the [demo](https://codesandbox.io/s/controlled-component-uwf8n) and type into the input field. You can see that `value` state variable updates as soon as you type.  
 
-The input field is *controlled* because React sets its value from the state. When the user types into the input field, the `onChange` handler updates the state with the input’s value accessed from the event object: `event.target.value`.  
+The input field is *controlled* because React sets its value from the state `<input value={value} ... />`. When the user types into the input field, the `onChange` handler updates the state with the input’s value accessed from the event object: `event.target.value`.  
 
 The controlled components approach can help you access the value of any input field: being regular textual inputs, textareas, select fields.  
 
@@ -153,7 +153,9 @@ function RegisterYourCatForm() {
 
 `values` is the state variable that holds the data of the entire form. This is a plain JavaScript object with properties `name`, `color`, `age`, and `habits` corresponding to each input field in the form.  
 
-`set(key)` is a higher-order function that returns on change handlers. Its purpose is to avoid writing manually on change handlers for each field in the form.    
+`set(key)` is a higher-order function that returns on change handlers. Its purpose is to avoid writing manually on change handlers for each field in the form. 
+
+For example, `set('name')` returns a handler that updates `values.name` property when a change in the *Name* field happens.  
 
 Open the [demo](https://codesandbox.io/s/form-state-es25p?file=/src/App.js), then type some values into the input fields. `values` object updates accordingly.  
 
