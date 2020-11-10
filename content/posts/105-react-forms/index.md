@@ -108,7 +108,7 @@ The input field is *controlled* because React sets its value from the state. Whe
 
 The controlled components approach can help you access the value of any input field: being regular textual inputs, textareas, select fields.  
 
-Here's how you could keep the "Register Your Cat" form data into the component's state variable `values`:
+Let's control "Register Your Cat" form data by a state variable `values`:
 
 ```jsx{21,24,30,33}
 import { useState } from 'react';
@@ -218,7 +218,7 @@ function RegisterYourCatForm() {
 
 Now, if you open the [demo](https://codesandbox.io/s/form-validation-sosi5?file=/src/App.js) and click the *Submit* button, the form is going to be validated.  
 
-If, for example, you haven't introduced anything into the *Name* field and clicked *Submit*, then the *Name* field is going to be highlighted with a validation error message displayed nearby.  
+If, for example, you haven't introduced anything into the *Name* field and clicked *Submit*, then the *Name* field is highlighted with an error message nearby.  
 
 ![Form validation error](./images/html-form-validation-error.png)
 
@@ -226,13 +226,13 @@ If, for example, you haven't introduced anything into the *Name* field and click
 
 When *Submit* button is clicked, the browser performs a default form submission by making a full-page POST request to the URL specified in the `action` attribute of the `<form>`. If not specified, the `action` attribute equals the current URL.  
 
-But, since the form is controlled by React, you wouldn't need this to happen.  
+But, since the form is controlled by React, you don't want this to happen.  
 
 To prevent the browser from performing the default action on submit, simply attach `onSubmit` event handler to the form, then call `event.preventDefault()`. 
 
 Moreover, inside the `onSubmit` event handler you can perform a POST request by yourself to save the user form:
 
-```jsx{}
+```jsx{19,21,34}
 // ...
 
 function RegisterYourCatForm() {
@@ -287,9 +287,9 @@ Note that while a client-side validation is performed, you always need to valida
 
 To edit an existing registration, you would need to fill the form with initial data.  
 
-Because the input values are controlled by `values` state variable, just initialize the form's state using the initial data:
+Because the input fields values are controlled by `values` state variable, just initialize the form's state using the initial data:
 
-```jsx
+```jsx{4}
 // ...
 
 function EditRegistrationForm({ registrationId, initialValues }) {
@@ -316,3 +316,5 @@ By default, when clicking the form's *Submit* button, the browser performs a ful
 Also, inside the same `onSubmit` event handler you can access the form data from the corresponding state variable, and save it manually using your preferred way: by making an async fetch POST request.  
 
 Finally, when you'd like to edit an entity using the form, you can load the initial data into your component's form state variable.  
+
+*What is your preffered approach or library to work with forms in React?*
