@@ -201,19 +201,26 @@ function RegisterYourCatForm() {
     name: '', color: '', age: '', habits: '' 
   });
 
-  const onSubmit = (event) => {
+  const saveFormData = async () => {
+    const response = await fetch('/api/registration', {
+      method: 'POST',
+      body: JSON.stringify(values)
+    });
+    if (response.status !== 200) {
+      throw new Error(`Request failed: ${response.status}`); 
+    }
+  }
+
+  const onSubmit = async (event) => {
     event.preventDefault(); // Prevent default submission
     try {
-      await fetch('/api/registration', {
-        method: 'POST',
-        body: JSON.stringify(values)
-      });
+      await saveFormData();
       alert('Your registration was successfully submitted!');
-      setValues({ 
+      setValues({
         name: '', color: '', age: '', habits: '' 
       });
     } catch (e) {
-      alert('Registration failed!');
+      alert(`Registration failed! ${e.message}`);
     }
   }
 
@@ -227,6 +234,8 @@ function RegisterYourCatForm() {
 }
 ```
 
+Open the [demo](https://codesandbox.io/s/form-submission-k5f3l?file=/pages/index.js), fill the registration form, and click *Submit*. The form's values are going to be sent as a `POST` request to `/api/registration` URL.  
+
 ## 5. Form's initial data
 
 To edit an existing registration, you would need to fill the form with initial data.  
@@ -234,26 +243,10 @@ To edit an existing registration, you would need to fill the form with initial d
 Because the inputs values are controlled by `values` state variable, what you need to do is simply load the registration data and update the `values` with the fetched data.  
 
 ```jsx
-import { useEffect } from React;
 // ...
 
-function RegisterYourCatForm({ id }) {
-  const [values, setValues] = useState({ 
-    name: '', color: '', age: '', habits: '' 
-  });
-
-  useEffect(() => {
-    loadFormData = async () => {
-      try {
-        const response = await fetch(`api/registration/${id}`);
-        const fetchedValues = await response.json();
-        setValue(fetchedValues);
-      } catch (e) {
-        // Handle loading error
-      }
-    }
-    loadFormData();
-  }, [registrationId]);
+function RegisterYourCatForm({ id, initialValues }) {
+  const [values, setValues] = useState({ initialValues });
 
   // ...
 
