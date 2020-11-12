@@ -49,11 +49,11 @@ Almost everywhere you can use a regular function, you can also use the arrow fun
 ```javascript
 const numbers = [4, 5, 2, 6];
 
-const duplicated = numbers.map((number) => {
+const doubled = numbers.map((number) => {
   return number * 2;
 });
 
-duplicated; // => [8, 10, 4, 12]
+doubled; // => [8, 10, 4, 12]
 ```
 
 `(number) => { return number * 2; }` is an arrow function used as a callback of `number.map()` method.  
