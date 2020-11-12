@@ -86,8 +86,10 @@ React offers 2 approaches to access the value of an input field: using [controll
 Let's see an example of a controlled component in React:
 
 ```jsx
+import { useState } from 'react';
+
 function MyControlledInput({ }) {
-  const [value, setValue] = useValue('');
+  const [value, setValue] = useState('');
 
   const onChange = (event) => {
     setValue(event.target.value);
