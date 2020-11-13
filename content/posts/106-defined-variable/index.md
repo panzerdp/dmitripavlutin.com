@@ -3,9 +3,9 @@ title: "Checking if a Variable is Defined in JavaScript"
 description: "How to check correctly if a variable is defined in JavaScript using typeof operator, try/catch blocks, or window.hasOwnProperty()"
 published: "2020-11-17T12:00Z"
 modified: "2020-11-17T12:00Z"
-thumbnail: "./images/cover-6.png"
+thumbnail: "./images/cover-8.png"
 slug: javascript-defined-variable-checking
-tags: ['javascript', 'variable']
+tags: ['javascript', 'variable', 'undefined']
 recommended: ['javascript-hoisting-in-details', 'javascript-variables-and-temporal-dead-zone']
 type: post
 ---
