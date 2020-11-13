@@ -27,11 +27,11 @@ A variable is *defined* when there is a name binding available in the current sc
 Examples of *defined variables*:
 
 ```javascript
-const pi = 3.14; // pi is "defined"
-let result;      // result is "defined"
+const pi = 3.14; // pi is defined
+let result;      // result is defined
 
 window.message = 'Hello';
-message;      // message is "defined"
+message;         // message is defined
 ```
 
 A variable is *not defined* when there is no name binding available in the current scope.   
@@ -39,12 +39,12 @@ A variable is *not defined* when there is no name binding available in the curre
 Examples of *not defined variables*:
 
 ```javascript
-pi;     // Throws ReferenceError: pi is "not defined"
+pi;     // Throws ReferenceError: pi is not defined
 
 if (true) {
   let result;
 }
-let result; // Throws ReferenceError: result is "not defined"
+let result; // Throws ReferenceError: result is not defined
 ```
 
 Accessing a variable that's not defined in JavaScript throws a `ReferenceError`.  
@@ -56,24 +56,24 @@ A variable is *initialized* when there is a name binding available in the curren
 Examples of *initialized variables*:
 
 ```javascript
-const pi = 3.14; // pi is "initialized"
+const pi = 3.14; // pi is initialized
 let result;
-result = 'Value'; // result is "initialized"
+result = 'Value'; // result is initialized
 ```
 
 A variable is *uninitialized* when there is a name binding available in the current scope and the variable has not been assigned with an initial value.  
 
-Examples of *initialized variables*:
+Examples of *uninitialized variables*:
 
 ```javascript
-let result; // result is "uninitialized"
-var sum;    // result is "uninitialized"
+let result; // result is uninitialized
+var sum;    // result is uninitialized
 ```
 
 The value of an uninitialized variable is always `undefined`:
 
 ```javascript
-let result; // result is "uninitialized"
+let result; // result is uninitialized
 result; // => undefined
 ```
 
