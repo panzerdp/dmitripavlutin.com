@@ -1,6 +1,6 @@
 ---
-title: "Checking if a Variable is Defined in JavaScript (Not Easy as It Seems!)"
-description: "How to check if a variable is defined in JavaScript."
+title: "Checking if a Variable is Defined in JavaScript"
+description: "How to check correctly if a variable is defined in JavaScript."
 published: "2020-11-17T12:00Z"
 modified: "2020-11-17T12:00Z"
 thumbnail: "./images/cover-2.png"
@@ -20,11 +20,11 @@ How to determine if a variable is defined in JavaScript? The answer is not so ea
 
 I'd like to have an agreement about the terms I'm going to use. The following 4 sections will make clear about what it means a variable to be "defined"/"not defined" and "initialized"/"uninitialized".  
 
-### 1.1 Defined variable
+### 1.1 Defined / not defined variable
 
-A variable is considered *defined* when there is a name binding available in the current scope.  
+A variable is *defined* when there is a name binding available in the current scope.  
 
-Examples of *defined* variables:
+Examples of *defined variables*:
 
 ```javascript
 const pi = 3.14; // pi is "defined"
@@ -34,11 +34,9 @@ window.message = 'Hello';
 message;      // message is "defined"
 ```
 
-### 1.2 Not defined variable
+A variable is *not defined* when there is no name binding available in the current scope.   
 
-A variable is considered *not defined* when there is no name binding available in the current scope.   
-
-Examples of *not defined* variables:
+Examples of *not defined variables*:
 
 ```javascript
 pi;     // Throws ReferenceError: pi is "not defined"
@@ -49,16 +47,54 @@ if (true) {
 let result; // Throws ReferenceError: result is "not defined"
 ```
 
-Here's a good criteria of determining whether a variable is not defined: JavaScript always throws a `ReferenceError` if you try to access a *not defined* variable.  
+Accessing a variable that's not defined in JavaScript throws a `ReferenceError`.  
 
-### 1.3 Initialized variable
+### 1.2 Initialized / uninitialized variable
 
-A variable is considered *initialized* when there is a name binding available in the current scope and the variable has been assigned with an initial value.  
+A variable is *initialized* when there is a name binding available in the current scope and the variable has been assigned with an initial value.  
 
+Examples of *initialized variables*:
 
-### 1.4 Uninitialized variable
+```javascript
+const pi = 3.14; // pi is "initialized"
+let result;
+result = 'Value'; // result is "initialized"
+```
+
+A variable is *uninitialized* when there is a name binding available in the current scope and the variable has not been assigned with an initial value.  
+
+Examples of *initialized variables*:
+
+```javascript
+let result; // result is "uninitialized"
+var sum;    // result is "uninitialized"
+```
+
+The value of an uninitialized variable is always `undefined`:
+
+```javascript
+let result; // result is "uninitialized"
+result; // => undefined
+```
 
 ## 2. *typeof*
+
+Having the possible states of variables defined, let's consider a few techniques that tells whether a variable is defined or not.  
+
+As a reminder, the `typeof` operator determines the type of the value that the variable contains. `typeof myVar` can evaluate to one of the values: `'boolean'`, `'number'`, `'string'`, `'object'`, `'symbol'`, and `'undefined'`.
+
+Aside from determining the variable value's type, `typeof myVar` has a really nice property: it doesn't throw a `ReferenceError` if the `myVar` is not defined. That's great because now you can use it to determine if the variable is not defined:
+
+```javascript
+// existingVar is defined
+const existingVar = 'Hello';
+typeof existingVar !== 'undefined'; // => true
+
+// missingVar is not defined
+typeof missingVar !== 'undefined'; // => false
+```
+
+Simply saying, the expression `typeof myVar !== 'undefined'` evaluates to `true` if `myVar` is defined, and `false` if `myVar` is not defined in the current scope.  
 
 ## 3. *try/catch*
 
