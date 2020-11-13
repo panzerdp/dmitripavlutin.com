@@ -77,7 +77,7 @@ let result; // result is uninitialized
 result; // => undefined
 ```
 
-## 2. *typeof*
+## 2. Using *typeof*
 
 Having the possible states of variables defined, let's consider a few techniques that tells whether a variable is defined or not.  
 
@@ -106,7 +106,7 @@ typeof myVar !== 'undefined'; // => false
 
 Usually that's not a problem because when you check if the variable is defined, you'd like it to be initialized with a payload value too.  
 
-## 3. *try/catch*
+## 3. Using *try/catch*
 
 When you try to access the value of non defined variable, JavaScript throws a reference error:
 
@@ -145,11 +145,11 @@ try {
 // logs 'existingVar is defined'
 ```
 
-## 4. Global variables case
+## 4. Using *window.hasOwnProperty()*
 
 Finally, if you'd like to check for existance of some global variables, then you can go with a more simpler approach. Because each global variable is stored as property on the global object (`window` in a browser environment, `global` in NodeJS).  
 
-You can use this approach to check, for example, if the browser support a certain Web API, like `IntersectionObserver`:
+You can use this approach to check, for example, if the browser supports a certain Web API like `IntersectionObserver`:
 
 ```javascript
 // Detects if the browser supports IntersectionObserver API
@@ -159,6 +159,7 @@ window.hasOwnProperty('IntersectionObserver');
 Be aware that `var` variables and `function` declarations when used in the topmost scope do create properties on the global object:
 
 ```javascript
+// Top-most scope
 var num = 19;
 function greet() {
   return 'Hello!';
@@ -168,9 +169,10 @@ window.hasOwnProperty('num');   // => true
 window.hasOwnProperty('greet'); // => true
 ```
 
-But `const` and `let` variables, as well as `class` declerations, do not create properties on the global object:
+But `const` and `let` variables, as well as `class` declrations, do not create properties on the global object:
 
 ```javascript
+// Top-most scope
 const pi = 3.14;
 let message = 'Hi!';
 class MyClass {}
