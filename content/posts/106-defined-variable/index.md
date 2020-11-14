@@ -1,6 +1,6 @@
 ---
 title: "Checking if a Variable is Defined in JavaScript"
-description: "How to check correctly if a variable is defined in JavaScript using typeof operator, try/catch blocks, or window.hasOwnProperty()"
+description: "How to check correctly if a variable is defined in JavaScript using typeof operator, try/catch blocks, or window.hasOwnProperty()."
 published: "2020-11-17T12:00Z"
 modified: "2020-11-17T12:00Z"
 thumbnail: "./images/cover-8.png"
@@ -110,15 +110,23 @@ if (typeof myVar === 'undefined') {
 Accessing a defined but uninitialized variable evaluates to `undefined`. Thus be aware that `typeof myVar === 'undefined'` evaluates to `true` when `myVar` is *not defined*, but also when is *defined* but *uninitialized*:
 
 ```javascript
+// missingVar is not defined
+typeof missingVar === 'undefined'; // => true
+
 // myVar is defined and unininitialized
 let myVar;
 typeof myVar === 'undefined';      // => true
-
-// missingVar is not defined
-typeof missingVar === 'undefined'; // => true
 ```
 
 Usually, that's not a problem. When you check if the variable is defined, you want it initialized with a payload.  
+
+Of course, if the variable is defined and has a value, `typeof myVar === 'undefined'` evaluates to `false`:
+
+```javascript
+const myVar = 42;
+
+typeof myVar === 'undefined'; // => false
+```
 
 ## 3. Using *try/catch*
 
