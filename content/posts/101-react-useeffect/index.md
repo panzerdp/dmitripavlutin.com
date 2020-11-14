@@ -12,9 +12,9 @@ type: post
 
 I am impressed by the expressiveness of React hooks. You can do so much by writing so little.   
 
-But the brevity of hooks has a price &mdash; they're relatively difficult to get started. This is true for `useEffect()` &mdash; the hook that manages side-effects in React components.  
+But the brevity of hooks has a price &mdash; they're relatively difficult to get started. This is true for `useEffect()` &mdash; the hook that manages side-effects in functional React components.  
 
-In this post, you'll find everything you need to understand and start using `useEffect()` hook.  
+In this post, you'll find everything to understand and start using `useEffect()` hook.  
 
 ## 1. *useEffect()* is for side-effects
 
@@ -69,7 +69,7 @@ useEffect(callback[, dependencies]);
 * An empty array `[]`: the side-effect runs *once* after the initial rendering
 * Has props or state values `[prop1, prop2, ..., state1, state2]`: the side-effect runs *only when any value in the dependencies change*.
 
-In simple words, put the side-effects logic inside the `callback` argument, and use `dependencies` argument to control when the side-effect should run. That's the sole purpose of `useEffect()`.  
+In simple words, put the side-effect logic inside the `callback` argument, and use `dependencies` argument to control when the side-effect should run. That's the sole purpose of `useEffect()`.  
 
 ## 2. Side-effect on component did mount
 
@@ -262,9 +262,9 @@ Open the [demo](https://codesandbox.io/s/gracious-tdd-gy4zo?file=/src/App.js) an
 
 ## 6. Conclusion
 
-`useEffect(callback, dependencies)` is the hook that manages the side-effects in functional components. 
+`useEffect(callback, dependencies)` is the hook that manages the side-effects in functional components. `callback` argument is the place to put the side-effect logic. `dependencies` is a list of dependencies of your side-effect: being props or state values.  
 
-`callback` argument should contain side-effect logic, and is invoked after changes are committed to the screen. `dependencies` is a list of dependencies of your side-effect: being props or state values.  
+`useEffect()` will make sure to invoke the `callback` after initial mounting, and on later renderings if any value inside `dependencies` has changed.  
 
 Because `useEffect()` hook heavily relies on closures, you might need to [get them well](/simple-explanation-of-javascript-closures/) too. Also be aware of [stale closures issue](/react-hooks-stale-closures/).  
 
