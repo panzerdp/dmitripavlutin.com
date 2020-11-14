@@ -18,7 +18,7 @@ How to determine if a variable is defined in JavaScript? The answer is not strai
 
 ## 1. The states of a variable
 
-Before jumping into specific techniques to determine the variables existence, I'd like to have an agreement about the terms I'm going to use. 
+Before jumping into specific techniques to determine the variable's existence, I'd like to have an agreement about the terms I'm going to use. 
 
 In the following 2 sections, I'll make clear what it means for a variable to be "defined"/"not defined" and "initialized"/"uninitialized".  
 
@@ -85,7 +85,7 @@ result; // => undefined
 
 Having the possible states of variables defined, let's consider a few techniques that tell whether a variable is defined.  
 
-As a reminder, the `typeof` operator determines variable's value type. `typeof myVar` can evaluate to one of the values: `'boolean'`, `'number'`, `'string'`, `'object'`, `'symbol'`, and `'undefined'`.
+As a reminder, the `typeof` operator determines the variable's value type. `typeof myVar` can evaluate to one of the values: `'boolean'`, `'number'`, `'string'`, `'object'`, `'symbol'`, and `'undefined'`.
 
 Plus, `typeof missingVar` has a nice property: it doesn't throw a `ReferenceError` if the `missingVar` is not defined:
 
