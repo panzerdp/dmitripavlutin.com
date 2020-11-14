@@ -3,7 +3,7 @@ title: "Checking if a Variable is Defined in JavaScript"
 description: "How to check correctly if a variable is defined in JavaScript using typeof operator, try/catch blocks, or window.hasOwnProperty()."
 published: "2020-11-17T12:00Z"
 modified: "2020-11-17T12:00Z"
-thumbnail: "./images/cover-8.png"
+thumbnail: "./images/cover-9.png"
 slug: javascript-defined-variable-checking
 tags: ['javascript', 'variable', 'undefined']
 recommended: ['javascript-hoisting-in-details', 'javascript-variables-and-temporal-dead-zone']
@@ -24,7 +24,9 @@ In the following 2 sections, I'll make clear what it means for a variable to be 
 
 ### 1.1 Defined / not defined variable
 
-A variable is *defined* when there is a name binding available in the current scope.  
+A variable is *defined* when it has been declared in the current scope using a declaration statement.  
+
+The usual way to declarate variables is `const`, `let` and `var` statements, but you can also use `function` and `class` declaration statements.  
 
 Examples of *defined variables*:
 
@@ -36,48 +38,51 @@ window.message = 'Hello';
 message;         // message is defined
 ```
 
-Contrary, a variable is *not defined* when there is no name binding available in the current scope.   
+Contrary, a variable is *not defined* when it hasn't been declared in the current scope using a declaration statement. 
 
 Examples of *non defined variables*:
 
 ```javascript
-pi;     // Throws ReferenceError: pi is not defined
+pi;     // pi is not defined, throws ReferenceError
 
 if (true) {
+  // result is defined, but within this block scope only
   let result;
 }
-let result; // Throws ReferenceError: result is not defined
+result; // result is not defined, throws ReferenceError
 ```
 
-The space where the variable is defined is determined by the scope. A scope in JavaScript is defined by a block of code (for `const` and `let` variables) and by a function (for `const`, `let`, `var`).  
+The space where the variable is defined is determined by the [scope](/javascript-scope/). A scope in JavaScript is defined by a block of code (for `const` and `let` variables) and by a function (for `const`, `let`, `var`).  
 
 Accessing a variable that's not defined in JavaScript throws a `ReferenceError`.  
 
 ### 1.2 Initialized / uninitialized variable
 
-A variable is *initialized* when there is a name binding available in the current scope and the variable has been assigned with an initial value.  
+A variable is *initialized* when the declarated variable has been assigned with an initial value.  
 
 Examples of *initialized variables*:
 
 ```javascript
-const pi = 3.14; // pi is initialized
+const pi = 3.14;   // pi is initialized
+
 let result;
 result = 'Value'; // result is initialized
 ```
 
-On the other side, a variable is *uninitialized* when there is a name binding available in the current scope and the variable has not been assigned with an initial value.  
+On the other side, a variable is *uninitialized* when the declarated variable has not been assigned with an initial value.  
 
 Examples of *uninitialized variables*:
 
 ```javascript
 let result; // result is uninitialized
-var sum;    // result is uninitialized
+var sum;    // sum is uninitialized
 ```
 
 The value of an uninitialized variable is always `undefined`:
 
 ```javascript
 let result; // result is uninitialized
+
 result; // => undefined
 ```
 
@@ -85,9 +90,9 @@ result; // => undefined
 
 Having the possible states of variables defined, let's consider a few techniques that tell whether a variable is defined.  
 
-As a reminder, the `typeof` operator determines the variable's value type. `typeof myVar` can evaluate to one of the values: `'boolean'`, `'number'`, `'string'`, `'object'`, `'symbol'`, and `'undefined'`.
+The `typeof` operator determines the variable's type. `typeof myVar` can evaluate to one of the values: `'boolean'`, `'number'`, `'string'`, `'object'`, `'symbol'`, and `'undefined'`.
 
-Plus, `typeof missingVar` has a nice property: it doesn't throw a `ReferenceError` if the `missingVar` is not defined:
+The expression `typeof missingVar` doesn't throw a `ReferenceError` if the `missingVar` is not defined, compared to solely access of the not defined variable:
 
 ```javascript
 // missingVar is not defined
@@ -97,7 +102,7 @@ typeof missingVar; // Doesn't throw ReferenceError
 missingVar;        // Throws ReferenceError
 ```
 
-That's great because you can use the expression `typeof myVar === 'undefined'` to determine if the variable is defined:
+That's great because you can use the expression `typeof myVar === 'undefined'` to determine if the variable is not defined:
 
 ```javascript
 if (typeof myVar === 'undefined') {
@@ -107,7 +112,7 @@ if (typeof myVar === 'undefined') {
 }
 ```
 
-Accessing a defined but uninitialized variable evaluates to `undefined`. Thus be aware that `typeof myVar === 'undefined'` evaluates to `true` when `myVar` is *not defined*, but also when is *defined* but *uninitialized*:
+Be aware that `typeof myVar === 'undefined'` evaluates to `true` when `myVar` is *not defined*, but also when *defined* and *uninitialized*. All because accessing a defined but uninitialized variable evaluates to `undefined`.  
 
 ```javascript
 // missingVar is not defined
@@ -118,7 +123,7 @@ let myVar;
 typeof myVar === 'undefined';      // => true
 ```
 
-Usually, that's not a problem. When you check if the variable is defined, you want it initialized with a payload.  
+Usually, that's not a problem. When you check if the variable is defined, you want it initialized with a payload too.  
 
 Of course, if the variable is defined and has a value, `typeof myVar === 'undefined'` evaluates to `false`:
 
@@ -174,9 +179,9 @@ Compared to `typeof` approach, the `try/catch` is more precise because it determ
 Finally, to check for the existence of global variables, you can go with a simpler approach. 
 
 
-Each global variable is stored as a property on the global object (`window` in a browser environment, `global` in NodeJS). So, to determine if the global variable `myGlobalVar` is defined, simply check the global object for corresponding property existence: `window.hasOwnProperty('myGlobalVar')`.  
+Each global variable is stored as a property on the global object (`window` in a browser environment, `global` in NodeJS). You can use this idea to determine if the global variable `myGlobalVar` is defined: simply check the global object for corresponding property existence: `window.hasOwnProperty('myGlobalVar')`.  
 
-For example, here's how to check if the browser supports the `IntersectionObserver` API:
+For example, here's how to check if the browser defines an `IntersectionObserver` variable:
 
 ```javascript
 if (window.hasOwnProperty('IntersectionObserver')) {
@@ -186,10 +191,10 @@ if (window.hasOwnProperty('IntersectionObserver')) {
 }
 ```
 
-`var` variables and `function` declarations when used in the top-most scope do create properties on the global object:
+`var` variables and `function` declarations, when used in the [outermost scope](/javascript-scope/#6-global-scope) (aka global scope), do create properties on the global object:
 
 ```javascript
-// Top-most scope
+// Outermost scope
 var num = 19;
 function greet() {
   return 'Hello!';
@@ -202,14 +207,14 @@ window.hasOwnProperty('greet'); // => true
 However, be aware that `const` and `let` variables, as well as `class` declarations, do not create properties on the global object:
 
 ```javascript
-// Top-most scope
+// Outermost scope
 const pi = 3.14;
 let message = 'Hi!';
 class MyClass {}
 
-console.log(window.hasOwnProperty('pi'));      // => false
-console.log(window.hasOwnProperty('message')); // => false
-console.log(window.hasOwnProperty('MyClass')); // => false
+window.hasOwnProperty('pi');      // => false
+window.hasOwnProperty('message'); // => false
+window.hasOwnProperty('MyClass'); // => false
 ```
 
 ## 5. Summary
