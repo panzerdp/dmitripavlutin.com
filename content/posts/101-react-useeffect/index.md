@@ -37,7 +37,7 @@ function Greet({ name }) {
 }
 ```
 
- How to decoupling rendering from side-effect? Welcome `useEffect()` &mdash; the hook that runs side-effects independently of rendering.    
+ How to decouple rendering from side-effect? Welcome `useEffect()` &mdash; the hook that runs side-effects independently of rendering.    
 
 ```jsx{8}
 import React, { useEffect } from 'react';
