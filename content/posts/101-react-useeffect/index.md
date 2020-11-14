@@ -2,7 +2,7 @@
 title: "A Simple Explanation of React.useEffect()"
 description: "useEffect() hook executes side-effects in React components."
 published: "2020-10-13T08:50Z"
-modified: "2020-10-14T09:00Z"
+modified: "2020-11-14T12:00Z"
 thumbnail: "./images/effect-4.jpg"
 slug: react-useeffect-explanation
 tags: ['react', 'hook', 'useeffect']
@@ -22,7 +22,7 @@ A functional React component uses props and/or state to calculate the output. If
 
 Examples of side-effects are fetch requests, manipulating DOM directly, using timer functions like `setTimeout()`, and more.  
 
-Normally the component rendering and side-effect invocation logic is *independent*.  
+Normally the component rendering and side-effect invocation logic are *independent*.  
 
 It would be a mistake to perform side-effects directly in the body of the functional component. How often the component renders isn't something you can control &mdash; if React wants to render the component, you cannot stop it.  
 
@@ -73,7 +73,7 @@ In simple words, put the side-effects logic inside the `callback` argument, and 
 
 ## 2. Side-effect on component did mount
 
-There are side-effects that you'd like to invoke once after mounting of the component.  
+There are side-effects that you'd like to invoke once after the mounting of the component.  
 
 To do so, indicate an empty dependencies array `[]` to `useEffect(..., [])`: 
 
@@ -92,7 +92,7 @@ function Greet({ name }) {
 }
 ```
 
-`useEffect(..., [])` was supplied with an empty array as dependencies argument. When configured such way, the `useEffect()` is going to execute the callback *just once*, after initial mounting. 
+`useEffect(..., [])` was supplied with an empty array as dependencies argument. When configured in such a way, the `useEffect()` is going to execute the callback *just once*, after initial mounting. 
 
 Even if the component re-renders with different `name` property, the side-effect runs only once after the first render:
 
