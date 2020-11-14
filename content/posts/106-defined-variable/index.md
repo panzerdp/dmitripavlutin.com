@@ -208,10 +208,10 @@ console.log(window.hasOwnProperty('MyClass')); // => false
 
 In JavaScript, a variable can be defined or not defined, as well as initialized and uninitialized.  
 
-A good way to detect if a variable is defined is to use the `typeof` operator. `typeof myVar === 'undefined'` evaluates to `true` if `myVar` is not defined (but also defined and uninitialized).  
+`typeof myVar === 'undefined'` evaluates to `true` if `myVar` is not defined, but also defined and uninitialized.  
 
 To detect if a variable is exactly defined or not &mdash; wrap the variable in a `try { myVar }` block, then catch the possible reference error in a `catch(e) {  }` block.  
 
-Finally, if you'd like to check the existence of global variables, then you can use `window.hasOwnProperty('myVar')`. This approach is useful to check if the browser supports a Web API.  
+Finally, if you'd like to check the existence of global variables, then invoke `window.hasOwnProperty('myVar')`. This approach fits determining if the browser supports a Web API.  
 
 *What is your preferred way to check if a variable is defined?*
