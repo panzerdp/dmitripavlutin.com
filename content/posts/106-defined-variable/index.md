@@ -14,11 +14,11 @@ From time to time you have to check whether a variable is defined in JavaScript.
 
 Checking for variables existence is necessary to determine if an external script has been successfully loaded into the web page, or to determine if the browser supports a Web API (`IntersectionObserver`, `Intl`).  
 
-How to determine if a variable is defined in JavaScript? The answer is not straightforward as it seems, so let's find out!
+How to determine if a variable is defined in JavaScript? The answer is not straightforward, so let's find out!
 
 ## 1. The states of a variable
 
-Before jumping into specific techniques to determine the variable's existence, I'd like to have an agreement about the terms I'm going to use. 
+Before jumping into specific techniques to determine the variable's existence, I'd like to have an agreement on the related terms I'm going to use.  
 
 In the following 2 sections, I'll make clear what it means for a variable to be "defined"/"not defined" and "initialized"/"uninitialized".  
 
@@ -26,7 +26,7 @@ In the following 2 sections, I'll make clear what it means for a variable to be 
 
 A variable is *defined* when it has been declared in the current scope using a declaration statement.  
 
-The usual way to declarate variables is `const`, `let` and `var` statements, but you can also use `function` and `class` declaration statements.  
+The usual way to declarate variables is `const`, `let` and `var` statements, plus the `function` and `class` declaration statements.  
 
 Examples of *defined variables*:
 
@@ -44,17 +44,22 @@ Examples of *non defined variables*:
 
 ```javascript
 pi;     // pi is not defined, throws ReferenceError
+result; // result is not defined, throws ReferenceError
 
 if (true) {
-  // result is defined, but within this block scope only
+  // result is defined, but in this block scope
   let result;
 }
-result; // result is not defined, throws ReferenceError
 ```
 
-The space where the variable is defined is determined by the [scope](/javascript-scope/). A scope in JavaScript is defined by a block of code (for `const` and `let` variables) and by a function (for `const`, `let`, `var`).  
+The limits where the variable is defined and accessible is determined by the [scope](/javascript-scope/). A scope in JavaScript is defined by a block of code (for `const` and `let` variables) and by a function body (for `const`, `let`, `var`).  
 
-Accessing a variable that's not defined in JavaScript throws a `ReferenceError`.  
+Accessing a variable that's not defined throws a `ReferenceError`:
+
+```javascript
+// pi is not defined
+pi; // throws ReferenceError
+```
 
 ### 1.2 Initialized / uninitialized variable
 
@@ -88,11 +93,11 @@ result; // => undefined
 
 ## 2. Using *typeof*
 
-Having the possible states of variables defined, let's consider a few techniques that tell whether a variable is defined.  
+Having the possible states of variables defined, let's consider the techniques that find whether a variable is defined.  
 
 The `typeof` operator determines the variable's type. `typeof myVar` can evaluate to one of the values: `'boolean'`, `'number'`, `'string'`, `'object'`, `'symbol'`, and `'undefined'`.
 
-The expression `typeof missingVar` doesn't throw a `ReferenceError` if the `missingVar` is not defined, compared to solely access of the not defined variable:
+The expression `typeof missingVar` doesn't throw a `ReferenceError` if the `missingVar` is not defined, contrary to simple access of the not defined variable:
 
 ```javascript
 // missingVar is not defined
@@ -135,14 +140,14 @@ typeof myVar === 'undefined'; // => false
 
 ## 3. Using *try/catch*
 
-When accessing the value of a non defined variable, JavaScript throws a reference error:
+When accessing a non defined variable, JavaScript throws a reference error:
 
 ```javascript
 // missingVar is not defined
 missingVar; // throws "ReferenceError: missingVar is not defined"
 ```
 
-So... what about wrapping the checked variable in a `try` block, and try to catch the reference error?  
+So... what about wrapping the checked variable in a `try` block, and try to catch the reference error? If the error is caught, that would mean that the variable is not defined:  
 
 ```javascript
 // missingVar is not defined
@@ -156,7 +161,7 @@ try {
 // logs 'missingVar is not defined'
 ```
 
-`missingVar` in the above example is not defined. When trying to access the variable in a `try` block, a `ReferenceError` error is thrown. Then `catch` block catches the reference error. That's another way to check the variable's existence.  
+`missingVar` in the above example is not defined. When trying to access the variable in a `try` block, a `ReferenceError` error is thrown and `catch` block catches this reference error. That's another way to check the variable's existence.  
 
 Of course, if the variable is defined, no reference error is thrown:
 
@@ -219,12 +224,12 @@ window.hasOwnProperty('MyClass'); // => false
 
 ## 5. Summary
 
-In JavaScript, a variable can be defined or not defined, as well as initialized and uninitialized.  
+In JavaScript, a variable can be either defined or not defined, as well as initialized or uninitialized.  
 
-`typeof myVar === 'undefined'` evaluates to `true` if `myVar` is not defined, but also defined and uninitialized.  
+`typeof myVar === 'undefined'` evaluates to `true` if `myVar` is not defined, but also defined and uninitialized. That's a quick way to determine if a variable is defined.   
 
-To detect if a variable is exactly defined or not &mdash; wrap the variable in a `try { myVar }` block, then catch the possible reference error in a `catch(e) {  }` block.  
+Another approach is to wrap the variable in a `try { myVar }` block, then catch the possible reference error in a `catch(e) {  }` block. If you've caught a `ReferenceError`, then the variable is not defined.  
 
-Finally, if you'd like to check the existence of global variables, then invoke `window.hasOwnProperty('myVar')`. This approach fits determining if the browser supports a Web API.  
+Finally, to check the existence of a global variable `myGlobalVar` invoke `window.hasOwnProperty('myGlobalVar')`. This approach is useful to check if the browser supports a Web API.  
 
 *What is your preferred way to check if a variable is defined?*
