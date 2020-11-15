@@ -63,7 +63,7 @@ pi; // throws ReferenceError
 
 ### 1.2 Initialized / uninitialized variable
 
-A variable is *initialized* when the declarated variable has been assigned with an initial value.  
+A variable is *initialized* when the declared variable has been assigned with an initial value.  
 
 Examples of *initialized variables*:
 
@@ -74,7 +74,7 @@ let result;
 result = 'Value'; // result is initialized
 ```
 
-On the other side, a variable is *uninitialized* when the declarated variable has not been assigned with an initial value.  
+On the other side, a variable is *uninitialized* when the declared variable has not been assigned with an initial value.  
 
 Examples of *uninitialized variables*:
 
