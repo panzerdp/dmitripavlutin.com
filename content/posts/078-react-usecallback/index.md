@@ -144,7 +144,7 @@ export default function MyParent({ term }) {
 
 `onItemClick` callback is memoized by `useCallback()`. As long as `term` is the same, `useCallback()` returns the same function object.  
 
-Even if for some reason `MyParent` component re-renders, `onItemClick` function object is the same and doesn't break the memoization of `MyBigList`.  
+When `MyParent` component re-renders, `onItemClick` function object remains the same and doesn't break the memoization of `MyBigList`.  
 
 That was a good use case of `useCallback()`.  
 
