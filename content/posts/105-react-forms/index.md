@@ -1,5 +1,5 @@
 ---
-title: "React Forms Tutorial: Access Input Values, Validate, and Submit Forms"
+title: "React Forms Tutorial: Access Input Values, Validate, Submit Forms"
 description: "A step by step tutorial on how to access input values, validate, and submit forms in React."
 published: "2020-11-10T10:00Z"
 modified: "2020-11-10T10:00Z"
