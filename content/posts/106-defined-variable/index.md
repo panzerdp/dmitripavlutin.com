@@ -1,9 +1,9 @@
 ---
-title: "Checking if a Variable is Defined in JavaScript"
-description: "How to check correctly if a variable is defined in JavaScript using typeof operator, try/catch blocks, or window.hasOwnProperty()."
+title: "3 Ways to Check if a Variable is Defined in JavaScript"
+description: "How to check if a variable is defined in JavaScript using typeof operator, try/catch blocks, or window.hasOwnProperty()."
 published: "2020-11-17T12:00Z"
 modified: "2020-11-17T12:00Z"
-thumbnail: "./images/cover-9.png"
+thumbnail: "./images/cover-10.png"
 slug: javascript-defined-variable-checking
 tags: ['javascript', 'variable', 'undefined']
 recommended: ['javascript-hoisting-in-details', 'javascript-variables-and-temporal-dead-zone']
@@ -14,7 +14,7 @@ From time to time you have to check whether a variable is defined in JavaScript.
 
 Checking for variables existence is necessary to determine if an external script has been successfully loaded into the web page, or to determine if the browser supports a Web API (`IntersectionObserver`, `Intl`).  
 
-How to determine if a variable is defined in JavaScript? The answer is not straightforward, so let's find out!
+How to check if a variable is defined in JavaScript? The answer is not straightforward, so let's find out!
 
 ## 1. The states of a variable
 
@@ -40,7 +40,7 @@ message;         // message is defined
 
 Contrary, a variable is *not defined* when it hasn't been declared in the current scope using a declaration statement. 
 
-Examples of *non defined variables*:
+Examples of *not defined variables*:
 
 ```javascript
 pi;     // pi is not defined, throws ReferenceError
@@ -140,7 +140,7 @@ typeof myVar === 'undefined'; // => false
 
 ## 3. Using *try/catch*
 
-When accessing a non defined variable, JavaScript throws a reference error:
+When accessing a not defined variable, JavaScript throws a reference error:
 
 ```javascript
 // missingVar is not defined
