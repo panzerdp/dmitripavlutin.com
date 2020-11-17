@@ -99,7 +99,7 @@ What's important the `query` state variable is the source of truth for the value
 
 In the previous implementation, as soon as you type a character into the input field, the list gets filtered instantly. That's not always convenient because it distracts the user when typing the query. 
 
-Let's improve the user experience with debouncing: let's filter the list only after passing 400ms after the last change of the input field.  
+Let's improve the user experience with debouncing: filter the list with a delay of 400 ms after the last input change.  
 
 Let's see a possible implementation of a debounced controlled input:
 
