@@ -2,27 +2,66 @@
 title: "React Controlled Components — the Hooks Way"
 description: "The step by step guide on how to implement controlled components in React using hooks."
 published: "2020-09-29T07:20Z"
-modified: "2020-11-16T10:30Z"
-thumbnail: "./images/cover-3.png"
+modified: "2020-11-17T08:20Z"
+thumbnail: "./images/cover-4.png"
 slug: controlled-inputs-using-react-hooks
 tags: ['react', 'component', 'input', 'form', 'hook']
 recommended: ['use-react-memo-wisely', 'react-state-management']
 type: post
 ---
 
-There are 2 approaches to access the value of an input element in React.  
-
-In the first approach, named *uncontrolled component*, you access the value from a reference to the input element. The second approach, which I like because it doesn't use references, is using a *controlled component*. 
+React offers 2 approaches to access the value of an input field: using a controlled or uncontrolled component techniques. I prefer controlled components because you read and set the input value through the component's state.  
 
 In this post, you'll read how to implement controlled components using React hooks.  
 
 ## 1. The controlled component
 
-The input field is *controlled* because React sets its value from the state. When the user types into the input field, the `onChange` handler updates the state with the input's value, which's accessed from the event object: `event.target.value`.  
+Let's say you have a simple text input field, and you'd like to access its value:
 
-A good way to understand how controlled components work is by studying an example.  
+```jsx
+import { useState } from 'react';
 
-A web page consists of a list of employees' names. You need to add an input field, and when the user types into this field, the employees' list is filtered by name.  
+function MyControlledInput({ }) {
+  const [value, setValue] = useState('');
+
+  const onChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  return (
+    <>
+      <div>Input value: {value}</div>
+      <input value={value} onChange={onChange} />
+    </>
+  );
+}
+```
+
+Open the [demo](https://codesandbox.io/s/controlled-component-uwf8n) and type into the input field. You can see that `value` state variable contains the value entered into the input field, and it also updates each time you enter a new value.  
+
+The input field is *controlled* because React sets its value from the state `<input value={value} ... />`. When the user types into the input field, the `onChange` handler updates the state with the input’s value accessed from the event object: `event.target.value`.  
+
+`value` state variable is the source of truth. Each time you need to access the value enter by the user into the input field &mdash; just read `value` state variable.  
+
+The controlled components approach can help you access the value of any input type: being regular textual inputs, textareas, select fields.  
+
+## 2. The controlled component in 3 steps
+
+Setting up the controlled component requires 3 steps:
+
+1) Define the state that's going to hold the input value: `const [value, setValue] = useState('')`.  
+
+2) Then define an event handler that updates the state when the input value changes:
+
+```javascript
+const onChange = event => setValue(event.target.value);
+```
+
+3) Assign the input field with the state value and attach the event handler: `<input type="text" value={value} onChange={onChange} />`. 
+
+## 3. The state as the source of truth
+
+Let's see a more complex example. A web page consists of a list of employees' names. You need to add an input field, and when the user types into this field, the employees' list is filtered by name.  
 
 That's a good scenario to use a controlled input. Here's a possible implementation:
 
@@ -54,23 +93,7 @@ function FilteredEmployeesList({ employees }) {
 
 Open the [demo](https://codesandbox.io/s/gracious-dawn-29qi6?file=/src/App.js) and enter a query in the input field. You'll see how the list of employees is filtered.  
 
-Setting up the controlled input requires 3 steps.
-
-### Step 1. Define the state that holds the input value
-
-Define the state that's going to hold the input value: `const [query, setQuery] = useState('')`.  
-
-### Step 2. Define on change event handler
-
-Then define an event handler that updates the state when the input value changes:
-
-```javascript
-const onChange = event => setQuery(event.target.value);
-```
-
-### Step 3. Assign the event handler and value to the input field
-
-Finally, set on the input field the value attribute as the state value, as well attach the event handler: `<input type="text" value={query} onChange={onChange} />`. 
+What's important the `query` state variable is the source of truth for the value entered in the input field. You use it inside `employees.filter()` to filter the list of employees: `name.toLowerCase().includes(query)`.  
 
 ## 2. Debouncing the controlled input
 
