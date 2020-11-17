@@ -41,7 +41,7 @@ Open the [demo](https://codesandbox.io/s/controlled-component-uwf8n) and type in
 
 The input field is *controlled* because React sets its value from the state `<input value={value} ... />`. When the user types into the input field, the `onChange` handler updates the state with the input’s value accessed from the event object: `event.target.value`.  
 
-`value` state variable is the source of truth. Each time you need to access the value enter by the user into the input field &mdash; just read `value` state variable.  
+`value` state variable is the source of truth. Each time you need to access the value entered by the user into the input field &mdash; just read `value` state variable.  
 
 The controlled components approach can help you access the value of any input type: being regular textual inputs, textareas, select fields.  
 
@@ -51,7 +51,7 @@ Setting up the controlled component requires 3 steps:
 
 1) Define the state that's going to hold the input value: `const [value, setValue] = useState('')`.  
 
-2) Then define an event handler that updates the state when the input value changes:
+2) Create the event handler that updates the state when the input value changes:
 
 ```javascript
 const onChange = event => setValue(event.target.value);
@@ -95,7 +95,7 @@ Open the [demo](https://codesandbox.io/s/gracious-dawn-29qi6?file=/src/App.js) a
 
 What's important the `query` state variable is the source of truth for the value entered in the input field. You use it inside `employees.filter()` to filter the list of employees: `name.toLowerCase().includes(query)`.  
 
-## 2. Debouncing the controlled input
+## 4. Debouncing the controlled input
 
 In the previous implementation, as soon as you type a character into the input field, the list gets filtered instantly. That's not always convenient because it distracts the user when typing the query. 
 
@@ -157,7 +157,7 @@ First, the `useDebouncedValue()` hook creates a new state derived from the main 
 
 Then, `useEffect()` updates after `wait` delay the `debouncedValue` state when the main `value` state changes.  
 
-## 3. Summary
+## 5. Summary
 
 The controlled component is a convenient technique to access the value of input fields in React. It doesn't use references and serves as a single source of truth to access the input value.  
 
