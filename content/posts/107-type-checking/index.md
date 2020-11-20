@@ -199,9 +199,16 @@ But at the same time, `myCat` is also an instance of the base class `Pet`:
 myCat instanceof Pet; // => true
 ```
 
-In simple words, `object instanceof Constructor` evaluates to `true` if `object` is an instance of `Constructor`. But also if `Constructor` is the parent class of the class that has created the instance.  
+In simple words, `object instanceof Constructor` evaluates to `true` if `object` is an instance of `Constructor`, but also if `Constructor` is the parent class of instance's class.  
 
 ## 3. Summary
 
 JavaScript is loosely-typed language, meaning that there are no restriction on what type a variable can have.  
 
+Thus, sometimes, you have to check what type the variable is.  
+
+`typeof myVariable` is the operator that let's you determine the type of `myVariable`. It can evaluate to one of the values: `'string'`, `'number'`, `'boolean'`, `'symbol'`, `'undefined'`, `'object'`.  
+
+Note that `typeof null` evaluates to `'object'`, which might be a bit confgusing.  
+
+`instanceof` operator let's identify the class that created an instance. `object instanceof Constructor` evaluates to `true` if `object` is an instance of `Constructor`.  
