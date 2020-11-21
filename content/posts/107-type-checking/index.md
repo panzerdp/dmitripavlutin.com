@@ -1,8 +1,8 @@
 ---
 title: "Type checking in JavaScript: typeof and instanceof operators"
 description: "How to perform type checking in JavaScript using typeof and instance of operators."
-published: "2020-11-17T09:00Z"
-modified: "2020-11-17T09:00Z"
+published: "2020-11-24T12:00Z"
+modified: "2020-11-24T12:00Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-typeof-instanceof
 tags: ['javascript', 'typeof', 'instanceof']
@@ -97,7 +97,7 @@ typeof regExp; // => 'object'
 
 What about the type of `null`? Uh, oh, that's a nasty one.
 
-### 1.1 *typeof null* exception
+### 1.1 *typeof null*
 
 As mentioned in the previous section, `typeof` an object is `'object'`. 
 
@@ -172,7 +172,7 @@ However, a plain object isn't an instance of `Pet`:
 { name: 'Zoe' } instanceof Pet; // => false
 ```
 
-### 2.1 *instanceof* an parent classes
+### 2.1 *instanceof* parent class
 
 Now let's say that you've extended the class `Pet`:
 
