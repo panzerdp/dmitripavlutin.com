@@ -93,7 +93,7 @@ result; // => undefined
 
 Knowing the possible states of variables, let's consider the techniques to find whether a variable is defined or not.  
 
-The `typeof` operator determines the variable's type. `typeof myVar` can evaluate to one of the values: `'boolean'`, `'number'`, `'string'`, `'object'`, `'symbol'`, and `'undefined'`.
+The `typeof` operator determines the variable's type. `typeof myVar` can evaluate to one of the values: `'boolean'`, `'number'`, `'string'`, `'symbol'`, `'object'`, `'function'` and `'undefined'`.  
 
 The expression `typeof missingVar` doesn't throw a `ReferenceError` if the `missingVar` is not defined, contrary to simple access of the not defined variable:
 
