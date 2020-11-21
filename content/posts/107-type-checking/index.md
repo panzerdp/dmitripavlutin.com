@@ -22,7 +22,7 @@ message = 14; // assign a number
 
 Such dynamism gives you flexibility and simplifies variables declaration.  
 
-On the other side, you can never be sure that a variable contatins a value of a certain type. For example, the following function `greet(who)` expects a string argument, however you can invoke the function with any type of argument:
+On the other side, you can never be sure that a variable contains a value of a certain type. For example, the following function `greet(who)` expects a string argument, however, you can invoke the function with any type of argument:
 
 ```javascript
 function geet(who) {
@@ -111,14 +111,14 @@ What about the type of `null`? Uh, that's a nasty one!
 
 As mentioned in the previous section, `typeof` an object is `'object'`. 
 
-However, `typof null` resolves to `'object'` as well!
+However, `typeof null` resolves to `'object'` as well!
 
 ```javascript
 const missingObject = null;
 typeof missingObject; // => 'object'
 ```
 
-That's a bit confuging, and as the rumors [say](https://twitter.com/BrendanEich/status/1140637621183377408), `typeof null` being `'object'` was a bug in the initial implementation of JavaScript.  
+That's a bit confusing, and as the rumors [say](https://twitter.com/BrendanEich/status/1140637621183377408), `typeof null` being `'object'` was a bug in the initial implementation of JavaScript.  
 
 When using `typeof` to detect a real object be sure to check againts `null` additionally:
 
@@ -158,7 +158,7 @@ Follow the post [3 Ways to Check if a Variable is Defined in JavaScript](/javasc
 
 ## 2. *instanceof* operator
 
-Ok, `typeof` let's you detect the primitive type of the variable. But what about more complex object-oritented type checking?  
+Ok, `typeof` lets you detect the primitive type of the variable. But what about more complex object-oriented type checking?  
 
 For example, you've defined a class `Pet`, and then created an instance of that class `myPet`:
 
@@ -220,11 +220,11 @@ In simple words, `object instanceof Constructor` evaluates to `true` if `object`
 
 ## 3. Summary
 
-JavaScript is loosely-typed language, meaning that there are no restriction on what type a variable can have.  
+JavaScript is a loosely-typed language, meaning that there is no restriction on what type a variable can have.  
 
 Thus, sometimes, you have to check what type the variable is.  
 
-`typeof myVariable` is the operator that let's you determine the type of `myVariable`. It can evaluate to one of the values: `'string'`, `'number'`, `'boolean'`, `'symbol'`, `'undefined'`, `'object'`, `'function'`.  
+`typeof myVariable` is the operator that lets you determine the type of `myVariable`. It can evaluate to one of the values: `'string'`, `'number'`, `'boolean'`, `'symbol'`, `'undefined'`, `'object'`, `'function'`.  
 
 Note that `typeof null` evaluates to `'object'`.  
 
