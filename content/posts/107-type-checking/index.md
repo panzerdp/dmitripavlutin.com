@@ -1,6 +1,6 @@
 ---
 title: "Type checking in JavaScript: typeof and instanceof operators"
-description: "How to perform type checking in JavaScript using typeof and instance of operators."
+description: "How to perform type checking in JavaScript using typeof and instanceof operators."
 published: "2020-11-24T12:00Z"
 modified: "2020-11-24T12:00Z"
 thumbnail: "./images/cover-2.png"
@@ -41,11 +41,19 @@ Let's see in more detail how to use `typeof` and `instanceof` operators in JavaS
 
 ## 1. *typeof* operator
 
-JavaScript provides the following primitive types: strings, numbers, booleans, symbols. Plus functions, object types, and the special `undefined`.
+In JavaScript you can find primitive types like strings, numbers, booleans, symbols. Additionally there functions, objects, and the special values `undefined` and `null`.  
 
-To determine the type of the variable, simply invoke the expression `typeof myVariable`, and it will evaluate to one of the values: `'string'`, `'number'`, `'boolean'`, `'symbol'`, `'undefined'`, `'object'`, `'function'`.  
+`typeof` is an operator that let's you determine the type of the `expression`:
 
-`typeof` operator lets you distinguish these types.
+```javascript
+const typeAsString = typeof expression;
+```
+
+where `expression` is an expression that evaluates to a value: a variable `myVariable`, property accessor `myObject.myProp`, function invocation `myFunction()`, or even a raw literal `14`.  
+
+`typeof expression`, dependening on the value of `expression`, will evaluate to one of the strings: `'string'`, `'number'`, `'boolean'`, `'symbol'`, `'undefined'`, `'object'`, `'function'`.  
+
+Let's see how `typeof` operator works in a few examples.  
 
 Strings:
 
@@ -109,9 +117,9 @@ What about the type of `null`? Uh, that's a nasty one!
 
 ### 1.1 *typeof null*
 
-As mentioned in the previous section, `typeof` an object is `'object'`. 
+As mentioned in the previous section, `typeof myObject` an object evaluates to `'object'` string. That's reasonable.  
 
-However, `typeof null` resolves to `'object'` as well!
+However, `typeof null` evaluates to `'object'` string as well!
 
 ```javascript
 const missingObject = null;
@@ -120,7 +128,7 @@ typeof missingObject; // => 'object'
 
 That's a bit confusing, and as the rumors [say](https://twitter.com/BrendanEich/status/1140637621183377408), `typeof null` being `'object'` was a bug in the initial implementation of JavaScript.  
 
-When using `typeof` to detect a real object be sure to check againts `null` additionally:
+That's why, when using `typeof` to detect a real object, be sure to check againts `null` additionally:
 
 ```javascript
 function isRealObject(object) {
@@ -136,6 +144,8 @@ Follow my post [Everything about null in JavaScript](/javascript-null/) to read 
 
 ### 1.2. *typeof* and not defined variables
 
+While `typeof`'s direct scope is to determine the type of the value, it has an interesting property that you can use to determine if a variable is defined on not.  
+
 JavaScript throws a reference error if you access a variable that is not defined:
 
 ```javascript
@@ -143,14 +153,14 @@ JavaScript throws a reference error if you access a variable that is not defined
 missingVar; // throws ReferenceError
 ```
 
-But `typeof` has a nice property &mdash; a reference error is not thrown when `typeof` evaluates the type of a not defined variable:
+But `typeof` has a nice property &mdash; a reference error is *not thrown* when `typeof` evaluates the type of a not defined variable:
 
 ```javascript
-// missingVar is not defined
-typeof missingVar; // => 'undefined'
+// notDefinedVar is not defined
+typeof notDefinedVar; // => 'undefined'
 ```
 
-In simple words, if `missingVar` is not defined, `typeof missingVar` evaluates to `'undefined'`.  
+The variable `notDefinedVar` is not defined in the current scope. However, executing the expression `typeof notDefinedVar` doesn't throw a reference error, and evaluates to `'undefined'` string.  
 
 This way, you can use `typeof` to detect if a variable is not defined: `typeof missingVar === 'undefined'` evaluates to `true` if `missingVar` is not defined.
 
@@ -158,9 +168,9 @@ Follow the post [3 Ways to Check if a Variable is Defined in JavaScript](/javasc
 
 ## 2. *instanceof* operator
 
-Ok, `typeof` lets you detect the primitive type of the variable. But what about more complex object-oriented type checking?  
+Ok, `typeof` lets you detect the primitive type. But what about more complex object-oriented type checking?  
 
-For example, you've defined a class `Pet`, and then created an instance of that class `myPet`:
+For example, you've defined a class `Pet`, and then created an instance of it `myPet`:
 
 ```javascript
 class Pet {
@@ -174,7 +184,13 @@ const myPet = new Pet('Lily');
 
 How can you check that `myPet` is an instance of `Pet` class? 
 
-Welcome `object instanceof Constructor` operator: it checks whether the `object` was instantiated by `Constructor`.  
+Welcome `instanceof` operator:
+
+```javascript
+const bool = object instanceof Constructor;
+```
+
+`object instanceof Constructor` checks whether the `object` was instantiated by `Constructor`.    
 
 Since `myPet` was created using `Pet` class, `myPet instanceof Pet` evaluates to `true`:  
 
@@ -189,9 +205,25 @@ const plainPet = { name: 'Zoe' };
 plainPet instanceof Pet; // => false
 ```
 
+As of more practical examples, you may find `instanceof` useful to determine the built-in special objects in JavaScript like regular expressions, arrays:
+
+```javascript
+function isRegExp(value) {
+  return value instanceof RegExp;
+}
+isRegExp(/Hello/); // => true
+isRegExp('Hello'); // => false
+
+function isArray(value) {
+  return value instanceof Array;
+}
+isArray([1, 2, 3]); // => true
+isArray({ prop: 'Val' }); // => false
+```
+
 ### 2.1 *instanceof* and the parent class
 
-Now let's extended the class `Pet`:
+Now the class `Cat` extends the parent class `Pet`:
 
 ```javascript
 class Cat extends Pet {
