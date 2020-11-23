@@ -25,7 +25,7 @@ Such dynamism gives you flexibility and simplifies variables declaration.
 On the other side, you can never be sure that a variable contains a value of a certain type. For example, the following function `greet(who)` expects a string argument, however, you can invoke the function with any type of argument:
 
 ```javascript
-function geet(who) {
+function greet(who) {
   return `Hello, ${who}!`
 }
 
@@ -149,8 +149,8 @@ While `typeof`'s direct scope is to determine the type of the value, it has an i
 JavaScript throws a reference error if you access a variable that is not defined:
 
 ```javascript
-// missingVar is not defined
-missingVar; // throws ReferenceError
+// notDefinedVar is not defined
+notDefinedVar; // throws ReferenceError
 ```
 
 But `typeof` has a nice property &mdash; a reference error is *not thrown* when `typeof` evaluates the type of a not defined variable:
@@ -162,7 +162,7 @@ typeof notDefinedVar; // => 'undefined'
 
 The variable `notDefinedVar` is not defined in the current scope. However, executing the expression `typeof notDefinedVar` doesn't throw a reference error, and evaluates to `'undefined'` string.  
 
-This way, you can use `typeof` to detect if a variable is not defined: `typeof missingVar === 'undefined'` evaluates to `true` if `missingVar` is not defined.
+This way, you can use `typeof` to detect if a variable is not defined: `typeof notDefinedVar === 'undefined'` evaluates to `true` if `notDefinedVar` is not defined.
 
 Follow the post [3 Ways to Check if a Variable is Defined in JavaScript](/javascript-defined-variable-checking/) to read more about not defined variables.  
 
@@ -262,4 +262,4 @@ Note that `typeof null` evaluates to `'object'`.
 
 `instanceof` operator let's identify the instance's constructor. `object instanceof Constructor` evaluates to `true` if `object` is an instance of `Constructor`.  
 
-*Quiz: What is the built-in constructor in JavaScript for which `instanceof` for any object returns `true`?*
+*Quiz: What is the built-in constructor for which `instanceof` for any object returns `true`?*
