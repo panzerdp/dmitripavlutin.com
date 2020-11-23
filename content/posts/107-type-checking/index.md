@@ -35,13 +35,13 @@ greet(true);    // => 'Hello, true!'
 greet([1]);     // => 'Hello, 1!'
 ```
 
-That's why, sometimes, you need to check the variable's type in JavaScript &mdash; using `typeof` operator, as well as `instanceof` to check instances types.  
+That's why, sometimes, you need to check the variable's type in JavaScript &mdash; using `typeof` operator, as well as `instanceof` to check instance types.  
 
 Let's see in more detail how to use `typeof` and `instanceof` operators in JavaScript.  
 
 ## 1. *typeof* operator
 
-In JavaScript you can find primitive types like strings, numbers, booleans, symbols. Additionally there functions, objects, and the special values `undefined` and `null`.  
+In JavaScript, you can find primitive types like strings, numbers, booleans, symbols. Additionally, there are functions, objects, and the special values `undefined` and `null`.  
 
 `typeof` is an operator that let's you determine the type of the `expression`:
 
@@ -51,7 +51,7 @@ const typeAsString = typeof expression;
 
 where `expression` is an expression that evaluates to a value: a variable `myVariable`, property accessor `myObject.myProp`, function invocation `myFunction()`, or even a raw literal `14`.  
 
-`typeof expression`, dependening on the value of `expression`, will evaluate to one of the strings: `'string'`, `'number'`, `'boolean'`, `'symbol'`, `'undefined'`, `'object'`, `'function'`.  
+`typeof expression`, depending on the value of `expression`, will evaluate to one of the strings: `'string'`, `'number'`, `'boolean'`, `'symbol'`, `'undefined'`, `'object'`, `'function'`.  
 
 Let's see how `typeof` operator works in a few examples.  
 
@@ -205,7 +205,7 @@ const plainPet = { name: 'Zoe' };
 plainPet instanceof Pet; // => false
 ```
 
-As of more practical examples, you may find `instanceof` useful to determine the built-in special objects in JavaScript like regular expressions, arrays:
+As for more practical examples, you may find `instanceof` useful to determine the built-in special objects in JavaScript like regular expressions, arrays:
 
 ```javascript
 function isRegExp(value) {
