@@ -1,8 +1,8 @@
 ---
 title: "Type checking in JavaScript: typeof and instanceof operators"
 description: "How to perform type checking in JavaScript using typeof and instanceof operators."
-published: "2020-11-24T12:00Z"
-modified: "2020-11-24T12:00Z"
+published: "2020-11-24T08:30Z"
+modified: "2020-11-24T08:30Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-typeof-instanceof
 tags: ['javascript', 'typeof', 'instanceof']
@@ -119,7 +119,7 @@ What about the type of `null`? Uh, that's a nasty one!
 
 ### 1.1 *typeof null*
 
-As mentioned in the previous section, `typeof` of an object evaluates to `'object'` . That's expected.  
+As mentioned in the previous section, `typeof` of an object evaluates to `'object'`. That's expected.  
 
 However, `typeof null` evaluates to `'object'` as well!
 
@@ -170,9 +170,42 @@ Follow the post [3 Ways to Check if a Variable is Defined in JavaScript](/javasc
 
 ## 2. *instanceof* operator
 
-Ok, `typeof` lets you detect the primitive type. But what about more complex object-oriented type checking?  
+The usual way to use a JavaScript function is to invoke it by adding a pair of parentheses after its name:
 
-For example, you've defined a class `Pet`, and then created an instance of it `myPet`:
+```javascript
+function greet(who) {
+  return `Hello, ${who}!`;
+}
+
+greet('World'); // => 'Hello, World!'
+```
+
+`greet('World')` is a regular function invocation.  
+
+But JavaScript functions can do more: they can even construct objects! To make a function construct objects, just use `new` keyword before the regular function invocation:
+
+```javascript
+function Greeter(who) {
+  this.message = `Hello, ${who}!`;
+}
+
+const worldGreeter = new Greeter('World');
+worldGreeter.message; // => 'Hello, World!'
+```
+
+`new Greeter('World')` is a constructor invocation that creates the instance `worldGreeter`.  
+
+How can you check in JavaScript that a certain instance was created with a certain constructor? Welcome `instanceof` operator:
+
+```javascript
+const bool = object instanceof Constructor;
+```
+
+where `object` is an expression that evaluates to an object, `Contructor` is a class or function that [constructs](/gentle-explanation-of-this-in-javascript/#4-constructor-invocation) objects. `instanceof` evaluates to a boolean.  
+
+`worldGreeter` instance was created using `Greeter` constructor, so `worldGreeter instanceof Greeter` evaluates to `true`.  
+
+Starting ES2015, a better way to construct objects is by using the `class` syntax. For example, let's define a class `Pet` and then created an instance of it `myPet`:
 
 ```javascript
 class Pet {
@@ -184,17 +217,9 @@ class Pet {
 const myPet = new Pet('Lily');
 ```
 
-How can you check that `myPet` is an instance of `Pet` class? 
+`new Pet('Lily')` is a construction invocation that creates an instance `myPet`.
 
-Welcome `instanceof` operator:
-
-```javascript
-const bool = object instanceof Constructor;
-```
-
-where `object` is an expression that evaluates to an object, `Contructor` is a class or function that [constructs](/gentle-explanation-of-this-in-javascript/#4-constructor-invocation) objects. `instanceof` evaluates to a boolean.  
-
-Since `myPet` was constructed using `Pet` class &mdash; `const myPet = new Pet('Lily')` &mdash; `myPet instanceof Pet` evaluates to `true`:  
+Since `myPet` was constructed using `Pet` class &mdash; `const myPet = new Pet('Lily')` &mdash; `myPet instanceof Pet` also evaluates to `true`:  
 
 ```javascript
 myPet instanceof Pet; // => true
