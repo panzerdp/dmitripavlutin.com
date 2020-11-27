@@ -12,9 +12,9 @@ type: post
 
 I am impressed by the expressiveness of React hooks. You can do so much by writing so little.   
 
-But the brevity of hooks has a price &mdash; they're relatively difficult to get started. This is true for `useEffect()` &mdash; the hook that manages side-effects in functional React components.  
+But the brevity of hooks has a price &mdash; they're relatively difficult to get started. Especially `useEffect()` &mdash; the hook that manages side-effects in functional React components.  
 
-In this post, you'll find everything to understand and start using `useEffect()` hook.  
+In this post, you'll learn how and when to use `useEffect()` hook.  
 
 ## 1. *useEffect()* is for side-effects
 
