@@ -5,8 +5,8 @@ published: '2020-01-29T11:30Z'
 modified: '2020-02-11T15:00Z'
 thumbnail: './images/quality-2.png'
 slug: javascript-arrow-functions-best-practices
-tags: ['javascript', 'arrow function', 'es2015', 'clean code']
-recommended: ['when-not-to-use-arrow-functions-in-javascript', '6-ways-to-declare-javascript-functions']
+tags: ['javascript', 'arrow function', 'clean code']
+recommended: ['javascript-modules-best-practices', 'javascript-variables-best-practices']
 type: post
 ---
 
