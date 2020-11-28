@@ -8,6 +8,7 @@
   h3 {
     margin: 0;
     padding: 1.5rem;
+    padding-bottom: 1rem;
   }
 
   .tabs {
@@ -15,7 +16,6 @@
       display: flex;
       justify-content: space-between;
       border-bottom: 1px solid $border-color;
-      border-top: 1px solid $border-color;
       padding: 0 1.5rem;
       // background-color: rgba($border-color, 0.4);
     
