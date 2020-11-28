@@ -18,6 +18,9 @@ So, if you'd like to improve the way you work with variables in JavaScript, and 
 
 In this post, you'll read about 5 best practices of how to declare and use JavaScript variables.
 
+```toc
+```
+
 ## 1. Prefer *const*, othewise use *let*
 
 Usually I declare my JavaScript variables using `const` or `let`.  
@@ -108,10 +111,10 @@ function binarySearch(array, search) {
   while(left <= right) {
     const middle = Math.floor((left + right) / 2);
     const middleItem = array[middle];
-    if (middleItem === search) { 
+    if (middleItem === search) {
       return true; 
     }
-    if (middleItem < search) { 
+    if (middleItem < search) {
       left = middle + 1; 
     } else {
       right = middle - 1; 
@@ -123,17 +126,15 @@ function binarySearch(array, search) {
 
 Now `middle` and `middleItem` variables exists solely in the scope that uses the variables. They have a minimal lifetime and lifespace, and it is easier to reason about them.  
 
-## 3. As close as possible to usage
+## 3. Close to usage
 
 Sometimes, especially if your code block or function body has a lot of statements, you might want to declare all the variables at the top of the scope. 
 
 However, I find the opposite practice more useful: try to declare the variable as close as possible to the usage statement. This way, you won't have to guess: *Hey, I see the variable declared here, but... where is it used?*
 
-
-
 ## 4. Good naming means easy reading
 
-I know you've probably read already a lot about good naming of variables, so I'll keep it short and to the point.  
+You've probably read already a lot about good naming of variables, so I'll keep it short and to the point.  
 
 From the multitude of rules that you can apply to have a good variable name, I distinguish 2 the most important ones.  
 
@@ -168,17 +169,34 @@ Same with `isLoading` &mdash; a boolean indicating a whether a loading is in pro
 
 `count` variable, without doubt, indicates a number type variable that holds some counting result.  
 
-What about some bad examples of variables naming?
+Let me show you an example, so you could spot the difference. Imagine you're exploring the code of an application, and you see a function like this:
 
 ```javascript
-let ldng;
+function salary(ws, r) {
+  let t = 0;
+  for (w of ws) {
+    t += w * r;
+  }
+  return t;
+}
 ```
 
-If you look at `ldng` variable name, can you say what it does means? Clearly not. Is `ldng` an abbreviation of `loading`, or `landing`, `leading`? 
+Can you conclude what the function does? Probably something related to salary calculation... Unforatunely, variable names like `ws`, `r`, `t`, `w` say almost nothing about their intent. 
 
-Avoid such ambiguous and cryptic variable names. Clarity is more important than brevity.   
+On the contrary, let's say you're looking at the same function, but with explanatory variable naming:
 
+```javascript
+function calculateTotalSalary(weeksHours, ratePerHour) {
+  let totalSalary = 0;
+  for (const weekHours of weeksHours) {
+    const weeklySalary = weekHours * ratePerHour;
+    totalSalary += weeklySalary;
+  }
+  return totalSalary;
+}
+```
 
+The code clearly says what it does. That's the power of good naming.  
 
 ## 5. Introduce exlanatory variables
 
@@ -186,7 +204,58 @@ Usually, I prefer not to add comments to my code. I prefer having self-documenti
 
 Sometimes, when I have a lot of expressions that do a quite complex calculation, it might be better do strip the expression into smaller chunks. And save each chunk expression into a variable with explanatory name.  
 
-For example:
+Let's look back to the binary search implementation algorithm:
+
+```javascript{7,8,11}
+function binarySearch(array, search) {
+  let left = 0;
+  let right = array.length - 1;
+
+  while(left <= right) {
+    const middle = Math.floor((left + right) / 2);
+    const middleItem = array[middle];
+    if (middleItem === search) {
+      return true; 
+    }
+    if (middleItem < search) {
+      left = middle + 1; 
+    } else {
+      right = middle - 1; 
+    }
+  }
+  return false;
+}
+```
+
+Here `middleItem` is a specially introduced explanatory variable that holds the middle item value. In the conditionals of `while` cycle it is easier to reason about and use the explanatory variable `middleItem`, rather than directly using the item accessor `array[middle]`.  
+
+Compare with a version of the function where `middleItem` explanatory variable is missing:
+
+```javascript{7,10}
+function binarySearch(array, search) {
+  let left = 0;
+  let right = array.length - 1;
+
+  while(left <= right) {
+    const middle = Math.floor((left + right) / 2);
+    if (array[middle] === search) {
+      return true; 
+    }
+    if (array[middle] < search) {
+      left = middle + 1; 
+    } else {
+      right = middle - 1; 
+    }
+  }
+  return false;
+}
+```
+
+This version, without the explanatory variable, is slightly more difficult to understand.  
+
+
+
+Use explanatory variables to explain what your code does. Even if adding explanatory variables adds a few variable declaration statements, the increased code readability worth it.  
 
 ## 6. Summary
 
