@@ -1,0 +1,22 @@
+@import '~styles/variables';
+
+.jobOpportunities {
+  box-shadow: $box-shadow;
+  background-color: rgba($border-color, 0.4);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  padding: 1.5rem;
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  h3 {
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .description {
+    margin: 1rem 0;
+  }
+}

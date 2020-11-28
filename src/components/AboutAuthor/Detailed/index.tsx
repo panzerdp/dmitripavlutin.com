@@ -17,6 +17,9 @@ export default function AboutAuthorDetailed({ authorInfo, authorProfilePicture, 
         <Img fluid={authorProfilePicture} alt={authorInfo.name} />
         <h3>About {authorInfo.name}</h3>
         <div className={styles.description}>{authorInfo.description}</div>
+        <div className={styles.description}>
+          
+        </div>
       </div>
       <div className={styles.readMore}>
         <div className={styles.links}>
