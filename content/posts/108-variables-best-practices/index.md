@@ -124,13 +124,49 @@ function binarySearch(array, search) {
 }
 ```
 
-Now `middle` and `middleItem` variables exists solely in the scope that uses the variables. They have a minimal lifetime and lifespace, and it is easier to reason about them.  
+Now `middle` and `middleItem` variables exists solely in the scope that uses the variables. They have a minimal lifetime and lifespace, and it is easier to reason about their role.  
 
 ## 3. Close to usage
 
-Sometimes, especially if your code block or function body has a lot of statements, you might want to declare all the variables at the top of the scope. 
+Sometimes, especially if your code block or function body has a lot of statements, you might want to declare all the variables at the top.  
 
 However, I find the opposite practice more useful: try to declare the variable as close as possible to the usage statement. This way, you won't have to guess: *Hey, I see the variable declared here, but... where is it used?*
+
+Let's say you have a function that has lots of statements in its body. You declare and initialize a variable `result` at the beginning of the function, and use it in `return` statement:
+
+```javascript{2,9}
+function myBigFunction(param1, param2) {
+  const result = otherFunction(param1);
+  let something;
+
+  /*
+   * calculate something... 
+   */
+
+  return something + result;
+}
+```
+
+The problem is that `result` variable is declared at the beginning, but used only at the end. 
+
+To increase the undestanding of the function, always try to keep the variable declaration as close as possible to the usage place. 
+
+Let's improve the function by moving the `result` variable declaration right before the `return` statement:
+
+```javascript{8,9}
+function myBigFunction(param1, param2) {
+  let something;
+
+  /* 
+   * calculate something... 
+   */
+
+  const result = otherFunction(param1);
+  return something + result;
+}
+```
+
+Now `result` variable has its right place within the function.    
 
 ## 4. Good naming means easy reading
 
@@ -157,6 +193,7 @@ const GRAPHQL_URI = 'http://site.com/graphql';
 The second rule, which I consider the most important in variable naming: *the variable name should clearly, without ambiguity indicate what data holds the variable*.  
 
 Here are a few examples of good naming of variables:
+
 ```javascript
 let message = 'Hello';
 let isLoading = true;
@@ -253,14 +290,20 @@ function binarySearch(array, search) {
 
 This version, without the explanatory variable, is slightly more difficult to understand.  
 
-
-
 Use explanatory variables to explain what your code does. Even if adding explanatory variables adds a few variable declaration statements, the increased code readability worth it.  
 
 ## 6. Summary
 
 Variables are everywhere. You declare them, assign, read them at nearly every statement of your application.  
 
-That's why having a good discipline and try to apply best practices when working with variables is important for readability.  
+That's why having a good discipline and best practices when working with variables is important for readability.  
 
 The first good practices when working with variables in JavaScript is to use `const`, and otherwise use `let`. 
+
+A good way to increase the readability of functions and variables is to try to keep the variable's scope as small as possible, as well keep the variable as close as possible to the usage place.  
+
+You can't underestimate the importance of good naming. Always folow the rule: *the variable name should clearly, without ambiguity indicate what data holds the variable*. Don't be afraid to use longer variable names: favor clariy over brevity.  
+
+Finally, instead of flooding your code with comments, a better strategy is to use the self-documenting code. In places of high complexity I prefer to introduce explanatory variables.  
+
+*What other best practices to write quality variables do you know?*
