@@ -4,15 +4,18 @@ import PopularPosts from 'components/Popular/Posts';
 import SidebarItemsCommon from 'components/SidebarItems/Common';
 
 interface PostRightSidebarProps {
-  popularPosts: Post<FixedImage>[];
+  popularPostsByCategory: {
+    plainPosts: PostPlain[],
+    category: string
+  }[];
   siteUrl: string;
 }
 
-export default function PostRightSidebar({ popularPosts, siteUrl }: PostRightSidebarProps) {
+export default function PostRightSidebar({ popularPostsByCategory, siteUrl }: PostRightSidebarProps) {
   return (
     <div className={styles.rightSidebar}>
       <SidebarItemsCommon />
-      <PopularPosts posts={popularPosts} siteUrl={siteUrl} />
+      <PopularPosts popularPostsByCategory={popularPostsByCategory} siteUrl={siteUrl} />
     </div>
   );
 }

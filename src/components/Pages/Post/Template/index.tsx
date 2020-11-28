@@ -31,7 +31,10 @@ interface PostTemplateProps {
   postRepositoryFileUrl: string;
   post: PostDetailed;
   recommendedPosts: Post<FixedImage>[];
-  popularPosts: Post<FixedImage>[];
+  popularPostsByCategory: {
+    plainPosts: PostPlain[],
+    category: string
+  }[];
   authorProfilePictureSrc: string;
   githubCommentsRepository: string;
 }
@@ -42,7 +45,7 @@ export default function PostTemplate({
   postRepositoryFileUrl,
   post,
   recommendedPosts,
-  popularPosts,
+  popularPostsByCategory,
   authorProfilePictureSrc,
   githubCommentsRepository
 }: PostTemplateProps) {
@@ -56,7 +59,7 @@ export default function PostTemplate({
       twitterName={authorInfo.nicknames.twitter}
     />
   );
-  const rightSidebar = <RightSidebar popularPosts={popularPosts} siteUrl={siteInfo.url} />;
+  const rightSidebar = <RightSidebar popularPostsByCategory={popularPostsByCategory} siteUrl={siteInfo.url} />;
   const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
   return (
     <Layout leftSidebar={leftSidebar} rightSidebar={rightSidebar}>
