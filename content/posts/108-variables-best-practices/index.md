@@ -16,16 +16,16 @@ Regarding good coding discipline, I would put the ability to correctly use varia
 
 So, if you'd like to improve the way you work with variables in JavaScript, and then enjoy the benefits of increased readability and maintainability of your code: then let's get started.  
 
-In this post, you'll read about 5 best practices of how to declare and use JavaScript variables.
+In this post, you'll read about the 5 best practices of how to declare and use JavaScript variables.
 
 ```toc
 ```
 
-## 1. Prefer *const*, othewise use *let*
+## 1. Prefer *const*, otherwise use *let*
 
-Usually I declare my JavaScript variables using `const` or `let`.  
+Usually, I declare my JavaScript variables using `const` or `let`.  
 
- The main difference between `const` and `let` is that `const` always requires an initial value, and you cannnot reassign a value to `const` variable once initialized.  
+ The main difference between `const` and `let` is that `const` always requires an initial value, and you can not reassign a value to `const` variable once initialized.  
 
 ```javascript
 // const requires initialization
@@ -59,15 +59,15 @@ function myBigFunction(param1, param2) {
 }
 ```
 
-Without knowing much about what happens inside `myBigFunction()`, you can conclude that `result` variable is assigned once, and after declaration is readonly.  
+Without knowing much about what happens inside `myBigFunction()`, you can conclude that `result` variable is assigned once and after the declaration is readonly.  
 
 In other cases, if your variable has to be reassigned multiple times during execution, then `let` declaration is the way to go.  
 
-## 2. Minimize variable's scope
+## 2. Minimize the variable's scope
 
 The variables in JavaScript live and are accessible within the [scope](/javascript-scope/) they've been created. A code block and a function body create a scope for `const` and `let` variables.  
 
-A good practice to increase the readability of variables is to try to keep them in smallest possible scope.  
+A good practice to increase the readability of variables is to try to keep them in the smallest possible scope.  
 
 For example, the following function is an implementation of [binary search algorithm](https://en.wikipedia.org/wiki/Binary_search_algorithm):
 
@@ -124,7 +124,7 @@ function binarySearch(array, search) {
 }
 ```
 
-Now `middle` and `middleItem` variables exists solely in the scope that uses the variables. They have a minimal lifetime and lifespace, and it is easier to reason about their role.  
+Now, `middle` and `middleItem` variables exist solely in the scope that uses the variables. They have a minimal lifetime and lifespace, and it is easier to reason about their role.  
 
 ## 3. Close to usage
 
@@ -149,7 +149,7 @@ function myBigFunction(param1, param2) {
 
 The problem is that `result` variable is declared at the beginning, but used only at the end. 
 
-To increase the undestanding of the function, always try to keep the variable declaration as close as possible to the usage place. 
+To increase the understanding of the function, always try to keep the variable declaration as close as possible to the usage place. 
 
 Let's improve the function by moving the `result` variable declaration right before the `return` statement:
 
@@ -166,13 +166,13 @@ function myBigFunction(param1, param2) {
 }
 ```
 
-Now `result` variable has its right place within the function.    
+Now, `result` variable has its right place within the function.    
 
 ## 4. Good naming means easy reading
 
 You've probably read already a lot about good naming of variables, so I'll keep it short and to the point.  
 
-From the multitude of rules that you can apply to have a good variable name, I distinguish 2 the most important ones.  
+From the multitude of rules that you can apply to have a good variable name, I distinguish 2 important ones.  
 
 The first one is simple: *use the camel case for variable's name*.
 
@@ -182,8 +182,7 @@ const isLoading = true;
 let count;
 ```
 
-The one exception to the above rule are the magical literals: like numbers or strings that have special meaning. The variables holdoing magical literals
-can be upper cased with underscore between words: 
+The one exception to the above rule is the magical literals: like numbers or strings that have special meaning. The variables holding magical literals can be uppercased with an underscore between words: 
 
 ```javascript
 const SECONDS_IN_MINUTE = 60;
@@ -200,11 +199,11 @@ let isLoading = true;
 let count;
 ```
 
-`message` variable clearly indicates that this variable contains some kind of message, which is also most likely a string. 
+`message` variable indicates that this variable contains some kind of message, which is also most likely a string. 
 
-Same with `isLoading` &mdash; a boolean indicating a whether a loading is in progress.  
+Same with `isLoading` &mdash; a boolean indicating whether loading is in progress.  
 
-`count` variable, without doubt, indicates a number type variable that holds some counting result.  
+`count` variable, without doubt, indicates a number type variable that holds some counting results.  
 
 Let me show you an example, so you could spot the difference. Imagine you're exploring the code of an application, and you see a function like this:
 
@@ -218,7 +217,7 @@ function salary(ws, r) {
 }
 ```
 
-Can you conclude what the function does? Probably something related to salary calculation... Unforatunely, variable names like `ws`, `r`, `t`, `w` say almost nothing about their intent. 
+Can you conclude what the function does? Probably something related to salary calculation... Unfortunately, variable names like `ws`, `r`, `t`, `w` say almost nothing about their intent. 
 
 On the contrary, let's say you're looking at the same function, but with explanatory variable naming:
 
@@ -235,11 +234,11 @@ function calculateTotalSalary(weeksHours, ratePerHour) {
 
 The code clearly says what it does. That's the power of good naming.  
 
-## 5. Introduce exlanatory variables
+## 5. Introduce explanatory variables
 
 Usually, I prefer not to add comments to my code. I prefer having self-documenting code that clearly expresses what it does through good naming of variables, object's properties, functions, classes.  
 
-Sometimes, when I have a lot of expressions that do a quite complex calculation, it might be better do strip the expression into smaller chunks. And save each chunk expression into a variable with explanatory name.  
+Sometimes, when I have a lot of expressions that do a quite complex calculation, it might be better to strip the expression into smaller chunks. And save each chunk expression into a variable with an explanatory name.  
 
 Let's look back to the binary search implementation algorithm:
 
@@ -296,14 +295,14 @@ Use explanatory variables to explain what your code does. Even if adding explana
 
 Variables are everywhere. You declare them, assign, read them at nearly every statement of your application.  
 
-That's why having a good discipline and best practices when working with variables is important for readability.  
+That's why having the good discipline and best practices when working with variables is important for readability.  
 
-The first good practices when working with variables in JavaScript is to use `const`, and otherwise use `let`. 
+The first good practice when working with variables in JavaScript is to use `const` and otherwise use `let`. 
 
-A good way to increase the readability of functions and variables is to try to keep the variable's scope as small as possible, as well keep the variable as close as possible to the usage place.  
+A good way to increase the readability of functions and variables is to try to keep the variable's scope as small as possible, as well as keep the variable as close as possible to the usage place.  
 
-You can't underestimate the importance of good naming. Always folow the rule: *the variable name should clearly, without ambiguity indicate what data holds the variable*. Don't be afraid to use longer variable names: favor clariy over brevity.  
+You can't underestimate the importance of good naming. Always follow the rule: *the variable name should clearly, without ambiguity indicate what data holds the variable*. Don't be afraid to use longer variable names: favor clarity over brevity.  
 
-Finally, instead of flooding your code with comments, a better strategy is to use the self-documenting code. In places of high complexity I prefer to introduce explanatory variables.  
+Finally, instead of flooding your code with comments, a better strategy is to use the self-documenting code. In places of high complexity, I prefer to introduce explanatory variables.  
 
 *What other best practices to write quality variables do you know?*
