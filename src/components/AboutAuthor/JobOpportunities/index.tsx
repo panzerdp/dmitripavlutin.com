@@ -3,7 +3,7 @@ import styles from './index.module.scss';
 export default function JobOpportunities({ authorInfo }: { authorInfo: AuthorInfo }) {
   return (
     <div className={styles.jobOpportunities}>
-      <h3>Looking for Job Opportunities</h3>
+      <h3>Looking for a Frontend Developer? Here I am!</h3>
       <div className={styles.description}>
         <p>
           I'm always interested in learning new technologies, participate in new projects, and face challenges.  
