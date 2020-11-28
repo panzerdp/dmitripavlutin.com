@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Link from 'gatsby-link';
 
 import styles from './index.module.scss';
@@ -12,21 +13,42 @@ interface PopularPostsListProps {
 }
 
 export default function PopularPostsList({ popularPostsByCategory, siteUrl }: PopularPostsListProps) {
-  console.log(popularPostsByCategory);
+  const [activeTabIndex, setActiveTabIndex] = useState(0); 
   return (
     <div className={styles.popularPosts}>
-      <h3>Read popular posts</h3>
-      <div className={styles.list}>
-        {/* {popularPosts.map((post) => {
-          const toPost = TO_POST({ slug: post.slug });
+      <h3>Popular posts</h3>
+      <div className={styles.tabs}>
+        <div className={styles.titles}>
+          {popularPostsByCategory.map(({ category }, index) => {
+            const tabClassName = `${styles.title} ${activeTabIndex === index ? styles.activeTitle : ''}`;
+            return (
+              <div 
+                key={category} 
+                className={tabClassName}
+                onClick={() => setActiveTabIndex(index)}
+              >{category}</div>
+            );
+          })}
+        </div>
+        {popularPostsByCategory.map(({ category, plainPosts }, index) => {
+          const tabClassName = `${styles.list} ${activeTabIndex === index ? styles.activeList : ''}`;
           return (
-            <div key={post.slug} className={styles.item}>
-              <span className={styles.square}>&#x25A0;</span>
-              <Link to={toPost} className={styles.link}>{post.title}</Link>
+            <div className={tabClassName} key={category}>
+              {plainPosts.map(mapPost)}
             </div>
           );
-        })} */}
+        })}
       </div>
     </div>
   );
+}
+
+function mapPost(post: PostPlain) {
+  const toPost = TO_POST({ slug: post.slug });
+  return (
+    <div key={post.slug} className={styles.item}>
+      <span className={styles.square}>&#x25A0;</span>
+      <Link to={toPost} className={styles.link}>{post.title}</Link>
+    </div>
+  );  
 }

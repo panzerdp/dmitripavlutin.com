@@ -4,32 +4,60 @@
   box-shadow: $box-shadow;
   border-radius: 8px;
   font-size: 1.3rem;
-  padding: 1.5rem;
 
   h3 {
     margin: 0;
-    margin-bottom: 0.5rem;
+    padding: 1.5rem;
   }
 
-  .list {
-    .item {
-      align-items: center;
-      padding: 0.75rem 0;
+  .tabs {
+    .titles {
       display: flex;
-      align-items: flex-start;
+      justify-content: space-between;
+      border-bottom: 1px solid $border-color;
+      border-top: 1px solid $border-color;
+      padding: 0 1.5rem;
+      // background-color: rgba($border-color, 0.4);
+    
+      .title {
+        font-size: 1.3rem;
+        padding: 0.75rem 0;
+        cursor: pointer;
 
-      .square {
-        margin-right: 0.5rem;
-        color: $anchor-color;
-        font-size: 1.2rem;
+        &.activeTitle {
+          color: $anchor-color;
+          border-bottom: 2px solid $anchor-color; 
+        }
+      }
+    }
+
+    .list {
+      display: none;
+      padding: 1rem 1.5rem 1.5rem;
+      
+      &.activeList {
+        display: block;
       }
   
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      .link {
-        font-size: 1.3rem;
+      .item {
+        align-items: center;
+        padding: 0.75rem 0;
+        display: flex;
+        align-items: flex-start;
+  
+        .square {
+          margin-right: 0.5rem;
+          color: $anchor-color;
+          font-size: 1.2rem;
+        }
+    
+        &:last-child {
+          padding-bottom: 0;
+        }
+  
+        .link {
+          font-size: 1.3rem;
+        }
       }
     }
   }

@@ -44,24 +44,25 @@ module.exports = {
     popularPostsByCategory: [{
       category: 'JavaScript',
       slugs: [
-        'gentle-explanation-of-this-in-javascript',
         'simple-explanation-of-javascript-closures',
+        'gentle-explanation-of-this-in-javascript',
         'how-to-compare-objects-in-javascript',
         'differences-between-arrow-and-regular-functions'
       ]
     }, {
       category: 'React',
       slugs: [
-        'dont-overuse-react-usecallback',
         'react-useeffect-explanation',
+        'dont-overuse-react-usecallback',
+        'use-react-memo-wisely',
         'react-usestate-hook-guide',
-        'use-react-memo-wisely'
       ]
     }, {
       category: 'Best Practices',
       slugs: [
         'javascript-modules-best-practices',
-        'javascript-arrow-functions-best-practices'
+        'javascript-arrow-functions-best-practices',
+        'coding-like-shakespeare-practical-function-naming-conventions'
       ]
     }]
   },
