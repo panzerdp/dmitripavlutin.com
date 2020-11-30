@@ -12,11 +12,11 @@ type: post
 
 Variables are everywhere. Even if you're writing a small function, or writing a big application: you always declare, assign, and read variables.  
 
-Regarding good coding discipline, I would put the ability to correctly use variables at a high level.  
+The ability to write variables with readability in mind is a good habit.  
 
 So, if you'd like to improve the way you work with variables in JavaScript, and then enjoy the benefits of increased readability and maintainability of your code: then let's get started.  
 
-In this post, you'll read about the 5 best practices of how to declare and use JavaScript variables.
+In this post, you'll read 5 best practices of how to declare and use JavaScript variables.
 
 ```toc
 ```
@@ -25,7 +25,7 @@ In this post, you'll read about the 5 best practices of how to declare and use J
 
 Usually, I declare my JavaScript variables using `const` or `let`.  
 
- The main difference between `const` and `let` is that `const` always requires an initial value, and you can not reassign a value to `const` variable once initialized.  
+ The main difference between the two is that `const` requires an initial value, and its value can not be reassigned once initialized. `let` declaration, on the other side, doesn't require an initial value and you can reassign its value multiple times.  
 
 ```javascript
 // const requires initialization
@@ -44,7 +44,7 @@ result = result * 2;
 
 A good practice when choosing the declaration statement for variables is to *prefer `const`, otherwise use `let`.*  
 
-Because `const` requires initialization and cannot be reassigned, it is much easier to reason about it compared to `let` variables.    
+Because `const` requires initialization and cannot be reassigned, it is easier to reason about it compared to `let` variables.    
 
 For example, if you're looking at a function body and see a `const result = ...` declaration:
 
@@ -59,15 +59,15 @@ function myBigFunction(param1, param2) {
 }
 ```
 
-Without knowing much about what happens inside `myBigFunction()`, you can conclude that `result` variable is assigned once and after the declaration is readonly.  
+Without knowing much about what happens inside `myBigFunction()`, you can conclude that `result` variable is assigned once, and after the declaration is read-only. 
 
 In other cases, if your variable has to be reassigned multiple times during execution, then `let` declaration is the way to go.  
 
 ## 2. Minimize the variable's scope
 
-The variables in JavaScript live and are accessible within the [scope](/javascript-scope/) they've been created. A code block and a function body create a scope for `const` and `let` variables.  
+The variables live within the [scope](/javascript-scope/) they've been created. A code block and a function body create a scope for `const` and `let` variables.  
 
-A good practice to increase the readability of variables is to try to keep them in the smallest possible scope.  
+A good practice to increase the readability of variables is to try to keep them in the smallest reasonably possible scope.  
 
 For example, the following function is an implementation of [binary search algorithm](https://en.wikipedia.org/wiki/Binary_search_algorithm):
 
@@ -99,7 +99,7 @@ binarySearch([2, 5, 7, 9], 1); // => false
 
 Let's look at the `middle` and `middleItem` variables. During each cycle of searching, `middle` variable keeps the index of the current middle item of binary search, while `middleItem` variable keeps the middle item.  
 
-The `middle` and `middleItem` variables are declared at the beginning of the function `binarySearch()`. Thus, these variables are available within the entire scope created by `binarySearch()` function body.  
+The `middle` and `middleItem` variables are declared at the beginning of the function body. Thus, these variables are available within the entire scope created by `binarySearch()` function body.  
 
 However, `middle` and `middleItem` variables are used only within the `while` cycle code block. So... why not declaring these variables directly within `while` code block?  
 
@@ -128,11 +128,11 @@ Now, `middle` and `middleItem` variables exist solely in the scope that uses the
 
 ## 3. Close to usage
 
-Sometimes, especially if your code block or function body has a lot of statements, you might want to declare all the variables at the top.  
+I have the urge to declare all the variables at the top of the function body, especially if the function has a lot of statements. Unfortunately, this practice has the downside of cluttering the variables intent.  
 
-However, I find the opposite practice more useful: try to declare the variable as close as possible to the usage statement. This way, you won't have to guess: *Hey, I see the variable declared here, but... where is it used?*
+Try to declare the variable as close as possible to the usage place. This way, you won't have to guess: *Hey, I see the variable declared here, but... where is it used?*
 
-Let's say you have a function that has lots of statements in its body. You declare and initialize a variable `result` at the beginning of the function, and use it in `return` statement:
+Let's say you have a function that has lots of statements in its body. You declare and initialize a variable `result` at the beginning of the function, however use `result` only in `return` statement:
 
 ```javascript{2,9}
 function myBigFunction(param1, param2) {
@@ -149,7 +149,7 @@ function myBigFunction(param1, param2) {
 
 The problem is that `result` variable is declared at the beginning, but used only at the end. 
 
-To increase the understanding of the function, always try to keep the variable declaration as close as possible to the usage place. 
+To increase the understanding of the function and the role of `result` variable, always try to keep the variable declaration as close as possible to the usage place. 
 
 Let's improve the function by moving the `result` variable declaration right before the `return` statement:
 
@@ -174,7 +174,7 @@ You've probably read already a lot about good naming of variables, so I'll keep 
 
 From the multitude of rules that you can apply to have a good variable name, I distinguish 2 important ones.  
 
-The first one is simple: *use the camel case for variable's name*.
+The first one is simple: *use the [camel case](https://en.wikipedia.org/wiki/Camel_case) for the variable's name*.
 
 ```javascript
 const message = 'Hello';
@@ -182,7 +182,7 @@ const isLoading = true;
 let count;
 ```
 
-The one exception to the above rule is the magical literals: like numbers or strings that have special meaning. The variables holding magical literals can be uppercased with an underscore between words: 
+The one exception to the above rule is the magical literals: like numbers or strings that have special meaning. The variables holding magical literals can be uppercased with an underscore between words, to distinguishable from regular variables: 
 
 ```javascript
 const SECONDS_IN_MINUTE = 60;
@@ -199,11 +199,13 @@ let isLoading = true;
 let count;
 ```
 
-`message` variable indicates that this variable contains some kind of message, which is also most likely a string. 
+`message` name indicates that this variable contains some kind of message, which is most likely a string. 
 
 Same with `isLoading` &mdash; a boolean indicating whether loading is in progress.  
 
 `count` variable, without doubt, indicates a number type variable that holds some counting results.  
+
+Choose a variable name that without doubt, clearly, indicates its role.  
 
 Let me show you an example, so you could spot the difference. Imagine you're exploring the code of an application, and you see a function like this:
 
@@ -234,13 +236,26 @@ function calculateTotalSalary(weeksHours, ratePerHour) {
 
 The code clearly says what it does. That's the power of good naming.  
 
-## 5. Introduce explanatory variables
+## 5. Introduce intermidiate variables
 
-Usually, I prefer not to add comments to my code. I prefer having self-documenting code that clearly expresses what it does through good naming of variables, object's properties, functions, classes.  
+Usually, I try to avoid commenting my code. I prefer writing self-documenting code that expresses the intent through good naming of variables, properties, functions, classes.  
 
-Sometimes, when I have a lot of expressions that do a quite complex calculation, it might be better to strip the expression into smaller chunks. And save each chunk expression into a variable with an explanatory name.  
+A good practice to write self-documenting code are the intermediate variables. They're great when dealing with long expressions within a statement, something like:
 
-Let's look back to the binary search implementation algorithm:
+```javascript
+const sum = val1 * val2 + val3 / val4;
+```
+
+I like to introduce intermediate variables that explain the intent of each expression. Good naming of intermediate variable can boost the readability of the long expression:
+
+```javascript
+const multiplication = val1 * val2;
+const division       = val3 / val4;
+
+const sum = multiplication + division;
+```
+
+For example, let's look back to the binary search implementation algorithm:
 
 ```javascript{7,8,11}
 function binarySearch(array, search) {
@@ -263,7 +278,7 @@ function binarySearch(array, search) {
 }
 ```
 
-Here `middleItem` is a specially introduced explanatory variable that holds the middle item value. In the conditionals of `while` cycle it is easier to reason about and use the explanatory variable `middleItem`, rather than directly using the item accessor `array[middle]`.  
+Here `middleItem` is an explanatory variable holding the middle item. In the conditionals it is easier to reason about and use the explanatory variable `middleItem`, rather than directly using the item accessor `array[middle]`.  
 
 Compare with a version of the function where `middleItem` explanatory variable is missing:
 
@@ -289,20 +304,20 @@ function binarySearch(array, search) {
 
 This version, without the explanatory variable, is slightly more difficult to understand.  
 
-Use explanatory variables to explain what your code does. Even if adding explanatory variables adds a few variable declaration statements, the increased code readability worth it.  
+Use intermediate variables to explain *with code* what your code does. Even if adding explanatory variables adds a few variable declaration statements, the increased code readability worth it.  
 
 ## 6. Summary
 
 Variables are everywhere. You declare them, assign, read them at nearly every statement of your application.  
 
-That's why having the good discipline and best practices when working with variables is important for readability.  
+That's why having the good discipline when working with variables is important for readability.  
 
-The first good practice when working with variables in JavaScript is to use `const` and otherwise use `let`. 
+The first good practice when working with variables in JavaScript is to use `const` and otherwise use `let`.  
 
-A good way to increase the readability of functions and variables is to try to keep the variable's scope as small as possible, as well as keep the variable as close as possible to the usage place.  
+A good way to increase the readability of variables is to try to keep the variable's scope as small as possible. As well, keep declare the variable as close as possible to the usage place.  
 
 You can't underestimate the importance of good naming. Always follow the rule: *the variable name should clearly, without ambiguity indicate what data holds the variable*. Don't be afraid to use longer variable names: favor clarity over brevity.  
 
-Finally, instead of flooding your code with comments, a better strategy is to use the self-documenting code. In places of high complexity, I prefer to introduce explanatory variables.  
+Finally, instead of flooding your code with comments, a better strategy is to use the self-documenting code. In places of high complexity, I prefer to introduce intermediate variables.  
 
 *What other best practices to write quality variables do you know?*
