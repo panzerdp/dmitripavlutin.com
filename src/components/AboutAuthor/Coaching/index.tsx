@@ -4,7 +4,7 @@ interface AboutAuthorContact {
   authorInfo: AuthorInfo;
 }
 
-export default function AboutAuthorContact({ authorInfo }: AboutAuthorContact) {
+export default function Coaching({ authorInfo }: AboutAuthorContact) {
   return (
     <div className={styles.contactAuthor}>
       <h3>Your JavaScript Coach</h3>

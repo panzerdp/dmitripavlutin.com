@@ -41,13 +41,30 @@ module.exports = {
     isProductionMode: process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod',
   },
   featured: {
-    popular: [
-      'simple-but-tricky-javascript-interview-questions',
-      'how-to-compare-objects-in-javascript',
-      'javascript-arrow-functions-best-practices',
-      'use-react-memo-wisely',
-      'simple-explanation-of-javascript-closures'
-    ],
+    popularPostsByCategory: [{
+      category: 'JavaScript',
+      slugs: [
+        'simple-explanation-of-javascript-closures',
+        'gentle-explanation-of-this-in-javascript',
+        'how-to-compare-objects-in-javascript',
+        'differences-between-arrow-and-regular-functions'
+      ]
+    }, {
+      category: 'React',
+      slugs: [
+        'react-useeffect-explanation',
+        'dont-overuse-react-usecallback',
+        'use-react-memo-wisely',
+        'react-usestate-hook-guide',
+      ]
+    }, {
+      category: 'Best Practices',
+      slugs: [
+        'javascript-modules-best-practices',
+        'javascript-arrow-functions-best-practices',
+        'coding-like-shakespeare-practical-function-naming-conventions'
+      ]
+    }]
   },
   googleCustomSearchId: '004443697379288327791:1zr8pgnumxn',
   githubCommentsRepository: 'panzerdp/dmitripavlutin.com-comments'

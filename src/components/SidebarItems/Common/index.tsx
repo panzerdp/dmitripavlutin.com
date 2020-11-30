@@ -1,6 +1,7 @@
 import SubscriptionRegion from 'components/Subscription/Region';
 import AboutAuthorDetailed from 'components/AboutAuthor/Detailed';
-import AboutAuthorContact from 'components/AboutAuthor/Contact';
+import AuthorCoaching from 'components/AboutAuthor/Coaching';
+import AuthorJobOpportunities from 'components/AboutAuthor/JobOpportunities';
 import AboutAuthorFetch, { AboutAuthorFetchResult } from 'components/AboutAuthor/Fetch';
 
 export default function SidebarItemsCommon() {
@@ -16,7 +17,8 @@ function renderAuthorInfo({ authorInfo, authorProfilePictureBig, authorStats }: 
   return (
     <>
       <AboutAuthorDetailed authorInfo={authorInfo} authorProfilePicture={authorProfilePictureBig}  authorStats={authorStats} />
-      <AboutAuthorContact authorInfo={authorInfo} />
+      <AuthorJobOpportunities authorInfo={authorInfo} />
+      <AuthorCoaching authorInfo={authorInfo} />
     </>
   );
 }

@@ -9,7 +9,10 @@ const query = `
   site {
     siteMetadata {
       featured {
-        popular
+        popularPostsByCategory {
+          category
+          slugs
+        }
       }
       githubCommentsRepository
     }
@@ -53,8 +56,9 @@ exports.createPages = async ({ graphql, actions }) => {
   // Create blog posts pages.
   const edges = result.data.allMarkdownRemark.edges;
   createExcerptsList(createPage, edges, githubCommentsRepository);
-  const popular = result.data.site.siteMetadata.featured.popular;
-  createPost(createPage, edges, popular, githubCommentsRepository);
+  const popularPostsByCategory = result.data.site.siteMetadata.featured.popularPostsByCategory;
+  const popularPostsSlugs = popularPostsByCategory.reduce((acc, postsByCategory) => [...acc, ...postsByCategory.slugs], []);
+  createPost(createPage, edges, popularPostsSlugs, githubCommentsRepository);
   createPlainListByTag(createPage, edges);
   return result;  
 };

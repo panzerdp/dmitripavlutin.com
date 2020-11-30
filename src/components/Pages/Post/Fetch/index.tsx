@@ -2,15 +2,15 @@ import { graphql } from 'gatsby';
 
 import PostTemplate from 'components/Pages/Post/Template';
 import { PostBySlugQuery } from 'typings/graphql';
-import { toPostImageFixed } from 'utils/mapper';
+import { toPostImageFixed, toPostPlain } from 'utils/mapper';
 
 interface PostTemplateFetchProps {
   data: PostBySlugQuery;
 }
 
 export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
-  const { siteInfo, authorInfo, githubCommentsRepository } = data.site.siteMetadata;
-  const { markdownRemark, recommendedPosts, popularPosts, authorProfilePicture } = data;
+  const { siteInfo, authorInfo, githubCommentsRepository, featured: { popularPostsByCategory } } = data.site.siteMetadata;
+  const { markdownRemark, recommendedPostsMarkdown, popularPostsMarkdown, authorProfilePicture } = data;
   const post: PostDetailed = {
     ...markdownRemark.frontmatter,
     html: markdownRemark.html,
@@ -21,16 +21,22 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
     .slice(-4)
     .join('/');
   const postRepositoryFileUrl = `${siteInfo.repositoryUrl}/edit/master/${postRelativePath}`;
-  const recommended = recommendedPosts.edges.map(toPostImageFixed);
-  const popular = popularPosts.edges.map(toPostImageFixed);
+  const recommendedPosts = recommendedPostsMarkdown.edges.map(toPostImageFixed);
+  const popularPosts = popularPostsMarkdown.edges.map(toPostPlain);
+  const popularPlainPostsByCategory = popularPostsByCategory.map(({ category, slugs }) => {
+    return {
+      category,
+      plainPosts: slugs.map(popularSlug => popularPosts.find(({ slug }) => popularSlug === slug))
+    };
+  });
   return (
     <PostTemplate
       siteInfo={siteInfo}
       authorInfo={authorInfo}
       postRepositoryFileUrl={postRepositoryFileUrl}
       post={post}
-      recommendedPosts={recommended}
-      popularPosts={popular}
+      recommendedPosts={recommendedPosts}
+      popularPostsByCategory={popularPlainPostsByCategory}
       authorProfilePictureSrc={authorProfilePicture.childImageSharp.resize.src}
       githubCommentsRepository={githubCommentsRepository}
     />
@@ -83,7 +89,7 @@ export const pageQuery = graphql`
     tags
   }
 
-  query PostBySlug($slug: String!, $recommended: [String]!, $popular: [String]!) {
+  query PostBySlug($slug: String!, $recommended: [String]!, $popularPostsSlugs: [String]!) {
     site {
       siteMetadata {
         siteInfo {
@@ -91,6 +97,12 @@ export const pageQuery = graphql`
         }
         authorInfo {
           ...AuthorInfoAll
+        }
+        featured {
+          popularPostsByCategory {
+            category
+            slugs
+          }
         }
         githubCommentsRepository
       }
@@ -118,7 +130,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    recommendedPosts: allMarkdownRemark(filter: { frontmatter: { slug: { in: $recommended } } }) {
+    recommendedPostsMarkdown: allMarkdownRemark(filter: { frontmatter: { slug: { in: $recommended } } }) {
       edges {
         node {
           frontmatter {
@@ -134,18 +146,11 @@ export const pageQuery = graphql`
         }
       }
     }
-    popularPosts: allMarkdownRemark(filter: { frontmatter: { slug: { in: $popular } } }) {
+    popularPostsMarkdown: allMarkdownRemark(filter: { frontmatter: { slug: { in: $popularPostsSlugs } } }) {
       edges {
         node {
           frontmatter {
             ...Post
-            thumbnail {
-              childImageSharp {
-                fixed(width: 70, height: 70, quality: 90) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
-              }
-            }
           }
         }
       }
