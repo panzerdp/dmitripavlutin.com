@@ -59,7 +59,7 @@ function myBigFunction(param1, param2) {
 }
 ```
 
-Without knowing much about what happens inside `myBigFunction()`, you can conclude that `result` variable is assigned once, and after the declaration is read-only. 
+Without knowing much about what happens inside `myBigFunction()`, you can conclude that `result` variable is assigned once and after the declaration is read-only. 
 
 In other cases, if your variable has to be reassigned multiple times during execution, then `let` declaration is the way to go.  
 
@@ -128,7 +128,7 @@ Now, `middle` and `middleItem` variables exist solely in the scope that uses the
 
 ## 3. Close to usage
 
-I have the urge to declare all the variables at the top of the function body, especially if the function has a lot of statements. Unfortunately, this practice has the downside of cluttering the variables intent.  
+I have the urge to declare all the variables at the top of the function body, especially if the function has a lot of statements. Unfortunately, this practice has the downside of cluttering the intent of the variable.  
 
 Try to declare the variable as close as possible to the usage place. This way, you won't have to guess: *Hey, I see the variable declared here, but... where is it used?*
 
@@ -236,17 +236,17 @@ function calculateTotalSalary(weeksHours, ratePerHour) {
 
 The code clearly says what it does. That's the power of good naming.  
 
-## 5. Introduce intermidiate variables
+## 5. Introduce intermediate variables
 
 Usually, I try to avoid commenting my code. I prefer writing self-documenting code that expresses the intent through good naming of variables, properties, functions, classes.  
 
-A good practice to write self-documenting code are the intermediate variables. They're great when dealing with long expressions within a statement, something like:
+A good practice to write self-documenting code is the intermediate variables. They're great when dealing with long expressions within a statement, something like:
 
 ```javascript
 const sum = val1 * val2 + val3 / val4;
 ```
 
-I like to introduce intermediate variables that explain the intent of each expression. Good naming of intermediate variable can boost the readability of the long expression:
+I like to introduce intermediate variables that explain the intent of each expression. Good naming of the intermediate variable can boost the readability of a long expression:
 
 ```javascript
 const multiplication = val1 * val2;
@@ -278,7 +278,7 @@ function binarySearch(array, search) {
 }
 ```
 
-Here `middleItem` is an explanatory variable holding the middle item. In the conditionals it is easier to reason about and use the explanatory variable `middleItem`, rather than directly using the item accessor `array[middle]`.  
+Here `middleItem` is an explanatory variable holding the middle item. In the conditionals, it is easier to reason about and use the explanatory variable `middleItem`, rather than directly using the item accessor `array[middle]`.  
 
 Compare with a version of the function where `middleItem` explanatory variable is missing:
 
@@ -310,11 +310,11 @@ Use intermediate variables to explain *with code* what your code does. Even if a
 
 Variables are everywhere. You declare them, assign, read them at nearly every statement of your application.  
 
-That's why having the good discipline when working with variables is important for readability.  
+That's why having good discipline when working with variables is important for readability.  
 
 The first good practice when working with variables in JavaScript is to use `const` and otherwise use `let`.  
 
-A good way to increase the readability of variables is to try to keep the variable's scope as small as possible. As well, keep declare the variable as close as possible to the usage place.  
+A good way to increase the readability of variables is to try to keep the variable's scope as small as possible. As well, declare the variable as close as possible to the usage place.  
 
 You can't underestimate the importance of good naming. Always follow the rule: *the variable name should clearly, without ambiguity indicate what data holds the variable*. Don't be afraid to use longer variable names: favor clarity over brevity.  
 
