@@ -60,9 +60,9 @@ module.exports = {
     }, {
       category: 'Best Practices',
       slugs: [
+        'javascript-variables-best-practices',
         'javascript-modules-best-practices',
-        'javascript-arrow-functions-best-practices',
-        'coding-like-shakespeare-practical-function-naming-conventions'
+        'javascript-arrow-functions-best-practices'
       ]
     }]
   },

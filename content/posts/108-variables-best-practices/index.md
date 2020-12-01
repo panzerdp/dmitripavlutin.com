@@ -1,8 +1,8 @@
 ---
 title: "5 Best Practices to Write Quality JavaScript Variables"
 description: "5 best practices on how to write quality JavaScript variables: prefer const, minimize scope, close to use place, and more."
-published: "2020-12-01T12:00Z"
-modified: "2020-12-01T12:00Z"
+published: "2020-12-01T08:30Z"
+modified: "2020-12-01T08:30Z"
 thumbnail: "./images/cover-4.png"
 slug: javascript-variables-best-practices
 tags: ['javascript', 'variable', 'clean code']
@@ -99,7 +99,7 @@ binarySearch([2, 5, 7, 9], 1); // => false
 
 The `middle` and `middleItem` variables are declared at the beginning of the function body. Thus, these variables are available within the entire scope created by `binarySearch()` function body.  
 
-`middle` variable keeps middle index of binary search, while `middleItem` variable keeps the middle item.  
+`middle` variable keeps the middle index of binary search, while `middleItem` variable keeps the middle item.  
 
 However, `middle` and `middleItem` variables are used only within the `while` cycle code block. So... why not declaring these variables directly within `while` code block?  
 
