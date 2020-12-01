@@ -6,7 +6,7 @@ modified: "2020-10-16T07:15Z"
 thumbnail: "./images/cover.png"
 slug: check-if-object-has-property-javascript
 tags: ["javascript", "object"]
-recommended: ["7-tips-to-handle-undefined-in-javascript", "own-and-inherited-properties-in-javascript"]
+recommended: ["access-object-properties-javascript", "javascript-defined-variable-checking"]
 type: post
 ---
 
