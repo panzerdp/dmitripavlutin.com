@@ -21,7 +21,7 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
     .slice(-4)
     .join('/');
   const postRepositoryFileUrl = `${siteInfo.repositoryUrl}/edit/master/${postRelativePath}`;
-  const recommendedPosts = recommendedPostsMarkdown.edges.map(toPostImageFixed);
+  const recommendedPosts = recommendedPostsMarkdown.edges.map(toPostPlain);
   const popularPosts = popularPostsMarkdown.edges.map(toPostPlain);
   const popularPlainPostsByCategory = popularPostsByCategory.map(({ category, slugs }) => {
     return {
@@ -135,13 +135,6 @@ export const pageQuery = graphql`
         node {
           frontmatter {
             ...Post
-            thumbnail {
-              childImageSharp {
-                fixed(width: 360, height: 200, quality: 90) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
-              }
-            }
           }
         }
       }

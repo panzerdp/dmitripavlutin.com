@@ -30,7 +30,7 @@ interface PostTemplateProps {
   authorInfo: AuthorInfo;
   postRepositoryFileUrl: string;
   post: PostDetailed;
-  recommendedPosts: Post<FixedImage>[];
+  recommendedPosts: PostPlain[];
   popularPostsByCategory: {
     plainPosts: PostPlain[],
     category: string

@@ -2,13 +2,11 @@ import RecommendedPost from '../Post';
 import styles from './index.module.scss';
 
 interface RecommendedListProps {
-  posts: Post<FixedImage>[];
+  posts: PostPlain[];
 }
 
 export default function RecommendedList({ posts }: RecommendedListProps) {
-  const list = posts.map(function(post: Post<FixedImage>, index: number) {
-    return <RecommendedPost post={post} key={index} />;
-  });
+  const list = posts.map((post, index) => <RecommendedPost post={post} key={index} />);
   return (
     <div className={styles.recommended}>
       <h3>Recommended reading:</h3>
