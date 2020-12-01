@@ -1,8 +1,8 @@
 import Img from 'gatsby-image';
 
+import AuthorLinks from 'components/AboutAuthor/Links';
+
 import styles from './index.module.scss';
-import TwitterFollowButton from 'components/AboutAuthor/TwitterFollowButton';
-import FacebookFollowButton from 'components/AboutAuthor/FacebookFollowButton';
 
 interface AboutAuthorDetailed {
   authorInfo: AuthorInfo;
@@ -10,30 +10,28 @@ interface AboutAuthorDetailed {
   authorStats: AuthorStats;
 }
 
-export default function AboutAuthorDetailed({ authorInfo, authorProfilePicture, authorStats }: AboutAuthorDetailed) {
+export default function AboutAuthorDetailed({ authorInfo: { profiles, email, description, name }, authorProfilePicture }: AboutAuthorDetailed) {
   return (
     <div className={styles.aboutAuthor}>
       <div className={styles.authorInfo}>
-        <Img fluid={authorProfilePicture} alt={authorInfo.name} />
-        <h3>About {authorInfo.name}</h3>
-        <div className={styles.description}>{authorInfo.description}</div>
-        <div className={styles.description}>
-          
-        </div>
+        <Img fluid={authorProfilePicture} alt={name} />
+        <h3>About {name}</h3>
+        <div className={styles.description}>{description}</div>
       </div>
-      <div className={styles.readMore}>
-        <div className={styles.links}>
-          <TwitterFollowButton
-            authorName={authorInfo.name}
-            twitterFollowersCount={authorStats.twitterFollowersCount}
-            username={authorInfo.nicknames.twitter}
-          />
-          <FacebookFollowButton
-            authorName={authorInfo.name}
-            facebookPageUrl={authorInfo.profiles.facebook}
-          />
-        </div>
-      </div>
+      <AuthorLinks>
+        <a href={`mailto:${email}`} title={`Send an email to ${name}`}>
+          <img alt="Email address" src="/icons/email.svg" />
+        </a>
+        <a href={profiles.twitter} title={`${name}'s Twitter profile`}>
+          <img alt="Twitter profile" src="/icons/twitter.svg" />
+        </a>
+        <a href={profiles.facebook} title={`${name}'s Facebook page`}>
+          <img alt="Facebook page" src="/icons/facebook.svg" />
+        </a>
+        <a href={profiles.linkedin} title={`${name}'s Linkedin profile`}>
+          <img alt="LinkedIn profile" src="/icons/linkedin.svg" />
+        </a>
+      </AuthorLinks>
     </div>
   );
 }

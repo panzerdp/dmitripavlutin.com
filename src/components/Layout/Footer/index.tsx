@@ -2,6 +2,7 @@ import Link from 'gatsby-link';
 import { memo } from 'react';
 
 import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_RSS, TO_SEARCH } from 'routes/path';
+import AuthorLinks from 'components/AboutAuthor/Links';
 import styles from './index.module.scss';
 
 const year = new Date().getFullYear();
@@ -31,7 +32,7 @@ export function Footer({ authorInfo: { profiles, name, email } }: FooterProps) {
             <Link to={TO_SEARCH()}>Search</Link>
             <Link to={TO_ABOUT_ME()}>About</Link>
           </div>
-          <div className={styles.follow}>
+          <AuthorLinks className={styles.footerAuthorLinks}>
             <a href={`mailto:${email}`} title={`Send an email to ${name}`}>
               <img alt="Email address" src="/icons/email.svg" />
             </a>
@@ -50,7 +51,7 @@ export function Footer({ authorInfo: { profiles, name, email } }: FooterProps) {
             <a href={profiles.github} title={`${name}'s Github profile`}>
               <img alt="Github profile" src="/icons/github.svg" />
             </a>
-          </div>
+          </AuthorLinks>
         </div>
       </div>
     </footer>
