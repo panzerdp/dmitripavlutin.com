@@ -306,7 +306,7 @@ function binarySearch(array, search) {
 
 This version, without the explanatory variable, is slightly more difficult to understand.  
 
-Use intermediate variables to *explain code with code*. Even if adding variables adds a few variable declaration statements, the increased code readability worth it.  
+Use intermediate variables to *explain code with code*. Intermediate variables might add a few declaration statements, but the increased code readability worth it.  
 
 ## 6. Summary
 
