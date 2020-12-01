@@ -12,7 +12,7 @@ type: post
 
 Variables are everywhere. Even if you're writing a small function, or writing an application: you always declare, assign, and read variables.  
 
-Writing quality variables brings the benefits of increased readability and easier maintainability of your code.  
+Writing quality variables brings increased readability and easier maintainability of your code.  
 
 In this post, you'll read 5 best practices of how to declare and use variables in JavaScript.
 
@@ -21,7 +21,7 @@ In this post, you'll read 5 best practices of how to declare and use variables i
 
 ## 1. Prefer *const*, otherwise use *let*
 
-Usually, I declare my JavaScript variables using `const` or `let`.  
+I declare my JavaScript variables using `const` or `let`.  
 
  The main difference between the two is that `const` variable requires an initial value, and its value can not be reassigned once initialized. 
 
@@ -42,7 +42,7 @@ result = 14;
 result = result * 2;
 ```
 
-`const` is a one-off assignment variable. Reasoning about a `const` variable is easier (compared to `let`) because you know that a `const` variable isn't going to be reassigned.  
+`const` is a one-off assignment variable. Reasoning about a `const` variable is easier (compared to `let`) because you know that a `const` variable isn't going to be changed.  
 
 A good practice when choosing the declaration type of variables is to *prefer `const`, otherwise use `let`.*  
 
@@ -126,7 +126,7 @@ function binarySearch(array, search) {
 
 Now, `middle` and `middleItem` variables exist solely in the scope that uses the variables. They have a minimal lifetime and lifespace, and it is easier to reason about their role.  
 
-## 3. Close to usage
+## 3. Close to use
 
 I have the urge to declare all the variables at the top of the function body, especially if the function is big. Unfortunately, this practice has the downside of cluttering the intent variables I'm using in the function.  
 
