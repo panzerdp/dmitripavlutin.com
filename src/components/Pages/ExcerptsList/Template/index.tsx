@@ -15,7 +15,7 @@ interface ExcerptsTemplateProps {
   pagesSum: number;
   authorProfilePictureSrc: string;
   popularPostsByCategory: {
-    plainPosts: PostPlain[],
+    plainPosts: Post<FixedImage>[],
     category: string
   }[];
 }

@@ -18,6 +18,7 @@
     .titles {
       display: flex;
       justify-content: flex-start;
+      align-items: flex-end;
       border-bottom: 1px solid $border-color;
       padding: 0 1.5rem;
       // background-color: rgba($border-color, 0.4);
@@ -47,11 +48,43 @@
         padding: 0.7rem 0;
         display: flex;
         align-items: flex-start;
-    
+
+        .thumbnailAnchor {
+          display: block;
+          margin-right: 0.75rem;
+          align-items: center;
+
+          @media (max-width: $small-device-width) {
+            display: none;
+          }
+        
+          :global {	
+            .gatsby-image-wrapper {		
+              border-radius: 4px;	
+            }
+          }
+        }
+
         .square {
           margin-right: 0.5rem;
           color: $anchor-color;
           font-size: 1.2rem;
+          display: none;
+
+
+          @media (max-width: $small-device-width) {
+            display: inline-block;
+          }
+        }
+
+        .tags {
+          display: flex;
+          flex-wrap: wrap;
+          margin-top: 0.5rem;
+
+          @media (max-width: $small-device-width) {
+            display: none;
+          }
         }
     
         &:last-child {
@@ -59,7 +92,7 @@
         }
     
         .link {
-          font-size: 1.3rem;
+          font-size: 1.5rem;
         }
       }
     }

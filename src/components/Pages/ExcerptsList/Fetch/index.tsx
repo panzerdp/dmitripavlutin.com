@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 
 import ExcerptsListTemplate from 'components/Pages/ExcerptsList/Template';
 import { ExcerptsListQuery } from 'typings/graphql';
-import { toPostImageFluid, toPostPlain } from 'utils/mapper';
+import { toPostImageFluid, toPostImageFixed } from 'utils/mapper';
 
 interface ExcerptsFetchProps {
   data: ExcerptsListQuery;
@@ -28,7 +28,7 @@ export default function ExcerptsFetch({
   },
   pageContext,
 }: ExcerptsFetchProps) {
-  const popularPosts = popularPostsMarkdown.edges.map(toPostPlain);
+  const popularPosts = popularPostsMarkdown.edges.map(toPostImageFixed);
   const popularPlainPostsByCategory = popularPostsByCategory.map(({ category, slugs }) => {
     return {
       category,
@@ -77,6 +77,13 @@ export const pageQuery = graphql`
         node {
           frontmatter {
             ...Post
+            thumbnail {	
+              childImageSharp {	
+                fixed(width: 150, height: 83, quality: 90) {	
+                  ...GatsbyImageSharpFixed_withWebp	
+                }	
+              }	
+            }
           }
         }
       }
