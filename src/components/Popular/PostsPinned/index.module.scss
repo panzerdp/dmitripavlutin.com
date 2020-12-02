@@ -105,23 +105,12 @@
   .popular {
     position: absolute;
     top: -0.5rem;
-    right: -1rem;
+    right: -2.1rem;
     display: flex;
     flex-flow: column;
     align-items: center;
     border-radius: 4px;
-    background-color: rgba(white, 0.5);
-
-    @media (max-width: $small-device-width) {
-      .icon {
-        width: 2rem;
-        height: 2rem;
-      }
-  
-      .popularTitle {
-        display: none;
-      }
-    }
+    background-color: rgba(white, 0.75);
 
     .icon {
       width: 4rem;
@@ -134,6 +123,19 @@
       color: $anchor-color;
       font-weight: bold;
       font-size: 1.25rem;
+    }
+
+    @media (max-width: 660px) {
+      right: 0;
+
+      .icon {
+        width: 2.75rem;
+        height: 2.75rem;
+      }
+  
+      .popularTitle {
+        display: none;
+      }
     }
   }
 }
