@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import Link from 'gatsby-link';
 
 import styles from './index.module.scss';
-import PopularPostsTabs from 'components/Popular/PostsListTabs';
+import { TO_POST } from 'routes/path';
 
 interface PopularPostsPinnedProps {
   popularPostsByCategory: {
@@ -11,7 +12,7 @@ interface PopularPostsPinnedProps {
 }
 
 export default function PopularPostsPinned({ popularPostsByCategory }: PopularPostsPinnedProps) {
-  const [activeTabIndex, setActiveTabIndex] = useState(0); 
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
   return (
     <div className={styles.popularPostsPinned}>
       <h3>Popular posts</h3>
@@ -20,16 +21,34 @@ export default function PopularPostsPinned({ popularPostsByCategory }: PopularPo
           {popularPostsByCategory.map(({ category }, index) => {
             const tabClassName = `${styles.title} ${activeTabIndex === index ? styles.activeTitle : ''}`;
             return (
-              <div 
-                key={category} 
+              <div
+                key={category}
                 className={tabClassName}
                 onClick={() => setActiveTabIndex(index)}
               >{category}</div>
             );
           })}
         </div>
-        <PopularPostsTabs popularPostsByCategory={popularPostsByCategory} activeTabIndex={activeTabIndex} />
+        {popularPostsByCategory.map(({ category, plainPosts }, index) => {
+          const tabClassName = `${styles.listTab} ${activeTabIndex === index ? styles.active : ''}`;
+          return (
+            <div className={tabClassName} key={category}>
+              {plainPosts.map(mapPost)}
+            </div>
+          );
+        })}
       </div>
+      <img src="/icons/pin.svg" className={styles.pin} />
+    </div>
+  );
+}
+
+function mapPost(post: PostPlain) {
+  const toPost = TO_POST({ slug: post.slug });
+  return (
+    <div key={post.slug} className={styles.item}>
+      <span className={styles.square}>&#x25A0;</span>
+      <Link to={toPost} className={styles.link}>{post.title}</Link>
     </div>
   );
 }
