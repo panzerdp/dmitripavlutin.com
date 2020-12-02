@@ -5,7 +5,7 @@ published: "2020-05-04T08:40Z"
 modified: "2020-11-07T21:40Z"
 thumbnail: "./images/cover-6.png"
 slug: dont-overuse-react-usecallback
-tags: ["react", "component", "memoization"]
+tags: ["react", "memoization"]
 recommended: ["use-react-memo-wisely", "react-usestate-hook-guide"]
 type: post
 ---

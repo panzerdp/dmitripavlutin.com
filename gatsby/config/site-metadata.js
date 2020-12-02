@@ -46,7 +46,6 @@ module.exports = {
       slugs: [
         'simple-explanation-of-javascript-closures',
         'gentle-explanation-of-this-in-javascript',
-        'how-to-compare-objects-in-javascript',
         'differences-between-arrow-and-regular-functions'
       ]
     }, {
@@ -55,7 +54,6 @@ module.exports = {
         'react-useeffect-explanation',
         'dont-overuse-react-usecallback',
         'use-react-memo-wisely',
-        'react-usestate-hook-guide',
       ]
     }, {
       category: 'Best Practices',

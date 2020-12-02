@@ -5,7 +5,7 @@ published: "2019-07-17T11:30:00Z"
 modified: "2020-09-19T09:00Z"
 thumbnail: "./images/instruments.jpg"
 slug: use-react-memo-wisely
-tags: ["react", "component", "memoization"]
+tags: ["react", "memoization"]
 recommended: ["react-useeffect-explanation", "dont-overuse-react-usecallback"]
 type: post
 ---
