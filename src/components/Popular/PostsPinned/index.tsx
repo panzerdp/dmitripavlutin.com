@@ -4,7 +4,6 @@ import Img from 'gatsby-image';
 
 import styles from './index.module.scss';
 import { TO_POST } from 'routes/path';
-import Tag from 'components/Tag';
 
 interface PopularPostsPinnedProps {
   popularPostsByCategory: {
@@ -56,9 +55,6 @@ function mapPost(post: Post<FixedImage>) {
         <div>
           <span className={styles.square}>&#x25A0;</span>
           <Link to={toPost} className={styles.link}>{post.title}</Link>
-        </div>
-        <div className={styles.tags}>
-          {post.tags.slice(0, 2).map(tag => <Tag tag={tag} key={tag} />)}
         </div>
       </div>
     </div>
