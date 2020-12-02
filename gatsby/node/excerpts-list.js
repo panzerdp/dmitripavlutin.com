@@ -6,7 +6,7 @@ const POSTS_PER_PAGE = 10;
 
 const pageComponentPath = path.resolve(__dirname, '../../src/components/Pages/ExcerptsList/Fetch/index.tsx');
 
-module.exports = function createExcerptsList(createPage, edges) {
+module.exports = function createExcerptsList(createPage, edges, popularPostsSlugs) {
   const pagesSum = Math.ceil(edges.length / POSTS_PER_PAGE);
   for (let currentPage = 1; currentPage <= pagesSum; currentPage++) {
     createPage({
@@ -17,6 +17,7 @@ module.exports = function createExcerptsList(createPage, edges) {
         limit: POSTS_PER_PAGE,
         currentPage,
         pagesSum,
+        popularPostsSlugs
       },
     });
   }

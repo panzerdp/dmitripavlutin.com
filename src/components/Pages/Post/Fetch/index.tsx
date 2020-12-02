@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 
 import PostTemplate from 'components/Pages/Post/Template';
 import { PostBySlugQuery } from 'typings/graphql';
-import { toPostImageFixed, toPostPlain } from 'utils/mapper';
+import { toPostPlain } from 'utils/mapper';
 
 interface PostTemplateFetchProps {
   data: PostBySlugQuery;

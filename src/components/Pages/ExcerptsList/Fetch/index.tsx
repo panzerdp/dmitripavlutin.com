@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 
 import ExcerptsListTemplate from 'components/Pages/ExcerptsList/Template';
 import { ExcerptsListQuery } from 'typings/graphql';
-import { toPostImageFluid } from 'utils/mapper';
+import { toPostImageFluid, toPostPlain } from 'utils/mapper';
 
 interface ExcerptsFetchProps {
   data: ExcerptsListQuery;
@@ -15,13 +15,26 @@ interface ExcerptsFetchProps {
 export default function ExcerptsFetch({
   data: {
     site: {
-      siteMetadata: { siteInfo },
+      siteMetadata: {
+        siteInfo,
+        featured: {
+          popularPostsByCategory
+        }        
+      },
     },
     allMarkdownRemark,
     authorProfilePicture,
+    popularPostsMarkdown
   },
   pageContext,
 }: ExcerptsFetchProps) {
+  const popularPosts = popularPostsMarkdown.edges.map(toPostPlain);
+  const popularPlainPostsByCategory = popularPostsByCategory.map(({ category, slugs }) => {
+    return {
+      category,
+      plainPosts: slugs.map(popularSlug => popularPosts.find(({ slug }) => popularSlug === slug))
+    };
+  });
   return (
     <ExcerptsListTemplate
       siteInfo={siteInfo}
@@ -29,12 +42,13 @@ export default function ExcerptsFetch({
       authorProfilePictureSrc={authorProfilePicture.childImageSharp.resize.src}
       currentPage={pageContext.currentPage}
       pagesSum={pageContext.pagesSum}
+      popularPostsByCategory={popularPlainPostsByCategory}
     />
   );
 }
 
 export const pageQuery = graphql`
-  query ExcerptsList($skip: Int, $limit: Int) {
+  query ExcerptsList($skip: Int, $limit: Int, $popularPostsSlugs: [String]!) {
     site {
       siteMetadata {
         siteInfo {
@@ -43,12 +57,27 @@ export const pageQuery = graphql`
         authorInfo {
           ...AuthorInfoAll
         }
+        featured {
+          popularPostsByCategory {
+            category
+            slugs
+          }
+        }
       }
     }
     authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {
       childImageSharp {
         resize(width: 256, height: 256, quality: 100) {
           src
+        }
+      }
+    }
+    popularPostsMarkdown: allMarkdownRemark(filter: { frontmatter: { slug: { in: $popularPostsSlugs } } }) {
+      edges {
+        node {
+          frontmatter {
+            ...Post
+          }
         }
       }
     }

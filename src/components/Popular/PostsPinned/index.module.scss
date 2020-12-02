@@ -1,10 +1,13 @@
 @import '~styles/variables';
 
-.popularPosts {
+.popularPostsPinned {
   box-shadow: $box-shadow;
   border-radius: 8px;
   font-size: 1.3rem;
-
+  margin: 0 auto;
+  margin-top: 2rem;
+  max-width: 30rem;
+  
   h3 {
     margin: 0;
     padding: 1.5rem;
@@ -14,14 +17,14 @@
   .tabs {
     .titles {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       border-bottom: 1px solid $border-color;
       padding: 0 1.5rem;
       // background-color: rgba($border-color, 0.4);
     
       .title {
         font-size: 1.3rem;
-        padding: 0.75rem 0;
+        padding: 0.75rem;
         cursor: pointer;
 
         &.activeTitle {

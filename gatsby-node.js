@@ -55,9 +55,11 @@ exports.createPages = async ({ graphql, actions }) => {
   const githubCommentsRepository = result.data.site.siteMetadata.githubCommentsRepository;
   // Create blog posts pages.
   const edges = result.data.allMarkdownRemark.edges;
-  createExcerptsList(createPage, edges, githubCommentsRepository);
+
   const popularPostsByCategory = result.data.site.siteMetadata.featured.popularPostsByCategory;
   const popularPostsSlugs = popularPostsByCategory.reduce((acc, postsByCategory) => [...acc, ...postsByCategory.slugs], []);
+
+  createExcerptsList(createPage, edges, popularPostsSlugs, githubCommentsRepository);
   createPost(createPage, edges, popularPostsSlugs, githubCommentsRepository);
   createPlainListByTag(createPage, edges);
   return result;  

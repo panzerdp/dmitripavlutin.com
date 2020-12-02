@@ -1,19 +1,19 @@
 import { useState } from 'react';
 
 import styles from './index.module.scss';
-import PopularPostsListTabs from 'components/Popular/PostsListTabs';
+import PopularPostsTabs from 'components/Popular/PostsListTabs';
 
-interface PopularPostsProps {
+interface PopularPostsPinnedProps {
   popularPostsByCategory: {
     plainPosts: PostPlain[],
     category: string
   }[];
 }
 
-export default function PopularPosts({ popularPostsByCategory }: PopularPostsProps) {
+export default function PopularPostsPinned({ popularPostsByCategory }: PopularPostsPinnedProps) {
   const [activeTabIndex, setActiveTabIndex] = useState(0); 
   return (
-    <div className={styles.popularPosts}>
+    <div className={styles.popularPostsPinned}>
       <h3>Popular posts</h3>
       <div className={styles.tabs}>
         <div className={styles.titles}>
@@ -28,7 +28,7 @@ export default function PopularPosts({ popularPostsByCategory }: PopularPostsPro
             );
           })}
         </div>
-        <PopularPostsListTabs popularPostsByCategory={popularPostsByCategory} activeTabIndex={activeTabIndex} />
+        <PopularPostsTabs popularPostsByCategory={popularPostsByCategory} activeTabIndex={activeTabIndex} />
       </div>
     </div>
   );
