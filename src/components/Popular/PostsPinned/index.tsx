@@ -4,6 +4,7 @@ import Img from 'gatsby-image';
 
 import styles from './index.module.scss';
 import { TO_POST } from 'routes/path';
+import Tag from 'components/Tag';
 
 interface PopularPostsPinnedProps {
   popularPostsByCategory: {
@@ -16,7 +17,6 @@ export default function PopularPostsPinned({ popularPostsByCategory }: PopularPo
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   return (
     <div className={styles.popularPostsPinned}>
-      <h3>Popular posts</h3>
       <div className={styles.tabs}>
         <div className={styles.titles}>
           {popularPostsByCategory.map(({ category }, index) => {
@@ -39,7 +39,10 @@ export default function PopularPostsPinned({ popularPostsByCategory }: PopularPo
           );
         })}
       </div>
-      <img src="/icons/pin.svg" className={styles.pin} />
+      <div className={styles.popular}>
+        <img src="/icons/popular.svg" className={styles.icon} />
+        <div className={styles.popularTitle}>Popular</div>
+      </div>
     </div>
   );
 }
@@ -52,9 +55,10 @@ function mapPost(post: Post<FixedImage>) {
         <Img fixed={post.thumbnail} />
       </Link>
       <div>
-        <div>
-          <span className={styles.square}>&#x25A0;</span>
-          <Link to={toPost} className={styles.link}>{post.title}</Link>
+        <span className={styles.square}>&#x25A0;</span>
+        <Link to={toPost} className={styles.link}>{post.title}</Link>
+        <div className={styles.tags}>
+          {post.tags.slice(0, 2).map(tag => <Tag tag={tag} key={tag} />)}
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@
   margin: 0 auto;
   margin-top: 1.5rem;
   position: relative;
-  max-width: 32rem;
+  max-width: 35rem;
   
   h3 {
     margin: 0;
@@ -22,11 +22,19 @@
       align-items: flex-end;
       border-bottom: 1px solid $border-color;
       padding: 0 1.5rem;
+
+      @media (max-width: $small-device-width) {
+        padding: 0 0.5rem;
+      }
     
       .title {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         padding: 0.75rem;
         cursor: pointer;
+
+        @media (max-width: $small-device-width) {
+          padding: 0.5rem;
+        }
 
         &.activeTitle {
           color: $anchor-color;
@@ -51,7 +59,7 @@
 
         .thumbnailAnchor {
           display: block;
-          margin-right: 0.75rem;
+          margin-right: 0.8rem;
           align-items: center;
 
           @media (max-width: $small-device-width) {
@@ -71,7 +79,6 @@
           font-size: 1.2rem;
           display: none;
 
-
           @media (max-width: $small-device-width) {
             display: inline-block;
           }
@@ -82,17 +89,51 @@
         }
     
         .link {
-          font-size: 1.5rem;
+          font-size: 1.45rem;
+        }
+
+        .tags {
+          display: flex;
+          flex-wrap: wrap;
+          margin-top: 0.5rem;
+          display: none; // Do not show ads for now
         }
       }
     }
   }
 
-  .pin {
+  .popular {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 2rem;
-    height: 2rem;
+    top: -0.5rem;
+    right: -1rem;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    border-radius: 4px;
+    background-color: rgba(white, 0.5);
+
+    @media (max-width: $small-device-width) {
+      .icon {
+        width: 2rem;
+        height: 2rem;
+      }
+  
+      .popularTitle {
+        display: none;
+      }
+    }
+
+    .icon {
+      width: 4rem;
+      height: 4rem;
+    }
+
+    .popularTitle {
+      margin: 0;
+      padding: 0;
+      color: $anchor-color;
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
   }
 }
