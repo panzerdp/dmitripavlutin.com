@@ -180,7 +180,7 @@ cancelFetchButton.addEventListener('click', () => {
 
 <!-- Open [the demo](). Click *Fetch movies* to start the request, then right away click *Cancel fetch* to cancel it. Then inspect the console and you'll see the `AbortError` error logged.   -->
 
-The abort controller instances aren't reusable. Each time you start a `fetch()` request, you have to create a new abort controller instance for this request.  
+The abort controller instances aren't reusable. Each time you start a `fetch()` request, you have to create a new abort controller instance for each request.  
 
 ## 5. Parallel fetch requests
 
