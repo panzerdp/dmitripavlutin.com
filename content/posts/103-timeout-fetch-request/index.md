@@ -2,7 +2,7 @@
 title: "How to Timeout a fetch() Request"
 description: "How to use setTimeout(), the abort controller, and fetch() API to make requests with a configurable timeout."
 published: "2020-10-27T09:00Z"
-modified: "2020-10-27T09:00Z"
+modified: "2020-12-03T08:00Z"
 thumbnail: "./images/cover-2.png"
 slug: timeout-fetch-request
 tags: ['fetch']
@@ -66,7 +66,7 @@ async function fetchWithTimeout(resource, options) {
 
 First, `const { timeout = 8000 } = options` extracts the timeout param in milliseconds from the `options` object (defaults to 8 seconds).   
 
-`const controller = new AbortController()` creates an instance of the [abort controller](https://developer.mozilla.org/en-US/docs/Web/API/AbortController). This controller that let's you stop `fetch()` requests at will. Note that for each request a new abort controlled must be created, in other words, controllers aren't reusable.   
+`const controller = new AbortController()` creates an instance of the [abort controller](https://developer.mozilla.org/en-US/docs/Web/API/AbortController). This controller lets you stop `fetch()` requests at will. Note that for each request a new abort controlled must be created, in other words, controllers aren't reusable.   
 
 `const id = setTimeout(() => controller.abort(), timeout)` starts a timing function. After `timeout` time, if the timining function wasn't cleared, `controller.abort()` is going to abort (or cancel) the fetch request.  
 
