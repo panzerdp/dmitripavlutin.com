@@ -23,3 +23,5 @@ In this post I will describe you situations how not to use React hooks, in simpl
 ## 3. Do Not use state for infrastructure data
 
 ## 4. Do Not forget to cleanup side-effects
+
+## 5. Summary
