@@ -2,7 +2,7 @@
 title: "How to Use Fetch with async/await"
 description: "How to use fetch() with async/await syntax in JavaScript: fetch JSON data, handle errors, make parallel requests, cancel and intercept requests."
 published: "2020-09-15T08:40Z"
-modified: "2020-12-03T19:40Z"
+modified: "2020-12-04T12:30Z"
 thumbnail: "./images/cover-4.png"
 slug: javascript-fetch-async-await
 tags: ['fetch', 'async await']
@@ -10,7 +10,7 @@ recommended: ['javascript-async-await', 'react-fetch-lifecycle-methods-hooks-sus
 type: post
 ---
 
-The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) has become the native way to fetch resources in Frontend applications. While `fetch()` is generally simple to use, there is a couple of nuances to be aware of.  
+The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) has become the native way to fetch resources in Frontend applications. While `fetch()` is generally easy to use, you should be aware of a couple of nuances.  
 
 In this post, I'll show you the common scenarios of how to use Fetch API with `async/await` syntax. You'll understand how to fetch data, handle fetch errors, cancel a fetch request, and more.  
 
@@ -54,9 +54,9 @@ When the request completes, `response` is assigned with the response object of t
 
 ## 2. Fetching JSON
 
-The `Response` object returned by the `fetch()` is a generic placeholder for multiple data formats.  
+The `Response` object, returned by the `await fetch()`, is a generic placeholder for multiple data formats.  
 
-Here's how you could fetch movies as JSON data from the response object:
+Here's how you can extract the JSON object from a fetch response:
 
 ```javascript {3}
 async function fetchMoviesJSON() {
@@ -72,7 +72,7 @@ fetchMoviesJSON().then(movies => {
 
 `response.json()` is a method on the Response object that lets you extract a JSON object from the response. The method returns a promise, so you have to wait for the JSON: `await response.json()`.
 
-The response object offers a lot of useful methods (all returning promises):
+The [response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object offers a lot of useful methods (all returning promises):
 
 * `response.json()` returns a promise resolved to a JSON object
 * `response.text()` returns a promise resolved to raw text
@@ -153,14 +153,15 @@ B) When starting the request properly, use the options argument of `fetch(url, {
 
 C) Finally, if you need to cancel the request, just call `controller.abort()` method.  
 
-For example, let's implement 2 buttons that control a fetch request. Clicking the button *Fetch movies* starts a *fetch()* request, while click *Cancel fetch* aborts the request in progress:
+For example, let's implement 2 buttons that control a fetch request. Clicking the button *Fetch movies* starts a `fetch()` request, while clicking *Cancel fetch* aborts the request in progress:
 
-```javascript{7,18}
+```javascript{8,19}
 let controller = null;
 
 fetchMoviesButton.addEventListener('click', async () => {
   controller = new AbortController();
   try {
+    console.log('Request in progress...');
     const response = await fetch('/movies', { 
       signal: controller.signal 
     });
@@ -178,9 +179,11 @@ cancelFetchButton.addEventListener('click', () => {
 });
 ```
 
-<!-- Open [the demo](). Click *Fetch movies* to start the request, then right away click *Cancel fetch* to cancel it. Then inspect the console and you'll see the `AbortError` error logged.   -->
+Open [the demo](https://codesandbox.io/s/cancel-fetch-request-ggieh?file=/src/index.html). Click *Fetch movies* to start the request, then right away click *Cancel fetch* to cancel it. This makes the active request cancel: `await fetch()` gets rejected by throwing an abort error. The `catch` block then catches the abort error.  
 
 The abort controller instances aren't reusable. Each time you start a `fetch()` request, you have to create a new abort controller instance for each request.  
+
+On a side note, if you'd like to timeout a `fetch()` request, follow my post [How to Timeout a fetch() Request](/timeout-fetch-request/).  
 
 ## 5. Parallel fetch requests
 
@@ -210,7 +213,7 @@ fetchMoviesAndCategories().then(({ movies, categories }) => {
 });
 ```
 
-`await Promise.all([...])` starts fetch requests in parallel, and waits until all of them are resolved. 
+`await Promise.all([...])` starts fetch requests in parallel, and waits until all of them are resolved.  
 
 ## 6. Intercepting fetch requests
 
