@@ -104,7 +104,108 @@ function FetchGame({ id }) {
 }
 ```
 
-## 2. Do Not use stale data
+Now, no matter the value of `id`, the `useState()` and `useEffect()` hooks are always invoked in the same order. That's how hooks should always be configured.  
+
+A rule of thumb I found useful: always all the invocations of React hooks at the beginning of the component.  
+
+## 2. Do Not create stale data
+
+React hooks heavily rely on the concept of closures. And exactly relying on closures is what makes them so expressive.  
+
+As a quick reminder, the [closure](/simple-explanation-of-javascript-closures/) in JavaScript is the function that captures variables from its lexical scope. No matter where the closure is executed, it always has access to the variables from the place where it is defined.  
+
+Sometimes, when working with hooks that use callbacks as arguments (like `useEffect()`, `useCallback()`) you might encounter an effect named stale closure. It happens when during re-renderings a closure has captured outdated state or props variables.  
+
+Let's an interesting example of a stale closure.
+
+The following component `MyIncreaser` increases the state variable `counter` when a button is clicked:
+
+```jsx
+function MyIncreaser() {
+  const [count, setCount] = useState(0);
+
+  const increase = useCallback(() => {
+    setCount(count + 1);
+  }, [count]);
+
+  const handleClick = () {
+    increase();
+    increase();
+    increase();
+  };
+
+  return (
+    <>
+      <button onClick={handleClick}>Increase</button>
+      <div>Counter: {counter}</div>
+    </>
+  );
+}
+```
+
+Now, before opening the demo, I want to ask you. If you click the button *3x Increase* once, does the counter increase by `3`?  
+
+Ok. Open the demo and click *3x Increase* once.  
+
+Unfortuantely, even if the `increase()` is called 3 times inside the `handleClick()`, when the button is clicked the `count` state variable is increased only by 1. Hm...
+
+The problem lays in the `setCount(count + 1)` state updater. When the button is clicked, React invokes 3 times:
+
+```javascript
+  const handleClick = () {
+    increase();
+    increase();
+    increase();
+  };
+
+// same as:
+
+  const handleClick = () {
+    setCount(count + 1);
+    // count variable is now stale
+    setCount(count + 1);
+    setCount(count + 1);
+  };
+```
+
+The first invocation of `setCount(count + 1)` correctly sets the counter to be `count + 1 = 0 + 1 = 1`. However, the next 2 calls of `setCount(count + 1)` also set the count to `1`, all because these calls use a *stale state*.  
+
+Usually a stale state is solved by using a functional way to update the state. Instead of using `setCount(count + 1)`, let's simply use `setCount(count => count + 1)`.  
+
+```jsx{5}
+function MyIncreaser() {
+  const [count, setCount] = useState(0);
+
+  const increase = useCallback(() => {
+    setCount(count => count + 1);
+  }, [count]);
+
+  const handleClick = () {
+    increase();
+    increase();
+    increase();
+  };
+
+  return (
+    <>
+      <button onClick={handleClick}>Increase</button>
+      <div>Counter: {counter}</div>
+    </>
+  );
+}
+```
+
+Inside the updater function `count => count + 1` React can provide you with the latest actual state value.  
+
+Open the demo with the fixed version. Now clicking *3x Increase* once increases the `count` by 3 as expected.  
+
+Here's a good rule to avoid encountering a stale variable:
+
+> If you use the current state value to calculate the next state, always use a functional way to update the state: `setValue(prevValue => prevValue + someResult)`.
+
+And to prevent closures from capturing old values:
+
+> Always makes sure that any state or prop value used inside of a callback supplied to a hook is indicated as a dependency.  
 
 ## 3. Do Not use state for infrastructure data
 
