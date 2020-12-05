@@ -108,15 +108,7 @@ Now, no matter the value of `id`, the `useState()` and `useEffect()` hooks are a
 
 A rule of thumb I found useful: always all the invocations of React hooks at the beginning of the component.  
 
-## 2. Do Not use stale data
-
-React hooks heavily rely on the concept of closures. And exactly relying on closures is what makes them so expressive.  
-
-As a quick reminder, the [closure](/simple-explanation-of-javascript-closures/) in JavaScript is the function that captures variables from its lexical scope. No matter where the closure is executed, it always has access to the variables from the place where it is defined.  
-
-Sometimes, when working with hooks that use callbacks as arguments (like `useEffect()`, `useCallback()`) you might encounter an effect named stale closure. It happens when during re-renderings a closure has captured outdated state or props variables.  
-
-Let's an interesting example of a stale closure.
+## 2. Do Not use stale state
 
 The following component `MyIncreaser` increases the state variable `counter` when a button is clicked:
 
@@ -207,7 +199,17 @@ And to prevent closures from capturing old values:
 
 > Always makes sure that any state or prop value used inside of a callback supplied to a hook is indicated as a dependency.  
 
-## 3. Do Not use state for infrastructure data
+## 3. Do Not use stale closures
+
+React hooks heavily rely on the concept of closures. And exactly relying on closures is what makes them so expressive.  
+
+As a quick reminder, the [closure](/simple-explanation-of-javascript-closures/) in JavaScript is the function that captures variables from its lexical scope. No matter where the closure is executed, it always has access to the variables from the place where it is defined.  
+
+Sometimes, when working with hooks that use callbacks as arguments (like `useEffect()`, `useCallback()`) you might encounter an effect named stale closure. It happens when during re-renderings a closure has captured outdated state or props variables.  
+
+Let's an interesting example of a stale closure.
+
+## 4. Do Not use state for infrastructure data
 
 Once I had the necessity to invoke a side-effect when a state variable updates, but without invoking the side-effect on first render.  
 
@@ -267,7 +269,7 @@ function MyComponent() {
 
 What's important updating a reference `isFirstRef.current = false` doesn't trigger a re-render.  
 
-## 4. Do Not forget to cleanup side-effects
+## 5. Do Not forget to cleanup side-effects
 
 Finally, as you might now already, `useEffect()` is the hook that you would use to invoke some side-effects.  
 
@@ -330,7 +332,7 @@ function DelayedIncreaser() {
 
 Open the fixed version demo. Click *Start Increasing* button and check how the count increases. Then hit *Unmount Increaser*: and thanks to `() => clearInterval(id)` cleanup the interval stops. No complains from React.  
 
-## 5. Summary
+## 6. Summary
 
 The best way to start with React hooks is to learn how to use them. That's the right thing to do.  
 
