@@ -5,7 +5,7 @@ published: "2020-12-08T12:00Z"
 modified: "2020-12-08T12:00Z"
 thumbnail: "./images/cat-2.jpg"
 slug: how-not-to-use-react-hooks
-tags: ['react', 'hook', 'useffect']
+tags: ['react', 'hook', 'useffect', 'usestate']
 recommended: ['use-react-memo-wisely', 'dont-overuse-react-usecallback']
 type: post
 ---
@@ -32,9 +32,12 @@ function FetchGame({ id }) {
   });
 
   useEffect(() => {
-    const response = await fetch(`/game/${id}`);
-    const fetchedGame = await response.json();
-    setGame(fetchedGame);
+    const fetchGame = async () => {
+      const response = await fetch(`/api/game/${id}`);
+      const fetchedGame = await response.json();
+      setGame(fetchedGame);
+    };
+    fetchGame();
   }, [id]);
 
   return (
@@ -48,7 +51,58 @@ function FetchGame({ id }) {
 
 The component `FetchGame` accepts a prop `id`. This prop is used to fetch the game information ``await fetch(`/game/${id}`)`` using the `useEffect()` hook.  
 
-Now open the demo and load a few games. If you open the console, you can see that React warns about incorrect order of hooks execution.  
+Now open the demo and load a few games. Look at the Problems tab &mdash; Eslint warns about incorrect order of hooks execution:  
+
+![React hooks order problem](./images/hooks-order-problem-3.png)
+
+The problem happens because of the early exit:  
+
+```javascript{2-4}
+function FetchGame({ id }) {
+  if (!id) {
+    return 'Please select a game to fetch';
+  }
+  
+   // ...
+}
+```
+
+When `id` is empty, the function render a simple message and exists. No hooks are invoked in such case. However, in case if `id` is not empty, e.g. equal `'1'`, the `useState()` and `useEffect()` hooks are invoked.  
+
+So, be sure to never invoke the hooks conditionally, but always invoke them in the same order, regardless of the props or state values.  
+
+Solving the broken `FetchGame` component would simply mean moving the return after invoking the hooks:
+
+```jsx{13-15,18-20}
+function FetchGame({ id }) {
+  const [game, setGame] = useState({ 
+    name: '',
+    description: '' 
+  });
+
+  useEffect(() => {
+    const fetchGame = async () => {
+      const response = await fetch(`/api/game/${id}`);
+      const fetchedGame = await response.json();
+      setGame(fetchedGame);
+    };
+    if (id) { 
+      fetchGame(); 
+    }
+  }, [id]);
+
+  if (!id) {
+    return 'Please select a game to fetch';
+  }
+
+  return (
+    <div>
+      <div>Name: {game.name}</div>
+      <div>Description: {game.description}</div>
+    </div>
+  );
+}
+```
 
 ## 2. Do Not use stale data
 
