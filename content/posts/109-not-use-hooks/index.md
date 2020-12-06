@@ -195,11 +195,7 @@ Here's a good rule to avoid encountering a stale variable:
 
 > If you use the current state value to calculate the next state, always use a functional way to update the state: `setValue(prevValue => prevValue + someResult)`.
 
-And to prevent closures from capturing old values:
-
-> Always makes sure that any state or prop value used inside of a callback supplied to a hook is indicated as a dependency.  
-
-## 3. Do Not use stale closures
+## 3. Do Not create stale closures
 
 React hooks heavily rely on the concept of closures. And exactly relying on closures is what makes them so expressive.  
 
@@ -207,7 +203,66 @@ As a quick reminder, the [closure](/simple-explanation-of-javascript-closures/) 
 
 Sometimes, when working with hooks that use callbacks as arguments (like `useEffect()`, `useCallback()`) you might encounter an effect named stale closure. It happens when during re-renderings a closure has captured outdated state or props variables.  
 
-Let's an interesting example of a stale closure.
+Let's study a common case of stale closure when using `useEffect()` hook. Inside the component `<WatchCount>` the hook `useEffect()` logs every second the value of `count`:  
+
+```jsx
+function WatchCount() {
+  const [count, setCount] = useState(0);
+
+  useEffect(function() {
+    setInterval(function log() {
+      console.log(`Count is: ${count}`);
+    }, 2000);
+  }, []);
+
+  const handleClick = () => setCount(count => count + 1);
+
+  return (
+    <>
+      <button onClick={handleClick}>Increase</button>
+      <div>Counter: {counter}</div>
+    </>
+  );
+}
+```
+
+[Open the demo](https://codesandbox.io/s/stale-closure-use-effect-broken-2-gyhzk) and click *Increase* button. Then check the console &mdash; every 2 seconds apprears `Count is: 0`, no matter the actual value of `count` state variable.  
+
+Why does it happen?
+
+At first render, the closure `log()` captures `count` variable as `0`. Later, even if `count` increases, `log()` still uses `count` as `0` from initial render. `log()` is a stale closure because it has captured a stale (in other words outdated) state variable `count`.  
+
+The solution is to let know `useEffect()` that the closure `log()` depends on `count` and properly handle the reset of interval:  
+
+```jsx{8,9}
+function WatchCount() {
+  const [count, setCount] = useState(0);
+
+  useEffect(function() {
+    const id = setInterval(function log() {
+      console.log(`Count is: ${count}`);
+    }, 2000);
+    return () => clearInterval(id);
+  }, [count]);
+
+  const handleClick = () => setCount(count => count + 1);
+
+  return (
+    <>
+      <button onClick={handleClick}>Increase</button>
+      <div>Counter: {counter}</div>
+    </>
+  );
+}
+```
+
+With the dependencies properly set, `useEffect()` updates the closure as soon as `count` changes.  
+
+Open the fixed demo and click a few times increase. The console will log the actual value of `count`.  
+
+To prevent closures from capturing old values:
+
+> Always makes sure that any state or prop value used inside of a callback supplied to a hook is indicated as a dependency.  
 
 ## 4. Do Not use state for infrastructure data
 
@@ -309,11 +364,9 @@ Open the demo, and click *Start increasing* button. As expected, the count state
 
 What happens if `DelayedIncreaser` component unmounts? On the same demo, while having the increaser in progress, click the *Unmount Increaser* button. You would see React throwing warnings in console about updating the state of a componet that's been unmounted.  
 
-That being said, every time you code a side-effect, question yourself whether it should cleanup.  
-
 Fixing `DelayedIncreaser` is simple: just return a cleanup function from the callback of `useEffect()`:
 
-```jsx
+```jsx{9}
 function DelayedIncreaser() {
   // ...
 
@@ -331,6 +384,8 @@ function DelayedIncreaser() {
 ```
 
 Open the fixed version demo. Click *Start Increasing* button and check how the count increases. Then hit *Unmount Increaser*: and thanks to `() => clearInterval(id)` cleanup the interval stops. No complains from React.  
+
+That being said, every time you code a side-effect, question yourself whether it should cleanup.  
 
 ## 6. Summary
 
