@@ -327,6 +327,8 @@ function MyComponent() {
 
 What's important updating a reference `isFirstRef.current = false` doesn't trigger a re-render.  
 
+(Add more examples from real world regarding roads, traffic lights)
+
 ## 5. Do Not forget to cleanup side-effects
 
 Finally, as you might now already, `useEffect()` is the hook that you would use to invoke some side-effects.  
