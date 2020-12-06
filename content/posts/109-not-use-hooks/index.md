@@ -16,6 +16,9 @@ However, despite hooks simplicity, there are situations when you just can't unde
 
 In this post I will describe you situations how not to use React hooks, in simple words the common mistakes you might be doing when using them.  
 
+```toc
+```
+
 ## 1. Do Not change hooks invocation order
 
 Just a few days before writing this post, I was writing a component that fetches data of a game. Here's a simplified version of `FetchGame` component:
@@ -333,6 +336,8 @@ A lot of side-effects, like making a fetch request, setting a timeout using `set
 What's important is to Not forget to always clean-up the side-effect is the component unmounts or it doesn't need anymore the result of the side-effect.  
 
 For example, if you'he started a timer, make sure to stop the timer if the component for some reason unmounts before the timer ends. 
+
+(Try to use an example that involves a slow fetch request)
 
 The following component has a button *Start increasing*. When the button is clicked, a counter increases by 1 with delay each second.  
 
