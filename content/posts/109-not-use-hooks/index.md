@@ -1,8 +1,8 @@
 ---
 title: "How Not to Use React Hooks"
 description: "Common mistakes and anti-patterns to avoid when using React hooks."
-published: "2020-12-08T12:00Z"
-modified: "2020-12-08T12:00Z"
+published: "2020-12-08T11:10Z"
+modified: "2020-12-08T11:10Z"
 thumbnail: "./images/cat-2.jpg"
 slug: how-not-to-use-react-hooks
 tags: ['react', 'hook', 'useffect', 'usestate']
@@ -50,11 +50,9 @@ function FetchGame({ id }) {
 }
 ```
 
-The component `FetchGame` accepts a prop `id` &mdash; the id of the game to be fetched. 
+The component `FetchGame` accepts a prop `id` &mdash; the id of the game to be fetched. `useEffect()` hook fetches the game information ``await fetch(`/game/${id}`)`` and saves it into the state variable `game`.  
 
-`useEffect()` hook fetches the game information ``await fetch(`/game/${id}`)`` and saves it into the state variable `game`.  
-
-Open the [demo](https://codesandbox.io/s/hooks-order-warning-rdxpg?file=/pages/index.js) and load a few games. Look at the Problems tab &mdash; Eslint warns about incorrect order of hooks execution:  
+Open the [demo](https://codesandbox.io/s/hooks-order-warning-rdxpg?file=/pages/index.js) and load a few games. The component correctly performs the fetch, as well updates the state with the fetched data. But look at the Problems tab &mdash; Eslint warns about incorrect order of hooks execution:  
 
 ![React hooks order problem](./images/hooks-order-problem-3.png)
 
@@ -70,7 +68,11 @@ function FetchGame({ id }) {
 }
 ```
 
-When `id` is empty, the component renders a simple message and exists. No hooks are invoked. However, in case if `id` is not empty, e.g. equal `'1'`, the `useState()` and `useEffect()` hooks are invoked.  
+When `id` is empty, the component renders `'Please select a game to fetch'` and exits. No hooks are invoked. 
+
+But if `id` is not empty (e.g. equals `'1'`) the `useState()` and `useEffect()` hooks are invoked.  
+
+Having the hooks executed conditionally can make your components buggy and lead to unexpected error.  
 
 Never invoke the hooks conditionally, but always invoke them in the same order, regardless of the props or state values.  That's exactly what suggests [the first rule of hooks](https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level): *Don’t call Hooks inside loops, conditions, or nested functions*.  
 
@@ -132,7 +134,7 @@ function MyIncreaser() {
   return (
     <>
       <button onClick={handleClick}>Increase</button>
-      <div>Counter: {counter}</div>
+      <div>Counter: {count}</div>
     </>
   );
 }
@@ -184,7 +186,7 @@ function MyIncreaser() {
   return (
     <>
       <button onClick={handleClick}>Increase</button>
-      <div>Counter: {counter}</div>
+      <div>Counter: {count}</div>
     </>
   );
 }
@@ -223,13 +225,13 @@ function WatchCount() {
   return (
     <>
       <button onClick={handleClick}>Increase</button>
-      <div>Counter: {counter}</div>
+      <div>Counter: {count}</div>
     </>
   );
 }
 ```
 
-[Open the demo](https://codesandbox.io/s/stale-closure-use-effect-broken-2-gyhzk) and click *Increase* button. Then check the console &mdash; every 2 seconds appears `Count is: 0`, no matter the actual value of `count` state variable.  
+[Open the demo](https://codesandbox.io/s/stale-closure-tmcpd?file=/src/index.js) and click *Increase* button. Then check the console &mdash; every 2 seconds appears `Count is: 0`, no matter the actual value of `count` state variable.  
 
 Why does it happen?
 
@@ -261,7 +263,7 @@ function WatchCount() {
 
 With the dependencies properly set, `useEffect()` updates the closure as soon as `count` changes.  
 
-Open the fixed [demo](https://codesandbox.io/s/stale-closure-use-effect-fixed-2-ybv47) and click a few times increase. The console will log the actual value of `count`.  
+Open the fixed [demo](https://codesandbox.io/s/stale-closure-fixed-rrfc2?file=/src/index.js) and click a few times increase. The console will log the actual value of `count`.  
 
 To prevent closures from capturing old values:
 
@@ -348,7 +350,7 @@ function DelayedIncreaser() {
 
   useEffect(() => {
     if (increase) {
-      const id = setInterval(() => {
+      setInterval(() => {
         setCount(count => count + 1)
       }, 1000);
     }
@@ -365,9 +367,11 @@ function DelayedIncreaser() {
 }
 ```
 
-Open the demo, and click *Start increasing* button. As expected, the count state variable increases each second.  
+Open the [demo](https://codesandbox.io/s/unmounted-state-update-n1d3u?file=/src/index.js), and click *Start increasing* button. As expected, the count state variable increases each second.  
 
 What happens if `DelayedIncreaser` component unmounts? On the same demo, while having the increaser in progress, click the *Unmount Increaser* button. You would see React throwing warnings in the console about updating the state of a component that's been unmounted.  
+
+![React unmounted component update state warning](./images/react-unmounted-update-state.png)
 
 Fixing `DelayedIncreaser` is simple: just return a cleanup function from the callback of `useEffect()`:
 
@@ -388,9 +392,9 @@ function DelayedIncreaser() {
 }
 ```
 
-Open the fixed version demo. Click *Start Increasing* button and check how the count increases. Then hit *Unmount Increaser*: and thanks to `() => clearInterval(id)` cleanup the interval stops. No complaints from React.  
+Open the fixed [demo](https://codesandbox.io/s/unmounted-state-update-fixed-siq8w?file=/src/index.js). Click *Start Increasing* button and check how the count increases. Then hit *Unmount Increaser*: and thanks to `() => clearInterval(id)` cleanup the interval stops. No complaints from React.  
 
-That being said, every time you code a side-effect, question yourself whether it should clean up.   
+That being said, every time you code a side-effect, question yourself whether it should clean up. Timers, heavy fetch requests (like uploading files), sockets almost always have to be clean up.  
 
 ## 6. Summary
 
