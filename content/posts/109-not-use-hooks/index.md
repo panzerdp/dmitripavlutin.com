@@ -142,7 +142,7 @@ function MyIncreaser() {
 
 Now, before opening the demo, I want to ask you. If you click the button *Increase* once, does the counter increase by `3`?  
 
-Ok. Open the [demo](https://codesandbox.io/s/stale-variable-fixed-3j0p8?file=/src/index.js) and click *Increase* button once.  
+Ok. Open the [demo](https://codesandbox.io/s/stale-variable-jo32q?file=/src/index.js) and click *Increase* button once.  
 
 Unfortunately, even if the `increase()` is called 3 times inside the `handleClick()`, when the button is clicked the `count` increases only by `1`. Hm...
 
