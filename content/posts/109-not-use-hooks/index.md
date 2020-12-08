@@ -19,7 +19,7 @@ In this post, I will describe the React hooks anti-patterns, and how to fix them
 
 ## 1. Do Not change hooks invocation order
 
-A few days before writing this post, I was coding a component that fetches a game information. Here's a simplified version of `FetchGame` component:
+A few days before writing this post, I was coding a component that fetches a game information by id. Here's a simplified version of `FetchGame` component:
 
 ```jsx
 function FetchGame({ id }) {
@@ -72,9 +72,9 @@ When `id` is empty, the component renders `'Please select a game to fetch'` and 
 
 But if `id` is not empty (e.g. equals `'1'`) the `useState()` and `useEffect()` hooks are invoked.  
 
-Having the hooks executed conditionally can make your components buggy and lead to unexpected error.  
+Having the hooks executed conditionally can lead to unexpected errors that might be hard to debug. The way React hooks internally work require components to always invoke hooks in the same order between renderings. 
 
-Never invoke the hooks conditionally, but always invoke them in the same order, regardless of the props or state values.  That's exactly what suggests [the first rule of hooks](https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level): *Don’t call Hooks inside loops, conditions, or nested functions*.  
+That's exactly what suggests [the first rule of hooks](https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level): *Don’t call Hooks inside loops, conditions, or nested functions*.  
 
 Solving the incorrect order of hooks means moving the `return` statements after invoking the hooks:
 
@@ -115,9 +115,9 @@ A rule of thumb is to execute the hooks at the top of the component body. [eslin
 
 ## 2. Do Not use stale state
 
-The following component `MyIncreaser` increases the state variable `counter` when a button is clicked:
+The following component `MyIncreaser` increases the state variable `count` when a button is clicked:
 
-```jsx
+```jsx{9-11}
 function MyIncreaser() {
   const [count, setCount] = useState(0);
 
@@ -140,11 +140,13 @@ function MyIncreaser() {
 }
 ```
 
+The interesting part is that `handleClick` invokes the state update `3` times.  
+
 Now, before opening the demo, I want to ask you. If you click the button *Increase* once, does the counter increase by `3`?  
 
 Ok. Open the [demo](https://codesandbox.io/s/stale-variable-jo32q?file=/src/index.js) and click *Increase* button once.  
 
-Unfortunately, even if the `increase()` is called 3 times inside the `handleClick()`, when the button is clicked the `count` increases only by `1`. Hm...
+Unfortunately, even if the `increase()` is called 3 times inside the `handleClick()`, `count` increases only by `1`. Hm...
 
 The problem lays in the `setCount(count + 1)` state updater. When the button is clicked, React invokes `setCount(count + 1)` 3 times:
 
@@ -165,9 +167,9 @@ The problem lays in the `setCount(count + 1)` state updater. When the button is 
   };
 ```
 
-The first invocation of `setCount(count + 1)` correctly updates the counter as `count + 1 = 0 + 1 = 1`. However, the next 2 calls of `setCount(count + 1)` also set the count to `1`, all because these calls use a *stale state*.  
+The first invocation of `setCount(count + 1)` correctly updates the counter as `count + 1 = 0 + 1 = 1`. However, the next 2 calls of `setCount(count + 1)` also set the count to `1` because they use a *stale state*.  
 
-The stale state is solved by using a functional way to update the state. Instead of using `setCount(count + 1)`, let's simply use `setCount(count => count + 1)`.  
+The stale state is solved by using a functional way to update the state. Instead of  `setCount(count + 1)`, let's better use `setCount(count => count + 1)`:  
 
 ```jsx{5}
 function MyIncreaser() {
@@ -192,7 +194,7 @@ function MyIncreaser() {
 }
 ```
 
-By using a updater function `count => count + 1`, React gives you with the latest *actual* state value.  
+By using a updater function `count => count + 1`, React can give you the latest *actual* state value.  
 
 Open the fixed [demo](https://codesandbox.io/s/stale-variable-fixed-3j0p8?file=/src/index.js). Now clicking *Increase* button updates the `count` by `3`, as expected.  
 
@@ -206,9 +208,11 @@ React hooks heavily rely on the concept of closures. Relying on closures is what
 
 As a quick reminder, the [closure](/simple-explanation-of-javascript-closures/) in JavaScript is the function that captures variables from its lexical scope. No matter where the closure is executed, it always has access to the variables from the place where it is defined.  
 
-When working with hooks that use callbacks as arguments (like `useEffect(callback, deps)`, `useCallback(callback, deps)`) you might encounter an effect named stale closure. It happens when during re-renderings a closure has captured outdated state or props variables.  
+When using hooks accept callbacks as arguments (like `useEffect(callback, deps)`, `useCallback(callback, deps)`) you might create a stale closure &mdash; a closure that has captured outdated state or prop variables.  
 
-Let's study a common case of stale closure when using `useEffect()` hook. Inside the component `<WatchCount>` the hook `useEffect()` logs every second the value of `count`:  
+Let's see a case of a stale closure created when using `useEffect(callback, deps)` hook and forgetting to correctly set the hook dependencies.   
+
+Inside the component `<WatchCount>` the hook `useEffect()` logs every second the value of `count`:  
 
 ```jsx
 function WatchCount() {
@@ -235,9 +239,11 @@ function WatchCount() {
 
 Why does it happen?
 
-At first render, the closure `log()` captures `count` variable as `0`. Later, even if `count` increases, `log()` still uses `count` as `0` from initial render. `log()` is a stale closure because it has captured a stale (in other words outdated) state variable `count`.  
+At first render, the closure `log` captures `count` variable as `0`. 
 
-The solution is to let know `useEffect()` that the closure `log()` depends on `count` and properly handle the reset of interval:  
+Later, when the button is clicked and `count` increases, `setInterval` still invokes the old `log` closure that has captured `count` as `0` from initial render. `log` is a stale closure because it has captured a stale (in other words outdated) state variable `count`.  
+
+The solution is to let know `useEffect()` that the closure `log` depends on `count` and properly reset the timer:  
 
 ```jsx{8,9}
 function WatchCount() {
@@ -261,21 +267,19 @@ function WatchCount() {
 }
 ```
 
-With the dependencies properly set, `useEffect()` updates the closure as soon as `count` changes.  
+With the dependencies properly set, `useEffect()` updates the closure of `setInterval()` as soon as `count` changes.  
 
 Open the fixed [demo](https://codesandbox.io/s/stale-closure-fixed-rrfc2?file=/src/index.js) and click a few times increase. The console will log the actual value of `count`.  
 
 To prevent closures from capturing old values:
 
-> Always makes sure that any state or prop value used inside of a callback supplied to a hook is indicated as a dependency.  
+> Always makes sure that any state or prop values used inside of a callback supplied to a hook is indicated as a dependency.  
 
 [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) can help you not forget to properly set the hooks dependecies.  
 
 ## 4. Do Not use the state for infrastructure data
 
-Once I had to invoke a side-effect on state variable update, but without invoking the side-effect on the first render.  
-
-As you might know, `useEffect(callback, deps)` always invokes the `callback` after initially mounting the component: so I want to avoid that.  
+Once I needed to invoke a side-effect on state update, but without invoking the side-effect on the first render. `useEffect(callback, deps)` always invokes the `callback` after mounting of the component: so I want to avoid that.  
 
 Surprinsngly for me, I found the following solution:
 
@@ -300,13 +304,15 @@ function MyComponent() {
 }
 ```
 
-A state variable `isFirst` holds the information whether now is the first render. That's a problem &mdash; as soon as you update `setIsFirst(false)` another re-render happens &mdash; and for no reason.  
+A state variable `isFirst` holds the information about whether this is the first render of the component. Holding such information in state is a problem &mdash; as soon as you update `setIsFirst(false)` another re-render happens &mdash; and for no reason.  
 
-The information whether this is the first render shouldn't be stored in the state. The infrastructure data: the information about rendering (is first render, the number of renderings), timer ids (`setTimeout()`, `setInterval()`), direct references to DOM elements, etc.  
+It makes sense to keep `count` as a state because counter information is rendered. However, `isFirst` isn't used to directly calculate the output.  
 
-A good rule of thumb is to manage infrastructure data as references, because updating references doesn't trigger re-rendering.   
+The information whether this is the first render shouldn't be stored in the state. The infrastructure data, like details about rendering cycle (is first rendering, the number of renderings), timer ids (`setTimeout()`, `setInterval()`), direct references to DOM elements, etc. should be stored and updated using references `useRef()`.   
 
-```jsx
+Let's store the information about first rendering into a reference:
+
+```jsx{2}
 function MyComponent() {
   const isFirstRef = useRef(true);
   const [count, setCounter] = useState(0);
@@ -329,19 +335,17 @@ function MyComponent() {
 
 `isFirstRef` is a reference that holds the information whether this is the first rendering of the component. `isFirstRef.current` property is used to access and update the value of the reference.  
 
-What's important: updating a reference `isFirstRef.current = false` doesn't trigger a re-render.  
+What's important: updating a reference `isFirstRef.current = false` doesn't trigger re-rendering.  
 
 ## 5. Do Not forget to cleanup side-effects
 
-Finally, as you might know already, `useEffect()` is the hook that you would use to invoke some side-effects.  
-
-A lot of side-effects, like making a fetch request and using timers like `setTimeout()`, are asynchronous.  
+A lot of side-effects, like making a fetch request or using timers like `setTimeout()`, are asynchronous.  
 
 Do not forget to clean-up the side-effect if the component unmounts or it doesn't need anymore the result of the side-effect.  
 
-For example, if you've started a timer, make sure to stop the timer if the component for some reason unmounts before the timer ends. 
+For example, if you've started a timer, make sure to stop the timer if the component when the component unmounts.  
 
-The following component has a button *Start increasing*. When the button is clicked, a counter increases by 1 with delay each second.  
+The following component has a button *Start increasing*. When the button is clicked, a counter increases by 1 with delay each second:  
 
 ```jsx
 function DelayedIncreaser() {
@@ -369,7 +373,7 @@ function DelayedIncreaser() {
 
 Open the [demo](https://codesandbox.io/s/unmounted-state-update-n1d3u?file=/src/index.js), and click *Start increasing* button. As expected, the count state variable increases each second.  
 
-What happens if `DelayedIncreaser` component unmounts? On the same demo, while having the increaser in progress, click the *Unmount Increaser* button. You would see React throwing warnings in the console about updating the state of a component that's been unmounted.  
+While having the increaser in progress, click the *Unmount Increaser* button that umounts the component. React warns in the console about updating the state of an unmounted component.  
 
 ![React unmounted component update state warning](./images/react-unmounted-update-state.png)
 
@@ -400,15 +404,15 @@ That being said, every time you code a side-effect, question yourself whether it
 
 The best way to start with React hooks is to learn how to use them. 
 
-But you might encounter situations when you just can't understand why they behave differently than you expect. Knowing how to use React hooks is not enough: you also should know how Not to use them.  
+But you can encounter situations when you can't understand why they behave differently than you expect. Knowing how to use React hooks is not enough: you also should know how Not to use them.  
 
-The first thing Not to do is render the hooks conditionally or change the order of hooks invocation. React expects that, no matter the props or state values, the component between re-rendering always invokes the hooks in the same order.  
+The first thing Not to do is render the hooks conditionally or change the order of hooks invocation. React expects that, no matter the props or state values, the component always invokes the hooks in the same order.    
 
-The second thing to avoid is using stale state values. That often happens when calculating next state using the current state. To solve that simply use a functional way to update the state. 
+The second thing to avoid is using stale state values. To avoid stale state use a functional way to update the state.  
 
-Also, don't forget to indicate correctly the dependencies array for hooks that accept callbacks as arguments: e.g. `useEffect(callback, deps)`, `useCallback(callback, deps)`. That allows you to solve the stale closures.    
+Don't forget to indicate the dependencies for hooks that accept callbacks as arguments: e.g. `useEffect(callback, deps)`, `useCallback(callback, deps)`. That allows you to solve the stale closures.  
 
-Do not store infrastructure data (like information about component rendering, `setTimeout()` or `useInterval()` ids) into the state. The rule of thumb is to keep such data into references.  
+Do not store infrastructure data (like information about component rendering cycle, `setTimeout()` or `useInterval()` ids) into the state. The rule of thumb is to keep such data into references.  
 
 Finally, do not forget to clean up your side-effects, if that's the case.  
 
