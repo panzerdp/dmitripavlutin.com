@@ -212,7 +212,7 @@ When using hooks accept callbacks as arguments (like `useEffect(callback, deps)`
 
 Let's see a case of a stale closure created when using `useEffect(callback, deps)` hook and forgetting to correctly set the hook dependencies.   
 
-Inside the component `<WatchCount>` the hook `useEffect()` logs every second the value of `count`:  
+Inside the component `<WatchCount>` the hook `useEffect()` logs every 2 seconds the value of `count`:  
 
 ```jsx
 function WatchCount() {
@@ -281,12 +281,12 @@ To prevent closures from capturing old values:
 
 Once I needed to invoke a side-effect on state update, but without invoking the side-effect on the first render. `useEffect(callback, deps)` always invokes the `callback` after mounting of the component: so I want to avoid that.  
 
-Surprinsngly for me, I found the following solution:
+Surprisingly for me, I found the following solution:
 
 ```jsx
 function MyComponent() {
   const [isFirst, setIsFirst] = useState(true);
-  const [count, setCounter] = useState(0);
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     if (isFirst) {
@@ -315,7 +315,7 @@ Let's store the information about first rendering into a reference:
 ```jsx{2}
 function MyComponent() {
   const isFirstRef = useRef(true);
-  const [count, setCounter] = useState(0);
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     if (isFirstRef.current) {
@@ -326,7 +326,7 @@ function MyComponent() {
   }, [counter]);
 
   return (
-    <button onClick={() => setCounter(count => count + 1)}>
+    <button onClick={() => setCounter(counter => counter + 1)}>
       Increase
     </button>
   );
