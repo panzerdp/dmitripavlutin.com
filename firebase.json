@@ -6,6 +6,10 @@
       "source": "/rss",
       "destination": "/rss.xml",
       "type": 301
+    }, {
+      "source": "/how-not-to-use-react-hooks/",
+      "destination": "/react-hooks-mistakes-to-avoid/",
+      "type": 301
     }],
     "headers": [
       {

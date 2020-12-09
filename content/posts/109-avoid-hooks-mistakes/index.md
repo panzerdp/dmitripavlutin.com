@@ -4,7 +4,7 @@ description: "Common mistakes and anti-patterns to avoid when using React hooks.
 published: "2020-12-08T11:10Z"
 modified: "2020-12-08T11:10Z"
 thumbnail: "./images/cat-2.jpg"
-slug: how-not-to-use-react-hooks
+slug: react-hooks-mistakes-to-avoid
 tags: ['react', 'hook', 'useffect', 'usestate']
 recommended: ['use-react-memo-wisely', 'dont-overuse-react-usecallback']
 type: post
