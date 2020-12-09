@@ -12,7 +12,7 @@ type: post
 
 Most likely you've read many posts on how to use React hooks. But *knowing how Not to use*, sometimes, is equally important as *knowing how to use*.  
 
-In this post, I will describe the React hooks anti-patterns, and how to fix them.  
+In this post, I will describe the React hooks usage mistakes, and how to fix them.    
 
 ```toc
 ```
