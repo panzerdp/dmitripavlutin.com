@@ -1,5 +1,5 @@
 ---
-title: "Facepalm Mistakes to Avoid When Using React Hooks"
+title: "5 Mistakes to Avoid When Using React Hooks"
 description: "Common mistakes and anti-patterns to avoid when using React hooks."
 published: "2020-12-08T11:10Z"
 modified: "2020-12-08T11:10Z"
