@@ -261,7 +261,7 @@ function WatchCount() {
   return (
     <>
       <button onClick={handleClick}>Increase</button>
-      <div>Counter: {counter}</div>
+      <div>Counter: {count}</div>
     </>
   );
 }
@@ -286,7 +286,7 @@ Surprisingly for me, I found the following solution:
 ```jsx
 function MyComponent() {
   const [isFirst, setIsFirst] = useState(true);
-  const [counter, setCounter] = useState(0);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (isFirst) {
@@ -294,10 +294,10 @@ function MyComponent() {
       return;
     }
     console.log('The counter increased!');
-  }, [counter]);
+  }, [count]);
 
   return (
-    <button onClick={() => setCounter(count => count + 1)}>
+    <button onClick={() => setCount(count => count + 1)}>
       Increase
     </button>
   );
@@ -315,7 +315,7 @@ Let's store the information about first rendering into a reference:
 ```jsx{2}
 function MyComponent() {
   const isFirstRef = useRef(true);
-  const [counter, setCounter] = useState(0);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (isFirstRef.current) {
@@ -323,10 +323,10 @@ function MyComponent() {
       return;
     }
     console.log('The counter increased!');
-  }, [counter]);
+  }, [count]);
 
   return (
-    <button onClick={() => setCounter(counter => counter + 1)}>
+    <button onClick={() => setCounter(count => count + 1)}>
       Increase
     </button>
   );
