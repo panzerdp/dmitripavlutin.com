@@ -10,7 +10,7 @@ recommended: ['react-usestate-hook-guide', 'react-hooks-mistakes-to-avoid']
 type: post
 ---
 
-React `useState()` hook let's you create, access and manage the state inside of functional React components.  
+React `useState()` hook lets you create, access, and manage the state inside of functional React components.  
 
 In this post, I'll let you know the subtle way of how React updates the state of the component: async or sync?
 
@@ -34,7 +34,7 @@ function MyComponent() {
 
 In the above example `value` is the current state value, and `setValue()` is the state updater function. Calling `setValue('Changed value')` inside the click event handler the state to `'Changed value'`.  
 
-An important idea to remember about the update of the state inside of the React component is that the state update is *asynchornous*.  
+An important idea to remember about the update of the state inside of the React component is that the state update is *asynchronous*.  
 
 Consider a functional component `DoubleIncreaser` that has a counter state. The component has a button *Double Increase*:
 
@@ -64,11 +64,11 @@ When the button is clicked, `doubleIncreaseHandler` event handler performs 2 con
 
 Open the demo and click the button *Double Increase*. Unfortunately, `count` is increased by `1` at each click.  
 
-When `setCount(count + 1)` updates the state, the changes are not reflected immediately in the `count` variable. Rather React **schedules a re-rendering** of the component, and on next render `count` variable gets updated.  
+When `setCount(count + 1)` updates the state, the changes are not reflected immediately in the `count` variable. Rather React **schedules a re-rendering** of the component, and on the next render `count` variable gets updated.  
 
 > The setter function `setValue(newValue)` of `useState()` updates both state variable `value` and the component's output asynchronously.  
 
-In other words, if you're updating the state, expect the state variable to have the actual value only on next rendering. That's why, event calling `setCount(count + 1)`, on later statement `count` is still going to have the old value.  
+In other words, if you're updating the state, expect the state variable to have the actual value only on the next rendering. That's why, event calling `setCount(count + 1)`, on later statement `count` is still going to have the old value.  
 
 If you'd like to access the actual state value, use the functional way to update the state:
 
@@ -126,7 +126,7 @@ function FetchUsers() {
 }
 ```
 
-`FetchUsers` component starts a fetch request on mounting. `setUsers(fetchedUsers)` updates the state with the fetched users, however the changes aren't reflected right away in `users` state variable.  
+`FetchUsers` component starts a fetch request on mounting. `setUsers(fetchedUsers)` updates the state with the fetched users, however, the changes aren't reflected right away in `users` state variable.  
 
 ## 3. State update in a class component
 
@@ -174,10 +174,10 @@ In class based components, `this.state` is also not updated immediately. When ca
 
 ## 4. Summary
 
-`useState()` hook (inside functional React components) as well as `this.setState()` (inside class components) update the state variable as well as the component output asynchronously.  
+`useState()` hook (inside functional React components) and `this.setState()` (inside class components) update the state variable and the component output asynchronously.  
 
 Remember the simple rule: 
 
-> Calling the setter function `setValue(newValue)` of `useState()` hook doesn't exactly update the state, but rather *schedules a state update*.  
+> Calling the setter function `setValue(newValue)` of `useState()` hook (and `this.setState()` inside class components) doesn't exactly update the state, but rather *schedules a state update*.  
 
-*Quiz: are references (created by `useRef()`) updated synchonously or asynchonously? Write the answer in a comment below!*
+*Quiz: are references (created by `useRef()`) updated synchronously or asynchronously? Write the answer in a comment below!*
