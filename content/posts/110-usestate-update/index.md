@@ -1,9 +1,9 @@
 ---
-title: "Is the State of React Components Updated Sync or Async?"
+title: "How React Updates State"
 description: "Why React.useState() doesn't mutate state immediately?"
 published: "2020-12-15T12:00Z"
 modified: "2020-12-15T12:00Z"
-thumbnail: "./images/cover-2.png"
+thumbnail: "./images/cover-3.png"
 slug: react-usestate-update-state-immediately
 tags: ['react', 'hook', 'usestate']
 recommended: ['react-usestate-hook-guide', 'react-hooks-mistakes-to-avoid']
@@ -12,7 +12,7 @@ type: post
 
 React `useState()` hook manages the state in functional React components.  
 
-When you call the state update function, does React update the state in synchornously  or asynchornously? 
+When you call the state update function, does React update the state immediately (synchornously) or rather schedules a state update (asynchornously)? This post answers this question.  
 
 ## 1. State update using *useState()*
 
@@ -31,7 +31,7 @@ function DoubleIncreaser() {
 
   return (
     <>
-      <button onClick={this.doubleIncreaseHandler}>
+      <button onClick={doubleIncreaseHandler}>
         Double Increase
       </button>
       <div>Count: {count}</div>
@@ -44,22 +44,19 @@ function DoubleIncreaser() {
 
 The component has a button *Double Increase*. When the button is clicked, `doubleIncreaseHandler` event handler performs 2 consecutive increments of count state: `setCount(count + 1)` and then `setCount(count + 1)` again.  
 
-The big question now is &mdash; when calling `setCount(count + 1); setCount(count + 1);` does the state update by:
+The big question now is &mdash; when calling `setCount(count + 1); setCount(count + 1);` does the state update by `1` or `2`?
 
-* 2, which would mean that the state is updated synchornously
-* or 1, which would mean that the state updates asynchronously?
+Open the [demo](https://codesandbox.io/s/usestate-broken-ytmxk?file=/src/index.js) and click the button *Double Increase*. The `count` is increased by `1` at each click.  
 
-Open the demo and click the button *Double Increase*. The `count` is increased by `1` at each click.  
+When `setCount(count + 1)` updates the state, the changes are not reflected immediately in the `count` variable. Rather React *schedules a state update*, and on the next render `count` variable gets updated.  
 
-When `setCount(count + 1)` updates the state, the changes are not reflected immediately in the `count` variable. Rather React *schedules the state update*, and on the next render `count` variable gets updated.  
+For instance, if `count` variable is `0`, then calling `setCount(count + 1); setCount(count + 1); ` is evaluated as `setCount(0 + 1); setCount(0 + 1)` &mdash; setting the state to `1`.  
 
-For instance, if `count` variable is `0`, then calling `setCount(count + 1); setCount(count + 1); ` is evaluated as `setCount(0 + 1); setCount(0 + 1)`: which sets the state to `1`.
-
-> The setter function `setValue(newValue)` of `useState()` updates the state asynchronously.  
+> The state update function `setValue(newValue)` of `[value, setValue] = useState()` updates the state asynchronously.  
 
 In other words, if you're updating the state, expect the state variable to receive the actual value on the next rendering.  
 
-If you'd like to access the actual state value, use the functional way to update the state:
+If you use the current state to calculate the next state, then you can provide a callback to the state updater function. In case of the `DoubleIncreaser`, you can use `setCount(actualCount => actualCount + 1)`:  
 
 ```jsx{7-8}
 import { useState } from 'react';
@@ -67,14 +64,14 @@ import { useState } from 'react';
 function DoubleIncreaser() {
   const [count, setCount] = useState(0);
 
-  const doubleIncrease = () => {
+  const doubleIncreaseHandler = () => {
     setCount(actualCount => actualCount + 1);
     setCount(actualCount => actualCount + 1);
   };
 
   return (
     <>
-      <button onClick={this.doubleIncrease}>
+      <button onClick={doubleIncreaseHandler}>
         Double Increase
       </button>
       <div>Count: {count}</div>
@@ -83,9 +80,9 @@ function DoubleIncreaser() {
 }
 ```
 
-When updating the state using a function `setCount(actualCount => actualCount + 1)`, the `actualCount` argument contains the actual value of the state.  
+When updating the state using a function `setCount(actualCount => actualCount + 1)`, then `actualCount` argument contains the actual value of the state.  
 
-Open the demo, and click the *Double Increase* button. The count updates by `2` as expected.  
+Open the [demo](https://codesandbox.io/s/usestate-fixed-callback-e4pp3?file=/src/index.js), and click the *Double Increase* button. The count updates by `2` as expected.  
 
 Of course, you can use an intermediate `let` variable:
 
@@ -113,7 +110,9 @@ function DoubleIncreaser() {
 }
 ```
 
-`let actualCount = count` is an intermediate variable that you can update. Then update the state using the intermediate variable `setCount(actualCount)`.  
+`let actualCount = count` is an intermediate variable that you can update at will. The updated intermediate variable to update the `setCount(actualCount)`.  
+
+Try the [demo](https://codesandbox.io/s/usestate-fixed-interm-variable-xo3n7?file=/src/index.js) using intermediate variable.  
 
 ## 2. The state variable is immutable and readonly
 
@@ -147,13 +146,37 @@ function FetchUsers() {
 
 After the fetch completing, `setUsers(fetchedUsers)` updates the state with the fetched users. However, the changes aren't reflected right away in `users` state variable.  
 
-The state variable `users` is immutable and readonly. You can schedule its update 
+The state variable `users` is readonly and immutable. You're not allowed to assign to state variable, neither mutate it. The only thing you can do is use the state update function: `setUsers(newUsersList)`.  
+
+```jsx{9-11}
+function FetchUsers() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const startFetching = async () => {
+      const response = await fetch('/users');
+      const fetchedUsers = await response.json();
+
+      users = fetchedUsers;       // Incorrect! users is readonly
+      users.push(..fetchedUsers); // Incorrect! users is immutable
+      setUsers(fetchedUsers);     // Correct!
+    };
+    startFetching();
+  }, []);
+
+  return (
+    <ul>
+      {users.map(user => <li>{user}</li>)}
+    </ul>
+  );
+}
+```
 
 ## 3. State update in a class component
 
-The same idea of the asynchonous state update is perform in class components too.  
+The same idea of the asynchonous state update is valid for class components too.  
 
-The following class component has the state `count`, which gets increased when the button *Double Increase* is clicked:
+The following class component has a state `count`, which should increase by `2` when the button *Double Increase* is clicked:
 
 ```jsx{21-26}
 import { Component } from 'react';
@@ -176,11 +199,11 @@ class DoubleIncreaser extends Component {
 
   doubleIncrease = () => {
     // Works!
-    this.setState({ actualCount } => ({ 
-      actualCount: actualCount + 1
+    this.setState(({ count }) => ({
+      count: count + 1
     }));
-    this.setState({ actualCount } => ({ 
-      actualCount: actualCount + 1
+    this.setState(({ count }) => ({
+      count: count + 1
     }));
 
     // Won't work!
@@ -190,18 +213,18 @@ class DoubleIncreaser extends Component {
 }
 ```
 
-Take a look at the `doubleIncrease()` event handler: `this.setState(actualCount => actualCount + 1)` the state updater also uses a callback function.  
+Take a look at the `doubleIncrease()` event handler: the state updater also uses a callback.  
 
-Open the demo and click the button *Double Increase*. As expected, the `this.state.count` updates by 2. 
+Open the [demo](https://codesandbox.io/s/thisstate-chrfo?file=/src/index.js) and click the button *Double Increase*. As expected, the `this.state.count` updates by 2. 
 
 In class based components, `this.state` is also not updated immediately. When calling `this.setState(newState)`, React schedules a re-render, and exactly on next rendering
 `this.state` contains the new state value `newState`.  
 
-> `this.setState(newState)` updates `this.state` asynchronously, i.e. on next rendering.  
+> `this.setState(newState)` updates `this.state` asynchronously.  
 
 ## 4. Summary
 
-`useState()` hook (inside functional React components) and `this.setState()` (inside class components) update the state variable and the component output asynchronously.  
+`useState()` hook and `this.setState()` (inside class components) update the state variable and the component output asynchronously.  
 
 Remember the simple rule: 
 
