@@ -233,9 +233,26 @@ When the request completes, `setEmployees(await fetchEmployees(query))` updates 
 
 On later renderings, if the `query` prop changes, `useEffect()` hook starts a new fetching process for a new `query` value.  
 
-The callback argument of `useEffect(callback)` cannot be an `async` function. But you can always invoke an `async` function inside the callback function itself, like in the previous example: `fetchEmployees()`.  
+The `callback` argument of `useEffect(callback)` cannot be an `async` function. But you can always invoke an `async` function inside the callback function itself, like in the previous example:  
 
-To run only once the fetch request when the component mounts, simply indicate an empty dependencies list: `useEffect(fetchSideEffect, [])`.  
+```jsx{4,8}
+function FetchEmployeesByQuery({ query }) {
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(() => {  // <--- CANNOT be an async function
+    async function fetchEmployees() {
+      // ...
+    }
+    fetchEmployees(); // <--- But CAN invoke async functions
+  }, [query]);
+
+  // ...
+}
+```
+
+*Quiz: Do you know why the `callback` of `useEffect()` cannot be an `async` function? Please write your opinion in a comment below!*
+
+To run the fetch request once when the component mounts, simply indicate an empty dependencies list: `useEffect(fetchSideEffect, [])`.  
 
 ## 6. Side-effect cleanup
 
