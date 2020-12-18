@@ -779,7 +779,7 @@ function compare(n1, n2) {
     return -1;
   }
   if (n1 % 2 !== 0 && n2 % 2 === 0) {
-    return -1;
+    return 1;
   }
   return 0;
 }
