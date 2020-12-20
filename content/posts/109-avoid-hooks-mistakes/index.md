@@ -412,7 +412,7 @@ The second thing to avoid is using stale state values. To avoid stale state use 
 
 Don't forget to indicate the dependencies for hooks that accept callbacks as arguments: e.g. `useEffect(callback, deps)`, `useCallback(callback, deps)`. That allows you to solve the stale closures.  
 
-Do not store infrastructure data (like information about component rendering cycle, `setTimeout()` or `useInterval()` ids) into the state. The rule of thumb is to keep such data into references.  
+Do not store infrastructure data (like information about component rendering cycle, `setTimeout()` or `setInterval()` ids) into the state. The rule of thumb is to keep such data into references.  
 
 Finally, do not forget to clean up your side-effects, if that's the case.  
 
