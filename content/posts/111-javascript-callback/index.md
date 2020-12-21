@@ -49,11 +49,11 @@ messages; // => ['Hello, Cristina!', 'Hello, Ana!']
 
 `persons.map(greet)` method accepts `greet` function as an argument. Doing so makes the `greet` a *callback function*.  
 
-A function that accepts a another function as an arguments or returns a function is named *higher order function*.  
+A function that accepts another function as an argument or returns a function is named *higher-order function*.  
 
-> A *higher order function* accepts a *callback function* as an argument and invokes ("calls back") the callback function to perform an operation.  
+> A *higher-order function* accepts a *callback function* as an argument and invokes ("calls back") the callback function to perform an operation.  
 
-In the examples above, `persons.map(greet)` method is a higher order function that uses `greet()` callback function to map persons to greeting messages.  
+In the examples above, `persons.map(greet)` method is a higher-order function that uses `greet()` callback function to map persons to greeting messages.  
 
 You can always write higher order functions that use callbacks by yourself. For example, here's an equivalent version that maps items of an array:
 
@@ -74,13 +74,13 @@ const messages = map(persons, greet);
 messages; // => ['Hello, Cristina!', 'Hello, Ana!'] 
 ```
 
-`map(array, callback)` is a higher order function because it accepts a callback function as an argument, and then inside of its body invokes the callback function: `callback(item)`.  
+`map(array, callback)` is a higher-order function because it accepts a callback function as an argument, and then inside of its body invokes the callback function: `callback(item)`.  
 
 ## 2. The synchronous callback
 
-The way callback functions are used can be divided into 2 categories: synchornous and asynchornous callbacks.  
+The way callback functions are used can be divided into 2 categories: synchronous and asynchronous callbacks.  
 
-The synchornous callback is executed during the execution of the higher order function that uses it.  
+The synchronous callback is executed during the execution of the higher-order function that uses it.  
 
 For example, recall the `map()` and `greet()` functions.  
 
@@ -109,19 +109,19 @@ map(persons, greet);
 
 Feel free to check the [demo](https://jsitor.com/MZVUzLzql).  
 
-`greet()` here is a synchornous callback because its being executed at the same time as the higher order function `map()`.  
+`greet()` is a synchronous callback because it's being executed at the same time as the higher-order function `map()`.  
 
-The synchornous way to invoke the callbacks:  
+The synchronous way to invoke the callbacks:  
 
-1. The higher order function starts execution
-* The higher order calls a few times the callback function 
-* Finally, the higher order function completes its execution.  
+1. The higher-order function starts execution
+* The higher-order calls a few times the callback function 
+* Finally, the higher-order function completes its execution.  
 
-## 3. The asynchornous callback
+## 3. The asynchronous callback
 
-The asynchonous callback, on the contrary to synchronous, is executed at a time after the execution of higher order function that uses it.  
+The asynchronous callback, on the contrary to synchronous, is executed at a time after the execution of the higher-order function that uses it.  
 
-A good example of asynchronous callbacks are the timer functions: `setTimeout(callback, time)` is a function that invokes the `callback` after `time` milliseconds have passed.  
+A good example of asynchronous callbacks is the timer functions: `setTimeout(callback, time)` is a function that invokes the `callback` after `time` milliseconds have passed.  
 
 In the following example the `callback` function is executed after 2 seconds:
 
@@ -139,18 +139,18 @@ console.log('setTimeout() completed');
 
 This time `callback()` is asynchornous because `setTimeout(callback)` is starts and completes, however the `callback()` is executed only after 2 seconds.  
 
-The asynchornous way to invoke the callbacks:
+The asynchronous way to invoke the callbacks:
 
-1. The higher order function starts execution
-2. The higher order function completes its execution
-3. The higher order function executes the callback at a later time (due to an event, passed timeout)
+1. The higher-order function starts execution
+2. The higher-order function completes its execution
+3. The higher-order function executes the callback at a later time (due to an event, passed timeout)
 
 ## 4. Summary
 
-The callback is a function that's accepted as an argument and executed by another function (also labeled the higher order function).  
+The callback is a function that's accepted as an argument and executed by another function (also labeled the higher-order function).  
 
-There are 2 kinds of callback functions: synchornous and asynchornous.  
+There are 2 kinds of callback functions: synchronous and asynchronous.  
 
-The synchornous callbacks are executed at the same time as the higher order function that uses the callback. 
+The synchronous callbacks are executed at the same time as the higher-order function that uses the callback. 
 
-On the other side, the asynchornous callbacks are executed at a later time than the higher order function that uses it.  
+On the other side, the asynchronous callbacks are executed at a later time than the higher-order function that uses it.  
