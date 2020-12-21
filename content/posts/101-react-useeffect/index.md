@@ -2,7 +2,7 @@
 title: "A Simple Explanation of React.useEffect()"
 description: "useEffect() hook executes side-effects in React components."
 published: "2020-10-13T08:50Z"
-modified: "2020-12-18T10:00Z"
+modified: "2020-12-21T07:30Z"
 thumbnail: "./images/effect-4.jpg"
 slug: react-useeffect-explanation
 tags: ['react', 'hook', 'useeffect']
@@ -63,9 +63,9 @@ useEffect(callback[, dependencies]);
 * `callback` is the callback function containing side-effect logic. `useEffect()` executes the callback function after React has committed the changes to the screen.
 * `dependencies` is an optional array of dependencies. `useEffect()` executes `callback` only if the dependencies have changed between renderings.  
 
-## 2. Dependencies of *useEffect()*
+## 2. The dependencies of *useEffect()*
 
-`dependencies` array lets you control when the side-effect runs. When dependencies are:
+`dependencies` argument of `useEffect(callback, dependencies)` lets you control when the side-effect runs. When dependencies are:
 
 A) Not provided: the side-effect runs after *every* rendering.
 
@@ -79,7 +79,7 @@ function MyComponent() {
 }
 ```
 
-B) An empty array `[]`: the side-effect runs *once* after the initial rendering
+B) An empty array `[]`: the side-effect runs *once* after the initial rendering.
 
 ```jsx{6}
 import { useEffect } from 'react';
@@ -91,7 +91,7 @@ function MyComponent() {
 }
 ```
 
-C) Has props or state values `[prop1, prop2, ..., state1, state2]`: the side-effect runs *only when any value in the dependencies change*.  
+C) Has props or state values `[prop1, prop2, ..., state1, state2]`: the side-effect runs *only when any depenendecy value changes*.  
 
 ```jsx{7}
 import { useEffect } from 'react';
@@ -106,7 +106,7 @@ function MyComponent({ prop }) {
 
 While the case A) you won't use often, let's detail into the cases B) and C).  
 
-## 3. Side-effect on component did mount
+## 3. The side-effect on component did mount
 
 Some side-effects you'd like to invoke once after the mounting of the component.  
 
@@ -142,7 +142,7 @@ Even if the component re-renders with different `name` property, the side-effect
 <Greet name="Butters"/> // Side-effect does NOT RUN
 ```
 
-## 4. Side-effect on component did update
+## 4. The side-effect on component did update
 
 Each time the side-effect uses props or state values, you must indicate these values as dependencies:
 
@@ -203,7 +203,7 @@ function Greet({ name }) {
 The following component `FetchEmployeesByQuery` fetches the employees list over the network. The `query` prop filters the fetched employees:
 
 ```jsx
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function FetchEmployeesByQuery({ query }) {
   const [employees, setEmployees] = useState([]);
@@ -213,8 +213,8 @@ function FetchEmployeesByQuery({ query }) {
       const response = await fetch(
         `/employees?q=${encodeURIComponent(query)}`
       );
-      const employees = await response.json(response);
-      setEmployees(employees);
+      const fetchedEmployees = await response.json(response);
+      setEmployees(fetchedEmployees);
     }
     fetchEmployees();
   }, [query]);
@@ -227,13 +227,13 @@ function FetchEmployeesByQuery({ query }) {
 }
 ```
 
-Inside `<FetchEmployeesByQuery query="query">`, `useEffect()` starts a fetch request by calling the asynchronous function `fetch()` right after the initial mounting.    
+`useEffect()` starts a fetch request by calling `fetch()` after the initial mounting.   
 
-When the request completes, `setEmployees(await fetchEmployees(query))` updates the component state with the newly fetched employees list.  
+When the request completes, `setEmployees(fetchedEmployees)` updates the component state with the newly fetched employees list.  
 
-On later renderings, if the `query` prop changes, `useEffect()` hook starts a new fetching process for a new `query` value.  
+On later renderings, if the `query` prop changes, `useEffect()` hook starts a new fetch request for a new `query` value.  
 
-The `callback` argument of `useEffect(callback)` cannot be an `async` function. But you can always invoke an `async` function inside the callback function itself, like in the previous example:  
+Note that the `callback` argument of `useEffect(callback)` cannot be an `async` function. But you can always invoke an `async` function inside the callback function itself, like in the previous example:  
 
 ```jsx{4,8}
 function FetchEmployeesByQuery({ query }) {
@@ -254,7 +254,7 @@ function FetchEmployeesByQuery({ query }) {
 
 To run the fetch request once when the component mounts, simply indicate an empty dependencies list: `useEffect(fetchSideEffect, [])`.  
 
-## 6. Side-effect cleanup
+## 6. The side-effect cleanup
 
 There are side-effects that need cleanup: close a socket, clear timers.  
 
