@@ -1,6 +1,6 @@
 ---
 title: "What is a Callback Function in JavaScript?"
-description: "What is a callback function in JavaScript?"
+description: "The callback is a function that's accepted as an argument and executed by another function (the higher-order function)."
 published: "2020-12-22T12:00Z"
 modified: "2020-12-22T12:00Z"
 thumbnail: "./images/cover.png"
@@ -117,6 +117,49 @@ The synchronous way to invoke the callbacks:
 1. The higher-order function starts execution
 * The higher-order calls a few times the callback function 
 * Finally, the higher-order function completes its execution.  
+
+### 2.1 Examples of synchronous callbacks
+
+A lot of methods of native JavaScript types use synchornous callbacks. 
+
+#### Array methods use synchronous callbacks
+
+The biggest users of synchronous callbacks are the [array methods](/operations-on-arrays-javascript/) like `array.map(callback)`, `array.forEach(callback)`, `array.find(callback)`, `array.filter(callback)`, `array.reduce(callback)`:  
+
+```javascript{5-7,13-15,20-25}
+// Examples of synchronous callbacks on arrays
+const persons = ['Ana', 'Elena'];
+
+persons.forEach(
+  function callback(person) {
+    console.log(person);
+  }
+);
+// logs 'Ana'
+// logs 'Elena'
+
+const containsAna = persons.find(
+  function callback(person) {
+    return person === 'Ana';
+  }
+);
+containsAna; // => true
+
+const namesStartingA = persons.reduce(
+  function callback(count, person) {
+    if (person[0].toLowerCase() === 'a') {
+      count++;
+    }
+    return count;
+  }, 
+  0
+);
+namesStartingA; // => 1
+```
+
+#### String methods use synchronous callbacks
+
+
 
 ## 3. The asynchronous callback
 
