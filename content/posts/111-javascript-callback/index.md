@@ -1,8 +1,8 @@
 ---
 title: "Everything About Callback Functions in JavaScript"
-description: "The callback is a function that's being called by another function, either synchornously or asynchronously."
-published: "2020-12-22T12:00Z"
-modified: "2020-12-22T12:00Z"
+description: "The callback is a function being called by another function, either synchronously or asynchronously."
+published: "2020-12-22T11:40Z"
+modified: "2020-12-22T11:40Z"
 thumbnail: "./images/cover-4.png"
 slug: javascript-callback
 tags: ['javascript', 'function']
@@ -18,11 +18,11 @@ In this post, I will explain the concept of a callback function. Also, I'll help
 
 How can you compose a message to greet a person?  
 
-Let's create a function `greet(person)` that accepts a `person` argument. The function should return the greeting message:
+Let's create a function `greet(name)` that accepts a `name` argument. The function should return the greeting message:
 
 ```javascript
-function greet(person) {
-  return `Hello, ${name}`;
+function greet(name) {
+  return `Hello, ${name}!`;
 }
 
 greet('Cristina'); // => 'Hello, Cristina!'
@@ -64,8 +64,8 @@ function map(array, callback) {
   return mappedArray;
 }
 
-function greet(person) {
-  return `Hello, ${name}`;
+function greet(name) {
+  return `Hello, ${name}!`;
 }
 
 const persons = ['Cristina', 'Ana'];
@@ -80,7 +80,7 @@ Note that a regular function (defined using `function` keyword) or an arrow func
 
 ## 2. The synchronous callback
 
-The callback functions are divided into 2 types by the way they're invoked: *synchronous* and *asynchronous* callbacks.  
+There are 2 types of callbacks by the way they're invoked: *synchronous* and *asynchronous* callbacks.  
 
 > The *synchronous callback* is executed *during* the execution of the higher-order function that uses the callback.  
 
@@ -95,9 +95,9 @@ function map(array, callback) {
   return mappedArray;
 }
 
-function greet(person) {
+function greet(name) {
   console.log('greet() called');
-  return `Hello, ${name}`;
+  return `Hello, ${name}!`;
 }
 
 const persons = ['Cristina'];
@@ -118,7 +118,7 @@ The synchronous way to invoke the callbacks:
 * The callback function executes: `'greet() called'`
 * Finally, the higher-order function completes its execution: `'map() completed'`  
 
-In other words, you can say the synchronous callbacks are *blocking*: the higher-order function doesn't complete its execution until the callback is done executing.
+In other words, the synchronous callbacks are *blocking*: the higher-order function doesn't complete its execution until the callback is done executing.
 
 ### 2.1 Examples of synchronous callbacks
 
@@ -131,28 +131,28 @@ The most used ones are the [array methods](/operations-on-arrays-javascript/) li
 const persons = ['Ana', 'Elena'];
 
 persons.forEach(
-  function callback(person) {
-    console.log(person);
+  function callback(name) {
+    console.log(name);
   }
 );
 // logs 'Ana'
 // logs 'Elena'
 
-const containsAna = persons.find(
-  function callback(person) {
-    return person === 'Ana';
+const nameStartingA = persons.find(
+  function callback(name) {
+    return name[0].toLowerCase() === 'a';
   }
 );
-containsAna; // => true
+nameStartingA; // => 'Ana'
 
-const namesStartingA = persons.reduce(
-  function callback(count, person) {
-    const startsA = person[0].toLowerCase() === 'a';
+const countStartingA = persons.reduce(
+  function callback(count, name) {
+    const startsA = name[0].toLowerCase() === 'a';
     return startsA ? count + 1 : count;
   }, 
   0
 );
-namesStartingA; // => 1
+countStartingA; // => 1
 ```
 
 `string.replace(callback)` method of the string type also accepts a callback that is executed synchronously:
@@ -199,7 +199,7 @@ The asynchronous way to invoke the callbacks:
 2. The higher-order function completes its execution: `'setTimeout() completed'`
 3. The callback function executes after 2 seconds: `'later() called'`
 
-Simply saying, the asynchronous callbacks are *non-blocking*: the higher-order function completes its execution without waiting or even invoking the callback.  
+Simply saying, the asynchronous callbacks are *non-blocking*: the higher-order function completes its execution without waiting for the callback.  
 
 The higher-order function makes sure to execute the callback later on a certain event. For example `setTimeout(callback, time)` invokes the `callback` after `time` milliseconds have passed, or a DOM event listener `button.addEventListener('click', callback)` calls the `callback` when the user clicks the button.  
 
@@ -215,7 +215,7 @@ setTimeout(function later() {
 
 setInterval(function repeat() {
   console.log('Every 2 seconds');
-});
+}, 2000);
 // Each 2 seconds logs 'Every 2 seconds!' 
 ```
 
@@ -236,8 +236,8 @@ The callback is a function that's accepted as an argument and executed by anothe
 
 There are 2 kinds of callback functions: synchronous and asynchronous.  
 
-The synchronous callbacks are executed at the same time as the higher-order function that uses the callback. 
+The synchronous callbacks are executed at the same time as the higher-order function that uses the callback. Synchronous callbacks are *blocking*.
 
-On the other side, the asynchronous callbacks are executed at a later time than the higher-order function.  
+On the other side, the asynchronous callbacks are executed at a later time than the higher-order function. Asynchronous callbacks are *non-blocking*.  
 
 *Quiz: does `setTimeout(callback, 0)` execute the `callback` synchronously or asynchronously?*
