@@ -37,7 +37,7 @@ const messages = persons.map(greet);
 messages; // => ['Hello, Cristina!', 'Hello, Ana!'] 
 ```
 
-`persons.map(greet)` takes each item of the `persons` array, an invokes the function `greet()` using each item as an invocation argument: `greet('Cristina')`, `greet('Ana')`.  
+`persons.map(greet)` takes each item of the `persons` array, and invokes the function `greet()` using each item as an invocation argument: `greet('Cristina')`, `greet('Ana')`.  
 
 What's interesting is that `persons.map(greet)` method accepts `greet()` function as an argument. Doing so makes the `greet()` a *callback function*.  
 
@@ -47,13 +47,13 @@ The `persons.map(greet)` is a function that accepts another function as an argum
 
 What's important is that the higher-order function takes the full responsibility of invoking the callback and supplying it with the right arguments. 
 
-In the previous example, the higher-order function `persons.map(greet)` takes the responsibility to invoke the `greet()` callback function with each item of the array as an argument.  
+In the previous example, the higher-order function `persons.map(greet)` takes the responsibility to invoke the `greet()` callback function with each item of the array as an argument: `'Cristina'` and `'Ana'`.  
 
-That brings to an easy rule for identifying callbacks. If you've defined a  function and you're not invoking it by yourself &mdash; but rather supply as an argument to another function &mdash; then you've created a callback.  
+That brings to an easy rule for identifying callbacks. If you've defined a function and you're not invoking it by yourself &mdash; but rather supply as an argument to another function &mdash; then you've created a callback.  
 
-You can always write  by yourself higher-order functions that use callbacks. For example, here's an equivalent version the `array.map()` method:
+You can always write by yourself higher-order functions that use callbacks. For example, here's an equivalent version the `array.map()` method:
 
-```javascript{5}
+```javascript{5,17}
 function map(array, callback) {
   const mappedArray = [];
   for (const item of array) { 
@@ -84,6 +84,8 @@ There are 2 types of callbacks by the way they're invoked: *synchronous* and *as
 
 > The *synchronous callback* is executed *during* the execution of the higher-order function that uses the callback.  
 
+In other words, the synchronous callbacks are *blocking*: the higher-order function doesn't complete its execution until the callback is done executing.
+
 For example, recall the `map()` and `greet()` functions.  
 
 ```javascript
@@ -108,17 +110,13 @@ map(persons, greet);
 // logs 'map() completed'
 ```
 
-Try the [demo](https://jsitor.com/MZVUzLzql).  
-
-`greet()` is a synchronous callback because it's being executed at the same time as the higher-order function `map()`.  
+`greet()` is a synchronous callback because it's being executed at the same time as the higher-order function `map()`. You can try the [demo](https://jsitor.com/MZVUzLzql).
 
 The synchronous way to invoke the callbacks:  
 
 1. The higher-order function starts execution: `'map() starts'`
 * The callback function executes: `'greet() called'`
 * Finally, the higher-order function completes its execution: `'map() completed'`  
-
-In other words, the synchronous callbacks are *blocking*: the higher-order function doesn't complete its execution until the callback is done executing.
 
 ### 2.1 Examples of synchronous callbacks
 
@@ -173,9 +171,9 @@ person.replace(/./g,
 
 > The *asynchronous callback* is executed *after* the execution of the higher-order function.  
 
-A good example of asynchronous callbacks is the timer function `setTimeout(callback, time)`. It invokes the `callback` after `time` milliseconds have passed.  
+Simply saying, the asynchronous callbacks are *non-blocking*: the higher-order function completes its execution without waiting for the callback. The higher-order function makes sure to execute the callback later on a certain event. 
 
-In the following example, the `later()` function is executed with a delay 2 seconds:
+In the following example, the `later()` function is executed with a delay of 2 seconds:
 
 ```javascript
 console.log('setTimeout() starts');
@@ -189,19 +187,13 @@ console.log('setTimeout() completed');
 // logs 'later() called' (after 2 seconds)
 ```
 
-Try the [demo](https://jsitor.com/MhhozrnIj).  
-
-`later()` is an asynchornous callback because `setTimeout(later, 2000)` starts and completes its execution, but `later()` is executed after passing 2 seconds.  
+`later()` is an asynchornous callback because `setTimeout(later, 2000)` starts and completes its execution, but `later()` is executed after passing 2 seconds. Try the [demo](https://jsitor.com/MhhozrnIj).   
 
 The asynchronous way to invoke the callbacks:
 
 1. The higher-order function starts execution: `'setTimeout() starts'`
 2. The higher-order function completes its execution: `'setTimeout() completed'`
 3. The callback function executes after 2 seconds: `'later() called'`
-
-Simply saying, the asynchronous callbacks are *non-blocking*: the higher-order function completes its execution without waiting for the callback.  
-
-The higher-order function makes sure to execute the callback later on a certain event. For example `setTimeout(callback, time)` invokes the `callback` after `time` milliseconds have passed, or a DOM event listener `button.addEventListener('click', callback)` calls the `callback` when the user clicks the button.  
 
 ### 3.1 Examples of asynchronous callbacks
 
