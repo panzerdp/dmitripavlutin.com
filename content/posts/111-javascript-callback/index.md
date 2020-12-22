@@ -1,6 +1,6 @@
 ---
 title: "What is a Callback Function in JavaScript?"
-description: "The callback is a function that's accepted as an argument and executed by another function (the higher-order function)."
+description: "The callback is a function that's used as an argument and executed by another function (the higher-order function)."
 published: "2020-12-22T12:00Z"
 modified: "2020-12-22T12:00Z"
 thumbnail: "./images/cover-2.png"
@@ -10,27 +10,15 @@ recommended: ['6-ways-to-declare-javascript-functions', 'javascript-arrow-functi
 type: post
 ---
 
-The callback function is one of those concepts that every JavaScript developer should know. Callbacks mechanism is used in arrays, timer functions, promises, event handlers, and more.    
+The callback function is one of those concepts that every JavaScript developer should know. Callbacks are used in arrays, timer functions, promises, event handlers, and much more.    
 
-In this post, I will explain the concept of a callback function. Also I'll help you distinguish the 2 types of callbacks: synchronous and asynchronous.
+In this post, I will explain the concept of a callback function. Also I'll help you distinguish the 2 types of callbacks: synchronous and asynchronous ones.  
 
 ## 1. The callback function
 
 How can you compose a message to greet a person?  
 
-The simplest (yet not the most reusable) way is to use 2 variables. One variable contains the person's `name`, the other variable
-the constructed `message`:
-
-```javascript
-let name = 'Cristina';
-
-let message = `Hello, ${name}`;
-message; // => 'Hello, Cristina!'
-```
-
-A problem with the above code is the reuse difficulty: what if you want to reuse the greeting logic in multiple places? A function can help!
-
-Let's create a function `greet(person)` that accepts a `person` argument. The should return the greeting message:
+Let's create a function `greet(person)` that accepts a `person` argument. The function should return the greeting message:
 
 ```javascript
 function greet(person) {
@@ -86,7 +74,7 @@ messages; // => ['Hello, Cristina!', 'Hello, Ana!']
 
 The callback functions are divided into 2 types: *synchronous* and *asynchronous* callbacks.  
 
-> The *synchronous callback* is executed *during* the execution of the higher-order function that invokes the callback.  
+> The *synchronous callback* is executed *during* the execution of the higher-order function that uses the callback.  
 
 For example, recall the `map()` and `greet()` functions.  
 
@@ -159,7 +147,7 @@ namesStartingA; // => 1
 
 ## 3. The asynchronous callback
 
-> The *asynchronous callback* is executed at a *later* time than the execution of the higher-order function.  
+> The *asynchronous callback* is executed at a *later* time after the execution of the higher-order function.  
 
 A good example of asynchronous callbacks is the timer function `setTimeout(callback, time)`. It invokes the `callback` after `time` milliseconds have passed.  
 
