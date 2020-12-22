@@ -1,0 +1,243 @@
+---
+title: "Everything About Callback Functions in JavaScript"
+description: "The callback is a function being called by another function, either synchronously or asynchronously."
+published: "2020-12-22T11:40Z"
+modified: "2020-12-22T11:40Z"
+thumbnail: "./images/cover-4.png"
+slug: javascript-callback
+tags: ['javascript', 'function']
+recommended: ['6-ways-to-declare-javascript-functions', 'javascript-arrow-functions']
+type: post
+---
+
+The callback function is one of those concepts that every JavaScript developer should know. Callbacks are used in arrays, timer functions, promises, event handlers, and much more.    
+
+In this post, I will explain the concept of a callback function. Also, I'll help you distinguish the 2 types of callbacks: synchronous and asynchronous.  
+
+## 1. The callback function
+
+How can you compose a message to greet a person?  
+
+Let's create a function `greet(name)` that accepts a `name` argument. The function should return the greeting message:
+
+```javascript
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+greet('Cristina'); // => 'Hello, Cristina!'
+```
+
+What about greeting a list of persons? That's possible using a special array method  `array.map()`:
+
+```javascript
+const persons = ['Cristina', 'Ana'];
+
+const messages = persons.map(greet);
+messages; // => ['Hello, Cristina!', 'Hello, Ana!'] 
+```
+
+`persons.map(greet)` takes each item of the `persons` array, an invokes the function `greet()` using each item as an invocation argument: `greet('Cristina')`, `greet('Ana')`.  
+
+What's interesting is that `persons.map(greet)` method accepts `greet()` function as an argument. Doing so makes the `greet()` a *callback function*.  
+
+The `persons.map(greet)` is a function that accepts another function as an argument, so it is named a *higher-order function*.  
+
+> The *callback function* is supplied as an argument to a *higher-order function*  that invokes ("calls back") the callback function to perform an operation.  
+
+What's important is that the higher-order function takes the full responsibility of invoking the callback and supplying it with the right arguments. 
+
+In the previous example, the higher-order function `persons.map(greet)` takes the responsibility to invoke the `greet()` callback function with each item of the array as an argument.  
+
+That brings to an easy rule for identifying callbacks. If you've defined a  function and you're not invoking it by yourself &mdash; but rather supply as an argument to another function &mdash; then you've created a callback.  
+
+You can always write  by yourself higher-order functions that use callbacks. For example, here's an equivalent version the `array.map()` method:
+
+```javascript{5}
+function map(array, callback) {
+  const mappedArray = [];
+  for (const item of array) { 
+    mappedArray.push(
+      callback(item)
+    );
+  }
+  return mappedArray;
+}
+
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+const persons = ['Cristina', 'Ana'];
+
+const messages = map(persons, greet);
+messages; // => ['Hello, Cristina!', 'Hello, Ana!'] 
+```
+
+`map(array, callback)` is a higher-order function since it accepts a callback function as an argument, and then inside of its body invokes that callback function: `callback(item)`.  
+
+Note that a regular function (defined using `function` keyword) or an arrow function (defined using the fat arrow `=>`) can equally serve as callbacks.  
+
+## 2. The synchronous callback
+
+There are 2 types of callbacks by the way they're invoked: *synchronous* and *asynchronous* callbacks.  
+
+> The *synchronous callback* is executed *during* the execution of the higher-order function that uses the callback.  
+
+For example, recall the `map()` and `greet()` functions.  
+
+```javascript
+function map(array, callback) {
+  console.log('map() starts');
+  const mappedArray = [];
+  for (const item of array) { mappedArray.push(callback(item)) }
+  console.log('map() completed');
+  return mappedArray;
+}
+
+function greet(name) {
+  console.log('greet() called');
+  return `Hello, ${name}!`;
+}
+
+const persons = ['Cristina'];
+
+map(persons, greet);
+// logs 'map() starts'
+// logs 'greet() called'
+// logs 'map() completed'
+```
+
+Try the [demo](https://jsitor.com/MZVUzLzql).  
+
+`greet()` is a synchronous callback because it's being executed at the same time as the higher-order function `map()`.  
+
+The synchronous way to invoke the callbacks:  
+
+1. The higher-order function starts execution: `'map() starts'`
+* The callback function executes: `'greet() called'`
+* Finally, the higher-order function completes its execution: `'map() completed'`  
+
+In other words, the synchronous callbacks are *blocking*: the higher-order function doesn't complete its execution until the callback is done executing.
+
+### 2.1 Examples of synchronous callbacks
+
+A lot of methods of native JavaScript types use synchronous callbacks. 
+
+The most used ones are the [array methods](/operations-on-arrays-javascript/) like `array.map(callback)`, `array.forEach(callback)`, `array.find(callback)`, `array.filter(callback)`, `array.reduce(callback, init)`:  
+
+```javascript{5,13,20}
+// Examples of synchronous callbacks on arrays
+const persons = ['Ana', 'Elena'];
+
+persons.forEach(
+  function callback(name) {
+    console.log(name);
+  }
+);
+// logs 'Ana'
+// logs 'Elena'
+
+const nameStartingA = persons.find(
+  function callback(name) {
+    return name[0].toLowerCase() === 'a';
+  }
+);
+nameStartingA; // => 'Ana'
+
+const countStartingA = persons.reduce(
+  function callback(count, name) {
+    const startsA = name[0].toLowerCase() === 'a';
+    return startsA ? count + 1 : count;
+  }, 
+  0
+);
+countStartingA; // => 1
+```
+
+`string.replace(callback)` method of the string type also accepts a callback that is executed synchronously:
+
+```javascript{6}
+// Examples of synchronous callbacks on strings
+const person = 'Cristina';
+
+// Replace 'i' with '1'
+person.replace(/./g, 
+  function(char) {
+    return char.toLowerCase() === 'i' ? '1' : char;
+  }
+); // => 'Cr1st1na'
+```
+
+## 3. The asynchronous callback
+
+> The *asynchronous callback* is executed *after* the execution of the higher-order function.  
+
+A good example of asynchronous callbacks is the timer function `setTimeout(callback, time)`. It invokes the `callback` after `time` milliseconds have passed.  
+
+In the following example, the `later()` function is executed with a delay 2 seconds:
+
+```javascript
+console.log('setTimeout() starts');
+setTimeout(function later() {
+  console.log('later() called');
+}, 2000);
+console.log('setTimeout() completed');
+
+// logs 'setTimeout() starts'
+// logs 'setTimeout() completed'
+// logs 'later() called' (after 2 seconds)
+```
+
+Try the [demo](https://jsitor.com/MhhozrnIj).  
+
+`later()` is an asynchornous callback because `setTimeout(later, 2000)` starts and completes its execution, but `later()` is executed after passing 2 seconds.  
+
+The asynchronous way to invoke the callbacks:
+
+1. The higher-order function starts execution: `'setTimeout() starts'`
+2. The higher-order function completes its execution: `'setTimeout() completed'`
+3. The callback function executes after 2 seconds: `'later() called'`
+
+Simply saying, the asynchronous callbacks are *non-blocking*: the higher-order function completes its execution without waiting for the callback.  
+
+The higher-order function makes sure to execute the callback later on a certain event. For example `setTimeout(callback, time)` invokes the `callback` after `time` milliseconds have passed, or a DOM event listener `button.addEventListener('click', callback)` calls the `callback` when the user clicks the button.  
+
+### 3.1 Examples of asynchronous callbacks
+
+The timer functions invoke the callbacks asynchronously:
+
+```javascript
+setTimeout(function later() {
+  console.log('2 seconds have passed!');
+}, 2000);
+// After 2 seconds logs '2 seconds have passed!' 
+
+setInterval(function repeat() {
+  console.log('Every 2 seconds');
+}, 2000);
+// Each 2 seconds logs 'Every 2 seconds!' 
+```
+
+DOM event listeners also invoke the event handler function (a subtype of callback functions) asynchronously:
+
+```javascript
+const myButton = document.getElementById('myButton');
+
+myButton.addEventListener('click', function handler() {
+  console.log('Button clicked!');
+});
+// Logs 'Button clicked!' when the button is clicked
+```
+
+## 4. Summary
+
+The callback is a function that's accepted as an argument and executed by another function (the higher-order function).  
+
+There are 2 kinds of callback functions: synchronous and asynchronous.  
+
+The synchronous callbacks are executed at the same time as the higher-order function that uses the callback. Synchronous callbacks are *blocking*.
+
+On the other side, the asynchronous callbacks are executed at a later time than the higher-order function. Asynchronous callbacks are *non-blocking*.  
+
+*Quiz: does `setTimeout(callback, 0)` execute the `callback` synchronously or asynchronously?*
