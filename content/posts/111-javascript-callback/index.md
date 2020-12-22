@@ -145,6 +145,20 @@ const namesStartingA = persons.reduce(
 namesStartingA; // => 1
 ```
 
+`string.replace(callback)` method of the string type also accept a callback that is executed synchronously:
+
+```javascript{6}
+// Examples of synchronous callbacks on strings
+const person = 'Cristina';
+
+// Replace 'i' with '1'
+person.replace(/./g, 
+  function(char) {
+    return char.toLowerCase() === 'i' ? '1' : char;
+  }
+); // => 'Cr1st1na'
+```
+
 ## 3. The asynchronous callback
 
 > The *asynchronous callback* is executed at a *later* time after the execution of the higher-order function.  
@@ -174,6 +188,33 @@ The asynchronous way to invoke the callbacks:
 1. The higher-order function starts execution: `'setTimeout() starts'`
 2. The higher-order function completes its execution: `'setTimeout() completed'`
 3. The higher-order function executes the callback after 2 seconds: `'later() called'`
+
+### 3.1 Examples of asynchronous callbacks
+
+The timer functions invoke the callbacks asynchronously:
+
+```javascript
+setTimeout(function later() {
+  console.log('2 seconds have passed!');
+}, 2000);
+// After 2 seconds logs '2 seconds have passed!' 
+
+setInterval(function repeat() {
+  console.log('Every 2 seconds');
+});
+// Each 2 seconds logs 'Every 2 seconds!' 
+```
+
+DOM event listeners also invoke the event handler function (a subtype of callback functions) asynchronously:
+
+```javascript
+const myButton = document.getElementById('myButton');
+
+myButton.addEventListener('click', function handler() {
+  console.log('Button clicked!');
+});
+// Logs 'Button clicked!' when the button is clicked
+```
 
 ## 4. Summary
 
