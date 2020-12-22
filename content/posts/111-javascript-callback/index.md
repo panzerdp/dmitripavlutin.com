@@ -45,6 +45,12 @@ The `persons.map(callbackFunc)` is a function that accepts another function as a
 
 > A *higher-order function* accepts a *callback function* as an argument and invokes ("calls back") the callback function to perform an operation.  
 
+What's important is that the higher-order function takes the full responsibility of invoking the callback and supplying it with the right arguments. 
+
+In the previous example, the higher-order function `persons.map(greet)` takes the responsibility to invoke the `greet()` callback function with each item of the array as an argument.  
+
+That brings to an easy rule to identifying callbacks. If you've defined a  function and you're not invoking it by yourself &mdash; but rather supply it to another function &mdash; then you've created a callback.  
+
 You can always write  by yourself higher-order functions that use callbacks. For example, here's an equivalent version the `array.map()` method:
 
 ```javascript{5}
@@ -161,7 +167,7 @@ person.replace(/./g,
 
 ## 3. The asynchronous callback
 
-> The *asynchronous callback* is executed at a *later* time after the execution of the higher-order function.  
+> The *asynchronous callback* is executed *after* the execution of the higher-order function.  
 
 A good example of asynchronous callbacks is the timer function `setTimeout(callback, time)`. It invokes the `callback` after `time` milliseconds have passed.  
 
