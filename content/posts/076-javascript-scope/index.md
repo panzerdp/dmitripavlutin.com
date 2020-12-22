@@ -177,7 +177,7 @@ console.log(run2);  // throws ReferenceError
 
 ES2015 module also creates a scope for variables, functions, classes.  
 
-The module `circle` defines a constant `pi` (for some internal usuage):
+The module `circle` defines a constant `pi` (for some internal usage):
 
 ```javascript
 // "circle" module scope
