@@ -2,7 +2,7 @@
 title: "Everything About Callback Functions in JavaScript"
 description: "The callback is a function being called by another function, either synchronously or asynchronously."
 published: "2020-12-22T11:40Z"
-modified: "2020-12-22T11:40Z"
+modified: "2020-12-23T19:00Z"
 thumbnail: "./images/cover-4.png"
 slug: javascript-callback
 tags: ['javascript', 'function']
@@ -222,7 +222,40 @@ myButton.addEventListener('click', function handler() {
 // Logs 'Button clicked!' when the button is clicked
 ```
 
-## 4. Summary
+## 4. Asynchronous callback function vs asynchronous function
+
+The special keyword `async` placed before the function definition creates an asynchornous function:
+
+```javascript
+async function fetchUserNames() {
+  const resp = await fetch('https://api.github.com/users?per_page=5');
+  const users = await resp.json();
+  const names = users.map(({ login }) => login);
+  console.log(names);
+}
+```
+
+`fetchUserNames()` is asynchronous since it's prefixed with `async`. The function fetches `await fetch('https://api.github.com/users?per_page=5')` first 5 users from GitHub. Then extracts from the response object the JSON data: `await resp.json()`.  
+
+The asynchronous functions are syntactic sugar on top of promises. When encountering the expression `await <promise>` (note that calling `fetch()` returns a promise), the asynchronous function pauses its execution until the promise is resolved.  
+
+An asynchronous callback function and an asynchronous function are **different** terms.  
+
+The asynchronous callback function is executed in a non-blocking manner by the higher-order function. But the asynchronous function pauses its execution while waiting for promises (`await <promise>`) to resolve.  
+
+However... you can use an asynchronous function as an asynchronous callback! 
+
+Let's make the asynchornous function `fetchUserNames()` an asynchronous callback called on button click:
+
+```javascript
+const button = document.getElementById('fetchUsersButton');
+
+button.addEventListener('click', fetchUserNames);
+```
+
+Open the [demo](https://codesandbox.io/s/fetch-users-0jz0w?file=/index.html) and click *Fetch Users*. When the request completes, you'll see a list of users logged to the console.  
+
+## 5. Summary
 
 The callback is a function that's accepted as an argument and executed by another function (the higher-order function).  
 
