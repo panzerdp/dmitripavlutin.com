@@ -5,7 +5,7 @@ published: "2020-12-08T11:10Z"
 modified: "2020-12-08T11:10Z"
 thumbnail: "./images/cat-2.jpg"
 slug: react-hooks-mistakes-to-avoid
-tags: ['react', 'hook', 'useffect', 'usestate']
+tags: ['react', 'hook', 'useeffect', 'usestate']
 recommended: ['use-react-memo-wisely', 'dont-overuse-react-usecallback']
 type: post
 ---
