@@ -1,6 +1,6 @@
 ---
 title: "Why Promises Are Faster Than setTimeout()?"
-description: "Why Immediatly Resolved Promise is Always Faster Than setTimeout(..., 0)?"
+description: "Why an immidiately resolved promise is faster then an immediate timeout?"
 published: "2020-12-29T12:00Z"
 modified: "2020-12-29T12:00Z"
 thumbnail: "./images/cover-2.png"
