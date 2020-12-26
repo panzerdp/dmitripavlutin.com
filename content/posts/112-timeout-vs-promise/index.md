@@ -54,11 +54,83 @@ Open the [demo](https://jsitor.com/kslO11KZW5) and look at the console. Hm... sa
 
 The experiment has demonstrated that an immediately resolved promise is processed before an immediate timeout. The big question is... *why does it happen?* 
 
-## 2. Task queue vs job queue
+## 2. Looking at the event loop
 
 What's related with the asynchornous JavaScript can be answered by investigating the event loop behavior. The question asked above can be found in how event loop processes
 promises and `setTimeout()`.  
 
 JavaScript is a single-threaded. At any point in time, JavaScript executes only one function.  
 
-## 3. Summary
+Let's recall the main components of how asynchornous JavaScript works.  
+
+![Event Loop Empty](./images/event-loop-empty-7.png)
+
+*The call stack* is a LIFO (Last in, First out) structure that stores the execution context created during the code execution. In simple words, the call stack executes the functions.  
+
+*Web APIs* is the place the async operations (fetch requests, timers) with their callbacks are waiting to complete.   
+
+*Task Queue* is a queue structure (First In, First Out) that holds the callbacks of async operations that are waiting to be executed. For example, the callbacks of a timed out `setTimeot()` or a click DOM event handler that are ready to be executed are enqueued in the task queue.  
+
+*Job Queue* is a queue structure (First In, First Out) that holds the callbacks of async operations that are waiting to be executed. For example, the resolve or reject callbacks of a fullfilled promise are enqueued in the job queue.  
+
+Finally, the *event loop* permanently monitors whether the call stack is empty. If the call stack is empty, the event loop looks into the job queue and then into the task queue to see if there’s any pending callback waiting to be executed.  
+
+To get a good understanding of event loop, I recommend watching this [video](https://www.youtube.com/watch?v=8aGhZQkoFbQ).  
+
+## 3. Job queue vs task queue
+
+Let's look again at the experiment and try to analyze it from an event loop perspective. I'll make a step by step analysis of the code execution:
+
+A) The call stack executes `setTimeout(..., 0)` and *schedules* a timer:
+
+```javascript{1-3}
+setTimeout(() => {
+  console.log('Timed out!');
+}, 0);
+
+Promise.resolve(true).then(() => {
+  console.log('Resolved!');
+});
+```
+
+B) The call stack executes `Promise.resolve(true).then(...)` and *schedules* a promise resolution:
+
+```javascript{5-7}
+setTimeout(() => {
+  console.log('Timed out!');
+}, 0);
+
+Promise.resolve(true).then(() => {
+  console.log('Resolved!');
+});
+```
+
+C) The timer callback is enqueued to task queue, the promise callback is enqueued to job queue:
+
+D) The event loop dequeses the promise callback from the job queue and the call stack executes the promise callback:  
+
+```javascript{6}
+setTimeout(() => {
+  console.log('Timed out!');
+}, 0);
+
+Promise.resolve(true).then(() => {
+  console.log('Resolved!');
+});
+```
+
+E) Finally the event loop dequeues the timer callback from the task queue and the call stack executes the timer callback:  
+
+```javascript{2}
+setTimeout(() => {
+  console.log('Timed out!');
+}, 0);
+
+Promise.resolve(true).then(() => {
+  console.log('Resolved!');
+});
+```
+
+Done.  
+
+## 4. Summary
