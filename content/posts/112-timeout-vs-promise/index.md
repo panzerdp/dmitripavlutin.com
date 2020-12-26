@@ -125,7 +125,7 @@ Promise.resolve(1).then(function resolve() {
 });
 ```
 
-![Event Loop](./images/Selection_023.png)
+![Event Loop](./images/Selection_026.png)
 
 E) Finally, the event loop dequeues the timer callback from the task queue into the call stack. Then the call stack executes the timer callback:  
 
@@ -139,7 +139,7 @@ Promise.resolve(1).then(function resolve() {
 });
 ```
 
-![Event Loop](./images/Selection_024.png)
+![Event Loop](./images/Selection_027.png)
 
 The callstack is empty. The script execution has been completed.  
 
