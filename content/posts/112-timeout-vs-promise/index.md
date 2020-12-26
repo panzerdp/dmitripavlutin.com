@@ -15,11 +15,11 @@ type: post
 Let's try an experiment. What does execute faster: an immediately resolved promise or a an immediate timeout (aka a timeout of `0` milliseconds)?  
 
 ```javascript
-Promise.resolve(1).then(() => {
+Promise.resolve(1).then(function resolve() {
   console.log('Resolved!');
 });
 
-setTimeout(() => {
+setTimeout(function timeout() {
   console.log('Timed out!');
 }, 0);
 
@@ -36,11 +36,11 @@ Can it be related to the fact that the `Promise.resolve(true).then(...)` was cal
 Let's change slighly the conditions of the experiment and call `setTimeout(..., 0)` first:
 
 ```javascript
-setTimeout(() => {
+setTimeout(function timeout() {
   console.log('Timed out!');
 }, 0);
 
-Promise.resolve(true).then(() => {
+Promise.resolve(1).then(function resolve() {
   console.log('Resolved!');
 });
 
@@ -63,17 +63,17 @@ JavaScript is a single-threaded. At any point in time, JavaScript executes only 
 
 Let's recall the main components of how asynchornous JavaScript works.  
 
-![Event Loop Empty](./images/event-loop-empty-7.png)
+![Event Loop Empty](./images/Selection_019.png)
 
-*The call stack* is a LIFO (Last in, First out) structure that stores the execution context created during the code execution. In simple words, the call stack executes the functions.  
+*The call stack* is a LIFO (Last In, First Out) structure that stores the execution context created during the code execution. In simple words, the call stack executes the functions.  
 
 *Web APIs* is the place the async operations (fetch requests, timers) with their callbacks are waiting to complete.   
 
-*Task Queue* is a queue structure (First In, First Out) that holds the callbacks of async operations that are waiting to be executed. For example, the callbacks of a timed out `setTimeot()` or a click DOM event handler that are ready to be executed are enqueued in the task queue.  
+*The task queue* is a queue structure (First In, First Out) that holds the callbacks of async operations that are waiting to be executed. For example, the callbacks of a timed out `setTimeot()` or a click DOM event handler that are ready to be executed are enqueued in the task queue.  
 
-*Job Queue* is a queue structure (First In, First Out) that holds the callbacks of async operations that are waiting to be executed. For example, the resolve or reject callbacks of a fullfilled promise are enqueued in the job queue.  
+*The job queue* is a queue structure (First In, First Out) that holds the callbacks of async operations that are waiting to be executed. For example, the resolve or reject callbacks of a fullfilled promise are enqueued in the job queue.  
 
-Finally, the *event loop* permanently monitors whether the call stack is empty. If the call stack is empty, the event loop looks into the job queue and then into the task queue to see if there’s any pending callback waiting to be executed.  
+Finally, *the event loop* permanently monitors whether the call stack is empty. If the call stack is empty, the event loop looks into the job queue and then into the task queue to see if there’s any pending callback waiting to be executed.  
 
 To get a good understanding of event loop, I recommend watching this [video](https://www.youtube.com/watch?v=8aGhZQkoFbQ).  
 
@@ -84,53 +84,67 @@ Let's look again at the experiment and try to analyze it from an event loop pers
 A) The call stack executes `setTimeout(..., 0)` and *schedules* a timer:
 
 ```javascript{1-3}
-setTimeout(() => {
+setTimeout(function timeout() {
   console.log('Timed out!');
 }, 0);
 
-Promise.resolve(true).then(() => {
+Promise.resolve(1).then(function resolve() {
   console.log('Resolved!');
 });
 ```
+
+![Event Loop](./images/Selection_020.png)
 
 B) The call stack executes `Promise.resolve(true).then(...)` and *schedules* a promise resolution:
 
 ```javascript{5-7}
-setTimeout(() => {
+setTimeout(function timeout() {
   console.log('Timed out!');
 }, 0);
 
-Promise.resolve(true).then(() => {
+Promise.resolve(1).then(function resolve() {
   console.log('Resolved!');
 });
 ```
 
-C) The timer callback is enqueued to task queue, the promise callback is enqueued to job queue:
+![Event Loop](./images/Selection_021.png)
 
-D) The event loop dequeses the promise callback from the job queue and the call stack executes the promise callback:  
+C) The timer callback is *enqueued* to task queue, the promise callback is *enqueued* to job queue:
+
+![Event Loop](./images/Selection_025.png)
+
+D) The event loop dequeues the promise callback from the job queue into the call stack. The call stack executes the promise callback:  
 
 ```javascript{6}
-setTimeout(() => {
+setTimeout(function timeout() {
   console.log('Timed out!');
 }, 0);
 
-Promise.resolve(true).then(() => {
+Promise.resolve(1).then(function resolve() {
   console.log('Resolved!');
 });
 ```
 
-E) Finally the event loop dequeues the timer callback from the task queue and the call stack executes the timer callback:  
+![Event Loop](./images/Selection_023.png)
+
+E) Finally, the event loop dequeues the timer callback from the task queue into the call stack. Then the call stack executes the timer callback:  
 
 ```javascript{2}
-setTimeout(() => {
+setTimeout(function timeout() {
   console.log('Timed out!');
 }, 0);
 
-Promise.resolve(true).then(() => {
+Promise.resolve(1).then(function resolve() {
   console.log('Resolved!');
 });
 ```
 
-Done.  
+![Event Loop](./images/Selection_024.png)
+
+The callstack is empty. The script execution has been completed.  
 
 ## 4. Summary
+
+The answer to the question why an immediately resolved promise is processed faster than an immediately timed out timer is simple.  
+
+The event loop *priorities* dequeuing jobs from the job queue over the tasks from the task queue.  
