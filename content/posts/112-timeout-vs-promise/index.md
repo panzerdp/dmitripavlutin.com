@@ -3,7 +3,7 @@ title: "Why Promises Are Faster Than setTimeout()?"
 description: "Why an immidiately resolved promise is faster then an immediate timeout?"
 published: "2020-12-29T12:00Z"
 modified: "2020-12-29T12:00Z"
-thumbnail: "./images/cover-2.png"
+thumbnail: "./images/cover-4.png"
 slug: javascript-promises-settimeout
 tags: ['javascript', 'function']
 recommended: ['javascript-callback', 'timeout-fetch-request']
@@ -12,7 +12,7 @@ type: post
 
 ## 1. The experiment
 
-Let's try an experiment. What does execute faster: an immediately resolved promise or a an immediate timeout (aka a timeout of `0` milliseconds)?  
+Let's try an experiment. What does execute faster: an immediately resolved promise or an immediate timeout (aka a timeout of `0` milliseconds)?  
 
 ```javascript
 Promise.resolve(1).then(function resolve() {
@@ -48,7 +48,7 @@ Promise.resolve(1).then(function resolve() {
 // logs 'Timed out!'
 ```
 
-Open the [demo](https://jsitor.com/kslO11KZW5) and look at the console. Hm... same result!
+Open the [demo](https://jsitor.com/kslO11KZW5) and look at the console. Hm... the same result!
 
 `setTimeout(..., 0)` is called before `Promise.resolve(true).then(...)`. However, `'Resolved!'` is still logged before `'Timed out!'`.  
 
@@ -56,12 +56,12 @@ The experiment has demonstrated that an immediately resolved promise is processe
 
 ## 2. Looking at the event loop
 
-What's related with the asynchornous JavaScript can be answered by investigating the event loop behavior. The question asked above can be found in how event loop processes
+What's related to the asynchronous JavaScript can be answered by investigating the event loop behavior. The question asked above can be found in how event loop processes
 promises and `setTimeout()`.  
 
-JavaScript is a single-threaded. At any point in time, JavaScript executes only one function.  
+JavaScript is single-threaded. At any point in time, JavaScript executes only one function.  
 
-Let's recall the main components of how asynchornous JavaScript works.  
+Let's recall the main components of how asynchronous JavaScript works.  
 
 ![Event Loop Empty](./images/Selection_019.png)
 
@@ -71,11 +71,11 @@ Let's recall the main components of how asynchornous JavaScript works.
 
 *The task queue* is a queue structure (First In, First Out) that holds the callbacks of async operations that are waiting to be executed. For example, the callbacks of a timed out `setTimeot()` or a click DOM event handler that are ready to be executed are enqueued in the task queue.  
 
-*The job queue* is a queue structure (First In, First Out) that holds the callbacks of async operations that are waiting to be executed. For example, the resolve or reject callbacks of a fullfilled promise are enqueued in the job queue.  
+*The job queue* is a queue structure (First In, First Out) that holds the callbacks of async operations that are waiting to be executed. For example, the resolve or reject callbacks of a fulfilled promise are enqueued in the job queue.  
 
 Finally, *the event loop* permanently monitors whether the call stack is empty. If the call stack is empty, the event loop looks into the job queue and then into the task queue to see if there’s any pending callback waiting to be executed.  
 
-To get a good understanding of event loop, I recommend watching this [video](https://www.youtube.com/watch?v=8aGhZQkoFbQ).  
+To get a good understanding of the event loop, I recommend watching this [video](https://www.youtube.com/watch?v=8aGhZQkoFbQ).  
 
 ## 3. Job queue vs task queue
 
@@ -141,10 +141,10 @@ Promise.resolve(1).then(function resolve() {
 
 ![Event Loop](./images/Selection_027.png)
 
-The callstack is empty. The script execution has been completed.  
+The call stack is empty. The script execution has been completed.  
 
 ## 4. Summary
 
-The answer to the question why an immediately resolved promise is processed faster than an immediately timed out timer is simple.  
+The answer to the question of why an immediately resolved promise is processed faster than an immediately timed out timer is simple.  
 
 The event loop *priorities* dequeuing jobs from the job queue over the tasks from the task queue.  
