@@ -1,8 +1,8 @@
 ---
 title: "Why Promises Are Faster Than setTimeout()?"
 description: "Why an immidiately resolved promise is faster then an immediate timeout?"
-published: "2020-12-29T12:00Z"
-modified: "2020-12-29T12:00Z"
+published: "2020-12-29T09:30Z"
+modified: "2020-12-29T09:30Z"
 thumbnail: "./images/cover-4.png"
 slug: javascript-promises-settimeout
 tags: ['javascript', 'promise', 'event loop']
