@@ -70,16 +70,16 @@ The constants meaningfully suggest the type of the node they indicate: for examp
 For example, if you use the DOM query functions `document.querySelector(selector)` and select the `<p>` node, then it would have the type `Node.ELEMENT_NODE`:
 
 ```javascript
-const paragraphNode = document.querySelector('p');
+const paragraph = document.querySelector('p');
 
-paragraphNode.nodeType === Node.ELEMENT_NODE; // => true
+paragraph.nodeType === Node.ELEMENT_NODE; // => true
 ```
 
 Same way you can use `childNodes` property of the node object and check what kind of children the paragraph node contains:   
 
 ```javascript
-const paragraphNode = document.querySelector('p');
-const firstChild = paragraphNode.childNodes[0];
+const paragraph = document.querySelector('p');
+const firstChild = paragraph.childNodes[0];
 
 firstChild.nodeType === Node.TEXT_NODE; // => true
 ```
@@ -101,6 +101,15 @@ I'd say that if you get well the term of node the answer is obvious: an element 
 The element is a subtype of node the same way a cat is a subtype of animal.  
 
 In simple words, an element is a node that's written using tag in the HTML document. `<html>`, `<head>`, `<title>`, `<body>`, `<h2>`, `<p>` are all elements because they are represented by tags.  
+
+`Node` and `HTMLElement` are constructors of a node and an element in JavaScript DOM implementation. Since an element is a subtype of node, a paragraph would be an instance of both `Node` and `HTMLElement`:
+
+```javascript
+const paragraph = document.querySelector('p');
+
+paragraph instanceof Node;        // => true
+paragraph instanceof HTMLElement; // => true
+```
 
 ## 3. Node and element collections
 
