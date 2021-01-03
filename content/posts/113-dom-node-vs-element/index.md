@@ -98,7 +98,9 @@ After getting a good grasp of what a DOM node is, now is the time to differentia
 
 I'd say that if you get well the term of node the answer is obvious: an element is just a subtype of node. Alongside with types like document, comment or text.  
 
-In simple words, an element is a node that written using tag in the HTML document. `<html>`, `<head>`, `<title>`, `<body>`, `<h2>`, `<p>` are all elements because they are represented by tags.  
+The element is a subtype of node the same way a cat is a subtype of animal.  
+
+In simple words, an element is a node that's written using tag in the HTML document. `<html>`, `<head>`, `<title>`, `<body>`, `<h2>`, `<p>` are all elements because they are represented by tags.  
 
 ## 3. Summary
 
