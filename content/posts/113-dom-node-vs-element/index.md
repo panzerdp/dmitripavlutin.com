@@ -10,15 +10,15 @@ recommended: ['javascript-event-delegation', 'simple-but-tricky-javascript-inter
 type: post
 ---
 
-The Document Object Model (DOM) is an interface that treats HTML or XML document as a tree structure where each node is an object of the document. DOM also provide a set of methods that can query the tree, change the structure, style.  
+The Document Object Model (DOM) is an interface that treats HTML or XML document as a tree structure where each node is an object of the document. DOM also provides a set of methods that can query the tree, change the structure, style.  
 
-Also in HTML you might be familiar with the term element: which is also an structural unit of the document.  
+Also in HTML, you might be familiar with the term element: which is also a structural unit of the document.  
 
 So, what's the difference between DOM Node and Element? Let's find out.  
 
 ## 1. DOM Node
 
-The key to understanding the difference between a node and an element is straigfoward: you need to undersand well what is a DOM node. 
+The key to understanding the difference between a node and an element is straightforward: you need to understand well what is a DOM node. 
 
 In simple terms, a DOM document consists of a hierarchy of nodes. Each node can have a parent and children. As an example, look at the following HTML document:
 
@@ -36,7 +36,7 @@ In simple terms, a DOM document consists of a hierarchy of nodes. Each node can 
 </html>
 ```
 
-The above HTML document is repsesented by the following hierarchy of nodes:
+The above HTML document is represented by the following hierarchy of nodes:
 
 ![Hierarchy of DOM Nodes](./images/dom-nodes.png)
 
@@ -96,9 +96,9 @@ document.nodeType === Node.DOCUMENT_NODE; // => true
 
 After getting a good grasp of what a DOM node is, now is the time to differentiate the DOM node and element. 
 
-I'd say that if you get well the term of node the answer is obvious: an element is just a subtype of node. Alongside with types like document, comment or text.  
+If you get well the *node* term, then the answer is obvious: an element is just a type of node. Along with types like document, comment, or text.  
 
-The element is a subtype of node the same way a cat is a subtype of animal.  
+The element is a subtype of the node the same way a cat is a subtype of an animal.  
 
 In simple words, an element is a node that's written using tag in the HTML document. `<html>`, `<head>`, `<title>`, `<body>`, `<h2>`, `<p>` are all elements because they are represented by tags.  
 
@@ -113,7 +113,7 @@ paragraph instanceof HTMLElement; // => true
 
 ## 3. DOM properties: nodes and elements
 
-Aside from differentiating nodes from elements, you need also to distinguish the DOM properties and functions that returns either nodes, either elements.  
+Aside from differentiating nodes from elements, you need also to distinguish the DOM properties that contain or nodes, or elements.  
 
 The following properties of `Node` type evaluate to a node or collection of nodes `NodeList`:
 
@@ -153,13 +153,12 @@ paragraph.children;   // HTMLCollection: [HTMLElement]
 
 You'll see that `paragraph.childNodes` collection contains 2 nodes: the bold element `<b>Thank you</b>`, as well as the text node ` for visiting my web page!`.  
 
-However, `paragraph.children` collection contains only 1 element: the bold element `<b>Thank you</b>`. Because `paragraph.children` can contain only elements, the text node wasn't include here because this node is of type text (`Node.TEXT_NODE`), and not an element (`Node.ELEMENT_NODE`).  
+However, `paragraph.children` collection contains only 1 element: the bold element `<b>Thank you</b>`. Because `paragraph.children` can contain only elements, the text node wasn't included here because this node is of type text (`Node.TEXT_NODE`), and not an element (`Node.ELEMENT_NODE`).  
 
 ## 4. Summary
 
-Understanding the difference between a DOM node and element is easy if you understand what actuall a node is.  
+Understanding the difference between a DOM node and an element is easy if you understand what a node is.  
 
 The document is a hierarchical collection of nodes. Each node can have a parent and children.  
 
-Nodes can be of different types, the element type being one of them. The element is a subtype of node that is represented by a tag in the HTML document.  
-
+Nodes can be of different types, the element type being one of them. The element is represented by a tag in the HTML document.  
