@@ -48,7 +48,7 @@ While it's obvious that the tags in the HTML document represent a node, what's e
 
 The paragraph node `<p>` has 1 child: the text node `"Thank you for visiting my web page!"`.  
 
-### 1.2 DOM Node Types
+### 1.2 Node Types
 
 How can you distinguish these different types of nodes? The answer lays in the DOM [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node) interface, particularly in the `Node.nodeType` property.  
 
@@ -111,7 +111,49 @@ paragraph instanceof Node;        // => true
 paragraph instanceof HTMLElement; // => true
 ```
 
-## 3. Node and element collections
+## 3. DOM properties: nodes and elements
+
+Aside from differentiating nodes from elements, you need also to distinguish the DOM properties and functions that returns either nodes, either elements.  
+
+The following properties of `Node` type evaluate to a node or collection of nodes `NodeList`:
+
+```javascript
+node.parentNode; // Node or null
+
+node.firstChild; // Node or null
+node.lastChild;  // Node or null
+
+node.childNodes; // NodeList
+```
+
+However, the following properties are elements or collection of elements `HTMLCollection`:
+
+```javascript
+node.parentElement; // HTMLElement or null
+
+node.children;      // HTMLCollection
+```
+
+Since both `node.childNodes` and `node.children` return a list of children, why still the need to have both of these properties? Consider the following paragraph element containing some text:
+
+```html
+<p>
+  <b>Thank you</b> for visiting my web page!
+</p>
+```
+
+Now, if you open the [demo](https://jsitor.com/3mPwoSVbYh) and look at the properties of the parapgraph node:
+
+```javascript
+const paragraph = document.querySelector('p');
+
+paragraph.childNodes; // NodeList:       [HTMLElement, Text]
+paragraph.children;   // HTMLCollection: [HTMLElement]
+```
+
+You'll see that `paragraph.childNodes` collection contains 2 nodes: the bold element `<b>Thank you</b>`, as well as the text node ` for visiting my web page!`.  
+
+However, `paragraph.children` collection contains only 1 element: the bold element `<b>Thank you</b>`. Because `paragraph.children` can contain only elements, the text node wasn't include here because this node is of type text (`Node.TEXT_NODE`), and not an element (`Node.ELEMENT_NODE`).  
 
 ## 4. Summary
 
