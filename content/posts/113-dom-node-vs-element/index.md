@@ -1,8 +1,8 @@
 ---
 title: "What's the Difference between DOM Node and Element?"
 description: "What's the difference between a DOM node and an element? Let's find out!"
-published: "2021-01-05T15:00Z"
-modified: "2021-01-05T15:00Z"
+published: "2021-01-05T16:40Z"
+modified: "2021-01-05T16:40Z"
 thumbnail: "./images/cover-2.png"
 slug: dom-node-element
 tags: ['dom', 'node', 'element']
