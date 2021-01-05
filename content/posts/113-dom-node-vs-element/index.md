@@ -10,17 +10,17 @@ recommended: ['javascript-event-delegation', 'simple-but-tricky-javascript-inter
 type: post
 ---
 
-The Document Object Model (DOM) is an interface that treats HTML or XML document as a tree structure where each node is an object of the document. DOM also provides a set of methods that can query the tree, change the structure, style.  
+The Document Object Model (DOM) is an interface that treats HTML or XML document as a tree structure where each node is an object of the document. DOM also provides a set of methods to query the tree, alter the structure, style.  
 
-Also in HTML, you might be familiar with the term element: which is also a structural unit of the document.  
-
-So, what's the difference between DOM Node and Element? Let's find out.  
+DOM also uses the term *element*: which is quite similar to a node. So, what's the difference between a DOM node and an element? Let's find out!  
 
 ## 1. DOM Node
 
-The key to understanding the difference between a node and an element is straightforward: you need to understand well what is a DOM node. 
+The key to understanding the difference between a node and an element is to understand what exactly is a node in DOM.  
 
-In simple terms, a DOM document consists of a hierarchy of nodes. Each node can have a parent and children. As an example, look at the following HTML document:
+From a higher viewpoint, a DOM document consists of a hierarchy of nodes. Each node can have a parent and children.  
+
+Let's look at the following HTML document:
 
 ```html
 <!DOCTYPE html>
@@ -36,23 +36,21 @@ In simple terms, a DOM document consists of a hierarchy of nodes. Each node can 
 </html>
 ```
 
-The above HTML document is represented by the following hierarchy of nodes:
+The document contains the following hierarchy of nodes:
 
 ![Hierarchy of DOM Nodes](./images/dom-nodes.png)
 
-The `<html>` tag is a node in the document tree. `<html>` has 2 children: `<head>` and `<body>` nodes.  
+`<html>` is a node in the document tree. It has 2 children: `<head>` and `<body>` nodes.  
 
-`<body>` is also a node having 3 children: a comment `<!-- Page Body -->`, heading `<h2>`, and paragraph `<p>`.    
+`<body>` is also a node having 3 children: a comment `<!-- Page Body -->`, heading `<h2>`, and paragraph `<p>`. The parent of the `<body>` node is `<html>` node.  
 
-While it's obvious that the tags in the HTML document represent a node, what's even more interesting is that regular text is also a node!
-
-The paragraph node `<p>` has 1 child: the text node `"Thank you for visiting my web page!"`.  
+The tags in the HTML document represent a node, what's interesting is that regular text is also a node. The paragraph node `<p>` has 1 child: the text node `"Thank you for visiting my web page!"`.  
 
 ### 1.2 Node Types
 
 How can you distinguish these different types of nodes? The answer lays in the DOM [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node) interface, particularly in the `Node.nodeType` property.  
 
-`Node.nodeType` can have one of the following constant value that represents the type of the node:
+`Node.nodeType` can have one of the following values that represents the type of the node:
 
 * `Node.ELEMENT_NODE`
 * `Node.ATTRIBUTE_NODE`
@@ -65,9 +63,9 @@ How can you distinguish these different types of nodes? The answer lays in the D
 * `Node.DOCUMENT_FRAGMENT_NODE`
 * `Node.NOTATION_NODE`
 
-The constants meaningfully suggest the type of the node they indicate: for example `Node.ELEMENT_NODE` represents the type of an element node, ``Node.TEXT_NODE`` represents a text node, `Node.DOCUMENT_NODE` the document node, and so on.  
+The constants meaningfully indicate the node type: for example `Node.ELEMENT_NODE` represents an element node, ``Node.TEXT_NODE`` represents a text node, `Node.DOCUMENT_NODE` the document node, and so on.  
 
-For example, if you use the DOM query functions `document.querySelector(selector)` and select the `<p>` node, then it would have the type `Node.ELEMENT_NODE`:
+For example, let's select the paragraph node, and look at its `nodeType` property:
 
 ```javascript
 const paragraph = document.querySelector('p');
@@ -75,7 +73,9 @@ const paragraph = document.querySelector('p');
 paragraph.nodeType === Node.ELEMENT_NODE; // => true
 ```
 
-Same way you can use `childNodes` property of the node object and check what kind of children the paragraph node contains:   
+As expected `paragraph.nodeType` has the value `Node.ELEMENT_NODE`, indicating that the paragraph is an element.  
+
+The paragraph also contains a text node:
 
 ```javascript
 const paragraph = document.querySelector('p');
@@ -83,8 +83,6 @@ const firstChild = paragraph.childNodes[0];
 
 firstChild.nodeType === Node.TEXT_NODE; // => true
 ```
-
-So, the paragraph node has one child of type text.  
 
 There's a node type that represents the entire document tree of nodes &mdash; `Node.DOCUMENT_NODE`:
 
@@ -96,13 +94,24 @@ document.nodeType === Node.DOCUMENT_NODE; // => true
 
 After getting a good grasp of what a DOM node is, now is the time to differentiate the DOM node and element. 
 
-If you get well the *node* term, then the answer is obvious: an element is just a type of node. Along with types like document, comment, or text.  
+If you get well the *node* term, then the answer is obvious: an element is a node of specific type element (`Node.ELEMENT_NODE`). Along with types like document, comment, or text.  
 
-The element is a subtype of the node the same way a cat is a subtype of an animal.  
+In simple words, an element is a node that's written using a tag in the HTML document. `<html>`, `<head>`, `<title>`, `<body>`, `<h2>`, `<p>` are all elements because they are represented by tags.  
 
-In simple words, an element is a node that's written using tag in the HTML document. `<html>`, `<head>`, `<title>`, `<body>`, `<h2>`, `<p>` are all elements because they are represented by tags.  
+The comment node, the text node aren't elements because they are not written with tags:
 
-`Node` and `HTMLElement` are constructors of a node and an element in JavaScript DOM implementation. Since an element is a subtype of node, a paragraph would be an instance of both `Node` and `HTMLElement`:
+```html{3,5}
+<html>
+  <body>
+    <!-- Page Body -->
+    <p>
+      Thank you for visiting my web page!
+    </p>
+  </body>
+</html>
+```
+
+`Node` is constructor of a node, and `HTMLElement` is a constructor of an element in JavaScript DOM. A paragraph, being an element, but also a node, is an instance of both `Node` and `HTMLElement`:
 
 ```javascript
 const paragraph = document.querySelector('p');
@@ -111,11 +120,13 @@ paragraph instanceof Node;        // => true
 paragraph instanceof HTMLElement; // => true
 ```
 
+Saying it simpler, the element is a subtype of node the same way a cat is a subtype of an animal.  
+
 ## 3. DOM properties: nodes and elements
 
-Aside from differentiating nodes from elements, you need also to distinguish the DOM properties that contain or nodes, or elements.  
+Aside from differentiating nodes from elements, you need also to distinguish the DOM properties that contain specifically only nodes, or only elements.  
 
-The following properties of `Node` type evaluate to a node or collection of nodes `NodeList`:
+The following properties of `Node` type evaluate to a node or a collection of nodes (`NodeList`):
 
 ```javascript
 node.parentNode; // Node or null
@@ -126,7 +137,7 @@ node.lastChild;  // Node or null
 node.childNodes; // NodeList
 ```
 
-However, the following properties are elements or collection of elements `HTMLCollection`:
+However, the following properties are elements or collection of elements (`HTMLCollection`):
 
 ```javascript
 node.parentElement; // HTMLElement or null
@@ -134,7 +145,9 @@ node.parentElement; // HTMLElement or null
 node.children;      // HTMLCollection
 ```
 
-Since both `node.childNodes` and `node.children` return a list of children, why still the need to have both of these properties? Consider the following paragraph element containing some text:
+Since both `node.childNodes` and `node.children` return a list of children, why have both of these properties? Good question!
+
+Consider the following paragraph element containing some text:
 
 ```html
 <p>
@@ -142,7 +155,7 @@ Since both `node.childNodes` and `node.children` return a list of children, why 
 </p>
 ```
 
-Now, if you open the [demo](https://jsitor.com/3mPwoSVbYh) and look at the properties of the parapgraph node:
+Open the [demo](https://jsitor.com/3mPwoSVbYh), then look at `childNodes` and `children` properties of the parapgraph node:
 
 ```javascript
 const paragraph = document.querySelector('p');
@@ -151,14 +164,18 @@ paragraph.childNodes; // NodeList:       [HTMLElement, Text]
 paragraph.children;   // HTMLCollection: [HTMLElement]
 ```
 
-You'll see that `paragraph.childNodes` collection contains 2 nodes: the bold element `<b>Thank you</b>`, as well as the text node ` for visiting my web page!`.  
+`paragraph.childNodes` collection contains 2 nodes: the bold element `<b>Thank you</b>`, as well as the text node ` for visiting my web page!`.  
 
-However, `paragraph.children` collection contains only 1 element: the bold element `<b>Thank you</b>`. Because `paragraph.children` can contain only elements, the text node wasn't included here because this node is of type text (`Node.TEXT_NODE`), and not an element (`Node.ELEMENT_NODE`).  
+However, `paragraph.children` collection contains only 1 item: the bold element `<b>Thank you</b>`. 
+
+Because `paragraph.children` can contain only elements, the text node wasn't included here because its type is text (`Node.TEXT_NODE`), and not an element (`Node.ELEMENT_NODE`).  
 
 ## 4. Summary
 
+A DOM document is a hierarchical collection of nodes. Each node can have a parent and children.  
+
 Understanding the difference between a DOM node and an element is easy if you understand what a node is.  
 
-The document is a hierarchical collection of nodes. Each node can have a parent and children.  
+Nodes have types, the element type being one of them. The element is represented by a tag in the HTML document.  
 
-Nodes can be of different types, the element type being one of them. The element is represented by a tag in the HTML document.  
+*Quiz: What type of node in DOM doesn't has a parent?*
