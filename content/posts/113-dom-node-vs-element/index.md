@@ -1,10 +1,10 @@
 ---
-title: "Same But Different: DOM Node vs Element"
+title: "What's the Difference between DOM Node and Element?"
 description: "What's the difference between a DOM node and an element? Let's find out!"
 published: "2021-01-05T15:00Z"
 modified: "2021-01-05T15:00Z"
 thumbnail: "./images/cover-2.png"
-slug: dom-node-vs-element
+slug: dom-node-element
 tags: ['dom', 'node', 'element']
 recommended: ['javascript-event-delegation', 'simple-but-tricky-javascript-interview-questions']
 type: post
@@ -178,4 +178,4 @@ Understanding the difference between a DOM node and an element is easy if you un
 
 Nodes have types, the element type being one of them. The element is represented by a tag in the HTML document.  
 
-*Quiz: What type of node doesn't has a parent?*
+*Quiz: What type of node never has a parent node?*
