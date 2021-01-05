@@ -94,7 +94,7 @@ document.nodeType === Node.DOCUMENT_NODE; // => true
 
 After getting a good grasp of what a DOM node is, now is the time to differentiate the DOM node and element. 
 
-If you get well the *node* term, then the answer is obvious: an element is a node of specific type element (`Node.ELEMENT_NODE`). Along with types like document, comment, or text.  
+If you get well the *node* term, then the answer is obvious: an element is a node of a specific type element (`Node.ELEMENT_NODE`). Along with types like document, comment, or text.  
 
 In simple words, an element is a node that's written using a tag in the HTML document. `<html>`, `<head>`, `<title>`, `<body>`, `<h2>`, `<p>` are all elements because they are represented by tags.  
 
@@ -120,7 +120,7 @@ paragraph instanceof Node;        // => true
 paragraph instanceof HTMLElement; // => true
 ```
 
-Saying it simpler, the element is a subtype of node the same way a cat is a subtype of an animal.  
+Saying it simpler, an element is a subtype of a node the same way a cat is a subtype of an animal.  
 
 ## 3. DOM properties: nodes and elements
 
