@@ -2,7 +2,7 @@
 title: Be Aware of Stale Closures when Using React Hooks
 description: The stale closures is a pitfall of React hooks when an outdated variable is captured by a closure.
 published: '2019-10-24T12:40Z'
-modified: '2021-01-07T13:00Z'
+modified: '2021-01-07T14:20Z'
 thumbnail: './images/landscape.jpg'
 slug: react-hooks-stale-closures
 tags: ['react', 'hook']
@@ -14,7 +14,7 @@ Hooks ease the management of state and side effects inside functional React comp
 
 Hooks heavily rely on JavaScript [closures](/simple-explanation-of-javascript-closures/). That's why hooks are so expressive and simple. But closures are sometimes tricky.  
 
-One issue you can encounter when using hooks is the stale closure. And it might be difficult to solve!
+One issue you can encounter when using hooks is stale closure. And it might be difficult to solve!
 
 Let's start with distilling what the stale closure is. Then you'll see how a stale closure affects React hooks, and how to solve that.  
 
@@ -55,7 +55,7 @@ Try the [demo](https://jsitor.com/GoHU5UGEd).
 
 Then the 3 invocations of `increment()` increment `value` up to `3`.  
 
-Finally, the call of `log()` logs the message `"Current value is 0"`. Htm... this is unexpected because `value` equals `3`.  
+Finally, the call of `log()` logs the message `"Current value is 0"`. Hmm... this is unexpected because `value` equals `3`.  
 
 *`log()` is a stale closure.* The closure `log()` has captured `message` variable having `"Current value is 0"`.  
 
@@ -181,7 +181,7 @@ I recommend to enable [eslint-plugin-react-hooks](https://www.npmjs.com/package/
 
 ### 3.2 *useState()*
 
-The component `<DelayedCount>` has 1 button *Increase async* that increments the counter in asynchronously with 1 second delay.  
+The component `<DelayedCount>` has 1 button *Increase async* that increments the counter asynchronously with 1 second delay.  
 
 ```jsx
 function DelayedCount() {
@@ -202,13 +202,15 @@ function DelayedCount() {
 }
 ```
 
-Now [open the demo](https://codesandbox.io/s/use-state-broken-0q994). Click 2 times quickly *Increase async* button. The counter gets updated only by `1`, instead of expected `2`.  
+Now [open the demo](https://codesandbox.io/s/use-state-broken-0q994). Click quickly 2 times *Increase async* button. The counter gets updated only by `1`, instead of expected `2`.  
 
-It happens because `delay()` is a stale closure.  
+On each click `setTimeout(delay, 1000)` schedules the execution of `delay()` after 1 second. `delay()` captures the variable `count` as being `0`.  
 
-`delay()` is a stale closure that uses an outdated `count` variable captured during the initial render.  
+Both `delay()` closures (because 2 clicks have been made) update the state to the same value: `setCount(count + 1) = setCount(0 + 1) = setCount(1)`. 
 
-To fix the problem, let's use a functional way to update `count` state:
+All because the `delay()` closure of the second click has captured the outdated `count` variable as being `0`.  
+
+To fix the problem, let's use a functional way `setCount(count => count + 1)` to update `count` state:
 
 ```jsx{6}
 function DelayedCount() {
@@ -234,14 +236,22 @@ function DelayedCount() {
 }
 ```
 
-Now `setCount(count => count + 1)` updates the count state inside `delay()`. React makes sure the latest state value is supplied as an argument to the update state function. The stale closure is solved.    
+Now `setCount(count => count + 1)` updates the count state inside `delay()`.  
 
-[Open the demo](https://codesandbox.io/s/use-state-fixed-zz78r). Click "Increase async" then right away "Increase sync" buttons. The `counter` displays the correct value `2`.  
+[Open the demo](https://codesandbox.io/s/use-state-fixed-zz78r). Click *Increase async* quickly 2 times. The `counter` displays the correct value `2`.  
+
+When a callback function that returns the new state based on the previous one is supplied to the state update function, React makes sure that the latest state value is supplied as an argument to that callback:
+
+```javascript
+setCount(alwaysActualStateValue => newStateValue);
+```
+
+That's why the stale closure problem that appears during state update is usually solved pretty well by using a functional way to update the state.  
 
 ## 4. Conclusion
 
-The stale closure problem occurs when a closure captures outdated variables. An efficient way to solve stale closures is to correctly set the dependencies of React hooks. Or, in the case of a stale state, use a functional way to update the state.   
+The stale closure problem occurs when a closure captures outdated variables. 
 
-The key takeaway is to try to supply hooks with closures that have captured the freshest variables.  
+An efficient way to solve stale closures is to correctly set the dependencies of React hooks. Or, in the case of a stale state, use a functional way to update the state.   
 
-*Do you think closures make React hooks difficult to understand?*
+The key takeaway is to try to supply hooks with closures that capture the freshest variables.  
