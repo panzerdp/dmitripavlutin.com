@@ -2,7 +2,7 @@
 title: Be Aware of Stale Closures when Using React Hooks
 description: The stale closures is a pitfall of React hooks when an outdated variable is captured by a closure.
 published: '2019-10-24T12:40Z'
-modified: '2019-10-25T04:31Z'
+modified: '2021-01-07T13:00Z'
 thumbnail: './images/landscape.jpg'
 slug: react-hooks-stale-closures
 tags: ['react', 'hook']
@@ -10,48 +10,56 @@ recommended: ['use-react-memo-wisely', 'simple-explanation-of-javascript-closure
 type: post
 ---
 
-Hooks replace class-based components by easing the reuse of state and side effects management. Additionally, you can extract repeated logic into a custom hook to reuse across the application.  
+Hooks ease the management of state and side effects inside functional React components. Moreover, repeated logic can be extracted into a custom hook to reuse across the application.  
 
-Hooks heavily rely on JavaScript closures. But closures are sometimes tricky.  
+Hooks heavily rely on JavaScript [closures](/simple-explanation-of-javascript-closures/). That's why hooks are so expressive and simple. But closures are sometimes tricky.  
 
-One issue you can encounter when working with a React component having a multitude of effects and state management is the stale closure. And it might be difficult to solve!
+One issue you can encounter when using hooks is the stale closure. And it might be difficult to solve!
 
-Let's start with distilling what the stale closure is. Then let's how a stale closure affects React hooks, and how you could solve that.  
+Let's start with distilling what the stale closure is. Then you'll see how a stale closure affects React hooks, and how to solve that.  
 
-*I assume you're familiar with JavaScript closures. If you need a refresh on closures, take a look at [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).*  
+*If you need a refresh on closures, I recommend reading [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).*  
 
 ## 1. The stale closure
 
-A factory function `createIncrement(i)` returns an increment function. The increment function increases an interval `value` by `i`, and returns a function that logs the current `value`:  
+A factory function `createIncrement(incBy)` returns a tuple of `increment` and `log` functions. When `increment()` function increases the internal `value` by `incBy`, and returns a function that logs the current `value`:  
 
-```javascript{20}
-function createIncrement(i) {
+```javascript{22,9-12}
+function createIncrement(incBy) {
   let value = 0;
+
   function increment() {
-    value += i;
+    value += incBy;
     console.log(value);
-    const message = `Current value is ${value}`;
-    return function logValue() {
-      console.log(message);
-    };
+  }
+
+  const message = `Current value is ${value}`;
+  function log() {
+    console.log(message);
   }
   
-  return increment;
+  return [increment, log];
 }
 
-const inc = createIncrement(1);
-const log = inc(); // logs 1
-inc();             // logs 2
-inc();             // logs 3
+const [increment, log] = createIncrement(1);
+increment(); // logs 1
+increment(); // logs 2
+increment(); // logs 3
 // Does not work!
-log();             // logs "Current value is 1"
+log();       // logs "Current value is 0"
 ```
 
-On the first call of `inc()`, the returned closure is assigned to the variable `log`. The 3 invocations of `inc()` increment `value` up to `3`.  
+Try the [demo](https://jsitor.com/GoHU5UGEd).  
 
-Finally, the call of `log()` logs the message `"Current value is 1"`. This is unexpected because `value` equals `3`.  
+`[increment, log] = createIncrement(1)` returns a tuple of functions: one function that increments the internal value, another that logs the current value.  
 
-*`log()` is a stale closure.* On first invocation of `inc()`, the closure `log()` has captured `message` variable having `"Current value is 1"`. While now, when `value` is already `3`, `message` variable is outdated.  
+Then the 3 invocations of `increment()` increment `value` up to `3`.  
+
+Finally, the call of `log()` logs the message `"Current value is 0"`. Htm... this is unexpected because `value` equals `3`.  
+
+*`log()` is a stale closure.* The closure `log()` has captured `message` variable having `"Current value is 0"`.  
+
+Even if `value` variable gets incremented multiple times when calling `increment()`, the `message` variable doesn't update and always keeps an outdated value `"Current value is 0"`.  
 
 > *The stale closure* captures variables that have outdated values.  
 
@@ -59,58 +67,40 @@ Let's see some approaches on how to fix the stale closure.
 
 ## 2. Fixing the stale closure
 
-#### A. Use a fresh closure
+Fixing the stale `log()` requires closing the closure over the actually changed variable: `value`. 
 
-The first approach to solving stale closures is to find the closure that captured the freshest variables.  
+Let's move the statement `const message = ...;` into `log()` function body:
 
-Let's find the closure that has captured the most up to date `message` variable. That's the closure returned from the *latest* `inc()` invocation:
-
-```javascript{7}
-const inc = createIncrement(1);
-
-inc();  // logs 1
-inc();  // logs 2
-const latestLog = inc(); // logs 3
-// Works!
-latestLog(); // logs "Current value is 3"
-```
-
-`latestLog` captured the `message` variable that has the most up to date `"Current value is 3"`.  
-
-*By the way, this is approximately how React hooks handle the freshness of closures.* 
-
-*Hooks implementation assumes that between the component re-renderings, the latest closure supplied as a callback to the hook (e.g. `useEffect(callback)`) has captured the freshest variables from the component's function scope.*  
-
-#### B. Close over the changed variable
-
-To second way is to make `logValue()` use `value` directly.  
-
-Let's move the line `const message = ...;` into `logValue()` function body:
-
-```javascript{7,20}
-function createIncrementFixed(i) {
+```javascript{10}
+function createIncrement(incBy) {
   let value = 0;
+
   function increment() {
-    value += i;
+    value += incBy;
     console.log(value);
-    return function logValue() {
-      const message = `Current value is ${value}`;
-      console.log(message);
-    };
+  }
+
+  function log() {
+    const message = `Current value is ${value}`;
+    console.log(message);
   }
   
-  return increment;
+  return [increment, log];
 }
 
-const inc = createIncrementFixed(1);
-const log = inc(); // logs 1
-inc();             // logs 2
-inc();             // logs 3
+const [increment, log] = createIncrement(1);
+increment(); // logs 1
+increment(); // logs 2
+increment(); // logs 3
 // Works!
-log();             // logs "Current value is 3"
+log();       // logs "Current value is 3"
 ```
 
-`logValue()` closes over `value` variable from the scope of `createIncrementFixed()`.  `log()` now logs the correct message `"Current value is 3"`.   
+Try the fixed [demo](https://jsitor.com/RMPY8EktG).
+
+Now, after calling 3 times the `increment()` function, calling `log()` logs the actual `value`: `"Current value is 3"`. 
+
+`log()` is no longer a stale closure.  
 
 ## 3. Stale closures of hooks
 
@@ -118,7 +108,7 @@ log();             // logs "Current value is 3"
 
 Let's study a common case of stale closure when using `useEffect()` hook.
 
-Inside the component `<WatchCount>` the hook `useEffect()` logs every second the value of `count`:  
+Inside the component `<WatchCount>` the hook `useEffect()` logs every 2 seconds the value of `count`:  
 
 ```jsx
 function WatchCount() {
@@ -141,11 +131,17 @@ function WatchCount() {
 }
 ```
 
-[Open the demo](https://codesandbox.io/s/stale-closure-use-effect-broken-2-gyhzk) and click a few times increase button. Then look at the console, and every 2 seconds appears `Count is: 0`.   
+[Open the demo](https://codesandbox.io/s/stale-closure-use-effect-broken-2-gyhzk) and click a few times increase button. Then look at the console, and every 2 seconds appears `Count is: 0`, despite the fact that `count`  state variable has actually being increased a few times.  
+
+![React Stale Closure](./images/react-stale-closure-5.png)
 
 Why does it happen?
 
-At first render, the closure `log()` captures `count` variable as `0`. Later, even if `count` increases, `log()` still uses `count` as `0` from initial render. `log()` is a stale closure.  
+At first render, the state variable `count` is initialized with `0`. 
+
+After the component has mounted, `useEffect()` calls `setInterval(log, 2000)` timer function which schedules calling `log()` function every 2 seconds. Here, the closure `log()` captures `count` variable as `0`.  
+
+Later, even if `count` increases, `log()` still uses `count` as `0` from initial render. *`log()` becomes a stale closure.*  
 
 The solution is to let know `useEffect()` that the closure `log()` depends on `count` and properly handle the reset of interval:  
 
@@ -177,18 +173,15 @@ With the dependencies properly set, `useEffect()` updates the closure as soon as
 
 [Open the fixed demo](https://codesandbox.io/s/stale-closure-use-effect-fixed-2-ybv47) and click a few times increase. The console will log the actual value of `count`.  
 
+![React Stale Closure Fixed](./images/react-stale-closure-fixed.png)
+
 Proper management of hooks dependencies is an efficient way to solve the stale closure problem. 
 
-I recommend to install [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks), which detects the forgotten dependencies.  
-
-*There's another solution how to make log() work correctly. If you see it, let me know in a [comment](#comments)!*  
+I recommend to enable [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks), which detects the forgotten dependencies.  
 
 ### 3.2 *useState()*
 
-The component `<DelayedCount>` has 2 buttons: 
-
-* "Increase async" increments the counter in async mode with 1 second delay 
-* "Increase sync" increments the counter right away, in sync mode. 
+The component `<DelayedCount>` has 1 button *Increase async* that increments the counter in asynchronously with 1 second delay.  
 
 ```jsx
 function DelayedCount() {
@@ -200,30 +193,18 @@ function DelayedCount() {
     }, 1000);
   }
 
-  function handleClickSync() {
-    setCount(count + 1);
-  }
-
   return (
     <div>
       {count}
       <button onClick={handleClickAsync}>Increase async</button>
-      <button onClick={handleClickSync}>Increase sync</button>
     </div>
   );
 }
 ```
 
-Now [open the demo](https://codesandbox.io/s/use-state-broken-0q994). Click "Increase async" then right away "Increase sync" buttons. The counter gets updated only to `1`.  
+Now [open the demo](https://codesandbox.io/s/use-state-broken-0q994). Click 2 times quickly *Increase async* button. The counter gets updated only by `1`, instead of expected `2`.  
 
-It happens because `delay()` is a stale closure.    
-
-Let's explore what happens:
-
-  1. *Initial render*. `count` is `0`.  
-  * *"Increase async" is clicked*. `delay()` closure captures `count` as `0`. `setTimeout()` registers `delay()` to be called after 1 second.  
-  * *"Increase sync" is clicked*. The handler `handleClickSync()` sets count state to `1` using `setCount(0 + 1)`. The component re-renders.  
-  * *After 1 second*. `setTimeout()` executes the `delay()` function. But `delay()` closure still *remembers* `count` being `0` from initial render, so sets the state `setState(0 + 1)`. As result, the count remains `1`.  
+It happens because `delay()` is a stale closure.  
 
 `delay()` is a stale closure that uses an outdated `count` variable captured during the initial render.  
 
