@@ -18,7 +18,7 @@ DOM also uses the term *element*: which is quite similar to a node. So, what's t
 
 The key to understanding the difference between a node and an element is to understand what a node is.  
 
-From a higher viewpoint, a DOM document consists of a hierarchy of nodes. Each node can have a parent and children.  
+From a higher viewpoint, a DOM document consists of a hierarchy of nodes. Each node can have a parent and/or children.  
 
 Let's look at the following HTML document:
 
@@ -175,7 +175,7 @@ Having both `node.childNodes` and `node.children` lets you choose the collection
 
 ## 4. Summary
 
-A DOM document is a hierarchical collection of nodes. Each node can have a parent and children.  
+A DOM document is a hierarchical collection of nodes. Each node can have a parent and/or children.  
 
 Understanding the difference between a DOM node and an element is easy if you understand what a node is.  
 

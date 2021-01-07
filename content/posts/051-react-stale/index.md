@@ -10,11 +10,11 @@ recommended: ['use-react-memo-wisely', 'simple-explanation-of-javascript-closure
 type: post
 ---
 
-Hooks replace class-based components by easying the reuse of state and side effects management. Additionally you can extract repeated logic into a custom hook to reuse across the application.  
+Hooks replace class-based components by easing the reuse of state and side effects management. Additionally, you can extract repeated logic into a custom hook to reuse across the application.  
 
 Hooks heavily rely on JavaScript closures. But closures are sometimes tricky.  
 
-One issue you can encouter when working with a React component having a multitude of effects and state management is the stale closure. And it might be difficult to solve!
+One issue you can encounter when working with a React component having a multitude of effects and state management is the stale closure. And it might be difficult to solve!
 
 Let's start with distilling what the stale closure is. Then let's how a stale closure affects React hooks, and how you could solve that.  
 
@@ -49,7 +49,7 @@ log();             // logs "Current value is 1"
 
 On the first call of `inc()`, the returned closure is assigned to the variable `log`. The 3 invocations of `inc()` increment `value` up to `3`.  
 
-Finally, the call of `log()` logs the message `"Current value is 1"`. This is unexpected because `value` equals to `3`.  
+Finally, the call of `log()` logs the message `"Current value is 1"`. This is unexpected because `value` equals `3`.  
 
 *`log()` is a stale closure.* On first invocation of `inc()`, the closure `log()` has captured `message` variable having `"Current value is 1"`. While now, when `value` is already `3`, `message` variable is outdated.  
 
@@ -141,7 +141,7 @@ function WatchCount() {
 }
 ```
 
-[Open the demo](https://codesandbox.io/s/stale-closure-use-effect-broken-2-gyhzk) and click a few times increase button. Then look at the console, and every 2 seconds apprears `Count is: 0`.   
+[Open the demo](https://codesandbox.io/s/stale-closure-use-effect-broken-2-gyhzk) and click a few times increase button. Then look at the console, and every 2 seconds appears `Count is: 0`.   
 
 Why does it happen?
 
@@ -259,7 +259,7 @@ Now `setCount(count => count + 1)` updates the count state inside `delay()`. Rea
 
 ## 4. Conclusion
 
-The stale closure problem occurs when a closure captures outdated variables. An efficient way to solve stale closures is to correctly set the dependencies of React hooks. Or, in case of stale state, use a functional way to update the state.   
+The stale closure problem occurs when a closure captures outdated variables. An efficient way to solve stale closures is to correctly set the dependencies of React hooks. Or, in the case of a stale state, use a functional way to update the state.   
 
 The key takeaway is to try to supply hooks with closures that have captured the freshest variables.  
 
