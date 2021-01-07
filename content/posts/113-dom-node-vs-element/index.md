@@ -2,7 +2,7 @@
 title: "What's the Difference between DOM Node and Element?"
 description: "What's the difference between a DOM node and an element? Let's find out!"
 published: "2021-01-05T16:40Z"
-modified: "2021-01-05T16:40Z"
+modified: "2021-01-07T10:00Z"
 thumbnail: "./images/cover-2.png"
 slug: dom-node-element
 tags: ['dom', 'node', 'element']
@@ -10,13 +10,13 @@ recommended: ['javascript-event-delegation', 'simple-but-tricky-javascript-inter
 type: post
 ---
 
-The Document Object Model (DOM) is an interface that treats HTML or XML document as a tree structure where each node is an object of the document. DOM also provides a set of methods to query the tree, alter the structure, style.  
+The Document Object Model (DOM) is an interface that treats HTML or XML document as a tree structure, where each node is an object of the document. DOM also provides a set of methods to query the tree, alter the structure, style.  
 
 DOM also uses the term *element*: which is quite similar to a node. So, what's the difference between a DOM node and an element? Let's find out!  
 
 ## 1. DOM Node
 
-The key to understanding the difference between a node and an element is to understand what exactly is a node in DOM.  
+The key to understanding the difference between a node and an element is to understand what a node is.  
 
 From a higher viewpoint, a DOM document consists of a hierarchy of nodes. Each node can have a parent and children.  
 
@@ -94,13 +94,14 @@ document.nodeType === Node.DOCUMENT_NODE; // => true
 
 After getting a good grasp of what a DOM node is, now is the time to differentiate the DOM node and element. 
 
-If you get well the *node* term, then the answer is obvious: an element is a node of a specific type element (`Node.ELEMENT_NODE`). Along with types like document, comment, or text.  
+If you get well the *node* term, then the answer is obvious: an element is a node of a specific type &mdash; element (`Node.ELEMENT_NODE`). Along with types like document, comment, text, etc.    
 
 In simple words, an element is a node that's written using a tag in the HTML document. `<html>`, `<head>`, `<title>`, `<body>`, `<h2>`, `<p>` are all elements because they are represented by tags.  
 
-The comment node, the text node aren't elements because they are not written with tags:
+The document type, the comment, the text nodes aren't elements because they are not written with tags:
 
-```html{3,5}
+```html{1,4,6}
+ <!DOCTYPE html>
 <html>
   <body>
     <!-- Page Body -->
@@ -111,7 +112,7 @@ The comment node, the text node aren't elements because they are not written wit
 </html>
 ```
 
-`Node` is constructor of a node, and `HTMLElement` is a constructor of an element in JavaScript DOM. A paragraph, being an element, but also a node, is an instance of both `Node` and `HTMLElement`:
+`Node` is constructor of a node, and `HTMLElement` is a constructor of an element in JavaScript DOM. A paragraph, being a node and also an element, is an instance of both `Node` and `HTMLElement`:
 
 ```javascript
 const paragraph = document.querySelector('p');
@@ -168,7 +169,9 @@ paragraph.children;   // HTMLCollection: [HTMLElement]
 
 However, `paragraph.children` collection contains only 1 item: the bold element `<b>Thank you</b>`. 
 
-Because `paragraph.children` can contain only elements, the text node wasn't included here because its type is text (`Node.TEXT_NODE`), and not an element (`Node.ELEMENT_NODE`).  
+Because `paragraph.children` contains only elements, the text node wasn't included here because its type is text (`Node.TEXT_NODE`), and not an element (`Node.ELEMENT_NODE`).  
+
+Having both `node.childNodes` and `node.children` lets you choose the collection of children you'd like to access: all children nodes or only children being elements.  
 
 ## 4. Summary
 
