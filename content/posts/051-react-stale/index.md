@@ -2,7 +2,7 @@
 title: Be Aware of Stale Closures when Using React Hooks
 description: The stale closures is a pitfall of React hooks when an outdated variable is captured by a closure.
 published: '2019-10-24T12:40Z'
-modified: '2021-01-07T14:20Z'
+modified: '2021-01-09T16:30Z'
 thumbnail: './images/landscape.jpg'
 slug: react-hooks-stale-closures
 tags: ['react', 'hook']
@@ -22,7 +22,7 @@ Let's start with distilling what the stale closure is. Then you'll see how a sta
 
 ## 1. The stale closure
 
-A factory function `createIncrement(incBy)` returns a tuple of `increment` and `log` functions. When `increment()` function increases the internal `value` by `incBy`, and returns a function that logs the current `value`:  
+A factory function `createIncrement(incBy)` returns a tuple of `increment` and `log` functions. When called, `increment()` function increases the internal `value` by `incBy`, while `log()` simply logs a message with the information about the current `value`:  
 
 ```javascript{22,9-12}
 function createIncrement(incBy) {
@@ -141,9 +141,9 @@ At first render, the state variable `count` is initialized with `0`.
 
 After the component has mounted, `useEffect()` calls `setInterval(log, 2000)` timer function which schedules calling `log()` function every 2 seconds. Here, the closure `log()` captures `count` variable as `0`.  
 
-Later, even if `count` increases, `log()` still uses `count` as `0` from initial render. *`log()` becomes a stale closure.*  
+Later, even if `count` increases when the *Increase* button is clicked, the `log()` closure called by the timer function every 2 seconds still uses `count` as `0` from initial render. *`log()` becomes a stale closure.*  
 
-The solution is to let know `useEffect()` that the closure `log()` depends on `count` and properly handle the reset of interval:  
+The solution is to let know `useEffect()` that the closure `log()` depends on `count` and properly handle the reset of interval when `count` changes:  
 
 ```jsx{11}
 function WatchCount() {
