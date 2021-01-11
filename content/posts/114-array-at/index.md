@@ -14,7 +14,7 @@ Alongside the plain JavaScript object, the array is probably one of the most pop
 
 In this post, I'm going to present the new array method `array.at(index)`.  
 
-The main benefit of the new method is the ability to acees elements from the end of the array using a negative index, which isn't possible using the regular square brackets syntax `array[index]`.  
+The main benefit of the new method is the ability to access elements from the end of the array using a negative index, which isn't possible using the regular square brackets syntax `array[index]`.  
 
 ## 1. The limitation of the square brackets syntax
 
@@ -29,7 +29,7 @@ item; // => 'apple'
 
 The expression `array[index]` is named *property accessor*, which evaluates to the array item located at `index`.  
 
-In most of the cases, if you'd like to access the item by a positive index &mdash; the square brackets accessor is the way to go. It has a simple and readable syntax.  
+In most cases, if you'd like to access the item by a positive index &mdash; the square brackets accessor is the way to go. It has a simple and readable syntax.  
 
 But sometimes you'd like to access the array elements from the end, rather than from the beginning. For example, to access the last element of the array:
 
@@ -40,7 +40,7 @@ const latestItem = fruits[fruits.length - 1];
 latestItem; // => 'grape'
 ```
 
-`fruits[fruits.length - 1]` is the how you can access the last element of the array. `fruits.length - 1` is the index of the last element of the array.  
+`fruits[fruits.length - 1]` is how you can access the last element of the array. `fruits.length - 1` is the index of the last element of the array.  
 
 The array accessor doesn't allow a straightforward way to access items from the end of the array, and also don't accept a negative index.     
 
@@ -78,7 +78,23 @@ const lastItem = fruits.at(-1);
 lastItem; // => 'grape'
 ```
 
-When using a negative index, the `array.at()` looks for items from the end of the array. 
+When using a negative index, the `array.at()` looks for items from the end of the array.  
+
+Here's a more detailed example of how `array.at()` method accesses elements:
+
+```javascript
+const vegetables = ['potatoes', 'tomatoes', 'onions'];
+
+vegetables.at(0); // => 'potatoes'
+vegetables.at(1); // => 'tomatoes'
+vegetables.at(2); // => 'onions'
+vegetables.at(3); // => undefined
+
+vegetables.at(-1); // => 'onions'
+vegetables.at(-2); // => 'tomatoes'
+vegetables.at(-3); // => 'potatoes'
+vegetables.at(-4); // => undefined
+```
 
 If `negIndex` is a negative index used as an argument on `array.at(negIndex)`, then the method accesses 
 the element at index `array.length + negIndex`. Here's an example:
@@ -94,7 +110,7 @@ fruits[fruits.length + negIndex]; // => 'banana'
 
 ## 3. Summary
 
-The square brackets syntax syntax in JavaScript is the usual and good way to access items by index. Just put the index variable in square brackets `array[index]`,
+The square brackets syntax in JavaScript is the usual and good way to access items by index. Just put the index variable in square brackets `array[index]`,
 and get the array item at that index.  
 
 However, accessing an array item from the end using the regular accessor isn't convenient since it doesn't accept negative indexes. So, for example, to access the last element of the array you have to use a workaround expression: 
