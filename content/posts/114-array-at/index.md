@@ -12,9 +12,9 @@ type: post
 
 ## 1. The problem of the regular way to access items
 
-Alongside with the plain JavaScript object, the array is probably one of the most popular data structure. 
+Alongside the plain JavaScript object, the array is probably one of the most popular data structure. 
 
-A widely used operation on array is the access of an element of the array by index:
+A widely used operation on the array is the access of an element of the array by index:
 
 ```javascript
 const fruits = ['orange', 'apple', 'banana', 'grape'];
@@ -37,9 +37,9 @@ latestItem; // => 'grape'
 
 `fruits[fruits.length - 1]` is the way you can access the latest element of the array. `fruits.length - 1` is the index of the latest element of the array.  
 
-The array accessor doesn't allow a straigfoward way to access items from the tail of the array.  
+The array accessor doesn't allow a straightforward way to access items from the tail of the array.  
 
-Fortuantely, a new proposal (at stage 3 as of January 2021) brings the method `at()` to arrays, and it can solve many limitations of the array accessor.  
+Fortunately, a new proposal (at stage 3 as of January 2021) brings the method `at()` to arrays, and it can solve many limitations of the array accessor.  
 
 ## 2. array.at() method
 
@@ -89,11 +89,11 @@ fruits[fruits.length + negIndex]; // => 'banana'
 
 ## 3. Summary
 
-The array accessor syntax in JavaScript is the usual and good way to access items of arrays. Just put the index variable in square brakets `array[index]`,
+The array accessor syntax in JavaScript is the usual and good way to access items of arrays. Just put the index variable in square brackets `array[index]`,
 and get the array item value at that index.  
 
-In some cases, however, to access the array item from the tail (use a negative index) using the regular accessor isn't convinient since regular accessor doesn't access negative indexes. So, for example, to access the latest element of the array you have to use a long expression: `array[array.length - 1]`.
+In some cases, however, to access the array item from the tail (use a negative index) using the regular accessor isn't convenient since the regular accessor doesn't access negative indexes. So, for example, to access the latest element of the array you have to use a long expression: `array[array.length - 1]`.
 
-Fortuantely, the new array method `array.at(index)` lets you access the array elements by index as a regular accessor. What's better, `array.at(index)` also accepts negative indexes, in which case the method access the elements from the tail.  
+Fortunately, the new array method `array.at(index)` lets you access the array elements by index as a regular accessor. What's better, `array.at(index)` also accepts negative indexes, in which case the method accesses the elements from the tail.  
 
 Just include the [array.prototype.at](https://github.com/es-shims/Array.prototype.at) polyfill into your application, and start using `array.at()` today!
