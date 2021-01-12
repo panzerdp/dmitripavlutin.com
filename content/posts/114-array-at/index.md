@@ -96,6 +96,8 @@ vegetables.at(-3); // => 'potatoes'
 vegetables.at(-4); // => undefined
 ```
 
+Check out the [demo](https://codesandbox.io/s/zen-bird-2xr74?file=/src/index.js).
+
 If `negIndex` is a negative index, then `array.at(negIndex)` accesses 
 the element at index `array.length + negIndex`. Here's an example:
 
