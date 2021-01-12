@@ -1,9 +1,9 @@
 ---
-title: "The New Array Method You'll Enjoy: array.at()"
-description: "array.at() method let's you access the array element at specific index"
-published: "2021-01-12T12:00Z"
-modified: "2021-01-12T12:00Z"
-thumbnail: "./images/cover-2.png"
+title: "The New Array Method You'll Enjoy: array.at(index)"
+description: "array.at(index) method in JavaScript accesses array items at positive and (finally!) at negative indexes"
+published: "2021-01-12T09:00Z"
+modified: "2021-01-12T09:00Z"
+thumbnail: "./images/cover-3.png"
 slug: javascript-array-at
 tags: ['javascript', 'array']
 recommended: ['operations-on-arrays-javascript', 'javascript-array-contains-value']
@@ -83,20 +83,20 @@ lastItem; // => 'grape'
 Here's a more detailed example of how `array.at()` method accesses elements:
 
 ```javascript
-const vegetables = ['potatoes', 'tomatoes', 'onions'];
+const vegetables = ['potatoe', 'tomatoe', 'onion'];
 
-vegetables.at(0); // => 'potatoes'
-vegetables.at(1); // => 'tomatoes'
-vegetables.at(2); // => 'onions'
+vegetables.at(0); // => 'potatoe'
+vegetables.at(1); // => 'tomatoe'
+vegetables.at(2); // => 'onion'
 vegetables.at(3); // => undefined
 
-vegetables.at(-1); // => 'onions'
-vegetables.at(-2); // => 'tomatoes'
-vegetables.at(-3); // => 'potatoes'
+vegetables.at(-1); // => 'onion'
+vegetables.at(-2); // => 'tomatoe'
+vegetables.at(-3); // => 'potatoe'
 vegetables.at(-4); // => undefined
 ```
 
-Check out the [demo](https://codesandbox.io/s/zen-bird-2xr74?file=/src/index.js).
+Check out the [demo](https://codesandbox.io/s/array-at-method-2xr74?file=/src/index.js).
 
 If `negIndex` is a negative index, then `array.at(negIndex)` accesses 
 the element at index `array.length + negIndex`. Here's an example:
