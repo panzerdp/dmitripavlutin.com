@@ -1,0 +1,60 @@
+@import '~styles/variables';
+
+.root {
+  position: relative;
+  display: flex;
+  flex-flow: row;
+  margin-bottom: 30px;
+
+  .comment {
+    position: relative;
+    width: 100%;
+  }
+
+  .avatar {
+    width: 53px;
+    height: 45px;
+    background: #f2f2f2;
+    margin-right: 20px;
+  }
+
+  .text {
+    margin-bottom: 16px;
+  }
+
+  .header {
+    background: #f2f2f2;
+    height: 45px;
+    margin-bottom: 16px;
+  }
+
+  .textLine60,
+  .textLine70,
+  .textLine90,
+  .textLine100 {
+    background: #f2f2f2;
+    height: 10px;
+  }
+
+  .textLine60 {
+    width: 60%;
+  }
+
+  .textLine70 {
+    width: 70%;
+  }
+
+  .textLine90 {
+    width: 90%;
+  }
+
+  .textLine100 {
+    width: 100%;
+  }
+}
+
+@media (max-width: $small-device-width) {
+  .avatar {
+    display: none;
+  }
+}
