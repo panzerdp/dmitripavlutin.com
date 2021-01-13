@@ -72,7 +72,7 @@ function FilteredEmployeesList({ employees }) {
   const onChange = event => setQuery(event.target.value);
 
   const filteredEmployees = employees.filter(name => {
-    return name.toLowerCase().includes(query);
+    return name.toLowerCase().includes(query.toLowerCase());
   });
 
   return (
@@ -113,7 +113,7 @@ function FilteredEmployeesList({ employees }) {
   const onChange = event => setQuery(event.target.value);
 
   const filteredEmployees = employees.filter(name => {
-    return name.toLowerCase().includes(debouncedQuery);
+    return name.toLowerCase().includes(debouncedQuery.toLowerCase());
   });
 
   return (
