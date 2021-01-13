@@ -1,8 +1,7 @@
-import * as React from 'react';
-import classNames from 'utils/classnames';
+import classNames from 'classnames';
 
 import styles from './index.module.scss';
 
-const SkeletonAnimation = (): JSX.Element => <div className={classNames(styles.skeleton, styles.fill)} />;
-
-export { SkeletonAnimation };
+export function SkeletonAnimation (): JSX.Element {
+  return <div className={classNames(styles.skeleton, styles.fill)} />;
+}

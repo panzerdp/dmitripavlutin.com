@@ -26,10 +26,7 @@ export function CommentsThread({ githubCommentsRepository }: CommentsThreadProps
 
       scriptEl.onload = () => {
         const iframe = document.querySelector('.utterances-frame');
-
-        iframe.addEventListener('load', () => {
-          setIsLoading(false);
-        });
+        iframe.addEventListener('load', () => setIsLoading(false));
       };
     } else {
       console.log(`Error adding utterances comments on: ${commentBox}`);
@@ -38,7 +35,7 @@ export function CommentsThread({ githubCommentsRepository }: CommentsThreadProps
 
   return (
     <>
-      {isLoading && <Placeholder />}
+      {isLoading ? <Placeholder /> : null}
       <div ref={commentBox}></div>
     </>
   );
