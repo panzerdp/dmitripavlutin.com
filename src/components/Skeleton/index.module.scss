@@ -1,0 +1,46 @@
+:root {
+  --animation-opaque: rgba(255, 255, 255, 0.4);
+  --animation-trans: rgba(255, 255, 255, 0);
+}
+
+@keyframes smoothLoadingAnimation {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(50%, 0, 0);
+  }
+}
+
+.skeleton {
+  overflow: hidden;
+  position: relative;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  width: 300%;
+  height: 100%;
+  left: -200%;
+  top: 0;
+  background: linear-gradient(
+    to right,
+    var(--animation-opaque) 60%,
+    var(--animation-trans) 63%,
+    var(--animation-opaque) 66%
+  );
+  animation-name: smoothLoadingAnimation;
+  animation-duration: 1.3s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
