@@ -17,9 +17,9 @@ effort to familiarize and use correctly.
 
 A pitfall you might experience when working with `useEffect()` is the infinite loop of re-renderings. In this post, I'll describe the common scenarios that generate infinite loops and how to avoid them.  
 
-*If aren't familiar with `useEffect()`, I recommend reading my post [A Simple Explanation of React.useEffect()](/react-useeffect-explanation/) before continuing. Having good fundamental knowledge of a non-trivial subject greatly helps bypass rookie mistakes*.  
+*If you aren't familiar with `useEffect()`, I recommend reading my post [A Simple Explanation of React.useEffect()](/react-useeffect-explanation/) before continuing. Having good fundamental knowledge of a non-trivial subject helps bypass rookie mistakes*.  
 
-## 1. Side-effect updating state infinite loop
+## 1. The infinite loop created by side-effect updating state
 
 Imagine a simple functional component that contains an input element. What I'd like to do is show on the
 screen how much times the input has changed.  
@@ -64,7 +64,6 @@ useEffect(() => setCount(count + 1));
 
 it generates an infinite loop of component re-renderings.  
 
-
 * After initial rendering `useEffect(() => setCount(count + 1))` executes the side-effect callback
 * The side-effect callback `() => setCount(count + 1)` updates state
 * The state update triggers re-rendering
@@ -75,7 +74,7 @@ it generates an infinite loop of component re-renderings.
 
 ![React useEffect() infinite loop](./images/infinite-loop.png)
 
-## 2. Fixing side-effect updating state infinite loop
+## 2. Fixing the infinite loop
 
 ### 2.1 Fixing dependencies
 
@@ -105,7 +104,7 @@ function CountInputChanges() {
 
 Adding `[value]` as a dependency of `useEffect(..., [value])`, the `count` state variable is updated only when `[value]` is changed.  
 
-![React useEffect() controlled rendering loop](./images/breakable-loop.png)
+![React useEffect() controlled rendering loop](./images/breakable-loop-2.png)
 
 Open the fixed [demo](https://codesandbox.io/s/infinite-loop-fixed-4sgfr?file=/src/App.js). Now, as soon as you type into the input field, the `count` state correctly
 display the number of input value changes.  
@@ -118,9 +117,8 @@ The idea is that updating a reference doesn't trigger re-rendering of the compon
 
 Here's a possible implementation:
 
-```jsx
+```jsx{7}
 import { useEffect, useState, useRef } from "react";
-import "./styles.css";
 
 export default function CountInputChanges() {
   const [value, setValue] = useState("");
@@ -139,12 +137,40 @@ export default function CountInputChanges() {
 }
 ```
 
-Thanks to `useEffect(() => countRef.current++)` after every re-rendering because of `value` change, the `countRef.current` gets incremented.  
+Thanks to `useEffect(() => countRef.current++)`, after every re-rendering because of `value` change, the `countRef.current` gets incremented.  
 
 ![React useEffect() controlled rendering loop](./images/no-loop.png)
 
 Check out the [demo](https://codesandbox.io/s/infinite-loop-fixed-4sgfr?file=/src/App.js). Now, as soon as you type into the input field, the `countRef` reference is updated without triggering a re-rendering &mdash; efficiently solving the infinite loop problem.  
 
-## 3. Side-effect updating its dependency infinite loop
+## 3. The infinite loop created by side-effect updating its dependency
+
+Even if you setup correctly the `useEffect()` dependencies, still, you have to make sure not to update the state that is also a dependency to avoid creating an infinite loop.  
+
+```jsx{8}
+import { useState } from "react";
+
+export default function CountSecrets() {
+  const [secret, setSecret] = useState({ value, countSecrets: 0 });
+
+  useEffect({
+    if (secret.value === 'secret') {
+      setState({
+        value: secret.value,
+        countSecrets: secret.countSecrets + 1
+      });
+    }
+  }, [secret]);
+
+  const onChange = ({ target }) => setValue(target.value);
+
+  return (
+    <div>
+      <input type="text" value={value} onChange={onChange} />
+      <div>Number of secret: {secret.countSecrets}</div>
+    </div>
+  );
+}
+```
 
 ## 4. Summary
