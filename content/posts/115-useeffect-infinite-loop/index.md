@@ -52,9 +52,9 @@ and the `onChange` event handler updates the `value` state as the user types int
 I took the decision to update the `count` variable using `useEffect()` hook. Every time the component re-renders due to user typing into the input,
 the `useEffect(() => setCount(count + 1))` updates the counter.  
 
-Do you expect any problems with the component? Take a try and open the [demo](https://codesandbox.io/s/infinite-loop-9rb8c?file=/src/App.js). 
+Do you expect any problems with this component? Take a try and open the [demo](https://codesandbox.io/s/infinite-loop-9rb8c?file=/src/App.js). 
 
-The demo shows that `count` state variable increases uncontrollable, even if you haven't typed anything into the input.  
+The demo shows that `count` state variable increases uncontrollable, even if you haven't typed anything into the input. That's an infinite loop.
 
 When `useEffect()` is used as such:
 
@@ -139,7 +139,7 @@ export default function CountInputChanges() {
 
 Thanks to `useEffect(() => countRef.current++)` after every re-rendering because of `value` change, the `countRef.current` gets incremented.  
 
-Check out the [demo](https://codesandbox.io/s/infinite-loop-fixed-4sgfr?file=/src/App.js). Now, as soon as you type into the input field, the `countRef` reference gets updated without triggering a re-rendering &mdash; efficiently solving the infinite loop problem.  
+Check out the [demo](https://codesandbox.io/s/infinite-loop-fixed-4sgfr?file=/src/App.js). Now, as soon as you type into the input field, the `countRef` reference is updated without triggering a re-rendering &mdash; efficiently solving the infinite loop problem.  
 
 ## 3. Side-effect updating its dependency infinite loop
 
