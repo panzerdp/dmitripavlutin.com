@@ -73,7 +73,7 @@ it generates an infinite loop of component re-renderings.
 * The state update triggers re-rendering
 * ...and so on indefinitely
 
-![React useEffect() infinite loop](./images/useeffect-infinite-loop-3.png)
+![React useEffect() infinite loop](./images/infinite-loop.png)
 
 ## 2. Fixing side-effect updating state infinite loop
 
@@ -105,7 +105,7 @@ function CountInputChanges() {
 
 Adding `[value]` as a dependency of `useEffect(..., [value])`, the `count` state variable is updated only when `[value]` is changed.  
 
-![React useEffect() controlled rendering loop](./images/useeffect-controlled-rendering-loop.png)
+![React useEffect() controlled rendering loop](./images/breakable-loop.png)
 
 Open the fixed [demo](https://codesandbox.io/s/infinite-loop-fixed-4sgfr?file=/src/App.js). Now, as soon as you type into the input field, the `count` state correctly
 display the number of input value changes.  
@@ -140,6 +140,8 @@ export default function CountInputChanges() {
 ```
 
 Thanks to `useEffect(() => countRef.current++)` after every re-rendering because of `value` change, the `countRef.current` gets incremented.  
+
+![React useEffect() controlled rendering loop](./images/no-loop.png)
 
 Check out the [demo](https://codesandbox.io/s/infinite-loop-fixed-4sgfr?file=/src/App.js). Now, as soon as you type into the input field, the `countRef` reference is updated without triggering a re-rendering &mdash; efficiently solving the infinite loop problem.  
 
