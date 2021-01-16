@@ -99,11 +99,13 @@ function CountInputChanges() {
       <input type="text" value={value} onChange={onChange} />
       <div>Number of changes: {count}</div>
     </div>
-  )
+  );
 }
 ```
 
 Adding `[value]` as a dependency of `useEffect(..., [value])`, the `count` state variable is updated only when `[value]` is changed.  
+
+![React useEffect() controlled rendering loop](./images/useeffect-controlled-rendering-loop.png)
 
 Open the fixed [demo](https://codesandbox.io/s/infinite-loop-fixed-4sgfr?file=/src/App.js). Now, as soon as you type into the input field, the `count` state correctly
 display the number of input value changes.  
