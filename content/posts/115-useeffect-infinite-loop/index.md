@@ -19,7 +19,7 @@ A pitfall you might experience when working with `useEffect()` is the infinite l
 
 *If you aren't familiar with `useEffect()`, I recommend reading my post [A Simple Explanation of React.useEffect()](/react-useeffect-explanation/) before continuing. Having good fundamental knowledge of a non-trivial subject helps bypass rookie mistakes*.  
 
-## 1. The infinite loop created by side-effect updating state
+## 1. The infinite loop and side-effect updating state
 
 Imagine a simple functional component that contains an input element. What I'd like to do is show on the
 screen how much times the input has changed.  
@@ -74,9 +74,7 @@ it generates an infinite loop of component re-renderings.
 
 ![React useEffect() infinite loop](./images/infinite-loop.png)
 
-## 2. Fixing the infinite loop
-
-### 2.1 Fixing dependencies
+### 1.1 Fixing dependencies
 
 The infinite loop is fixed by correct management of the `useEffect(callback, dependencies)` dependencies argument.  
 
@@ -109,7 +107,7 @@ Adding `[value]` as a dependency of `useEffect(..., [value])`, the `count` state
 Open the fixed [demo](https://codesandbox.io/s/infinite-loop-fixed-4sgfr?file=/src/App.js). Now, as soon as you type into the input field, the `count` state correctly
 display the number of input value changes.  
 
-### 2.2 Using a reference
+### 1.2 Using a reference
 
 An alternative to the above solution is to use a reference (created by `useRef()` hook) to store the number of changes of the input. 
 
@@ -120,7 +118,7 @@ Here's a possible implementation:
 ```jsx{7}
 import { useEffect, useState, useRef } from "react";
 
-export default function CountInputChanges() {
+function CountInputChanges() {
   const [value, setValue] = useState("");
   const countRef = useRef(0);
 
@@ -143,34 +141,53 @@ Thanks to `useEffect(() => countRef.current++)`, after every re-rendering becaus
 
 Check out the [demo](https://codesandbox.io/s/infinite-loop-fixed-4sgfr?file=/src/App.js). Now, as soon as you type into the input field, the `countRef` reference is updated without triggering a re-rendering &mdash; efficiently solving the infinite loop problem.  
 
-## 3. The infinite loop created by side-effect updating its dependency
+## 2. The infinite loop and new objects references
 
-Even if you setup correctly the `useEffect()` dependencies, still, you have to make sure not to update the state that is also a dependency to avoid creating an infinite loop.  
+Even if you setup correctly the `useEffect()` dependencies, still, you have to be careful when using objects as dependencies.  
 
-```jsx{8}
-import { useState } from "react";
+For example, the following component `CountSecrets` watches the words user types into the input, and as soon as the user types the special word `'secret'`, a counter is increased and showed on the page.  
 
-export default function CountSecrets() {
-  const [secret, setSecret] = useState({ value, countSecrets: 0 });
+Here's a possible implementation of the component:
 
-  useEffect({
+```jsx{8,10}
+import { useEffect, useState } from "react";
+
+function CountSecrets() {
+  const [secret, setSecret] = useState({ value: "", countSecrets: 0 });
+
+  useEffect(() => {
     if (secret.value === 'secret') {
-      setState({
-        value: secret.value,
-        countSecrets: secret.countSecrets + 1
-      });
+      setSecret(s => ({...s, countSecrets: s.countSecrets + 1}));
     }
   }, [secret]);
 
-  const onChange = ({ target }) => setValue(target.value);
+  const onChange = ({ target }) => {
+    setSecret(s => ({ ...s, value: target.value }));
+  };
 
   return (
     <div>
-      <input type="text" value={value} onChange={onChange} />
-      <div>Number of secret: {secret.countSecrets}</div>
+      <input type="text" value={secret.value} onChange={onChange} />
+      <div>Number of secrets: {secret.countSecrets}</div>
     </div>
   );
 }
 ```
+
+Open the demo and type a few different words, one of which should be `'secret'`. You will notice that as soon as you type the word `'secret'`, the `secret.countSecrets` state variable starts to grow uncontrollable.  
+
+That's an infinite renderings loop problem.  
+
+Let's take a look at how `useEffect()` is configured: the `secret` object is used as a dependency: `useEffect(..., [secret])`. Inside the side-effect callback, as soon as the input value equals `'secret'`, the state updater function is called:
+
+```javascript
+setSecret(s => ({...s, countSecrets: s.countSecrets + 1}));
+```
+
+which increments the secrets counter `countSecrets`, but also creates *a new object*.  
+
+And because `secret` now is a new object, the `useEffect()` invokes again the side-effect that updates the state and a new `secret` object is created again, and so on.  
+
+### 2.1 Avoid objects as dependencies
 
 ## 4. Summary
