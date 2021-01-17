@@ -188,9 +188,9 @@ And because `secret` now is a new object, the `useEffect()` invokes again the si
 
 The best way to solve the problem of an infinite loop created by circular new objects creation is... to avoid using references to object in the dependency argument of `useEffect()`.  
 
-Fixing the infinite loop of `<CountSecrets>` component requires changing the dependency of from `useEffect(..., [secret])` to `useEffect(..., [secret.value])`. 
+Fixing the infinite loop of `<CountSecrets>` component requires changing the dependency from `useEffect(..., [secret])` to `useEffect(..., [secret.value])`. 
 
-Updating the side-effect callback when solely `secret.value` changes is enough. So here's the fixed version of the component:
+Calling the side-effect callback when solely `secret.value` changes is enough. So here's the fixed version of the component:
 
 ```jsx{10}
 import { useEffect, useState } from "react";
@@ -217,6 +217,63 @@ function CountSecrets() {
 }
 ```
 
-Open the fixed version [demo](https://codesandbox.io/s/infinite-loop-obj-dependency-fixed-hyv66?file=/src/App.js). Type a few different words into the input, and as soon as you enter the special word `'secret'` the secrets counter increments.  No infinite loop is created.  
+Open the fixed [demo](https://codesandbox.io/s/infinite-loop-obj-dependency-fixed-hyv66?file=/src/App.js). Type a few different words into the input, but as soon as you enter the special word `'secret'` the secrets counter increments.  No infinite loop is created.  
 
-## 4. Summary
+## 3. Summary
+
+`useEffect(callback, deps)` is the hook that executed `callback` (the side-effect) after the component rendering.  
+
+Sometimes, if you aren't careful with what the side-effect does, you might trigger an infinite loop of component renderings.  
+
+One common case that most likely will generate an infinite loop is updating state in the side-effect, at the same time without having any dependency argument at all:
+
+```javascript
+useEffect(() => {
+  // Infinite loop!
+  setState(count + 1);
+});
+```
+
+Usually the best way to avoid the infinite loop is to properly manage the hook dependencies: have the control on when exactly the side-effect should run:
+
+```javascript
+useEffect(() => {
+  // No infinite loop
+  setState(count + 1);
+}, [whenToUpdateValue]);
+```
+
+Alternatively, you can also use a reference. Updating a reference doesn't trigger a re-rendering:
+
+```javascript
+useEffect(() => {
+  // No infinite loop
+  countRef.current++;
+});
+```
+
+Another common recipe of an infinite loop is using an object as a dependency of `useEffect()`, and inside the side-effect updating that object (effectively creating a new object):
+
+```javascript
+useEffect(() => {
+  // Infinite loop!
+  setObject({
+    ...object,
+    prop: 'newValue'
+  })
+}, [object]);
+```
+
+Try to avoid using objects as dependencies directly, and stick to use a specific property only (the end result should be a primitive value):
+
+```javascript
+useEffect(() => {
+  // No infinite loop
+  setObject({
+    ...object,
+    prop: 'newValue'
+  })
+}, [object.whenToUpdateProp]);
+```
+
+*What other scenarios that create infinite loops when using `useEffect()` do you know?*
