@@ -1,8 +1,8 @@
 ---
 title: "How to Solve the Infinite Loop of React.useEffect()"
-description: "This post describes the common scenarios that generate infinite loops when using React useEffect() hook and ways to solve it."
-published: "2021-01-19T12:00Z"
-modified: "2021-01-19T12:00Z"
+description: "Be careful when using React.useEffect() hook because it can generate infinite loops."
+published: "2021-01-19T11:00Z"
+modified: "2021-01-19T11:00Z"
 thumbnail: "./images/cover-4.png"
 slug: react-useeffect-infinite-loop
 tags: ['react', 'hook', 'useeffect']
@@ -20,7 +20,7 @@ A pitfall you might experience when working with `useEffect()` is the infinite l
 
 ## 1. The infinite loop and side-effect updating state
 
-A functional component contains an input element. You job is to count and display how many times the input has changed.  
+A functional component contains an input element. Your job is to count and display how many times the input has changed.  
 
 A possible implementation of `<CountInputChanges>` component looks as follows:
 
