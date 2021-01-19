@@ -10,20 +10,19 @@ recommended: ['react-hooks-mistakes-to-avoid', 'react-useeffect-explanation']
 type: post
 ---
 
-`useEffect()` React hook manages the side-effects. The usual side-effects are fetching over the network, manipulating DOM directly, starting and ending timers.  
+`useEffect()` React hook manages the side-effects like fetching over the network, manipulating DOM directly, starting and ending timers.  
 
-While the `useEffect()` is, alongside with `useState()` (the one that manages state), is one of the most used hooks, it requires 
-an effort to familiarize and use correctly.  
+While the `useEffect()` is, alongside with `useState()` (the one that manages state), is one of the most used hooks, it requires some time to familiarize and use correctly.  
 
-A pitfall you might experience when working with `useEffect()` is the infinite loop of re-renderings. In this post, I'll describe the common scenarios that generate infinite loops and how to avoid them.  
+A pitfall you might experience when working with `useEffect()` is the infinite loop of component renderings. In this post, I'll describe the common scenarios that generate infinite loops and how to avoid them.  
 
-*If you aren't familiar with `useEffect()`, I recommend reading my post [A Simple Explanation of React.useEffect()](/react-useeffect-explanation/) before continuing. Having good fundamental knowledge of a non-trivial subject helps bypass rookie mistakes*.  
+*If you aren't familiar with `useEffect()`, I recommend reading my post [A Simple Explanation of React.useEffect()](/react-useeffect-explanation/) before continuing. Having good fundamental knowledge of a non-trivial subject helps bypass the rookie mistakes*.  
 
 ## 1. The infinite loop and side-effect updating state
 
-Imagine a simple functional component that contains an input element. It should display how many times the input has changed.  
+A functional component contains an input element. You job is to count and display how many times the input has changed.  
 
-A possible implementation looks as follows:
+A possible implementation of `<CountInputChanges>` component looks as follows:
 
 ```jsx{7}
 import { useEffect, useState } from 'react';
@@ -45,17 +44,19 @@ function CountInputChanges() {
 }
 ```
 
-`<input type="text" value={value} onChange={onChange} />` is a [controlled component](/controlled-inputs-using-react-hooks/). `value` state variable hold the input value,
-and the `onChange` event handler updates the `value` state as the user types into the input.  
+`<input type="text" value={value} onChange={onChange} />` is a [controlled component](/controlled-inputs-using-react-hooks/). `value` state variable holds the input value,
+and the `onChange` event handler updates the `value` state when user types into the input.  
 
 I took the decision to update the `count` variable using `useEffect()` hook. Every time the component re-renders due to user typing into the input,
 the `useEffect(() => setCount(count + 1))` updates the counter.  
 
+Because `useEffect(() => setCount(count + 1))` is used without dependencies argument, `() => setCount(count + 1)` callback is [executed](/react-useeffect-explanation/#2-the-dependencies-of-useeffect) after every rendering of the component.  
+
 Do you expect any problems with this component? Take a try and open the [demo](https://codesandbox.io/s/infinite-loop-9rb8c?file=/src/App.js). 
 
-The demo shows that `count` state variable increases uncontrollably, even if you haven't typed anything into the input. That's an infinite loop.
+The demo shows that `count` state variable increases uncontrollably, even if you haven't typed anything into the input. That's an infinite loop.  
 
-When `useEffect()` is used as such:
+The problem lays in the way `useEffect()` is used:
 
 ```jsx{3}
 useEffect(() => setCount(count + 1));
@@ -63,7 +64,7 @@ useEffect(() => setCount(count + 1));
 
 it generates an infinite loop of component re-renderings.  
 
-After initial rendering `useEffect()` executes the side-effect callback that updates the state. The state update triggers re-rendering. After re-rendering `useEffect()` executes the side-effect callback and again updates the state, which triggers again a re-rendering. ...and so on indefinitely.  
+After initial rendering, `useEffect()` executes the side-effect callback that updates the state. The state update triggers re-rendering. After re-rendering `useEffect()` executes the side-effect callback and again updates the state, which triggers again a re-rendering. ...and so on indefinitely.  
 
 ![React useEffect() infinite loop](./images/1.png)
 
@@ -71,7 +72,7 @@ After initial rendering `useEffect()` executes the side-effect callback that upd
 
 The infinite loop is fixed by correct management of the `useEffect(callback, dependencies)` dependencies argument.  
 
-Because you want the `count` to change when `value` changes, you can simply add `value` as a dependency of the side-effect:
+Because you want the `count` to increment when `value` changes, you can simply add `value` as a dependency of the side-effect:
 
 ```jsx{7}
 import { useEffect, useState } from 'react';
@@ -93,7 +94,7 @@ function CountInputChanges() {
 }
 ```
 
-Adding `[value]` as a dependency of `useEffect(..., [value])`, the `count` state variable is updated only when `[value]` is changed.  
+Adding `[value]` as a dependency of `useEffect(..., [value])`, the `count` state variable is updated only when `[value]` is changed. Doing so solves the infinite loop.  
 
 ![React useEffect() controlled rendering loop](./images/2-2.png)
 
@@ -102,7 +103,7 @@ display the number of input value changes.
 
 ### 1.2 Using a reference
 
-An alternative to the above solution is to use a reference (created by `useRef()` hook) to store the number of changes of the input. 
+An alternative to the above solution is to use a reference (created by [useRef()](https://reactjs.org/docs/hooks-reference.html#useref) hook) to store the number of changes of the input. 
 
 The idea is that updating a reference doesn't trigger re-rendering of the component.  
 
@@ -128,17 +129,17 @@ function CountInputChanges() {
 }
 ```
 
-Thanks to `useEffect(() => countRef.current++)`, after every re-rendering because of `value` change, the `countRef.current` gets incremented.  
+Thanks to `useEffect(() => countRef.current++)`, after every re-rendering because of `value` change, the `countRef.current` gets incremented. The reference change by itself doesn't trigger a re-rendering.
 
 ![React useEffect() controlled rendering loop](./images/3.png)
 
-Check out the [demo](https://codesandbox.io/s/infinite-loop-fixed-4sgfr?file=/src/App.js). Now, as soon as you type into the input field, the `countRef` reference is updated without triggering a re-rendering &mdash; efficiently solving the infinite loop problem.  
+Check out the [demo](https://codesandbox.io/s/infinite-loop-reference-lcmq7). Now, as soon as you type into the input field, the `countRef` reference is updated without triggering a re-rendering &mdash; efficiently solving the infinite loop problem.  
 
 ## 2. The infinite loop and new objects references
 
 Even if you set up correctly the `useEffect()` dependencies, still, you have to be careful when using objects as dependencies.  
 
-For example, the following component `CountSecrets` watches the words the user types into the input, and as soon as the user types the special word `'secret'`, a counter is increased and showed on the page.  
+For example, the following component `CountSecrets` watches the words the user types into the input, and as soon as the user types the special word `'secret'`, a counter of secrets is increased and displayed.  
 
 Here's a possible implementation of the component:
 
@@ -167,7 +168,7 @@ function CountSecrets() {
 }
 ```
 
-Open the [demo](https://codesandbox.io/s/infinite-loop-obj-dependency-7t26v?file=/src/App.js) and type a few different words, one of which to be `'secret'`. You will notice that as soon as you type the word `'secret'`, the `secret.countSecrets` state variable starts to grow uncontrollably.  
+Open the [demo](https://codesandbox.io/s/infinite-loop-obj-dependency-7t26v?file=/src/App.js) and type some words, one of which to be `'secret'`. As soon as you type the word `'secret'`, the `secret.countSecrets` state variable starts to grow uncontrollably.  
 
 That's an infinite loop problem.  
 
@@ -181,15 +182,39 @@ setSecret(s => ({...s, countSecrets: s.countSecrets + 1}));
 
 which increments the secrets counter `countSecrets`, but also creates *a new object*.  
 
-And because `secret` now is a new object, the `useEffect()` invokes again the side-effect that updates the state and a new `secret` object is created again, and so on.  
+`secret` now is a new object and the dependency has changed. So `useEffect(..., [secret])` invokes again the side-effect that updates the state and a new `secret` object is created again, and so on.  
+
+2 objects in JavaScript are [equal](how-to-compare-objects-in-javascript/#1-referential-equality) only if they reference exactly the same object.  
 
 ### 2.1 Avoid objects as dependencies
 
-The best way to solve the problem of an infinite loop created by circular new objects creation is... to avoid using references to object in the dependency argument of `useEffect()`.  
+The best way to solve the problem of an infinite loop created by circular new objects creation is... to avoid using references to objects in the dependencies argument of `useEffect()`:
+
+```javascript{5}
+let count = 0;
+
+useEffect(() => {
+  // some logic
+}, [count]); // Good!
+```
+
+```javascript{7,11}
+let myObject = {
+  prop: 'Value'
+};
+
+useEffect(() => {
+  // some logic
+}, [myObject]); // Not good!
+
+useEffect(() => {
+  // some logic
+}, [myObject.prop]); // Good!
+```
 
 Fixing the infinite loop of `<CountSecrets>` component requires changing the dependency from `useEffect(..., [secret])` to `useEffect(..., [secret.value])`. 
 
-Calling the side-effect callback when solely `secret.value` changes is enough. So here's the fixed version of the component:
+Calling the side-effect callback when solely `secret.value` changes is enough. Here's the fixed version of the component:
 
 ```jsx{10}
 import { useEffect, useState } from "react";
@@ -216,7 +241,7 @@ function CountSecrets() {
 }
 ```
 
-Open the fixed [demo](https://codesandbox.io/s/infinite-loop-obj-dependency-fixed-hyv66?file=/src/App.js). Type a few different words into the input, but as soon as you enter the special word `'secret'` the secrets counter increments.  No infinite loop is created.  
+Open the fixed [demo](https://codesandbox.io/s/infinite-loop-obj-dependency-fixed-hyv66?file=/src/App.js). Type some words into the input... and as soon as you enter the special word `'secret'` the secrets counter increments.  No infinite loop is created.  
 
 ## 3. Summary
 
@@ -224,7 +249,7 @@ Open the fixed [demo](https://codesandbox.io/s/infinite-loop-obj-dependency-fixe
 
 Sometimes, if you aren't careful with what the side-effect does, you might trigger an infinite loop of component renderings.  
 
-One common case that most likely will generate an infinite loop is updating state in the side-effect, at the same time without having any dependency argument at all:
+A common case that generates an infinite loop is updating state in the side-effect without having any dependency argument at all:
 
 ```javascript
 useEffect(() => {
@@ -233,7 +258,7 @@ useEffect(() => {
 });
 ```
 
-Usually the best way to avoid the infinite loop is to properly manage the hook dependencies: have the control on when exactly the side-effect should run:
+An efficient way to avoid the infinite loop is to properly manage the hook dependencies &mdash; control when exactly the side-effect should run.  
 
 ```javascript
 useEffect(() => {
@@ -263,7 +288,7 @@ useEffect(() => {
 }, [object]);
 ```
 
-Try to avoid using objects as dependencies directly, and stick to use a specific property only (the end result should be a primitive value):
+Avoid using objects as dependencies, but stick to use a specific property only (the end result should be a primitive value):
 
 ```javascript
 useEffect(() => {
@@ -274,5 +299,7 @@ useEffect(() => {
   })
 }, [object.whenToUpdateProp]);
 ```
+
+What are other common mistakes when using React hooks? In one of my previous posts I talked about [5 Mistakes to Avoid When Using React Hooks](/react-hooks-mistakes-to-avoid/).  
 
 *What other infinite loop pitfalls when using `useEffect()` do you know?*
