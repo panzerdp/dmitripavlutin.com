@@ -245,9 +245,7 @@ Open the fixed [demo](https://codesandbox.io/s/infinite-loop-obj-dependency-fixe
 
 ## 3. Summary
 
-`useEffect(callback, deps)` is the hook that executed `callback` (the side-effect) after the component rendering.  
-
-Sometimes, if you aren't careful with what the side-effect does, you might trigger an infinite loop of component renderings.  
+`useEffect(callback, deps)` is the hook that executes `callback` (the side-effect) after the component rendering. If you aren't careful with what the side-effect does, you might trigger an infinite loop of component renderings.  
 
 A common case that generates an infinite loop is updating state in the side-effect without having any dependency argument at all:
 
