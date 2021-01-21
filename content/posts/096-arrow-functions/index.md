@@ -355,7 +355,7 @@ gen.next(); // => { value: undefined, done: true }
 
 ## 6. Summary
 
-The central symbol of an arrow function is the fat arrow `=>`: on the left side of it enumerate the params, and on the right side write the function body:
+The central symbol of an arrow function is the fat arrow `=>`: on the left side of it are the params, and on the right side is the function body:
 
 ```javascript
 (param1, param2, ..., paramN) => { ... }
@@ -368,5 +368,7 @@ The arrow function can be shortened: when it has one parameter you can omit the 
 The arrow function has a few limitations: you cannot use it as a method on an object, constructor, or generator function.  
 
 Arrow functions are lightweight, inline, and easy to read ([when not being nested too much](/javascript-arrow-functions-best-practices/#5-be-aware-of-excessive-nesting)) &mdash; use them as much as you want in your code.
+
+What about the differences between an arrow and a regular function? Follow my post [5 Differences Between Arrow and Regular Functions](/differences-between-arrow-and-regular-functions/) to find a detailed answer.
 
 *Do you prefer using the arrow or regular functions?*

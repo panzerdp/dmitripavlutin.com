@@ -351,4 +351,6 @@ Last but not least, you can define methods using the arrow function syntax insid
 
 Anyhow the fat arrow method is invoked, `this` always equals to the class instance, which is useful when the methods are used as callbacks.  
 
+To understand all types of functions in JavaScript, I recommend checking [6 Ways to Declare JavaScript Functions](/6-ways-to-declare-javascript-functions/).
+
 *What other differences between arrow and regular functions do you know?*

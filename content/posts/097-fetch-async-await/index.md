@@ -335,4 +335,6 @@ Because `fetch()` returns a promise, you can simplify the code by using the `asy
 
 You've found out how to use `fetch()` accompanied with `async/await` to fetch JSON data, handle fetching errors, cancel a request, perform parallel requests, and how to intercept the requests using decorators.  
 
+Having mastered the basics of `fetch()` with `async/await`, follow my post on [How to Timeout a fetch() Request](/timeout-fetch-request/).  
+
 *Challenge: can you write a decorator that intercepts the response and extracts the JSON data?*

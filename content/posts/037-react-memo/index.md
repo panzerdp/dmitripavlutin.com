@@ -287,4 +287,6 @@ Take precautions when memoizing components that use props as callbacks. Make sur
 
 Don't forget to use [profiling](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab) to measure the performance gains of memoization.  
 
+What to read next? To memoize callbacks in React I recommend checking my post [Your Guide to React.useCallback()](/dont-overuse-react-usecallback/).  
+
 *Do you know interesting use cases of React.memo()? If so, please write a comment below!*

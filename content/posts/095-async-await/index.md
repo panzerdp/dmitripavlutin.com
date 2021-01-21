@@ -288,6 +288,8 @@ async function fetchMovies() {
 1. A function handling an asynchronous task must be marked using the `async` keyword.
 2. `await promise` operator pauses the function execution until `promise` is either resolved successfully or rejected.
 3. If `promise` resolves successfully, the `await` operator returns the resolved value: `const resolvedValue = await promise`. Otherwise, you can catch a rejected promise inside `try/catch`.  
-4. An async function always returns a promise, which gives the ability to nest async functions. 
+4. An async function always returns a promise, which gives the ability to nest async functions.  
+
+Having a good understanding of `async/await`, check my detailed post on [How to Use Fetch with async/await](/javascript-fetch-async-await/).  
 
 *Quiz: Is it an error to await for primitive values, e.g. `await 3`?*

@@ -128,3 +128,5 @@ const lastItem = array.at(-1);
 ```
 
 Just include the [array.prototype.at](https://github.com/es-shims/Array.prototype.at) polyfill into your application, and start using `array.at()` today!
+
+Where to go next? Find out how to [Check if an Array Contains a Value in JavaScript](/javascript-array-contains-value/).

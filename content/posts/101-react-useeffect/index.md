@@ -327,4 +327,6 @@ Open the [demo](https://codesandbox.io/s/gracious-tdd-gy4zo?file=/src/App.js) an
 
 Because `useEffect()` hook heavily relies on closures, you might need to [get them well](/simple-explanation-of-javascript-closures/) too. Also be aware of [stale closures issue](/react-hooks-stale-closures/).  
 
+The next step to mastering `useEffect()` is to understand the infinite loop pitfall: [How to Solve the Infinite Loop of React.useEffect()](/react-useeffect-infinite-loop/).  
+
 *Still have questions about `useEffect()` hook? Ask in the comments below!*

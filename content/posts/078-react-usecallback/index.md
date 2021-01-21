@@ -211,4 +211,6 @@ Either way:
 
 Then ask yourself: does the increased performance, compared to increased complexity, worth using `useCallback()`?
 
+To enable the memoization of the entire component output I recommend checking my post [Use React.memo() wisely](/use-react-memo-wisely/).  
+
 *Do you know use cases that worth using `useCallback()`? Please share your experience in a comment below.*
