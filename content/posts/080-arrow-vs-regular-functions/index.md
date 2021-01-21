@@ -42,6 +42,9 @@ While both the regular and arrow syntaxes define functions, when would you choos
 
 In this post, I'm going to show the main differences between the two, so you could choose the right syntax for your needs.  
 
+```toc
+```
+
 ## 1. *this* value
 
 ### 1.1 Regular function
