@@ -6,7 +6,7 @@ modified: "2021-01-26T12:00Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-array-sort-numbers
 tags: ['javascript', 'array', 'number', 'sort']
-recommended: ['react-hooks-mistakes-to-avoid', 'react-useeffect-explanation']
+recommended: ['operations-on-arrays-javascript', 'javascript-array-at']
 type: post
 ---
 
@@ -121,8 +121,8 @@ Finally, the spread operator `[...new Float64Array(numbers).sort()]` extracts th
 
 That's why using `array.sort()` to sort an array of numbers in ascending order doesn't work.  
 
-The method accepts a comparator function `array.sort(comparator)` that you can use to customize how the elements are sorted. 
+But you can indicate a comparator function `array.sort(comparator)` to customize how the elements are sorted. 
 
-I recommend using `numbers.sort((a, b) => a - b)` as one of the shortest way to sort an array of numbers.  
+I recommend `numbers.sort((a, b) => a - b)` as one of the shortest way to sort an array of numbers in JavaScript.  
 
 *Quiz: how would you sort numbers in a descending order? Write your answer in a comment below!*
