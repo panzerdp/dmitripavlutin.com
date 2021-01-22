@@ -252,6 +252,8 @@ That's why the stale closure problem that appears during state update is usually
 
 The stale closure problem occurs when a closure captures outdated variables. 
 
-An efficient way to solve stale closures is to correctly set the dependencies of React hooks. Or, in the case of a stale state, use a functional way to update the state.   
+An efficient way to solve stale closures is to correctly set the dependencies of React hooks. Or, in the case of a stale state, use a functional way to update the state.  
 
 The key takeaway is to try to supply hooks with closures that capture the freshest variables.  
+
+The next step to master React hooks is to be aware of [5 Mistakes to Avoid When Using React Hooks](/react-hooks-mistakes-to-avoid/).  

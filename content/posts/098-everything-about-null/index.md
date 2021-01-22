@@ -239,4 +239,6 @@ The strict equality operator determines whether a variable is null: `variable ==
 
 Avoid if possible returning `null` or setting variables to `null`. This practice leads to the spread of null values and verifications for `null`. Instead, try to use objects with default properties, or even throw errors.  
 
+Having mastered `null`, why not master `undefined`? Follow my post [7 Tips to Handle undefined in JavaScript](/7-tips-to-handle-undefined-in-javascript/).
+
 *What condition do you use to check for `null`?*

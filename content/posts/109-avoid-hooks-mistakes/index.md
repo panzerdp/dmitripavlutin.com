@@ -414,6 +414,9 @@ Don't forget to indicate the dependencies for hooks that accept callbacks as arg
 
 Do not store infrastructure data (like information about component rendering cycle, `setTimeout()` or `setInterval()` ids) into the state. The rule of thumb is to keep such data into references.  
 
-Finally, do not forget to clean up your side-effects, if that's the case.  
+Do not forget to clean up your side-effects, if that's the case.  
+
+One more nasty pitfall you can encounter when using `useEffect()` is the infinite loop. How to avoid it? Check out my post on [How to Solve the Infinite Loop of React.useEffect()
+](/react-useeffect-infinite-loop/).  
 
 *What other React hooks anti-patterns do you know?*

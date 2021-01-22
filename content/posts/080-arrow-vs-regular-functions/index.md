@@ -42,6 +42,9 @@ While both the regular and arrow syntaxes define functions, when would you choos
 
 In this post, I'm going to show the main differences between the two, so you could choose the right syntax for your needs.  
 
+```toc
+```
+
 ## 1. *this* value
 
 ### 1.1 Regular function
@@ -347,5 +350,7 @@ If the arrow function has one expression, then the expression is returned implic
 Last but not least, you can define methods using the arrow function syntax inside classes. Fat arrow methods bind `this` value to the class instance.  
 
 Anyhow the fat arrow method is invoked, `this` always equals to the class instance, which is useful when the methods are used as callbacks.  
+
+To understand all types of functions in JavaScript, I recommend checking [6 Ways to Declare JavaScript Functions](/6-ways-to-declare-javascript-functions/).
 
 *What other differences between arrow and regular functions do you know?*

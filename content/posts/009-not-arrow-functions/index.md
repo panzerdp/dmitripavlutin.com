@@ -190,3 +190,5 @@ It is good to find a balance between short and verbose to make your JavaScript s
 Without a doubt, the arrow function is a great addition. When used correctly it brings simplicity in places where earlier you had to use `.bind()` or trying to catch the context. It also makes the code lighter.  
 
 Advantages in some situations bring disadvantages in others. You can't use an arrow function when a dynamic context is required: defining methods, create objects with constructors, get the target from `this` when handling events.
+
+What about the differences between an arrow and a regular function? Follow my post [5 Differences Between Arrow and Regular Functions](/differences-between-arrow-and-regular-functions/) to find a detailed answer.
