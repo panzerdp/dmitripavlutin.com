@@ -91,7 +91,7 @@ const numbers = [10, 5, 11];
 numbers.sort((a, b) => a - b); // => [5, 10, 11]
 ```
 
-`(a, b) => a - b` is short comparator that correctly sorts the numbers.  
+`(a, b) => a - b` is a short comparator to sort numbers.  
 
 ## 3. Sorting using a typed array
 
@@ -121,6 +121,8 @@ Finally, the spread operator `[...new Float64Array(numbers).sort()]` extracts th
 
 That's why using `array.sort()` to sort an array of numbers in ascending order doesn't work.  
 
-However, the method accepts a comparator function that you can use to customize how the elements are sorted. I recommend using `numbers.sort((a, b) => a - b)` as one of the shortest way to sort an array of numbers.  
+The method accepts a comparator function `array.sort(comparator)` that you can use to customize how the elements are sorted. 
+
+I recommend using `numbers.sort((a, b) => a - b)` as one of the shortest way to sort an array of numbers.  
 
 *Quiz: how would you sort numbers in a descending order? Write your answer in a comment below!*
