@@ -5,6 +5,9 @@ require('dotenv').config({
 module.exports = {
   siteMetadata: require('./gatsby/config/site-metadata'),
   pathPrefix: '/',
+  flags: {
+    DEV_SSR: false
+  },  
   plugins: [
     {
       resolve: 'gatsby-transformer-remark',

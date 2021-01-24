@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import styles from './index.module.scss';
 
-function Comment(): JSX.Element {
+function Placeholder(): JSX.Element {
   return (
     <div className={styles.root}>
       <div className={styles.avatar}></div>
@@ -17,16 +17,6 @@ function Comment(): JSX.Element {
       </div>
       <SkeletonAnimation />
     </div>
-  );
-}
-
-export function Placeholder(): JSX.Element {
-  return (
-    <>
-      <Comment />
-      <Comment />
-      <Comment />
-    </>
   );
 }
 
