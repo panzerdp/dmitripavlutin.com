@@ -2,7 +2,7 @@
 title: "A Simple Explanation of React.useEffect()"
 description: "useEffect() hook executes side-effects in React components."
 published: "2020-10-13T08:50Z"
-modified: "2020-12-21T07:30Z"
+modified: "2021-01-24T13:10Z"
 thumbnail: "./images/effect-4.jpg"
 slug: react-useeffect-explanation
 tags: ['react', 'hook', 'useeffect']
@@ -130,7 +130,7 @@ function Greet({ name }) {
 }
 ```
 
-`useEffect(..., [])` was supplied with an empty array as dependencies argument. When configured in such a way, the `useEffect()` is going to execute the callback *just once*, after initial mounting. 
+`useEffect(..., [])` was supplied with an empty array as a dependencies argument. When configured in such a way, the `useEffect()` is going to execute the callback *just once*, after initial mounting. 
 
 Even if the component re-renders with different `name` property, the side-effect runs only once after the first render:
 
@@ -257,7 +257,7 @@ To run the fetch request once when the component mounts, simply indicate an empt
 
 ## 6. The side-effect cleanup
 
-There are side-effects that need cleanup: close a socket, clear timers.  
+Some side-effects need cleanup: close a socket, clear timers.  
 
 If the `callback` of `useEffect(callback)` returns a function, then `useEffect()` considers this as an *effect cleanup*:  
 
@@ -279,7 +279,7 @@ B) On later renderings, before invoking the next side-effect callback, `useEffec
 
 C) Finally, after unmounting the component, `useEffect()` *invokes* the cleanup function from the latest side-effect.  
 
-Let's see an examply when you'd find the side-effect cleanup useful.  
+Let's see an example when the side-effect cleanup is useful.  
 
 The following component `<RepeatMessage message="My Message" />` accepts a prop `message`. Then, every 2 seconds the `message` prop is logged to console:  
 
@@ -297,9 +297,9 @@ function RepeatMessage({ message }) {
 }
 ```
 
-Open the [demo](https://codesandbox.io/s/restless-wildflower-c0cfw?file=/src/App.js) and type some messages. The console logs every 2 seconds any message been ever typed into the input. However, you need to log only the latest message.  
+Open the [demo](https://codesandbox.io/s/restless-wildflower-c0cfw?file=/src/App.js) and type some messages. The console logs every 2 seconds any message that's been ever typed into the input. However, you need to log only the latest message.  
 
-That's the case to cleanup the side-effect: cancel the previous timer when starting a new one. Let's return a cleanup function that stops the previous timer:
+That's the case to clean up the side-effect: cancel the previous timer when starting a new one. Let's return a cleanup function that stops the previous timer:
 
 ```jsx{8-10}
 import { useEffect } from 'react';
@@ -324,7 +324,7 @@ Open the [demo](https://codesandbox.io/s/gracious-tdd-gy4zo?file=/src/App.js) an
 
 `useEffect(callback, dependencies)` is the hook that manages the side-effects in functional components. `callback` argument is a function to put the side-effect logic. `dependencies` is a list of dependencies of your side-effect: being props or state values.  
 
-`useEffect(callback, dependencies)` invokes the `callback` after initial mounting, and on later renderings if any value inside `dependencies` has changed.  
+`useEffect(callback, dependencies)` invokes the `callback` after initial mounting, and on later renderings, if any value inside `dependencies` has changed.  
 
 Because `useEffect()` hook heavily relies on closures, you might need to [get them well](/simple-explanation-of-javascript-closures/) too. Also be aware of [stale closures issue](/react-hooks-stale-closures/).  
 
