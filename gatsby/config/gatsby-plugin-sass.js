@@ -3,6 +3,8 @@ const path = require('path');
 module.exports = {
   resolve: 'gatsby-plugin-sass',
   options: {
-    includePaths: [path.resolve(__dirname, '../../src')],
+    sassOptions: {
+      includePaths: [path.resolve(__dirname, '../../src')],
+    }
   },
 };

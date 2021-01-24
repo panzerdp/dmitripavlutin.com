@@ -28,7 +28,6 @@ export default function ExcerptsListTemplate({
   authorProfilePictureSrc,
   popularPostsByCategory
 }: ExcerptsTemplateProps) {
-  console.log(popularPostsByCategory);
   return (
     <Layout rightSidebar={<RightSidebar />} leftSidebar={<LeftSidebar />}>
       <MetaTags siteInfo={siteInfo} authorProfilePictureSrc={authorProfilePictureSrc} currentPage={currentPage} />

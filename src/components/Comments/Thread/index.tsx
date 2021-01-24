@@ -24,10 +24,10 @@ export function CommentsThread({ githubCommentsRepository }: CommentsThreadProps
       setIsLoading(true);
       commentBox.current.appendChild(scriptEl);
 
-      scriptEl.onload = () => {
+      scriptEl.addEventListener('load', () => {
         const iframe = document.querySelector('.utterances-frame');
         iframe.addEventListener('load', () => setIsLoading(false));
-      };
+      });
     } else {
       console.log(`Error adding utterances comments on: ${commentBox}`);
     }

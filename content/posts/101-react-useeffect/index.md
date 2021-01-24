@@ -2,7 +2,7 @@
 title: "A Simple Explanation of React.useEffect()"
 description: "useEffect() hook executes side-effects in React components."
 published: "2020-10-13T08:50Z"
-modified: "2020-12-21T07:30Z"
+modified: "2021-01-24T13:10Z"
 thumbnail: "./images/effect-4.jpg"
 slug: react-useeffect-explanation
 tags: ['react', 'hook', 'useeffect']
@@ -22,7 +22,7 @@ A functional React component uses props and/or state to calculate the output. If
 
 Examples of side-effects are fetch requests, manipulating DOM directly, using timer functions like `setTimeout()`, and more.  
 
-The component rendering and side-effect invocation logic are *independent*. Thus it would be a mistake to perform side-effects directly in the body of the component. 
+The component rendering and side-effect logic are *independent*. So it would be a mistake to perform side-effects directly in the body of the component. 
 
 How often the component renders isn't something you can control &mdash; if React wants to render the component, you cannot stop it.  
 
@@ -37,7 +37,7 @@ function Greet({ name }) {
 }
 ```
 
- How to decouple rendering from side-effect? Welcome `useEffect()` &mdash; the hook that runs side-effects independently of rendering.    
+How to decouple rendering from the side-effect? Welcome `useEffect()` &mdash; the hook that runs side-effects independently of rendering.    
 
 ```jsx{8}
 import { useEffect } from 'react';
@@ -63,11 +63,13 @@ useEffect(callback[, dependencies]);
 * `callback` is the callback function containing side-effect logic. `useEffect()` executes the callback function after React has committed the changes to the screen.
 * `dependencies` is an optional array of dependencies. `useEffect()` executes `callback` only if the dependencies have changed between renderings.  
 
+Put your side-effect logic into the `callback` function, then use the `dependencies` argument to control when you want the side-effect to run. That's the sole and simple purpose of `useEffect()`.  
+
 ## 2. The dependencies of *useEffect()*
 
 `dependencies` argument of `useEffect(callback, dependencies)` lets you control when the side-effect runs. When dependencies are:
 
-A) Not provided: the side-effect runs after *every* rendering.
+A) <u>Not provided</u>: the side-effect runs after *every* rendering.
 
 ```jsx{6}
 import { useEffect } from 'react';
@@ -79,7 +81,7 @@ function MyComponent() {
 }
 ```
 
-B) An empty array `[]`: the side-effect runs *once* after the initial rendering.
+B) <u>An empty array</u> `[]`: the side-effect runs *once* after the initial rendering.
 
 ```jsx{6}
 import { useEffect } from 'react';
@@ -91,20 +93,21 @@ function MyComponent() {
 }
 ```
 
-C) Has props or state values `[prop1, prop2, ..., state1, state2]`: the side-effect runs *only when any depenendecy value changes*.  
+C) <u>Has props or state values</u> `[prop1, prop2, ..., state1, state2]`: the side-effect runs *only when any depenendecy value changes*.  
 
-```jsx{7}
-import { useEffect } from 'react';
+```jsx{8}
+import { useEffect, useState } from 'react';
 
 function MyComponent({ prop }) {
+  const [state, setState] = useState('');
   useEffect(() => {
     // Runs ONCE after initial rendering
-    // and after every rendering ONLY IF `prop` changes
-  }, [prop]);
+    // and after every rendering ONLY IF `prop` or `state` changes
+  }, [prop, state]);
 }
 ```
 
-While the case A) you won't use often, let's detail into the cases B) and C).  
+Let's detail into the cases B) and C) since they're used often.  
 
 ## 3. The side-effect on component did mount
 
@@ -119,7 +122,7 @@ function Greet({ name }) {
   const message = `Hello, ${name}!`;
 
   useEffect(() => {
-    // Run once, after mounting
+    // Runs once, after mounting
     document.title = 'Greetings page';
   }, []);
 
@@ -127,7 +130,7 @@ function Greet({ name }) {
 }
 ```
 
-`useEffect(..., [])` was supplied with an empty array as dependencies argument. When configured in such a way, the `useEffect()` is going to execute the callback *just once*, after initial mounting. 
+`useEffect(..., [])` was supplied with an empty array as a dependencies argument. When configured in such a way, the `useEffect()` is going to execute the callback *just once*, after initial mounting. 
 
 Even if the component re-renders with different `name` property, the side-effect runs only once after the first render:
 
@@ -147,7 +150,7 @@ Even if the component re-renders with different `name` property, the side-effect
 Each time the side-effect uses props or state values, you must indicate these values as dependencies:
 
 ```jsx{8}
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 function MyComponent({ prop }) {
   const [state, setState] = useState();
@@ -160,7 +163,7 @@ function MyComponent({ prop }) {
 }
 ```
 
-The `useEffect(callback, [prop, state])` invokes the `callback` after the changes are being committed to DOM and *if and only if* any value in the dependencies array `[prop, state]` have changed.  
+The `useEffect(callback, [prop, state])` invokes the `callback` after the changes are being committed to DOM and *if and only if* any value in the dependencies array `[prop, state]` has changed.  
 
 Using the dependencies argument of `useEffect()` you control when to invoke the side-effect, independently from the rendering cycles of the component. Again, *that's the essence of `useEffect()` hook.*  
 
@@ -227,13 +230,13 @@ function FetchEmployeesByQuery({ query }) {
 }
 ```
 
-`useEffect()` starts a fetch request by calling `fetch()` after the initial mounting.   
+`useEffect()` starts a fetch request by calling `fetchEmployees()` async function after the initial mounting.   
 
-When the request completes, `setEmployees(fetchedEmployees)` updates the component state with the newly fetched employees list.  
+When the request completes, `setEmployees(fetchedEmployees)` updates the `employees` state with the just fetched employees list.  
 
 On later renderings, if the `query` prop changes, `useEffect()` hook starts a new fetch request for a new `query` value.  
 
-Note that the `callback` argument of `useEffect(callback)` cannot be an `async` function. But you can always invoke an `async` function inside the callback function itself, like in the previous example:  
+Note that the `callback` argument of `useEffect(callback)` cannot be an `async` function. But you can always define and then invoke an `async` function inside the callback itself:  
 
 ```jsx{4,8}
 function FetchEmployeesByQuery({ query }) {
@@ -250,13 +253,11 @@ function FetchEmployeesByQuery({ query }) {
 }
 ```
 
-*Quiz: Do you know why the `callback` of `useEffect()` cannot be an `async` function? Please write your opinion in a comment below!*
-
 To run the fetch request once when the component mounts, simply indicate an empty dependencies list: `useEffect(fetchSideEffect, [])`.  
 
 ## 6. The side-effect cleanup
 
-There are side-effects that need cleanup: close a socket, clear timers.  
+Some side-effects need cleanup: close a socket, clear timers.  
 
 If the `callback` of `useEffect(callback)` returns a function, then `useEffect()` considers this as an *effect cleanup*:  
 
@@ -274,40 +275,40 @@ Cleanup works the following way:
 
 A) After initial rendering, `useEffect()` invokes the callback having the side-effect. `cleanup` function is *not invoked*.  
 
-B) On later renderings, before invoking the next side-effect, `useEffect()` *invokes* the `cleanup` function from the previous side-effect execution (to clean up everything after the previous side-effect), then runs the current side-effect.  
+B) On later renderings, before invoking the next side-effect callback, `useEffect()` *invokes* the `cleanup` function from the previous side-effect execution (to clean up everything after the previous side-effect), then runs the current side-effect.  
 
 C) Finally, after unmounting the component, `useEffect()` *invokes* the cleanup function from the latest side-effect.  
 
-For example, let's log a message to console every 3 seconds:
+Let's see an example when the side-effect cleanup is useful.  
+
+The following component `<RepeatMessage message="My Message" />` accepts a prop `message`. Then, every 2 seconds the `message` prop is logged to console:  
 
 ```jsx
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 function RepeatMessage({ message }) {
   useEffect(() => {
     setInterval(() => {
       console.log(message);
-    }, 1000);
+    }, 2000);
   }, [message]);
 
   return <div>I'm logging to console "{message}"</div>;
 }
 ```
 
-Open the [demo](https://codesandbox.io/s/restless-wildflower-c0cfw?file=/src/App.js) and type different messages &mdash; the console logs every 3 seconds each message ever typed.  
+Open the [demo](https://codesandbox.io/s/restless-wildflower-c0cfw?file=/src/App.js) and type some messages. The console logs every 2 seconds any message that's been ever typed into the input. However, you need to log only the latest message.  
 
-You need to stop the logging of previous messages. That's the right case to cleanup the side-effect: cancel the previous timer when starting a new one.    
-
-Let's return a cleanup function that clears the previous timer:
+That's the case to clean up the side-effect: cancel the previous timer when starting a new one. Let's return a cleanup function that stops the previous timer:
 
 ```jsx{8-10}
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 function RepeatMessage({ message }) {
   useEffect(() => {
     const id = setInterval(() => {
       console.log(message);
-    }, 3000);
+    }, 2000);
     return () => {
       clearInterval(id);
     };
@@ -323,10 +324,10 @@ Open the [demo](https://codesandbox.io/s/gracious-tdd-gy4zo?file=/src/App.js) an
 
 `useEffect(callback, dependencies)` is the hook that manages the side-effects in functional components. `callback` argument is a function to put the side-effect logic. `dependencies` is a list of dependencies of your side-effect: being props or state values.  
 
-`useEffect(callback, dependencies)` makes sure to invoke the `callback` after initial mounting, and on later renderings, if any value inside `dependencies` has changed.  
+`useEffect(callback, dependencies)` invokes the `callback` after initial mounting, and on later renderings, if any value inside `dependencies` has changed.  
 
 Because `useEffect()` hook heavily relies on closures, you might need to [get them well](/simple-explanation-of-javascript-closures/) too. Also be aware of [stale closures issue](/react-hooks-stale-closures/).  
 
-The next step to mastering `useEffect()` is to understand the infinite loop pitfall: [How to Solve the Infinite Loop of React.useEffect()](/react-useeffect-infinite-loop/).  
+The next step to mastering `useEffect()` is to understand and avoid [the infinite loop pitfall](/react-useeffect-infinite-loop/).  
 
 *Still have questions about `useEffect()` hook? Ask in the comments below!*

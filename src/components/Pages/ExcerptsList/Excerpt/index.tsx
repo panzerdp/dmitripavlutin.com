@@ -10,18 +10,18 @@ interface ExcerptProps {
   siteUrl: string;
 }
 
-export default function Excerpt({ post, siteUrl }: ExcerptProps) {
+export default function Excerpt({ post }: ExcerptProps) {
   const to = TO_POST({ slug: post.slug });
   return (
     <article key={post.slug} className={styles.excerpt}>
       <Link to={to} className={styles.thumbnailAnchor}>
-        <Img sizes={post.thumbnail} />
+        <Img fluid={post.thumbnail} />
       </Link>
       <div className={styles.content}>
         <h4>
           <Link to={to}>{post.title}</Link>
         </h4>
-        <SubheaderWithComments post={post} siteUrl={siteUrl} />
+        <SubheaderWithComments post={post} />
         <div className={styles.description}>{post.description} </div>
         <Link to={to} className={styles.continueReading}>
           Continue reading &#x279e;
