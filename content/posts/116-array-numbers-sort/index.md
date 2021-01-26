@@ -1,8 +1,8 @@
 ---
 title: "array.sort() Does Not Simply Sort Numbers in JavaScript"
 description: "array.sort() method, when invoked without arguments, doesn't sort numbers as you might expect."
-published: "2021-01-26T12:00Z"
-modified: "2021-01-26T12:00Z"
+published: "2021-01-26T09:30Z"
+modified: "2021-01-26T09:30Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-array-sort-numbers
 tags: ['javascript', 'array', 'number', 'sort']
@@ -10,9 +10,7 @@ recommended: ['operations-on-arrays-javascript', 'javascript-array-at']
 type: post
 ---
 
-In JavaScript, the `array.sort()` method sorts the array. Usually, you'd like to sort numbers in ascending order.  
-
-Let's use the method to sort an array of numbers:
+In JavaScript, the `array.sort()` method sorts the array. Let's use the method to sort an array of numbers:
 
 ```javascript
 const numbers = [10, 5, 11];
@@ -20,7 +18,7 @@ const numbers = [10, 5, 11];
 numbers.sort(); // => [10, 11, 5]
 ```
 
-Hm... `numbers.sort()` returns `[10, 11, 5]` &mdash; which doesn't like like a sorted array in ascrending order.  
+Hm... `numbers.sort()` returns `[10, 11, 5]` &mdash; which doesn't look like a sorted array in ascrending order.  
 
 Why does `array.sort()` method, when invoked without arguments, doesn't sort the numbers as expected? Let's find the answer.  
 
@@ -48,7 +46,7 @@ const numbers = [10, 5, 11];
 numbers.sort(); // => [10, 11, 5]
 ```
 
-`[10, 11, 5]` are the numbers sorted alphabetically, rather than by their numerical value.  
+The method returns the array `[10, 11, 5]` having numbers sorted alphabetically, rather than by their numeric value.  
 
 ## 2. *array.sort()* with a comparator
 
@@ -58,15 +56,15 @@ Fortunately, `array.sort()` method accepts an optional argument: the comparator 
 const mutatedArray = array.sort([comparator]);
 ```
 
-Using this function you can control how items are ordered in the array.  
+Using this function you can control how element are ordered in the array during sorting.  
 
 If `comparator(a, b)` returns:
 
 * A negative number `< 0`:  then `a` is placed before `b`
 * A positive number `> 0`: then `b` is placed before `a`
-* Zero `0`:  then the position of the compared items doesn't change
+* Zero `0`:  then the position of the compared elements doesn't change
 
-To correctly sort numbers in ascending order, let's use the comparator function:
+To correctly sort numbers in ascending order, let's use the following comparator function:
 
 ```javascript
 const numbers = [10, 5, 11];
@@ -84,13 +82,14 @@ numbers.sort((a, b) => {
 
 `numbers.sort(comparator)` now correctly sorts the numbers: `[5, 10, 11]`.  
 
-In the sorted in ascrending order array the smaller number is positioned before a bigger one. Thus:
+In a sorted in ascrending order array the smaller number is positioned before a bigger one. That's the property you need to maintain when coding
+the comparator function:
 
 * If `a < b` &mdash; the function returns `-1`, placing `a` before `b` (e.g. `5 < 8`, thus `5` is before `8`)
 * If `a > b` &mdash; the function returns `1`, placing `b` before `a` (e.g. `10 > 3`, thus `3` is before `10`)
 * If `a === b` &mdash; order is not changed.  
 
-The comparator function in the previous example is relatively long. Fortunately, the comparator can be simplified by just diffing the arguments:  
+The comparator function in the previous example is relatively long. Fortunately, it can be simplified by just diffing the arguments:  
 
 ```javascript
 const numbers = [10, 5, 11];
@@ -124,8 +123,8 @@ Finally, the spread operator `[...new Float64Array(numbers).sort()]` extracts th
 
 ## 4. Summary
 
-`array.sort()` method when invoked without arguments sorts the elements alphabetically. That's why using `array.sort()` to sort an array of numbers in ascending order doesn't work.  
+`array.sort()` method invoked without arguments sorts the elements alphabetically. That's why using `array.sort()` to sort numbers in ascending order doesn't work.  
 
-But you can indicate a comparator function `array.sort(comparator)` to customize how the elements are sorted. I recommend `numbers.sort((a, b) => a - b)` as one of the shortest way to sort an array of numbers in JavaScript.  
+But you can indicate a comparator function `array.sort(comparator)` to customize how the elements are sorted. I recommend `numbers.sort((a, b) => a - b)` as one of the shortest way to sort an array of numbers.  
 
 *Quiz: how would you sort numbers in a descending order? Write your answer in a comment below!*
