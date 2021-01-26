@@ -10,7 +10,7 @@ export default function Coaching({ authorInfo }: AboutAuthorContact) {
       <h3>Your JavaScript Coach</h3>
       <div className={styles.description}>
         <p>
-          I know how cumbersome are closures, scopes, prototypes, inheritance, async functions, <i>this</i> concepts in JavaScript. 
+          I know how cumbersome are closures, scopes, prototypes, inheritance, async functions, <i>this</i> in JavaScript. 
         </p>
         <p>I'm excited to start my coaching program to help you advance your JavaScript knowledge.</p>
         <p>You can have direct access to me through:</p>
