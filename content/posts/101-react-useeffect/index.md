@@ -63,7 +63,7 @@ useEffect(callback[, dependencies]);
 * `callback` is the callback function containing side-effect logic. `useEffect()` executes the callback function after React has committed the changes to the screen.
 * `dependencies` is an optional array of dependencies. `useEffect()` executes `callback` only if the dependencies have changed between renderings.  
 
-Put your side-effect logic into the `callback` function, then use the `dependencies` argument to control when you want the side-effect to run. That's the sole and simple purpose of `useEffect()`.  
+Put your side-effect logic into the `callback` function, then use the `dependencies` argument to control when you want the side-effect to run. That's the sole purpose of `useEffect()`.  
 
 ## 2. The dependencies of *useEffect()*
 
@@ -111,9 +111,7 @@ Let's detail into the cases B) and C) since they're used often.
 
 ## 3. The side-effect on component did mount
 
-Some side-effects you'd like to invoke once after the mounting of the component.  
-
-To do so, indicate an empty dependencies array `[]` to `useEffect(..., [])`: 
+To invoke a side-effect once after the component mounting, use an empty dependencies array:  
 
 ```jsx{9}
 import { useEffect } from 'react';

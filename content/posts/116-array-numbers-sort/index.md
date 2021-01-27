@@ -10,7 +10,7 @@ recommended: ['operations-on-arrays-javascript', 'javascript-array-at']
 type: post
 ---
 
-In JavaScript, the `array.sort()` method sorts the array. Let's use the method to sort an array of numbers:
+In JavaScript, the `array.sort()` method sorts the array. Let's use it to sort some numbers:
 
 ```javascript
 const numbers = [10, 5, 11];
