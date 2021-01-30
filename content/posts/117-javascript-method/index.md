@@ -10,6 +10,8 @@ recommended: ['6-ways-to-declare-javascript-functions', 'javascript-arrow-functi
 type: post
 ---
 
+## 1. What is a method
+
 In JavaScript here's how you can define a regular function:
 
 ```javascript
@@ -24,3 +26,65 @@ To *define* the function write the `function` keyword followed by its name, para
 
 Then, to *invoke* it, write the function name followed by the arguments: `greet('World')`.  
 
+You can see that the function `greet(who)` accepts data about who to greet from the argument. What if the `who` is a property of an object?  
+
+You can access the `who` property from the object inside of a method:
+
+```javascript{4-6}
+const world = {
+  who: 'World',
+
+  greet() {
+    return `Hello, ${this.who}!`;
+  }
+}
+
+world.greet(); // => 'Hello, World!'
+```
+
+`greet() { ... }` is now a *method definition*, because it belongs to the `world` object. 
+
+Inside of the method `this` points to the object the method belongs to &mdash; `world`. That's why `this.who` expression access the property `who`.  
+
+Note that `this` is also named *context*.  
+
+Finally, `world.greet()` is a *method invocation*: write the object followed by a dot and the method call.  
+
+### 1.1 The context is optional
+
+While in the previous method example you use `this` to access the object the method belongs to: JavaScript, however, doesn't impose a method to use the context.  
+
+For this reason you can use an object as a namespace of method:
+
+```javascript
+const namespace = {
+  greet(who) {
+    return `Hello, ${who}!`;
+  }
+
+  farewell(who) {
+    return `Good bye, ${who}!`;
+  }
+}
+
+namespace.greet('World');    // => 'Hello, World!'
+namespace.farewell('World'); // => 'Good bye, World!'
+```
+
+## 2. The 3 types of method definition
+
+### 2.1 Object literal method
+
+### 2.2 Class method
+
+### 2.3 Class arrow method
+
+## 3. The 2 types of method invocation
+
+### 3.1 Regular method invocation
+
+### 3.2 Indirect method invocation
+
+### 3.3 Bound method invocation
+
+## 4. Summary
