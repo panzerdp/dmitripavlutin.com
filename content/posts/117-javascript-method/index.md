@@ -42,7 +42,7 @@ const world = {
 world.greet(); // => 'Hello, World!'
 ```
 
-`greet() { ... }` is now a *method definition*, because it belongs to the `world` object. 
+`greet() { ... }` is now a *method definition* and it belongs to the `world` object.  
 
 Inside of the method `this` points to the object the method belongs to &mdash; `world`. That's why `this.who` expression access the property `who`.  
 
@@ -73,7 +73,7 @@ namespace.farewell('World'); // => 'Good bye, World!'
 
 `namespace` is an object that holds 2 method: `namespace.greet()` and `namespace.farewell()`. 
 
-The methods do not use `this` to access any of the object properties. `namespace` just servers as a namespace of methods.  
+The methods do not use `this`, and `namespace` serves as a namespace for methods.  
 
 ## 2. Object literal method
 
