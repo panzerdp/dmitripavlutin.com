@@ -98,15 +98,61 @@ const world = {
 world.greet(); // => 'Hello, World!'
 ```
 
+`greet() { .... }` is a method defined on an object literal. Saying it stricter, this type of definition is named *shortand method definition* (available starting ES2015).  
+
+Before ES2015 there was a longer syntax of how you can define methods:
+
+```javascript{4-6}
+const world = {
+  who: 'World',
+
+  greet: function() {
+    return `Hello, ${this.who}!`;
+  }
+}
+
+world.greet(); // => 'Hello, World!'
+```
+
+`greet: function() { ... }` is a *method definition*. Note the additional presence of a colon and `function` keyword. 
+
+### 2.2 Adding a method dynamically
 
 
-### 2.2 Class method
+### 2.3 Class method
 
-### 2.3 Class arrow method
+In JavaScript the `class` syntax allows you to define a class that is going to serve as a template for the created instance.  
 
-### 2.4 Adding a method dynamically
+A class can also have methods, and you define method on a class using a shortand method definition:
 
-## 3. The 2 types of method invocation
+```javascript{6-8}
+class Greeter {
+  constructor(who) {
+    this.who = who;
+  }
+
+  greet() {
+    return `Hello, ${this.who}!`;
+  }
+}
+
+const myGreeter = new Greeter('World');
+instance.greet(); // => 'Hello, World!' 
+```
+
+`greet() { ... }` is a method defined inside a class.  
+
+Every time you create an instance of the class using `new` operator (e.g. `new Greeter('World')`) the defined method is available on the instance.  
+
+`instance.greet()` is how you invoke the method `greet()` on the instance. What's important is that `this` inside of the method equals the instance itself.  
+
+## 3. The 3 types of method invocation
+
+What's particularly interesting about JavaScript is that defining a function as a method is half of the job. To maintain inside the method the context, you also have to make sure to invoke the method as a method.  
+
+Let me show you why it's important.  
+
+
 
 ### 3.1 Regular method invocation
 
@@ -114,4 +160,6 @@ world.greet(); // => 'Hello, World!'
 
 ### 3.3 Bound method invocation
 
-## 4. Summary
+## 4. Arrow functions as methods
+
+## 5. Summary
