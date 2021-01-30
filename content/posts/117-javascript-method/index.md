@@ -71,13 +71,40 @@ namespace.greet('World');    // => 'Hello, World!'
 namespace.farewell('World'); // => 'Good bye, World!'
 ```
 
+`namespace` is an object that holds 2 method: `namespace.greet()` and `namespace.farewell()`. 
+
+The methods do not use `this` to access any of the object properties.  
+
 ## 2. The 3 types of method definition
 
+JavaScript offers a bunch of ways to define methods. The way to define fall into 2 main categories:
+
+* Defining methods on an object literal
+* Defining methods in classes
+
 ### 2.1 Object literal method
+
+As seen in the previous chapter, you can define a method directly in an object literal:
+
+```javascript{4-6}
+const world = {
+  who: 'World',
+
+  greet() {
+    return `Hello, ${this.who}!`;
+  }
+}
+
+world.greet(); // => 'Hello, World!'
+```
+
+
 
 ### 2.2 Class method
 
 ### 2.3 Class arrow method
+
+### 2.4 Adding a method dynamically
 
 ## 3. The 2 types of method invocation
 
