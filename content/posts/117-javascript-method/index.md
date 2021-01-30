@@ -50,7 +50,7 @@ Note that `this` is also named *context*.
 
 Finally, `world.greet()` is a *method invocation*: write the object followed by a dot and the method call.  
 
-### 1.1 The context is optional
+### The context is optional
 
 While in the previous method example you use `this` to access the object the method belongs to: JavaScript, however, doesn't impose a method to use the context.  
 
@@ -75,14 +75,7 @@ namespace.farewell('World'); // => 'Good bye, World!'
 
 The methods do not use `this` to access any of the object properties.  
 
-## 2. The 3 types of method definition
-
-JavaScript offers a bunch of ways to define methods. The way to define fall into 2 main categories:
-
-* Defining methods on an object literal
-* Defining methods in classes
-
-### 2.1 Object literal method
+## 2. Object literal method
 
 As seen in the previous chapter, you can define a method directly in an object literal:
 
@@ -93,7 +86,7 @@ const world = {
   greet() {
     return `Hello, ${this.who}!`;
   }
-}
+};
 
 world.greet(); // => 'Hello, World!'
 ```
@@ -116,10 +109,9 @@ world.greet(); // => 'Hello, World!'
 
 `greet: function() { ... }` is a *method definition*. Note the additional presence of a colon and `function` keyword. 
 
-### 2.2 Adding a method dynamically
+### Adding a method dynamically
 
-
-### 2.3 Class method
+## 3. Class method
 
 In JavaScript the `class` syntax allows you to define a class that is going to serve as a template for the created instance.  
 
@@ -146,11 +138,33 @@ Every time you create an instance of the class using `new` operator (e.g. `new G
 
 `instance.greet()` is how you invoke the method `greet()` on the instance. What's important is that `this` inside of the method equals the instance itself.  
 
-## 3. The 3 types of method invocation
+## 4. Method invocation
 
-What's particularly interesting about JavaScript is that defining a function as a method is half of the job. To maintain inside the method the context, you also have to make sure to invoke the method as a method.  
+What's particularly interesting about JavaScript is that defining the method is half of the job. To maintain inside the method the context, you also have to make sure to invoke the method as a method.  
 
 Let me show you why it's important.  
+
+Recall the `world` object having the method `greet()` upon it. Let's check what value has `this` when `greet()` is invoked as a method and as a regular function:
+
+```javascript
+const world = {
+  who: 'World',
+
+  greet() {
+    console.log(this === world);
+    return `Hello, ${this.who}!`;
+  }
+};
+
+// Method invocation
+world.greet(); // logs true
+
+const greetFunc = word.greet;
+// Regular function invocation
+greetFunc(); // => logs false
+```
+
+`world.greet()` is method invocation. Note the presence of the object `world`, followed by a dot `.`, and finally the method itself &mdash; that's what makes the method invocation: `<object>.<method>(arg1, arg2, ...)`.  
 
 
 
