@@ -111,6 +111,29 @@ world.greet(); // => 'Hello, World!'
 
 ### Adding methods dynamically
 
+The method on the plain object is just a function that is stored as a property on the object. That's why you can add method dynamically to an object:
+
+```javascript
+const world = {
+  who: 'World',
+
+  greet() {
+    return `Hello, ${this.who}!`;
+  }
+};
+
+// A a new property holding a function
+world.farewell = function () {
+  return `Good bye, ${who}!`;
+}
+
+world.farewell(); // => 'Good bye, World!'
+```
+
+`world` object at first doesn't have a method `farewell`. It is later added dynamically.  
+
+Still, even the added dynamically method can be invoked as a method later: `world.farewell()`.  
+
 ## 3. Class method
 
 In JavaScript the `class` syntax allows you to define a class that is going to serve as a template for the created instance.  
@@ -245,7 +268,6 @@ const world = {
   who: 'World',
 
   greet: () => {
-    console.log(this === world);
     return `Hello, ${this.who}!`;
   }
 };
@@ -272,7 +294,7 @@ What's specific to JavaScript is that it is not enough to define a method. You a
 myObject.myMethod('Arg 1', 'Arg 2');
 ```
 
-What's even more interesting is that in JavaScript you can define a regular function, not belonging to an object, but then you can invoke that function as a method on an object. You can do so using an indirect invocation of the function or bounding a function to a particular context: 
+What's even more interesting is that in JavaScript you can define a regular function, not belonging to an object, but then invoke that function as a method on an arbitrar object. You can do so using an indirect invocation of the function or bounding a function to a particular context: 
 
 ```javascript
 // Indirect function invocation
