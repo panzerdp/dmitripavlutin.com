@@ -191,6 +191,8 @@ greetFunc(); // => logs false
 
 `greetFunc` is the same function as `world.greet`. But when invoked as *regular function* `greetFunc()`, `this` inside `greet()` isn't equal to the `world` object, but rather to the global object (in a browser this is `window`).   
 
+!!!Write about the pitfall of separating method from object. Put link to the corresponding section in this post.
+
 ### 3.2 Indirect function invocation
 
 As stated in the previous section, a regular function invocation has `this` resolved as the global object. Is there a way, still, having a function defined as a function, but not a method, but to specify the value of `this`?  
@@ -306,4 +308,7 @@ myBoundFunc('Arg 1', 'Arg 2');
 
 Indirect invocation and bounding emulate the method invocation.  
 
-*Still have questions about JavaScript methods? Write a comment below!*
+Slighly confused on how `this` works in JavaScript? I recommend reading my extensive post [Gentle Explanation of "this" in JavaScript
+](/gentle-explanation-of-this-in-javascript/).  
+
+!! Add quizz with setTimeout and methods
