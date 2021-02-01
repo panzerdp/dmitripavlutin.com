@@ -12,7 +12,7 @@ type: post
 
 ## 1. What is a method
 
-In JavaScript here's how you can define a regular function:
+Here's how you can define a regular function in JavaScript:
 
 ```javascript
 function greet(who) {
@@ -22,13 +22,13 @@ function greet(who) {
 greet('World'); // => 'Hello, World!'
 ```
 
-To *define* the function write the `function` keyword followed by its name, params and body: `function greet(who) {...}`.  
+Put the `function` keyword followed by its name, params, and body: `function greet(who) {...}`. That's a *regular function definition*.
 
-Then, to *invoke* it, write the function name followed by the arguments: `greet('World')`.  
+`greet('World')` is the *regular function invocation*. The function `greet('World')` accepts data from the argument. 
 
-You can see that the function `greet(who)` accepts data about who to greet from the argument. What if the `who` is a property of an object?  
+What if `who` is a property of an object? To easily access the properties of an object, things are easier if you attach the function to that object, in other words, create a method on that object.  
 
-You can access the `who` property from the object inside of a method:
+Let's make `greet()` a method on the object `world`:
 
 ```javascript{4-6}
 const world = {
@@ -42,13 +42,11 @@ const world = {
 world.greet(); // => 'Hello, World!'
 ```
 
-`greet() { ... }` is now a *method definition* and it belongs to the `world` object.  
+`greet() { ... }` is now a *method* that belongs to the `world` object. `world.greet()` is a *method invocation*: write the object followed by a dot and the method call.   
 
-Inside of the method `this` points to the object the method belongs to &mdash; `world`. That's why `this.who` expression access the property `who`.  
+Inside of the `greet()` method `this` points to the object the method belongs to &mdash; `world`. That's why `this.who` expression access the property `who`.  
 
 Note that `this` is also named *context*.  
-
-Finally, `world.greet()` is a *method invocation*: write the object followed by a dot and the method call.  
 
 ### The context is optional
 
@@ -71,9 +69,9 @@ namespace.greet('World');    // => 'Hello, World!'
 namespace.farewell('World'); // => 'Good bye, World!'
 ```
 
-`namespace` is an object that holds 2 method: `namespace.greet()` and `namespace.farewell()`. 
+`namespace` is an object that holds 2 methods: `namespace.greet()` and `namespace.farewell()`. 
 
-The methods do not use `this`, and `namespace` serves as a namespace for methods.  
+The methods do not use `this`, and `namespace` serves as a holder of alike methods.  
 
 ## 2. Object literal method
 
@@ -91,9 +89,9 @@ const world = {
 world.greet(); // => 'Hello, World!'
 ```
 
-`greet() { .... }` is a method defined on an object literal. Saying it stricter, this type of definition is named *shorthand method definition* (available starting ES2015).  
+`greet() { .... }` is a method defined on an object literal. Such type of definition is named *shorthand method definition* (available starting ES2015).  
 
-Before ES2015 there was a longer syntax of how you can define methods:
+There's also a longer syntax of how you can define methods:
 
 ```javascript{4-6}
 const world = {
@@ -111,7 +109,7 @@ world.greet(); // => 'Hello, World!'
 
 ### Adding methods dynamically
 
-The method on the plain object is just a function that is stored as a property on the object. That's why you can add method dynamically to an object:
+The method is just a function that is stored as a property on the object. That's why you can add method dynamically to an object:
 
 ```javascript
 const world = {
@@ -124,7 +122,7 @@ const world = {
 
 // A a new property holding a function
 world.farewell = function () {
-  return `Good bye, ${who}!`;
+  return `Good bye, ${this.who}!`;
 }
 
 world.farewell(); // => 'Good bye, World!'
@@ -132,13 +130,13 @@ world.farewell(); // => 'Good bye, World!'
 
 `world` object at first doesn't have a method `farewell`. It is later added dynamically.  
 
-Still, even the added dynamically method can be invoked as a method later: `world.farewell()`.  
+The dynamically added method can be invoked as a method: `world.farewell()`.  
 
 ## 3. Class method
 
-In JavaScript the `class` syntax allows you to define a class that is going to serve as a template for the created instance.  
+In JavaScript, the `class` syntax defines a class that's going to serve as a template for its instances.  
 
-A class can also have methods, and you define method on a class using a shortand method definition:
+A class can also have methods:
 
 ```javascript{6-8}
 class Greeter {
@@ -152,20 +150,20 @@ class Greeter {
 }
 
 const myGreeter = new Greeter('World');
-instance.greet(); // => 'Hello, World!' 
+myGreeter.greet(); // => 'Hello, World!' 
 ```
 
 `greet() { ... }` is a method defined inside a class.  
 
-Every time you create an instance of the class using `new` operator (e.g. `new Greeter('World')`) the defined method is available on the instance.  
+Every time you create an instance of the class using `new` operator (e.g. `myGreeter = new Greeter('World')`) the defined method is available on the created instance.  
 
-`instance.greet()` is how you invoke the method `greet()` on the instance. What's important is that `this` inside of the method equals the instance itself.  
+`myGreeter.greet()` is how you invoke the method `greet()` on the instance. What's important is that `this` inside of the method equals the instance itself.  
 
 ## 4. Method invocation
 
-### 3.1 Regular method invocation
+### 3.1 Method invocation
 
-What's particularly interesting about JavaScript is that defining the method is half of the job. To maintain inside the method the context, you also have to make sure to invoke the method as a... method.  
+What's particularly interesting about JavaScript is that defining a method on an object or class is half of the job. To maintain inside the method the context, you also have to make sure to *invoke the method as a... method*.  
 
 Let me show you why it's important.  
 
@@ -191,13 +189,13 @@ greetFunc(); // => logs false
 
 `world.greet()` is a method invocation. The object `world`, followed by a dot `.`, and finally the method itself &mdash; that's what makes the *method invocation*.  
 
-`greetFunc` is the same function as `world.greet`. But when invoked as `greetFunc()` inside the function `this` isn't equal to the `world` object, but rather to the global object (in a browser this is `window`). It happens because `greetFunc()` is a *regular function invocation*.  
+`greetFunc` is the same function as `world.greet`. But when invoked as *regular function* `greetFunc()`, `this` inside `greet()` isn't equal to the `world` object, but rather to the global object (in a browser this is `window`).   
 
 ### 3.2 Indirect function invocation
 
 As stated in the previous section, a regular function invocation has `this` resolved as the global object. Is there a way, still, having a function defined as a function, but not a method, but to specify the value of `this`?  
 
-Welcome the indirect method invocation, which can be performed using:
+Welcome the indirect function invocation, which can be performed using:
 
 ```javascript
 myFunc.call(thisArg, arg1, arg2, ..., argN);
@@ -206,7 +204,7 @@ myFunc.apply(thisArg, [arg1, arg2, ..., argN]);
  
 methods available on the function object. 
 
-The first argument of `myFunc.call(thisArg)` and `myFunc.apply(thisArg)` allows to specify the context of the method invocation. In other words, you can manually indicate what value `this` is going to have inside the function.  
+The first argument of `myFunc.call(thisArg)` and `myFunc.apply(thisArg)` is the context (the value of `this`) of the indirect invocation. In other words, you can manually indicate what value `this` is going to have inside the function.  
 
 For example, let's define `greet()` as a regular function, and an object `aliens` having a `who` property:
 
@@ -259,9 +257,9 @@ Later, when invoking the bound function `greetAliens()`, `this` equals `aliens` 
 
 ## 4. Arrow functions as methods
 
-What about the arrow function? Using an arrow function as a method isn't recommended, and here's why.  
+Using an arrow function as a method isn't recommended, and here's why.  
 
-Let's define the greet as a method, but using the arrow function syntax:
+Let's define the `greet()` as a method, but using the arrow function syntax:
 
 ```javascript
 const world = {
@@ -283,9 +281,9 @@ That's why `this` inside of the arrow function equals the global object: `window
 
 ## 5. Summary
 
-The method is a special function belonging to an object. The context of a method (`this` value) equals the object the method belongs to.  
+The method is a function belonging to an object. The context of a method (`this` value) equals the object the method belongs to.  
 
-You can also define methods on classes. `this` inside of a method of a class equals to the class instance.  
+You can also define methods on classes. `this` inside of a method of a class equals to the instance.  
 
 What's specific to JavaScript is that it is not enough to define a method. You also need to make sure to use a method invocation. Typically, the method invocation has the following syntax:
 
@@ -294,7 +292,7 @@ What's specific to JavaScript is that it is not enough to define a method. You a
 myObject.myMethod('Arg 1', 'Arg 2');
 ```
 
-What's even more interesting is that in JavaScript you can define a regular function, not belonging to an object, but then invoke that function as a method on an arbitrar object. You can do so using an indirect invocation of the function or bounding a function to a particular context: 
+Interestingly is that in JavaScript you can define a regular function, not belonging to an object, but then invoke that function as a method on an arbitrar object. You can do so using an indirect invocation of the function or bind a function to a particular context:  
 
 ```javascript
 // Indirect function invocation
@@ -307,3 +305,5 @@ myBoundFunc('Arg 1', 'Arg 2');
 ```
 
 Indirect invocation and bounding emulate the method invocation.  
+
+*Still have questions about JavaScript methods? Write a comment below!*
