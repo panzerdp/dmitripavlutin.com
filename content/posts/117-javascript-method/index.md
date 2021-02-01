@@ -91,7 +91,7 @@ const world = {
 world.greet(); // => 'Hello, World!'
 ```
 
-`greet() { .... }` is a method defined on an object literal. Saying it stricter, this type of definition is named *shortand method definition* (available starting ES2015).  
+`greet() { .... }` is a method defined on an object literal. Saying it stricter, this type of definition is named *shorthand method definition* (available starting ES2015).  
 
 Before ES2015 there was a longer syntax of how you can define methods:
 
@@ -191,7 +191,7 @@ greetFunc(); // => logs false
 
 `world.greet()` is a method invocation. The object `world`, followed by a dot `.`, and finally the method itself &mdash; that's what makes the *method invocation*.  
 
-`greetFunc` is the same function as `world.geet`. But when invoked as `greetFunc()` inside the function `this` isn't equal to the `world` object, but rather to the global object (in a browser this is window). It happens because `greetFunc()` is a *regular function invocation*.  
+`greetFunc` is the same function as `world.greet`. But when invoked as `greetFunc()` inside the function `this` isn't equal to the `world` object, but rather to the global object (in a browser this is `window`). It happens because `greetFunc()` is a *regular function invocation*.  
 
 ### 3.2 Indirect function invocation
 
@@ -235,7 +235,7 @@ You can create a bound function using a special method:
 const myBoundFunc = myFunc.bind(thisArg, arg1, arg2, ..., argN);
 ```
 
-The first argument of `myFunc.bind(thisArg)` is the context to which the found is going to bound too. 
+The first argument of `myFunc.bind(thisArg)` is the context to which the function is going to be bound to. 
 
 For example, let's reuse the `greet()` and bind it to `aliens` context:
 
@@ -259,7 +259,7 @@ Later, when invoking the bound function `greetAliens()`, `this` equals `aliens` 
 
 ## 4. Arrow functions as methods
 
-What about arrow function? Well, it turns out that using an arrow function as method isn't recommended.  
+What about the arrow function? Using an arrow function as a method isn't recommended, and here's why.  
 
 Let's define the greet as a method, but using the arrow function syntax:
 
@@ -275,15 +275,15 @@ const world = {
 world.greet(); // => 'Hello, undefined!'
 ```
 
-Unfortunatel, `world.greet()` returns `'Hello, undefined!'` instead of the expected `'Hello, World!'`.
+Unfortunately, `world.greet()` returns `'Hello, undefined!'` instead of the expected `'Hello, World!'`.
 
-The value of `this` inside of the arrow function equals to `this` of the outer scope. Always.  
+The value of `this` inside of the arrow function equals `this` of the outer scope. Always.  
 
-That's why `this` inside of the arrow function equals to the global object: `window` in a browser. `'Hello, ${this.who}!'` evaluates as ``Hello, ${windows.who}!``, which in the end is `'Hello, undefined!'`.  
+That's why `this` inside of the arrow function equals the global object: `window` in a browser. `'Hello, ${this.who}!'` evaluates as ``Hello, ${windows.who}!``, which in the end is `'Hello, undefined!'`.  
 
 ## 5. Summary
 
-The method is a special function belonging to an object. The context of a method (`this` value) equals to the object the method belongs to.  
+The method is a special function belonging to an object. The context of a method (`this` value) equals the object the method belongs to.  
 
 You can also define methods on classes. `this` inside of a method of a class equals to the class instance.  
 
