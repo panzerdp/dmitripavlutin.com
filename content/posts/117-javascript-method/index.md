@@ -191,7 +191,7 @@ greetFunc(); // => logs false
 
 `greetFunc` is the same function as `world.greet`. But when invoked as *regular function* `greetFunc()`, `this` inside `greet()` isn't equal to the `world` object, but rather to the global object (in a browser this is `window`).   
 
-I name expressions like `greetFunc = world.greet` *separating a method from its object*. When later invoking the separated method `greetFunc()` would make `this` equal to global object.  
+I name expressions like `greetFunc = world.greet` *separating a method from its object*. When later invoking the separated method `greetFunc()` would make `this` equal to the global object.  
 
 Separating a method from its object can take different forms:
 
@@ -213,7 +213,7 @@ To avoid loosing the context of the method, make sure to use the method invocati
 
 ### 3.2 Indirect function invocation
 
-As stated in the previous section, a regular function invocation has `this` resolved as the global object. Is there a way for a regular function to have a custom value of `this`?  
+As stated in the previous section, a regular function invocation has `this` resolved as the global object. Is there a way for a regular function to have a customizable value of `this`?  
 
 Welcome the indirect function invocation, which can be performed using:
 
@@ -333,4 +333,4 @@ To read about all ways you can define functions in JavaScript follow my post [6 
 Confused about how `this` works in JavaScript? Then I recommend reading my extensive guide [Gentle Explanation of "this" in JavaScript
 ](/gentle-explanation-of-this-in-javascript/).  
 
-*Quizzzzz: can a method in JavaScript be an asynchornous function?*
+*Quizzzzz: can a method in JavaScript be an asynchronous function?*
