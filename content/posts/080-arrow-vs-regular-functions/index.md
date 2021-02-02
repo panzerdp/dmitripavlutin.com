@@ -213,7 +213,7 @@ function myRegularFunction() {
   myArrowFunction('c', 'd');
 }
 
-myRegularFunction('a', 'b'); // logs { 0: 'c', 1: 'd' }
+myRegularFunction('a', 'b'); // logs ['c', 'd']
 ```
 
 `...args` rest parameter collects the execution arguments of the arrow function: `{ 0: 'c', 1: 'd' }`.  
