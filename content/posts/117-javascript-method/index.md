@@ -162,7 +162,7 @@ Every time you create an instance of the class using `new` operator (e.g. `myGre
 
 ## 4. How to invoke a method
 
-### 3.1 Method invocation
+### 4.1 Method invocation
 
 What's particularly interesting about JavaScript is that defining a method on an object or class is half of the job. To maintain the method the context, you have to make sure to *invoke the method as a... method*.   
 
@@ -212,7 +212,7 @@ myButton.addEventListener('click', myObject.myMethod)
 
 To avoid loosing the context of the method, make sure to use the method invocation `world.greet()` or [bind the method manually to the object](#33-bound-function-invocation) `greetFunc = world.greet.bind(this)`.  
 
-### 3.2 Indirect function invocation
+### 4.2 Indirect function invocation
 
 As stated in the previous section, a regular function invocation has `this` resolved as the global object. Is there a way for a regular function to have a customizable value of `this`?  
 
@@ -246,7 +246,7 @@ greet.apply(aliens); // => 'Hello, Aliens!'
 
 The indirect invocation lets you emulate the method invocation on an object!
 
-### 3.3 Bound function invocation
+### 4.3 Bound function invocation
 
 Finally, here's the third way how you can make a function be invoked as a method on an object. Specifically, you can bound a function to have a specific context.  
 
@@ -280,7 +280,7 @@ Later, when invoking the bound function `greetAliens()`, `this` equals `aliens` 
 
 Again, using a bound function you can emulate the method invocation.  
 
-## 4. Arrow functions as methods
+## 5. Arrow functions as methods
 
 Using an arrow function as a method isn't recommended, and here's why.  
 
@@ -306,7 +306,7 @@ That's why `this` inside of the arrow function equals the global object: `window
 
 I like the arrow functions. But they don't work as methods.  
 
-## 5. Summary
+## 6. Summary
 
 The method is a function belonging to an object. The context of a method (`this` value) equals the object the method belongs to.  
 
