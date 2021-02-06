@@ -3,14 +3,14 @@ title: "7 Interview Questions on JavaScript Closure. Can You Answer Them?"
 description: "Can you answer these 7 interview questions regarding the closure concept in JavaScript?"
 published: "2021-02-09T12:00Z"
 modified: "2021-02-09T12:00Z"
-thumbnail: "./images/cover-3.jpg"
+thumbnail: "./images/cover.jpg"
 slug: javascript-closure-interview-questions
 tags: ['javascript', 'closure', 'interview']
 recommended: ['simple-explanation-of-javascript-closures', 'simple-but-tricky-javascript-interview-questions']
 type: post
 ---
 
-## Questions 1
+## Questions 1: Are you a closure?
 
 Consider the following functions `clickHandler`, `immediate`, and `delayedReload`:
 
@@ -22,8 +22,9 @@ button.addEventListener('click', function clickHandler() {
 ```
 
 ```javascript
-(function immediate(number) {
+const result = (function immediate(number) {
   const message = `number is: ${number}`;
+  return message;
 })(100);
 ```
 
@@ -35,7 +36,7 @@ setTimeout(function delayedReload() {
 
 Which of 3 these functions are closures and why?
 
-## Questions 2
+## Questions 2: Clashing variables
 
 What will log to console the following code snippet:
 
@@ -44,37 +45,37 @@ let count = 0;
 (function () {
   if (count === 0) {
     let count = 1;
-    console.log(count); // ???
+    console.log(count); // What is logged?
   }
-  console.log(count); // ???
+  console.log(count); // What is logged?
 })();
 ```
 
-## Questions 3
+## Questions 3: Clashing params
 
 What will log to console the following code snippet:
 
 ```javascript
 (function(a) {
   return (function(b) {
-    console.log(a); // ???
+    console.log(a); // What is logged?
   })(1);
 })(0);
 ```
 
-## Questions 4
+## Questions 4: Tricky closure
 
 What will log to console the following code snippet:
 
 ```javascript
 for (var i = 0; i < 3; i++) {
   setTimeout(function() {
-    console.log(i); // ???
+    console.log(i); // What is logged?
   }, 1000);
 }
 ```
 
-## Questions 5
+## Questions 5: Right or wrong message
 
 What will log to console the following code snippet:
 
@@ -87,7 +88,7 @@ function createIncrement() {
 
   let message = `Count is ${count}`;
   function log() {
-    console.log(message); // ???
+    console.log(message);
   }
   
   return [increment, log];
@@ -97,10 +98,52 @@ const [increment, log] = createIncrement();
 increment(); 
 increment(); 
 increment(); 
-log(); 
+log(); // What is logged?
 ```
 
-## Questions 6
+## Questions 6: Restoring encapsulaiton
+
+Consider the following factory `createStack()` that creates instances of stack data structure:
+
+```javascript
+function createStack() {
+  return {
+    items: [],
+    push(item) {
+      this.items.push(item);
+    },
+    pop() {
+      return this.items.unshift();
+    }
+  };
+}
+
+const stack = createStack();
+stack.push(10);
+stack.push(5);
+stack.pop(); // => 5
+
+stack.items; // => [10]
+```
+
+The problem with this stack implementation is that it exposes the `stack.items` property, and the user can modify this array directly. That breaks the encapsulation of stack implementation.   
+
+Refactor the above stack implementation, using the concept of closure, such that there is no way to access `items` array outside of `createStack()` function scope:  
+
+```javascript
+function createStack() {
+  // Write your code here...
+}
+
+const stack = createStack();
+stack.push(10);
+stack.push(5);
+stack.pop(); // => 5
+
+stack.items; // => undefined
+```
+
+## Questions 7: A touch of functional programming
 
 Write a function `multiply()`:
 
@@ -119,8 +162,4 @@ multiply(3, 3); // => 9
 const double = multiply(2);
 double(5);  // => 10
 double(11); // => 22
-
 ```
-
-## Questions 7
-
