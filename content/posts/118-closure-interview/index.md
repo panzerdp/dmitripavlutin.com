@@ -12,12 +12,16 @@ type: post
 
 ## Questions 1
 
-Write a function `createMultiplier()` that does the following:
+Write a function `createMultiplier()`:
 
 ```javascript
-function createMultiplier(multiplier) {
-  // Write your code here
+function createMultiplier(number) {
+  // Write your code here...
 }
+```
+
+that does the following:
+```javascript
 
 const double = createMultiplier(2);
 
@@ -27,19 +31,52 @@ double(11); // => 22
 
 ## Questions 2
 
-What will output to console the following code snippet:
+What will log to console the following code snippet:
 
 ```javascript
 for (var i = 0; i < 3; i++) {
-  setTimeout(() => console.log(i), 1000);
+  setTimeout(() => console.log(i) /* ??? */, 1000);
 }
 ```
 
 ## Questions 3
 
+What will log to console the following code snippet:
 
+```javascript
+let count = 0;
+(function () {
+  if (count === 0) {
+    let count = 1;
+    console.log(count); // ???
+  }
+  console.log(count); // ???
+})();
+```
 
 ## Questions 4
+
+What will log to console the following code snippet:
+
+```javascript
+function createIncrement() {
+  let count = 0;
+
+  const increment = () => count++;
+
+  let message = `Count is ${value}`;
+  const log = () => console.log(message);
+  
+  return [increment, log];
+}
+
+const [increment, log] = createIncrement();
+increment(); 
+increment(); 
+increment(); 
+log();       // ???
+```
+
 ## Questions 5
 ## Questions 6
 ## Questions 7
