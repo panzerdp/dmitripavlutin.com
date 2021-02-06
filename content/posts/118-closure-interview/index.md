@@ -36,6 +36,17 @@ setTimeout(function delayedReload() {
 
 Which of 3 these functions are closures and why?
 
+<details>
+    <summary>Expand answer</summary>
+    
+    Let's see the answer.
+
+```javascript
+const t = 1;
+```
+
+</details>
+
 ## Questions 2: Clashing variables
 
 What will log to console the following code snippet:
@@ -101,9 +112,9 @@ increment();
 log(); // What is logged?
 ```
 
-## Questions 6: Restoring encapsulaiton
+## Questions 6: Restoring encapsulation
 
-Consider the following factory `createStack()` that creates instances of stack data structure:
+The following function `createStack()` creates instances of stack data structure:
 
 ```javascript
 function createStack() {
@@ -126,7 +137,7 @@ stack.pop(); // => 5
 stack.items; // => [10]
 ```
 
-The problem with this stack implementation is that it exposes the `stack.items` property, and the user can modify this array directly. That breaks the encapsulation of stack implementation.   
+The problem with this stack implementation is that it exposes the `stack.items` property, and thus anyone could modify this array directly. That breaks the encapsulation of stack implementation.   
 
 Refactor the above stack implementation, using the concept of closure, such that there is no way to access `items` array outside of `createStack()` function scope:  
 
