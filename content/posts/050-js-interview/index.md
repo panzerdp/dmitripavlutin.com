@@ -6,7 +6,7 @@ modified: '2019-11-21T10:15Z'
 thumbnail: './images/people-at-interview.jpg'
 slug: simple-but-tricky-javascript-interview-questions
 tags: ['javascript', 'closure', 'array', 'hoisting']
-recommended: ['simple-explanation-of-javascript-closures', 'javascript-variables-and-temporal-dead-zone']
+recommended: ['simple-explanation-of-javascript-closures', 'javascript-closure-interview-questions']
 type: post
 ---
 
