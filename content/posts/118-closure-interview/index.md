@@ -215,6 +215,40 @@ stack.pop(); // => 5
 stack.items; // => undefined
 ```
 
+<details>
+  <summary>Expand answer</summary>
+
+Here's a possible refactoring of `createStack()`:
+
+```javascript
+function createStack() {
+  const items = [];
+  return {
+    push(item) {
+      items.push(item);
+    },
+    pop() {
+      return items.unshift();
+    }
+  };
+}
+
+const stack = createStack();
+stack.push(10);
+stack.push(5);
+stack.pop(); // => 5
+
+stack.items; // undefined
+```
+
+Instead of having `items` a property on the exported object, `items` has been moved to a variable inside `createStack()` scope. 
+
+Now, from the outside of `createStack()` scope there is no way to access or modify `items` variable. `items` is now a private variable, and the implementation of the stack is encapsulated.   
+
+`push()` and `pop()` methods, being closures, capture `items` variable from `createStack()` function scope. 
+
+</details>
+
 ## Questions 7: A touch of functional programming
 
 Write a function `multiply()`:
@@ -235,3 +269,40 @@ const double = multiply(2);
 double(5);  // => 10
 double(11); // => 22
 ```
+
+<details>
+  <summary>Expand answer</summary>
+
+Here's a possible implementation of `multiply()` function:
+
+```javascript
+function multiply(number1, number2) {
+  if (number2 !== undefined) {
+    return number1 * number2;
+  }
+  return function doMultiply(number2) {
+    return number1 * number2;
+  };
+}
+
+multiply(4, 5); // => 20
+multiply(3, 3); // => 9
+
+const double = multiply(2);
+double(5);  // => 10
+double(11); // => 22
+```
+
+If `number2` parameter is not `undefined`, then the function simply multiplier `number1` and `number2`.  
+
+But if `number2` is `undefined`, that means that `multiply()` function has been called with one argument. In such case let's return a function `doMultiply()` that when later invoked performs the actual multiplication.  
+
+Note that `doMultiply()` function is a closure, since it captures `number1` variable from `multiply()` scope.  
+
+</details>
+
+## Summary
+
+If you answered at least 5 questions out of 7, then you have a good understanding of closures and know how to use them.  
+
+If you answered correctly less than 5 questions, then you need a good refresher on closures. I recommend checking my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).  
