@@ -48,7 +48,20 @@ A simple rule to identifying a closure is checking whether the function accesses
 
 </details>
 
-## Questions 2: Clashing variables
+
+## Questions 2: Clashing params
+
+What will log to console the following code snippet:
+
+```javascript
+(function(a) {
+  return (function(b) {
+    console.log(a); // What is logged?
+  })(1);
+})(0);
+```
+
+## Questions 3: Clashing variables
 
 What will log to console the following code snippet:
 
@@ -61,18 +74,6 @@ let count = 0;
   }
   console.log(count); // What is logged?
 })();
-```
-
-## Questions 3: Clashing params
-
-What will log to console the following code snippet:
-
-```javascript
-(function(a) {
-  return (function(b) {
-    console.log(a); // What is logged?
-  })(1);
-})(0);
 ```
 
 ## Questions 4: Tricky closure
