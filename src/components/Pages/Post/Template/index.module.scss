@@ -52,11 +52,8 @@
     max-width: 100%;
   }
 
-  details {
-    summary {
-      margin-bottom: 0.75rem;
-      outline: none;
-    }
+  details summary {
+    outline: none;
   }
 
   :global {

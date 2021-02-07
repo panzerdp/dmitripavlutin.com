@@ -1,6 +1,6 @@
 ---
 title: "7 Interview Questions on JavaScript Closures. Can You Answer Them?"
-description: "Can you answer these 7 interview questions regarding the closure concept in JavaScript?"
+description: "Can you answer these 7 interview questions on the closure concept in JavaScript?"
 published: "2021-02-09T12:00Z"
 modified: "2021-02-09T12:00Z"
 thumbnail: "./images/cover-5.jpg"
@@ -16,7 +16,7 @@ If you're preparing for a JavaScript coding interview, there's a good chance you
 
 In this post, I compiled a list of 7 interesting, practical and increasingly challenging questions on JavaScript closures. 
 
-Take a pencil and a piece of paper, and try to solve these problems without looking at the answers. In my estimation, you would need about 30-40 minutes.  
+Take a pencil and a piece of paper, and try to solve these problems without looking at the answers. In my estimation, you would need about 30 minutes.  
 
 *If you need a refresh on closures, I recommend checking my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).*  
 
@@ -69,8 +69,8 @@ A simple rule to identifying a closure is checking whether the function accesses
 What will log to console the following code snippet:
 
 ```javascript
-(function immediate1(a) {
-  return (function immediate2(b) {
+(function immediateA(a) {
+  return (function immediateB(b) {
     console.log(a); // What is logged?
   })(1);
 })(0);
@@ -81,7 +81,9 @@ What will log to console the following code snippet:
 
 `0` is logged to console.
 
-`immediate2` is a closure that captures `a` variable from the outer `immediate1` scope, where `a` is a parameter. Since `immediate1` was invoked with argument `0`, `a` parameter has the value `0`.  
+`immediateA` was invoked with argument `0`, thus `a` parameter inside the function has value `0`.  
+
+`immediateB` is a closure that captures `a` variable from the outer `immediateA` scope, where `a` is a parameter being `0`.  
 
 </details>
 
@@ -121,7 +123,7 @@ What will log to console the following code snippet:
 
 ```javascript
 for (var i = 0; i < 3; i++) {
-  setTimeout(function() {
+  setTimeout(function log() {
     console.log(i); // What is logged?
   }, 1000);
 }
@@ -308,7 +310,7 @@ double(5);  // => 10
 double(11); // => 22
 ```
 
-If `number2` parameter is not `undefined`, then the function simply multiplier `number1` and `number2`.  
+If `number2` parameter is not `undefined`, then the function simply returns `number1` and `number2` multiplied.  
 
 But if `number2` is `undefined`, that means that `multiply()` function has been called with one argument. In such case let's return a function `doMultiply()` that when later invoked performs the actual multiplication.  
 
@@ -318,6 +320,8 @@ Note that `doMultiply()` function is a closure, since it captures `number1` vari
 
 ## Summary
 
-If you answered at least 5 questions out of 7, then you have a good understanding of closures and know how to use them.  
+If you answered 5 or more questions out of 7, then you have a good understanding of closures and know how to use them.  
 
 If you answered correctly less than 5 questions, then you need a good refresher on closures. I recommend checking my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).  
+
+Ready for a new challenge? Try to solve the [7 Simple but Tricky JavaScript Interview Questions](/simple-but-tricky-javascript-interview-questions/).
