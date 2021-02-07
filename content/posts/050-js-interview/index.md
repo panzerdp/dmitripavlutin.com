@@ -220,7 +220,7 @@ for (i = 0; i < 3; i++) {
 
 #### Answer
 
-If you haven't heard about this tricky question before, most likely your answer is `0`, `1` and `2`: which is incorrect. When I first had tried to solve it, this was my answer too!
+If you haven't heard about this tricky question before, most likely your answer is `0`, `1` and `2`: which is incorrect. When I first tried to solve it, this was my answer too!
 
 There are 2 phases behind executing this snippet.
 
