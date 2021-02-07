@@ -12,20 +12,20 @@ type: post
 
 Don't underestimate the importance of knowing closures.  
 
-If you're preparing for a JavaScript coding interview, there's a good chance you're going to get asked about the concept of closures.  
+During a JavaScript coding interview there's a good chance you'll get asked about the concept of closures.  
 
-I compiled a list of 7 practical and increasingly challenging questions on JavaScript closures. 
+I compiled a list of 7 interesting and increasingly challenging questions on JavaScript closures. 
 
 Take a pencil and a piece of paper, and try to answer the questions without looking at the answers. In my estimation, you would need about 30 minutes.  
 
-*If you need a refresh on closures, I recommend checking my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).*  
-
 Have fun!
+
+*If you need a refresh on closures, I recommend checking the post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).*  
 
 ```toc
 ```
 
-## Questions 1: Is it a closure?
+## Questions 1: Closures raise your hand
 
 Consider the following functions `clickHandler`, `immediate`, and `delayedReload`:
 
@@ -63,7 +63,7 @@ A simple rule to identifying a closure is checking whether the function accesses
 
 </details>
 
-## Questions 2: Confusing params
+## Questions 2: Lost in parameters
 
 What will log to console the following code snippet:
 
@@ -86,7 +86,7 @@ What will log to console the following code snippet:
 
 </details>
 
-## Questions 3: Clashing variables
+## Questions 3: Who's who
 
 What will log to console the following code snippet:
 
@@ -146,7 +146,7 @@ The second phase happens after 1000ms:
 
 1. `setTimeout()` executes the scheduled `log()` functions. `log()` reads the *current value* of variable `i`, which is `3`, and logs to console `3`.
 
-That's why `3`, `3`, and `3` are logged to the console.  
+That's why `3`, `3`, `3` is logged to the console.  
 
 *Side challenge: how would you fix this example to log `0`, `1`, `2` values? Write your solution in a comment below!*
 </details>
@@ -217,7 +217,7 @@ stack.pop(); // => 5
 stack.items; // => [10]
 ```
 
-Anyone can modify items array directly because the above implementation exposes the `stack.items` property. That's a problem since it breaks the encapsulation of the stack.   
+Anyone can modify items array directly because the above implementation exposes the `stack.items` property. That's a problem since it breaks the encapsulation of the stack: only `push()` and `pop()` methods should be public.     
 
 Refactor the above stack implementation, using the concept of closure, such that there is no way to access `items` array outside of `createStack()` function scope:  
 
@@ -270,12 +270,12 @@ Thanks to this change, from the outside of `createStack()` scope there is no way
 
 </details>
 
-## Questions 7: A touch of functional programming
+## Questions 7: Smart multiplication
 
 Write a function `multiply()` that multiples 2 numbers:
 
 ```javascript
-function multiply(number1, number2) {
+function multiply(num1, num2) {
   // Write your code here...
 }
 ```

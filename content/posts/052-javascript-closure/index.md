@@ -318,4 +318,6 @@ Closures capture variables inside event handlers, callbacks. They're used in fun
 
 Every JavaScript developer must know how closures work. Deal with it <nobr>⌐■_■</nobr>.
 
+What about a challenge? [7 Interview Questions on JavaScript Closures. Can You Answer Them?](/javascript-closures-interview-questions/)  
+
 *Do you still struggle to understand closures? If so, ask me a question in a comment below!*
