@@ -10,7 +10,7 @@ recommended: ['simple-explanation-of-javascript-closures', 'simple-but-tricky-ja
 type: post
 ---
 
-## Questions 1: Are you a closure?
+## Questions 1: Is it a closure?
 
 Consider the following functions `clickHandler`, `immediate`, and `delayedReload`:
 
@@ -34,16 +34,17 @@ setTimeout(function delayedReload() {
 }, 1000);
 ```
 
-Which of 3 these functions are closures and why?
+Which of these 3 functions is a closure and why?
 
 <details>
-    <summary>Expand answer</summary>
-    
-    Let's see the answer.
+  <summary>Expand answer</summary>
 
-```javascript
-const t = 1;
-```
+
+1) `clickHandler` *is a closure* because it accesses the variable `countClicks` from the outer scope.  
+2) `immediate` *is not a closure* because it doesn't access any variables from the outer scope. 
+3) `delayedReload` *is a closure* because it accesses the global variable `location`.  
+
+A simple rule to identifying a closure is checking whether the function accesses variables from the outer scopes.  
 
 </details>
 
@@ -159,7 +160,7 @@ stack.items; // => undefined
 Write a function `multiply()`:
 
 ```javascript
-function multiply(number) {
+function multiply(number1, number2) {
   // Write your code here...
 }
 ```
