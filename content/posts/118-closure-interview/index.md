@@ -1,14 +1,29 @@
 ---
-title: "7 Interview Questions on JavaScript Closure. Can You Answer Them?"
+title: "7 Interview Questions on JavaScript Closures. Can You Answer Them?"
 description: "Can you answer these 7 interview questions regarding the closure concept in JavaScript?"
 published: "2021-02-09T12:00Z"
 modified: "2021-02-09T12:00Z"
-thumbnail: "./images/cover.jpg"
+thumbnail: "./images/cover-5.jpg"
 slug: javascript-closure-interview-questions
 tags: ['javascript', 'closure', 'interview']
 recommended: ['simple-explanation-of-javascript-closures', 'simple-but-tricky-javascript-interview-questions']
 type: post
 ---
+
+Don't underestimate the importance of knowing well closures.  
+
+If you're preparing for a JavaScript coding interview, there's a good chance you'll be asked about the concept of closures in JavaScript.  
+
+In this post, I compiled a list of 7 interesting, practical and increasingly challenging questions on JavaScript closures. 
+
+Take a pencil and a piece of paper, and try to solve these problems without looking at the answers. In my estimation, you would need about 30-40 minutes.  
+
+*If you need a refresh on closures, I recommend checking my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).*  
+
+Have fun!
+
+```toc
+```
 
 ## Questions 1: Is it a closure?
 
@@ -49,7 +64,7 @@ A simple rule to identifying a closure is checking whether the function accesses
 </details>
 
 
-## Questions 2: Clashing params
+## Questions 2: Confusing params
 
 What will log to console the following code snippet:
 
