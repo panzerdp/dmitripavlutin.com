@@ -10,13 +10,13 @@ recommended: ['simple-explanation-of-javascript-closures', 'simple-but-tricky-ja
 type: post
 ---
 
-Don't underestimate the importance of knowing well closures.  
+Don't underestimate the importance of knowing closures.  
 
-If you're preparing for a JavaScript coding interview, there's a good chance you'll be asked about the concept of closures in JavaScript.  
+If you're preparing for a JavaScript coding interview, there's a good chance you're going to get asked about the concept of closures.  
 
-In this post, I compiled a list of 7 interesting, practical and increasingly challenging questions on JavaScript closures. 
+I compiled a list of 7 practical and increasingly challenging questions on JavaScript closures. 
 
-Take a pencil and a piece of paper, and try to solve these problems without looking at the answers. In my estimation, you would need about 30 minutes.  
+Take a pencil and a piece of paper, and try to answer the questions without looking at the answers. In my estimation, you would need about 30 minutes.  
 
 *If you need a refresh on closures, I recommend checking my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).*  
 
@@ -57,12 +57,11 @@ Which of these 3 functions is a closure and why?
 
 1) `clickHandler` *is a closure* because it accesses the variable `countClicks` from the outer scope.  
 2) `immediate` *is not a closure* because it doesn't access any variables from the outer scope. 
-3) `delayedReload` *is a closure* because it accesses the global variable `location`.  
+3) `delayedReload` *is a closure* because it accesses the global variable `location`. 
 
 A simple rule to identifying a closure is checking whether the function accesses variables from the outer scopes.  
 
 </details>
-
 
 ## Questions 2: Confusing params
 
@@ -79,11 +78,11 @@ What will log to console the following code snippet:
 <details>
   <summary>Expand answer</summary>
 
-`0` is logged to console. [Try the demo.](https://jsitor.com/_r8I1Do6L)  
+`0` is logged to the console. [Try the demo.](https://jsitor.com/_r8I1Do6L)  
 
-`immediateA` was invoked with argument `0`, thus `a` parameter inside the function has value `0`.  
+`immediateA` was invoked with argument `0` so `a` parameter inside the function has value `0`.  
 
-`immediateB` is a closure that captures `a` variable from the outer `immediateA` scope, where `a` is a parameter being `0`.  
+`immediateB` is a closure that captures `a` variable from the outer `immediateA` scope, where `a` is a parameter being `0`. Thus `console.log(a)` logs `0`.  
 
 </details>
 
@@ -105,15 +104,15 @@ let count = 0;
 <details>
   <summary>Expand answer</summary>
 
-`1` and `0` is logged to console. [Try the demo.](https://jsitor.com/3c9T0QMAG)
+`1` and `0` is logged to the console. [Try the demo.](https://jsitor.com/3c9T0QMAG)
 
 The first statement `let count = 0` declares a variable `count` in the outermost scope. 
 
-Because `immediate()` is a closure, it captures the `count` variable from the outermost scope.  
+Because `immediate()` is a closure that captures the `count` variable from the outermost scope.  
 
 However, inside the conditional, another `let count = 1` declares a local variable `count`, which overwrites `count` from outer the scope. The first `console.log(count)` logs `1`.  
 
-The second `console.log(count)` logs `0`, since this `count` variable is captured from the outermost scope.  
+The second `console.log(count)` logs `0`, since here `count` variable is accessed from the outermost scope.  
 
 </details>
 
@@ -147,7 +146,7 @@ The second phase happens after 1000ms:
 
 1. `setTimeout()` executes the scheduled `log()` functions. `log()` reads the *current value* of variable `i`, which is `3`, and logs to console `3`.
 
-That's why the output to the console is `3`, `3` and `3`.  
+That's why `3`, `3`, and `3` are logged to the console.  
 
 *Side challenge: how would you fix this example to log `0`, `1`, `2` values? Write your solution in a comment below!*
 </details>
@@ -185,7 +184,7 @@ log(); // What is logged?
 
 `increment()` function has been called 3 times, effectively incrementing `count` to value `3`.  
 
-`message` variable exists within the scope of `createIncrement()` function. It's been initialized with value `'Count is 0'`. However, even if `count` variable has been increased a few times, `message` variable always holds `'Count is 0'`.  
+`message` variable exists within the scope of `createIncrement()` function. Its initial value is `'Count is 0'`. However, even if `count` variable has been incremented a few times, `message` variable always holds `'Count is 0'`.  
 
 `log()` function is a closure that captures `message` variable from the `createIncrement()` scope. `console.log(message)` logs `'Count is 0'` to console.  
 
@@ -193,7 +192,7 @@ log(); // What is logged?
 
 </details>
 
-## Questions 6: Restoring encapsulation
+## Questions 6: Restore encapsulation
 
 The following function `createStack()` creates instances of stack data structure:
 
@@ -218,7 +217,7 @@ stack.pop(); // => 5
 stack.items; // => [10]
 ```
 
-The problem with the above stack implementation is that it exposes the `stack.items` property, and thus anyone could modify this array directly. This breaks the encapsulation of stack implementation.   
+Anyone can modify items array directly because the above implementation exposes the `stack.items` property. That's a problem since it breaks the encapsulation of the stack.   
 
 Refactor the above stack implementation, using the concept of closure, such that there is no way to access `items` array outside of `createStack()` function scope:  
 
@@ -263,9 +262,9 @@ stack.items; // => undefined
 
 [Try the demo.](https://jsitor.com/Am60z1bCI) 
 
-Instead of having `items` a property on the exported object, `items` has been moved to a variable inside `createStack()` scope. 
+`items` has been moved to a variable inside `createStack()` scope.   
 
-Now, from the outside of `createStack()` scope there is no way to access or modify `items` variable. `items` is now a private variable, and the implementation of the stack is encapsulated.   
+Thanks to this change, from the outside of `createStack()` scope there is no way to access or modify `items` array. `items` is now a private variable, and the stack is encapsulated: only `push()` and `pop()` method are public.     
 
 `push()` and `pop()` methods, being closures, capture `items` variable from `createStack()` function scope. 
 
@@ -281,7 +280,9 @@ function multiply(number1, number2) {
 }
 ```
 
-that works as follows:
+If `multiply(num1, numb2)` is invoked with 2 arguments, it should return the multiplication of the 2 arguments. 
+
+But if invoked with 1 argument `const anotherFunc = multiply(num1)`, the function should return another function. The returned function when called `anotherFunc(num2)` performs the multiplication `num1 * num2`.  
 
 ```javascript
 multiply(4, 5); // => 20
@@ -319,16 +320,16 @@ double(11); // => 22
 
 If `number2` parameter is not `undefined`, then the function simply returns `number1 * number2`.  
 
-But if `number2` is `undefined`, it means that `multiply()` function has been called with one argument. In such case let's return a function `doMultiply()` that when later invoked performs the actual multiplication.  
+But if `number2` is `undefined`, it means that `multiply()` function has been called with one argument. In such a case let's return a function `doMultiply()` that when later invoked performs the actual multiplication.  
 
-Note that `doMultiply()` function is a closure, since it captures `number1` variable from `multiply()` scope.  
+`doMultiply()` is a closure because it captures `number1` variable from `multiply()` scope.  
 
 </details>
 
 ## Summary
 
-If you answered 5 or more questions out of 7, then you have a good understanding of closures and know how to use them.  
+You have a good understanding of closures if you answered 5 or more questions.  
 
-If you answered correctly less than 5 questions, then you need a good refresher on closures. I recommend checking my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).  
+But you need a good refresher on closures if you answered correctly less than 5 questions. I recommend checking my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).  
 
 Ready for a new challenge? Try to solve the [7 Simple but Tricky JavaScript Interview Questions](/simple-but-tricky-javascript-interview-questions/).
