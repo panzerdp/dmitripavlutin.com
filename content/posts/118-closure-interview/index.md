@@ -4,7 +4,7 @@ description: "Can you answer these 7 interview questions on the closure concept 
 published: "2021-02-09T12:00Z"
 modified: "2021-02-09T12:00Z"
 thumbnail: "./images/cover-5.jpg"
-slug: javascript-closure-interview-questions
+slug: javascript-closures-interview-questions
 tags: ['javascript', 'closure', 'interview']
 recommended: ['simple-explanation-of-javascript-closures', 'simple-but-tricky-javascript-interview-questions']
 type: post
@@ -79,7 +79,7 @@ What will log to console the following code snippet:
 <details>
   <summary>Expand answer</summary>
 
-`0` is logged to console.
+`0` is logged to console. [Try the demo.](https://jsitor.com/_r8I1Do6L)  
 
 `immediateA` was invoked with argument `0`, thus `a` parameter inside the function has value `0`.  
 
@@ -105,7 +105,7 @@ let count = 0;
 <details>
   <summary>Expand answer</summary>
 
-`1` and `0` is logged to console.  
+`1` and `0` is logged to console. [Try the demo.](https://jsitor.com/3c9T0QMAG)
 
 The first statement `let count = 0` declares a variable `count` in the outermost scope. 
 
@@ -132,7 +132,7 @@ for (var i = 0; i < 3; i++) {
 <details>
   <summary>Expand answer</summary>
 
-`3`, `3`, `3` is logged to console.  
+`3`, `3`, `3` is logged to console. [Try the demo.](https://jsitor.com/8kit3zMOT)
 
 The code snippet executes in 2 phases.  
 
@@ -149,6 +149,7 @@ The second phase happens after 1000ms:
 
 That's why the output to the console is `3`, `3` and `3`.  
 
+*Side challenge: how would you fix this example to log `0`, `1`, `2` values? Write your solution in a comment below!*
 </details>
 
 ## Questions 5: Right or wrong message
@@ -180,13 +181,15 @@ log(); // What is logged?
 <details>
   <summary>Expand answer</summary>
 
-`'Count is 0'` is logged to console.  
+`'Count is 0'` is logged to console. [Try the demo.](https://jsitor.com/W9goMvJt7)
 
 `increment()` function has been called 3 times, effectively incrementing `count` to value `3`.  
 
 `message` variable exists within the scope of `createIncrement()` function. It's been initialized with value `'Count is 0'`. However, even if `count` variable has been increased a few times, `message` variable always holds `'Count is 0'`.  
 
 `log()` function is a closure that captures `message` variable from the `createIncrement()` scope. `console.log(message)` logs `'Count is 0'` to console.  
+
+*Side challenge: how would you fix `log()` function to return the message having the actual `count` value? Write your solution in a comment below!*
 
 </details>
 
@@ -202,7 +205,7 @@ function createStack() {
       this.items.push(item);
     },
     pop() {
-      return this.items.unshift();
+      return this.items.pop();
     }
   };
 }
@@ -245,7 +248,7 @@ function createStack() {
       items.push(item);
     },
     pop() {
-      return items.unshift();
+      return items.pop();
     }
   };
 }
@@ -255,8 +258,10 @@ stack.push(10);
 stack.push(5);
 stack.pop(); // => 5
 
-stack.items; // undefined
+stack.items; // => undefined
 ```
+
+[Try the demo.](https://jsitor.com/Am60z1bCI) 
 
 Instead of having `items` a property on the exported object, `items` has been moved to a variable inside `createStack()` scope. 
 
@@ -268,7 +273,7 @@ Now, from the outside of `createStack()` scope there is no way to access or modi
 
 ## Questions 7: A touch of functional programming
 
-Write a function `multiply()`:
+Write a function `multiply()` that multiples 2 numbers:
 
 ```javascript
 function multiply(number1, number2) {
@@ -310,9 +315,11 @@ double(5);  // => 10
 double(11); // => 22
 ```
 
-If `number2` parameter is not `undefined`, then the function simply returns `number1` and `number2` multiplied.  
+[Try the demo.](https://jsitor.com/k-NwrN59K)
 
-But if `number2` is `undefined`, that means that `multiply()` function has been called with one argument. In such case let's return a function `doMultiply()` that when later invoked performs the actual multiplication.  
+If `number2` parameter is not `undefined`, then the function simply returns `number1 * number2`.  
+
+But if `number2` is `undefined`, it means that `multiply()` function has been called with one argument. In such case let's return a function `doMultiply()` that when later invoked performs the actual multiplication.  
 
 Note that `doMultiply()` function is a closure, since it captures `number1` variable from `multiply()` scope.  
 
