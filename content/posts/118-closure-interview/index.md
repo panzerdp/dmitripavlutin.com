@@ -10,13 +10,11 @@ recommended: ['simple-explanation-of-javascript-closures', 'simple-but-tricky-ja
 type: post
 ---
 
-Don't underestimate the importance of knowing closures.  
-
-During a JavaScript coding interview there's a good chance you'll get asked about the concept of closures.  
+Every JavaScript developer must know what a closure is. During a JavaScript coding interview there's a good chance you'll get asked about the concept of closures.  
 
 I compiled a list of 7 interesting and increasingly challenging questions on JavaScript closures. 
 
-Take a pencil and a piece of paper, and try to answer the questions without looking at the answers. In my estimation, you would need about 30 minutes.  
+Take a pencil and a piece of paper, and try to answer the questions without looking at the answers, or running the code. In my estimation, you would need about 30 minutes.  
 
 Have fun!
 
@@ -54,12 +52,11 @@ Which of these 3 functions is a closure and why?
 <details>
   <summary>Expand answer</summary>
 
+A simple rule to identifying a closure is checking whether the function accesses variables from the outer scopes.  
 
 1) `clickHandler` *is a closure* because it accesses the variable `countClicks` from the outer scope.  
 2) `immediate` *is not a closure* because it doesn't access any variables from the outer scope. 
-3) `delayedReload` *is a closure* because it accesses the global variable `location`. 
-
-A simple rule to identifying a closure is checking whether the function accesses variables from the outer scopes.  
+3) `delayedReload` *is a closure* because it accesses the global variable `location` being accessed from the global scope (aka the outermost scope).   
 
 </details>
 
@@ -80,9 +77,9 @@ What will log to console the following code snippet:
 
 `0` is logged to the console. [Try the demo.](https://jsitor.com/_r8I1Do6L)  
 
-`immediateA` was invoked with argument `0` so `a` parameter inside the function has value `0`.  
+`immediateA` is called with the argument `0`, thus `a` parameter is `0`.  
 
-`immediateB` is a closure that captures `a` variable from the outer `immediateA` scope, where `a` is a parameter being `0`. Thus `console.log(a)` logs `0`.  
+`immediateB` function, being nested into `immediateA` function, is a closure that captures `a` variable from the outer `immediateA` scope, where `a` is `0`. Thus `console.log(a)` logs `0`.  
 
 </details>
 
@@ -106,13 +103,13 @@ let count = 0;
 
 `1` and `0` is logged to the console. [Try the demo.](https://jsitor.com/3c9T0QMAG)
 
-The first statement `let count = 0` declares a variable `count` in the outermost scope. 
+The first statement `let count = 0` declares a variable `count`.  
 
-Because `immediate()` is a closure that captures the `count` variable from the outermost scope.  
+`immediate()` is a closure that captures the `count` variable from the outer scope. Inside of the `immediate()` function scope `count` is `0`.  
 
 However, inside the conditional, another `let count = 1` declares a local variable `count`, which overwrites `count` from outer the scope. The first `console.log(count)` logs `1`.  
 
-The second `console.log(count)` logs `0`, since here `count` variable is accessed from the outermost scope.  
+The second `console.log(count)` logs `0`, since here `count` variable is accessed from the outer scope.  
 
 </details>
 
@@ -215,9 +212,12 @@ stack.push(5);
 stack.pop(); // => 5
 
 stack.items; // => [10]
+stack.items = [10, 100, 1000]; // Encapsulation broken!
 ```
 
-Anyone can modify items array directly because the above implementation exposes the `stack.items` property. That's a problem since it breaks the encapsulation of the stack: only `push()` and `pop()` methods should be public.     
+The stack works as expected, but with one small problem. Anyone can modify items array directly because `stack.items` property is exposed. 
+
+That's an issue since it breaks the encapsulation of the stack: normally only `push()` and `pop()` methods should be public, but `stack.items` shouldn't be accessible.      
 
 Refactor the above stack implementation, using the concept of closure, such that there is no way to access `items` array outside of `createStack()` function scope:  
 
@@ -264,7 +264,7 @@ stack.items; // => undefined
 
 `items` has been moved to a variable inside `createStack()` scope.   
 
-Thanks to this change, from the outside of `createStack()` scope there is no way to access or modify `items` array. `items` is now a private variable, and the stack is encapsulated: only `push()` and `pop()` method are public.     
+Thanks to this change, from the outside of `createStack()` scope, there is no way to access or modify `items` array. `items` is now a private variable, and the stack is encapsulated: only `push()` and `pop()` method are public.     
 
 `push()` and `pop()` methods, being closures, capture `items` variable from `createStack()` function scope. 
 
@@ -328,8 +328,9 @@ But if `number2` is `undefined`, it means that `multiply()` function has been ca
 
 ## Summary
 
-You have a good understanding of closures if you answered 5 or more questions.  
+After answering the questions by yourself, open the post answers and compare:  
 
-But you need a good refresher on closures if you answered correctly less than 5 questions. I recommend checking my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).  
+* You have a good understanding of closures if you answered 5 or more questions  
+* But you need a good refresher on closures if you answered correctly less than 5 questions. I recommend checking my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).  
 
 Ready for a new challenge? Try to solve the [7 Simple but Tricky JavaScript Interview Questions](/simple-but-tricky-javascript-interview-questions/).
