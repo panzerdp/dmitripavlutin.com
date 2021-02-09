@@ -1,8 +1,8 @@
 ---
 title: "7 Interview Questions on JavaScript Closures. Can You Answer Them?"
 description: "Can you answer these 7 interview questions on the closure concept in JavaScript?"
-published: "2021-02-09T12:00Z"
-modified: "2021-02-09T12:00Z"
+published: "2021-02-09T11:30Z"
+modified: "2021-02-09T11:30Z"
 thumbnail: "./images/cover-5.jpg"
 slug: javascript-closures-interview-questions
 tags: ['javascript', 'closure', 'interview']
