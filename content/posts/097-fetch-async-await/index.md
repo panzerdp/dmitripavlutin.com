@@ -2,7 +2,7 @@
 title: "How to Use Fetch with async/await"
 description: "How to use fetch() with async/await syntax in JavaScript: fetch JSON data, handle errors, make parallel requests, cancel and intercept requests."
 published: "2020-09-15T08:40Z"
-modified: "2020-12-04T12:30Z"
+modified: "2021-02-10T19:30Z"
 thumbnail: "./images/cover-4.png"
 slug: javascript-fetch-async-await
 tags: ['fetch', 'async await']
@@ -10,16 +10,16 @@ recommended: ['javascript-async-await', 'react-fetch-lifecycle-methods-hooks-sus
 type: post
 ---
 
-The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) has become the native way to fetch resources in Frontend applications. While `fetch()` is generally easy to use, you should be aware of a couple of nuances.  
+The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is the default tool to make network in web applications. While `fetch()` is generally easy to use, there some nuances to be aware of.  
 
-In this post, I'll show you the common scenarios of how to use Fetch API with `async/await` syntax. You'll understand how to fetch data, handle fetch errors, cancel a fetch request, and more.  
+In this post, you'll find the common scenarios of how to use `fetch()` with `async/await` syntax. You'll understand how to fetch data, handle fetch errors, cancel a fetch request, and more.  
 
 ```toc
 ```
 
 ## 1. Intro to *fetch()*
 
-The Fetch API accesses resources across the network. You can make HTTP requests (`GET`, `POST`), download, and upload files.  
+The Fetch API accesses resources across the network. You can make HTTP requests (using `GET`, `POST` and other methods), download, and upload files.  
 
 To start a request, call the special function `fetch()`:
 
@@ -29,10 +29,10 @@ const response = await fetch(resource[, options]);
 
 which accepts 2 arguments:
 
-* `resource`: a URL string, or a [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) object  
-* `options`: a configuration object with properties like `method` (`'GET'`, `'POST'`), `headers`, `body`, `credentials`, [and more](https://javascript.info/fetch-api).  
+* `resource`: the URL string, or a [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) object  
+* `options`: the configuration object with properties like `method`, `headers`, `body`, `credentials`, [and more](https://javascript.info/fetch-api).  
 
-Executing `fetch()` starts a request and returns a promise. When the request completes, the promise is resolved with the [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object. If the request fails due to some network problems, the promise is rejected.    
+`fetch()` starts a request and returns a promise. When the request completes, the promise is resolved with the [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object. If the request fails due to some network problems, the promise is rejected.    
 
 `async/await` syntax fits great with `fetch()` because it simplifies the work with promises.      
 
@@ -54,9 +54,9 @@ When the request completes, `response` is assigned with the response object of t
 
 ## 2. Fetching JSON
 
-The `Response` object, returned by the `await fetch()`, is a generic placeholder for multiple data formats.  
+The `response` object, returned by the `await fetch()`, is a generic placeholder for multiple data formats.  
 
-Here's how you can extract the JSON object from a fetch response:
+For example, you can extract the JSON object from a fetch response:
 
 ```javascript {3}
 async function fetchMoviesJSON() {
@@ -72,12 +72,12 @@ fetchMoviesJSON().then(movies => {
 
 `response.json()` is a method on the Response object that lets you extract a JSON object from the response. The method returns a promise, so you have to wait for the JSON: `await response.json()`.
 
-The [response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object offers a lot of useful methods (all returning promises):
+The [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object offers a lot of useful methods (all returning promises):
 
 * `response.json()` returns a promise resolved to a JSON object
 * `response.text()` returns a promise resolved to raw text
 * `response.formData()` returns a promise resolved to [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData)
-* `response.blob()` returns a promise resolved to a [Blog](https://developer.mozilla.org/en-US/docs/Web/API/Blob) (a file-like object of raw data)
+* `response.blob()` returns a promise resolved to a [Blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob) (a file-like object of raw data)
 * `response.arrayBuffer()()` returns a promise resolved to an [ArryBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) (raw generic binary data)
 
 ## 3. Handling fetch errors
@@ -155,17 +155,15 @@ C) Finally, if you need to cancel the request, just call `controller.abort()` me
 
 For example, let's implement 2 buttons that control a fetch request. Clicking the button *Fetch movies* starts a `fetch()` request, while clicking *Cancel fetch* aborts the request in progress:
 
-```javascript{8,19}
+```javascript{4,7,17}
 let controller = null;
 
 fetchMoviesButton.addEventListener('click', async () => {
   controller = new AbortController();
   try {
-    console.log('Request in progress...');
     const response = await fetch('/movies', { 
       signal: controller.signal 
     });
-    console.log('Fetched movies: ', await response.json());
   } catch (error) {
     console.log('Fetch error: ', error);
   }
@@ -217,9 +215,9 @@ fetchMoviesAndCategories().then(({ movies, categories }) => {
 
 ## 6. Intercepting fetch requests
 
-Sometimes you need to do work before sending the request, or after receiving the response &mdash; the interception.  
+Sometimes you need to do work before sending the request, or after receiving the response &mdash; to perform an interception.  
 
-An example of interception is [Handling of fetch errors](#3-handling-fetch-errors): throwing an error if the response status is not within the range `200` to `299`.  
+An example of interception is [handling of fetch errors](#3-handling-fetch-errors): throwing an error if the response status is not within the range `200` to `299`.  
 
 `fetch()` API doesn't provide any functionality to intercept the requests. That's OK &mdash; `fetch()` API is designed to be simple.  
 
@@ -329,9 +327,9 @@ const fetcher =
 
 ## 7. Summary
 
-Calling `fetch()` starts a request and returns a promise. When the request completes, the promise resolves to the response object. From the response object, you can extract data in the format you need: JSON, raw text, Blob. 
+Calling `fetch()` starts a request and returns a promise. When the request completes, the promise resolves to the response object. From the response object you can extract data in the format you need: JSON, raw text, Blob. 
 
-Because `fetch()` returns a promise, you can simplify the code by using the `async/await` syntax.  
+Because `fetch()` returns a promise, you can simplify the code by using the `async/await` syntax: `response = await fetch()`.    
 
 You've found out how to use `fetch()` accompanied with `async/await` to fetch JSON data, handle fetching errors, cancel a request, perform parallel requests, and how to intercept the requests using decorators.  
 
