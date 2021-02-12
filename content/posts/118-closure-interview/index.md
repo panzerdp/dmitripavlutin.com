@@ -1,6 +1,6 @@
 ---
 title: "7 Interview Questions on JavaScript Closures. Can You Answer Them?"
-description: "Can you answer these 7 interview questions on the closure concept in JavaScript?"
+description: "I compiled a list of 7 interesting and increasingly challenging questions on JavaScript closures. Can you answer them?"
 published: "2021-02-09T11:30Z"
 modified: "2021-02-09T11:30Z"
 thumbnail: "./images/cover-5.jpg"
