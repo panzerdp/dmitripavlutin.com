@@ -34,7 +34,7 @@ However, if you've used `fetch()` in your web application, soon you would have n
 
 For example, as shown in the above code snippet, you have to manually extract the JSON object from the response: `moviesJson = await response.json()`. Doing it one time &mdash; not a problem. But if your application does many requests, extracting everything time the JSON object using `await response.json()` is tedious.  
 
-That's why is tempting to use a 3rd party library, like [axios](https://github.com/axios/axios), that greatly simplifies the handling of requests. Consider the same fetching of movies using `axios`:
+As result it's tempting to use a 3rd party library, like [axios](https://github.com/axios/axios), that greatly simplifies the handling of requests. Consider the same fetching of movies using `axios`:
 
 ```javascript
 async function executeRequest() {
@@ -48,8 +48,12 @@ executeRequest();
 
 `moviesJson = await axios('/movies.json')` returns the actual JSON response. You don't have to manually extract the JSON like `fetch()` requires you to do.  
 
-But using a helper library like `axios` brings its own set of problems. First, it *increases the bundle size* of your web application. Secondly, you depend on the quality of the 3rd party library: you get all the benefits, but also you *get all the bugs*. In other words, your application couples with that library.   
+But... using a helper library like `axios` brings its own set of problems. 
 
-Alternatively to using `axios`, I'm going to show you how to apply the decorator pattern and increase the flexibility and possibilities of `fetch()` API. 
+First, it *increases the bundle size* of your web application. Secondly, your application couples with the 3rd party library: you get all the benefits of that library, but also you *get all its bugs*.  
+
+I purpose a different approach that takes the best from both worlds &mdash; use the decorator pattern to increase the easy of use and flexibility of `fetch()` API. 
+
+Let's see in the next section how to do that.  
 
 ## 2. Decorated fetch()
