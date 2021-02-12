@@ -10,7 +10,7 @@ recommended: ['javascript-fetch-async-await', 'timeout-fetch-request']
 type: post
 ---
 
-## 1. fetch() is good, but I want better
+## 1. fetch() is good, but you want better
 
 `fetch()` API lets you perform network requests in web applications.   
 
@@ -48,3 +48,8 @@ executeRequest();
 
 `moviesJson = await axios('/movies.json')` returns the actual JSON response. You don't have to manually extract the JSON like `fetch()` requires you to do.  
 
+But using a helper library like `axios` brings its own set of problems. First, it *increases the bundle size* of your web application. Secondly, you depend on the quality of the 3rd party library: you get all the benefits, but also you *get all the bugs*. In other words, your application couples with that library.   
+
+Alternatively to using `axios`, I'm going to show you how to apply the decorator pattern and increase the flexibility and possibilities of `fetch()` API. 
+
+## 2. Decorated fetch()
