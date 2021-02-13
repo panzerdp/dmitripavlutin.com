@@ -52,8 +52,6 @@ Which of these 3 functions close over outer scope variables?
 <details>
   <summary>Expand answer</summary>
 
-A simple rule to identifying a closure is checking whether the function accesses variables from the outer scopes.  
-
 1) `clickHandler` *closes* over the variable `countClicks` from the outer scope.  
 2) `immediate` *doesn't close* because it doesn't access any variables from the outer scope. 
 3) `delayedReload` *closes* over the global variable `location` being accessed from the global scope (aka the outermost scope).   
