@@ -54,6 +54,92 @@ First, it *increases the bundle size* of your web application. Secondly, your ap
 
 I purpose a different approach that takes the best from both worlds &mdash; use the decorator pattern to increase the easy of use and flexibility of `fetch()` API. 
 
-Let's see in the next section how to do that.  
+Let's see in the next sections how to do that.  
 
-## 2. Decorated fetch()
+## 2. Preparing the Fetcher interface
+
+What's great about the decorator pattern is that it lets you add funcionality on top of some base functionality (decorate) in a flexible and loosely coupled way.  
+
+If you aren't familiar with the decorator pattern, I suggest you to pause and read the [decorator pattern explanation](https://refactoring.guru/design-patterns/decorator).  
+
+Applying the decorator to enhance the `fetch()` requires a few simple steps.  
+
+The first step is to declare an abstract interface named `Fetcher`:
+
+```typescript
+type ResponseWithData = Response & { data?: any };
+
+interface Fetcher {
+  fetch(input: RequestInfo, init?: RequestInit): Promise<ResponseWithData>;
+}
+```
+
+`Fetcher` interface has just one method that accepts exactly the same arguments and returns the same type of data as the regular `fetch()`.  
+
+The second step is implementing the basic fetcher class:
+
+```typescript
+class BasicFetcher implements Fetcher {
+   fetch(input: RequestInfo, init?: RequestInit): Promise<ResponseWithData> {
+     return fetch(input, init);
+   }
+}
+```
+
+`BasicFetcher` implements the `Fetcher` interface. 
+
+Its one method `BasicFetcher.fetch()` simply invokes the regular `fetch()` function. Simple as is.  
+
+Let's use the basic fetcher class to fetch the list of movies:
+
+```typescript{1,4}
+const fetcher = new BasicFetcher();
+
+async function executeRequest() {
+  const response = await fetcher.fetch('/movies.json');
+  const moviesJson = await response.json();
+  console.log(moviesJson);
+}
+
+executeRequest(); 
+// logs [{ name: 'Heat' }, { name: 'Alien' }]
+```
+
+`const fetcher = new BasicFetcher()` creates an instance of the fetcher class. Then you can use `fetcher.fetch('/movies.json')` to fetch the movies JSON.  
+
+At this step, `BasicFetcher` class doesn't bring benefits. Moreover, things are more complicated because of a new interface and a new class! Wait a bit... you will see the magic happens when the decorators are introduced into action.  
+
+## 3. Introducing JSON extractor decorator
+
+The workhorse of the decorator pattern are the decorator classes. 
+
+The decorator class must conform to the `Fetcher` interface, wrap the decorated instance, as well introduce the additional functionality in the `fetch()` method.  
+
+Let's implement a decorator that extracts JSON data from the response object:
+
+```typescript
+class JsonExtractorFetcher implements Fetcher {
+  private decoratee: Fetcher;
+
+  constructor (decoratee: Fetcher) {
+    this.decoratee = decoratee;
+  }
+
+  async fetch(input: RequestInfo, init?: RequestInit): Promise<ResponseWithData> {
+    const response = await this.decoratee.fetch(input, init);
+    const json = await response.json();
+    response.data = json;
+    return response;
+  }
+}
+```
+
+Let's look closer at how `JsonExtractorFetcher` is constructed.  
+
+A) `JsonExtractorFetch` conforms to the `Fetcher` interface. That's really important.  
+
+B) `JsonExtractorFetch` has a private field `decoratee` that also conforms to the `Fetcher` interface. 
+
+C) Inside the `fetch()` method `this.decoratee.fetch(input, init)` the fetch method of the decoratee is invoked.  
+
+D) The payload of this decorator is to extract the JSON from the response. 
