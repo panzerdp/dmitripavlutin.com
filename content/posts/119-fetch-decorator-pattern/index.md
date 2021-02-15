@@ -70,8 +70,8 @@ The first step is to declare an abstract interface named `Fetcher`:
 type ResponseWithData = Response & { data?: any };
 
 interface Fetcher {
-  fetch(input: RequestInfo, init?: RequestInit): Promise<ResponseWithData>;
-}
+  run(input: RequestInfo, init?: RequestInit): Promise<ResponseWithData>;
+} 
 ```
 
 `Fetcher` interface has just one method that accepts exactly the same arguments and returns the same type of data as the regular `fetch()`.  
@@ -80,21 +80,19 @@ The second step is implementing the basic fetcher class:
 
 ```typescript
 class BasicFetcher implements Fetcher {
-  fetch(input: RequestInfo, init?: RequestInit): Promise<ResponseWithData> {
+  run(input: RequestInfo, init?: RequestInit): Promise<ResponseWithData> {
     return fetch(input, init);
   }
 }
 ```
 
-`BasicFetcher` implements the `Fetcher` interface. 
-
-Its one method `BasicFetcher.fetch()` simply invokes the regular `fetch()` function. Simple as is.  
+`BasicFetcher` implements the `Fetcher` interface. Its one method `run()` invokes the regular `fetch()` function. Simple as is.  
 
 Let's use the basic fetcher class to fetch the list of movies:
 
 ```typescript{1,5}
 const fetcher = new BasicFetcher();
-const decoratedFetch = fetcher.fetch(bind, fetcher);
+const decoratedFetch = fetcher.run(bind, fetcher);
 
 async function executeRequest() {
   const response = await decoratedFetch('/movies.json');
@@ -106,7 +104,7 @@ executeRequest();
 // logs [{ name: 'Heat' }, { name: 'Alien' }]
 ```
 
-`const fetcher = new BasicFetcher()` creates an instance of the fetcher class. `decoratedFetch = fetcher.fetch(bind, fetcher)` creates a bound method. Then you can use `decoratedFetch.fetch('/movies.json')` to fetch the movies JSON.  
+`const fetcher = new BasicFetcher()` creates an instance of the fetcher class. `decoratedFetch = fetcher.run(bind, fetcher)` creates a bound method. Then you can use `decoratedFetch.fetch('/movies.json')` to fetch the movies JSON.  
 
 At this step, `BasicFetcher` class doesn't bring benefits. Moreover, things are more complicated because of a new interface and a new class! Wait a bit... you will see the magic happens when the decorators are introduced into action.  
 
@@ -126,7 +124,7 @@ class JsonExtractorFetcher implements Fetcher {
     this.decoratee = decoratee;
   }
 
-  async fetch(input: RequestInfo, init?: RequestInit): 
+  async run(input: RequestInfo, init?: RequestInit): 
     Promise<ResponseWithData> {
     const response = await this.decoratee.fetch(input, init);
     const json = await response.json();
@@ -150,7 +148,7 @@ Now let's compose decorate the `BasicFetcher` with the `JsonExtractorFetcher` de
 const fetcher = new JsonExtractorFetcher(
   new BasicFetcher();
 );
-const decoratedFetch = fetcher.fetch(bind, fetcher);
+const decoratedFetch = fetcher.run(bind, fetcher);
 
 async function executeRequest() {
   const { data } = await decoratedFetch('/movies.json');
@@ -167,3 +165,4 @@ Now, instead of extracting manually the JSON data from the response, you can acc
 
 What's great about the decorator pattern is that you can decorate with as many decorators as you want.  
 
+`fetch()` API unfortunately doesn't 
