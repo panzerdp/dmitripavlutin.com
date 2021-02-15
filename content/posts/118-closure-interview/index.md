@@ -215,7 +215,7 @@ stack.items = [10, 100, 1000]; // Encapsulation broken!
 
 The stack works as expected, but with one small problem. Anyone can modify items array directly because `stack.items` property is exposed. 
 
-That's an issue since it breaks the encapsulation of the stack: normally only `push()` and `pop()` methods should be public, but `stack.items` shouldn't be accessible.      
+That's an issue since it breaks the encapsulation of the stack: only `push()` and `pop()` methods should be public, but `stack.items` or any other details shouldn't be accessible.  
 
 Refactor the above stack implementation, using the concept of closure, such that there is no way to access `items` array outside of `createStack()` function scope:  
 
