@@ -2,7 +2,7 @@
 title: "7 Interview Questions on JavaScript Closures. Can You Answer Them?"
 description: "I compiled a list of 7 interesting and increasingly challenging questions on JavaScript closures. Can you answer them?"
 published: "2021-02-09T11:30Z"
-modified: "2021-02-09T11:30Z"
+modified: "2021-02-15T10:20Z"
 thumbnail: "./images/cover-5.jpg"
 slug: javascript-closures-interview-questions
 tags: ['javascript', 'closure', 'interview']
@@ -47,14 +47,14 @@ setTimeout(function delayedReload() {
 }, 1000);
 ```
 
-Which of these 3 functions close over outer scope variables?
+Which of these 3 functions access outer scope variables?
 
 <details>
   <summary>Expand answer</summary>
 
-1) `clickHandler` *closes* over the variable `countClicks` from the outer scope.  
-2) `immediate` *doesn't close* because it doesn't access any variables from the outer scope. 
-3) `delayedReload` *closes* over the global variable `location` being accessed from the global scope (aka the outermost scope).   
+1) `clickHandler` *accesses* the variable `countClicks` from the outer scope.  
+2) `immediate` *doesn't access* any variables from the outer scope. 
+3) `delayedReload` *accesses* the global variable `location` from the global scope (aka the outermost scope).   
 
 </details>
 
