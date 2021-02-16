@@ -70,7 +70,10 @@ The first step is to declare an abstract interface named `Fetcher`:
 type ResponseWithData = Response & { data?: any };
 
 interface Fetcher {
-  run(input: RequestInfo, init?: RequestInit): Promise<ResponseWithData>;
+  run(
+    input: RequestInfo, 
+    init?: RequestInit
+  ): Promise<ResponseWithData>;
 } 
 ```
 
@@ -107,7 +110,11 @@ executeRequest();
 // logs [{ name: 'Heat' }, { name: 'Alien' }]
 ```
 
-`const fetcher = new BasicFetcher()` creates an instance of the fetcher class. `decoratedFetch = fetcher.run.bind(fetcher)` creates a bound method. Then you can use `decoratedFetch.fetch('/movies.json')` to fetch the movies JSON.  
+[Try the demo](https://codesandbox.io/s/basic-fetch-nm7qm?file=/src/index.ts)
+
+`const fetcher = new BasicFetcher()` creates an instance of the fetcher class. `decoratedFetch = fetcher.run.bind(fetcher)` creates a bound method. 
+
+Then you can use `decoratedFetch('/movies.json')` to fetch the movies JSON, exactly like using the regular `fetch()`.  
 
 At this step, `BasicFetcher` class doesn't bring benefits. Moreover, things are more complicated because of a new interface and a new class! Wait a bit... you will see the magic happens when the decorators are introduced into action.  
 
@@ -151,7 +158,7 @@ Now let's compose decorate the `BasicFetcher` with the `JsonFetcherDecorator` de
 
 ```typescript
 const fetcher = new JsonFetcherDecorator(
-  new BasicFetcher();
+  new BasicFetcher()
 );
 const decoratedFetch = fetcher.run.bind(fetcher);
 
@@ -163,6 +170,8 @@ async function executeRequest() {
 executeRequest(); 
 // logs [{ name: 'Heat' }, { name: 'Alien' }]
 ```
+
+[Try the demo](https://codesandbox.io/s/json-extractor-decorator-eyror?file=/src/index.ts)
 
 Now, instead of extracting manually the JSON data from the response, you can access the extracted data from `data` property of the response object.  
 
@@ -218,7 +227,7 @@ async function executeRequest() {
   try {
     const { data } = await decoratedFetch('/movies.json');
     console.log(data);
-  } catch (e) {
+  } catch (error) {
     // Timeouts if the request takes
     // longer than 8 seconds
     console.log(error.name);
@@ -230,7 +239,7 @@ executeRequest();
 // logs "AbortError"
 ```
 
-Now, if the request to `/movies.json` takes more than 8 seconds `decoratedFetch('/movies.json')` will throw an abort error.  
+[Try the demo](https://codesandbox.io/s/timeout-decorator-ibsg7?file=/src/index.ts). The request to `/movies.json` takes more than 8 seconds. `decoratedFetch('/movies.json')`, thanks to `TimeoutFetcherDecorator`, throws an error and `"AbortError"` is logged to console.
 
 ## 5. Summary
 
@@ -238,7 +247,7 @@ Now, if the request to `/movies.json` takes more than 8 seconds `decoratedFetch(
 
 To avoid the boilerplate, you might choose to use a more friendly library like `axios`. However, using a 3rd party library like `axios` increases your bundle size, as well you tightly couple with it.  
 
-An alternative solution is to apply the decorator pattern at the top of `fetch()`. You can make decorators for extracting automatically the JSON from the request, timeout the request, and much more. You can combine, add or remove decorators in the most flexible way.  
+An alternative solution is to apply the decorator pattern on top of `fetch()`. You can make decorators to extract the JSON from the request, timeout the request, and much more. You can combine, add or remove decorators anytime you want, without modifying the code that actually uses the decorated fetch.  
 
 Would you like to use the `fetch()` with the most common decorators? I created a [gist]() for you! Feel free to use it in your application.  
 
