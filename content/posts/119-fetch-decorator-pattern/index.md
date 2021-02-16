@@ -80,7 +80,10 @@ The second step is implementing the basic fetcher class:
 
 ```typescript
 class BasicFetcher implements Fetcher {
-  run(input: RequestInfo, init?: RequestInit): Promise<ResponseWithData> {
+  run(
+    input: RequestInfo, 
+    init?: RequestInit
+  ): Promise<ResponseWithData> {
     return fetch(input, init);
   }
 }
@@ -92,7 +95,7 @@ Let's use the basic fetcher class to fetch the list of movies:
 
 ```typescript{1,5}
 const fetcher = new BasicFetcher();
-const decoratedFetch = fetcher.run(bind, fetcher);
+const decoratedFetch = fetcher.run.bind(fetcher);
 
 async function executeRequest() {
   const response = await decoratedFetch('/movies.json');
@@ -104,11 +107,11 @@ executeRequest();
 // logs [{ name: 'Heat' }, { name: 'Alien' }]
 ```
 
-`const fetcher = new BasicFetcher()` creates an instance of the fetcher class. `decoratedFetch = fetcher.run(bind, fetcher)` creates a bound method. Then you can use `decoratedFetch.fetch('/movies.json')` to fetch the movies JSON.  
+`const fetcher = new BasicFetcher()` creates an instance of the fetcher class. `decoratedFetch = fetcher.run.bind(fetcher)` creates a bound method. Then you can use `decoratedFetch.fetch('/movies.json')` to fetch the movies JSON.  
 
 At this step, `BasicFetcher` class doesn't bring benefits. Moreover, things are more complicated because of a new interface and a new class! Wait a bit... you will see the magic happens when the decorators are introduced into action.  
 
-## 3. Introducing JSON extractor decorator
+## 3. The JSON extractor decorator
 
 The workhorse of the decorator pattern are the decorator classes. 
 
@@ -117,16 +120,18 @@ The decorator class must conform to the `Fetcher` interface, wrap the decorated 
 Let's implement a decorator that extracts JSON data from the response object:
 
 ```typescript
-class JsonExtractorFetcher implements Fetcher {
+class JsonFetcherDecorator implements Fetcher {
   private decoratee: Fetcher;
 
   constructor (decoratee: Fetcher) {
     this.decoratee = decoratee;
   }
 
-  async run(input: RequestInfo, init?: RequestInit): 
-    Promise<ResponseWithData> {
-    const response = await this.decoratee.fetch(input, init);
+  async run(
+    input: RequestInfo, 
+    init?: RequestInit
+  ): Promise<ResponseWithData> {
+    const response = await this.decoratee.run(input, init);
     const json = await response.json();
     response.data = json;
     return response;
@@ -134,21 +139,21 @@ class JsonExtractorFetcher implements Fetcher {
 }
 ```
 
-Let's look closer at how `JsonExtractorFetcher` is constructed.  
+Let's look closer at how `JsonFetcherDecorator` is constructed.  
 
-`JsonExtractorFetch` conforms to the `Fetcher` interface. That's really important because it allows to use multiple decorators.    
+`JsonFetcherDecorator` conforms to the `Fetcher` interface. That's really important because it allows to use multiple decorators.    
 
-`JsonExtractorFetch` has a private field `decoratee` that also conforms to the `Fetcher` interface. Inside the `fetch()` method `this.decoratee.fetch(input, init)` pefroms the actual fetch of data.  
+`JsonExtractorFetch` has a private field `decoratee` that also conforms to the `Fetcher` interface. Inside the `fetch()` method `this.decoratee.run(input, init)` pefroms the actual fetch of data.  
 
 Then `json = await response.json()` extracts the JSON data from the response. Finally `response.data = json` assigns to the response object the extracted JSON data.  
 
-Now let's compose decorate the `BasicFetcher` with the `JsonExtractorFetcher` decorator, and simplify the use of `fetch()`:
+Now let's compose decorate the `BasicFetcher` with the `JsonFetcherDecorator` decorator, and simplify the use of `fetch()`:
 
 ```typescript
-const fetcher = new JsonExtractorFetcher(
+const fetcher = new JsonFetcherDecorator(
   new BasicFetcher();
 );
-const decoratedFetch = fetcher.run(bind, fetcher);
+const decoratedFetch = fetcher.run.bind(fetcher);
 
 async function executeRequest() {
   const { data } = await decoratedFetch('/movies.json');
@@ -161,8 +166,80 @@ executeRequest();
 
 Now, instead of extracting manually the JSON data from the response, you can access the extracted data from `data` property of the response object.  
 
-## 4. Introducing request timeout decorator
+## 4. The request timeout decorator
 
-What's great about the decorator pattern is that you can decorate with as many decorators as you want.  
+`fetch()` API by default timeouts the requests at the time specified by the browser. In Chrome a network request timeouts at 300 seconds, while in Firefox at 90 seconds.   
 
-`fetch()` API unfortunately doesn't 
+Users can wait up to 8 seconds for simple requests to complete. That's why you need to set a timeout on the network requests and inform the user after 8 seconds about the network problems.  
+
+What's great about the decorator pattern is that you can decorate your basic implementation with as many decorators as you want! So, let's create a timeout decorator for the fetch requests.  
+
+```typescript
+const TIMEOUT = 8000; // 8 seconds
+
+class TimeoutFetcherDecorator implements Fetcher {
+  private decoratee: Fetcher;
+
+  constructor(decoratee: Fetcher) {
+    this.decoratee = decoratee;
+  }
+
+  async run(
+    input: RequestInfo, 
+    init?: RequestInit
+  ): Promise<ResponseWithData> {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), TIMEOUT);
+    const response = await this.decoratee.run(input, {
+      ...init,
+      signal: controller.signal
+    });
+    clearTimeout(id);
+    return response;
+  }
+}
+```
+
+`TimeoutFetcherDecorator` is a decorator that implementes the `Fetcher` interface.  
+
+Inside the `run()` method of `TimeoutFetcherDecorator`: the abort controller is used to abort the request if it hasn't been completed in 8 seconds.  
+
+Now let's put this decorator to work:
+
+```typescript
+const fetcher = new TimeoutFetcherDecorator(
+  new JsonFetcherDecorator(
+    new BasicFetcher()
+  )
+);
+const decoratedFetch = fetcher.run.bind(fetcher);
+
+async function executeRequest() {
+  try {
+    const { data } = await decoratedFetch('/movies.json');
+    console.log(data);
+  } catch (e) {
+    // Timeouts if the request takes
+    // longer than 8 seconds
+    console.log(error.name);
+  }
+}
+
+executeRequest(); 
+// if the request takes more than 8 seconds
+// logs "AbortError"
+```
+
+Now, if the request to `/movies.json` takes more than 8 seconds `decoratedFetch('/movies.json')` will throw an abort error.  
+
+## 5. Summary
+
+`fetch()` API provides the basic functionality to perform fetch requests. But usually, you need more than that. Using `fetch()` solely forces you to extract manually the JSON data from the request, configure the timeout, and more.  
+
+To avoid the boilerplate, you might choose to use a more friendly library like `axios`. However, using a 3rd party library like `axios` increases your bundle size, as well you tightly couple with it.  
+
+An alternative solution is to apply the decorator pattern at the top of `fetch()`. You can make decorators for extracting automatically the JSON from the request, timeout the request, and much more. You can combine, add or remove decorators in the most flexible way.  
+
+Would you like to use the `fetch()` with the most common decorators? I created a [gist]() for you! Feel free to use it in your application.  
+
+*What other `fetch()` decorators might be useful? Write your implementation in a comment below! (please use TypeScript)*
