@@ -14,7 +14,7 @@ type: post
 
 `fetch()` API lets you perform network requests in web applications.   
 
-`fetch()` usage is pretty straigforward: invoke `fetch('/movies.json')` to start the request. When the request completes, 
+`fetch()` usage is pretty straightforward: invoke `fetch('/movies.json')` to start the request. When the request completes, 
 you get a [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object from where you can extract data.  
 
 Here's a simple example of how to fetch some movies, in JSON format, from `/movies.json` URL:
@@ -52,15 +52,15 @@ But... using a helper library like `axios` brings its own set of problems.
 
 First, it *increases the bundle size* of your web application. Secondly, your application couples with the 3rd party library: you get all the benefits of that library, but also you *get all its bugs*.  
 
-I purpose a different approach that takes the best from both worlds &mdash; use the decorator pattern to increase the easy of use and flexibility of `fetch()` API. 
+I purpose a different approach that takes the best from both worlds &mdash; use the decorator pattern to increase the ease of use and flexibility of `fetch()` API. 
 
 Let's see in the next sections how to do that.  
 
 ## 2. Preparing the Fetcher interface
 
-What's great about the decorator pattern is that it lets you add funcionality on top of some base functionality (decorate) in a flexible and loosely coupled way.  
+What's great about the decorator pattern is that it lets you add functionality on top of some base functionality (decorate) in a flexible and loosely coupled way.  
 
-If you aren't familiar with the decorator pattern, I suggest you to pause and read the [decorator pattern explanation](https://refactoring.guru/design-patterns/decorator).  
+If you aren't familiar with the decorator pattern, I suggest reading the [decorator pattern explanation](https://refactoring.guru/design-patterns/decorator).  
 
 Applying the decorator to enhance the `fetch()` requires a few simple steps.  
 
@@ -77,7 +77,7 @@ interface Fetcher {
 } 
 ```
 
-`Fetcher` interface has just one method that accepts exactly the same arguments and returns the same type of data as the regular `fetch()`.  
+`Fetcher` interface has just one method that accepts the same arguments and returns the same type of data as the regular `fetch()`.  
 
 The second step is implementing the basic fetcher class:
 
@@ -116,11 +116,11 @@ executeRequest();
 
 Then you can use `decoratedFetch('/movies.json')` to fetch the movies JSON, exactly like using the regular `fetch()`.  
 
-At this step, `BasicFetcher` class doesn't bring benefits. Moreover, things are more complicated because of a new interface and a new class! Wait a bit... you will see the magic happens when the decorators are introduced into action.  
+At this step, `BasicFetcher` class doesn't bring benefits. Moreover, things are more complicated because of a new interface and a new class! Wait a bit... you will see the magic happens when the decorators are introduced into the action.  
 
 ## 3. The JSON extractor decorator
 
-The workhorse of the decorator pattern are the decorator classes. 
+The workhorse of the decorator pattern is the decorator classes. 
 
 The decorator class must conform to the `Fetcher` interface, wrap the decorated instance, as well introduce the additional functionality in the `fetch()` method.  
 
@@ -148,7 +148,7 @@ class JsonFetcherDecorator implements Fetcher {
 
 Let's look closer at how `JsonFetcherDecorator` is constructed.  
 
-`JsonFetcherDecorator` conforms to the `Fetcher` interface. That's really important because it allows to use multiple decorators.    
+`JsonFetcherDecorator` conforms to the `Fetcher` interface. That's important because it allows using multiple decorators.    
 
 `JsonExtractorFetch` has a private field `decoratee` that also conforms to the `Fetcher` interface. Inside the `fetch()` method `this.decoratee.run(input, init)` pefroms the actual fetch of data.  
 
@@ -209,7 +209,7 @@ class TimeoutFetcherDecorator implements Fetcher {
 }
 ```
 
-`TimeoutFetcherDecorator` is a decorator that implementes the `Fetcher` interface.  
+`TimeoutFetcherDecorator` is a decorator that implements the `Fetcher` interface.  
 
 Inside the `run()` method of `TimeoutFetcherDecorator`: the abort controller is used to abort the request if it hasn't been completed in 8 seconds.  
 
@@ -245,9 +245,9 @@ executeRequest();
 
 `fetch()` API provides the basic functionality to perform fetch requests. But usually, you need more than that. Using `fetch()` solely forces you to extract manually the JSON data from the request, configure the timeout, and more.  
 
-To avoid the boilerplate, you might choose to use a more friendly library like `axios`. However, using a 3rd party library like `axios` increases your bundle size, as well you tightly couple with it.  
+To avoid the boilerplate, you can use a more friendly library like `axios`. However, using a 3rd party library like `axios` increases the app bundle size, as well you tightly couple with it.  
 
-An alternative solution is to apply the decorator pattern on top of `fetch()`. You can make decorators to extract the JSON from the request, timeout the request, and much more. You can combine, add or remove decorators anytime you want, without modifying the code that actually uses the decorated fetch.  
+An alternative solution is to apply the decorator pattern on top of `fetch()`. You can make decorators that extract the JSON from the request, timeout the request, and much more. You can combine, add or remove decorators anytime you want, without modifying the code that uses the decorated fetch.  
 
 Would you like to use the `fetch()` with the most common decorators? I created a [gist]() for you! Feel free to use it in your application.  
 
