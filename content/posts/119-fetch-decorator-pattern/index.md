@@ -1,8 +1,8 @@
 ---
 title: "How to Greatly Enhance fetch() with the Decorator Pattern"
 description: "How to use the decorator pattern to enhance the possibilities and flexibily of fetch() API."
-published: "2021-02-16T12:00Z"
-modified: "2021-02-16T12:00Z"
+published: "2021-02-16T09:10Z"
+modified: "2021-02-16T09:10Z"
 thumbnail: "./images/cover.png"
 slug: enhance-fetch-with-decorator-pattern
 tags: ['fetch', 'decorator pattern', 'async await']
@@ -30,9 +30,7 @@ executeRequest();
 // logs [{ name: 'Heat' }, { name: 'Alien' }]
 ```
 
-However, if you've used `fetch()` in your web application, soon you would have noticed you have to write *lots of boilerplate*.  
-
-For example, as shown in the above code snippet, you have to manually extract the JSON object from the response: `moviesJson = await response.json()`. Doing it one time &mdash; not a problem. But if your application does many requests, extracting everything time the JSON object using `await response.json()` is tedious.  
+As shown in the above code snippet, you have to manually extract the JSON object from the response: `moviesJson = await response.json()`. Doing it one time &mdash; not a problem. But if your application does many requests, extracting everything time the JSON object using `await response.json()` is tedious.  
 
 As result it's tempting to use a 3rd party library, like [axios](https://github.com/axios/axios), that greatly simplifies the handling of requests. Consider the same fetching of movies using `axios`:
 
@@ -58,9 +56,9 @@ Let's see in the next sections how to do that.
 
 ## 2. Preparing the Fetcher interface
 
-What's great about the decorator pattern is that it lets you add functionality on top of some base functionality (decorate) in a flexible and loosely coupled way.  
+The decorator pattern is useful because it enables adding functionality  (in other words &mdash; decorate) on top of basic logic in a flexible and loosely coupled manner.  
 
-If you aren't familiar with the decorator pattern, I suggest reading the [decorator pattern explanation](https://refactoring.guru/design-patterns/decorator).  
+If you aren't familiar with the decorator pattern, I suggest reading about [how it works](https://refactoring.guru/design-patterns/decorator).  
 
 Applying the decorator to enhance the `fetch()` requires a few simple steps.  
 
@@ -116,13 +114,13 @@ executeRequest();
 
 Then you can use `decoratedFetch('/movies.json')` to fetch the movies JSON, exactly like using the regular `fetch()`.  
 
-At this step, `BasicFetcher` class doesn't bring benefits. Moreover, things are more complicated because of a new interface and a new class! Wait a bit... you will see the magic happens when the decorators are introduced into the action.  
+At this step, `BasicFetcher` class doesn't bring benefits. Moreover, things are more complicated because of a new interface and a new class! Wait a bit... you will see the great benefits when the decorators are introduced into the action.  
 
 ## 3. The JSON extractor decorator
 
-The workhorse of the decorator pattern is the decorator classes. 
+The workhorse of the decorator pattern is the decorator class. 
 
-The decorator class must conform to the `Fetcher` interface, wrap the decorated instance, as well introduce the additional functionality in the `fetch()` method.  
+The decorator class must conform to the `Fetcher` interface, wrap the decorated instance, as well introduce the additional functionality in the `run()` method.  
 
 Let's implement a decorator that extracts JSON data from the response object:
 
@@ -148,15 +146,15 @@ class JsonFetcherDecorator implements Fetcher {
 
 Let's look closer at how `JsonFetcherDecorator` is constructed.  
 
-`JsonFetcherDecorator` conforms to the `Fetcher` interface. That's important because it allows using multiple decorators.    
+`JsonFetcherDecorator` conforms to the `Fetcher` interface.  
 
-`JsonExtractorFetch` has a private field `decoratee` that also conforms to the `Fetcher` interface. Inside the `fetch()` method `this.decoratee.run(input, init)` pefroms the actual fetch of data.  
+`JsonExtractorFetch` has a private field `decoratee` that also conforms to the `Fetcher` interface. Inside the `run()` method `this.decoratee.run(input, init)` pefroms the actual fetch of data.  
 
-Then `json = await response.json()` extracts the JSON data from the response. Finally `response.data = json` assigns to the response object the extracted JSON data.  
+Then `json = await response.json()` extracts the JSON data from the response. Finally, `response.data = json` assigns to the response object the extracted JSON data.  
 
 Now let's compose decorate the `BasicFetcher` with the `JsonFetcherDecorator` decorator, and simplify the use of `fetch()`:
 
-```typescript
+```typescript{1-3,7}
 const fetcher = new JsonFetcherDecorator(
   new BasicFetcher()
 );
@@ -175,13 +173,15 @@ executeRequest();
 
 Now, instead of extracting manually the JSON data from the response, you can access the extracted data from `data` property of the response object.  
 
+By moving the JSON extractor to a decorator, now in every place you use `const { data } = decoratedFetch(URL)` you won't have to manually extract the JSON object.  
+
 ## 4. The request timeout decorator
 
 `fetch()` API by default timeouts the requests at the time specified by the browser. In Chrome a network request timeouts at 300 seconds, while in Firefox at 90 seconds.   
 
 Users can wait up to 8 seconds for simple requests to complete. That's why you need to set a timeout on the network requests and inform the user after 8 seconds about the network problems.  
 
-What's great about the decorator pattern is that you can decorate your basic implementation with as many decorators as you want! So, let's create a timeout decorator for the fetch requests.  
+What's great about the decorator pattern is that you can decorate your basic implementation with as many decorators as you want! So, let's create a timeout decorator for the fetch requests:  
 
 ```typescript
 const TIMEOUT = 8000; // 8 seconds
@@ -239,16 +239,22 @@ executeRequest();
 // logs "AbortError"
 ```
 
-[Try the demo](https://codesandbox.io/s/timeout-decorator-ibsg7?file=/src/index.ts). The request to `/movies.json` takes more than 8 seconds. `decoratedFetch('/movies.json')`, thanks to `TimeoutFetcherDecorator`, throws an error and `"AbortError"` is logged to console.
+[Try the demo](https://codesandbox.io/s/timeout-decorator-ibsg7?file=/src/index.ts) 
+
+In the demo, the request to `/movies.json` takes more than 8 seconds. 
+
+`decoratedFetch('/movies.json')`, thanks to `TimeoutFetcherDecorator`, throws a timeout error.  
+
+Now the basic fetcher is wrapped in 2 decorators: one extracts the JSON object, and another timeouts the request in 8 seconds. That greatly simplifies the use of `decoratedFetch()`: when invoking `decoratedFetch()` the decorators logic is working for you.  
 
 ## 5. Summary
 
-`fetch()` API provides the basic functionality to perform fetch requests. But usually, you need more than that. Using `fetch()` solely forces you to extract manually the JSON data from the request, configure the timeout, and more.  
+`fetch()` API provides the basic functionality to perform fetch requests. But you need more than that. Using `fetch()` solely forces you to extract manually the JSON data from the request, configure the timeout, and more.  
 
 To avoid the boilerplate, you can use a more friendly library like `axios`. However, using a 3rd party library like `axios` increases the app bundle size, as well you tightly couple with it.  
 
-An alternative solution is to apply the decorator pattern on top of `fetch()`. You can make decorators that extract the JSON from the request, timeout the request, and much more. You can combine, add or remove decorators anytime you want, without modifying the code that uses the decorated fetch.  
+An alternative solution is to apply the decorator pattern on top of `fetch()`. You can make decorators that extract the JSON from the request, timeout the request, and much more. You can combine, add or remove decorators anytime you want, without affecting the code that uses the decorated fetch.  
 
-Would you like to use the `fetch()` with the most common decorators? I created a [gist]() for you! Feel free to use it in your application.  
+Would you like to use the `fetch()` with the most common decorators? I created a [gist](https://gist.github.com/panzerdp/1312bcd5f455fa409d2aced844cad96f) for you! Feel free to use it in your application or even add more decorators for your own needs!  
 
 *What other `fetch()` decorators might be useful? Write your implementation in a comment below! (please use TypeScript)*
