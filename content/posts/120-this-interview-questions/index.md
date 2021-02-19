@@ -40,6 +40,24 @@ console.log(object.getMessage()); // What is logged?
 What logs to console the following code snippet:
 
 ```javascript
+function Pet(name) {
+  this.name = name;
+
+  this.getName = () => {
+    return this.name;
+  };
+}
+
+const cat = new Pet('Fluffy');
+
+console.log(cat.getName());    // What is logged?
+```
+
+## Question 3
+
+What logs to console the following code snippet:
+
+```javascript
 const object = {
   message: 'Hello, World!',
 
@@ -50,8 +68,6 @@ const object = {
 
 setTimeout(object.logMessage, 1000);
 ```
-
-## Question 3
 
 ## Question 4
 
