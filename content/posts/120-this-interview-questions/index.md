@@ -6,7 +6,7 @@ modified: "2021-02-23T12:00Z"
 thumbnail: "./images/cover.jpg"
 slug: javascript-this-interview-questions
 tags: ['javascript', 'this', 'interview']
-recommended: ['gentle-explanation-of-this-in-javascript', 'simple-but-tricky-javascript-interview-questions']
+recommended: ['gentle-explanation-of-this-in-javascript', 'javascript-closures-interview-questions']
 type: post
 ---
 
@@ -18,7 +18,10 @@ Since the best way to prepare for a coding interview is practice, in this post I
 
 *If you're not familiar with `this` keyword, I highly recommend studying well the post [Gentle Explanation of "this" in JavaScript](/gentle-explanation-of-this-in-javascript/).*  
 
-## Question 1
+```toc
+```
+
+## Question 1: Variable vs property
 
 What logs to console the following code snippet:
 
@@ -35,7 +38,7 @@ const object = {
 console.log(object.getMessage()); // What is logged?
 ```
 
-## Question 2
+## Question 2: A new cat
 
 What logs to console the following code snippet:
 
@@ -50,10 +53,10 @@ function Pet(name) {
 
 const cat = new Pet('Fluffy');
 
-console.log(cat.getName());    // What is logged?
+console.log(cat.getName()); // What is logged?
 ```
 
-## Question 3
+## Question 3: Delayed greeting
 
 What logs to console the following code snippet:
 
@@ -71,7 +74,7 @@ setTimeout(object.logMessage, 1000);
 
 ## Question 4
 
-## Question 5
+## Question 5: Greeting and farewell
 
 What logs to console the following code snippet:
 
@@ -92,27 +95,7 @@ console.log(object.greet());    // What is logged?
 console.log(object.farewell()); // What is logged?
 ```
 
-## Question 6
-
-What logs to console the following code snippet:
-
-```javascript
-var length = 4;
-function callback() {
-  console.log(this.length); // What is logged?
-}
-
-const object = {
-  length: 5,
-  method(callback) {
-    callback();
-  }
-};
-
-obj.method(callback, 1, 2);
-```
-
-## Questions 7
+## Question 6: Calling arguments
 
 What logs to console the following code snippet:
 
@@ -126,6 +109,26 @@ const object = {
   length: 5,
   method(callback) {
     arguments[0]();
+  }
+};
+
+obj.method(callback, 1, 2);
+```
+
+## Question 7: Tricky length
+
+What logs to console the following code snippet:
+
+```javascript
+var length = 4;
+function callback() {
+  console.log(this.length); // What is logged?
+}
+
+const object = {
+  length: 5,
+  method(callback) {
+    callback();
   }
 };
 

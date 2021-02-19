@@ -6,7 +6,7 @@ modified: '2019-11-21T10:15Z'
 thumbnail: './images/people-at-interview.jpg'
 slug: simple-but-tricky-javascript-interview-questions
 tags: ['javascript', 'closure', 'array', 'hoisting', 'interview']
-recommended: ['simple-explanation-of-javascript-closures', 'javascript-closure-interview-questions']
+recommended: ['javascript-this-interview-questions', 'javascript-closures-interview-questions']
 type: post
 ---
 
@@ -302,5 +302,7 @@ Follow the guide [JavaScript Variables Hoisting in Details](/javascript-hoisting
 You can think that some of the questions are useless for interviewing. I have the same feeling, especially regarding the [eagle eye test](#3-eagle-eye-test). Still, they could be asked.
 
 Anyways, many of these questions can truly assess if you are seasoned in JavaScript, like [the tricky closure](#5-the-classic-question-tricky-closure). If you have had difficulties to answer some while reading the post, it's a good indicator of what you must study next!
+
+Ready for a new challenge? Try to answer [7 Interview Questions on "this" keyword](javascript-this-interview-questions).
 
 *Is it fair to ask tricky questions during the interview? Let me know your opinion.*
