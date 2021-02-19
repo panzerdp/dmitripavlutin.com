@@ -38,6 +38,11 @@ const object = {
 console.log(object.getMessage()); // What is logged?
 ```
 
+<details>
+  <summary>Expand answer</summary>
+
+</details>
+
 ## Question 2: A new cat
 
 What logs to console the following code snippet:
@@ -56,6 +61,11 @@ const cat = new Pet('Fluffy');
 console.log(cat.getName()); // What is logged?
 ```
 
+<details>
+  <summary>Expand answer</summary>
+
+</details>
+
 ## Question 3: Delayed greeting
 
 What logs to console the following code snippet:
@@ -72,7 +82,31 @@ const object = {
 setTimeout(object.logMessage, 1000);
 ```
 
-## Question 4
+<details>
+  <summary>Expand answer</summary>
+
+</details>
+
+## Question 4: Artificial method
+
+How can you call `logMessage` function so that it logs `"Hello, World!"`?
+
+```javascript
+const object = {
+  message: 'Hello, World!'
+};
+
+function logMessage() {
+  console.log(this.message); // "Hello, World!"
+}
+
+// Write your code here...
+```
+
+<details>
+  <summary>Expand answer</summary>
+
+</details>
 
 ## Question 5: Greeting and farewell
 
@@ -95,6 +129,11 @@ console.log(object.greet());    // What is logged?
 console.log(object.farewell()); // What is logged?
 ```
 
+<details>
+  <summary>Expand answer</summary>
+
+</details>
+
 ## Question 6: Calling arguments
 
 What logs to console the following code snippet:
@@ -115,6 +154,11 @@ const object = {
 obj.method(callback, 1, 2);
 ```
 
+<details>
+  <summary>Expand answer</summary>
+
+</details>
+
 ## Question 7: Tricky length
 
 What logs to console the following code snippet:
@@ -134,3 +178,8 @@ const object = {
 
 obj.method(callback, 1, 2);
 ```
+
+<details>
+  <summary>Expand answer</summary>
+
+</details>
