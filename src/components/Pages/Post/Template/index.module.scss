@@ -52,7 +52,9 @@
     max-width: 100%;
   }
 
-
+  details summary {
+    outline: none;
+  }
 
   :global {
     .toc {
