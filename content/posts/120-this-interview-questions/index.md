@@ -1,6 +1,6 @@
 ---
 title: '7 Interview Questions on "this" keyword in JavaScript. Can You Answer Them?'
-description: 'A compilied list of 7 interesting and challenging interview questions on "this" keyword in JavaScript.'
+description: '7 interview questions to challenge your knowledge on "this" keyword in JavaScript.'
 published: "2021-02-23T12:00Z"
 modified: "2021-02-23T12:00Z"
 thumbnail: "./images/cover.jpg"
@@ -41,6 +41,11 @@ console.log(object.getMessage()); // What is logged?
 <details>
   <summary>Expand answer</summary>
 
+`'Hello, World!'` is logged to console.  
+
+`object.getMessage()` is a method invocation, that's why `this` inside the method equals `object`.  
+
+You can see also a variable declaration `const message = 'Hello, Earth!'` inside the method. This variable doesn't influence the value of `this.message`.  
 </details>
 
 ## Question 2: A new cat
