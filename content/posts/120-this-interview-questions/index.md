@@ -45,7 +45,7 @@ console.log(object.getMessage()); // What is logged?
 
 `object.getMessage()` is a method invocation, that's why `this` inside the method equals `object`.  
 
-You can see also a variable declaration `const message = 'Hello, Earth!'` inside the method. This variable doesn't influence the value of `this.message`.  
+There's also a variable declaration `const message = 'Hello, Earth!'` inside the method. The variable doesn't influence anyhow the value of `this.message`.  
 </details>
 
 ## Question 2: A new cat
@@ -56,18 +56,27 @@ What logs to console the following code snippet:
 function Pet(name) {
   this.name = name;
 
-  this.getName = () => {
-    return this.name;
-  };
+  this.getName = () => this.name;
 }
 
 const cat = new Pet('Fluffy');
 
 console.log(cat.getName()); // What is logged?
+
+const { getName } = cat;
+console.log(getName());     // What is logged?
 ```
 
 <details>
   <summary>Expand answer</summary>
+
+`'Fluffy'` and `'Fluffy'` is logged to console.  
+
+When a function is invoked as a constructor `new Pet('Fluffy')`, `this` inside the constructor function equals to the constructed object. Then `this.name = name` creates `name` property on the object having `'Fluffy'` value.  
+
+`this.getName = () => this.name` creates a method `getName` on the object. And since the arrow function is used, `this` inside the arrow function equals to `this` of the outer function (`Pet`).  
+
+Invoking `cat.getName()`, as well as `getName()`, returns `this.name` as `'Fluffy'`, where `this` is `cat`.  
 
 </details>
 
@@ -90,6 +99,16 @@ setTimeout(object.logMessage, 1000);
 <details>
   <summary>Expand answer</summary>
 
+After a delay of 1 second, `undefined` is logged to console.  
+
+While `setTimeout()` function uses the `object.logMessage` as a callback, still, it inovkes `object.logMessage` as a regular function, rather than a method.  
+
+And inside of a regular function `this` equals the global object, which is `window` in case of the browser environment.  
+
+That's why `console.log(this.message)` inside `logMessage` method actually logs `window.message`, which is `undefined`.  
+
+*Side challenge: how can you fix this code so that `'Hello, World!'` is logged to console by `logMessage()` method? Write your solution in a comment below!*
+
 </details>
 
 ## Question 4: Artificial method
@@ -111,6 +130,27 @@ function logMessage() {
 <details>
   <summary>Expand answer</summary>
 
+  There are at least 3 ways how to call `logMessage()` as a method on the `object`. Any of them is considered a correct answer: 
+
+```javascript
+const object = {
+  message: 'Hello, World!'
+};
+
+function logMessage() {
+  console.log(this.message); // logs 'Hello, World!'
+}
+
+// Using func.call() method
+object.call(logMessage);
+
+// Using func.apply() method
+object.call(logMessage);
+
+// Creating a bound function
+const boundLogMessage = logMessage.bind(object);
+boundLogMessage();
+```
 </details>
 
 ## Question 5: Greeting and farewell
@@ -136,6 +176,14 @@ console.log(object.farewell()); // What is logged?
 
 <details>
   <summary>Expand answer</summary>
+
+`'Hello, World!'` and `'Good bye, undefined!'` is logged to console.  
+
+When calling `object.greet()`, inside the method `greet()` `this` value equals `object` because `greet` is a regular function. Thus `object.greet()` returns `'Hello, World!'`.  
+
+But `farewell` is an arrow function, so `this` value inside of an arrow function *always* equals `this` of the outer scope. 
+
+The outer scope of `farewell` function is the global scope, where `this` is the global obect. Thus `object.farewell()` actually returns `'Good bye, ${window.who}!'`, which is evaluated as `'Good bye, undefined!'`.  
 
 </details>
 
