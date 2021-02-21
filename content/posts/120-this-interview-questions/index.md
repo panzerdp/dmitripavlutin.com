@@ -16,7 +16,7 @@ That's why you might expect during a JavaScript coding interview to get asked ab
 
 Since the best way to prepare for a coding interview is practice, in this post I compiled a list of 7 interesting interview questions about `this`.  
 
-*If you're not familiar with `this` keyword, I highly recommend studying well the post [Gentle Explanation of "this" in JavaScript](/gentle-explanation-of-this-in-javascript/).*  
+*If you're not familiar with `this` keyword, I recommend reading the post [Gentle Explanation of "this" in JavaScript](/gentle-explanation-of-this-in-javascript/) before continueing with answering the questions.*  
 
 ```toc
 ```
@@ -187,32 +187,7 @@ The outer scope of `farewell` function is the global scope, where `this` is the 
 
 </details>
 
-## Question 6: Calling arguments
-
-What logs to console the following code snippet:
-
-```javascript
-var length = 4;
-function callback() {
-  console.log(this.length); // What is logged?
-}
-
-const object = {
-  length: 5,
-  method(callback) {
-    arguments[0]();
-  }
-};
-
-obj.method(callback, 1, 2);
-```
-
-<details>
-  <summary>Expand answer</summary>
-
-</details>
-
-## Question 7: Tricky length
+## Question 6: Tricky length
 
 What logs to console the following code snippet:
 
@@ -235,4 +210,60 @@ obj.method(callback, 1, 2);
 <details>
   <summary>Expand answer</summary>
 
+  `4` is logged to console.
+
+  `callback()` function is invoked using a regular function invocation inside `method()`.  
+
+  Since `this` value during a regular function invocation equals the global object, `this.length` is evaluated as `window.length`. 
+  
+  Also the first statement `var length = 4` actually creates a property `length` on the global object: `window.length` becomes `4`.  
+
+  Finally `console.log(this.length)` logs `window.length`, which is `4`.  
 </details>
+
+## Question 7: Calling arguments
+
+What logs to console the following code snippet:
+
+```javascript
+var length = 4;
+function callback() {
+  console.log(this.length); // What is logged?
+}
+
+const object = {
+  length: 5,
+  method(callback) {
+    arguments[0]();
+  }
+};
+
+obj.method(callback, 1, 2);
+```
+
+<details>
+  <summary>Expand answer</summary>
+
+  `3` is logged to console.
+
+  `obj.method(callback, 1, 2)` is invoked with 3 arguments: `callback`, `1` and `2`. As result the `arguments` is an array-like object of the following structure:
+
+  ```javascript
+  { 
+    0: callback, 
+    1: 1, 
+    2: 2, 
+    length: 3 
+  }
+  ```
+
+  `arguments[0]()` performs a method invocation of the `callback` on the `arguments` object. 
+  
+  `this` inside the `callback` equals `arguments`, so `this.length` is same as `arguments.length` &mdash; which is `3`.  
+</details>
+
+## Summary
+
+If you've answered correctly 5 or more questions, then you have a good understanding of `this` keyword! Otherwise you need a good refresher on how `this` keyword works in JavaScript, so I recommend again revising the post [Gentle Explanation of “this” in JavaScript](/gentle-explanation-of-this-in-javascript/).  
+
+Ready for a new challenge? Try to solve the [7 Interview Questions on JavaScript Closures](/javascript-closures-interview-questions/).

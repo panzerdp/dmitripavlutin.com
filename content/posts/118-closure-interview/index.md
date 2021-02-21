@@ -331,4 +331,4 @@ Compare your answers with the answers in the post:
 * You have a good understanding of closures if you answered correctly 5 or more questions  
 * But you need a good refresher on closures if you answered correctly less than 5 questions. I recommend checking my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).  
 
-Ready for a new challenge? Try to solve the [7 Simple but Tricky JavaScript Interview Questions](/simple-but-tricky-javascript-interview-questions/).
+Ready for a new challenge? Try to solve the [7 Interview Questions on "this" keyword in JavaScript](/javascript-this-interview-questions/).
