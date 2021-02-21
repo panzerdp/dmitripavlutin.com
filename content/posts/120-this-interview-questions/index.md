@@ -18,6 +18,8 @@ Since the best way to prepare for a coding interview is to practice, in this pos
 
 *If you're not familiar with `this` keyword, I recommend reading the post [Gentle Explanation of "this" in JavaScript](/gentle-explanation-of-this-in-javascript/) before continuing with answering the questions.*  
 
+Note: JavaScript snippets below run in non-strict mode, or sloppy mode.  
+
 ```toc
 ```
 
@@ -41,14 +43,14 @@ console.log(object.getMessage()); // What is logged?
 <details>
   <summary>Expand answer</summary>
 
-`'Hello, World!'` is logged to console.  
+`'Hello, World!'` is logged to console. [Try the demo.](https://jsitor.com/oFyrX3rV9)
 
 `object.getMessage()` is a method invocation, that's why `this` inside the method equals `object`.  
 
 There's also a variable declaration `const message = 'Hello, Earth!'` inside the method. The variable doesn't influence anyhow the value of `this.message`.  
 </details>
 
-## Question 2: A new cat
+## Question 2: A cat
 
 What logs to console the following code snippet:
 
@@ -70,7 +72,7 @@ console.log(getName());     // What is logged?
 <details>
   <summary>Expand answer</summary>
 
-`'Fluffy'` and `'Fluffy'` are logged to console.  
+`'Fluffy'` and `'Fluffy'` are logged to console. [Try the demo.](https://jsitor.com/e6FDBGpam) 
 
 When a function is invoked as a constructor `new Pet('Fluffy')`, `this` inside the constructor function equals the constructed object. Then `this.name = name` creates `name` property on the object having `'Fluffy'` value.  
 
@@ -99,7 +101,7 @@ setTimeout(object.logMessage, 1000);
 <details>
   <summary>Expand answer</summary>
 
-After a delay of 1 second, `undefined` is logged to console.  
+After a delay of 1 second, `undefined` is logged to console. [Try the demo.](https://jsitor.com/YMveKYTTE) 
 
 While `setTimeout()` function uses the `object.logMessage` as a callback, still, it inovkes `object.logMessage` as a regular function, rather than a method.  
 
@@ -142,15 +144,18 @@ function logMessage() {
 }
 
 // Using func.call() method
-object.call(logMessage);
+logMessage.call(object);
 
 // Using func.apply() method
-object.call(logMessage);
+logMessage.apply(object);
 
 // Creating a bound function
 const boundLogMessage = logMessage.bind(object);
 boundLogMessage();
 ```
+
+[Try the demo.](https://jsitor.com/tDJH-ufto)
+
 </details>
 
 ## Question 5: Greeting and farewell
@@ -166,7 +171,7 @@ const object = {
   },
 
   farewell: () => {
-    return `Good bye, ${this.who}!`;
+    return `Goodbye, ${this.who}!`;
   }
 };
 
@@ -177,7 +182,7 @@ console.log(object.farewell()); // What is logged?
 <details>
   <summary>Expand answer</summary>
 
-`'Hello, World!'` and `'Goodbye, undefined!'` are logged to console.  
+`'Hello, World!'` and `'Goodbye, undefined!'` are logged to console. [Try the demo.](https://jsitor.com/TLj-FLReJ) 
 
 When calling `object.greet()`, inside the method `greet()` `this` value equals `object` because `greet` is a regular function. Thus `object.greet()` returns `'Hello, World!'`.  
 
@@ -204,21 +209,22 @@ const object = {
   }
 };
 
-obj.method(callback, 1, 2);
+object.method(callback, 1, 2);
 ```
 
 <details>
   <summary>Expand answer</summary>
 
-  `4` is logged to console.
+`4` is logged to console. [Try the demo.](https://jsitor.com/EkwQ6ArxK)
 
-  `callback()` function is invoked using a regular function invocation inside `method()`.  
+`callback()` function is invoked using a regular function invocation inside `method()`.  
 
-  Since `this` value during a regular function invocation equals the global object, `this.length` is evaluated as `window.length`. 
-  
-  Also the first statement `var length = 4` actually creates a property `length` on the global object: `window.length` becomes `4`.  
+Since `this` value during a regular function invocation equals the global object, `this.length` is evaluated as `window.length`. 
 
-  Finally `console.log(this.length)` logs `window.length`, which is `4`.  
+Also the first statement `var length = 4` actually creates a property `length` on the global object: `window.length` becomes `4`.  
+
+Finally `console.log(this.length)` logs `window.length`, which is `4`.  
+
 </details>
 
 ## Question 7: Calling arguments
@@ -238,32 +244,35 @@ const object = {
   }
 };
 
-obj.method(callback, 1, 2);
+object.method(callback, 1, 2);
 ```
 
 <details>
   <summary>Expand answer</summary>
 
-  `3` is logged to console.
+`3` is logged to console. [Try the demo.](https://jsitor.com/uZ2X-75_0)
 
-  `obj.method(callback, 1, 2)` is invoked with 3 arguments: `callback`, `1` and `2`. As result the `arguments` is an array-like object of the following structure:
+`obj.method(callback, 1, 2)` is invoked with 3 arguments: `callback`, `1` and `2`. As result the `arguments` is an array-like object of the following structure:
 
-  ```javascript
-  {
-    0: callback, 
-    1: 1, 
-    2: 2, 
-    length: 3 
-  }
-  ```
+```javascript
+{
+  0: callback, 
+  1: 1, 
+  2: 2, 
+  length: 3 
+}
+```
 
-  `arguments[0]()` performs a method invocation of the `callback` on the `arguments` object. 
-  
-  `this` inside the `callback` equals `arguments`, so `this.length` is same as `arguments.length` &mdash; which is `3`.  
+`arguments[0]()` performs a method invocation of the `callback` on the `arguments` object. 
+
+`this` inside the `callback` equals `arguments`, so `this.length` is same as `arguments.length` &mdash; which is `3`.  
+
 </details>
 
 ## Summary
 
-If you've answered correctly 5 or more questions, then you have a good understanding of `this` keyword! Otherwise, you need a good refresher on how `this` keyword works in JavaScript, so I recommend again revising the post [Gentle Explanation of “this” in JavaScript](/gentle-explanation-of-this-in-javascript/).  
+If you've answered correctly 5 or more questions, then you have a good understanding of `this` keyword! 
+
+Otherwise, you need a good refresher on how `this` keyword works in JavaScript. I recommend revising the post [Gentle Explanation of “this” in JavaScript](/gentle-explanation-of-this-in-javascript/).  
 
 Ready for a new challenge? Try to solve the [7 Interview Questions on JavaScript Closures](/javascript-closures-interview-questions/).
