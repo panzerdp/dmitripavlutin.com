@@ -10,13 +10,13 @@ recommended: ['gentle-explanation-of-this-in-javascript', 'javascript-closures-i
 type: post
 ---
 
-In JavaScript `this` is a special value that equals to the function invocation context. While simple at first, `this` is one of the most confusing aspects of the language. 
+In JavaScript `this` is a special value that equals the function invocation context. While simple at first, `this` is one of the most confusing aspects of the language. 
 
-That's why you might expect during a JavaScript coding interview to get asked about how `this` behave in certain situations.  
+That's why you might expect during a JavaScript coding interview to get asked about how `this` behaves in certain situations.  
 
-Since the best way to prepare for a coding interview is practice, in this post I compiled a list of 7 interesting interview questions about `this`.  
+Since the best way to prepare for a coding interview is to practice, in this post I compiled a list of 7 interesting interview questions about `this`.  
 
-*If you're not familiar with `this` keyword, I recommend reading the post [Gentle Explanation of "this" in JavaScript](/gentle-explanation-of-this-in-javascript/) before continueing with answering the questions.*  
+*If you're not familiar with `this` keyword, I recommend reading the post [Gentle Explanation of "this" in JavaScript](/gentle-explanation-of-this-in-javascript/) before continuing with answering the questions.*  
 
 ```toc
 ```
@@ -70,9 +70,9 @@ console.log(getName());     // What is logged?
 <details>
   <summary>Expand answer</summary>
 
-`'Fluffy'` and `'Fluffy'` is logged to console.  
+`'Fluffy'` and `'Fluffy'` are logged to console.  
 
-When a function is invoked as a constructor `new Pet('Fluffy')`, `this` inside the constructor function equals to the constructed object. Then `this.name = name` creates `name` property on the object having `'Fluffy'` value.  
+When a function is invoked as a constructor `new Pet('Fluffy')`, `this` inside the constructor function equals the constructed object. Then `this.name = name` creates `name` property on the object having `'Fluffy'` value.  
 
 `this.getName = () => this.name` creates a method `getName` on the object. And since the arrow function is used, `this` inside the arrow function equals to `this` of the outer function (`Pet`).  
 
@@ -103,9 +103,9 @@ After a delay of 1 second, `undefined` is logged to console.
 
 While `setTimeout()` function uses the `object.logMessage` as a callback, still, it inovkes `object.logMessage` as a regular function, rather than a method.  
 
-And inside of a regular function `this` equals the global object, which is `window` in case of the browser environment.  
+And inside of a regular function `this` equals the global object, which is `window` in the case of the browser environment.  
 
-That's why `console.log(this.message)` inside `logMessage` method actually logs `window.message`, which is `undefined`.  
+That's why `console.log(this.message)` inside `logMessage` method logs `window.message`, which is `undefined`.  
 
 *Side challenge: how can you fix this code so that `'Hello, World!'` is logged to console by `logMessage()` method? Write your solution in a comment below!*
 
@@ -177,13 +177,13 @@ console.log(object.farewell()); // What is logged?
 <details>
   <summary>Expand answer</summary>
 
-`'Hello, World!'` and `'Good bye, undefined!'` is logged to console.  
+`'Hello, World!'` and `'Goodbye, undefined!'` are logged to console.  
 
 When calling `object.greet()`, inside the method `greet()` `this` value equals `object` because `greet` is a regular function. Thus `object.greet()` returns `'Hello, World!'`.  
 
 But `farewell` is an arrow function, so `this` value inside of an arrow function *always* equals `this` of the outer scope. 
 
-The outer scope of `farewell` function is the global scope, where `this` is the global obect. Thus `object.farewell()` actually returns `'Good bye, ${window.who}!'`, which is evaluated as `'Good bye, undefined!'`.  
+The outer scope of `farewell` function is the global scope, where `this` is the global object. Thus `object.farewell()` actually returns `'Goodbye, ${window.who}!'`, which is evaluated as `'Goodbye, undefined!'`.  
 
 </details>
 
@@ -249,7 +249,7 @@ obj.method(callback, 1, 2);
   `obj.method(callback, 1, 2)` is invoked with 3 arguments: `callback`, `1` and `2`. As result the `arguments` is an array-like object of the following structure:
 
   ```javascript
-  { 
+  {
     0: callback, 
     1: 1, 
     2: 2, 
@@ -264,6 +264,6 @@ obj.method(callback, 1, 2);
 
 ## Summary
 
-If you've answered correctly 5 or more questions, then you have a good understanding of `this` keyword! Otherwise you need a good refresher on how `this` keyword works in JavaScript, so I recommend again revising the post [Gentle Explanation of “this” in JavaScript](/gentle-explanation-of-this-in-javascript/).  
+If you've answered correctly 5 or more questions, then you have a good understanding of `this` keyword! Otherwise, you need a good refresher on how `this` keyword works in JavaScript, so I recommend again revising the post [Gentle Explanation of “this” in JavaScript](/gentle-explanation-of-this-in-javascript/).  
 
 Ready for a new challenge? Try to solve the [7 Interview Questions on JavaScript Closures](/javascript-closures-interview-questions/).
