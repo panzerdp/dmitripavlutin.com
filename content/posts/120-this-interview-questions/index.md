@@ -18,7 +18,7 @@ Since the best way to prepare for a coding interview is to practice, in this pos
 
 *If you're not familiar with `this` keyword, I recommend reading the post [Gentle Explanation of "this" in JavaScript](/gentle-explanation-of-this-in-javascript/) before continuing with answering the questions.*  
 
-Note: JavaScript snippets below run in non-strict mode, or sloppy mode.  
+Note: JavaScript snippets below run in strict mode.  
 
 ```toc
 ```
