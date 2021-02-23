@@ -49,7 +49,7 @@ increment(); // logs 3
 log();       // logs "Current value is 0"
 ```
 
-Try the [demo](https://jsitor.com/GoHU5UGEd).  
+Try the [demo](https://jsfiddle.net/dmitri_pavlutin/mhcwxLd3/).  
 
 `[increment, log] = createIncrement(1)` returns a tuple of functions: one function that increments the internal value, another that logs the current value.  
 
@@ -96,7 +96,7 @@ increment(); // logs 3
 log();       // logs "Current value is 3"
 ```
 
-Try the fixed [demo](https://jsitor.com/RMPY8EktG).
+Try the fixed [demo](https://jsfiddle.net/dmitri_pavlutin/27n1cbxr/).
 
 Now, after calling 3 times the `increment()` function, calling `log()` logs the actual `value`: `"Current value is 3"`. 
 
