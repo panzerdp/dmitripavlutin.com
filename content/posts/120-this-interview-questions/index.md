@@ -1,8 +1,8 @@
 ---
 title: '7 Interview Questions on "this" keyword in JavaScript. Can You Answer Them?'
 description: '7 interview questions to challenge your knowledge on "this" keyword in JavaScript.'
-published: "2021-02-23T12:00Z"
-modified: "2021-02-23T12:00Z"
+published: "2021-02-23T09:30Z"
+modified: "2021-02-23T09:30Z"
 thumbnail: "./images/cover.jpg"
 slug: javascript-this-interview-questions
 tags: ['javascript', 'this', 'interview']
@@ -219,11 +219,11 @@ object.method(callback, 1, 2);
 
 `4` is logged to console. [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/Lr618c3s/)
 
-`callback()` is called using regular function invocation inside `method()`. Since [*this* value during a regular function invocation] equals the global object, `this.length` is evaluated as `window.length` inside `callbac()` function.   
+`callback()` is called using regular function invocation inside `method()`. Since [*this* value during a regular function invocation](/gentle-explanation-of-this-in-javascript/#21-this-in-a-function-invocation) equals the global object, `this.length` is evaluated as `window.length` inside `callback()` function.   
 
 The first statement `var length = 4`, being in the outermost scope, creates a property `length` on the global object: `window.length` becomes `4`.  
 
-Finally inside the `callback()` function `this.length` evaluates as `window.length` &mdash; `4` being logged to console.  
+Finally, inside the `callback()` function `this.length` evaluates as `window.length` &mdash; `4` being logged to console.  
 
 </details>
 
