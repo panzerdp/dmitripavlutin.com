@@ -2,7 +2,7 @@
 title: "How to Greatly Enhance fetch() with the Decorator Pattern"
 description: "How to use the decorator pattern to enhance the possibilities and flexibily of fetch() API."
 published: "2021-02-16T09:10Z"
-modified: "2021-02-16T09:10Z"
+modified: "2021-02-27T06:30Z"
 thumbnail: "./images/cover.png"
 slug: enhance-fetch-with-decorator-pattern
 tags: ['fetch', 'decorator pattern', 'async await']
@@ -52,7 +52,7 @@ First, it *increases the bundle size* of your web application. Secondly, your ap
 
 I purpose a different approach that takes the best from both worlds &mdash; use the decorator pattern to increase the ease of use and flexibility of `fetch()` API. 
 
-Let's see in the next sections how to do that.  
+The idea is to wrap a base fetch class (I'll show how to define it) with any other functionality that *you* need: extract JSON, timeout, throw error on bad HTTP status, handle auth headers, and much more. Let's see in the next sections how to do that.  
 
 ## 2. Preparing the Fetcher interface
 
