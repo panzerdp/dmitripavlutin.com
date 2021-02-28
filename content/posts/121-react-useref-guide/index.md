@@ -38,7 +38,7 @@ A) Between component re-renderings the value of the reference (`value = referenc
 
 B) Updating a reference (`reference.current = newValue`) *doesn't trigger a component re-rendering*.  
 
-### 2.1 Use case: *useRef()* as value holder
+### 1.1 Use case: logging button clicks
 
 Let's see all these ideas in action using a component `LogButtonClicks` which simply counts and logs the number of clicks on a button.  
 
@@ -71,7 +71,7 @@ What's interesting is that no matter how many times you click the button and `co
 
 Now a reasonable question: what's the main difference between using `useRef()` and `useState()`?  
 
-### 2.2 The difference from state
+### 1.2 Study: reference and state diff
 
 Let's reuse the component `LogButtonClicks` from the previous section, but instead of using `useRef()`, let's use `useState()` hook to coint the number of button clicks.  
 
@@ -111,10 +111,42 @@ B) Use the reference as a value to `ref` attribute to the element you'd like to 
 
 C) Finally the reference contains a link to the DOM element: `elementRef.current` is an `HTMLElement`.  
 
-### 2.1 Use case: *useRef()* accessing elements
+### 2.1 Use case: focusing an input
+
+The classic example of when you need to access DOM elements is to focus into an input as soon as the component renders.  
+
+To make it work you'll need to create a reference to the input element, and then right after mount call the special method `inputElement.focus()` to focus.  
+
+Here's a possible implementation of the `InputFocus` component:
+
+```jsx
+import { useRef, useEffect } from 'react';
+
+function InputFocus() {
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
+  return <input ref={inputRef} type="text" />;
+}
+```
+
+Try the demo.
+
+`const inputRef = useRef()` creates a reference that's going to hold the input element.  
+
+When writing the input itself, do assign to its `ref` attribute the reference: `<input ref={inputRef} type="text" />`. React then, right after mounting the component into the DOM, is going to set `inputRef.current` to be the input element.  
 
 
 
-## 3. The rule of useRef()
+## 3. Updating references
+
+The function body of the functional React component should either calculate the output, either invoke hooks.  
+
+That's why updating a reference (as well as updating state) shouldn't be performed inside the body of the functional component. In other words, keep your rendering logic pure.  
+
+The reference can be updated either inside `useEffect()` or inside of handlers (click handlers, fetch request complete handlers, etc).  
 
 ## 4. Summary
