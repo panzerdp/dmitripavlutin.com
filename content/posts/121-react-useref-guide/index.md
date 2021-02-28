@@ -32,7 +32,7 @@ reference.current = newValue;
 
 `current` property is the workhorse of the reference. Read `value = reference.current` property to access the reference value, as well update the property `reference.current = newValue` to set a new value to the reference.  
 
-There are 2 big rules to remember about the behavior of `useRef()` references:
+There are 2 main rules to remember about the behavior of `useRef()` references:
 
 A) Between component re-renderings the value of the reference (`value = reference.current`) *stays the same*;
 
@@ -71,7 +71,7 @@ What's interesting is that no matter how many times you click the button and `co
 
 Now a reasonable question: what's the main difference between using `useRef()` and `useState()`?  
 
-### 1.2 Study: reference and state diff
+#### Reference and state diff
 
 Let's reuse the component `LogButtonClicks` from the previous section, but instead of using `useRef()`, let's use `useState()` hook to coint the number of button clicks.  
 
@@ -97,7 +97,13 @@ Try the demo.
 
 Open the demo and click a few times the button. Each time you click, you will see in console the message `'I rendered!'`. It demonstrates that each time the state is updated, the component re-renders.  
 
-And that is the main difference between state (created by `useState()` hook) and references (created by `useRef()` hook): *updating state does trigger re-rendering, while updating a reference does not*.  
+So, the 2 main difference between state and references:
+
+1. Updating state does trigger component re-rendering, while updating a reference doesn't.  
+
+2. The state update is asynchronous (the state variable is updated after re-rendering), while the reference is update synchornously (the updated value is available right away)
+
+### 1.2 Use case: implementing a stopwatch
 
 ## 2. Access DOM elements
 
@@ -110,6 +116,24 @@ A) Define a reference that's going to keep the link to DOM element `const elemen
 B) Use the reference as a value to `ref` attribute to the element you'd like to access: `<div ref={elementRef}></div>`;
 
 C) Finally the reference contains a link to the DOM element: `elementRef.current` is an `HTMLElement`.  
+
+```jsx{4,7,11}
+import { useRef, useEffect } from 'react';
+
+function AccessingElement() {
+  const elementRef = useRef();
+
+   useEffect(() => {
+    const divElement = elementRef.current;
+  }, []);
+
+  return (
+    <div ref={elementRef}>
+      I'm an element
+    </div>
+  );
+}
+```
 
 ### 2.1 Use case: focusing an input
 
@@ -139,14 +163,43 @@ Try the demo.
 
 When writing the input itself, do assign to its `ref` attribute the reference: `<input ref={inputRef} type="text" />`. React then, right after mounting the component into the DOM, is going to set `inputRef.current` to be the input element.  
 
+## 3. Updating references restriction
 
-
-## 3. Updating references
-
-The function body of the functional React component should either calculate the output, either invoke hooks.  
+The function scope of the functional React component should either calculate the output, either invoke hooks.  
 
 That's why updating a reference (as well as updating state) shouldn't be performed inside the body of the functional component. In other words, keep your rendering logic pure.  
 
-The reference can be updated either inside `useEffect()` or inside of handlers (click handlers, fetch request complete handlers, etc).  
+The reference can be updated either inside `useEffect()` or inside handlers (event handlers, timer handlers, etc).  
+
+```jsx{7,10,15,18,21}
+import { useRef, useEffect } from 'react';
+
+function MyComponent({ prop }) {
+  const myRef = useRef(0);
+
+  useEffect(() => {
+    myRef.current++; // Good!
+
+    setTimeout(() => {
+      myRef.current++; // Good!
+    }, 1000);
+  }, []);
+
+  const handler = () => {
+    myRef.current++; // Good!
+  };
+
+  myRef.current++; // Bad!
+
+  if (prop) {
+    myRef.current++; // Bad!
+  }
+
+  return <button onClick={handler}>My button</button>;
+}
+```
 
 ## 4. Summary
+
+`useRef()` is the hook that let's you do 2 things: store mutable values that keep between renderings, as well access DOM elements.  
+
