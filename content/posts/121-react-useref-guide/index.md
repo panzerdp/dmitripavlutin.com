@@ -12,7 +12,7 @@ type: post
 
 `React.useRef()` is a hook that solves 2 main issues: holding mutable values that should persist between component renderings and reference DOM elements.  
 
-In this post, you'll learn in detail how `useRef()` works and when you should use it. Interesting demos included.  
+In this post, you'll learn in detail how `useRef()` works. Interesting demos included.  
 
 ## 1. Mutable values
 
@@ -36,7 +36,7 @@ function MyComponent() {
 }
 ```
 
-`useRef(initialValue)` accepts one argument which sets the initial value of the reference. The hook returns a special value &mdash; named *reference*, or *ref* &mdash; which is an object having one property `current`:
+`useRef(initialValue)` accepts one argument that sets the initial value of the reference. The hook returns a special value &mdash; named *reference*, or *ref* &mdash; which is an object having one property `current`:
 
 ```javascript
 const reference = useRef(initialValue);
@@ -44,7 +44,7 @@ const reference = useRef(initialValue);
 reference; // => { current: <referenceValue> }
 ```
 
-Use `value = reference.current` to access the reference value, as well `reference.current = newValue` to set a new value to the reference.  
+Read the property `reference.current` to access the reference value, as well update that property `reference.current = newValue` to set a new value to the reference. 
 
 There are 2 main rules to remember about the behavior of `useRef()` references:
 
@@ -52,9 +52,11 @@ There are 2 main rules to remember about the behavior of `useRef()` references:
 
 * Updating a reference *doesn't trigger a component re-rendering*.  
 
+Basically, this is how simple the `useRef()` references are.  
+
 ### 1.1 Use case: logging button clicks
 
-Let's see all these ideas in action using a component `LogButtonClicks` which simply counts and logs the number of clicks on a button.  
+Let's see how to use `useRef()` in a component `LogButtonClicks`. The reference is used to stored the number of clicks on a button.  
 
 Here's a possible implementation of `LogButtonClicks` using `useRef()` hook:
 
@@ -87,7 +89,7 @@ Now a reasonable question: what's the main difference between using `useRef()` a
 
 #### Reference and state diff
 
-Let's reuse the component `LogButtonClicks` from the previous section, but instead of using `useRef()`, let's use `useState()` hook to coint the number of button clicks.  
+Let's reuse the component `LogButtonClicks` from the previous section, but use `useState()` hook to count the number of button clicks:  
 
 ```jsx
 import { useState } from 'react';
@@ -109,23 +111,23 @@ function LogButtonClicks() {
 
 [Try the demo.](https://codesandbox.io/s/logging-button-clicks-state-nzzuk?file=/src/App.js)
 
-Open the demo and click a few times the button. Each time you click, you will see in console the message `'I rendered!'`. It demonstrates that each time the state is updated, the component re-renders.  
+Open the demo and click the button. Each time you click, you will see in console the message `'I rendered!'` &mdash; that each time the state is updated, the component re-renders.  
 
-So, the 2 main difference between state and references:
+So, the 2 main differences between state and references:
 
 1. Updating state does trigger component re-rendering, while updating a reference doesn't.  
 
 2. The state update is asynchronous (the state variable is updated after re-rendering), while the reference is update synchornously (the updated value is available right away)
 
+From a higher point of view, references are used to store infrastructure data of the component, while state stores information that is directly rendered on the screen.  
+
 ### 1.2 Use case: implementing a stopwatch
 
-The things you can store inside a reference are infrastructure information that involves some kind of side-effect.  
+The things you can store inside a reference are infrastructure information that involves some kind of side-effect. For example, you can store into a reference the timer ids, different kind of pointers (e.g. socket ids).  
 
-For example, you can store into a refence the timer ids, for later control.  
+The following component `Stopwatch` starts a `setInterval()` timer function that increases each second the counter of a stopwatch.  
 
-The following component `Stopwatch` starts a `setInterval()` timer function that invokes a callback each second increasing the counter of a stopwatch.  
-
-Because the timer id should be kept between renderings of the component (`count` state increases each second), it is wise to keept it into a reference `const timerIdRef = useRef(0)`:  
+Because the timer id should persist between renderings of the component (`count` state increases each second and triggers re-rendering), it is wise to keept the timer id in a reference `const timerIdRef = useRef(0)`:  
 
 ```jsx
 import { useRef, useState, useEffect } from 'react';
@@ -163,6 +165,12 @@ function Stopwatch() {
 [Try the demo.](https://codesandbox.io/s/stopwatch-cm7zz?file=/src/App.js)
 
 `timerIdRef` is a reference that holds the `setInterval()` timer id.  
+
+`startHandler()` function, which is invoked when the *Start* button is clicked, starts the timer and saves its id to the reference `timerIdRef.current = setInterval(...)`.  
+
+When the user decides to stop the stopwatch, one clicks *Stop* button. The corresponding `stopHandler()` accesses the timer id from the reference and stops the timer `clearInterval(timerIdRef.current)`.  
+
+Additionally, if the component unmounts with the stopwatch active, the cleanup function of `useEffect()` is going to stop the timer.  
 
 *Side challenge: can you improve the stopwatch by adding a Reset button? Share your solution in a comment below!*
 
