@@ -125,7 +125,7 @@ For example, you can store into a refence the timer ids, for later control.
 
 The following component `Stopwatch` starts a `setInterval()` timer function that invokes a callback each second increasing the counter of a stopwatch.  
 
-Because the timer id should be kept between renderings of the component, it is good to keept it into a reference.  
+Because the timer id should be kept between renderings of the component (`count` state increases each second), it is wise to keept it into a reference `const timerIdRef = useRef(0)`:  
 
 ```jsx
 import { useRef, useState, useEffect } from 'react';
@@ -161,6 +161,10 @@ function Stopwatch() {
 ```
 
 [Try the demo.](https://codesandbox.io/s/stopwatch-cm7zz?file=/src/App.js)
+
+`timerIdRef` is a reference that holds the `setInterval()` timer id.  
+
+*Side challenge: can you improve the stopwatch by adding a Reset button? Share your solution in a comment below!*
 
 ## 2. Access DOM elements
 
@@ -258,5 +262,14 @@ function MyComponent({ prop }) {
 
 ## 4. Summary
 
-`useRef()` is the hook that let's you do 2 things: store mutable values that keep between renderings, as well access DOM elements.  
+`useRef()` hook can do 2 things: store mutable values that persist between renderings, as well access DOM elements.  
 
+Calling `const reference = useRef(initialValue)` with the initial value returns a special object named reference. The reference object has a property `current`: you can use this property to access the reference value `reference.current`, or update the reference `reference.current = newValue`.  
+
+Between the component re-renderings, the value of the reference is persistent. 
+
+References can also be used to access DOM elements. To do so assign the reference to `ref` attribute of the element you'd like to have access to: `<div ref={reference}>Element</div>`. Then you can access the element by reading `reference.current`.  
+
+Want to improve you React knowledge further? Follow [A Simple Explanation of React.useEffect()](/react-useeffect-explanation/).  
+
+*Challenge: write a custom hook that works as `useEffect()`, only that it doesn't invoke the callback after initial rendering (Hint: you need to use `useRef()`). Share your solution in a comment below!*
