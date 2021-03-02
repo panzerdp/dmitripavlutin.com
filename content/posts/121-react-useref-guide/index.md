@@ -3,7 +3,7 @@ title: 'The Complete Guide to useRef() Hook and References in React'
 description: 'React.useRef() hook solves 2 issues: holds mutable values that persist between component renderings and reference DOM elements.'
 published: "2021-03-02T12:00Z"
 modified: "2021-03-02T12:00Z"
-thumbnail: "./images/cover-5.png"
+thumbnail: "./images/cover-6.png"
 slug: react-useref-guide
 tags: ['react', 'useref', 'hook', 'dom', 'element']
 recommended: ['react-useeffect-explanation', 'use-react-memo-wisely']
