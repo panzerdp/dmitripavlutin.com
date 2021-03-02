@@ -260,7 +260,7 @@ During initial rendering, the DOM structure isn't created yet. React just doesn'
 
 That's why `inputRef.current` evaluates to `undefined` during initial rendering before React has committed any changes to DOM.  
 
-However, `useEffect()` hook invokes the callback right after initial rendering and changes being committed to the DOM. In such a case, the input element has already been created, and `inputRef.current` evaluates to the actual input element.  
+However, `useEffect(callback, [])` hook invokes the callback right after initial rendering when React has already committed to the DOM. In such a case, the input element has already been created, and `inputRef.current` points to the actual input element.  
 
 ## 3. Updating references restriction
 
