@@ -5,7 +5,7 @@ published: "2021-03-02T12:00Z"
 modified: "2021-03-02T12:00Z"
 thumbnail: "./images/cover-4.png"
 slug: react-useref-guide
-tags: ['react', 'useref', 'hook', 'element']
+tags: ['react', 'useref', 'hook', 'dom', 'element']
 recommended: ['react-useeffect-explanation', 'use-react-memo-wisely']
 type: post
 ---
