@@ -14,6 +14,10 @@ type: post
 
 In this post, you'll learn in detail how `useRef()` works. Interesting demos included.  
 
+```toc
+toHeading: 3
+```
+
 ## 1. Mutable values
 
 The usage of `useRef()` hooks is pretty straigfoward:
