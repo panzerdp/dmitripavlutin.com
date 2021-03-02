@@ -10,7 +10,7 @@ recommended: ['react-useeffect-explanation', 'use-react-memo-wisely']
 type: post
 ---
 
-`React.useRef()` is a hook that solves 2 main issues: holding mutable values that should persist between component renderings and reference DOM elements.  
+`React.useRef()` is a hook that solves 2 issues: holding mutable values that should persist between component renderings and reference DOM elements.  
 
 In this post, you'll learn in detail how `useRef()` works. Interesting demos included.  
 
@@ -83,11 +83,11 @@ function LogButtonClicks() {
 
 `const countRef = useRef(0)` creates a references `countRef` initialized with `0`.  
 
-When the button is clicked, `handle` function is invoked where `countRef.current++` gets incremented. The ref value is logged to the console.  
+When the button is clicked, `handle` function is invoked where `countRef.current++` gets incremented. The reference value is logged to the console.  
 
-What's interesting is that clicking the button and updating the reference value `countRef.current++` doesn't trigger component re-rendering. You can see that by `'I rendered!'` message being logged to console just once: during the initial rendering of the component.  
+What's interesting is that updating the reference value `countRef.current++` doesn't trigger component re-rendering. You can see that by `'I rendered!'` being logged to console just once: during the initial rendering of the component.  
 
-Now a reasonable question: what's the main difference between using `useRef()` and `useState()`?  
+Now a reasonable question: what's the main difference between references and state?  
 
 #### Reference and state diff
 
@@ -113,7 +113,7 @@ function LogButtonClicks() {
 
 [Try the demo.](https://codesandbox.io/s/logging-button-clicks-state-nzzuk?file=/src/App.js)
 
-Open the demo and click the button. Each time you click, you will see in the console the message `'I rendered!'` &mdash; that each time the state is updated, the component re-renders.  
+Open the demo and click the button. Each time you click, you will see in the console the message `'I rendered!'` &mdash; meaning that each time the state is updated, the component re-renders.  
 
 So, the 2 main differences between state and references:
 
@@ -125,11 +125,11 @@ From a higher point of view, references are used to store infrastructure data of
 
 ### 1.2 Use case: implementing a stopwatch
 
-The things you can store inside a reference are infrastructure information that involves some kind of side-effect. For example, you can store into a reference the timer ids, different kinds of pointers (e.g. socket ids).  
+The things you can store inside a reference are infrastructure information that involves some side-effect. For example, you can store into a reference the timer ids, different kinds of pointers (e.g. socket ids).  
 
-The following component `Stopwatch` starts a `setInterval()` timer function that increases each second the counter of a stopwatch.  
+The following component `Stopwatch` uses `setInterval(callback, time)` timer function to increase each second the counter of a stopwatch.  
 
-Because the timer id should persist between renderings of the component (`count` state increases each second and triggers re-rendering), it is wise to keept the timer id in a reference `const timerIdRef = useRef(0)`:  
+Because the timer id should persist between renderings of the component (`count` state increases each second and triggers re-rendering), it is wise to keep the timer id in a reference `const timerIdRef = useRef(0)`:  
 
 ```jsx
 import { useRef, useState, useEffect } from 'react';
@@ -170,23 +170,21 @@ function Stopwatch() {
 
 `startHandler()` function, which is invoked when the *Start* button is clicked, starts the timer and saves its id to the reference `timerIdRef.current = setInterval(...)`.  
 
-When the user decides to stop the stopwatch, one clicks *Stop* button. The corresponding `stopHandler()` accesses the timer id from the reference and stops the timer `clearInterval(timerIdRef.current)`.  
+When the user decides to stop the stopwatch, one clicks *Stop* button. The *Stop* button handler `stopHandler()` accesses the timer id from the reference and stops the timer `clearInterval(timerIdRef.current)`.  
 
-Additionally, if the component unmounts with the stopwatch active, the cleanup function of `useEffect()` is going to stop the timer.  
+Additionally, if the component unmounts with the stopwatch is active, the cleanup function of `useEffect()` is going to stop the timer.  
 
 *Side challenge: can you improve the stopwatch by adding a Reset button? Share your solution in a comment below!*
 
 ## 2. Access DOM elements
 
-Another useful application of the `useRef()` hook is that it allows you to access DOM elements directly.  
-
-You can do this pretty simple: 
+Another useful application of the `useRef()` hook is to access DOM elements. You can do this pretty easy: 
 
 A) Define a reference that's going to keep the link to DOM element `const elementRef = useRef()`; 
 
 B) Use the reference as a value to `ref` attribute to the element you'd like to access: `<div ref={elementRef}></div>`;
 
-C) Finally the reference contains a link to the DOM element: `elementRef.current` is an `HTMLElement`.  
+C) Then React will make the reference link to the DOM element: `elementRef.current` is an `HTMLElement`.  
 
 ```jsx{4,7,11}
 import { useRef, useEffect } from 'react';
@@ -208,9 +206,9 @@ function AccessingElement() {
 
 ### 2.1 Use case: focusing an input
 
-The classic example of when you need to access DOM elements is to focus on the input element as soon as the component renders.  
+A good example of when you need to access DOM elements is to focus on the input field as soon as the component renders.  
 
-To make it work you'll need to create a reference to the input element, and then right after mount call the special method `inputElement.focus()` to focus.  
+To make it work you'll need to create a reference to the input element, and then  after mounting call the special method `inputElement.focus()` to focus.  
 
 Here's a possible implementation of the `InputFocus` component:
 
@@ -232,7 +230,9 @@ function InputFocus() {
 
 `const inputRef = useRef()` creates a reference that's going to hold the input element.  
 
-When writing the input itself, do assign to its `ref` attribute the reference: `<input ref={inputRef} type="text" />`. React then, right after mounting the component into the DOM, is going to set `inputRef.current` to be the input element.  
+On the input assign `ref` attribute with the reference: `<input ref={inputRef} type="text" />`. React then, right after mounting the component into the DOM, is going to set `inputRef.current` to be the input element.  
+
+
 
 #### Ref is null on initial rendering
 
@@ -260,17 +260,17 @@ function InputFocus() {
 
 [Try the demo.](https://codesandbox.io/s/empty-on-initial-rendering-5my4g?file=/src/App.js)
 
-During initial rendering, the DOM structure isn't created yet. React just doesn't know what content the component is going to output.  
+During initial rendering, the DOM structure isn't created yet. React has to perform the initial rendering to know what content to display.  
 
 That's why `inputRef.current` evaluates to `undefined` during initial rendering before React has committed any changes to DOM.  
 
-However, `useEffect(callback, [])` hook invokes the callback right after initial rendering when React has already committed to the DOM. In such a case, the input element has already been created, and `inputRef.current` points to the actual input element.  
+But `useEffect(callback, [])` hook invokes the callback right after mounting when React has already committed to the DOM. In such a case, the input element has already been created, and `inputRef.current` points to the actual input element.  
 
 ## 3. Updating references restriction
 
 The function scope of the functional React component should either calculate the output, either invoke hooks.  
 
-That's why updating a reference (as well as updating state) shouldn't be performed inside the immediate scope of the functional component. The reference can be updated either inside `useEffect()` or different kinds of handlers (event handlers, timer handlers, etc).  
+That's why updating a reference (as well as updating state) shouldn't be performed inside the immediate scope of the functional component. The reference can be updated either inside a `useEffect()` callback or different kinds of handlers (event handlers, timer handlers, etc).  
 
 ```jsx{7,10,15,18,21}
 import { useRef, useEffect } from 'react';
@@ -308,7 +308,9 @@ Calling `const reference = useRef(initialValue)` with the initial value returns 
 
 Between the component re-renderings, the value of the reference is persistent. 
 
-References can also access DOM elements. Assign the reference to `ref` attribute of the element you'd like to have access to: `<div ref={reference}>Element</div>`. Then you can access the element by reading `reference.current`.  
+Updating a reference, contrary to updating state, doesn't trigger component re-rendering.  
+
+References can also access DOM elements. Assign the reference to `ref` attribute of the element you'd like to access: `<div ref={reference}>Element</div>`. Then the element is available at `reference.current`.  
 
 Want to improve you React knowledge further? Follow [A Simple Explanation of React.useEffect()](/react-useeffect-explanation/).  
 
