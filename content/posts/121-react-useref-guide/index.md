@@ -1,9 +1,9 @@
 ---
-title: 'The Complete Guide to useRef() Hook and References in React'
+title: 'The Complete Guide to useRef() and Refs in React'
 description: 'React.useRef() hook solves 2 issues: holds mutable values that persist between component renderings and reference DOM elements.'
 published: "2021-03-02T12:00Z"
 modified: "2021-03-02T12:00Z"
-thumbnail: "./images/cover-6.png"
+thumbnail: "./images/cover-7.png"
 slug: react-useref-guide
 tags: ['react', 'useref', 'hook', 'dom', 'element']
 recommended: ['react-useeffect-explanation', 'use-react-memo-wisely']
@@ -12,7 +12,7 @@ type: post
 
 `React.useRef()` is a hook that solves 2 issues: holding mutable values that should persist between component renderings and reference DOM elements.  
 
-In this post, you'll learn in detail how `useRef()` and references work in React. Interesting demos included.  
+In this post, you'll learn in detail how `useRef()` and refs (aka references) work in React. Interesting demos included.  
 
 ```toc
 toHeading: 3
@@ -40,7 +40,7 @@ function MyComponent() {
 }
 ```
 
-`useRef(initialValue)` accepts one argument that sets the initial value of the reference. The hook returns a special value &mdash; named *reference*, or *ref* &mdash; which is an object having one property `current`:
+`useRef(initialValue)` accepts one argument that sets the initial value of the reference. The hook returns a special value &mdash; named *ref*, or *reference* &mdash; which is an object having one property `current`:
 
 ```javascript
 const reference = useRef(initialValue);
