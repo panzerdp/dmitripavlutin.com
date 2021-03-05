@@ -2,7 +2,7 @@
 title: 'The Complete Guide to useRef() and Refs in React'
 description: 'React.useRef() hook solves 2 issues: holds mutable values that persist between component renderings and reference DOM elements.'
 published: "2021-03-02T12:00Z"
-modified: "2021-03-02T12:00Z"
+modified: "2021-03-05T10:20Z"
 thumbnail: "./images/cover-7.png"
 slug: react-useref-guide
 tags: ['react', 'useref', 'hook', 'dom', 'element']
@@ -166,7 +166,7 @@ function Stopwatch() {
 
 To stop the stopwatch user clicks *Stop* button. The *Stop* button handler `stopHandler()` accesses the timer id from the reference and stops the timer `clearInterval(timerIdRef.current)`.  
 
-Additionally, if the component unmounts while stopwatch being active, the cleanup function of `useEffect()` is going to stop the timer too.  
+Additionally, if the component unmounts while the stopwatch being active, the cleanup function of `useEffect()` is going to stop the timer too.  
 
 As you can see, in the stopwatch example the reference was used to store the infrastructure data &mdash; the active timer id.  
 
@@ -174,7 +174,7 @@ As you can see, in the stopwatch example the reference was used to store the inf
 
 ## 2. Access DOM elements
 
-Another useful application of the `useRef()` hook is to access DOM elements. You can do in 3 steps: 
+Another useful application of the `useRef()` hook is to access DOM elements. You can do it in 3 steps: 
 
 A) Define the reference to access the element `const elementRef = useRef()`; 
 
