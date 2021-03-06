@@ -1,11 +1,11 @@
 ---
-title: 'The Friendly Algorithm to Determine the Value of "this" in JavaScript'
-description: 'A friendly step by step algorithm to determine the value of "this" of Any Function in JavaScript'
-published: "2021-03-02T12:00Z"
-modified: "2021-03-05T10:20Z"
-thumbnail: "./images/cover-7.png"
+title: 'An Easy Algorithm to Determine "this" value in JavaScript'
+description: 'A step by step algorithm to determine "this" value in JavaScript.'
+published: "2021-03-09T12:00Z"
+modified: "2021-03-09T12:00Z"
+thumbnail: "./images/cover-2.png"
 slug: javascript-this-algorithm
-tags: ['javascript', 'this']
+tags: ['javascript', 'this', 'function']
 recommended: ['gentle-explanation-of-this-in-javascript', 'javascript-this-interview-questions']
 type: post
 ---
