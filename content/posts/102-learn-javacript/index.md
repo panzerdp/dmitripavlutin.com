@@ -32,7 +32,7 @@ Step by step principle applies to learning JavaScript language too. There are no
 
 ## 2. Learn the way *you* like it
 
-The good news is that in 2020 there plenty of ways to learn JavaScript: by reading books, watching video courses, attending [freeCodeCamp](https://www.freecodecamp.org/learn).  
+There are plenty of ways to learn JavaScript: by reading books, watching video courses, attending [freeCodeCamp](https://www.freecodecamp.org/learn).  
 
 ### 2.1 Books
 
