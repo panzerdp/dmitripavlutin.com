@@ -12,17 +12,47 @@ type: post
 
 A confusing aspect of JavaScript language you would probably hear often is `this` keyword.  
 
-`this`, named the function invocation conent, is confusing because it behaves differently depending on how the function is invoked.  
+`this` &mdash; the function invocation conent &mdash; is confusing because it behaves differently depending on how the function is invoked.  
 
 So, if you have hard time in determining the value of `this` keyword in a particular situation, I've created an easy algorithm for you to follow.  
 
-While I've tried to make the algorithm as accessible as possible, I recommend reading it multiple times. Then follow the examples where the algorithm is put into practice &mdash; the examples help greatly to solidify the algorithm.  
+While I've tried to make the algorithm as accessible as possible, I recommend reading it multiple times. Then follow the examples where the algorithm is put into practice &mdash; the examples help greatly to solidify the algorithm. Finally, try the homework examples by yourself!
 
 Ready? Let's begin!  
 
 ## 1. *this* algorithm
 
+**ThisValue(func)**:
 
+The formal definition of `ThisValue(func)` that returns `this` value of an arbitrary function `func`.
+
+
+
+1. If `func` is an *arrow function*, then  
+
+    1. If `func` is defined in the outermost scope, then `return globalObject`
+    * Else
+        1. let `outerFunc` be the *outer function* of `func`  
+        * `return ThisValue(outerFunc)`  
+
+* Else if `func` is a *bound function* of an `originFunc` function, then  
+
+    1. let `thisArg` be the argument of `func = originFunc.bind(thisArg)`  
+    * `return thisArg`  
+
+* Else if `func` is a *regular function*, then  
+
+    1. If `func` is *invoked as a constructor*, then  
+
+        1. let `newObject` be the newly constructed object `newObject = new func()`  
+        * `return newObject`  
+
+    * 
+
+    * Else if `func` is *invoked as a method*, then
+
+        1. let `owningObject` be the object upon which `func` is invoked on `owningObject.func()`
+        * `return owningObject`
 
 ## 2. Examples
 
