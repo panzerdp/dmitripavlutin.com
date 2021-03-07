@@ -310,4 +310,4 @@ References can also access DOM elements. Assign the reference to `ref` attribute
 
 Want to improve you React knowledge further? Follow [A Simple Explanation of React.useEffect()](/react-useeffect-explanation/).  
 
-*Challenge: write a custom hook that works as `useEffect()`, only that it doesn't invoke the callback after initial rendering (Hint: you need to use `useRef()`). Share your solution in a comment below!*
+*Challenge: write a custom hook `useEffectSkipFirstRender()` that works as `useEffect()`, only that it doesn't invoke the callback after initial rendering (Hint: you need to use `useRef()`). Share your solution in a comment below!*
