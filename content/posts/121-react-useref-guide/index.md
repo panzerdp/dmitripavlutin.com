@@ -226,7 +226,7 @@ function InputFocus() {
 
 `const inputRef = useRef()` creates a reference to hold the input element.  
 
-`inputRef` is then assign to `ref` attribute of the input field: `<input ref={inputRef} type="text" />`. 
+`inputRef` is then assigned to `ref` attribute of the input field: `<input ref={inputRef} type="text" />`. 
 
 React then, after mounting, sets `inputRef.current` to be the input element. Now you can set the focus to the input programatically: `inputRef.current.focus()`.  
 
