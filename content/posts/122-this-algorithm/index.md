@@ -22,11 +22,9 @@ Ready? Let's begin!
 
 ## 1. *this* algorithm
 
-**ThisValue(func)**:
+The formal definition of `ThisValue(func)` that returns `this` value of an arbitrary invoked function `func`.
 
-The formal definition of `ThisValue(func)` that returns `this` value of an arbitrary function `func`.
-
-
+**ThisValueOfFunction(func)**:
 
 1. If `func` is an *arrow function*, then  
 
@@ -47,21 +45,70 @@ The formal definition of `ThisValue(func)` that returns `this` value of an arbit
         1. let `newObject` be the newly constructed object `newObject = new func()`  
         * `return newObject`  
 
-    * 
+    * Else if `func` is *invoked indirectly*, then
+        
+        1. let `thisArg` be the argument of `func.call(thisArg)` or `func.apply(thisArg)`
+        * `return thisArg`
 
     * Else if `func` is *invoked as a method*, then
 
         1. let `owningObject` be the object upon which `func` is invoked on `owningObject.func()`
         * `return owningObject`
 
-## 2. Examples
+    * Else if `func` is *simply invoked*, then
+        1. if *strict mode* is enabled, then `return undefined`
+        * else `return globalObject`
 
-### 2.1 Arrow function
+### 2.1 Defining the terms
 
-### 2.2 Nested arrow function
+The algorithm uses a plenty of JavaScript terms. 
 
-### 2.3 Regular function invocation
+A) *An arrow function* is a function defined using the fat arrow syntax `=>`. Example of an arrow function:
 
-### 2.4 *new* objects
+```javascript
+const sum = (number1, number2) => {
+  return number1 + number2;
+}
+```
 
-## 3. Summary
+B) *A bound function* is a function created from invoking the method `originalFunc.bind(thisArg, arg1, ..., argN)` upon an original function. Example of a bound function:
+
+```javascript
+function originalFunction() {
+  console.log(this); // logs { prop: 'Value' }
+}
+
+const boundFunction = originalFunction.bind({ prop: 'Value' });
+```
+
+C) *A regular function* is a simple function being defined using `function` keyword or using a shorthand definition on an object. Examples of regular functions:
+
+```javascript
+function regularFunction(who) {
+  return `Hello, ${who}!`;
+}
+
+const object = {
+  anotherRegularFunction(who) {
+    return `Good bye, ${who}!`
+  }
+}
+```
+
+## 3. Examples
+
+### Example 1
+
+### Example 2
+
+### Example 3
+
+## 4. Homework
+
+### Exersize 1
+
+### Exersize 2
+
+### Exersize 3
+
+## 5. Summary
