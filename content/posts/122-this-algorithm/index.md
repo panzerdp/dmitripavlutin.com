@@ -62,11 +62,11 @@ The formal definition of `ThisValue(func)` that returns `this` value of an arbit
         1. let `owningObject` be the object upon which `func` is invoked on `owningObject.func()`
         * `return owningObject`
 
-    * Else if `func` is *simply invoked*, then
+    * Else if `func` is *invoked regularly*, then
         1. If *strict mode* is enabled, then `return undefined`
         * Else `return globalObject`
 
-### 2.1 Defining the terms
+### 1.1 The terms used in the algorithm
 
 The algorithm uses a plenty of JavaScript terms. If you aren't familiar with something, expand and look at the explanation.  
 
@@ -90,7 +90,7 @@ const sum = (number1, number2) => {
 
 ```javascript
 function originalFunction() {
-  console.log(this); // logs { prop: 'Value' }
+  // ...
 }
 
 const boundFunction = originalFunction.bind({ prop: 'Value' });
@@ -119,7 +119,6 @@ const object = {
   <summary>constructor()</summary>
 
 *constructor()* is a special method inside of a `class` that initializes the class instance.
-
 
 ```javascript
 class SomeClass() {
@@ -154,13 +153,105 @@ function someFunction() {
 </details>
 
 <details>
-  <summary></summary>
+  <summary>Invocation</summary>
 
+*Invocation* of a function is just calling the function with some arguments.  
+
+```javascript{4-6,13,20}
+function sum(number1, number2) {
+  return number1 + number2;
+}
+sum(1, 3);           // Invocation
+sum.call({}, 3, 4);  // Invocation
+sum.apply({}, 5, 9); // Invocation
+
+const obj = {
+  method() {
+    return 'Some method';
+  }
+};
+obj.method(); // Invocation
+
+class SomeClass {
+  constructor(prop) {
+    this.prop = prop;
+  } 
+}
+const instance = new SomeClass('Value'); // Invocation
+```
 </details>
 
 <details>
-  <summary></summary>
+  <summary>Constructor invocation</summary>
 
+*Constructor invocation* happens when a function or class is invoked using `new` keyword.  
+
+```javascript{4,11}
+function MyCat(name) {
+  this.name = name;
+}
+const fluffy = new MyCat('Fluffy'); // Constructor invocation
+
+class MyDog {
+  constructor(name) {
+    this.name = name;
+  }
+}
+const rex = new MyDog('Rex'); // Constructor invocation
+```
+</details>
+
+<details>
+  <summary>Indirect invocation</summary>
+
+*An indirect invocation* of a function happens when that function is called using `func.call(thisArg, ...)` or `func.apply(thisArg, ...)` methods.  
+
+```javascript
+function sum(number1, number2) {
+  return number1 + number2;
+}
+
+sum.call({}, 1, 2);  // Indirect invocation
+sum.apply({}, 3, 5); // Indirect invocation
+```
+</details>
+
+<details>
+  <summary>Method invocation</summary>
+
+*Method invocation* happens when a function is invoked in a property accessor expression `object.method()`.  
+
+```javascript
+const object = {
+  greeting(who) {
+    return `Hello, ${who}!`
+  }
+};
+
+object.greeting('World');    // Method invocation
+object['greeting']('World'); // Method invocation
+```
+</details>
+
+<details>
+  <summary>Regular invocation</summary>
+
+*Regular invocation* happen when a variable containing the function is used for invocation.  
+
+```javascript
+function sum(number1, number2) {
+  return number1 + number2;
+}
+
+sum(1, 4); // Regular invocation
+```
+</details>
+
+<details>
+  <summary>Strict mode</summary>
+
+*Strict mode* is a special mode imposed upon running JavaScript code having some special restrictions. The strict mode is enabled by adding `'use strict'` directive at 
+the start of the script or at the top of a function scope.  
 </details>
 
 ## 3. Examples
