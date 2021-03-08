@@ -269,7 +269,7 @@ myFunc();
 
 Try the demo.
 
-**thisValue = ThisValueOfFunction(myFunc, "regular")**
+**ThisValueOfFunction(myFunc, "regular")**
 
 `myFunc` is an arrow function: thus matching the point *1* in the algorithm. Also `myFunc` is defined in the outermost scope, matching the point *1.1*.  
 
@@ -317,7 +317,7 @@ fluffy.getName();
 
 Try the demo.
 
-**thisValueOfGetName = ThisValueOfFunction(getName, "as a method")**
+**ThisValueOfFunction(getName, "as a method")**
 
 `getName()` is an arrow function, thus the point *1* of the algorithm is applied. Then the point *1.2* matches, because `MyCat` is the outer function of `getName()`.  
 
@@ -325,7 +325,7 @@ The point *1.2.2* suggest that `this` value of `getName()` arrow function equals
 
 So, let's run the algorithm again upon `MyCat` function (a recursive call of the algorithm!).  
 
-**thisValueOfMyCat = ThisValueOfFunction(MyCat, "as a constructor")**
+**ThisValueOfFunction(MyCat, "as a constructor")**
 
 `MyCat` function is a regular function, thus the point *4* of the algorithm is applied. 
 
