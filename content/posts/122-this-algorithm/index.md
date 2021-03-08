@@ -261,13 +261,15 @@ the start of the script or at the top of a function scope.
 
 ```javascript{2}
 const myFunc = () => {
-  console.log(this);
+  console.log(this); // logs `window`
 };
 
-myFunc(); // logs `window`
+myFunc();
 ```
 
 Try the demo.
+
+**thisValue = ThisValueOfFunction(myFunc, "regular")**
 
 `myFunc` is an arrow function: thus matching the point *1* in the algorithm. Also `myFunc` is defined in the outermost scope, matching the point *1.1*.  
 
@@ -278,20 +280,22 @@ The point *1.1* of the algorithm says `return globalObject`: meaning that `this`
 ```javascript{3}
 const object = {
   method() {
-    console.log(this);
-  }
+    console.log(this); // logs { method() {...} }
+  } 
 };
 
-object.method(); // logs { method() {...} }
+object.method();
 ```
 
 Try the demo.
+
+**thisValue = ThisValueOfFunction(object.method, "as a method")**
 
 `method()`, while being a property of the `object`, is a regular function. The point *4* of the algorithm is matched.  
 
 `object.method()` is a method invocation because of the property accessor usage: thus the point *4.3* is matched.  
 
-Then, according to point *4.3*, `this` value inside `method()` equals `object`.  
+Then, according to point *4.3*, `this` value inside `method()` equals the owining object &mdash; `object`.  
 
 ### Example 3
 
@@ -300,7 +304,7 @@ function MyCat(name) {
   this.name = name;
 
   const getName = () => {
-    console.log(this);
+    console.log(this); // logs { name: 'Flufyy', getName() {...} }
     return this.name;
   }
 
@@ -308,10 +312,12 @@ function MyCat(name) {
 }
 
 const fluffy = new MyCat('Fluffy');
-fluffy.getName(); // logs { name: 'Flufyy', getName() {...} }
+fluffy.getName();
 ```
 
 Try the demo.
+
+**thisValueOfGetName = ThisValueOfFunction(getName, "as a method")**
 
 `getName()` is an arrow function, thus the point *1* of the algorithm is applied. Then the point *1.2* matches, because `MyCat` is the outer function of `getName()`.  
 
@@ -319,16 +325,70 @@ The point *1.2.2* suggest that `this` value of `getName()` arrow function equals
 
 So, let's run the algorithm again upon `MyCat` function (a recursive call of the algorithm!).  
 
-`MyCat` function is a regular function, thus the point *4* of the algorithm is applied. Because `MyCat` was invoked as a constructor `new MyCat('Fluffy')`, the point *4.1* is applied. Finally, according to points *4.1.1* and *4.1.2*, `this` value inside `MyCat` equals to the constructed object: `fluffy`.  
+**thisValueOfMyCat = ThisValueOfFunction(MyCat, "as a constructor")**
+
+`MyCat` function is a regular function, thus the point *4* of the algorithm is applied. 
+
+Because `MyCat` was invoked as a constructor `new MyCat('Fluffy')`, the point *4.1* is applied. Finally, according to points *4.1.1* and *4.1.2*, `this` value inside `MyCat` equals to the constructed object: `fluffy`.  
 
 And, returning back to the arrow function's point *1.2.2*, `this` inside of the `getName()` equals `this` of the `MyCat` &mdash; which is finally `fluffy`.  
 
 ## 3. Homework
 
+The best way to understand the presented algorithm is to try it by yourself. I suggest you to try the following 3 execises in determining `this` value.  
+
 ### Exercise 1
+
+```javascript{2}
+const myRegularFunc = function() {
+  console.log(this); // logs ???
+};
+
+myRegularFunc();
+```
+
+*How would the algorithm determine `this` value inside `myRegularFunc()`? Write the step by step evaluation.*
 
 ### Exercise 2
 
+```javascript{4}
+class MyCat {
+  constructor(name) {
+    this.name = name;
+    console.log(this); // logs ???
+  }
+}
+
+const myCat = new MyCat('Lucy');
+```
+
+*How would the algorithm determine `this` value inside `new MyCat('Lucy')`? Write the step by step evaluation.*
+
 ### Exercise 3
 
+```javascript{6}
+const object = {
+  name: 'Batman',
+
+  getName() {
+    const arrow = () => {
+      console.log(this); // ???
+      return this.name;
+    };
+
+    return arrow();
+  };
+}
+
+object.getName();
+```
+
+*How would the algorithm determine `this` value inside `arrow()` function? Write the step by step evaluation.*
+
 ## 4. Summary
+
+In this post I presented a formal algorithm to determine the value of `this` inside of any kind of function invoked in any kind of way.  
+
+While the algorithm is kind of difficult at first, if you try to understand the examples I presented, you would soon realize how easy is to apply the algorithm.  
+
+*Have any questions on the algorithm? Write a comment below!*
