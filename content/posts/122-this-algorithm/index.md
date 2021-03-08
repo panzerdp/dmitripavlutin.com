@@ -34,7 +34,7 @@ certain way `invocationType`.
     1. If `func` is defined in the *outermost scope*, then `return globalObject`
     * Else
         1. let `outerFunc` be the *outer function* of `func`  
-        * `return ThisValue(outerFunc)`  
+        * `return ThisValueOfFunction(outerFunc, outerInvocationType)`  
 
 * Else if `func` is a *bound function* of an `originFunc` function, then  
 
