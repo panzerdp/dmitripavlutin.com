@@ -24,9 +24,10 @@ Ready? Let's begin!
 
 ## 1. *this* algorithm
 
-The formal definition of `ThisValue(func)` that returns `this` value of an arbitrary invoked function `func`.
+The formal definition of `ThisValueOfFunction(func, invocationType)` that returns `this` value of an arbitrary function `func` invoked in a
+certain way `invocationType`.
 
-**ThisValueOfFunction(func)**:
+**ThisValueOfFunction(func, invocationType)**:
 
 1. If `func` is an *arrow function*, then  
 
@@ -47,22 +48,22 @@ The formal definition of `ThisValue(func)` that returns `this` value of an arbit
 
 * Else if `func` is a *regular function*, then  
 
-    1. If `func` is *invoked as a constructor*, then  
+    1. If `invocationType` is *as a constructor*, then  
 
         1. let `newObject` be the newly constructed object `newObject = new func()`  
         * `return newObject`  
 
-    * Else if `func` is *invoked indirectly*, then
+    * Else if `invocationType` is *indirectly*, then
         
         1. let `thisArg` be the argument of `func.call(thisArg)` or `func.apply(thisArg)`
         * `return thisArg`
 
-    * Else if `func` is *invoked as a method*, then
+    * Else if `invocationType` is *as a method*, then
 
         1. let `owningObject` be the object upon which `func` is invoked on `owningObject.func()`
         * `return owningObject`
 
-    * Else if `func` is *invoked regularly*, then
+    * Else if `invocationType` is *regular*, then
         1. If *strict mode* is enabled, then `return undefined`
         * Else `return globalObject`
 
@@ -254,20 +255,80 @@ sum(1, 4); // Regular invocation
 the start of the script or at the top of a function scope.  
 </details>
 
-## 3. Examples
+## 2. Examples
 
 ### Example 1
 
+```javascript{2}
+const myFunc = () => {
+  console.log(this);
+};
+
+myFunc(); // logs `window`
+```
+
+Try the demo.
+
+`myFunc` is an arrow function: thus matching the point *1* in the algorithm. Also `myFunc` is defined in the outermost scope, matching the point *1.1*.  
+
+The point *1.1* of the algorithm says `return globalObject`: meaning that `this` value inside `myFunc` is the global object &mdash; `window` (in a browser environment).  
+
 ### Example 2
+
+```javascript{3}
+const object = {
+  method() {
+    console.log(this);
+  }
+};
+
+object.method(); // logs { method() {...} }
+```
+
+Try the demo.
+
+`method()`, while being a property of the `object`, is a regular function. The point *4* of the algorithm is matched.  
+
+`object.method()` is a method invocation because of the property accessor usage: thus the point *4.3* is matched.  
+
+Then, according to point *4.3*, `this` value inside `method()` equals `object`.  
 
 ### Example 3
 
-## 4. Homework
+```javascript{5}
+function MyCat(name) {
+  this.name = name;
 
-### Exersize 1
+  const getName = () => {
+    console.log(this);
+    return this.name;
+  }
 
-### Exersize 2
+  this.getName = getName;
+}
 
-### Exersize 3
+const fluffy = new MyCat('Fluffy');
+fluffy.getName(); // logs { name: 'Flufyy', getName() {...} }
+```
 
-## 5. Summary
+Try the demo.
+
+`getName()` is an arrow function, thus the point *1* of the algorithm is applied. Then the point *1.2* matches, because `MyCat` is the outer function of `getName()`.  
+
+The point *1.2.2* suggest that `this` value of `getName()` arrow function equals `this` value of the outer function: `MyCat`.  
+
+So, let's run the algorithm again upon `MyCat` function (a recursive call of the algorithm!).  
+
+`MyCat` function is a regular function, thus the point *4* of the algorithm is applied. Because `MyCat` was invoked as a constructor `new MyCat('Fluffy')`, the point *4.1* is applied. Finally, according to points *4.1.1* and *4.1.2*, `this` value inside `MyCat` equals to the constructed object: `fluffy`.  
+
+And, returning back to the arrow function's point *1.2.2*, `this` inside of the `getName()` equals `this` of the `MyCat` &mdash; which is finally `fluffy`.  
+
+## 3. Homework
+
+### Exercise 1
+
+### Exercise 2
+
+### Exercise 3
+
+## 4. Summary
