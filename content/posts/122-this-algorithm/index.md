@@ -12,11 +12,13 @@ type: post
 
 A confusing aspect of JavaScript language you would probably hear often is `this` keyword.  
 
-`this` &mdash; the function invocation conent &mdash; is confusing because it behaves differently depending on how the function is invoked.  
+`this` &mdash; the function invocation context in JavaScript &mdash; behaves differently depending on how the function is invoked.  
 
 So, if you have hard time in determining the value of `this` keyword in a particular situation, I've created an easy algorithm for you to follow.  
 
-While I've tried to make the algorithm as accessible as possible, I recommend reading it multiple times. Then follow the examples where the algorithm is put into practice &mdash; the examples help greatly to solidify the algorithm. Finally, try the homework examples by yourself!
+While I made the algorithm as accessible as possible, I recommend reading it multiple times and understand the terms that it uses. 
+
+Then follow the examples where the algorithm is put into practice &mdash; the examples help greatly to solidify the algorithm. Finally, try the homework exercises by yourself!
 
 Ready? Let's begin!  
 
@@ -28,7 +30,7 @@ The formal definition of `ThisValue(func)` that returns `this` value of an arbit
 
 1. If `func` is an *arrow function*, then  
 
-    1. If `func` is defined in the outermost scope, then `return globalObject`
+    1. If `func` is defined in the *outermost scope*, then `return globalObject`
     * Else
         1. let `outerFunc` be the *outer function* of `func`  
         * `return ThisValue(outerFunc)`  
@@ -37,6 +39,11 @@ The formal definition of `ThisValue(func)` that returns `this` value of an arbit
 
     1. let `thisArg` be the argument of `func = originFunc.bind(thisArg)`  
     * `return thisArg`  
+
+* Else if `func` is a `constructor()` method inside of a *class* `SomeClass`, then  
+    
+    1. let `instance` be the instance of the class `instance = new SomeClass()`
+    * `return instance`
 
 * Else if `func` is a *regular function*, then  
 
@@ -56,14 +63,17 @@ The formal definition of `ThisValue(func)` that returns `this` value of an arbit
         * `return owningObject`
 
     * Else if `func` is *simply invoked*, then
-        1. if *strict mode* is enabled, then `return undefined`
-        * else `return globalObject`
+        1. If *strict mode* is enabled, then `return undefined`
+        * Else `return globalObject`
 
 ### 2.1 Defining the terms
 
-The algorithm uses a plenty of JavaScript terms. 
+The algorithm uses a plenty of JavaScript terms. If you aren't familiar with something, expand and look at the explanation.  
 
-A) *An arrow function* is a function defined using the fat arrow syntax `=>`. Example of an arrow function:
+<details>
+  <summary>Arrow function</summary>
+
+*An arrow function* is a function defined using the fat arrow syntax `=>`. Example of an arrow function:
 
 ```javascript
 const sum = (number1, number2) => {
@@ -71,7 +81,12 @@ const sum = (number1, number2) => {
 }
 ```
 
-B) *A bound function* is a function created from invoking the method `originalFunc.bind(thisArg, arg1, ..., argN)` upon an original function. Example of a bound function:
+</details>
+
+<details>
+  <summary>Bound function</summary>
+
+*A bound function* is a function created from invoking the method `myFunc.bind(thisArg, arg1, ..., argN)` upon a function. Example of a bound function:
 
 ```javascript
 function originalFunction() {
@@ -80,8 +95,12 @@ function originalFunction() {
 
 const boundFunction = originalFunction.bind({ prop: 'Value' });
 ```
+</details>
 
-C) *A regular function* is a simple function being defined using `function` keyword or using a shorthand definition on an object. Examples of regular functions:
+<details>
+  <summary>Regular function</summary>
+
+*A regular function* is a simple JavaScript function being defined using `function` keyword or using a shorthand definition on an object. Examples of regular functions:
 
 ```javascript
 function regularFunction(who) {
@@ -92,8 +111,57 @@ const object = {
   anotherRegularFunction(who) {
     return `Good bye, ${who}!`
   }
+};
+```
+</details>
+
+<details>
+  <summary>constructor()</summary>
+
+*constructor()* is a special method inside of a `class` that initializes the class instance.
+
+
+```javascript
+class SomeClass() {
+  constructor(prop) {
+    this.prop = prop;
+  }
 }
 ```
+</details>
+
+<details>
+  <summary>Outermost scope</summary>
+
+*The outermost scope* is the top scope that doesn't have an outer scope.  
+
+```javascript
+// The outermost scope
+let a = 1;
+
+function someFunction() {
+  // someFunction() scope
+  // Not the outermost scope
+  let b = 1;
+}
+```
+</details>
+
+<details>
+  <summary>Global object</summary>
+
+*The global object* is the object that always exists in the global scope. `window` is the global object in a browser environment.
+</details>
+
+<details>
+  <summary></summary>
+
+</details>
+
+<details>
+  <summary></summary>
+
+</details>
 
 ## 3. Examples
 
