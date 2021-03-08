@@ -236,7 +236,7 @@ object['greeting']('World'); // Method invocation
 <details>
   <summary>Regular invocation</summary>
 
-*Regular invocation* happen when a variable containing the function is used for invocation.  
+*Regular invocation* happens when the sole variable containing the function is used for invocation `func(...)`.  
 
 ```javascript
 function sum(number1, number2) {
