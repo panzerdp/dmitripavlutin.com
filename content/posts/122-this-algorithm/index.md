@@ -14,7 +14,7 @@ A confusing aspect of JavaScript language you would probably hear often is `this
 
 `this` &mdash; the function invocation context in JavaScript &mdash; behaves differently depending on how the function is invoked.  
 
-So, if you have hard time in determining the value of `this` keyword in a particular situation, I've created an easy algorithm for you to follow.  
+So, if you have a hard time determining the value of `this` keyword in a particular situation, I've created an easy algorithm for you to follow.  
 
 While I made the algorithm as accessible as possible, I recommend reading it multiple times and understand the terms that it uses. 
 
@@ -69,7 +69,7 @@ certain way `invocationType`.
 
 ### 1.1 The terms used in the algorithm
 
-The algorithm uses a plenty of JavaScript terms. If you aren't familiar with something, expand and look at the explanation.  
+The algorithm uses plenty of JavaScript terms. If you aren't familiar with something, expand and look at the explanation.  
 
 <details>
   <summary>Arrow function</summary>
@@ -251,8 +251,7 @@ sum(1, 4); // Regular invocation
 <details>
   <summary>Strict mode</summary>
 
-*Strict mode* is a special mode imposed upon running JavaScript code having some special restrictions. The strict mode is enabled by adding `'use strict'` directive at 
-the start of the script or at the top of a function scope.  
+*Strict mode* is a special mode imposed upon running JavaScript code having some special restrictions. The strict mode is enabled by adding `'use strict'` directive at the start of the script or the top of the function scope.  
 </details>
 
 ## 2. Examples
@@ -327,7 +326,7 @@ So, let's run the algorithm again upon `MyCat` function (a recursive call of the
 
 **ThisValueOfFunction(MyCat, "as a constructor")**
 
-`MyCat` function is a regular function, thus the point *4* of the algorithm is applied. 
+`MyCat` is a regular function, thus the point *4* of the algorithm is applied. 
 
 Because `MyCat` was invoked as a constructor `new MyCat('Fluffy')`, the point *4.1* is applied. Finally, according to points *4.1.1* and *4.1.2*, `this` value inside `MyCat` equals to the constructed object: `fluffy`.  
 
@@ -335,7 +334,7 @@ And, returning back to the arrow function's point *1.2.2*, `this` inside of the 
 
 ## 3. Homework
 
-The best way to understand the presented algorithm is to try it by yourself. I suggest you to try the following 3 execises in determining `this` value.  
+The best way to understand the presented algorithm is to try it by yourself. I suggest you try the following 3 exercises in determining `this` value.  
 
 ### Exercise 1
 
@@ -347,7 +346,7 @@ const myRegularFunc = function() {
 myRegularFunc();
 ```
 
-*How would the algorithm determine `this` value inside `myRegularFunc()`? Write the step by step evaluation.*
+*How would the algorithm determine `this` value inside `myRegularFunc()`? Write the step-by-step evaluation.*
 
 ### Exercise 2
 
@@ -362,7 +361,7 @@ class MyCat {
 const myCat = new MyCat('Lucy');
 ```
 
-*How would the algorithm determine `this` value inside `new MyCat('Lucy')`? Write the step by step evaluation.*
+*How would the algorithm determine `this` value inside `new MyCat('Lucy')`? Write the step-by-step evaluation.*
 
 ### Exercise 3
 
@@ -383,11 +382,11 @@ const object = {
 object.getName();
 ```
 
-*How would the algorithm determine `this` value inside `arrow()` function? Write the step by step evaluation.*
+*How would the algorithm determine `this` value inside `arrow()` function? Write the step-by-step evaluation.*
 
 ## 4. Summary
 
-In this post I presented a formal algorithm to determine the value of `this` inside of any kind of function invoked in any kind of way.  
+In this post, I presented a formal algorithm to determine the value of `this` inside of any kind of function invoked in any kind of way.  
 
 While the algorithm is kind of difficult at first, if you try to understand the examples I presented, you would soon realize how easy is to apply the algorithm.  
 
