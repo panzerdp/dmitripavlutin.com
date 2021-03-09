@@ -41,6 +41,12 @@
     }
   }
 
+  ol {
+    p {
+      margin: 0.5rem 0;
+    }
+  }
+
   a[href^="https://codesandbox.io"] {
     padding-left: 26px;
     background: left center / 22px no-repeat url('/icons/codesandbox.svg');
