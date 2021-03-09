@@ -10,22 +10,21 @@ recommended: ['gentle-explanation-of-this-in-javascript', 'javascript-this-inter
 type: post
 ---
 
-A confusing aspect of JavaScript language you would probably hear often is `this` keyword.  
-
-`this` &mdash; the function invocation context in JavaScript &mdash; behaves differently depending on how the function is invoked.  
+Every JavaScript developer, including myself, has been struggling in understanding how `this` keyword works. 
 
 So, if you have a hard time determining the value of `this` keyword in a particular situation, I've created an easy algorithm for you to follow.  
 
-While I made the algorithm as accessible as possible, I recommend reading it multiple times and understand the terms that it uses. 
+While I made the algorithm as accessible as possible, I recommend reading it multiple times and understand the terms that it uses.  
 
-Then follow the examples where the algorithm is put into practice &mdash; the examples help greatly to solidify the algorithm. Finally, try the homework exercises by yourself!
+Also you fill find in the post examples showing step-by-step evaluation of the algorithm for particular situations. Finally, try the homework exercises by yourself!
+
+*Note: If you don't understand the algorithm from the first time: that's expected! Get back to the post later and try again until you crack it.*  
 
 Ready? Let's begin!  
 
 ## 1. *this* algorithm
 
-The formal definition of `ThisValueOfFunction(func, invocationType)` that returns `this` value of an arbitrary function `func` invoked in a
-certain way `invocationType`.
+The formal definition of `ThisValueOfFunction(func, invocationType)` that returns `this` value a function `func` invoked in a certain way `invocationType`.
 
 **ThisValueOfFunction(func, invocationType)**:
 
@@ -101,7 +100,7 @@ const boundFunction = originalFunction.bind({ prop: 'Value' });
 <details>
   <summary>Regular function</summary>
 
-*A regular function* is a simple JavaScript function being defined using `function` keyword or using a shorthand definition on an object. Examples of regular functions:
+*A regular function* is a simple JavaScript function defined using `function` keyword or using a shorthand definition on an object. Examples of regular functions:
 
 ```javascript
 function regularFunction(who) {
@@ -150,7 +149,7 @@ function someFunction() {
 <details>
   <summary>Global object</summary>
 
-*The global object* is the object that always exists in the global scope. `window` is the global object in a browser environment.
+*The global object* is the object that always exists in the global scope. `window` is the global object in a browser environment, `global` in Node environment.  
 </details>
 
 <details>
@@ -205,7 +204,7 @@ const rex = new MyDog('Rex'); // Constructor invocation
 <details>
   <summary>Indirect invocation</summary>
 
-*An indirect invocation* of a function happens when that function is called using `func.call(thisArg, ...)` or `func.apply(thisArg, ...)` methods.  
+*An indirect invocation* of happens when a function is called using `func.call(thisArg, ...)` or `func.apply(thisArg, ...)` methods.  
 
 ```javascript
 function sum(number1, number2) {
@@ -288,7 +287,7 @@ object.method();
 
 Try the demo.
 
-**thisValue = ThisValueOfFunction(object.method, "as a method")**
+**ThisValueOfFunction(object.method, "as a method")**
 
 `method()`, while being a property of the `object`, is a regular function. The point *4* of the algorithm is matched.  
 
@@ -334,7 +333,7 @@ And, returning back to the arrow function's point *1.2.2*, `this` inside of the 
 
 ## 3. Homework
 
-The best way to understand the presented algorithm is to try it by yourself. I suggest you try the following 3 exercises in determining `this` value.  
+The best way to understand the algorithm is trying it by yourself. Follow the 3 exercises in determining `this` value.  
 
 ### Exercise 1
 
@@ -386,8 +385,8 @@ object.getName();
 
 ## 4. Summary
 
-In this post, I presented a formal algorithm to determine the value of `this` inside of any kind of function invoked in any kind of way.  
+In this post, I presented an algorithm to determine the value of `this` inside of a function invoked in a certain way.  
 
-While the algorithm is kind of difficult at first, if you try to understand the examples I presented, you would soon realize how easy is to apply the algorithm.  
+While the algorithm might be challenging at first, if you understand the step-by-step examples, you will realize how easy is to apply the algorithm to finally understand how `this` works in JavaScript.  
 
 *Have any questions on the algorithm? Write a comment below!*
