@@ -1,8 +1,8 @@
 ---
 title: 'A Helpful Algorithm to Determine "this" value in JavaScript'
 description: 'Struggle finding "this" value? I have created an universal algorithm to help you find "this" in any situation.'
-published: "2021-03-09T12:00Z"
-modified: "2021-03-09T12:00Z"
+published: "2021-03-09T11:00Z"
+modified: "2021-03-09T11:00Z"
 thumbnail: "./images/cover-3.png"
 slug: javascript-this-algorithm
 tags: ['javascript', 'this', 'function']
