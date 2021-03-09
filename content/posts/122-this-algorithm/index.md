@@ -1,6 +1,6 @@
 ---
 title: 'An Easy Algorithm to Determine "this" value in JavaScript'
-description: 'Struggle determining "this" value? I have created an universal algorithm to help you find "this" in any situation.'
+description: 'Struggle finding "this" value? I have created an universal algorithm to help you find "this" in any situation.'
 published: "2021-03-09T12:00Z"
 modified: "2021-03-09T12:00Z"
 thumbnail: "./images/cover-2.png"
@@ -12,11 +12,11 @@ type: post
 
 Every JavaScript developer, including myself, has been struggling in understanding how `this` keyword works. 
 
-So, if you struggle determining the value of `this` keyword in a particular situation, I've created a universal algorithm for you to follow.  
+So, if you struggle to determine the value of `this` keyword in a particular situation, I've created a universal algorithm for you to follow.  
 
 While I made the algorithm as accessible as possible, I recommend reading it multiple times and understand the terms that it uses.  
 
-Also I'll show you step-by-step evaluation of the algorithm for particular situations. Finally, try the homework exercises by yourself!
+Also, I'll show you a step-by-step evaluation of the algorithm for particular situations. Finally, try the homework exercises by yourself!
 
 *Note: If you don't understand the algorithm from the first time: that's expected! Get back to the post later and try again until you crack it.*  
 
@@ -59,8 +59,8 @@ The formal definition of `ThisValueOfFunction(func, invocationType)` that return
 
     * Else if `invocationType` is *as a method*, then
 
-        1. let `owningObject` be the object upon which `func` is invoked on `owningObject.func()`
-        * `return owningObject`
+        1. let `object` be the object upon which `func` is invoked on `object.func()`
+        * `return object`
 
     * Else if `invocationType` is *regular*, then
         1. If *strict mode* is enabled, then `return undefined`
@@ -142,6 +142,22 @@ function someFunction() {
   // someFunction() scope
   // Not the outermost scope
   let b = 1;
+}
+```
+</details>
+
+<details>
+  <summary>Outer function</summary>
+
+*The outer function* contains another function within its scope.  
+
+```javascript
+// outerFunction() is the outer function of myFunction()
+function outerFunction() {
+
+  function myFunction() {
+
+  }
 }
 ```
 </details>
@@ -293,7 +309,7 @@ object.method();
 
 `object.method()` is a method invocation because of the property accessor usage: thus the point *4.3* is matched.  
 
-Then, according to point *4.3*, `this` value inside `method()` equals the owining object &mdash; `object`.  
+Then, according to point *4.3*, `this` value inside `method()` equals the owning object of the method invocation (`object.method()`) &mdash; `object`.  
 
 ### Example 3
 
@@ -319,9 +335,9 @@ fluffy.getName();
 
 `getName()` is an arrow function, thus the point *1* of the algorithm is applied. Then the point *1.2* matches, because `MyCat` is the outer function of `getName()`.  
 
-The point *1.2.2* suggest that `this` value of `getName()` arrow function equals `this` value of the outer function: `MyCat`.  
+The point *1.2.2* says that `this` value inside `getName()` arrow function equals `this` value of the outer function: `MyCat`.  
 
-So, let's run the algorithm again upon `MyCat` function (a recursive call of the algorithm!).  
+So, let's run the algorithm recursively again on `MyCat` function &mdash; `ThisValueOfFunction(MyCat, "as a constructor")`.  
 
 **ThisValueOfFunction(MyCat, "as a constructor")**
 
@@ -333,7 +349,7 @@ And, returning back to the arrow function's point *1.2.2*, `this` inside of the 
 
 ## 3. Homework
 
-The best way to understand the algorithm is trying it by yourself. Follow the 3 exercises in determining `this` value.  
+The best way to understand the algorithm is by trying it yourself. Follow the 3 exercises in determining `this` value.  
 
 ### Exercise 1
 
@@ -385,8 +401,8 @@ object.getName();
 
 ## 4. Summary
 
-In this post, I presented an universal algorithm to determine the value of `this` inside of an invoked function.  
+In this post, I presented a universal algorithm to determine the value of `this` inside of an invoked function.  
 
 While the algorithm might be challenging at first, if you understand the step-by-step examples, you will realize how easy is to apply the algorithm.  
 
-*Have any questions on the algorithm? Write a comment below!*
+*Struggle applying the algorithm for a certain situation? Describe your case in a comment below!*
