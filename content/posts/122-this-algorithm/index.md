@@ -1,6 +1,6 @@
 ---
 title: 'An Easy Algorithm to Determine "this" value in JavaScript'
-description: 'An universal algorithm to determine "this" value in JavaScript.'
+description: 'Struggle determining "this" value? I have created an universal algorithm to help you find "this" in any situation.'
 published: "2021-03-09T12:00Z"
 modified: "2021-03-09T12:00Z"
 thumbnail: "./images/cover-2.png"
@@ -12,11 +12,11 @@ type: post
 
 Every JavaScript developer, including myself, has been struggling in understanding how `this` keyword works. 
 
-So, if you have a hard time determining the value of `this` keyword in a particular situation, I've created an easy algorithm for you to follow.  
+So, if you struggle determining the value of `this` keyword in a particular situation, I've created a universal algorithm for you to follow.  
 
 While I made the algorithm as accessible as possible, I recommend reading it multiple times and understand the terms that it uses.  
 
-Also you fill find in the post examples showing step-by-step evaluation of the algorithm for particular situations. Finally, try the homework exercises by yourself!
+Also I'll show you step-by-step evaluation of the algorithm for particular situations. Finally, try the homework exercises by yourself!
 
 *Note: If you don't understand the algorithm from the first time: that's expected! Get back to the post later and try again until you crack it.*  
 
@@ -265,7 +265,7 @@ const myFunc = () => {
 myFunc();
 ```
 
-Try the demo.
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/er2vf6a0/)
 
 **ThisValueOfFunction(myFunc, "regular")**
 
@@ -285,7 +285,7 @@ const object = {
 object.method();
 ```
 
-Try the demo.
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/yL90q6d4/)
 
 **ThisValueOfFunction(object.method, "as a method")**
 
@@ -313,7 +313,7 @@ const fluffy = new MyCat('Fluffy');
 fluffy.getName();
 ```
 
-Try the demo.
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/uL7xk804/)
 
 **ThisValueOfFunction(getName, "as a method")**
 
@@ -370,7 +370,7 @@ const object = {
 
   getName() {
     const arrow = () => {
-      console.log(this); // ???
+      console.log(this); // logs ???
       return this.name;
     };
 
@@ -385,8 +385,8 @@ object.getName();
 
 ## 4. Summary
 
-In this post, I presented an algorithm to determine the value of `this` inside of a function invoked in a certain way.  
+In this post, I presented an universal algorithm to determine the value of `this` inside of an invoked function.  
 
-While the algorithm might be challenging at first, if you understand the step-by-step examples, you will realize how easy is to apply the algorithm to finally understand how `this` works in JavaScript.  
+While the algorithm might be challenging at first, if you understand the step-by-step examples, you will realize how easy is to apply the algorithm.  
 
 *Have any questions on the algorithm? Write a comment below!*
