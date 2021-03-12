@@ -1,6 +1,6 @@
 ---
-title: "3 Ways to Check If an Object Has a Property in JavaScript"
-description: "The 3 ways to check if an object has a property in JavaScript: hasOwnProperty() method, in operator, comparing with undefined."
+title: "4 Ways to Check If an Object Has a Property in JavaScript"
+description: "The 4 ways to check if an object has a property in JavaScript: hasOwnProperty() method, in operator, comparing with undefined, double bang."
 published: "2020-06-16T09:00Z"
 modified: "2020-10-16T07:15Z"
 thumbnail: "./images/cover.png"
@@ -128,7 +128,20 @@ hero.name !== undefined; // => false
 
 Even if the property `name` exists (but has `undefined` value), `hero.name !== undefined` evaluates to `false`: which incorrectly indicates a missing property.  
 
-## 4. Summary
+## 4. Double bang
+
+Using !hero.name makes it truthy, but !!hero.name will return true if hero.name is defined.
+
+```javascript{6}
+const hero = {
+  name: 'Batman'
+};
+
+!!hero.name;     // => true
+!!hero.realName; // => false
+```
+
+## 5. Summary
 
 There are mainly 3 ways to check if the property exists.  
 
