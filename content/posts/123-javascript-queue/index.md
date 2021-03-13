@@ -46,7 +46,7 @@ Additionally, you can some more helper operations on the queue:
 
 What's important regaring all of the queue operations &mdash; enqueue, dequeue, peek and length &mdash; all these operations must be performed in constant time `O(1)`. 
 
-The constant time `O(1)` means that no matter the size of the queue (it can have 10 or 1 million items): the queue, dequeue, peek and length operations must be performed in the same time.  
+The constant time `O(1)` means that no matter the size of the queue (it can have 10 or 1 million items): the enqueue, dequeue, peek and length operations must be performed in the same time.  
 
 ## 3. Implementing a queue in JavaScript
 
