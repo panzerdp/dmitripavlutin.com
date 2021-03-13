@@ -318,7 +318,7 @@ function MyCat(name) {
   this.name = name;
 
   const getName = () => {
-    console.log(this); // logs { name: 'Flufyy', getName() {...} }
+    console.log(this); // logs { name: 'Fluffy', getName() {...} }
     return this.name;
   }
 
