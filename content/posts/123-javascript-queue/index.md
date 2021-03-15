@@ -32,6 +32,8 @@ This is the real-world example of a queue &mdash; and the queue data structure w
 
 The queue data structure is a type of First Input First Output (FIFO). The first item enqueued is the first item to dequeue.  
 
+![Queue Data Structure](./images/queue-10.svg)
+
 ## 2. The operations on queues
 
 No matter how the queue is implemented internally, its main purpose is to support 2 main operations:
@@ -46,7 +48,7 @@ Additionally, you can some more helper operations on the queue:
 
 What's important regaring all of the queue operations &mdash; enqueue, dequeue, peek and length &mdash; all these operations must be performed in constant time `O(1)`. 
 
-The constant time `O(1)` means that no matter the size of the queue (it can have 10 or 1 million items): the enqueue, dequeue, peek and length operations must be performed in the same time.  
+The constant time `O(1)` means that no matter the size of the queue (it can have 10 or 1 million items): the enqueue, dequeue, peek and length operations must be performed at relatively the same time.  
 
 ## 3. Implementing a queue in JavaScript
 
@@ -117,4 +119,4 @@ The queue has 2 main operations: enqueue and dequeue. Additionally queues can ha
 
 All queue operations have to be performed in constant time `O(1)`.  
 
-*Challenge: improve `dequeue()` and `peek()` to throw an error if these operations are performed on an empty queue. Write your solution in a comment below!*
+*Challenge: improve `dequeue()` and `peek()` methods to throw an error if performed on an empty queue. Write your solution in a comment below!*
