@@ -32,7 +32,7 @@ This is the real-world example of a queue &mdash; and the queue data structure w
 
 The queue data structure is a type of First Input First Output (FIFO). The first item enqueued is the first item to dequeue.  
 
-![Queue Data Structure](./images/queue-10.svg)
+![Queue Data Structure](./images/queue-11.svg)
 
 ## 2. The operations on queues
 
