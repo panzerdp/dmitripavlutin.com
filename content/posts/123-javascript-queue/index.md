@@ -15,18 +15,17 @@ Being a good developer requires knowledge from multiple disciplines.
 The first requirement is to know the programming language of your choice: and if you're reading this post,
 most likely your language of choice is JavaScript.  
 
-However, on top knowing the programming language, you also have to understand how to organize data to 
-easily and effectively manipulate it depending on your task. That's were the data structures come into play.  
+However, on top of knowing the programming language, you also have to understand how to organize data to easily and effectively manipulate it depending on your task. That's where the data structures come into play.  
 
 In this post, I'm going to describe the queue data structure, what operations you can perform on it, as well present you with a simple queue implementation in JavaScript.  
 
 ## 1. The queue data structure
 
-If you enjoy travelling (like I do), most likely you passed the check-in process at the airport. If there are a lot of travellers wanting to process the check-in, naturally a queue of people is formed at the check-in desk.  
+If you enjoy traveling (like I do), most likely you passed the check-in process at the airport. If there are a lot of travelers wanting to process the check-in, naturally a queue of people is formed at the check-in desk.  
 
 ![Airport Check-In Queue](./images/airport-queue.jpg)
 
-A traveller just entered the airport is going to *enqueue* into the queue, and the traveller that has just passed the check-in process at the desk is *dequeued* from the queue.  
+A traveler who just entered the airport is going to *enqueue* into the queue, and the traveler that has just passed the check-in process at the desk is *dequeued* from the queue.  
 
 This is the real-world example of a queue &mdash; and the queue data structure works the same way as the natural queue.  
 
@@ -36,11 +35,11 @@ The queue data structure is a type of First Input First Output (FIFO). The first
 
 ## 2. The operations on queues
 
-The queue supports 2 main operations: enqueue and dequeue. Additionally, you might find useful to have the peek and length operations.  
+The queue supports 2 main operations: enqueue and dequeue. Additionally, you might find it useful to have the peek and length operations.  
 
 ### 2.1 Enqueue operation
 
-The enqueue operations inserts an item at the end of the queue. The enqueued item becomes the tail of the queue.  
+The enqueue operation inserts an item at the end of the queue. The enqueued item becomes the tail of the queue.  
 
 ![Queue: Enqueue Operation](./images/enqueue.svg)
 
@@ -80,7 +79,7 @@ Length operation counts how many items the queue contains.
 
 ![Queue Data Structure: Length](./images/length.svg)
 
-The queue in the picture has 4 items: `4`, `6`, `2`, and `7`.  As result the queue length is `4`.  
+The queue in the picture has 4 items: `4`, `6`, `2`, and `7`.  As result, the queue length is `4`.  
 
 ```javascript
 queue.length; // => 4
@@ -94,7 +93,7 @@ The constant time `O(1)` means that no matter the size of the queue (it can have
 
 ## 3. Implementing a queue in JavaScript
 
-Let's look at a possible implementation of a queue data structure, while maintining the requeument that all queue operations to be performed in constract time `O(1)`.  
+Let's look at a possible implementation of a queue data structure while maintaining the requirement that all queue operations be performed in constant time `O(1)`.  
 
 ```javascript
 class Queue {
@@ -156,9 +155,9 @@ Thus the time complexity of the methods of `Queue` is constant time `O(1)`.
 
 ## 4. Summary
 
-The queue data structure is a type of First Input First Output (FIFO): the earliest enqeued item is the earlies to dequeue.  
+The queue data structure is a type of First Input First Output (FIFO): the earliest enqueued item is the earlies to dequeue.  
 
-The queue has 2 main operations: enqueue and dequeue. Additionally queues can have helper operations like peek and length.  
+The queue has 2 main operations: enqueue and dequeue. Additionally, queues can have helper operations like peek and length.  
 
 All queue operations have to be performed in constant time `O(1)`.  
 
