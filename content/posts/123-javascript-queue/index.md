@@ -10,15 +10,15 @@ recommended: ['gentle-explanation-of-this-in-javascript', 'javascript-this-inter
 type: post
 ---
 
-Being a good developer (including Frontend developer) requires knowledge from multiple disciplines.  
+Being a good developer requires knowledge from multiple disciplines.  
 
-The first requirement is to know the programming language that you've chosen: and if you're reading this post,
+The first requirement is to know the programming language of your choice: and if you're reading this post,
 most likely your language of choice is JavaScript.  
 
 However, on top knowing the programming language, you also have to understand how to organize data to 
 easily and effectively manipulate it depending on your task. That's were the data structures come into play.  
 
-In this post, I'm going to describe the queue data structure, what operations you can perform on it, as well present you with a simple implement in JavaScript.  
+In this post, I'm going to describe the queue data structure, what operations you can perform on it, as well present you with a simple queue implementation in JavaScript.  
 
 ## 1. The queue data structure
 
@@ -42,39 +42,45 @@ The queue supports 2 main operations: enqueue and dequeue. Additionally, you mig
 
 The enqueue operations inserts an item at the end of the queue. The enqueued item becomes the tail of the queue.  
 
+![Queue: Enqueue Operation](./images/enqueue.svg)
+
 ```javascript
 queue.enqueue(8);
 ```
 
-![Queue: Enqueue Operation](./images/enqueue.svg)
+The enqueue operation in the picture above inserts the item `8` at the tail of the queue. `8` becomes the tail of the queue.  
 
 ### 2.2 Dequeue operation
 
-The dequeue operation extracts the item at the head of the queue. The head of the queue becomes the next item in the queue.  
+The dequeue operation extracts the item at the head of the queue. The next item in the queue becomes the head.  
+
+![Queue Data Structure: Dequeue Operation](./images/dequeue.svg)
+
+In the picture above the dequeue operation returns and removes the item `7` from the queue, and the item `2` becomes the new head.  
 
 ```javascript
 queue.dequeue(); // => 7
 ```
 
-![Queue Data Structure: Dequeue Operation](./images/dequeue.svg)
-
 ### 2.3 Peek operation
 
 The peek operation reads the head of the queue, without altering the queue.  
+
+![Queue Data Structure: Peek Operation](./images/peek.svg)
+
+Item `7` is the head of the queue in the picture above. The peek operation simply returns the head &mdash; the item `7` &mdash; without modifying the queue.  
 
 ```javascript
 queue.peek(); // => 7
 ```
 
-![Queue Data Structure: Peek Operation](./images/peek.svg)
-
 ### 2.4 Queue length
 
-`queue.length` operation counts how many items the queue contains.  
+Length operation counts how many items the queue contains.  
 
 ![Queue Data Structure: Length](./images/length.svg)
 
-The queue in the picture above contains 4 items: `4`, `6`, `2`, and `7`.  As result the queue length is `4`.  
+The queue in the picture has 4 items: `4`, `6`, `2`, and `7`.  As result the queue length is `4`.  
 
 ```javascript
 queue.length; // => 4
@@ -149,7 +155,7 @@ Thus the time complexity of the methods of `Queue` is constant time `O(1)`.
 
 ## 4. Summary
 
-The queue data structure is a type of First Input First Output (FIFO). The first item enqueued is the first item to dequeue.  
+The queue data structure is a type of First Input First Output (FIFO): the earliest enqeued item is the earlies to dequeue.  
 
 The queue has 2 main operations: enqueue and dequeue. Additionally queues can have helper operations like peek and length.  
 
