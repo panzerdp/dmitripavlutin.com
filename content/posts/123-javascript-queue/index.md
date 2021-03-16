@@ -1,8 +1,8 @@
 ---
 title: 'How to Implement a Queue in JavaScript'
 description: 'The guide on how to implement a queue data structure in JavaScript.'
-published: "2021-03-16T12:00Z"
-modified: "2021-03-16T12:00Z"
+published: "2021-03-16T12:30Z"
+modified: "2021-03-16T12:30Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-queue
 tags: ['javascript', 'computer science', 'data structure' ,'queue']
