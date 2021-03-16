@@ -16,7 +16,7 @@ The first requirement is to know the programming language of your choice. If you
 
 However, on top of knowing the programming language, you also have to understand how to organize data to easily and effectively manipulate data depending on the task. That's where the data structures come into play.  
 
-In this post, I'm going to describe the queue data structure, what operations it has, as well present you with a queue implementation in JavaScript.  
+In this post, I'm going to describe the queue data structure, what operations it has, as well as present you with a queue implementation in JavaScript.  
 
 ## 1. The queue data structure
 
@@ -28,15 +28,15 @@ A traveler who just entered the airport and wants to check-in is going to *enque
 
 This is the real-world example of a queue &mdash; and the queue data structure works the same way.  
 
-The queue is a type of First Input-First Output (FIFO) data structure. The first item enqueued (inputed) is the first item to dequeue (outputed). 
+The queue is a type of First Input-First Output (FIFO) data structure. The first item enqueued (input) is the first item to dequeue (output). 
 
-The earliest enqueued item into the queue is situation at the *head*, while the latest enqueued item is situation at the *tail* of the queue.  
+Structurally, a queue has 2 pointers. The earliest enqueued item in the queue is situated at the *head*, while the latest enqueued item is situated at the *tail* of the queue.  
 
 ![Queue Data Structure](./images/queue-12.svg)
 
 ## 2. The operations on queues
 
-The queue supports 2 main operations: enqueue and dequeue. Additionally, you might find useful to have the peek and length operations.  
+The queue supports 2 main operations: enqueue and dequeue. Additionally, you might find it useful to have the peek and length operations.  
 
 ### 2.1 Enqueue operation
 
@@ -56,7 +56,7 @@ The dequeue operation extracts the item at the head of the queue. The next item 
 
 ![Queue Data Structure: Dequeue Operation](./images/dequeue.svg)
 
-In the picture above the dequeue operation returns and removes the item `7` from the queue. After dequeue the item `2` becomes the new head.  
+In the picture above the dequeue operation returns and removes the item `7` from the queue. After dequeue, item `2` becomes the new head.  
 
 ```javascript
 queue.dequeue(); // => 7
@@ -94,7 +94,7 @@ The constant time `O(1)` means that no matter the size of the queue (it can have
 
 ## 3. Implementing a queue in JavaScript
 
-Let's look at a possible implementation of the queue data structure, while maintaining the requirement that all operations must perform in constant time `O(1)`.  
+Let's look at a possible implementation of the queue data structure while maintaining the requirement that all operations must perform in constant time `O(1)`.  
 
 ```javascript
 class Queue {
@@ -143,9 +143,9 @@ queue.length;    // => 3
 
 `const queue = new Queue()` is how you create an instance of a queue. 
 
-Calling `queue.enqueue(7)` method enqeues the item `7` into the queue. 
+Calling `queue.enqueue(7)` method enqueues the item `7` into the queue. 
 
-`queue.dequeue()` dequeues an head item from the queue, while `queue.peek()` just peeks the item at the head. 
+`queue.dequeue()` dequeues a head item from the queue, while `queue.peek()` just peeks the item at the head. 
 
 Finally, `queue.length` shows how many items are still in the queue.  
 
@@ -158,7 +158,7 @@ Regarding the implementation: inside the `Queue` class the plain object `this.it
 * Property accessors (e.g. `this.items[this.headIndex]`),
 * Or perform aritmetical operations (e.g. `this.headIndex++`)
 
-Thus the time complexity of these methods  is constant time `O(1)`.  
+Thus the time complexity of these methods is constant time `O(1)`.  
 
 ## 4. Summary
 
