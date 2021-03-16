@@ -110,8 +110,8 @@ class Queue {
   }
 
   dequeue() {
-    const item = this.items[headIndex];
-    delete this.item[headIndex];
+    const item = this.items[this.headIndex];
+    delete this.items[this.headIndex];
     this.headIndex++;
     return item;
   }
@@ -127,18 +127,19 @@ class Queue {
 
 const queue = new Queue();
 
-queue.enqueue(1);
-queue.enqueue(5);
-queue.enqueue(3);
+queue.enqueue(7);
+queue.enqueue(2);
+queue.enqueue(6);
+queue.enqueue(4);
 
-queue.dequeue(); // => 1
+queue.dequeue(); // => 7
 
-queue.peek();    // => 5
+queue.peek();    // => 2
 
-queue.length;    // => 2
+queue.length;    // => 3
 ```
 
-[Try the demo.]()
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/g6pd4hqb/2/)
 
 Inside of the `Queue` class, the plain JavaScript object `this.items` keeps the items of the queue.  
 
