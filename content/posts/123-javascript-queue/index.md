@@ -36,17 +36,53 @@ The queue data structure is a type of First Input First Output (FIFO). The first
 
 ## 2. The operations on queues
 
-No matter how the queue is implemented internally, its main purpose is to support 2 main operations:
+The queue supports 2 main operations: enqueue and dequeue. Additionally, you might find useful to have the peek and length operations.  
 
-1. `queue.enqueue(item)` &mdash; enqueue an item into the queue;
-* `item = queue.dequeue()` &mdash; dequeue an item from the top of the queue;
+### 2.1 Enqueue operation
 
-Additionally, you can some more helper operations on the queue:
+The enqueue operations inserts an item at the end of the queue. The enqueued item becomes the tail of the queue.  
 
-3. `queue.peek()` &mdash; just peek the item at the top of the queue (without removing the item from the queue);
-4. `queue.length` &mdash; determine the number of items in the queue.
+```javascript
+queue.enqueue(8);
+```
 
-What's important regaring all of the queue operations &mdash; enqueue, dequeue, peek and length &mdash; all these operations must be performed in constant time `O(1)`. 
+![Queue: Enqueue Operation](./images/enqueue.svg)
+
+### 2.2 Dequeue operation
+
+The dequeue operation extracts the item at the head of the queue. The head of the queue becomes the next item in the queue.  
+
+```javascript
+queue.dequeue(); // => 7
+```
+
+![Queue Data Structure: Dequeue Operation](./images/dequeue.svg)
+
+### 2.3 Peek operation
+
+The peek operation reads the head of the queue, without altering the queue.  
+
+```javascript
+queue.peek(); // => 7
+```
+
+![Queue Data Structure: Peek Operation](./images/peek.svg)
+
+### 2.4 Queue length
+
+`queue.length` operation counts how many items the queue contains.  
+
+![Queue Data Structure: Length](./images/length.svg)
+
+The queue in the picture above contains 4 items: `4`, `6`, `2`, and `7`.  As result the queue length is `4`.  
+
+```javascript
+queue.length; // => 4
+```
+
+### 2.5 Queue operations time complexity
+
+What's important regarding all of the queue operations &mdash; enqueue, dequeue, peek and length &mdash; all these operations must be performed in constant time `O(1)`.   
 
 The constant time `O(1)` means that no matter the size of the queue (it can have 10 or 1 million items): the enqueue, dequeue, peek and length operations must be performed at relatively the same time.  
 
