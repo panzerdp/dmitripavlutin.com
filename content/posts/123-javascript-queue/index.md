@@ -24,16 +24,19 @@ If you enjoy traveling (like I do), most likely you passed the check-in process 
 
 ![Airport Check-In Queue](./images/airport-queue.jpg)
 
-A traveler who just entered the airport and wants to check-in is going to *enqueue* into the queue, and the traveler that has just passed the check-in process at the desk is *dequeued* from the queue.  
+A traveler who's just entered the airport and wants to check-in is going to *enqueue* into the queue. Another traveler that has just passed the check-in process at the desk is *dequeued* from the queue.  
 
 This is the real-world example of a queue &mdash; and the queue data structure works the same way.  
 
-The queue is a type of First Input-First Output (FIFO) data structure. The first item enqueued (input) is the first item to dequeue (output). 
+The queue is a type of First Input-First Output (FIFO) data structure. The first enqueued item (input) is the first to dequeue (output). 
 
-Structurally, a queue has 2 pointers. The earliest enqueued item in the queue is situated at the *head*, while the latest enqueued item is situated at the *tail* of the queue.  
+A queue has 2 pointers: head and tail. The earliest enqueued item in the queue is at the *head*, while the latest enqueued item is at the *tail* of the queue.  
+
+Recalling the airport example, the traveler at the check-in desk is the head of the queue. The traveler who has just entered the queue is at the tail.  
 
 ![Queue Data Structure](./images/queue-12.svg)
 
+From a higher-point of view, the queue is the data structure that lets a slow precessor (e.g. a check-in desk at the airport) process one item at a time 
 ## 2. The operations on queues
 
 The queue supports 2 main operations: enqueue and dequeue. Additionally, you might find it useful to have the peek and length operations.  
