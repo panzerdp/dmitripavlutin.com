@@ -55,6 +55,8 @@ Hopefully, that short description of the 2 main categories of types in JavaScrip
 Passing by value means that every time you assign a value to a variable, a copy of that value is created. Every single time. And what's interesting, in JavaScript
 the primitives are passed by value.  
 
+![Values in JavaScript](./images/values-2.png)
+
 Let me show you how pass by value manifests itself.  
 
 Let's say you have 2 variables `a` and `b`:
@@ -81,6 +83,8 @@ The pass by references, however, manifests itself differently.
 
 When you create an object in JavaScript, you're given a reference to that object. If 2 variables point to the same reference, then reference is reflected in both variables.  
 
+![References in JavaScript](./images/references-2.png)
+
 Let's check the following code sample:
 
 ```javascript
@@ -99,13 +103,13 @@ Then `let y = x` defines a variable `y`, and assigns to it the references to the
 
 `y.push(2)` now modifies the array by pushing the item `2` to it. And because `x` and `y` both reference the same array, loggin `x` and `y` shows the same content.  
 
-*Note: for the sake of simplicity, I use the term the reference. However, in JavaScript everthing is a value, so in case of object a value to a reference is used.*
+*Note: for simplicity, I say that variables hold references to objects. However, in JavaScript everthing is a value, so stricter variables hold values thar are references to objects*.
 
 ## 4. Comparing values and references
 
-Understanding the difference between values and references is important when you want to compare them.  
+Understanding the difference between values and references is important when you want to compare objects.  
 
-When using the strict comparison operator `===` on values, in order 2 values to be equal, they just have to be the same value. All of the below comparisons are equal:
+When using the strict comparison operator `===` on values, 2 variables are equal if they have the same value. All of the below comparisons are equal:
 
 ```javascript
 const one = 1;
