@@ -36,7 +36,8 @@ Recalling the airport example, the traveler at the check-in desk is the head of 
 
 ![Queue Data Structure](./images/queue-12.svg)
 
-From a higher-point of view, the queue is the data structure that lets a slow precessor (e.g. a check-in desk at the airport) process one item at a time 
+From a higher-point of view, the queue is the data structure that lets you process items, one at a time, in the same order they come in.  
+
 ## 2. The operations on queues
 
 The queue supports 2 main operations: enqueue and dequeue. Additionally, you might find it useful to have the peek and length operations.  
