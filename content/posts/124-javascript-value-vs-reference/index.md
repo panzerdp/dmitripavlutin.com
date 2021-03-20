@@ -99,11 +99,13 @@ Then `let y = x` defines a variable `y`, and assigns to it the references to the
 
 `y.push(2)` now modifies the array by pushing the item `2` to it. And because `x` and `y` both reference the same array, loggin `x` and `y` shows the same content.  
 
+*Note: for the sake of simplicity, I use the term the reference. However, in JavaScript everthing is a value, so in case of object a value to a reference is used.*
+
 ## 4. Comparing values and references
 
-Understanding the difference between values and references is especially important because of how JavaScript compares these.  
+Understanding the difference between values and references is important when you want to compare them.  
 
-When using the strict comparison operator on values, in order 2 values to be equal, they just have to be the same value. All of the above comparisons are equal:
+When using the strict comparison operator `===` on values, in order 2 values to be equal, they just have to be the same value. All of the below comparisons are equal:
 
 ```javascript
 const one = 1;
@@ -114,11 +116,9 @@ console.log(one === 1);       // true
 console.log(one === one);     // true
 ```
 
-`one` and `oneCopy` have the same value `1`. The operator `===` evaluates to `true` as longs as both operands are `1`, be it `1` access from a variable or just the literal `1` used.  
+`one` and `oneCopy` have the same value `1`. The operator `===` evaluates to `true` as longs as both operands are `1`.  
 
 But the comparison operator `===` works differently when comparing references. 2 references are equal only if they reference exactly the same object. 
-
-For example:
 
 ```javascript
 const ar = [1];
@@ -144,5 +144,5 @@ that reference that object are going to see that change.
 
 The comparison operator distinghuishes comparing values and references. 2 variables holding references are equal only if they reference exactly the same object, but 2 variables holding values are equal if they simply have 2 same values.  
 
-Often, however, you might want to compare object by their structure rather by reference. Check out the post [How to Compare Objects in JavaScript
-](/how-to-compare-objects-in-javascript) by their structure.  
+Often, however, you might want to compare object by their structure rather by reference. Check out the post [How to Compare Objects in JavaScript](/how-to-compare-objects-in-javascript).
+
