@@ -3,7 +3,7 @@ title: "React Controlled Components, the Hooks Way"
 description: "The step by step guide on how to implement controlled components in React using hooks."
 published: "2020-09-29T07:20Z"
 modified: "2020-11-17T08:20Z"
-thumbnail: "./images/cover-5.png"
+thumbnail: "./images/cover-6.png"
 slug: controlled-inputs-using-react-hooks
 tags: ['react', 'component', 'input', 'form', 'hook']
 recommended: ['use-react-memo-wisely', 'react-state-management']
