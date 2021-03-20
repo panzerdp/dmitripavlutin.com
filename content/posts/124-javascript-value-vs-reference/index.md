@@ -126,11 +126,12 @@ But the comparison operator `===` works differently when comparing references. 2
 
 ```javascript
 const ar = [1];
-const ar2 = ar;
 const arCopy = [1];
 
 console.log(ar === arCopy); // false
 console.log(ar === [1]);    // false
+
+const ar2 = ar;
 console.log(ar === ar2);    // true
 console.log(ar === ar);     // true
 ```
