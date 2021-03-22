@@ -10,15 +10,16 @@ recommended: ['the-legend-of-javascript-equality-operator', 'how-to-compare-obje
 type: post
 ---
 
-You may have heard that in JavaScript you can pass by value and by reference. Knowing the difference between the two is an important step in working with object in JavaScript.   
+In JavaScript you can pass by value (when assigning values) and by reference (when assigning objects). 
 
-Let's find out in this post.  
+
+Knowing the difference between the two helps in working with objects in JavaScript.  
 
 ## 1. Understanding primitive and objects
 
-In JavaScript there 2 main categories of data types: *primitives* and *objects*.  
+JavaScript provides 2 categories of data types: *primitives* and *objects*.  
 
-The primitive category is formed of numbers, booleans, strings, symbols and special values `null` and `undefined`.  
+The primitives are numbers, booleans, strings, symbols and special values `null` and `undefined`.  
 
 ```javascript
 // Primitives
@@ -33,10 +34,11 @@ const missingObject = null;
 const nothing = undefined;
 ```
 
-The second important category of types is objects. Particularly the plain JavaScript object, arrays, functions &mdash; are all objects.  
+The second category is objects. Particularly the plain JavaScript object, arrays, functions, and more &mdash; are all objects.  
 
 ```javascript
 // Objects
+
 const plainObject = {
   prop: 'Value'
 };
@@ -48,7 +50,7 @@ const functionObject = (n1, n2) => {
 };
 ```
 
-Hopefully, that short description of the 2 main categories of types in JavaScript.  
+Saying it differently, anything that is not a primitive value in JavaScript is an object.  
 
 ## 2. Values
 
