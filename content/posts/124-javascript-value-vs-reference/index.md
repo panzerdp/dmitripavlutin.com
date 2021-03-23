@@ -124,7 +124,7 @@ console.log(one === 1);       // true
 console.log(one === one);     // true
 ```
 
-`one` and `oneCopy` have the same value `1`. The operator `===` evaluates to `true` as longs as both operands are `1`.  
+`one` and `oneCopy` have the same value `1`. The operator `===` evaluates to `true` as longs as both operands are `1`, no matter where the value is taken from: a literal `1`, variable's value, expression `2 - 1`.  
 
 But the comparison operator `===` works differently when comparing references. 2 references are equal only if they reference exactly the same object. 
 
@@ -142,9 +142,9 @@ console.log(ar1 === ar11); // true
 console.log(ar1 === ar1);  // true
 ```
 
-`ar` and `arCopy` reference arrays of the same structure, however `ar === arCopy` evaluates to `false` because `ar` and `arCopy` reference different arrays.  
+`ar1` and `ar2` reference arrays of the same structure, however `ar1 === ar2` evaluates to `false` because `ar1` and `ar2` reference different array objects.  
 
-The comparison operator returns `true` only when comparing references pointing to the same object: `ar === ar2` or `ar === ar`.  
+The comparison operator returns `true` only when comparing references pointing to the same object: `ar1 === ar11` or `ar1 === ar1`.  
 
 ## 5. Summary
 
