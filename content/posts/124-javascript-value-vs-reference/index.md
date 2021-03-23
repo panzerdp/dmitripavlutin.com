@@ -10,10 +10,11 @@ recommended: ['the-legend-of-javascript-equality-operator', 'how-to-compare-obje
 type: post
 ---
 
-In JavaScript you can pass by value (when assigning values) and by reference (when assigning objects). 
+In JavaScript, you can pass by value and by reference.
 
+The main difference between the two is that passing by value happens when assigning and comparing primitives while passing by reference when assigning and comparing objects.   
 
-Knowing the difference between the two helps in working with objects in JavaScript.  
+Let's discuss about values and references in more detail in this post.  
 
 ## 1. Understanding primitive and objects
 
@@ -54,8 +55,9 @@ Saying it differently, anything that is not a primitive value in JavaScript is a
 
 ## 2. Values
 
-Passing by value means that every time you assign a value to a variable, a copy of that value is created. Every single time. And what's interesting, in JavaScript
-the primitives are passed by value.  
+The simple rule of passing by value is that all primitive values in JavaScript are passed by value. Simple as that.  
+
+Passing by value means that every time you assign a value to a variable, a copy of that value is created. Every single time.  
 
 ![Values in JavaScript](./images/values-2.png)
 
@@ -77,13 +79,13 @@ The first statement `let a = 1` defines a variable `a` initialized with the numb
 
 The second statement `let b = a` defines another variable `b` and initializes it with the value of `a` variable &mdash; efficiently passing by value. Simpler, a copy of number `1` is assigned to `b`.  
 
-Later, `b = b + 2` increases by `2` the value of `b`. `b` variable becomes `3`, and this change doesn't affect the value of `a` variable which remains `1`.  
+Later, `b = b + 2` increases by `2` and becomes `3`. `b` variable changes, and this change doesn't affect the value of `a`.  
 
 ## 3. References
 
 The pass by references, however, manifests itself differently.  
 
-When you create an object in JavaScript, you're given a reference to that object. If 2 variables point to the same reference, then reference is reflected in both variables.  
+When you create an object in JavaScript, you're given a reference to that object. In case if 2 variables hold the same reference, then a change of the object is reflected in both variables.  
 
 ![References in JavaScript](./images/references-2.png)
 
@@ -99,15 +101,15 @@ console.log(x); // [1, 2]
 console.log(y); // [1, 2]
 ```
 
-The first statement `let x = [1]` creates an array `[1]`, defines a variable `x`, then assigns to the variable with a reference to the created array.  
+The first statement `let x = [1]` creates an array, defines a variable `x`, then assigns to the variable a reference of the created array.  
 
 Then `let y = x` defines a variable `y`, and assigns to it the references to the array that is stored in `x` variable. This is a pass by reference.  
 
-`y.push(2)` now modifies the array by pushing the item `2` to it. And because `x` and `y` both reference the same array, loggin `x` and `y` shows the same content.  
+`y.push(2)` mutates the array by pushing an item `2`. Because `x` and `y` variables both reference the same array, this change is reflected in both variables.  
 
-*Note: for simplicity, I say that variables hold references to objects. However, in JavaScript everthing is a value, so stricter variables hold values thar are references to objects*.
+*Note: for simplicity, I say that variables hold references to objects. But strictly saying variables in JavaScript hold values thar are references to objects*.
 
-## 4. Comparing values and references
+## 4. Comparing values and comparing references
 
 Understanding the difference between values and references is important when you want to compare objects.  
 
@@ -126,30 +128,32 @@ console.log(one === one);     // true
 
 But the comparison operator `===` works differently when comparing references. 2 references are equal only if they reference exactly the same object. 
 
+`ar1` and `ar2` hold references to different array instance:
+
 ```javascript
-const ar = [1];
-const arCopy = [1];
+const ar1 = [1];
+const ar2 = [1];
 
-console.log(ar === arCopy); // false
-console.log(ar === [1]);    // false
+console.log(ar1 === ar2); // false
+console.log(ar === [1]);  // false
 
-const ar2 = ar;
-console.log(ar === ar2);    // true
-console.log(ar === ar);     // true
+const ar11 = ar1;
+console.log(ar1 === ar11); // true
+console.log(ar1 === ar1);  // true
 ```
 
-Even if `ar` and `arCopy` reference arrays of the same structure, `ar === arCopy` evaluates to `false` because `ar` and `arCopy` reference different arrays.  
+`ar` and `arCopy` reference arrays of the same structure, however `ar === arCopy` evaluates to `false` because `ar` and `arCopy` reference different arrays.  
 
 The comparison operator returns `true` only when comparing references pointing to the same object: `ar === ar2` or `ar === ar`.  
 
 ## 5. Summary
 
-In JavaScript primitive types are values: meaning that each time a value is assigned or used, a copy of that value is created.  
+In JavaScript primitive types are passed around as values: meaning that each time a value is assigned or used, a copy of that value is created.  
 
-On the other side objects (including plain objects, array, functions, class instances) in JavaScript are references. If you modify the object, then all variables
+On the other side objects (including plain objects, array, functions, class instances) are references. If you modify the object, then all variables
 that reference that object are going to see that change.  
 
-The comparison operator distinghuishes comparing values and references. 2 variables holding references are equal only if they reference exactly the same object, but 2 variables holding values are equal if they simply have 2 same values.  
+The comparison operator distinghuishes comparing values and references. 2 variables holding references are equal only if they reference exactly the same object, but 2 variables holding values are equal if they simply have 2 same values no matter where the value originates: from a variable, literal, etc.  
 
 Often, however, you might want to compare object by their structure rather by reference. Check out the post [How to Compare Objects in JavaScript](/how-to-compare-objects-in-javascript).
 
