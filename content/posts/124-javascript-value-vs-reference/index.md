@@ -1,8 +1,8 @@
 ---
 title: 'The Difference Between Values and References in JavaScript'
-description: 'Understanding the difference between values and references is an important step to effective working with object in JavaScript.'
-published: "2021-03-23T12:00Z"
-modified: "2021-03-23T12:00Z"
+description: "What is the difference between passing by value and passing by reference in JavaScript."
+published: "2021-03-23T11:10Z"
+modified: "2021-03-23T11:10Z"
 thumbnail: "./images/cover-3.png"
 slug: value-vs-reference-javascript
 tags: ['javascript', 'object']
@@ -14,13 +14,13 @@ In JavaScript, you can pass by value and by reference.
 
 The main difference between the two is that passing by value happens when assigning and comparing primitives while passing by reference when assigning and comparing objects.   
 
-Let's discuss about values and references in more detail in this post.  
+Let's discuss values and references in more detail in this post.  
 
 ## 1. Understanding primitive and objects
 
 JavaScript provides 2 categories of data types: *primitives* and *objects*.  
 
-The primitives are numbers, booleans, strings, symbols and special values `null` and `undefined`.  
+The primitives are numbers, booleans, strings, symbols, and special values `null` and `undefined`.  
 
 ```javascript
 // Primitives
@@ -107,7 +107,7 @@ Then `let y = x` defines a variable `y`, and assigns to it the references to the
 
 `y.push(2)` mutates the array by pushing an item `2`. Because `x` and `y` variables both reference the same array, this change is reflected in both variables.  
 
-*Note: for simplicity, I say that variables hold references to objects. But strictly saying variables in JavaScript hold values thar are references to objects*.
+*Note: for simplicity, I say that variables hold references to objects. But strictly saying variables in JavaScript hold values that are references to objects*.
 
 ## 4. Comparing values and comparing references
 
@@ -151,9 +151,9 @@ The comparison operator returns `true` only when comparing references pointing t
 In JavaScript primitive types are passed around as values: meaning that each time a value is assigned or used, a copy of that value is created.  
 
 On the other side objects (including plain objects, array, functions, class instances) are references. If you modify the object, then all variables
-that reference that object are going to see that change.  
+that reference that object is going to see that change.  
 
-The comparison operator distinghuishes comparing values and references. 2 variables holding references are equal only if they reference exactly the same object, but 2 variables holding values are equal if they simply have 2 same values no matter where the value originates: from a variable, literal, etc.  
+The comparison operator distinguishes comparing values and references. 2 variables holding references are equal only if they reference exactly the same object, but 2 variables holding values are equal if they simply have 2 same values no matter where the value originates: from a variable, literal, etc.  
 
-Often, however, you might want to compare object by their structure rather by reference. Check out the post [How to Compare Objects in JavaScript](/how-to-compare-objects-in-javascript).
+Often, however, you might want to compare objects by their structure rather than by reference. Check out the post [How to Compare Objects in JavaScript](/how-to-compare-objects-in-javascript).
 
