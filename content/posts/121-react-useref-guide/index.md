@@ -123,7 +123,7 @@ From a higher point of view, references are used to store infrastructure data of
 
 ### 1.2 Use case: implementing a stopwatch
 
-The things you can store inside a reference are infrastructure information that involves some side-effect. For example, you can store into a reference the timer ids, different kinds of pointers (e.g. socket ids).  
+The things you can store inside a reference are infrastructure information that involves some side-effect. For example, you can store into a reference the timer ids, or different kinds of pointers (e.g. socket ids).  
 
 For example, the following component `Stopwatch` uses `setInterval(callback, time)` timer function to increase each second the counter of a stopwatch. The timer id is stored into a reference `timerIdRef`:  
 
@@ -262,7 +262,7 @@ But `useEffect(callback, [])` hook invokes the callback right after mounting, th
 
 ## 3. Updating references restriction
 
-The function scope of the functional component should either calculate the output, either invoke hooks.  
+The function scope of the functional component should either calculate the output, or invoke hooks.  
 
 That's why updating a reference (as well as updating state) shouldn't be performed inside the immediate scope of the component's function. 
 
