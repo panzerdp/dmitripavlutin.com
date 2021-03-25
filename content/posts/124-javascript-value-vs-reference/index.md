@@ -12,7 +12,7 @@ type: post
 
 In JavaScript, you can pass by value and by reference.
 
-The main difference between the two is that passing by value happens when assigning and comparing primitives while passing by reference when assigning and comparing objects.   
+The main difference between the two is that passing by value happens when assigning primitives while passing by reference when assigning objects.   
 
 Let's discuss values and references in more detail in this post.  
 
@@ -39,7 +39,6 @@ The second category is objects. Particularly the plain JavaScript object, arrays
 
 ```javascript
 // Objects
-
 const plainObject = {
   prop: 'Value'
 };
