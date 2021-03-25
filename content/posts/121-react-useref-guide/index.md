@@ -77,7 +77,7 @@ function LogButtonClicks() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/logging-button-clicks-reference-ogcnc?file=/src/index.js)
+[Try the demo.](https://codesandbox.io/s/logging-button-clicks-reference-ogcnc?file=/src/App.js)
 
 `const countRef = useRef(0)` creates a references `countRef` initialized with `0`.  
 
