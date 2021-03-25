@@ -135,7 +135,7 @@ const ar1 = [1];
 const ar2 = [1];
 
 console.log(ar1 === ar2); // false
-console.log(ar === [1]);  // false
+console.log(ar1 === [1]);  // false
 
 const ar11 = ar1;
 console.log(ar1 === ar11); // true
