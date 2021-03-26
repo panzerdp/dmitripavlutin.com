@@ -25,7 +25,7 @@ Let's say that you code an application that has a search input in the header, an
 
 Here's the initial sketch of the application:
 
-```jsx{23}
+```jsx{25}
 function App() {
   return (
     <div>
@@ -37,7 +37,9 @@ function App() {
 
 function Header() {
   const [value, setValue] = useState('');
+
   const handleChange = event => setValue(event.target.value);
+
   return (
     <header>
       <input type="text" value={value} onChange={handleChange} />
@@ -63,6 +65,18 @@ function Main() {
 Clearly the search query is a global state variable. And `jotai` library can help you here using a construction named *atom*.  
 
 ## 2. Jotai atoms
+
+The piece of state in jotai is organized in an atom. An atom accepts an initial value, be it a primitive type like number, string, or objects like arrays and plain JavaScript objects.  
+
+```javascript
+import { atom } from 'jotai';
+
+const numberAtom = atom(0);
+const stringAtom = atom('My value');
+const arrayAtom = atom(['item 1', 'item 2']);
+```
+
+The atom alone doesn't help much. 
 
 ## 3. Jotai derived atoms
 
