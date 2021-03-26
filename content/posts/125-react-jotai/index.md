@@ -15,9 +15,9 @@ efficient in solving a lot of global state management tasks.
 
 But with the introduction of hooks, I have found that alternative libraries like [react-query](https://react-query.tanstack.com/) or [useSWR()](https://swr.vercel.app/) handle the fetching of data in much less ceremony than Redux.  
 
-While `redux-query` or `useSWR()` greatly simplify the management of asynchornously fetched data &mdash; there still the simple global state that you have to manage.  
+While `redux-query` or `useSWR()` greatly simplify the management of asynchornously fetched data &mdash; sometimes there's left the simple global state that you have to manage.  
 
-For such simple global state, like storing whether a side-menu is expanded or not, fits well a simple React state management library &mdash; thus welcome `jotai` https://github.com/pmndrs/jotai.  
+For such simple global state, like storing whether a side-menu is expanded or not, fits well a simple React state management library &mdash; welcome `jotai` https://github.com/pmndrs/jotai.  
 
 ## 1. Search query: a global state variable
 
@@ -147,7 +147,9 @@ Inside of the `<Header>` component `const [search, setSearch] = useAtom(searchAt
 
 As soon as the user types into the input field, `handleChange()` event handler updates the atom value: `setSearch(event.target.value)`.  
 
+`<Main>` component can access the `searchAtom` also: `const [search] = useAtom(searchAtom)`. And when the atom value changes, the `<Main>` component also receives the new value.  
 
+In conclusion, atoms are global state pieces that can be accessed in any component.  
 
 ## 3. Jotai derived atoms
 
