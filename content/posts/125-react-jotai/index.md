@@ -69,14 +69,34 @@ Clearly the search query is a global state variable. And `jotai` library can hel
 The piece of state in jotai is organized in an atom. An atom accepts an initial value, be it a primitive type like number, string, or objects like arrays and plain JavaScript objects.  
 
 ```javascript
+// atoms.js
 import { atom } from 'jotai';
 
-const numberAtom = atom(0);
-const stringAtom = atom('My value');
-const arrayAtom = atom(['item 1', 'item 2']);
+const counterAtom = atom(0);
 ```
 
-The atom alone doesn't help much. 
+The atom alone doesn't help much. If you want to read and update the atom's state then you need to use a special hook `useAtom()`:
+
+```jsx{5,15}
+import { useAtom } from 'jotai';
+import { counterAtom } from './atoms';
+
+function MyComponent1() {
+  const [count, setCount] = useAtom(counterAtom);
+
+  const handleClick = () => {
+    setNumber(number => number + 1); // Increment number
+  };
+
+  return <button onClick={handleClick}>Increment number</button>;
+}
+
+function MyComponent() {
+  const [count] = useAtom(counterAtom);
+
+  return <div>Current count: {counter}</div>;
+}
+```
 
 ## 3. Jotai derived atoms
 
