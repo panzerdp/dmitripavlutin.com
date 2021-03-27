@@ -94,7 +94,7 @@ export function Button() {
 
 `const [count, setCount] = useAtom(counterAtom)` returns a tuple where the first item is the value of the state, and the second is a state updater function.  
 
-`count` variable is the atom's value, while `setCount()` can be used to update the atom's value. 
+`count` contains the atom's value, while `setCount()` can be used to update the atom's value. 
 
 What makes the atoms so great is that you can access the same atom from multiple components. If a component updates the atom, then all the components that read this atom are going to be updated. This is the global state management!  
 
