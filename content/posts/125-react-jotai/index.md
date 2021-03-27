@@ -73,12 +73,12 @@ const counterAtom = atom(0);
 
 But the atom alone doesn't help much. To read and update the atom's state use a special hook `useAtom()`:
 
-```jsx{5,15}
+```jsx{3,6}
 import { atom, useAtom } from 'jotai';
 
-const counterAtom = atom(0);
+export const counterAtom = atom(0);
 
-function Button() {
+export function Button() {
   const [count, setCount] = useAtom(counterAtom);
 
   const handleClick = () => {
@@ -86,12 +86,6 @@ function Button() {
   };
 
   return <button onClick={handleClick}>Increment</button>;
-}
-
-function CurrentCount() {
-  const [count] = useAtom(counterAtom);
-
-  return <div>Current count: {counter}</div>;
 }
 ```
 
@@ -101,7 +95,18 @@ function CurrentCount() {
 
 What makes the atoms so great is that you can access the same atom from multiple components. If a component updates the atom, then all the components that read this atom are going to be updated. This is the global state management!  
 
-For example, if you click the button *Increment*, then both components `<MyComponent1>` and `<MyComponent2>` are going to re-render because of the `counterAtom` change.  
+```jsx{5}
+import { useAtom } from 'jotai';
+import { counterAtom } from './Button';
+
+function CurrentCount() {
+  const [count] = useAtom(counterAtom);
+
+  return <div>Current count: {counter}</div>;
+}
+```
+
+For example, if you click the button *Increment*, then both components `<Button>` and `<CurrentCount>` are going to re-render because of the `counterAtom` change.  
 
 What's great about `useAtom(atom)` is that it keeps the same API as the built-in `useState()` hook &mdash; which also return a tuple of state value and updater function.  
 
