@@ -64,7 +64,6 @@ Clearly the search query is a global state variable. And `jotai` library can hel
 The piece of state in jotai is organized in an atom. An atom accepts an initial value, be it a primitive type like number, string, or objects like arrays and plain JavaScript objects.  
 
 ```javascript
-// atoms.js
 import { atom } from 'jotai';
 
 const counterAtom = atom(0);
@@ -75,10 +74,11 @@ const counterAtom = atom(0);
 But the atom alone doesn't help much. To read and update the atom's state use a special hook `useAtom()`:
 
 ```jsx{5,15}
-import { useAtom } from 'jotai';
-import { counterAtom } from './atoms';
+import { atom, useAtom } from 'jotai';
 
-function MyComponent1() {
+const counterAtom = atom(0);
+
+function Button() {
   const [count, setCount] = useAtom(counterAtom);
 
   const handleClick = () => {
@@ -88,7 +88,7 @@ function MyComponent1() {
   return <button onClick={handleClick}>Increment</button>;
 }
 
-function MyComponent2() {
+function CurrentCount() {
   const [count] = useAtom(counterAtom);
 
   return <div>Current count: {counter}</div>;
@@ -153,3 +153,77 @@ In conclusion, atoms are global state pieces that can be accessed in any compone
 
 ## 3. Jotai derived atoms
 
+If you find yourself often calculating some derived state from an atom, then you may find useful the *derived atoms* feature of `jotai`.  
+
+You can create a derived atom when suppling a callback function to `atom((get) => get(myAtom))`: in which case `jotai` is going to call the callback with a getter function as an argument from where you can extract the value of the base atom. 
+
+```javascript
+import { atom } from 'jotai';
+
+const baseAtom = atom(2);
+const derivedAtom = atom(get => get(baseAtom) % 2 === 0); 
+```
+
+In the example above `baseAtom` is an atom holding a number. But `derivedAtom` is a derived atom which simply determines whether the number stored in `baseAtom` is even.  
+
+Of course, as soon as the base atom changes, all the derived atoms change also triggering a re-render in components that use them.  
+
+For example, let's create `nameLengthAtom` derived atom that calculate the length of the string stored in a base atom `nameAtom`:
+
+```jsx{4,15}
+import { atom } from 'jotai';
+
+const nameAtom = atom('Batman');
+const isNameEmptyAtom = atom(get => get(nameAtom).length === 0);
+
+function HeroName() {
+  const [name, setName] = useAtom(nameAtom);
+  const [isNameEmpty] = useAtom(isNameEmptyAtom);
+
+  const handleChange = event => setSearch(event.target.value);
+
+  return (
+    <div>
+      <input type="text" value={name} onChange={handleChange} />
+      <div>Is the name empty: {isNameEmpty ? 'Yes' : 'No'}</div>
+    </div>
+  );
+}
+```
+
+What's even better is that you can create a derived atom from multiple base atoms!
+
+```javascript
+import { atom } from 'jotai';
+
+const counterAtom1 = atom(0);
+const counterAtom2 = atom(0);
+
+const sumAtom = atom((get) => get(counterAtom1) + get(counterAtom2));
+```
+
+## 4. Conclusion
+
+I like `jotai` for its minimalistic but flexible way to manage simple global state.  
+
+To create a global state variable using jotai you need to make 2 simple steps:  
+
+A) Define the atom for your global state variable: 
+
+```javascript
+const myAtom = atom(<initialValue>)
+```
+
+B) Then access the atom' value and updater function inside of the component using a special hook:
+
+```jsx
+function MyComponent() {
+  const [value, setValue] = useAtom(myAtom);
+  
+  // ...
+}
+```
+
+I found that `jotai` fits good for management of simple global variables, as a complement to asynchonous state management libraries like `react-query` and `useSWR()`.    
+
+*Would you use `jotai` to manage simple global state variables? What features, in your opinion, `jotai` is still missing?*
