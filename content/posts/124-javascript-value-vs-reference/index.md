@@ -2,7 +2,7 @@
 title: 'The Difference Between Values and References in JavaScript'
 description: "What is the difference between passing by value and passing by reference in JavaScript."
 published: "2021-03-23T11:10Z"
-modified: "2021-03-23T11:10Z"
+modified: "2021-03-28T12:10Z"
 thumbnail: "./images/cover-3.png"
 slug: value-vs-reference-javascript
 tags: ['javascript', 'object']
@@ -76,7 +76,7 @@ console.log(b); // 3
 
 The first statement `let a = 1` defines a variable `a` initialized with the number `1`.  
 
-The second statement `let b = a` defines another variable `b` and initializes it with the value of `a` variable &mdash; which is passing by value. Simpler, a copy of number `1` is assigned to `b`.  
+The second statement `let b = a` defines another variable `b` and initializes it with the value of `a` variable &mdash; which is passing by value. Simpler, a copy of the number `1` is assigned to `b`.  
 
 Later, `b = b + 2` increases by `2` and becomes `3`. `b` variable changes, and this change doesn't affect the value of `a`.  
 
@@ -155,4 +155,3 @@ that reference that object are going to see the change.
 The comparison operator distinguishes comparing values and references. 2 variables holding references are equal only if they reference exactly the same object, but 2 variables holding values are equal if they simply have 2 same values no matter where the value originates: from a variable, literal, etc.  
 
 Often, however, you might want to compare objects by their structure rather than by reference. Check out the post [How to Compare Objects in JavaScript](/how-to-compare-objects-in-javascript).
-
