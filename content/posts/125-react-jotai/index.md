@@ -3,7 +3,7 @@ title: 'A Guide to Jotai: the Minimalist React State Management Library'
 description: "Jotai is a simple but flexible state management library for React."
 published: "2021-03-30T12:00Z"
 modified: "2021-03-30T12:00Z"
-thumbnail: "./images/cover-2.png"
+thumbnail: "./images/cover-3.png"
 slug: react-jotai-state-management
 tags: ['react', 'state', 'open source']
 recommended: ['react-usestate-hook-guide', 'react-useref-guide']
