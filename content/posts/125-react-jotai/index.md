@@ -1,6 +1,6 @@
 ---
 title: 'A Guide to Jotai: the Minimalist React State Management Library'
-description: "Jotai is a primitive and flexible state management for React."
+description: "Jotai is a simple but flexible state management library for React."
 published: "2021-03-30T12:00Z"
 modified: "2021-03-30T12:00Z"
 thumbnail: "./images/cover-2.png"
@@ -10,25 +10,27 @@ recommended: ['react-usestate-hook-guide', 'react-useref-guide']
 type: post
 ---
 
-Redux had been for a long time the leader of the global state management in React. *Action -> reducer -> state* paradigm is pretty 
-efficient in solving a lot of global state management tasks.  
+For a long time Redux had been the leader of the global state management in React. *Action -> reducer -> state* paradigm is pretty 
+efficient in solving a lot of state management tasks.  
 
-But with the introduction of hooks, I have found that alternative libraries like [react-query](https://react-query.tanstack.com/) or [useSWR()](https://swr.vercel.app/) handle the fetching of data in much less ceremony than Redux.  
+With the introduction of hooks, I have found that libraries like [react-query](https://react-query.tanstack.com/) or [useSWR()](https://swr.vercel.app/) handle the fetching of data with less boilerplate than Redux.  
 
-While `redux-query` or `useSWR()` greatly simplifies the management of asynchronously fetched data &mdash; sometimes there are left the simple global state.  
+While `redux-query` or `useSWR()` greatly simplifies the management of asynchronously fetched data &mdash; there is still global state variables like side-menu expand status, theme, dark-mode is enabled, etc.  
 
-For such a simple global state, like storing whether a side-menu is expanded or not, fits well a simple React state management library &mdash; welcome `jotai` https://github.com/pmndrs/jotai.  
+For primitive global state variables fits well a simple React state management library &mdash; welcome `jotai` https://github.com/pmndrs/jotai.  
 
 ```toc
 ```
 
 ## 1. Search query: a global state variable
 
-Let's say that you code an application that has a search input in the header, and your task is to display the entered search query in the main part of the page.  
+Let's say that your application has a header and main content components. Inside the header there's a input field where user can introduce a search query. The main component should display the search query introduced in the input field.  
 
 Here's the initial sketch of the application:
 
 ```jsx
+import { useState } from 'react';
+
 function App() {
   return (
     <div>
@@ -56,9 +58,9 @@ function Main() {
 
 [Try the demo.](https://codesandbox.io/s/search-query-no-global-state-ppr2c?file=/src/App.js)
 
-`<App>` component wires 2 components: `<Header>` and `<Main>`.  
+`<App>` is composed of 2 components: `<Header>` and `<Main>`.  
 
-`<Header>` is a component that contains an input field: the one where the user introduces a search query.  
+`<Header>` is a component that contains an input field where the user introduces a search query.  
 
 `<Main>` is the component that should render the query entered into the input field. How would you access the value here?  
 
@@ -66,7 +68,7 @@ The search query is a global state variable. And `jotai` library can help you he
 
 ## 2. Jotai atoms
 
-The piece of state in jotai is organized in an atom. An atom accepts an initial value, be it a primitive type like a number, string, or more complex structures like arrays and objects.  
+A piece of state in `jotai` is represented by an *atom*. An atom accepts an initial value, be it a primitive type like a number, string, or more complex structures like arrays and objects.  
 
 ```javascript
 import { atom } from 'jotai';
@@ -76,7 +78,7 @@ const counterAtom = atom(0);
 
 `counterAtom` is the atom that holds the counter state.
 
-But the atom alone doesn't help much. To read and update the atom's state use a special hook `useAtom()`:
+But the atom alone doesn't help much. To read and update the atom's state `jotai` provides a special hook `useAtom()`:
 
 ```jsx{3,6}
 import { atom, useAtom } from 'jotai';
@@ -90,7 +92,12 @@ export function Button() {
     setNumber(number => number + 1); // Increment number
   };
 
-  return <button onClick={handleClick}>Increment</button>;
+  return (
+    <div>
+      {count}
+      <button onClick={handleClick}>Increment</button>
+    </div>
+  );
 }
 ```
 
@@ -98,7 +105,9 @@ export function Button() {
 
 `count` contains the atom's value, while `setCount()` can be used to update the atom's value. 
 
-What makes the atoms so great is that you can access the same atom from multiple components. If a component updates the atom, then all the components that read this atom are going to be updated. This is the global state management!  
+The selling point of atoms is that you can access the same atom from multiple components. If a component updates the atom, then all the components that read this atom are going to be updated. This is the global state management!  
+
+For example, let's read `counterAtom` value in an another component `<CurrentCount>`:
 
 ```jsx{5}
 import { useAtom } from 'jotai';
@@ -111,17 +120,18 @@ function CurrentCount() {
 }
 ```
 
-For example, if you click the button *Increment*, then both components `<Button>` and `<CurrentCount>` are going to re-render because of the `counterAtom` change.  
+When the value of `counterAtom` change (due to counter increment), then both components `<Button>` and `<CurrentCount>` are going to re-render.  
 
-What's great about `useAtom(atom)` is that it keeps the same API as the built-in `useState()` hook &mdash; which also returns a tuple of state value and updater function.  
+What's great about `useAtom(atom)` hook keeps the same API as the built-in `useState()` hook &mdash; which also returns a tuple of state value and an updater function.  
 
 ### 2.1 Storing the search query in an atom
 
 Now let's return to the problem of section 1: how to share the search query from the `<Header>` component in `<Main>` component.  
 
-Most likely you already know the solution: let's create an atom `searchAtom` and share it between `<Header>` and `<Main>` components.  
+You might already see the solution: let's create an atom `searchAtom` and share it between `<Header>` and `<Main>` components:  
 
-```jsx{12,15,25-26}
+```jsx{13,16,26}
+import { useState } from 'react';
 import { atom, useAtom } from 'jotai';
 
 function App() {
@@ -170,17 +180,17 @@ You can create a derived atom when supplying a callback function to `atom(get =>
 ```javascript{4}
 import { atom } from 'jotai';
 
-const baseAtom = atom(2);
-const derivedAtom = atom(get => get(baseAtom) % 2 === 0); 
+const numberAtom = atom(2);
+const isEvenAtom = atom(get => get(baseAtom) % 2 === 0); 
 ```
 
-In the example above `baseAtom` is an atom holding a number. But `derivedAtom` is a derived atom that simply determines whether the number stored in `baseAtom` is even.  
+In the example above `numberAtom` is an atom holding a number. `isEvenAtom` is a derived atom that determines whether the number stored in `numberAtom` is even.  
 
-Of course, as soon as the base atom changes, all the derived atoms change: triggering a re-render in components that use them.  
+Of course, as soon as the base atom changes, the derived atom changes too.  
 
-For example, let's create `nameLengthAtom` derived atom that calculates the length of the string stored in a base atom `nameAtom`:
+For example, let's create `isNameEmptyAtom` derived atom that determines the string stored in `nameAtom` is empty:
 
-```jsx{4,8,15}
+```jsx{4,8}
 import { atom } from 'jotai';
 
 const nameAtom = atom('Batman');
@@ -218,7 +228,7 @@ const sumAtom = atom((get) => get(counterAtom1) + get(counterAtom2));
 
 I like `jotai` for its minimalistic but flexible way to manage a simple global state.  
 
-To create a global state variable using jotai you need to make 2 simple steps:  
+To create a global state variable you need 2 steps:  
 
 A) Define the atom for your global state variable: 
 
@@ -226,7 +236,7 @@ A) Define the atom for your global state variable:
 const myAtom = atom(<initialValue>);
 ```
 
-B) Then access the atom' value and updater function inside of the component using a special hook:
+B) Then access the atom's value and updater function inside of the component using the special hook `useAtom(<atom>)`:
 
 ```jsx
 function MyComponent() {
@@ -235,6 +245,6 @@ function MyComponent() {
 }
 ```
 
-I found that `jotai` fits well for the management of simple global variables, as a complement to asynchronous state management libraries like `react-query` and `useSWR()`.    
+I found that `jotai` fits well to manage simple global variables, as a complement to asynchronous state management libraries like `react-query` and `useSWR()`.    
 
 *Would you use `jotai` to manage simple global state variables? What features, in your opinion, `jotai` is still missing?*
