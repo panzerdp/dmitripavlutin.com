@@ -89,7 +89,7 @@ export function Button() {
   const [count, setCount] = useAtom(counterAtom);
 
   const handleClick = () => {
-    setNumber(number => number + 1); // Increment number
+    setCount(number => number + 1); // Increment number
   };
 
   return (
@@ -101,11 +101,13 @@ export function Button() {
 }
 ```
 
+[Try the demo.](https://codesandbox.io/s/jotai-atom-2ueh3?file=/src/App.js)
+
 `const [count, setCount] = useAtom(counterAtom)` returns a tuple where the first item is the value of the state, and the second is a state updater function.  
 
 `count` contains the atom's value, while `setCount()` can be used to update the atom's value. 
 
-The selling point of atoms is that you can access the same atom from multiple components. If a component updates the atom, then all the components that read this atom are going to be updated. This is the global state management!  
+The selling point of atoms is that you can access the same atom from multiple components. If a component updates the atom, then all the components that read this atom are updated. This is the global state management!  
 
 For example, let's read `counterAtom` value in an another component `<CurrentCount>`:
 
@@ -116,9 +118,11 @@ import { counterAtom } from './Button';
 function CurrentCount() {
   const [count] = useAtom(counterAtom);
 
-  return <div>Current count: {counter}</div>;
+  return <div>Current count: {count}</div>;
 }
 ```
+
+[Try the demo.](https://codesandbox.io/s/jotai-atom-shared-iq6td?file=/src/App.js)
 
 When the value of `counterAtom` changes (due to counter increment), then both components `<Button>` and `<CurrentCount>` are going to re-render.  
 
@@ -157,9 +161,11 @@ function Header() {
 
 function Main() {
   const [search] = useAtom(searchAtom);
-  return <main>Search query: {search}</main>;
+  return <main>Search query: "{search}"</main>;
 }
 ```
+
+[Try the demo.](https://codesandbox.io/s/search-query-global-state-rp1lr?file=/src/App.js)
 
 `const searchAtom = atom('')` creates the atom that's going to hold the search query global state variable.  
 
@@ -184,14 +190,14 @@ const numberAtom = atom(2);
 const isEvenAtom = atom(get => get(baseAtom) % 2 === 0); 
 ```
 
-In the example above `numberAtom` is an atom holding a number. `isEvenAtom` is a derived atom that determines whether the number stored in `numberAtom` is even.  
+In the example above `numberAtom` holds a number. `isEvenAtom` is a derived atom that determines whether the number stored in `numberAtom` is even.  
 
 Of course, as soon as the base atom changes, the derived atom changes too.  
 
 For example, let's create `isNameEmptyAtom` derived atom that determines the string stored in `nameAtom` is empty:
 
 ```jsx{4,8}
-import { atom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 
 const nameAtom = atom('Batman');
 const isNameEmptyAtom = atom(get => get(nameAtom).length === 0);
@@ -200,7 +206,7 @@ function HeroName() {
   const [name, setName] = useAtom(nameAtom);
   const [isNameEmpty] = useAtom(isNameEmptyAtom);
 
-  const handleChange = event => setSearch(event.target.value);
+  const handleChange = event => setName(event.target.value);
 
   return (
     <div>
@@ -210,6 +216,8 @@ function HeroName() {
   );
 }
 ```
+
+[Try the demo.](https://codesandbox.io/s/derived-atoms-eqs7w?file=/src/App.js)
 
 What's even better is that you can create a derived atom from multiple base atoms!
 
