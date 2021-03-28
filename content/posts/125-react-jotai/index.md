@@ -10,12 +10,12 @@ recommended: ['react-usestate-hook-guide', 'react-useref-guide']
 type: post
 ---
 
-For a long time Redux had been the leader of the global state management in React. *Action -> reducer -> state* paradigm is pretty 
+For a long time, Redux had been the leader of the global state management in React. *Action -> reducer -> state* paradigm is pretty 
 efficient in solving a lot of state management tasks.  
 
 With the introduction of hooks, I have found that libraries like [react-query](https://react-query.tanstack.com/) or [useSWR()](https://swr.vercel.app/) handle the fetching of data with less boilerplate than Redux.  
 
-While `redux-query` or `useSWR()` greatly simplifies the management of asynchronously fetched data &mdash; there is still global state variables like side-menu expand status, theme, dark-mode is enabled, etc.  
+While `redux-query` or `useSWR()` greatly simplifies the management of asynchronously fetched data &mdash; there are still global state variables like side-menu expand state, theme, dark-mode is enabled, etc.  
 
 For primitive global state variables fits well a simple React state management library &mdash; welcome `jotai` https://github.com/pmndrs/jotai.  
 
@@ -24,7 +24,7 @@ For primitive global state variables fits well a simple React state management l
 
 ## 1. Search query: a global state variable
 
-Let's say that your application has a header and main content components. Inside the header there's a input field where user can introduce a search query. The main component should display the search query introduced in the input field.  
+Let's say that your application has a header and main content components. Inside the header, there's an input field where the user can introduce a search query. The main component should display the search query introduced in the input field.  
 
 Here's the initial sketch of the application:
 
@@ -120,7 +120,7 @@ function CurrentCount() {
 }
 ```
 
-When the value of `counterAtom` change (due to counter increment), then both components `<Button>` and `<CurrentCount>` are going to re-render.  
+When the value of `counterAtom` changes (due to counter increment), then both components `<Button>` and `<CurrentCount>` are going to re-render.  
 
 What's great about `useAtom(atom)` hook keeps the same API as the built-in `useState()` hook &mdash; which also returns a tuple of state value and an updater function.  
 
@@ -167,7 +167,7 @@ Inside of the `<Header>` component `const [search, setSearch] = useAtom(searchAt
 
 As soon as the user types into the input field, `handleChange()` event handler updates the atom value: `setSearch(event.target.value)`.  
 
-`<Main>` component can also access the `searchAtom` value: `const [search] = useAtom(searchAtom)`. And when the atom's value changes when user types into the input, the `<Main>` component is updated to received the new value.  
+`<Main>` component can also access the `searchAtom` value: `const [search] = useAtom(searchAtom)`. And when the atom's value changes due to the user typing into the input, `<Main>` component is updated to receive the new value.  
 
 In conclusion, atoms are global state pieces that can be accessed and modified by any component.  
 
