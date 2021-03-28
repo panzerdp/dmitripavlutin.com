@@ -50,9 +50,11 @@ function Header() {
 
 function Main() {
   // How to access the search?
-  return <main>???</main>;
+  return <main>Search query: ???</main>;
 }
 ```
+
+[Try the demo.](https://codesandbox.io/s/search-query-no-global-state-ppr2c?file=/src/App.js)
 
 `<App>` component wires 2 components: `<Header>` and `<Main>`.  
 
@@ -113,11 +115,11 @@ For example, if you click the button *Increment*, then both components `<Button>
 
 What's great about `useAtom(atom)` is that it keeps the same API as the built-in `useState()` hook &mdash; which also returns a tuple of state value and updater function.  
 
-### 2.1 Making the search query an atom
+### 2.1 Storing the search query in an atom
 
 Now let's return to the problem of section 1: how to share the search query from the `<Header>` component in `<Main>` component.  
 
-Most likely you already acknowledged the solution: let's create an atom `searchAtom` and share it between `<Header>` and `<Main>` components.  
+Most likely you already know the solution: let's create an atom `searchAtom` and share it between `<Header>` and `<Main>` components.  
 
 ```jsx{12,15,25-26}
 import { atom, useAtom } from 'jotai';
@@ -145,27 +147,27 @@ function Header() {
 
 function Main() {
   const [search] = useAtom(searchAtom);
-  return <main>{search}</main>;
+  return <main>Search query: {search}</main>;
 }
 ```
 
-`const searchAtom = atom('')` creates the atom that's going to hold the search global state variable.  
+`const searchAtom = atom('')` creates the atom that's going to hold the search query global state variable.  
 
-Inside of the `<Header>` component `const [search, setSearch] = useAtom(searchAtom)` the `useAtom()` hooks returns the current search value, as well as the updater function.  
+Inside of the `<Header>` component `const [search, setSearch] = useAtom(searchAtom)` returns the current search value, as well as the updater function.  
 
 As soon as the user types into the input field, `handleChange()` event handler updates the atom value: `setSearch(event.target.value)`.  
 
-`<Main>` component can access the `searchAtom` also: `const [search] = useAtom(searchAtom)`. And when the atom value changes, the `<Main>` component also receives the new value.  
+`<Main>` component can also access the `searchAtom` value: `const [search] = useAtom(searchAtom)`. And when the atom's value changes when user types into the input, the `<Main>` component is updated to received the new value.  
 
-In conclusion, atoms are global state pieces that can be accessed in any component.  
+In conclusion, atoms are global state pieces that can be accessed and modified by any component.  
 
 ## 3. Jotai derived atoms
 
-If you find yourself calculating derived state from an atom's state, then you may find useful the *derived atoms* feature of `jotai`.  
+If you find yourself calculating data from an atom's value, then you may find useful the *derived atoms* feature of `jotai`.  
 
-You can create a derived atom when supplying a callback function to `atom((get) => get(myAtom))`: in which case `jotai` is going to call the callback with a getter function as an argument from where you can extract the value of the base atom. 
+You can create a derived atom when supplying a callback function to `atom(get => get(myAtom))`: in which case `jotai` invokes the callback with a getter function `get` from where you can extract the value of the base atom `get(myAtom)`.  
 
-```javascript
+```javascript{4}
 import { atom } from 'jotai';
 
 const baseAtom = atom(2);
