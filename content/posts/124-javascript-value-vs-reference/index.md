@@ -35,7 +35,7 @@ const missingObject = null;
 const nothing = undefined;
 ```
 
-The second category is objects. Particularly the plain JavaScript object, arrays, functions, and more &mdash; are all objects.  
+The second category is objects. Particularly the plain object, arrays, functions, and more &mdash; are all objects.  
 
 ```javascript
 // Objects
@@ -50,7 +50,7 @@ const functionObject = (n1, n2) => {
 };
 ```
 
-Saying it differently, anything that is not a primitive value in JavaScript is an object.  
+Saying it differently, anything that is not a primitive value is an object.  
 
 ## 2. Values
 
@@ -76,15 +76,15 @@ console.log(b); // 3
 
 The first statement `let a = 1` defines a variable `a` initialized with the number `1`.  
 
-The second statement `let b = a` defines another variable `b` and initializes it with the value of `a` variable &mdash; efficiently passing by value. Simpler, a copy of number `1` is assigned to `b`.  
+The second statement `let b = a` defines another variable `b` and initializes it with the value of `a` variable &mdash; which is passing by value. Simpler, a copy of number `1` is assigned to `b`.  
 
 Later, `b = b + 2` increases by `2` and becomes `3`. `b` variable changes, and this change doesn't affect the value of `a`.  
 
 ## 3. References
 
-The pass by references, however, manifests itself differently.  
+The pass by reference, however, manifests itself differently.  
 
-When you create an object in JavaScript, you're given a reference to that object. In case if 2 variables hold the same reference, then a change of the object is reflected in both variables.  
+When creating an object you're given a reference to that object. If 2 variables hold the same reference, then changing the object reflects in both variables.  
 
 ![References in JavaScript](./images/references-2.png)
 
@@ -100,11 +100,11 @@ console.log(x); // [1, 2]
 console.log(y); // [1, 2]
 ```
 
-The first statement `let x = [1]` creates an array, defines a variable `x`, then assigns to the variable a reference of the created array.  
+The first statement `let x = [1]` creates an array, defines a variable `x`, and initializes the variable with a reference to the created array.  
 
-Then `let y = x` defines a variable `y`, and assigns to it the references to the array that is stored in `x` variable. This is a pass by reference.  
+Then `let y = x` defines a variable `y`, and initializes `y` with the reference stored in `x` variable. This is a pass by reference.  
 
-`y.push(2)` mutates the array by pushing an item `2`. Because `x` and `y` variables both reference the same array, this change is reflected in both variables.  
+`y.push(2)` mutates the array by pushing an item `2`. Because `x` and `y` variables reference the same array, this change is reflected in both variables.  
 
 *Note: for simplicity, I say that variables hold references to objects. But strictly saying variables in JavaScript hold values that are references to objects*.
 
@@ -112,7 +112,7 @@ Then `let y = x` defines a variable `y`, and assigns to it the references to the
 
 Understanding the difference between values and references is important when you want to compare objects.  
 
-When using the strict comparison operator `===` on values, 2 variables are equal if they have the same value. All of the below comparisons are equal:
+When using the strict comparison operator `===`, 2 variables having values are equal if they have the same value. All of the below comparisons are equal:
 
 ```javascript
 const one = 1;
@@ -147,10 +147,10 @@ The comparison operator returns `true` only when comparing references pointing t
 
 ## 5. Summary
 
-In JavaScript primitive types are passed around as values: meaning that each time a value is assigned or used, a copy of that value is created.  
+In JavaScript primitive types are passed around as values: meaning that each time a value is assigned, a copy of that value is created.  
 
 On the other side objects (including plain objects, array, functions, class instances) are references. If you modify the object, then all variables
-that reference that object is going to see that change.  
+that reference that object are going to see the change.  
 
 The comparison operator distinguishes comparing values and references. 2 variables holding references are equal only if they reference exactly the same object, but 2 variables holding values are equal if they simply have 2 same values no matter where the value originates: from a variable, literal, etc.  
 
