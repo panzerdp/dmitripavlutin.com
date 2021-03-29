@@ -10,12 +10,9 @@ recommended: ['react-usestate-hook-guide', 'react-useref-guide']
 type: post
 ---
 
-For a long time, Redux had been the leader of the global state management in React. *Action -> reducer -> state* paradigm is pretty 
-efficient in solving a lot of state management tasks.  
+For a long time, Redux had been the leader library of global state management in React. But with the introduction of hooks, I have found that libraries like [react-query](https://react-query.tanstack.com/) or [useSWR()](https://swr.vercel.app/) handle the fetching of data with less boilerplate.  
 
-With the introduction of hooks, I have found that libraries like [react-query](https://react-query.tanstack.com/) or [useSWR()](https://swr.vercel.app/) handle the fetching of data with less boilerplate than Redux.  
-
-While `redux-query` or `useSWR()` greatly simplifies the management of asynchronously fetched data &mdash; there are still global state variables like side-menu expand state, theme, dark-mode is enabled, etc.  
+While `redux-query` and `useSWR()` simplify the management of asynchronously fetched data &mdash; there's data like side-menu expand state, theme, dark-mode being enabled, etc. that require separate management.  
 
 For primitive global state variables fits well a simple React state management library &mdash; welcome `jotai` https://github.com/pmndrs/jotai.  
 
