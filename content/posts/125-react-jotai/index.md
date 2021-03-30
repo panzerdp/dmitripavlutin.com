@@ -12,7 +12,7 @@ type: post
 
 For a long time, Redux had been the leader library of global state management in React. But with the introduction of hooks, I have found that libraries like [react-query](https://react-query.tanstack.com/) or [useSWR()](https://swr.vercel.app/) handle the fetching of data with less boilerplate.  
 
-But the simple UI state like side-menu expand, theme, dark-mode, etc. require separate management &mdash; in which case a simple global state management library like `jotai` (https://github.com/pmndrs/jotai) becomes handy.  
+But the simple UI state like side-menu expand, theme, dark-mode, etc. require separate management &mdash; in which case a simple global state management library like `Jotai` (https://github.com/pmndrs/jotai) becomes handy.  
 
 In this post, you will learn how to use `Jotai`.  
 
