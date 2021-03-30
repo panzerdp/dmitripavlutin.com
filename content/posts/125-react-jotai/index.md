@@ -3,7 +3,7 @@ title: 'A Guide to Jotai: the Minimalist React State Management Library'
 description: "Jotai is a simple but flexible state management library for React."
 published: "2021-03-30T12:00Z"
 modified: "2021-03-30T12:00Z"
-thumbnail: "./images/cover-4.png"
+thumbnail: "./images/cover.png"
 slug: react-jotai-state-management
 tags: ['react', 'state', 'open source']
 recommended: ['react-usestate-hook-guide', 'react-useref-guide']
@@ -123,7 +123,7 @@ function CurrentCount() {
 
 When the value of `counterAtom` changes (due to counter increment), then both components `<CounterButton>` and `<CurrentCount>` are going to re-render.  
 
-![Jotai atom](./images/atom-6.svg)
+![Jotai atom](./images/atom-7.svg)
 
 What's great about `useAtom(atom)` hook keeps the same API as the built-in `useState()` hook &mdash; which also returns a tuple of state value and an updater function.  
 
@@ -191,7 +191,7 @@ const isEvenAtom = atom(get => get(baseAtom) % 2 === 0);
 
 In the example above `numberAtom` holds a number. `isEvenAtom` is a derived atom that determines whether the number stored in `numberAtom` is even.  
 
-![Derived Atom](./images/derived-atom-2.svg)
+![Derived Atom](./images/derived-atom-4.svg)
 
 Of course, as soon as the base atom changes, the derived atom changes too.  
 
@@ -233,7 +233,7 @@ const sumAtom = atom((get) => get(counterAtom1) + get(counterAtom2));
 
 `sumAtom` is derived from 2 base atoms: `counterAtom1` and `counterAtom2`.  
 
-![Derived From Multiple Base Atoms](./images/derived-from-multiple.svg)
+![Derived From Multiple Base Atoms](./images/derived-from-multiple-3.svg)
 
 ## 4. Conclusion
 
@@ -257,5 +257,7 @@ function MyComponent() {
 ```
 
 I found that `jotai` fits well to manage simple global variables, as a complement to asynchronous state management libraries like `react-query` and `useSWR()`.    
+
+The post has described the basic functionality of `jotai`. Visit the repository https://github.com/pmndrs/jotai to read about all the features.  
 
 *Would you use `jotai` to manage simple global state variables? What features, in your opinion, `jotai` is still missing?*
