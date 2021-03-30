@@ -1,6 +1,6 @@
 ---
 title: 'A Guide to Jotai: the Minimalist React State Management Library'
-description: "Jotai is a simple but flexible state management library for React."
+description: "How to use Jotai library to easily manage global state variables in React."
 published: "2021-03-30T08:15Z"
 modified: "2021-03-30T08:15Z"
 thumbnail: "./images/cover.png"
@@ -14,7 +14,7 @@ For a long time, Redux had been the leader library of global state management in
 
 But the simple UI state like side-menu expand, theme, dark-mode, etc. require separate management &mdash; in which case a simple global state management library like `jotai` (https://github.com/pmndrs/jotai) becomes handy.  
 
-In this post, you will learn how to use `jotai`.  
+In this post, you will learn how to use `Jotai`.  
 
 ```toc
 ```
@@ -61,11 +61,11 @@ function Main() {
 
 `<Main>` is the component that should render the query entered into the input field. How would you access the value here?  
 
-The search query is a global state variable. And `jotai` library can help you here using a construction named *atom*.  
+The search query is a global state variable. And `Jotai` library can help you here using a construction named *atom*.  
 
 ## 2. Jotai atoms
 
-A piece of state in `jotai` is represented by an *atom*. An atom accepts an initial value, be it a primitive type like a number, string, or more complex structures like arrays and objects.  
+A piece of state in `Jotai` is represented by an *atom*. An atom accepts an initial value, be it a primitive type like a number, string, or more complex structures like arrays and objects.  
 
 ```javascript
 import { atom } from 'jotai';
@@ -75,7 +75,7 @@ const counterAtom = atom(0);
 
 `counterAtom` is the atom that holds the counter state.
 
-But the atom alone doesn't help much. To read and update the atom's state `jotai` provides a special hook `useAtom()`:
+But the atom alone doesn't help much. To read and update the atom's state `Jotai` provides a special hook `useAtom()`:
 
 ```jsx{3,6}
 import { atom, useAtom } from 'jotai';
@@ -178,9 +178,9 @@ In conclusion, atoms are global state pieces that can be accessed and modified b
 
 ## 3. Jotai derived atoms
 
-If you find yourself calculating data from an atom's value, then you may find useful the *derived atoms* feature of `jotai`.  
+If you find yourself calculating data from an atom's value, then you may find useful the *derived atoms* feature of `Jotai`.  
 
-You can create a derived atom when supplying a callback function to `atom(get => get(myAtom))`: in which case `jotai` invokes the callback with a getter function `get` from where you can extract the value of the base atom `get(myAtom)`.  
+You can create a derived atom when supplying a callback function to `atom(get => get(myAtom))`: in which case `Jotai` invokes the callback with a getter function `get` from where you can extract the value of the base atom `get(myAtom)`.  
 
 ```javascript{4}
 import { atom } from 'jotai';
@@ -237,7 +237,7 @@ const sumAtom = atom((get) => get(counterAtom1) + get(counterAtom2));
 
 ## 4. Conclusion
 
-I like `jotai` for its minimalistic but flexible way to manage a simple global state.  
+I like `Jotai` for its minimalistic but flexible way to manage a simple global state.  
 
 To create a global state variable you need 2 steps:  
 
@@ -256,8 +256,8 @@ function MyComponent() {
 }
 ```
 
-I found that `jotai` fits well to manage simple global variables, as a complement to asynchronous state management libraries like `react-query` and `useSWR()`.    
+I found that `Jotai` fits well to manage simple global variables, as a complement to asynchronous state management libraries like `react-query` and `useSWR()`.    
 
-The post has described the basic functionality of `jotai`. Visit the repository https://github.com/pmndrs/jotai to read about all the features.  
+The post has described the basic functionality of `Jotai`. Visit the repository https://github.com/pmndrs/jotai to read about all the features.  
 
-*Would you use `jotai` to manage simple global state variables? What features, in your opinion, `jotai` is still missing?*
+*Would you use `Jotai` to manage simple global state variables? What features, in your opinion, this library is still missing?*
