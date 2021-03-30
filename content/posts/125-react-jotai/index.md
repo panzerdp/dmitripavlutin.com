@@ -1,6 +1,6 @@
 ---
 title: 'A Guide to Jotai: the Minimalist React State Management Library'
-description: "How to use Jotai library to easily manage global state variables in React."
+description: "How to manage global state in React using the minimalist but flexible Jotai library."
 published: "2021-03-30T08:15Z"
 modified: "2021-03-30T08:15Z"
 thumbnail: "./images/cover.png"
@@ -123,7 +123,7 @@ function CurrentCount() {
 
 When the value of `counterAtom` changes (due to counter increment), then both components `<CounterButton>` and `<CurrentCount>` are going to re-render.  
 
-![Jotai atom](./images/atom-7.svg)
+![Jotai atom](./images/atom-8.svg)
 
 What's great about `useAtom(atom)` hook keeps the same API as the built-in `useState()` hook &mdash; which also returns a tuple of state value and an updater function.  
 
