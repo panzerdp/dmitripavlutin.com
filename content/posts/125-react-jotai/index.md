@@ -3,7 +3,7 @@ title: 'A Guide to Jotai: the Minimalist React State Management Library'
 description: "Jotai is a simple but flexible state management library for React."
 published: "2021-03-30T12:00Z"
 modified: "2021-03-30T12:00Z"
-thumbnail: "./images/cover-3.png"
+thumbnail: "./images/cover-4.png"
 slug: react-jotai-state-management
 tags: ['react', 'state', 'open source']
 recommended: ['react-usestate-hook-guide', 'react-useref-guide']
@@ -12,16 +12,16 @@ type: post
 
 For a long time, Redux had been the leader library of global state management in React. But with the introduction of hooks, I have found that libraries like [react-query](https://react-query.tanstack.com/) or [useSWR()](https://swr.vercel.app/) handle the fetching of data with less boilerplate.  
 
-While `redux-query` and `useSWR()` simplify the management of asynchronously fetched data &mdash; there's data like side-menu expand state, theme, dark-mode being enabled, etc. that require separate management.  
+But the simple UI state like side-menu expand, theme, dark-mode, etc. require separate management &mdash; in which case a simple global state management library like `jotai` (https://github.com/pmndrs/jotai) becomes handy.  
 
-For primitive global state variables fits well a simple React state management library &mdash; welcome `jotai` https://github.com/pmndrs/jotai.  
+In this post, you will learn how to use `jotai`.  
 
 ```toc
 ```
 
 ## 1. Search query: a global state variable
 
-Let's say that your application has a header and main content components. Inside the header, there's an input field where the user can introduce a search query. The main component should display the search query introduced in the input field.  
+An application has a header and main content components. The header component has an input field where the user can introduce a search query. The main component should display the search query introduced in the input field.  
 
 Here's the initial sketch of the application:
 
@@ -82,7 +82,7 @@ import { atom, useAtom } from 'jotai';
 
 export const counterAtom = atom(0);
 
-export function Button() {
+export function CounterButton() {
   const [count, setCount] = useAtom(counterAtom);
 
   const handleClick = () => {
@@ -121,11 +121,13 @@ function CurrentCount() {
 
 [Try the demo.](https://codesandbox.io/s/jotai-atom-shared-iq6td?file=/src/App.js)
 
-When the value of `counterAtom` changes (due to counter increment), then both components `<Button>` and `<CurrentCount>` are going to re-render.  
+When the value of `counterAtom` changes (due to counter increment), then both components `<CounterButton>` and `<CurrentCount>` are going to re-render.  
+
+![Jotai atom](./images/atom-6.svg)
 
 What's great about `useAtom(atom)` hook keeps the same API as the built-in `useState()` hook &mdash; which also returns a tuple of state value and an updater function.  
 
-### 2.1 Storing the search query in an atom
+### 2.1 Search query atom
 
 Now let's return to the problem of section 1: how to share the search query from the `<Header>` component in `<Main>` component.  
 
@@ -189,6 +191,8 @@ const isEvenAtom = atom(get => get(baseAtom) % 2 === 0);
 
 In the example above `numberAtom` holds a number. `isEvenAtom` is a derived atom that determines whether the number stored in `numberAtom` is even.  
 
+![Derived Atom](./images/derived-atom-2.svg)
+
 Of course, as soon as the base atom changes, the derived atom changes too.  
 
 For example, let's create `isNameEmptyAtom` derived atom that determines the string stored in `nameAtom` is empty:
@@ -228,6 +232,8 @@ const sumAtom = atom((get) => get(counterAtom1) + get(counterAtom2));
 ```
 
 `sumAtom` is derived from 2 base atoms: `counterAtom1` and `counterAtom2`.  
+
+![Derived From Multiple Base Atoms](./images/derived-from-multiple.svg)
 
 ## 4. Conclusion
 
