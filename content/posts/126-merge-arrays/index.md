@@ -1,8 +1,8 @@
 ---
 title: '3 Ways to Merge Arrays in JavaScript'
 description: "How to merge arrays in JavaScript using spread operator, array.concat() and array.push()."
-published: "2021-04-06T12:00Z"
-modified: "2021-04-06T12:00Z"
+published: "2021-04-06T06:30Z"
+modified: "2021-04-06T06:30Z"
 thumbnail: "./images/cover.png"
 slug: javascript-merge-arrays
 tags: ['javascript', 'array']
