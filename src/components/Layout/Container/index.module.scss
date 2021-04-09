@@ -17,6 +17,8 @@ body {
   font-weight: normal;
   color: $body-color;
   min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
