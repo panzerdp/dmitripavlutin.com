@@ -2,7 +2,7 @@
 title: 'The Complete Guide to useRef() and Refs in React'
 description: 'How to use React.useRef() hook to create persisted mutable values (also known as references or refs), as well access DOM elements.'
 published: "2021-03-02T12:00Z"
-modified: "2021-03-26T10:20Z"
+modified: "2021-04-10T08:20Z"
 thumbnail: "./images/cover-7.png"
 slug: react-useref-guide
 tags: ['react', 'useref', 'hook', 'dom', 'element']
@@ -18,7 +18,7 @@ toHeading: 3
 
 ## 1. Mutable values
 
-`useRef(initialValue)` accepts one argument (the initial value of the reference) and returns a *reference* (also known as *ref*). A reference is just an object having a special property `current`:
+`useRef(initialValue)` accepts one argument as the initial value and returns a *reference*, aka *ref*. A reference is an object having a special property `current`:
 
 ```javascript
 const reference = useRef(initialValue);
@@ -81,7 +81,7 @@ function LogButtonClicks() {
 
 When the button is clicked, `handle` function is invoked and the reference value is incremented: `countRef.current++`. The reference value is logged to the console.  
 
-Note that updating the reference value `countRef.current++` doesn't trigger component re-rendering &mdash; `'I rendered!'` is logged to console just once during initial rendering.  
+Note that updating the reference value `countRef.current++` doesn't trigger component re-rendering &mdash; `'I rendered!'` is logged to console just once, at initial rendering.  
 
 Now a reasonable question: what's the main difference between references and state?  
 
@@ -121,7 +121,7 @@ From a higher point of view, references are used to store infrastructure data of
 
 ### 1.2 Use case: implementing a stopwatch
 
-The things you can store inside a reference are infrastructure information that involves some side-effect. For example, you can store into a reference different kinds of pointers: timer ids, socket ids, etc.
+You can store inside a reference infrastructure information of some side-effect. For example, you can store into a reference pointers: timer ids, socket ids, etc.
 
 For example, the following component `Stopwatch` uses `setInterval(callback, time)` timer function to increase each second the counter of a stopwatch. The timer id is stored into a reference `timerIdRef`:  
 
@@ -172,7 +172,7 @@ In the stopwatch example, the reference was used to store the infrastructure dat
 
 ## 2. Accessing DOM elements
 
-Another useful application of the `useRef()` hook is to access DOM elements. It's done in 3 steps:
+Another useful application of the `useRef()` hook is to access DOM elements, which is performed in 3 steps:
 
 A) Define the reference to access the element `const elementRef = useRef()`; 
 
@@ -301,9 +301,7 @@ function MyComponent({ prop }) {
 
 ## 4. Summary
 
-`useRef()` hook stores mutable values (aka references or refs) that persist between renderings, as well accesses DOM elements.  
-
-Calling `const reference = useRef(initialValue)` with the initial value returns a special object named reference. The reference object has a property `current`: you can use this property to read the reference value `reference.current`, or update the reference `reference.current = newValue`.  
+`useRef()` hook creates references. Calling `const reference = useRef(initialValue)` with the initial value returns a special object named reference. The reference object has a property `current`: you can use this property to read the reference value `reference.current`, or update the reference `reference.current = newValue`.  
 
 Between the component re-renderings, the value of the reference is persistent. 
 
