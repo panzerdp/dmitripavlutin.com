@@ -2,7 +2,7 @@
 title: '3 Ways to Merge Arrays in JavaScript'
 description: "How to merge arrays in JavaScript using spread operator, array.concat() and array.push()."
 published: "2021-04-06T06:30Z"
-modified: "2021-04-06T06:30Z"
+modified: "2021-04-10T08:30Z"
 thumbnail: "./images/cover.png"
 slug: javascript-merge-arrays
 tags: ['javascript', 'array']
@@ -22,16 +22,16 @@ In this post, you'll find 3 ways to merge arrays in JavaScript: 2 immutable (a n
 
 ### 1.1 Merge using the spread operator
 
-If you want to know one but a good way to merge arrays in JavaScript, then you should remember the merge using the spread operator.  
+If you want to know one but a good way to merge arrays in JavaScript, then remember the merge using the spread operator.  
 
-Write inside the array literal two or more arrays prefixed with the spread operator `...`, and JavaScript is going to create a new array containing all the items of the arrays:
+Write inside the array literal two or more arrays prefixed with the spread operator `...`, and JavaScript will create a new array with all these arrays merged:
 
 ```javascript
 // merge array1 and array2
 const mergeResult = [...array1, ...array2];
 ```
 
-For example, consider the following 2 arrays `heros` and `villains`:
+For example, let's merge 2 arrays `heroes` and `villains`:
 
 ```javascript
 const heroes = ['Batman', 'Superman'];
@@ -42,7 +42,7 @@ const all = [...heroes, ...villains];
 all; // ['Batman', 'Superman', 'Joker', 'Bane']
 ```
 
-`const all = [...heros, ...villains]` creates a new array having `heros` and `villains` arrays merged.  
+`const all = [...heros, ...villains]` creates a new array having `heroes` and `villains` arrays merged.  
 
 The order of merged arrays inside the array literal does matter: items of the merged arrays are inserted in the same order as the arrays appear inside the literal. 
 
@@ -79,7 +79,7 @@ or using another form:
 const mergeResult = [].concat(array1, array2);
 ```
 
-The `array.concat()` method doesn't mutate the array upon which it is called but returns a new array having the merge result.    
+`array.concat()` method doesn't mutate the array upon which it is called but returns a new array having the merge result.    
 
 Let's use `array.concat()` to merge the `heroes` and `villains`:
 
@@ -94,7 +94,7 @@ all1; // ['Batman', 'Superman', 'Joker', 'Bane']
 all2; // ['Batman', 'Superman', 'Joker', 'Bane']
 ```
 
-`heroes.concat(villains)` as well as `[].concat(heros, villains)` return a new array where `heros` and `villains` arrays are merged.  
+`heroes.concat(villains)` as well as `[].concat(heroes, villains)` return a new array where `heroes` and `villains` arrays are merged.  
 
 The concat method accepts multiple arrays as arguments, thus you can merge 2 or more arrays at once:
 
@@ -106,7 +106,7 @@ const mergeResult = [].concat(array1, array2, array3, arrayN);
 
 The merge performed using the spread operator or `array.concat()` creates a new array. However, sometimes you don't want to create a new array, but rather merge it into some existing array.  
 
-The approach below performs a mutable way to merge arrays.  
+The approach below performs a mutable way to merge.  
 
 ### 2.1 Merge using *array.push()* method
 
@@ -127,7 +127,7 @@ Thanks to the fact that `array.push(item1, item2, ..., itemN)` accepts multiple 
 array1.push(...array2);
 ```
 
-For example, let's merge `villains` into `heros` arrays:
+For example, let's merge `villains` into `heroes` arrays:
 
 ```javascript
 const heroes = ['Batman', 'Superman'];
@@ -138,7 +138,7 @@ heroes.push(...villains);
 heroes; // ['Batman', 'Superman', 'Joker', 'Bane']
 ```
 
-`heroes.push(...villains)` pushes all the items of `villains` array at the end of `heroes` array &mdash; performing a mutable merge. `heros` array is mutated.  
+`heroes.push(...villains)` pushes all the items of `villains` array at the end of `heroes` array &mdash; performing a mutable merge. `heroes` array is mutated.  
 
 *Side challenge: what expression would you use to push multiple arrays at once? Share your solution in a comment below!*
 
