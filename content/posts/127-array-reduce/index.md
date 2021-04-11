@@ -39,3 +39,40 @@ Reducing of an array meaning performing a concrete accumulative operation on its
 The simplest example of reduce operation is calculating the sum of an array, where the accumulative operation is addition. The resulted value of sum reduce operation equals to sum of all the numbers in the array.  
 
 For an array like `[1, 2, 4, 6]` the sum reduce operation results in `12` &mdash; the sum of all items.  
+
+Another example of reduce operation would be calculating the maximum element of the array. For an array like `[1, 2, 4, 6]` the max reduce operation results in `6`.  
+
+Having a good view of what reduce operation means  &mdash; now you can easily see what `array.reduce()` method does.  
+
+## 2. array.reduce() method
+
+The `array.reduce()` accepts 2 arguments:
+
+```javascript
+const value = array.reduce(callback[, initialValue]);
+```
+
+The `callback` is an obligatory argument which is a function that perform the reduce operation, which the second optional argument is the initial value. 
+
+When running the reduce method, JavaScript invokes the reduce `callback` with 4 arguments: the accumulator value, the current array item, the current array item index, and the array itself. The `callback` function must return a new accumulator value.  
+
+```javascript
+array.reduce(function(accumulator, item, index, array) {
+  // ...
+  return newAccumulatorValue;
+})
+```
+
+For example, let's get back to the code from the introduction:  
+
+```javascript
+const numbers = [1, 2, 4, 6];
+
+const sum = numbers.reduce((sum, number) => sum + number, 0);
+
+sum; // 12
+```
+
+## 3. Omitting initial value argument
+
+## 4. Conclusion
