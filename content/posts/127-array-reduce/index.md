@@ -6,7 +6,7 @@ modified: "2021-04-13T12:00Z"
 thumbnail: "./images/cover-3.png"
 slug: javascript-array-reduce
 tags: ['javascript', 'reduce']
-recommended: ['javascript-merge-arrays', 'operations-on-arrays-javascript']
+recommended: ['foreach-iterate-array-javascript', 'operations-on-arrays-javascript']
 type: post
 ---
 
@@ -117,5 +117,6 @@ Sometimes you might find useful this optimization.
 
 `array.reduce(callback, initialValue)` accepts 2 arguments: the `callback` function that updates the accumulated value, and the initial value of the accumulator. `array.reduce()` then invokes the `callback` for each item of the array, calculating this way the final value.  
 
-You can also omit the initial value second argument, in which case the accumulator value is initialized with the first item of the array, and the iteration start from the second item.  
+You can also omit the initial value argument, in which case the accumulator value is initialized with the first item of the array, and the iteration starts from the second item.  
 
+Would you like to read more about array methods? Follow my post on [How to Use forEach() to Iterate an Array](/foreach-iterate-array-javascript/).  
