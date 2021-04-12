@@ -107,7 +107,7 @@ const sum = numbers.reduce(function summarize(sum, number, index) {
 sum; // 12
 ```
 
-The initial value argument is omitted, thus the accumulator is initialized with the value of first item `2`, and the iteration start from the second item.  
+The initial value argument is omitted, thus the accumulator is initialized with the value of first item `2`, and the iteration starts from the second item.  
 
 Sometimes you might find useful this optimization.  
 
