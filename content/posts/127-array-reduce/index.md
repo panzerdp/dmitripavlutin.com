@@ -23,7 +23,10 @@ Thanks to the `array.reduce()` method of JavaScript, you can easily do that:
 ```javascript
 const numbers = [1, 2, 4, 6];
 
-const sum = numbers.reduce((sum, number) => sum + number, 0);
+const sum = numbers.reduce(function(sum, number) {
+  const updatedSum = sum + number;
+  return updatedSum;
+}, 0);
 
 sum; // 12
 ```
@@ -58,8 +61,9 @@ When running the reduce method, JavaScript invokes the reduce `callback` with 4 
 
 ```javascript
 array.reduce(function(accumulator, item, index, array) {
-  // ...
-  return newAccumulatorValue;
+  // Use `accumulator` and `item` 
+  // to calculate `updatedAccumulator`...
+  return updatedAccumulator;
 })
 ```
 
@@ -68,11 +72,26 @@ For example, let's get back to the code from the introduction:
 ```javascript
 const numbers = [1, 2, 4, 6];
 
-const sum = numbers.reduce((sum, number) => sum + number, 0);
+const sum = numbers.reduce(function summarize(sum, number) {
+  const updatedSum = sum + number;
+  return updatedSum;
+}, 0);
 
 sum; // 12
 ```
 
+The `numbers.reduce(summarize, 0)` calculates the sum of all elements in the array.  
+
+For every item in the array, the `summarize` callback is invoked with the current sum of numbers and the iterated `number`. What's important is that the callback uses the current accumulated sum, adds to it the current number, then returns the updated sum. 
+
+That's how reducing of the array to a value works.  
+
+Also note the second argument of `numbers.reduce(summarize, 0)` &mdash; the sum of array items is initializes with `0`.  
+
+*Side challenge: how would you use `array.reduce()` method to find the maximum value of the array? Write your solution in a comment below!*
+
 ## 3. Omitting initial value argument
+
+
 
 ## 4. Conclusion
