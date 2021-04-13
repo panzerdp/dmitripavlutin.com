@@ -41,7 +41,7 @@ A good example of reduce operation is calculating the sum of an array, where the
 
 Another example of reducing is determining the maximum element of the array. For an array `[7, 2, 10, 6]` the reducing to max item results in `10`.  
 
-Now you can easily see what `array.reduce()` method does &mdash; perform a reduce operation.  
+Now you can easily see what` array.reduce()` method does &mdash; perform a reduce operation.  
 
 ## 2. array.reduce() method
 
@@ -80,7 +80,7 @@ sum; // 12
 
 `numbers.reduce(summarize, 0)` calculates the sum of all elements in the array.  
 
-The `summarize` callback is invoked for every item in the array with the current accumulated sum and the currently iterated number. `summarize` callback adds to the current accumulated sum the iterated item, and returns that updated sum.  
+The `summarize` callback is invoked for every item in the array with the accumulated sum and the iterated number. `summarize` callback adds the iterated item to the already accumulated sum, and returns that updated sum.  
 
 That's how an array is reducing to a sum.  
 
@@ -111,7 +111,7 @@ The initial value argument is omitted, thus the accumulator is initialized with 
 
 ## 4. Conclusion
 
-`array.reduce()` is a useful method that lets reduce an array to a value.  
+`array.reduce()` is a useful method that reduces an array to a value.  
 
 `array.reduce(callback, initialValue)` accepts 2 arguments: the `callback` function that updates the accumulator value, and the initial value of the accumulator. `array.reduce()` then invokes the `callback` for each item of the array, updating the accumulator at each step.  
 
