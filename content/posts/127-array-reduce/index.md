@@ -31,19 +31,19 @@ const sum = numbers.reduce(function(sum, number) {
 sum; // 12
 ```
 
-In this post, you will learn about what the reduce operation means, and how use `array.reduce(callback, initialValue)` method in JavaScript to perform the reduce operation on arrays.  
+In this post, you will learn about what the reduce operation means, and how to use `array.reduce(callback, initialValue)` method in JavaScript to perform the reduce operation on arrays.  
 
 ## 1. Reduce operation
 
 Before diving into the actual detail of how to use the `array.reduce()` method, let's find distinguish what problem it tries to solve: reducing to a value.  
 
-Reducing of an array meaning performing a concrete accumulative operation on its items to calculate a resulted value.  
+Reducing an array meaning performing a concrete accumulative operation on its items to calculate a resulted value.  
 
-The simplest example of reduce operation is calculating the sum of an array, where the accumulative operation is addition. The resulted value of sum reduce operation equals to sum of all the numbers in the array.  
+The simplest example of reducing operation is calculating the sum of an array, where the accumulative operation is an addition. The array is reduced to the sum of all its items.  
 
-For an array like `[2, 4, 6]` the sum reduce operation results in `12` &mdash; the sum of all items.  
+For an array `[2, 4, 6]` the sum reduce operation results in `12` &mdash; the sum of all items.  
 
-Another example of reduce operation would be calculating the maximum element of the array. For an array like `[1, 2, 4, 6]` the max reduce operation results in `6`.  
+Another example of reducing would be calculating the maximum element of the array. For an array `[1, 2, 4, 6]` the max reduce operation results in `6`.  
 
 Having a good view of what reduce operation means  &mdash; now you can easily see what `array.reduce()` method does.  
 
@@ -55,7 +55,7 @@ The `array.reduce()` accepts 2 arguments:
 const value = array.reduce(callback[, initialValue]);
 ```
 
-The `callback` is an obligatory argument which is a function that perform the reduce operation, which the second optional argument is the initial value. 
+The `callback` is an obligatory argument that is a function performing the reduce operation, which the second optional argument is the initial value. 
 
 When running the reduce method, JavaScript invokes the reduce `callback` with 4 arguments: the accumulator value, the current array item, the current array item index, and the array itself. The `callback` function must return a new accumulator value.  
 
@@ -84,17 +84,17 @@ sum; // 12
 
 For every item in the array, the `summarize` callback is invoked with the current accumulated sum of numbers and the iterated `number`. What's important is that the callback uses the current accumulated sum, adds to it the current number, then returns the updated sum. 
 
-That's how reducing of the array to a value works.  
+That's how an array is reducing to a value.  
 
-Also note the second argument of `numbers.reduce(summarize, 0)` &mdash; the sum of array items is initializes with `0`.  
+Also, note the second argument of `numbers.reduce(summarize, 0)` &mdash; the sum of array items is initialized with `0`.  
 
 *Side challenge: how would you use `array.reduce()` method to find the maximum value of the array? Write your solution in a comment below!*
 
 ## 3. Omitting initial value argument
 
-You can also omit the second argument of the `array.reduce()`. In such case the reduce method assigns initializes the accumulator value with the first item of the array, and the iteration starts from the second item.  
+You can also omit the second argument of the `array.reduce()`. In such a case the reduce method assigns initializes the accumulator value with the first item of the array, and the iteration starts from the second item.  
 
-For example, let's sum the number of the array without inidicating the second argument of `number.reduce(summarize)`:
+For example, let's sum the number of the array without indicating the second argument of `number.reduce(summarize)`:
 
 ```javascript
 const numbers = [2, 4, 6];
@@ -107,13 +107,13 @@ const sum = numbers.reduce(function summarize(sum, number, index) {
 sum; // 12
 ```
 
-The initial value argument is omitted, thus the accumulator is initialized with the value of first item `2`, and the iteration starts from the second item.  
+The initial value argument is omitted, thus the accumulator is initialized with the value of the first item `2`, and the iteration starts from the second item.  
 
 Sometimes you might find useful this optimization.  
 
 ## 4. Conclusion
 
-`array.reduce()` is a useful method that let's you calculate a value based on an array.  
+`array.reduce()` is a useful method that lets you calculate a value based on an array.  
 
 `array.reduce(callback, initialValue)` accepts 2 arguments: the `callback` function that updates the accumulated value, and the initial value of the accumulator. `array.reduce()` then invokes the `callback` for each item of the array, calculating this way the final value.  
 
