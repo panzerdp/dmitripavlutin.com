@@ -1,11 +1,11 @@
 ---
 title: 'How to Use Array Reduce Method in JavaScript'
 description: "What is a reduce operation and how to use array.reduce() method to perform the reduce operation on arrays."
-published: "2021-04-13T12:00Z"
-modified: "2021-04-13T12:00Z"
+published: "2021-04-13T07:30Z"
+modified: "2021-04-13T07:30Z"
 thumbnail: "./images/cover-3.png"
 slug: javascript-array-reduce
-tags: ['javascript', 'reduce']
+tags: ['javascript', 'array', 'reduce']
 recommended: ['foreach-iterate-array-javascript', 'operations-on-arrays-javascript']
 type: post
 ---
@@ -37,7 +37,7 @@ Before diving into how to use the `array.reduce()` method, let's find distinguis
 
 Reducing an array meaning performing a concrete accumulative operation on its items to calculate a result value.  
 
-A good example of reducing operation is calculating the sum of an array, where the accumulative operation is the addition of items. For an array `[2, 4, 6]` reducing to a sum results in `12`.  
+A good example of reduce operation is calculating the sum of an array, where the accumulative operation is the addition of items. For an array `[2, 4, 6]` reducing to a sum results in `12`.  
 
 Another example of reducing is determining the maximum element of the array. For an array `[7, 2, 10, 6]` the reducing to max item results in `10`.  
 
@@ -76,9 +76,11 @@ const sum = numbers.reduce(function summarize(sum, number) {
 sum; // 12
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/m65xogaL/)
+
 `numbers.reduce(summarize, 0)` calculates the sum of all elements in the array.  
 
-For every item in the array, the `summarize` callback is invoked with the current accumulated sum of numbers and the iterated `number`. `summarize` callback uses the current accumulated sum, adds to it the current item, and returns the updated sum. 
+The `summarize` callback is invoked for every item in the array with the current accumulated sum and the currently iterated number. `summarize` callback adds to the current accumulated sum the iterated item, and returns that updated sum.  
 
 That's how an array is reducing to a sum.  
 
@@ -102,6 +104,8 @@ const sum = numbers.reduce(function summarize(sum, number, index) {
 
 sum; // 12
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/dh5zyaqv/)
 
 The initial value argument is omitted, thus the accumulator is initialized with the value of the first item (the number `2`). The iteration starts from the second item.  
 

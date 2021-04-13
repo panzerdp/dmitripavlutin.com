@@ -48,8 +48,13 @@
   }
 
   a[href^="https://codesandbox.io"] {
-    padding-left: 26px;
-    background: left center / 22px no-repeat url('/icons/codesandbox.svg');
+    padding-left: 30px;
+    background: left center / 25px no-repeat url('/icons/codesandbox.svg');
+  }
+
+  a[href^="https://jsfiddle.net"] {
+    padding-left: 30px;
+    background: left center / 25px no-repeat url('/icons/javascript-2.svg');
   }
 
   img[src$='.gif'], img[src$='.svg'] {
