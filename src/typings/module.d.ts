@@ -1,9 +1,4 @@
-declare module '*.scss' {
-  const scssContent: {
-    [index: string]: string;
-  };
-  export default scssContent;
-}
+declare module '*.scss';
 
 declare module 'routes/path' {
   export const PATH_INDEX: string;
