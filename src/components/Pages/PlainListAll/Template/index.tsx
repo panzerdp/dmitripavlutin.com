@@ -4,7 +4,7 @@ import MetaTags from '../Meta/Tags';
 import PlainListAllRightSidebar from 'components/Pages/PlainListAll/Sidebar/Right';
 import { formatDateToMonth } from 'utils/date';
 
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 interface PlainListAllTemplateProps {
   posts: PostPlain[];

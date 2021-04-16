@@ -3,7 +3,7 @@ import SearchRightSidebar from 'components/Pages/Search/Sidebar/Right';
 import SearchMetaTags from 'components/Pages/Search/Meta/Tags';
 import ClientOnly from '../ClientOnly';
 
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 interface SearchTemplateProps {
   googleCustomSearchId: string;

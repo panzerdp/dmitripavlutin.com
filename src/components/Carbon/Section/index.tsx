@@ -1,4 +1,4 @@
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 import CarbonFetch from 'components/Carbon/Fetch';
 import CarbonAd from 'components/Carbon/Ad';

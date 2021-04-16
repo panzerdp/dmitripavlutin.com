@@ -1,5 +1,5 @@
 import RecommendedPost from '../Post';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 interface RecommendedListProps {
   posts: PostPlain[];

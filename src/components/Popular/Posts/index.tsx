@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Link from 'gatsby-link';
 
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 import { TO_POST } from 'routes/path';
 
 interface PopularPostsProps {

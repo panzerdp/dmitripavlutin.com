@@ -1,5 +1,5 @@
 import PostShareButton from '../../Button';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 export const URL_SHARE_REDDIT = 'https://www.reddit.com/submit';
 

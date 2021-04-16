@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import 'normalize.css/normalize.css';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 import Footer from 'components/Layout/Footer';
 import LayoutHeader from 'components/Layout/Header';

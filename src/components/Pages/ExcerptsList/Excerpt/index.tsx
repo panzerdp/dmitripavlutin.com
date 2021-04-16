@@ -3,7 +3,7 @@ import Link from 'gatsby-link';
 
 import SubheaderWithComments from 'components/Subheader/WithComments';
 import { TO_POST } from 'routes/path';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 interface ExcerptProps {
   post: Post;

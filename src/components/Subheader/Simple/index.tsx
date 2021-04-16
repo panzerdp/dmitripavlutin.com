@@ -1,6 +1,6 @@
 import Tag from 'components/Tag';
 import { formatDate } from 'utils/date';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 interface PostSubheaderProps {
   post: PostPlain;

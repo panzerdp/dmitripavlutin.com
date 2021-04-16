@@ -21,7 +21,7 @@ import CarbonMetaTags from 'components/Carbon/Meta/Tags';
 import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll';
 import CommentsCount from 'components/Comments/Count';
 import { TO_POST } from 'routes/path';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 const SHOW_SHARE_AFTER_Y = 500;
 

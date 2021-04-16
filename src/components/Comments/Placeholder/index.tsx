@@ -1,7 +1,7 @@
 import { SkeletonAnimation } from 'components/Skeleton';
 import classNames from 'classnames';
 
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 function Placeholder(): JSX.Element {
   return (

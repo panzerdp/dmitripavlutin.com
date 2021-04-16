@@ -3,7 +3,7 @@ import * as React from 'react';
 import withWindowOpen, { WindowOpenOptions } from 'components/With/WindowOpen';
 import { slugify } from 'utils/string';
 import ShareButton from '../../Button';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 export const URL_SHARE_TWITTER = 'https://twitter.com/share';
 

@@ -2,7 +2,7 @@ import Link from 'gatsby-link';
 
 import { TO_TAG } from 'routes/path';
 import { slugify } from 'utils/string';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 interface TagProps {
   tag: string;

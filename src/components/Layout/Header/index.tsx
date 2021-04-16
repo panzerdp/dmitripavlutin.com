@@ -3,7 +3,7 @@ import Link from 'gatsby-link';
 import { memo } from 'react';
 
 import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_SEARCH } from 'routes/path';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 interface HeaderProps {
   authorProfilePicture: FixedImage;

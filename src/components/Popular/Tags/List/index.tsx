@@ -1,4 +1,4 @@
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 import Tag from 'components/Tag';
 
 interface PopularTagsListProps {

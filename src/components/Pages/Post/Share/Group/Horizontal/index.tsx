@@ -1,4 +1,4 @@
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 import ShareSocialFacebook from 'components/Pages/Post/Share/Social/Facebook';
 import PostShareSocialTwitter from 'components/Pages/Post/Share/Social/Twitter';

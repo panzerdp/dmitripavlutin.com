@@ -1,7 +1,7 @@
 import { useRef, Fragment } from 'react';
 import { useLocation } from '@reach/router';
 
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 import CarbonBannerDemo from 'components/Carbon/Banner/Demo';
 import CarbonBannerLive from 'components/Carbon/Banner/Live';
 

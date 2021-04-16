@@ -1,6 +1,6 @@
 import Media from 'react-media';
 
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 import CardonSection from 'components/Carbon/Section';
 

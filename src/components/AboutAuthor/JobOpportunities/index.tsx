@@ -1,4 +1,4 @@
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 export default function JobOpportunities({ authorInfo }: { authorInfo: AuthorInfo }) {
   return (

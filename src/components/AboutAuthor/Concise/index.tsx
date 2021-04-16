@@ -1,6 +1,6 @@
 import Img from 'gatsby-image';
 
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 import TwitterFollowButton from 'components/AboutAuthor/TwitterFollowButton';
 
 interface AboutAuthorConcise {

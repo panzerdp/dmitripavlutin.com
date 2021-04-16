@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 import withWindowOpen, { WindowOpenOptions } from 'components/With/WindowOpen';
 
 const TWITTER_FOLLOW_URL = 'https://twitter.com/intent/user?screen_name=';

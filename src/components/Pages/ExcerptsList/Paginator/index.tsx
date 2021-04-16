@@ -3,7 +3,7 @@ import { Component } from 'react';
 
 import { TO_INDEX, TO_PAGE } from 'routes/path';
 import { generatePages } from './utils';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 const MAX_DISPLAYED_PAGES = 5;
 

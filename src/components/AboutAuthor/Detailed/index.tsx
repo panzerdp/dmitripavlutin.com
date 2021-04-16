@@ -2,7 +2,7 @@ import Img from 'gatsby-image';
 
 import AuthorLinks from 'components/AboutAuthor/Links';
 
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 interface AboutAuthorDetailed {
   authorInfo: AuthorInfo;

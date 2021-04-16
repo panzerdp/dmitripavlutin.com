@@ -2,7 +2,7 @@ import Link from 'gatsby-link';
 
 import Tag from 'components/Tag';
 import { TO_POST } from 'routes/path';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 interface RecommendedPostProps {
   post: PostPlain;

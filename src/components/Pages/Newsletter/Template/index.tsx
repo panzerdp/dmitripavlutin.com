@@ -1,4 +1,4 @@
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 import Layout from 'components/Layout/Fetch';
 import SubscriptionRegion from 'components/Subscription/Region';
 import MetaTags from 'components/Pages/Newsletter/Meta/Tags';

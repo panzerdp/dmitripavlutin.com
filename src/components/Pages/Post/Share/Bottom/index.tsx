@@ -1,5 +1,5 @@
 import ShareGroupHorizontal from '../Group/Horizontal';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 interface PostShareButtomProps {
   url: string;

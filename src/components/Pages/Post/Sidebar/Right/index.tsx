@@ -1,4 +1,4 @@
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 import PopularPosts from 'components/Popular/Posts';
 import SidebarItemsCommon from 'components/SidebarItems/Common';

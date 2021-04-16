@@ -1,4 +1,4 @@
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 import PopularTagsFetch from 'components/Popular/Tags/Fetch';
 import PopularTagsList from 'components/Popular/Tags/List';

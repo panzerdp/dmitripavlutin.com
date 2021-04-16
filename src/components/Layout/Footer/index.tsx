@@ -3,7 +3,7 @@ import { memo } from 'react';
 
 import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_RSS, TO_SEARCH } from 'routes/path';
 import AuthorLinks from 'components/AboutAuthor/Links';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 
 const year = new Date().getFullYear();
 
