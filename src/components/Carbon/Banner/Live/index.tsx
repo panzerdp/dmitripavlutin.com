@@ -11,6 +11,8 @@ function CarbonBannerLive(props: CarbonBannerLiveProps, ref: React.RefObject<HTM
     script.async = true;
     script.id = '_carbonads_js';
     ref.current.appendChild(script);
+
+    return () => { script.parentElement.removeChild(script) }
   }, []);
   return null;
 }

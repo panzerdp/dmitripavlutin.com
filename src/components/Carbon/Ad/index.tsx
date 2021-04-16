@@ -1,4 +1,4 @@
-import { useRef, Fragment } from 'react';
+import { useRef } from 'react';
 import { useLocation } from '@reach/router';
 
 import * as styles from './index.module.scss';
@@ -18,14 +18,13 @@ export default function CarbonAd(props: CarbonAdProps): JSX.Element {
     return null;
   }
 
+  const carbonElement = isProductionMode ? 
+    <CarbonBannerLive ref={container} scriptSrc={scriptSrc} />
+    : <CarbonBannerDemo ref={container} />;
+
   return (
-    <Fragment key={pathname}>
-      <div ref={container} className={styles.carbonAd}></div>
-      {isProductionMode ? (
-        <CarbonBannerLive ref={container} scriptSrc={scriptSrc} />
-      ) : (
-        <CarbonBannerDemo ref={container} />
-      )}
-    </Fragment>
+    <div ref={container} className={styles.carbonAd} key={pathname}>
+      {carbonElement}
+    </div>
   );
 }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-function CarbonBannerDemo(_: {}, ref: React.RefObject<HTMLDivElement>): null {
-  const insertDemoAd = () => {
+function CarbonBannerDemo(_: unknown, ref: React.RefObject<HTMLDivElement>): null {
+  React.useEffect(() => {
     const div = document.createElement('div');
     div.id = 'carbonads';
     div.innerHTML = `
@@ -19,10 +19,12 @@ function CarbonBannerDemo(_: {}, ref: React.RefObject<HTMLDivElement>): null {
       </a>
       <img src="#" border="0" height="1" width="1" alt="ads via Carbon" style="display: none;">
     </span>`;
-    ref.current.appendChild(div);
-  };
-  React.useEffect(() => {
-    setTimeout(insertDemoAd, 500);
+    setTimeout(() => {
+      ref.current.appendChild(div);
+    }, 500);
+    return () => {
+      div.parentElement.removeChild(div);
+    };
   }, []);
   return null;
 }
