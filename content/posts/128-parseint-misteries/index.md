@@ -64,3 +64,43 @@ Why does `parseInt(0.0000005)` have such a mystery behavior?
 
 ## 2. Discovering the mystery of *parseInt()*
 
+Let's look again at what `parseInt()` does with its first argument: if it's not a string, then it is converted to a string, then parsed, and the parsed integer returned.  
+
+That might be the first clue.  
+
+Let's try then to convert manually the floats to a string represenation:
+
+```javascript
+String(0.5);      // '0.5'
+String(0.05);     // '0.05'
+String(0.005);    // '0.05'
+String(0.0005);   // '0.005' 
+String(0.00005);  // '0.00005'
+String(0.000005); // '0.000005'
+
+String(0.0000005); // '5e-7'
+```
+
+The expliciti conversion to string of `String(0.0000005)` expression clearly behaves differently than other floats: it's a string representation of [exponential notation](https://en.wikipedia.org/wiki/Scientific_notation)!
+
+That's the second &mdash; and a significant clue!
+
+And when the expontential notiation as a string value is parsed to an integer, you get the number `5`:
+
+```javascript
+parseInt(0.0000005); // 5
+// same as
+parseInt('5e-7');   // 5
+```
+
+`parseInt('5e-7')` takes into consideration the first digit `5`, but skips `e-7`.  
+
+Mystery solved!
+
+## 3. Conclusion
+
+`parseInt()` is the function that parses numerical string values into integers. 
+
+But if trying to transform to an integer a float smaller than 10<sup>-6</sup> (e.g. `0.0000005` which is same as 5*10<sup>-7</sup>), then such float transform into a string has the exponential notiation (e.g. `5e-7` is the expontential notation of `0.0000005`) into an exponential notation. And `parseInt()` is going to parse the exponential notation, which might lead to unexpected results.  
+
+*Side challenge: can you explain why `parseInt('999999999999999999999')` equals `1`? Write your considerations in a comment below!*
