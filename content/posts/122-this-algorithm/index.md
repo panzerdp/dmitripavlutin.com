@@ -31,40 +31,40 @@ The formal definition of `ThisValueOfFunction(func, invocationType)` that return
 1. If `func` is an *arrow function*, then  
 
     1. If `func` is defined in the *outermost scope*, then `return globalObject`
-    * Else
+    2. Else
         1. let `outerFunc` be the *outer function* of `func`  
-        * `return ThisValueOfFunction(outerFunc, outerInvocationType)`  
+        2. `return ThisValueOfFunction(outerFunc, outerInvocationType)`  
 
-* Else if `func` is a *bound function* of an `originFunc` function, then  
+2. Else if `func` is a *bound function* of an `originFunc` function, then  
 
     1. let `thisArg` be the argument of `func = originFunc.bind(thisArg)`  
-    * `return thisArg`  
+    2. `return thisArg`  
 
-* Else if `func` is a `constructor()` method inside of a *class* `SomeClass`, then  
+3. Else if `func` is a `constructor()` method inside of a *class* `SomeClass`, then  
     
     1. let `instance` be the instance of the class `instance = new SomeClass()`
-    * `return instance`
+    2. `return instance`
 
-* Else if `func` is a *regular function*, then  
+4. Else if `func` is a *regular function*, then  
 
     1. If `invocationType` is *as a constructor*, then  
 
         1. let `newObject` be the newly constructed object `newObject = new func()`  
-        * `return newObject`  
+        2. `return newObject`  
 
-    * Else if `invocationType` is *indirectly*, then
+    2. Else if `invocationType` is *indirectly*, then
         
         1. let `thisArg` be the argument of `func.call(thisArg)` or `func.apply(thisArg)`
-        * `return thisArg`
+        2. `return thisArg`
 
-    * Else if `invocationType` is *as a method*, then
+    3. Else if `invocationType` is *as a method*, then
 
         1. let `object` be the object upon which `func` is invoked on `object.func()`
-        * `return object`
+        2. `return object`
 
-    * Else if `invocationType` is *regular*, then
+    4. Else if `invocationType` is *regular*, then
         1. If *strict mode* is enabled, then `return undefined`
-        * Else `return globalObject`
+        2. Else `return globalObject`
 
 ### 1.1 The terms used in the algorithm
 
