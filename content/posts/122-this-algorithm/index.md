@@ -2,7 +2,7 @@
 title: 'A Helpful Algorithm to Determine "this" value in JavaScript'
 description: 'Struggle finding "this" value? I have created an universal algorithm to help you find "this" in any situation.'
 published: "2021-03-09T11:00Z"
-modified: "2021-03-09T11:00Z"
+modified: "2021-04-19T07:00Z"
 thumbnail: "./images/cover-3.png"
 slug: javascript-this-algorithm
 tags: ['javascript', 'this', 'function']
@@ -28,24 +28,7 @@ The formal definition of `ThisValueOfFunction(func, invocationType)` that return
 
 **ThisValueOfFunction(func, invocationType)**:
 
-1. If `func` is an *arrow function*, then  
-
-    1. If `func` is defined in the *outermost scope*, then `return globalObject`
-    2. Else
-        1. let `outerFunc` be the *outer function* of `func`  
-        2. `return ThisValueOfFunction(outerFunc, outerInvocationType)`  
-
-2. Else if `func` is a *bound function* of an `originFunc` function, then  
-
-    1. let `thisArg` be the argument of `func = originFunc.bind(thisArg)`  
-    2. `return thisArg`  
-
-3. Else if `func` is a `constructor()` method inside of a *class* `SomeClass`, then  
-    
-    1. let `instance` be the instance of the class `instance = new SomeClass()`
-    2. `return instance`
-
-4. Else if `func` is a *regular function*, then  
+1. If `func` is a *regular function*, then  
 
     1. If `invocationType` is *as a constructor*, then  
 
@@ -65,6 +48,23 @@ The formal definition of `ThisValueOfFunction(func, invocationType)` that return
     4. Else if `invocationType` is *regular*, then
         1. If *strict mode* is enabled, then `return undefined`
         2. Else `return globalObject`
+
+2. Else if `func` is an *arrow function*, then  
+
+    1. If `func` is defined in the *outermost scope*, then `return globalObject`
+    2. Else
+        1. let `outerFunc` be the *outer function* of `func`  
+        2. `return ThisValueOfFunction(outerFunc, outerInvocationType)`  
+
+3. Else if `func` is a *bound function* of an `originFunc` function, then  
+
+    1. let `thisArg` be the argument of `func = originFunc.bind(thisArg)`  
+    2. `return thisArg`  
+
+4. Else if `func` is a `constructor()` method inside of a *class* `SomeClass`, then  
+    
+    1. let `instance` be the instance of the class `instance = new SomeClass()`
+    2. `return instance`
 
 ### 1.1 The terms used in the algorithm
 
@@ -285,9 +285,9 @@ myFunc();
 
 **ThisValueOfFunction(myFunc, "regular")**
 
-`myFunc` is an arrow function: thus matching the point *1* in the algorithm. Also `myFunc` is defined in the outermost scope, matching the point *1.1*.  
+`myFunc` is an arrow function: thus matching the point *2* in the algorithm. Also `myFunc` is defined in the outermost scope, matching the point *2.1*.  
 
-The point *1.1* of the algorithm says `return globalObject`: meaning that `this` value inside `myFunc` is the global object &mdash; `window` (in a browser environment).  
+The point *2.1* of the algorithm says `return globalObject`: meaning that `this` value inside `myFunc` is the global object &mdash; `window` (in a browser environment).  
 
 ### Example 2
 
@@ -305,11 +305,11 @@ object.method();
 
 **ThisValueOfFunction(object.method, "as a method")**
 
-`method()`, while being a property of the `object`, is a regular function. The point *4* of the algorithm is matched.  
+`method()`, while being a property of the `object`, is a regular function. The point *1* of the algorithm is matched.  
 
-`object.method()` is a method invocation because of the property accessor usage: thus the point *4.3* is matched.  
+`object.method()` is a method invocation because of the property accessor usage: thus the point *1.3* is matched.  
 
-Then, according to point *4.3*, `this` value inside `method()` equals the owning object of the method invocation (`object.method()`) &mdash; `object`.  
+Then, according to point *1.3*, `this` value inside `method()` equals the owning object of the method invocation (`object.method()`) &mdash; `object`.  
 
 ### Example 3
 
@@ -333,19 +333,19 @@ fluffy.getName();
 
 **ThisValueOfFunction(getName, "as a method")**
 
-`getName()` is an arrow function, thus the point *1* of the algorithm is applied. Then the point *1.2* matches, because `MyCat` is the outer function of `getName()`.  
+`getName()` is an arrow function, thus the point *2* of the algorithm is applied. Then the point *2.2* matches, because `MyCat` is the outer function of `getName()`.  
 
-The point *1.2.2* says that `this` value inside `getName()` arrow function equals `this` value of the outer function: `MyCat`.  
+The point *2.2.2* says that `this` value inside `getName()` arrow function equals `this` value of the outer function: `MyCat`.  
 
 So, let's run the algorithm recursively again on `MyCat` function &mdash; `ThisValueOfFunction(MyCat, "as a constructor")`.  
 
 **ThisValueOfFunction(MyCat, "as a constructor")**
 
-`MyCat` is a regular function, thus the point *4* of the algorithm is applied. 
+`MyCat` is a regular function, thus the point *1* of the algorithm is applied. 
 
-Because `MyCat` was invoked as a constructor `new MyCat('Fluffy')`, the point *4.1* is applied. Finally, according to points *4.1.1* and *4.1.2*, `this` value inside `MyCat` equals to the constructed object: `fluffy`.  
+Because `MyCat` was invoked as a constructor `new MyCat('Fluffy')`, the point *1.1* is applied. Finally, according to points *1.1.1* and *1.1.2*, `this` value inside `MyCat` equals to the constructed object: `fluffy`.  
 
-And, returning back to the arrow function's point *1.2.2*, `this` inside of the `getName()` equals `this` of the `MyCat` &mdash; which is finally `fluffy`.  
+And, returning back to the arrow function's point *2.2.2*, `this` inside of the `getName()` equals `this` of the `MyCat` &mdash; which is finally `fluffy`.  
 
 ## 3. Homework
 
