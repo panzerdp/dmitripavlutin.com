@@ -3,7 +3,7 @@ title: 'A Mistery of parseInt() in JavaScript'
 description: "Solving a mistery of how parseInt() parses small float numbers in JavaScript."
 published: "2021-04-20T12:00Z"
 modified: "2021-04-20T12:00Z"
-thumbnail: "./images/cover-3.png"
+thumbnail: "./images/cover-2.png"
 slug: parseint-mistery-javascript
 tags: ['javascript', 'number']
 recommended: ['nan-in-javascript', 'infinity-in-javascript']
@@ -20,7 +20,7 @@ number; // 100
 As expected, `'100'` is parsed to integer `100`.  
 
 `parseInt(numericalString, radix)` also accepts a second argument: the radix at which the string argument is. The radix argument allows you to parse integers from different
-numerical bases, the most common being 2, 8, 10 and 16.    
+numerical bases, the most common being 2, 8, 10, and 16.    
 
 Let's use `parseInt()` to parse a numerical string in base 2:
 
@@ -37,7 +37,7 @@ That's pretty much a short introduction to `parseInt()`.
 
 `parseInt(numericalString)` always converts its first argument to a string (if it's not a string), then parses that numeric string to the integer value.  
 
-That's why you could even use floats as the first argument, and `parseInt()` converts the float to an integer value:
+That's why you can use `parseInt()` to extract the integer part of float numbers:
 
 ```javascript
 parseInt(0.5);      // => 0
@@ -48,9 +48,9 @@ parseInt(0.00005);  // => 0
 parseInt(0.000005); // => 0
 ```
 
-Extracting the integer part of floats like `0.5`, `0.05`, etc. is `0`.  
+Extracting the integer part of floats like `0.5`, `0.05`, etc. results in `0`. This works as expected.   
 
-But what about trying the float value `0.0000005`?  
+What about extracting the integer part of `0.0000005`?  
 
 ```javascript
 parseInt(0.0000005); // 5
@@ -79,11 +79,11 @@ String(0.000005); // => '0.000005'
 String(0.0000005); // => '5e-7'
 ```
 
-The explicit conversion to a string of `String(0.0000005)` expression behaves differently than other floats: it's a string representation of [exponential notation](https://en.wikipedia.org/wiki/Scientific_notation)!
+The explicit conversion to a string of `String(0.0000005)` behaves differently than other floats: it's a string representation of [exponential notation](https://en.wikipedia.org/wiki/Scientific_notation)!
 
 That's the second &mdash; and a significant clue!
 
-And when the expontential notiation as a string value is parsed to an integer, you get the number `5`:
+And when the expontential notiation is parsed to an integer, you get the number `5`:
 
 ```javascript
 parseInt(0.0000005); // => 5
@@ -95,9 +95,9 @@ parseInt('5e-7');    // => 5
 
 `parseInt('5e-7')` takes into consideration the first digit `'5'`, but skips `'e-7'`.  
 
-Mystery solved!
+Mystery solved! Because `parseInt()` always converts its first argument to a string, the floats smaller than 10<sup>-6</sup> are conversed to an exponential notation. Then `parseInt()` extracts the integer from the exponential notation of the float!
 
-To safely extract the integer part of a float number I recommend `Math.floor()` function:
+On a side note, to safely extract the integer part of a float number I recommend `Math.floor()` function:
 
 ```javascript
 Math.floor(0.5);      // => 0
@@ -113,6 +113,8 @@ Math.floor(0.0000005); // => 0
 ## 3. Conclusion
 
 `parseInt()` is the function that parses numerical strings to integers. 
+
+Care must be taken when trying to extract the integer part of floats using `parseInt()`.  
 
 Floats smaller than 10<sup>-6</sup> (e.g. `0.0000005` which is same as 5*10<sup>-7</sup>) conversed to a string are written in the exponential notation  (e.g. `5e-7` is the exponential notation of `0.0000005`). That's why using such small floats with `parseInt()` leads to unexpected results: only the significat part (e.g. `5` of `5e-7`) of the exponential notiation is parsed. 
 
