@@ -48,13 +48,17 @@ parseInt(0.00005);  // => 0
 parseInt(0.000005); // => 0
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/tshcnf6v/)
+
 Extracting the integer part of floats like `0.5`, `0.05`, etc. results in `0`. This works as expected.   
 
 What about extracting the integer part of `0.0000005`?  
 
 ```javascript
-parseInt(0.0000005); // 5
+parseInt(0.0000005); // => 5
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/txqm6573/)
 
 `parseInt()` parses the float `0.0000005` to... `5`. Interesting and kind of unexpected...  
 
@@ -79,6 +83,8 @@ String(0.000005); // => '0.000005'
 String(0.0000005); // => '5e-7'
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/m7az1y2g/)
+
 The explicit conversion to a string of `String(0.0000005)` behaves differently than other floats: it's a string representation of [exponential notation](https://en.wikipedia.org/wiki/Scientific_notation)!
 
 That's the second &mdash; and a significant clue!
@@ -92,6 +98,8 @@ parseInt(5e-7);      // => 5
 // same as
 parseInt('5e-7');    // => 5
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/tyov1daL/)
 
 `parseInt('5e-7')` takes into consideration the first digit `'5'`, but skips `'e-7'`.  
 
@@ -109,6 +117,8 @@ Math.floor(0.000005); // => 0
 
 Math.floor(0.0000005); // => 0
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/w6ut3pvh/)
 
 ## 3. Conclusion
 
