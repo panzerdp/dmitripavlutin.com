@@ -1,10 +1,10 @@
 ---
-title: 'A Mistery of parseInt() in JavaScript'
-description: "Solving a mistery of how parseInt() parses small float numbers in JavaScript."
+title: 'Solving a Mystery Behavior of parseInt() in JavaScript'
+description: "Solving a mystery of how parseInt() parses small float numbers in JavaScript."
 published: "2021-04-20T07:00Z"
 modified: "2021-04-20T07:00Z"
-thumbnail: "./images/cover-2.png"
-slug: parseint-mistery-javascript
+thumbnail: "./images/cover-3.png"
+slug: parseint-mystery-javascript
 tags: ['javascript', 'number']
 recommended: ['nan-in-javascript', 'infinity-in-javascript']
 type: post
@@ -64,7 +64,7 @@ parseInt(0.0000005); // => 5
 
 Why does `parseInt(0.0000005)` have such a mystery behavior?  
 
-## 2. Discovering the mystery of *parseInt()*
+## 2. Solving the mystery of *parseInt()*
 
 Let's look again at what `parseInt(numericalString)` does with its first argument: if it's not a string, then it is converted to a string, then parsed, and the parsed integer returned.  
 
