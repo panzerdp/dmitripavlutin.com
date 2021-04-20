@@ -1,8 +1,8 @@
 ---
 title: 'A Mistery of parseInt() in JavaScript'
 description: "Solving a mistery of how parseInt() parses small float numbers in JavaScript."
-published: "2021-04-20T12:00Z"
-modified: "2021-04-20T12:00Z"
+published: "2021-04-20T07:00Z"
+modified: "2021-04-20T07:00Z"
 thumbnail: "./images/cover-2.png"
 slug: parseint-mistery-javascript
 tags: ['javascript', 'number']
@@ -10,7 +10,7 @@ recommended: ['nan-in-javascript', 'infinity-in-javascript']
 type: post
 ---
 
-`parseInt()` is a built-in function in JavaScript that parses integers from numerical strings. For example, let's parse the integer from the numeric string `'100'`:
+`parseInt()` is a built-in JavaScript function that parses integers from numerical strings. For example, let's parse the integer from the numeric string `'100'`:
 
 ```javascript
 const number = parseInt('100');
@@ -19,7 +19,7 @@ number; // 100
 
 As expected, `'100'` is parsed to integer `100`.  
 
-`parseInt(numericalString, radix)` also accepts a second argument: the radix at which the string argument is. The radix argument allows you to parse integers from different
+`parseInt(numericalString, radix)` also accepts a second argument: the radix at which the numerical string argument is. The radix argument allows you to parse integers from different
 numerical bases, the most common being 2, 8, 10, and 16.    
 
 Let's use `parseInt()` to parse a numerical string in base 2:
@@ -29,7 +29,7 @@ const number = parseInt('100', 2);
 number; // 4
 ```
 
-Because the radix argument is `4`, `parseInt('100', 2)` parses `'100'` as an integer in numerical base 2: thus it returns the value `4` (in decimal).  
+`parseInt('100', 2)` parses `'100'` as an integer in numerical base 2: thus it returns the value `4` (in decimal).  
 
 That's pretty much a short introduction to `parseInt()`.  
 
@@ -37,7 +37,7 @@ That's pretty much a short introduction to `parseInt()`.
 
 `parseInt(numericalString)` always converts its first argument to a string (if it's not a string), then parses that numeric string to the integer value.  
 
-That's why you can use `parseInt()` to extract the integer part of float numbers:
+That's why you can (but should't!) use `parseInt()` to extract the integer part of float numbers:
 
 ```javascript
 parseInt(0.5);      // => 0
@@ -66,7 +66,7 @@ Why does `parseInt(0.0000005)` have such a mystery behavior?
 
 ## 2. Discovering the mystery of *parseInt()*
 
-Let's look again at what `parseInt()` does with its first argument: if it's not a string, then it is converted to a string, then parsed, and the parsed integer returned.  
+Let's look again at what `parseInt(numericalString)` does with its first argument: if it's not a string, then it is converted to a string, then parsed, and the parsed integer returned.  
 
 That might be the first clue.  
 
@@ -85,7 +85,7 @@ String(0.0000005); // => '5e-7'
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/m7az1y2g/)
 
-The explicit conversion to a string of `String(0.0000005)` behaves differently than other floats: it's a string representation of [exponential notation](https://en.wikipedia.org/wiki/Scientific_notation)!
+The explicit conversion to a string of `String(0.0000005)` behaves differently than other floats: it's a string representation of the [exponential notation](https://en.wikipedia.org/wiki/Scientific_notation)!
 
 That's the second &mdash; and a significant clue!
 
@@ -103,7 +103,7 @@ parseInt('5e-7');    // => 5
 
 `parseInt('5e-7')` takes into consideration the first digit `'5'`, but skips `'e-7'`.  
 
-Mystery solved! Because `parseInt()` always converts its first argument to a string, the floats smaller than 10<sup>-6</sup> are conversed to an exponential notation. Then `parseInt()` extracts the integer from the exponential notation of the float!
+Mystery solved! Because `parseInt()` always converts its first argument to a string, the floats smaller than 10<sup>-6</sup> are written in an exponential notation. Then `parseInt()` extracts the integer from the exponential notation of the float!
 
 On a side note, to safely extract the integer part of a float number I recommend `Math.floor()` function:
 
