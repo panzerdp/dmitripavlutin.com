@@ -128,4 +128,4 @@ Care must be taken when trying to extract the integer part of floats using `pars
 
 Floats smaller than 10<sup>-6</sup> (e.g. `0.0000005` which is same as 5*10<sup>-7</sup>) conversed to a string are written in the exponential notation  (e.g. `5e-7` is the exponential notation of `0.0000005`). That's why using such small floats with `parseInt()` leads to unexpected results: only the significat part (e.g. `5` of `5e-7`) of the exponential notiation is parsed. 
 
-*Side challenge: can you explain why `parseInt('999999999999999999999')` equals `1`? Write your considerations in a comment below!*
+*Side challenge: can you explain why `parseInt(999999999999999999999)` equals `1`? Write your considerations in a comment below!*
