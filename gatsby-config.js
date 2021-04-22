@@ -9,7 +9,6 @@ module.exports = {
     DEV_SSR: false
   },  
   plugins: [
-    'gatsby-plugin-preact',
     {
       resolve: 'gatsby-transformer-remark',
       options: {
@@ -97,6 +96,6 @@ module.exports = {
     require('./gatsby/config/gatsby-plugin-sass'),
     'gatsby-plugin-minify-classnames',
     require('./gatsby/config/gatsby-plugin-feed'),
-    require('./gatsby/config/gatsby-plugin-source-mailchimp')
+    require('./gatsby/config/gatsby-plugin-source-mailchimp'),
   ],
 };
