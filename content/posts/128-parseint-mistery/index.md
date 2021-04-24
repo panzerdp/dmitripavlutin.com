@@ -75,8 +75,8 @@ Let's try then to convert manually the floats to a string represenation:
 ```javascript
 String(0.5);      // => '0.5'
 String(0.05);     // => '0.05'
-String(0.005);    // => '0.05'
-String(0.0005);   // => '0.005' 
+String(0.005);    // => '0.005'
+String(0.0005);   // => '0.0005' 
 String(0.00005);  // => '0.00005'
 String(0.000005); // => '0.000005'
 
