@@ -10,9 +10,9 @@ recommended: ["react-useeffect-explanation", "dont-overuse-react-usecallback"]
 type: post
 ---
 
-Users enjoy fast and responsive user interfaces (UI). A UI response delay of fewer than 100 milliseconds feels instant to the user. A delay between 100 and 300 milliseconds is already perceptible.  
+Users enjoy fast and responsive user interfaces (UI). A UI response delay of fewer than 100 milliseconds feels instant to the user but a delay between 100 and 300 milliseconds is already perceptible.  
 
-To improve user interface performance, React offers a higher-order component `React.memo()`. When `React.memo()` wraps a component, React memoizes the rendered output then skips unnecessary rendering.  
+To improve user interface performance, React offers a higher-order component `React.memo()`. When `React.memo()` wraps a component, React memoizes the rendered output of the wrapped component then skips unnecessary renderings.  
 
 This post describes the situations when `React.memo()` improves the performance, and, not less important, warns when its usage is useless.  
 
@@ -20,7 +20,7 @@ Plus I'll describe some useful memoization tips you should be aware of.
 
 ## 1. React.memo()
 
-When deciding to update DOM, React first renders your component, then compares the result with the previous render result. If the render results are different, React updates the DOM.  
+When deciding to update DOM, React first renders your component, then compares the result with the previous render. If the render results are different, React updates the DOM.  
 
 Current vs previous render results comparison is fast. But you can *speed up* the process under some circumstances.  
 
@@ -41,19 +41,18 @@ export function Movie({ title, releaseDate }) {
 export const MemoizedMovie = React.memo(Movie);
 ```
 
-`React.memo(Movie)` returns a new memoized component `MemoizedMovie`. It outputs the same content as the original `Movie` component, but with one difference. 
+`React.memo(Movie)` returns a new memoized component `MemoizedMovie`. 
 
-`MemoizedMovie` rendered content is memoized. As long as `title` or `releaseDate` props are the same between renderings React reuses the memoized content.  
+`MemoizedMovie` outputs the same content as the original `Movie` component, but with one difference &mdash; `MemoizedMovie` render is memoized. React reuses the memoized content as long as `title` and `releaseDate` props are the same between renderings:  
 
-```jsx{3-4,10-11}
-// First render. React calls MemoizedMovie function.
+```jsx{3-4,9-10}
+// First render - MemoizedMovie IS INVOKED.
 <MemoizedMovie 
   title="Heat" 
   releaseDate="December 15, 1995" 
 />
 
-// On next round React does not call MemoizedMovie function,
-// preventing rendering
+// Second render - MemoizedMovie IS NOT INVOKED.
 <MemoizedMovie
   title="Heat" 
   releaseDate="December 15, 1995" 
@@ -70,7 +69,7 @@ The same functionality for class components is implemented by [PureComponent](ht
 
 By default `React.memo()` does a [shallow](https://github.com/facebook/react/blob/v16.8.6/packages/shared/shallowEqual.js) comparison of props and objects of props. 
 
-You can use the second argument to indicate a custom equality check function:  
+To customize the props comparison you can use the second argument to indicate an equality check function:  
 
 ```javascript
 React.memo(Component, [areEqual(prevProps, nextProps)]);
@@ -159,13 +158,13 @@ function MovieViewsRealtime({ title, releaseDate, views }) {
 
 As long as `title` and `releaseDate` props are the same, React skips rendering `MemoizedMovie`. This improves the performance of `MovieViewsRealtime` component.  
 
-> The more often the component renders with the same props, the heavier and the more computationally expensive the output is, the more chances are that component needs to be wrapped in `React.memo()`  
+> The more often the component renders with the same props, the heavier and the more computationally expensive the output is, the more chances are that component needs to be wrapped in `React.memo()`.  
 
 Anyways, use [profiling](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab) to measure the benefits of applying `React.memo()`.   
 
 ## 3. When to avoid React.memo()
 
-> If the component doesn't *re-render often with the same props*, most likely you don't need `React.memo()`.  
+> If the component *isn't heavy* and usually *renders with different props*, most likely you don't need `React.memo()`.  
 
 Use the following rule of thumb: don't use memoization if you can't quantify the performance gains. 
 
@@ -202,7 +201,7 @@ console.log(sum2 === sum2); // => true
 ```
 `sumFactory()` is a factory function. It returns functions that sum 2 numbers.  
 
-The functions `sum1` and `sum2` are created by the factory. Both functions sum 2 numbers. However, `sum1` and `sum2` are different function objects (`sum1 === sum2` is `false`).  
+The functions `sum1` and `sum2` are created by the factory. Both functions sum numbers. However, `sum1` and `sum2` are different function objects (`sum1 === sum2` is `false`).  
 
 Every time a parent component defines a callback for its child, it creates new function instances. Let's see how this breaks memoization, and how to fix it.   
 
