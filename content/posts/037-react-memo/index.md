@@ -2,7 +2,7 @@
 title: Use React.memo() wisely
 description: "React.memo() increases the performance of functional components by preventing useless renderings. But such performance tweaks must be applied wisely."
 published: "2019-07-17T11:30:00Z"
-modified: "2020-09-19T09:00Z"
+modified: "2021-04-25T06:30Z"
 thumbnail: "./images/instruments.jpg"
 slug: use-react-memo-wisely
 tags: ["react", "memoization"]
