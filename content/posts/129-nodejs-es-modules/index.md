@@ -51,7 +51,7 @@ exports.monthFromDate = function(date) {
   if (!(date instanceof Date)) {
     date = new Date(date);
   }
-  return MONTHS[date.getMonth())];
+  return MONTHS[date.getMonth()];
 }
 ```
 
@@ -79,6 +79,14 @@ node ./month.js "2022-01-01"
 
 `January` is logged to console.  
 
+[Try the demo.](https://codesandbox.io/s/commonjs-qv4np?file=/month.js)
+
 Having that working, let's transform both `month-from-data.js` and `month.js` modules to ECMAScript module format, and setup Node.js to understand that.  
 
 ## 2. Enabling ES modules in Node.js
+
+Now comes the interesting part. There are 2 ways how Node.js is configured to use ECMAScript modules:
+
+1. The module's file has the extension `.mjs` 
+2. Or if the nearest parent folder of the module has `package.json` where `'type'` field has the value `"module"`.  
+
