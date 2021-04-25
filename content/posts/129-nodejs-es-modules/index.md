@@ -77,16 +77,89 @@ Now, if you run `month.js` as a CLI script, everything works as expected:
 node ./month.js "2022-01-01"
 ```
 
-`January` is logged to console.  
+[Run the command in the demo.](https://codesandbox.io/s/commonjs-qv4np?file=/month.js)
 
-[Try the demo.](https://codesandbox.io/s/commonjs-qv4np?file=/month.js)
+`January` is printed in the terminal.  
 
 Having that working, let's transform both `month-from-data.js` and `month.js` modules to ECMAScript module format, and setup Node.js to understand that.  
 
 ## 2. Enabling ES modules in Node.js
 
-Now comes the interesting part. There are 2 ways how Node.js is configured to use ECMAScript modules:
+Now comes the interesting part. There are 3 ways how to configure Node.js to use ECMAScript modules format:
 
 1. The module's file has the extension `.mjs` 
-2. Or if the nearest parent folder of the module has `package.json` where `'type'` field has the value `"module"`.  
+2. Or if the nearest parent folder of the module has `{ type: "module" }` in `package.json`
+3. Or if the module's code is passed as a string using `--eval="<module-code>"` argument or from `STDIN` using the argument `--input-type=commonjs`.  
+
+The detail into the first (`.mjs` extension) and second ways (setting `type` field as `"module"` in `package.json`).  
+
+### 2.1 *.mjs* file extension
+
+A simple way to tell Node.js to treat the modules in ECMAScript format is simply to use the `.mjs` extensions, instead of the common `.js`.  
+
+Let's transform both modules from the previous example into ECMAScript format, and also not forget to use `.mjs` extension.  
+
+```javascript
+// month-from-date.mjs (ES Module)
+
+const MONTHS = [
+  'January', 'February', 'March','April', 'May', 'June', 'July', 
+  'August', 'September', 'October', 'November', 'December'
+];
+
+export function monthFromDate(date) {
+  if (!(date instanceof Date)) {
+    date = new Date(date);
+  }
+  return MONTHS[date.getMonth()];
+}
+```
+
+`month-from-date.mjs` now uses the ES format way to export a function from the module: `export function monthFromDate(...) { ... }`.  
+
+```javascript
+// month.mjs (ES Module)
+
+import { monthFromDate } from './month-from-date.js';
+
+const dateString = process.argv[2] ?? null;
+
+console.log(monthFromDate(dateString));
+```
+
+Same way `month.mjs` uses the ES module `import` syntax to import `monthFromDate()` function from `'month-from-date.mjs'` module.  
+
+That's all you need to do to make Node.js understand ES modules format. That was easy!
+
+Now let's use the `month.mjs` module in command line:
+
+```bash
+node ./month.mjs "2022-02-01"
+```
+
+`February` is printed in terminal.  
+
+### 2.2 { "type": "module" } in *package.json*
+
+If you don't want to mess with file extensions, and just tell Node.js to treat all `.js` files as ES modules, then indicate `"type"` field as `"module"` in the `package.json`
+file:
+
+```json{4}
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "type": "module",
+  // ...
+}
+```
+
+Now all `.js` files inside the folder containing such `package.json` are going to be treated by Node.js as ECMAScript modules.  
+
+Recalling the month modules, now you can rename `month-from-date.mjs` to `month-from-date.js` and `month.mjs` to `month.js` (while still keeping the `import` and `export` syntax), and Node.js is going to execute these module as ECMAScript ones.
+
+```bash
+node ./month.js "2022-03-01"
+```
+
+`March` is printed in terminal.  
 
