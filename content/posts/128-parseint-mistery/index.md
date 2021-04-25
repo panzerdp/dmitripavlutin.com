@@ -103,7 +103,7 @@ parseInt('5e-7');    // => 5
 
 `parseInt('5e-7')` takes into consideration the first digit `'5'`, but skips `'e-7'`.  
 
-Mystery solved! Because `parseInt()` always converts its first argument to a string, the floats smaller than 10<sup>-6</sup> are written in an exponential notation. Then `parseInt()` extracts the integer from the exponential notation of the float!
+Mystery solved! Because `parseInt()` always converts its first argument to a string, the floats smaller than 10<sup>-6</sup> are written in an exponential notation. Then `parseInt()` extracts the integer from the exponential notation of the float.
 
 On a side note, to safely extract the integer part of a float number I recommend `Math.floor()` function:
 
