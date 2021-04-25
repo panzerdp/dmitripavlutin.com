@@ -1,6 +1,6 @@
 ---
 title: 'How to Use ECMAScript Modules in Node.js'
-description: "How to enable and use ECMAScript 2015 modules in Node.js."
+description: "How to enable and use natively ECMAScript 2015 modules in Node.js."
 published: "2021-04-27T12:00Z"
 modified: "2021-04-27T12:00Z"
 thumbnail: "./images/cover-4.png"
@@ -10,26 +10,30 @@ recommended: ['javascript-modules-best-practices', 'javascript-module-import-twi
 type: post
 ---
 
-The ECMAScript (ES) modules is a format of writing JavaScript modules using the `import` and `export` statements. The JavaScript native modules
+The ECMAScript (ES) modules is a format of writing JavaScript modules using the `import` and `export` statements. The JavaScript modules
 were introduced as a part of ES2015 specification.  
 
 Here's an ES module exporting a function `monthFromDate()`:
 
-```javascript{8}
-// ES module exporting "monthFromDate()" function
+```javascript{6}
 const MONTHS = [
-  'January', 'February', 'March','April', 'May',
-  'June', 'July', 'August', 'September', 'October',
-  'November', 'December'
+  'January', 'February', 'March','April', 'May', 'June', 'July', 
+  'August', 'September', 'October', 'November', 'December'
 ];
 
 export function monthFromDate(date) {
-  if (!(date instance of Date)) {
+  if (!(date instanceof Date)) {
     date = new Date(date);
   }
   return MONTHS[date.getMonth())];
 }
 ```
 
-Thanks to Babel.js, you were able to use the ES modules long before Node.js or browsers were able to support natively ES modules.  
+Node.js version 13.2.0 and above supports natively ES modules (without experimental flags). 
+
+In this post, you'll learn how to enable and use ES modules in Node.js. 
+
+As well, you'll find what global variables of Node.js environment are no longer available in ES module scope.  
+
+## 1. Enabling ES modules in Node.js
 
