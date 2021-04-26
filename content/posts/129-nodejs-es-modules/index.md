@@ -38,13 +38,11 @@ To include a CommonJS module you have to use a special function `require('<path-
 
 For example, the following module `month-from-data.js` is a CommonJS module. The module exports a function `monthFromDate()`, which determines the month name of an arbitrary date:
 
-```javascript{8}
+```javascript{6}
 // month-from-date.js (CommonJS)
 
-const MONTHS = [
-  'January', 'February', 'March','April', 'May', 'June', 'July', 
-  'August', 'September', 'October', 'November', 'December'
-];
+const MONTHS = ['January', 'February', 'March','April', 'May', 'June', 
+  'July', 'August', 'September', 'October', 'November', 'December'];
 
 exports.monthFromDate = function(date) {
   if (!(date instanceof Date)) {
@@ -98,13 +96,11 @@ An easy way to tell Node.js to treat the modules in ECMAScript format is to use 
 
 Let's transform both modules from the previous example into ECMAScript format and change files extension from `.js` to `.mjs`.  
 
-```javascript{1,8}
+```javascript{1,6}
 // month-from-date.mjs (ES Module)
 
-const MONTHS = [
-  'January', 'February', 'March','April', 'May', 'June', 'July', 
-  'August', 'September', 'October', 'November', 'December'
-];
+const MONTHS = ['January', 'February', 'March','April', 'May', 'June', 
+  'July', 'August', 'September', 'October', 'November', 'December'];
 
 export function monthFromDate(date) {
   if (!(date instanceof Date)) {
@@ -177,7 +173,7 @@ import module from 'path';
 
 ### 3.1 Relative specifier
 
-You can import modules using *relative specifiers*, which would import the module relative to the current module location:
+You can import modules using a *relative specifier*, which would import the module relative to the current module location.  
 
 ```javascript
 // Relative specifiers:
@@ -187,9 +183,9 @@ import module2 from '../folder/module2.mjs';
 
 When using relative specifiers indicating the file extension (`.js`, `'.mjs'`, etc.) is obligatory.
 
-### 3.2 Bare specifiers
+### 3.2 Bare specifier
 
-*Bare specifiers* start with a module name (doesn't start with `.` `./` `..` `/`), and let's you import modules from `node_modules` or the built-in Node.js modules.  
+*A bare specifier* starts with a module name (doesn't start with `.` `./` `..` `/`), and let's you import modules from `node_modules` or the built-in Node.js modules.  
 
 For example, if you've installed `lodash-es` package in `node_modules`, then you can access that module:
  
@@ -204,7 +200,7 @@ Using bare specifiers you can also import the Node.js built-in modules:
 import fs from 'fs';
 ```
 
-### 3.3 Absolute specifiers
+### 3.3 Absolute specifier
 
 An *absolute specifier* let's you import modules using an absolute path:
 
@@ -232,11 +228,11 @@ console.log(import.meta.url); // "file:///usr/opt/module.mjs"
 
 ## 5. Conclusion
 
-Node.js supports ES modules when the module extension is `.mjs`, the nearest folder of the module has a `package.json` containing `{ “type”: “module” }`, or when using --  
+Node.js supports ES modules when the module extension is `.mjs`, or the nearest folder of the module has a `package.json` containing `{ “type”: “module” }`.   
 
 Then you can import modules using:
 
-* Relative path, e.g. `import modules from './module.js'`
-* Absolute path, e.g. `import module from 'file://abs/path/module.js'`
+* Relative path, e.g. `import module from './module.js'`
+* Absolute path, e.g. `import module from 'file:///abs/path/module.js'`
 * Modules installed in `node_modules`, e.g. `import lodash from 'lodash-es'`
 * Or built-in Node.js modules like `import fs from 'fs'`.
