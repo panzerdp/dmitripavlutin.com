@@ -90,7 +90,7 @@ There are 3 ways to configure Node.js to use [ECMAScript modules](https://nodejs
 2. The nearest parent folder of the module has `{ "type": "module" }` in `package.json`
 3. The module's code is passed as a string using `--eval="<module-code>"` argument or from `STDIN` using the argument `--input-type=commonjs`.  
 
-The detail into the first (`.mjs` extension) and second (`{ type: "module" }` in `package.json`) ways.  
+Let's detail into the first (`.mjs` extension) and second (`{ type: "module" }` in `package.json`) ways.  
 
 ### 2.1 *.mjs* file extension
 
@@ -128,9 +128,9 @@ console.log(monthFromDate(dateString));
 
 Same way `month.mjs` uses the ES module `import` syntax to import `monthFromDate()` function from `'month-from-date.mjs'` module.  
 
-That's all you need to do to make Node.js use ES modules!
+That's all you need to make Node.js use ES modules!
 
-Now let's use the `month.mjs` module in command line:
+Let's run `month.mjs` module in command line:
 
 ```bash
 node ./month.mjs "2022-02-01"
@@ -166,6 +166,68 @@ node ./month.js "2022-03-01"
 
 `March` is printed in terminal.  
 
-## 3. ECMAScript modules and Node.js environment
+## 3. Importing ECMAScript modules
 
-## 4. Conclusion
+The *specifier* is the static string value represeting the path from where you'd like to import the module.  
+
+```javascript
+// 'path' is the specifier
+import module from 'path';
+```
+
+### 3.1 Relative specifier
+
+You can import modules using *relative specifiers*, which would import the module relative to the current module location:
+
+```javascript
+// Relative specifiers:
+import module1 from './module1.js';
+import module2 from '../folder/module2.mjs';
+```
+
+When using relative specifiers indicating the file extension (`.js`, `'.mjs'`, etc.) is obligatory.
+
+### 3.2 Bare specifiers
+
+*Bare specifiers* start with a module name (doesn't start with `.` `./` `..` `/`), and let's you import modules from `node_modules` or the built-in Node.js modules.  
+
+For example, if you've installed `lodash-es` package in `node_modules`, then you can access that module:
+ 
+```javascript
+import lodash from 'lodash-es';
+import intersection from 'lodash-es/intersection';
+```
+
+Using bare specifiers you can also import the Node.js built-in modules:
+
+```javascript
+import fs from 'fs';
+```
+
+### 3.3 Absolute specifiers
+
+An *absolute specifier* let's you import modules using an absolute path:
+
+```javascript
+import module4 from 'file:///usr/opt/module4.js'
+```
+
+## 4. ECMAScript modules and Node.js environment
+
+Inside the ECMAScript module are not available the CommonJS specific variables like:
+
+* `require()`
+* `exports`
+* `module.exports`
+* `__dirname`
+* `__filename`
+
+However, you can use `import.meta.url` to determine the absolute path of the current module:
+
+```javascript
+// (ES Module)
+
+console.log(import.meta.url); 
+```
+
+## 5. Conclusion
