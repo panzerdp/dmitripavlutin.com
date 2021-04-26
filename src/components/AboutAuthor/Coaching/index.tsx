@@ -5,6 +5,7 @@ interface AboutAuthorContact {
 }
 
 export default function Coaching({ authorInfo }: AboutAuthorContact) {
+  return null;
   return (
     <div className={styles.contactAuthor}>
       <h3>Your JavaScript Coach</h3>
