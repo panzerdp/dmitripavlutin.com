@@ -32,7 +32,7 @@ In this post, you'll learn how to enable and use ES modules in Node.js. Also you
 
 ## 1. CommonJS modules format
 
-The default format of modules in Node.js is the CommonJS. 
+The default format of modules in Node.js is the [CommonJS](https://nodejs.org/docs/latest/api/modules.html#modules_modules_commonjs_modules). 
 
 To include a CommonJS module you have to use a special function `require('<path-to-module>')`. To export use a special object `exports` available in the scope of a CommonJS module.  
 
@@ -56,7 +56,7 @@ exports.monthFromDate = function(date) {
 
 Note the `exports.monthFromDate` part &mdash; this is how the CommonJS module exports the function.  
 
-Now, let's write a Node.js CLI script that accepts a date string as an argument, and the script should echo the name of the month of that date. Let's name the script `month.js`:
+Let's write a Node.js CLI script that accepts a date string argument, and the script should echo the month name of that date. Let's name the script `month.js`:
 
 ```javascript{3}
 // month.js (CommonJS)
@@ -84,10 +84,10 @@ Having that working, let's transform both `month-from-data.js` and `month.js` mo
 
 ## 2. Enabling ES modules in Node.js
 
-There are 3 ways to configure Node.js to use ECMAScript modules format:
+There are 3 ways to configure Node.js to use [ECMAScript modules](https://nodejs.org/docs/latest/api/esm.html#esm_modules_ecmascript_modules) format:
 
 1. The module's file has the extension `.mjs` 
-2. The nearest parent folder of the module has `{ type: "module" }` in `package.json`
+2. The nearest parent folder of the module has `{ "type": "module" }` in `package.json`
 3. The module's code is passed as a string using `--eval="<module-code>"` argument or from `STDIN` using the argument `--input-type=commonjs`.  
 
 The detail into the first (`.mjs` extension) and second (`{ type: "module" }` in `package.json`) ways.  
@@ -96,7 +96,7 @@ The detail into the first (`.mjs` extension) and second (`{ type: "module" }` in
 
 An easy way to tell Node.js to treat the modules in ECMAScript format is to use the `.mjs` extensions (instead of the common `.js`).  
 
-Let's transform both modules from the previous example into ECMAScript format, and also not forget to use `.mjs` extension.  
+Let's transform both modules from the previous example into ECMAScript format and change files extension from `.js` to `.mjs`.  
 
 ```javascript{1,8}
 // month-from-date.mjs (ES Module)
