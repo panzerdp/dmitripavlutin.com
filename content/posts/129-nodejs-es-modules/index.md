@@ -34,7 +34,7 @@ In this post, you'll learn how to enable and use ES modules in Node.js. Also you
 
 The default format of modules in Node.js is the [CommonJS](https://nodejs.org/docs/latest/api/modules.html#modules_modules_commonjs_modules). 
 
-To include a CommonJS module you have to use a special function `require('<path-to-module>')`. To export use a special object `exports` available in the scope of a CommonJS module.  
+To include a CommonJS module you have to use a special function `require('<path-to-module>')`. To export use a special object `exports` or `module.exports` available in the scope of a CommonJS module.  
 
 For example, the following module `month-from-data.js` is a CommonJS module. The module exports a function `monthFromDate()`, which determines the month name of an arbitrary date:
 
@@ -168,7 +168,7 @@ node ./month.js "2022-03-01"
 
 ## 3. Importing ECMAScript modules
 
-The *specifier* is the static string value represeting the path from where you'd like to import the module.  
+The *specifier* is the static string value that's the path from where you'd like to import the module.  
 
 ```javascript
 // 'path' is the specifier
@@ -209,12 +209,12 @@ import fs from 'fs';
 An *absolute specifier* let's you import modules using an absolute path:
 
 ```javascript
-import module4 from 'file:///usr/opt/module4.js'
+import module from 'file:///usr/opt/module.js';
 ```
 
 ## 4. ECMAScript modules and Node.js environment
 
-Inside the ECMAScript module are not available the CommonJS specific variables like:
+Inside the ECMAScript module are *not available* the CommonJS specific variables like:
 
 * `require()`
 * `exports`
@@ -225,9 +225,18 @@ Inside the ECMAScript module are not available the CommonJS specific variables l
 However, you can use `import.meta.url` to determine the absolute path of the current module:
 
 ```javascript
-// (ES Module)
+// An ES module at path "/usr/opt/module.mjs"
 
-console.log(import.meta.url); 
+console.log(import.meta.url); // "file:///usr/opt/module.mjs"
 ```
 
 ## 5. Conclusion
+
+Node.js supports ES modules when the module extension is `.mjs`, the nearest folder of the module has a `package.json` containing `{ “type”: “module” }`, or when using --  
+
+Then you can import modules using:
+
+* Relative path, e.g. `import modules from './module.js'`
+* Absolute path, e.g. `import module from 'file://abs/path/module.js'`
+* Modules installed in `node_modules`, e.g. `import lodash from 'lodash-es'`
+* Or built-in Node.js modules like `import fs from 'fs'`.
