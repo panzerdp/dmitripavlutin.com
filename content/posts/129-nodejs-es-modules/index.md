@@ -1,6 +1,6 @@
 ---
 title: 'How to Use ECMAScript Modules in Node.js'
-description: "How to enable and use natively ECMAScript 2015 modules in Node.js."
+description: "How to enable and use ECMAScript 2015 modules in Node.js."
 published: "2021-04-27T12:00Z"
 modified: "2021-04-27T12:00Z"
 thumbnail: "./images/cover-4.png"
@@ -19,82 +19,37 @@ The ECMAScript modules (in short ES modules) is a JavaScript modules format that
 import myFunc from './my-func';
 
 // export statement
-export myImprovedFunction(param) {
-  const someOtherResult = myFunc(param);
+export myOtherFunc(param) {
+  const result = myFunc(param);
   // ....
-  return someResult;
+  return otherResult;
 }
 ```
 
-Starting version 13.2.0 Node.js supports natively ES modules (without experimental flags).  
+Starting version 13.2.0, Node.js supports natively and production-ready the ES modules.  
 
-In this post, you'll learn how to enable and use ES modules in Node.js. Also you'll read what global variables of Node.js environment are no longer available in ES module scope, compared to CommonJS format.    
+In this post, you'll learn how to enable and use ES modules in Node.js and other useful details.  
 
-## 1. CommonJS modules format
-
-The default format of modules in Node.js is the [CommonJS](https://nodejs.org/docs/latest/api/modules.html#modules_modules_commonjs_modules). 
-
-To include a CommonJS module you have to use a special function `require('<path-to-module>')`. To export use a special object `exports` or `module.exports` available in the scope of a CommonJS module.  
-
-For example, the following module `month-from-data.js` is a CommonJS module. The module exports a function `monthFromDate()`, which determines the month name of an arbitrary date:
-
-```javascript{6}
-// month-from-date.js (CommonJS)
-
-const MONTHS = ['January', 'February', 'March','April', 'May', 'June', 
-  'July', 'August', 'September', 'October', 'November', 'December'];
-
-exports.monthFromDate = function(date) {
-  if (!(date instanceof Date)) {
-    date = new Date(date);
-  }
-  return MONTHS[date.getMonth()];
-}
+```toc
 ```
 
-Note the `exports.monthFromDate` part &mdash; this is how the CommonJS module exports the function.  
+## 1. Enabling ECMAScript modules in Node.js
 
-Let's write a Node.js CLI script that accepts a date string argument, and the script should echo the month name of that date. Let's name the script `month.js`:
+The default format of modules in Node.js is the [CommonJS](https://nodejs.org/docs/latest/api/modules.html#modules_modules_commonjs_modules). So if you want to make Node.js understand ES modules format, you have to explicitely make so.  
 
-```javascript{3}
-// month.js (CommonJS)
+Node.js uses [ECMAScript modules](https://nodejs.org/docs/latest/api/esm.html#esm_modules_ecmascript_modules) format when:
 
-const { monthFromDate } = require('./month-from-date.js');
-
-const dateString = process.argv[2] ?? null;
-
-console.log(monthFromDate(dateString));
-```
-
-`const { monthFromDate } = require('./month-from-date.js')` is how you import the `monthFromDate` function from the `month-from-date.js` CommonJS module.  
-
-Now, if you run `month.js` as a CLI script, everything works as expected:
-
-```bash
-node ./month.js "2022-01-01"
-```
-
-[Run the command in the demo.](https://codesandbox.io/s/commonjs-qv4np?file=/month.js)
-
-`January` is printed in the terminal.  
-
-Having that working, let's transform both `month-from-data.js` and `month.js` modules to ECMAScript module format, and setup Node.js to understand that.  
-
-## 2. Enabling ES modules in Node.js
-
-There are 3 ways to configure Node.js to use [ECMAScript modules](https://nodejs.org/docs/latest/api/esm.html#esm_modules_ecmascript_modules) format:
-
-1. The module's file has the extension `.mjs` 
-2. The nearest parent folder of the module has `{ "type": "module" }` in `package.json`
-3. The module's code is passed as a string using `--eval="<module-code>"` argument or from `STDIN` using the argument `--input-type=commonjs`.  
+1. The module's file extension is `.mjs` 
+2. Or the nearest parent folder of the module has `{ "type": "module" }` in `package.json`
+3. Or the argument `--input-type=commonjs` is present, and the module's code is passed as a string using `--eval="<module-code>"` argument or from `STDIN`.   
 
 Let's detail into the first (`.mjs` extension) and second (`{ type: "module" }` in `package.json`) ways.  
 
-### 2.1 *.mjs* file extension
+### 1.1 *.mjs* file extension
 
-An easy way to tell Node.js to treat the modules in ECMAScript format is to use the `.mjs` extensions (instead of the common `.js`).  
+An easy way to tell Node.js to treat the modules in ECMAScript format is to use the `.mjs` file extension.  
 
-Let's transform both modules from the previous example into ECMAScript format and change files extension from `.js` to `.mjs`.  
+The follow ES module `month-from-date.mjs` (note the `.mjs` file extension) exports a function `monthFromDate()`, which determines the month name of an arbitrary date. 
 
 ```javascript{1,6}
 // month-from-date.mjs (ES Module)
@@ -110,7 +65,7 @@ export function monthFromDate(date) {
 }
 ```
 
-`month-from-date.mjs` now uses the ES format way to export a function from the module: `export function monthFromDate(...) { ... }`.  
+Same way another module `month.mjs` uses the ES module `import` syntax to import `monthFromDate()` function from `'month-from-date.mjs'` module. This module accepts   
 
 ```javascript{1,3}
 // month.mjs (ES Module)
@@ -121,8 +76,6 @@ const dateString = process.argv[2] ?? null;
 
 console.log(monthFromDate(dateString));
 ```
-
-Same way `month.mjs` uses the ES module `import` syntax to import `monthFromDate()` function from `'month-from-date.mjs'` module.  
 
 That's all you need to make Node.js use ES modules!
 
@@ -136,9 +89,9 @@ node ./month.mjs "2022-02-01"
 
 `February` is printed in terminal.  
 
-### 2.2 { "type": "module" } in *package.json*
+### 1.2 { "type": "module" } in *package.json*
 
-If you want to tell Node.js to treat all `.js` files as ES modules then indicate `"type"` field as `"module"` in the `package.json`
+If you want to tell Node.js to treat all `.js` files as ES modules, then set `"type"` field as `"module"` in the `package.json`
 file:
 
 ```json{4}
@@ -150,7 +103,7 @@ file:
 }
 ```
 
-Now all `.js` files inside the folder containing such `package.json` are as ECMAScript modules.  
+Now all `.js` files inside the folder containing such `package.json` execute as ECMAScript modules.  
 
 Recalling the month modules, now you can rename `month-from-date.mjs` to `month-from-date.js` and `month.mjs` to `month.js` (while still keeping the `import` and `export` syntax), and Node.js is going to execute these module as ECMAScript ones.
 
@@ -162,18 +115,24 @@ node ./month.js "2022-03-01"
 
 `March` is printed in terminal.  
 
-## 3. Importing ECMAScript modules
+## 2. Importing ECMAScript modules
 
-The *specifier* is the static string value that's the path from where you'd like to import the module.  
+The *specifier* is the string literal representing the path from where to import the module.  
+
+In the example below `'path'` is a specifier:
 
 ```javascript
 // 'path' is the specifier
 import module from 'path';
 ```
 
-### 3.1 Relative specifier
+There are 3 kinds of specifiers: relative, bare and absolute.  
 
-You can import modules using a *relative specifier*, which would import the module relative to the current module location.  
+### 2.1 Relative specifier
+
+You can import modules using a *relative specifier*, which would import a module relative to the current module location.  
+
+Relative specifiers usually start with `'.'`, `'..'`, or `'./'`:
 
 ```javascript
 // Relative specifiers:
@@ -183,9 +142,9 @@ import module2 from '../folder/module2.mjs';
 
 When using relative specifiers indicating the file extension (`.js`, `'.mjs'`, etc.) is obligatory.
 
-### 3.2 Bare specifier
+### 2.2 Bare specifier
 
-*A bare specifier* starts with a module name (doesn't start with `.` `./` `..` `/`), and let's you import modules from `node_modules` or the built-in Node.js modules.  
+*A bare specifier* starts with a module name (doesn't start with `'.'`, `'./'`, `'..'`, `'/'`), and imports modules from `node_modules` or the built-in Node.js modules.  
 
 For example, if you've installed `lodash-es` package in `node_modules`, then you can access that module:
  
@@ -200,17 +159,19 @@ Using bare specifiers you can also import the Node.js built-in modules:
 import fs from 'fs';
 ```
 
-### 3.3 Absolute specifier
+### 2.3 Absolute specifier
 
-An *absolute specifier* let's you import modules using an absolute path:
+An *absolute specifier* imports modules using an absolute path:
 
 ```javascript
 import module from 'file:///usr/opt/module.js';
 ```
 
-## 4. ECMAScript modules and Node.js environment
+Note the presence of `file://` prefix in the absolute specifiers.  
 
-Inside the ECMAScript module are *not available* the CommonJS specific variables like:
+## 3. ECMAScript modules and Node.js environment
+
+Inside the ECMAScript module scope are *not available* the CommonJS specific variables like:
 
 * `require()`
 * `exports`
@@ -226,7 +187,7 @@ However, you can use `import.meta.url` to determine the absolute path of the cur
 console.log(import.meta.url); // "file:///usr/opt/module.mjs"
 ```
 
-## 5. Conclusion
+## 4. Conclusion
 
 Node.js supports ES modules when the module extension is `.mjs`, or the nearest folder of the module has a `package.json` containing `{ “type”: “module” }`.   
 
