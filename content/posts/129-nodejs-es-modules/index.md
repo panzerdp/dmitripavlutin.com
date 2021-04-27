@@ -172,7 +172,7 @@ Note the presence of the `file://` prefix in the absolute specifiers.
 
 ## 3. Dynamic import of modules
 
-The default importing mechanism of ES modules *always* evaluates and imports the module specified in the `import ... from '...'` &mdash; no matter if you use the module or not.  
+The default importing mechanism of ES modules *always* evaluates and imports the module specified in the `import module from 'path'` &mdash; no matter if you use the module or not.  
 
 But sometimes you may want to import the modules dynamically, in which case you can invoke the asynchornous function `import('./path-to-module')`:
 
@@ -221,18 +221,17 @@ node ./month.js "2022-04-01"
 
 You can be in a situation when you need to import a CommonJS module from an ES module, and vice-versa.  
 
-Fortunately, Node.js allows an ES module to import a CommonJS module:
+Fortunately, Node.js allows an ES module to include a CommonJS module as a default import:
 
 ```javascript{3}
 // ES module
 
-import defaultComponent, { component1 } from './module.commonjs.js';
+import defaultComponent from './module.commonjs.js';
 
 // use `defaultComponent`...
-// use `component1`...
 ```
 
-When imported in an ES module, the `module.exports` of the CommonJS module becomes the default import, and any `exports.<named-export>` becomes a named import.  
+When imported in an ES module, the `module.exports` of the CommonJS module becomes the default import.  
 
 However, the `require()` function of the CommonJS format *cannot* import an ES module. Instead, you can use the async function `import()` inside CommonJS to load an ES module:
 
