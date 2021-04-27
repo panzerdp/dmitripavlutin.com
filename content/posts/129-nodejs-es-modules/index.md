@@ -26,7 +26,7 @@ export myOtherFunc(param) {
 }
 ```
 
-Starting version 13.2.0, Node.js supports natively and production-ready ES modules.  
+Starting version 13.2.0, Node.js production-ready  supports ES modules.  
 
 In this post, you'll learn how to enable and use ES modules in Node.js.  
 
@@ -35,7 +35,7 @@ In this post, you'll learn how to enable and use ES modules in Node.js.
 
 ## 1. Enabling ECMAScript modules in Node.js
 
-The default format of modules in Node.js is the [CommonJS](https://nodejs.org/docs/latest/api/modules.html#modules_modules_commonjs_modules). So if you want to make Node.js understand ES modules format, you have to explicitly make so.  
+The default format of modules in Node.js is the [CommonJS](https://nodejs.org/docs/latest/api/modules.html#modules_modules_commonjs_modules). To make Node.js understand ES modules format, you have to explicitly make so.  
 
 Node.js uses [ECMAScript modules](https://nodejs.org/docs/latest/api/esm.html#esm_modules_ecmascript_modules) format when:
 
@@ -43,7 +43,7 @@ Node.js uses [ECMAScript modules](https://nodejs.org/docs/latest/api/esm.html#es
 2. Or the nearest parent folder of the module has `{ "type": "module" }` in `package.json`
 3. Or the argument `--input-type=commonjs` is present, and the module's code is passed as a string using `--eval="<module-code>"` argument or from `STDIN`.   
 
-Let's detail into the first (`.mjs` extension) and second (`{ type: "module" }` in `package.json`) ways.  
+Let's detail into the first (`.mjs` extension) and second (`{ "type": "module" }` in `package.json`) ways.  
 
 ### 1.1 *.mjs* file extension
 
@@ -215,7 +215,40 @@ node ./month.js "2022-04-01"
 
 `April` is logged in the terminal.  
 
-## 4. ECMAScript modules and Node.js environment
+## 4. Mixing module formats
+
+While not desirable, but you can be in a situation when you need to import an CommonJS module from an ES module, and vice-versa.  
+
+Fortunately, Node.js allows an ES module to import a CommonJS module:
+
+```javascript{3}
+// ES module
+
+import defaultComponent, { component1 } from './module.commonjs.js';
+
+// use `defaultComponent`...
+// use `component1`...
+```
+
+When imported in an ES module, the `module.exports` of the CommonJS module becomes the default import, and any `exports.<named-export>` becomes a named import.  
+
+However, the `require()` function of the CommonJS format *cannot* import an ES module. Instead, you can use the async function `import()` inside a CommonJS to load an ES module:
+
+```javascript{7}
+// CommonJS module
+
+async function loadESModule() {
+  const { 
+    default: defaultComponent, 
+    component1 
+  } = await import('./module.es.mjs');
+  // ...
+}
+
+loadESModule();
+```
+
+## 5. ECMAScript modules and Node.js environment
 
 Inside the ECMAScript module scope are *not available* the CommonJS specific variables like:
 
@@ -233,7 +266,7 @@ However, you can use `import.meta.url` to determine the absolute path of the cur
 console.log(import.meta.url); // "file:///usr/opt/module.mjs"
 ```
 
-## 5. Conclusion
+## 6. Conclusion
 
 Node.js supports ES modules when the module extension is `.mjs`, or the nearest folder of the module has a `package.json` containing `{ “type”: “module” }`.   
 
