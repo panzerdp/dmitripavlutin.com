@@ -26,7 +26,7 @@ export myOtherFunc(param) {
 }
 ```
 
-Starting version 13.2.0, Node.js supports natively and production-ready the ES modules.  
+Starting version 13.2.0, Node.js supports natively and production-ready ES modules.  
 
 In this post, you'll learn how to enable and use ES modules in Node.js and other useful details.  
 
@@ -35,7 +35,7 @@ In this post, you'll learn how to enable and use ES modules in Node.js and other
 
 ## 1. Enabling ECMAScript modules in Node.js
 
-The default format of modules in Node.js is the [CommonJS](https://nodejs.org/docs/latest/api/modules.html#modules_modules_commonjs_modules). So if you want to make Node.js understand ES modules format, you have to explicitely make so.  
+The default format of modules in Node.js is the [CommonJS](https://nodejs.org/docs/latest/api/modules.html#modules_modules_commonjs_modules). So if you want to make Node.js understand ES modules format, you have to explicitly make so.  
 
 Node.js uses [ECMAScript modules](https://nodejs.org/docs/latest/api/esm.html#esm_modules_ecmascript_modules) format when:
 
@@ -87,7 +87,7 @@ node ./month.mjs "2022-02-01"
 
 [Run the command in the demo.](https://codesandbox.io/s/mjs-extension-8cio7?file=/month.mjs)
 
-`February` is printed in terminal.  
+`February` is printed in the terminal.  
 
 ### 1.2 { "type": "module" } in *package.json*
 
@@ -105,7 +105,7 @@ file:
 
 Now all `.js` files inside the folder containing such `package.json` execute as ECMAScript modules.  
 
-Recalling the month modules, now you can rename `month-from-date.mjs` to `month-from-date.js` and `month.mjs` to `month.js` (while still keeping the `import` and `export` syntax), and Node.js is going to execute these module as ECMAScript ones.
+Recalling the month modules, now you can rename `month-from-date.mjs` to `month-from-date.js` and `month.mjs` to `month.js` (while still keeping the `import` and `export` syntax), and Node.js is going to execute these modules as ECMAScript ones.
 
 ```bash
 node ./month.js "2022-03-01"
@@ -113,7 +113,7 @@ node ./month.js "2022-03-01"
 
 [Run the command in the demo.](https://codesandbox.io/s/type-module-lcr0m?file=/month.js)
 
-`March` is printed in terminal.  
+`March` is printed in the terminal.  
 
 ## 2. Importing ECMAScript modules
 
@@ -146,7 +146,7 @@ When using relative specifiers indicating the file extension (`.js`, `'.mjs'`, e
 
 *A bare specifier* starts with a module name (doesn't start with `'.'`, `'./'`, `'..'`, `'/'`), and imports modules from `node_modules` or the built-in Node.js modules.  
 
-For example, if you've installed `lodash-es` package in `node_modules`, then you can access that module:
+For example, if you've installed the `lodash-es` package in `node_modules`, then you can access that module:
  
 ```javascript
 import lodash from 'lodash-es';
@@ -167,7 +167,7 @@ An *absolute specifier* imports modules using an absolute path:
 import module from 'file:///usr/opt/module.js';
 ```
 
-Note the presence of `file://` prefix in the absolute specifiers.  
+Note the presence of the `file://` prefix in the absolute specifiers.  
 
 ## 3. ECMAScript modules and Node.js environment
 
