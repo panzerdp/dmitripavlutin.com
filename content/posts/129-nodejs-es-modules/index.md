@@ -26,7 +26,7 @@ export myOtherFunc(param) {
 }
 ```
 
-Starting version 13.2.0, Node.js production-ready supports ES modules.  
+Starting version 13.2.0, Node.js has stable support ES modules.  
 
 In this post, you'll learn how to enable and use ES modules in Node.js.  
 
