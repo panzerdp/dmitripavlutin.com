@@ -26,7 +26,7 @@ export myOtherFunc(param) {
 }
 ```
 
-Starting version 13.2.0, Node.js production-ready  supports ES modules.  
+Starting version 13.2.0, Node.js production-ready supports ES modules.  
 
 In this post, you'll learn how to enable and use ES modules in Node.js.  
 
@@ -37,10 +37,10 @@ In this post, you'll learn how to enable and use ES modules in Node.js.
 
 The default format of modules in Node.js is the [CommonJS](https://nodejs.org/docs/latest/api/modules.html#modules_modules_commonjs_modules). To make Node.js understand ES modules format, you have to explicitly make so.  
 
-Node.js uses [ECMAScript modules](https://nodejs.org/docs/latest/api/esm.html#esm_modules_ecmascript_modules) format when:
+Node.js uses [ECMAScript modules](https://nodejs.org/docs/latest/api/esm.html#esm_modules_ecmascript_modules) format if:
 
 1. The module's file extension is `.mjs` 
-2. Or the nearest parent folder of the module has `{ "type": "module" }` in `package.json`
+2. Or the module's nearest parent folder has `{ "type": "module" }` in `package.json`
 3. Or the argument `--input-type=commonjs` is present, and the module's code is passed as a string using `--eval="<module-code>"` argument or from `STDIN`.   
 
 Let's detail into the first (`.mjs` extension) and second (`{ "type": "module" }` in `package.json`) ways.  
@@ -49,7 +49,7 @@ Let's detail into the first (`.mjs` extension) and second (`{ "type": "module" }
 
 An easy way to tell Node.js to treat the modules in ECMAScript format is to use the `.mjs` file extension.  
 
-The follow ES module `month-from-date.mjs` (note the `.mjs` file extension) exports a function `monthFromDate()`, which determines the month name of an arbitrary date. 
+The following ES module `month-from-date.mjs` (note the `.mjs` file extension) exports a function `monthFromDate()`, which determines the month name of an arbitrary date: 
 
 ```javascript{1,6}
 // month-from-date.mjs (ES Module)
@@ -65,7 +65,7 @@ export function monthFromDate(date) {
 }
 ```
 
-Same way another module `month.mjs` uses the ES module `import` syntax to import `monthFromDate()` function from `'month-from-date.mjs'` module. This module is run as a CLI script, and returns the month name of the date string passed as an argument:
+Same way another module `month.mjs` uses the ES module `import` syntax to import `monthFromDate()` function from `'month-from-date.mjs'` module. This module also runs as a CLI script, and prints the month name of the date string passed as an argument:
 
 ```javascript{1,3}
 // month.mjs (ES Module)
@@ -91,7 +91,7 @@ node ./month.mjs "2022-02-01"
 
 ### 1.2 { "type": "module" } in *package.json*
 
-To make `.js` files as ES modules simply set `"type"` field as `"module"` in the `package.json`:
+By default `.js` files in Node.js are considered CommonJS modules. To make `.js` files as ES modules simply set `"type"` field as `"module"` in the `package.json`:
 
 ```json{4}
 {
@@ -104,7 +104,7 @@ To make `.js` files as ES modules simply set `"type"` field as `"module"` in the
 
 Now all `.js` files inside the folder containing such `package.json` execute as ECMAScript modules.  
 
-Recalling the month modules, now you can rename `month-from-date.mjs` to `month-from-date.js` and `month.mjs` to `month.js` (while still keeping the `import` and `export` syntax), and Node.js is going to execute these modules as ECMAScript ones.
+Regarding the month modules, let's rename `month-from-date.mjs` to `month-from-date.js` and `month.mjs` to `month.js` (while still keeping the `import` and `export` syntax), set `"type"` field as `"module"` in the `package.json`, and Node.js is going to execute these modules as ECMAScript ones.
 
 ```bash
 node ./month.js "2022-03-01"
@@ -125,11 +125,11 @@ In the example below `'path'` is a specifier:
 import module from 'path';
 ```
 
-There are 3 kinds of specifiers: relative, bare and absolute.  
+There are 3 kinds of specifiers in Node.js: relative, bare and absolute.  
 
 ### 2.1 Relative specifier
 
-You can import modules using a *relative specifier*, which would import a module relative to the current module location.  
+Importing a module using a *relative specifier* would resolve the path of the imported module relative to the current (importing) module location.  
 
 Relative specifiers usually start with `'.'`, `'..'`, or `'./'`:
 
@@ -145,9 +145,10 @@ When using relative specifiers indicating the file extension (`.js`, `'.mjs'`, e
 
 *A bare specifier* starts with a module name (doesn't start with `'.'`, `'./'`, `'..'`, `'/'`), and imports modules from `node_modules` or the built-in Node.js modules.  
 
-For example, if you've installed the `lodash-es` package in `node_modules`, then you can access that module:
+For example, if you've installed the `lodash-es` package in `node_modules`, then you can access that module using a bare specifier:
  
 ```javascript
+// Bare specifiers:
 import lodash from 'lodash-es';
 import intersection from 'lodash-es/intersection';
 ```
@@ -163,6 +164,7 @@ import fs from 'fs';
 An *absolute specifier* imports modules using an absolute path:
 
 ```javascript
+// Absolute specifier:
 import module from 'file:///usr/opt/module.js';
 ```
 
@@ -170,9 +172,9 @@ Note the presence of the `file://` prefix in the absolute specifiers.
 
 ## 3. Dynamic import of modules
 
-The default importing mechanism of ES modules *always* evaluates and imports the module specified in the `from` path. No matter if you later use the module or not.  
+The default importing mechanism of ES modules *always* evaluates and imports the module specified in the `import ... from '...'` &mdash; no matter if you use the module or not.  
 
-But sometimes you may want to import the modules dynamically, in which case you can invoke asynchornous function `import('path')`:
+But sometimes you may want to import the modules dynamically, in which case you can invoke the asynchornous function `import('./path-to-module')`:
 
 ```javascript
 async function loadModule() {
@@ -186,11 +188,11 @@ async function loadModule() {
 loadModule();
 ```
 
-`import('path')` loads asynchornously the module and returns a promise that resolves to the imported module components: `default` property as the default export, and the named exports as properties with the same names.  
+`import('./path-to-module')` loads asynchronously the module and returns a promise that resolves to the imported module components: `default` property as the default import, and the named imports as properties with the same names.  
 
 For example, let's improve `month.js` script to load `month-from-date.js` module only when the user sets the date argument:
 
-```javascript{9}
+```javascript {9}
 // month.js (ES Module)
 
 const dateString = process.argv[2] ?? null;
@@ -217,7 +219,7 @@ node ./month.js "2022-04-01"
 
 ## 4. Mixing module formats
 
-While not desirable, but you can be in a situation when you need to import an CommonJS module from an ES module, and vice-versa.  
+You can be in a situation when you need to import a CommonJS module from an ES module, and vice-versa.  
 
 Fortunately, Node.js allows an ES module to import a CommonJS module:
 
@@ -232,7 +234,7 @@ import defaultComponent, { component1 } from './module.commonjs.js';
 
 When imported in an ES module, the `module.exports` of the CommonJS module becomes the default import, and any `exports.<named-export>` becomes a named import.  
 
-However, the `require()` function of the CommonJS format *cannot* import an ES module. Instead, you can use the async function `import()` inside a CommonJS to load an ES module:
+However, the `require()` function of the CommonJS format *cannot* import an ES module. Instead, you can use the async function `import()` inside CommonJS to load an ES module:
 
 ```javascript{7}
 // CommonJS module
@@ -247,6 +249,8 @@ async function loadESModule() {
 
 loadESModule();
 ```
+
+I recommend as much as possible to avoid mixing module formats.  
 
 ## 5. ECMAScript modules and Node.js environment
 
@@ -276,3 +280,7 @@ Then you can import modules using:
 * Absolute path, e.g. `import module from 'file:///abs/path/module.js'`
 * Modules installed in `node_modules`, e.g. `import lodash from 'lodash-es'`
 * Or built-in Node.js modules like `import fs from 'fs'`.
+
+You can import dynamically a module using `import('./path-to-module')` syntax.  
+
+Also, while not desirable, but sometimes necessary, you can import a CommonJS module from an ES module using the `import ... from 'path'` statement.  
