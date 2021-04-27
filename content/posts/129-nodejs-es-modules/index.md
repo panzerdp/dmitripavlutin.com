@@ -28,7 +28,7 @@ export myOtherFunc(param) {
 
 Starting version 13.2.0, Node.js supports natively and production-ready ES modules.  
 
-In this post, you'll learn how to enable and use ES modules in Node.js and other useful details.  
+In this post, you'll learn how to enable and use ES modules in Node.js.  
 
 ```toc
 ```
@@ -65,7 +65,7 @@ export function monthFromDate(date) {
 }
 ```
 
-Same way another module `month.mjs` uses the ES module `import` syntax to import `monthFromDate()` function from `'month-from-date.mjs'` module. This module accepts   
+Same way another module `month.mjs` uses the ES module `import` syntax to import `monthFromDate()` function from `'month-from-date.mjs'` module. This module is run as a CLI script, and returns the month name of the date string passed as an argument:
 
 ```javascript{1,3}
 // month.mjs (ES Module)
@@ -91,8 +91,7 @@ node ./month.mjs "2022-02-01"
 
 ### 1.2 { "type": "module" } in *package.json*
 
-If you want to tell Node.js to treat all `.js` files as ES modules, then set `"type"` field as `"module"` in the `package.json`
-file:
+To make `.js` files as ES modules simply set `"type"` field as `"module"` in the `package.json`:
 
 ```json{4}
 {
@@ -169,7 +168,54 @@ import module from 'file:///usr/opt/module.js';
 
 Note the presence of the `file://` prefix in the absolute specifiers.  
 
-## 3. ECMAScript modules and Node.js environment
+## 3. Dynamic import of modules
+
+The default importing mechanism of ES modules *always* evaluates and imports the module specified in the `from` path. No matter if you later use the module or not.  
+
+But sometimes you may want to import the modules dynamically, in which case you can invoke asynchornous function `import('path')`:
+
+```javascript
+async function loadModule() {
+  const { 
+    default: defaultComponent, 
+    component1 
+  } = await import('./path-to-module');
+  // ...
+}
+
+loadModule();
+```
+
+`import('path')` loads asynchornously the module and returns a promise that resolves to the imported module components: `default` property as the default export, and the named exports as properties with the same names.  
+
+For example, let's improve `month.js` script to load `month-from-date.js` module only when the user sets the date argument:
+
+```javascript{9}
+// month.js (ES Module)
+
+const dateString = process.argv[2] ?? null;
+
+if (dateString === null) {
+  console.log('Please indicate date argument');
+} else {
+  (async function() {
+    const { monthFromDate } = await import('./month-from-date.js');
+    console.log(monthFromDate(dateString));
+  })();
+}
+```
+
+`const { monthFromDate } = await import('./month-from-date.mjs')` loads the module dynamically, and assigns the named export `monthFromDate` to a variable with the same name.  
+
+```bash
+node ./month.js "2022-04-01"
+```
+
+[Run the command in the demo.](https://codesandbox.io/s/dynamic-t15zl?file=/month.js)
+
+`April` is logged in the terminal.  
+
+## 4. ECMAScript modules and Node.js environment
 
 Inside the ECMAScript module scope are *not available* the CommonJS specific variables like:
 
@@ -187,7 +233,7 @@ However, you can use `import.meta.url` to determine the absolute path of the cur
 console.log(import.meta.url); // "file:///usr/opt/module.mjs"
 ```
 
-## 4. Conclusion
+## 5. Conclusion
 
 Node.js supports ES modules when the module extension is `.mjs`, or the nearest folder of the module has a `package.json` containing `{ “type”: “module” }`.   
 
