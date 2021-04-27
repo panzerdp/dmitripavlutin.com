@@ -1,10 +1,10 @@
 ---
 title: 'How to Use ECMAScript Modules in Node.js'
 description: "How to enable and use ECMAScript 2015 modules in Node.js."
-published: "2021-04-27T12:00Z"
-modified: "2021-04-27T12:00Z"
+published: "2021-04-27T09:00Z"
+modified: "2021-04-27T09:00Z"
 thumbnail: "./images/cover-4.png"
-slug: javascript-modules-nodejs
+slug: ecmascript-modules-nodejs
 tags: ['javascript', 'module', 'nodejs']
 recommended: ['javascript-modules-best-practices', 'javascript-module-import-twice']
 type: post
@@ -284,3 +284,5 @@ Then you can import modules using:
 You can import dynamically a module using `import('./path-to-module')` syntax.  
 
 Also, while not desirable, but sometimes necessary, you can import a CommonJS module from an ES module using the `import ... from 'path'` statement.  
+
+*Would you switch completely to use ECMAScript modules in your Node.js project?*
