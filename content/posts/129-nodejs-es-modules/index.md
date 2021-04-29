@@ -2,7 +2,7 @@
 title: 'How to Use ECMAScript Modules in Node.js'
 description: "How to enable and use ECMAScript 2015 modules in Node.js."
 published: "2021-04-27T09:00Z"
-modified: "2021-04-27T09:00Z"
+modified: "2021-04-29T17:00Z"
 thumbnail: "./images/cover-4.png"
 slug: ecmascript-modules-nodejs
 tags: ['javascript', 'module', 'nodejs']
@@ -231,7 +231,7 @@ import defaultComponent from './module.commonjs.js';
 // use `defaultComponent`...
 ```
 
-When imported in an ES module, the `module.exports` of the CommonJS module becomes the default import.  
+When imported in an ES module, the `module.exports` of the CommonJS module becomes the default import. The named imports from a CommonJS module, however, is not supported.  
 
 However, the `require()` function of the CommonJS format *cannot* import an ES module. Instead, you can use the async function `import()` inside CommonJS to load an ES module:
 
@@ -282,6 +282,6 @@ Then you can import modules using:
 
 You can import dynamically a module using `import('./path-to-module')` syntax.  
 
-Also, while not desirable, but sometimes necessary, you can import a CommonJS module from an ES module using the `import ... from 'path'` statement.  
+While not desirable, but sometimes necessary, you can import a CommonJS module from an ES module using the `import defaultImport from './common.js'` statement. The `module.exports` of the CommonJS becomes the default import `defaultImport` inside the ES module.  
 
 *Would you switch completely to use ECMAScript modules in your Node.js project?*
