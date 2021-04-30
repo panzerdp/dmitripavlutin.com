@@ -41,7 +41,7 @@ Node.js uses [ECMAScript modules](https://nodejs.org/docs/latest/api/esm.html#es
 
 1. The module's file extension is `.mjs` 
 2. Or the module's nearest parent folder has `{ "type": "module" }` in `package.json`
-3. Or the argument `--input-type=commonjs` is present, and the module's code is passed as a string using `--eval="<module-code>"` argument or from `STDIN`.   
+3. Or the argument `--input-type=module` is present, and the module's code is passed as a string using `--eval="<module-code>"` argument or from `STDIN`.   
 
 Let's detail into the first (`.mjs` extension) and second (`{ "type": "module" }` in `package.json`) ways.  
 
