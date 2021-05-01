@@ -1,6 +1,6 @@
 ---
 title: "Don't Confuse Function Expressions and Function Declarations in JavaScript"
-description: "In this post you'll read what are the differences between function declarations and function expressions in JavaScript."
+description: "What are the differences between function declarations and function expressions in JavaScript."
 published: "2021-05-04T12:00Z"
 modified: "2021-05-04T12:00Z"
 thumbnail: "./images/cover-4.png"
@@ -110,9 +110,55 @@ myFunction(2, 3);
 
 ## 3. The function expression
 
+The function expression occurs when a function is declared (with or without a name) inside of an expression. 
 
+The following are examples function expressions:
 
-### 3.1 Don'ts of function expression
+```javascript{3,8,14}
+// Function expressions
+
+(function sum2(a, b) {
+  return a + b;
+});
+
+const myObject = {
+  myMethod: function() {
+    return 42;
+  }
+};
+
+const numbers = [4, 1, 6];
+numbers.forEach(function callback(number) {
+  console.log(number);
+  // logs 4
+  // logs 1
+  // logs 1
+});
+```
+
+If the function inside the expression doesn't have a name, e.g. `function() { return 42 }`, then that's an *anonymous function expression*. 
+
+But if the function has a name, e.g. `sum2` and `callback` in the previous example, then that's a *named function expression*.  
+
+### 3.1 How to distinguish function declaration from function expression
+
+Here's a simple hint on how to distinguish a function declaration from function expression. 
+
+> If the statement starts with the `function` keyword, then it's a *function declaration*, otherwise it's a *function expression*.  
+
+```javascript
+// Function declaration: starts with `function` keyword
+function sum1(a, b) {
+  return a + b;
+}
+
+// Function expression: starts with `(`
+(function sum2(a, b) {
+  return a + b;
+});
+```
+
+### 3.2 Don'ts of function expression
 
 ## 4. Summary
 
