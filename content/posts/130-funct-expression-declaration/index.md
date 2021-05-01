@@ -81,9 +81,11 @@ function sumArray(array) {
 sumArray([1, [4, 6]]); // => 11
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/n7wcryuo/)
+
 `function sumArray(array) { ... }` is a function declaration. 
 
-The function variable `sumArray`, containing the function object, is available in the current scope: before `sumArray([10, [1, [5]]])` and after `sumArray([1, [4, 6]])` the function declaration, and also in the scope of the function itself `sumArray(item)` &mdash; allowing recursive calls.    
+The function variable `sumArray`, containing the function object, is available in the current scope: before `sumArray([10, [1, [5]]])` and after `sumArray([1, [4, 6]])` the function declaration, and also in the scope of the function itself `sumArray(item)` (allowing recursive calls).  
 
 The function variable is available before the function declaration thanks to [hoisting](/javascript-hoisting-in-details/#hoisting-and-function-declaration).  
 
