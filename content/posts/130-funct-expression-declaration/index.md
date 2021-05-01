@@ -16,6 +16,9 @@ However, the way you define a function using `function` keyword can create funct
 
 In this post, you'll read what are the differences between function declarations and function expressions in JavaScript.  
 
+```toc
+```
+
 ## 1. The difference between function expression and declaration
 
 Function declaration and function expression are both approaches to create functions in JavaScript using the `function` keyword.  
@@ -140,26 +143,66 @@ If the function inside the expression doesn't have a name, e.g. `function() { re
 
 But if the function has a name, e.g. `sum2` and `callback` in the previous example, then that's a *named function expression*.  
 
-### 3.1 How to distinguish function declaration from function expression
+### 3.1 Distinguish function declaration from expression
 
-Here's a simple hint on how to distinguish a function declaration from function expression. 
+Here's a simple hint on how to distinguish a function declaration from a function expression: 
 
 > If the statement starts with the `function` keyword, then it's a *function declaration*, otherwise it's a *function expression*.  
 
 ```javascript
-// Function declaration: starts with `function` keyword
+// Function declaration: STARTS with `function` keyword
 function sum1(a, b) {
   return a + b;
 }
 
-// Function expression: starts with `(`
+// Function expression: DOES NOT START with `function` keyword
 (function sum2(a, b) {
   return a + b;
+});
+
+// Function expression: DOES NOT START with `function` keyword
+[1, 2, 3].reduce(function sum3(acc, number) { 
+  return acc + number 
 });
 ```
 
 ### 3.2 Don'ts of function expression
 
+If you've created a named function expression, note that the function variable is *available only inside the function scope*:  
+
+```javascript
+const numbers = [4, 1, 6];
+numbers.forEach(function callback(number) {
+  console.log(typeof callback); // logs 'function'
+});
+
+console.log(typeof callback); // logs 'undefined'
+```
+
+`callback` is a named function expression. `callback` function variable is available only inside the `callback()` function scope, but not outside.  
+
+To increase the code readability, I recommend using named function expressions over anonymous ones. If you trace an error or perform a debugging session, then using named function expressions in your code you'll get a call stack with the function names.  
+
 ## 4. Summary
+
+Depending on how you use `function` keyword to create functions, you can end in 2 ways to create function: function declaration and function expression.  
+
+A function declaration happens when you start the statement with the `function` keyword:
+
+```javascript
+// Function declaration
+function sum1(a, b) {
+  return a + b;
+}
+```
+
+However, if a statement doesn't start with `function` keyword, then you have a function expression:
+
+```javascript
+// Function expression
+(function sum2(a, b) {
+  return a + b;
+});
+```
 
 *Challenge: is `function sum(a, b) { return a + b } + 1;` a function declaration or function expression? Write your explanation in a comment below!*
