@@ -179,7 +179,7 @@ function sum(number1, number2) {
 }
 sum(1, 3);           // Invocation
 sum.call({}, 3, 4);  // Invocation
-sum.apply({}, 5, 9); // Invocation
+sum.apply({}, [5, 9]); // Invocation
 
 const obj = {
   method() {
