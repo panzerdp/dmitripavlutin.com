@@ -14,59 +14,61 @@ In JavaScript, the `function` keyword does a simple job: creates a function.
 
 However, the way you define a function using `function` keyword can create functions with different properties.  
 
-In this post, you'll read what are the differences between function declarations and function expressions in JavaScript.  
+In this post, you'll find how using `function` keyword you can write function declarations and function expressions, and what are the differences between them. 
 
 ```toc
 ```
 
-## 1. The difference between function expression and declaration
+## 1. Function expressions vs function declarations
 
-Function declaration and function expression are both approaches to create functions in JavaScript using the `function` keyword.  
+Function declarations and function expressions are 2 ways create functions using the `function` keyword. 
 
-Let's pick an example to demonstrate the difference &mdash; let's say you want to create a function that simply sums 2 numbers.  
-
-In one case you define the function as usual (the `sum1` function). But in the other case you place the function into a pair of parentheses (the `sum2` function).  
+Let's pick an example to demonstrate the difference &mdash; let's create 2 versions of a function that sums numbers:
 
 ```javascript
-function sum1(a, b) {
+function sumA(a, b) {
   return a + b;
 }
 
-(function sum2(a, b) {
+(function sumB(a, b) {
   return a + b;
 });
 
-sum1(1, 2); // ???
-sum2(1, 2); // ???
+sumA(1, 2); // ???
+sumB(1, 2); // ???
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/8b46yokr/)
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/8b46yokr/2/)
 
-What would happen if you invoke `sum1(1, 2)` and `sum2(1, 2)`?    
+In one case you define the function as usual (the `sumA` function). But in the other case the function is placed into a pair of parentheses (the `sumB` function).  
 
-As expected, `sum1(1, 2)` simply returns the sum of `1` and `2` numbers &mdash; `3`. 
-However, invoking `sum2(1, 2)` throws an error `Uncaught ReferenceError: sum2 is not defined`.  
+What would happen if you invoke `sumA(1, 2)` and `sumB(1, 2)`?    
 
-The explanation is that `sum1` was created using a function declaration, which *creates a name binding* in the current scope. While `sum2` was created using a function expression (because it is wrapped into a pair of parentheses), which *doesn't create a name binding* in the current scope.  
+As expected, `sumA(1, 2)` simply returns the sum of `1` and `2` numbers &mdash; `3`. 
+However, invoking `sumB(1, 2)` throws an error `Uncaught ReferenceError: sumB is not defined`.  
 
-In the next sections, let'd look into more detail about the function declaration and function expression.  
+The explanation is that `sumA` was created using a function declaration, which *function variable* (with the same name as the function name) in the current scope. But `sumB` was created using a function expression (being wrapped into parentheses), which *doesn't create a function variable* in the current scope.  
+
+From a higher point of view, function declarations are useful to create standalone functions, but function expressions are great to create callbacks.  
+
+Now, let's into the behavior and dont's of the function declarations and function expressions.  
 
 ## 2. The function declaration
 
-As you already saw in the previous example, `sum1` is a function declaration:
+As you already saw in the previous example, `sumA` is a function declaration:
 
 ```javascript
 // Function declaration
-function sum1(a, b) {
+function sumA(a, b) {
   return a + b;
 }
 
-sum1(4, 5); // => 9
+sumA(4, 5); // => 9
 ```
 
 A *function declaration* occurs when a statement contains the `function` keyword followed by the function name, a pair of parentheses with the parameters `(para1, param2, paramN)`, and the function body enclosed into a pair of curly braces `{ ... }`.  
 
-The function declaration creates a *name binding variable* &mdash; a variable with the same name as the function name (e.g. `sum1` from the previous example). The name binding is accessible in the current scope (*before* and *after* the function declaration) and even *inside* the function's scope itself. Use the function variable to invoke the function.  
+The function declaration creates a *name binding variable* &mdash; a variable with the same name as the function name (e.g. `sumA` from the previous example). The name binding is accessible in the current scope (*before* and *after* the function declaration) and even *inside* the function's scope itself. Use the function variable to invoke the function.  
 
 For example, let's write a function `sumArray(array)` that calculates the sum of items of an array. If the item is an array itself, then a recursive call `sumArray(item)` is made:  
 
@@ -120,7 +122,7 @@ The following are examples function expressions:
 ```javascript{3,8,14}
 // Function expressions
 
-(function sum2(a, b) {
+(function sumB(a, b) {
   return a + b;
 });
 
@@ -141,7 +143,7 @@ numbers.forEach(function callback(number) {
 
 If the function inside the expression doesn't have a name, e.g. `function() { return 42 }`, then that's an *anonymous function expression*. 
 
-But if the function has a name, e.g. `sum2` and `callback` in the previous example, then that's a *named function expression*.  
+But if the function has a name, e.g. `sumB` and `callback` in the previous example, then that's a *named function expression*.  
 
 ### 3.1 Distinguish function declaration from expression
 
@@ -151,12 +153,12 @@ Here's a simple hint on how to distinguish a function declaration from a functio
 
 ```javascript
 // Function declaration: STARTS with `function` keyword
-function sum1(a, b) {
+function sumA(a, b) {
   return a + b;
 }
 
 // Function expression: DOES NOT START with `function` keyword
-(function sum2(a, b) {
+(function sumB(a, b) {
   return a + b;
 });
 
@@ -191,7 +193,7 @@ A function declaration happens when you start the statement with the `function` 
 
 ```javascript
 // Function declaration
-function sum1(a, b) {
+function sumA(a, b) {
   return a + b;
 }
 ```
@@ -200,7 +202,7 @@ However, if a statement doesn't start with `function` keyword, then you have a f
 
 ```javascript
 // Function expression
-(function sum2(a, b) {
+(function sumB(a, b) {
   return a + b;
 });
 ```
