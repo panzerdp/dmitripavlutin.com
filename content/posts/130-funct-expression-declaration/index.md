@@ -212,7 +212,7 @@ if (true) {
 
 If you've created a named function expression, note that the function variable is *available only inside the function scope*:  
 
-```javascript{3}
+```javascript{3,6}
 const numbers = [4, 1, 6];
 numbers.forEach(function callback(number) {
   callback; // function
