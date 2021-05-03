@@ -3,7 +3,7 @@ title: "Don't Confuse Function Expressions and Function Declarations in JavaScri
 description: "What are the differences between function declarations and function expressions in JavaScript."
 published: "2021-05-04T12:00Z"
 modified: "2021-05-04T12:00Z"
-thumbnail: "./images/cover-4.png"
+thumbnail: "./images/cover.png"
 slug: javascript-function-expression-declaration
 tags: ['javascript', 'function']
 recommended: ['differences-between-arrow-and-regular-functions', '6-ways-to-declare-javascript-functions']
@@ -145,8 +145,6 @@ If the function inside the expression doesn't have a name, e.g. `function() { re
 
 But if the function has a name, e.g. `sumB` and `callback` in the previous example, then that's a *named function expression*.  
 
-### 3.1 Distinguish function declaration from expression
-
 Here's a simple hint on how to distinguish a function declaration from a function expression: 
 
 > If the statement starts with the `function` keyword, then it's a *function declaration*, otherwise it's a *function expression*.  
@@ -168,7 +166,7 @@ function sumA(a, b) {
 });
 ```
 
-### 3.2 Don'ts of function expression
+### 3.1 Don'ts of function expression
 
 If you've created a named function expression, note that the function variable is *available only inside the function scope*:  
 
