@@ -14,7 +14,7 @@ In JavaScript, the `function` keyword does a simple job: creates a function.
 
 However, the way you define a function using `function` keyword can create functions with different properties.  
 
-In this post, you'll find how using `function` keyword you can write function declarations and function expressions, and what are the differences between them. 
+In this post, you'll find how using `function` keyword you can make function declarations and function expressions, and what are the differences between the 2 types of functions.  
 
 ```toc
 ```
@@ -40,18 +40,18 @@ sumB(1, 2); // ???
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/8b46yokr/2/)
 
-In one case you define the function as usual (the `sumA` function). But in the other case the function is placed into a pair of parentheses (the `sumB` function).  
+In one case, you define the function as usual (the `sumA` function). In the other case the function is placed into a pair of parentheses (the `sumB` function).  
 
 What would happen if you invoke `sumA(1, 2)` and `sumB(1, 2)`?    
 
 As expected, `sumA(1, 2)` simply returns the sum of `1` and `2` numbers &mdash; `3`. 
 However, invoking `sumB(1, 2)` throws an error `Uncaught ReferenceError: sumB is not defined`.  
 
-The explanation is that `sumA` was created using a function declaration, which *function variable* (with the same name as the function name) in the current scope. But `sumB` was created using a function expression (being wrapped into parentheses), which *doesn't create a function variable* in the current scope.  
+The explanation is that `sumA` was created using a function declaration, which creates a *function variable* (with the same name as the function name) in the current scope. But `sumB` was created using a function expression (it is wrapped into parentheses), which *doesn't create a function variable* in the current scope.  
 
-From a higher point of view, function declarations are useful to create standalone functions, but function expressions are great to create callbacks.  
+From a higher point of view, function declarations are useful to create standalone functions, but function expressions are good as callbacks.  
 
-Now, let's into the behavior and dont's of the function declarations and function expressions.  
+Now, let's dive more into the behavior of the function declarations and function expressions.  
 
 ## 2. The function declaration
 
@@ -66,11 +66,13 @@ function sumA(a, b) {
 sumA(4, 5); // => 9
 ```
 
-A *function declaration* occurs when a statement contains the `function` keyword followed by the function name, a pair of parentheses with the parameters `(para1, param2, paramN)`, and the function body enclosed into a pair of curly braces `{ ... }`.  
+A *function declaration* occurs when a statement contains the `function` keyword followed by the function name, a pair of parentheses with the parameters `(param1, param2, paramN)`, and the function body enclosed into a pair of curly braces `{ }`.  
 
-The function declaration creates a *name binding variable* &mdash; a variable with the same name as the function name (e.g. `sumA` from the previous example). The name binding is accessible in the current scope (*before* and *after* the function declaration) and even *inside* the function's scope itself. Use the function variable to invoke the function.  
+The function declaration creates a *function variable* &mdash; a variable with the same name as the function name (e.g. `sumA` from the previous example). The function variable is accessible in the current scope (*before* and *after* the function declaration) and even *inside* the function's scope itself. 
 
-For example, let's write a function `sumArray(array)` that calculates the sum of items of an array. If the item is an array itself, then a recursive call `sumArray(item)` is made:  
+The function variable is normally used to invoke the function, or pass around the function object to other functions.  
+
+For example, let's write a function `sumArray(array)` that calculates sums items of an array. The array can contain either a number or another arrays, so if the item is an array itself, then a recursive call is made `sumArray(item)`:  
 
 ```javascript{1, 6, 11}
 sumArray([10, [1, [5]]]); // => 16
@@ -94,9 +96,28 @@ The function variable `sumArray`, containing the function object, is available i
 
 The function variable is available before the function declaration thanks to [hoisting](/javascript-hoisting-in-details/#hoisting-and-function-declaration).  
 
-### 2.1 Don'ts of function declaration
+### 2.1 Dos and don'ts of function declaration
 
-Note that it is not recommended to use function declarations inside conditionals (`if`)  and loops (`while`, `for`).  
+The role of the function declaration syntax is to create standalone functions. Function declarations are expected inside the global scope or the direct the scope of other functions functions.  
+
+```javascript{2-4,8-10}
+// Good!
+function myFunc1(param1, param2) {
+  return param1 + param2;
+}
+
+function bigFunction(param) {
+  // Good!
+  function myFunc2(param1, param2) {
+    return param1 + param2;
+  }
+
+  const result = myFunc2(1, 3);
+  return result + param;
+}
+```
+
+That's why it is not recommended to use function declarations inside conditionals (`if`)  and loops (`while`, `for`).  
 
 ```javascript
 // Bad!
@@ -113,9 +134,11 @@ if (myCondition) {
 myFunction(2, 3);
 ```
 
+Creating functions on conditions are better performed using function expressions.  
+
 ## 3. The function expression
 
-The function expression occurs when a function is declared (with or without a name) inside of an expression. 
+The function expression occurs when a function is created (with or without a name) inside of an expression. 
 
 The following are examples function expressions:
 
@@ -141,9 +164,10 @@ numbers.forEach(function callback(number) {
 });
 ```
 
-If the function inside the expression doesn't have a name, e.g. `function() { return 42 }`, then that's an *anonymous function expression*. 
+There are 2 kinds of functions created inside a function expression:
 
-But if the function has a name, e.g. `sumB` and `callback` in the previous example, then that's a *named function expression*.  
+* If the function inside the expression doesn't have a name, e.g. `function() { return 42 }`, then that's an *anonymous function expression*
+* If the function has a name, e.g. `sumB` and `callback` in the previous example, then that's a *named function expression*
 
 Here's a simple hint on how to distinguish a function declaration from a function expression: 
 
@@ -156,7 +180,7 @@ function sumA(a, b) {
 }
 
 // Function expression: DOES NOT START with `function` keyword
-(function sumB(a, b) {
+const mySum = (function sumB(a, b) {
   return a + b;
 });
 
@@ -166,20 +190,40 @@ function sumA(a, b) {
 });
 ```
 
-### 3.1 Don'ts of function expression
+### 3.1 Dos and don'ts of function expression
+
+Function expressions fits best as callbacks or functions created under conditionals.  
+
+```javascript
+const callback1;
+
+// Functions created conditionally
+if (true) {
+  callback1 = function() { return 42 };
+} else {
+  callback2 = function() { return 3.14 };
+}
+
+// Functions used as callbacks
+[1, 2, 3].map(function increment(number) {
+  return number + 1;
+}); // => [2, 3, 4]
+```
 
 If you've created a named function expression, note that the function variable is *available only inside the function scope*:  
 
-```javascript
+```javascript{3}
 const numbers = [4, 1, 6];
 numbers.forEach(function callback(number) {
-  console.log(typeof callback); // logs 'function'
+  callback; // function
 });
 
-console.log(typeof callback); // logs 'undefined'
+callback; // ReferenceError: callback is not defined
 ```
 
-`callback` is a named function expression. `callback` function variable is available only inside the `callback()` function scope, but not outside.  
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/sujwmp10/)
+
+`callback` is a named function expression, thus `callback` function variable is available only inside the `callback()` function scope, but not outside.  
 
 To increase the code readability, I recommend using named function expressions over anonymous ones. If you trace an error or perform a debugging session, then using named function expressions in your code you'll get a call stack with the function names.  
 
