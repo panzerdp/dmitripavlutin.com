@@ -58,6 +58,27 @@ const sum = (function sumB(a, b) {
 sum(1, 2); // => 3
 ```
 
+Here's a simple hint on how to distinguish a function declaration from a function expression: 
+
+> If the statement starts with the `function` keyword, then it's a *function declaration*, otherwise it's a *function expression*.  
+
+```javascript
+// Function declaration: STARTS with `function` keyword
+function sumA(a, b) {
+  return a + b;
+}
+
+// Function expression: DOES NOT START with `function` keyword
+const mySum = (function sumB(a, b) {
+  return a + b;
+});
+
+// Function expression: DOES NOT START with `function` keyword
+[1, 2, 3].reduce(function sum3(acc, number) { 
+  return acc + number 
+});
+```
+
 From a higher point of view, function declarations are useful to create standalone functions, but function expressions are good as callbacks.  
 
 Now, let's dive more into the behavior of the function declarations and function expressions.  
@@ -177,27 +198,6 @@ There are 2 kinds of functions created inside a function expression:
 
 * If the function inside the expression doesn't have a name, e.g. `function() { return 42 }`, then that's an *anonymous function expression*
 * If the function has a name, e.g. `sumB` and `callback` in the previous example, then that's a *named function expression*
-
-Here's a simple hint on how to distinguish a function declaration from a function expression: 
-
-> If the statement starts with the `function` keyword, then it's a *function declaration*, otherwise it's a *function expression*.  
-
-```javascript
-// Function declaration: STARTS with `function` keyword
-function sumA(a, b) {
-  return a + b;
-}
-
-// Function expression: DOES NOT START with `function` keyword
-const mySum = (function sumB(a, b) {
-  return a + b;
-});
-
-// Function expression: DOES NOT START with `function` keyword
-[1, 2, 3].reduce(function sum3(acc, number) { 
-  return acc + number 
-});
-```
 
 ### 3.1 Dos and don'ts of the function expression
 
