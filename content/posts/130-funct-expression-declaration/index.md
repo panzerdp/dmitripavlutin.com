@@ -224,7 +224,7 @@ console.log(callback); // ReferenceError: callback is not defined
 
 `callback` is a named function expression, thus the `callback` function variable is available only inside the `callback()` function scope, but not outside.  
 
-However, if you store the function object into a regular variable, then you can access the function object from that variable:
+However, if you store the function object into a regular variable, then you can access the function object from that variable inside and outside of the function scope:
 
 ```javascript{2,7}
 const callback = function(number) {
