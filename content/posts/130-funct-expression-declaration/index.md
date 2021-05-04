@@ -47,6 +47,17 @@ However, invoking `sumB(1, 2)` throws an error `Uncaught ReferenceError: sumB is
 
 The explanation is that `sumA` was created using a function declaration, which creates a *function variable* (with the same name as the function name) in the current scope. But `sumB` was created using a function expression (it is wrapped into parentheses), which *doesn't create a function variable* in the current scope.  
 
+If you want to access the function created using a function expression, then save the function object into a variable:
+
+```javascript
+// Works!
+const sum = (function sumB(a, b) {
+  return a + b;
+});
+
+sum(1, 2); // => 3
+```
+
 From a higher point of view, function declarations are useful to create standalone functions, but function expressions are good as callbacks.  
 
 Now, let's dive more into the behavior of the function declarations and function expressions.  
