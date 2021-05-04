@@ -1,20 +1,18 @@
 ---
 title: "Don't Confuse Function Expressions and Function Declarations in JavaScript"
 description: "What are the differences between function declarations and function expressions in JavaScript."
-published: "2021-05-04T12:00Z"
-modified: "2021-05-04T12:00Z"
+published: "2021-05-04T07:50Z"
+modified: "2021-05-04T07:50Z"
 thumbnail: "./images/cover-2.png"
-slug: javascript-function-expression-declaration
+slug: javascript-function-expressions-and-declarations
 tags: ['javascript', 'function']
 recommended: ['differences-between-arrow-and-regular-functions', '6-ways-to-declare-javascript-functions']
 type: post
 ---
 
-In JavaScript, the `function` keyword does a simple job: creates a function. 
+In JavaScript, the `function` keyword does a simple job: creates a function. However, the way you define a function using the  keyword can create functions with different properties.  
 
-However, the way you define a function using the `function` keyword can create functions with different properties.  
-
-In this post, you'll find how using the `function` keyword you can make function declarations and function expressions, and what are the differences between the 2 types of functions.  
+In this post, you'll find how using the `function` keyword you can write function declarations and function expressions, and what are the differences between the 2 types of functions.  
 
 ```toc
 ```
@@ -70,7 +68,7 @@ A *function declaration* occurs when a statement contains the `function` keyword
 
 The function declaration creates a *function variable* &mdash; a variable with the same name as the function name (e.g. `sumA` from the previous example). The function variable is accessible in the current scope (*before* and *after* the function declaration) and even *inside* the function's scope itself. 
 
-The function variable is normally used to invoke the function or pass around the function object to other functions ([higher-order functions](https://dev.to/damcosset/higher-order-functions-in-javascript-4j8b)).  
+The function variable is normally used to invoke the function or pass around the function object to other functions (to [higher-order functions](https://dev.to/damcosset/higher-order-functions-in-javascript-4j8b)).  
 
 For example, let's write a function `sumArray(array)` that sums recursively items of an array (the array can contain either numbers or other arrays):  
 
@@ -196,11 +194,11 @@ Function expressions fit good as callbacks or functions created by condition:
 
 ```javascript
 // Functions created conditionally
-const callback1;
+let callback;
 if (true) {
-  callback1 = function() { return 42 };
+  callback = function() { return 42 };
 } else {
-  callback2 = function() { return 3.14 };
+  callback = function() { return 3.14 };
 }
 
 // Functions used as callbacks
@@ -251,6 +249,8 @@ function sumA(a, b) {
 }
 ```
 
+Function declarations are useful to create standalone, general purpose, functions.  
+
 However, if a statement doesn't start with `function` keyword, then you have a function expression:
 
 ```javascript
@@ -259,5 +259,7 @@ However, if a statement doesn't start with `function` keyword, then you have a f
   return a + b;
 });
 ```
+
+The functions created using functions expressions are useful to create callbacks or functions by condition.  
 
 *Challenge: is `function sum(a, b) { return a + b } + 1;` a function declaration or function expression? Write your explanation in a comment below!*
