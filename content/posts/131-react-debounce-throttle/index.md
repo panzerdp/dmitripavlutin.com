@@ -20,8 +20,8 @@ In this post, I'll learn how to correctly use React hooks to create debounced an
 
 ## 1. The callback without debouncing
 
-## 2. Debounce a callback, first attempt
+## 2. Debouncing a callback, first attempt
 
-## 3. Debounce a callback, second attempt
+## 3. Debouncing a callback, second attempt
 
 ## 4. Conclusion
