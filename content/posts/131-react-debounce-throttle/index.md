@@ -16,8 +16,12 @@ For example, if the user types a query into an input field, and the component fe
 
 In this post, I'll learn how to correctly use React hooks to create debounced and throttled callbacks in React.  
 
-*If you're unfamiliar with debounce and throttle concepts, I recommend checking [The Difference Between Throttling and Debouncing](https://css-tricks.com/the-difference-between-throttling-and-debouncing/).*
+*If you're unfamiliar with debounce and throttle concepts, I recommend checking [Debouncing and Throttling Explained Through Examples](https://css-tricks.com/debouncing-throttling-explained-examples/).*
 
-## 1. The dummy approach
+## 1. The callback without debouncing
 
-## 2. 
+## 2. Debounce a callback, first attempt
+
+## 3. Debounce a callback, second attempt
+
+## 4. Conclusion
