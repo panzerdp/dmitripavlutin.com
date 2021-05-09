@@ -55,7 +55,7 @@ function FilterList({ list }) {
 }
 ```
 
-[Try the demo.]()
+[Try the demo.](https://codesandbox.io/s/no-debouncing-bbd0e?file=/src/FilterList.js)
 
 When typing the query into the input field, you would notice the list gets filtered for every introduced character.  
 
@@ -204,11 +204,11 @@ function MyComponent({ prop }) {
 }
 ```
 
-That guarantees refresing the debounced event callback.  
+Properly setting the dependencies guarantees refreshing the debounced event callback.  
 
 ## 5. Conclusion
 
-A good way to create debounced and throttled functions to handle often happening events is by using the `useMemo()` hook:
+A good way to create debounced and throttled functions, to handle often happening events, is by using the `useMemo()` hook:
 
 ```jsx{10-12,14-16}
 import { useMemo } from 'react';
@@ -232,4 +232,4 @@ function MyComponent() {
 }
 ```
 
-Also, do not forget to set property the dependencies argument of `useMemo()`, in case if the debounced event handler access props or state values.  
+Also, do not forget to set property the dependencies argument of `useMemo(memoFunc, dependencies)`, in case if the debounced event handler access props or state values.  
