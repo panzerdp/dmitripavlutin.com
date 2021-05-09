@@ -1,6 +1,6 @@
 ---
 title: "How to Correctly Debounce and Throttle Callbacks in React"
-description: "How to correctly create debounced and throttled callbacks in React using useMemo() hook."
+description: "How to correctly debounce and throttle callbacks in React using useCallback() and useMemo() hooks."
 published: "2021-05-11T08:00Z"
 modified: "2021-05-11T08:00Z"
 thumbnail: "./images/cover-3.png"
@@ -83,7 +83,7 @@ The debouncing then fits great to soften the filtering inside the `<FilterList>`
 
 The only problem with applying debouncing to `changeHandler` is that the debounced version of the function should remain the same between component re-renderings. The first approach would be to use the `useCallback(callback, dependencies)` that would make sure to keep one instance of the debounced function between component re-renderings.  
 
-```jsx{2,19-21}
+```jsx{2,19-21,26}
 import { useState, useCallback } from 'react';
 import debounce from 'lodash.debounce';
 
@@ -103,13 +103,13 @@ function FilterList({ list }) {
   }, 300);
 
   const debouncedChangeHandler = useCallback(
-    debounce(changeHandler)
+    debounce(changeHandler, 300)
   , []);
 
   return (
     <div>
       <input 
-        onChange={changeHandler} 
+        onChange={debouncedChangeHandler} 
         type="text" 
         placeholder="Type a query..."
       />
@@ -121,14 +121,65 @@ function FilterList({ list }) {
 
 [Try the demo.]()
 
-`debounce(changeHandler)` creates a debounced version of the event handled and `useCallback(debouncedCallback, [])` makes sure to return the same instance of the debounced callback between re-renderings.  
+`debounce(changeHandler, 300)` creates a debounced version of the event handled and `useCallback(debounce(changeHandler, 300), [])` makes sure to return the same instance of the debounced callback between re-renderings.  
 
-Open the demo and try to enter a query: you'll see that the list is filtered with a delay of `300ms` after the last typing: which is a better experience.  
+*On a side note, this approach also works with creating throttled functions, e.g. `useCallback(throttle(callback, time), [])`.*
 
-However... this implementation has a small issue: each time the component re-renders, a new instance of the debounced function is created by the `debounce(changeHandler)`. That's not a problem regarding the functional requirements: `useCallback()` makes sure to return only the first debounced version. But it would be wiser to improve this part.  
+Open the demo and type a query: you'll see that the list is filtered with a delay of `300ms` after the last typing: which is brings a softer and better user experience.  
+
+However... this implementation has a small performance issue: each time the component re-renders, a new instance of the debounced function is created by the `debounce(changeHandler)`. 
+
+That's not a problem regarding the correctness: `useCallback()` makes sure to return the same debounced function instance. But it would be wise to avoid calling `debounce(...)` on each rendering.  
 
 Let's see how to do that in the next section.  
 
 ## 3. Debouncing a callback, second attempt
 
+Fortunately, using `useMemo()` hook as an alternative to `useCallback()` is a more optimal choice:
+
+```jsx{19-21}
+import { useState, useMemo } from 'react';
+import debounce from 'lodash.debounce';
+
+function FilterList({ list }) {
+  const [query, setQuery] = useState('');
+
+  let filteredList = [];
+
+  if (query !== '') {
+    filteredList = list.filter(name => {
+      return name.toLowerCase().includes(query.toLowerCase());
+    });
+  }
+
+  const changeHandler = event => {
+    setQuery(event.target.value);
+  }, 300);
+
+  const debouncedChangeHandler = useMemo(
+    () => debounce(changeHandler, 300)
+  , []);
+
+  return (
+    <div>
+      <input 
+        onChange={debouncedChangeHandler} 
+        type="text" 
+        placeholder="Type a query..."
+      />
+      {filteredList.map(name => <div>{name}</div>)}
+    </div>
+  );
+}
+```
+
+[Try the demo.]()
+
+`useMemo(() => debounce(changeHandler, 300), [])` to memoize the debounced handler doesn't need calling `debounce()` at each rendering.  
+
+*This approach also works with creating throttled functions: `useMemo(() => throttle(callback, time), [])`.*
+
+If you open the demo, you'd see that typing into the input field is still debounced.  
+
 ## 4. Conclusion
+
