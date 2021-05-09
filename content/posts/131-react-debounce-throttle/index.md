@@ -181,5 +181,55 @@ function FilterList({ list }) {
 
 If you open the demo, you'd see that typing into the input field is still debounced.  
 
-## 4. Conclusion
+## 4. Be careful with dependencies
 
+If the debounced handler uses props or state, to avoid creating [stale closures](/react-hooks-stale-closures), I'd recommend setting up correctly the dependencies of `useMemo()`:
+
+```jsx{8,13}
+import { useMemo } from 'react';
+import debounce from 'lodash.debounce';
+
+function MyComponent({ prop }) {
+  const [value, setValue] = useState('');
+  
+  const eventHandler = () => {
+    // the event uses `prop` and `value`
+  };
+
+  const debouncedEventHandler = useMemo(() => {
+    () => debounce(eventHandler, 300)
+  }, [prop, stateValue]);
+  
+  // ...
+}
+```
+
+That guarantees refresing the debounced event callback.  
+
+## 5. Conclusion
+
+A good way to create debounced and throttled functions to handle often happening events is by using the `useMemo()` hook:
+
+```jsx{10-12,14-16}
+import { useMemo } from 'react';
+import debounce from 'lodash.debounce';
+import throttle from 'lodash.throttle';
+
+function MyComponent() {
+  const eventHandler = () => {
+    // handle the event...
+  };
+
+  const debouncedEventHandler = useMemo(() => {
+    () => debounce(eventHandler, 300)
+  }, []);
+
+  const throttledEventHandler = useMemo(() => {
+    () => throttle(eventHandler, 300)
+  }, []);
+  
+  // ...
+}
+```
+
+Also, do not forget to set property the dependencies argument of `useMemo()`, in case if the debounced event handler access props or state values.  
