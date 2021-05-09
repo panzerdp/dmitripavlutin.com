@@ -81,7 +81,53 @@ When the debounced function `debouncedCallback` gets invoked multiple times, eve
 
 The debouncing then fits great to soften the filtering inside the `<FilterList>`: let's debounce `changeHandler` to wait about `300ms` when the user stops typing, and only then filter the list.  
 
-The only problem with applying debouncing to `changeHandler` is that the debounce version of the function should remain the same between component re-renderings.  
+The only problem with applying debouncing to `changeHandler` is that the debounced version of the function should remain the same between component re-renderings. The first approach would be to use the `useCallback(callback, dependencies)` that would make sure to keep one instance of the debounced function between component re-renderings.  
+
+```jsx{2,19-21}
+import { useState, useCallback } from 'react';
+import debounce from 'lodash.debounce';
+
+function FilterList({ list }) {
+  const [query, setQuery] = useState('');
+
+  let filteredList = [];
+
+  if (query !== '') {
+    filteredList = list.filter(name => {
+      return name.toLowerCase().includes(query.toLowerCase());
+    });
+  }
+
+  const changeHandler = event => {
+    setQuery(event.target.value);
+  }, 300);
+
+  const debouncedChangeHandler = useCallback(
+    debounce(changeHandler)
+  , []);
+
+  return (
+    <div>
+      <input 
+        onChange={changeHandler} 
+        type="text" 
+        placeholder="Type a query..."
+      />
+      {filteredList.map(name => <div>{name}</div>)}
+    </div>
+  );
+}
+```
+
+[Try the demo.]()
+
+`debounce(changeHandler)` creates a debounced version of the event handled and `useCallback(debouncedCallback, [])` makes sure to return the same instance of the debounced callback between re-renderings.  
+
+Open the demo and try to enter a query: you'll see that the list is filtered with a delay of `300ms` after the last typing: which is a better experience.  
+
+However... this implementation has a small issue: each time the component re-renders, a new instance of the debounced function is created by the `debounce(changeHandler)`. That's not a problem regarding the functional requirements: `useCallback()` makes sure to return only the first debounced version. But it would be wiser to improve this part.  
+
+Let's see how to do that in the next section.  
 
 ## 3. Debouncing a callback, second attempt
 
