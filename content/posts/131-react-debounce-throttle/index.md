@@ -27,18 +27,18 @@ Let's implement the filtering in a plain way:
 ```jsx
 import { useState } from 'react';
 
-function FilterList({ list }) {
-  const [query, setQuery] = useState('');
+export function FilterList({ names }) {
+  const [query, setQuery] = useState("");
 
-  let filteredList = [];
+  let filteredNames = names;
 
-  if (query !== '') {
-    filteredList = list.filter(name => {
+  if (query !== "") {
+    filteredNames = names.filter((name) => {
       return name.toLowerCase().includes(query.toLowerCase());
     });
   }
 
-  const changeHandler = event => {
+  const changeHandler = (event) => {
     setQuery(event.target.value);
   };
 
@@ -49,7 +49,7 @@ function FilterList({ list }) {
         type="text" 
         placeholder="Type a query..."
       />
-      {filteredList.map(name => <div>{name}</div>)}
+      {filteredNames.map(name => <div key={name}>{name}</div>)}
     </div>
   );
 }
@@ -87,20 +87,20 @@ The only problem with applying debouncing to `changeHandler` is that the debounc
 import { useState, useCallback } from 'react';
 import debounce from 'lodash.debounce';
 
-function FilterList({ list }) {
-  const [query, setQuery] = useState('');
+export function FilterList({ names }) {
+  const [query, setQuery] = useState("");
 
-  let filteredList = [];
+  let filteredNames = names;
 
-  if (query !== '') {
-    filteredList = list.filter(name => {
+  if (query !== "") {
+    filteredNames = names.filter((name) => {
       return name.toLowerCase().includes(query.toLowerCase());
     });
   }
 
   const changeHandler = event => {
     setQuery(event.target.value);
-  }, 300);
+  };
 
   const debouncedChangeHandler = useCallback(
     debounce(changeHandler, 300)
@@ -113,19 +113,19 @@ function FilterList({ list }) {
         type="text" 
         placeholder="Type a query..."
       />
-      {filteredList.map(name => <div>{name}</div>)}
+      {filteredNames.map(name => <div key={name}>{name}</div>)}
     </div>
   );
 }
 ```
 
-[Try the demo.]()
+[Try the demo.](https://codesandbox.io/s/use-callback-debouncing-0ch2q?file=/src/FilterList.js)
 
 `debounce(changeHandler, 300)` creates a debounced version of the event handled and `useCallback(debounce(changeHandler, 300), [])` makes sure to return the same instance of the debounced callback between re-renderings.  
 
-*On a side note, this approach also works with creating throttled functions, e.g. `useCallback(throttle(callback, time), [])`.*
+*The approach also works with creating throttled functions, e.g. `useCallback(throttle(callback, time), [])`.*
 
-Open the demo and type a query: you'll see that the list is filtered with a delay of `300ms` after the last typing: which is brings a softer and better user experience.  
+Open the demo and type a query: you'll see that the list is filtered with a delay of `300ms` after the last typing: which brings a softer and better user experience.  
 
 However... this implementation has a small performance issue: each time the component re-renders, a new instance of the debounced function is created by the `debounce(changeHandler)`. 
 
@@ -141,20 +141,20 @@ Fortunately, using `useMemo()` hook as an alternative to `useCallback()` is a mo
 import { useState, useMemo } from 'react';
 import debounce from 'lodash.debounce';
 
-function FilterList({ list }) {
-  const [query, setQuery] = useState('');
+export function FilterList({ names }) {
+  const [query, setQuery] = useState("");
 
-  let filteredList = [];
+  let filteredNames = names;
 
-  if (query !== '') {
-    filteredList = list.filter(name => {
+  if (query !== "") {
+    filteredNames = names.filter((name) => {
       return name.toLowerCase().includes(query.toLowerCase());
     });
   }
 
-  const changeHandler = event => {
+  const changeHandler = (event) => {
     setQuery(event.target.value);
-  }, 300);
+  };
 
   const debouncedChangeHandler = useMemo(
     () => debounce(changeHandler, 300)
@@ -162,18 +162,18 @@ function FilterList({ list }) {
 
   return (
     <div>
-      <input 
-        onChange={debouncedChangeHandler} 
-        type="text" 
+      <input
+        onChange={debouncedChangeHandler}
+        type="text"
         placeholder="Type a query..."
       />
-      {filteredList.map(name => <div>{name}</div>)}
+      {filteredNames.map(name => <div key={name}>{name}</div>)}
     </div>
   );
 }
 ```
 
-[Try the demo.]()
+[Try the demo.](https://codesandbox.io/s/use-memo-debouncing-jwsog?file=/src/FilterList.js)
 
 `useMemo(() => debounce(changeHandler, 300), [])` to memoize the debounced handler doesn't need calling `debounce()` at each rendering.  
 
@@ -232,4 +232,4 @@ function MyComponent() {
 }
 ```
 
-Also, do not forget to set property the dependencies argument of `useMemo(memoFunc, dependencies)`, in case if the debounced event handler access props or state values.  
+If the debounced or throttled event handler access props or state values, do not forget to set property the dependencies argument of `useMemo(..., dependencies)`.  
