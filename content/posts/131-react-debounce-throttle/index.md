@@ -10,7 +10,7 @@ recommended: ['javascript-callback', 'controlled-inputs-using-react-hooks']
 type: post
 ---
 
-When a React component handles bursting events like window resize, scrolling, user typing into an input, etc. it makes sense to soften the handlers of these events. Othwerise the handlers are invoked too often, and you risk to make the application lagging or even unresponsive for a few seconds.   
+When a React component handles bursting events like window resize, scrolling, user typing into an input, etc. it makes sense to soften the handlers of these events. Otherwise, the handlers are invoked too often, and you risk making the application lagging or even unresponsive for a few seconds.   
 
 For example, if the user types a query into an input field, and the component fetches data from the API using that query &mdash; then don't make the request as soon as the user types a character, but wait around 300ms until the user has typed the last character &mdash; then perform the request. This is debouncing.  
 
@@ -63,7 +63,7 @@ For example, if you type the word `Michael`, then the component would display fl
 
 Let's improve the process of filtering by applying `300ms` time debouncing to the `changeHandler` function.  
 
-## 2. Debouncing a callback, first attempt
+## 2. Debouncing a callback, the first attempt
 
 To debounce the `changeHandler` function I'm going to use the `lodash.debounce` package. You can use any other library at your will, or even write the debounce function by yourself.  
 
@@ -121,7 +121,7 @@ export function FilterList({ names }) {
 
 [Try the demo.](https://codesandbox.io/s/use-callback-debouncing-0ch2q?file=/src/FilterList.js)
 
-`debounce(changeHandler, 300)` creates a debounced version of the event handled and `useCallback(debounce(changeHandler, 300), [])` makes sure to return the same instance of the debounced callback between re-renderings.  
+`debounce(changeHandler, 300)` creates a debounced version of the event handled, and `useCallback(debounce(changeHandler, 300), [])` makes sure to return the same instance of the debounced callback between re-renderings.  
 
 *The approach also works with creating throttled functions, e.g. `useCallback(throttle(callback, time), [])`.*
 
@@ -233,3 +233,5 @@ function MyComponent() {
 ```
 
 If the debounced or throttled event handler access props or state values, do not forget to set property the dependencies argument of `useMemo(..., dependencies)`.  
+
+*What events, in your opinion, worth debouncing and throttling?*
