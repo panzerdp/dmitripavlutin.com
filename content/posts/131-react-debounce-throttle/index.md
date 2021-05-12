@@ -10,17 +10,15 @@ recommended: ['javascript-callback', 'controlled-inputs-using-react-hooks']
 type: post
 ---
 
-When a React component handles bursting events like window resize, scrolling, user typing into an input, etc. it makes sense to soften the handlers of these events. Otherwise, the handlers are invoked too often, and you risk making the application lagging or even unresponsive for a few seconds.   
+When a React component handles bursting events like window resize, scrolling, user typing into an input, etc. &mdash; it's wise to soften the handlers of these events. Otherwise, since the handlers are invoked often, you risk making the application lagging or even unresponsive for a few seconds. That's when debouncing and throttling techniques are helpful.  
 
-For example, if the user types a query into an input field, and the component filters a list of names for that query &mdash; then don't make the filter as soon as the user types a character, but wait around 300ms until the user has typed the last character &mdash; then perform filtering. This is debouncing.  
-
-In this post, you'll learn how to correctly use React hooks to create debounced and throttled callbacks in React.  
+In this post, you'll learn how to correctly use React hooks to apply debouncing and throttling techniques to callbacks in React.  
 
 *If you're unfamiliar with debounce and throttle concepts, I recommend checking [Debouncing and Throttling Explained Through Examples](https://css-tricks.com/debouncing-throttling-explained-examples/).*
 
 ## 1. The callback without debouncing
 
-Let's say that component `<FilterList>` accepts as a prop a potentially quite big list of names (at least 200 records). The component has an input field where the user types a query and the names are filtered by that query.  
+Let's say that a component `<FilterList>` accepts a big list of names (at least 200 records). The component has an input field where the user types a query and the names are filtered by that query.  
 
 Here's the first version of `<FilterList>` component:
 
@@ -57,7 +55,7 @@ export function FilterList({ names }) {
 
 [Try the demo.](https://codesandbox.io/s/no-debouncing-bbd0e?file=/src/FilterList.js)
 
-When typing the query into the input field, you would notice the list gets filtered for every introduced character.  
+When typing the query into the input field, you can notice that the list gets filtered for every introduced character.  
 
 For example, if you type char by char the word `Michael`, then the component would display flashes of filtered lists for the queries `M`, `Mi`, `Mic`, `Mich`, `Micha`, `Michae`, `Michael`. However, the user would need to see just one filter result: for the word `Michael`.  
 
@@ -129,7 +127,7 @@ export function FilterList({ names }) {
 
 Open the [demo](https://codesandbox.io/s/use-callback-debouncing-0ch2q?file=/src/FilterList.js) and type a query: you'll see that the list is filtered with a delay of `300ms` after the last typing: which brings a softer and better user experience.  
 
-However... this implementation has a small performance issue: each time the component re-renders, a new instance of the debounced function is created by the `debounce(changeHandler)`. 
+However... this implementation has a small performance issue: each time the component re-renders, a new instance of the debounced function is created by the `debounce(changeHandler, 300)`.  
 
 That's not a problem regarding the correctness: `useCallback()` makes sure to return the same debounced function instance. But it would be wise to avoid calling `debounce(...)` on each rendering.  
 
