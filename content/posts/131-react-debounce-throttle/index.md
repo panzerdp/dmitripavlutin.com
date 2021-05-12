@@ -10,7 +10,9 @@ recommended: ['javascript-callback', 'controlled-inputs-using-react-hooks']
 type: post
 ---
 
-When a React component handles bursting events like window resize, scrolling, user typing into an input, etc. &mdash; it's wise to soften the handlers of these events. Otherwise, since the handlers are invoked often, you risk making the application lagging or even unresponsive for a few seconds. That's when debouncing and throttling techniques are helpful.  
+When a React component handles bursting events like window resize, scrolling, user typing into an input, etc. &mdash; it's wise to soften the handlers of these events. 
+
+Otherwise, when the handlers are invoked too often you risk making the application lagging or even unresponsive for a few seconds. Fortunately, debouncing and throttling techniques can help you control the invocation of the event handlers.  
 
 In this post, you'll learn how to correctly use React hooks to apply debouncing and throttling techniques to callbacks in React.  
 
