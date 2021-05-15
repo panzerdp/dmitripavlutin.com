@@ -284,4 +284,4 @@ You can import dynamically a module using `import('./path-to-module')` syntax.
 
 While not desirable, but sometimes necessary, you can import a CommonJS module from an ES module using the `import defaultImport from './common.js'` statement. The `module.exports` of the CommonJS becomes the default import `defaultImport` inside the ES module.  
 
-*Would you switch completely to use ECMAScript modules in your Node.js project?*
+On a side note, how to write quality ECMAScript modules? To find out, follow my post [4 Best Practices to Write Quality JavaScript Modules](/javascript-modules-best-practices/).  
