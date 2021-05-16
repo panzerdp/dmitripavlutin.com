@@ -49,5 +49,5 @@ const numbers1 = [1, 2, 3];
 Math.max(...numbers1); // => 3
 ```
 
-`Math.max(...numbers1)` expressions uses the spread syntax and returns the maximum number of `numbers1` array.  
+`Math.max(...numbers1)` expression uses the spread syntax and returns the maximum number of `numbers1` array.  
 
