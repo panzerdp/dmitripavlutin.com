@@ -1,8 +1,8 @@
 ---
 title: "Why Math.max() Without Arguments Returns -Infinity"
 description: "What is the reason that Math.max() utility function when being called without arguments returns -Infinity."
-published: "2021-05-18T12:00Z"
-modified: "2021-05-18T12:00Z"
+published: "2021-05-18T12:30Z"
+modified: "2021-05-18T12:30Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-math-max-infinity
 tags: ['javascript', 'number']
@@ -10,7 +10,7 @@ recommended: ['infinity-in-javascript', 'nan-in-javascript']
 type: post
 ---
 
-`Math.max()` is a built-in JavaScript utility function that determines the maximum number from the numbers specified as arguments.  
+`Math.max()` is a built-in JavaScript utility function that determines the maximum number from the arguments.  
 
 For example, let's determine the maximum of the numbers `1`, `2` and `3`:
 
@@ -35,11 +35,11 @@ Math.max(); // => -Infinity
 ```
 
 While it might be unexpected at first, but calling `Math.max()` without arguments returns `-Infinity`. Let's find out why it happens, 
-and why it's important to happen that way.  
+and why it's important to happen this way.  
 
 ## 1. Max of one array
 
-Before diving into the main question (why `Math.max()` without args returns `-Infinity`), first let's see how Math.max() can be used to determine the maximum number from arrays.  
+Before diving into the main question (why `Math.max()` without args returns `-Infinity`), let's see how `Math.max()` can be used to determine the maximum number from an array.  
 
 `Math.max(num1, num2, ..., numN)` accepts multiple number arguments and returns the maximum number of them. Simple as a pie.  
 
@@ -75,7 +75,7 @@ The maximum number of `[1, 2, 3]` is `3`, and of `[0, 6]` is corresponding `6`. 
 
 That's expected.  
 
-What about trying to determine the max of arrays if one array is empty? Let's make `numbers1` an empty array and try again:
+What about trying to determine the maximum of arrays if one array is empty? Let's make `numbers1` an empty array and try again:
 
 ```javascript
 const numbers1 = [];
@@ -95,17 +95,17 @@ What's interesting is what value returns `Math.max(...numbers1)`: being that `nu
 
 Then `Math.max(max1, max2)` is evaluated as `Math.max(-Infinity, 6)`, which results in `6`.  
 
-Now it's clear why `Math.max()` returns `-Infinity` when called without arguments: it's a way for the max function to be defined upon an empty set. 
+Now it's clear why `Math.max()` returns `-Infinity` when called without arguments: it's a way for the max function to be defined upon an empty set.  
 
 Making a parallel between max and addition, `-Infinity` for max is the same as `0` for addition.  
 
-The same behavior happens with `Math.min()` &mdash; it returns `Infinity` when called without arguments.  
+*The same behavior happens with `Math.min()` &mdash; it returns `Infinity` when called without arguments.*  
 
 *`-Infinity`, in regards to the max operation on the real numbers, is called the [Identity element](https://en.wikipedia.org/wiki/Identity_element).*
 
 ## 3. Conclusion
 
-`Math.max()` called without arguments returns `-Infinity` to correctly handle the cases when an aggregation of maximum operations happens, particularly being useful when determining the max value of an empty array.  
+`Math.max()` called without arguments returns `-Infinity` to correctly handle the cases multiple maximum operations are performed (max of max of max...), particularly being useful when determining the max value of an empty array.  
 
 In simple words, if you're determining the maximum numbers of 2 arrays, and then determine the maximum of these maximums too, you would get the expected result.  
 
