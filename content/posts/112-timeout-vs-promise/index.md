@@ -66,9 +66,9 @@ The questions related to asynchronous JavaScript can be answered by investigatin
 
 *Web APIs* is the place the async operations (fetch requests, promises, timers) with their callbacks are waiting to complete.   
 
-*The task queue* is a FIFO (First In, First Out) structure that holds the callbacks of async operations that are ready to be executed. For example, the callback of a timed out `setTimeout()` &mdash; ready to be executed &mdash; is enqueued in the task queue.  
+*The task queue* (also named macrostasks) is a FIFO (First In, First Out) structure that holds the callbacks of async operations that are ready to be executed. For example, the callback of a timed out `setTimeout()` &mdash; ready to be executed &mdash; is enqueued in the task queue.  
 
-*The job queue* is a FIFO (First In, First Out) structure that holds the callbacks of promises that are ready to be executed. For example, the resolve or reject callbacks of a fulfilled promise are enqueued in the job queue.  
+*The job queue* (also named microtasks) is a FIFO (First In, First Out) structure that holds the callbacks of promises that are ready to be executed. For example, the resolve or reject callbacks of a fulfilled promise are enqueued in the job queue.  
 
 Finally, *the event loop* permanently monitors whether the call stack is empty. If the call stack is empty, the event loop looks into the job queue or task queue, and dequeues any callback ready to be executed into the call stack.  
 
