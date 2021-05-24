@@ -10,7 +10,9 @@ recommended: ['react-useeffect-infinite-loop', 'react-hooks-stale-closures']
 type: post
 ---
 
-The most common asynchonous side effects are performing fetch requests to load data from a remote server, as well as handle timers like `setTimeout()`, debounce or throttle functions. 
+The common asynchonous side effects are: performing fetch requests to load data from a remote server, as well as handle timers like `setTimeout()`, debounce or throttle functions.  
+
+Handling of the side-effects in React is a medium complexity task. However, time to time you might find some difficulties that are at the intersection of component lifecycle and the side effect lifecycle.  
 
 ## 1. The effect is active after unmounting
 
