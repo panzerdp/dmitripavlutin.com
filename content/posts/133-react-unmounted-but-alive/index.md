@@ -29,7 +29,7 @@ Let's reproduce the state update after unmounting problem in a simple example.
 A simple application shows information about a local restaurant. The first page displays the list of employees (waiters, kitchen staff), and the second page is a simple about page with textual information.  
 
 ```jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Employees() {
   const [list, setList] = useState(null);
@@ -138,7 +138,7 @@ Also, in order to [cancel](/javascript-fetch-async-await/#4-canceling-a-fetch-re
 Now let's use the 2 above ideas and fix the `<Employees>` component to correctly handle the cleanup of the fetch async effect:
 
 ```jsx{7,11,19}
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Employees() {
   const [list, setList] = useState(null);
@@ -185,7 +185,7 @@ There are some common side-effects that you invoke inside of React components th
 As already mentioned, it is recommended to abort the fetch request in case if the component unmounts.  
 
 ```jsx{7,11,19}
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function MyComponent() {
   const [value, setValue] = useState();
@@ -212,14 +212,95 @@ function MyComponent() {
 
 You can find more [here](/javascript-fetch-async-await/#4-canceling-a-fetch-request) about properly cancelling fetch requests.  
 
-### 3.2 Web sockets
+### 3.2 Timer functions
+
+In case if you're using `setTimeout()` or `setInterval()` timer functions, it's almost always a good idea to clear them on unmount using the special `clearTimeout()` function.  
+
+```jsx{11}
+import { useState, useEffect } from 'react';
+
+function MyComponent() {
+  const [value, setValue] = useState();
+
+  useEffect(() => {
+    let timerId = setTimeout(() => {
+      setValue('State value');
+      timerId = null;
+    }, 3000);
+    return () => clearTimeout(timerId);
+  }, []);
+
+  // ...
+}
+```
+
+### 3.3 Debounce and throttle
+
+When debouncing or throttling event handlers in React, you may also want to make sure to clear any scheduled call of the debounded or throttled functions.  
+
+Usually the debounce and throttling implementions (like `lodash.debounce` and `lodash.throttle`) provide a special method `cancel()` that you can call to stop the scheduled execution:
+
+```jsx{14}
+import { useState, useEffect } from 'react';
+import throttle from 'lodash.throttle'
+
+function MyComponent () {
+  useEffect(() => {
+    const handleResize = throttle(() => {
+      // Handle window resize...
+    }, 300);
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      handleResize.cancel();
+    };
+  }, []);
+
+  // ...
+}
+```
+
+### 3.4 Web sockets
 
 Another candidate to obligatory cleanup on component unmount are the [web sockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).  
 
+```jsx{11}
+import { useState } from 'react';
 
+function MyComponent() {
+  const [value, setValue] = useState();
 
-### 3.3 Timer functions
+  useEffect(() => {
+    const socket = new WebSocket("wss://www.example.com/ws");
+    socket.onmessage = (event) => {
+      setValue(JSON.parse(event.data));
+    };
+    return () => socket.close();
+  }, []);
 
-### 3.4 Debounce and throttle
+  // ...
+}
+```
 
 ## 4. Conclusion
+
+The good way to handle the async effects is to property clean them when the component unmounts. 
+
+Depending on the type of the side-effect (fetch request, timeout, etc) usually you should just return a cleanup function from the `useEffect()` callback that is going to clean the side-effect.  
+
+```javascript{4-6}
+function MyComponent() {
+  useEffect(() => {
+    // Side-effect logic...
+    return () => {
+      // Side-effect cleanup...
+    };
+  }, []);
+
+  // ...
+}
+```
+
+*What other async effects that need cleanup do you know? Write a comment below!*
