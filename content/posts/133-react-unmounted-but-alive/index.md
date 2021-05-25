@@ -86,7 +86,30 @@ Open the [demo](https://codesandbox.io/s/side-effect-cleanup-broken-9eofz?file=/
 
 Now refresh the web page, and before the employees fetching completes, click the `About Page` link. Then open the console, and notice that React has thrown a warning:
 
-![React warning about updating state of unmounted component](./images/warning-2.png)
+![React warning about updating state of unmounted component](./images/warning.png)
+
+The reson for this warning is `<Employees>` component has already been unmounted (recall that you've clicked "About Page" link and `<About />` component has been rendered). But still the side effect of fetching employees list completes, and React is asked to update the state of an unmounted component.  
+
+```jsx{7-8}
+function Employees() {
+  const [list, setList] = useState(null);
+
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      const response = await fetch("/employees/list");
+      // Updating the state of an unmounted component
+      setList(await response.json()); 
+    };
+    fetchEmployees();
+  }, []);
+  
+  // ...
+}
+```
+
+What would be the solution to this issue? As the warning suggests, you need to cancel any active asynchornous tasks if the component unmounts.  
+
+
 
 ## 2. Cleaning up effects
 
