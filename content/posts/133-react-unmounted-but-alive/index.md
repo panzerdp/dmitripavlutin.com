@@ -10,23 +10,23 @@ recommended: ['react-useeffect-infinite-loop', 'react-hooks-stale-closures']
 type: post
 ---
 
-The common asynchonous side effects are: performing fetch requests to load data from a remote server, handle timers like `setTimeout()`, debounce or throttle functions, etc.    
+The common asynchronous side effects are: performing fetch requests to load data from a remote server, handle timers like `setTimeout()`, debounce or throttle functions, etc.    
 
-Handling of the side-effects in React is a medium complexity task. However, time to time you might find some difficulties that are at the intersection of component lifecycle and the side effect lifecycle.  
+Handling the side effects in React is a medium-complexity task. However, from time to time you might find some difficulties that are at the intersection of component lifecycle and the side effect lifecycle.  
 
-One of such difficulty is when a side-effect, which completes after a component unmounts, tries to update the state with the result of the side-effect. That often leads to a known warning by React:
+One such difficulty is when a side-effect, which completes after a component unmounts, tries to update the state with the result of the side-effect. That often leads to a known warning by React:
 
 ```
 Warning: Can't perform a React state update on an unmounted component.
 ```
 
-In this post, I'll show you when the above warning appears and how to correctly cleanup side-effects in React.  
+In this post, I'll show you when the above warning appears and how to correctly clean up side effects in React.  
 
 ## 1. State update after unmounting
 
-Let's reproduce the state update after unmounting problem in a simple example.  
+Let's reproduce the state update after unmounting the problem in a simple example.  
 
-A simple application shows information about a local restaurant. The first page displays the list of employees (waiters, kitchen staff), and the second page is a simple about page with textual information.  
+An application shows information about a local restaurant. The first page displays the list of employees (waiters, kitchen staff), and the second page shows textual information.  
 
 ```jsx
 import { useState, useEffect } from 'react';
@@ -88,11 +88,11 @@ function App() {
 
 Open the [demo](https://codesandbox.io/s/side-effect-cleanup-broken-9eofz?file=/src/index.js) application. You will see that right away the list of employees is being fetched. The request takes about 3 seconds.  
 
-Now refresh the web page, and before the employees fetching completes, click the `About Page` link. Then open the console, and notice that React has thrown a warning:
+Now refresh the web page, and before the employees' fetching completes, click the `About Page` link. Then open the console, and notice that React has thrown a warning:
 
-![React warning about updating state of unmounted component](./images/warning.png)
+![React warning about updating the state of unmounted component](./images/warning.png)
 
-The reson for this warning is `<Employees>` component has already been unmounted (recall that you've clicked "About Page" link and `<About />` component has been rendered). But still the side effect of fetching employees list completes, and React is asked to update the state of an unmounted component.  
+The reason for this warning is `<Employees>` component has already been unmounted (recall that you've clicked "About Page" link and `<About />` component has been rendered). But still, the side effect of fetching employees list completes, and React is asked to update the state of an unmounted component.  
 
 ```jsx{8-9}
 function Employees() {
@@ -114,11 +114,11 @@ function Employees() {
 }
 ```
 
-What would be the solution to this issue? As the warning suggests, you need to cancel any active asynchornous tasks if the component unmounts. Let's see how to do that in the next section.    
+What would be the solution to this issue? As the warning suggests, you need to cancel any active asynchronous tasks if the component unmounts. Let's see how to do that in the next section.    
 
 ### 2. Cleanup the fetch request
 
-In case of using `useEffect()` hook, you need to return from the effect callback a special [cleanup function](/react-useeffect-explanation/#6-the-side-effect-cleanup) that's going to be executed right after the component is unmounted.  
+In the case of using `useEffect()` hook, you need to return from the effect callback a special [cleanup function](/react-useeffect-explanation/#6-the-side-effect-cleanup) that's going to be executed right after the component is unmounted.  
 
 ```javascript{4-6}
 function MyComponent() {
@@ -236,7 +236,7 @@ function MyComponent() {
 
 ### 3.3 Debounce and throttle
 
-When debouncing or throttling event handlers in React, you may also want to make sure to clear any scheduled call of the debounded or throttled functions.  
+When debouncing or throttling event handlers in React, you may also want to make sure to clear any scheduled call of the debounced or throttled functions.  
 
 Usually the debounce and throttling implementions (like `lodash.debounce` and `lodash.throttle`) provide a special method `cancel()` that you can call to stop the scheduled execution:
 
@@ -286,9 +286,9 @@ function MyComponent() {
 
 ## 4. Conclusion
 
-The good way to handle the async effects is to property clean them when the component unmounts. 
+A good way to handle the async effects is to properly clean them when the component unmounts. 
 
-Depending on the type of the side-effect (fetch request, timeout, etc) usually you should just return a cleanup function from the `useEffect()` callback that is going to clean the side-effect.  
+Depending on the type of the side-effect (fetch request, timeout, etc) usually, you should just return a cleanup function from the `useEffect()` callback that is going to clean the side-effect.  
 
 ```javascript{4-6}
 function MyComponent() {
