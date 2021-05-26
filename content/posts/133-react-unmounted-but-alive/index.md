@@ -3,7 +3,7 @@ title: "How to Cleanup Async Effects in React"
 description: "How to handle the asynchornous effects in React that might finish after the component had unmounted."  
 published: "2021-05-25T12:00Z"
 modified: "2021-05-25T12:00Z"
-thumbnail: "./images/cover-2.png"
+thumbnail: "./images/cover.png"
 slug: react-dispose-async-effects
 tags: ['react', 'async']
 recommended: ['react-useeffect-infinite-loop', 'react-hooks-stale-closures']
