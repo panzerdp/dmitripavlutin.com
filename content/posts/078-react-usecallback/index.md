@@ -2,7 +2,7 @@
 title: "Your Guide to React.useCallback()"
 description: "React.useCallback() memoizes callback functions. In this post I will explain when to and when not to use React.useCallback()."
 published: "2020-05-04T08:40Z"
-modified: "2020-11-07T21:40Z"
+modified: "2021-05-29T07:15Z"
 thumbnail: "./images/cover-6.png"
 slug: dont-overuse-react-usecallback
 tags: ["react", "memoization"]
@@ -34,7 +34,7 @@ In this post, I'm going to explain how to use correctly `useCallback()`.
 
 Before diving into `useCallback()` usage, let's distinguish the problem `useCallback()` solves &mdash; the functions equality check.    
 
-Let's write a function named `factory()` that returns functions: 
+Let's write a function `factory()` that returns functions: 
 
 ```javascript{11-12}
 function factory() {
@@ -63,9 +63,7 @@ That's just how JavaScript objects works. An object (including a function object
 
 Different function objects sharing the same code are often created inside React components:
 
-```jsx{5-7}
-import React from 'react';
-
+```jsx{3-5}
 function MyComponent() {
   // handleClick is re-created on each render
   const handleClick = () => {
@@ -80,15 +78,16 @@ function MyComponent() {
 
 Because inline functions are cheap, the re-creation of functions on each rendering is not a problem. *A few inline functions per component are acceptable.*  
 
-But in some cases you need to maintain one function instance between renderings:
+But in some cases you need to maintain a single function instance between renderings:
 
 1. A functional component wrapped inside `React.memo()` accepts a  function object prop
 2. When the function object is a dependency to other hooks, e.g. `useEffect(..., [callback])`  
+3. When the function has some internal state, e.g. when the [function is debounced or throttled](/react-throttle-debounce/#2-debouncing-a-callback-the-first-attempt).  
 
 That's when `useCallback(callbackFun, deps)` is helpful: given the same dependency values `deps`, the hook returns (aka memoizes) the function instance between renderings:
 
 ```jsx{5-7}
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 
 function MyComponent() {
   // handleClick is the same function object
@@ -107,7 +106,6 @@ function MyComponent() {
 Imagine you have a component that renders a big list of items:
 
 ```jsx
-import React from 'react';
 import useSearch from './fetch-items';
 
 function MyBigList({ term, onItemClick }) {
@@ -126,7 +124,7 @@ The list could be big, maybe hundreds of items. To prevent useless list re-rende
 The parent component of `MyBigList` provides a handler function to know when an item is clicked:  
 
 ```jsx
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 
 export default function MyParent({ term }) {
   const onItemClick = useCallback(event => {
@@ -152,10 +150,11 @@ That was a good use case of `useCallback()`.
 
 Let's look at another example:
 
-```jsx{4-6}
-import React, { useCallback } from 'react';
+```jsx{5-7}
+import { useCallback } from 'react';
 
 function MyComponent() {
+  // Contrived use of `useCallback()`
   const handleClick = useCallback(() => {
     // handle the click event
   }, []);
@@ -168,18 +167,18 @@ function MyChild ({ onClick }) {
 }
 ```
 
-Does it make sense to apply `useCallback()`? Most likely not.  
+Does it make sense to apply `useCallback()`? Most likely not because `<MyChild>` component is light and its re-rendering doesn't create performance issues.  
 
-`useCallback()` hook is called every time `MyComponent` renders. Even `useCallback()` returning the same function object, still, the inline function is re-created on every re-rendering (`useCallback()` just skips it).   
+Don't forget that `useCallback()` hook is called every time `MyComponent` renders. Even `useCallback()` returning the same function object, still, the inline function is re-created on every re-rendering (`useCallback()` just skips it).   
 
-This doesn't bring any benefits because *the optimization costs more than not having the optimization*.  
+By using `useCallback()` you also increased code complexity. You have to keep the `deps` of `useCallback(..., deps)` in sync with what you're using inside the memoized callback.  
 
-Don't forget about the increased code complexity. You have to keep the `deps` of `useCallback(..., deps)` in sync with what you're using inside the memoized callback.  
+In conclusion, *the optimization costs more than not having the optimization*.  
 
 Simply *accept* that on each re-rendering new functions are created:
 
 ```jsx{4-6}
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 
 function MyComponent() {
   const handleClick = () => {

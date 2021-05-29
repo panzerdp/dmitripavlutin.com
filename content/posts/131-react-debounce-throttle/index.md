@@ -208,7 +208,44 @@ function MyComponent({ prop }) {
 
 Properly setting the dependencies guarantees refreshing the debounced closure.  
 
-## 5. Conclusion
+## 5. Cleanup
+
+Because debouncing and throttling execute the function with a delay, you might end up in a situation when the function is executed after the component is unmounted.  
+
+When no longer needed, it is recommended to cancel debouncing and throttling.  
+
+The debounce and throttle implementations usually provide a special method to cancel the execution. For example `lodash.debounce` library provides `debouncedCallback.cancel()` to cancel any scheduled calls.  
+
+Here's how you can cancel the debounced function when the component unmounts:
+
+```jsx{13-17}
+import { useState, useMemo, useEffect } from 'react';
+import debounce from 'lodash.debounce';
+
+export function FilterList({ names }) {
+  // ....
+
+  const debouncedChangeHandler = useMemo(
+    () => debounce(changeHandler, 300)
+  , []);
+
+  // Stop the invocation of the debounced function
+  // after unmounting
+  useEffect(() => {
+    return () => {
+      debouncedChangeHandler.cancel();
+    }
+  }, []);
+
+  return (
+    // ....
+  );
+}
+```
+
+I recommend checking my [How to Cleanup Async Effects in React](/react-dispose-async-effects/).  
+
+## 6. Conclusion
 
 A good way to create debounced and throttled functions, to handle often happening events, is by using the `useMemo()` hook:
 
