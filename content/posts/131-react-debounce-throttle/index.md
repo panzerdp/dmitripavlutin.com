@@ -243,7 +243,7 @@ export function FilterList({ names }) {
 }
 ```
 
-I recommend checking my [How to Cleanup Async Effects in React](/react-dispose-async-effects/).  
+I recommend checking my [How to Cleanup Async Effects in React](/react-cleanup-async-effects).  
 
 ## 6. Conclusion
 
