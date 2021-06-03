@@ -43,30 +43,76 @@ Let's see how it works in an example.
 
 ## 2. *useMemo()* &mdash; an example
 
-There's a component that displays 2 categories of employees in a company: software developers and technical support. Each list also can be filtered by a search query.  
+A component `<FactorialAndSum /> ` displayes 2 input fields where you can insert numbers. For the first field the component displays the factorial of the introduced number, and for the second input field the component calculates the sum of all positive numbers until that number.  
 
-Here's a possible implementation of `<CompanyEmployees />` component:
+Here's a possible implementation of `<FactorialAndSum />` component:
 
 ```jsx
 import { useState } from 'react';
 
-export function CompanyEmployees({ devs, support }) {
-  const [devsQuery, setDevsQuery] = useState('');
-  const [supQuery, setSupQuery] = useState('');
+function factorial(n) {
+  const result = 
+}
 
-  let filteredDevs = devs;
+export function CompanyEmployees({ names }) {
+  const [number1, setNumber1] = useState('1');
+  const [number2, setNumber2] = useState('1');
+  
+  let filteredNames = names;
 
   if (devsQuery.length > 0) {
     filteredDevs = devs.filter(name => {
-      return name.toLowerCase().includes(devsQuery.toLowerCase());
+      return name.toLowerCase().includes(query.toLowerCase());
     });
   }
 
-  let fildeteredSupport = support;
+  const handleChange = event => {
+    setQuery(event.target.value);
+  };
 
-}
-
-function List({ employees, listName }) {
-  
+  return (
+    <div>
+      <input value={devsQuery} onChange={handleChange}>
+      {filteredDevs.map(name => <div>{name}</div>)}
+    </div>
+  );
 }
 ```
+
+If you open the demo, everything works as expected.  
+
+But what would happen if the <CompanyEmployees> would re-render, for example if you add an auto-incrementing counter inside it?  
+
+## 3. Potentially good use cases
+
+### 3.1 Memoizing derived data
+
+A good use case of `useMemo()` is to keep in memory the derived state. For example, having a list of names, you would memoize the names filtered by a query:
+
+```jsx
+import { useState } from 'react';
+
+export function CompanyEmployees({ names }) {
+  const [query, setQuery] = useState('');
+  
+  let filteredNames = names;
+
+  if (devsQuery.length > 0) {
+    filteredDevs = devs.filter(name => {
+      return name.toLowerCase().includes(query.toLowerCase());
+    });
+  }
+
+  const handleChange = event => {
+    setQuery(event.target.value);
+  };
+
+  return (
+    <div>
+      <input value={devsQuery} onChange={handleChange}>
+      {filteredDevs.map(name => <div>{name}</div>)}
+    </div>
+  );
+}
+```
+
