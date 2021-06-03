@@ -1,6 +1,6 @@
 ---
 title: "How to Memoize with React.useMemo()"
-description: "How to use the useMemo() hook in React to memoize heavy computations."  
+description: "How to memoize data in a React component using useMemo() hook."  
 published: "2021-06-03T12:00Z"
 modified: "2021-06-03T12:00Z"
 thumbnail: "./images/cover-4.png"
@@ -39,6 +39,34 @@ However, if `deps` argument had changed compared to previous render, then `useMe
 
 That's the essence of `useMemo()` hook.  
 
-Let's see how all this works in an example.  
+Let's see how it works in an example.  
 
 ## 2. *useMemo()* &mdash; an example
+
+There's a component that displays 2 categories of employees in a company: software developers and technical support. Each list also can be filtered by a search query.  
+
+Here's a possible implementation of `<CompanyEmployees />` component:
+
+```jsx
+import { useState } from 'react';
+
+export function CompanyEmployees({ devs, support }) {
+  const [devsQuery, setDevsQuery] = useState('');
+  const [supQuery, setSupQuery] = useState('');
+
+  let filteredDevs = devs;
+
+  if (devsQuery.length > 0) {
+    filteredDevs = devs.filter(name => {
+      return name.toLowerCase().includes(devsQuery.toLowerCase());
+    });
+  }
+
+  let fildeteredSupport = support;
+
+}
+
+function List({ employees, listName }) {
+  
+}
+```
