@@ -43,76 +43,126 @@ Let's see how it works in an example.
 
 ## 2. *useMemo()* &mdash; an example
 
-A component `<FactorialAndSum /> ` displayes 2 input fields where you can insert numbers. For the first field the component displays the factorial of the introduced number, and for the second input field the component calculates the sum of all positive numbers until that number.  
+A component `<CalculateFactorial />` displayes 2 input fields where you can insert numbers. The component calculates the factorial of the first number, and the sum of all number up to second number.  
 
-Here's a possible implementation of `<FactorialAndSum />` component:
+Here's a possible implementation of `<CalculateFactorial />` component:
 
-```jsx
+```jsx{7,28}
 import { useState } from 'react';
 
-function factorial(n) {
-  const result = 
-}
+export function CalculateFactorial() {
+  const [number, setNumber] = useState(1);
+  const [inc, setInc] = useState(0);
 
-export function CompanyEmployees({ names }) {
-  const [number1, setNumber1] = useState('1');
-  const [number2, setNumber2] = useState('1');
-  
-  let filteredNames = names;
+  const factorial = factorialOf(number);
 
-  if (devsQuery.length > 0) {
-    filteredDevs = devs.filter(name => {
-      return name.toLowerCase().includes(query.toLowerCase());
-    });
-  }
-
-  const handleChange = event => {
-    setQuery(event.target.value);
+  const onChange = event => {
+    setNumber(Number(event.target.value));
   };
-
+  const onClick = () => setInc(i => i + 1);
+  
   return (
     <div>
-      <input value={devsQuery} onChange={handleChange}>
-      {filteredDevs.map(name => <div>{name}</div>)}
+      Factorial of <input value={number} onChange={onChange} /> 
+      is {factorial}
+      <button onClick={onClick}>Re-render</button>
     </div>
   );
 }
+
+function factorialOf(n) {
+  console.log('Factorial called!');
+  return n <= 0 ? 1 : n * factorialOf(n - 1);
+}
 ```
 
-If you open the demo, everything works as expected.  
+Every time you change the input value, `'Factorial called!'` is logged to console.  
 
-But what would happen if the <CompanyEmployees> would re-render, for example if you add an auto-incrementing counter inside it?  
+But also, each time you click *Re-render* button, `inc` value is updated. Updating `inc` state value triggers `<CalculateFactorial />` re-rendering, and the factorial is recalculated again. `'Factorial called!'` is logged to console each time you click *Re-render*.  
 
-## 3. Potentially good use cases
+How can you memoize the factorial calculation when the component re-renders? Welcome `useMemo()` hook!  
 
-### 3.1 Memoizing derived data
+By using `useMemo(() => factorialOf(number), [number])` instead of simple `factorialOf(number)`, React memoizes the factorial calculation.  
 
-A good use case of `useMemo()` is to keep in memory the derived state. For example, having a list of names, you would memoize the names filtered by a query:
+Let's improve `<CalculateFactorial />` and memoize the factorial calculation:
 
-```jsx
-import { useState } from 'react';
+```jsx{7,28}
+import { useState, useMemo } from 'react';
 
-export function CompanyEmployees({ names }) {
-  const [query, setQuery] = useState('');
-  
-  let filteredNames = names;
+export function CalculateFactorial() {
+  const [number, setNumber] = useState(1);
+  const [inc, setInc] = useState(0);
 
-  if (devsQuery.length > 0) {
-    filteredDevs = devs.filter(name => {
-      return name.toLowerCase().includes(query.toLowerCase());
-    });
-  }
+  const factorial = useMemo(() => factorialOf(number), [number]);
 
-  const handleChange = event => {
-    setQuery(event.target.value);
+  const onChange = event => {
+    setNumber(Number(event.target.value));
   };
-
+  const onClick = () => setInc(i => i + 1);
+  
   return (
     <div>
-      <input value={devsQuery} onChange={handleChange}>
-      {filteredDevs.map(name => <div>{name}</div>)}
+      Factorial of <input value={number} onChange={onChange} /> 
+      is {factorial}
+      <button onClick={onClick}>Re-render</button>
     </div>
   );
 }
+
+function factorialOf(n) {
+  console.log('Factorial called!');
+  return n <= 0 ? 1 : n * factorialOf(n - 1);
+}
 ```
+
+Open the demo. Every time you change the value of the number, `'Factorial called!'` is logged to console. That's expected.  
+
+However, if you click *Re-render* button, `'Factorial called!'` isn't logged to console because `useMemo(() => factorialOf(number), [number])` returns the memoized factorial calculation.  
+
+## 3. *useMemo()* vs *useCallback()*
+
+`useCallback()`, compared to `useMemo()`, is a more specialized hook that memoizes callbacks:  
+
+```jsx{7}
+import { useCallback } from 'react';
+
+function MyComponent({ prop }) {
+  const callback = () => {
+    return 'Result';
+  };
+  const memoizedCallback = useCallback(callback, [prop]);
+  
+  return <ChildComponent callback={memoizedCallback} />;
+}
+```
+
+In the above example, `useCallback(() => {...}, [prop])` returns the same function instance as long as `prop` dependency is the same. 
+
+You can use the same way the `useMemo()` to memoize callbacks:
+
+```jsx{7}
+import { useMemo } from 'react';
+
+function MyComponent({ prop }) {
+  const callback = () => {
+    return 'Result';
+  };
+  const memoizedCallback = useMemo(() => callback, [prop]);
+  
+  return <ChildComponent callback={memoizedCallback} />;
+}
+```
+
+## 4. Use memoization with care
+
+While `useMemo()` can improve the performance of the component, you have to make sure to profile the component with and without the hook.  
+
+When memoization is used innapropriately, it could even harm the performance.  
+
+## 5. Conclusion
+
+`useMemo(() => computation(a, b), [a, b])` is the hook that lets you memoize some heavy computations. Given the same `[a, b]` dependencies, once memoized, the hook is 
+going to return the memoized value.  
+
+If you'd like to know more about the alternative to callback memoization `useCallback()`, I recommend following my post [How to Memoize with React.useMemo()](/react-usememo-hook/).  
 
