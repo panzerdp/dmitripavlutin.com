@@ -1,6 +1,6 @@
 ---
 title: "How to Memoize with React.useMemo()"
-description: "How to memoize data in a React component using useMemo() hook."  
+description: "How and when to use React.useMemo() hook to improve the performance of React components."  
 published: "2021-06-04T13:00Z"
 modified: "2021-06-04T13:00Z"
 thumbnail: "./images/cover-5.png"
