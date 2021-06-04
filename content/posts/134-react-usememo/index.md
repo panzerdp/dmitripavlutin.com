@@ -1,8 +1,8 @@
 ---
 title: "How to Memoize with React.useMemo()"
 description: "How to memoize data in a React component using useMemo() hook."  
-published: "2021-06-03T12:00Z"
-modified: "2021-06-03T12:00Z"
+published: "2021-06-04T13:00Z"
+modified: "2021-06-04T13:00Z"
 thumbnail: "./images/cover-5.png"
 slug: react-usememo-hook
 tags: ['react', 'usememo', 'hook']
