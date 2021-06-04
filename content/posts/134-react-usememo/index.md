@@ -10,7 +10,7 @@ recommended: ['use-react-memo-wisely', 'dont-overuse-react-usecallback']
 type: post
 ---
 
-From time to time in your React component can perform some expensive calculations. For example, given a big list of employees and a search query, the component should filter the employees' names by that query.  
+From time to time a React components can perform expensive calculations. For example, given a big list of employees and a search query, the component should filter the employees' names by the query.  
 
 In such cases, with care, you can try to improve the performance of your components using the [memoization](https://en.wikipedia.org/wiki/Memoization) technique.  
 
