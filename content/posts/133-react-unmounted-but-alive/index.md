@@ -66,7 +66,7 @@ function About() {
 }
 ```
 
-The `<App>` component wires toghether `<Employees>` and `<About>`:
+The `<App>` component wires together `<Employees>` and `<About>`:
 
 ```jsx
 import { useState } from 'react';
