@@ -10,7 +10,7 @@ recommended: ['use-react-memo-wisely', 'dont-overuse-react-usecallback']
 type: post
 ---
 
-From time to time in your React component, you have to perform some heavy computations. For example, given a list of employees and some search query, you'd like to filter the employees' names by that query.  
+From time to time in your React component can perform some expensive calculations. For example, given a big list of employees and a search query, the component should filter the employees' names by that query.  
 
 In such cases, with care, you can try to improve the performance of your components using the [memoization](https://en.wikipedia.org/wiki/Memoization) technique.  
 
@@ -18,23 +18,23 @@ In this post, I'm going to describe how and when to use the `useMemo()` React ho
 
 ## 1. *useMemo()* hook
 
-`useMemo()` is a built-in React hook that accepts 2 arguments &mdash; a function that computes a result value and the depedencies array:  
+`useMemo()` is a built-in React hook that accepts 2 arguments &mdash; a function that computes a result and the depedencies array:  
 
 ```javascript
 import { useMemo } from 'react';
 
 function MyComponent() {
-  const memoizedResult = useMemo(computationCallback, deps);
+  const memoizedResult = useMemo(() => heavyCalc(a, b), [a, b]);
 
   // ...
 }
 ```
 
-The essence of `useMemo(computationCallback, deps)` hook is this: the hook invokes, memoizes, and returns the value returned by `computationCallback()`.  
+During initial rendering, `useMemo(() => heavyCalc(a, b), [a, b])` invokes `heavyCalc(a, b)`, memoizes the calculation result, and returns it to the component.  
 
-If `deps` argument doesn't change during re-rendering, then `useMemo()` *doesn't invoke* `computationCallback()` and returns the memoized value. 
+If `a` and `b` dependencies don't change during re-rendering, then `useMemo()` *doesn't invoke* `heavyCalc(a, b)` but returns the memoized value. 
 
-However, if `deps` argument had changed compared to previous render, then `useMemo()` *invokes* `computationCallback()`, memoizes the new value, and returns it.  
+However, if `a` and `b` change during re-rendering, then `useMemo()` *invokes* `heavyCalc(a, b)`, memoizes the new value, and returns it.  
 
 That's the essence of `useMemo()` hook.  
 
@@ -70,14 +70,14 @@ export function CalculateFactorial() {
 }
 
 function factorialOf(n) {
-  console.log('Factorial called!');
+  console.log('factorialOf(n) called!');
   return n <= 0 ? 1 : n * factorialOf(n - 1);
 }
 ```
 
-Every time you change the input value, `'Factorial called!'` is logged to console.  
+Every time you change the input value, the factorial calculation function is invoked `factorialOf(n)` and `'factorialOf(n) called!'` is logged to console.  
 
-But also, each time you click *Re-render* button, `inc` value is updated. Updating `inc` state value triggers `<CalculateFactorial />` re-rendering, and the factorial is recalculated again. `'Factorial called!'` is logged to console each time you click *Re-render*.  
+On the other side, each time you click *Re-render* button, `inc` state value is updated. Updating `inc` state value triggers `<CalculateFactorial />` re-rendering. But, as a secondary effect, the factorial is recalculate too and `'Factorial called!'` is logged to console each time you click *Re-render*.  
 
 How can you memoize the factorial calculation when the component re-renders? Welcome `useMemo()` hook!  
 
@@ -116,7 +116,7 @@ function factorialOf(n) {
 
 Open the demo. Every time you change the value of the number, `'Factorial called!'` is logged to console. That's expected.  
 
-However, if you click *Re-render* button, `'Factorial called!'` isn't logged to console because `useMemo(() => factorialOf(number), [number])` returns the memoized factorial calculation.  
+However, if you click *Re-render* button, `'Factorial called!'` isn't logged to console because `useMemo(() => factorialOf(number), [number])` returns the memoized factorial calculation. Great! 
 
 ## 3. *useMemo()* vs *useCallback()*
 
@@ -154,13 +154,13 @@ function MyComponent({ prop }) {
 
 ## 4. Use memoization with care
 
-While `useMemo()` can improve the performance of the component, you have to make sure to profile the component with and without the hook.  
+While `useMemo()` can improve the performance of the component, you have to make sure to profile the component with and without the hook. Only after that make the conclusion whether memoization worth it.   
 
 When memoization is used inappropriately, it could harm the performance.  
 
 ## 5. Conclusion
 
 `useMemo(() => computation(a, b), [a, b])` is the hook that lets you memoize some heavy computations. Given the same `[a, b]` dependencies, once memoized, the hook is 
-going to return the memoized value.  
+going to return the memoized value without invoking `computation(a, b)`.  
 
-If you'd like to know more about the alternative to callback memoization `useCallback()`, I recommend following my post [How to Memoize with React.useMemo()](/react-usememo-hook/).  
+Also check the post [Your Guide to React.useCallback()](/dont-overuse-react-usecallback/) if you'd like to read about `useCallback()` hook.  
