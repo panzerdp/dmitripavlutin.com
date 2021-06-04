@@ -3,7 +3,7 @@ title: "How to Memoize with React.useMemo()"
 description: "How to memoize data in a React component using useMemo() hook."  
 published: "2021-06-03T12:00Z"
 modified: "2021-06-03T12:00Z"
-thumbnail: "./images/cover-4.png"
+thumbnail: "./images/cover-5.png"
 slug: react-usememo-hook
 tags: ['react', 'usememo', 'hook']
 recommended: ['use-react-memo-wisely', 'dont-overuse-react-usecallback']
@@ -38,7 +38,9 @@ However, if `a` and `b` change during re-rendering, then `useMemo()` *invokes* `
 
 That's the essence of `useMemo()` hook.  
 
-Let's see how it works in an example.  
+Don't forget to provide the dependencies argument. Otherwise, without dependencies argument, `useMemo(() => heavyCalc(a, b))` invokes `heavyCalc(a, b)` during every re-rendering. 
+
+Now let's see how `useMemo()` works in an example.  
 
 ## 2. *useMemo()* &mdash; an example
 
@@ -62,7 +64,8 @@ export function CalculateFactorial() {
   
   return (
     <div>
-      Factorial of <input value={number} onChange={onChange} /> 
+      Factorial of 
+      <input type="number" value={number} onChange={onChange} />
       is {factorial}
       <button onClick={onClick}>Re-render</button>
     </div>
@@ -75,9 +78,11 @@ function factorialOf(n) {
 }
 ```
 
+[Try the demo.](https://codesandbox.io/s/factorial-without-memoization-26yp4?file=/src/App.js)
+
 Every time you change the input value, the factorial calculation function is invoked `factorialOf(n)` and `'factorialOf(n) called!'` is logged to console.  
 
-On the other side, each time you click *Re-render* button, `inc` state value is updated. Updating `inc` state value triggers `<CalculateFactorial />` re-rendering. But, as a secondary effect, the factorial is recalculate too and `'Factorial called!'` is logged to console each time you click *Re-render*.  
+On the other side, each time you click *Re-render* button, `inc` state value is updated. Updating `inc` state value triggers `<CalculateFactorial />` re-rendering. But, as a secondary effect, the factorial is recalculate too and `'factorialOf(n) called!'` is logged to console each time you click *Re-render*.  
 
 How can you memoize the factorial calculation when the component re-renders? Welcome `useMemo()` hook!  
 
@@ -101,7 +106,8 @@ export function CalculateFactorial() {
   
   return (
     <div>
-      Factorial of <input value={number} onChange={onChange} /> 
+      Factorial of 
+      <input type="number" value={number} onChange={onChange} />
       is {factorial}
       <button onClick={onClick}>Re-render</button>
     </div>
@@ -109,14 +115,16 @@ export function CalculateFactorial() {
 }
 
 function factorialOf(n) {
-  console.log('Factorial called!');
+  console.log('factorialOf(n) called!');
   return n <= 0 ? 1 : n * factorialOf(n - 1);
 }
 ```
 
-Open the demo. Every time you change the value of the number, `'Factorial called!'` is logged to console. That's expected.  
+[Try the demo.](https://codesandbox.io/s/factorial-with-memoization-65mkk?file=/src/App.js)
 
-However, if you click *Re-render* button, `'Factorial called!'` isn't logged to console because `useMemo(() => factorialOf(number), [number])` returns the memoized factorial calculation. Great! 
+Open the [demo](https://codesandbox.io/s/factorial-with-memoization-65mkk?file=/src/App.js). Every time you change the value of the number, `'factorialOf(n) called!'` is logged to console. That's expected.  
+
+However, if you click *Re-render* button, `'factorialOf(n) called!'` isn't logged to console because `useMemo(() => factorialOf(number), [number])` returns the memoized factorial calculation. Great! 
 
 ## 3. *useMemo()* vs *useCallback()*
 
