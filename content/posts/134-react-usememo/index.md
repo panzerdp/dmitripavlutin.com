@@ -10,8 +10,7 @@ recommended: ['use-react-memo-wisely', 'dont-overuse-react-usecallback']
 type: post
 ---
 
-Time to time in your React component you have to perform some heavy computations. For example, given a list of employees and some search query, you'd like to 
-filter the employees' names by that query.  
+From time to time in your React component, you have to perform some heavy computations. For example, given a list of employees and some search query, you'd like to filter the employees' names by that query.  
 
 In such cases, with care, you can try to improve the performance of your components using the [memoization](https://en.wikipedia.org/wiki/Memoization) technique.  
 
@@ -43,7 +42,7 @@ Let's see how it works in an example.
 
 ## 2. *useMemo()* &mdash; an example
 
-A component `<CalculateFactorial />` displayes 2 input fields where you can insert numbers. The component calculates the factorial of the first number, and the sum of all number up to second number.  
+A component `<CalculateFactorial />` calculates the factorial of the number introduced by the user into an input field.
 
 Here's a possible implementation of `<CalculateFactorial />` component:
 
@@ -157,7 +156,7 @@ function MyComponent({ prop }) {
 
 While `useMemo()` can improve the performance of the component, you have to make sure to profile the component with and without the hook.  
 
-When memoization is used innapropriately, it could even harm the performance.  
+When memoization is used inappropriately, it could harm the performance.  
 
 ## 5. Conclusion
 
@@ -165,4 +164,3 @@ When memoization is used innapropriately, it could even harm the performance.
 going to return the memoized value.  
 
 If you'd like to know more about the alternative to callback memoization `useCallback()`, I recommend following my post [How to Memoize with React.useMemo()](/react-usememo-hook/).  
-
