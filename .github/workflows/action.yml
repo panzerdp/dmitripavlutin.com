@@ -12,14 +12,14 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Install Dependencies
-        run: yarn
+        run: npm install
       - name: Build
-        run: yarn build
+        run: npm run build
         env:
           MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
       - name: Install firebase CLI
-        run: yarn add firebase-tools
+        run: npm install firebase-tools
       - name: Deploy
-        run: yarn firebase deploy
+        run: npm run firebase deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
