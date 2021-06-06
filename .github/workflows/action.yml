@@ -20,6 +20,6 @@ jobs:
       - name: Install firebase CLI
         run: npm install firebase-tools
       - name: Deploy
-        run: npm run firebase deploy
+        run: npx run firebase deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
