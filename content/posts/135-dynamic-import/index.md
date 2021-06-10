@@ -1,9 +1,9 @@
 ---
-title: "Dynamic Import of ECMAScript Modules"
-description: "How to import dynamically ECMAScript Modules in JavaScript"  
-published: "2021-06-10T13:00Z"
-modified: "2021-06-10T13:00Z"
-thumbnail: "./images/cover-4.png"
+title: "How to Dynamically Import ECMAScript Modules"
+description: "How to use import(pathToModule) to dynamically import ECMAScript modules in JavaScript."  
+published: "2021-06-10T18:40Z"
+modified: "2021-06-10T18:40Z"
+thumbnail: "./images/cover.png"
 slug: ecmascript-modules-dynamic-import
 tags: ['javascript', 'module']
 recommended: ['ecmascript-modules-nodejs', 'javascript-modules-best-practices']
@@ -12,7 +12,7 @@ type: post
 
 ECMAScript (aka ES2015, or ES) modules are a way to organize cohesive chunks of code in JavaScript.  
 
-ES modules system has 2 actors: 
+ES modules system has 2 actors:  
 
 1. The *importing* module 
 2. The *imported* module.  
@@ -33,13 +33,11 @@ While the imported module uses the `export` syntax to export components from its
 export const concat = (paramA, paramB) => paramA + paramB;
 ```
 
-This way of using ES modules is *static*: meaning that the dependencies between modules is known at compile time.  
+`import { concat } from './concatModule'` way of using ES modules is *static*: meaning that the dependencies between modules are known at compile time.  
 
-While static importing works in most of the situations, sometimes you'd like to safe client's bandwidth 
-and load modules conditionally.  
+While static importing works in most situations, sometimes you'd like to save the client's bandwidth and load modules conditionally.  
 
-To make it happen you can use the new dynamic importing of modules using `import` syntax in a different way: like a function. This feature is
-a standard JavaScript language feature starting ES2020.  
+To make it happen you can use the new dynamic importing of modules using `import(pathToModule)` syntax in a different way: as a function.  Dynamic import is a JavaScript language feature starting ES2020.  
 
 Let's see how dynamic import works.   
 
@@ -49,12 +47,16 @@ Let's see how dynamic import works.
 When the `import` keyword is used as a function rather than as a static import syntax:
 
 ```javascript
-promise = import(moduleSpecifier);
+const module = await import(pathToModule);
 ```
 
-For example, lets load 
+it returns a promise and starts an asynchronous task of loading the module. If the module was loaded successfully, then the promise resolves to the module content, otherwise, the promise rejects.   
 
-```javascript
+Note that `pathToModule` can be any expression that evaluates to a string indicating the imported module path. Valid values are regular string literals (like `./myModule`) or variables having strings.  
+
+For example, lets load a module inside of an asynchornous function:
+
+```javascript{2}
 async function loadMyModule() {
   const myModule = await import('./myModule');
   // ... use myModule
@@ -63,22 +65,35 @@ async function loadMyModule() {
 loadMyModule();
 ```
 
-it returns a promise, and starts an asynchornous task of loading the module. If the module was loaded successfully, then the promise resolves to the module content, otherwise the promise rejects.   
+What's interesting is that, contrary to static import, the dynamic import accepts expressions that evaluate to the module path:
 
-## 2. Named dynamic import
+```javascript{2}
+async function loadMyModule(pathToModule) {
+  const myModule = await import(pathToModule);
+  // ... use myModule
+}
 
-Let's consider the following imported module, named `namedConcat.js`:
+loadMyModule('./myModule');
+```
+
+Now, knowing how to load the module, let's see how to extract the components from the imported module.  
+
+## 2. Importing components
+
+### 2.1 Importing of *named* exports
+
+Let's consider the following module, named `namedConcat.js`:
 
 ```javascript
 // namedConcat.js
 export const concat = (paramA, paramB) => paramA + paramB;
 ```
 
-As you can see, it performs a named exports of the `concat` function.  
+Note that it performs a named export of the `concat` function.  
 
-If you'd like to dynamically import `namedConcat.js`, and specifically import the named component `concat`, then simple destructure the resolved object:
+If you'd like to dynamically import `namedConcat.js`, and access the named export `concat`, then simply destructure the resolved module object by the named export name:
 
-```javascript
+```javascript{2}
 async function loadMyModule() {
   const { concat } = await import('./namedConcat');
   concat('b', 'c'); // => 'bc'
@@ -87,9 +102,9 @@ async function loadMyModule() {
 loadMyModule();
 ```
 
-## 3. Default dynamic import
+### 2.2 Importing of *default* export
 
-In case if the imported module exports as a default, you can easily have access to the dynamic default import using `default` property.  
+In case if the imported module exports as a default, you can easily have access to the dynamic default import using the `default` property.  
 
 Let's say that `defaultConcat.js` exports the `concat` function as a `default` export:
 
@@ -109,16 +124,51 @@ async function loadMyModule() {
 loadMyModule();
 ```
 
-## 4. When to use dynamic import
+Note that `default` is a keyword in JavaScript, so it cannot be used as a variable name. 
 
-I recommend to use dynamic import when you're unsure whether you'll the module or not. Also, a rule of thumb is to dynamically import modules that are relatively big size.   
+### 2.3 Importing mixed content
 
-For small module (e.g. `namedConcat.js` or `defaultConcat.js` from the previous example), with a few dozens of line of code, then dynamic import usually doesn't worth the hassle.  
+If the imported component contains default, as well as multiple named exports, then you can easily access all these components using a single destructuring statement:
 
-## 5. Conclusion
+```javascript
+async function loadMyModule() {
+  const { 
+    default: defaultImport,
+    namedExport1,
+    namedExport2
+  } = await import('./mixedExportModule');
+  // ...
+}
 
-When calling `import` as a function with an argument indicating the specifier (aka path) to a module, then you're going to dynamically load that module.  
+loadMyModule();
+```
 
-In such case `promise = import(pathToModule)` returns a promise that resolves to an object containing the components of the imported module.  
+## 3. When to use dynamic import
 
-The dynamic import is supported by both Node.js and most of the modern browsers.  
+I recommend using dynamic import when importing relatively big size modules conditionally. E.g. one time you might need the module, other time not. Or you might want to load different big modules, also depending on certain runtime conditions.  
+
+```javascript
+async function execBigModule(condition) {
+  if (condition) {
+    const { funcA } = await import('./bigModuleA');
+    funcA();
+  } else {
+    const { funcB } = await import('./bigModuleB');
+    funcB();
+  }
+}
+
+execBigModule(true);
+```
+
+For small modules (like `namedConcat.js` or `defaultConcat.js` from the previous example), with a few dozens of lines of code, the dynamic import normally doesn't worth the hassle.  
+
+## 4. Conclusion
+
+When calling `import(pathToModule)` as a function with an argument indicating the specifier (aka path) to a module, then you're going to dynamically load that module.  
+
+In such a case `module = await import(pathToModule)` returns a promise that resolves to an object containing the components of the imported module.  
+
+The dynamic import is supported by both Node.js (version 13.2 and above) and [most modern browsers](https://caniuse.com/es6-module-dynamic-import).  
+
+Next, I recommend checking my post on [4 Best Practices to Write Quality JavaScript Modules](/javascript-modules-best-practices/).
