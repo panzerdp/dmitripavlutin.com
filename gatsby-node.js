@@ -73,10 +73,12 @@ exports.onCreateWebpackConfig = ({ stage, actions, getConfig  }) => {
   });
 
   // Remove CSS ordering logs
-  if (stage === 'build-javascript') {
+  if (stage === 'build-javascript' || stage === 'develop') {
     const config = getConfig();
     const miniCssExtractPlugin = config.plugins.find(
-      plugin => plugin.constructor.name === 'MiniCssExtractPlugin'
+      plugin => {
+        return plugin.constructor.name === 'MiniCssExtractPlugin';
+      }
     );
     if (miniCssExtractPlugin) {
       miniCssExtractPlugin.options.ignoreOrder = true;
