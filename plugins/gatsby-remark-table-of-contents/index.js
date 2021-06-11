@@ -36,7 +36,7 @@ const transformer = (markdownAST, pluginOptions) => {
   };
 
   try {
-    let parsePrefs = yaml.safeLoad(markdownAST.children[index].value);
+    let parsePrefs = yaml.load(markdownAST.children[index].value);
     prefs = { ...prefs, ...keysToCamel(parsePrefs) };
   } catch (e) {
     console.log("Can't parse TOC-Configuration", e);

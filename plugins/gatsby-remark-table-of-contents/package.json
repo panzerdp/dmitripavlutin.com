@@ -24,6 +24,6 @@
   "homepage": "https://github.com/signalwerk/gatsby-remark-table-of-contents#readme",
   "dependencies": {
     "js-yaml": "^3.13.1",
-    "mdast-util-toc": "^4.2.0"
+    "mdast-util-toc": "6.0.0"
   }
 }
