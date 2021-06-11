@@ -14,8 +14,8 @@ ECMAScript (aka ES2015, or ES) modules are a way to organize cohesive chunks of 
 
 ES modules system has 2 actors:  
 
-1. The *importing* module 
-2. The *imported* module.  
+1. The *importing* module &mdash; the one that uses `import { func } from './myModule'`
+2. The *imported* module &mdash; the one which exports `export const func = () => {}`. 
 
 The importing module is the one that uses `import` syntax to import a dependency:
 
