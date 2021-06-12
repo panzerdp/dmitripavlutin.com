@@ -145,7 +145,9 @@ loadMyModule();
 
 ## 3. When to use dynamic import
 
-I recommend using dynamic import when importing relatively big size modules conditionally. E.g. one time you might need the module, other time not. Or you might want to load different big modules, also depending on certain runtime conditions.  
+I recommend using dynamic import when importing big modules, conditionally.  
+
+E.g. you might use the module from time to time, depending on runtime conditions. Or you might want to load different big modules, also depending on certain runtime conditions.  
 
 ```javascript
 async function execBigModule(condition) {
