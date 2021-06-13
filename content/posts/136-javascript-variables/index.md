@@ -14,7 +14,7 @@ Variables is a fundamental concept that any developer must know in order to use 
 
 In JavaScript the concept of variables works around 3 types of declaration statements: `const`, `let`, and `var`.  
 
-To make the understanding easier, I'm going to describe each statement using 4 phases: declaration, initilization, assignment and access. Each of the
+To make the understanding easier, I'm going to describe each statement using 4 phases: declaration, initilization, access the value and assignment of a new value. Each of the
 3 statements (`const`, `let`, and `var`) create variables that behave differently exactly in these 4 phases.  
 
 Let's get started.  
@@ -46,7 +46,6 @@ For example, identifiers like `myNumber` and `mynumber` are different, because t
 Here's how you can *declare* a `const` variable with the identifier `myConstVariable`:
 
 ```javascript
-// Declaration
 const myConstVariable = initialValue;
 ```
 
@@ -57,11 +56,23 @@ Examples of initial values are literals (numbers `1`, strings `'My Initial Value
 For example:
 
 ```javascript
-// Declaration
 const hero = 'Batman';
 ```
 
 declares a `const` variable named `hero` that is initialized with the string literal `'Batman'`.  
+
+After the declaration and initialization, you can *access* the variable value just by writing the identifier:
+
+```javascript
+const hero = 'Batman';
+
+console.log(hero);              // logs 'Batman'
+console.log(`Hello, ${hero}!`); // logs 'Hello, Batman!'
+```
+
+It's important to remember when you can and cannot *access* the variable value &mdash; this is also called scope. 
+
+The code block and a function create a scope for `const` variables, 
 
 ## 3. *let* variables
 
