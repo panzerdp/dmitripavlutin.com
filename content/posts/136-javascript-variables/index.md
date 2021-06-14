@@ -43,6 +43,8 @@ For example, identifiers like `myNumber` and `mynumber` are different, because t
 
 ## 2. *const* variables
 
+### 2.1 *const* declaration and initialization
+
 Here's how you can *declare* a `const` variable with the identifier `myConstVariable`:
 
 ```javascript
@@ -61,6 +63,8 @@ const hero = 'Batman';
 
 declares a `const` variable named `hero` that is initialized with the string literal `'Batman'`.  
 
+### 2.2 *const* access and assignment
+
 After the declaration and initialization, you can *access* the variable value just by writing the identifier:
 
 ```javascript
@@ -70,12 +74,213 @@ console.log(hero);              // logs 'Batman'
 console.log(`Hello, ${hero}!`); // logs 'Hello, Batman!'
 ```
 
-It's important to remember when you can and cannot *access* the variable value &mdash; this is also called scope. 
+What's also specific to `const` variables (in contrast to `let` and `var` variables) is that you have to assign the initial value.  
 
-The code block and a function create a scope for `const` variables, 
+```javascript
+const hero; // SyntaxError: Missing initializer in const declaration
+```
+
+Also you cannot reassign a new value to the variable:  
+
+```javascript
+const hero = 'Batman';
+
+hero = 'Joker'; // TypeError: Assignment to constant variable
+```
+
+It's important to remember when you can and cannot *access* the variable value &mdash; this is also called scope. Outside of its scope, the variable cannot the accessed.  
+
+The code block and a function create a scope for `const` variables:
+
+```javascript
+if (true) {
+  // Code block scope
+  const hero = 'Batman';
+  console.log(hero); // logs 'Batman'
+}
+console.log(hero); // throws ReferenceError
+```
+
+```javascript
+function greetBatman() {
+  // Function scope
+  const hero = 'Batman';
+  console.log(`Hello, ${hero}!`); // logs 'Hello, Batman!'
+}
+console.log(`Hello, ${hero}!`); // throws ReferenceError
+
+greetBatman();
+```
+
+On top of that, you can also access the `const` variable value only after the declaration statement, but not before:
+
+```javascript
+console.log(hero); // throws ReferenceError
+const hero = 'Batman';
+```
 
 ## 3. *let* variables
 
+### 3.1 *let* declaration and initialization
+
+Here's how you can *declare* a `let` variable with the identifier `myVariable1` or `myVariable2`:
+
+```javascript
+let myVariable1 = initialValue;
+// or
+let myVariable2;
+```
+
+The variable `myVariable1` is *initialized* right away with an `initialValue`, which can be any expression that evaluates to a value. 
+
+Examples of initial values are literals (numbers `1`, strings `'My Initial Value'`), or even other variables or function calls.  
+
+Additionally, the second variable `myVariable2` is declared, however wasn't initialized with an initial value.  
+
+For example:
+
+```javascript
+let villain = 'Joker';
+```
+
+declares a `let` variable named `villain` that is initialized with the string literal `'Joker'`.  
+
+### 3.2 *let* access and assignment
+
+After the declaration and initialization, you can *access* the variable value just by writing the identifier:
+
+```javascript
+const hero = 'Batman';
+
+console.log(hero);              // logs 'Batman'
+console.log(`Hello, ${hero}!`); // logs 'Hello, Batman!'
+```
+
+What's also specific to `const` variables (in contrast to `let` and `var` variables) is that you have to assign the initial value.  
+
+```javascript
+const hero; // SyntaxError: Missing initializer in const declaration
+```
+
+Also you cannot reassign a new value to the variable:  
+
+```javascript
+const hero = 'Batman';
+
+hero = 'Joker'; // TypeError: Assignment to constant variable
+```
+
+It's important to remember when you can and cannot *access* the variable value &mdash; this is also called scope. Outside of its scope, the variable cannot the accessed.  
+
+The code block and a function create a scope for `const` variables:
+
+```javascript
+if (true) {
+  // Code block scope
+  const hero = 'Batman';
+  console.log(hero); // logs 'Batman'
+}
+console.log(hero); // throws ReferenceError
+```
+
+```javascript
+function greetBatman() {
+  // Function scope
+  const hero = 'Batman';
+  console.log(`Hello, ${hero}!`); // logs 'Hello, Batman!'
+}
+console.log(`Hello, ${hero}!`); // throws ReferenceError
+
+greetBatman();
+```
+
+On top of that, you can also access the `const` variable value only after the declaration statement, but not before:
+
+```javascript
+console.log(hero); // throws ReferenceError
+const hero = 'Batman';
+```
+
 ## 4. *var* variables
 
+### 2.1 *var* declaration and initialization
+
+Here's how you can *declare* a `const` variable with the identifier `myConstVariable`:
+
+```javascript
+const myConstVariable = initialValue;
+```
+
+The variable `myConstVariable` is *initialized* right away with an `initialValue`, which can be any expression that evaluates to a value. 
+
+Examples of initial values are literals (numbers `1`, strings `'My Initial Value'`), or even other variables or function calls.  
+
+For example:
+
+```javascript
+const hero = 'Batman';
+```
+
+declares a `const` variable named `hero` that is initialized with the string literal `'Batman'`.  
+
+### 2.2 *var* access and assignment
+
+After the declaration and initialization, you can *access* the variable value just by writing the identifier:
+
+```javascript
+const hero = 'Batman';
+
+console.log(hero);              // logs 'Batman'
+console.log(`Hello, ${hero}!`); // logs 'Hello, Batman!'
+```
+
+What's also specific to `const` variables (in contrast to `let` and `var` variables) is that you have to assign the initial value.  
+
+```javascript
+const hero; // SyntaxError: Missing initializer in const declaration
+```
+
+Also you cannot reassign a new value to the variable:  
+
+```javascript
+const hero = 'Batman';
+
+hero = 'Joker'; // TypeError: Assignment to constant variable
+```
+
+It's important to remember when you can and cannot *access* the variable value &mdash; this is also called scope. Outside of its scope, the variable cannot the accessed.  
+
+The code block and a function create a scope for `const` variables:
+
+```javascript
+if (true) {
+  // Code block scope
+  const hero = 'Batman';
+  console.log(hero); // logs 'Batman'
+}
+console.log(hero); // throws ReferenceError
+```
+
+```javascript
+function greetBatman() {
+  // Function scope
+  const hero = 'Batman';
+  console.log(`Hello, ${hero}!`); // logs 'Hello, Batman!'
+}
+console.log(`Hello, ${hero}!`); // throws ReferenceError
+
+greetBatman();
+```
+
+On top of that, you can also access the `const` variable value only after the declaration statement, but not before:
+
+```javascript
+console.log(hero); // throws ReferenceError
+const hero = 'Batman';
+```
+
+
 ## 5. Conclusion
+
+As presented, there are 3 ways to declare variables in JavaScript: using `const`, `let` or `var`.  
+
