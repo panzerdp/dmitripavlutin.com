@@ -131,156 +131,160 @@ let myVariable1 = initialValue;
 let myVariable2;
 ```
 
-The variable `myVariable1` is *initialized* right away with an `initialValue`, which can be any expression that evaluates to a value. 
+The variable `myVariable1` is *initialized* right away with an `initialValue`, which can be any expression that evaluates to a value.  
 
-Examples of initial values are literals (numbers `1`, strings `'My Initial Value'`), or even other variables or function calls.  
+Examples of initial values are literals (numbers `1`, strings `'My Initial Value'`), or even other variables, expressions or function calls.  
 
-Additionally, the second variable `myVariable2` is declared, however wasn't initialized with an initial value.  
+The variable `myVariable2` is *declared*, however doesn't have an initial value. By default, JavaScript considers uninitialized variables having the special value `undefined`.
 
-For example:
+In the following code snippet:
 
 ```javascript
 let villain = 'Joker';
+
+let name;
 ```
 
-declares a `let` variable named `villain` that is initialized with the string literal `'Joker'`.  
+The `let` variable named `villain` is declared and initialized with the string literal `'Joker'`. `name` variable also has been defined, but it wasn't initialized.   
 
 ### 3.2 *let* access and assignment
 
-After the declaration and initialization, you can *access* the variable value just by writing the identifier:
+After the declaration and initialization, you can *access* the `let` variable value just by writing the identifier:
 
 ```javascript
-const hero = 'Batman';
+let villain = 'Joker';
 
-console.log(hero);              // logs 'Batman'
-console.log(`Hello, ${hero}!`); // logs 'Hello, Batman!'
+console.log(villain);              // logs 'Joker'
+console.log(`Hello, ${villain}!`); // logs 'Hello, Joker!'
+
+let name;
+console.log(name); // logs undefined
 ```
 
-What's also specific to `const` variables (in contrast to `let` and `var` variables) is that you have to assign the initial value.  
+`name` variable, while being declared, it is not yet initialized so it has `undefined` value.  
+
+You can easily reassign values to `let` variables, thing you cannot do with `const` variables - and this is the main difference between the them.
 
 ```javascript
-const hero; // SyntaxError: Missing initializer in const declaration
+const villain = 'Joker';
+
+villain = 'Bane';
+console.log(villain); // logs 'Bane'
 ```
 
-Also you cannot reassign a new value to the variable:  
-
-```javascript
-const hero = 'Batman';
-
-hero = 'Joker'; // TypeError: Assignment to constant variable
-```
-
-It's important to remember when you can and cannot *access* the variable value &mdash; this is also called scope. Outside of its scope, the variable cannot the accessed.  
-
-The code block and a function create a scope for `const` variables:
+The scope of the `let` variables is defined the same way as for `const`: by a code block or function body.  
 
 ```javascript
 if (true) {
   // Code block scope
-  const hero = 'Batman';
-  console.log(hero); // logs 'Batman'
+  let villain = 'Joker';
+  console.log(villain); // logs 'Joker'
 }
-console.log(hero); // throws ReferenceError
+console.log(villain); // throws ReferenceError
 ```
 
 ```javascript
-function greetBatman() {
+function greetJoker() {
   // Function scope
-  const hero = 'Batman';
-  console.log(`Hello, ${hero}!`); // logs 'Hello, Batman!'
+  let villain = 'Joker';
+  console.log(`Hello, ${villain}!`); // logs 'Hello, Joker!'
 }
-console.log(`Hello, ${hero}!`); // throws ReferenceError
+console.log(`Hello, ${villain}!`); // throws ReferenceError
 
-greetBatman();
+greetJoker();
 ```
 
-On top of that, you can also access the `const` variable value only after the declaration statement, but not before:
+You can access the value of the `let` variable within the current scope, and only after the declaration statement:
 
 ```javascript
-console.log(hero); // throws ReferenceError
-const hero = 'Batman';
+console.log(villain); // throws ReferenceError
+let villain = 'Joker';
 ```
 
 ## 4. *var* variables
 
-### 2.1 *var* declaration and initialization
+### 4.1 *var* declaration and initialization
 
-Here's how you can *declare* a `const` variable with the identifier `myConstVariable`:
+Here's how you can *declare* a `var` variable with the identifier `myVariable1` or `myVariable2`:
 
 ```javascript
-const myConstVariable = initialValue;
+var myVariable1 = initialValue;
+// or
+var myVariable2;
 ```
 
-The variable `myConstVariable` is *initialized* right away with an `initialValue`, which can be any expression that evaluates to a value. 
+The variable `myVariable1` is *initialized* right away with an `initialValue`, which can be any expression that evaluates to a value.  
 
-Examples of initial values are literals (numbers `1`, strings `'My Initial Value'`), or even other variables or function calls.  
+The variable `myVariable2` is *declared*, however doesn't have an initial value. By default, JavaScript considers uninitialized variables having the special value `undefined`.
 
-For example:
+In the following code snippet:
 
 ```javascript
-const hero = 'Batman';
+var villain = 'Joker';
+
+var name;
 ```
 
-declares a `const` variable named `hero` that is initialized with the string literal `'Batman'`.  
+The `var` variable named `villain` is declared and initialized with the string literal `'Joker'`. `name` variable also has been defined, but it wasn't initialized.   
 
-### 2.2 *var* access and assignment
+### 4.2 *var* access and assignment
 
-After the declaration and initialization, you can *access* the variable value just by writing the identifier:
+After the declaration and initialization, you can *access* the `let` variable value just by writing the identifier:
 
 ```javascript
-const hero = 'Batman';
+var villain = 'Joker';
 
-console.log(hero);              // logs 'Batman'
-console.log(`Hello, ${hero}!`); // logs 'Hello, Batman!'
+console.log(villain);              // logs 'Joker'
+console.log(`Hello, ${villain}!`); // logs 'Hello, Joker!'
+
+var name;
+console.log(name); // logs undefined
 ```
 
-What's also specific to `const` variables (in contrast to `let` and `var` variables) is that you have to assign the initial value.  
+`name` variable, while being declared, it is not yet initialized so it has `undefined` value.  
+
+You can easily reassign values to `var` variables, same as with `let` variables.  
 
 ```javascript
-const hero; // SyntaxError: Missing initializer in const declaration
+var villain = 'Joker';
+
+villain = 'Bane';
+console.log(villain); // logs 'Bane'
 ```
 
-Also you cannot reassign a new value to the variable:  
+The scope of the `var` variables is defined only by the function body, which is the main difference between `let` variables:
 
 ```javascript
-const hero = 'Batman';
+function greetJoker() {
+  // Function scope
+  var villain = 'Joker';
+  console.log(`Hello, ${villain}!`); // logs 'Hello, Joker!'
+}
+console.log(`Hello, ${villain}!`); // throws ReferenceError
 
-hero = 'Joker'; // TypeError: Assignment to constant variable
+greetJoker();
 ```
 
-It's important to remember when you can and cannot *access* the variable value &mdash; this is also called scope. Outside of its scope, the variable cannot the accessed.  
-
-The code block and a function create a scope for `const` variables:
-
 ```javascript
+// A code block doesn't create a scope
+// for `var` variables
 if (true) {
   // Code block scope
-  const hero = 'Batman';
-  console.log(hero); // logs 'Batman'
+  var villain = 'Joker';
+  console.log(villain); // logs 'Joker'
 }
-console.log(hero); // throws ReferenceError
+console.log(villain); // logs 'Joker'
 ```
+
+Normally you won't have to access `var` variables before the declaration statement. But if you do, JavaScript won't throw a reference error but rather evaluate the variable to `undefined`:
 
 ```javascript
-function greetBatman() {
-  // Function scope
-  const hero = 'Batman';
-  console.log(`Hello, ${hero}!`); // logs 'Hello, Batman!'
-}
-console.log(`Hello, ${hero}!`); // throws ReferenceError
-
-greetBatman();
+console.log(villain); // logs undefined
+var villain = 'Joker';
 ```
 
-On top of that, you can also access the `const` variable value only after the declaration statement, but not before:
-
-```javascript
-console.log(hero); // throws ReferenceError
-const hero = 'Batman';
-```
-
+It happens because `var` variables hoist up to the top of the scope.  
 
 ## 5. Conclusion
 
 As presented, there are 3 ways to declare variables in JavaScript: using `const`, `let` or `var`.  
-
