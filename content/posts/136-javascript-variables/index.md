@@ -10,24 +10,24 @@ recommended: ['javascript-hoisting-in-details', 'javascript-defined-variable-che
 type: post
 ---
 
-Variables is a fundamental concept that any developer must know to program.  
+The variable is a fundamental concept that any developer.
 
 In JavaScript the concept of variables works around 3 types of declaration statements: `const`, `let`, and `var`.  
 
-To make the understanding easier, I'm going to describe each statement using 4 phases: declaration, initilization, access the value and assignment of a new value. Each of the
+To make the understanding easier, I'm going to describe each statement using 4 phases: declaration, initialization, access the value, and assignment of a new value. Each of the
 3 statements (`const`, `let`, and `var`) create variables that behave differently exactly in these 4 phases.  
 
 Let's get started.  
 
 ## 1. Variable identifier
 
-Before getting into the variables statements, it is important to understand what a variable actually is.  
+Before getting into the variables statements, it is important to understand what a variable is.  
 
 In simple terms, a variable is a placeholder for a value. A value in JavaScript can be either a primitive value or an object.  
 
-Any variable has a *name*, which stricter is called *identifier*. Example of identifiers are `myNumber`, `name`, `list`, `item`, etc.  
+Any variable has a *name*, which stricter is called *identifier*. Examples of identifiers are `myNumber`, `name`, `list`, `item`, etc.  
 
-Regarding the syntax of an identifier, there rules are pretty simple: 
+Regarding the syntax of an identifier, their rules are pretty simple: 
 
 > *An identifier* can contain letters, `$`, `_` and digits `0..9`, but cannot start with a digit `0..9`.  
 
@@ -80,7 +80,7 @@ What's also specific to `const` variables (in contrast to `let` and `var` variab
 const hero; // SyntaxError: Missing initializer in const declaration
 ```
 
-Also you cannot reassign a new value to the variable:  
+Also, you cannot reassign a new value to `const` variable:  
 
 ```javascript
 const hero = 'Batman';
@@ -131,9 +131,9 @@ let myVariable1 = initialValue;
 let myVariable2;
 ```
 
-The variable `myVariable1` is *initialized* right away with an `initialValue`, which can be any expression that evaluates to a value.  
+The variable `myVariable1` is *initialized* right away with an `initialValue`, which can be any kind of expression.  
 
-Examples of initial values are literals (numbers `1`, strings `'My Initial Value'`), or even other variables, expressions or function calls.  
+Examples of initial values are literals (numbers `1`, strings `'My Initial Value'`), or even other variables, expressions, or function calls.  
 
 The variable `myVariable2` is *declared*, however doesn't have an initial value. By default, JavaScript considers uninitialized variables having the special value `undefined`.
 
@@ -161,9 +161,9 @@ let name;
 console.log(name); // logs undefined
 ```
 
-`name` variable, while being declared, it is not yet initialized so it has `undefined` value.  
+`name` variable, while being declared, it is not yet initialized so it has an `undefined` value.  
 
-You can easily reassign values to `let` variables, thing you cannot do with `const` variables - and this is the main difference between the them.
+You can easily reassign values to `let` variables, a thing you cannot do with `const` variables - and this is the main difference between them.
 
 ```javascript
 const villain = 'Joker';
@@ -213,7 +213,7 @@ var myVariable1 = initialValue;
 var myVariable2;
 ```
 
-The variable `myVariable1` is *declared* and *initialized* right away with an `initialValue`, which can be any expression that evaluates to a value.  
+The variable `myVariable1` is *declared* and *initialized* right away with an `initialValue`, which can be any kind of expression: literal, function call, etc.
 
 The variable `myVariable2` is *declared*, however doesn't have an initial value. By default, JavaScript considers uninitialized variables as having the special value `undefined`.
 
@@ -241,7 +241,7 @@ var name;
 console.log(name); // logs undefined
 ```
 
-`name` variable, while being declared, it is not yet initialized so it has `undefined` value.  
+`name` variable, while being declared, it is not yet initialized so it has an `undefined` value.  
 
 You can easily reassign values to `var` variables, same as with `let` variables.  
 
@@ -287,11 +287,11 @@ It happens because `var` variables hoist up to the top of the scope.
 
 ## 5. Conclusion
 
-There are 3 ways to declare variables in JavaScript: using `const`, `let` or `var`.  
+There are 3 ways to declare variables in JavaScript: using `const`, `let`, or `var`.  
 
-Specific to `const` variable is that you have to initialize the variable right away with an initial value. Also, `const` variable cannot be updated to a new value.  
+Specific to the `const` variable is that you have to initialize the variable right away with an initial value. Also, the `const` variable cannot be updated to a new value.  
 
 `let`, on the other side, can be initialized, but can be declared without an initial value. Also `let` variable value can be updated.  
 
-`var` variables behave almost the same as `let` variables: can be initialized or not, as well can be reassigned with a new value. However, contrary to `let` and `const`, only the function body can create a scope for `var` variables.  
+`var` variables behave almost as `let` variables: can be initialized or not, as well can be reassigned with a new value. However, contrary to `let` and `const`, only the function body can create a scope for `var` variables.  
 
