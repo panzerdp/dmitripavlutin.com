@@ -10,14 +10,14 @@ recommended: ['javascript-hoisting-in-details', 'javascript-defined-variable-che
 type: post
 ---
 
-The variable is a fundamental concept that any developer.
+The variable is a fundamental concept that any developer should know.
 
-In JavaScript the concept of variable works around 3 types of declaration statements: `const`, `let`, and `var`.  
+In JavaScript, `const`, `let`, and `var` are the statements you can declarate variable.  
 
 I'm going to describe each variable type around the declaration, initialization, value access, and assignment. Each of the
 3 types (`const`, `let`, and `var`) create variables that behave differently exactly in these 4 steps.  
 
-This post isn't quite beginner friendly, but rather useful to solidify the knowledge of JavaScript variables.  
+This post isn't quite beginner friendly, but rather useful to solidify your knowledge of variables and their behavior.  
 
 Let's get started.  
 
