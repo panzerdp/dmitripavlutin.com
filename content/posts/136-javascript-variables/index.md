@@ -10,7 +10,7 @@ recommended: ['javascript-hoisting-in-details', 'javascript-defined-variable-che
 type: post
 ---
 
-Variables is a fundamental concept that any developer must know in order to use a specific programming language.  
+Variables is a fundamental concept that any developer must know to program.  
 
 In JavaScript the concept of variables works around 3 types of declaration statements: `const`, `let`, and `var`.  
 
@@ -213,29 +213,29 @@ var myVariable1 = initialValue;
 var myVariable2;
 ```
 
-The variable `myVariable1` is *initialized* right away with an `initialValue`, which can be any expression that evaluates to a value.  
+The variable `myVariable1` is *declared* and *initialized* right away with an `initialValue`, which can be any expression that evaluates to a value.  
 
-The variable `myVariable2` is *declared*, however doesn't have an initial value. By default, JavaScript considers uninitialized variables having the special value `undefined`.
+The variable `myVariable2` is *declared*, however doesn't have an initial value. By default, JavaScript considers uninitialized variables as having the special value `undefined`.
 
 In the following code snippet:
 
 ```javascript
-var villain = 'Joker';
+var city = 'Gotham';
 
 var name;
 ```
 
-The `var` variable named `villain` is declared and initialized with the string literal `'Joker'`. `name` variable also has been defined, but it wasn't initialized.   
+The `var` variable `city` is declared and initialized with the string literal `'Gotham'`. `name` variable also has been defined, but it wasn't initialized.   
 
 ### 4.2 *var* access and assignment
 
-After the declaration and initialization, you can *access* the `let` variable value just by writing the identifier:
+After the declaration and optional initialization, you can *access* the `var` variable value just by writing the identifier:
 
 ```javascript
-var villain = 'Joker';
+var city = 'Gotham';
 
-console.log(villain);              // logs 'Joker'
-console.log(`Hello, ${villain}!`); // logs 'Hello, Joker!'
+console.log(city);                  // logs 'Gotham'
+console.log(`Welcome to ${city}!`); // logs 'Welcome to Gotham!'
 
 var name;
 console.log(name); // logs undefined
@@ -246,23 +246,23 @@ console.log(name); // logs undefined
 You can easily reassign values to `var` variables, same as with `let` variables.  
 
 ```javascript
-var villain = 'Joker';
+var city = 'Gotham';
 
-villain = 'Bane';
-console.log(villain); // logs 'Bane'
+city = 'New York';
+console.log(city); // logs 'New York'
 ```
 
-The scope of the `var` variables is defined only by the function body, which is the main difference between `let` variables:
+The scope of the `var` variables is defined only by the function body:
 
 ```javascript
-function greetJoker() {
+function welcomeTo() {
   // Function scope
-  var villain = 'Joker';
-  console.log(`Hello, ${villain}!`); // logs 'Hello, Joker!'
+  var city = 'Gotham';
+  console.log(`Welcome to ${city}!`); // logs 'Welcome to Gotham!'
 }
-console.log(`Hello, ${villain}!`); // throws ReferenceError
+console.log(`Welcome to ${city}!`); // throws ReferenceError
 
-greetJoker();
+welcomeTo();
 ```
 
 ```javascript
@@ -270,21 +270,28 @@ greetJoker();
 // for `var` variables
 if (true) {
   // Code block scope
-  var villain = 'Joker';
-  console.log(villain); // logs 'Joker'
+  var city = 'Gotham';
+  console.log(city); // logs 'Gotham'
 }
-console.log(villain); // logs 'Joker'
+console.log(city); // logs 'Gotham'
 ```
 
-Normally you won't have to access `var` variables before the declaration statement. But if you do, JavaScript won't throw a reference error but rather evaluate the variable to `undefined`:
+Normally, you won't access `var` variables before the declaration statement. But if you do, JavaScript won't throw a reference error, but rather evaluate the variable to `undefined`:
 
 ```javascript
-console.log(villain); // logs undefined
-var villain = 'Joker';
+console.log(city); // logs undefined
+var city = 'Gotham';
 ```
 
 It happens because `var` variables hoist up to the top of the scope.  
 
 ## 5. Conclusion
 
-As presented, there are 3 ways to declare variables in JavaScript: using `const`, `let` or `var`.  
+There are 3 ways to declare variables in JavaScript: using `const`, `let` or `var`.  
+
+Specific to `const` variable is that you have to initialize the variable right away with an initial value. Also, `const` variable cannot be updated to a new value.  
+
+`let`, on the other side, can be initialized, but can be declared without an initial value. Also `let` variable value can be updated.  
+
+`var` variables behave almost the same as `let` variables: can be initialized or not, as well can be reassigned with a new value. However, contrary to `let` and `const`, only the function body can create a scope for `var` variables.  
+
