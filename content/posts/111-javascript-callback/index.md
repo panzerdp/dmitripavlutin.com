@@ -187,7 +187,7 @@ console.log('setTimeout() completed');
 // logs 'later() called' (after 2 seconds)
 ```
 
-`later()` is an asynchornous callback because `setTimeout(later, 2000)` starts and completes its execution, but `later()` is executed after passing 2 seconds. Try the [demo](https://jsitor.com/MhhozrnIj).   
+`later()` is an asynchronous callback because `setTimeout(later, 2000)` starts and completes its execution, but `later()` is executed after passing 2 seconds. Try the [demo](https://jsitor.com/MhhozrnIj).   
 
 The asynchronous way to invoke the callbacks:
 
