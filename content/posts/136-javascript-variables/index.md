@@ -2,7 +2,7 @@
 title: "A Simple Explanation of JavaScript Variables: const, let, var"
 description: "How to declare, initialize, assign and read JavaScript variables using const, let and var statements."  
 published: "2021-06-16T10:00Z"
-modified: "2021-06-16T10:00Z"
+modified: "2021-06-18T07:20Z"
 thumbnail: "./images/cover-3.png"
 slug: javascript-variables-const-let-var
 tags: ['javascript', 'variable', 'const', 'let', 'var']
@@ -12,7 +12,7 @@ type: post
 
 A variable is just a holder of a value, like a box holding an item.  
 
-In JavaScript, you can create 3 types of variables: using `const`, `let` and `var` statements. Each variable type has different behavior regarding the declaration, initialization, value access, and assignment steps.  
+In JavaScript, you can create 3 types of variables: using `const`, `let`, and `var` statements. Each variable type has different behavior regarding the declaration, initialization, value access, and assignment steps.  
 
 This post will help you solidify your knowledge of JavaScript variables.  
 
