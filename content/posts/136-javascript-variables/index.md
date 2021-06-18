@@ -10,24 +10,23 @@ recommended: ['javascript-hoisting-in-details', 'javascript-defined-variable-che
 type: post
 ---
 
-The variable is a fundamental concept that any developer should know.
+A variable is just a holder of a value, like a box holding an item.  
 
-In JavaScript, `const`, `let`, and `var` are the statements you can declarate variable.  
+In JavaScript, you can create 3 types of variables: using `const`, `let` and `var` statements. Each variable type has different behavior regarding the declaration, initialization, value access, and assignment steps.  
 
-I'm going to describe each variable type around the declaration, initialization, value access, and assignment. Each of the
-3 types (`const`, `let`, and `var`) create variables that behave differently exactly in these 4 steps.  
-
-This post isn't quite beginner friendly, but rather useful to solidify your knowledge of variables and their behavior.  
+This post will help you solidify your knowledge of JavaScript variables.  
 
 Let's get started.  
 
 ## 1. Variable identifier
 
-First, let's understand what a variable is.  
+First, let's see what a variable is and how it's identified.  
 
-In simple terms, a variable is a placeholder (or a box) for a value. A value in JavaScript can be either a primitive value or an object.  
+In simple terms, a variable is a placeholder (or a box) for a value. A value in JavaScript can be either [a primitive or an object](/value-vs-reference-javascript/#1-understanding-primitive-and-objects).  
 
-The variable has a *name*, which stricter is called *identifier*. Examples of identifiers are `myNumber`, `name`, `list`, `item`.    
+![JavaScript variable is like a box](./images/box-2.png)
+
+The variable has a *name*, which stricter is called *identifier*. Examples of variable identifiers are `myNumber`, `name`, `list`, `item`.    
 
 The syntax of an identifier is pretty simple: 
 
@@ -42,6 +41,8 @@ Finally,
 > JavaScript identifiers are *case sensitive*.  
 
 For example, the identifiers `myNumber` and `mynumber` are different, because the letter `n` has different cases in the identifiers (`N` vs `n`).  
+
+Having that, now let's see the 3 ways you can declare variables in JavaScript: `const`, `let`, and `var` statements.  
 
 ## 2. *const* variables
 
@@ -63,7 +64,13 @@ For example the statement:
 const hero = 'Batman';
 ```
 
-Declares a `const` variable using the identifier `hero` that is initialized with the string literal `'Batman'`.  
+Declares a `const` variable with the identifier `hero` initialized with the string literal `'Batman'`.  
+
+What's also specific to `const` variables (contrary to `let` and `var` variables described below) is that you have to assign the initial value:  
+
+```javascript
+const hero; // SyntaxError: Missing initializer in const declaration
+```
 
 ### 2.2 *const* access and assignment
 
@@ -76,13 +83,7 @@ console.log(hero);              // logs 'Batman'
 console.log(`Hello, ${hero}!`); // logs 'Hello, Batman!'
 ```
 
-What's also specific to `const` variables (in contrast to `let` and `var` variables) is that you have to assign the initial value:  
-
-```javascript
-const hero; // SyntaxError: Missing initializer in const declaration
-```
-
-Also, you cannot reassign a new value to `const` variable:  
+What distinguishes `const` variables from `let` and `var` is that you cannot assign a new value to a `const` variable:
 
 ```javascript
 const hero = 'Batman';
@@ -90,9 +91,10 @@ const hero = 'Batman';
 hero = 'Joker'; // TypeError: Assignment to constant variable
 ```
 
-Regarding when you can access a variable: you can access it only within its [scope](/javascript-scope/). Outside of its scope, the variable cannot the accessed.  
+The code block and a function body create a scope for `const` variables. The concept of [scope](/javascript-scope/#1-the-scope) defines the limits where the variable is accessible.  
 
-The code block and a function body create a scope for `const` variables:
+In the example below `hero` variable is declared within the scope of the `if` conditional block. Thus, you can access `hero` only within that block, but not 
+outside:
 
 ```javascript
 if (true) {
@@ -102,6 +104,8 @@ if (true) {
 }
 console.log(hero); // throws ReferenceError
 ```
+
+Same way `hero` is declared inside the scope of the `greetBatman()` function:
 
 ```javascript
 function greetBatman() {
@@ -121,6 +125,8 @@ console.log(hero); // throws ReferenceError
 const hero = 'Batman';
 ```
 
+From the usage perspective, you should use `const` variables as read-only that you don't plan to reassign. 
+
 ## 3. *let* variables
 
 ### 3.1 *let* declaration and initialization
@@ -133,7 +139,7 @@ let myVariable1 = initialValue;
 let myVariable2;
 ```
 
-The variable `myVariable1` is *declared* and *initialized* right away with an `initialValue`, which can be any kind of expression.  
+The variable `myVariable1` is *declared* and *initialized* right away with an `initialValue`.  
 
 The variable `myVariable2` is *declared*, however doesn't have an initial value. By default, JavaScript considers uninitialized variables having the special value `undefined`.
 
@@ -163,7 +169,7 @@ console.log(name); // logs undefined
 
 `name` variable, while being declared, isn't initialized so it has an `undefined` value.  
 
-You can easily update the value of a `let` variable, a thing you cannot do with `const` variables - and this is the main difference between them.
+You can easily update the value of a `let` variable, a thing you cannot do with `const` variables - and that's the main difference between them.
 
 ```javascript
 let villain = 'Joker';
@@ -283,16 +289,16 @@ console.log(city); // logs undefined
 var city = 'Gotham';
 ```
 
-It happens because a `var` variables hoists up to the top of the scope.  
+It happens because a `var` variables [hoists up](/javascript-hoisting-in-details/#hoisting-and-var) to the top of the scope.  
 
 ## 5. Conclusion
 
 There are 3 ways to declare variables in JavaScript: using `const`, `let`, or `var` statements.  
 
-Specific to `const` variable is that you have to initialize the variable right away with an initial value. Also, the `const` variable cannot be reassigned.  
+Specific to `const` variable is that you have to initialize the variable with an initial value. Also, the `const` variable cannot be reassigned.  
 
 `let`, on the other side, can be declared with or without an initial value. Also `let` variable value can be updated.  
 
-`var` variables behave almost as `let` variables: can be initialized or not, as well can be reassigned with a new value. However, contrary to `let` and `const`, only the function body can create a scope for `var` variables.  
+`var` variables behave almost as `let` variables: can be initialized or not, as well can be reassigned. However, contrary to `let` and `const`, only the function body creates a scope for `var` variables.  
 
-*In your opinion, does it make sense to use `var` statement to defined function scope variables? Write your opinion in a comment below!*
+*Side challenge: what happens if you assign a value to a non-existing variable `nonExisting = 'hello'`?*
