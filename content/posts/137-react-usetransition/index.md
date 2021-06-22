@@ -37,9 +37,7 @@ Here's a possible implementation:
 export function FilterList({ names }) {
   const [query, setQuery] = useState("");
 
-  const changeHandler = (event) => {
-    setQuery(event.target.value);
-  };
+  const changeHandler = event => setQuery(event.target.value);
 
   return (
     <div>
@@ -53,9 +51,6 @@ export function FilterList({ names }) {
 
 function ListItem({ name, query }) {
   const index = name.toLowerCase().indexOf(query.toLowerCase());
-  if (index === -1) {
-    return <div>{name}</div>;
-  }
   return (
     <div>
       {name.slice(0, index)}
@@ -81,7 +76,7 @@ Updating the input field value when the user types is an urgent task that must p
 
 *The non-urgent but heavy task slows down the light but urgent task.*
 
-This is where `useTransition()` hook can help you!
+`useTransition()` hook can help you separate urgent from non-urgent UI updates.  
 
 ## 3. Heavy UI updates as non-urgent
 
