@@ -198,9 +198,9 @@ function MyComponent({ prop }) {
     // the event uses `prop` and `value`
   };
 
-  const debouncedEventHandler = useMemo(() => {
+  const debouncedEventHandler = useMemo(
     () => debounce(eventHandler, 300)
-  }, [prop, stateValue]);
+  , [prop, stateValue]);
   
   // ...
 }
@@ -259,13 +259,13 @@ function MyComponent() {
     // handle the event...
   };
 
-  const debouncedEventHandler = useMemo(() => {
+  const debouncedEventHandler = useMemo(
     () => debounce(eventHandler, 300)
-  }, []);
+  , []);
 
-  const throttledEventHandler = useMemo(() => {
+  const throttledEventHandler = useMemo(
     () => throttle(eventHandler, 300)
-  }, []);
+  , []);
   
   // ...
 }
