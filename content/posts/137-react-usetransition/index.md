@@ -3,7 +3,7 @@ title: "Don't Stop Me Now: How to Use React useTransition() hook"
 description: "How to speed up UI updates by prioritizing updates using React useTranstion() hook."
 published: "2021-06-23T09:00Z"
 modified: "2021-06-23T09:00Z"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover-3.png"
 slug: react-usetransition
 tags: ['react', 'usetransition', 'hook']
 recommended: ['react-throttle-debounce', 'controlled-inputs-using-react-hooks']
