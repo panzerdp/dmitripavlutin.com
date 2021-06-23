@@ -3,30 +3,63 @@ title: "Don't Stop Me Now: How to Use React useTransition() hook"
 description: "How to correctly priotitize updates using React useTranstion() hook to speed up the UI."
 published: "2021-06-22T12:00Z"
 modified: "2021-06-22T12:20Z"
-thumbnail: "./images/cover-3.png"
+thumbnail: "./images/cover.png"
 slug: react-usetransition
 tags: ['react', 'usetransition', 'hook']
 recommended: ['react-throttle-debounce', 'controlled-inputs-using-react-hooks']
 type: post
 ---
 
-There are some updates of UI that should be performed as fast as possible, while other have less priority.  
+There are some updates of UI that should be performed as quickly as possible, while other have less priority.  
 
 Until now, React didn't provide a built-in tool to let you priorities the UI screen updates.  
 
-Fortunately, starting React 18 (which is still in alpha as June 2021), you can make as less priority the heavy UI 
-changes.  
+Fortunately, starting React 18 (which is in alpha as June 2021), you can enable the concurrent mode, which allows you to make
+UI updates more precise depending on their priority.  
 
 In this post, you'll learn when to use the new `useTransition()` hook to make your UI more responsive when perfoming
 heavy updates.  
 
 ## 1. *useTransition()* hook
 
+By default, all updates in React are considered urgent. React doesn't consider whether some UI updates must be performed right away and other, non-important ones, postponed.  
 
+![React Legacy Rendering Mode](./images/legacy-3.svg)
+
+However, starting React 18 and the new concurrent features, you can tell React which updates are non-urgent by marking them as transitions.  
+
+![React Concurrent Rendering Mode](./images/concurrent-2.svg)
+
+`useTransition()` is a hook that let's you access concurrent mode features inside of the component.  
+
+When invoking the `const [isPending, startTransition] = useTransitionHook()` it returns an array having 2 value:
+
+* `isPending`: indicates that the transition is pending
+* `startTransition(callback)`: allows you to mark what updates inside `callback` to be considered as transitions.  
+
+```jsx{4,8-11}
+import { useTransition } from 'react';
+
+function MyComponent() {
+  const [isPending, startTransition] = useTransition();
+  // ...
+
+  const someEventHandler = (event) => {
+    startTransition(() => {
+      // Mark updates as transitions, or non-urgent
+      setValue(event.target.value);
+    });
+  }
+
+  return <HeavyComponent value={value} />;
+}
+```
+
+In order to use `useTransition()` hook, make sure to [enable the concurrent mode](https://github.com/reactwg/react-18/discussions/6).  
 
 ## 2. Heavy UI updates as urgent
 
-Let's consider an example of where it makes sense to separate urgent from non-urgent updates.  
+Let's consider an example of when all the updates are considered urgent.    
 
 You have a list of emplyee names, as well an input field where the user introduces a query. The component should highglight the query matches in
 the name of the employee.  
@@ -34,30 +67,35 @@ the name of the employee.
 Here's a possible implementation:
 
 ```jsx
-export function FilterList({ names }) {
-  const [query, setQuery] = useState("");
+import { useState } from 'react';
 
-  const changeHandler = event => setQuery(event.target.value);
+export function FilterList({ names }) {
+  const [query, setQuery] = useState('');
+
+  const changeHandler = ({ target: { value } }) => setQuery(value);
 
   return (
     <div>
-      <input onChange={changeHandler} type="text" />
+      <input onChange={changeHandler} value={query} type="text" />
       {names.map((name, i) => (
-        <ListItem key={i} name={name} query={query} />
+        <ListItem key={i} name={name} highlight={query} />
       ))}
     </div>
   );
 }
 
-function ListItem({ name, query }) {
-  const index = name.toLowerCase().indexOf(query.toLowerCase());
+function ListItem({ name, highlight }) {
+  const index = name.toLowerCase().indexOf(highlight.toLowerCase());
+  if (index === -1) {
+    return <div>{name}</div>;
+  }
   return (
     <div>
       {name.slice(0, index)}
       <span className="highlight">
-        {name.slice(index, index + query.length)}
+        {name.slice(index, index + highlight.length)}
       </span>
-      {name.slice(index + query.length)}
+      {name.slice(index + highlight.length)}
     </div>
   );
 }
@@ -65,7 +103,7 @@ function ListItem({ name, query }) {
 
 [Try the demo.](https://codesandbox.io/s/heavy-update-as-urgent-ejwbg?file=/src/FilterList.js)
 
-`<FilterList names={names}>` accepts a big array of names. Inside of the component, `query` is the state variable that contains the query string. The input field is a [controlled
+`<FilterList names={names} />` accepts a big array of names. Inside of the component, `query` is the state variable that contains the query string. The input field is a [controlled
 component](/controlled-inputs-using-react-hooks/) that updates `query` state variable when the user types.  
 
 Open the [demo]((https://codesandbox.io/s/heavy-update-as-urgent-ejwbg?file=/src/FilterList.js)) and type quickly a query into the input field. You would notice typiing lags and the UI feels unresponsive for noticeable periods of time.  
@@ -74,13 +112,64 @@ Why does it happen, and how to solve it?
 
 Updating the input field value when the user types is an urgent task that must perform fast. However, updating the list by highlighting the matches is a heavy but non-urgent task.  
 
-*The non-urgent but heavy task slows down the light but urgent task.*
+*The heavy non-urgent task slows down the light urgent task.*
 
 `useTransition()` hook can help you separate urgent from non-urgent UI updates.  
 
-## 3. Heavy UI updates as non-urgent
+## 3. Heavy UI updates as transitions
 
+As already mentioned, you can use `useTransition()` hook to let know React which UI updates are urgent (like updating the input field value), and which are non-urgent transitions (like updating the names list to highlight the query).  
 
+Let's make the necessary adjustments to `<FilterList>` component.  
+
+First, let's invoke the `[isPending, startTransition] = useTransition()` hook to get access to `startTransition()` function. Secondly, let's create a duplicate state that'll hold the query state value.  
+
+```jsx{5,7,11}
+import { useState, useTransition } from 'react';
+
+export function FilterList({ names }) {
+  const [query, setQuery] = useState('');
+  const [highlight, setHighlight] = useState('');
+
+  const [isPending, startTransition] = useTransition();
+
+  const changeHandler = ({ target: { value } }) => {
+    setQuery(value);
+    startTransition(() => setHighlight(value));
+  };
+
+  return (
+    <div>
+      <input onChange={changeHandler} value={query} type="text" />
+      {names.map((name, i) => (
+        <ListItem key={i} name={name} highlight={highlight} />
+      ))}
+    </div>
+  );
+}
+```
+
+[Try the demo.](https://codesandbox.io/s/heavy-update-as-non-urgent-ifobc?file=/src/FilterList.js)
+
+Open the [demo](https://codesandbox.io/s/heavy-update-as-non-urgent-ifobc?file=/src/FilterList.js) using transitions feature. If you type quickly a query into the input field, you would notice a measurement delay of highlighting the query inside the list. 
+
+React has separated the rendering of urgent task (updating the input field when the user types) from the non-urgent task (highligting the query inside the list).  
 
 ## 4. Conclusion
 
+The concurrent mode in React let's you separate urgent from non-urgent tasks, making the UI updates more precise and user friendly.  
+
+Enabling the new React 18 concurrent mode, you can then use the `useTransition()` hook that gives you access to `startTransition(callback)` function. 
+
+`startTransition(callback)` you can mark the updates that are considered transitions, or non-urgent:
+
+```javascript
+const [isPending, startTransition] = useTransition();
+
+startTransition(() => {
+  // Mark updates as transitions
+  setStateValue(newValue);
+});
+```
+
+*Side challenge: would it be possible to use `useDeferredValue()` hook to get rid of the duplicate state? If so, write your solution in a comment below!*
