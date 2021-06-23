@@ -1,8 +1,8 @@
 ---
 title: "Don't Stop Me Now: How to Use React useTransition() hook"
-description: "How to prioritize updates using React useTranstion() hook to speed up the UI."
-published: "2021-06-22T12:00Z"
-modified: "2021-06-22T12:20Z"
+description: "How to speed up UI updates by prioritizing updates using React useTranstion() hook."
+published: "2021-06-23T09:00Z"
+modified: "2021-06-23T09:00Z"
 thumbnail: "./images/cover.png"
 slug: react-usetransition
 tags: ['react', 'usetransition', 'hook']
@@ -10,15 +10,14 @@ recommended: ['react-throttle-debounce', 'controlled-inputs-using-react-hooks']
 type: post
 ---
 
-There are some updates of UI that should be performed as quickly as possible, while others have less priority.  
+There are UI updates that should be performed as quickly as possible, while others have less priority.  
 
-Until now, React didn't provide a built-in tool to let you prioritize the UI screen updates.  
+Until now, React didn't provide a built-in tool to let you prioritize the UI updates.  
 
 Fortunately, starting React 18 (which is in alpha as June 2021), you can enable the concurrent mode, which allows you to make
 UI updates more precise depending on their priority.  
 
-In this post, you'll learn when to use the new `useTransition()` hook to make your UI more responsive when performing
-heavy updates.  
+In this post, you'll learn when to use the new `useTransition()` hook to make the UI more responsive when performing heavy updates.  
 
 ## 1. *useTransition()* hook
 
@@ -26,11 +25,9 @@ By default, all updates in React are considered urgent. React doesn't consider w
 
 ![React Legacy Rendering Mode](./images/legacy-3.svg)
 
-However, starting React 18 and the new concurrent features, you can tell React which updates are non-urgent by marking them as transitions.  
+However, starting React 18 and the new concurrent features, you can tell React which updates should be marked as transitions, effectievely making them as non-urgent.  
 
-![React Concurrent Rendering Mode](./images/concurrent-2.svg)
-
-`useTransition()` is a hook that lets you access concurrent mode features inside of the component.  
+`useTransition()` is a hook that lets you access concurrent mode features inside of the React component.  
 
 When invoking the `const [isPending, startTransition] = useTransitionHook()` it returns an array having 2 value:
 
@@ -57,11 +54,13 @@ function MyComponent() {
 
 In order to use `useTransition()` hook, make sure to [enable the concurrent mode](https://github.com/reactwg/react-18/discussions/6).  
 
+![React Concurrent Rendering Mode](./images/concurrent-2.svg)
+
 ## 2. Heavy UI updates as urgent
 
-Let's consider an example of when all the updates are considered urgent.    
+Let's consider an example of when all updates are considered urgent, and how does it affect the user experience.      
 
-You have a list of employee names, as well as an input field where the user introduces a query. The component should highlight the query matches in the name of the employee.  
+You have a list of employee names, as well as an input field where the user introduces a query. The component should highlight the query matches in the name of the employees.  
 
 Here's a possible implementation:
 
@@ -158,9 +157,9 @@ React has separated the rendering of the urgent task (updating the input field w
 
 The concurrent mode in React lets you separate urgent from non-urgent tasks, making the UI updates more precise and user-friendly.  
 
-Enabling the new React 18 concurrent mode, you can then use the `useTransition()` hook that gives you access to `startTransition(callback)` function. 
+After [enabling](https://github.com/reactwg/react-18/discussions/6) the new React 18 concurrent mode, you can then use the `useTransition()` hook to access `startTransition(callback)` function. 
 
-`startTransition(callback)` you can mark the updates that are considered transitions, or non-urgent:
+Using `startTransition(callback)` you can mark the certain updates as transitions:
 
 ```javascript
 const [isPending, startTransition] = useTransition();
