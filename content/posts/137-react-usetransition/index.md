@@ -27,7 +27,7 @@ By default, all updates in React are considered urgent. React doesn't distinguis
 
 However, starting React 18 and the new concurrent features, you can tell React to mark some updates as non-urgent &mdash; as transitions. That's especially useful with heavy UI updates, like filtering a big list.  
 
-![React Concurrent Rendering Mode](./images/concurrent-3.svg)
+![React Concurrent Rendering Mode](./images/concurrent-4.svg)
 
 `useTransition()` is a hook that lets you access concurrent mode features inside of the React component.  
 
