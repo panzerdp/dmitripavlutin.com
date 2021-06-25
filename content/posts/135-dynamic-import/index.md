@@ -14,14 +14,14 @@ ECMAScript (aka ES2015, or ES) modules are a way to organize cohesive chunks of 
 
 ES modules system has 2 actors:  
 
-1. The *importing* module &mdash; the one that uses `import { func } from './myModule'`
+1. The *importing* module &mdash; the one that uses `import { func } from './myModule.js'`
 2. The *imported* module &mdash; the one which exports `export const func = () => {}`. 
 
 The importing module uses `import` syntax to import a dependency:
 
 ```javascript
 // The importing module
-import { concat } from './concatModule';
+import { concat } from './concatModule.js';
 
 concat('a', 'b'); // => 'ab'
 ```
@@ -33,7 +33,7 @@ While the imported module exports its components using `export` syntax:
 export const concat = (paramA, paramB) => paramA + paramB;
 ```
 
-`import { concat } from './concatModule'` way of using ES modules is *static*: meaning that the dependencies between modules are known at compile time.  
+`import { concat } from './concatModule.js'` way of using ES modules is *static*: meaning that the dependencies between modules are known at compile time.  
 
 While static importing works in most situations, sometimes you'd like to save the client's bandwidth and load modules conditionally.  
 
@@ -55,14 +55,14 @@ It returns a promise and starts an asynchronous task to load the module. If the 
 
 ```javascript
 // Classic string literals
-const module1 = await import('./myModule');
+const module1 = await import('./myModule.js');
 
 // A variable
-const path = './myOtherModule';
+const path = './myOtherModule.js';
 const module2 = await import(path);
 
 // Function call
-const getPath = (version) => `./myModule/versions/${version}`;
+const getPath = (version) => `./myModule/versions/${version}.js`;
 const moduleVersion1 = await import(getPath('v1.0'));
 const moduleVersion2 = await import(getPath('v2.0'));
 ```
@@ -71,7 +71,7 @@ Because the `import(path)` returns a promise, it fits great with the `async/awai
 
 ```javascript{2}
 async function loadMyModule() {
-  const myModule = await import('./myModule');
+  const myModule = await import('./myModule.js');
   // ... use myModule
 }
 
@@ -97,7 +97,7 @@ If you'd like to dynamically import `namedConcat.js`, and access the named expor
 
 ```javascript{2}
 async function loadMyModule() {
-  const { concat } = await import('./namedConcat');
+  const { concat } = await import('./namedConcat.js');
   concat('b', 'c'); // => 'bc'
 }
 
@@ -121,7 +121,7 @@ But there's a nuance. `default` is a keyword in JavaScript, so it cannot be used
 
 ```javascript
 async function loadMyModule() {
-  const { default: defaultImport } = await import('./defaultConcat');
+  const { default: defaultImport } = await import('./defaultConcat.js');
   defaultImport('b', 'c'); // => 'bc'
 }
 
@@ -138,7 +138,7 @@ async function loadMyModule() {
     default: defaultImport,
     namedExport1,
     namedExport2
-  } = await import('./mixedExportModule');
+  } = await import('./mixedExportModule.js');
   // ...
 }
 
@@ -154,10 +154,10 @@ E.g. you might use the module from time to time, depending on runtime conditions
 ```javascript
 async function execBigModule(condition) {
   if (condition) {
-    const { funcA } = await import('./bigModuleA');
+    const { funcA } = await import('./bigModuleA.js');
     funcA();
   } else {
-    const { funcB } = await import('./bigModuleB');
+    const { funcB } = await import('./bigModuleB.js');
     funcB();
   }
 }
@@ -178,8 +178,8 @@ In that object the `default` property contains the default export, and the named
 ```javascript
 const { 
   default: defaultComponent, 
-  namedExport1, 
-  namedExport2 
+  namedExport1,
+  namedExport2
 } = await import(path);
 ```
 
