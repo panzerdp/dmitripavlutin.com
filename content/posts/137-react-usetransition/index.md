@@ -2,7 +2,7 @@
 title: "Don't Stop Me Now: How to Use React useTransition() hook"
 description: "How to speed up UI updates by prioritizing updates using React useTranstion() hook."
 published: "2021-06-23T09:00Z"
-modified: "2021-06-23T09:00Z"
+modified: "2021-06-29T10:10Z"
 thumbnail: "./images/cover-3.png"
 slug: react-usetransition
 tags: ['react', 'usetransition', 'hook']
@@ -10,31 +10,31 @@ recommended: ['react-throttle-debounce', 'controlled-inputs-using-react-hooks']
 type: post
 ---
 
-There are UI updates that should be performed as quickly as possible (typing into an input field, selecting a value from dropdown), while others have less priority (filtering a list).  
+Some UI updates should be performed as quickly as possible (typing into an input field, select a value from dropdown), while others can have lower priority (filtering a list).  
 
-Until now, React hasn't provided a built-in tool to prioritize UI updates.  
+Until now, React hasn't provided a tool to prioritize UI updates.  
 
-Fortunately, starting React 18 (which is in alpha as June 2021) you can enable the concurrent mode, which allows you to make
-UI updates more precise by manually indicating tasks that are heavy and less priority.  
+Fortunately, starting React 18 (which is in alpha as of June 2021) you can enable the concurrent mode &mdash; which allows you to mark
+UI updates as high or interruptible-low priority.   
 
-In this post, you'll learn when to use the new `useTransition()` hook to make the UI more responsive when performing heavy updates.  
+In this post, you'll learn how to use `useTransition()` hook to mark UI updates as low priority, which is especially useful for heavy non-urgent updates.  
 
 ## 1. *useTransition()* hook
 
-By default, all updates in React are considered urgent. React doesn't distinguish if certain UI updates must be performed right away or postponed. That could create a problem when quick updates are slowed down by heavy updates.    
+By default, all updates in React are considered urgent. That could create a problem when quick updates are slowed down by heavy updates.    
 
 ![React Legacy Rendering Mode](./images/legacy-4.svg)
 
-However, starting React 18 and the new concurrent features, you can tell React to mark some updates as non-urgent &mdash; as transitions. That's especially useful with heavy UI updates, like filtering a big list.  
+However, starting React 18 and the new concurrency features, you can mark some updates as interruptible and non-urgent &mdash; so-called transitions. That's especially useful with heavy UI updates, like filtering a big list.  
 
 ![React Concurrent Rendering Mode](./images/concurrent-4.svg)
 
-`useTransition()` is a hook that lets you access concurrent mode features inside of the React component.  
+`useTransition()` is the hook that lets you access concurrent mode features inside of the React component.  
 
 Invoking `const [isPending, startTransition] = useTransitionHook()` returns an array of 2 items:
 
 * `isPending`: indicates that the transition is pending
-* `startTransition(callback)`: allows you to mark what updates inside `callback` to be considered as transitions.  
+* `startTransition(callback)`: allows you to mark any UI updates inside `callback` as transitions.  
 
 ```jsx{4,8-11}
 import { useTransition } from 'react';
@@ -45,7 +45,7 @@ function MyComponent() {
 
   const someEventHandler = (event) => {
     startTransition(() => {
-      // Mark updates as transitions, or non-urgent
+      // Mark updates as transitions
       setValue(event.target.value);
     });
   }
@@ -58,9 +58,9 @@ In order to use `useTransition()` hook, make sure to [enable the concurrent mode
 
 ## 2. Heavy UI updates as urgent
 
-Let's consider an example when all updates are considered urgent, and how does it affect the user experience.      
+Let's consider an example when all updates are urgent, and how does it affect the user experience.      
 
-You have a list of employee names, as well as an input field where the user introduces a query. The component should highlight in the employee names the query matchings.  
+You have a list of employee names, as well as an input field where the user introduces a query. The component highlights the query matches in the employee names.  
 
 Here's a possible implementation:
 
@@ -120,7 +120,7 @@ As already mentioned, you can use `useTransition()` hook to let know React which
 
 Let's make the necessary adjustments to `<FilterList>` component.  
 
-First, let's invoke the `[isPending, startTransition] = useTransition()` hook to get access to `startTransition()` function. Secondly, let's create a duplicate state that'll hold the query state value.  
+First, let's invoke the `[isPending, startTransition] = useTransition()` hook to get access to `startTransition()` function. Secondly, let's create a state variable to hold the query state value specifically for the transition.  
 
 ```jsx{5,7,11}
 import { useState, useTransition } from 'react';
@@ -151,15 +151,15 @@ export function FilterList({ names }) {
 
 Open the [demo](https://codesandbox.io/s/heavy-update-as-non-urgent-ifobc?file=/src/FilterList.js) using transitions feature. If you type quickly a query into the input field, you would notice a delay in highlighting the query inside the list. 
 
-React has separated the rendering of the urgent task (updating the input field when the user types) from the non-urgent task (highlighting the query inside the list).  
+React has separated the rendering of the urgent task (updating the input field when the user types) from the non-urgent task (highlighting the query inside the list). Such an approach provides a better user experience.  
 
 ## 4. Conclusion
 
-The concurrent mode in React lets you separate urgent from non-urgent tasks, making the UI updates more precise and user-friendly.  
+The concurrent mode in React lets you separate urgent from non-urgent tasks, making the UI updates more user-friendly.  
 
-After [enabling](https://github.com/reactwg/react-18/discussions/5) the new React 18 concurrent mode, you can use the `useTransition()` hook to access `startTransition(callback)` function. 
+After [enabling](https://github.com/reactwg/react-18/discussions/5) the new React 18 concurrent mode, you can use the `useTransition()` hook to access `startTransition(callback)` function.  
 
-`startTransition(callback)` let's you mark certain heavy updates as transitions:
+`startTransition(callback)` let's you mark certain updates as transitions:
 
 ```javascript
 const [isPending, startTransition] = useTransition();
