@@ -10,13 +10,13 @@ recommended: ['react-state-management', 'use-react-memo-wisely']
 type: post
 ---
 
-To start using React you don't have to learn a lot. Understand the concept of components, state, props, and hooks &mdash; and you know how to use React.  
+To start using React you don't have to learn a lot. Learn the concept of components, state, props, and hooks &mdash; and you know how to use React.  
 
 In this post, you'll read a simple but pragmatic guide on how to use props on React components.  
 
 ## 1. The component props
 
-A component in React is an encpasulated piece of logic. For example, here's a component that displays a `Hello, World!` message:
+A component is an encpasulated piece of logic. For example, here's a component that displays a `Hello, World!` message:
 
 ```jsx
 function HelloWorld() {
@@ -32,13 +32,13 @@ function HelloWorld() {
 <span>Hello, World!</span>
 ```
 
-The problem with `<HelloWorld />` component is that it displays a static value: `Hello, World!`. You have no way of reusing this logic.  
+The problem with `<HelloWorld />` component is that it is inflexible. You cannot change the greet person , e.g. use `Joker` instead of `Earth`.  
 
-But how to display a message for an arbitrary person, not just `World`? You can use the concept of component *props*.  
+You can solve this issue by using the concept of component *props*.  
 
-Let's make the `<HelloWorld />` component more reusable, and add to it the prop `who`. Let's name the new component `<Message>`.  
+Let's make the `<HelloWorld />` component more flexible by adding a prop `who`. The `who` allows to custimize the person that's being greeted. Let's name the new component `<Hello>`.  
 
-There are 2 steps to add a prop to a component.  
+There are 2 steps to add the `who `prop to `<Message>` component:
 
 *1) Make the function of your component read the props from the `props` parameter*:
 
@@ -48,9 +48,9 @@ function Hello(props) {
 }
 ```
 
-Now `Hello` function has a parameter `props`. When rendering this component, React will make sure to assign to `props` object all the props you assign to the component.  
+Now `Hello` function has a parameter `props`. When rendering the component, React will make sure to assign to `props` object all the props you assign to the component.  
 
-*2) When rendering the component, add the prop to the component using the attribute syntax `who="Earth"`:*
+*2) When rendering the component, add the prop to the component using the attribute-like syntax `who="Earth"`:*
 
 ```jsx
 // Render
@@ -60,9 +60,7 @@ Now `Hello` function has a parameter `props`. When rendering this component, Rea
 <div>Hello, Earth!</div>
 ```
 
-### 1.1 Multiple props
-
-What's great is that you can use any value you'd like. For example, let's greet the `Mars`!
+You can use any `who` prop value you'd like. For example, let's greet the `Mars`!
 
 ```jsx
 // Render
@@ -72,7 +70,11 @@ What's great is that you can use any value you'd like. For example, let's greet 
 <div>Hello, Mars!</div>
 ```
 
-Of course, you can use as many props as you like. Let's make the message component even more reusable by using a prop for the greeting and the person's name.  
+That's all you need to know in order to use React props!
+
+### 1.1 Multiple props
+
+Of course, you can use as many props as you like. Let's make the `<Message>` component accept 2 props to customize the greet message, as well as the greet person:
 
 ```jsx
 function Message({ greet, who }) {
@@ -90,7 +92,7 @@ function Message({ greet, who }) {
 
 ### 1.2 Class component props
 
-In case if you use class-based components, then you can access the list of props from `this.props` property of the component instance.  
+If you use class-based components, then you can access the props from `this.props` property of the component instance.  
 
 ```jsx
 import { Component } from 'react';
@@ -114,11 +116,11 @@ Setting the prop value for a class component is the same as for a functional one
 
 ## 2. Values of props
 
-In most of the previous examples, the values of props were strings. But often you'd like to set props to different primitive types like numbers, booleans, objects, arrays, and even variables.  
+In most of the previous examples, the values of props were strings. But often you'd like to set props to values like numbers, booleans, objects, arrays, and even variables.  
 
-All values, except double-quoted string literals, have to be wrapped in curly braces `prop={value}`.  
+React doesn't put any restriction on what value a prop can have. But all values, except double-quoted string literals, have to be wrapped in curly braces `prop={value}`.  
 
-Use the following guide to set different types of values.
+Use the following guide to set different types of values on your components.  
 
 1) String literals:
 
@@ -170,23 +172,23 @@ Use the following guide to set different types of values.
 
 ## 3. Passing down props
 
-What's interesting is that inside the component you can use props as any regular JavaScript variable. You can render conditionally, or you can even pass down props to other components.  
+Inside the component you can use props as any regular JavaScript variable. You can render conditionally, or you even pass down props to other components.  
 
-For example, let's create a component `<HelloPeople />` that accepts a list of persons. This component is going to pass down each person to the `<Message>` component.  
+For example, let's create a component `<HelloPeople />` that accepts a list of persons. This component is going to pass down each person to the `<Hello>` component.  
 
 ```jsx
 function HelloPeople({ persons }) {
   return (
     <div>
       {persons.map((person, index) => {
-        return <Hello who={person} key={index} />
+        return <Hello who={person} key={index} />;
       })}
     </div>
   );
 }
 ```
 
-`<HelloPeople persons={persons} />` accepts a prop `persons`. Inside the component, the list of persons is iterated and each person is mapped to a `<Message who={person} />`. This way, the props can be passed down to child components.  
+`<HelloPeople persons={persons} />` accepts a prop `persons` &mdash; that is an array of string. Inside the component, the list of persons is iterated and each person is mapped to the `<Hello who={person} />` component. This way, the props can be passed down to child components.  
 
 ```jsx
 // Render
@@ -214,9 +216,7 @@ function HelloOptional({ who = 'Unknown' }) {
 ```
 
 Looking at the parameter destructuring `{ who = 'Unknown' }` you would notice that if `who` prop is not indicated, then it defaults
-to `'Unknown'` value.  
-
-When `who` prop isn't indicated, it defaults to `Unknown`:
+to `'Unknown'` value. Great!
 
 ```jsx
 // Render
@@ -226,7 +226,7 @@ When `who` prop isn't indicated, it defaults to `Unknown`:
 <div>Hello, Unknown!</div>
 ```
 
-However, if indicated, it is the actual value:
+However, if indicated, `who` accepts the actual value:
 
 ```jsx
 // Render
@@ -238,35 +238,33 @@ However, if indicated, it is the actual value:
 
 ## 5. Props spread syntax
 
-If you dynamically construct the props of a component, you might have the props of the component inside of a plain JavaScript object.  
-
-In such a case you might find useful the props spread syntax `<MyComponent {...propsAsObject} />`, which allows you to indicate an object having the props.  
+If you dynamically construct the props of a component, you might hold the props of the component inside of a plain JavaScript object.  
 
 For example, let's define the object `hiBatman` with the properties `greet` and `who`:
 
 ```javascript
-const hiBatman = { greet: 'Hi', who: 'Batman' };
+const propsAsObject = { greet: 'Hi', who: 'Batman' };
 
 function Message({ greet, who }) {
   return <div>{greet}, {who}!</div>;
 }
 ```
 
-Then, instead of manually enumerating the props, simply use the spread syntax `<Message {...hiBatman} />`:
+Then, when setting up the props of the component, instead of manually enumerating the props:
 
 ```jsx
 // Render
-<Message {...hiBatman} />
+<Message greet={hiBatman.greet} who={hiBatman.who} />
 
 // Output
 <div>Hi, Batman!</div>
 ```
 
-The above spread syntax example is equivalent to the following:
+you can simply use the spread syntax `<Message {...hiBatman} />`:
 
 ```jsx
 // Render
-<Message greet={hiBatman.greet} who={hiBatman.who} />
+<Message {...hiBatman} />
 
 // Output
 <div>Hi, Batman!</div>
@@ -280,10 +278,11 @@ While you are free to use any prop names you like, React, however, has some prop
 
 ### 6.1 *children*
 
-`children` is a special property that is set by React with the content of the body of the component: the content between open tag `<MyComponent>` and closing tag `</MyComponent>`.
+`children` is a special property assigned by React with the content of the body of the component: the content between open tag `<MyComponent>` and closing tag `</MyComponent>`.  
 
 ```jsx
 function Parent({ children }) {
+  console.log(children); // logs <span>I'm a child!</span>
   return <div>{children}</div>;
 }
 ```
@@ -302,7 +301,7 @@ function Parent({ children }) {
 
 If you recall the `<HelloPeople persons={persons} />` component:
 
-```jsx
+```jsx{5}
 function HelloPeople({ persons }) {
   return (
     <div>
@@ -314,15 +313,15 @@ function HelloPeople({ persons }) {
 }
 ```
 
-`<Hello who={person} key={index} />` uses the special `key` prop. It allows React to perform updates on arrays of elements faster.  
+`<Hello who={person} key={index} />` uses the special `key` prop. It allows React to perform updates on array items faster.  
 
 ## 7. Conclusion
 
-Component props are a way you can write reusable pieces of UI logic. Props serve as an input for the component.  
+Props are a way you can write reusable pieces of UI logic. Props serve as an input for the component.  
 
 Using props is pretty simple.  
 
-First, make sure your component reads the prop from the props argument (or `this.props` in case of class components):
+First, make sure your component reads the props from the props parameter (or `this.props` in case of class components):
 
 ```jsx
 function MyComponent({ prop }) {
@@ -330,7 +329,7 @@ function MyComponent({ prop }) {
 }
 ```
 
-Then, when rendering the component in JSX make sure to set the prop value using an HTML-like attribute: `prop="My Value"`:
+Then, when rendering the component in JSX make sure to set the prop value using an attribute-like syntax: `prop="My Value"`:
 
 ```jsx
 // Render
@@ -340,3 +339,4 @@ Then, when rendering the component in JSX make sure to set the prop value using 
 <div>Prop value: My Value</div>
 ```
 
+Next I recommend to take take a look on [how React updates the state of components](https://dmitripavlutin.com/how-react-updates-state/).  
