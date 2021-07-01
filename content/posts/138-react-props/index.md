@@ -61,6 +61,8 @@ Now `Hello` function has a parameter `props`. When rendering this component, Rea
 <div>Hello, Earth!</div>
 ```
 
+### 1.1 Multiple props
+
 What's great is that you can use any value you'd like. For example, let's greet the `Mars`!
 
 ```jsx
@@ -85,6 +87,30 @@ function Message({ greet, who }) {
 
 // Output
 <div>Welcome, Aliens!</div>
+```
+
+### 1.2 Class component props
+
+In case if you use class based components, then you can access the list of props from `this.props` property of the component instance.  
+
+```jsx
+import { Component } from 'react';
+
+class HelloAsClass extends Component {
+  render() {
+    return <div>Hello, {this.props.who}!</div>;
+  }
+}
+```
+
+Setting the prop value for a class component is the same as for a functional one:
+
+```jsx
+// Render
+<HelloAsClass who="Earth" />
+
+// Output
+<div>Hello, Earth!</div>
 ```
 
 ## 2. Values of props
@@ -169,18 +195,18 @@ function HelloPeople({ persons }) {
 
 // Output
 <div>
-  <div>Hello, Jokoer!</div>
+  <div>Hello, Joker!</div>
   <div>Hello, Batman!</div>
 </div>
 ```
 
 ## 4. Optional props
 
-There are situation when you have a good default value for some props. In such a case, you can omit indicating the prop at all.  
+There are situation when you have a good default value for a prop. In such a case, you can omit indicating the prop at all.  
 
 However, make sure to indicate the default value when accessing the prop inside of the component.  
 
-For example, let's make the `who` prop inside the `<Message />` component as optional, but defaulting to `'Unknown'`.  
+For example, let's make the `who` prop inside the `<HelloOptional />` component as optional, but default to `'Unknown'`.  
 
 ```jsx
 function HelloOptional({ who = 'Unknown' }) {
@@ -188,7 +214,7 @@ function HelloOptional({ who = 'Unknown' }) {
 }
 ```
 
-Looking at the parameter destructuring `{ who = 'Unknown' }` you would notice that if `who` prop is not indicated, then it would default
+Looking at the parameter destructuring `{ who = 'Unknown' }` you would notice that if `who` prop is not indicated, then it defaults
 to `'Unknown'` value.  
 
 When `who` prop isn't indicated, it defaults to `Unknown`:
@@ -215,24 +241,32 @@ However, if indicated, it is the actual value:
 
 If you dynamically construct the props of a component, you might have the props of the component inside of a plain JavaScript object.  
 
-In such a case you might find useful the props spread syntax, which allows you to indicate an object having the props.  
+In such a case you might find useful the props spread syntax `<MyComponent {...propsAsObject} />`, which allows you to indicate an object having the props.  
 
-For example, let's use the object `hiBatman` to set the props of `<Message />` component.  
+For example, let's define the object `hiBatman` with the properties `greet` and `who`:
 
 ```javascript
 const hiBatman = { greet: 'Hi', who: 'Batman' };
-```
 
-```jsx
 function Message({ greet, who }) {
   return <div>{greet}, {who}!</div>;
 }
 ```
 
+Then, instead of manually enumerating the props, simply use the spread syntax `<Message {...hiBatman} />`:
+
 ```jsx
 // Render
 <Message {...hiBatman} />
-// Same as
+
+// Output
+<div>Hi, Batman!</div>
+```
+
+The above spread syntax example is equivalent to the following:
+
+```jsx
+// Render
 <Message greet={hiBatman.greet} who={hiBatman.who} />
 
 // Output
