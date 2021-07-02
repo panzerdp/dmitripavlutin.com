@@ -35,11 +35,6 @@ module.exports = {
     endpoint: 'https://dmitripavlutin.us13.list-manage.com/subscribe/post?u=7cedcb1f5ab74eb7c907e768e&id=75f44f92b9',
     hiddenFieldName: 'b_7cedcb1f5ab74eb7c907e768e_75f44f92b9',
   },
-  carbonAdsService: {
-    scriptSrc: '//cdn.carbonads.com/carbon.js?serve=CE7DT2QI&placement=dmitripavlutincom',
-    isEnabled: true,
-    isProductionMode: process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod',
-  },
   featured: {
     popularPostsByCategory: [{
       category: 'JavaScript',
