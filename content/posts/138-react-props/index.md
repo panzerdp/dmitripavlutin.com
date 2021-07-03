@@ -1,6 +1,6 @@
 ---
 title: 'A Simple Guide to Component Props in React'
-description: "In this guide you'll find what are component's props in React and how to use them."
+description: "In this guide you'll find what are component props in React and how to use them."
 published: "2021-07-02T12:00Z"
 modified: "2021-07-02T12:00Z"
 thumbnail: "./images/cover.png"
@@ -243,7 +243,7 @@ If you dynamically construct the props of a component, you might hold the props 
 For example, let's define the object `hiBatman` with the properties `greet` and `who`:
 
 ```javascript
-const propsAsObject = { greet: 'Hi', who: 'Batman' };
+const hiBatman = { greet: 'Hi', who: 'Batman' };
 
 function Message({ greet, who }) {
   return <div>{greet}, {who}!</div>;
