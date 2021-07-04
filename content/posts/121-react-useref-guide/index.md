@@ -40,6 +40,8 @@ function MyComponent() {
 
 `reference.current` accesses the reference value, and `reference.current = newValue` updates the reference value. Pretty simple.  
 
+![React reference object](./images/reference-4.svg)
+
 There are 2 rules to remember about references:  
 
 1. The value of the reference is *persisted* (stays the same) between component re-renderings;  
