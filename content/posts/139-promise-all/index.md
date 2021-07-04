@@ -34,11 +34,11 @@ The interesting part is in the way the promise returned by `Promise.all()` gets 
 
 <u>If all promises get fullfilled</u>, then `allPromise` fullfills with an array of the fullfilled values of individual promises.
 
-![Promise.all() - all fullfilled](./images/all-fullfilled-7.svg)
+![Promise.all() - all fullfilled](./images/all-fullfilled-8.svg)
 
 <u>But if at least one promise rejects</u>, then `allPromise` rejects right away (without waiting other promises to complete) with the same reason as the rejected promise rejects.  
 
-![Promise.all() - one rejects](./images/one-rejects-2.svg)
+![Promise.all() - one rejects](./images/one-rejects-4.svg)
 
 Let's see in a couple of examples how you can use `Promise.all()` to perform multiple async operation at once. As mentioned above, `Promise.all()` has mainly 2 outcomes: resolving with an array of all promises, or reject with the first rejected promise.  
 
