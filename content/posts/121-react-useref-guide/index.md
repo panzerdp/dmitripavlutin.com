@@ -109,7 +109,7 @@ So, the 2 main differences between references and state:
 1. Updating a reference doesn't trigger re-rendering, while updating the state makes the component re-render;
 2. The reference update is synchronous (the updated reference value is available right away), while the state update is asynchronous (the state variable is updated after re-rendering).
 
-From a higher point of view, references are used to store infrastructure data side-effects, while the state stores information that is directly rendered on the screen.  
+From a higher point of view, references store infrastructure data of side-effects, while the state stores information that is directly rendered on the screen.  
 
 ### 1.2 Use case: implementing a stopwatch
 
