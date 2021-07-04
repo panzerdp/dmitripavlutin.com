@@ -40,7 +40,7 @@ function MyComponent() {
 
 `reference.current` accesses the reference value, and `reference.current = newValue` updates the reference value. Pretty simple.  
 
-![React reference object](./images/reference-4.svg)
+![React reference object](./images/reference-5.svg)
 
 There are 2 rules to remember about references:  
 
