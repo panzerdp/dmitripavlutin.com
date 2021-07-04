@@ -186,7 +186,7 @@ You can create a derived atom when supplying a callback function to `atom(get =>
 import { atom } from 'jotai';
 
 const numberAtom = atom(2);
-const isEvenAtom = atom(get => get(baseAtom) % 2 === 0); 
+const isEvenAtom = atom(get => get(numberAtom) % 2 === 0); 
 ```
 
 In the example above `numberAtom` holds a number. `isEvenAtom` is a derived atom that determines whether the number stored in `numberAtom` is even.  
