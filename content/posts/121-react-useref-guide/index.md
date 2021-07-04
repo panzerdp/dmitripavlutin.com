@@ -2,7 +2,7 @@
 title: 'The Complete Guide to useRef() and Refs in React'
 description: 'How to use React.useRef() hook to create persisted mutable values (also known as references or refs), as well access DOM elements.'
 published: "2021-03-02T12:00Z"
-modified: "2021-05-07T18:00Z"
+modified: "2021-07-04T07:30Z"
 thumbnail: "./images/cover-7.png"
 slug: react-useref-guide
 tags: ['react', 'useref', 'hook', 'dom', 'element']
@@ -74,13 +74,13 @@ function LogButtonClicks() {
 
 When the button is clicked, `handle` function is invoked and the reference value is incremented: `countRef.current++`. The reference value is logged to the console.  
 
-Note that updating the reference value `countRef.current++` doesn't trigger component re-rendering. `'I rendered!'` is logged to console just once, at initial rendering, and no re-rendering happens when the reference is updated.    
+Updating the reference value `countRef.current++` doesn't trigger component re-rendering. This is demonstrated by the fact that `'I rendered!'` is logged to the console just once, at initial rendering, and no re-rendering happens when the reference is updated.    
 
 Now a reasonable question: what's the main difference between references and state?  
 
 #### Reference and state diff
 
-Let's reuse the component `LogButtonClicks` from the previous section, but use `useState()` hook to count the number of button clicks:  
+Let's reuse the component `LogButtonClicks` from the previous section, but this time use `useState()` hook to count the number of button clicks:  
 
 ```jsx{4,9}
 import { useState } from 'react';
@@ -104,18 +104,18 @@ function LogButtonClicks() {
 
 Open the demo and click the button. Each time you click, you will see in the console the message `'I rendered!'` &mdash; meaning that each time the state is updated, the component re-renders.  
 
-So, the 2 main differences between state and references:
+So, the 2 main differences between references and state:
 
-1. Updating state triggers a component re-rendering, while updating a reference doesn't trigger  
-2. The state update is asynchronous (the state variable is updated after re-rendering), while the reference update is synchronous (the updated reference value is available right away).
+1. Updating a reference doesn't trigger re-rendering, while updating the state makes the component re-render;
+2. The reference update is synchronous (the updated reference value is available right away), while the state update is asynchronous (the state variable is updated after re-rendering).
 
-From a higher point of view, references are used to store infrastructure data of the component, while the state stores information that is directly rendered on the screen.  
+From a higher point of view, references are used to store infrastructure data side-effects, while the state stores information that is directly rendered on the screen.  
 
 ### 1.2 Use case: implementing a stopwatch
 
-You can store inside a reference infrastructure data of side-effects. For example, you can store into a reference pointers: timer ids, socket ids, etc.
+You can store inside a reference infrastructure data of side effects. For example, you can store into reference pointers: timer ids, socket ids, etc.  
 
-For example, the following component `Stopwatch` uses `setInterval(callback, time)` timer function to increase each second the counter of a stopwatch. The timer id is stored into a reference `timerIdRef`:  
+The component `Stopwatch` uses `setInterval(callback, time)` timer function to increase each second the counter of a stopwatch. The timer id is stored into a reference `timerIdRef`:  
 
 ```jsx{4,9}
 import { useRef, useState, useEffect } from 'react';
@@ -168,9 +168,9 @@ Another useful application of the `useRef()` hook is to access DOM elements. Thi
 
 1. Define the reference to access the element `const elementRef = useRef()`; 
 2. Assign the reference to `ref` attribute of the element: `<div ref={elementRef}></div>`;
-3. After mounting, `elementRef.current` contains the DOM element.  
+3. After mounting, `elementRef.current` points to the DOM element.  
 
-```jsx{4,7,11}
+```jsx{4,7,12}
 import { useRef, useEffect } from 'react';
 
 function AccessingElement() {
@@ -178,6 +178,7 @@ function AccessingElement() {
 
    useEffect(() => {
     const divElement = elementRef.current;
+    console.log(divElement); // logs <div>I'm an element</div>
   }, []);
 
   return (
@@ -187,6 +188,8 @@ function AccessingElement() {
   );
 }
 ```
+
+[Try the demo.](https://codesandbox.io/s/access-dom-element-hrh78?file=/src/App.js)
 
 ### 2.1 Use case: focusing an input
 
@@ -251,7 +254,9 @@ function InputFocus() {
 
 During initial rendering React still determines what is the output of the component, so there's no DOM structure created yet. That's why `inputRef.current` evaluates to `undefined` during initial rendering.
 
-`useEffect(callback, [])` hook invokes the callback right after mounting when the input element has been created in DOM. `callback` function is the right place to access `inputRef.current` because it is guaranteed that the DOM is constructed.  
+`useEffect(callback, [])` [hook](/react-useeffect-explanation/) invokes the callback right after mounting, when the input element has already been created in DOM. 
+
+`callback` function of the `useEffect(callback, [])` is the right place to access `inputRef.current` because it is guaranteed that the DOM is constructed.  
 
 ## 3. Updating references restriction
 
