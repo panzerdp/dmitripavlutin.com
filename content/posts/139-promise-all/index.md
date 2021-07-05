@@ -44,8 +44,85 @@ Let's see in a couple of examples how you can use `Promise.all()` to perform mul
 
 ## 2. Example: all promises fullfilled
 
-For example, a remote API allows you to fetch products and categories of products.  
+To study how `Promise.all()` works, I'm going to use 2 helpers `resolveTimeout(value, delay)` and `rejectTimeout(reason, delay)` which would return promises that fullfill or reject with a specific delay.  
+
+```javascript
+function resolveTimeout(value, delay) {
+  return new Promise(
+    resolve => setTimeout(() => resolve(value), delay)
+  );
+}
+
+function rejectTimeout(reason, delay) {
+  return new Promise(
+    (r, reject) => setTimeout(() => reject(reason), delay)
+  );
+}
+```
+
+What `resolveTimeout(value, delay)` simply does it returns a promise that fullfills with `value` after passing `delay` time.  
+
+On the other side, `rejectTimeout(reason, delay)` returns a promise that rejects with `reason` (usually an error) after passing `delay` time.  
+
+For example, let's fetch the lists of vegetables and fruits available at the local grocerry store:  
+
+```javascript{4-7}
+const SECOND = 1000;
+
+async function load() {
+  const allPromise = Promise.all([
+    resolveTimeout(['potatoes', 'tomatoes'], SECOND),
+    resolveTimeout(['oranges', 'apples'], SECOND)
+  ]);
+
+  // await 1 second...
+  const lists = await allPromise;
+
+  console.log(lists); 
+  // [['potatoes', 'tomatoes'], ['oranges', 'apples']]
+}
+
+load();
+```
+
+[Try the demo.]()
+
+`const allPromise = Promise.all([...])` returns a new promise `allPromise`. Then the statement `const lists = await allPromise` awaits 1 second until `allPromise` gets fullfilled with an array containining the first and second promises fullfill values.  
+
+Finally, `lists` contains the aggregated result: `[['potatoes', 'tomatoes'], ['oranges', 'apples']]`.  
 
 ## 3. Example: one promise rejects
 
+Now let's image the situation that the grocerry is out of fruits. In such a case, let's throw an error `new Error('Out of fruits!')`.  
+
+```javascript{4-7}
+const SECOND = 1000;
+
+async function load() {
+  const allPromise = Promise.all([
+    resolveTimeout(['potatoes', 'tomatoes'], 2 * SECOND),
+    rejectTimeout(new Error('Out of fruits!'), SECOND)
+  ]);
+
+  try {
+    // wait 2 seconds...
+    const lists = await allPromise;
+  } catch (error) {
+    console.log(error.message); // 'Out of fruits!'
+  }
+}
+
+load();
+```
+
+[Try the demo.]()
+
+In this scenario `allPromise = Promise.all([...])` returns, as usual, a promise. 
+
+However, after passing `1` second the promise `rejectTimeout(new Error('Out of fruits!'), SECOND)` rejects, which makes the `allPromise` reject right away!  
+
+
 ## 4. Conclusion
+
+`Promise.all([...])` is a useful helper function that let's you execute asynchornous operation in parallel, agreggate the result into an array using a fail-fast strategy.  
+
