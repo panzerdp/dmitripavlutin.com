@@ -28,11 +28,11 @@ The interesting part is in the way the promise returned by `Promise.all()` gets 
 
 <u>If all promises are resolved successfully</u>, then `allPromise` fulfills with an array containing fulfilled values of individual promises. The order of promises in the array does matter &mdash; you'll get the fulfilled values in the same order.  
 
-![Promise.all() - all fullfilled](./images/all-fullfilled-8.svg)
+![Promise.all() - all fullfilled](./images/all-fullfilled-9.svg)
 
 <u>But if at least one promise rejects</u>, then `allPromise` rejects right away (without waiting for other promises to resolve) with the same reason as the rejected promise rejects.  
 
-![Promise.all() - one rejects](./images/one-rejects-4.svg)
+![Promise.all() - one rejects](./images/one-rejects-5.svg)
 
 Let's see in a couple of examples how you can use `Promise.all()` to perform multiple async operations at once.  
 
@@ -74,7 +74,7 @@ console.log(lists);
 // [['potatoes', 'tomatoes'], ['oranges', 'apples']]
 ```
 
-[Try the demo.]()
+[Try the demo.](https://codesandbox.io/s/all-promises-fullfilled-2wte0?file=/src/index.js)
 
 `const allPromise = Promise.all([...])` returns a new promise `allPromise`. 
 
@@ -105,15 +105,15 @@ try {
 }
 ```
 
-[Try the demo.]()
+[Try the demo.](https://codesandbox.io/s/one-rejects-w5guk?file=/src/index.js)
 
 In this scenario `allPromise = Promise.all([...])` returns, as usual, a promise. 
 
 However, after passing 1 second the second promise (fruits) rejects with an error `new Error('Out of fruits!')`. This makes the `allPromise` reject right away with the same `new Error('Out of fruits!')` reason.  
 
-Even if the vegetable promise has been fulfilled, `Promise.all()` doesn't take it into account.  
+Even if the vegetables promise has been fulfilled, `Promise.all()` doesn't take it into account.  
 
-Such behavior of `Promise.all([...])` is named *fail-fast*. If at least one promise in the promises array rejects, then the promise returned by `Promise.all([...])` rejects too, and with the same reason.    
+Such behavior of `Promise.all([...])` is named *fail-fast*. If at least one promise in the promises array rejects, then the promise returned by `allPromise = Promise.all([...])` rejects too &mdash; with the same reason.    
 
 ## 4. Conclusion
 
