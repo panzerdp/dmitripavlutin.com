@@ -82,9 +82,7 @@ Then the statement `const lists = await allPromise` awaits 1 second until `allPr
 
 Finally, `lists` contains the aggregated result: `[['potatoes', 'tomatoes'], ['oranges', 'apples']]`.  
 
-The order of promises array directly influences the order of the results.  
-
-In the example above, in the promises array, the vegetables promise is the first item, and the fruits promise is the second item: `Promise.all([vegetablesPromise, fruitsPromise])`. Then you'd get in the results array the results in the same order: first vegetables list and second fruits list.  
+*The order of promises array directly influences the order of the results*. In the promises array the vegetables promise is the first item, and the fruits promise is the second item: `Promise.all([vegetablesPromise, fruitsPromise])`. Then you'd get in the results array the results in the same order: first vegetables list and second fruits list.  
 
 ## 3. Example: one promise rejects
 
