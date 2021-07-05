@@ -54,7 +54,7 @@ function rejectTimeout(reason, delay) {
 }
 ```
 
-What `resolveTimeout(value, delay)` simply does it returns a promise that fulfills with `value` after passing `delay` time.  
+`resolveTimeout(value, delay)` returns a promise that fulfills with `value` after passing `delay` time.  
 
 On the other side, `rejectTimeout(reason, delay)` returns a promise that rejects with `reason` (usually an error) after passing `delay` time.  
 
@@ -76,13 +76,15 @@ console.log(lists);
 
 [Try the demo.]()
 
-`const allPromise = Promise.all([...])` returns a new promise `allPromise`. Then the statement `const lists = await allPromise` awaits 1 second until `allPromise` gets fulfilled with an array containing the first and second promises fulfill values.  
+`const allPromise = Promise.all([...])` returns a new promise `allPromise`. 
+
+Then the statement `const lists = await allPromise` awaits 1 second until `allPromise` gets fulfilled with an array containing the first and second promises fulfill values.  
 
 Finally, `lists` contains the aggregated result: `[['potatoes', 'tomatoes'], ['oranges', 'apples']]`.  
 
 The order of promises array directly influences the order of the results.  
 
-In the example above, in the promises array, the vegetable promise is the first item, and the fruit promise is the second item: `Promise.all([vegetablesPromise, fruitsPromise])`. Then you'd get in the results array the results in the same order: first vegetable list and second fruits list.  
+In the example above, in the promises array, the vegetables promise is the first item, and the fruits promise is the second item: `Promise.all([vegetablesPromise, fruitsPromise])`. Then you'd get in the results array the results in the same order: first vegetables list and second fruits list.  
 
 ## 3. Example: one promise rejects
 
@@ -111,7 +113,7 @@ However, after passing 1 second the second promise (fruits) rejects with an erro
 
 Even if the vegetable promise has been fulfilled, `Promise.all()` doesn't take it into account.  
 
-Such behavior of `Promise.all([...])` is named *fail-fast*. If at least one promise in the promises array rejects, then the promise returned by `Promise.all([...])` rejects.  
+Such behavior of `Promise.all([...])` is named *fail-fast*. If at least one promise in the promises array rejects, then the promise returned by `Promise.all([...])` rejects too, and with the same reason.    
 
 ## 4. Conclusion
 
