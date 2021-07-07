@@ -10,7 +10,7 @@ recommended: ['javascript-fetch-async-await', 'javascript-async-await']
 type: post
 ---
 
-In simple words, a promise is a placeholder for a value that's going to be available sometime later. They're really useful when handling asynchoronous operations.  
+In simple words, a promise is a placeholder for a value that's going to be available sometime later. Promises are useful when handling asynchoronous operations.  
 
 JavaScript provides a helper function `Promise.all(promisesArrayOrIterable)` that allows to handle multiple promises at once, in parallel, and then get the result in a single aggregate array. Let's see how it works.  
 
