@@ -10,6 +10,13 @@ recommended: ['javascript-fetch-async-await', 'promise-all']
 type: post
 ---
 
+To be honest, I had hard time understanding promises when I had been learning them. 
+
+Thinking back, the problem was that most tutorials were solely describing the promise object, its methods, etc.  
+
+
+## 1. Why promises
+
 JavaScript works well with imperative and synchronous code.  
 
 ```javascript
@@ -32,5 +39,15 @@ function findPerson(who) {
 findPerson('Joker'); // => true
 ```
 
-The snippet above is synchronous and blocking code. Which simply means that as soon as JavaScript enters into `findPerson()` function, it doesn't get out of there
+The snippet above is synchronous and blocking code. Which simply means that when JavaScript enters into `findPerson()` function, it doesn't get out of there
 until executed.  
+
+## 2. What is a promise
+
+## 3. Promise state
+
+## 4. Chain of promises
+
+## 5. *async/await*
+
+## 6. Conclusion
