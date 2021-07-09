@@ -10,3 +10,27 @@ recommended: ['javascript-fetch-async-await', 'promise-all']
 type: post
 ---
 
+JavaScript works well with imperative and synchronous code.  
+
+```javascript
+function getList() {
+  return ['Joker', 'Batman', 'Cat Woman'];
+}
+
+function findPerson(who) {
+  const list = getList();
+
+  for (const person of list) {
+    if (person === who) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+findPerson('Joker'); // => true
+```
+
+The snippet above is synchronous and blocking code. Which simply means that as soon as JavaScript enters into `findPerson()` function, it doesn't get out of there
+until executed.  
