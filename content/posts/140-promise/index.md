@@ -10,12 +10,12 @@ recommended: ['javascript-fetch-async-await', 'promise-all']
 type: post
 ---
 
-To be honest, I had hard time understanding promises when I had been learning them. 
+To be honest, I had had difficulties in understanding promises when I had been learning them. 
 
 I think the problem was that most of the tutorials were solely describing the promise object, its methods, etc. I don't care too much about promises directly, I care about
 them only in how they can make my life easier!
 
-What follows is the post that I wanted to read in order to understand promises myself. The post shows how promises can make your life easier when coding asynchornous logic.  
+What follows is the post that I wanted to read in order to understand promises myself. The post shows how promises can make your life easier when coding asynchronous logic.  
 
 ## 1. Why promises
 
@@ -64,7 +64,7 @@ findPerson('Joker');
 
 How in such a case `getList()` would return the list of persons with a delay of 1 second. Same way, how would `findPerson(who)` access the list of persons that's returned with a delay?
 
-### 1.1 The callback approach
+### 1.1 The callbacks approach
 
 One classic approach would be to introduce callbacks:
 
@@ -90,25 +90,13 @@ The callbacks approach works. But what is the price?
 
 By adding callbacks, `getListDelayed(callback)` as well `findPerson(who, callback)` become more complex because they need one more argument: the callback.  
 
-Moreover, such code is harder to understand because the flow of calculations is hidden in between callbacks. Compare this code with the [synchronous code snippet](#sync-code): which is clearly easier to understand.  
-
-The problem becomes more apparent when you'd try to use results from multiple asynchornous operations using callbacks. The more operations you handle, the more callbacks are nested into each other creating so calleed [callback hell problem](http://callbackhell.com/).  
-
-```javascript
-asyncOperation1(result1 => {
-  asyncOperation2(result2 => {
-    asyncOperation3(result3 => {
-      console.log(result1 + result2 + result3);
-    });
-  });
-})
-```
+Callbacks approach code is harder to understand because the computations flow is hidden in between callbacks. Compare this code with the [synchronous code snippet](#sync-code): which is clearly easier to understand. Also, the more operations you handle, the more callbacks are nested into each other creating so calleed [callback hell problem](http://callbackhell.com/).  
 
 While callbacks have their good place in JavaScript, still, let's find a better solution.  
 
 ### 1.2 An object encapsulating the operation result
 
-Like I mentioned above, I really like the synchornous code because it is easy to understand. You see, step by step and line by line how the code is executed.  
+Like I mentioned above, I really like the synchornous code because it is easy to understand. You see, step by step and line by line, how the code is executed.  
 
 Let me write again the synchornous code example:
 
@@ -126,9 +114,13 @@ function findPerson(who) {
 findPerson('Joker'); // => true
 ```
 
-How would it be possible to code asynchornous operations, while still keeping the readability of synchronous code?  
+How to code asynchornous operations, while still keeping the readability of synchronous code? 
 
-What about still returning from `getListDelayed()` the list of persons, 
+What about still returning from `getListDelayed()` the *kind-of list of persons*?  
+
+This *kind-of list of persons* is then *kind-of checked if contains `who`*, and then *a kind-of boolean value* is returned.  
+
+
 
 ## 2. What is a promise
 
