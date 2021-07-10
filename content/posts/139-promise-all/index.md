@@ -2,7 +2,7 @@
 title: "How to Use Promise.all()"
 description: "How to use Promise.all() to perform parallel async operations."
 published: "2021-07-06T07:00Z"
-modified: "2021-07-06T07:00Z"
+modified: "2021-07-10T07:00Z"
 thumbnail: "./images/cover-6.png"
 slug: promise-all
 tags: ['javascript', 'promise', 'async']
@@ -10,19 +10,21 @@ recommended: ['javascript-fetch-async-await', 'javascript-async-await']
 type: post
 ---
 
-In simple words, a promise is a placeholder for a value that's going to be available sometime later. Promises are useful when handling asynchoronous operations.  
+In simple words, a promise is a placeholder for a value that's going to be available sometime later. 
 
-JavaScript provides a helper function `Promise.all(promisesArrayOrIterable)` that allows to handle multiple promises at once, in parallel, and then get the result in a single aggregate array. Let's see how it works.  
+Promises are useful when handling asynchoronous operations.  
+
+JavaScript provides a helper function `Promise.all(promisesArrayOrIterable)` to handle multiple promises at once, in parallel, and get the results in a single aggregate array. Let's see how it works.  
 
 ## 1. Promise.all()
 
-`Promise.all()` is a built-in helper function that accepts an array of promises (or generally an iterable). The function returns a promise:  
+`Promise.all()` is a built-in helper that accepts an array of promises (or generally an iterable). The function returns a promise:  
 
 ```javascript
 const allPromise = Promise.all([promise1, promise2, ...]);
 ```
 
-And here's how you can extract values using a `then`-able syntax:
+Then you can extract promises resolved values using a `then`-able syntax:
 
 ```javascript
 allPromise.then(values => {
@@ -45,7 +47,7 @@ try {
 
 The interesting part is in the way the promise returned by `Promise.all()` gets resolved or rejected.  
 
-<u>If all promises are resolved successfully</u>, then `allPromise` fulfills with an array containing fulfilled values of individual promises. The order of promises in the array does matter &mdash; you'll get the fulfilled values in the same order.  
+<u>If all promises are resolved successfully</u>, then `allPromise` fulfills with an array containing fulfilled values of individual promises. The order of promises in the array does matter &mdash; you'll get the fulfilled values in that order.  
 
 ![Promise.all() - all fullfilled](./images/all-fullfilled-9.svg)
 
@@ -103,11 +105,11 @@ Finally, `lists` contains the aggregated result: `[['potatoes', 'tomatoes'], ['o
 
 *The order of promises array directly influences the order of the results*. 
 
-The vegetables promise is the first item, and the fruits promise is the second item in the input array: `Promise.all([vegetablesPromise, fruitsPromise])`. Thus you'd get in the results array the results in the same order &mdash; first vegetables list and second fruits list.  
+The vegetables promise is the first item, and the fruits promise is the second item in the input array: `Promise.all([vegetablesPromise, fruitsPromise])`. The results array contains values in the same order &mdash; first vegetables list and second fruits list.  
 
 ## 3. Example: one promise rejects
 
-Now let's imagine the situation that the grocery is out of fruits. In such a case, let's reject the fruits promise with an error `new Error('Out of fruits!')`:
+Now imagine the situation that the grocery is out of fruits. In such a case, let's reject the fruits promise with an error `new Error('Out of fruits!')`:
 
 ```javascript{3,11}
 const allPromise = Promise.all([
@@ -128,7 +130,7 @@ try {
 
 In this scenario `allPromise = Promise.all([...])` returns, as usual, a promise. 
 
-However, after passing 1 second the second promise (fruits) rejects with an error `new Error('Out of fruits!')`. This makes the `allPromise` reject right away with the same `new Error('Out of fruits!')`.  
+However, after passing 1 second the second promise (fruits) rejects with an error `new Error('Out of fruits!')`. This makes `allPromise` reject right away with the same `new Error('Out of fruits!')`.  
 
 Even if the vegetables promise has been fulfilled, `Promise.all()` doesn't take it into account.  
 
@@ -136,6 +138,6 @@ Such behavior of `Promise.all([...])` is named *fail-fast*. If at least one prom
 
 ## 4. Conclusion
 
-`Promise.all([...])` is a useful helper function that lets you execute asynchronous operations in parallel, using a fail-fast strategy, and aggregate the result into an array.  
+`Promise.all([...])` is a useful helper function that lets you execute asynchronous operations in parallel, using a fail-fast strategy, and aggregate the results into an array.  
 
 *Challenge: can you implement a function `myPromiseAll(arrayOfPromises)` that would work like `Promise.all()`? Share your solution in a comment below!*
