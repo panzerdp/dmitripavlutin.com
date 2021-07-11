@@ -106,8 +106,6 @@ This *kind-of list of persons* is then *kind-of checked if contains `who`*, and 
 
 > *A promise* is an object that encapsulates the result of an asynchronous operation.
 
-
-
 ## 3. Promise state
 
 A promise can have one of the following state values:
@@ -176,3 +174,5 @@ console.log(await findPerson('Joker')); // logs true
 Now if you look at the `async` `findPerson()` function, you would notice how similar it is to the synchornous version of that function from the beginning of the post!
 
 ## 6. Conclusion
+
+In simpler words, the promise is a placeholder holding the result of an asynchornous operation. If the operation completes successfully, then the promise *fulfills* with the operation value, but if the operation fails: the promise *rejects* with the reason of the failing.  
