@@ -3,7 +3,7 @@ title: "What is a Promise in JavaScript?"
 description: "An easy guide explaining what are promises and how to use them in JavaScript."
 published: "2021-07-13T12:00Z"
 modified: "2021-07-13T12:00Z"
-thumbnail: "./images/cover-2.png"
+thumbnail: "./images/cover-6.png"
 slug: what-is-javascript-promise
 tags: ['javascript', 'promise']
 recommended: ['javascript-fetch-async-await', 'promise-all']
@@ -100,7 +100,9 @@ How to code asynchronous operations, while still keeping the readability of sync
 
 What about returning from `getList()` the *kind-of list of persons*?  
 
-This *kind-of list of persons* is then *kind-of checked if contains `who`*, and then *a kind-of boolean value* is returned.  
+This *kind-of list of persons* is then *kind-of checked if contains `who`*, and then *a kind-of boolean value* is returned. And what's great is that these *kind-of* results can be returned as regular results.  
+
+
 
 ## 2. What is a promise
 
