@@ -1,6 +1,6 @@
 ---
 title: "What is a Promise in JavaScript?"
-description: "An easy guide explaining what are promises and how to use them in JavaScript."
+description: "The post that I had wanted to read to understand promises myself: how promises make your life easier when coding asynchronous logic.  "
 published: "2021-07-13T12:00Z"
 modified: "2021-07-13T12:00Z"
 thumbnail: "./images/cover-6.png"
@@ -10,12 +10,12 @@ recommended: ['javascript-fetch-async-await', 'promise-all']
 type: post
 ---
 
-To be honest, I had had difficulties in understanding promises when I had been learning them. 
+I had had difficulties in understanding promises when I had been learning them back in a few years. 
 
-I think the problem was that most of the tutorials were solely describing the promise object, its methods, etc. I don't care too much about promises directly, I care about
-them only in how they can make my life easier!
+I think the problem was that most of the tutorials were solely describing the promise object, its methods, etc. I don't care too much about promises, I care about
+them as long as they make my life easier!
 
-What follows is the post that I wanted to read in order to understand promises myself. The post shows how promises can make your life easier when coding asynchronous logic.  
+What follows is the post that I had wanted to read to understand promises myself. The post shows how promises make your life easier when coding asynchronous logic.  
 
 ## 1. Why promises
 
@@ -37,8 +37,8 @@ function findPerson(who) {
 findPerson('Joker'); // => true
 ```
 
-The snippet above is synchronous and blocking code. Which simply means that when JavaScript enters into `findPerson()` function, it doesn't get out of there
-until executed.  
+The snippet above is synchronous and blocking code. When JavaScript enters into `findPerson()` function, it doesn't get out of there
+until the function is executed.   
 
 Getting the list of persons `const list = getList()` is a synchronous operation too.  
 
@@ -46,15 +46,17 @@ Until now, everything seems easy and straighforward.
 
 But what would happen if accessing the list of persons `getList()` is an operation that requires, for example, 1 second. Unfortunately, now the things become more complicated.  
 
-```javascript{3,8}
+```javascript{4,10}
 function getList() {
+  // How to return the list?...
   setTimeout(() => {
-    // ...how to return the list?
+    ['Joker', 'Batman'] // ???
   }, 1000);
 }
 
 function findPerson(who) {
-  // ...how to access the list?
+  // How to access the list?...
+  const list = /* ??? */;
 
   return list.some(person => person === who);
 }
@@ -96,31 +98,57 @@ While callbacks have their good place in JavaScript, still, let's find a better 
 
 I like the synchornous code because it is easy to understand. You see line by line how the code is executed.  
 
-How to code asynchronous operations, while still keeping the readability of synchronous code? 
+How to code asynchronous operations, while still preserving the readability of synchronous code? 
 
 What about returning from `getList()` the *kind-of list of persons*?  
 
-This *kind-of list of persons* is then *kind-of checked if contains `who`*, and then *a kind-of boolean value* is returned. And what's great is that these *kind-of* results can be returned as regular results.  
+This *kind-of list of persons* is then *kind-of checked if contains `who`*, and then *a kind-of boolean value* is returned. And what's great is that these *kind-of* results can be returned, assigned to variables just like regular objects.  
 
-
+This *kind-of result* object that encapsulates (aka holds, manages, contains) the result of an asynchronous operation is a *promise of a result* object.  
 
 ## 2. What is a promise
 
 > *A promise* is an object that encapsulates the result of an asynchronous operation.
 
-## 3. Promise state
-
-A promise can have one of the following state values:
+A promise can be in one of the following state value:
 
 * *Pending*
-* *Fullfilled* with a value
-* *Rejected* with a reason
+* *Fullfilled* with a *value*
+* *Rejected* with of a *reason*
 
-## 4. Chain of promises
+### 2.1 Promising the list
+
+Now, having an understanding of promises, let's return to the delayed list example.  
+
+Here's how it would work when using promises:
+
+```javascript
+function getList() {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(['Joker', 'Batman']), 1000);
+  });
+}
+
+function findPerson(who, callback) {
+  return getList().then(list => {
+    return list.some(person => person === who);
+  });
+}
+
+findPerson('Joker').then(result => {
+  console.log(result); // logs true
+});
+```
+
+## 3. Chain of promises
 
 Often it happens that the result of an asynchornous operation is used in another asynchornous operation.  
 
-## 5. *async/await*
+For example, let's imagine that in the the persons searching example the person to search is also a result of an asynchornous operation.  
+
+
+
+## 4. *async/await*
 
 While looking at the previous code sample that use promises, you might wonder &mdash; *Hey, using promises still requires callbacks and relatively lots of boilerplate code like `.then()`, `.catch()`.*  
 
@@ -175,6 +203,6 @@ console.log(await findPerson('Joker')); // logs true
 
 Now if you look at the `async` `findPerson()` function, you would notice how similar it is to the synchornous version of that function from the beginning of the post!
 
-## 6. Conclusion
+## 5. Conclusion
 
 In simpler words, the promise is a placeholder holding the result of an asynchornous operation. If the operation completes successfully, then the promise *fulfills* with the operation value, but if the operation fails: the promise *rejects* with the reason of the failing.  
