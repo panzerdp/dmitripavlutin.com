@@ -12,8 +12,8 @@ type: post
 
 I had had difficulties in understanding promises when I had been learning them back in a few years. 
 
-I think the problem was that most of the tutorials were solely describing the promise object, its methods, etc. I don't care too much about promises, I care about
-them as long as they make my life easier!
+The problem was that most of the tutorials were solely describing the promise object, its methods, etc. I don't care too much about promises, I care about
+them as long as they make coding easier!  
 
 What follows is the post that I had wanted to read to understand promises myself. The post shows how promises make your life easier when coding asynchronous logic.  
 
@@ -46,22 +46,20 @@ Until now, everything seems easy and straighforward.
 
 But what would happen if accessing the list of persons `getList()` is an operation that requires, for example, 1 second. Unfortunately, now the things become more complicated.  
 
-```javascript{4,10}
+```javascript{3,8}
 function getList() {
-  // How to return the list?...
   setTimeout(() => {
-    ['Joker', 'Batman'] // ???
+    ['Joker', 'Batman'] // How to return the list?
   }, 1000);
 }
 
 function findPerson(who) {
-  // How to access the list?...
-  const list = /* ??? */;
+  const list = /* How to access the list? */;
 
   return list.some(person => person === who);
 }
 
-findPerson('Joker');
+console.log(findPerson('Joker')); // logs true
 ```
 
 How to return the list of persons from `getList()` with a delay of 1 second? Same way, how would `findPerson(who)` access the list of persons that's returned with a delay?  
@@ -104,7 +102,11 @@ What about returning from `getList()` the *kind-of list of persons*?
 
 This *kind-of list of persons* is then *kind-of checked if contains `who`*, and then *a kind-of boolean value* is returned. And what's great is that these *kind-of* results can be returned, assigned to variables just like regular objects.  
 
-This *kind-of result* object that encapsulates (aka holds, manages, contains) the result of an asynchronous operation is a *promise of a result* object.  
+This *kind-of result* object that encapsulates (aka holds, manages, contains) the result of an asynchronous operation is a *promise of a result* object. 
+
+There isn't anything special about the promise object: it is still the result, just wrapped in a promise because you can't have the result right now, but sometime later.  
+
+*The main idea of promises is to allow returning data wrapped in a promise ("kind-of data") from an asynchornous function exactly like from a synchronous one, because the synchornous code is easy to understand.*
 
 ## 2. What is a promise
 
@@ -116,7 +118,9 @@ A promise can be in one of the following state value:
 * *Fullfilled* with a *value*
 * *Rejected* with of a *reason*
 
-### 2.1 Promising the list
+
+
+### 2.1 Promised list of persons
 
 Now, having an understanding of promises, let's return to the delayed list example.  
 
@@ -142,9 +146,9 @@ findPerson('Joker').then(result => {
 
 ## 3. Chain of promises
 
-Often it happens that the result of an asynchornous operation is used in another asynchornous operation.  
+The result of an asynchornous operation is used in another asynchornous operation.  
 
-For example, let's imagine that in the the persons searching example the person to search is also a result of an asynchornous operation.  
+For example, let's imagine that in the the persons searching example the person to search is also a result of an asynchronous operation.  
 
 
 
@@ -205,4 +209,4 @@ Now if you look at the `async` `findPerson()` function, you would notice how sim
 
 ## 5. Conclusion
 
-In simpler words, the promise is a placeholder holding the result of an asynchornous operation. If the operation completes successfully, then the promise *fulfills* with the operation value, but if the operation fails: the promise *rejects* with the reason of the failing.  
+The promise is a placeholder holding the result of an asynchornous operation. If the operation completes successfully, then the promise *fulfills* with the operation value, but if the operation fails: the promise *rejects* with the reason of the failing.  
