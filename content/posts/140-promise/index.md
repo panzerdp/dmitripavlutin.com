@@ -172,7 +172,7 @@ The promise object allows extracting the fullfill value using a special method: 
 
 Here's for example how you can get access to the value of the promise returned by `getList()`:
 
-```javascript{9-11}
+```javascript{10-12}
 function getList() {
   return new Promise(resolve => {
     setTimeout(() => resolve(['Joker', 'Batman']), 1000);
@@ -181,9 +181,10 @@ function getList() {
 
 const promise = getList();
 
-promise.then(value => {
-  console.log(value); // logs ['Joker', 'Batman']
-});
+promise
+  .then(value => {
+    console.log(value); // logs ['Joker', 'Batman']
+  });
 ```
 
 ### 2.2 Extracting the promise rejection error
@@ -192,7 +193,7 @@ Same way, if the operation completed with an error and the promise rejects, you 
 
 For example, let's imagine that accessing the list of persons ends in an error:
 
-```javascript{9-11}
+```javascript{10-12}
 function getList() {
   return new Promise((resolve, reject) => {
     setTimeout(() => reject(new Error('Nobody here!')), 1000);
@@ -201,9 +202,10 @@ function getList() {
 
 const promise = getList();
 
-promise.catch(error => {
-  console.log(error); // logs Error
-});
+promise
+  .catch(error => {
+    console.log(error); // logs Error
+  });
 ```
 
 ## 3. Chain of promises
@@ -225,7 +227,8 @@ function findPerson(who) {
   getList()
     .then(list => {
       return list.some(person => person === who);
-    }).then(found => {
+    })
+    .then(found => {
       console.log(found);
     });
 }
@@ -253,14 +256,15 @@ function getList() {
 }
 
 function findPerson(who, callback) {
-  return getList().then(list => {
-    return list.some(person => person === who);
-  });
+  getList()
+    .then(list => {
+      const found = list.some(person => person === who);
+
+      console.log(found);
+    });
 }
 
-findPerson('Joker').then(result => {
-  console.log(result); // logs true
-});
+findPerson('Joker'); // logs true
 ```
 
 Let's reduce this code by applying the `async/await` syntax, which is relatively easy:
@@ -270,7 +274,7 @@ Let's reduce this code by applying the `async/await` syntax, which is relatively
 
 Now let's apply these rules to the previous code snippet:
 
-```javascript{7,8,13}
+```javascript{7,8}
 function getList() {
   return new Promise(resolve => {
     setTimeout(() => resolve(['Joker', 'Batman'], 1000);
@@ -280,10 +284,12 @@ function getList() {
 async function findPerson(who) {
   const list = await getList();
 
-  return list.some(person => person === who);
+  const found = list.some(person => person === who);
+
+  console.log(found);
 }
 
-console.log(await findPerson('Joker')); // logs true
+findPerson('Joker'); // logs true
 ```
 
 Now if you look at the `async` `findPerson()` function, you would notice how similar it is to the synchornous version of that function from the beginning of the post!
