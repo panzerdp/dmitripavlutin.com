@@ -118,7 +118,9 @@ A promise can be in one of the following state value:
 * *Fullfilled* with a *value*
 * *Rejected* with of a *reason*
 
+![Resolved promise](./images/resolved-7.svg)
 
+![Rejected promise](./images/rejected-5.svg)
 
 ### 2.1 Promised list of persons
 
