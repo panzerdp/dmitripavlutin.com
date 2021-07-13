@@ -118,6 +118,10 @@ A promise can be in one of the following state value:
 * *Fullfilled* with a *value*
 * *Rejected* with of a *reason*
 
+When the promise object has just been created, it is in the *pending* state. The promise maintains the *pending* state as long as the asynchronous operation behind it is in progress.  
+
+Then, depending on the asynchronous operation completion the promise status can change to either *fullfilled* (when the async operation completed successfully) or *rejected* (when then async operation failed).  
+
 ![Resolved promise](./images/resolved-7.svg)
 
 ![Rejected promise](./images/rejected-5.svg)
