@@ -12,14 +12,16 @@ type: post
 
 I had had difficulties in understanding promises when I had been learning them back in a few years. 
 
-The problem was that most of the tutorials were solely describing the promise object, its methods, etc. I don't care too much about promises, I care about
+The problem was that most of the tutorials were solely describing the promise object, its methods, etc. But I don't care much about promises, I care about
 them as long as they make coding easier!  
 
-What follows is the post that I had wanted to read to understand promises myself. The post shows how promises make your life easier when coding asynchronous logic.  
+What follows is the post that I had wanted to read to understand promises myself. The post describes the reason why promises make easier coding asynchronous logic, then concentrate on explaining how to use promises.    
 
 ## 1. Why promises
 
 JavaScript works well with imperative and synchronous code.  
+
+Let's consider a function `findPerson(who)` that simply determines whether a person name is contained in a list of persons:
 
 <div id="sync-code"></div>
 
@@ -39,14 +41,14 @@ function findPerson(who) {
 findPerson('Joker'); // logs true
 ```
 
-The snippet above is synchronous and blocking code. When JavaScript enters into `findPerson()` function, it doesn't get out of there
+The snippet above is synchronous and blocking code. When JavaScript enters into `findPerson()` function to execute, it doesn't get out of there
 until the function is executed.   
 
 Getting the list of persons `const list = getList()` is a synchronous operation too.  
 
-Until now, everything seems easy and straighforward.  
+Synchronous code is easy and straighforward to understand. But you don't always have the chance to access data instantly: some data, like a result of an asynchronous operation (like fetching data over the network), could take a while to be available.  
 
-But what would happen if accessing the list of persons `getList()` is an operation that requires, for example, 1 second. Unfortunately, now the things become more complicated.  
+For example, what would happen if accessing the list of persons `getList()` is an operation that requires, for example, 1 second.
 
 ```javascript{3,8}
 function getList() {
@@ -68,6 +70,8 @@ findPerson('Joker'); // logs true
 
 How to return the list of persons from `getList()` with a delay of 1 second? Same way, how would `findPerson(who)` access the list of persons that's returned with a delay?  
 
+Unfortunately, now the things become more complicated. Let's see a few approaches how to code that.  
+
 ### 1.1 The callbacks approach
 
 One classic approach would be to introduce callbacks:
@@ -88,11 +92,9 @@ function findPerson(who) {
 findPerson('Joker'); // logs true
 ```
 
-The callbacks approach works. But what is the price? 
+`getList(callback)` becomes more complex because its need one more argument: the callback.  
 
-`getList(callback)` become more complex because they need one more argument: the callback.  
-
-Callbacks approach code is hard to follow because the computations flow is hidden in between callbacks. Compare this code with the [synchronous code snippet](#sync-code): which is clearly easier to understand.  
+Code using callbacks approach is difficult to follow because the computations flow is hidden in between callbacks. If you'd need to manage even more asynchronous operations using callbacks, you could easily end into the [callback hell](http://callbackhell.com/) problem.  
 
 While callbacks have their good place in JavaScript, still, let's find a better solution.  
 
@@ -102,13 +104,13 @@ I like the synchornous code because it is easy to understand. You see line by li
 
 How to code asynchronous operations, while still preserving the readability of synchronous code? 
 
-What about returning from `getList()` the *kind-of list of persons*?  
+What about returning from `getList()` a *kind-of list of persons*?  
 
-This *kind-of list of persons* is then *kind-of checked if contains `who`*, and then *a kind-of boolean value* is returned. And what's great is that these *kind-of* results can be returned, assigned to variables just like regular objects.  
+This *kind-of list of persons* is then *kind-of checked if contains `who`*, and then *a kind-of boolean value* is logged to console. And what's great is that these *kind-of* results can be returned, assigned to variables just like regular objects.  
 
-This *kind-of result* object that encapsulates (aka holds, manages, contains) the result of an asynchronous operation is a *promise of a result* object. 
+This *kind-of result* object that encapsulates (aka holds, manages, contains) the result of an asynchronous operation is a *promise of a result*. 
 
-There isn't anything special about the promise object: it is still the result, just wrapped in a promise because you can't have the result right now, but sometime later.  
+There isn't anything special about the promise object: it is still the result, just encapsulated in a promise because you can't have the result right now, but sometime later.  
 
 *The main idea of promises is to allow returning data wrapped in a promise ("kind-of data") from an asynchornous function exactly like from a synchronous one, because the synchornous code is easy to understand.*
 
