@@ -15,7 +15,10 @@ I had had difficulties in understanding promises when I had been learning them b
 The problem was that most of the tutorials were solely describing the promise object, its methods, etc. But I don't care much about promises, I care about
 them as long as they make coding easier!  
 
-What follows is the post that I had wanted to read to understand promises myself. The post describes the reason why promises make easier coding asynchronous logic, then concentrate on explaining how to use promises.    
+What follows is the post that I had wanted to read to understand promises myself. The post describes the reason why promises make easier coding asynchronous logic, then concentrate on explaining how to use promises.  
+
+```toc
+```
 
 ## 1. Why promises
 
@@ -46,7 +49,7 @@ until the function is executed.
 
 Getting the list of persons `const list = getList()` is a synchronous operation too.  
 
-Synchronous code is easy and straighforward to understand. But you don't always have the chance to access data instantly: some data, like a result of an asynchronous operation (like fetching data over the network), could take a while to be available.  
+Synchronous code is straighforward to understand. But you don't always have the luck to access data instantly: some data, like fetching data over the network, could take a while to be available.  
 
 For example, what would happen if accessing the list of persons `getList()` is an operation that requires, for example, 1 second.
 
@@ -61,7 +64,6 @@ function findPerson(who) {
   const list = /* How to access the list? */;
 
   const found = list.some(person => person === who);
-
   console.log(found);
 }
 
@@ -84,7 +86,6 @@ function getList(callback) {
 function findPerson(who) {
   getList(list => {
     const found = list.some(person => person === who);
-
     console.log(found);
   });
 }
@@ -195,6 +196,26 @@ promise
   });
 ```
 
+Having the knowledge of how to extract a fulfilled value from a promise, let's transform `findPerson(who)` to extract the list from the promise returned by `getList()`:
+
+```javascript{9-12}
+function getList() {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(['Joker', 'Batman']), 1000);
+  });
+}
+
+function findPerson(who) {
+  getList()
+    .then(list => {
+      const found = list.some(person => person === who);  
+      console.log(found);
+    });
+}
+
+findPerson('Joker'); // logs true
+```
+
 ### 2.2 Extracting the promise rejection error
 
 Same way, if the operation completed with an error and the promise rejects, you can access the rejection error using a special method `promise.catch(errorCallback)`.  
@@ -222,6 +243,38 @@ As seen above, a promise encapsulates the result of an asynchronous operation. Y
 
 But that's only half of the benefits that a promise can provide.  
 
+What's also important is that promises can create chains to handle multiple dependent asynchronous operations.  
+
+The technical side of chaining consists of the fact that `.then()`, as well as `.catch()` methods on a promise return by themselves promises.  
+
+For example, let's create an async function that doubles a number with a delay of 1 second:
+
+```javascript
+function delayDouble(number) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(2 * number), 1000);
+  });
+}
+```
+
+Then, let's say that you'd like to double 3 times the number `5`:
+
+```javascript
+delayDouble(5)
+  .then(number => {
+    console.log(number); // logs 10
+    return delayDouble(number);
+  })
+  .then(number => {
+    console.log(number); // logs 20
+    return delayDouble(number);
+  })
+  .then(result => {
+    console.log(result); // logs 40
+  });
+```
+
+
 ## 4. *async/await*
 
 While looking at the previous code sample that use promises, you might wonder &mdash; *Hey, using promises still requires callbacks and relatively lots of boilerplate code like `.then()`, `.catch()`.*  
@@ -245,7 +298,6 @@ function findPerson(who) {
   getList()
     .then(list => {
       const found = list.some(person => person === who);
-
       console.log(found);
     });
 }
@@ -256,7 +308,8 @@ findPerson('Joker'); // logs true
 Let's reduce this code by applying the `async/await` syntax, which is relatively easy:
 
 * If you want a function to become asynchronous and handle promises, then mark it as `async`
-* Inside of the `async` function body, whether you want to wait for a promise to resolve, use `await promiseExpression` syntax.  
+* Inside of the `async` function body, whether you want to wait for a promise to resolve, use `await promiseExpression` syntax
+* An `async` function always returns a promise, allowing the use of `async` functions insides `async` functions.
 
 Now let's apply these rules to the previous code snippet:
 
@@ -271,14 +324,13 @@ async function findPerson(who) {
   const list = await getList();
 
   const found = list.some(person => person === who);
-
   console.log(found);
 }
 
 findPerson('Joker'); // logs true
 ```
 
-Now if you look at the `async` `findPerson()` function, you would notice how similar it is to the synchornous version of that function from the beginning of the post!
+Now if you look at the `async` `findPerson()` function, you would notice how similar it is to the [synchornous version](#sync-code) of that function from the beginning of the post!
 
 ## 5. Conclusion
 
