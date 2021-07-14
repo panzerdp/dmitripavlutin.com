@@ -124,11 +124,17 @@ Each promise has a state, which can be one of the following values:
 * *Fullfilled* with a <u>value</u>
 * *Rejected* for a <u>reason</u>
 
-When the promise has just been created, it is in the *pending* state. The promise maintains the *pending* state as long as the asynchronous operation behind the promise is in progress.  
+The just created promise is in *pending* state. The promise maintains the *pending* state as long as the asynchronous operation behind the promise is in progress.  
 
-Then, depending on the asynchronous operation completion, the promise state changes to either *fullfilled* (when the async operation completed successfully) or *rejected* (when then async operation failed).  
+Then, depending on the asynchronous operation completion result, the promise state changes to either:
 
-![Promise lifecycle](./images/promise-lifecycle-2.svg)
+A) *fulfilled* (when the async operation completed successfully)
+
+![Promise fulfilled state](./images/fulfilled.svg)
+ 
+B) or *rejected* (when then async operation failed).  
+
+![Promise rejected state](./images/rejected.svg)
 
 In JavaScript, you can create a promise object using a special constructor `Promise`:  
 
@@ -147,7 +153,7 @@ const promise = new Promise((resolve, reject) => {
 
 In the special function, after the completion of the operation, you have to call either:
 
-1) If the async operation completed sucessfully, call `resolve(value)` (that would change the state of the promise to *fullfilled*)
+1) If the async operation completed sucessfully, call `resolve(value)` (that would change the state of the promise to *fulfilled*)
 2) Otherwise, in case of an error, call `reject(error)` (that would change the state of the promise to *rejected*)
 
 Let's make a pause from promises dry theory and get back to the persons example.  
@@ -166,11 +172,11 @@ function getList() {
 
 `getList()` creates and returns a promise. Inside of the promise, after passing 1 second, calling `resolve(['Joker', 'Batman'])` effectively makes the promise *fulfill* with the list of persons.  
 
-### 2.1 Extracting the promise fullfill value
+### 2.1 Extracting the promise fulfill value
 
 Now you can ask me a reasonable question: how can I access the value from a promise?  
 
-The promise object allows extracting the fullfill value using a special method: `promise.then(successCallback)`.  
+The promise object allows extracting the fulfill value using a special method: `promise.then(successCallback)`.  
 
 Here's for example how you can get access to the value of the promise returned by `getList()`:
 
@@ -212,31 +218,9 @@ promise
 
 ## 3. Chain of promises
 
-The result of an asynchornous operation is used in another asynchornous operation.  
+As seen above, a promise encapsulates the result of an asynchronous operation. You can use anyhow you want a promise: return, use as argument, assign to variables.  
 
-For example, let's imagine that in the the persons searching example the person to search is also a result of an asynchronous operation.  
-
-Here's how it would work when using promises:
-
-```javascript
-function getList() {
-  return new Promise(resolve => {
-    setTimeout(() => resolve(['Joker', 'Batman']), 1000);
-  });
-}
-
-function findPerson(who) {
-  getList()
-    .then(list => {
-      return list.some(person => person === who);
-    })
-    .then(found => {
-      console.log(found);
-    });
-}
-
-findPerson('Joker'); // logs true
-```
+But that's only half of the benefits that a promise can provide.  
 
 ## 4. *async/await*
 
@@ -257,7 +241,7 @@ function getList() {
   });
 }
 
-function findPerson(who, callback) {
+function findPerson(who) {
   getList()
     .then(list => {
       const found = list.some(person => person === who);
