@@ -274,6 +274,25 @@ delayDouble(5)
   });
 ```
 
+In a chain of promises, if any promise in the chain rejects, then the resolving flow jumps until the first `.catch()`:
+
+```javascript
+delayDouble(5)
+  .then(number => {
+    console.log(number); // logs 10
+    return new Promise((_, reject) => reject(new Error('Oops!')));
+  })
+  .then(number => {
+    console.log(number); // Skipped...
+    return delayDouble(number);
+  })
+  .then(result => {
+    console.log(result); // Skipped...
+  })
+  .catch(error => {
+    console.log(error); // logs Error('Oops!')
+  });
+```
 
 ## 4. *async/await*
 
