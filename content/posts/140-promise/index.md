@@ -15,7 +15,7 @@ I had had difficulties in understanding promises when I had been learning them b
 The problem was that most of the tutorials were solely describing the promise object, its methods, etc. But I don't care much about promises, I care about
 them as long as they make coding easier!  
 
-What follows is the post that I had wanted to read to understand promises myself. The post describes the reason why promises make easier coding asynchronous logic, then explains how to use promises.  
+What follows is the post that I had wanted to read to understand promises myself. The post describes why promises make coding asynchronous logic easier, then explains how to use promises.  
 
 ```toc
 ```
@@ -24,7 +24,7 @@ What follows is the post that I had wanted to read to understand promises myself
 
 JavaScript works well with imperative and synchronous code.  
 
-Let's consider a function `findPerson(who)` that simply determines whether a person name is contained in a list of persons:
+Let's consider a function `findPerson(who)` that determines whether a person name is contained in a list of persons:
 
 <div id="sync-code"></div>
 
@@ -43,6 +43,8 @@ function findPerson(who) {
 
 findPerson('Joker'); // logs true
 ```
+
+[Try the demo.](https://codesandbox.io/s/ancient-dawn-j6jbq?file=/src/index.js)
 
 The snippet above is synchronous and blocking code. When JavaScript enters into `findPerson()` function to execute, it doesn't get out of there
 until the function is executed.   
@@ -92,6 +94,8 @@ function findPerson(who) {
 
 findPerson('Joker'); // logs true
 ```
+
+[Try the demo.](https://codesandbox.io/s/elated-jones-mflcv?file=/src/index.js)
 
 `getList(callback)` becomes more complex because it needs one more argument: the callback.  
 
@@ -173,13 +177,22 @@ function getList() {
 
 `getList()` creates and returns a promise. Inside of the promise, after passing 1 second, calling `resolve(['Joker', 'Batman'])` effectively makes the promise *fulfill* with the list of persons.  
 
+*While in examples that follow I'm creating promises by hand, usually you won't do this in production. Most of the asynchronous functions of popular libraries (like [axios](https://github.com/axios/axios)) or web APIs (like [fetch()](/javascript-fetch-async-await/)) return already constructed promises.*  
+
 ### 2.1 Extracting the promise fulfill value
 
 Now you can ask me a reasonable question: how can I access the value from a promise?  
 
-The promise object allows extracting the fulfill value using a special method: `promise.then(successCallback)`.  
+The promise object allows extracting the fulfill value (aka the result of a successfully completed async operation) using a special method: 
 
-Here's for example how you can get access to the value of the promise returned by `getList()`:
+```javascript
+promise
+  .then(value => {
+    // use value...
+  });
+```
+
+Here's how to access the value of the promise returned by `getList()`:
 
 ```javascript{10-12}
 function getList() {
@@ -195,6 +208,8 @@ promise
     console.log(value); // logs ['Joker', 'Batman']
   });
 ```
+
+[Try the demo.](https://codesandbox.io/s/elastic-monad-rnf9v?file=/src/index.js)
 
 Having the knowledge of how to extract a fulfilled value from a promise, let's transform `findPerson(who)` to extract the list from the promise returned by `getList()`:
 
@@ -216,9 +231,18 @@ function findPerson(who) {
 findPerson('Joker'); // logs true
 ```
 
+[Try the demo.](https://codesandbox.io/s/focused-euler-87tlx?file=/src/index.js)
+
 ### 2.2 Extracting the promise rejection error
 
-Same way, if the operation fails with an error and the promise rejects, you can access the rejection error using a special method `promise.catch(errorCallback)`.  
+If the operation fails then the promise rejects with an error. You can access the rejection error using a special method:
+
+```javascript
+promise
+  .catch(error => {
+    // check error...
+  })
+```
 
 For example, let's imagine that accessing the list of persons ends in an error:
 
@@ -233,19 +257,96 @@ const promise = getList();
 
 promise
   .catch(error => {
-    console.log(error); // logs Error
+    console.log(error); // logs Error('Nobody here!')
   });
 ```
 
+[Try the demo.](https://codesandbox.io/s/broken-frog-l244c?file=/src/index.js)
+
+### 2.3 Extracting value and error
+
+You can also extract at once the fulfill value or the reject reason at once. 
+
+To do so you can either:
+
+A) Supply 2 callback argument to `promise.then(successCallback, errorCallback)` method:
+
+```javascript
+promise
+  .then(value => {
+    // use value...
+  }, error => {
+    // check error...
+  });
+```
+
+B) or you can use what is called chain of promises (described below) and chain `promise.then(successCallback).catch(errorCallback)`
+
+```javascript
+promise
+  .then(value => {
+    // use value...
+  })
+  .catch(error => {
+    // check error...
+  });
+```
+
+Let's look closer at the approach B) since it's used more often.  
+
+When using `promise.then(successCallback).catch(errorCallback)` chain, if `promise` resolves successfully then only `successCallback` is called:
+
+```javascript{11}
+function getList() {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(['Joker', 'Batman']), 1000);
+  });
+}
+
+const promise = getList();
+
+promise
+  .then(value => {
+    console.log(value); // logs ['Joker', 'Batman']
+  })
+  .catch(error) => {
+    console.log(error); // Skipped...
+  };
+```
+
+[Try the demo.](https://codesandbox.io/s/boring-volhard-hsoc3?file=/src/index.js)
+
+However, in case if `promise` rejects, then only `errorCallback` is called:
+
+```javascript{14}
+function getList() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => reject(new Error('Nobody here!')), 1000);
+  });
+}
+
+const promise = getList();
+
+promise
+  .then(value => {
+    console.log(value); // Skipped...
+  })
+  .catch(error => {
+    console.log(error); // logs Error('Nobody here!')
+  });
+```
+
+[Try the demo.](https://codesandbox.io/s/keen-bartik-o857t?file=/src/index.js)
+
 ## 3. Chain of promises
 
-As seen above, a promise encapsulates the result of an asynchronous operation. You can use anyhow you want a promise: return, use as an argument, assign to variables.  
+As seen above, a promise encapsulates the result of an asynchronous operation. You can use anyhow you want a promise: return from a function, use as an argument, assign to variables. 
 
 But that's only half of the benefits that a promise can provide.  
 
 What's also important is that promises can create chains to handle multiple dependent asynchronous operations.  
 
-The technical side of chaining consists of the fact that `.then()`, as well as `.catch()` methods on by themselves a promise.  
+The technical side of chaining consists of the fact that `promise.then()`, and even `promise.catch()` methods by themselves return a promise.  
 
 For example, let's create an async function that doubles a number with a delay of 1 second:
 
@@ -257,7 +358,7 @@ function delayDouble(number) {
 }
 ```
 
-Then, let's say that you'd like to double 3 times the number `5`:
+Then, let's double 3 times the number `5`:
 
 ```javascript
 delayDouble(5)
@@ -273,6 +374,8 @@ delayDouble(5)
     console.log(result); // logs 40
   });
 ```
+
+[Try the demo.](https://codesandbox.io/s/eager-sky-fyk0r?file=/src/index.js)
 
 In a chain of promises, if any promise in the chain rejects, then the resolving flow jumps until the first `.catch()`:
 
@@ -293,6 +396,8 @@ delayDouble(5)
     console.log(error); // logs Error('Oops!')
   });
 ```
+
+[Try the demo.](https://codesandbox.io/s/interesting-gates-dbjj1?file=/src/index.js)
 
 ## 4. *async/await*
 
@@ -328,7 +433,7 @@ Let's reduce this code by applying the `async/await` syntax, which is relatively
 
 * If you want a function to become asynchronous and handle promises, then mark it as `async`
 * Inside of the `async` function body, whether you want to wait for a promise to resolve, use `await promiseExpression` syntax
-* An `async` function always returns a promise, allowing the use of `async` functions insides `async` functions.
+* An `async` function always returns a promise, which enables calling `async` functions inside `async` functions.  
 
 Now let's apply these rules to the previous code snippet:
 
@@ -349,8 +454,16 @@ async function findPerson(who) {
 findPerson('Joker'); // logs true
 ```
 
-Now if you look at the `async` `findPerson()` function, you would notice how similar it is to the [synchornous version](#sync-code) of that function from the beginning of the post!
+[Try the demo.](https://codesandbox.io/s/prod-fire-3cfo3?file=/src/index.js)
+
+What's interesting is that `async findPerson(who)` now pauses its execution at the `await getList()` statement. The pause continues until the promise returned by `getList()` is either fulfilled or rejected.  
+
+Now if you look at the `async findPerson(who)` function, you would notice how similar it is to the [synchornous version](#sync-code) of that function from the beginning of the post! That's the goal of promises and `async/await` syntax.  
 
 ## 5. Conclusion
 
 The promise is a placeholder holding the result of an asynchronous operation. If the operation completes successfully, then the promise *fulfills* with the operation value, but if the operation fails: the promise *rejects* with the reason of the failure.  
+
+If you'd like to read more about using promises, `async/await` from a practical side, I recommend checking [How to Use Fetch with async/await](/javascript-fetch-async-await/).  
+
+*Challenge: do you know the one important difference between `promise.then(fn1, fn2)` and `promise.then(fn1).catch(fn2)`? Please share your opinion in a comment below!*
