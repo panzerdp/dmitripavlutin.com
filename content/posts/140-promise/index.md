@@ -1,8 +1,8 @@
 ---
 title: "What is a Promise in JavaScript?"
-description: "The post that I had wanted to read to understand promises myself: how promises make your life easier when coding asynchronous logic.  "
-published: "2021-07-13T12:00Z"
-modified: "2021-07-13T12:00Z"
+description: "The post that I had wanted to read myself to understand promises."
+published: "2021-07-15T08:00Z"
+modified: "2021-07-15T08:00Z"
 thumbnail: "./images/cover-6.png"
 slug: what-is-javascript-promise
 tags: ['javascript', 'promise']
@@ -265,11 +265,11 @@ promise
 
 ### 2.3 Extracting value and error
 
-You can also extract at once the fulfill value or the reject reason at once. 
+You can also extract the fulfill value or the reject reason at once. 
 
 To do so you can either:
 
-A) Supply 2 callback argument to `promise.then(successCallback, errorCallback)` method:
+A) Supply 2 callback arguments to `promise.then(successCallback, errorCallback)` method:
 
 ```javascript
 promise
@@ -280,7 +280,7 @@ promise
   });
 ```
 
-B) or you can use what is called chain of promises (described below) and chain `promise.then(successCallback).catch(errorCallback)`
+B) or you can use what is called chain of promises (described below) and chain `promise.then(successCallback).catch(errorCallback)`:
 
 ```javascript
 promise
