@@ -191,6 +191,8 @@ promise
   });
 ```
 
+![Promise then()](./images/then.svg)
+
 Here's how to access the value of the promise returned by `getList()`:
 
 ```javascript{10-12}
@@ -248,6 +250,8 @@ promise
     // check error...
   })
 ```
+
+![Promise catch()](./images/catch.svg)
 
 For example, let's imagine that accessing the list of persons ends in an error (note the use of `reject(error)` function):
 
@@ -365,35 +369,39 @@ Then, let's double 3 times the number `5`:
 
 ```javascript
 delayDouble(5)
-  .then(number => {
-    console.log(number); // logs 10
-    return delayDouble(number);
+  .then(value1 => {
+    console.log(value1); // logs 10
+    return delayDouble(value1);
   })
-  .then(number => {
-    console.log(number); // logs 20
-    return delayDouble(number);
+  .then(value2 => {
+    console.log(value2); // logs 20
+    return delayDouble(value2);
   })
-  .then(result => {
-    console.log(result); // logs 40
+  .then(value3 => {
+    console.log(value3); // logs 40
   });
 ```
 
 [Try the demo.](https://codesandbox.io/s/eager-sky-fyk0r?file=/src/index.js)
 
-In a chain of promises, if any promise in the chain rejects, then the resolving flow jumps until the first `.catch()`:
+Each double operation requires 1 second. The chain performs 3 double operations, and the result of each operation is used by the next operation.  
+
+![Chain of promises](./images/chain.svg)
+
+In a chain of promises, if any promise in the chain rejects, then the resolving flow jumps until the first `.catch()`, bypassing all `.then()` in between:
 
 ```javascript
 delayDouble(5)
-  .then(number => {
-    console.log(number); // logs 10
+  .then(value1 => {
+    console.log(value1); // logs 10
     return new Promise((_, reject) => reject(new Error('Oops!')));
   })
-  .then(number => {
-    console.log(number); // Skipped...
-    return delayDouble(number);
+  .then(value2 => {
+    console.log(value2); // Skipped...
+    return delayDouble(value2);
   })
-  .then(result => {
-    console.log(result); // Skipped...
+  .then(value3 => {
+    console.log(value3); // Skipped...
   })
   .catch(error => {
     console.log(error); // logs Error('Oops!')
