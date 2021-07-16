@@ -73,7 +73,7 @@ findPerson('Joker'); // logs true
 
 How to return the list of persons from `getList()` with a delay of 1 second? Same way, how would `findPerson(who)` access the list of persons that's returned with a delay?  
 
-Unfortunately, now things have become more complicated. Let's see a few approaches on how to solve that.  
+Unfortunately, now things have become more complicated. Let's see a few approaches to how to solve that.  
 
 ### 1.1 The callbacks approach
 
@@ -116,7 +116,7 @@ This *kind-of result* object that encapsulates (aka holds, manages, contains) th
 
 There isn't anything special about the promise object: it is still the result, just encapsulated in a promise because you can't have the result right now, but sometime later.  
 
-*The main idea of promises is to return data wrapped a promise ("kind-of data") from an asynchronous function exactly like from synchronous one because the synchronous code is easy to understand.*
+*The main idea of promises is to return data wrapped a promise ("kind-of data") from an asynchronous function exactly like from a synchronous one because the synchronous code is easy to understand.*
 
 ## 2. What is a promise
 
@@ -130,7 +130,7 @@ Each promise has a state, which can have one of the following values:
 
 The just created promise is in a *pending* state. The promise maintains the *pending* state as long as the asynchronous operation behind is in progress.  
 
-Then, depending on the asynchronous operation completion, the promise state changes to either:
+Then, depending on how the asynchronous operation completes, the promise state changes to either:
 
 A) *fulfilled* (when the async operation completed successfully)
 
@@ -157,7 +157,7 @@ const promise = new Promise((resolve, reject) => {
 
 In the special function, after the completion of the operation, you have to call either:
 
-1) If the async operation completed successfully, call `resolve(value)` (that would change the state of the promise to *fulfilled*)
+1) If the async operation is completed successfully, call `resolve(value)` (that would change the state of the promise to *fulfilled*)
 2) Otherwise, in case of an error, call `reject(error)` (that would change the state of the promise to *rejected*)
 
 Let's make a pause from dry theory and get back to the persons' example.  
@@ -236,7 +236,7 @@ findPerson('Joker'); // logs true
 
 Look closer at `const listPromise = getList()` statement: you can see that getting the promise is done using a synchronous statement, even if behind it runs an asynchronous operation.   
 
-That's the first big benefit that the promise provides (the second big benefit is [chaining](#3-chain-of-promises)): you can manipulate encapsulated async operation results in a synchronous way, without over-complicating the functions like the callbacks approach would do.  
+That's the promise first big benefit (the second big benefit is [chaining](#3-chain-of-promises)): you can manipulate encapsulated async operation results in a sync way, without over-complicating the functions like the callbacks approach would do.  
 
 ### 2.2 Extracting the promise rejection error
 
@@ -297,7 +297,7 @@ promise
   });
 ```
 
-Let's look closer at the approach B) since it's used more often.  
+Let's look closer at approach B) since it's used more often.  
 
 When using `promise.then(successCallback).catch(errorCallback)` chain, if `promise` resolves successfully then only `successCallback` is called:
 
@@ -410,7 +410,7 @@ While looking at the previous code samples that use promises, you might wonder:
 
 Your observation would be reasonable.  
 
-Fortunately, JavaScript has made a step forward in improving even more the asynchronous code by providing the `async/await` syntax: which is a really useful syntactic sugar on top of promises.  
+Fortunately, JavaScript has made a step forward in improving, even more, the asynchronous code by providing the `async/await` syntax: which is a really useful syntactic sugar on top of promises.  
 
 When possible, I highly recommend working with `async/await` syntax rather than dealing with raw promises.  
 
@@ -471,6 +471,6 @@ The promise is a placeholder holding the result of an asynchronous operation. If
 
 Promises can also create chains, which are useful in handling multiple dependent async operations.  
 
-If you'd like to read more about using promises, `async/await` from a practical side, I recommend checking [How to Use Fetch with async/await](/javascript-fetch-async-await/).  
+If you'd like to read more about promises and `async/await` from a practical side, I recommend checking [How to Use Fetch with async/await](/javascript-fetch-async-await/).  
 
 *Challenge: do you know the one important difference between `promise.then(fn1, fn2)` and `promise.then(fn1).catch(fn2)`? Please share your opinion in a comment below!*
