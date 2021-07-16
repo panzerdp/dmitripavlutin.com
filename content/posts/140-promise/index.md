@@ -116,7 +116,7 @@ This *kind-of list of persons* is then *kind-of checked if contains `who`*, and 
 
 This *kind-of result* object that encapsulates (aka holds, manages, contains) the result of an asynchronous operation is a *promise* object.  
 
-*Promises, wrapping the async result, can be returned synchronously from a function, assigned to variables, or used as arguments. The idea is to use asynchronous operation results synchronously, because synchronous code is easy to understand.*  
+*Promises, wrapping the async result, can be returned synchronously from a function, assigned to variables, or used as arguments. The idea is to use asynchronous operation results synchronously because synchronous code is easy to understand.*  
 
 ## 2. What is a promise
 
@@ -153,7 +153,7 @@ const promise = new Promise((resolve, reject) => {
 });
 ```
 
-`Promise` constructor accepts a special function that should contains the logic of the asynchronous operation.  
+`Promise` constructor accepts a special function that should contain the logic of the asynchronous operation.  
 
 In the special function, after the completion of the operation, you have to call either:
 
