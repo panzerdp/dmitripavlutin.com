@@ -426,7 +426,7 @@ Applying the `async/await` syntax on top of promises is relatively easy:
 
 ### 4.1 *await*-ing promise value
 
-If the promise is fullfilled `await myPromise` statement evaluates to the fulfill value: 
+If the promise is fulfilled `await myPromise` statement evaluates to the fulfill value: 
 
 ```javascript
 async function myFuncion() {
@@ -435,7 +435,7 @@ async function myFuncion() {
 }
 ```
 
-When JavaScript encounters `await myPromise`, where `myPromise` is in pending state, it's going to pause the function execution until `myPromise` gets either fulfilled or rejected. The function is marked with `async` is *interruptible*. 
+When JavaScript encounters `await myPromise`, where `myPromise` is pending, it's going to pause the function execution until `myPromise` gets either fulfilled or rejected. The function is marked with `async` is *interruptible*. 
 
 Now let's use `async/await` syntax to access the delayed list:
 
@@ -502,7 +502,7 @@ findPerson('Joker');
 
 [Try the demo.](https://codesandbox.io/s/romantic-buck-csiso?file=/src/index.js)
 
-This time the promise `await getList()` rejects. Right away the execution jumps into `catch(error)`: where `error` indicate the rejection reason &mdash; `new Error('Nobody here!')`.  
+This time the promise `await getList()` rejects. Right away the execution jumps into `catch(error)`: where `error` indicates the rejection reason &mdash; `new Error('Nobody here!')`.  
 
 ## 5. Conclusion
 
