@@ -2,7 +2,7 @@
 title: "What is a Promise in JavaScript?"
 description: "The post that I had wanted to read myself to understand promises."
 published: "2021-07-15T08:00Z"
-modified: "2021-07-15T08:00Z"
+modified: "2021-07-17T18:00Z"
 thumbnail: "./images/cover-6.png"
 slug: what-is-javascript-promise
 tags: ['javascript', 'promise']
@@ -38,10 +38,10 @@ function findPerson(who) {
 
   const found = list.some(person => person === who);
 
-  console.log(found);
+  console.log(found); // logs true
 }
 
-findPerson('Joker'); // logs true
+findPerson('Joker');
 ```
 
 [Try the demo.](https://codesandbox.io/s/ancient-dawn-j6jbq?file=/src/index.js)
@@ -87,11 +87,11 @@ function getList(callback) {
 function findPerson(who) {
   getList(list => {
     const found = list.some(person => person === who);
-    console.log(found);
+    console.log(found); // logs true
   });
 }
 
-findPerson('Joker'); // logs true
+findPerson('Joker');
 ```
 
 [Try the demo.](https://codesandbox.io/s/elated-jones-mflcv?file=/src/index.js)
@@ -223,11 +223,11 @@ function findPerson(who) {
   listPromise
     .then(list => {
       const found = list.some(person => person === who);  
-      console.log(found);
+      console.log(found); // logs true
     });
 }
 
-findPerson('Joker'); // logs true
+findPerson('Joker');
 ```
 
 [Try the demo.](https://codesandbox.io/s/focused-euler-87tlx?file=/src/index.js)
@@ -424,6 +424,10 @@ Applying the `async/await` syntax on top of promises is relatively easy:
 * Inside of the `async` function body, whenever you want to wait for a promise to resolve, use `await promiseExpression` syntax
 * An `async` function always returns a promise, which enables calling `async` functions inside `async` functions.  
 
+### 4.1 *await*-ing promise value
+
+If the promise is fullfilled `await myPromise` statement evaluates to the fulfill value: 
+
 ```javascript
 async function myFuncion() {
   // ...
@@ -431,13 +435,9 @@ async function myFuncion() {
 }
 ```
 
-The function is marked with `async` is *interruptible*. 
+When JavaScript encounters `await myPromise`, where `myPromise` is in pending state, it's going to pause the function execution until `myPromise` gets either fulfilled or rejected. The function is marked with `async` is *interruptible*. 
 
-When JavaScript encounters `await myPromise`, where `myPromise` is in pending state, it's going to pause the function execution until `myPromise` gets either fulfilled or rejected.  
-
-### 4.1 *await*-ing promises
-
-Now let's apply these rules to the previous code snippet:
+Now let's use `async/await` syntax to access the delayed list:
 
 ```javascript{7,8}
 function getList() {
@@ -450,10 +450,10 @@ async function findPerson(who) {
   const list = await getList();
 
   const found = list.some(person => person === who);
-  console.log(found);
+  console.log(found); // logs true
 }
 
-findPerson('Joker'); // logs true
+findPerson('Joker');
 ```
 
 [Try the demo.](https://codesandbox.io/s/prod-fire-3cfo3?file=/src/index.js)
@@ -462,8 +462,47 @@ findPerson('Joker'); // logs true
 
 Looking at the `async findPerson(who)` function you would notice how similar it is to the [synchornous version](#sync-code) of that function from the beginning of the post! That's the goal of promises and `async/await` syntax.  
 
+### 4.2 *catch*-ing promise error
 
-### 4.2 *catch* rejected promises
+If the promise rejects while being awaited, you can easily catch the error by wrapping `await myPromise` into a `try/catch` clause:
+
+```javascript
+async function myFuncion() {
+  // ...
+  try {
+    const value = await myPromise;
+  } catch (error) {
+    // check error
+  }
+}
+```
+
+For example, let's reject the promise that should return the list of persons:
+
+```javascript{14}
+function getList() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => reject(new Error('Nobody here!')), 1000);
+  });
+}
+
+async function findPerson(who) {
+  try {
+    const list = await getList();
+
+    const found = list.some(person => person === who);
+    console.log(found); 
+  } catch (error) {
+    console.log(error); // logs Error('Nobody here!')
+  }
+}
+
+findPerson('Joker');
+```
+
+[Try the demo.](https://codesandbox.io/s/romantic-buck-csiso?file=/src/index.js)
+
+This time the promise `await getList()` rejects. Right away the execution jumps into `catch(error)`: where `error` indicate the rejection reason &mdash; `new Error('Nobody here!')`.  
 
 ## 5. Conclusion
 
