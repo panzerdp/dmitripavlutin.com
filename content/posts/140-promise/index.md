@@ -464,7 +464,7 @@ findPerson('Joker');
 
 After the promise being fulfilled, the expression `async findPerson(who)` evaluates to the actual list of persons.  
 
-Looking at the `async findPerson(who)` function you would notice how similar it is to the [synchornous version](#sync-code) of that function from the beginning of the post! That's the goal of promises and `async/await` syntax.  
+Looking at the `async findPerson(who)` function you would notice how similar it is to the [synchronous version](#sync-code) of that function from the beginning of the post! That's the goal of promises and `async/await` syntax.  
 
 ### 4.2 *catch*-ing promise error
 
