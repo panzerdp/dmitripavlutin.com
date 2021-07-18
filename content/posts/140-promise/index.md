@@ -2,7 +2,7 @@
 title: "What is a Promise in JavaScript?"
 description: "The post that I had wanted to read myself to understand promises."
 published: "2021-07-15T08:00Z"
-modified: "2021-07-17T18:00Z"
+modified: "2021-07-18T07:30Z"
 thumbnail: "./images/cover-6.png"
 slug: what-is-javascript-promise
 tags: ['javascript', 'promise']
@@ -426,16 +426,18 @@ Applying the `async/await` syntax on top of promises is relatively easy:
 
 ### 4.1 *await*-ing promise value
 
-If the promise is fulfilled `await myPromise` statement evaluates to the fulfill value: 
+If the promise is fulfilled `await promise` statement evaluates to the fulfill value: 
 
 ```javascript
-async function myFuncion() {
+async function myFunction() {
   // ...
-  const value = await myPromise;
+  const value = await promise;
 }
 ```
 
-When JavaScript encounters `await myPromise`, where `myPromise` is pending, it's going to pause the function execution until `myPromise` gets either fulfilled or rejected. The function is marked with `async` is *interruptible*. 
+![JavaScript async await of promise](./images/async-await.svg)
+
+When JavaScript encounters `await promise`, where `promise` is pending, it's going to pause the function execution until `promise` gets either fulfilled or rejected.  
 
 Now let's use `async/await` syntax to access the delayed list:
 
@@ -458,24 +460,29 @@ findPerson('Joker');
 
 [Try the demo.](https://codesandbox.io/s/prod-fire-3cfo3?file=/src/index.js)
 
-`async findPerson(who)` now pauses its execution at the `await getList()` statement. The pause continues until the promise returned by `getList()` is either fulfilled or rejected (in the example the promise resolves in 1 second with the list of persons).  
+`async findPerson(who)` pauses its execution for 1 second at the `await getList()` statement, until the promise `getList()` is fulfilled.  
+
+After the promise being fulfilled, the expression `async findPerson(who)` evaluates to the actual list of persons.  
 
 Looking at the `async findPerson(who)` function you would notice how similar it is to the [synchornous version](#sync-code) of that function from the beginning of the post! That's the goal of promises and `async/await` syntax.  
 
 ### 4.2 *catch*-ing promise error
 
-If the promise rejects while being awaited, you can easily catch the error by wrapping `await myPromise` into a `try/catch` clause:
+If the promise rejects while being awaited, you can easily catch the error by wrapping `await promise` into a `try/catch` clause:
 
 ```javascript
-async function myFuncion() {
+async function myFunction() {
   // ...
   try {
-    const value = await myPromise;
+    const value = await promise;
   } catch (error) {
     // check error
+    error;
   }
 }
 ```
+
+![JavaScript async catch](./images/async-catch.svg)
 
 For example, let's reject the promise that should return the list of persons:
 
@@ -503,6 +510,35 @@ findPerson('Joker');
 [Try the demo.](https://codesandbox.io/s/romantic-buck-csiso?file=/src/index.js)
 
 This time the promise `await getList()` rejects. Right away the execution jumps into `catch(error)`: where `error` indicates the rejection reason &mdash; `new Error('Nobody here!')`.  
+
+### 4.3 *await*-ing chain
+
+You can use as many `await` statements as you need inside of an `async` function. For example, let's transform the example from chain of promises section to `async/await` syntax:
+
+```javascript
+function delayDouble(number) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(2 * number), 1000);
+  });
+}
+
+async function run() {
+  const value1 = await delayDouble(5);
+  console.log(value1); // logs 10
+  
+  const value2 = await delayDouble(value1);
+  console.log(value2); // logs 20
+
+  const value3 = await delayDouble(value2);
+  console.log(value3); // logs 40
+}
+
+run();
+```
+
+[Try the demo.](https://codesandbox.io/s/vigilant-currying-nliu0?file=/src/index.js)
+
+Clearly, `async/await` greatly simplifies handling multiple dependent async operations.  
 
 ## 5. Conclusion
 
