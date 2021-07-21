@@ -12,14 +12,14 @@ type: post
 
 In JavaScript you can check the status of the resolved promise using 2 approaches.  
 
-A) The first one is to just one method `promise.then()` but supply 2 callback arguments: the first for fullfillment and the second for rejection:
+A) Use 2 callbacks on `promise.then()`: the first for fullfillment and the second for rejection:
 
 ```javascript
 promise
   .then(success, error);
 ```
 
-B) The second approach, which is more popular, is to use a chain of `promise.then().catch()`:
+B) Use a chain of `promise.then().catch()`:
 
 ```javascript
 promise
@@ -27,7 +27,7 @@ promise
   .catch(error);
 ```
 
-Do these 2 approaches work exactly the same way, or there's a slight difference between them?
+Is there any difference between the 2 approaches? Let's find out!
 
 ## 1. What's the same
 
@@ -42,7 +42,9 @@ function error(err) {
 };
 ```
 
-At first sight, and in most cases that's true, both approaches work same way: if `promise` resolves successfully, `success` is called:
+`success()` function is used as a successful resolve callback, while `error()` to catch rejections.  
+
+In most cases both approaches work same way: if `promise` resolves successfully, then `success` is called in both approaches:
 
 ```javascript
 Promise.resolve('Hi!')
@@ -65,49 +67,49 @@ Promise.reject('Oops!')
 Promise.reject('Oops!')
   .then(success)
   .catch(error);
-// Logs 'Resolved: Oops!'
+// Logs 'Error: Oops!'
 ```
 
-As seen above, the behavior of both forms is the same.  
+In the above examples, the behavior of both approach is the same.  
 
 ## 2. What's the difference
 
-The difference is seen when the success callback of the resolved promise, for some reason (usually when the resolved value is invalid), returns a rejected promise.  
+The difference is seen when the `success()` callback of the resolved promise returns a rejected promise. That might happen when the resolved value is invalid.  
 
 Let's modify the success callback to return a rejected promise:
 
 ```javascript{3}
-function invalidSuccess(invalidValue) {
+function rejectSuccess(invalidValue) {
   console.log('Invalid success: ', invalidValue);
   return Promise.reject('Invalid!');
 }
 ```
 
-Now let's use `invalidSuccess` in both approaches:
+Now let's use `rejectSuccess` in both approaches:
 
  ```javascript{9}
 Promise.resolve('Zzz!')
-  .then(invalidSuccess, error);
+  .then(rejectSuccess, error);
 // Logs 'Invalid success: Zzzzz!'
 
 Promise.resolve('Zzz!')
-  .then(invalidSuccess)
+  .then(rejectSuccess)
   .catch(error);
 // Logs 'Invalid success: Zzzzz!'
 // Logs 'Error: Invalid!'
 ```
 
-`Promise.resolve('Zzz!').then(invalidSuccess, error)` only calls `invalidSuccess`, even if `invalidSuccess` returns a rejected promise.  
+`Promise.resolve('Zzz!').then(rejectSuccess, error)` only calls `rejectSuccess`, even if `rejectSuccess` returns a rejected promise. *`error` callback is not invoked*.  
 
-`Promise.resolve('Zzz!').then(invalidSuccess).catch(error)` calls `invalidSuccess` because the promise is resolved. However, because `invalidSuccess` returns a rejected promise, which is caugth by `.catch(error)`, the `error` callback is invoked too. *That's the main difference.*  
+`Promise.resolve('Zzz!').then(rejectSuccess).catch(error)` calls `rejectSuccess` because the promise is resolved. But `rejectSuccess` returns a rejected promise, &mdash; it is caugth by `.catch(error)` and the *`error` callback is invoked*. That's the difference.  
 
-## 3. Conclusion
+## 3. When to use
 
-The main difference between the forms `promise.then(success, error)` and `promise.then(success).catch(error)` is that in case if `success` callback returns a rejected promise in case of invalid data, then only the second form is going to catch that rejection.  
+That could be useful, for example, when you perform a fetch request to get a list of items, but the list must obligatory have at least one item.  
 
-That could be useful, for example, when you perform a fetch request to get a list of items, but for some reason the returned list is empty:
+So, in case if the list is empty, you could simply reject that list:
 
-```javascript
+```javascript{3-5}
 axios('/list.json')
   .then(list => {
     if (list.length === 0) {
@@ -120,4 +122,8 @@ axios('/list.json')
   });
 ```
 
-In the example above `catch(error)` would catch the request errors, and as well the manual validation of the list being non-empty.  
+In the example above `.catch(error)` would catch the request errors, as well the emply list error.  
+
+## 4. Conclusion
+
+The main difference between the forms `promise.then(success, error)` and `promise.then(success).catch(error)` is that in case if `success` callback returns a rejected promise, then only the second form is going to catch that rejection.  
