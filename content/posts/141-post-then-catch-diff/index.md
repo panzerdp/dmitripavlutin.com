@@ -10,9 +10,9 @@ recommended: ['what-is-javascript-promise', 'promise-all']
 type: post
 ---
 
-In JavaScript you can check the status of the resolved promise using 2 approaches.  
+In JavaScript, you can check the status of the resolved promise using 2 approaches.  
 
-A) Use 2 callbacks on `promise.then()`: the first for fullfillment and the second for rejection:
+A) Use 2 callbacks on `promise.then()` &mdash; the first for fullfillment and the second for rejection:
 
 ```javascript
 promise
@@ -44,7 +44,7 @@ function error(err) {
 
 `success()` function is used as a successful resolve callback, while `error()` to catch rejections.  
 
-In most cases both approaches work same way: if `promise` resolves successfully, then `success` is called in both approaches:
+In most cases both approaches work the same way: if `promise` resolves successfully, then `success` is called in both approaches:
 
 ```javascript
 Promise.resolve('Hi!')
@@ -70,7 +70,7 @@ Promise.reject('Oops!')
 // Logs 'Error: Oops!'
 ```
 
-In the above examples, the behavior of both approach is the same.  
+In the above examples, the behavior of both approaches is the same.  
 
 ## 2. What's the difference
 
@@ -122,7 +122,7 @@ axios('/list.json')
   });
 ```
 
-In the example above `.catch(error)` would catch the request errors, as well the emply list error.  
+In the above example `.catch(error)` would catch the request errors and the empty list error.  
 
 ## 4. Conclusion
 
