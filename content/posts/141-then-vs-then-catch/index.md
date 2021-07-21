@@ -1,8 +1,8 @@
 ---
 title: "JavaScript Promises: then(f,f) vs then(f).catch(f)"
 description: "What's the difference between promise.then(fn, fn) and promise.then(fn).catch(fn) when using JavaScript promises?"
-published: "2021-07-20T12:00Z"
-modified: "2021-07-20T12:00Z"
+published: "2021-07-21T08:30Z"
+modified: "2021-07-21T08:30Z"
 thumbnail: "./images/cover-4.png"
 slug: javascript-promises-then-vs-then-catch
 tags: ['javascript', 'promise']
@@ -36,13 +36,14 @@ Let's consider the callbacks we're going to use:
 ```javascript
 function success(value) {
   console.log('Resolved: ', value);
-};
+}
+
 function error(err) {
   console.log('Error: ', err);
-};
+}
 ```
 
-`success()` function is used as a successful resolve callback, while `error()` to catch rejections.  
+`success()` function would be called on fulfillments, while `error()` on rejections.  
 
 In most cases both approaches work the same way: if `promise` resolves successfully, then `success` is called in both approaches:
 
@@ -57,6 +58,8 @@ Promise.resolve('Hi!')
 // Logs 'Resolved: Hi!'
 ```
 
+[Try the demo.](https://codesandbox.io/s/youthful-satoshi-wh7el?file=/src/index.js)
+
  Otherwise, in case of rejection, `error` callback is called:
 
  ```javascript
@@ -69,6 +72,8 @@ Promise.reject('Oops!')
   .catch(error);
 // Logs 'Error: Oops!'
 ```
+
+[Try the demo.](https://codesandbox.io/s/priceless-surf-iyj8p?file=/src/index.js)
 
 In the above examples, the behavior of both approaches is the same.  
 
@@ -99,6 +104,8 @@ Promise.resolve('Zzz!')
 // Logs 'Error: Invalid!'
 ```
 
+[Try the demo.](https://codesandbox.io/s/elated-snowflake-y174u?file=/src/index.js)
+
 `Promise.resolve('Zzz!').then(rejectSuccess, error)` only calls `rejectSuccess`, even if `rejectSuccess` returns a rejected promise. *`error` callback is not invoked*.  
 
 `Promise.resolve('Zzz!').then(rejectSuccess).catch(error)` calls `rejectSuccess` because the promise is resolved. But `rejectSuccess` returns a rejected promise, &mdash; it is caugth by `.catch(error)` and the *`error` callback is invoked*. That's the difference.  
@@ -110,17 +117,22 @@ That could be useful, for example, when you perform a fetch request to get a lis
 So, in case if the list is empty, you could simply reject that list:
 
 ```javascript{3-5}
-axios('/list.json')
-  .then(list => {
+import axios from "axios";
+
+axios("/list.json")
+  .then(response => {
+    const list = response.data;
     if (list.length === 0) {
-      return Promise.reject(new Error('Empty list!'));
+      return Promise.reject(new Error("Empty list!"));
     }
     return list;
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err);
   });
 ```
+
+[Try the demo.](https://codesandbox.io/s/epic-breeze-m186p?file=/src/index.js)
 
 In the above example `.catch(error)` would catch the request errors and the empty list error.  
 
