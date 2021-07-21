@@ -10,16 +10,16 @@ recommended: ['what-is-javascript-promise', 'promise-all']
 type: post
 ---
 
-In JavaScript, you can check the status of the resolved promise using 2 approaches.  
+In JavaScript, you can access the fullfillment value or the rejection reason of a promise in 2 ways.  
 
-A) Use 2 callbacks on `promise.then()` &mdash; the first for fullfillment and the second for rejection:
+A) Use 2 callbacks on `promise.then(fn, fn)`:
 
 ```javascript
 promise
   .then(success, error);
 ```
 
-B) Use a chain of `promise.then().catch()`:
+B) Or use a chain of `promise.then(fn).catch(fn)`:
 
 ```javascript
 promise
@@ -116,7 +116,7 @@ That could be useful, for example, when you perform a fetch request to get a lis
 
 So, in case if the list is empty, you could simply reject that list:
 
-```javascript{3-5}
+```javascript{6-8}
 import axios from "axios";
 
 axios("/list.json")
