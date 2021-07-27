@@ -15,9 +15,7 @@ type: post
 In this post, I'm going to show you how to use `fetch()` API to both load JSON data (usually using GET method) or send JSON
 data (usually using a POST method).  
 
-## 1. *GET* JSON data
-
-Let's recall quickly how does `fetch()` API work.  
+## 1. Recall *fetch()*
 
 `fetch()` accepts 2 arguments: the URL or request object, while the second is an optional settings object.  
 
@@ -25,17 +23,25 @@ Let's recall quickly how does `fetch()` API work.
 const response = await fetch(urlOrRequest[, options]);
 ```
 
-What's important is that when calling `fetch()` with the desired option, it starts the request and returns right away a promise. When the request completes, the promise is going to resolve to the [response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object. 
+Calling `fetch()` starts the request and returns right away a promise. When the request completes, the promise is going to resolve to the [response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object.  
 
 Response object provides useful [methods](https://developer.mozilla.org/en-US/docs/Web/API/Response#methods) to extract from a multitude of formats. But to extract data from JSON you need just one method `response.json`:  
 
-```javascript
+```javascript{3}
 const response = await fetch('/data.json');
 
 const jsonData = await response.json();
 ```
 
-As an example, let's say that you'd like to fetch a simple list of names. You know that `/names.json` path on the server returns a list in JSON format. 
+`options`, the optional second argument, let's you configure the request. I'm interested in using the following options props:  
+
+* `options.method`: the HTTP method used to perform the request. Valid values are `'GET'`, `'POST'`, `'PATCH'`, `'PUT'`, `'DELETE'`. Defaults to `'GET'`
+* `options.body`: the body of the HTTP request
+
+
+## 2. *GET* JSON data
+
+Let's fetch a simple list of names. You know that `/names.json` path on the server returns a list in JSON format. 
 
 ```javascript
 async function loadNames() {
@@ -49,9 +55,13 @@ async function loadNames() {
 
 [Try the demo.]()
 
-That was, in a few words, how you can load and parse JSON data using `fetch()`.   
+`await fetch('/names.json')` starts the request, and returns the response object as soon as it is ready.  
 
-## 2. *POST* JSON data
+Then, from the response, you can parse the JSON returned from the server into a plain JavaScript object: `await response.json()`. 
+
+*Note: `response.json()` returns a promise.*    
+
+## 3. *POST* JSON data
 
 In case if you want to submit some JSON data to server, it gets a little trickier.  
 
@@ -72,7 +82,7 @@ async function pushName() {
 pushName();
 ```
 
-Take a closer look at `body` option value: `JSON.stringify(object)` utility function is used to transform a JavaScript object into a JSON string.  
+Take a look at `body` option value: `JSON.stringify(object)` utility function is used to transform a JavaScript object into a JSON string.  
 
 This is pretty much all the main information you need to know to load or push JSON data to server using `fetch()`.  
 
