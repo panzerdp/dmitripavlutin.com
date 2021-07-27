@@ -3,7 +3,7 @@ title: "How use fetch() with JSON"
 description: "How to use fetch() API to GET or POST JSON data."
 published: "2021-07-27T12:00Z"
 modified: "2021-07-27T12:00Z"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover-2.png"
 slug: fetch-with-json
 tags: ['fetch', 'json']
 recommended: ['javascript-fetch-async-await', 'timeout-fetch-request']
@@ -52,4 +52,27 @@ async function loadNames() {
 That was, in a few words, how you can load and parse JSON data using `fetch()`.   
 
 ## 2. *POST* JSON data
+
+In case if you want to submit some JSON data to server, it gets a little trickier.  
+
+First, you need to set a couple of parameters on the `fetch()`. Particularly indicate the HTTP method as `'POST'`, as well you need to set the `body` parameter as the stringified object (the actual JSON string).  
+
+```javascript{4-5}
+async function pushName() {
+  const object = { name: 'James Gordon' };
+  const response = await fetch('/names.json', {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+pushName();
+```
+
+Take a closer look at `body` option value: `JSON.stringify(object)` utility function is used to transform a JavaScript object into a JSON string.  
+
+This is pretty much all the main information you need to know to load or push JSON data to server using `fetch()`.  
 
