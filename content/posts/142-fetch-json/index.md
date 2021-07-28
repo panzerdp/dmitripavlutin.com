@@ -1,8 +1,8 @@
 ---
 title: "How use fetch() with JSON"
 description: "How to use fetch() API to GET or POST JSON data."
-published: "2021-07-27T12:00Z"
-modified: "2021-07-27T12:00Z"
+published: "2021-07-28T08:20Z"
+modified: "2021-07-28T08:20Z"
 thumbnail: "./images/cover-2.png"
 slug: fetch-with-json
 tags: ['fetch', 'json']
