@@ -23,8 +23,7 @@ Here's an example of JSON containing an object with props and values:
 }
 ```
 
-In this post, I'll guide you on how to use `fetch()` API to both load JSON data (usually using `GET` method) or post JSON
-data (usually using a `POST` method).  
+In this post, I'll guide you on how to use `fetch()` API to load (usually using `GET` method) or post data (usually using a `POST` method) JSON data.  
 
 ## 1. Recalling *fetch()*
 
@@ -96,9 +95,9 @@ const response = await fetch('/api/names', {
 
 `POST`-ing JSON data to the server is slightly trickier.  
 
-First, you need to set a couple of parameters on the `fetch()`. Particularly indicate the HTTP method as `'POST'`. 
+First, you need to set a couple of parameters on the `fetch()`, particularly indicate the HTTP `method` as `'POST'`. 
 
-Second, you need to set the `body` parameter with the stringified object (the actual JSON string).  
+Second, you need to set the `body` parameter with the object stringified as JSON.
 
 ```javascript{4-5}
 async function postName() {
@@ -145,7 +144,7 @@ const response = await fetch('/api/names', {
 
 In the examples above I was using the `options` argument of `fetch()` to set the `method`, `headers`, and `body`. 
 
-But sometimes you might want to encapsulate the request data into an object, especially when implementing a middleware. You can create request objects using the same options using the [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request) constructor.  
+But sometimes you might want to encapsulate the request data into an object, especially when implementing a [middleware](https://muniftanjim.dev/blog/basic-middleware-pattern-in-javascript/). You can create request objects using the same options using the [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request) constructor.  
 
 For example, let's post JSON data by creating a request object:
 
