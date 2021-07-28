@@ -12,65 +12,99 @@ type: post
 
 [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON), which is a simple format of structured data, has become a popular format to send data over the network.  
 
-In this post, I'm going to show you how to use `fetch()` API to both load JSON data (usually using GET method) or send JSON
-data (usually using a POST method).  
+Here's an example of JSON containing an object with props and values:
 
-## 1. Recall *fetch()*
+```json
+{
+  "name": "Joker",
+  "city": "Gotham",
+  "isVillain": true,
+  "friends": []
+}
+```
 
-`fetch()` accepts 2 arguments: the URL or request object, while the second is an optional settings object.  
+In this post, I'll guide you on how use `fetch()` API to both load JSON data (usually using `GET` method) or post JSON
+data (usually using a `POST` method).  
+
+## 1. Recalling *fetch()*
+
+`fetch()` accepts 2 arguments:  
 
 ```javascript
 const response = await fetch(urlOrRequest[, options]);
 ```
 
-Calling `fetch()` starts the request and returns right away a promise. When the request completes, the promise is going to resolve to the [response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object.  
+The first obligatory argument of `fetch()` is the URL of the request, or generally a [request](https://developer.mozilla.org/en-US/docs/Web/API/Request) object.    
 
-Response object provides useful [methods](https://developer.mozilla.org/en-US/docs/Web/API/Response#methods) to extract from a multitude of formats. But to extract data from JSON you need just one method `response.json`:  
-
-```javascript{3}
-const response = await fetch('/data.json');
-
-const jsonData = await response.json();
-```
-
-`options`, the optional second argument, let's you configure the request. I'm interested in using the following options props:  
+`options`, the optional second argument, let's you configure the request. The most useful options are:
 
 * `options.method`: the HTTP method used to perform the request. Valid values are `'GET'`, `'POST'`, `'PATCH'`, `'PUT'`, `'DELETE'`. Defaults to `'GET'`
 * `options.body`: the body of the HTTP request
 
+Calling `fetch()` starts a request and returns a promise. When the request completes, the promise resolves to the [response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object.  
+
+Response object provides useful [methods](https://developer.mozilla.org/en-US/docs/Web/API/Response#methods) to extract data from a multitude of formats. But to parse data from JSON you need just one method &mdash; `response.json()`.  
 
 ## 2. *GET* JSON data
 
-Let's fetch a simple list of names. You know that `/names.json` path on the server returns a list in JSON format. 
+Let's fetch from the path `/api/names` a list of persons in JSON format:
 
 ```javascript
 async function loadNames() {
-  const response = await fetch('/names.json');
+  const response = await fetch('/api/names');
   const names = await response.json();
 
   console.log(names); 
   // logs [{ name: 'Joker'}, { name: 'Batman' }]
 }
+
+loadNames();
 ```
 
-[Try the demo.]()
+`await fetch('/api/names')` starts a `GET` request, and exaluates to the response object when the request is complete.  
 
-`await fetch('/names.json')` starts the request, and returns the response object as soon as it is ready.  
+Then, from the server response, you can parse the JSON into a plain JavaScript object using `await response.json()` (note: `response.json()` returns a promise!).
 
-Then, from the response, you can parse the JSON returned from the server into a plain JavaScript object: `await response.json()`. 
+That's pretty much everything you need to fetch and parse the JSON from the server.  
 
-*Note: `response.json()` returns a promise.*    
+By default `fetch()` performs a `GET` request. But you can always indicate the HTTP method explicitely:
+
+```javascript{3}
+// ...
+const response = await fetch('/api/names', {
+  method: 'GET'
+});
+// ...
+```
+
+### 2.1 Explicitely asking for JSON
+
+Some API servers might work with multiple formats: JSON, XML, etc. That's why these servers might [require](https://stackoverflow.com/questions/43209924/rest-api-use-the-accept-application-json-http-header) you to indicate the format of the posted data.  
+
+To do so you need to use the `headers` option, and specifically set `Accept` header to `application/json` to explicitely ask for JSON:
+
+```javascript{3-5}
+// ...
+const response = await fetch('/api/names', {
+  headers: {
+    'Accept': 'application/json'
+  }
+});
+// ...
+```
 
 ## 3. *POST* JSON data
 
-In case if you want to submit some JSON data to server, it gets a little trickier.  
+`POST`-ing JSON data to server is slightly trickier.  
 
-First, you need to set a couple of parameters on the `fetch()`. Particularly indicate the HTTP method as `'POST'`, as well you need to set the `body` parameter as the stringified object (the actual JSON string).  
+First, you need to set a couple of parameters on the `fetch()`. Particularly indicate the HTTP method as `'POST'`. 
+
+Second, you need to set the `body` parameter with the stringified object (the actual JSON string).  
 
 ```javascript{4-5}
-async function pushName() {
+async function postName() {
   const object = { name: 'James Gordon' };
-  const response = await fetch('/names.json', {
+  const response = await fetch('/api/names', {
     method: 'POST',
     body: JSON.stringify(object)
   });
@@ -79,10 +113,66 @@ async function pushName() {
   console.log(responseText); // logs 'OK'
 }
 
-pushName();
+postName();
 ```
 
-Take a look at `body` option value: `JSON.stringify(object)` utility function is used to transform a JavaScript object into a JSON string.  
+Take a look at `body` option value. `JSON.stringify(object)` utility function is used to transform a JavaScript object into a JSON string.  
 
-This is pretty much all the main information you need to know to load or push JSON data to server using `fetch()`.  
+`body` option accepts a string, but not an  object.  
 
+This approach works also when perforning `POST`, but as well `PUT` or `PATCH` requests.  
+
+### 3.1 Explicitely pushing JSON
+
+Again, some servers might require you to indicate explicitely that you `POST` (or `PATCH`, or `PUT`) data in JSON format.  
+
+In such a case you can indicate the content type of data you're pushing, particularly setting `Content-Type` header to `application/json`.  
+
+```javascript{6-8}
+// ...
+const object = { name: 'James Gordon' };
+
+const response = await fetch('/api/names', {
+  method: 'POST',
+  body: JSON.stringify(object),
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+// ...
+```
+
+## 4. Using a request object
+
+In the examples above I was using the `options` argument of `fetch()` to set the `method`, `headers`, and `body`. 
+
+But sometimes you might want to encapsulate the request data into an object, especially when implementing a middleware. You can create request objects using the same options using the [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request) constructor.  
+
+For example, let's post JSON data by creating a request object:
+
+```javascript
+// ...
+const object = { name: 'James Gordon' };
+
+const request = new Request('/api/names', {
+  method: 'POST',
+  body: JSON.stringify(object),
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
+const response = await fetch(request);
+
+// ...
+```
+
+## 5. Conclusion
+
+This is pretty much all the main information you need to load or post JSON data to server using `fetch()`.  
+
+When loading data, make sure to extract and parse JSON to an actual object from the response using `const object = await response.json()` method.  
+
+But when posting JSON data, make sure to indicate the stringified object into a JSON string using `JSON.stringify(object)`. Assign the JSON to `body` option of the request.  
+
+Would you like to know more on how to use `fetch()`? I recommend checking [How to Use Fetch with async/await](/javascript-fetch-async-await/).
