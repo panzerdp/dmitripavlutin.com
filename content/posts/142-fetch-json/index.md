@@ -1,9 +1,9 @@
 ---
-title: "How use fetch() with JSON"
-description: "How to use fetch() API to GET or POST JSON data."
+title: "How to Use fetch() with JSON"
+description: "How to use fetch() API to load and post JSON data."
 published: "2021-07-28T08:20Z"
 modified: "2021-07-28T08:20Z"
-thumbnail: "./images/cover-2.png"
+thumbnail: "./images/cover-3.png"
 slug: fetch-with-json
 tags: ['fetch', 'json']
 recommended: ['javascript-fetch-async-await', 'timeout-fetch-request']
