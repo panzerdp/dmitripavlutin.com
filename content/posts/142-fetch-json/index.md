@@ -121,7 +121,7 @@ Take a look at `body` option value. `JSON.stringify(object)` utility function is
 
 This approach works also when performing `POST`, but as well `PUT` or `PATCH` requests.  
 
-### 3.1 Explicitly pushing JSON
+### 3.1 Explicitly posting JSON
 
 Again, some servers might require you to indicate explicitly that you `POST` (or `PATCH`, or `PUT`) data in JSON format.  
 
