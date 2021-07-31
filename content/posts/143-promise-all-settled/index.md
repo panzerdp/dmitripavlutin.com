@@ -30,7 +30,7 @@ const statusesPromise = Promise.allSettled(promises);
 
 After *all* the `promises` in the input array are being fulfilled or rejects, `statusPromise` resolves with an array where each item is either:
 
-1. `{ status: 'fulfilled', value: resolvedValue }` &mdash; if the corresponding promise resolved successfuly
-2. Or `{ status: 'rejected', reason: rejectionReason }` &mdash; if the corresponding promise rejected
+1. `{ status: 'fulfilled', value: value }` &mdash; if the corresponding promise resolved successfuly
+2. Or `{ status: 'rejected', reason: reason }` &mdash; if the corresponding promise rejected
 
-What's important is that the promise returned by `Promise.allSettled()` *always resolves*, no matter the resolve status of the promises in the input array.  
+The promise returned by `Promise.allSettled()` *always resolves with an array of statuses*, no matter promises get resolved or rejected in the input array.
