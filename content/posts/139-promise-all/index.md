@@ -1,12 +1,12 @@
 ---
 title: "How to Use Promise.all()"
-description: "How to use Promise.all() to perform parallel async operations."
+description: "How to use Promise.all() to perform parallel async operations in a fail-fast manner."
 published: "2021-07-06T07:00Z"
 modified: "2021-07-10T07:00Z"
 thumbnail: "./images/cover-6.png"
 slug: promise-all
 tags: ['javascript', 'promise', 'async']
-recommended: ['javascript-fetch-async-await', 'javascript-async-await']
+recommended: ['what-is-javascript-promise', 'promise-all-settled']
 type: post
 ---
 
