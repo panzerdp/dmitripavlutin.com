@@ -3,7 +3,7 @@ title: "How to Use Promise.allSettled()"
 description: "How to use Promise.allSettled() to perform parallel async operations and collect the statuses into an array."
 published: "2021-08-03T12:00Z"
 modified: "2021-08-03T12:00Z"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover-2.png"
 slug: promise-all-settled
 tags: ['javascript', 'promise', 'async']
 recommended: ['promise-all', 'what-is-javascript-promise']
@@ -20,18 +20,18 @@ Let's see how `Promise.allSettled()` works.
 
 ### 1. *Promise.allSettled()*
 
-The helper function accepts a single argument: an array (or generally an iterable) of promises.
+The function accepts a single argument: an array (or generally an iterable) of promises, and right away returns a special promise.  
 
 ```javascript
 const statusesPromise = Promise.allSettled(promises);
 ```
 
-When *all* the `promises` in the input array are being fulfilled or rejected, in parallel, the returned promise `statusesPromise` resolves with an array where each item is either:
+When *all* the `promises` in the input array are being fulfilled or rejected, in parallel, the returned promise `statusesPromise` resolves with an array where each item is a status object:
 
 1. `{ status: 'fulfilled', value: value }` &mdash; if the corresponding promise has fulfilled
 2. Or `{ status: 'rejected', reason: reason }` &mdash; if the corresponding promise has rejected
 
-The promise returned by `Promise.allSettled()` *always resolves with an array of statuses*, no matter promises get resolved or rejected in the input array.
+The promise returned by `Promise.allSettled()` *always resolves with an array of statuses*, no matter if the input promises get resolved or rejected.  
 
 ## 2. Fetching fruits and vegetables
 
@@ -82,12 +82,68 @@ console.log(statuses);
 
 [Try the demo.](https://codesandbox.io/s/all-resolved-yyc0l?file=/src/index.js)
 
-`Promise.allSettled([...])` returns a promise `statusesPromise` that resolves in 1 second, right after the list of vegetables and fruits were resolved in parallel during 1 second.  
+`Promise.allSettled([...])` returns a promise `statusesPromise` that resolves in 1 second, right after the list of vegetables and fruits were resolved in parallel.  
 
+The resolved value of promise `productsPromise` is an array containing the statuses. 
 
+The first item of the array contains the fulfilled status with vegetables: `{ status: 'fulfilled', value: ['potatoes', 'tomatoes'] }`.  
+
+Same way, the second item is the fulfilled status of fruits: `{ status: 'fulfilled', value: ['oranges', 'apples'] }`.  
 
 ### 2.2 One promise rejected
 
+Let's imagine the situation when there are no more fruits at the grocerry. In such case, let's reject the promise that returns fruits. How would `Promise.allSettled()` would work in such case?  
+
+```javascript{1-4}
+const statusesPromise = Promise.allSettled([
+  resolveTimeout(['potatoes', 'tomatoes'], 1000),
+  rejectTimeout(new Error('Out of fruits!'), 1000)
+]);
+
+// wait...
+const statuses = await productsPromise;
+
+// after 1 second
+console.log(statuses); 
+// [
+//   { status: 'fulfilled', value: ['potatoes', 'tomatoes'] },
+//   { status: 'rejected', reason: Error('Out of fruits!') }
+// ]
+```
+
+After 1 second passing, `productsPromise`, which is returned `Promise.allSettled([...])` resolves with an array of statuses.  
+
+The first item of the array, since vegetables promise resolved successfully, is `{ status: 'fulfilled', value: ['potatoes', 'tomatoes'] }`.  
+
+The second item, because fruits promise rejected with an error, is a rejection status: `{ status: 'rejected', reason: Error('Out of fruits') }`.  
+
+Note that even thought the second promise in the input array rejected, the `statusesPromise` was still resolved successfully with an array of statuses.  
+
 ### 2.3 All promises rejected
 
+What is the grocerry is oout of vegetables and out of fruits? In such case both promises reject:
+
+
+```javascript{1-4}
+const statusesPromise = Promise.allSettled([
+  resolveTimeout(new Error('Out of vegetables!'), 1000),
+  rejectTimeout(new Error('Out of fruits!'), 1000)
+]);
+
+// wait...
+const statuses = await productsPromise;
+
+// after 1 second
+console.log(statuses); 
+// [
+//   { status: 'fulfilled', reason: Error('Out of vegetables!')  },
+//   { status: 'rejected', reason: Error('Out of fruits!') }
+// ]
+```
+
+In such case `statusesPromise` still gets resolves with an array of statues, which, however, are statuses of rejected promises with the corresponding reason.  
+
 ## 3. Conclusion
+
+`Promise.allSettled(promise)` let's you resolve and collect the statuses of the promises supplied as an array.  
+
