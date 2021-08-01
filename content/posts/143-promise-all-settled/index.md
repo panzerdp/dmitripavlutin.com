@@ -59,7 +59,7 @@ function rejectTimeout(reason, delay) {
 
 Let's use these helper functions to experiment how `Promise.allSettled()` behaves.  
 
-### 2.1 All promises fulfilled
+### 2.1 All promises fulfill
 
 For example, let's access, at the same time, the lists of vegetables and fruits available at the local grocerry store. Accessing each list is an asynchornous operation:  
 
@@ -90,7 +90,7 @@ The first item of the array contains the fulfilled status with vegetables: `{ st
 
 Same way, the second item is the fulfilled status of fruits: `{ status: 'fulfilled', value: ['oranges', 'apples'] }`.  
 
-### 2.2 One promise rejected
+### 2.2 One promise rejects
 
 Let's imagine the situation when there are no more fruits at the grocerry. In such case, let's reject the promise that returns fruits. How would `Promise.allSettled()` would work in such case?  
 
@@ -119,7 +119,7 @@ The second item, because fruits promise rejected with an error, is a rejection s
 
 Note that even thought the second promise in the input array rejected, the `statusesPromise` was still resolved successfully with an array of statuses.  
 
-### 2.3 All promises rejected
+### 2.3 All promises reject
 
 What is the grocerry is oout of vegetables and out of fruits? In such case both promises reject:
 
