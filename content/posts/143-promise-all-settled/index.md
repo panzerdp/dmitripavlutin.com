@@ -107,9 +107,9 @@ The promise `statusesPromise` resolves to an array containing the statuses:
 
 ### 2.2 One promise rejected
 
-Imagine there are no more fruits at the grocerry. In such case, let's reject the promise that returns fruits. 
+Imagine there are no more fruits at the grocery. In such a case, let's reject the promise that returns fruits. 
 
-How would `Promise.allSettled()` would work in such case?  
+How would `Promise.allSettled()` would work in such a case?  
 
 ```javascript{3}
 const statusesPromise = Promise.allSettled([
@@ -135,7 +135,7 @@ The promise returned by `Promise.allSettled([...])` resolves to an array of stat
 1. The first item of the array, since vegetables promise resolved successfully, is `{ status: 'fulfilled', value: ['potatoes', 'tomatoes'] }`  
 2. The second item, because fruits promise rejected with an error, is a rejection status: `{ status: 'rejected', reason: Error('Out of fruits') }`.  
 
-Note that even thought the second promise in the input array rejected, the `statusesPromise` still resolves successfully with an array of statuses.  
+Note that even though the second promise in the input array is rejected, the `statusesPromise` still resolves successfully with an array of statuses.  
 
 ### 2.3 All promises rejected
 
@@ -160,11 +160,11 @@ console.log(statuses);
 
 [Try the demo.](https://codesandbox.io/s/all-rejected-z4jee?file=/src/index.js)
 
-In such case `statusesPromise` still resolves succesfully to an array of statuses. However, the array contains the statuses of rejected promises.   
+In such a case `statusesPromise` still resolves successfully to an array of statuses. However, the array contains the statuses of rejected promises.   
 
 ## 3. Conclusion
 
-`Promise.allSettled(promise)` let's you run promises in parallel and collect the settle statuses into an aggregate array. 
+`Promise.allSettled(promise)` lets you run promises in parallel and collect the settle statuses into an aggregate array. 
 
-It works great when you need to perform parallel and independent asynchronous operations, when you need to awlays collect all the results even if some async operations could fail.  
+It works great when you need to perform parallel and independent asynchronous operations when you need to always collect all the results even if some async operations could fail.  
 
