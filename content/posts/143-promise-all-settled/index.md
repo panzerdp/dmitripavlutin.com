@@ -29,6 +29,8 @@ When *all* input `promises` are being fulfilled or rejected, in parallel, `statu
 1. `{ status: 'fulfilled', value: value }` &mdash; if the corresponding promise has fulfilled
 2. Or `{ status: 'rejected', reason: reason }` &mdash; if the corresponding promise has rejected
 
+![Promise.allSettled() in JavaScript](./images/all-settled.svg)
+
 After all input `promises` are being resolved, you can extract their statuses using a `then`-able syntax:
 
 ```javascript
@@ -46,8 +48,6 @@ statuses; // [ { status: '...', value: '...' }, ...]
 ```
 
 The promise returned by `Promise.allSettled()` *always fulfills with an array of statuses*, no matter if the input promises get resolved or rejected. 
-
-In other words, the promise returned by `Promise.allSettled()` *never rejects*.  
 
 ## 2. Fetching fruits and vegetables
 
@@ -168,3 +168,4 @@ In such a case `statusesPromise` still resolves successfully to an array of stat
 
 It works great when you need to perform parallel and independent asynchronous operations when you need to always collect all the results even if some async operations could fail.  
 
+*Challenge: do you know cases when `Promise.allSettled()` can return a rejected promise? If so, please write a comment below!*
