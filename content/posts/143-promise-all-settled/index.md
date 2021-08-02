@@ -118,7 +118,7 @@ const statusesPromise = Promise.allSettled([
 ]);
 
 // wait...
-const statuses = await productsPromise;
+const statuses = await statusesPromise;
 
 // after 1 second
 console.log(statuses); 
@@ -127,6 +127,8 @@ console.log(statuses);
 //   { status: 'rejected', reason: Error('Out of fruits!') }
 // ]
 ```
+
+[Try the demo.](https://codesandbox.io/s/one-rejected-ij3uo?file=/src/index.js)
 
 The promise returned by `Promise.allSettled([...])` resolves to an array of statuses after 1 second:    
 
@@ -146,7 +148,7 @@ const statusesPromise = Promise.allSettled([
 ]);
 
 // wait...
-const statuses = await productsPromise;
+const statuses = await statusesPromise;
 
 // after 1 second
 console.log(statuses); 
@@ -155,6 +157,8 @@ console.log(statuses);
 //   { status: 'rejected', reason: Error('Out of fruits!') }
 // ]
 ```
+
+[Try the demo.](https://codesandbox.io/s/all-rejected-z4jee?file=/src/index.js)
 
 In such case `statusesPromise` still resolves succesfully to an array of statuses. However, the array contains the statuses of rejected promises.   
 
