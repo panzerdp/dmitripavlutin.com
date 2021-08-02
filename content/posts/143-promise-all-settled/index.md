@@ -1,9 +1,9 @@
 ---
 title: "How to Use Promise.allSettled()"
-description: "How to use Promise.allSettled() to perform parallel async operations and collect the statuses into an array."
+description: "How to use Promise.allSettled() to perform parallel async operations and collect the promises statuses into an array."
 published: "2021-08-03T12:00Z"
 modified: "2021-08-03T12:00Z"
-thumbnail: "./images/cover-2.png"
+thumbnail: "./images/cover-3.png"
 slug: promise-all-settled
 tags: ['javascript', 'promise', 'async']
 recommended: ['promise-all', 'what-is-javascript-promise']
