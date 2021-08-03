@@ -1,8 +1,8 @@
 ---
 title: "How to Use Promise.allSettled()"
 description: "How to use Promise.allSettled() to perform parallel async operations and collect the promises statuses into an array."
-published: "2021-08-03T12:00Z"
-modified: "2021-08-03T12:00Z"
+published: "2021-08-03T07:40Z"
+modified: "2021-08-03T07:40Z"
 thumbnail: "./images/cover-3.png"
 slug: promise-all-settled
 tags: ['javascript', 'promise', 'async']
@@ -24,7 +24,7 @@ The function accepts an array (or generally an iterable) of promises as an argum
 const statusesPromise = Promise.allSettled(promises);
 ```
 
-When *all* input `promises` are being fulfilled or rejected, in parallel, `statusesPromise` resolves to an array having the statuses of the input promises:
+When *all* input `promises` are being fulfilled or rejected, in parallel, `statusesPromise` resolves to an array having their statuses:
 
 1. `{ status: 'fulfilled', value: value }` &mdash; if the corresponding promise has fulfilled
 2. Or `{ status: 'rejected', reason: reason }` &mdash; if the corresponding promise has rejected
@@ -35,7 +35,7 @@ After all input `promises` are being resolved, you can extract their statuses us
 
 ```javascript
 statusesPromise.then(statuses => {
- statuses; // [ { status: '...', value: '...' }, ..]
+ statuses; // [{ status: '...', value: '...' }, ...]
 });
 ```
 
@@ -44,10 +44,10 @@ or using an `async/await` syntax:
 ```javascript
 const statuses = await statusesPromise;
 
-statuses; // [ { status: '...', value: '...' }, ...]
+statuses; // [{ status: '...', value: '...' }, ...]
 ```
 
-The promise returned by `Promise.allSettled()` *always fulfills with an array of statuses*, no matter if the input promises get resolved or rejected. 
+The promise returned by `Promise.allSettled()` *always fulfills with an array of statuses*, no matter if some (or even all!) input promises are rejected. 
 
 ## 2. Fetching fruits and vegetables
 
@@ -77,7 +77,7 @@ Let's use these helper functions to experiment on `Promise.allSettled()`.
 
 ### 2.1 All promises fulfilled
 
-Let's access in parallel the lists of vegetables and fruits available at the local grocerry store. Accessing each list is an asynchornous operation:  
+Let's access in parallel the vegetables and fruits available at the local grocerry store. Accessing each list is an asynchornous operation:  
 
 ```javascript{2,3}
 const statusesPromise = Promise.allSettled([
@@ -98,7 +98,7 @@ console.log(statuses);
 
 [Try the demo.](https://codesandbox.io/s/all-resolved-yyc0l?file=/src/index.js)
 
-`Promise.allSettled([...])` returns a promise `statusesPromise` that resolves in 1 second, right after the list of vegetables and fruits were resolved, in parallel.  
+`Promise.allSettled([...])` returns a promise `statusesPromise` that resolves in 1 second, right after vegetables and fruits were resolved, in parallel.  
 
 The promise `statusesPromise` resolves to an array containing the statuses: 
 
@@ -107,7 +107,7 @@ The promise `statusesPromise` resolves to an array containing the statuses:
 
 ### 2.2 One promise rejected
 
-Imagine there are no more fruits at the grocery. In such a case, let's reject the promise that returns fruits. 
+Imagine there are no more fruits at the grocery. In such a case, let's reject the fruits' promise.  
 
 How would `Promise.allSettled()` would work in such a case?  
 
@@ -135,11 +135,11 @@ The promise returned by `Promise.allSettled([...])` resolves to an array of stat
 1. The first item of the array, since vegetables promise resolved successfully, is `{ status: 'fulfilled', value: ['potatoes', 'tomatoes'] }`  
 2. The second item, because fruits promise rejected with an error, is a rejection status: `{ status: 'rejected', reason: Error('Out of fruits') }`.  
 
-Note that even though the second promise in the input array is rejected, the `statusesPromise` still resolves successfully with an array of statuses.  
+Even though the second promise in the input array is rejected, the `statusesPromise` still resolves successfully with an array of statuses.  
 
 ### 2.3 All promises rejected
 
-What if the grocerry is out of both vegetables and fruits? In such case both promises should reject:
+What if the grocerry is out of both vegetables and fruits? In such case both promises reject:
 
 ```javascript{2-3}
 const statusesPromise = Promise.allSettled([
@@ -164,8 +164,8 @@ In such a case `statusesPromise` still resolves successfully to an array of stat
 
 ## 3. Conclusion
 
-`Promise.allSettled(promise)` lets you run promises in parallel and collect the settle statuses into an aggregate array. 
+`Promise.allSettled(promises)` lets you run promises in parallel and collect the statuses (either fulfilled or reject) into an aggregate array. 
 
-It works great when you need to perform parallel and independent asynchronous operations when you need to always collect all the results even if some async operations could fail.  
+`Promise.allSettled(...)` works great when you need to perform parallel and independent asynchronous operations and collect all the results even if some async operations could fail.  
 
-*Challenge: do you know cases when `Promise.allSettled()` can return a rejected promise? If so, please write a comment below!*
+*Challenge: do you know cases when `Promise.allSettled()` returns a rejected promise? If so, please write a comment below!*
