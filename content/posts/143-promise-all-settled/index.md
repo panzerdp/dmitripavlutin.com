@@ -86,7 +86,7 @@ const statusesPromise = Promise.allSettled([
 ]);
 
 // wait...
-const statuses = await productsPromise;
+const statuses = await statusesPromise;
 
 // after 1 second
 console.log(statuses); 
