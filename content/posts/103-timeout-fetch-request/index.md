@@ -48,7 +48,7 @@ In the [demo](https://codesandbox.io/s/strange-merkle-xqs7n?file=/src/index.html
 The following `fetchWithTimeout()` is an improved version of `fetch()` that creates requests with a configurable timeout:
 
 ```javascript
-async function fetchWithTimeout(resource, options) {
+async function fetchWithTimeout(resource, options = {}) {
   const { timeout = 8000 } = options;
   
   const controller = new AbortController();
