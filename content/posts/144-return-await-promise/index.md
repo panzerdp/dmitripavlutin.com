@@ -126,3 +126,9 @@ run(); // Uncaught Error: Cannot divide by 0
 
 This time, however, `catch(error) { ... }` doesn't catch the rejected promise because of the missing `await`.  
 
+## 3. Conclusion
+
+If you want to catch the rejection of the asynchronous operation result you're returning from an asynchronous function,
+then you should defintely use `return await promise` expression, by adding deliberately the `await`.  
+
+`catch(error) {...}` statement caught only *awaited* rejected promises.  
