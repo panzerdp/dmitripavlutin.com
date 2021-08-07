@@ -10,8 +10,8 @@ recommended: ['promise-all', 'what-is-javascript-promise']
 type: post
 ---
 
-When returning from an asynchronous function a `promise`, should you wait for that promise to resolve `return await promise`, or should you return it right 
-await `return promise`?  
+When returning from an asynchronous function a `promise`, you can wait for that promise to resolve `return await promise`, or you can return it directly 
+`return promise`:  
 
 ```javascript{3,10}
 function func1() {
@@ -27,11 +27,11 @@ async function func2() {
 }
 ```
 
-Is there any difference between using and not using `await` keyword? Let's find the answer.  
+Both of the expressions actually work. But are there any situations that make a difference between the two expressions? Let's find out!
 
 ## 1. When there's no difference
 
-To find the difference between the 2 expressions, I'm going to use a helper function `delayedDivide(n1, n2)`.  
+To find the difference between the 2 expressions (`return await promise` vs `return promise`), I'm going to use a helper function `delayedDivide(n1, n2)`.  
 
 The function divides 2 numbers, and returns the division result wrapped in a promise. In case if the second (divisor) argument is `0`, the function returns a rejected promise
 because it is not possible to divide by `0`.  
@@ -46,9 +46,11 @@ function promisedDivision(n1, n2) {
 }
 ```
 
-Let’s use the 2 approaches mentioned in the introduction: one by using return `await promisedDivision(6, 2)` and the second as `return promiseDivision()`.
+Having the helper function defined, now let's try to use it.  
 
-```javascript{2,7}
+To check how the first expression works (`return await promise`), I'm going to return from the following function the expression: `return await promisedDivision(6, 2)`:  
+
+```javascript{2}
 async function divideWithAwait() {
   return await promisedDivision(6, 2);
 }
@@ -64,7 +66,7 @@ As expected, `await divideWithAwait()` evaluates to the division result `3`.
 
 The second approach doesn't use an `await` keyword:
 
-```javascript{2,7}
+```javascript{2}
 async function divideWithoutAwait() {
   return promisedDivision(6, 2);
 }
@@ -82,23 +84,26 @@ So... where's the difference? Let's search more!
 
 ## 2. When there's a difference
 
-Now let's say that you'd like to deliberately divide by `0`, and try to catch the rejected promise. 
+Now let's deliberately divide by `0`, and try to catch the rejected promise. 
 
-Let's use the 2 approaches mentioned in the introduction: one by using `return await promisedDivision(5, 0)` and the second with `return promiseDivision(5, 0)`.  
+Let's use the 2 approaches again, but this time try to catch any rejected promises using the `catch(error) { ... }`.   
+
+
 
 ```javascript{3}
 async function divideWithAwait() {
   try {
     return await promisedDivision(5, 0);
   } catch (error) {
-    console.log(error); // Rejection caught
+    // Rejection caught
+    console.log(error); // logs Error('Cannot divide by 0')
   }
 }
 
 async function run() {
   const result = await divideWithAwait();
 }
-run(); // logs Error('Cannot divide by 0')
+run();
 ```
 
 [Try the demo.](https://codesandbox.io/s/with-await-ihxg5?file=/src/index.js)
@@ -131,4 +136,4 @@ This time, however, `catch(error) { ... }` doesn't catch the rejected promise be
 If you want to catch the rejection of the asynchronous operation result you're returning from an asynchronous function,
 then you should defintely use `return await promise` expression, by adding deliberately the `await`.  
 
-`catch(error) {...}` statement caught only *awaited* rejected promises.  
+`catch(error) {...}` statement catches only *awaited* rejected promises.  
