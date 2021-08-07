@@ -142,9 +142,9 @@ Now you can easily see the main difference between using `return await promise` 
 
 ## 3. Conclusion
 
-In most of the situations, especially if the promises successfully resolve, there isn't a big difference between using `return await promise` and `return promise`.  
+In most situations, especially if the promises successfully resolve, there isn't a big difference between using `return await promise` and `return promise`.  
 
 However, if you want to catch the rejected promise you're returning from an asynchronous function,
-then you should defintely use `return await promise` expression, by adding deliberately the `await`.  
+then you should definitely use `return await promise` expression and add deliberately the `await`.  
 
 `catch(error) {...}` statement catches only *awaited* rejected promises in `try {...}` statement.  
