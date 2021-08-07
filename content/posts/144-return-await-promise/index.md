@@ -27,7 +27,7 @@ async function func2() {
 }
 ```
 
-Both of the expressions actually work. But are there cases that make a difference between the two expressions? Let's find out!
+Both of the expressions actually work. But are there cases that make a difference between them? Let's find out!
 
 ## 1. Same behavior
 
