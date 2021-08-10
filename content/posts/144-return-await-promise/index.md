@@ -142,7 +142,7 @@ This time, however, `catch(error) { ... }` doesn't catch the rejected promise.
 
 Now you can easily see the main difference between using `return await promise` and `return promise`:
 
-> When being wrapped into `try { ... }`, the nearby `catch(error) { ... }` catch the rejected `promise` only for the expression `return await promise`.  
+> When being wrapped into `try { ... }`, the nearby `catch(error) { ... }` catches the rejected `promise` only if the promise is *awaited* (which is true for `return await promise`).  
 
 ## 3. Conclusion
 
