@@ -1,8 +1,8 @@
 ---
 title: "'return await promise' vs 'return promise' in JavaScript"
 description: "Is there any difference between using 'return await promise' and 'return promise' in asynchronous JavaScript functions?"
-published: "2021-08-10T12:00Z"
-modified: "2021-08-10T12:00Z"
+published: "2021-08-10T06:40Z"
+modified: "2021-08-10T06:40Z"
 thumbnail: "./images/cover-3.png"
 slug: return-await-promise-javascript
 tags: ['javascript', 'promise', 'async']
@@ -29,7 +29,7 @@ async function func2() {
 
 You'll see shortly that *both* expressions do work. 
 
-However, are there cases when these expression behaves differently? Let's find out!
+However, are there cases when these expressions behave differently? Let's find out!
 
 ## 1. Same behavior
 
@@ -142,7 +142,7 @@ This time, however, `catch(error) { ... }` doesn't catch the rejected promise.
 
 Now you can easily see the main difference between using `return await promise` and `return promise`:
 
-> When being wrapped into `try { ... }`, the nearby `catch(error) { ... }` catche the rejected `promise` only for the expression `return await promise`.  
+> When being wrapped into `try { ... }`, the nearby `catch(error) { ... }` catch the rejected `promise` only for the expression `return await promise`.  
 
 ## 3. Conclusion
 
