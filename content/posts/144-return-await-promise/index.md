@@ -3,7 +3,7 @@ title: "'return await promise' vs 'return promise' in JavaScript"
 description: "Is there any difference between using 'return await promise' and 'return promise' in asynchronous JavaScript functions?"
 published: "2021-08-10T06:40Z"
 modified: "2021-08-10T06:40Z"
-thumbnail: "./images/cover-3.png"
+thumbnail: "./images/cover.png"
 slug: return-await-promise-javascript
 tags: ['javascript', 'promise', 'async']
 recommended: ['promise-all', 'what-is-javascript-promise']
