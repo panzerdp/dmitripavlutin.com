@@ -5,7 +5,7 @@ published: "2020-06-16T09:00Z"
 modified: "2020-10-16T07:15Z"
 thumbnail: "./images/cover.png"
 slug: check-if-object-has-property-javascript
-tags: ["javascript", "object"]
+tags: ["javascript", "object", "property"]
 recommended: ["access-object-properties-javascript", "javascript-defined-variable-checking"]
 type: post
 ---
