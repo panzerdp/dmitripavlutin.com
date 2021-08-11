@@ -19,17 +19,17 @@ const employee = {
 };
 ```
 
-The `user` variable contains an object describing an employee. The object contains 3 properties that
-describe various employee data: `name`, `position` and years of `experience`.  
+The `user` variable contains an object describing an employee. The object contains 2 properties that
+describe employee data: `name` and `position`.  
 
 Sometimes, however, you need to remove properties from an object. For example, how would you remove the `position` property from the
 `employee` object?  
 
-Let's see 2 common ways on how to remove properties from an object in JavaScript: using the `delete` operator (mutable way) and object rest (immutable way).  
+Let's see 2 common ways on how to remove properties from an object in JavaScript &mdash; using the `delete` operator (mutable way) and object destructuring combined with object rest (immutable way).  
 
 ## 1. *delete* operator
 
-`delete` is a special operator in JavaScript that removes a property from an object. Its single operand usually accepts a [property accessor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors) that indicates what specific property to remove:
+`delete` is a special operator in JavaScript that removes a property from an object. Its single operand usually accepts a [property accessor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors) to indicate what property to remove:
 
 A) Remove using a dot property accessor:
 ```javascript
@@ -85,7 +85,7 @@ console.log(employee); // { name: 'John Smith' }
 
 ## 2. Object destructuring with rest syntax
 
-Another approach you can use to remove properties, but in an immutable manner without altering the original object, is to use the [object destructuring and rest syntax](/javascript-object-destructuring/#8-rest-object-after-destructuring).  
+Another approach to removing properties, but in an immutable manner without altering the original object, is to use the [object destructuring and rest syntax](/javascript-object-destructuring/#8-rest-object-after-destructuring).  
 
 The idea is simple: destructure the object to the property you want to remove, and the remaining properties collect into a rest object:
 
@@ -102,7 +102,7 @@ const { [name]: removedProperty, ...restObject } = object;
 
 After applying the destructuring and rest syntax, `restObject` is going to contain the same properties as `object`, only without the removed property.  
 
-For example, let's remove the property `position` from `employee1` object:
+For example, let's remove the property `position` from `employee` object:
 
 ```javascript{6}
 const employee = {
@@ -120,12 +120,11 @@ console.log(employee);
 
 [Try the demo.](https://codesandbox.io/s/destructuring-rest-uh68c?file=/src/index.js)
 
-The statement `const { position, ...employeeRest } = employee1` destructures the `employee1` objects and collects the properties into a rest object `employee2` without including the `position` property. 
+The statement `const { position, ...employeeRest } = employee` destructures the `employee` objects and collects the properties into a rest object `employeeRest` without including the `position` property. 
 
-Object destructuring with rest syntax is an immutable way of property removal: the original `employee1` object isn't mutated. Rather a new object `employee2` is created which contains all the properties of `employee1` but the removed one `position`.  
+Object destructuring with rest syntax is an immutable way of property removal: the original `employee` object isn't mutated. Rather a new object `employeeRest` is created which contains all the properties of `employee` but without the removed `position`.  
 
-In case if you determine the property to remove dynamically, then you can use use the dynamic property name destructuring syntax:
-
+If the property name to remove is determined dynamically, then you can use use the dynamic property name destructuring syntax:
 
 ```javascript{7}
 const employee = {
@@ -141,7 +140,7 @@ console.log(employeeRest); // { name: 'John Smith' }
 
 [Try the demo.](https://codesandbox.io/s/destructuring-rest-dynamic-m4jgf)
 
-`const { [name]: removedProperty, ...employeeRest } = employee` let's you the same way remove a property with dynamica name, and collect the reamined properties into `employeeRest` object.  
+`const { [name]: removedProperty, ...employeeRest } = employee` let's you remove a property with dynamic name by collecting the properties, but removed one, into `employeeRest` object.  
 
 What's interesting is that you can remove multiple properties at once using the destructuring and rest syntax:
 
@@ -165,7 +164,7 @@ console.log(employeeRest); // { name: 'John Smith' }
 
 In JavaScript, there are 2 common ways to remove properties from an object.  
 
-The first, mutable, approach is to use the `delete object.property` operator.  
+The first mutable approach is to use the `delete object.property` operator.  
 
 The second approach, which is immutable since it doesn't modify the original object, is to invoke the object destructuring and spread syntax:  `const {property, ...rest} = object`.  
 
