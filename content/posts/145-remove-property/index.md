@@ -29,16 +29,14 @@ Let's see 2 common ways on how to remove properties from object in JavaScript: u
 
 ## 1. *delete* operator
 
-`delete` is a special operator in JavaScript that deletes a property from an object. It's single operand usually accepts a [property accessor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors) that indicates what specific property to delete.  
+`delete` is a special operator in JavaScript that removes a property from an object. It's single operand usually accepts a [property accessor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors) that indicates what specific property to remove:
 
-Because the property accessor can have different syntaxes, usually you would use one of the possible one:
-
-A) Dot property accessor:
+A) Remove using a dot property accessor:
 ```javascript
 delete object.property;
 ```
 
-B) Square brakets property accessor:
+B) Remove using square brakets property accessor:
 ```javascript
 delete object['property'];
 // or
@@ -46,9 +44,9 @@ const name = 'dynamicProperty';
 delete object[name];
 ```
 
-When applying the `delete` operator on a property accessor, it removes the corresponding property from the object:
+When applying the `delete` operator on a property accessor, the operator removes the corresponding property from the object:
 
-```javascript
+```javascript{6}
 const employee = {
   name: 'John Smith',
   position: 'Sales Manager'
@@ -61,9 +59,25 @@ console.log(employee); // { name: 'John Smith' }
 
 Initially, `employee` has 2 properties: `name` and `position`. 
 
-But after applying the `delete` operator on the `position` property: `delete employee.position`, the corresponding property has been removed from the `employee` object. 
+But after applying the `delete` operator on the `position` property: `delete employee.position`, the property is removed from the object. Simple as that.  
 
-The property removal using `delete` operator is mutable because it mutates (aka alters, modifies) the original object `employee`.  
+The property removal using `delete` operator is mutable because it mutates (aka alters, modifies) the original object. 
+
+In case if the property name to remove is determined dynamically, then you can use the square breakets syntax:
+
+```javascript{7}
+const employee = {
+  name: 'John Smith',
+  position: 'Sales Manager'
+};
+
+const name = 'position';
+delete employee[name];
+
+console.log(employee); // { name: 'John Smith' }
+```
+
+`delete employee[name]` removes the property which name is contained inside `name` variable.  
 
 ## 2. Object rest syntax
 
