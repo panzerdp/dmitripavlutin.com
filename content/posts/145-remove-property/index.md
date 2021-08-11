@@ -25,11 +25,11 @@ describe various employee data: `name`, `position` and years of `experience`.
 Sometimes, however, you need to remove properties from an object. For example, how would you remove the `position` property from the
 `employee` object?  
 
-Let's see 2 common ways on how to remove properties from object in JavaScript: using `delete` operator (mutable way) and object rest (immutable way).  
+Let's see 2 common ways on how to remove properties from an object in JavaScript: using the `delete` operator (mutable way) and object rest (immutable way).  
 
 ## 1. *delete* operator
 
-`delete` is a special operator in JavaScript that removes a property from an object. It's single operand usually accepts a [property accessor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors) that indicates what specific property to remove:
+`delete` is a special operator in JavaScript that removes a property from an object. Its single operand usually accepts a [property accessor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors) that indicates what specific property to remove:
 
 A) Remove using a dot property accessor:
 ```javascript
@@ -65,7 +65,7 @@ But after applying the `delete` operator on the `position` property: `delete emp
 
 The property removal using `delete` operator is mutable because it mutates (aka alters, modifies) the original object. 
 
-In case if the property name to remove is determined dynamically, then you can use the square breakets syntax:
+In case if the property name to remove is determined dynamically, then you can use the square brackets syntax:
 
 ```javascript{7}
 const employee = {
@@ -83,9 +83,9 @@ console.log(employee); // { name: 'John Smith' }
 
 `delete employee[name]` removes the property which name is contained inside `name` variable.  
 
-## 2. Object rest syntax
+## 2. Object destructuring with rest syntax
 
-Another approach you can use to remove properties, but in a immutable manner without altering the original object, is to use the [object destructuring and rest syntax](/javascript-object-destructuring/#8-rest-object-after-destructuring).  
+Another approach you can use to remove properties, but in an immutable manner without altering the original object, is to use the [object destructuring and rest syntax](/javascript-object-destructuring/#8-rest-object-after-destructuring).  
 
 The idea is simple: destructure the object to the property you want to remove, and the remaining properties collect into a rest object:
 
@@ -163,7 +163,7 @@ console.log(employeeRest); // { name: 'John Smith' }
 
 ## 3. Conclusion
 
-In JavaScript the are 2 common ways to remove properties from an object.  
+In JavaScript, there are 2 common ways to remove properties from an object.  
 
 The first, mutable, approach is to use the `delete object.property` operator.  
 
