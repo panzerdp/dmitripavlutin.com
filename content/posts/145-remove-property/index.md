@@ -57,6 +57,8 @@ delete employee.position;
 console.log(employee); // { name: 'John Smith' }
 ```
 
+[Try the demo.](https://codesandbox.io/s/delete-cop3o?file=/src/index.js)
+
 Initially, `employee` has 2 properties: `name` and `position`. 
 
 But after applying the `delete` operator on the `position` property: `delete employee.position`, the property is removed from the object. Simple as that.  
@@ -76,6 +78,8 @@ delete employee[name];
 
 console.log(employee); // { name: 'John Smith' }
 ```
+
+[Try the demo.](https://codesandbox.io/s/delete-dynamic-9k03s?file=/src/index.js)
 
 `delete employee[name]` removes the property which name is contained inside `name` variable.  
 
@@ -114,6 +118,8 @@ console.log(employee);
 // { name: 'John Smith',position: 'Sales Manager' }
 ```
 
+[Try the demo.](https://codesandbox.io/s/destructuring-rest-uh68c?file=/src/index.js)
+
 The statement `const { position, ...employeeRest } = employee1` destructures the `employee1` objects and collects the properties into a rest object `employee2` without including the `position` property. 
 
 Object destructuring with rest syntax is an immutable way of property removal: the original `employee1` object isn't mutated. Rather a new object `employee2` is created which contains all the properties of `employee1` but the removed one `position`.  
@@ -133,6 +139,8 @@ const { [name]: removedProperty, ...employeeRest } = employee;
 console.log(employeeRest); // { name: 'John Smith' }
 ```
 
+[Try the demo.](https://codesandbox.io/s/destructuring-rest-dynamic-m4jgf)
+
 `const { [name]: removedProperty, ...employeeRest } = employee` let's you the same way remove a property with dynamica name, and collect the reamined properties into `employeeRest` object.  
 
 What's interesting is that you can remove multiple properties at once using the destructuring and rest syntax:
@@ -148,6 +156,8 @@ const { position, experience, ...employeeRest } = employee;
 
 console.log(employeeRest); // { name: 'John Smith' }
 ```
+
+[Try the demo.](https://codesandbox.io/s/destructuring-rest-multiple-i73ki?file=/src/index.js)
 
 `const { position, experience, ...employeeRest } = employee` has removed 2 properties at once: `position` and `experience`.  
 
