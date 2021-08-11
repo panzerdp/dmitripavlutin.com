@@ -1,6 +1,6 @@
 ---
 title: "2 Ways to Remove a Property from an Object in JavaScript"
-description: "How to use the delete operator and object destructuring with rest syntax to remove properties from an object in JavaScript."
+description: "How to remove properties from an object in JavaScript using the delete operator or object destructuring with rest syntax."
 published: "2021-08-17T12:00Z"
 modified: "2021-08-17T12:00Z"
 thumbnail: "./images/cover-2.png"
