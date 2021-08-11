@@ -1,16 +1,16 @@
 ---
 title: "2 Ways to Remove a Property from an Object in JavaScript"
-description: "How to use the delete operator or rest syntax to delete properties from an object in JavaScript."
+description: "How to use the delete operator and object destructuring with rest syntax to remove properties from an object in JavaScript."
 published: "2021-08-17T12:00Z"
 modified: "2021-08-17T12:00Z"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover-2.png"
 slug: remove-object-property-javascript
 tags: ['javascript', 'object', 'property']
 recommended: ['check-if-object-has-property-javascript', 'access-object-properties-javascript']
 type: post
 ---
 
-In simple words, a JavaScript object is a collection of properties, where each property has a name and a value.  
+A JavaScript object is a collection of properties, where each property has a name and a value.  
 
 ```javascript
 const employee = {
@@ -81,6 +81,82 @@ console.log(employee); // { name: 'John Smith' }
 
 ## 2. Object rest syntax
 
+Another approach you can use to remove properties, but in a immutable manner without altering the original object, is to use the [object destructuring and rest syntax](/javascript-object-destructuring/#8-rest-object-after-destructuring).  
+
+The idea is simple: destructure the object to the property you want to remove, and the remaining properties collect into a rest object:
+
+A) The property name is known:
+```javascript
+const { property, ...restObject } = object;
+```
+
+B) The property name is dynamic:
+```javascript
+const name = 'property';
+const { [name]: removedProperty, ...restObject } = object;
+```
+
+After applying the destructuring and rest syntax, `restObject` is going to contain the same properties as `object`, only without the removed property.  
+
+For example, let's remove the property `position` from `employee1` object:
+
+```javascript{6}
+const employee = {
+  name: 'John Smith',
+  position: 'Sales Manager'
+};
+
+const { position, ...employeeRest } = employee;
+
+console.log(employeeRest); // { name: 'John Smith' }
+
+console.log(employee); 
+// { name: 'John Smith',position: 'Sales Manager' }
+```
+
+The statement `const { position, ...employeeRest } = employee1` destructures the `employee1` objects and collects the properties into a rest object `employee2` without including the `position` property. 
+
+Object destructuring with rest syntax is an immutable way of property removal: the original `employee1` object isn't mutated. Rather a new object `employee2` is created which contains all the properties of `employee1` but the removed one `position`.  
+
+In case if you determine the property to remove dynamically, then you can use use the dynamic property name destructuring syntax:
+
+
+```javascript{7}
+const employee = {
+  name: 'John Smith',
+  position: 'Sales Manager'
+};
+
+const name = 'position';
+const { [name]: removedProperty, ...employeeRest } = employee;
+
+console.log(employeeRest); // { name: 'John Smith' }
+```
+
+`const { [name]: removedProperty, ...employeeRest } = employee` let's you the same way remove a property with dynamica name, and collect the reamined properties into `employeeRest` object.  
+
+What's interesting is that you can remove multiple properties at once using the destructuring and rest syntax:
+
+```javascript{7}
+const employee = {
+  name: 'John Smith',
+  position: 'Sales Manager',
+  experience: 6, // years
+};
+
+const { position, experience, ...employeeRest } = employee;
+
+console.log(employeeRest); // { name: 'John Smith' }
+```
+
+`const { position, experience, ...employeeRest } = employee` has removed 2 properties at once: `position` and `experience`.  
+
 ## 3. Conclusion
 
-*Challenge: what is the [time complexity](https://en.wikipedia.org/wiki/Time_complexity) of the property removal operation using `delete` and object rest syntax? Write your opinion in a comment below!*
+In JavaScript the are 2 common ways to remove properties from an object.  
+
+The first, mutable, approach is to use the `delete object.property` operator.  
+
+The second approach, which is immutable since it doesn't modify the original object, is to invoke the object destructuring and spread syntax:  `const {property, ...rest} = object`.  
+
+*Side challenge: what is the [time complexity](https://en.wikipedia.org/wiki/Time_complexity) of the property removal using `delete` and object rest syntax? Write your opinion in a comment below!*
