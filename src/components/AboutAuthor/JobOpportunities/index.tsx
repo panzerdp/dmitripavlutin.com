@@ -8,13 +8,13 @@ export default function JobOpportunities() {
       </h3>
       <div className={styles.description}>
         <p>
-        I'm always interested in challenging projects and job opportunities.
+        I&apos;m always interested in challenging projects and job opportunities.
         </p>
         <p>
-        If you're a recruiter, you're welcome to <a href="mailto:dmitripavlutin@gmail.com">contact me</a> with an interesting Frontend job position.
+        If you&apos;re a recruiter, you&apos;re welcome to <a href="mailto:dmitripavlutin@gmail.com">contact me</a> with an interesting Frontend job position.
         </p>
         <p>
-          If you're a developer enjoying my posts, you're welcome to <a href="mailto:dmitripavlutin@gmail.com">contact me</a> if you want to refer me to a position.
+          If you&apos;re a developer enjoying my posts, you&apos;re welcome to <a href="mailto:dmitripavlutin@gmail.com">contact me</a> to refer me to a Frontend job position in your company.
         </p> 
       </div>
     </div>
