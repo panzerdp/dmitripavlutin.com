@@ -1,19 +1,21 @@
 import * as styles from './index.module.scss';
 
-export default function JobOpportunities({ authorInfo }: { authorInfo: AuthorInfo }) {
+export default function JobOpportunities() {
   return (
     <div className={styles.jobOpportunities}>
-      <h3>Looking for a Frontend Developer?</h3>
+      <h3>
+        Would you like me in your team?
+      </h3>
       <div className={styles.description}>
         <p>
-          I'm always interested in learning new technologies, participate in new projects, and face challenges.  
+        I'm always interested in challenging projects and job opportunities.
         </p>
         <p>
-          I'm looking for interesting Frontend (JavaScript, TypeScript, React, CSS) job opportunities in London, United Kingdom. 
+        If you're a recruiter, you're welcome to <a href="mailto:dmitripavlutin@gmail.com">contact me</a> with an interesting Frontend job position.
         </p>
         <p>
-          If you'd like me to be a part of your Frontend team, please <a href={`mailto:${authorInfo.email}`}>contact me</a>.  
-        </p>
+          If you're a developer enjoying my posts, you're welcome to <a href="mailto:dmitripavlutin@gmail.com">contact me</a> if you want to refer me to a position.
+        </p> 
       </div>
     </div>
   );
