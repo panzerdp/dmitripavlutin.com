@@ -1,8 +1,8 @@
 ---
 title: "How to Use Promise.any()"
-description: "How to use the Promise.any(promises) helper function to get the value of the first resolved promise from an array of promises."
-published: "2021-08-26T12:00Z"
-modified: "2021-08-26T12:00Z"
+description: "How to use the Promise.any() to get the first fulfilled promise from an array of promises."
+published: "2021-08-26T11:10Z"
+modified: "2021-08-26T11:10Z"
 thumbnail: "./images/cover.png"
 slug: promise-any
 tags: ['javascript', 'promise', 'async']
@@ -10,13 +10,13 @@ recommended: ['promise-all', 'promise-all-settled']
 type: post
 ---
 
-`Promise.any(promises)` is a helper function that runs promises in parallel and resolves to the value of the first promises that gets resolved from `promises` list.  
+`Promise.any(promises)` is a helper function that runs promises in parallel and resolves to the value of the first promise that gets resolved from `promises` list.  
 
 Let's see how `Promise.any()` works.  
 
 ### 1. *Promise.any()*
 
-`Promise.any()` is useful to perform independent async operations in parallel in a race manner, in order to get the value of any first resolved promise.  
+`Promise.any()` is useful to perform independent async operations in a parallel and race manner, to get the value of any first fulfilled promise.  
 
 The function accepts an array (or generally an iterable) of promises as an argument:
 
@@ -40,9 +40,9 @@ const firstValue = await anyFirstPromise;
 firstValue; // The value of the first fulfilled promise
 ```
 
-The promise returned by `Promise.any()` *always fulfills with any first fulfilled promise* &mdash; even if some promises get rejected, these rejections are ignored. 
+The promise returned by `Promise.any()` *fulfills with any first fulfilled promise* &mdash; even if some promises get rejected, these rejections are ignored. 
 
-However, if *all promises in the input array are rejected*, then `Promise.any()` rejects with an aggregate error containing all the rejection reasons of the input promises.  
+However, if *all promises in the input array are rejected* or *if the input array is empty*, then `Promise.any()` rejects with an [aggregate error]((https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) containing all the rejection reasons of the input promises.  
 
 ## 2. Fruits and vegetables
 
@@ -72,7 +72,7 @@ Let's use these helper functions to experiment on `Promise.any()`.
 
 ### 2.1 All promises fulfilled
 
-Let's try to access the first resolved list from the local grocerry store:
+Let's try to access the first resolved list from the local grocery store:
 
 ```javascript{2,3}
 const promise = Promise.any([
@@ -81,17 +81,17 @@ const promise = Promise.any([
 ]);
 
 // wait...
-const anyFirstList = await statusesPromise;
+const list = await statusesPromise;
 
 // after 1 second
-console.log(anyFirstList); // logs ['potatoes', 'tomatoes']
+console.log(list); // logs ['potatoes', 'tomatoes']
 ```
 
-[Try the demo.](https://codesandbox.io/s/all-resolved-yyc0l?file=/src/index.js)
+[Try the demo.](https://codesandbox.io/s/first-fulfilled-w89h7?file=/src/index.js)
 
-`Promise.any([...])` returns a `promise` that resolves in 1 second to the list of vegetables `['potatoes', 'tomatoes']`: because this is the promise that resolved first.  
+`Promise.any([...])` returns a `promise` that resolves in 1 second to the list of vegetables `['potatoes', 'tomatoes']`. All because vegetables promise has fulfilled first.  
 
-The second promise, with the list of fruits, resolves in 2 seconds, and its value is ignored.  
+The second promise, with the list of fruits, resolves in 2 seconds, but its value is ignored.  
 
 ### 2.2 One promise rejected
 
@@ -101,16 +101,18 @@ How would `Promise.any()` would work in such a case?
 
 ```javascript{2}
 const promise = Promise.any([
-  resolveTimeout(new Error('Out of vegetables!'), 1000),
-  rejectTimeout(['oranges', 'apples'], 2000)
+  rejectTimeout(new Error("Out of vegetables!"), 1000),
+  resolveTimeout(["oranges", "apples"], 2000)
 ]);
 
 // wait...
-const anyFirstList = await promise;
+const list = await promise;
 
 // after 2 seconds
-console.log(anyFirstList); // logs ['oranges', 'apples']
+console.log(list); // logs ['oranges', 'apples']
 ```
+
+[Try the demo.](https://codesandbox.io/s/one-rejected-dkxrw?file=/src/index.js)
 
 This case is a little trickier.  
 
@@ -120,32 +122,36 @@ Finally, after 2 seconds, the fruits promise resolves to a list of fruits `['ora
 
 ### 2.3 All promises rejected
 
-What if the grocerry is out of both vegetables and fruits? In such case both promises reject:
+What if the grocery is out of both vegetables and fruits? In such a case both promises reject:
 
 ```javascript{2-3}
-const statusesPromise = Promise.any([
+const promise = Promise.any([
   rejectTimeout(new Error('Out of vegetables!'), 1000),
   rejectTimeout(new Error('Out of fruits!'), 2000)
 ]);
 
-// wait...
-
 try {
-  const anyFirstList = await statusesPromise;
-} catch (error) {
-  console.log(error); 
-  // logs Error([Error('Out of vegetables!'), Error('Out of fruits!')])
+  // wait...
+  const list = await promise;
+} catch (aggregateError) {
+  console.log(aggregateError); // logs AggregateError
+  console.log(aggregateError.errors); 
+  // logs [Error('Out of vegetables!'), Error('Out of fruits!')]
 }
 ```
 
-All of the input promises are rejected. Because of that the promise returned by `Promise.any([...])` also gets rejected with a special kind of error that aggregates the rejection rejason of input promises.  
+[Try the demo.](https://codesandbox.io/s/all-rejected-fbwgu?file=/src/index.js:283-297)
+
+All of the input promises are rejected. Because of that the promise returned by `Promise.any([...])` also gets rejected with a special kind of error [AggregateError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) that contains the rejection reasons of input promises. 
+
+The aggregate error provides a special property `errors`: which is an array containing the errors of the input promises that had been rejected.  
 
 ## 3. Conclusion
 
-`Promise.any()` is useful to perform independent async operations in parallel in a race manner, in order to get the value of any first resolved promise.  
+`Promise.any()` is useful to perform independent async operations in parallel in a race manner, to get the value of any first resolved promise.  
 
-In case if all input promises of `Promise.any()` get rejected, then the promise returned by the helper function also gets rejected with an aggregate error containing the rejection reasons of the input promises. 
+If all input promises of `Promise.any()` are rejected, then the promise returned by the helper function also rejects with an aggregate error containing the rejection reasons of the input promises inside a special property: `aggregateError.errors`.  
 
-Note that `Promise.any([])` rejects and in case if the input array is empty
+Note that `Promise.any([])` rejects also if the input array is empty.  
 
 *Challenge: what's the main difference between `Promise.any()` and `Promise.race()`?*
