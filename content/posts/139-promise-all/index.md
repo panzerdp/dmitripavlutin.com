@@ -6,7 +6,7 @@ modified: "2021-07-10T07:00Z"
 thumbnail: "./images/cover-6.png"
 slug: promise-all
 tags: ['javascript', 'promise', 'async']
-recommended: ['what-is-javascript-promise', 'promise-all-settled']
+recommended: ['promise-any', 'promise-all-settled']
 type: post
 ---
 
