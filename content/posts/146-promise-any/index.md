@@ -44,9 +44,9 @@ The promise returned by `Promise.any()` *always fulfills with any first fulfille
 
 However, if *all promises in the input array are rejected*, then `Promise.any()` rejects with an aggregate error containing all the rejection reasons of the input promises.  
 
-## 2. Fetching fruits and vegetables
+## 2. Fruits and vegetables
 
-Before diving into `Promise.allSettle()`, let's define 2 simple helper functions.  
+Before diving into `Promise.any()`, let's define 2 simple helper functions.  
 
 First, `resolveTimeout(value, delay)` &mdash; returns a promise that fulfills with `value` after passing `delay` time:
 
@@ -68,99 +68,84 @@ function rejectTimeout(reason, delay) {
 }
 ```
 
-Let's use these helper functions to experiment on `Promise.allSettled()`.  
+Let's use these helper functions to experiment on `Promise.any()`.  
 
 ### 2.1 All promises fulfilled
 
-Let's access in parallel the vegetables and fruits available at the local grocerry store. Accessing each list is an asynchornous operation:  
+Let's try to access the first resolved list from the local grocerry store:
 
 ```javascript{2,3}
-const statusesPromise = Promise.allSettled([
+const promise = Promise.any([
   resolveTimeout(['potatoes', 'tomatoes'], 1000),
-  resolveTimeout(['oranges', 'apples'], 1000)
+  resolveTimeout(['oranges', 'apples'], 2000)
 ]);
 
 // wait...
-const statuses = await statusesPromise;
+const anyFirstList = await statusesPromise;
 
 // after 1 second
-console.log(statuses); 
-// [
-//   { status: 'fulfilled', value: ['potatoes', 'tomatoes'] },
-//   { status: 'fulfilled', value: ['oranges', 'apples'] }
-// ]
+console.log(anyFirstList); // logs ['potatoes', 'tomatoes']
 ```
 
 [Try the demo.](https://codesandbox.io/s/all-resolved-yyc0l?file=/src/index.js)
 
-`Promise.allSettled([...])` returns a promise `statusesPromise` that resolves in 1 second, right after vegetables and fruits were resolved, in parallel.  
+`Promise.any([...])` returns a `promise` that resolves in 1 second to the list of vegetables `['potatoes', 'tomatoes']`: because this is the promise that resolved first.  
 
-The promise `statusesPromise` resolves to an array containing the statuses: 
-
-1. The first item of the array contains the fulfilled status with vegetables: `{ status: 'fulfilled', value: ['potatoes', 'tomatoes'] }`
-2. Same way, the second item is the fulfilled status of fruits: `{ status: 'fulfilled', value: ['oranges', 'apples'] }`.  
+The second promise, with the list of fruits, resolves in 2 seconds, and its value is ignored.  
 
 ### 2.2 One promise rejected
 
-Imagine there are no more fruits at the grocery. In such a case, let's reject the fruits' promise.  
+Imagine there are no more vegetables at the grocery. In such a case, let's reject the vegetables' promise.  
 
-How would `Promise.allSettled()` would work in such a case?  
+How would `Promise.any()` would work in such a case?  
 
-```javascript{3}
-const statusesPromise = Promise.allSettled([
-  resolveTimeout(['potatoes', 'tomatoes'], 1000),
-  rejectTimeout(new Error('Out of fruits!'), 1000)
+```javascript{2}
+const promise = Promise.any([
+  resolveTimeout(new Error('Out of vegetables!'), 1000),
+  rejectTimeout(['oranges', 'apples'], 2000)
 ]);
 
 // wait...
-const statuses = await statusesPromise;
+const anyFirstList = await promise;
 
-// after 1 second
-console.log(statuses); 
-// [
-//   { status: 'fulfilled', value: ['potatoes', 'tomatoes'] },
-//   { status: 'rejected', reason: Error('Out of fruits!') }
-// ]
+// after 2 seconds
+console.log(anyFirstList); // logs ['oranges', 'apples']
 ```
 
-[Try the demo.](https://codesandbox.io/s/one-rejected-ij3uo?file=/src/index.js)
+This case is a little trickier.  
 
-The promise returned by `Promise.allSettled([...])` resolves to an array of statuses after 1 second:    
+First, the vegetables promise gets rejected after 1 second. However, `Promise.any()` does skip this rejection and still waits to see the resolving status of fruits.  
 
-1. The first item of the array, since vegetables promise resolved successfully, is `{ status: 'fulfilled', value: ['potatoes', 'tomatoes'] }`  
-2. The second item, because fruits promise rejected with an error, is a rejection status: `{ status: 'rejected', reason: Error('Out of fruits') }`.  
-
-Even though the second promise in the input array is rejected, the `statusesPromise` still resolves successfully with an array of statuses.  
+Finally, after 2 seconds, the fruits promise resolves to a list of fruits `['oranges', 'apples']`. Right away the promise returned by `Promise.any([...])` also resolves to this value.  
 
 ### 2.3 All promises rejected
 
 What if the grocerry is out of both vegetables and fruits? In such case both promises reject:
 
 ```javascript{2-3}
-const statusesPromise = Promise.allSettled([
+const statusesPromise = Promise.any([
   rejectTimeout(new Error('Out of vegetables!'), 1000),
-  rejectTimeout(new Error('Out of fruits!'), 1000)
+  rejectTimeout(new Error('Out of fruits!'), 2000)
 ]);
 
 // wait...
-const statuses = await statusesPromise;
 
-// after 1 second
-console.log(statuses); 
-// [
-//   { status: 'rejected', reason: Error('Out of vegetables!')  },
-//   { status: 'rejected', reason: Error('Out of fruits!') }
-// ]
+try {
+  const anyFirstList = await statusesPromise;
+} catch (error) {
+  console.log(error); 
+  // logs Error([Error('Out of vegetables!'), Error('Out of fruits!')])
+}
 ```
 
-[Try the demo.](https://codesandbox.io/s/all-rejected-z4jee?file=/src/index.js)
-
-In such a case `statusesPromise` still resolves successfully to an array of statuses. However, the array contains the statuses of rejected promises.   
+All of the input promises are rejected. Because of that the promise returned by `Promise.any([...])` also gets rejected with a special kind of error that aggregates the rejection rejason of input promises.  
 
 ## 3. Conclusion
 
-`Promise.allSettled(promises)` lets you run promises in parallel and collect the statuses (either fulfilled or reject) into an aggregate array. 
+`Promise.any()` is useful to perform independent async operations in parallel in a race manner, in order to get the value of any first resolved promise.  
 
-`Promise.allSettled(...)` works great when you need to perform parallel and independent asynchronous operations and collect all the results even if some async operations could fail.  
+In case if all input promises of `Promise.any()` get rejected, then the promise returned by the helper function also gets rejected with an aggregate error containing the rejection reasons of the input promises. 
 
-*Challenge: do you know cases when `Promise.allSettled()` returns a rejected promise? If so, please write a comment below!*
+Note that `Promise.any([])` rejects and in case if the input array is empty
+
+*Challenge: what's the main difference between `Promise.any()` and `Promise.race()`?*
