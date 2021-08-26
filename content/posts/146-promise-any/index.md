@@ -42,7 +42,7 @@ firstValue; // The value of the first fulfilled promise
 
 The promise returned by `Promise.any()` *fulfills with any first fulfilled promise* &mdash; even if some promises get rejected, these rejections are ignored. 
 
-However, if *all promises in the input array are rejected* or *if the input array is empty*, then `Promise.any()` rejects with an [aggregate error]((https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) containing all the rejection reasons of the input promises.  
+However, if *all promises in the input array are rejected* or *if the input array is empty*, then `Promise.any()` rejects with an [aggregate error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) containing all the rejection reasons of the input promises.  
 
 ## 2. Fruits and vegetables
 
