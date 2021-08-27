@@ -225,7 +225,7 @@ increaseSalaries([950, 800, 1000], 100);
 // After 6 seconds logs "New salaries: 1050,900,1100"
 ```
 
-`await salaryIncrease(baseSalary, increase)` is called 3 times for each salary in the array. Each time JavaScript waits 2 seconds until the sum is calculated.    
+`await increaseSalary(baseSalary, increase)` is called 3 times for each salary in the array. Each time JavaScript waits 2 seconds until the sum is calculated.    
 
 This way you can nest `async` function into `async` functions.  
 
