@@ -10,7 +10,7 @@ recommended: ['promise-all', 'promise-all-settled']
 type: post
 ---
 
-`Promise.any(promises)` is a helper function that runs promises in parallel and resolves to the value of the first promise that gets resolved from `promises` list.  
+`Promise.any(promises)` is a helper function that runs promises in parallel and resolves to the value of the first successfully resolved promise from `promises` list.  
 
 Let's see how `Promise.any()` works.  
 
@@ -21,17 +21,17 @@ Let's see how `Promise.any()` works.
 The function accepts an array (or generally an iterable) of promises as an argument:
 
 ```javascript
-const anyFirstPromise = Promise.any(promises);
+const anyPromise = Promise.any(promises);
 ```
 
-When *any* first promise from the input `promises` is fulfilled, right away the `anyFirstPromise` resolves to the value of that promise. 
+When *any* first promise from the input `promises` is fulfilled, right away the `anyPromise` resolves to the value of that promise. 
 
 ![Promise.any(): All fulfilled](./images/all-fulfilled.svg)
 
 You can extract the value of the first promise using a `then`-able syntax:
 
 ```javascript
-anyFirstPromise.then(firstValue => {
+anyPromise.then(firstValue => {
  firstValue; // The value of the first fulfilled promise
 });
 ```
@@ -39,12 +39,12 @@ anyFirstPromise.then(firstValue => {
 or using an `async/await` syntax:  
 
 ```javascript
-const firstValue = await anyFirstPromise;
+const firstValue = await anyPromise;
 
 firstValue; // The value of the first fulfilled promise
 ```
 
-The promise returned by `Promise.any()` *fulfills with any first fulfilled promise* &mdash; even if some promises get rejected, these rejections are ignored.  
+The promise returned by `Promise.any()` *fulfills with any first fulfilled promise*. Even if some promises get rejected, these rejections are ignored.  
 
 ![Promise.any(): First fulfilled, rejected ignored](./images/rejected-ignored-2.svg)
 
@@ -124,9 +124,9 @@ console.log(list); // logs ['oranges', 'apples']
 
 This case is a little trickier.  
 
-First, the vegetables promise gets rejected after 1 second. However, `Promise.any()` does skip this rejection and still waits to see the resolving status of fruits.  
+First, the vegetables promise gets rejected after 1 second. However, `Promise.any()` does skip this rejection and still waits to see the status of fruits' promise.  
 
-Finally, after 2 seconds, the fruits promise resolves to a list of fruits `['oranges', 'apples']`. Right away the promise returned by `Promise.any([...])` also resolves to this value.  
+Finally, after one more second, the fruits promise resolves to a list of fruits `['oranges', 'apples']`. Right away the promise returned by `Promise.any([...])` also resolves to this value.  
 
 ### 2.3 All promises rejected
 
@@ -150,15 +150,15 @@ try {
 
 [Try the demo.](https://codesandbox.io/s/all-rejected-fbwgu?file=/src/index.js:283-297)
 
-All of the input promises are rejected. Because of that the promise returned by `Promise.any([...])` also gets rejected with a special kind of error [AggregateError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) that contains the rejection reasons of input promises. 
+All input promises are rejected. Thus the promise returned by `Promise.any([...])` also gets rejected with a special kind of error &mdash; [AggregateError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) &mdash; that contains the rejection reasons of input promises. 
 
 The aggregate error provides a special property `errors`: which is an array containing the errors of the input promises that had been rejected.  
 
 ## 3. Conclusion
 
-`Promise.any()` is useful to perform independent async operations in parallel in a race manner, to get the value of any first resolved promise.  
+`Promise.any()` is useful to perform independent async operations in parallel in a race manner, to get the value of any first successfully resolved promise.  
 
-If all input promises of `Promise.any()` are rejected, then the promise returned by the helper function also rejects with an aggregate error containing the rejection reasons of the input promises inside a special property: `aggregateError.errors`.  
+If all input promises of `Promise.any()` are rejected, then the promise returned by the helper function also rejects with an aggregate error, which contains the rejection reasons of the input promises inside a special property: `aggregateError.errors`.  
 
 Note that `Promise.any([])` rejects also if the input array is empty.  
 
