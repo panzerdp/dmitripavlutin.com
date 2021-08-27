@@ -24,7 +24,11 @@ The function accepts an array (or generally an iterable) of promises as an argum
 const anyFirstPromise = Promise.any(promises);
 ```
 
-When *any* first promise from the input `promises` is fulfilled, right away the `anyFirstPromise` resolves to the value of that promise. You can extract the value of the first promise using a `then`-able syntax:
+When *any* first promise from the input `promises` is fulfilled, right away the `anyFirstPromise` resolves to the value of that promise. 
+
+![Promise.any(): All fulfilled](./images/all-fulfilled.svg)
+
+You can extract the value of the first promise using a `then`-able syntax:
 
 ```javascript
 anyFirstPromise.then(firstValue => {
@@ -40,9 +44,13 @@ const firstValue = await anyFirstPromise;
 firstValue; // The value of the first fulfilled promise
 ```
 
-The promise returned by `Promise.any()` *fulfills with any first fulfilled promise* &mdash; even if some promises get rejected, these rejections are ignored. 
+The promise returned by `Promise.any()` *fulfills with any first fulfilled promise* &mdash; even if some promises get rejected, these rejections are ignored.  
+
+![Promise.any(): First fulfilled, rejected ignored](./images/rejected-ignored-2.svg)
 
 However, if *all promises in the input array are rejected* or *if the input array is empty*, then `Promise.any()` rejects with an [aggregate error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) containing all the rejection reasons of the input promises.  
+
+![Promise.any(): All rejected](./images/all-rejected.svg)
 
 ## 2. Fruits and vegetables
 
