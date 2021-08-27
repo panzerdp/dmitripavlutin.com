@@ -26,7 +26,7 @@ const anyPromise = Promise.any(promises);
 
 When *any* first promise from the input `promises` is fulfilled, right away the `anyPromise` resolves to the value of that promise. 
 
-![Promise.any(): All fulfilled](./images/all-fulfilled.svg)
+![Promise.any(): All fulfilled](./images/all-fulfilled-2.svg)
 
 You can extract the value of the first promise using a `then`-able syntax:
 
@@ -46,11 +46,11 @@ firstValue; // The value of the first fulfilled promise
 
 The promise returned by `Promise.any()` *fulfills with any first fulfilled promise*. Even if some promises get rejected, these rejections are ignored.  
 
-![Promise.any(): First fulfilled, rejected ignored](./images/rejected-ignored-2.svg)
+![Promise.any(): First fulfilled, rejected ignored](./images/rejected-ignored-3.svg)
 
 However, if *all promises in the input array are rejected* or *if the input array is empty*, then `Promise.any()` rejects with an [aggregate error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) containing all the rejection reasons of the input promises.  
 
-![Promise.any(): All rejected](./images/all-rejected.svg)
+![Promise.any(): All rejected](./images/all-rejected-2.svg)
 
 ## 2. Fruits and vegetables
 
