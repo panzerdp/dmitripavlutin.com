@@ -89,7 +89,7 @@ const promise = Promise.any([
 ]);
 
 // wait...
-const list = await statusesPromise;
+const list = await promise;
 
 // after 1 second
 console.log(list); // logs ['potatoes', 'tomatoes']
