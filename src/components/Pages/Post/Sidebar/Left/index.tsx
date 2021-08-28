@@ -4,18 +4,19 @@ import ShareGroupVertical from 'components/Pages/Post/Share/Group/Vertical';
 import { TO_POST } from 'routes/path';
 
 interface PostLeftSidebarProps {
-  siteUrl: string;
+  siteInfo: SiteInfo;
   post: PostPlain;
   showShareButtons: boolean;
   twitterName: string;
 }
 
-export default function PostLeftSidebar({ siteUrl, post, showShareButtons, twitterName }: PostLeftSidebarProps) {
-  const postUrl = siteUrl + TO_POST({ slug: post.slug });
+export default function PostLeftSidebar({ siteInfo, post, showShareButtons, twitterName }: PostLeftSidebarProps) {
+  const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
   return (
     <div className={styles.leftSidebar}>
       <ShareGroupVertical
         url={postUrl}
+        siteInfo={siteInfo}
         text={post.title}
         tags={post.tags}
         show={showShareButtons}

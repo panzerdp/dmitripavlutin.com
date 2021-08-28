@@ -52,7 +52,7 @@ export default function PostTemplate({
   const leftSidebar = (
     <LeftSidebar
       post={post}
-      siteUrl={siteInfo.url}
+      siteInfo={siteInfo}
       showShareButtons={showShareButtons}
       twitterName={authorInfo.nicknames.twitter}
     />
@@ -79,7 +79,7 @@ export default function PostTemplate({
         <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
         <div className={styles.shareGroup}>
           <div className={styles.shareBottom}>
-            <ShareBottom url={postUrl} text={post.title} tags={post.tags} twitterName={authorInfo.nicknames.twitter} />
+            <ShareBottom url={postUrl} text={post.title} tags={post.tags} twitterName={authorInfo.nicknames.twitter} siteInfo={siteInfo} />
           </div>
           <div className={styles.postEdit}>
             <Edit url={postRepositoryFileUrl} />
@@ -90,12 +90,11 @@ export default function PostTemplate({
         </div>
         <div className={`${styles.delimiter} ${styles.authorInfoContainer}`}>
           <AboutAuthorFetch
-            render={({ authorStats, authorProfilePictureSmall }) => {
+            render={({ authorProfilePictureSmall }) => {
               return (
                 <AboutAuthorConcise
                   authorInfo={authorInfo}
                   authorProfilePicture={authorProfilePictureSmall}
-                  authorStats={authorStats}
                 />
               );
             }}

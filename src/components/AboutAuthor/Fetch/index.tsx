@@ -5,7 +5,6 @@ import { AboutAuthorQuery } from 'typings/graphql';
 
 export interface AboutAuthorFetchResult {
   authorInfo: AuthorInfo;
-  authorStats: AuthorStats;
   authorProfilePictureSmall: FixedImage;
   authorProfilePictureBig: FluidImage;
 }
@@ -22,9 +21,6 @@ export default function AboutAuthorFetch({ render }: AboutAuthorFetchProps) {
         query AboutAuthor {
           site {
             siteMetadata {
-              authorStats {
-                ...AuthorStatsAll
-              }
               authorInfo {
                 ...AuthorInfoAll
               }
@@ -51,12 +47,11 @@ export default function AboutAuthorFetch({ render }: AboutAuthorFetchProps) {
           authorProfilePictureBig,
           authorProfilePictureSmall,
           site: {
-            siteMetadata: { authorInfo, authorStats },
+            siteMetadata: { authorInfo },
           },
         } = data;
         return render({
           authorInfo,
-          authorStats,
           authorProfilePictureSmall: authorProfilePictureSmall.childImageSharp.fixed,
           authorProfilePictureBig: authorProfilePictureBig.childImageSharp.fluid,
         });

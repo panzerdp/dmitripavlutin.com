@@ -2,6 +2,7 @@ import ShareGroupHorizontal from '../Group/Horizontal';
 import * as styles from './index.module.scss';
 
 interface PostShareButtomProps {
+  siteInfo: SiteInfo;
   url: string;
   text: string;
   tags: Tags;

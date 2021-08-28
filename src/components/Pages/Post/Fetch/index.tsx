@@ -70,10 +70,6 @@ export const pageQuery = graphql`
     }
   }
 
-  fragment AuthorStatsAll on SiteSiteMetadataAuthorStats {
-    twitterFollowersCount
-  }
-
   fragment Post on MarkdownRemarkFrontmatter {
     title
     description

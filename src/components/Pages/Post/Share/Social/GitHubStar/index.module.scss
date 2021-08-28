@@ -1,0 +1,9 @@
+@import '~styles/variables';
+
+.gitHubStar {
+  background: url('/icons/github-star.svg') center / 1.75rem no-repeat rgba($github-brand-color, 0.75);
+
+  &:hover {
+    background-color: rgba($github-brand-color, 1);
+  }
+}

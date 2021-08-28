@@ -7,7 +7,6 @@ import * as styles from './index.module.scss';
 interface AboutAuthorDetailed {
   authorInfo: AuthorInfo;
   authorProfilePicture: FluidImage;
-  authorStats: AuthorStats;
 }
 
 export default function AboutAuthorDetailed({ authorInfo: { profiles, email, description, name }, authorProfilePicture }: AboutAuthorDetailed) {

@@ -5,7 +5,6 @@ import AuthorLinks from 'components/AboutAuthor/Links';
 
 interface AboutAuthorConcise {
   authorInfo: AuthorInfo;
-  authorStats: AuthorStats;
   authorProfilePicture: FixedImage;
 }
 
