@@ -4,14 +4,14 @@ export default function JobOpportunities() {
   return (
     <div className={styles.jobOpportunities}>
       <h3>
-        I'm interested in job opportunities
+        Contact me
       </h3>
       <div className={styles.description}>
         <p>
-          If you&apos;re a developer enjoying my posts and you want to refer me to a position in your company, then please <a href="mailto:dmitripavlutin@gmail.com">contact me</a>.
+          You're welcome to write me an <a href="mailto:dmitripavlutin@gmail.com">email message</a> just to say thanks, refer me to a job, or with an interesting job proposal.
         </p>
         <p>
-        If you&apos;re a recruiter and you have a job opportinity that might interest me, you&apos;re also welcome to <a href="mailto:dmitripavlutin@gmail.com">contact me</a>.
+          If you have a technical question, please write a comment in the corresponding post.
         </p>
       </div>
     </div>
