@@ -39,7 +39,7 @@ function UserInfo(props) {
 ```
 
 ```jsx
-<Parent /> 
+<Application /> 
 // renders 
 <span>John Smith</span>
 ```
@@ -50,7 +50,7 @@ The parent component assigns `userName` data to its child component `<UserInfo n
 
 That's pretty the standard way how data is assigned in React using props. You can use this approach without problems.  
 
-But the situation changes when `<UserInfo />` child component isn't a direct child of `<Application />`, but contains multiple intermediate parents. That could happen, for example, if `<UserInfo />` is rendered inside of `<Header />` component, which in turn is rendered ins
+But the situation changes when `<UserInfo />` child component isn't a direct child of `<Application />`, but is contained within multiple intermediate parents. That could happen, for example, if `<UserInfo />` is rendered inside of `<Header />` component, which in turn is rendered inside of a `<Layout />` component.  
 
 ### 2.2 Context to the rescue
 
