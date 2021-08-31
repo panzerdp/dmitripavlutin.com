@@ -1,6 +1,6 @@
 ---
 title: "A Simple Explanation of React Context and useContext() Hook"
-description: "What is the context concept in React and how to use useContext() hook"
+description: "The context in React let's you supply data to deeply nested components in a convinient way."
 published: "2021-08-31T12:00Z"
 modified: "2021-08-31T12:00Z"
 thumbnail: "./images/cover-2.png"
