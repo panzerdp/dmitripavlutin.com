@@ -14,11 +14,21 @@ In this post, you'll learn what is the context concept in React and when you'd n
 
 ## 1. How to define and use context in React
 
-### A. Define the context
+The context can help you to provide data to components no matter how deep they are in the components nesting.  
 
-### B. Provide the context
+Using the context in React usually requires initialization and wiring the 3 main components of the context: the context itself, the context provider and the context consumer.  
 
-### C. Consume the context
+
+A. Define the context
+
+```javascript
+import { createContext } from 'react';
+const MyContext = createContext(initialValue);
+```
+
+B. Provide the context
+
+C. Consume the context
 
 ## 2. When do you need a context?
 
@@ -50,7 +60,7 @@ The parent component assigns `userName` data to its child component `<UserInfo n
 
 That's pretty the standard way how data is assigned in React using props. You can use this approach without problems.  
 
-But the situation changes when `<UserInfo />` child component isn't a direct child of `<Application />`, but is contained within multiple intermediate parents. That could happen, for example, if `<UserInfo />` is rendered inside of `<Header />` component, which in turn is rendered inside of a `<Layout />` component.  
+But the situation changes when `<UserInfo />` child component isn't a direct child of `<Application />`, but is contained within multiple intermediate parents. That could happen, for example, when `<UserInfo />` is rendered inside of `<Header />` component, which in turn is rendered inside of a `<Layout />` component.  
 
 ### 2.2 Context to the rescue
 
