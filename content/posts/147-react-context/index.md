@@ -19,23 +19,47 @@ The context can help you to provide data to components no matter how deep they a
 Using the context in React usually requires initialization and wiring the 3 main components of the context: the context itself, the context provider and the context consumer.  
 
 
-A. Define the context
+A. Define the context using `createContext()` built-in function:
 
 ```javascript
 import { createContext } from 'react';
-const MyContext = createContext(initialValue);
+
+export const MyContext = createContext(initialValue);
 ```
 
-B. Provide the context
+B. Provide the context using the property `MyContext.Provider` of the context instance:
 
-C. Consume the context
+```javascript
+import { MyContext } from './myContext';
+
+function MyComponent() {
+  const value = 'My Value';
+  return (
+    <MyContext.Provider value={value}>
+      <MyContextUser />
+    </MyContext>
+  );
+}
+```
+
+C. Consume the context inside of the components that are wrapped in a context provider:
+
+```jsx
+import { useContext } from 'react';
+import { MyContext } from './myContext';
+
+function MyContextUser() {
+  const value = useContext(MyContext);
+
+  return <span>{value}</span>;
+}
+```
 
 ## 2. When do you need a context?
 
 ### 2.1 The props drilling problem
 
-The simplest way to pass data from a parent to a child component is to pass them using props. Saying it differently, the parent assigns needed data to props of the
-child component:
+The simplest way to pass data from a parent to a child component is simply when the parent assigns props to its child component:
 
 ```jsx
 function Application() {
@@ -54,9 +78,7 @@ function UserInfo(props) {
 <span>John Smith</span>
 ```
 
-In the example above `<Application />` is a parent component. Note that the parent component has some data, for simplicity, let's say the name of the user `userName`.  
-
-The parent component assigns `userName` data to its child component `<UserInfo name={userName} />` using the `name` prop available on the  `<UserInfo />` child component.  
+The parent component `<Application />` assigns `userName` data to its child component `<UserInfo name={userName} />` using the `name` prop.  
 
 That's pretty the standard way how data is assigned in React using props. You can use this approach without problems.  
 
