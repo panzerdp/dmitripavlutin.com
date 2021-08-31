@@ -33,3 +33,9 @@ interface EmailSubscriptionService {
   endpoint: string;
   hiddenFieldName: string;
 }
+
+interface CarbonAdsService {
+  scriptSrc: string;
+  isEnabled: boolean;
+  isProductionMode: boolean;
+}

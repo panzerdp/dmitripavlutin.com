@@ -16,6 +16,8 @@ import CommentsInView from 'components/Comments/InView';
 import AboutAuthorConcise from 'components/AboutAuthor/Concise';
 import AboutAuthorFetch from 'components/AboutAuthor/Fetch';
 import SubscriptionRegion from 'components/Subscription/Region';
+import CarbonFetch from 'components/Carbon/Fetch';
+import CarbonMetaTags from 'components/Carbon/Meta/Tags';
 import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll';
 import CommentsCount from 'components/Comments/Count';
 import { TO_POST } from 'routes/path';
@@ -68,6 +70,7 @@ export default function PostTemplate({
         authorInfo={authorInfo}
         authorProfilePictureSrc={authorProfilePictureSrc}
       />
+      <CarbonFetch render={(service) => <CarbonMetaTags carbonAdsService={service} />} />
       <article>
         <div className={styles.postCover}>
           <Img fluid={post.thumbnail} />

@@ -1,0 +1,12 @@
+@import '~styles/variables';
+
+.carbonSection {
+  background-color: rgba($border-color, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0.5rem 0.25rem;
+  box-sizing: border-box;
+  max-width: 250px;
+  min-height: 190px;
+  width: 100%;
+}
