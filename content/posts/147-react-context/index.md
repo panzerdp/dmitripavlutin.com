@@ -3,7 +3,7 @@ title: "A Simple Explanation of React Context and useContext() Hook"
 description: "The context in React let's you supply data to deeply nested components in a convinient way."
 published: "2021-08-31T12:00Z"
 modified: "2021-08-31T12:00Z"
-thumbnail: "./images/cover-2.png"
+thumbnail: "./images/cover.png"
 slug: react-context-and-usecontext
 tags: ['react', 'hook']
 recommended: ['react-useref-guide', 'react-useeffect-explanation']
@@ -18,7 +18,7 @@ The context can help you to provide data to components no matter how deep they a
 
 Using the context in React usually requires initialization and wiring the 3 main items of the context: the context itself, the context provider and the context consumer.  
 
-A. Define the context using `createContext()` built-in function:
+A. *Define* the context using `createContext()` built-in function:
 
 ```javascript
 import { createContext } from 'react';
@@ -26,7 +26,7 @@ import { createContext } from 'react';
 export const MyContext = createContext(initialValue);
 ```
 
-B. Provide the context using the property `MyContext.Provider` of the context instance:
+B. *Provide* the context using the property `MyContext.Provider` of the context instance:
 
 ```javascript
 import { MyContext } from './myContext';
@@ -36,12 +36,12 @@ function MyComponent() {
   return (
     <MyContext.Provider value={value}>
       <MyContextUser />
-    </MyContext>
+    </MyContext.Provider>
   );
 }
 ```
 
-C. Consume the context inside of the components that are wrapped in a context provider:
+C. *Consume* the context inside of the components that are wrapped in a context provider:
 
 ```jsx
 import { useContext } from 'react';
