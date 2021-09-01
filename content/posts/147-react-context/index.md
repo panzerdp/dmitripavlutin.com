@@ -20,7 +20,7 @@ Using the context in React usually requires initialization and wiring the 3 acto
 
 A. *Define* the context using `createContext()` built-in function:
 
-```javascript
+```javascript{3}
 import { createContext } from 'react';
 
 export const MyContext = createContext(initialValue);
@@ -28,7 +28,7 @@ export const MyContext = createContext(initialValue);
 
 B. *Provide* the context using the property `MyContext.Provider` of the context instance:
 
-```javascript
+```javascript{6}
 import { MyContext } from './myContext';
 
 function MyComponent() {
@@ -202,10 +202,12 @@ First, `const UserContext = createContext('Unknown')` creates the context that's
 Second, inside the `<Application />` component, all the application content is wrapped inside the user context provider: `<UserContext.Provider value={userName}>`. Note that the
 `value` prop of the provider component is important: this how you set the value of the context.  
 
-Finally, `<UserInfo />` becomes the consumer of the context.  
+Finally, `<UserInfo />` becomes the consumer of the context. It does so by using the built-in `useContext(UserContext)` hook being called with the context as an argument.  
+
+In the example, the value of the context doesn't change. However, note that when changing the context value all of its consumers are being notified and re-rendered.  
 
 ## 3. Conclusion
 
 The context in React is a concept that let's you supply child components with data, no matter how deep they are in the components tree.  
 
-Using the context requires 3 actors:
+Using the context requires 3 actors: the context, the context provider and the context consumer.  
