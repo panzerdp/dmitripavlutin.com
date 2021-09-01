@@ -1,24 +1,28 @@
 ---
 title: "A Guide on React Context and useContext() Hook"
-description: "The context in React let's you supply data to deeply nested components in a convinient way."
+description: "The React context let's you set data to deeply nested components in a convinient way."
 published: "2021-08-31T12:00Z"
 modified: "2021-08-31T12:00Z"
-thumbnail: "./images/cover-4.png"
+thumbnail: "./images/cover-5.png"
 slug: react-context-and-usecontext
 tags: ['react', 'context', 'hook']
 recommended: ['react-useref-guide', 'react-useeffect-explanation']
 type: post
 ---
 
-In this post, you'll learn how to initialize and use the context concept in React.  
+The context can help you to provide data to components no matter how deep they are in the components hierarchy.  
 
-## 1. How to define and use context in React
+The context fits great for use cases requiring components to access some global data: like the theme, global state, global-wise services.  
 
-The context can help you to provide data to components no matter how deep they are in the components nesting.  
+In this post, you'll learn how to use the context concept in React.  
 
-Using the context in React usually requires initialization and wiring the 3 actors of the context: the context itself, the context provider and the context consumer.  
+## 1. How to initialize and use the context
 
-A. *Define* the context using `createContext()` built-in function:
+Using the context in React requires 3 simple steps: *creating* the context, *providing* the context, and *consuming* the context.  
+
+#### A. Creating the context
+
+You can create a context using the built-in React factory `createContext(initialValue)`:
 
 ```javascript{3}
 import { createContext } from 'react';
@@ -26,35 +30,65 @@ import { createContext } from 'react';
 export const Context = createContext('Initial Value');
 ```
 
-B. *Provide* the context using the property `MyContext.Provider` of the context instance. Use the `value` prop available on the `<MyContext.Provider value={value} />` so set the value of the context:
+#### B. Providing the context
+
+Provide the context using the property `Context.Provider` of the context instance: that is a component that provides the context. 
+
+Use the `value` prop available on the `<Context.Provider value={value} />` so set the value of the context:
 
 ```javascript{6}
-import { MyContext } from './myContext';
+import { Context } from './myContext';
 
 function Main() {
   const value = 'My Value';
   return (
-    <MyContext.Provider value={value}>
-      <MyContextUser />
-    </MyContext.Provider>
+    <Context.Provider value={value}>
+      <MyComponent />
+    </Context.Provider>
   );
 }
 ```
 
-C. *Consume* the context inside of the components that are wrapped, no matter how deep, in a context provider:
+What's important here is that all the components that 'd like later to consume the context have to be wrapped inside the provider component.  
 
-```jsx
+#### C. Consuming the context
+
+Consuming the context inside of the child components, wrapped inside the provider, allows to access the context value at any time. 
+
+Accessing the context value can be performed in 2 ways.  
+
+First way, the one I recommend, is to use the `userContext(Context)` React hook:
+
+```jsx{5}
 import { useContext } from 'react';
-import { MyContext } from './myContext';
+import { Context } from './context';
 
-function MyContextUser() {
-  const value = useContext(MyContext);
+function MyComponent() {
+  const value = useContext(Context);
 
   return <span>{value}</span>;
 }
 ```
 
-You can have as many consumers as you want for a single context. Also, in case if the context value changes (by changing the `value` prop of the provider) all the consumers are immediately notified about that changes.  
+Having the context as an argument, the hook return the value of the context: `value = useContext(Context)`.  
+
+The second way is by using a render function supplied as a child to `Context.Consumer` special component:
+
+```jsx
+import { Context } from './context';
+
+function MyComponent() {
+  return (
+    <Context.Consumer>
+      {value => <span>{value}</span>}
+    </Context.Consumer>
+  );
+}
+```
+
+You can have as many consumers as you want for a single context. The only requirement is that these consumer components have to be wrapped, at any level of nesting, inside the provider component.  
+
+If the context value changes (by changing the `value` prop of the provider `<Context.Provider value={value} />`) all the consumers are immediately notified about that changes and re-rendered.
 
 ## 2. When do you need a context?
 
@@ -211,3 +245,5 @@ Note that when changing the context value, then all of its consumers are being n
 The context in React is a concept that let's you supply child components with data, no matter how deep they are in the components tree.  
 
 Using the context requires 3 actors: the context, the context provider and the context consumer.  
+
+Since applying the context inside of your application increases the level of complexity, you should be careful when deciding about the use of the contex.t  
