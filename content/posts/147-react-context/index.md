@@ -1,5 +1,5 @@
 ---
-title: "A Simple Explanation of React Context and useContext() Hook"
+title: "A Guide on React Context and useContext() Hook"
 description: "The context in React let's you supply data to deeply nested components in a convinient way."
 published: "2021-08-31T12:00Z"
 modified: "2021-08-31T12:00Z"
@@ -10,7 +10,7 @@ recommended: ['react-useref-guide', 'react-useeffect-explanation']
 type: post
 ---
 
-In this post, you'll learn what is the context concept in React and when you'd need to use it.  
+In this post, you'll learn how to initialize and use the context concept in React.  
 
 ## 1. How to define and use context in React
 
@@ -23,15 +23,15 @@ A. *Define* the context using `createContext()` built-in function:
 ```javascript{3}
 import { createContext } from 'react';
 
-export const MyContext = createContext(initialValue);
+export const Context = createContext('Initial Value');
 ```
 
-B. *Provide* the context using the property `MyContext.Provider` of the context instance:
+B. *Provide* the context using the property `MyContext.Provider` of the context instance. Use the `value` prop available on the `<MyContext.Provider value={value} />` so set the value of the context:
 
 ```javascript{6}
 import { MyContext } from './myContext';
 
-function MyComponent() {
+function Main() {
   const value = 'My Value';
   return (
     <MyContext.Provider value={value}>
@@ -54,7 +54,7 @@ function MyContextUser() {
 }
 ```
 
-Note that you can have as many consumers as you want for a single context.  
+You can have as many consumers as you want for a single context. Also, in case if the context value changes (by changing the `value` prop of the provider) all the consumers are immediately notified about that changes.  
 
 ## 2. When do you need a context?
 
@@ -204,7 +204,7 @@ Second, inside the `<Application />` component, all the application content is w
 
 Finally, `<UserInfo />` becomes the consumer of the context. It does so by using the built-in `useContext(UserContext)` hook being called with the context as an argument.  
 
-In the example, the value of the context doesn't change. However, note that when changing the context value all of its consumers are being notified and re-rendered.  
+Note that when changing the context value, then all of its consumers are being notified and re-rendered. 
 
 ## 3. Conclusion
 
