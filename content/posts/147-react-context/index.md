@@ -3,9 +3,9 @@ title: "A Simple Explanation of React Context and useContext() Hook"
 description: "The context in React let's you supply data to deeply nested components in a convinient way."
 published: "2021-08-31T12:00Z"
 modified: "2021-08-31T12:00Z"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover-4.png"
 slug: react-context-and-usecontext
-tags: ['react', 'hook']
+tags: ['react', 'context', 'hook']
 recommended: ['react-useref-guide', 'react-useeffect-explanation']
 type: post
 ---
@@ -16,7 +16,7 @@ In this post, you'll learn what is the context concept in React and when you'd n
 
 The context can help you to provide data to components no matter how deep they are in the components nesting.  
 
-Using the context in React usually requires initialization and wiring the 3 main items of the context: the context itself, the context provider and the context consumer.  
+Using the context in React usually requires initialization and wiring the 3 actors of the context: the context itself, the context provider and the context consumer.  
 
 A. *Define* the context using `createContext()` built-in function:
 
@@ -41,7 +41,7 @@ function MyComponent() {
 }
 ```
 
-C. *Consume* the context inside of the components that are wrapped in a context provider:
+C. *Consume* the context inside of the components that are wrapped, no matter how deep, in a context provider:
 
 ```jsx
 import { useContext } from 'react';
@@ -83,7 +83,9 @@ The parent component `<Application />` assigns `userName` data to its child comp
 
 That's pretty the standard way how data is assigned in React using props. You can use this approach without problems.  
 
-But the situation changes when `<UserInfo />` child component isn't a direct child of `<Application />`, but is contained within multiple intermediate parents. That could happen, for example, when `<UserInfo />` is rendered inside of `<Header />` component, which in turn is rendered inside of a `<Layout />` component.  
+But the situation changes when `<UserInfo />` child component isn't a direct child of `<Application />`, but is contained within multiple ancestors. 
+
+For example, when `<UserInfo />` is rendered inside of `<Header />` component, which in turn is rendered inside of a `<Layout />` component.  
 
 Here's how such a structuring would look:
 
@@ -138,7 +140,7 @@ React context is a possible solution to solve this kind of issues. Let's see in 
 
 ### 2.2 Context to the rescue
 
-As a quick reminder, applying the React context requires 3 items: the context, the provider extracted from the context, and the consumer.  
+As a quick reminder, applying the React context requires 3 actors: the context, the provider extracted from the context, and the consumer.  
 
 Here's how the sample application would look when applying the context to it:
 
@@ -203,3 +205,7 @@ Second, inside the `<Application />` component, all the application content is w
 Finally, `<UserInfo />` becomes the consumer of the context.  
 
 ## 3. Conclusion
+
+The context in React is a concept that let's you supply child components with data, no matter how deep they are in the components tree.  
+
+Using the context requires 3 actors:
