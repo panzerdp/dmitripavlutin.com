@@ -1,6 +1,6 @@
 ---
 title: "A Guide on React Context and useContext() Hook"
-description: "The React context let's you set data to deeply nested components in a convinient way."
+description: "The React context provides data to components no matter how deep they are in the components hierarchy."
 published: "2021-09-02T11:00Z"
 modified: "2021-08-02T11:00Z"
 thumbnail: "./images/cover-5.png"
