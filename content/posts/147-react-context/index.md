@@ -49,7 +49,7 @@ function Main() {
 }
 ```
 
-What's important here is that all the components that 'd like later to consume the context have to be wrapped inside the provider component.  
+What's important here is that all the components that'd like later to consume the context have to be wrapped inside the provider component.  
 
 #### C. Consuming the context
 
@@ -57,7 +57,7 @@ Consuming the context inside of the child components, wrapped inside the provide
 
 Accessing the context value can be performed in 2 ways.  
 
-First way, the one I recommend, is to use the `userContext(Context)` React hook:
+The first way, the one I recommend, is to use the `userContext(Context)` React hook:
 
 ```jsx{5}
 import { useContext } from 'react';
@@ -90,9 +90,9 @@ You can have as many consumers as you want for a single context. The only requir
 
 If the context value changes (by changing the `value` prop of the provider `<Context.Provider value={value} />`) all the consumers are immediately notified about that changes and re-rendered.
 
-## 2. When do you need a context?
+## 2. When do you need context?
 
-The main idea of using the context is to allow your components access some global data, and as well be able to re-render when that global data is changed.  
+The main idea of using the context is to allow your components to access some global data, and as well be able to re-render when that global data is changed.  
 
 You can hold inside the context:
 
@@ -104,9 +104,9 @@ You can hold inside the context:
 * preferred language 
 * a collection of services 
 
-that consumer components should use at any nesting level. Context solves primarly the props drilling problem when you have to pass down props from parents to children.  
+that consumer components should use at any nesting level. Context solves primarily the props drilling problem when you have to pass down props from parents to children.  
 
-But you should think carefuly before taking the decision to use context in your application.  
+But you should think carefully before deciding to use context in your application.  
 
 First, adding context introduces complexity to the application: creating the context, wrapping everything in the context provider, using the `useContext()`.  
 
@@ -190,7 +190,7 @@ You can probably see the problem: because `<UserInfo />` component is rendered d
 
 This problem is also known as [props drilling](https://kentcdodds.com/blog/prop-drilling).  
 
-React context is a possible solution to solve this kind of issues. Let's see in the next section how to apply it.  
+React context is a possible solution. Let's see in the next section how to apply it.  
 
 ### 3.1 Context to the rescue
 
@@ -254,16 +254,16 @@ Let's look into more detail what was done.
 First, `const UserContext = createContext('Unknown')` creates the context that's going to hold the user name information.  
 
 Second, inside the `<Application />` component, all the application content is wrapped inside the user context provider: `<UserContext.Provider value={userName}>`. Note that the
-`value` prop of the provider component is important: this how you set the value of the context.  
+`value` prop of the provider component is important: this is how you set the value of the context.  
 
-Finally, `<UserInfo />` becomes the consumer of the context. It does so by using the built-in `useContext(UserContext)` hook being called with the context as an argument.  
+Finally, `<UserInfo />` becomes the consumer of the context. It does so by using the built-in `useContext(UserContext)` hook is called with the context as an argument.  
 
 Note that when changing the context value, then all of its consumers are being notified and re-rendered.  
 
 ## 4. Conclusion
 
-The context in React is a concept that let's you supply child components with data, no matter how deep they are in the components tree.  
+The context in React is a concept that lets you supply child components with data, no matter how deep they are in the components tree.  
 
-Using the context requires 3 actors: the context, the context provider and the context consumer.  
+Using the context requires 3 steps: creating, providing, and consuming the context.  
 
 *What use cases of React context do you know?*
