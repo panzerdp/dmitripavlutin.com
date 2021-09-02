@@ -27,7 +27,7 @@ You can create a context using the built-in React factory `createContext(initial
 ```javascript{3}
 import { createContext } from 'react';
 
-export const Context = createContext('Initial Value');
+export const Context = createContext('Default Value');
 ```
 
 #### B. Providing the context
@@ -92,7 +92,27 @@ If the context value changes (by changing the `value` prop of the provider `<Con
 
 ## 2. When do you need a context?
 
-### 2.1 The props drilling problem
+The main idea of using the context is to allow your components access some global data, and as well be able to re-render when that global data is changed.  
+
+You can hold inside the context:
+
+* global state
+* theme
+* application configuration
+* authenticated user name 
+* user settings
+* preferred language 
+* a collection of services 
+
+that consumer components should use at any nesting level. Context solves primarly the props drilling problem when you have to pass down props from parents to children.  
+
+But you should think carefuly before taking the decision to use context in your application.  
+
+First, adding context introduces complexity to the application: creating the context, wrapping everything in the context provider, using the `useContext()`.  
+
+Secondly, adding context makes it more difficult to unit test the components. During unit testing, you would have to wrap the consumer into a provider.   
+
+## 3. Use case: solving the props drilling problem
 
 The simplest way to pass data from a parent to a child component is simply when the parent assigns props to its child component:
 
@@ -168,11 +188,11 @@ function UserInfo({ userName }) {
 
 You can probably see the problem: because `<UserInfo />` component is rendered deep down in the tree, all the parent components (`<Layout />` and `<Header />`) have to pass the `userName` prop.  
 
-This problem is also called [props drilling](https://kentcdodds.com/blog/prop-drilling).  
+This problem is also known as [props drilling](https://kentcdodds.com/blog/prop-drilling).  
 
 React context is a possible solution to solve this kind of issues. Let's see in the next section how to apply it.  
 
-### 2.2 Context to the rescue
+### 3.1 Context to the rescue
 
 As a quick reminder, applying the React context requires 3 actors: the context, the provider extracted from the context, and the consumer.  
 
@@ -238,12 +258,12 @@ Second, inside the `<Application />` component, all the application content is w
 
 Finally, `<UserInfo />` becomes the consumer of the context. It does so by using the built-in `useContext(UserContext)` hook being called with the context as an argument.  
 
-Note that when changing the context value, then all of its consumers are being notified and re-rendered. 
+Note that when changing the context value, then all of its consumers are being notified and re-rendered.  
 
-## 3. Conclusion
+## 4. Conclusion
 
 The context in React is a concept that let's you supply child components with data, no matter how deep they are in the components tree.  
 
 Using the context requires 3 actors: the context, the context provider and the context consumer.  
 
-Since applying the context inside of your application increases the level of complexity, you should be careful when deciding about the use of the contex.t  
+*What use cases of React context do you know?*
