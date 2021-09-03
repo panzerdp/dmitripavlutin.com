@@ -10,7 +10,7 @@ recommended: ['react-useref-guide', 'react-useeffect-explanation']
 type: post
 ---
 
-The context can help you to provide data to components no matter how deep they are in the components hierarchy. It is used to access global data like global state, theme, services.  
+The context can help you provide data to components no matter how deep they are in the components tree. It is used to access global data like global state, theme, services.  
 
 In this post, you'll learn how to use the context concept in React.  
 
@@ -28,7 +28,7 @@ import { createContext } from 'react';
 const Context = createContext('Default Value');
 ```
 
-The factory function accepts one optional argument: the default value of the context.  
+The factory function accepts one optional argument: the default value.   
 
 #### B. Providing the context
 
@@ -51,7 +51,7 @@ Again, what's important here is that all the components that'd like later to con
 
 #### C. Consuming the context
 
-Consuming the context inside of the child components can be performed in 2 ways.  
+Consuming the context can be performed in 2 ways.  
 
 The first way, the one I recommend, is to use the `userContext(Context)` React hook:
 
@@ -67,7 +67,7 @@ function MyComponent() {
 
 [Try the demo.](https://codesandbox.io/s/react-context-usecontext-pi5uv?file=/src/Main.js)
 
-Having the context as an argument, the hook return the value of the context: `value = useContext(Context)`.  
+The hook returns the value of the context: `value = useContext(Context)`.   
 
 The second way is by using a render function supplied as a child to `Context.Consumer` special component:
 
@@ -83,13 +83,15 @@ function MyComponent() {
 
 [Try the demo.](https://codesandbox.io/s/react-context-consumer-f413s?file=/src/Main.js)
 
-You can have as many consumers as you want for a single context. The only requirement is that these consumer components have to be wrapped, at any level of nesting, inside the provider component.  
+You can have as many consumers as you want for a single context. The only requirement is that the consumer components have to be wrapped inside the provider component.  
 
-If the context value changes (by changing the `value` prop of the provider `<Context.Provider value={value} />`) all the consumers are immediately notified about that changes and re-rendered.
+If the context value changes (by changing the `value` prop of the provider `<Context.Provider value={value} />`), then all consumers are immediately notified about that changes and re-rendered.  
+
+If the consumer isn't wrapped inside the provider, but still tries to access the context value (using `useContext()` or `<Context.Consumer>`), then the value of the context would be the default value `defaultValue` supplied to `createContext(defaultValue)` factory function.  
 
 ## 2. When do you need context?
 
-The main idea of using the context is to allow your components to access some global data, and as well be able to re-render when that global data is changed.  
+The main idea of using the context is to allow your components to access some global data and re-render when that global data is changed.  
 
 You can hold inside the context:
 
@@ -101,17 +103,17 @@ You can hold inside the context:
 * preferred language 
 * a collection of services 
 
-that consumer components should use at any nesting level. Context solves primarily the props drilling problem when you have to pass down props from parents to children.  
+that consumer components should use at any nesting level. Context solves primarily the props drilling problem: when you have to pass down props from parents to children.  
 
-But you should think carefully before deciding to use context in your application.  
+On the other side, you should think carefully before deciding to use context in your application.  
 
-First, adding context introduces complexity to the application. Creating the context, wrapping everything in the context provider, using the `useContext()` &mdash; all these add to the complexity.  
+First, adding context introduces complexity to the application. Creating the context, wrapping everything in the context provider, using the `useContext()` &mdash; this increases complexity.  
 
-Secondly, adding context makes it more difficult to unit test the components. During unit testing, you would have to wrap the consumer component into a context provider.   
+Secondly, adding context makes it more difficult to unit test the components. During unit testing, you would have to wrap the consumer component into a context provider. Including the components that are indirectly affected by the context &mdash; the ancestors of context consumers!  
 
 ## 3. Use case: solving the props drilling problem
 
-The simplest way to pass data from a parent to a child component is simply when the parent assigns props to its child component:
+The simplest way to pass data from a parent to a child component is when the parent assigns props to its child component:
 
 ```jsx
 function Application() {
@@ -126,11 +128,11 @@ function UserInfo({ userName }) {
 
 The parent component `<Application />` assigns `userName` data to its child component `<UserInfo name={userName} />` using the `name` prop.  
 
-That's pretty the standard way how data is assigned in React using props. You can use this approach without problems.  
+That's the usual way how data is passed using props. You can use this approach without problems.  
 
-But the situation changes when `<UserInfo />` child component isn't a direct child of `<Application />`, but is contained within multiple ancestors. 
+The situation changes when `<UserInfo />` child component isn't a direct child of `<Application />` but is contained within multiple ancestors. 
 
-For example, when `<UserInfo />` is rendered inside of `<Header />` component, which in turn is rendered inside of a `<Layout />` component.  
+For example, let's say that `<UserInfo />` renders inside of `<Header />` component, which in turn renders inside of a `<Layout />` component.  
 
 Here's how such a structuring would look:
 
@@ -170,7 +172,7 @@ function UserInfo({ userName }) {
 
 [Try the demo.](https://codesandbox.io/s/props-drilling-xhrfd?file=/src/Application.js)
 
-You can probably see the problem: because `<UserInfo />` component is rendered deep down in the tree, all the parent components (`<Layout />` and `<Header />`) have to pass the `userName` prop.  
+You can probably see the problem: because `<UserInfo />` component renders deep down in the tree, all the parent components (`<Layout />` and `<Header />`) have to pass the `userName` prop.  
 
 This problem is also known as [props drilling](https://kentcdodds.com/blog/prop-drilling).  
 
@@ -225,16 +227,16 @@ function UserInfo() {
 
 [Try the demo.](https://codesandbox.io/s/react-context-example-gzovv?file=/src/Application.js)
 
-Let's look into more detail what was done.  
+Let's look into more detail what has been done.  
 
 First, `const UserContext = createContext('Unknown')` creates the context that's going to hold the user name information.  
 
-Second, inside the `<Application />` component, all the application content is wrapped inside the user context provider: `<UserContext.Provider value={userName}>`. Note that the
+Second, inside the `<Application />` component, the application's child components are wrapped inside the user context provider: `<UserContext.Provider value={userName}>`. Note that the
 `value` prop of the provider component is important: this is how you set the value of the context.  
 
-Finally, `<UserInfo />` becomes the consumer of the context. It does so by using the built-in `useContext(UserContext)` hook is called with the context as an argument.  
+Finally, `<UserInfo />` becomes the consumer of the context. It does so by using the built-in `useContext(UserContext)` hook, which is called with the context as an argument and returns the user name value.  
 
-The benefit is that `<Layout />` and `<Header />` intermediate components no longer have to pass the `userName` prop.  
+`<Layout />` and `<Header />` intermediate components don't have to pass down the `userName` prop.  That is the great benefit of the context: it removes the burden of passing down data from the intermediate components.  
 
 Note that when changing the context value, then all of its consumers are being notified and re-rendered.  
 
@@ -244,6 +246,6 @@ The context in React is a concept that lets you supply child components with dat
 
 Using the context requires 3 steps: creating, providing, and consuming the context.  
 
-When deciding over introducing the context into your application, consider that it adds a good amount of complexity. Sometimes, drilling the props for 2-3 levels in the hierarchy isn't a big problem.  
+When introducing the context into your application, consider that it adds a good amount of complexity. Sometimes drilling the props through 2-3 levels in the hierarchy isn't a big problem.  
 
 *What use cases of React context do you know?*
