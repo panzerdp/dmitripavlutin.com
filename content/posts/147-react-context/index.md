@@ -244,7 +244,7 @@ Finally, `<UserInfo />` becomes the consumer of the context. It does so by using
 
 ### 3.2 Updating the context value
 
-When changing the context value changes then all of its consumers are being notified and re-rendered.  
+When changing the context value then all of its consumers are being notified and re-rendered.  
 
 For example, if I change the user name from `'John Smith'` to `'Smith, John Smith'`, then `<UserInfo />` consumer immediately re-renders to display the latest context value:
 
