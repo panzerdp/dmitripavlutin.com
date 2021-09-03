@@ -18,7 +18,7 @@ In this post, you'll learn how to use the context concept in React.
 toHeading: 3
 ```
 
-## 1. How to initialize and use the context
+## 1. How to use the context
 
 Using the context in React requires 3 simple steps: *creating* the context, *providing* the context, and *consuming* the context.  
 
