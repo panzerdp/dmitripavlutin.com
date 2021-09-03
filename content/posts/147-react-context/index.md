@@ -14,6 +14,10 @@ The context can help you provide data to components no matter how deep they are 
 
 In this post, you'll learn how to use the context concept in React.  
 
+```toc
+toHeading: 3
+```
+
 ## 1. How to initialize and use the context
 
 Using the context in React requires 3 simple steps: *creating* the context, *providing* the context, and *consuming* the context.  
@@ -85,9 +89,9 @@ function MyComponent() {
 
 You can have as many consumers as you want for a single context. The only requirement is that the consumer components have to be wrapped inside the provider component.  
 
-If the context value changes (by changing the `value` prop of the provider `<Context.Provider value={value} />`), then all consumers are immediately notified about that changes and re-rendered.  
+If the context value changes (by changing the `value` prop of the provider `<Context.Provider value={value} />`), then all consumers are immediately notified and re-rendered.  
 
-If the consumer isn't wrapped inside the provider, but still tries to access the context value (using `useContext()` or `<Context.Consumer>`), then the value of the context would be the default value `defaultValue` supplied to `createContext(defaultValue)` factory function.  
+If the consumer isn't wrapped inside the provider, but still tries to access the context value (using `useContext()` or `<Context.Consumer>`), then the value of the context would be the default value `defaultValue` supplied to `createContext(defaultValue)` factory function that had created the context.  
 
 ## 2. When do you need context?
 
@@ -111,7 +115,7 @@ First, adding context introduces complexity to the application. Creating the con
 
 Secondly, adding context makes it more difficult to unit test the components. During unit testing, you would have to wrap the consumer component into a context provider. Including the components that are indirectly affected by the context &mdash; the ancestors of context consumers!  
 
-## 3. Use case: solving the props drilling problem
+## 3. Use case: global user name
 
 The simplest way to pass data from a parent to a child component is when the parent assigns props to its child component:
 
@@ -238,7 +242,49 @@ Finally, `<UserInfo />` becomes the consumer of the context. It does so by using
 
 `<Layout />` and `<Header />` intermediate components don't have to pass down the `userName` prop.  That is the great benefit of the context: it removes the burden of passing down data from the intermediate components.  
 
-Note that when changing the context value, then all of its consumers are being notified and re-rendered.  
+### 3.2 Updating the context value
+
+When changing the context value changes then all of its consumers are being notified and re-rendered.  
+
+For example, if I change the user name from `'John Smith'` to `'Smith, John Smith'`, then `<UserInfo />` consumer immediately re-renders to display the latest context value:
+
+```jsx{8-10}
+import { createContext, useEffect, useState } from 'react';
+
+const UserContext = createContext('Unknown');
+
+function Application() {
+  const [userName, setUserName] = useState('John Smith');
+  useEffect(() => {
+    setTimeout(() => {
+      setUserName('Smith, John Smith');
+    }, 2000);
+  }, []);
+
+  return (
+    <UserContext.Provider value={userName}>
+      <Layout>
+        Main content
+      </Layout>
+    </UserContext.Provider>
+  );
+}
+
+// ...
+```
+
+[Try the demo.](https://codesandbox.io/s/react-context-example-change-hw32y?file=/src/Application.js)
+
+Open the [demo](https://codesandbox.io/s/react-context-example-change-hw32y?file=/src/Application.js) and you'd see `'John Smith'` (context value) displayed on the screen. After 2 seconds the context value changes to `'Smith, John Smith'`, and correspondingly the screen is updated with the new value.  
+
+It demonstrates that `<UserInfo />` component, the consumer that renders the context value on the screen, re-renders when the context value changes.  
+
+```jsx
+function UserInfo() {
+  const userName = useContext(UserContext);
+  return <span>{userName}</span>;
+}
+```
 
 ## 4. Conclusion
 
