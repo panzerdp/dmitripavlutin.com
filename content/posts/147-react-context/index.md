@@ -57,7 +57,7 @@ Again, what's important here is that all the components that'd like later to con
 
 Consuming the context can be performed in 2 ways.  
 
-The first way, the one I recommend, is to use the `userContext(Context)` React hook:
+The first way, the one I recommend, is to use the `useContext(Context)` React hook:
 
 ```jsx{4}
 import { useContext } from 'react';
