@@ -288,6 +288,42 @@ function UserInfo() {
 }
 ```
 
+#### 3.2.1 Updating the context value from inside the consumer
+
+The React Context API does not provide a dedicated method to update the context value from consumer components, but this can be easily implemented by providing an update function right in the context next to the value itself.
+
+```jsx
+import { createContext, useState, useContext } from 'react';
+
+const UserContext = createContext({
+  userName: '',
+  setUserName: () => {},
+});
+
+function Application() {
+  const [userName, setUserName] = useState('John Smith');
+  const value = { userName, setUserName };
+  return (
+    <UserContext.Provider value={value}>
+      <UserNameInput />
+    </UserContext.Provider>
+  );
+}
+
+function UserNameInput() {
+  const { userName, setUserName } = useContext(UserContext);
+  return (
+    <input
+      type="text"
+      name="username"
+      value={userName}
+      onChange={(ev) => setUserName(ev.target.value)}
+    />
+  )
+}
+```
+
+
 ## 4. Conclusion
 
 The context in React is a concept that lets you supply child components with global data, no matter how deep they are in the components tree.  
