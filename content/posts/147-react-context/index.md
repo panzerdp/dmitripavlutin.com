@@ -59,7 +59,7 @@ If you want to change the context value, simply update the `value` prop.
 
 Consuming the context can be performed in 2 ways.  
 
-The first way, the one I recommend, is to use the `userContext(Context)` React hook:
+The first way, the one I recommend, is to use the `useContext(Context)` React hook:
 
 ```jsx{4}
 import { useContext } from 'react';
