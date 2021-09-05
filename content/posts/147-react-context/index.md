@@ -290,10 +290,10 @@ function UserInfo() {
 
 #### 3.2.1 Updating the context value from inside the consumer
 
-The React Context API does not provide a dedicated method to update the context value from consumer components, but this can be easily implemented by providing an update function right in the context next to the value itself.
+The React Context API is stateless by default and does not provide a dedicated method to update the context value from consumer components, but this can be easily implemented by providing an update function right in the context next to the value itself.
 
 ```jsx
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useMemo } from 'react';
 
 const UserContext = createContext({
   userName: '',
@@ -302,7 +302,8 @@ const UserContext = createContext({
 
 function Application() {
   const [userName, setUserName] = useState('John Smith');
-  const value = { userName, setUserName };
+  const value = useMemo(() => ({ userName, setUserName }), [userName]);
+  
   return (
     <UserContext.Provider value={value}>
       <UserNameInput />
@@ -312,17 +313,19 @@ function Application() {
 
 function UserNameInput() {
   const { userName, setUserName } = useContext(UserContext);
+  const changeHandler = (event) => setUserName(ev.target.value);
+
   return (
     <input
       type="text"
       name="username"
       value={userName}
-      onChange={(ev) => setUserName(ev.target.value)}
+      onChange={changeHandler}
     />
-  )
+  );
 }
 ```
-
+The Application component uses memoization to prevent re-rendering of all consumers every time the Application is re-rendered.
 
 ## 4. Conclusion
 
