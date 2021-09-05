@@ -244,7 +244,7 @@ Finally, `<UserInfo />` becomes the consumer of the context by using the built-i
 
 `<Layout />` and `<Header />` intermediate components don't have to pass down the `userName` prop.  That is the great benefit of the context: it removes the burden of passing down data from through the intermediate components.  
 
-### 3.2 Updating the context value
+### 3.2 When context changes
 
 When the context value is changed by altering `value` prop of the context provider (`<Context.Provider value={value} />`), then all of its consumers are being notified and re-rendered.  
 
