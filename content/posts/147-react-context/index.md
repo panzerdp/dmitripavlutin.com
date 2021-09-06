@@ -2,7 +2,7 @@
 title: "A Guide to React Context and useContext() Hook"
 description: "The React context provides data to components no matter how deep they are in the components hierarchy."
 published: "2021-09-02T11:00Z"
-modified: "2021-08-02T11:00Z"
+modified: "2021-09-06T07:30Z"
 thumbnail: "./images/cover.png"
 slug: react-context-and-usecontext
 tags: ['react', 'context', 'hook']
@@ -242,7 +242,7 @@ Second, inside the `<Application />` component, the application's child componen
 
 Finally, `<UserInfo />` becomes the consumer of the context by using the built-in `useContext(UserContext)` hook. The hook is called with the context as an argument and returns the user name value.  
 
-`<Layout />` and `<Header />` intermediate components don't have to pass down the `userName` prop.  That is the great benefit of the context: it removes the burden of passing down data from through the intermediate components.  
+`<Layout />` and `<Header />` intermediate components don't have to pass down the `userName` prop.  That is the great benefit of the context: it removes the burden of passing down data through the intermediate components.  
 
 ### 3.2 When context changes
 
@@ -330,13 +330,22 @@ function UserNameInput() {
     />
   );
 }
+
+function UserInfo() {
+  const { userName } = useContext(UserContext);
+  return <span>{userName}</span>;
+}
 ```
+
+[Try the demo.](https://codesandbox.io/s/update-context-value-l39t0?file=/src/App.js)
 
 `<UserNameInput />` consumer reads the context value, from where `userName` and `setUserName` are extracted. The consumer then can update the context value by invoking the update function `setUserName(newContextValue)`.  
 
-Note that `<Application />` component memoizes the context value. Memoization prevents re-rendering of consumers every time the `<Application />` re-renders, because on each re-rendering `{ userName, setUserName }` creates new object instances.  
+`<UserInfo />` is another consumer of the context. When `<UserNameInput />` updates the context, this component is updated too.  
 
-See more about [referential equality of objects]((/how-to-compare-objects-in-javascript/#1-referential-equality)).
+Note that `<Application />` memoizes the context value. Memoization keeps the context value object the same as long as `userName` is the same, preventing re-rendering of consumers every time the `<Application />` re-renders.  
+
+Otherwise, without memoization, `const value = { userName, setUserName }` would create different object instances during re-rendering of `<Application />`, triggering re-rendering in context consumers. See more about [referential equality of objects]((/how-to-compare-objects-in-javascript/#1-referential-equality)).
 
 ## 5. Conclusion
 
