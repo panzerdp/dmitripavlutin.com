@@ -288,7 +288,7 @@ function UserInfo() {
 }
 ```
 
-### 4. Updating the context value from consumer
+## 4. Updating the context
 
 The React Context API is stateless by default and doesn't provide a dedicated method to update the context value from consumer components. 
 
