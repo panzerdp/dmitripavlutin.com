@@ -345,7 +345,7 @@ function UserInfo() {
 
 Note that `<Application />` memoizes the context value. Memoization keeps the context value object the same as long as `userName` is the same, preventing re-rendering of consumers every time the `<Application />` re-renders.  
 
-Otherwise, without memoization, `const value = { userName, setUserName }` would create different object instances during re-rendering of `<Application />`, triggering re-rendering in context consumers. See more about [referential equality of objects]((/how-to-compare-objects-in-javascript/#1-referential-equality)).
+Otherwise, without memoization, `const value = { userName, setUserName }` would create different object instances during re-rendering of `<Application />`, triggering re-rendering in context consumers. See more about [referential equality of objects](/how-to-compare-objects-in-javascript/#1-referential-equality).
 
 ## 5. Conclusion
 
