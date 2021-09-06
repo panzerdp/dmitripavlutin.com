@@ -288,11 +288,15 @@ function UserInfo() {
 }
 ```
 
-#### 3.2.1 Updating the context value from inside the consumer
+### 4. Updating the context value from consumer
 
-The React Context API is stateless by default and does not provide a dedicated method to update the context value from consumer components, but this can be easily implemented by providing an update function right in the context next to the value itself.
+The React Context API is stateless by default and doesn't provide a dedicated method to update the context value from consumer components. 
 
-```jsx
+But this can be easily implemented by integrating a state management mechanism (like `useState()` or `useReducer()` hooks), and providing an update function right in the context next to the value itself.
+
+In the following example, `<Application />` component uses `useState()` hook to manage the context value. 
+
+```jsx{10-13,16,23}
 import { createContext, useState, useContext, useMemo } from 'react';
 
 const UserContext = createContext({
@@ -302,7 +306,10 @@ const UserContext = createContext({
 
 function Application() {
   const [userName, setUserName] = useState('John Smith');
-  const value = useMemo(() => ({ userName, setUserName }), [userName]);
+  const value = useMemo(
+    () => ({ userName, setUserName }), 
+    [userName]
+  );
   
   return (
     <UserContext.Provider value={value}>
@@ -313,21 +320,25 @@ function Application() {
 
 function UserNameInput() {
   const { userName, setUserName } = useContext(UserContext);
-  const changeHandler = (event) => setUserName(ev.target.value);
+  const changeHandler = event => setUserName(event.target.value);
 
   return (
     <input
       type="text"
-      name="username"
       value={userName}
       onChange={changeHandler}
     />
   );
 }
 ```
-The Application component uses memoization to prevent re-rendering of all consumers every time the Application is re-rendered.
 
-## 4. Conclusion
+`<UserNameInput />` consumer reads the context value, from where `userName` and `setUserName` are extracted. The consumer then can update the context value by invoking the update function `setUserName(newContextValue)`.  
+
+Note that `<Application />` component memoizes the context value. Memoization prevents re-rendering of consumers every time the `<Application />` re-renders, because on each re-rendering `{ userName, setUserName }` creates new object instances.  
+
+See more about [referential equality of objects]((/how-to-compare-objects-in-javascript/#1-referential-equality)).
+
+## 5. Conclusion
 
 The context in React is a concept that lets you supply child components with global data, no matter how deep they are in the components tree.  
 
