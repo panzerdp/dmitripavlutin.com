@@ -91,12 +91,12 @@ Having added `typeof callback === 'function'` check, you can safely invoke `call
 
 ## 2. The mental model of *unknown* vs *any*
 
-To be honest, I had difficulties to understand `unknown` when I had read first about it. Why does it make a difference from `any`, since both types accept any value?  
+To be honest, I had difficulties understanding `unknown`. Why does it make a difference from `any`, since both types accept any value?  
 
-Here's where the difference lays:
+Here's the rule that had helped me understand the difference:
 
-* You can assign anything to `unknown` type, *but you cannot perform an operation on `unknown` type before doing a type check or use type assertion*
-* You can assign anything to `any` type, and you can perform any operation on `any` type
+* You can assign anything to `unknown` type *but you cannot perform an operation on `unknown` type before doing a type check or type assertion*
+* You can assign anything to `any` type *and you can perform any operation on `any` type*
 
 The example above has demonstrated exactly the similarity and difference between `unknown` and `any`.  
 
@@ -105,7 +105,7 @@ The case of `unknown`:
 ```typescript
 function invokeAnything(callback: unknown) {
   // you cannot perform an operation on `unknown` type 
-  // before doing a type check or use type assertion
+  // before doing a type check or type assertion
   if (typeof callback === 'function') {
     callback();
   }
@@ -127,7 +127,7 @@ function invokeAnything(callback: any) {
 invokeAnything(1); // // You can assign anything to `any` type
 ```
 
-In case of `callback` being `any`, TypeScript doesn't enforce any type checking.  
+`callback` being `any`, TypeScript doesn't enforce any type checking.  
 
 ## 3. Conclusion
 
