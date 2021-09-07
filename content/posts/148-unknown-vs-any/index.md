@@ -20,7 +20,7 @@ myVar = false;
 
 Many TypeScript guides discourage the use of `any` because using it throws away the type restrictions &mdash; the first reason why you use TypeScript!
 
-TypeScript (version 3.7 and above) also provides a special type `unknown` that is similar to `any`. You can assign any value to an `unknown` type variable:
+TypeScript (version 3.0 and above) also provides a special type `unknown` that is similar to `any`. You can assign any value to an `unknown` type variable:
 
 ```typescript
 let myVar: unknown = 0;
