@@ -10,7 +10,7 @@ recommended: ['javascript-null', '7-tips-to-handle-undefined-in-javascript']
 type: post
 ---
 
-`any` is a special keyword that represents any value. A variable of type `any` can receive any kind of value:
+`any` is the keyword that represents any value. A variable of type `any` can receive any kind of value:
 
 ```typescript
 let myVar: any = 0;
@@ -50,11 +50,11 @@ Because `callback` param is of `any` type, the statement `callback()` *won't tri
 
 But running the script *throws a runtime error*: `TypeError: callback is not a function` is thrown. `1` is a number and cannot be invoked as a function &mdash; and TypeScript hasn't protected you from this error!
 
-How to allow `invokeAnything()` function to accept any kind of argument, but force a type check on that argument, for example if invoking it as a function? 
+How to allow `invokeAnything()` function to accept any kind of argument, but force a type check on that argument, for example, if invoking it as a function? 
 
 Welcome `unknown`!
 
-`unknown`, same as `any`, accepts any kind of value. However, if you try to use the variable of `unknown` type, then TypeScript enforces you a type check. Exactly what you need!
+An `unknown` type variable, same as `any`, accepts any value. But when trying to use the variable of `unknown` TypeScript enforces a type check. Exactly what you need!
 
 Let's change the type of `callback` param from `any` to `unknown`, and see what happens:
 
@@ -69,7 +69,7 @@ invokeAnything(1);
 
 [Try the demo.](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABDMA3OBrApgQTATygAsUBzACggEMAbGgIyogwC5FwMw4B3MASkQBvAFCJE1Oo2bk+AbmEBfYcJTpseQiTAUAjHKA)
 
-Because `callback` argument is of type `unknown`, the statement `callback()` has a type error `Object is of type 'unknown'`.  
+Because the `callback` argument is of type `unknown`, the statement `callback()` has a type error `Object is of type 'unknown'`.  
 
 You need to perform type checking before using a variable of type `unknown`. In the example, you would simply need to check if `callback` is a function type:
 
@@ -93,7 +93,7 @@ Now you can easily understand the definition of `unknown` as [provided](https://
 
 ## 2. *don't know* vs *don't care*
 
-If you still have troubles in understanding the `unknown` concept, you might find useful the following mental model.  
+If you still have trouble understanding the `unknown` concept, you might find useful the following mental model: 
 
 `unknown` represents the idea of *I don't know*, while `any` &mdash; *I don't care*.  
 
