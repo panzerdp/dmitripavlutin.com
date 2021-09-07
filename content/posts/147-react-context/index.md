@@ -10,7 +10,7 @@ recommended: ['react-useref-guide', 'react-useeffect-explanation']
 type: post
 ---
 
-The context can help you provide data to components no matter how deep they are in the components tree. It is used to manage global data like global state, theme, services.  
+The React context provides data to components no matter how deep they are in the components tree. The context is used to manage global data, e.g. global state, theme, services, user settings, and more.    
 
 In this post, you'll learn how to use the context concept in React.  
 
@@ -345,7 +345,7 @@ function UserInfo() {
 
 Note that `<Application />` memoizes the context value. Memoization keeps the context value object the same as long as `userName` is the same, preventing re-rendering of consumers every time the `<Application />` re-renders.  
 
-Otherwise, without memoization, `const value = { userName, setUserName }` would create different object instances during re-rendering of `<Application />`, triggering re-rendering in context consumers. See more about [referential equality of objects]((/how-to-compare-objects-in-javascript/#1-referential-equality)).
+Otherwise, without memoization, `const value = { userName, setUserName }` would create different object instances during re-rendering of `<Application />`, triggering re-rendering in context consumers. See more about [referential equality of objects](/how-to-compare-objects-in-javascript/#1-referential-equality).
 
 ## 5. Conclusion
 
