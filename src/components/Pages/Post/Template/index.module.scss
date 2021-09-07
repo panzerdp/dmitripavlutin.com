@@ -57,6 +57,11 @@
     background: left center / 25px no-repeat url('/icons/javascript-2.svg');
   }
 
+  a[href^="https://www.typescriptlang.org/play"] {
+    padding-left: 30px;
+    background: left center / 25px no-repeat url('/icons/typescriptlang-icon.svg');
+  }
+
   img[src$='.gif'], img[src$='.svg'] {
     margin: 0 auto;
     display: block;

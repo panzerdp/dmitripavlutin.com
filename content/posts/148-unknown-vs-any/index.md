@@ -95,8 +95,8 @@ To be honest, I had difficulties understanding `unknown`. Why does it make a dif
 
 Here's the rule that had helped me understand the difference:
 
-* You can assign anything to `unknown` type *but you cannot perform an operation on `unknown` type before doing a type check or type assertion*
-* You can assign anything to `any` type *and you can perform any operation on `any` type*
+* You can assign anything to `unknown` type *but you cannot operate on `unknown` before doing a type check or type assertion*
+* You can assign anything to `any` type *and you can perform any operation on `any`*
 
 The example above has demonstrated exactly the similarity and difference between `unknown` and `any`.  
 
@@ -104,7 +104,7 @@ The case of `unknown`:
 
 ```typescript
 function invokeAnything(callback: unknown) {
-  // you cannot perform an operation on `unknown` type 
+  // you cannot operate on `unknown` type 
   // before doing a type check or type assertion
   if (typeof callback === 'function') {
     callback();
@@ -133,4 +133,4 @@ invokeAnything(1); // // You can assign anything to `any` type
 
 `unknown` and `any` are 2 special types that can hold any value.  
 
-`unknown` is recommended over `any` because it provides safer typing &mdash; you have to use type assertion or norrow to a specific type if you want to perform operations on `unknown`.  
+`unknown` is recommended over `any` because it provides safer typing &mdash; you have to use type assertion or narrow to a specific type if you want to perform operations on `unknown`.  
