@@ -72,9 +72,7 @@ function FetchGame({ id }) {
 
 If `id` is empty, the component renders `'Please select a game to fetch'` and exits. No hooks are invoked. But if `id` is not empty (e.g. equals `'1'`), then the `useState()` and `useEffect()` hooks are invoked.  
 
-As you can see, the hooks inside the component are executed conditionally.  
-
-The hooks executed conditionally can lead to unexpected errors that can be hard to debug. The way React hooks internally work requires components to invoke hooks in the same order between renderings &mdash; always!  
+The hooks executed conditionally can lead to unexpected and hard to debug errors. The way React hooks internally work requires components to invoke hooks in the same order between renderings &mdash; always!  
 
 That's exactly what suggests [the first rule of hooks](https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level): *Don’t call Hooks inside loops, conditions, or nested functions*.  
 

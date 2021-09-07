@@ -10,7 +10,7 @@ recommended: ['react-useref-guide', 'react-useeffect-explanation']
 type: post
 ---
 
-The context can help you provide data to components no matter how deep they are in the components tree. It is used to manage global data like global state, theme, services.  
+The React context provides data to components no matter how deep they are in the components tree. The context is used to manage global data, e.g. global state, theme, services, user settings, and more.    
 
 In this post, you'll learn how to use the context concept in React.  
 
