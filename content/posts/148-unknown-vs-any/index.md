@@ -1,8 +1,8 @@
 ---
 title: "unknown vs any in TypeScript"
 description: "What is the difference between unknown and any types in TypeScript."
-published: "2021-09-07T12:00Z"
-modified: "2021-08-07T12:00Z"
+published: "2021-09-08T13:00Z"
+modified: "2021-08-08T13:00Z"
 thumbnail: "./images/cover-3.png"
 slug: typescript-unknown-vs-any
 tags: ['typescript', 'unknown', 'any']
@@ -20,7 +20,7 @@ myVar = false;
 
 Many TypeScript guides discourage the use of `any` because using it throws away the type restrictions &mdash; the first reason why you use TypeScript!
 
-TypeScript (version 3.0 and above) also provides a special type `unknown` that is similar to `any`. You can assign any value to an `unknown` type variable:
+TypeScript (version 3.0 and above) also provides a special type `unknown` that is similar to `any`. You can assign any value to an `unknown` type variable as well:
 
 ```typescript
 let myVar: unknown = 0;
@@ -28,15 +28,15 @@ myVar = '1';
 myVar = false;
 ```
 
-Now... the big question is: what is the difference between using `any` and `unknown`? 
+Now... the big question is: what is the difference between using `any` and `unknown`?
 
 Let's find out in this post.  
 
 ## 1. *unknown* vs *any*
 
-To better understand the difference between `unknown` and `any`, let's start with writing a function that wants to invoke its only argument which can be any value.    
+To better understand the difference between `unknown` and `any`, let's start with writing a function that wants to invoke its only argument.  
 
-The first approach is to make the only parameter of `invokeAnything()` as `any`:
+Let's make the only parameter of `invokeAnything()` as `any` type:
 
 ```typescript
 function invokeAnything(callback: any) {
@@ -50,13 +50,13 @@ invokeAnything(1); // throws "TypeError: callback is not a function"
 
 Because `callback` param is of `any` type, the statement `callback()` *won't trigger type errors*. You can do anything with a variable of type `any`.  
 
-But running the script *throws a runtime error*: `TypeError: callback is not a function` is thrown. `1` is a number and cannot be invoked as a function &mdash; and TypeScript hasn't protected you from this error!
+But running the script *throws a runtime error*: `TypeError: callback is not a function`. `1` is a number and cannot be invoked as a function &mdash; and TypeScript hasn't protected you from this error!
 
 How to allow `invokeAnything()` function to accept any kind of argument, but force a type check on that argument, for example, if invoking it as a function? 
 
 Welcome `unknown`!
 
-An `unknown` type variable, same as `any`, accepts any value. But when trying to use the variable of `unknown`, TypeScript enforces a type check. Exactly what you need!
+An `unknown` type variable, same as `any`, accepts any value. But when trying to use the `unknown` variable, TypeScript enforces a type check. Exactly what you need!
 
 Let's change the type of `callback` param from `any` to `unknown`, and see what happens:
 
@@ -71,7 +71,7 @@ invokeAnything(1);
 
 [Try the demo.](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABDMA3OBrApgQTATygAsUBzACggEMAbGgIyogwC5FwMw4B3MASkQBvAFCJE1Oo2bk+AbmEBfYcJTpseQiTAUAjHKA)
 
-Because the `callback` argument is of type `unknown`, the statement `callback()` has a type error `Object is of type 'unknown'`.  
+Because the `callback` argument is of type `unknown`, the statement `callback()` has a type error `Object is of type 'unknown'`. Now, contrary to `any`, TypeScript protects you from invoking something that might not be a function! 
 
 You need to perform type checking before using a variable of type `unknown`. In the example, you would simply need to check if `callback` is a function type:
 
@@ -91,7 +91,7 @@ Having added `typeof callback === 'function'` check, you can safely invoke `call
 
 ## 2. The mental model of *unknown* vs *any*
 
-To be honest, I had difficulties understanding `unknown`. Why does it make a difference from `any`, since both types accept any value?  
+To be honest, I had difficulties understanding `unknown` when I had been learning it. How does it differ from `any`, since both types accept any value?  
 
 Here's the rule that had helped me understand the difference:
 
@@ -127,7 +127,7 @@ function invokeAnything(callback: any) {
 invokeAnything(1); // // You can assign anything to `any` type
 ```
 
-`callback` being `any`, TypeScript doesn't enforce any type checking.  
+`callback` being `any`, TypeScript doesn't enforce any type checking for the statement `callback()`.  
 
 ## 3. Conclusion
 
