@@ -444,7 +444,7 @@ Now let's use `async/await` syntax to access the delayed list:
 ```javascript{7,8}
 function getList() {
   return new Promise(resolve => {
-    setTimeout(() => resolve(['Joker', 'Batman'], 1000);
+    setTimeout(() => resolve(['Joker', 'Batman']), 1000);
   });
 }
 
