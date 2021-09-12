@@ -2,7 +2,7 @@
 title: "A Simple Explanation of React.useEffect()"
 description: "useEffect() hook executes side-effects in React components."
 published: "2020-10-13T08:50Z"
-modified: "2021-01-24T13:10Z"
+modified: "2021-09-12T09:10Z"
 thumbnail: "./images/effect-4.jpg"
 slug: react-useeffect-explanation
 tags: ['react', 'hook', 'useeffect']
@@ -22,16 +22,16 @@ A functional React component uses props and/or state to calculate the output. If
 
 Examples of side-effects are fetch requests, manipulating DOM directly, using timer functions like `setTimeout()`, and more.  
 
-The component rendering and side-effect logic are *independent*. So it would be a mistake to perform side-effects directly in the body of the component. 
+The component rendering and side-effect logic are *independent*. It would be a mistake to perform side-effects directly in the body of the component, which is primarily used to compute the output.   
 
-How often the component renders isn't something you can control &mdash; if React wants to render the component, you cannot stop it.  
+How often the component renders isn't something you can control &mdash; if React wants to render the component, you cannot stop it.    
 
 ```jsx{5}
 function Greet({ name }) {
   const message = `Hello, ${name}!`; // Calculates output
 
   // Bad!
-  document.title = 'Greetings page'; // Side-effect!
+  document.title = `Greetings to ${name}`; // Side-effect!
 
   return <div>{message}</div>;       // Calculates output
 }
@@ -47,8 +47,8 @@ function Greet({ name }) {
 
   useEffect(() => {
     // Good!
-    document.title = 'Greetings page'; // Side-effect!
-  }, []);
+    document.title = `Greetings to ${name}`; // Side-effect!
+  }, [name]);
 
   return <div>{message}</div>;         // Calculates output
 }
@@ -60,10 +60,22 @@ function Greet({ name }) {
 useEffect(callback[, dependencies]);
 ```
 
-* `callback` is the callback function containing side-effect logic. `useEffect()` executes the callback function after React has committed the changes to the screen.
+* `callback` is the function containing the side-effect logic. `callback` is executed right after changes were being pushed to DOM.  
 * `dependencies` is an optional array of dependencies. `useEffect()` executes `callback` only if the dependencies have changed between renderings.  
 
-Put your side-effect logic into the `callback` function, then use the `dependencies` argument to control when you want the side-effect to run. That's the sole purpose of `useEffect()`.  
+*Put your side-effect logic into the `callback` function, then use the `dependencies` argument to control when you want the side-effect to run. That's the sole purpose of `useEffect()`.*  
+
+For example, in the previous code snippet you saw the `useEffect()` in action:
+
+```javascript
+useEffect(() => {
+  document.title = `Greetings to ${name}`;
+}, [name]);
+```
+
+The *document title update* is the side-effect because it doesn't directly calculate the component output. That's why document title update is placed in a callback and supplied to `useEffect()`. 
+
+Also, you don't want the document title update to execute every time `Greet` component renders. You just want it executed when `name` prop changes &mdash; that's the reason you supplied `name` as a dependency to `useEffect(callback, [name])`.  
 
 ## 2. The dependencies of *useEffect()*
 
@@ -111,7 +123,7 @@ Let's detail into the cases B) and C) since they're used often.
 
 ## 3. The side-effect on component did mount
 
-To invoke a side-effect once after the component mounting, use an empty dependencies array:  
+Use an empty dependencies array to invoke a side-effect once after component mounting:
 
 ```jsx{9}
 import { useEffect } from 'react';
@@ -128,7 +140,7 @@ function Greet({ name }) {
 }
 ```
 
-`useEffect(..., [])` was supplied with an empty array as a dependencies argument. When configured in such a way, the `useEffect()` is going to execute the callback *just once*, after initial mounting. 
+`useEffect(..., [])` was supplied with an empty array as the dependencies argument. When configured in such a way, the `useEffect()` executes the callback *just once*, after initial mounting. 
 
 Even if the component re-renders with different `name` property, the side-effect runs only once after the first render:
 
@@ -137,10 +149,10 @@ Even if the component re-renders with different `name` property, the side-effect
 <Greet name="Eric" />   // Side-effect RUNS
 
 // Second render, name prop changes
-<Greet name="Stan" />   // Side-effect does NOT RUN
+<Greet name="Stan" />   // Side-effect DOES NOT RUN
 
 // Third render, name prop changes
-<Greet name="Butters"/> // Side-effect does NOT RUN
+<Greet name="Butters"/> // Side-effect DOES NOT RUN
 ```
 
 ## 4. The side-effect on component did update
@@ -191,7 +203,7 @@ function Greet({ name }) {
 <Greet name="Stan" />   // Side-effect RUNS
 
 // Third render, name prop doesn't change
-<Greet name="Stan" />   // Side-effect does NOT RUN
+<Greet name="Stan" />   // Side-effect DOES NOT RUN
 
 // Fourth render, name prop changes
 <Greet name="Butters"/> // Side-effect RUNS
@@ -257,7 +269,7 @@ To run the fetch request once when the component mounts, simply indicate an empt
 
 Some side-effects need cleanup: close a socket, clear timers.  
 
-If the `callback` of `useEffect(callback)` returns a function, then `useEffect()` considers this as an *effect cleanup*:  
+If the `callback` of `useEffect(callback, deps)` returns a function, then `useEffect()` considers this as an *effect cleanup*:  
 
 ```jsx{4-6}
 useEffect(() => {
@@ -295,7 +307,9 @@ function RepeatMessage({ message }) {
 }
 ```
 
-Open the [demo](https://codesandbox.io/s/restless-wildflower-c0cfw?file=/src/App.js) and type some messages. The console logs every 2 seconds any message that's been ever typed into the input. However, you need to log only the latest message.  
+[Try the demo.](https://codesandbox.io/s/restless-wildflower-c0cfw?file=/src/App.js)
+
+Open the demo and type some messages. The console logs every 2 seconds any message that's been ever typed into the input. However, you need to log only the latest message.  
 
 That's the case to clean up the side-effect: cancel the previous timer when starting a new one. Let's return a cleanup function that stops the previous timer:
 
@@ -316,15 +330,15 @@ function RepeatMessage({ message }) {
 }
 ```
 
-Open the [demo](https://codesandbox.io/s/gracious-tdd-gy4zo?file=/src/App.js) and type some messages: only the latest message logs to console.  
+[Try the demo.](https://codesandbox.io/s/gracious-tdd-gy4zo?file=/src/App.js)
+
+Open the demo and type some messages: only the latest message logs to console.  
 
 ## 7. Conclusion
 
 `useEffect(callback, dependencies)` is the hook that manages the side-effects in functional components. `callback` argument is a function to put the side-effect logic. `dependencies` is a list of dependencies of your side-effect: being props or state values.  
 
 `useEffect(callback, dependencies)` invokes the `callback` after initial mounting, and on later renderings, if any value inside `dependencies` has changed.  
-
-Because `useEffect()` hook heavily relies on closures, you might need to [get them well](/simple-explanation-of-javascript-closures/) too. Also be aware of [stale closures issue](/react-hooks-stale-closures/).  
 
 The next step to mastering `useEffect()` is to understand and avoid [the infinite loop pitfall](/react-useeffect-infinite-loop/).  
 
