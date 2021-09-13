@@ -109,16 +109,17 @@ The idea is that updating a reference doesn't trigger re-rendering of the compon
 
 Here's a possible implementation:
 
-```jsx{7}
-import { useEffect, useState, useRef } from "react";
+```jsx{9}
+import { useState, useRef } from 'react';
 
 function CountInputChanges() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const countRef = useRef(0);
 
-  useEffect(() => countRef.current++);
-
-  const onChange = ({ target }) => setValue(target.value);
+  const onChange = ({ target }) => {
+    setValue(target.value);
+    countRef.current++;
+  };
 
   return (
     <div>
@@ -129,9 +130,7 @@ function CountInputChanges() {
 }
 ```
 
-Thanks to `useEffect(() => countRef.current++)`, after every re-rendering because of `value` change, the `countRef.current` gets incremented. The reference change by itself doesn't trigger a re-rendering.
-
-![React useEffect() controlled rendering loop](./images/3.png)
+Inside the event handler `onChange` the `countRef.current++` is executed each time the `value` state changes. The reference change doesn't trigger re-rendering.  
 
 Check out the [demo](https://codesandbox.io/s/infinite-loop-reference-lcmq7). Now, as soon as you type into the input field, the `countRef` reference is updated without triggering a re-rendering &mdash; efficiently solving the infinite loop problem.  
 
