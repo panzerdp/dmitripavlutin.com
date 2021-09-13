@@ -114,7 +114,7 @@ function invokeAnything(callback: unknown) {
 invokeAnything(1); // You can assign anything to `unknown` type
 ```
 
-The type check here is `typeof callback === 'function'` &mdash; checking whether the `callback` is a function. The type of `callback` norrows to function type.  
+The type check here is `typeof callback === 'function'` &mdash; checking whether the `callback` is a function. The type of `callback` narrows to function type.  
 
 The case of `any`:
 
