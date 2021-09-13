@@ -267,10 +267,7 @@ useEffect(() => {
 Alternatively, you can also use a reference. Updating a reference doesn't trigger a re-rendering:
 
 ```javascript
-useEffect(() => {
-  // No infinite loop
-  countRef.current++;
-});
+countRef.current++;
 ```
 
 Another common recipe of an infinite loop is using an object as a dependency of `useEffect()`, and inside the side-effect updating that object (effectively creating a new object):
