@@ -123,7 +123,7 @@ The dispatch function is created for your by the `useReducer()` hook:
 const [state, dispatch] = useReducer(reducer, initialState);
 ```
 
-#### E. Dispatch, action object and reducer wired toghether
+#### E. Wiring everything
 
 Wiring all these terms toghether, here's how the state update using a reducer works.  
 
@@ -133,9 +133,9 @@ Then React redirects the action object and the current state value to the *reduc
 
 The reducer function uses the action object and performs a state update, returning the new state.  
 
-React then checks whether the state has been updated. If so, it re-renders the component and `useReducer()` returns the new state value: `[newState, ...] = useReducer(...)`.  
+React then checks whether the new state differs from previous one. If the state has been updated, React re-renders the component and `useReducer()` returns the new state value: `[newState, ...] = useReducer(...)`.  
 
-If all these terms sound too abstract, then you have the right feeling! 
+If all these terms sound too abstract, then you have the right feeling! Let's see how `useReducer()` works in an interesting example.  
 
 ## 2. Example: implementing a stopwatch
 
