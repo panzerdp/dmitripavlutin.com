@@ -83,7 +83,9 @@ function reducer(state, action) {
 }
 ```
 
-Note that the reducer above doesn't modify directly the current state in `state` variable, but rather creates a new state object stored in `newState`.  
+Note that the reducer above doesn't modify directly the current state in `state` variable, but rather creates a new state object stored in `newState`, then returns it.  
+
+React checks the difference between new and current state to determine whether the state has been updates, so do not mutate the current state directly.  
 
 #### C. Action object
 
