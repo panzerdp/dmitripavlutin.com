@@ -1,8 +1,8 @@
 ---
 title: "An Easy Guide to React useReducer() Hook"
 description: "How to use React useReducer() hook to manage complex state: initial state, action object, dispatch, reducer."
-published: "2021-09-14T12:00Z"
-modified: "2021-09-14T12:00Z"
+published: "2021-09-15T15:20Z"
+modified: "2021-09-15T15:20Z"
 thumbnail: "./images/cover.png"
 slug: react-usereducer
 tags: ['react', 'usereducer', 'hook']
