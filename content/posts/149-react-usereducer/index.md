@@ -3,7 +3,7 @@ title: "An Easy Guide to React useReducer() Hook"
 description: "How to use the useReducer() hook in React to manage complex state."
 published: "2021-09-14T12:00Z"
 modified: "2021-09-14T12:00Z"
-thumbnail: "./images/cover-4.png"
+thumbnail: "./images/cover-5.png"
 slug: react-usereducer
 tags: ['react', 'usereducer', 'hook']
 recommended: ['react-useref-guide', 'react-useeffect-explanation']
@@ -140,6 +140,99 @@ React then checks whether the new state differs from previous one. If the state 
 If all these terms sound too abstract, then you have the right feeling! Let's see how `useReducer()` works in an interesting example.  
 
 ## 2. Example: implementing a stopwatch
+
+Now let's see how all the terms involving the work of `useReducer()` hook work toghether in an example.  
+
+The task is to implement a simpler stopwatch. The stopwatch has 3 buttons: Start, Stop and Reset, and has a number displaying the passed seconds.  
+
+Now let's think about structuring the state of the stopwatch. There are 2 important state properties: a boolean indicating whether the stopwatch runs (let's name it `isRunning`) and a number indicating the number of passed seconds (let's name it `time`). As result, here's how the *initial state* can look like:
+
+```javascript
+const initialState = {
+  isRunning: false,
+  time: 0
+};
+```
+
+The initial state indicates that the stopwatch starts as incative and at `0` seconds.  
+
+Then let's consider what *action objects* the stopwatch should use. It's easy to find that we need 4 kind of actions: to start, stop and reset the stopwatch running process, as well tick the time each second.  
+
+```javascript
+// The start action object
+{ type: 'start' }
+
+// The stop action object
+{ type: 'stop' }
+
+// The reset action object
+{ type: 'reset' }
+
+// The tick action object
+{ type: 'tick' }
+```
+
+Having the state structure, as well the possible actions, let's use the *reducer* function to define how the action objects update the state of the component:
+
+```javascript
+function reducer(state, action) {
+  switch (action.type) {
+    case 'start':
+      return { ...state, isRunning: true };
+    case 'stop':
+      return { ...state, isRunning: false };
+    case 'reset':
+      return { isRunning: false, time: 0 };
+    case 'tick':
+      return { ...state, time: state.time + 1 };
+    default:
+      throw new Error();
+  }
+}
+```
+
+Finally, here's the component `Stopwatch` that wires everything together by invoking the `useReducer()` hook:
+
+```jsx
+import { useReducer, useEffect, useRef } from 'react';
+
+function Stopwatch() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const idRef = useRef(0);
+
+  useEffect(() => {
+    if (!state.isRunning) { 
+      return; 
+    }
+    idRef.current = setInterval(() => dispatch({type: 'tick'}), 1000);
+    return () => {
+      clearInterval(idRef.current);
+      idRef.current = 0;
+    };
+  }, [state.isRunning]);
+  
+  return (
+    <div>
+      {state.time}s
+      <button onClick={() => dispatch({ type: 'start' })}>
+        Start
+      </button>
+      <button onClick={() => dispatch({ type: 'stop' })}>
+        Stop
+      </button>
+      <button onClick={() => dispatch({ type: 'reset' })}>
+        Reset
+      </button>
+    </div>
+  )
+}
+```
+
+[Try the demo.](https://codesandbox.io/s/use-reducer-stopwatch-d1ocz?file=/src/Stopwatch.js)
+
+The click event handlers of the Start, Stop and Reset buttons correspondigly use the `dispatch()` function to dispatch the action object. 
+
+Inside the `useEffect()` callback, if `state.isRunning` is `true`, the `setInterval()` timer function dispatches the tick action object each second `dispatch({type: 'tick'})`.  
 
 ## 3. A mental model of dispatch, action object and reducer
 
