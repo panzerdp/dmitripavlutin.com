@@ -19,7 +19,7 @@ That's a problem because the React component in nature should contain the logic 
 logic is a separate concern that should be managed in a separate place. Otherwise, you get a mix of state management and rendering logic in one place, 
 and that's difficult to read, maintain, and test!  
 
-To help you with the problem describe above React provides the special state management hook `useReducer()`. The hook does so by extracting the complex state management out of the component.  
+To help you separate the concerns (rendering and state management) React provides the hook `useReducer()`. The hook does so by extracting the state management out of the component.  
 
 Let's see how the `useReducer()` hook works.  
 
@@ -131,6 +131,8 @@ const [state, dispatch] = useReducer(reducer, initialState);
 #### E. Wiring everything
 
 Wiring all these terms together, here's how the state update using a reducer works.  
+
+![React useReducer()](./images/reducer-3.svg)
 
 As a result of an event handler or after completing a fetch request, you call the *dispatch* function with the action object. 
 
@@ -251,7 +253,7 @@ Imagine you're the captain of a ship in the first half of the 20th century.
 
 The captain's bridge has a special communication device called *engine order telegraph* (see the picture above). This communication tool is used to transmit commands from the bridge to the engine room. Typical commands would be to move *back slowly*, move *ahead half* power, *stop*, etc.  
 
-For example, the ship is at full stop. You (the captain) want the ship to move forward at full speed. You'd approach the engine order telegraph and set the handle to *ahead full* power. Then, the engineers in the engine room, having the same device, see the handle moved to *ahead full* power, and set the engine to the corresponding regime.  
+For example, the ship is at full stop. You (the captain) want the ship to move forward at full speed. You'd approach the engine order telegraph and set the handle to *ahead full*. The engineers in the engine room, having the same device, see the *ahead full* command, and set the engine to the corresponding regime.  
 
 The *engine order telegraph* is the *dispatch* function, the *commands* are the *action objects*, the *engineers in the engine room* are the *reducer* function, and the *engine regime* is the *state*.  
 
