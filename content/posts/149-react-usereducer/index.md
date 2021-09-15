@@ -24,6 +24,10 @@ To help you with the problem describe above React prodives the special state man
 
 Let's see how `useReducer()` hook works.  
 
+```toc
+toHeading: 2
+```
+
 ## 1. *useReducer()*
 
 The `useReducer(reducer, initialState)` hook accept 2 arguments: the *reducer* function and the *initial state*. The hook then returns an array of 2 items: the current state and the *dispatch* function.
@@ -137,9 +141,11 @@ The reducer function uses the action object and performs a state update, returni
 
 React then checks whether the new state differs from previous one. If the state has been updated, React re-renders the component and `useReducer()` returns the new state value: `[newState, ...] = useReducer(...)`.  
 
+All these details of how `useReducer()` works is based on the [Flux architecture](https://facebook.github.io/flux/docs/in-depth-overview).  
+
 If all these terms sound too abstract, then you have the right feeling! Let's see how `useReducer()` works in an interesting example.  
 
-## 2. Example: implementing a stopwatch
+## 2. Implementing a stopwatch
 
 Now let's see how all the terms involving the work of `useReducer()` hook work toghether in an example.  
 
@@ -224,24 +230,40 @@ function Stopwatch() {
         Reset
       </button>
     </div>
-  )
+  );
 }
 ```
 
 [Try the demo.](https://codesandbox.io/s/use-reducer-stopwatch-d1ocz?file=/src/Stopwatch.js)
 
-The click event handlers of the Start, Stop and Reset buttons correspondigly use the `dispatch()` function to dispatch the action object. 
+The click event handlers of the Start, Stop and Reset buttons correspondigly use the `dispatch()` function to dispatch the necessary action object. 
 
 Inside the `useEffect()` callback, if `state.isRunning` is `true`, the `setInterval()` timer function dispatches the tick action object each second `dispatch({type: 'tick'})`.  
 
-## 3. A mental model of dispatch, action object and reducer
+Each time `reducer()` function updates the state as a result of dispatching an action, the component re-renders as a result, and receives the new state.  
 
-Ok, I know that all these terms floating around aren't easy to grasp at first because they are relatively abstract.  
+## 3. Reducer mental model
 
-So, let's see a real world example that works similarly to a reducer.  
+Let's see a real world example that works similarly to a reducer.  
 
-Imagine you're the captain of a ship in the middle of the 19th century. 
+Imagine you're the captain of a ship in the first half of the 20th century.  
+
+![Engine Order Telegraph](./images/engine-order-telegraph-2.jpg)
+
+The captain's bridge has a special communication device called *engine order telegraph* (see the picture above). This communication tool is used to transmit commands from the bridge to the engine room. Typical commands would be move *back slowly*, move *ahead half* power, *stop*, etc.  
+
+For example, the ship is in full stop. You (the captain) want the ship to move forward at full speed. You'd approach the engine order telegraph and set the handle to *ahead full* power. Then, the engineers in the engine room, having the same device, see the handle moved to *ahead full* power, and set the engine to correspding regime.  
+
+That's how would a real world example of a reducer would work. The *engine order telegraph* is the *disptach* function, the *commands* are the *action objects*, the *engineers in the engine room* are the *reducer* function, and the *engine regime* is the *state*.  
+
+The engine order telegraph helps separate the bridge from the engine room. Same way the `useReducer()` hook helps separate the component from the state management logic.  
 
 ## 4. Conclusion
+
+The `useReducer()` hook in React let's you separate the state management from the rendering logic of the component.  
+
+`const [state, dispatch] = useReducer(reducer, initialState)` accepts 2 argument: the reducer function and the initial state. Also the reducer returns an array of 2 items: the current state and the dispatch function.  
+
+
 
 *Challenge: write a custom hook `myUseState()` that works exactly `useState()`, only that it uses the `useReducer()` hook internally to manage the state. Write your solution in a comment below!*
