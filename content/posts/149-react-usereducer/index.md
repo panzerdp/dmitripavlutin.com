@@ -1,9 +1,9 @@
 ---
-title: "React.useReducer() Hook: Explanation and Examples"
+title: "An Easy Guide to React useReducer() Hook"
 description: "How to use the useReducer() hook in React to manage complex state."
 published: "2021-09-14T12:00Z"
 modified: "2021-09-14T12:00Z"
-thumbnail: "./images/cover-3.png"
+thumbnail: "./images/cover-4.png"
 slug: react-usereducer
 tags: ['react', 'usereducer', 'hook']
 recommended: ['react-useref-guide', 'react-useeffect-explanation']
