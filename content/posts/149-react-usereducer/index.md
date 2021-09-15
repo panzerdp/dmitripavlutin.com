@@ -10,7 +10,7 @@ recommended: ['react-useref-guide', 'react-useeffect-explanation']
 type: post
 ---
 
-If you've used hook `useState()` to manage non-trivial state like a list of items, where you need to add, update and remove
+If you've used `useState()` hook to manage non-trivial state like a list of items, where you need to add, update and remove
 items in the state, you might have noticed that the state management logic takes a good part of the component body.  
 
 That's a problem because the React component in nature should contain the logic that calculates the output. But the state management
