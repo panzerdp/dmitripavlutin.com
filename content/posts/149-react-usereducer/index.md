@@ -264,6 +264,8 @@ The `useReducer()` hook in React let's you separate the state management from th
 
 `const [state, dispatch] = useReducer(reducer, initialState)` accepts 2 argument: the reducer function and the initial state. Also the reducer returns an array of 2 items: the current state and the dispatch function.  
 
+When you'd like to update the state, simply call `dispatch(action)` with the appropriate action object. The action object is then fowrared to `reducer()` function that updates the state. If the state has been updated by the reducer, the component re-renders and `[state, ...] = useReducer(...)` hook returns the new state value.  
 
+`useReducer()` fits great with relatively complex state update (requiring at least 2-3 different update actions). For simple state management, simply use `useState()`.  
 
-*Challenge: write a custom hook `myUseState()` that works exactly `useState()`, only that it uses the `useReducer()` hook internally to manage the state. Write your solution in a comment below!*
+*Challenge: write a custom hook `myUseState()` that works exactly `useState()`, only that it uses the `useReducer()` hook to manage the state. Write your solution in a comment below!*
