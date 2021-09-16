@@ -18,7 +18,7 @@ and that's difficult to read, maintain, and test!
 
 To help you separate the concerns (rendering and state management) React provides the hook `useReducer()`. The hook does so by extracting the state management out of the component.  
 
-Let's see how the `useReducer()` hook works.  
+Let's see how the `useReducer()` hook works. As a nice bonus, you will find in the post a real-world example that greatly helps undersanding how reducers work.   
 
 ```toc
 toHeading: 2
@@ -105,8 +105,7 @@ Whenever you want to update the state (usually from an event handler or after co
 
 #### D. Reducer function
 
-> The *reducer* is a special pure function that accepts 2 parameters: the *current state* and an *action object*. Depending on the action object, the reducer function
-must update the state in an immutable manner, and return the new state.  
+> The *reducer* is a pure function that accepts 2 parameters: the *current state* and an *action object*. Depending on the action object, the reducer function must update the state in an immutable manner, and return the new state.  
 
 The following reducer function supports the increase and decrease of a counter state:
 
@@ -127,7 +126,7 @@ function reducer(state, action) {
 }
 ```
 
-Note that the reducer above doesn't modify directly the current state in the `state` variable, but rather creates a new state object stored in `newState`, then returns it.  
+The reducer above doesn't modify directly the current state in the `state` variable, but rather creates a new state object stored in `newState`, then returns it.  
 
 React checks the difference between the new and the current state to determine whether the state has been updated, so do not mutate the current state directly.  
 
