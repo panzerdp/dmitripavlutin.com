@@ -10,8 +10,7 @@ recommended: ['react-useref-guide', 'react-useeffect-explanation']
 type: post
 ---
 
-If you've used `useState()` hook to manage non-trivial state like a list of items, where you need to add, update and remove
-items in the state, you might have noticed that the state management logic takes a good part of the component body.  
+If you've used `useState()` hook to manage non-trivial state like a list of items, where you need to add, update and remove items in the state, you might have noticed that the state management logic takes a good part of the component body.  
 
 That's a problem because the React component in nature should contain the logic that calculates the output. But the state management
 logic is a different concern that should be managed in a separate place. Otherwise, you get a mix of state management and rendering logic in one place, 
@@ -51,7 +50,7 @@ Now, let's decipher what the terms of *initial state*, *action object*,  *dispat
 
 #### A. Initial state
 
-The *initial state* is the value the state is initialized with. 
+> The *initial state* is the value the state is initialized with. 
 
 For example, in the case of a counter state, the initial value could be:  
 
@@ -64,7 +63,7 @@ const initialState = {
 
 #### B. Action object
 
-An *action object* is an object that describes how to update the state.  
+> An *action object* is an object that describes how to update the state.  
 
 Typically, the action object would have a property `type` &mdash; a string describing what kind of state update the reducer must do.  
 
@@ -94,7 +93,7 @@ const action = {
 
 #### C. Dispatch function
 
-The *dispatch* is a special function that accepts one argument: the action object.  
+> The *dispatch* is a special function that dispatches an action object.  
 
 The dispatch function is created for your by the `useReducer()` hook: 
 
@@ -102,11 +101,11 @@ The dispatch function is created for your by the `useReducer()` hook:
 const [state, dispatch] = useReducer(reducer, initialState);
 ```
 
-Whenever you want to update the state (usually from an event handler or after fetch request completion), you simply call the dispatch function with the appropritate action object: `dispatch(actionObject)`.  
+Whenever you want to update the state (usually from an event handler or after completing a fetch request), you simply call the dispatch function with the appropritate action object: `dispatch(actionObject)`.  
 
 #### D. Reducer function
 
-The *reducer* is a special pure function that accepts 2 arguments: the current state and an *action object*. Depending on the action object, the reducer function
+> The *reducer* is a special pure function that accepts 2 parameters: the *current state* and an *action object*. Depending on the action object, the reducer function
 must update the state in an immutable manner, and return the new state.  
 
 The following reducer function supports the increase and decrease of a counter state:
@@ -136,7 +135,7 @@ React checks the difference between the new and the current state to determine w
 
 Wiring all these terms together, here's how the state update using a reducer works.  
 
-![React useReducer()](./images/reducer-3.svg)
+![React useReducer()](./images/reducer-4.svg)
 
 As a result of an event handler or after completing a fetch request, you call the *dispatch* function with the *action object*. 
 
@@ -249,7 +248,7 @@ Each time the `reducer()` function updates the state, the component re-renders a
 
 ## 3. Reducer mental model
 
-Finally, to solidofy your knowledge of `useReducer()`, let's see a real-world example that works similarly to a reducer.  
+To solidify your knowledge even more, let's see a real-world example that works similarly to a reducer.  
 
 Imagine you're the captain of a ship in the first half of the 20th century.  
 
