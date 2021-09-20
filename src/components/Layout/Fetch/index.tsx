@@ -17,7 +17,7 @@ export default function LayoutFetchQuery({ children, leftSidebar, rightSidebar }
     <StaticQuery
       query={graphql`
         query Layout {
-          file(relativePath: { eq: "profile-picture.jpg" }) {
+          file(relativePath: { eq: "face.jpg" }) {
             childImageSharp {
               fixed(width: 64, height: 64, quality: 100) {
                 ...GatsbyImageSharpFixed_withWebp
