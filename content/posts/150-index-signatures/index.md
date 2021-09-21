@@ -35,24 +35,7 @@ Let's find what TypeScript index signatures are and when they're needed.
 
 ## 1. Index signature
 
-Let's continue exploring the type error in the introduction:  
-
-```typescript{9}
-const dictionary = {
-  'one': 1,
-  'two': 2,
-  'three': 3
-};
-
-for (const name in dictionary) {
-  const number = dictionary[name];
-  // No index signature with a parameter of type 'string' was found
-}
-```
-
-[Try the demo.](https://www.typescriptlang.org/play?#code/MYewdgzgLgBAJgS2FB4CGAnAnjAvDAbwFgAoGGAcnAFMKAuGARgBpTyKoB3EemAJlZlKUABYZqtBgGZSAXwDcpUgDMQGGAApQkWGDQBbajARh4SFOmwBKQmxjboMMAFd9AI2rr8iZKj3YAbT1DAF1FIQB6CJgAORBjMDhqAA8YCAQAcz0oZ3EYTgRRGDQYAAdMA2ooTxgQZRgoLFKjCmgMEwyKfLQIGFVnRLkgA)
-
-Why TypeScript doesn't like `dictionary[name]`?  
+Let's continue exploring the type error from the previous code sample. Why TypeScript doesn't like `dictionary[name]`?  
 
 First, let's see what type is the `dictionary` variable? TypeScript infer `dictionary` type as `{ one: number, two: number, three: number }`.  
 
@@ -109,5 +92,4 @@ The index signature consists of a square braket, where you put the index name an
 
 Note that they `KeyType` can be either a string or a number, while `ValueType` can by anything.  
 
-*Challenge: Write a generic type `Indexed<K, V>` that creates an index signature, where `K` is the key type and `V` is the value type. Share your
-solution in a comment below!* 
+*Challenge: Write a generic type `Indexed<K, V>` that creates an index signature where `K` is the key type and `V` is the value type. Share your solution in a comment below!* 
