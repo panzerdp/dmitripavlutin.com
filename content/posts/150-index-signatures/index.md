@@ -105,9 +105,9 @@ The `IndexType` can be either a `string` or `number`, while `ValueType` can be a
 If you don't know the structure of the object you're going to work with, but you know the possible key and value types, then the index signature is
 what you need.  
 
-```typescript
-interface IndexesType {
-  [key: string]: string
-}
-```
+The index signature consists of a square braket, where you put the index name and its type, followed by a colon and the value type: `{ [indexName: KeyType]: ValueType }`.  
 
+Note that they `KeyType` can be either a string or a number, while `ValueType` can by anything.  
+
+*Challenge: Write a generic type `Indexed<K, V>` that creates an index signature, where `K` is the key type and `V` is the value type. Share your
+solution in a comment below!* 
