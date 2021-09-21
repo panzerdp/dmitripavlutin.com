@@ -4,16 +4,14 @@ type: "about-me"
 
 # About me
 
-My name is Dmitri Pavlutin. I'm a software developer specialized in Frontend technologies. You can contact me at [dmitripavlutin@gmail.com](mailto:dmitripavlutin@gmail.com).  
+My name is Dmitri Pavlutin. I'm a Senior Frontend Developer with 10+ years of experience, having a Master's Degree in Computer Science.
 
-On this blog, I write my thoughts and experience on Front-end development. [Subscribe](/newsletter/) if you are interested in knowing more about JavaScript language analysis, clean code practices, and efficient system design.  
+My passion is web applications development: programming, design (UI and UX), performance tuning, automated testing, and good application architecture. I am skilled at JavaScript, TypeScript, HTML, CSS, including React.js and Vue.js JavaScript frameworks.
+
+I have good communication skills (being fluent in written and verbal English) and interpersonal skills. I strive to be a humble team player and be approachable to receive and give feedback.
+
+On my blog https://dmitripavlutin.com I publish weekly posts about frontend development, mainly about JavaScript, TypeScript, and React.js. Writing helps me sharpen my written communication skills and stay in touch with software technology progress.
+
+I'm always interested in challenging projects and job opportunities. You're welcome to contact me at [dmitripavlutin@gmail.com](mailto:dmitripavlutin@gmail.com) or [write a message on LinkedIn](https://www.linkedin.com/in/dmitri-pavlutin/).  
 
 ![Dmitri Pavlutin Seine](./images/dmitri-pavlutin-seine-4.jpg)
-
-The tech stack I'm currently working with is JavaScript, TypeScript, React, CSS. Plus I have experience in native iOS mobile development.   
-
-I practice SOLID principles, Test-driven development (TDD), Domain-Driven Design, careful organization of system design in my daily coding challenges. 
-
-I maintain an open-source JavaScript library [vocajs.com](https://vocajs.com). I also help fellow developers on [Stackoverflow](http://stackoverflow.com/users/1894471/dmitri-pavlutin).  
-
-If you'd like to discuss with me (about blogging, hiring, conferences, just to say thanks), send me a message to [dmitripavlutin@gmail.com](mailto:dmitripavlutin@gmail.com).  
