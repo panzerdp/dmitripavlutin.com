@@ -163,31 +163,33 @@ article h1 {
   position: relative;
 }
 
-article code[class*='language-'] {
+p > code, em > code {
   font-size: 1rem;
   background-color: #f5f2f0;
   color: black;
   font-family: $mono-font-family;
-}
-
-article :not(pre) > code[class*='language-'] {
-  font-size: 1rem;
   line-height: inherit;
+  border-radius: .3em;
+  padding: .1em;
+  white-space: normal;
 }
 
-code[class*='language-'],
-pre[class*='language-'] {
+pre {
   border-radius: 3px;
   line-height: 1.25;
   font-size: 1rem;
-  padding: 0;
+  padding: 1rem;
+
+  :global {
+    .language-id {
+      display: none;
+    }
+  }
+
   code {
     font-family: $mono-font-family;
+    font-size: 1rem;
   }
-}
-
-pre[class*='language-'] {
-  padding: 0.8rem;
 }
 
 blockquote {
