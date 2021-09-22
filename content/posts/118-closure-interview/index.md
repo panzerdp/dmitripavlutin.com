@@ -2,7 +2,7 @@
 title: "7 Interview Questions on JavaScript Closures. Can You Answer Them?"
 description: "I compiled a list of 7 interesting and increasingly challenging questions on JavaScript closures. Can you answer them?"
 published: "2021-02-09T11:30Z"
-modified: "2021-02-15T10:20Z"
+modified: "2021-09-22T18:20Z"
 thumbnail: "./images/cover-5.jpg"
 slug: javascript-closures-interview-questions
 tags: ['javascript', 'closure', 'interview']
@@ -143,7 +143,7 @@ The second phase happens after 1000ms:
 
 That's why `3`, `3`, `3` is logged to the console.  
 
-*Side challenge: how would you fix this example to log `0`, `1`, `2` values? Write your solution in a comment below!*
+*Side challenge: how would you fix this example to log `0`, `1`, `2` values after passing 1 second? Write your solution in a comment below!*
 </details>
 
 ## Questions 5: Right or wrong message
