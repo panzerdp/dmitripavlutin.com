@@ -28,7 +28,7 @@ In JavaScript, a scope is created by a function or a code block.
 
 Let's see how the scope affects the availability of a variable `count`. This variable belongs to the scope created by function `foo()`:
 
-```javascript{4,8}
+```javascript{3,7}
 function foo() {
   // The function scope
   let count = 0;
@@ -57,7 +57,7 @@ You can reuse common variables names (`count`, `index`, `current`, `value`, etc)
 
 `foo()` and `bar()` function scopes have their own, but same named, variables `count`:
 
-```javascript{4,10}
+```javascript{3,9}
 function foo() {
   // "foo" function scope
   let count = 0;
@@ -86,7 +86,7 @@ How would the 2 function scopes interact with each other? Can I access the varia
 
 Let's try that in the example:
 
-```javascript{7}
+```javascript{6}
 function outerFunc() {
   // the outer scope
   let outerVar = 'I am outside!';
@@ -131,7 +131,7 @@ The distilled idea of the lexical scope:
 
 For example:
 
-```javascript{5,9,12}
+```javascript{4,8,11}
 const myGlobal = 0;
 
 function func() {
@@ -167,7 +167,7 @@ Ok, the lexical scope allows to access the variables statically of the outer sco
 
 Let's take a look again at the `outerFunc()` and `innerFunc()` example:  
 
-```javascript{8}
+```javascript{7}
 function outerFunc() {
   let outerVar = 'I am outside!';
 
@@ -189,7 +189,7 @@ Let's make a change: `innerFunc()` to be invoked outside of its lexical scope (o
 
 Let's make the adjustments to the code snippet:
 
-```javascript{8,12}
+```javascript{7,11}
 function outerFunc() {
   let outerVar = 'I am outside!';
 

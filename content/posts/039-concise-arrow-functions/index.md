@@ -167,7 +167,7 @@ greetObject('Klingons'); // => { message: `Klingons, Welcome!` }
 
 Let's define a class `Greet` containing a fat arrow method:
 
-```javascript{5-7}
+```javascript{4-6}
 class Greet {
   constructor(what) {
     this.what = what;
@@ -186,7 +186,7 @@ Can you write concise fat arrow methods? Yes, you can!
 
 Let's shorten `getMessage` method:
 
-```javascript{5}
+```javascript{4}
 class Greet {
   constructor(what) {
     this.what = what;

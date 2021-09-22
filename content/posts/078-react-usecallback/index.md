@@ -12,7 +12,7 @@ type: post
 
 A reader of my blog reached me on Facebook with an interesting question. He said his teammates, no matter the situation, were wrapping every callback function inside `useCallback()`:
 
-```jsx{4-6}
+```jsx{3-5}
 import React, { useCallback } from 'react';
 
 function MyComponent() {
@@ -38,7 +38,7 @@ Functions in JavaScript are first-class citizens, meaning that a function is a r
 
 Let's write a function `factory()` that returns functions that sum numbers: 
 
-```javascript{11-12}
+```javascript{10-11}
 function factory() {
   return (a, b) => a + b;
 }
@@ -63,7 +63,7 @@ That's just how JavaScript objects works. An object (including a function object
 
 Different function objects sharing the same code are often created inside React components:
 
-```jsx{3-5}
+```jsx{2-4}
 function MyComponent() {
   // handleClick is re-created on each render
   const handleClick = () => {
@@ -86,7 +86,7 @@ But in some cases you need to maintain a single function instance between render
 
 That's when `useCallback(callbackFun, deps)` is helpful: given the same dependency values `deps`, the hook returns the same function instance between renderings (aka memoization):
 
-```jsx{5-7}
+```jsx{4-6}
 import { useCallback } from 'react';
 
 function MyComponent() {
@@ -123,7 +123,7 @@ The list could be big, maybe hundreds of items. To prevent useless list re-rende
 
 The parent component of `MyBigList` provides a handler function to know when an item is clicked:  
 
-```jsx{11}
+```jsx{10}
 import { useCallback } from 'react';
 
 export function MyParent({ term }) {
@@ -150,7 +150,7 @@ That was a good use case of `useCallback()`.
 
 Let's look at another example:
 
-```jsx{5-7}
+```jsx{4-6}
 import { useCallback } from 'react';
 
 function MyComponent() {
@@ -177,7 +177,7 @@ In conclusion, *the optimization costs more than not having the optimization*.
 
 Simply *accept* that rendering creates new function objects:
 
-```jsx{4-6}
+```jsx{3-5}
 import { useCallback } from 'react';
 
 function MyComponent() {

@@ -173,7 +173,7 @@ function outerFunction() {
 
 *Invocation* of a function is just calling the function with some arguments.  
 
-```javascript{4-6,13,20}
+```javascript{3-5,12,19}
 function sum(number1, number2) {
   return number1 + number2;
 }
@@ -202,7 +202,7 @@ const instance = new SomeClass('Value'); // Invocation
 
 *Constructor invocation* happens when a function or class is invoked using `new` keyword.  
 
-```javascript{4,11}
+```javascript{3,10}
 function MyCat(name) {
   this.name = name;
 }
@@ -273,7 +273,7 @@ sum(1, 4); // Regular invocation
 
 ### Example 1
 
-```javascript{2}
+```javascript{1}
 const myFunc = () => {
   console.log(this); // logs `window`
 };
@@ -291,7 +291,7 @@ The point *2.1* of the algorithm says `return globalObject`: meaning that `this`
 
 ### Example 2
 
-```javascript{3}
+```javascript{2}
 const object = {
   method() {
     console.log(this); // logs { method() {...} }
@@ -313,7 +313,7 @@ Then, according to point *1.3*, `this` value inside `method()` equals the owning
 
 ### Example 3
 
-```javascript{5}
+```javascript{4}
 function MyCat(name) {
   this.name = name;
 
@@ -353,7 +353,7 @@ The best way to understand the algorithm is by trying it yourself. Follow the 3 
 
 ### Exercise 1
 
-```javascript{2}
+```javascript{1}
 const myRegularFunc = function() {
   console.log(this); // logs ???
 };
@@ -365,7 +365,7 @@ myRegularFunc();
 
 ### Exercise 2
 
-```javascript{4}
+```javascript{3}
 class MyCat {
   constructor(name) {
     this.name = name;
@@ -380,7 +380,7 @@ const myCat = new MyCat('Lucy');
 
 ### Exercise 3
 
-```javascript{6}
+```javascript{5}
 const object = {
   name: 'Batman',
 

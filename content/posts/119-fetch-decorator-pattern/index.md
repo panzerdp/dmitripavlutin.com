@@ -94,7 +94,7 @@ class BasicFetcher implements Fetcher {
 
 Let's use the basic fetcher class to fetch the list of movies:
 
-```typescript{1,5}
+```typescript{0,4}
 const fetcher = new BasicFetcher();
 const decoratedFetch = fetcher.run.bind(fetcher);
 
@@ -154,7 +154,7 @@ Then `json = await response.json()` extracts the JSON data from the response. Fi
 
 Now let's compose decorate the `BasicFetcher` with the `JsonFetcherDecorator` decorator, and simplify the use of `fetch()`:
 
-```typescript{1-3,7}
+```typescript{0-2,6}
 const fetcher = new JsonFetcherDecorator(
   new BasicFetcher()
 );

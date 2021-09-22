@@ -143,7 +143,7 @@ One of the nice features of `const` is that *you must assign an initial value* t
 
 Let's check the function that verifies whether a word is a palindrome:
 
-```javascript{2-3}
+```javascript{1-2}
 function isPalindrome(word) {
   const length = word.length;
   const half = Math.floor(length / 2);
@@ -220,7 +220,7 @@ For instance, if a variable solely exists to form the logic of block scope, then
 
 One classic example of the unnecessarily extended life of variables is the usage of `for` cycle inside a function:
 
-```javascript{2}
+```javascript{1}
 function someFunc(array) {
   var index, item, length = array.length;
   // some code...
@@ -238,7 +238,7 @@ Between the declaration at the top and the usage in `for` statement the variable
 
 A better approach is to move these variables as close as possible to their usage place:
 
-```javascript{4-6}
+```javascript{3-5}
 function someFunc(array) {
   // some code...
   // some code...
@@ -562,7 +562,7 @@ Sometimes a function does not require the full set of arguments on invocation. Y
 
 Recalling the previous example, let's make an improvement. If `b` parameter is `undefined`, let default it to `2`:
 
-```javascript{2-4}
+```javascript{1-3}
 function multiply(a, b) {
   if (b === undefined) {
     b = 2;
@@ -611,7 +611,7 @@ square(2); // => undefined
 
 The same situation happens when `return` statement is present, but without an expression nearby:  
 
-```javascript{3}
+```javascript{2}
 function square(x) {
   const res = x * x;
   return;

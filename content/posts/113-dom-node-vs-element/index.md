@@ -100,7 +100,7 @@ In simple words, an element is a node that's written using a tag in the HTML doc
 
 The document type, the comment, the text nodes aren't elements because they are not written with tags:
 
-```html{1,4,6}
+```html{0,3,5}
  <!DOCTYPE html>
 <html>
   <body>

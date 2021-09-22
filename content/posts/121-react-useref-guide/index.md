@@ -20,7 +20,7 @@ toHeading: 3
 
 `useRef(initialValue)` is a built-in React hook that accepts one argument as the initial value and returns a *reference* (aka *ref*). A reference is an object having a special property `current`.
 
-```jsx{4,8,11}
+```jsx{3,7,10}
 import { useRef } from 'react';
 
 function MyComponent() {
@@ -53,7 +53,7 @@ Now, let's see how to use `useRef()` in practice.
 
 The component `LogButtonClicks` uses a reference to store the number of clicks on a button: 
 
-```jsx{4,7}
+```jsx{3,6}
 import { useRef } from 'react';
 
 function LogButtonClicks() {
@@ -84,7 +84,7 @@ Now a reasonable question: what's the main difference between references and sta
 
 Let's reuse the component `LogButtonClicks` from the previous section, but this time use `useState()` hook to count the number of button clicks:  
 
-```jsx{4,9}
+```jsx{3,8}
 import { useState } from 'react';
 
 function LogButtonClicks() {
@@ -119,7 +119,7 @@ You can store inside a reference infrastructure data of side effects. For exampl
 
 The component `Stopwatch` uses `setInterval(callback, time)` timer function to increase each second the counter of a stopwatch. The timer id is stored into a reference `timerIdRef`:  
 
-```jsx{4,9}
+```jsx{3,8}
 import { useRef, useState, useEffect } from 'react';
 
 function Stopwatch() {
@@ -172,7 +172,7 @@ Another useful application of the `useRef()` hook is to access DOM elements. Thi
 2. Assign the reference to `ref` attribute of the element: `<div ref={elementRef}></div>`;
 3. After mounting, `elementRef.current` points to the DOM element.  
 
-```jsx{4,7,12}
+```jsx{3,6,11}
 import { useRef, useEffect } from 'react';
 
 function AccessingElement() {
@@ -201,7 +201,7 @@ To make it work you'll need to create a reference to the input, assign the refer
 
 Here's a possible implementation of the `<InputFocus>` component:
 
-```jsx{4,7,12}
+```jsx{3,6,11}
 import { useRef, useEffect } from 'react';
 
 function InputFocus() {
@@ -232,7 +232,7 @@ React then, after mounting, sets `inputRef.current` to be the input element. Now
 
 During initial rendering, the reference supposed to hold the DOM element is empty:  
 
-```jsx{8,14}
+```jsx{7,13}
 import { useRef, useEffect } from 'react';
 
 function InputFocus() {
@@ -268,7 +268,7 @@ That's why updating a reference (as well as updating state) shouldn't be perform
 
 The reference must be updated either inside a `useEffect()` callback or inside handlers (event handlers, timer handlers, etc).  
 
-```jsx{7,10,15,18,21}
+```jsx{6,9,14,17,20}
 import { useRef, useEffect } from 'react';
 
 function MyComponent({ prop }) {

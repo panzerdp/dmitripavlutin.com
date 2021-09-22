@@ -36,7 +36,7 @@ Invoking `const [isPending, startTransition] = useTransitionHook()` returns an a
 * `isPending`: indicates that the transition is pending
 * `startTransition(callback)`: allows you to mark any UI updates inside `callback` as transitions.  
 
-```jsx{4,8-11}
+```jsx{3,7-10}
 import { useTransition } from 'react';
 
 function MyComponent() {
@@ -122,7 +122,7 @@ Let's make the necessary adjustments to `<FilterList>` component.
 
 First, let's invoke the `[isPending, startTransition] = useTransition()` hook to get access to `startTransition()` function. Secondly, let's create a state variable to hold the query state value specifically for the transition.  
 
-```jsx{5,7,11}
+```jsx{4,6,10}
 import { useState, useTransition } from 'react';
 
 export function FilterList({ names }) {

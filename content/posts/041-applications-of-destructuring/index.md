@@ -36,7 +36,7 @@ b; // => 1
 
 The destructuring assignment makes the variables swapping simple, without any need of a temporary variable:
 
-```javascript{4}
+```javascript{3}
 let a = 1;
 let b = 2;
 
@@ -52,7 +52,7 @@ Although you still create a temporary array, swapping variables using destructur
 
 This is not the limit. You can swap more than 2 variables at the same time. Let's try that:
 
-```javascript{5}
+```javascript{4}
 let zero = 2;
 let one = 1;
 let two = 0;
@@ -85,7 +85,7 @@ firstColor; // => 'white'
 
 Fortunately, array destructuring helps you achieve the same way shorter:
 
-```javascript{3}
+```javascript{2}
 const colors = [];
 
 const [firstColor = 'white'] = colors;
@@ -97,7 +97,7 @@ firstColor; // => 'white'
 
 But there's a lot more flexibility. If you want to access the second element only, that's possible too:
 
-```javascript{3}
+```javascript{2}
 const colors = [];
 
 const [, secondColor = 'black'] = colors;
@@ -115,7 +115,7 @@ Immutability forbids mutating objects. Fortunately, destructuring helps you achi
 
 The destructuring in combination with `...` [rest operator](/how-three-dots-changed-javascript/#42-array-destructure) removes elements from the beginning of an array:
 
-```javascript{3}
+```javascript{2}
 const numbers = [1, 2, 3];
 
 const [, ...fooNumbers] = numbers;
@@ -130,7 +130,7 @@ The destructuring `[, ...fooNumbers] = numbers` creates a new array `fooNumbers`
 
 In the same immutable manner you can delete properties from objects. Let's try to delete `foo` property from the object `big`:
 
-```javascript{6}
+```javascript{5}
 const big = {
  foo: 'value Foo',
  bar: 'value Bar'
@@ -214,7 +214,7 @@ When first reading about objects destructuring, I was a bit surprised that you d
 
 To see how dynamic destructuring works, let's write a greeting function:
 
-```javascript{2}
+```javascript{1}
 function greet(obj, nameProp) {
  const { [nameProp]: name = 'Unknown' } = obj;
  return `Hello, ${name}!`;

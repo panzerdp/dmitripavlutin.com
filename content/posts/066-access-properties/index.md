@@ -33,7 +33,7 @@ expression.identifier
 
 For example, let's access the property `name` of the object `hero`:
 
-```javascript{6}
+```javascript{5}
 const hero = {
   name: 'Batman'
 };
@@ -56,7 +56,7 @@ This is not a problem, because usually, the property names are valid identifiers
 
 But sometimes properties are not valid identifiers:
 
-```javascript{6-7}
+```javascript{5-6}
 const weirdObject = {
   'prop-3': 'three',
   '3': 'three'
@@ -75,7 +75,7 @@ Because `prop-3` and `3` are invalid identifiers, the dot property accessor does
 
 To access the properties with these special names, use the square brackets property accessor (which is described in the next section):
 
-```javascript{6-7}
+```javascript{5-6}
 const weirdObject = {
   'prop-3': 'three',
   '3': 'three'
@@ -99,7 +99,7 @@ The first `expression` should evaluate to an object and the second `expression` 
 
 Here's an example:
 
-```javascript{7-8}
+```javascript{6-7}
 const property = 'name';
 const hero = {
   name: 'Batman'
@@ -126,7 +126,7 @@ const { identifier } = expression;
 
 Here's an example:
 
-```javascript{6}
+```javascript{5}
 const hero = {
   name: 'Batman'
 };
@@ -160,7 +160,7 @@ const { identifier: aliasIdentifier } = expression;
 
 Here's an example:
 
-```javascript{6}
+```javascript{5}
 const hero = {
   name: 'Batman'
 };
@@ -184,7 +184,7 @@ The first `expression` should evaluate to a property name, and the `identifier` 
 
 Here's an example:
 
-```javascript{7}
+```javascript{6}
 const property = 'name';
 const hero = {
   name: 'Batman'

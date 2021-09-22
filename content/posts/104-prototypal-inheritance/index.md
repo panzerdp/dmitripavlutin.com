@@ -30,7 +30,7 @@ const cat = { sound: 'Meow!', legs: 4 };
 
 Since I'd like to reuse `legs` property in other objects, let's extract `legs` property into a specialized object `pet`:
 
-```javascript{1}
+```javascript{0}
 const pet = { legs: 4 };
 
 const cat = { sound: 'Meow!' };

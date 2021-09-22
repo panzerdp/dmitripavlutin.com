@@ -24,7 +24,7 @@ A functional component contains an input element. Your job is to count and displ
 
 A possible implementation of `<CountInputChanges>` component looks as follows:
 
-```jsx{7}
+```jsx{6}
 import { useEffect, useState } from 'react';
 
 function CountInputChanges() {
@@ -58,7 +58,7 @@ The demo shows that `count` state variable increases uncontrollably, even if you
 
 The problem lays in the way `useEffect()` is used:
 
-```jsx{3}
+```jsx{2}
 useEffect(() => setCount(count + 1));
 ```
 
@@ -74,7 +74,7 @@ The infinite loop is fixed by correct management of the `useEffect(callback, dep
 
 Because you want the `count` to increment when `value` changes, you can simply add `value` as a dependency of the side-effect:
 
-```jsx{7}
+```jsx{6}
 import { useEffect, useState } from 'react';
 
 function CountInputChanges() {
@@ -109,7 +109,7 @@ The idea is that updating a reference doesn't trigger re-rendering of the compon
 
 Here's a possible implementation:
 
-```jsx{9}
+```jsx{8}
 import { useState, useRef } from 'react';
 
 function CountInputChanges() {
@@ -142,7 +142,7 @@ For example, the following component `CountSecrets` watches the words the user t
 
 Here's a possible implementation of the component:
 
-```jsx{8,10}
+```jsx{7,9}
 import { useEffect, useState } from "react";
 
 function CountSecrets() {
@@ -189,7 +189,7 @@ which increments the secrets counter `countSecrets`, but also creates *a new obj
 
 The best way to solve the problem of an infinite loop created by circular new objects creation is... to avoid using references to objects in the dependencies argument of `useEffect()`:
 
-```javascript{5}
+```javascript{4}
 let count = 0;
 
 useEffect(() => {
@@ -197,7 +197,7 @@ useEffect(() => {
 }, [count]); // Good!
 ```
 
-```javascript{7,11}
+```javascript{6,10}
 let myObject = {
   prop: 'Value'
 };
@@ -215,7 +215,7 @@ Fixing the infinite loop of `<CountSecrets>` component requires changing the dep
 
 Calling the side-effect callback when solely `secret.value` changes is enough. Here's the fixed version of the component:
 
-```jsx{10}
+```jsx{9}
 import { useEffect, useState } from "react";
 
 function CountSecrets() {

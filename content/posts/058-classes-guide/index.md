@@ -78,7 +78,7 @@ const myUser = new User();
 
 In the following example the constructor sets the initial value of the field `name`:
 
-```javascript{2-4}
+```javascript{1-3}
 class User {
   constructor(name) {
     this.name = name;
@@ -92,7 +92,7 @@ Inside the constructor `this` value equals to the newly created instance.
 
 The arguments used to instantiate the class become the parameters of the constructor:  
 
-```javascript{3,8}
+```javascript{2,7}
 class User {
   constructor(name) {
     name; // => 'Jon Snow'
@@ -125,7 +125,7 @@ The fields also have 2 levels of accessibility:
 
 Let's look again at the previous code snippet:
 
-```javascript{3}
+```javascript{2}
 class User {
   constructor(name) {
     this.name = name;
@@ -137,7 +137,7 @@ The expression `this.name = name` creates an instance field `name` and assigns t
 
 Later you can access `name` field using a property accessor:
 
-```javascript{2}
+```javascript{1}
 const user = new User('Jon Snow');
 user.name; // => 'Jon Snow'
 ```
@@ -150,7 +150,7 @@ A better approach is to explicitly declare the class fields. No matter what cons
 
 The [class fields proposal](https://github.com/tc39/proposal-class-fields) lets you define the fields inside the body of the class. Plus, you can indicate the initial value right away:
 
-```javascript{2-3}
+```javascript{1-2}
 class SomeClass {
   field1;
   field2 = 'Initial value';
@@ -161,7 +161,7 @@ class SomeClass {
 
 Let's modify the `User` class and declare a public field `name`:
 
-```javascript{2}
+```javascript{1}
 class User {
   name;
   
@@ -180,7 +180,7 @@ The public fields declared such a way is expressive: a quick look at the fields 
 
 Moreover, the class field can be initialized right away at declaration.  
 
-```javascript{2}
+```javascript{1}
 class User {
   name = 'Unknown';
 
@@ -211,7 +211,7 @@ Prefix the field name with the special symbol `#` to make it private, e.g. `#myF
 
 Let's make sure that the field `#name` can be set once at the instance initialization:
 
-```javascript{2}
+```javascript{1}
 class User {
   #name;
 
@@ -242,7 +242,7 @@ To create static fields in a JavaScript class, use the special keyword `static` 
 
 Let's add a new field `type` that indicates the user type: admin or regular. The static fields `TYPE_ADMIN` and `TYPE_REGULAR` are handy constants to differentiate the user types:
 
-```javascript{2-3}
+```javascript{1-2}
 class User {
   static TYPE_ADMIN = 'admin';
   static TYPE_REGULAR = 'regular';
@@ -270,7 +270,7 @@ To make the static field private, prefix the field name with `#` special symbol:
 
 Let's say you'd like to limit the number of instances of the `User` class. To hide the details about instances limits, you can create the private static fields:
 
-```javascript{2-3}
+```javascript{1-2}
 class User {
   static #MAX_INSTANCES = 2;
   static #instances = 0;
@@ -307,7 +307,7 @@ Instance methods can access and modify instance data. Instance methods can call 
 
 For example, let's define a method `getName()` that returns the name in the `User` class:
 
-```javascript{8-10}
+```javascript{7-9}
 class User {
   name = 'Unknown';
 
@@ -330,7 +330,7 @@ In a class method, as well as in the constructor, `this` value equals to the cla
 
 Let's add a new method `nameContains(str)` that has one parameter and calls another method:
 
-```javascript{12-14}
+```javascript{11-13}
 class User {
   name;
 
@@ -358,7 +358,7 @@ A method can also be private. To make the method private prefix its name with `#
 
 Let's make `getName()` method private:
 
-```javascript{8-10,13}
+```javascript{7-9,12}
 class User {
   #name;
 
@@ -394,7 +394,7 @@ The getter is executed on an attempt to get the field value, while setter on an 
 
 To make sure that the `name` property of the `User` cannot be empty, let's wrap the private field `#nameValue` in a getter and setter:
 
-```javascript{8,12}
+```javascript{7,11}
 class User {
   #nameValue;
 
@@ -438,7 +438,7 @@ When working with static methods, there are 2 simple rules to remember:
 
 For example, let's create a static method that detects whether a user with a specific name was already taken.  
 
-```javascript{4-6}
+```javascript{3-5}
 class User {
   static #takenNames = [];
 
@@ -472,7 +472,7 @@ In the expression `class Child extends Parent { }` the `Child` class inherits fr
 
 For example, let's create a new child class `ContentWriter` that extends the parent class `User`.  
 
-```javascript{13}
+```javascript{12}
 class User {
   name;
 
@@ -506,7 +506,7 @@ If you'd like to call the parent constructor in a child class, you need to use t
 
 For example, let's make `ContentWriter` constructor call the parent constructor of `User`, as well as initialize the posts field:
 
-```javascript{17}
+```javascript{16}
 class User {
   name;
 
@@ -537,7 +537,7 @@ writer.posts // => ['Why I like JS']
 
 Note that inside the child constructor you must execute `super()` before using `this` keyword. Calling `super()` makes sure that the parent constructor initializes the instance.
 
-```javascript{4-5}
+```javascript{3-4}
 class Child extends Parent {
   constructor(value1, value2) {
     // Does not work!
@@ -551,7 +551,7 @@ class Child extends Parent {
 
 If you'd like to access the parent method inside of a child method, you can use the special shortcut `super`.  
 
-```javascript{22}
+```javascript{21}
 class User {
   name;
 

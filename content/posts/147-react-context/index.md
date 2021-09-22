@@ -26,7 +26,7 @@ Using the context in React requires 3 simple steps: *creating* the context, *pro
 
 The built-in factory function `createContext(default)` creates a context instance:
 
-```javascript{3}
+```javascript{2}
 import { createContext } from 'react';
 
 const Context = createContext('Default Value');
@@ -40,7 +40,7 @@ The factory function accepts one optional argument: the default value.
 
 To set the value of context use the `value` prop available on the `<Context.Provider value={value} />`:
 
-```javascript{4}
+```javascript{3}
 function Main() {
   const value = 'My Context Value';
   return (
@@ -61,7 +61,7 @@ Consuming the context can be performed in 2 ways.
 
 The first way, the one I recommend, is to use the `useContext(Context)` React hook:
 
-```jsx{4}
+```jsx{3}
 import { useContext } from 'react';
 
 function MyComponent() {
@@ -190,7 +190,7 @@ As a quick reminder, applying the React context requires 3 actors: the context, 
 
 Here's how the sample application would look when applying the context to it:
 
-```jsx{3,8,36}
+```jsx{2,7,35}
 import { useContext, createContext } from 'react';
 
 const UserContext = createContext('Unknown');
@@ -250,7 +250,7 @@ When the context value is changed by altering `value` prop of the context provid
 
 For example, if I change the user name from `'John Smith'` to `'Smith, John Smith'`, then `<UserInfo />` consumer immediately re-renders to display the latest context value:
 
-```jsx{8-10}
+```jsx{7-9}
 import { createContext, useEffect, useState } from 'react';
 
 const UserContext = createContext('Unknown');
@@ -296,7 +296,7 @@ But this can be easily implemented by integrating a state management mechanism (
 
 In the following example, `<Application />` component uses `useState()` hook to manage the context value. 
 
-```jsx{10-13,16,23}
+```jsx{9-12,15,22}
 import { createContext, useState, useContext, useMemo } from 'react';
 
 const UserContext = createContext({

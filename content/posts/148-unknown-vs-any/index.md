@@ -12,7 +12,7 @@ type: post
 
 A variable of type `any` can be assigned with anything:
 
-```typescript
+```ts twoslash
 let myVar: any = 0;
 myVar = '1';
 myVar = false;
@@ -22,7 +22,7 @@ Many TypeScript guides discourage the use of `any` because using it throws away 
 
 TypeScript (version 3.0 and above) also provides a special type `unknown` that is similar to `any`. You can assign any value to an `unknown` type variable as well:
 
-```typescript
+```ts twoslash
 let myVar: unknown = 0;
 myVar = '1';
 myVar = false;
@@ -38,15 +38,13 @@ To better understand the difference between `unknown` and `any`, let's start wit
 
 Let's make the only parameter of `invokeAnything()` as `any` type:
 
-```typescript
+```ts twoslash
 function invokeAnything(callback: any) {
   callback();
 }
 
-invokeAnything(1); // throws "TypeError: callback is not a function"
+invokeAnything(1);
 ```
-
-[Try the demo.](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABDMA3OBrApgQTATygAsUBzACggEMAbGgIyogwC5EqCBKRAbwChEianUbNynANx8Avnz4p02PIRJgKARkmIA9NsTEATnADuAZ0QAiACr4ADlgCiBowbbCGTDMnNg4UdoigkLAIFkA)
 
 Because `callback` param is of `any` type, the statement `callback()` *won't trigger type errors*. You can do anything with a variable of type `any`.  
 
@@ -60,32 +58,29 @@ An `unknown` type variable, same as `any`, accepts any value. But when trying to
 
 Let's change the type of `callback` param from `any` to `unknown`, and see what happens:
 
-```typescript{3}
+```ts twoslash
+// @errors: 2571
 function invokeAnything(callback: unknown) {
   callback();
-  // Object is of type 'unknown'
 }
 
 invokeAnything(1);
 ```
-
-[Try the demo.](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABDMA3OBrApgQTATygAsUBzACggEMAbGgIyogwC5FwMw4B3MASkQBvAFCJE1Oo2bk+AbmEBfYcJTpseQiTAUAjHKA)
 
 Because the `callback` argument is of type `unknown`, the statement `callback()` has a type error `Object is of type 'unknown'`. Now, contrary to `any`, TypeScript protects you from invoking something that might not be a function! 
 
 You need to perform type checking before using a variable of type `unknown`. In the example, you would simply need to check if `callback` is a function type:
 
-```typescript
+```ts twoslash
 function invokeAnything(callback: unknown) {
   if (typeof callback === 'function') {
     callback();
+//    ^?
   }
 }
 
 invokeAnything(1);
 ```
-
-[Try the demo.](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABDMA3OBrApgQTATygAsUBzACggEMAbGgIyogwC5FwMw4B3MASkQBvAFCJkwROSj4ADljgTqdRs0QBeDYgDkoSLARaBIsWKUMmGcnwDcoxAF9hj4SnTY8hEmAoBGG0A)
 
 Having added `typeof callback === 'function'` check, you can safely invoke `callback()`. No type errors and no runtime errors! Great!
 
@@ -102,7 +97,7 @@ The example above has demonstrated exactly the similarity and difference between
 
 The case of `unknown`:
 
-```typescript
+```ts twoslash
 function invokeAnything(callback: unknown) {
   // you cannot operate on `unknown` type 
   // before doing a type check or type assertion
@@ -118,13 +113,13 @@ The type check here is `typeof callback === 'function'` &mdash; checking whether
 
 The case of `any`:
 
-```typescript
+```ts twoslash
 function invokeAnything(callback: any) {
   // you can perform any operation on `any` type
   callback();
 }
 
-invokeAnything(1); // // You can assign anything to `any` type
+invokeAnything(1); // You can assign anything to `any` type
 ```
 
 `callback` being `any`, TypeScript doesn't enforce any type checking for the statement `callback()`.  

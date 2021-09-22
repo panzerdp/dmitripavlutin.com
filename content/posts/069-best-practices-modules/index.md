@@ -22,7 +22,7 @@ When I started using JavaScript modules, I had used the *default* syntax to expo
 
 For example, here's a module `greeter` that exports the class `Greeter` as a default :
 
-```javascript{2}
+```javascript{1}
 // greeter.js
 export default class Greeter {
   constructor(name) {
@@ -43,7 +43,7 @@ I had concluded that the default export doesn't give visible benefits. Then I sw
 
 Let's make `Greeter` a named export, and see the benefits:
 
-```javascript{2}
+```javascript{1}
 // greeter.js
 export class Greeter {
   constructor(name) {
@@ -84,7 +84,7 @@ The module-level scope shouldn't do heavy computation like parsing JSON, making 
 
 For example, the following module `configuration` parses the configuration from the global variable `bigJsonString`:
 
-```javascript{4}
+```javascript{3}
 // configuration.js
 export const configuration = {
   // Bad
@@ -94,7 +94,7 @@ export const configuration = {
 
 That's a problem. Because the parsing of `bigJsonString` is performed at the module-level scope, a heavy operation is executed when `configuration` module is imported:  
 
-```javascript{2}
+```javascript{1}
 // Bad: parsing happens when the module is imported
 import { configuration } from 'configuration';
 
@@ -107,7 +107,7 @@ At a higher level, the module-level scope's role is to define the module compone
 
 Let's refactor the `configuration` module to perform lazy parsing:
 
-```javascript{6}
+```javascript{5}
 // configuration.js
 let parsedData = null;
 
@@ -124,7 +124,7 @@ export const configuration = {
 
 Because `data` property is defined as a getter, the `bigJsonString` is parsed only when the consumer accesses `configuration.data`.  
 
-```javascript{6}
+```javascript{5}
 // Good: JSON parsing doesn't happen when the module is imported
 import { configuration } from 'configuration';
 
@@ -225,7 +225,7 @@ The good solution is to split the low cohesion module `utils` into several high 
 
 Now, if `ShoppingCart` module imports `utils/stringFormat`, it wouldn't have a transitive dependency on `cookies`:  
 
-```jsx{2}
+```jsx{1}
 // ShoppingCartCount.jsx
 import { pluralize } from 'utils/stringFormat';
 
@@ -242,7 +242,7 @@ The best examples of high cohesion modules are Node built-in modules, like `fs`,
 
 I find difficult to understand the path of a module that contains one, or even more parent folders:
 
-```javascript{1-2}
+```javascript{0-1}
 import { compareDates } from '../../date/compare';
 import { formatDate }   from '../../date/format';
 
@@ -253,7 +253,7 @@ While having one parent selector `../` is usually not a problem, having 2 or mor
 
 That's why I'd recommend to avoid the parent folders in favor of absolute paths:
 
-```javascript{1-2}
+```javascript{0-1}
 import { compareDates } from 'utils/date/compare';
 import { formatDate }   from 'utils/date/format';
 

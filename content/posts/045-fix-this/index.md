@@ -48,7 +48,7 @@ A class `Person` contains the fields `firstName` and `lastName`. Plus, it has a 
 
 One possible implementation of `Person` could be:
 
-```javascript{6}
+```javascript{5}
 function Person(firstName, lastName) {
   this.firstName = firstName;
   this.lastName = lastName;
@@ -119,7 +119,7 @@ Let's continue with some useful approaches on how to keep `this` pointing to the
 
 The simplest way to keep `this` pointing to the class instance is to use an additional variable `self`:
 
-```javascript{5,9}
+```javascript{4,8}
 function Person(firstName, lastName) {
   this.firstName = firstName;
   this.lastName = lastName;
@@ -148,7 +148,7 @@ Is there are a way to bind `this` statically without an additional variable? Yes
 
 Let's refactor `Person` to use an arrow function:
 
-```javascript{5}
+```javascript{4}
 function Person(firstName, lastName) {
   this.firstName = firstName;
   this.lastName = lastName;
@@ -194,7 +194,7 @@ The use of additional variable `self` or arrow functions to fix the value of `th
 
 But there's a trick involving [bind()](/gentle-explanation-of-this-in-javascript/#6-bound-function) method that binds the context of the method inside the constructor: 
 
-```javascript{6}
+```javascript{5}
 class Person {
   constructor(firstName, lastName) {
     this.firstName = firstName;
@@ -224,7 +224,7 @@ The above method using manual context binding requires boilerplate code. Fortuna
 
 You can use the JavaScript [class fields proposal](https://github.com/tc39/proposal-class-fields) that permits to define a fat arrow method:
 
-```javascript{7}
+```javascript{6}
 class Person {
   constructor(firstName, lastName) {
     this.firstName = firstName;

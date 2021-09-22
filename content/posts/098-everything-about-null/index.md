@@ -41,7 +41,7 @@ If you see `null` (either assigned to a variable or returned by a function), the
 
 For example, the function `greetObject()` creates objects, but also can return `null` when an object cannot be created:
 
-```javascript{3}
+```javascript{2}
 function greetObject(who) {
   if (!who) {
     return null;

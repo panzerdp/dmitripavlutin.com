@@ -73,7 +73,7 @@ It happens because the verification of property existence relies on implicit con
 
 These kind of errors are difficult to spot. To fix the function, verify explicitely the type of the value: 
 
-```javascript{2}
+```javascript{1}
 function getPropFixed(object, propertyName, defaultValue) {
    if (object[propertyName] === undefined) {
      return defaultValue;
@@ -95,7 +95,7 @@ console.log(getPropFixed(hero, 'isVillian', true)); // => false
 
 Side note: the section [4.](#4-try-to-avoid-undefined-and-null) suggests to avoid using directly `undefined`. So the above solution can be improved in favor of `in` operator:  
 
-```javascript{2}
+```javascript{1}
 function getPropFixedBetter(object, propertyName, defaultValue) {
    if (!(propertyName in object)) {
      return defaultValue;
@@ -176,7 +176,7 @@ The refactored code is easier to understand because the variables are not spread
 Define the variables in the block scope they are used:
 
 #### if block scope
-```javascript{2}
+```javascript{1}
 // Bad
 let message;
 // ...
@@ -186,7 +186,7 @@ if (notFound) {
 }
 ```
 
-```javascript{3}
+```javascript{2}
 // Good
 if (notFound) {
   const message = 'Item not found';
@@ -195,7 +195,7 @@ if (notFound) {
 ```
 
 #### for block scope
-```javascript{2}
+```javascript{1}
 // Bad
 let item;
 for (item of array) {
@@ -203,7 +203,7 @@ for (item of array) {
 }
 ```
 
-```javascript{2}
+```javascript{1}
 // Good
 for (const item of array) {
   // Use `item`
@@ -233,7 +233,7 @@ Variables, object properties, arrays must be initialized with values before usin
 JavaScript offers a lot of possibilities to avoid comparing with `undefined`.
 
 #### Property existence
-```javascript{5}
+```javascript{4}
 // Bad
 const object = {
   prop: 'value'
@@ -242,7 +242,7 @@ if (object.nonExistingProp === undefined) {
   // ...
 }
 ```
-```javascript{5}
+```javascript{4}
 // Good
 const object = {
   prop: 'value'
@@ -253,7 +253,7 @@ if ('nonExistingProp' in object) {
 ```
 
 #### Object's default properties
-```javascript{3}
+```javascript{2}
 // Bad
 function foo(options) {
   if (object.optionalProp1 === undefined) {
@@ -262,7 +262,7 @@ function foo(options) {
   // ...
 }
 ```
-```javascript{7}
+```javascript{6}
 // Good
 function foo(options) {
   const defaultProps = {
@@ -277,7 +277,7 @@ function foo(options) {
 ```
 
 #### Default function parameter
-```javascript{3}
+```javascript{2}
 // Bad
 function foo(param1, param2) {
   if (param2 === undefined) {
@@ -286,7 +286,7 @@ function foo(param1, param2) {
   // ...
 }
 ```
-```javascript{2}
+```javascript{1}
 // Good
 function foo(param1, param2 = 'Some default value') {
   // ...
@@ -299,7 +299,7 @@ You should strive to avoid returning `null` from functions, and more importantly
 
 As soon as `null` appears in your call stack, you have to check for its existence in every function that potentially can access `null`. It's error-prone.  
 
-```javascript{5,11}
+```javascript{4,10}
 function bar(something) {
   if (something) {
     return foo({ value: 'Some value' });
