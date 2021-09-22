@@ -65,8 +65,6 @@ Having the `dictionary` annotated with an index signature where the key is `stri
 
 `{ [name: string]: number }` is an index signature, describing a general object with properties having `string` type as a key and `number` type as value.  
 
-If you access a value using a key type that's not of type in the index signature, TypeScript of course throws an error:
-
 ## 2. Index signature syntax
 
 The syntax of an index signature is pretty simple and looks similar to the syntax of a property, but with one difference. Instead of the property name, you simply write the type of the key
