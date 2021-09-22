@@ -10,7 +10,7 @@ recommended: ['typescript-unknown-vs-any', 'how-to-iterate-easily-over-object-pr
 type: post
 ---
 
-When I was making my first steps in using TypeScript, I was surprised that the following code snippet has a type error:
+When making my first steps in TypeScript, I was surprised that the code triggers a type error:
 
 ```ts twoslash
 // @errors: 7053
@@ -21,7 +21,7 @@ const dictionary = {
 };
 
 for (const name in dictionary) {
-  const number = dictionary[name];
+  const myNumber = dictionary[name];
 }
 ```
 
@@ -33,19 +33,7 @@ Let's find what TypeScript index signatures are and when they're needed.
 
 ## 1. Index signature
 
-Let's continue exploring the type error from the previous code sample. Why TypeScript doesn't like `dictionary[name]`?  
-
-First, let's see what type is the `dictionary` variable? TypeScript infer `dictionary` type as `{ one: number, two: number, three: number }`.  
-
-Second, let's see what `name` variable is? It's a `string` type.  
-
-Here's the problem: `dictionary[name]` tries to read a property that may not exist on `dictionary`, because `name` can be any `string` value. That's what TypeScript is complaining about.  
-
-How to make TypeScript allow us access properties of string type?  
-
-That's where the index signature can help. Let's annotate the `dictionary` variable with an index signature:
-
-```ts twoslash
+```twoslash include main
 interface NumberByName {
   [name: string]: number
 }
@@ -57,13 +45,49 @@ const dictionary: NumberByName = {
 };
 
 for (const name in dictionary) {
-  const number = dictionary[name]; // Good!
+  const myNumber = dictionary[name]; // Good!
+//       ^?                     
 }
+// - 1
 ```
 
-Having the `dictionary` annotated with an index signature where the key is `string` and value is a `number` type, the TypeScript doesn't complain anymore about `dictionary[name]`.  
+Let's continue exploring the type error from the previous code sample. Why TypeScript doesn't like `dictionary[name]`?  
 
-`{ [name: string]: number }` is an index signature, describing a general object with properties having `string` type as a key and `number` type as value.  
+First, let's see what type is the `dictionary` variable? It's a simple object type with fixed property names:
+
+```ts twoslash
+const dictionary = {
+  'one': 1,
+  'two': 2,
+  'three': 3
+};
+
+dictionary;
+// ^?
+```
+
+Second, let's see what `name` variable is? It's a `string` type.  
+
+Here's the problem: `dictionary[name]` tries to read a property that may not exist on `dictionary`, because `name` can be any `string` value. That's what TypeScript is complaining about.  
+
+How to make TypeScript access properties of string type?  
+
+That's where the index signature can help. Let's annotate the `dictionary` variable with an index signature:
+
+```ts twoslash
+// @include: main-1
+```
+
+Having the `dictionary` annotated with an index signature where the key is `string` and value is a `number` type, the TypeScript doesn't complain about `dictionary[name]`.  
+
+TypeScript understands that if you use a property accessor with a `string` type, the resulted value is going to be a `number`:
+
+```ts twoslash
+// @include: main-1
+// ---cut---
+type ValueType = (typeof dictionary)[string];
+//      ^?
+```
 
 ## 2. Index signature syntax
 
@@ -116,8 +140,6 @@ interface OopsDictionary {
 If you don't know the structure of the object you're going to work with, but you know the possible key and value types, then the index signature is
 what you need.  
 
-The index signature consists of the index name and its type in square brackets, followed by a colon and the value type: `{ [indexName: KeyType]: ValueType }`.  
-
-Note that `KeyType` can be either a `string`, `number`, or `symbol`, while `ValueType` can be anything.  
+The index signature consists of the index name and its type in square brackets, followed by a colon and the value type: `{ [indexName: KeyType]: ValueType }`. `KeyType` can be a `string`, `number`, or `symbol`, while `ValueType` can be any type.  
 
 *Challenge: Write a generic type `Indexed<K, V>` that creates an index signature where `K` is the key type and `V` is the value type. Share your solution in a comment below!* 
