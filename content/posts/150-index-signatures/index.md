@@ -1,8 +1,8 @@
 ---
 title: "Index Signatures in TypeScript"
 description: "Index signatures in TypeScript let's you annotate objects of unknown structure."
-published: "2021-09-21T12:00Z"
-modified: "2021-09-21T12:00Z"
+published: "2021-09-22T18:10Z"
+modified: "2021-09-22T18:10Z"
 thumbnail: "./images/cover-2.png"
 slug: typescript-index-signatures
 tags: ['typescript', 'object']
