@@ -77,7 +77,7 @@ const counterAtom = atom(0);
 
 But the atom alone doesn't help much. To read and update the atom's state `Jotai` provides a special hook `useAtom()`:
 
-```jsx{3,6}
+```jsx{2,5}
 import { atom, useAtom } from 'jotai';
 
 export const counterAtom = atom(0);
@@ -108,7 +108,7 @@ The selling point of atoms is that you can access the same atom from multiple co
 
 For example, let's read `counterAtom` value in an another component `<CurrentCount>`:
 
-```jsx{5}
+```jsx{4}
 import { useAtom } from 'jotai';
 import { counterAtom } from './Button';
 
@@ -133,7 +133,7 @@ Now let's return to the problem of section 1: how to share the search query from
 
 You might already see the solution: let's create an atom `searchAtom` and share it between `<Header>` and `<Main>` components:  
 
-```jsx{13,16,26}
+```jsx{12,15,25}
 import { useState } from 'react';
 import { atom, useAtom } from 'jotai';
 
@@ -182,7 +182,7 @@ If you find yourself calculating data from an atom's value, then you may find us
 
 You can create a derived atom when supplying a callback function to `atom(get => get(myAtom))`: in which case `Jotai` invokes the callback with a getter function `get` from where you can extract the value of the base atom `get(myAtom)`.  
 
-```javascript{4}
+```javascript{3}
 import { atom } from 'jotai';
 
 const numberAtom = atom(2);
@@ -197,7 +197,7 @@ Of course, as soon as the base atom changes, the derived atom changes too.
 
 For example, let's create `isNameEmptyAtom` derived atom that determines the string stored in `nameAtom` is empty:
 
-```jsx{4,8}
+```jsx{3,7}
 import { atom, useAtom } from 'jotai';
 
 const nameAtom = atom('Batman');

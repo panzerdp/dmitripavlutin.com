@@ -30,7 +30,7 @@ What if `who` is a property of an object? To easily access the properties of an 
 
 Let's make `greet()` a method on the object `world`:
 
-```javascript{4-6}
+```javascript{3-5}
 const world = {
   who: 'World',
 
@@ -77,7 +77,7 @@ The methods do not use `this`, and `namespace` serves as a holder of alike metho
 
 As seen in the previous chapter, you can define a method directly in an object literal:
 
-```javascript{4-6}
+```javascript{3-5}
 const world = {
   who: 'World',
 
@@ -93,7 +93,7 @@ world.greet(); // => 'Hello, World!'
 
 There's also a longer syntax of methods definition:
 
-```javascript{4-6}
+```javascript{3-5}
 const world = {
   who: 'World',
 
@@ -170,7 +170,7 @@ Let me show you why it's important.
 
 Recall the `world` object having the method `greet()` upon it. Let's check what value has `this` when `greet()` is invoked as a method and as a regular function:
 
-```javascript{5,11,15}
+```javascript{4,10,14}
 const world = {
   who: 'World',
 

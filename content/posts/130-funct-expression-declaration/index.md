@@ -104,7 +104,7 @@ The function variable is normally used to invoke the function or pass around the
 
 For example, let's write a function `sumArray(array)` that sums recursively items of an array (the array can contain either numbers or other arrays):  
 
-```javascript{1, 6, 11}
+```javascript{0,5,10}
 sumArray([10, [1, [5]]]); // => 16
 
 function sumArray(array) {
@@ -130,7 +130,7 @@ The function variable is available before the function declaration thanks to [ho
 
 The role of the function declaration syntax is to create standalone functions. Function declarations are expected inside the global scope or the direct the scope of other functions:  
 
-```javascript{2-4,8-10}
+```javascript{1-3,7-9}
 // Good!
 function myFunc1(param1, param2) {
   return param1 + param2;
@@ -172,7 +172,7 @@ The function expression occurs when the `function` keyword creates a function (w
 
 The following are examples of functions created using expressions:
 
-```javascript{3,8,14}
+```javascript{2,7,13}
 // Function expressions
 
 const sum = (function sumB(a, b) {
@@ -220,7 +220,7 @@ if (true) {
 
 If you've created a named function expression, note that the function variable is *available only inside the created function scope*:  
 
-```javascript{3,6}
+```javascript{2,5}
 const numbers = [4];
 numbers.forEach(function callback(number) {
   console.log(callback); // logs function() { ... }
@@ -235,7 +235,7 @@ console.log(callback); // ReferenceError: callback is not defined
 
 However, if you store the function object into a regular variable, then you can access the function object from that variable inside and outside of the function scope:
 
-```javascript{2,7}
+```javascript{1,6}
 const callback = function(number) {
   console.log(callback); // logs function() { ... }
 };

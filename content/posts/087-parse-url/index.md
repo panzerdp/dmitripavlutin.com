@@ -187,7 +187,7 @@ For example, `http ://example.com` is an invalid URL because of the space charac
 
 Let's use this invalid URL to initialize the parser:  
 
-```javascript{7}
+```javascript{6}
 try {
   const url = new URL('http ://example.com');
 } catch (error) {

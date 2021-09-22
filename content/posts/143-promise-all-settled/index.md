@@ -79,7 +79,7 @@ Let's use these helper functions to experiment on `Promise.allSettled()`.
 
 Let's access in parallel the vegetables and fruits available at the local grocerry store. Accessing each list is an asynchornous operation:  
 
-```javascript{2,3}
+```javascript{1,2}
 const statusesPromise = Promise.allSettled([
   resolveTimeout(['potatoes', 'tomatoes'], 1000),
   resolveTimeout(['oranges', 'apples'], 1000)
@@ -111,7 +111,7 @@ Imagine there are no more fruits at the grocery. In such a case, let's reject th
 
 How would `Promise.allSettled()` would work in such a case?  
 
-```javascript{3}
+```javascript{2}
 const statusesPromise = Promise.allSettled([
   resolveTimeout(['potatoes', 'tomatoes'], 1000),
   rejectTimeout(new Error('Out of fruits!'), 1000)
@@ -141,7 +141,7 @@ Even though the second promise in the input array is rejected, the `statusesProm
 
 What if the grocerry is out of both vegetables and fruits? In such case both promises reject:
 
-```javascript{2-3}
+```javascript{1-2}
 const statusesPromise = Promise.allSettled([
   rejectTimeout(new Error('Out of vegetables!'), 1000),
   rejectTimeout(new Error('Out of fruits!'), 1000)

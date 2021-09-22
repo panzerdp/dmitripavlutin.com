@@ -69,7 +69,7 @@ const moduleVersion2 = await import(getPath('v2.0'));
 
 Because the `import(path)` returns a promise, it fits great with the `async/await` syntax. For example, lets load a module inside of an asynchornous function:
 
-```javascript{2}
+```javascript{1}
 async function loadMyModule() {
   const myModule = await import('./myModule.js');
   // ... use myModule
@@ -95,7 +95,7 @@ export const concat = (paramA, paramB) => paramA + paramB;
 
 If you'd like to dynamically import `namedConcat.js`, and access the named export `concat`, then simply destructure the resolved module object by the named export name:
 
-```javascript{2}
+```javascript{1}
 async function loadMyModule() {
   const { concat } = await import('./namedConcat.js');
   concat('b', 'c'); // => 'bc'

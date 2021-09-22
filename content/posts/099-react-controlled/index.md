@@ -65,7 +65,7 @@ Let's see a more complex example. A web page consists of a list of employees' na
 
 That's a good scenario to use a controlled input. Here's a possible implementation:
 
-```jsx{2,4,15-16}
+```jsx{1,3,14-15}
 function FilteredEmployeesList({ employees }) {
   const [query, setQuery] = useState('');
   
@@ -103,7 +103,7 @@ Let's improve the user experience with debouncing: filter the list with a delay 
 
 Let's see a possible implementation of a debounced controlled input:
 
-```jsx{1,5,10}
+```jsx{0,4,9}
 import { useDebouncedValue } from './useDebouncedValue';
 
 function FilteredEmployeesList({ employees }) {

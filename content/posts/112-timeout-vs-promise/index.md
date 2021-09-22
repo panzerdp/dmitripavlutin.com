@@ -78,7 +78,7 @@ Let's look again at the experiment from the event loop perspective. I'll make a 
 
 A) The call stack executes `setTimeout(..., 0)` and *schedules* a timer. `timeout()` callback is stored in *Web APIs*:
 
-```javascript{1-3}
+```javascript{0-2}
 setTimeout(function timeout() {
   console.log('Timed out!');
 }, 0);
@@ -92,7 +92,7 @@ Promise.resolve(1).then(function resolve() {
 
 B) The call stack executes `Promise.resolve(true).then(resolve)` and *schedules* a promise resolution. `resolved()` callback is stored in *Web APIs*:
 
-```javascript{5-7}
+```javascript{4-6}
 setTimeout(function timeout() {
   console.log('Timed out!');
 }, 0);
@@ -110,7 +110,7 @@ C) The promise is resolved immediately, as well the timer is timed out immediate
 
 D) Now's the interesting part: the event loop priorities dequeueing jobs over tasks. The event loop dequeues the promise callback `resolve()` from the job queue and puts it into the call stack. Then the call stack executes the promise callback `resolve()`:  
 
-```javascript{6}
+```javascript{5}
 setTimeout(function timeout() {
   console.log('Timed out!');
 }, 0);
@@ -126,7 +126,7 @@ Promise.resolve(1).then(function resolve() {
 
 E) Finally, the event loop dequeues the timer callback `timeout()` from the task queue into the call stack. Then the call stack executes the timer callback `timeout()`:  
 
-```javascript{2}
+```javascript{1}
 setTimeout(function timeout() {
   console.log('Timed out!');
 }, 0);

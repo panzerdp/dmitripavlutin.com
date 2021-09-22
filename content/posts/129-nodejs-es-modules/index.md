@@ -51,7 +51,7 @@ An easy way to tell Node.js to treat the modules in ECMAScript format is to use 
 
 The following ES module `month-from-date.mjs` (note the `.mjs` file extension) exports a function `monthFromDate()`, which determines the month name of an arbitrary date: 
 
-```javascript{1,6}
+```javascript{0,5}
 // month-from-date.mjs (ES Module)
 
 const MONTHS = ['January', 'February', 'March','April', 'May', 'June', 
@@ -67,7 +67,7 @@ export function monthFromDate(date) {
 
 Same way another module `month.mjs` uses the ES module `import` syntax to import `monthFromDate()` function from `'month-from-date.mjs'` module. This module also runs as a CLI script, and prints the month name of the date string passed as an argument:
 
-```javascript{1,3}
+```javascript{0,2}
 // month.mjs (ES Module)
 
 import { monthFromDate } from './month-from-date.mjs';
@@ -93,7 +93,7 @@ node ./month.mjs "2022-02-01"
 
 By default `.js` files in Node.js are considered CommonJS modules. To make `.js` files as ES modules simply set `"type"` field as `"module"` in the `package.json`:
 
-```json{4}
+```json{3}
 {
   "name": "my-app",
   "version": "1.0.0",
@@ -223,7 +223,7 @@ You can be in a situation when you need to import a CommonJS module from an ES m
 
 Fortunately, Node.js allows an ES module to include a CommonJS module as a default import:
 
-```javascript{3}
+```javascript{2}
 // ES module
 
 import defaultComponent from './module.commonjs.js';
@@ -235,7 +235,7 @@ When imported in an ES module, the `module.exports` of the CommonJS module becom
 
 However, the `require()` function of the CommonJS format *cannot* import an ES module. Instead, you can use the async function `import()` inside CommonJS to load an ES module:
 
-```javascript{7}
+```javascript{6}
 // CommonJS module
 
 async function loadESModule() {

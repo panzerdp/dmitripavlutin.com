@@ -199,7 +199,7 @@ To make `this` have a desired value, modify the inner function's context with in
 
 The following example is calculating a sum of two numbers:
 
-```javascript{10}
+```javascript{9}
 const numbers = {
   numberA: 5,
   numberB: 10,
@@ -230,7 +230,7 @@ The invocation result of `numbers.sum()` is `NaN` (or an error is thrown `TypeEr
 
 One solution is to change manually the context of `calculate()` to the desired one by calling `calculate.call(this)` (an indirect invocation of a function, see section [5.](#5-indirect-invocation)):
 
-```javascript{13}
+```javascript{12}
 const numbers = {
   numberA: 5,
   numberB: 10,
@@ -255,7 +255,7 @@ Now `this.numberA + this.numberB` is same as `numbers.numberA + numbers.numberB`
 
 Another solution, slightly better, is to use an arrow function: 
 
-```javascript{7-10}
+```javascript{6-9}
 const numbers = {
   numberA: 5,
   numberB: 10,
@@ -329,7 +329,7 @@ When invoking a method on an object, `this` is the object that owns the method.
 
 Let's create an object with a method that increments a number:
 
-```javascript{4}
+```javascript{3}
 const calc = {
   num: 0,
   increment() {
@@ -348,7 +348,7 @@ Calling `calc.increment()` makes the context of `increment` function to be `calc
 
 Let's follow another case. A JavaScript object inherits a method from its `prototype`. When the inherited method is invoked on the object, the context of the invocation is still the object itself:
 
-```javascript{3}
+```javascript{2}
 const myDog = Object.create({
   sayName() {
     console.log(this === myDog); // => true
@@ -367,7 +367,7 @@ When `myDog.sayName()` is executed, `myDog` is the context of invocation.
 
 In ECMAScript 2015 [`class`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) syntax, the method invocation context is also the instance itself:
 
-```javascript{7}
+```javascript{6}
 class Planet {
   constructor(name) {
     this.name = name;
@@ -394,7 +394,7 @@ A bound function `const alone = myObj.myMethod.bind(myObj)` (using [`.bind()`](h
 
 The following example defines `Pet` constructor and makes an instance of it: `myCat`. Then `setTimout()` after 1 second logs `myCat` object information:
 
-```javascript{6}
+```javascript{5}
 function Pet(type, legs) {
   this.type = type;
   this.legs = legs;
@@ -428,7 +428,7 @@ When the separated `logInfo` is invoked as a function, `this` is global object o
 
 👍 A function bounds with an object using [`.bind()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind) method (see [6.](#6-bound-function)). If the separated method is bound with `myCat` object, the context problem is solved:
 
-```javascript{6,14}
+```javascript{5,13}
 function Pet(type, legs) {
   this.type = type;
   this.legs = legs;
@@ -451,7 +451,7 @@ setTimeout(boundLogInfo, 1000);
 
 An alternative solution is to define `logInfo()` method as an arrow function, which binds `this` lexically:
 
-```javascript{5-8}
+```javascript{4-7}
 function Pet(type, legs) {
   this.type = type;
   this.legs = legs;
@@ -469,7 +469,7 @@ setTimeout(myCat.logInfo, 1000);
 
 If you'd like to use classes and bind `this` to the class instance in your method, use the arrow function as a class property:
 
-```javascript{7-10}
+```javascript{6-9}
 class Pet {
   constructor(type, legs) {
     this.type = type;
@@ -495,7 +495,7 @@ Examples of construction invocation: `new Pet('cat', 4)`, `new RegExp('\\d')`.
 
 This example declares a function `Country`, then invokes it as a constructor:
 
-```javascript{11,13}
+```javascript{10,12}
 function Country(name, traveled) {
   this.name = name ? name : 'United Kingdom';
   this.traveled = Boolean(traveled); // transform to a boolean
@@ -519,7 +519,7 @@ If the constructor is called without arguments, then the parenthesis pair can be
 
 Starting ECMAScript 2015, JavaScript allows to define constructors using [`class`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) syntax:
 
-```javascript{13}
+```javascript{12}
 class City {
   constructor(name, traveled) {
     this.name = name;
@@ -554,7 +554,7 @@ The context of a constructor invocation is the newly created object. The constru
 
 Let's check the context in the following example:
 
-```javascript{2}
+```javascript{1}
 function Foo () {
   // this is fooInstance
   this.property = 'Default Value';
@@ -569,7 +569,7 @@ fooInstance.property; // => 'Default Value'
 
 The same scenario happens when using [`class`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) syntax (available in ES2015), only the initialization happens in the `constructor` method:
 
-```javascript{3}
+```javascript{2}
 class Bar {
   constructor() {
     // this is barInstance
@@ -588,7 +588,7 @@ At the time when `new Bar()` is executed, JavaScript creates an empty object and
 
 Some JavaScript functions create instances not only when invoked as constructors, but also when invoked as functions. For example `RegExp`:
 
-```javascript{1,2}
+```javascript{0,1}
 const reg1 = new RegExp('\\w+');
 const reg2 = RegExp('\\w+');
 
@@ -665,7 +665,7 @@ From the [list of methods](https://developer.mozilla.org/en-US/docs/Web/JavaScri
 
 The following example demonstrates the indirect invocation:
 
-```javascript{5,6}
+```javascript{4,5}
 function sum(number1, number2) {
   return number1 + number2;
 }
@@ -686,7 +686,7 @@ sum.apply(undefined, [10, 2]); // => 12
 
 The following example shows the indirect invocation context:
 
-```javascript{4}
+```javascript{3}
 const rabbit = { name: 'White Rabbit' };
 
 function concatName(string) {
@@ -703,7 +703,7 @@ The indirect invocation is useful when a function should be executed with a spec
 
 Another practical example is creating hierarchies of classes in ES5 to call the parent constructor:
 
-```javascript{9}
+```javascript{8}
 function Runner(name) {
   console.log(this instanceof Rabbit); // => true
   this.name = name;
@@ -730,7 +730,7 @@ myRabbit; // { name: 'White Rabbit', countLegs: 4 }
 
 The following code creates a bound function and later invokes it:
 
-```javascript{7}
+```javascript{6}
 function multiply(number) {
   'use strict';
   return this * number;
@@ -812,7 +812,7 @@ Only `new one()` changes the context of the bound function. Other types of invoc
 
 It can used the following way:
 
-```javascript{1-3}
+```javascript{0-2}
 const hello = (name) => {
   return 'Hello ' + name;
 };
@@ -828,7 +828,7 @@ An arrow function is [anonymous](https://developer.mozilla.org/en-US/docs/Web/Ja
 
 Also it doesn't provide the [`arguments`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) object, opposed to a regular function. The missing `arguments` is fixed using ES2015 [rest parameters](/how-three-dots-changed-javascript/#21-rest-parameter):  
 
-```javascript{1}
+```javascript{0}
 const sumArguments = (...args) => {
   console.log(typeof arguments); // => 'undefined'
   return args.reduce((result, item) => result + item);
@@ -848,7 +848,7 @@ The arrow function doesn't create its own execution context but takes `this` fro
 
 The following example shows the context transparency property:
 
-```javascript{12}
+```javascript{11}
 class Point {
   constructor(x, y) {
     this.x = x;
@@ -873,7 +873,7 @@ A regular function in this example would create its own context (`window` or `un
 
 If the arrow function is defined in the topmost scope (outside any function), the context is always the global object (`window` in a browser):
 
-```javascript{2}
+```javascript{1}
 const getContext = () => {
  console.log(this === window); // => true
  return this;
@@ -914,7 +914,7 @@ An arrow function cannot be used as a constructor. Invoking it as a constructor 
 
 This example defines a method `format()` on a class `Period` using an arrow function:
 
-```javascript{7,12}
+```javascript{6,11}
 function Period (hours, minutes) { 
   this.hours = hours;
   this.minutes = minutes;
@@ -937,7 +937,7 @@ The method returns `'undefined hours and undefined minutes'`, which is not the e
 
 👍 The function expression solves the problem because a regular function *does change its context* depending on invocation:
 
-```javascript{7,12}
+```javascript{6,11}
 function Period (hours, minutes) {
   this.hours = hours;
   this.minutes = minutes;

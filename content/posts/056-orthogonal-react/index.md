@@ -57,7 +57,7 @@ Let's see how to do that in 2 examples.
 
 Let's say you need to fetch a list of employees. One version of `<EmployeesPage>` could be as follows:
 
-```jsx{12}
+```jsx{11}
 import React, { useState } from 'react';
 import axios from 'axios';
 import EmployeesList from './EmployeesList';

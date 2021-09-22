@@ -67,7 +67,7 @@ Then, from the server response, you can parse the JSON into a plain JavaScript o
 
 By default `fetch()` performs a `GET` request. But you can always indicate the HTTP method explicitly:
 
-```javascript{3}
+```javascript{2}
 // ...
 const response = await fetch('/api/names', {
   method: 'GET'
@@ -81,7 +81,7 @@ Some API servers might work with multiple formats: JSON, XML, etc. That's why th
 
 To do so you need to use the `headers` option, and specifically set `Accept` header to `application/json` to explicitly ask for JSON:
 
-```javascript{3-5}
+```javascript{2-4}
 // ...
 const response = await fetch('/api/names', {
   headers: {
@@ -99,7 +99,7 @@ First, you need to set a couple of parameters on the `fetch()`, particularly ind
 
 Second, you need to set the `body` parameter with the object stringified as JSON.
 
-```javascript{4-5}
+```javascript{3-4}
 async function postName() {
   const object = { name: 'James Gordon' };
   const response = await fetch('/api/names', {
@@ -126,7 +126,7 @@ Again, some servers might require you to indicate explicitly that you `POST` (or
 
 In such a case you can indicate the content type of data you're pushing, particularly setting the `Content-Type` header to `application/json`.  
 
-```javascript{6-8}
+```javascript{5-7}
 // ...
 const object = { name: 'James Gordon' };
 

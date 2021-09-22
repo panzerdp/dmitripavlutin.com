@@ -81,7 +81,7 @@ On the other side, `rejectTimeout(reason, delay)` returns a promise that rejects
 
 For example, let's access, at the same time, the lists of vegetables and fruits available at the local grocerry store. Accessing each list is an asynchornous operation:  
 
-```javascript{1-4}
+```javascript{0-3}
 const allPromise = Promise.all([
   resolveTimeout(['potatoes', 'tomatoes'], 1000),
   resolveTimeout(['oranges', 'apples'], 1000)
@@ -111,7 +111,7 @@ The vegetables promise is the first item, and the fruits promise is the second i
 
 Now imagine the situation that the grocery is out of fruits. In such a case, let's reject the fruits promise with an error `new Error('Out of fruits!')`:
 
-```javascript{3,11}
+```javascript{2,10}
 const allPromise = Promise.all([
   resolveTimeout(['potatoes', 'tomatoes'], 1000),
   rejectTimeout(new Error('Out of fruits!'), 1000)

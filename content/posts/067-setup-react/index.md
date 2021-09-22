@@ -120,7 +120,7 @@ h1 {
 
 Secondly, update the `index.html` to link to the new external CSS file:
 
-```html{3-5}
+```html{2-4}
 <!-- index.html -->
 <html>
 <head>
@@ -143,7 +143,7 @@ By default, `parcel` installs the latest stable dependencies. But you can easily
 
 After the first build, `parcel` generates a `package.json` file in the playground directory: 
 
-```html{4}
+```html{3}
 react-playground
   ├── index.html
   ├── index.jsx
@@ -152,7 +152,7 @@ react-playground
 
 To install a specific dependency version, for example of React and React DOM, simply update `package.json`:
 
-```json{4-5}
+```json{3-4}
 // package.json
 {
   "dependencies": {
@@ -185,7 +185,7 @@ ReactDOM.render(
 
 Then update the HTML file so that the `script` tag to point to `index.tsx` file:
 
-```html{5}
+```html{4}
 <!-- index.html -->
 <html>
 <body>

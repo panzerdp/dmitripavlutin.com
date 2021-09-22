@@ -37,7 +37,7 @@ While at first the questions might seem random, they try to hook into important 
 
 To what evaluates `typeof a` and `typeof b` in the following snippet:
 
-```javascript{8-9}
+```javascript{7-8}
 function foo() {
   let a = b = 0;
   a++;
@@ -61,7 +61,7 @@ In other words, `b` is a global variable created accidentally.
 
 In a browser, the above code snippet is equivalent to:
 
-```javascript{2-4}
+```javascript{1-3}
 function foo() {
   let a;
   window.b = 0;
@@ -85,7 +85,7 @@ Because `b` is a global variable with the value `0`, the `typeof b` evaluates to
 
 What is the value of `clothes[0]`:
 
-```javascript{4}
+```javascript{3}
 const clothes = ['jacket', 't-shirt'];
 clothes.length = 0;
 
@@ -108,7 +108,7 @@ As result when JavaScript executes `clothes.length = 0`, all `clothes` items are
 
 What is the content of `numbers` array:
 
-```javascript{7}
+```javascript{6}
 const length = 4;
 const numbers = [];
 for (var i = 0; i < length; i++);{
@@ -171,7 +171,7 @@ I'll leave the conclusion up to you.
 
 What value is returned by `arrayFromValue()`?
 
-```javascript{6}
+```javascript{5}
 function arrayFromValue(item) {
   return
     [item];
@@ -188,7 +188,7 @@ However, this newline makes the JavaScript automatically insert a semicolon betw
 
 Here's an equivalent code with the semicolon inserted after `return`:
 
-```javascript{2}
+```javascript{1}
 function arrayFromValue(item) {
   return;
   [item];
@@ -208,7 +208,7 @@ Follow [this section](/7-tips-to-handle-undefined-in-javascript/#24-function-ret
 #### Question
 
 What will output to console the following code:
-```javascript{4}
+```javascript{3}
 let i;
 for (i = 0; i < 3; i++) {
   const log = () => {
@@ -277,7 +277,7 @@ Check [0.30000000000000004.com](https://0.30000000000000004.com/) for more infor
 
 What happens if you access `myVar` and `myConst` before declaration?
 
-```javascript{1-2}
+```javascript{0-1}
 myVar;   // => ???
 myConst; // => ???
 

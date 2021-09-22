@@ -83,7 +83,7 @@ The difference is seen when the `success()` callback of the resolved promise ret
 
 Let's modify the success callback to return a rejected promise:
 
-```javascript{3}
+```javascript{2}
 function rejectSuccess(invalidValue) {
   console.log('Invalid success: ', invalidValue);
   return Promise.reject('Invalid!');
@@ -92,7 +92,7 @@ function rejectSuccess(invalidValue) {
 
 Now let's use `rejectSuccess` in both approaches:
 
- ```javascript{9}
+ ```javascript{8}
 Promise.resolve('Zzz!')
   .then(rejectSuccess, error);
 // Logs 'Invalid success: Zzzzz!'
@@ -116,7 +116,7 @@ That could be useful, for example, when you perform a fetch request to get a lis
 
 So, in case if the list is empty, you could simply reject that list:
 
-```javascript{6-8}
+```javascript{5-7}
 import axios from "axios";
 
 axios("/list.json")

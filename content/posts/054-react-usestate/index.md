@@ -105,7 +105,7 @@ function Bulbs() {
 
 Let's use array destructuring to extract the state value into a variable `on`:
 
-```jsx{4}
+```jsx{3}
 import React, { useState } from 'react';
 
 function Bulbs() {
@@ -197,7 +197,7 @@ setItems(items => [...items, 'New Item']);
 
 Let's implement the bulb component to switch on/off with a single button:
 
-```jsx{6}
+```jsx{5}
 import React, { useState } from 'react';
 
 function Bulbs() {
@@ -327,7 +327,7 @@ Let's follow examples of correct and incorrect usage of `useState()`.
 
 `useState()` is *correctly* called at the top level of functional component:
 
-```jsx{3}
+```jsx{2}
 function Bulbs() {
   // Good
   const [on, setOn] = useState(false);
@@ -337,7 +337,7 @@ function Bulbs() {
 
 Multiple `useState()` calls are *correctly* invoked in the same order:
 
-```jsx{3-4}
+```jsx{2-3}
 function Bulbs() {
   // Good
   const [on, setOn] = useState(false);
@@ -347,7 +347,7 @@ function Bulbs() {
 
 `useState()` is *correctly* called at the top level of a custom hook:
 
-```jsx{3}
+```jsx{2}
 function toggleHook(initial) {
   // Good
   const [on, setOn] = useState(initial);
@@ -364,7 +364,7 @@ function Bulbs() {
 
 `useState()` is *incorrectly* called within a condition:
 
-```jsx{4}
+```jsx{3}
 function Switch({ isSwitchEnabled }) {
   if (isSwitchEnabled) {
     // Bad
@@ -376,7 +376,7 @@ function Switch({ isSwitchEnabled }) {
 
 `useState()` is *incorrectly* called within a nested function:
 
-```jsx{7}
+```jsx{6}
 function Switch() {
   let on = false;
   let setOn = () => {};

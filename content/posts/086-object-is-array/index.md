@@ -23,7 +23,7 @@ But if you want to know more, let's continue.
 
 Here are a few examples of using `Array.isArray()`:
 
-```javascript{6}
+```javascript{5}
 const array = [1, 2, 3];
 const object = { message: 'Hello!' };
 const string = 'Hello!';
@@ -66,7 +66,7 @@ Now emerges the next way to detect an array: `value instanceof Array` evaluates 
 
 Let's see a few examples:
 
-```javascript{6}
+```javascript{5}
 const array = [1, 2, 3];
 const object = { message: 'Hello!' };
 const string = 'Hello!';
@@ -96,7 +96,7 @@ In the simplest case, when `toString()` method is invoked directly on a plain ob
 
 However, you can use an [indirect call](/gentle-explanation-of-this-in-javascript/#5-indirect-invocation) of `toString()` on different types of values, and the method returns the corresponding string representation of the type:
 
-```javascript{6}
+```javascript{5}
 const array = [1, 2, 3];
 const object = { message: 'Hello' };
 const string = 'Hello!';
@@ -110,7 +110,7 @@ const empty = null;
 
 Now you can spot the idea: `({}).toString.call(value)` equals to `'[object Array]'` if `value` is an array.  
 
-```javascript{3}
+```javascript{2}
 const array = [1, 2, 3];
 
 ({}).toString.call(array) === '[object Array]'; // => true

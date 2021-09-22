@@ -85,7 +85,7 @@ The only problem with applying debouncing to `changeHandler` inside a React comp
 
 The first approach would be to use the `useCallback(callback, dependencies)` that would keep one instance of the debounced function between component re-renderings.  
 
-```jsx{2,19-21,26}
+```jsx{1,18-20,25}
 import { useState, useCallback } from 'react';
 import debounce from 'lodash.debounce';
 
@@ -139,7 +139,7 @@ Let's see how to avoid creating debounced functions on each render in the next s
 
 Fortunately, using `useMemo()` hook as an alternative to `useCallback()` is a more optimal choice:
 
-```jsx{19-21}
+```jsx{18-20}
 import { useState, useMemo } from 'react';
 import debounce from 'lodash.debounce';
 
@@ -187,7 +187,7 @@ If you open the [demo](https://codesandbox.io/s/use-memo-debouncing-jwsog?file=/
 
 If the debounced handler uses props or state, to avoid creating [stale closures](/react-hooks-stale-closures), I recommend setting up correctly the dependencies of `useMemo()`:
 
-```jsx{8,13}
+```jsx{7,12}
 import { useMemo } from 'react';
 import debounce from 'lodash.debounce';
 
@@ -218,7 +218,7 @@ The debounce and throttle implementations usually provide a special method to ca
 
 Here's how you can cancel the debounced function when the component unmounts:
 
-```jsx{13-17}
+```jsx{12-16}
 import { useState, useMemo, useEffect } from 'react';
 import debounce from 'lodash.debounce';
 
@@ -249,7 +249,7 @@ I recommend checking my [How to Cleanup Async Effects in React](/react-cleanup-a
 
 A good way to create debounced and throttled functions, to handle often happening events, is by using the `useMemo()` hook:
 
-```jsx{10-12,14-16}
+```jsx{9-11,13-15}
 import { useMemo } from 'react';
 import debounce from 'lodash.debounce';
 import throttle from 'lodash.throttle';

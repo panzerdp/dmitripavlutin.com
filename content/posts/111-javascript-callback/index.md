@@ -53,7 +53,7 @@ That brings to an easy rule for identifying callbacks. If you've defined a funct
 
 You can always write by yourself higher-order functions that use callbacks. For example, here's an equivalent version the `array.map()` method:
 
-```javascript{5,17}
+```javascript{4,16}
 function map(array, callback) {
   const mappedArray = [];
   for (const item of array) { 
@@ -124,7 +124,7 @@ A lot of methods of native JavaScript types use synchronous callbacks.
 
 The most used ones are the [array methods](/operations-on-arrays-javascript/) like `array.map(callback)`, `array.forEach(callback)`, `array.find(callback)`, `array.filter(callback)`, `array.reduce(callback, init)`:  
 
-```javascript{5,13,20}
+```javascript{4,12,19}
 // Examples of synchronous callbacks on arrays
 const persons = ['Ana', 'Elena'];
 
@@ -155,7 +155,7 @@ countStartingA; // => 1
 
 `string.replace(callback)` method of the string type also accepts a callback that is executed synchronously:
 
-```javascript{6}
+```javascript{5}
 // Examples of synchronous callbacks on strings
 const person = 'Cristina';
 

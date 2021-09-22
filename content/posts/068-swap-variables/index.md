@@ -20,7 +20,7 @@ It's good to know multiple ways to perform swapping of variables. In this post, 
 
 Destructuring assignment (a feature of [ES2015](https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015)) lets you extract items of an array into variables. For example, the following code destructures an array:
 
-```javascript{4}
+```javascript{3}
 let a;
 let b;
 
@@ -34,7 +34,7 @@ b; // => 2
 
 Knowing how to destructure an array, it's easy to use it for swapping variables. Let's swap the variables `a` and `b` using destructuring assignment:
 
-```javascript{4}
+```javascript{3}
 let a = 1;
 let b = 2;
 
@@ -60,7 +60,7 @@ Swapping variables using a temporary variable is classic. As the name suggests, 
 
 Let's swap the values of variables `a` and `b` using a temporary variable `temp`:
 
-```javascript{5-7}
+```javascript{4-6}
 let a = 1;
 let b = 2;
 let temp;
@@ -87,7 +87,7 @@ You can swap variables without the use of additional memory (like a temporary ar
 
 The following example swaps the variables `a` and `b` using the addition `+` and difference `-` arithmetic operators:
 
-```javascript{4-6}
+```javascript{3-5}
 let a = 1;
 let b = 2;
 
@@ -144,7 +144,7 @@ Bitwise XOR has 2 interesting properties:
 
 These XOR properties can be used to swap variables. Let's see how to swap `a` and `b` variables:
 
-```javascript{4-6}
+```javascript{3-5}
 let a = 1;
 let b = 2;
 

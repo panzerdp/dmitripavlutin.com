@@ -16,7 +16,7 @@ In this sense, React offers a lot of design techniques like [composition](https:
 
 Render props is efficient to design components in a [loosely coupled](https://en.wikipedia.org/wiki/Loose_coupling) manner. Its essence consists in using a special prop (usually named `render`) that delegates the rendering logic to the parent component:
 
-```jsx{6}
+```jsx{5}
 import Mouse from 'Mouse';
 
 function ShowMousePosition() {
@@ -114,7 +114,7 @@ The new render methods `renderCoors()` and `renderCity()` are defined using a [f
 
 Having `this` as the component instance is useful if you want to access the props of the main component inside the render methods:
 
-```jsx{11}
+```jsx{10}
 class DetectCityMessage extends React.Component {
   render() {
     return <AsyncCoords render={this.renderCoords} />;
@@ -280,7 +280,7 @@ function MultipleFetchResult() {
 
 If you try to use the class component or function composition approach, it's going to be troublesome. The callback hell transforms into arguments binding hell:
 
-```jsx{9,17}
+```jsx{8,16}
 class MultipleFetchResult extends React.Component {
   render() {
     return <AsyncFetch1 render={this.renderResult1} />;
@@ -321,7 +321,7 @@ You have to manually bind the result of render prop callbacks until they finally
 
 If you don't like manual binding, `react-adopt` could work better. Let's see a refactored version using this utility:
 
-```jsx{12}
+```jsx{11}
 import { adopt } from 'react-adopt';
 
 const Composed = adopt({
