@@ -12,7 +12,8 @@ type: post
 
 When I was making my first steps in using TypeScript, I was surprised that the following code snippet has a type error:
 
-```typescript{9}
+```ts twoslash
+// @errors: 7053
 const dictionary = {
   'one': 1,
   'two': 2,
@@ -21,11 +22,8 @@ const dictionary = {
 
 for (const name in dictionary) {
   const number = dictionary[name];
-  // No index signature with a parameter of type 'string' was found
 }
 ```
-
-[Try the demo.](https://www.typescriptlang.org/play?#code/MYewdgzgLgBAJgS2FB4CGAnAnjAvDAbwFgAoGGAcnAFMKAuGARgBpTyKoB3EemAJlZlKUABYZqtBgGZSAXwDcpUgDMQGGAApQkWGDQBbajARh4SFOmwBKQmxjboMMAFd9AI2rr8iZKj3YAbT1DAF1FIQB6CJgAORBjMDhqAA8YCAQAcz0oZ3EYTgRRGDQYAAdMA2ooTxgQZRgoLFKjCmgMEwyKfLQIGFVnRLkgA)
 
 What I want is to loop though all `dictionary` properties and get their values. TypeScript, however, triggers a type error on the expression `dictionary[name]`, requiring an index signature on the type of `dictionary`.  
 
@@ -47,7 +45,7 @@ How to make TypeScript to allow us access properties of string type?
 
 That's where the index signature can help. Let's annotate `dictionary` variable with an index signature:
 
-```typescript
+```ts twoslash
 interface NumberByName {
   [name: string]: number
 }
@@ -63,32 +61,64 @@ for (const name in dictionary) {
 }
 ```
 
-[Try the demo.](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgHIFcC2AjaAhAT1TkxQG8BYAKGWQG0QSIAuZAZzClAHMBdVkFlxRqAX2rUEAexAdkAE2AIwwGXCgFWGHPiJNkAXmSUayAOQyIZ1gEYANNVpmwAdynXkAJgennACygIK1YAZjEAbgkqGCkoZAAKaVkwZEZSZFAFJRU1DQBKY0dkJLlBHTijRWVVRg0GJl5w5AB6ZuQAcSkpeQBCMSA)
-
-Having the `person` variable of type `{ [key: string]: string }` (the index signature), the TypeScript doesn't complain anymore about about `person[prop]`.  
+Having the `dictionary` annotated with an index signature where the key is `string` and value is a `number` type, the TypeScript doesn't complain anymore about about `dictionary[name]`.  
 
 `{ [name: string]: number }` is an index signature, describing a general object with properties having `string` type as a key and `number` type as value.  
 
+If you access a value using a key type that's not of type in the index signature, TypeScript of course throws an error:
+
 ## 2. Index signature syntax
 
-The index signature consists of 2 parts: 
+The syntax of an index signature is pretty simple and looks similar to the syntax of a property, but with one difference. Instead of the property name, you simply write the type of the key
+in inside the square brakets: `{ [key: KeyType]: ValueType }`.  
 
-```typescript
-{
-  [index: IndexType]: ValueType
+Here are a few examples of index signatures.
+
+The `string` type is the key and value:
+
+```ts twoslash
+interface StringByString {
+  [key: string]: string;
 }
+
+const heroesInBooks: StringByString = {
+  'Gunslinger': 'The Dark Tower',
+  'Jack Torrance': 'The Shining'
+};
 ```
 
-A pair of square brakets `[index: IndexType]` containing the index name `index` and the index type `IndexType`, followed by a colon and a `ValueType`.  
+The `string` type is the key, the value can be a `string`, `number`, or `boolean`:
 
-The `IndexType` can be either a `string` or `number`, while `ValueType` can be any type: string, number, object, etc.  
+```ts twoslash
+interface Options {
+  [key: string]: string | number | boolean;
+  timeout: number;
+}
+
+const options: Options = {
+  timeout: 1000,
+  timeoutMessage: 'The request timed out!',
+  isFileUpload: false
+};
+```
+
+`Options` interface also has a field `timeout`, which works fine near the index signature.  
+
+The key of index signature can only be a `string`, `number` or `symbol`. Other types are not allowed:
+
+```ts twoslash
+// @errors: 1268
+interface OopsDictionary {
+  [key: boolean]: string;
+}
+```
 
 ## 3. Conclusion
 
 If you don't know the structure of the object you're going to work with, but you know the possible key and value types, then the index signature is
 what you need.  
 
-The index signature consists of a square braket, where you put the index name and its type, followed by a colon and the value type: `{ [indexName: KeyType]: ValueType }`.  
+The index signature consists the index name and its type in a square braket, followed by a colon and the value type: `{ [indexName: KeyType]: ValueType }`.  
 
 Note that they `KeyType` can be either a string or a number, while `ValueType` can by anything.  
 
