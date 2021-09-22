@@ -25,7 +25,7 @@ for (const name in dictionary) {
 }
 ```
 
-What I want is to loop though all `dictionary` properties and get their values. TypeScript, however, triggers a type error on the expression `dictionary[name]`, requiring an index signature on the type of `dictionary`.  
+What I want is to loop through all `dictionary` properties and get their values. TypeScript, however, triggers a type error on the expression `dictionary[name]`, requiring an index signature on the type of `dictionary`.  
 
 That's when I met index signatures. 
 
@@ -39,11 +39,11 @@ First, let's see what type is the `dictionary` variable? TypeScript infer `dicti
 
 Second, let's see what `name` variable is? It's a `string` type.  
 
-Here's the problem: `dictionary[name]` tries to read a property which may not exist on `dictionary`, because `name` can be any `string` value. That's what TypeScript is complaining about.  
+Here's the problem: `dictionary[name]` tries to read a property that may not exist on `dictionary`, because `name` can be any `string` value. That's what TypeScript is complaining about.  
 
-How to make TypeScript to allow us access properties of string type?  
+How to make TypeScript allow us access properties of string type?  
 
-That's where the index signature can help. Let's annotate `dictionary` variable with an index signature:
+That's where the index signature can help. Let's annotate the `dictionary` variable with an index signature:
 
 ```ts twoslash
 interface NumberByName {
@@ -61,14 +61,14 @@ for (const name in dictionary) {
 }
 ```
 
-Having the `dictionary` annotated with an index signature where the key is `string` and value is a `number` type, the TypeScript doesn't complain anymore about about `dictionary[name]`.  
+Having the `dictionary` annotated with an index signature where the key is `string` and value is a `number` type, the TypeScript doesn't complain anymore about `dictionary[name]`.  
 
 `{ [name: string]: number }` is an index signature, describing a general object with properties having `string` type as a key and `number` type as value.  
 
 ## 2. Index signature syntax
 
 The syntax of an index signature is pretty simple and looks similar to the syntax of a property, but with one difference. Instead of the property name, you simply write the type of the key
-in inside the square brakets: `{ [key: KeyType]: ValueType }`.  
+inside the square brackets: `{ [key: KeyType]: ValueType }`.  
 
 Here are a few examples of index signatures.
 
@@ -102,7 +102,7 @@ const options: Options = {
 
 `Options` interface also has a field `timeout`, which works fine near the index signature.  
 
-The key of index signature can only be a `string`, `number` or `symbol`. Other types are not allowed:
+The key of the index signature can only be a `string`, `number`, or `symbol`. Other types are not allowed:
 
 ```ts twoslash
 // @errors: 1268
@@ -116,8 +116,8 @@ interface OopsDictionary {
 If you don't know the structure of the object you're going to work with, but you know the possible key and value types, then the index signature is
 what you need.  
 
-The index signature consists the index name and its type in a square braket, followed by a colon and the value type: `{ [indexName: KeyType]: ValueType }`.  
+The index signature consists of the index name and its type in square brackets, followed by a colon and the value type: `{ [indexName: KeyType]: ValueType }`.  
 
-Note that they `KeyType` can be either a string or a number, while `ValueType` can by anything.  
+Note that `KeyType` can be either a `string`, `number`, or `symbol`, while `ValueType` can be anything.  
 
 *Challenge: Write a generic type `Indexed<K, V>` that creates an index signature where `K` is the key type and `V` is the value type. Share your solution in a comment below!* 
