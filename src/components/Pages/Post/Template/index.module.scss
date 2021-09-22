@@ -201,7 +201,11 @@ article h1 {
 
    pre.shiki div.highlight {
      opacity: 1;
-     background-color: rgba(gray, 15%);
+     background-color: rgba(#D57E7E, 0.1);
+     padding-right: 0.75rem;
+     padding-left: 0.75rem;
+     margin-right: -0.75rem;
+     margin-left: -0.75rem;
   }
 
    pre.shiki div.line {
