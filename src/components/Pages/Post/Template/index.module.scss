@@ -166,7 +166,7 @@ article h1 {
 :global {
   pre {
     /* In theory shiki will overwrite these, but this is to make sure there are defaults regardless */
-    background-color: white;
+    background-color: rgba(#f5f2f0, 0.5) !important;
     color: black;
 
     /* Give it some space to breathe */
@@ -174,8 +174,7 @@ article h1 {
     border-radius: 3px;
 
     /* All code samples get a grey border, twoslash ones get a different color */
-    border-left: 1px solid #999;
-    border-bottom: 1px solid #999;
+    border: none !important;
   
     /* Important to allow the code to move horizontally; */
     overflow-x: auto;
@@ -184,6 +183,7 @@ article h1 {
 
    pre.shiki {
       overflow-x: auto;
+      overflow-y: visible;
   }
 
    pre.shiki:hover .dim {
@@ -191,7 +191,7 @@ article h1 {
   }
 
    pre.shiki div.dim {
-     opacity: 0.7;
+     opacity: 0.5;
   }
 
    pre.shiki div.dim, pre.shiki div.highlight {
@@ -201,7 +201,7 @@ article h1 {
 
    pre.shiki div.highlight {
      opacity: 1;
-     background-color: rgba(white, 15%);
+     background-color: rgba(gray, 15%);
   }
 
    pre.shiki div.line {
@@ -241,8 +241,9 @@ article h1 {
   }
   
   pre .code-container {
-     overflow: auto;
+    //  overflow: auto;
   }
+
   /* The try button */
    pre .code-container > a {
      position: absolute;
@@ -272,8 +273,8 @@ article h1 {
   }
   
    pre code {
-     font-size: 15px;
-     font-family: "JetBrains Mono", Menlo, Monaco, Consolas, Courier New, monospace;;
+    font-size: 1rem !important;
+    font-family: $mono-font-family !important;
      white-space: pre;
      -webkit-overflow-scrolling: touch;
   }
@@ -466,15 +467,17 @@ article h1 {
   }
 }
 
-p > code, em > code {
-  font-size: 1rem;
-  background-color: #f5f2f0;
-  color: black;
-  font-family: $mono-font-family;
-  line-height: inherit;
-  border-radius: .3em;
-  padding: .1em;
-  white-space: normal;
+p, em, li, a, strong {
+  > code {
+    font-size: 1rem;
+    background-color: #f5f2f0;
+    color: black;
+    font-family: $mono-font-family;
+    line-height: inherit;
+    border-radius: .3em;
+    padding: .1em;
+    white-space: normal;
+  }
 }
 
 blockquote {

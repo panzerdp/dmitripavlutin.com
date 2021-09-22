@@ -40,7 +40,7 @@ module.exports = {
           {
             resolve: 'gatsby-remark-shiki-twoslash',
             options: {
-              theme: 'github-dark',
+              theme: 'github-light',
             }
           },
           'gatsby-remark-copy-linked-files',
