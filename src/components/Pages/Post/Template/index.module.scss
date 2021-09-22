@@ -166,18 +166,16 @@ article h1 {
 :global {
   pre {
     /* In theory shiki will overwrite these, but this is to make sure there are defaults regardless */
-     background-color: white;
-     color: black;
-  
+    background-color: white;
+    color: black;
+
     /* Give it some space to breathe */
-     padding: 12px;
-     border-radius: 3px;
-  
+    padding: 0.75rem;
+    border-radius: 3px;
+
     /* All code samples get a grey border, twoslash ones get a different color */
-     border-left: 1px solid #999;
-     border-bottom: 1px solid #999;
-  
-     margin-bottom: 3rem;
+    border-left: 1px solid #999;
+    border-bottom: 1px solid #999;
   
     /* Important to allow the code to move horizontally; */
     overflow-x: auto;
@@ -193,7 +191,7 @@ article h1 {
   }
 
    pre.shiki div.dim {
-     opacity: 0.5;
+     opacity: 0.7;
   }
 
    pre.shiki div.dim, pre.shiki div.highlight {
@@ -203,7 +201,7 @@ article h1 {
 
    pre.shiki div.highlight {
      opacity: 1;
-     background-color: #f1f8ff;
+     background-color: rgba(white, 15%);
   }
 
    pre.shiki div.line {
@@ -211,7 +209,7 @@ article h1 {
   }
   
   /** Don't show the language identifiers */
-  pre.shiki .language-id{
+  pre.shiki .language-id {
       display: none;
   }
   
