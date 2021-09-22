@@ -75,6 +75,7 @@ You need to perform type checking before using a variable of type `unknown`. In 
 function invokeAnything(callback: unknown) {
   if (typeof callback === 'function') {
     callback();
+//    ^?
   }
 }
 
