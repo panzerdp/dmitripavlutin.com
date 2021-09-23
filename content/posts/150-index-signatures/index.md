@@ -36,7 +36,10 @@ That's when I met index signatures.
 
 Let's find what are TypeScript index signatures and when they're needed.  
 
-## 1. Index signature
+```toc
+```
+
+## 1. Why index signature
 
 Let's continue exploring the type error from the previous code sample. Why TypeScript doesn't like `dictionary[name]`?  
 
@@ -51,7 +54,7 @@ dictionary;
 
 Second, let's see what `name` variable is? It's a `string` type.  
 
-Here's the problem: since dictionary has a predefined set of properies, `dictionary[name]` tries to read a property that may not exist on `dictionary`, because `name` can be any `string` value. That's what TypeScript is complaining about.  
+Here's the problem: since the dictionary has a predefined set of properties, `dictionary[name]` tries to read a property that may not exist on `dictionary`, because `name` can be any `string` value. That's what TypeScript is complaining about.  
 
 How to access properties using a key of `string` type?  
 
@@ -90,7 +93,7 @@ type ValueType = (typeof dictionary)[string];
 //      ^?
 ```
 
-The idea of the index signatures is to map the key type to value type. 
+The idea of the index signatures is to map key type to value type. That allows you to type objects of unknown structure when the only thing you know about the object is the key type and value type.  
 
 ## 2. Index signature syntax
 
@@ -138,7 +141,92 @@ interface OopsDictionary {
 }
 ```
 
-## 3. Conclusion
+## 3. Index signature caveats
+
+The index signatures in TypeScript have a few caveats you should be aware of.  
+
+### 3.1 Non-existing properties
+
+What would happen if you try to access a non-existing property of an object whose index signature is `{ [key: string]: string }`?  
+
+As expected, TypeScript would infer the type of the value as `string`, however checking the runtime value it would be `undefined`:
+
+```ts twoslash
+interface StringByString {
+  [key: string]: string;
+}
+
+const object: StringByString = {};
+
+const value = object['nonExistingProp'];
+value; // => undefined
+// ^?
+```
+
+`value` variable is a `string` type according to TypeScript, however, its runtime value is `undefined`.  
+
+The index signature simply maps a key type to a value type, and that's all. If you don't make that mapping correct, the value type can deviate from the actual runtime data type.  
+
+To fix the example above, you can simply mark the indexed value as `string` or `undefined`. Doing so, TypeScript is going to be aware that the properties you access might now exist:
+
+```ts twoslash{2}
+interface StringByString {
+  [key: string]: string | undefined;
+}
+
+const object: StringByString = {};
+
+const value = object['nonExistingProp'];
+value; // => undefined
+// ^?
+```
+
+### 3.2 String and number key
+
+Let's say that you have a dictionary of number names:
+
+```twoslash include loose
+interface NumbersNames {
+  [key: string]: string
+}
+
+const names: NumbersNames = {
+  '1': 'one',
+  '2': 'two',
+  '3': 'three',
+  // etc...
+};
+```
+
+```ts twoslash
+// @include: loose
+```
+
+Accessing a value by a string key works as expected:
+
+```ts twoslash
+// @include: loose
+// ---cut---
+const value1 = names['1'];
+//     ^?
+```
+
+Would it be an error if you try to access a value by a number `1`?
+
+```ts twoslash
+// @include: loose
+// ---cut---
+const value2 = names[1];
+//     ^?
+```
+
+Nope, all good!
+
+Because JavaScript implicitly coerces numbers to strings when used as keys in property accessors (`names[1]` is same as `names['1']`). TypeScript performs this coercion too.  
+
+You can think that `[key: string]` is the same as `[key: string | number]`.  
+
+## 4. Conclusion
 
 If you don't know the structure of the object you're going to work with, but you know the possible key and value types, then the index signature is
 what you need.  
