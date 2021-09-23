@@ -10,9 +10,9 @@ recommended: ['typescript-unknown-vs-any', 'how-to-iterate-easily-over-object-pr
 type: post
 ---
 
-When making my first steps in TypeScript, I was surprised that the code triggers a type error:
+When making my first steps in TypeScript, I was surprised that the following code triggers a type error:
 
-```ts twoslash
+```twoslash include with-error
 // @errors: 7053
 const dictionary = {
   'one': 1,
@@ -23,17 +23,41 @@ const dictionary = {
 for (const name in dictionary) {
   const myNumber = dictionary[name];
 }
+// - 1
 ```
 
-What I want is to loop through all `dictionary` properties and get their values. TypeScript, however, triggers a type error on the expression `dictionary[name]`, requiring an index signature on the type of `dictionary`.  
+```ts twoslash
+// @include: with-error-1
+```
+
+What I want is to loop through the `dictionary` properties and get their values. TypeScript, however, triggers a type error on the expression `dictionary[name]`, requiring an index signature on the type of `dictionary`.  
 
 That's when I met index signatures. 
 
-Let's find what TypeScript index signatures are and when they're needed.  
+Let's find what are TypeScript index signatures and when they're needed.  
 
 ## 1. Index signature
 
-```twoslash include main
+Let's continue exploring the type error from the previous code sample. Why TypeScript doesn't like `dictionary[name]`?  
+
+First, let's see what type is the `dictionary` variable &mdash; an object type with fixed property names:
+
+```ts twoslash
+// @include: with-error
+// ---cut---
+dictionary;
+// ^?
+```
+
+Second, let's see what `name` variable is? It's a `string` type.  
+
+Here's the problem: since dictionary has a predefined set of properies, `dictionary[name]` tries to read a property that may not exist on `dictionary`, because `name` can be any `string` value. That's what TypeScript is complaining about.  
+
+How to access properties using a key of `string` type?  
+
+That's where the index signature can help. Let's annotate the `dictionary` variable with an index signature:
+
+```twoslash include fixed
 interface NumberByName {
   [name: string]: number
 }
@@ -51,31 +75,8 @@ for (const name in dictionary) {
 // - 1
 ```
 
-Let's continue exploring the type error from the previous code sample. Why TypeScript doesn't like `dictionary[name]`?  
-
-First, let's see what type is the `dictionary` variable? It's a simple object type with fixed property names:
-
-```ts twoslash
-const dictionary = {
-  'one': 1,
-  'two': 2,
-  'three': 3
-};
-
-dictionary;
-// ^?
-```
-
-Second, let's see what `name` variable is? It's a `string` type.  
-
-Here's the problem: `dictionary[name]` tries to read a property that may not exist on `dictionary`, because `name` can be any `string` value. That's what TypeScript is complaining about.  
-
-How to make TypeScript access properties of string type?  
-
-That's where the index signature can help. Let's annotate the `dictionary` variable with an index signature:
-
-```ts twoslash
-// @include: main-1
+```ts twoslash{2,5}
+// @include: fixed-1
 ```
 
 Having the `dictionary` annotated with an index signature where the key is `string` and value is a `number` type, the TypeScript doesn't complain about `dictionary[name]`.  
@@ -83,11 +84,13 @@ Having the `dictionary` annotated with an index signature where the key is `stri
 TypeScript understands that if you use a property accessor with a `string` type, the resulted value is going to be a `number`:
 
 ```ts twoslash
-// @include: main-1
+// @include: fixed-1
 // ---cut---
 type ValueType = (typeof dictionary)[string];
 //      ^?
 ```
+
+The idea of the index signatures is to map the key type to value type. 
 
 ## 2. Index signature syntax
 
