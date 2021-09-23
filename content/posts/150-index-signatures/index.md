@@ -93,7 +93,7 @@ type ValueType = (typeof dictionary)[string];
 //      ^?
 ```
 
-The idea of the index signatures is to map key type to value type. That allows you to type objects of unknown structure when the only thing you know about the object is the key type and value type.  
+The idea of the index signatures is to map key type to value type. That allows you to type objects of unknown structure when the only thing you know is the key and value types.  
 
 ## 2. Index signature syntax
 
@@ -149,7 +149,7 @@ The index signatures in TypeScript have a few caveats you should be aware of.
 
 What would happen if you try to access a non-existing property of an object whose index signature is `{ [key: string]: string }`?  
 
-As expected, TypeScript would infer the type of the value as `string`, however checking the runtime value it would be `undefined`:
+As expected, TypeScript infers the type of the value to `string`. But if you check the runetime value &mdash; it's `undefined`:
 
 ```ts twoslash
 interface StringByString {
@@ -167,7 +167,7 @@ value; // => undefined
 
 The index signature simply maps a key type to a value type, and that's all. If you don't make that mapping correct, the value type can deviate from the actual runtime data type.  
 
-To fix the example above, you can simply mark the indexed value as `string` or `undefined`. Doing so, TypeScript is going to be aware that the properties you access might now exist:
+To make typing more accurate, mark the indexed value as `string` or `undefined`. Doing so, TypeScript is going to be aware that the properties you access might not exist:
 
 ```ts twoslash{2}
 interface StringByString {
