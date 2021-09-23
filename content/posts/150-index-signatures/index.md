@@ -222,7 +222,7 @@ const value2 = names[1];
 
 Nope, all good!
 
-Because JavaScript implicitly coerces numbers to strings when used as keys in property accessors (`names[1]` is same as `names['1']`). TypeScript performs this coercion too.  
+JavaScript implicitly coerces numbers to strings when used as keys in property accessors (`names[1]` is same as `names['1']`). TypeScript performs this coercion too.  
 
 You can think that `[key: string]` is the same as `[key: string | number]`.  
 
