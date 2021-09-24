@@ -182,8 +182,9 @@ article h1 {
   }
 
    pre.shiki {
-      overflow-x: auto;
-      overflow-y: visible;
+    overflow-x: auto;
+    overflow-y: visible;
+    overflow-wrap: normal;
   }
 
    pre.shiki:hover .dim {
