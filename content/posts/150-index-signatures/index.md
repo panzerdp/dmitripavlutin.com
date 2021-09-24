@@ -44,7 +44,7 @@ totalSalary(salary1); // => 120_000
 totalSalary(salary2); // => 110_000
 ```
 
-How would you annotate the `salaryObject` parameter of the `totalSalary()` function to accept objects with string keys and number values.  
+How would you annotate the `salaryObject` parameter of the `totalSalary()` function to accept objects with string keys and number values?  
 
 The answer is to use an index signature!
 
@@ -57,7 +57,7 @@ Let's find what are TypeScript index signatures and when they're needed.
 
 The idea of the index signatures is to type objects of unknown structure when the only thing you know is the key and value types.  
 
-It fits exactly the case of the salary parameter, since the function should accept salary objects of different structure, with the only requirement
+It fits exactly the case of the salary parameter since the function should accept salary objects of different structures, with the only requirement
 is property values to be numbers.  
 
 Let's annotate the `salaryObject` parameter with an index signature:
@@ -77,7 +77,7 @@ totalSalary(salary1); // => 120_000
 totalSalary(salary2); // => 110_000
 ```
 
-`{ [key: string]: number }` is the index signature, which tells TypeScript that `salaryObject` have to be an object with `string` type as key and `number` type as value.  
+`{ [key: string]: number }` is the index signature, which tells TypeScript that `salaryObject` has to be an object with `string` type as key and `number` type as value.  
 
 ## 2. Index signature syntax
 
@@ -133,7 +133,7 @@ The index signatures in TypeScript have a few caveats you should be aware of.
 
 What would happen if you try to access a non-existing property of an object whose index signature is `{ [key: string]: string }`?  
 
-As expected, TypeScript infers the type of the value to `string`. But if you check the runetime value &mdash; it's `undefined`:
+As expected, TypeScript infers the type of the value to `string`. But if you check the runtime value &mdash; it's `undefined`:
 
 ```ts twoslash
 interface StringByString {
@@ -206,7 +206,7 @@ const value2 = names[1];
 
 Nope, all good!
 
-JavaScript implicitly coerces numbers to strings when used as keys in property accessors (`names[1]` is same as `names['1']`). TypeScript performs this coercion too.  
+JavaScript implicitly coerces numbers to strings when used as keys in property accessors (`names[1]` is the same as `names['1']`). TypeScript performs this coercion too.  
 
 You can think that `[key: string]` is the same as `[key: string | number]`.  
 
@@ -219,7 +219,7 @@ const object1: Record<string, string> = { prop: 'Value' }; // OK
 const object2: { [key: string]: string } = { prop: 'Value' }; // OK
 ```
 
-The big question is... when to use a `Record<Keys, Type>` and when an index signature? At first sight they look quite similar!
+The big question is... when to use a `Record<Keys, Type>` and when an index signature? At first sight, they look quite similar!
 
 As you saw earlier, the index signature accepts only `string`, `number` or `symbol` as key type. If you try to use, for example, a union of string literal types as keys in an index signature, it would be an error:
 
@@ -230,9 +230,9 @@ interface FacebookSalary {
 }
 ```
 
-*The index signature is meant to be generic in regards of keys.*
+*The index signature is meant to be generic in regards to keys.*
 
-But you can use an union of string literals to describe the keys in a `Record<Keys, Type>`:
+But you can use a union of string literals to describe the keys in a `Record<Keys, Type>`:
 
 ```ts twoslash
 type FacebookSalary = Record<'yearlySalary'|'yearlyBonus', number>
@@ -243,14 +243,13 @@ const salary1: FacebookSalary = {
 }; // OK
 ```
 
-*The `Record<Keys, Type>` is meant to be *specific* in regards of keys.*
+*The `Record<Keys, Type>` is meant to be *specific* in regards to keys.*
 
-I recommend to use the index signature to annotate generic objects, e.g. keys are `string` type. But use `Record<Keys, Type>` to annotate specific objects when you know the keys in advance, e.g. an union of string literals `'prop1' | 'prop2'`  is used for keys.  
+I recommend using the index signature to annotate generic objects, e.g. keys are `string` type. But use `Record<Keys, Type>` to annotate specific objects when you know the keys in advance, e.g. a union of string literals `'prop1' | 'prop2'`  is used for keys.  
 
 ## 5. Conclusion
 
-If you don't know the structure of the object you're going to work with, but you know the possible key and value types, then the index signature is
-what you need.  
+If you don't know the object structure you're going to work with, but you know the possible key and value types, then the index signature is what you need.  
 
 The index signature consists of the index name and its type in square brackets, followed by a colon and the value type: `{ [indexName: KeyType]: ValueType }`. `KeyType` can be a `string`, `number`, or `symbol`, while `ValueType` can be any type.  
 
