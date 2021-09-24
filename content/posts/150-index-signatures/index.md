@@ -225,7 +225,7 @@ As you saw earlier, the index signature accepts only `string`, `number` or `symb
 
 ```ts twoslash
 // @errors: 1337
-interface FacebookSalary {
+interface Salary {
   [key: 'yearlySalary' | 'yearlyBonus']: number
 }
 ```
@@ -235,9 +235,9 @@ interface FacebookSalary {
 But you can use a union of string literals to describe the keys in a `Record<Keys, Type>`:
 
 ```ts twoslash
-type FacebookSalary = Record<'yearlySalary'|'yearlyBonus', number>
+type Salary = Record<'yearlySalary'|'yearlyBonus', number>
 
-const salary1: FacebookSalary = { 
+const salary1: Salary = { 
   'yearlySalary': 120_000,
   'yearlyBonus': 10_000
 }; // OK
