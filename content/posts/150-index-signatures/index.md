@@ -10,29 +10,43 @@ recommended: ['typescript-unknown-vs-any', 'how-to-iterate-easily-over-object-pr
 type: post
 ---
 
-When making my first steps in TypeScript, I was surprised that the following code triggers a type error:
+You have 2 objects that describe the salary of 2 software developers:
 
-```twoslash include with-error
+```twoslash include salary
 // @errors: 7053
-const dictionary = {
-  'one': 1,
-  'two': 2,
-  'three': 3
+const salary1 = {
+  baseSalary: 100_000,
+  yearlyBonus: 20_000
 };
 
-for (const name in dictionary) {
-  const myNumber = dictionary[name];
-}
+const salary2 = {
+  contractSalary: 110_000
+};
 // - 1
 ```
 
 ```ts twoslash
-// @include: with-error-1
+// @include: salary-1
 ```
 
-What I want is to loop through the `dictionary` properties and get their values. TypeScript, however, triggers a type error on the expression `dictionary[name]`, requiring an index signature on the type of `dictionary`.  
+You want to implement a function that returns the total salary using the salary object:
 
-That's when I met index signatures. 
+```ts{0}
+function totalSalary(salaryObject: ???) {
+  let total = 0;
+  for (const name in salaryObject) {
+    total += salaryObject[name];
+  }
+  return total;
+}
+
+totalSalary(salary1); // => 120_000
+totalSalary(salary2); // => 110_000
+```
+
+How would you annotate the `salaryObject` parameter of the `totalSalary()` function to accept objects with string keys and number values.  
+
+The answer is to use an index signature!
 
 Let's find what are TypeScript index signatures and when they're needed.  
 
@@ -41,59 +55,29 @@ Let's find what are TypeScript index signatures and when they're needed.
 
 ## 1. Why index signature
 
-Let's continue exploring the type error from the previous code sample. Why TypeScript doesn't like `dictionary[name]`?  
+The idea of the index signatures is to type objects of unknown structure when the only thing you know is the key and value types.  
 
-First, let's see what type is the `dictionary` variable &mdash; an object type with fixed property names:
+It fits exactly the case of the salary parameter, since the function should accept salary objects of different structure, with the only requirement
+is property values to be numbers.  
 
-```ts twoslash
-// @include: with-error
+Let's annotate the `salaryObject` parameter with an index signature:
+
+```ts twoslash{1}
+// @include: salary-1
 // ---cut---
-dictionary;
-// ^?
-```
-
-Second, let's see what `name` variable is? It's a `string` type.  
-
-Here's the problem: since the dictionary has a predefined set of properties, `dictionary[name]` tries to read a property that may not exist on `dictionary`, because `name` can be any `string` value. That's what TypeScript is complaining about.  
-
-How to access properties using a key of `string` type?  
-
-That's where the index signature can help. Let's annotate the `dictionary` variable with an index signature:
-
-```twoslash include fixed
-interface NumberByName {
-  [name: string]: number
+function totalSalary(salaryObject: { [key: string]: number }) {
+  let total = 0;
+  for (const name in salaryObject) {
+    total += salaryObject[name];
+  }
+  return total;
 }
 
-const dictionary: NumberByName = {
-  'one': 1,
-  'two': 2,
-  'three': 3
-};
-
-for (const name in dictionary) {
-  const myNumber = dictionary[name]; // Good!
-//       ^?                     
-}
-// - 1
+totalSalary(salary1); // => 120_000
+totalSalary(salary2); // => 110_000
 ```
 
-```ts twoslash{2,5}
-// @include: fixed-1
-```
-
-Having the `dictionary` annotated with an index signature where the key is `string` and value is a `number` type, the TypeScript doesn't complain about `dictionary[name]`.  
-
-TypeScript understands that if you use a property accessor with a `string` type, the resulted value is going to be a `number`:
-
-```ts twoslash
-// @include: fixed-1
-// ---cut---
-type ValueType = (typeof dictionary)[string];
-//      ^?
-```
-
-The idea of the index signatures is to map key type to value type. That allows you to type objects of unknown structure when the only thing you know is the key and value types.  
+`{ [key: string]: number }` is the index signature, which tells TypeScript that `salaryObject` have to be an object with `string` type as key and `number` type as value.  
 
 ## 2. Index signature syntax
 
@@ -226,7 +210,44 @@ JavaScript implicitly coerces numbers to strings when used as keys in property a
 
 You can think that `[key: string]` is the same as `[key: string | number]`.  
 
-## 4. Conclusion
+## 4. Index signature vs Record<Keys, Type>
+
+TypeScript has a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeystype) `Record<Keys, Type>` to annotate records, similar to the index signature.  
+
+```ts twoslash
+const object1: Record<string, string> = { prop: 'Value' }; // OK
+const object2: { [key: string]: string } = { prop: 'Value' }; // OK
+```
+
+The big question is... when to use a `Record<Keys, Type>` and when an index signature? At first sight they look quite similar!
+
+As you saw earlier, the index signature accepts only `string`, `number` or `symbol` as key type. If you try to use, for example, a union of string literal types as keys in an index signature, it would be an error:
+
+```ts twoslash
+// @errors: 1337
+interface FacebookSalary {
+  [key: 'yearlySalary' | 'yearlyBonus']: number
+}
+```
+
+*The index signature is meant to be generic in regards of keys.*
+
+But you can use an union of string literals to describe the keys in a `Record<Keys, Type>`:
+
+```ts twoslash
+type FacebookSalary = Record<'yearlySalary'|'yearlyBonus', number>
+
+const salary1: FacebookSalary = { 
+  'yearlySalary': 120_000,
+  'yearlyBonus': 10_000
+}; // OK
+```
+
+*The `Record<Keys, Type>` is meant to be *specific* in regards of keys.*
+
+I recommend to use the index signature to annotate generic objects, e.g. keys are `string` type. But use `Record<Keys, Type>` to annotate specific objects when you know the keys in advance, e.g. an union of string literals `'prop1' | 'prop2'`  is used for keys.  
+
+## 5. Conclusion
 
 If you don't know the structure of the object you're going to work with, but you know the possible key and value types, then the index signature is
 what you need.  
