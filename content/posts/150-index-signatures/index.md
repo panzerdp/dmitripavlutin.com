@@ -55,7 +55,7 @@ Let's find what are TypeScript index signatures and when they're needed.
 
 The idea of the index signatures is to type objects of unknown structure when you only know the key and value types.  
 
-An index signagure fits exactly the case of the salary parameter: the function should accept salary objects of different structures &mdash; only that values to be numbers.  
+An index signature fits the case of the salary parameter: the function should accept salary objects of different structures &mdash; only that values to be numbers.  
 
 Let's annotate the `salaryObject` parameter with an index signature:
 
