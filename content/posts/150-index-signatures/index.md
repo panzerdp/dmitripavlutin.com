@@ -12,8 +12,7 @@ type: post
 
 You have 2 objects that describe the salary of 2 software developers:
 
-```twoslash include salary
-// @errors: 7053
+```twoslash include salary-objects
 const salary1 = {
   baseSalary: 100_000,
   yearlyBonus: 20_000
@@ -22,14 +21,13 @@ const salary1 = {
 const salary2 = {
   contractSalary: 110_000
 };
-// - 1
 ```
 
 ```ts twoslash
-// @include: salary-1
+// @include: salary-objects
 ```
 
-You want to implement a function that returns the total salary using the salary object:
+You want to implement a function that returns the total remuneration based on the salary object:
 
 ```ts{0}
 function totalSalary(salaryObject: ???) {
@@ -55,16 +53,13 @@ Let's find what are TypeScript index signatures and when they're needed.
 
 ## 1. Why index signature
 
-The idea of the index signatures is to type objects of unknown structure when the only thing you know is the key and value types.  
+The idea of the index signatures is to type objects of unknown structure when you only know the key and value types.  
 
-It fits exactly the case of the salary parameter since the function should accept salary objects of different structures, with the only requirement
-is property values to be numbers.  
+An index signagure fits exactly the case of the salary parameter: the function should accept salary objects of different structures &mdash; only that values to be numbers.  
 
 Let's annotate the `salaryObject` parameter with an index signature:
 
-```ts twoslash{1}
-// @include: salary-1
-// ---cut---
+```twoslash include total-salary
 function totalSalary(salaryObject: { [key: string]: number }) {
   let total = 0;
   for (const name in salaryObject) {
@@ -72,12 +67,35 @@ function totalSalary(salaryObject: { [key: string]: number }) {
   }
   return total;
 }
+```
+
+
+```ts twoslash{1}
+// @include: salary-objects
+// ---cut---
+// @include: total-salary
+
 
 totalSalary(salary1); // => 120_000
 totalSalary(salary2); // => 110_000
 ```
 
 `{ [key: string]: number }` is the index signature, which tells TypeScript that `salaryObject` has to be an object with `string` type as key and `number` type as value.  
+
+Now the `totalSalary()` accepts as arguments both `salary1` and `salary2` objects, since they are objects with number values.  
+
+However, the function would not accept an object that has, for example, strings as values:
+
+```ts twoslash
+// @errors: 2345
+// @include: total-salary
+// ---cut---
+const salary3 = {
+  baseSalary: '100 thousands'
+};
+
+totalSalary(salary3);
+```
 
 ## 2. Index signature syntax
 
@@ -151,7 +169,7 @@ value; // => undefined
 
 The index signature simply maps a key type to a value type, and that's all. If you don't make that mapping correct, the value type can deviate from the actual runtime data type.  
 
-To make typing more accurate, mark the indexed value as `string` or `undefined`. Doing so, TypeScript is going to be aware that the properties you access might not exist:
+To make typing more accurate, mark the indexed value as `string` or `undefined`. Doing so, TypeScript becomes aware that the properties you access might not exist:
 
 ```ts twoslash{2}
 interface StringByString {
