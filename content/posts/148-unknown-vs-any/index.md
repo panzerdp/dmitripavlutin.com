@@ -99,14 +99,14 @@ The case of `unknown`:
 
 ```ts twoslash
 function invokeAnything(callback: unknown) {
-  // you cannot operate on `unknown` type 
-  // before doing a type check or type assertion
   if (typeof callback === 'function') {
+// @annotate: left { "arrowRot": "90deg 20px 27px", "textDegree": "3deg", "top": "0rem" } - Cannot operate on `unknown` before doing a type check
     callback();
   }
 }
 
-invokeAnything(1); // You can assign anything to `unknown` type
+// @annotate: left { "arrowRot": "90deg 8px 27px", "textDegree": "-3deg", "top": "5rem" } - Can assign anything to `unknown`
+invokeAnything(1);
 ```
 
 The type check here is `typeof callback === 'function'` &mdash; checking whether the `callback` is a function. The type of `callback` narrows to function type.  
@@ -115,11 +115,12 @@ The case of `any`:
 
 ```ts twoslash
 function invokeAnything(callback: any) {
-  // you can perform any operation on `any` type
+// @annotate: left { "arrowRot": "90deg 25px 20px", "textDegree": "3deg", "top": "0rem" } - Can perform any operation on `any` type
   callback();
 }
 
-invokeAnything(1); // You can assign anything to `any` type
+// @annotate: left { "arrowRot": "90deg 8px 27px", "textDegree": "-3deg", "top": "3rem" } - Can assign anything to `any` type
+invokeAnything(1);
 ```
 
 `callback` being `any`, TypeScript doesn't enforce any type checking for the statement `callback()`.  

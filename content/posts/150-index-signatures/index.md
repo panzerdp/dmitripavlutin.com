@@ -248,14 +248,15 @@ interface Salary {
 }
 ```
 
-*The index signature is meant to be generic in regards to keys.*
+This behavior suggests that *the index signature is meant to be generic in regards to keys.*
 
 But you can use a union of string literals to describe the keys in a `Record<Keys, Type>`:
 
 ```ts twoslash
-type Salary = Record<'yearlySalary'|'yearlyBonus', number>
+type SpecificSalary = Record<'yearlySalary'|'yearlyBonus', number>
+// @annotate: right { "arrowRot": "270deg 0px -10px", "flipped": false, "textDegree": "3deg", "top": "2.5rem" } - Be specific what keys the object should have
 
-const salary1: Salary = { 
+const salary1: SpecificSalary = { 
   'yearlySalary': 120_000,
   'yearlyBonus': 10_000
 }; // OK
