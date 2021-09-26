@@ -90,7 +90,7 @@ To be honest, I had difficulties understanding `unknown` when I had been learnin
 
 Here's the rule that had helped me understand the difference:
 
-* You can assign anything to `unknown` type *but you cannot operate on `unknown` before doing a type check or type assertion*
+* You can assign anything to `unknown` type *but you have to do a type check or type assertion to operate on `unknown`*
 * You can assign anything to `any` type *and you can perform any operation on `any`*
 
 The example above has demonstrated exactly the similarity and difference between `unknown` and `any`.  
@@ -100,7 +100,7 @@ The case of `unknown`:
 ```ts twoslash
 function invokeAnything(callback: unknown) {
   if (typeof callback === 'function') {
-// @annotate: left { "arrowRot": "90deg 20px 27px", "textDegree": "3deg", "top": "0rem" } - Cannot operate on `unknown` before doing a type check
+// @annotate: left { "arrowRot": "90deg 20px 27px", "textDegree": "3deg", "top": "0rem" } - Requires a type check to operate on `unknown`
     callback();
   }
 }
@@ -115,7 +115,7 @@ The case of `any`:
 
 ```ts twoslash
 function invokeAnything(callback: any) {
-// @annotate: left { "arrowRot": "90deg 25px 20px", "textDegree": "3deg", "top": "0rem" } - Can perform any operation on `any` type
+// @annotate: left { "arrowRot": "90deg 25px 20px", "textDegree": "3deg", "top": "0rem" } - Any operation is allowed on `any` type
   callback();
 }
 
