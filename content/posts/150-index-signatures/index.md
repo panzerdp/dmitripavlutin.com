@@ -75,7 +75,6 @@ function totalSalary(salaryObject: { [key: string]: number }) {
 // ---cut---
 // @include: total-salary
 
-
 totalSalary(salary1); // => 120_000
 totalSalary(salary2); // => 110_000
 ```
@@ -181,6 +180,7 @@ const object: StringByString = {};
 const value = object['nonExistingProp'];
 value; // => undefined
 // ^?
+// @annotate: right { "arrowRot": "270deg 0px -10px", "flipped": false, "textDegree": "3deg", "top": "3rem" } - `string | undefined` because the property can be missing
 ```
 
 ### 3.2 String and number key
