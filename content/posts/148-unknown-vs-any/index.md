@@ -4,9 +4,9 @@ description: "What is the difference between unknown and any types in TypeScript
 published: "2021-09-08T13:00Z"
 modified: "2021-09-08T13:00Z"
 thumbnail: "./images/cover-4.png"
-slug: typescript-unknown-vs-any
+slug: typescript-index-signatures
 tags: ['typescript', 'unknown', 'any']
-recommended: ['javascript-null', '7-tips-to-handle-undefined-in-javascript']
+recommended: ['javascript-null', 'typescript-react-components']
 type: post
 ---
 
