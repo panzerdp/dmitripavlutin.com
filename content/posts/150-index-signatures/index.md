@@ -254,7 +254,7 @@ But you can use a union of string literals to describe the keys in a `Record<Key
 
 ```ts twoslash
 type SpecificSalary = Record<'yearlySalary'|'yearlyBonus', number>
-// @annotate: right { "arrowRot": "270deg 0px -10px", "flipped": false, "textDegree": "3deg", "top": "2.5rem" } - Be specific what keys the object should have
+// @annotate: right { "arrowRot": "270deg 0px -25px", "flipped": false, "textDegree": "3deg", "top": "3rem" } - Be specific: indicate the keys of the object
 
 const salary1: SpecificSalary = { 
   'yearlySalary': 120_000,
@@ -271,5 +271,3 @@ I recommend using the index signature to annotate generic objects, e.g. keys are
 If you don't know the object structure you're going to work with, but you know the possible key and value types, then the index signature is what you need.  
 
 The index signature consists of the index name and its type in square brackets, followed by a colon and the value type: `{ [indexName: KeyType]: ValueType }`. `KeyType` can be a `string`, `number`, or `symbol`, while `ValueType` can be any type.  
-
-*Challenge: Write a generic type `Indexed<K, V>` that creates an index signature where `K` is the key type and `V` is the value type. Share your solution in a comment below!* 
