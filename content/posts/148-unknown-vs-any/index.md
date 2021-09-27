@@ -82,7 +82,7 @@ function invokeAnything(callback: unknown) {
 invokeAnything(1);
 ```
 
-Having added `typeof callback === 'function'` check, you can safely invoke `callback()`. No type errors and no runtime errors! Great!
+Having added `typeof callback === 'function'` check, you can safely invoke `callback()` because `unknown` has narrowed to `Function` type. No type errors and no runtime errors! Great!
 
 ## 2. The mental model of *unknown* vs *any*
 
@@ -100,12 +100,11 @@ The case of `unknown`:
 ```ts twoslash
 function invokeAnything(callback: unknown) {
   if (typeof callback === 'function') {
-// @annotate: left { "arrowRot": "90deg 20px 27px", "textDegree": "3deg", "top": "0rem" } - Requires a type check to operate on `unknown`
+// @annotate: left { "arrowRot": "90deg 15px 27px", "textDegree": "3deg", "top": "0rem" } - Requires a type check
     callback();
   }
 }
 
-// @annotate: left { "arrowRot": "90deg 8px 27px", "textDegree": "-3deg", "top": "5rem" } - Can assign anything to `unknown`
 invokeAnything(1);
 ```
 
@@ -115,11 +114,10 @@ The case of `any`:
 
 ```ts twoslash
 function invokeAnything(callback: any) {
-// @annotate: left { "arrowRot": "90deg 25px 20px", "textDegree": "3deg", "top": "0rem" } - Any operation is allowed on `any` type
+// @annotate: left { "arrowRot": "90deg 20px 20px", "textDegree": "3deg", "top": "0rem" } - Any operation is allowed
   callback();
 }
 
-// @annotate: left { "arrowRot": "90deg 8px 27px", "textDegree": "-3deg", "top": "3rem" } - Can assign anything to `any` type
 invokeAnything(1);
 ```
 
