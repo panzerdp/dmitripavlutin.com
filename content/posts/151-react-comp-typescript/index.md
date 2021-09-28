@@ -21,13 +21,86 @@ Typing constrains how a certain variable, object or function must be used. Const
 
 For example, let's say I am the author of a component that displays a formatted a date on the screen.  
 
+```twoslash include format-date-component
+interface FormatDateProps {
+  date: Date
+}
 
+function FormatDate({ date }: FormatDateProps): JSX.Element {
+  return <div>{date.toLocaleString()}</div>;
+}
+```
+
+```tsx twoslash{2}
+// @include: format-date-component
+```
+
+According to the `FormatDateProps` interface, the component `FormatDate` accepts `date` prop only an instance of `Date`. That is a *constraint* of how the component should be used.  
+
+Why is this constraint important? Because the `FormatDate` component calls the method `date.toLocaleString()` on the date instance.  
+
+Then the user of the `FormatDate` component would have to satify the constraint, and provide `date` prop only with `Date` instances:
+
+```tsx twoslash
+// @include: format-date-component
+// ---cut---
+<FormatDate
+  date={new Date()}
+/>
+```
+
+If the user forgots about the constraint, and for example provides a string `"Sep 28 2021"` to `date` prop:
+
+```tsx twoslash
+// @errors: 2322
+// @include: format-date-component
+// ---cut---
+<FormatDate
+  date="Sep 28 2021"
+/>
+```
+
+Then TypeScript will show a type error and indicate the expected data type.  
 
 ## 2. Typing props
+
+In my opinion, the best benefit React takes from TypeScript is the props typing.  
+
+Typing a React component is usually a 2 steps process.  
+
+A) Define the interface that describes what props the component accepts using an [object type](https://www.typescriptlang.org/docs/handbook/2/objects.html). A good naming convention for the
+props interface is `ComponentName` + `Props` = `ComponentNameProps`
+
+B) Inside of the functional component, annotate the props parameter with the props interface.  
+
+For example, let's annotate a component `Message` that accepts 2 props: `message` (a string) and `important` (a boolean):
+
+```tsx twoslash
+interface MessageProps {
+  message: string;
+  important: boolean;
+}
+
+function Message({ message, important }: MessageProps) {
+  return (
+    <div>
+      {important ? 'Important message: ' : 'Regular message: '}
+      {message}
+    </div>
+  );
+}
+```
+
+`MessageProps` is the interface that describes the type of props the component accepts: `message` prop as `string`, and `important` as `boolean`.  
+
+
 
 ### 2.1 *children* prop
 
 ### 2.2 Optional props
+
+### 2.3 Props types cheatsheet
+
 
 ## 3. Return type
 
