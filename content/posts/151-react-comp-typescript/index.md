@@ -1,9 +1,9 @@
 ---
-title: "TypeScript for React Components"
+title: "How to type React Components with TypeScript"
 description: "How to use TypeScript to annotate React components."
 published: "2021-09-29T12:00Z"
 modified: "2021-09-29T12:00Z"
-thumbnail: "./images/cover-2.png"
+thumbnail: "./images/cover-3.png"
 slug: typescript-react-components
 tags: ['typescript', 'react']
 recommended: ['typescript-unknown-vs-any', 'typescript-index-signatures']
@@ -73,29 +73,33 @@ props interface is `ComponentName` + `Props` = `ComponentNameProps`
 
 B) Inside of the functional component, annotate the props parameter with the props interface.  
 
-For example, let's annotate a component `Message` that accepts 2 props: `message` (a string) and `important` (a boolean):
+For example, let's annotate a component `Message` that accepts 2 props: `text` (a string) and `important` (a boolean):
 
 ```tsx twoslash
 interface MessageProps {
-  message: string;
+  text: string;
   important: boolean;
 }
 
-function Message({ message, important }: MessageProps) {
+function Message({ text, important }: MessageProps) {
   return (
     <div>
       {important ? 'Important message: ' : 'Regular message: '}
-      {message}
+      {text}
     </div>
   );
 }
 ```
 
-`MessageProps` is the interface that describes the type of props the component accepts: `message` prop as `string`, and `important` as `boolean`.  
+`MessageProps` is the interface that describes the type of props the component accepts: `text` prop as `string`, and `important` as `boolean`.  
 
-
+You find useful to explore [Basic Prop Types Examples](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example#basic-prop-types-examples) that gives examples of types for different kind of props. Use the link as an inspiration for your own typing!
 
 ### 2.1 *children* prop
+
+As you might know, `children` is a special prop in React components: it contains the content between the opening and closing tag of the component.  
+
+
 
 ### 2.2 Optional props
 
