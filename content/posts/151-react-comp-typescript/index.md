@@ -15,20 +15,13 @@ In this post, I'm going to discuss why and how to use TypeScript to type React c
 
 ## 1. Why typing React components?
 
-TypeScript is useful if you're coding middle size and bigger web applications.  
+TypeScript is useful if you're coding middle size and bigger web applications, because annotating variables, objects and functions with creates contracts between different parts of your  application.  
 
-*Why?*
+Typing constrains how a certain variable, object or function must be used. Constraining guides how to use a function the way its author has designed it.  
 
-Because annotating variables, objects and functions with creates contracts between different parts of your 
-application. 
+For example, let's say I am the author of a component that displays a formatted a date on the screen.  
 
-*Why do contracts are useful?*
 
-Because they constrain how a certain variable, object or function must be used.  
-
-*Why does constraining is useful?*
-
-Because constraining guides how to use a function the way its author has designed it.  
 
 ## 2. Typing props
 
