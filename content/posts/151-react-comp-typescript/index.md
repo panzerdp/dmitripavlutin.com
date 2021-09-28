@@ -10,8 +10,10 @@ recommended: ['typescript-unknown-vs-any', 'typescript-index-signatures']
 type: post
 ---
 
-In this post, I'm going to discuss why and how to use TypeScript to type React components.  
+In this post, I'm going to discuss why and how to use TypeScript to type React components. 
 
+You'll find how to annotate component props, how to mark
+a prop optional, how to set the return type, and as a nice bonus how to annotate the component's state when using `useState()` hook.  
 
 ## 1. Why typing React components?
 
@@ -97,14 +99,11 @@ You find useful to explore [Basic Prop Types Examples](https://react-typescript-
 
 ### 2.1 *children* prop
 
-As you might know, `children` is a special prop in React components: it contains the content between the opening and closing tag of the component.  
+`children` is a special prop in React components: it contains the content between the opening and closing tag of the component.  
 
 
 
 ### 2.2 Optional props
-
-### 2.3 Props types cheatsheet
-
 
 ## 3. Return type
 
