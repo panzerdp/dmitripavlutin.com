@@ -298,9 +298,16 @@ function ShowText({ show, text }: ShowTextProps): JSX.Element | null {
 }
 ```
 
-`ShowText` returns an element is `show` prop is `true`, otherwise returns `null`.  
+`ShowText` returns an element if `show` prop is `true`, otherwise returns `null`.  
 
 That's why the `ShowText` function's return type is an union `JSX.Element | null`.  
 
 ## 4. Conclusion
+
+React components can greatly benefit when used with TypeScript.  
+
+In my opinion one of the best benefits is the ability to easily verify the component props. Usually that's performed
+by defining an interface using an object type, and indicate each prop what type it should have.  
+
+Then, when the annotated component is rendered, TypeScript takes care to verify that the correct data types were supplied.  
 
