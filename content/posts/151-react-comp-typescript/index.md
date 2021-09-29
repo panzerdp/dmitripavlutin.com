@@ -15,6 +15,9 @@ In this post, I'm going to discuss why and how to use TypeScript to type React c
 You'll find how to annotate component props, how to mark
 a prop optional, how to set the return type, and as a nice bonus how to annotate the component's state when using `useState()` hook.  
 
+```toc
+```
+
 ## 1. Why typing React components?
 
 TypeScript is useful if you're coding middle and bigger size web applications. Annotating variables, objects and functions with creates contracts between different parts of your  application.  
@@ -193,6 +196,54 @@ or multiple children:
 *Challenge: how would you update the `MessageProps` interface to support also a simple `string` value as a child? Write your solution in a comment below!*
 
 ### 2.3 Optional props
+
+If you'd like to mark a prop as optional, you can mark the corresponding prop as [optional](https://www.typescriptlang.org/docs/handbook/2/objects.html#optional-properties) with `?` in the object type of the props.  
+
+For example, let's mark `important` prop as optional:
+
+```twoslash include message-optional
+interface MessageProps {
+  children: JSX.Element | JSX.Element[];
+  important?: boolean;
+}
+
+function Message({ children, important = false }: MessageProps) {
+  return (
+    <div>
+      {important ? 'Important message: ' : 'Regular message: '}
+      {children}
+    </div>
+  );
+}
+```
+
+```tsx twoslash{3,6}
+// @include: message-optional
+```
+
+You can see that inside that `MessageProps` interface the `important` prop is marked with an `?` &mdash; `important?: boolean` &mdash; making the prop optional.  
+
+Inside the `Message` function I have also added a `false` default value to `important` prop. That's going to be the default value in case if `important` prop is not indicated.  
+
+Now TypeScript allows you to both skip indicating `important` prop:
+
+```tsx twoslash
+// @include: message-optional
+// ---cut---
+<Message>
+  <span>The form has been submitted!</span>
+</Message>
+```
+
+Of course, you can indicate a specific value if you need so:
+
+```tsx twoslash
+// @include: message-optional
+// ---cut---
+<Message important={true}>
+  <span>The form has been submitted!</span>
+</Message>
+```
 
 ## 3. Return type
 
