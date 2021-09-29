@@ -12,19 +12,19 @@ type: post
 
 In this post, I'm going to discuss why and how to use TypeScript to type React components. 
 
-You'll find how to annotate component props, how to mark
-a prop optional, how to set the return type, and as a nice bonus how to annotate the component's state when using `useState()` hook.  
+You'll find how to annotate component props, mark
+a prop optional, and indicate the return type.
 
 ```toc
 ```
 
 ## 1. Why typing React components?
 
-TypeScript is useful if you're coding middle and bigger size web applications. Annotating variables, objects and functions with creates contracts between different parts of your  application.  
+TypeScript is useful if you're coding middle and bigger size web applications. Annotating variables, objects, and functions creates contracts between different parts of your application.  
 
-Typing constrains how a certain variable, object or function must be used. Constraining guides how to use a function the way its author has designed it.  
+Typing constrains how a certain variable, object, or function must be used. Constraining guides how to use a function the way its author has designed it.  
 
-For example, let's say I am the author of a component that displays a formatted a date on the screen.  
+For example, let's say I am the author of a component that displays a formatted date on the screen.  
 
 ```twoslash include format-date-component
 interface FormatDateProps {
@@ -44,7 +44,7 @@ According to the `FormatDateProps` interface, the component `FormatDate` accepts
 
 Why is this constraint important? Because the `FormatDate` component calls the method `date.toLocaleString()` on the date instance.  
 
-Then the user of the `FormatDate` component would have to satify the constraint, and provide `date` prop only with `Date` instances:
+Then the user of the `FormatDate` component would have to satisfy the constraint, and provide `date` prop only with `Date` instances:
 
 ```tsx twoslash
 // @include: format-date-component
@@ -54,7 +54,7 @@ Then the user of the `FormatDate` component would have to satify the constraint,
 />
 ```
 
-If the user forgots about the constraint, and for example provides a string `"Sep 28 2021"` to `date` prop:
+If the user forgets about the constraint, and for example provides a string `"Sep 28 2021"` to `date` prop:
 
 ```tsx twoslash
 // @errors: 2322
@@ -76,7 +76,7 @@ Typing a React component is usually a 2 steps process.
 A) Define the interface that describes what props the component accepts using an [object type](https://www.typescriptlang.org/docs/handbook/2/objects.html). A good naming convention for the
 props interface is `ComponentName` + `Props` = `ComponentNameProps`
 
-B) Inside of the functional component, annotate the props parameter with the props interface.  
+B) Inside the functional component, annotate the props parameter with the props interface.  
 
 For example, let's annotate a component `Message` that accepts 2 props: `text` (a string) and `important` (a boolean):
 
@@ -102,7 +102,7 @@ function Message({ text, important }: MessageProps) {
 
 `MessageProps` is the interface that describes the type of props the component accepts: `text` prop as `string`, and `important` as `boolean`.  
 
-[Basic Prop Types Examples](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example#basic-prop-types-examples) gives examples of types for different kind of props. Use the list as an inspiration for your own prop typing.
+[Basic Prop Types Examples](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example#basic-prop-types-examples) gives examples of types for different kinds of props. Use the list as an inspiration for your prop typing.
 
 Now when rendering the component, you would have to set the prop values according to the props type:
 
@@ -199,7 +199,7 @@ or multiple children:
 
 If you'd like to mark a prop as optional, you can mark the corresponding prop as [optional](https://www.typescriptlang.org/docs/handbook/2/objects.html#optional-properties) with `?` in the object type of the props.  
 
-For example, let's mark `important` prop as optional:
+For example, let's mark the `important` prop as optional:
 
 ```twoslash include message-optional
 interface MessageProps {
@@ -225,9 +225,9 @@ function Message({ children, important = false }: MessageProps) {
 
 You can see that inside that `MessageProps` interface the `important` prop is marked with an `?` &mdash; `important?: boolean` &mdash; making the prop optional.  
 
-Inside the `Message` function I have also added a `false` default value to `important` prop. That's going to be the default value in case if `important` prop is not indicated.  
+Inside the `Message` function I have also added a `false` default value to the `important` prop. That's going to be the default value in case if `important` prop is not indicated.  
 
-Now TypeScript allows you to both skip indicating `important` prop:
+Now TypeScript allows you to skips indicating `important` prop:
 
 ```tsx twoslash
 // @include: message-optional
@@ -249,8 +249,7 @@ Of course, you can indicate a specific value if you need so:
 
 ## 3. Return type
 
-In the previous examples `Message` function doesn't indicate explicitely its return type. That's because
-TypeScript is smart and can infer the function's return type.  
+In the previous examples `Message` function doesn't indicate explicitly its return type. That's because TypeScript is smart and can infer the function's return type.  
 
 ```tsx twoslash{3,6}
 // @include: message-optional-1
@@ -261,8 +260,7 @@ type MessageReturnType = ReturnType<typeof Message>;
 //      ^?
 ```
 
-However, my personal preference is to enfore each function to explicitely indicate the return type. In case 
-of React functional components the return type is usually `JSX.Element`:
+However, my personal preference is to enforce each function to explicitly indicate the return type. In the case of React functional components the return type is usually `JSX.Element`:
 
 ```tsx twoslash{5}
 // @include: message-optional-1
@@ -282,7 +280,7 @@ function Message({
 ```
 
 There are cases when the component might return nothing in certain conditions. If that's the case, just use
-an union `JSX.Element | null` as the return type:
+a union `JSX.Element | null` as the return type:
 
 ```tsx twoslash
 interface ShowTextProps {
@@ -300,14 +298,12 @@ function ShowText({ show, text }: ShowTextProps): JSX.Element | null {
 
 `ShowText` returns an element if `show` prop is `true`, otherwise returns `null`.  
 
-That's why the `ShowText` function's return type is an union `JSX.Element | null`.  
+That's why the `ShowText` function's return type is a union `JSX.Element | null`.  
 
 ## 4. Conclusion
 
 React components can greatly benefit when used with TypeScript.  
 
-In my opinion one of the best benefits is the ability to easily verify the component props. Usually that's performed
-by defining an interface using an object type, and indicate each prop what type it should have.  
+In my opinion, one of the best benefits is the ability to easily verify the component props. Usually, that's performed by defining an interface using an object type, and indicate each prop what type it should have.  
 
 Then, when the annotated component is rendered, TypeScript takes care to verify that the correct data types were supplied.  
-
