@@ -1,8 +1,8 @@
 ---
 title: "How to type React Components with TypeScript"
 description: "How to use TypeScript to annotate React components."
-published: "2021-09-29T12:00Z"
-modified: "2021-09-29T12:00Z"
+published: "2021-09-29T15:00Z"
+modified: "2021-09-29T15:00Z"
 thumbnail: "./images/cover-3.png"
 slug: typescript-react-components
 tags: ['typescript', 'react']
