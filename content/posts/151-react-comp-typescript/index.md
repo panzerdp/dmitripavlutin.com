@@ -102,7 +102,7 @@ function Message({ text, important }: MessageProps) {
 
 `MessageProps` is the interface that describes the type of props the component accepts: `text` prop as `string`, and `important` as `boolean`.  
 
-[Basic Prop Types Examples](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example#basic-prop-types-examples) gives examples of types for different kinds of props. Use the list as an inspiration for your prop typing.
+[Basic Prop Types](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example#basic-prop-types-examples) gives examples of types for different situations. Use the list as an inspiration for your prop typing.
 
 Now when rendering the component, you would have to set the prop values according to the props type:
 
