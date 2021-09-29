@@ -206,6 +206,7 @@ interface MessageProps {
   children: JSX.Element | JSX.Element[];
   important?: boolean;
 }
+// - 1
 
 function Message({ children, important = false }: MessageProps) {
   return (
@@ -215,6 +216,7 @@ function Message({ children, important = false }: MessageProps) {
     </div>
   );
 }
+// - 2
 ```
 
 ```tsx twoslash{3,6}
@@ -247,6 +249,58 @@ Of course, you can indicate a specific value if you need so:
 
 ## 3. Return type
 
-## 4. Typing state
+In the previous examples `Message` function doesn't indicate explicitely its return type. That's because
+TypeScript is smart and can infer the function's return type.  
 
-## 5. Conclusion
+```tsx twoslash{3,6}
+// @include: message-optional-1
+// @include: message-optional-2
+// ---cut---
+
+type MessageReturnType = ReturnType<typeof Message>;
+//      ^?
+```
+
+However, my personal preference is to enfore each function to explicitely indicate the return type. In case 
+of React functional components the return type is usually `JSX.Element`:
+
+```tsx twoslash{5}
+// @include: message-optional-1
+// ---cut---
+
+function Message({ 
+    children, 
+    important = false 
+  }: MessageProps): JSX.Element {
+  return (
+    <div>
+      {important ? 'Important message: ' : 'Regular message: '}
+      {children}
+    </div>
+  );
+}
+```
+
+There are cases when the component might return nothing in certain conditions. If that's the case, just use
+an union `JSX.Element | null` as the return type:
+
+```tsx twoslash
+interface ShowTextProps {
+  show: boolean;
+  text: string;
+}
+
+function ShowText({ show, text }: ShowTextProps): JSX.Element | null {
+  if (show) {
+    return <div>{text}</div>;
+  }
+  return null;
+}
+```
+
+`ShowText` returns an element is `show` prop is `true`, otherwise returns `null`.  
+
+That's why the `ShowText` function's return type is an union `JSX.Element | null`.  
+
+## 4. Conclusion
+
