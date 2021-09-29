@@ -17,7 +17,7 @@ a prop optional, how to set the return type, and as a nice bonus how to annotate
 
 ## 1. Why typing React components?
 
-TypeScript is useful if you're coding middle size and bigger web applications, because annotating variables, objects and functions with creates contracts between different parts of your  application.  
+TypeScript is useful if you're coding middle and bigger size web applications. Annotating variables, objects and functions with creates contracts between different parts of your  application.  
 
 Typing constrains how a certain variable, object or function must be used. Constraining guides how to use a function the way its author has designed it.  
 
@@ -142,6 +142,55 @@ then TypeScript will warn about that.
 ### 2.2 *children* prop
 
 `children` is a special prop in React components: it holds the content between the opening and closing tag of the component.  
+
+That's why the most often content of the `children` prop is the JSX element, which can be typed using a special type `JSX.Element`.  
+
+Let's slightly change the `Message` component to support the `children` prop:
+
+```twoslash include message-children
+interface MessageProps {
+  children: JSX.Element | JSX.Element[];
+  important: boolean;
+}
+
+function Message({ children, important }: MessageProps) {
+  return (
+    <div>
+      {important ? 'Important message: ' : 'Regular message: '}
+      {children}
+    </div>
+  );
+}
+```
+
+```tsx twoslash{2}
+// @include: message-children
+```
+
+Take a look at the `children` prop in the interface: it accepts a single element `JSX.Element` or an array of element `JSX.Element[]`.  
+
+Now you can use an element as a child to indicate the message:
+
+```tsx twoslash
+// @include: message-children
+// ---cut---
+<Message important={false}>
+  <span>The form has been submitted!</span>
+</Message>
+```
+
+or multiple children:
+
+```tsx twoslash
+// @include: message-children
+// ---cut---
+<Message important={false}>
+  <span>The form has been submitted!</span>
+  <span>Your request will be processed.</span>
+</Message>
+```
+
+*Challenge: how would you update the `MessageProps` interface to support also a simple `string` value as a child? Write your solution in a comment below!*
 
 ### 2.3 Optional props
 
