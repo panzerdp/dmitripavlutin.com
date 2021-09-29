@@ -77,7 +77,7 @@ B) Inside of the functional component, annotate the props parameter with the pro
 
 For example, let's annotate a component `Message` that accepts 2 props: `text` (a string) and `important` (a boolean):
 
-```tsx twoslash
+```twoslash include message
 interface MessageProps {
   text: string;
   important: boolean;
@@ -93,17 +93,57 @@ function Message({ text, important }: MessageProps) {
 }
 ```
 
+```tsx twoslash
+// @include: message
+```
+
 `MessageProps` is the interface that describes the type of props the component accepts: `text` prop as `string`, and `important` as `boolean`.  
 
-You find useful to explore [Basic Prop Types Examples](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example#basic-prop-types-examples) that gives examples of types for different kind of props. Use the link as an inspiration for your own typing!
+[Basic Prop Types Examples](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example#basic-prop-types-examples) gives examples of types for different kind of props. Use the list as an inspiration for your own prop typing.
 
-### 2.1 *children* prop
+Now when rendering the component, you would have to set the prop values according to the props type:
 
-`children` is a special prop in React components: it contains the content between the opening and closing tag of the component.  
+```tsx twoslash
+// @include: message
+// ---cut---
+<Message
+  text="The form has been submitted!"
+  important={false}
+/>
+```
 
+### 2.1 Props validation
 
+If `Message` component renders with invalid prop value:
 
-### 2.2 Optional props
+```tsx twoslash
+// @errors: 2322
+// @include: message
+// ---cut---
+<Message
+  text="The form has been submitted!"
+  important={0}
+/>
+```
+
+or without a prop:
+
+```tsx twoslash
+// @errors: 2741
+// @include: message
+// ---cut---
+<Message
+  important={true}
+/>
+```
+
+then TypeScript will warn about that.  
+
+### 2.2 *children* prop
+
+`children` is a special prop in React components: it holds the content between the opening and closing tag of the component.  
+
+### 2.3 Optional props
 
 ## 3. Return type
 
