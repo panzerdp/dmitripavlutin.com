@@ -1,8 +1,8 @@
 ---
 title: "How to type React Components with TypeScript"
-description: "How to use TypeScript to annotate React components."
+description: "How to use TypeScript to type React components: validate props, mark props as optional."
 published: "2021-09-29T15:00Z"
-modified: "2021-09-29T15:00Z"
+modified: "2021-10-01T16:40Z"
 thumbnail: "./images/cover-3.png"
 slug: typescript-react-components
 tags: ['typescript', 'react']
@@ -21,8 +21,6 @@ You'll find how to annotate component props, mark a prop optional, and indicate 
 
 TypeScript is useful if you're coding middle and bigger size web applications. Annotating variables, objects, and functions creates contracts between different parts of your application.  
 
-Typing constrains how a certain variable, object, or function must be used.  
-
 For example, let's say I am the author of a component that displays a formatted date on the screen.  
 
 ```twoslash include format-date-component
@@ -39,9 +37,9 @@ function FormatDate({ date }: FormatDateProps): JSX.Element {
 // @include: format-date-component
 ```
 
-According to the `FormatDateProps` interface, the component `FormatDate` accepts `date` prop only an instance of `Date`. That is a *constraint* of how the component should be used.  
+According to the `FormatDateProps` interface, the component `FormatDate` the value of `date` prop can only be an instance of `Date`. That is a *constraint*.  
 
-Why is this constraint important? Because the `FormatDate` component calls the method `date.toLocaleString()` on the date instance.  
+Why is this constraint important? Because the `FormatDate` component calls the method `date.toLocaleString()` on the date instance, and the `date` prop have to be a date instance. Otherwise the component wouldn't work.    
 
 Then the user of the `FormatDate` component would have to satisfy the constraint, and provide `date` prop only with `Date` instances:
 
@@ -64,7 +62,9 @@ If the user forgets about the constraint, and for example provides a string `"Se
 />
 ```
 
-Then TypeScript will show a type error and indicate the expected data type.  
+then TypeScript will show a type error. 
+
+That's great because the error is caught during development, without hiding in the codebase.  
 
 ## 2. Typing props
 
@@ -75,7 +75,7 @@ Typing a React component is usually a 2 steps process.
 A) Define the interface that describes what props the component accepts using an [object type](https://www.typescriptlang.org/docs/handbook/2/objects.html). A good naming convention for the
 props interface is `ComponentName` + `Props` = `ComponentNameProps`
 
-B) Inside the functional component function, annotate the props parameter with the props interface.  
+B) The use the interface to annotate the props parameter inside the functional component function.  
 
 For example, let's annotate a component `Message` that accepts 2 props: `text` (a string) and `important` (a boolean):
 
@@ -99,7 +99,7 @@ function Message({ text, important }: MessageProps) {
 // @include: message
 ```
 
-`MessageProps` is the interface that describes the type of props the component accepts: `text` prop as `string`, and `important` as `boolean`.  
+`MessageProps` is the interface that describes the props the component accepts: `text` prop as `string`, and `important` as `boolean`.  
 
 Now when rendering the component, you would have to set the prop values according to the props type:
 
@@ -116,7 +116,7 @@ Now when rendering the component, you would have to set the prop values accordin
 
 ### 2.1 Props validation
 
-What's great now is that if you happen to provide the component with the wrong set of props, or wrong value types, then TypeScript is going to warn you at compile time.  
+Now if you happen to provide the component with the wrong set of props, or wrong value types, then TypeScript will warn you at compile time about the wrong prop value.  
 
 Usually, a bug is caught in one of the following phases &mdash; type checking, unit testing, integration testing, end-to-end tests, bug report from the user &mdash; and *the earlier you catch the bug, the better!*
 
@@ -145,15 +145,13 @@ or without a prop:
 
 then TypeScript will warn about that.  
 
-When typing React props, be as restrictive as it makes sense. 
-
 ### 2.2 *children* prop
 
 `children` is a special prop in React components: it holds the content between the opening and closing tag when the component is rendered: `<Component>children</Component>`.  
 
-That's why the most often content of the `children` prop is the JSX element, which can be typed using a special type `JSX.Element` (usually available globally in a React environment).  
+Mostly the content of the `children` prop is a JSX element, which can be typed using a special type `JSX.Element` (a type available globally in a React environment).  
 
-Let's slightly change the `Message` component to use the `children` prop:
+Let's slightly change the `Message` component to use a `children` prop:
 
 ```twoslash include message-children
 interface MessageProps {
@@ -228,9 +226,9 @@ function Message({ children, important = false }: MessageProps) {
 // @include: message-optional
 ```
 
-You can see that inside that `MessageProps` interface the `important` prop is marked with an `?` &mdash; `important?: boolean` &mdash; making the prop optional.  
+Inside `MessageProps` interface the `important` prop is marked with an `?` &mdash; `important?: boolean` &mdash; making the prop optional.  
 
-Inside the `Message` function I have also added a `false` default value to the `important` prop. That's going to be the default value in case if `important` prop is not indicated.  
+Inside the `Message` function I have also added a `false` default value to the `important` prop: `{ children, important = false }`. That's going to be the default value in case if `important` prop is not indicated.  
 
 Now TypeScript allows you to skips the `important` prop:
 
@@ -309,8 +307,8 @@ function ShowText({ show, text }: ShowTextProps): JSX.Element | null {
 
 React components can greatly benefit from TypeScript.  
 
-A great benefit of typing is the ability to validate the component props. Usually, that's performed by defining an interface using an object type where each prop declares its type.  
+Typing components is especially useful to validate the component props. Usually, that's performed by defining an interface where each prop has its type.  
 
-Then, when the annotated component renders, TypeScript verifies whether correct prop values were supplied.  
+Then, when the annotated component renders, TypeScript verifies if correct prop values were supplied.  
 
-On top of data validation, the types can be a great source of meta information that gives clues of how the annotated function or variable works.  
+On top of data validation, the types can be a great source of meta information with clues of how the annotated function or variable works.  
