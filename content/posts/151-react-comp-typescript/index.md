@@ -1,5 +1,5 @@
 ---
-title: "How to type React Components with TypeScript"
+title: "How to Use TypeScript with React Components"
 description: "How to use TypeScript to type React components: validate props, mark props as optional."
 published: "2021-09-29T15:00Z"
 modified: "2021-10-01T16:40Z"
