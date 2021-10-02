@@ -193,7 +193,7 @@ Let's make a change: `innerFunc()` to be invoked outside of its lexical scope: i
 
 Let's make the adjustments to the code snippet:
 
-```javascript{7,12}
+```javascript{4,12}
 function outerFunc() {
   let outerVar = 'I am outside!';
 
