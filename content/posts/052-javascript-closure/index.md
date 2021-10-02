@@ -214,7 +214,7 @@ exec();
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/Lu0p76x4/)
 
-Now `innerFunc()` is executed outside of its lexical scope. And what's important: 
+Now `innerFunc()` is executed outside of its lexical scope, but exactly in the scope of `exec()` function. And what's important: 
 
 *`innerFunc()` still has access to `outerVar` from its lexical scope, even being executed outside of its lexical scope.*
 
