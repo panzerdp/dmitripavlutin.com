@@ -39,6 +39,8 @@ foo();
 console.log(count); // ReferenceError: count is not defined
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/81nmhury/)
+
 `count` is freely accessed within the scope of `foo()`.  
 
 However, outside of the `foo()` scope, `count` is inaccessible. If you try to access `count` from outside anyways, JavaScript throws `ReferenceError: count is not defined`.  
@@ -74,6 +76,8 @@ foo();
 bar();
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/weyqczga/)
+
 `count` variables from `foo()` and `bar()` function scopes do not collide.  
 
 ## 2. Scopes nesting
@@ -101,6 +105,8 @@ function outerFunc() {
 
 outerFunc();
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/x4rzf61c/)
 
 Indeed, `outerVar` variable is accessible inside `innerFunc()` scope. The variables of the outer scope are accessible inside the inner scope.  
 
@@ -149,6 +155,8 @@ function func() {
 func();
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/sga5jhku/)
+
 The lexical scope of `innerOfInnerOfFunc()` consits of scopes of `innerOfFunc()`, `func()` and global scope (the outermost scope). Within `innerOfInnerOfFunc()` you can access the lexical scope variables `myInnerVar`, `myVar` and `myGlobal`.  
 
 The lexical scope of `innerFunc()` consists of `func()` and global scope. Within `innerOfFunc()` you can access the lexical scope variables `myVar` and `myGlobal`.  
@@ -174,6 +182,8 @@ function outerFunc() {
 
 outerFunc();
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/x4rzf61c/)
 
 Inside the `innerFunc()` scope, the variable `outerVar` is accessed from the lexical scope. That's known already.  
 
@@ -201,6 +211,8 @@ function exec() {
 
 exec();
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/Lu0p76x4/)
 
 Now `innerFunc()` is executed outside of its lexical scope. And what's important: 
 
@@ -273,6 +285,8 @@ items.forEach(function iterator(number) {
 countEven; // => 2
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/kxpscLzv/1/)
+
 The `iterator` is a closure because it captures `countEven` variable.  
 
 ### 5.3 Functional programming
@@ -295,6 +309,8 @@ double(5); // => 10
 const triple = multiply(3);
 triple(4); // => 12
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/fqswk8v0/)
 
 `multiply` is a curried function that returns another function.  
 
