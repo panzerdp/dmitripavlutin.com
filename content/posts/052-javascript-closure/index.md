@@ -2,7 +2,7 @@
 title: A Simple Explanation of JavaScript Closures
 description: A closure is a function that captures variables from where it is defined (or its lexical scope).  
 published: '2019-10-25T04:00Z'
-modified: '2021-03-25T05:40Z'
+modified: '2021-10-02T15:00Z'
 thumbnail: './images/cover-2.png'
 slug: simple-explanation-of-javascript-closures
 tags: ['javascript', 'closure', 'scope']
@@ -119,12 +119,6 @@ Simpler, the lexical scoping means that inside the inner scope you can access va
 
 It's called *lexical* (or *static*) because the engine determines (at [lexing time](https://en.wikipedia.org/wiki/Lexical_analysis)) the nesting of scopes just by looking at the JavaScript source code, without executing it.  
 
-Here's how the engine understands the previous code snippet:
-
-  1. *I can see you define a function `outerFunc()` that has a variable `outerVar`. Good.*  
-  * *Inside the `outerFunc()`, I can see you define a function `innerFunc()`.*  
-  * *Inside the `innerFunc()`, I can see a variable `outerVar` without declaration. Since I use lexical scoping, I consider the variable `outerVar` inside `innerFunc()` to be the same variable as `outerVar` of `outerFunc()`.*
-
 The distilled idea of the lexical scope:
 
 > *The lexical scope* consists of outer scopes determined statically.   
@@ -185,11 +179,11 @@ Inside the `innerFunc()` scope, the variable `outerVar` is accessed from the lex
 
 Note that `innerFunc()` invocation happens inside its lexical scope (the scope of `outerFunc()`).  
 
-Let's make a change: `innerFunc()` to be invoked outside of its lexical scope (outside of `outerFunc()`). Would `innerFunc()` still be able to access `outerVar`?  
+Let's make a change: `innerFunc()` to be invoked outside of its lexical scope: in a function `exec()`. Would `innerFunc()` still be able to access `outerVar`?  
 
 Let's make the adjustments to the code snippet:
 
-```javascript{7,11}
+```javascript{7,12}
 function outerFunc() {
   let outerVar = 'I am outside!';
 
@@ -200,8 +194,12 @@ function outerFunc() {
   return innerFunc;
 }
 
-const myInnerFunc = outerFunc();
-myInnerFunc();
+function exec() {
+  const myInnerFunc = outerFunc();
+  myInnerFunc();
+}
+
+exec();
 ```
 
 Now `innerFunc()` is executed outside of its lexical scope. And what's important: 
@@ -212,7 +210,7 @@ In other words, `innerFunc()` *closes over* (a.k.a. captures, remembers) the var
 
 In other words, `innerFunc()` is a *closure* because it closes over the variable `outerVar` from its lexical scope.  
 
-![The JavaScript closure](./images/javascript-closure-2.png)
+![The JavaScript closure](./images/javascript-closure-4.svg)
 
 You've made the final step to understanding what a closure is:
 
