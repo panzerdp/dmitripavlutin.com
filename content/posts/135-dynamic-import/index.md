@@ -2,7 +2,7 @@
 title: "How to Dynamically Import ECMAScript Modules"
 description: "How to use import(pathToModule) to dynamically import ECMAScript modules in JavaScript."  
 published: "2021-06-10T18:40Z"
-modified: "2021-06-19T14:20Z"
+modified: "2021-10-03T06:20Z"
 thumbnail: "./images/cover.png"
 slug: ecmascript-modules-dynamic-import
 tags: ['javascript', 'module']
@@ -35,7 +35,7 @@ export const concat = (paramA, paramB) => paramA + paramB;
 
 `import { concat } from './concatModule.js'` way of using ES modules is *static*: meaning that the dependencies between modules are known at compile time. A static dependency is *always* included in the app's bundle.  
 
-Static importing works in most situations. But sometimes you'd like to save a bit of client's bandwidth and load modules dynamically.  
+Static importing works in most situations. But sometimes you'd like to save a bit of the client's bandwidth and load modules dynamically.  
 
 You can import modules dynamically if you use `import` as a function &mdash; `import(pathToModule)` &mdash; a feature available starting ES2020.  
 
@@ -67,7 +67,7 @@ const moduleVersion1 = await import(getPath('v1.0'));
 const moduleVersion2 = await import(getPath('v2.0'));
 ```
 
-Because the `import(path)` returns a promise, it fits great with the `async/await` syntax. For example, lets load a module inside of an asynchornous function:
+Because the `import(path)` returns a promise, it fits great with the `async/await` syntax. For example, let's load a module inside of an asynchronous function:
 
 ```javascript{1}
 async function loadMyModule() {
@@ -173,7 +173,7 @@ To load dynamically a module call `import(path)` as a function with an argument 
 
 `const module = await import(path)` returns a promise that resolves to an object containing the components of the imported module. 
 
-In that object the `default` property contains the default export, and the named exports are contained in the corresponding properties:
+In that object, the `default` property contains the default export, and the named exports are contained in the corresponding properties:
 
 ```javascript
 const { 
