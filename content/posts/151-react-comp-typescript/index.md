@@ -230,7 +230,7 @@ Inside `MessageProps` interface the `important` prop is marked with an `?` &mdas
 
 Inside the `Message` function I have also added a `false` default value to the `important` prop: `{ children, important = false }`. That's going to be the default value in case if `important` prop is not indicated.  
 
-Now TypeScript allows you to skips the `important` prop:
+Now TypeScript allows you to skip the `important` prop:
 
 ```tsx twoslash
 // @include: message-optional
