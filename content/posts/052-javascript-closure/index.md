@@ -222,7 +222,7 @@ In other words, `innerFunc()` *closes over* (a.k.a. captures, remembers) the var
 
 In other words, `innerFunc()` is a *closure* because it closes over the variable `outerVar` from its lexical scope.  
 
-![The JavaScript closure](./images/javascript-closure-4.svg)
+![The JavaScript closure](./images/javascript-closure-5.svg)
 
 You've made the final step to understanding what a closure is:
 
@@ -253,7 +253,7 @@ myButton.addEventListener('click', function handleClick() {
 
 [Open the demo](https://codesandbox.io/s/event-handling-ymvr9) and click the button. The text updates to show the number of clicks.  
 
-When the button is clicked, `handleClick()` is executed somewhere inside of the DOM code. The execution happens far from the place of definition.  
+When the button is clicked, `handleClick()` is executed somewhere inside of the DOM code. The execution happens far from the place of the definition.  
 
 But being a closure, `handleClick()` captures `countClicked` from the lexical scope and updates it when a click happens. Even more, `myText` is captured too.  
 
@@ -262,6 +262,7 @@ But being a closure, `handleClick()` captures `countClicked` from the lexical sc
 Capturing variables from the lexical scope is useful in callbacks.  
 
 A `setTimeout()` callback:
+
 ```javascript
 const message = 'Hello, World!';
 
@@ -272,6 +273,7 @@ setTimeout(function callback() {
 The `callback()` is a closure because it captures the variable `message`.  
 
 An iterator function for `forEach()`:
+
 ```javascript
 let countEven = 0;
 const items = [1, 5, 100, 10];
