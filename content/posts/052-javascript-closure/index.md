@@ -47,7 +47,7 @@ However, outside of the `foo()` scope, `count` is inaccessible. If you try to ac
 
 If you've defined a variable inside of a function or code block, then you can use this variable only within that function or code block. The above example demonstrates this behavior.   
 
-![The JavaScript scope](./images/javascript-scope-2.svg)
+![The JavaScript scope](./images/javascript-scope-3.svg)
 
 Now, let's see a general formulation:
 
@@ -222,7 +222,7 @@ In other words, `innerFunc()` *closes over* (a.k.a. captures, remembers) the var
 
 In other words, `innerFunc()` is a *closure* because it closes over the variable `outerVar` from its lexical scope.  
 
-![The JavaScript closure](./images/javascript-closure-5.svg)
+![The JavaScript closure](./images/javascript-closure-6.svg)
 
 You've made the final step to understanding what a closure is:
 
