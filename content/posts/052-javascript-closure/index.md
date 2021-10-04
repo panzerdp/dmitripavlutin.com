@@ -47,7 +47,7 @@ However, outside of the `foo()` scope, `count` is inaccessible. If you try to ac
 
 If you've defined a variable inside of a function or code block, then you can use this variable only within that function or code block. The above example demonstrates this behavior.   
 
-![The JavaScript scope](./images/javascript-scope-3.png)
+![The JavaScript scope](./images/javascript-scope-2.svg)
 
 Now, let's see a general formulation:
 
@@ -84,8 +84,6 @@ bar();
 
 Let's play a bit more with scopes, and nest one scope into another. For example, the function `innerFunc()` is nested inside an outer function `outerFunc()`.
 
-![The JavaScript scopes can be nested](./images/javascript-nested-scopes.png)
-
 How would the 2 function scopes interact with each other? Can I access the variable `outerVar` of `outerFunc()` from within `innerFunc()` scope?  
 
 Let's try that in the example:
@@ -109,6 +107,8 @@ outerFunc();
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/x4rzf61c/)
 
 Indeed, `outerVar` variable is accessible inside `innerFunc()` scope. The variables of the outer scope are accessible inside the inner scope.  
+
+![The JavaScript scopes can be nested](./images/javascript-nested-scopes-3.svg)
 
 Now you know 2 interesting things:
 
