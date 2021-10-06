@@ -2,7 +2,7 @@
 title: "A Simple Explanation of React.useEffect()"
 description: "useEffect() hook executes side-effects in React components."
 published: "2020-10-13T08:50Z"
-modified: "2021-09-12T09:10Z"
+modified: "2021-10-06T08:20Z"
 thumbnail: "./images/effect-4.jpg"
 slug: react-useeffect-explanation
 tags: ['react', 'hook', 'useeffect']
