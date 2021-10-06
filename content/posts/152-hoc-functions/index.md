@@ -14,18 +14,18 @@ The usual way you think about JavaScript functions is as reusable pieces of code
 
 The arguments are the input data of the function, and the return value is the output. 
 
-For example, here's a simple function that sums all the provided arguments:
+For example, here's a simple function that sums an array of numbers:
 
 ```js
-function calculate(...args) {
+function calculate(numbers) {
   let sum = 0;
-  for (const number of args) {
+  for (const number of numbers) {
     sum = sum + number;
   }
   return sum;
 }
 
-calculate(1, 2, 3); // => 6
+calculate([1, 2, 3]); // => 6
 ```
 
 The numbers as arguments are the input, and the function `calculate()` returns the sum &mdash; the output.  
@@ -38,13 +38,13 @@ Let's see how the higher-order functions concept can help you.
 
 Let's make a pause and think a bit about fundamentals.  
 
-In JavaScript the functions can use primitive types (like numbers, strings) as arguments, and return a primitive type too.  
+In JavaScript, the functions can use primitive types (like numbers, strings), objects (like arrays, plain objects, regular expressions, etc) as arguments, and return a primitive type or object too.  
 
-In the previous example, `calculate(1, 2, 3)` accepts numbers as arguments, and returns a number `6` &mdash; the sum.  
+In the previous example, `calculate([1, 2, 3])` accepts an array of numbers as an argument, and returns a number `6` &mdash; the sum.  
 
-But is it possible to assign functions themselves to variables, use as arguments, or even return? Yes, that's possible! 
+What about using functions as values? Is it possible to assign functions themselves to variables, use as arguments, or even return? Yes, that's possible! 
 
-All because *functions in JavaScript are first-class citizens*. You can:
+All because *functions in JavaScript are first-class citizens*. This means that you can:
 
 A. Assign functions to variables:
 
@@ -57,7 +57,7 @@ const hiFunction = function() {
 hiFunction(); // => 'Hello!'
 ```
 
-B. Use functions as arguments to other function:
+B. Use functions as arguments to other functions:
 
 ```javascript{1,5}
 // Use as arguments
@@ -80,7 +80,47 @@ const myFunc = iReturnFunction();
 myFunc(); // => 42
 ```
 
+Finally, here's the interesting part: 
 
-## 2.
+> The functions that use other functions as arguments, or return functions, are named *higher-order functions*.
 
-## 3.
+In the previous examples, `iUseFunction()` is higher-order because it accepts a function as an argument. Also `iReturnFunction()` is a higher-order function because it returns another function.  
+
+On the other side, the functions that use only primitives or objects as arguments, and only return primitives or objects are named *first-order functions*.  
+
+In the previous examples, `hiFunction()` is a first-order function since it simply returns a number.  
+
+So, in JavaScript *a function kind be either first-order, or high-order.*  
+
+That's interesting, but why are higher-order function useful? Let's find out next!
+
+## 2. The benefits of higher-order functions
+
+Let's recall to the question from the post introduction. How to make the `calculate()` function support multiple operations on the array of the numbers?  
+
+The answer is to make `calculate()` a *higher-order function*. Let's modify the function to make it happen:
+
+```javascript
+function calculate(operation, initialValue, numbers) {
+  let total = initialValue;
+  for (const number of numbers) {
+    total = operation(total, number);
+  }
+  return total;
+}
+
+function sum(n1, n2) {
+  return n1 + n2;
+}
+
+function multiply(n1, n2) {
+  return n1 * n2;
+}
+
+calculate(sum, 0, [1, 2, 4]);      // => 7
+calculate(multiply, 1, [1, 2, 4]); // => 8
+```
+
+## 3. More examples of higher-order functions
+
+## 4. Conclusion
