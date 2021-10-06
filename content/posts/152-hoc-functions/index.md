@@ -30,7 +30,7 @@ calculate([1, 2, 3]); // => 6
 
 The numbers as arguments are the input, and the function `calculate()` returns the sum &mdash; the output.  
 
-But what if you'd like to implement a more universal function, which should be able to support more operations on numbers: the addition, multiplication and concatention of numbers. How would you implement that?  
+But what if you'd like to implement a more universal function, which should be able to support more operations on numbers: the addition, multiplication and more. How would you implement that?  
 
 Let's see how the higher-order functions concept can help you.
 
@@ -121,6 +121,14 @@ calculate(sum, 0, [1, 2, 4]);      // => 7
 calculate(multiply, 1, [1, 2, 4]); // => 8
 ```
 
+Now `calculate(operation, initialValue, numbers)` is a higher-order function because it accepts as the first argument a function that describes an operation.  
+
+What's great is the you can easily reuse the `calculate()` function to support multiple operations. The single thing to do is to supply functions of different operations.  
+
+
+
 ## 3. More examples of higher-order functions
+
+
 
 ## 4. Conclusion
