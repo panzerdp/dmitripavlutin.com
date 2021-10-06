@@ -65,6 +65,8 @@ useEffect(callback[, dependencies]);
 
 *Put your side-effect logic into the `callback` function, then use the `dependencies` argument to control when you want the side-effect to run. That's the sole purpose of `useEffect()`.*  
 
+![React useEffect() Hook: when callback is invoked](./images/react-useeffect-callback.svg)
+
 For example, in the previous code snippet you saw the `useEffect()` in action:
 
 ```javascript
@@ -288,6 +290,8 @@ A) After initial rendering, `useEffect()` invokes the callback having the side-e
 B) On later renderings, before invoking the next side-effect callback, `useEffect()` *invokes* the `cleanup` function from the previous side-effect execution (to clean up everything after the previous side-effect), then runs the current side-effect.  
 
 C) Finally, after unmounting the component, `useEffect()` *invokes* the cleanup function from the latest side-effect.  
+
+![React useEffect() Hook: when callback and cleanup are invoked](./images/react-useeffect-callback-cleanup.svg)
 
 Let's see an example when the side-effect cleanup is useful.  
 
