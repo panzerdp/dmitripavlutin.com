@@ -157,6 +157,8 @@ Even if the component re-renders with different `name` property, the side-effect
 <Greet name="Butters"/> // Side-effect DOES NOT RUN
 ```
 
+[Try the demo.](https://codesandbox.io/s/sweet-jepsen-r8m6t?file=/src/Greet.js)
+
 ## 4. The side-effect on component did update
 
 Each time the side-effect uses props or state values, you must indicate these values as dependencies:
@@ -210,6 +212,8 @@ function Greet({ name }) {
 // Fourth render, name prop changes
 <Greet name="Butters"/> // Side-effect RUNS
 ```
+
+[Try the demo.](https://codesandbox.io/s/nifty-yonath-mo2qf?file=/src/Greet.js)
 
 ## 5. Fetching data
 
