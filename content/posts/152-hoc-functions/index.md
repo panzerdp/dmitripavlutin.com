@@ -92,13 +92,15 @@ In the previous examples, `hiFunction()` is a first-order function since it simp
 
 So, in JavaScript *a function kind be either first-order, or high-order.*  
 
-That's interesting, but why are higher-order function useful? Let's find out next!
+That's interesting, but why are higher-order functions useful? Let's find out next!
 
 ## 2. The benefits of higher-order functions
 
-Let's recall to the question from the post introduction. How to make the `calculate()` function support multiple operations on the array of the numbers?  
+Let's recall the question from the post introduction. How to make the `calculate()` function support multiple operations on an array of numbers?  
 
-The answer is to make `calculate()` a *higher-order function*. Let's modify the function to make it happen:
+The answer is to make `calculate()` a *higher-order function*, as supply the required operation as a function. 
+
+Let's modify the function to make it happen:
 
 ```javascript
 function calculate(operation, initialValue, numbers) {
