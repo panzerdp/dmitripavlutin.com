@@ -30,7 +30,7 @@ The numbers are the input, and the function `calculate()` returns the sum &mdash
 
 What about implementing a more universal function that would support more operations on numbers: addition, multiplication, and more. How would you implement that?  
 
-Let's what the concept of the higher-order functions is, and how it can make `calculate()` function more universal in regards of operations it can support.  
+Let's what the concept of the higher-order functions is, and how it can make `calculate()` function more universal in regards to operations it can support.  
 
 ## 1. Higher-order functions
 
@@ -80,7 +80,7 @@ myFunc(); // => 42
 
 Finally, here's the interesting part: 
 
-> The functions that use other functions as arguments or return functions, are named *higher-order functions*.
+> The functions that use other functions as arguments or return functions are named *higher-order functions*.
 
 In the previous examples, `iUseFunction()` is higher-order because it accepts a function as an argument. Also `iReturnFunction()` is a higher-order function because it returns another function.  
 
@@ -133,9 +133,9 @@ Same way `multiply()` describes the multiplication operation. `calculate(multipl
 
 What's great is you can *reuse* the `calculate()` function to support multiple operations by providing different operation functions: addition, multiplication, and more.  
 
-Additionally, the higher-order functions concept allows *composability* of functions. For example, if you compose `calculate()` with `sum()` to calculate the sum of all numbers in an array. If you want to calculate the production, then you compose `calculate()` and `multiply()`.  
+Additionally, the concept of the higher-order function allows *composability* of functions. For example, if you compose `calculate()` with `sum()` to calculate the sum of all numbers in an array. If you want to calculate the production, then you compose `calculate()` and `multiply()`.  
 
-In conclusion, higher-order functions enable better reusability and composability of functions. As result they reduce the [code duplication](https://en.wikipedia.org/wiki/Duplicate_code) and favor the [single-responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle).  
+In conclusion, higher-order functions enable better reusability and composability of functions. As result, they reduce the [code duplication](https://en.wikipedia.org/wiki/Duplicate_code) and favor the [single-responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle).  
 
 ### 2.2 Higher-order functions and callbacks
 
@@ -173,7 +173,7 @@ document
 
 Higher-order functions in JavaScript are a special category of functions that either accept functions as an argument or return functions.  
 
-On the other side, if the function uses only primitives or objects as arguments or return value, these functions are first-order.  
+On the other side, if the function uses only primitives or objects as arguments or return values, these functions are first-order.  
 
 Higher-order functions provide the reusability benefit: the main behavior is provided by the higher-order function itself, and by accepting a function as an argument you extend that behavior at your will.  
 
