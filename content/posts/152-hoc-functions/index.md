@@ -1,6 +1,6 @@
 ---
 title: "What are Higher-Order Functions in JavaScript"
-description: "The higher-order function accept as argument or return other functions."
+description: "The higher-order function accept as arguments or return other functions."
 published: "2021-10-07T10:00Z"
 modified: "2021-10-07T10:00Z"
 thumbnail: "./images/cover.png"
