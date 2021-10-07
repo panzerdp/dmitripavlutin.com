@@ -3,7 +3,7 @@ title: "What are Higher-Order Functions in JavaScript"
 description: "The higher-order functions are useful because they allow reusability of behavior."
 published: "2021-10-06T12:00Z"
 modified: "2021-10-06T12:00Z"
-thumbnail: "./images/cover-3.png"
+thumbnail: "./images/cover.png"
 slug: javascript-higher-order-functions
 tags: ['javascript', 'function']
 recommended: ['differences-between-arrow-and-regular-functions', '6-ways-to-declare-javascript-functions']
@@ -128,6 +128,8 @@ Now `calculate(operation, initialValue, numbers)` is a higher-order function bec
 What's great is the you can easily reuse the `calculate()` function to support multiple operations by providing different functions as an argument.  
 
 What's interesting is that in the invocation `calculate(sum, 0, [1, 2, 4])`, the function supplied as an argument is also called [callback](/javascript-callback/) function.  
+
+*Challenge: does the array object in JavaScript has a higher-order method similar to `calculate(operation, initialValue, numbers)`? Write your guess in a comment below!*
 
 ## 3. Examples of higher-order functions
 
