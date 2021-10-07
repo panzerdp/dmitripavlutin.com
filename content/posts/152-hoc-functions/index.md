@@ -121,6 +121,8 @@ calculate(sum, 0, [1, 2, 4]);      // => 7
 calculate(multiply, 1, [1, 2, 4]); // => 8
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/kj9d8uae/)
+
 Here's what changed: `calculate(operation, initialValue, numbers)` accepts the first argument a function that describes the operation, the second argument as the initial value, and finally the third argument is the array of numbers.  
 
 *Now `calculate(operation, initialValue, numbers)` is a higher-order function because it accepts a function as the first argument.*  
