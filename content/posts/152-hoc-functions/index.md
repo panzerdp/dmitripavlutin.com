@@ -125,12 +125,30 @@ calculate(multiply, 1, [1, 2, 4]); // => 8
 
 Now `calculate(operation, initialValue, numbers)` is a higher-order function because it accepts as the first argument a function that describes an operation.  
 
-What's great is the you can easily reuse the `calculate()` function to support multiple operations. The single thing to do is to supply functions of different operations.  
+What's great is the you can easily reuse the `calculate()` function to support multiple operations by providing different functions as an argument.  
 
+What's interesting is that in the invocation `calculate(sum, 0, [1, 2, 4])`, the function supplied as an argument is also called [callback](/javascript-callback/) function.  
 
+## 3. Examples of higher-order functions
 
-## 3. More examples of higher-order functions
+If you take a look closely at the built-in JavaScript function on arrays, strings, DOM methods, promise method &mdash; you could notice that many of them are higher-order functions as soon as they a function as an argument.  
 
+For example, `array.map(mapperFunc)` method is a higher-order function because it accepts a mapper function as an argument:
 
+```javascript
+const numbers = [1, 2, 4];
+
+const doubled = numbers.map(function mapper(number) {
+  return 2 * number;
+});
+
+doubles; // [2, 4, 8]
+```
 
 ## 4. Conclusion
+
+Higher-order functions in JavaScript is a special category of functions that either accept functions as an argument or return functions. Simple as is.  
+
+On the other side, if the function only uses primitives or objects as argument or returning, these functions are first-order.  
+
+Higher-order functions provide the benefit of reusability: the main behavior is provided by the higher-order function itself, but by accepting a function as an argument you modify that behavior at your will.  
