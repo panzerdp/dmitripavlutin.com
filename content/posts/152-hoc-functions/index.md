@@ -1,9 +1,9 @@
 ---
-title: "What are Higher-Order Functions in JavaScript"
+title: "What are Higher-Order Functions in JavaScript?"
 description: "The higher-order function accept as arguments or return other functions."
 published: "2021-10-07T10:00Z"
 modified: "2021-10-07T10:00Z"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover-2.png"
 slug: javascript-higher-order-functions
 tags: ['javascript', 'function']
 recommended: ['differences-between-arrow-and-regular-functions', '6-ways-to-declare-javascript-functions']
