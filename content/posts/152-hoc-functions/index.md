@@ -1,8 +1,8 @@
 ---
 title: "What are Higher-Order Functions in JavaScript"
 description: "The higher-order functions are useful because they allow reusability of behavior."
-published: "2021-10-06T12:00Z"
-modified: "2021-10-06T12:00Z"
+published: "2021-10-07T10:00Z"
+modified: "2021-10-07T10:00Z"
 thumbnail: "./images/cover.png"
 slug: javascript-higher-order-functions
 tags: ['javascript', 'function']
@@ -25,7 +25,7 @@ function calculate(numbers) {
   return sum;
 }
 
-calculate([1, 2, 3]); // => 6
+calculate([1, 2, 4]); // => 7
 ```
 
 The numbers as arguments are the input, and the function `calculate()` returns the sum &mdash; the output.  
@@ -40,7 +40,7 @@ Let's make a pause and think a bit about fundamentals.
 
 In JavaScript, the functions can use primitive types (like numbers, strings), objects (like arrays, plain objects, regular expressions, etc) as arguments, and return a primitive type or object too.  
 
-In the previous example, `calculate([1, 2, 3])` accepts an array of numbers as an argument, and returns a number `6` &mdash; the sum.  
+In the previous example, `calculate([1, 2, 4])` accepts an array of numbers as an argument, and returns the number `7` &mdash; the sum.  
 
 What about using functions as values? Is it possible to assign functions themselves to variables, use them as arguments, or even return? Yes, that's possible! 
 
