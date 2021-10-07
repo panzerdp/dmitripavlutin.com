@@ -30,9 +30,9 @@ calculate([1, 2, 3]); // => 6
 
 The numbers as arguments are the input, and the function `calculate()` returns the sum &mdash; the output.  
 
-But what if you'd like to implement a more universal function, which should be able to support more operations on numbers: the addition, multiplication and more. How would you implement that?  
+But what if you'd like to implement a more universal function, which should be able to support more operations on numbers: addition, multiplication, and more. How would you implement that?  
 
-Let's see how the higher-order functions concept can help you.
+Let's see how the concept of the higher-order functions can help you.
 
 ## 1. Higher-order functions
 
@@ -42,7 +42,7 @@ In JavaScript, the functions can use primitive types (like numbers, strings), ob
 
 In the previous example, `calculate([1, 2, 3])` accepts an array of numbers as an argument, and returns a number `6` &mdash; the sum.  
 
-What about using functions as values? Is it possible to assign functions themselves to variables, use as arguments, or even return? Yes, that's possible! 
+What about using functions as values? Is it possible to assign functions themselves to variables, use them as arguments, or even return? Yes, that's possible! 
 
 All because *functions in JavaScript are first-class citizens*. This means that you can:
 
@@ -90,7 +90,7 @@ On the other side, the functions that use only primitives or objects as argument
 
 In the previous examples, `hiFunction()` is a first-order function since it simply returns a number.  
 
-So, in JavaScript *a function kind be either first-order, or high-order.*  
+So, in JavaScript *a function kind is either first-order or high-order.*  
 
 That's interesting, but why are higher-order functions useful? Let's find out next!
 
@@ -125,17 +125,17 @@ calculate(multiply, 1, [1, 2, 4]); // => 8
 
 Now `calculate(operation, initialValue, numbers)` is a higher-order function because it accepts as the first argument a function that describes an operation.  
 
-What's great is the you can easily reuse the `calculate()` function to support multiple operations by providing different functions as an argument.  
+What's great is you can reuse the `calculate()` function to support multiple operations by providing different functions as an argument.  
 
 What's interesting is that in the invocation `calculate(sum, 0, [1, 2, 4])`, the function supplied as an argument is also called [callback](/javascript-callback/) function.  
 
-*Challenge: does the array object in JavaScript has a higher-order method similar to `calculate(operation, initialValue, numbers)`? Write your guess in a comment below!*
+*Challenge: does the array object has a higher-order method similar to `calculate(operation, initialValue, numbers)`? Write your guess in a comment below!*
 
 ## 3. Examples of higher-order functions
 
-If you take a look closely at the built-in JavaScript function on arrays, strings, DOM methods, promise method &mdash; you could notice that many of them are higher-order functions as soon as they a function as an argument.  
+If you take a look closely at the built-in JavaScript function on arrays, strings, DOM methods, promise method &mdash; you could notice that many of them are higher-order functions as soon as they function as an argument.  
 
-For example, `array.map(mapperFunc)` method is a higher-order function because it accepts a mapper function as an argument:
+For example, the `array.map(mapperFunc)` method is a higher-order function because it accepts a mapper function as an argument:
 
 ```javascript
 const numbers = [1, 2, 4];
@@ -149,8 +149,8 @@ doubles; // [2, 4, 8]
 
 ## 4. Conclusion
 
-Higher-order functions in JavaScript is a special category of functions that either accept functions as an argument or return functions. Simple as is.  
+Higher-order functions in JavaScript are a special category of functions that either accept functions as an argument or return functions.  
 
-On the other side, if the function only uses primitives or objects as argument or returning, these functions are first-order.  
+On the other side, if the function only uses primitives or objects for arguments or return, these functions are first-order.  
 
-Higher-order functions provide the benefit of reusability: the main behavior is provided by the higher-order function itself, but by accepting a function as an argument you modify that behavior at your will.  
+Higher-order functions provide the reusability benefit: the main behavior is provided by the higher-order function itself, but by accepting a function as an argument you modify that behavior at your will.  
