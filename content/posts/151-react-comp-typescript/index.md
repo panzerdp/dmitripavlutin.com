@@ -305,7 +305,7 @@ function ShowText({ show, text }: ShowTextProps): JSX.Element | null {
 
 My recommendation is to [enforce](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md) each function to explicitly indicate the return type. Many silly mistakes and typos can be caught by doing so.  
 
-For example, if you set a newline between `return` and the returned expression, then the explicitly indicated return type would catch this problem:
+For example, if you have set accidently a newline between `return` and the returned expression, then the explicitly indicated return type would catch this problem:
 
 ```tsx twoslash
 // @errors: 2322
