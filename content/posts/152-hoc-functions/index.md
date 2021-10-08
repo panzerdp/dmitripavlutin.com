@@ -158,7 +158,7 @@ const doubled = numbers.map(function mapper(number) {
   return 2 * number;
 });
 
-doubles; // [2, 4, 8]
+doubled; // [2, 4, 8]
 ```
 
 `element.addEventListener(type, handler)` DOM method is also a higher-order function since it accepts as the second argument the event handler function:
