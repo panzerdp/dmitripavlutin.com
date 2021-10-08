@@ -314,6 +314,7 @@ function Application() {
   return (
     <UserContext.Provider value={value}>
       <UserNameInput />
+      <UserInfo />
     </UserContext.Provider>
   );
 }
