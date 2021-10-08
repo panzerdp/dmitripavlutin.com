@@ -179,4 +179,4 @@ On the other side, if the function uses only primitives or objects as arguments 
 
 Higher-order functions provide the reusability benefit: the main behavior is provided by the higher-order function itself, and by accepting a function as an argument you extend that behavior at your will.  
 
-*Challenge: does the array object has a higher-order method similar to `calculate(operation, initialValue, numbers)`? Write your guess in a comment below!*
+*Challenge: Is there a built-in higher-order method on the array object similar to `calculate(operation, initialValue, numbers)`? Write your guess in a comment below!*
