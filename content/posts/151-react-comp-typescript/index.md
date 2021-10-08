@@ -2,7 +2,7 @@
 title: "How to Use TypeScript with React Components"
 description: "How to use TypeScript to type React components: validate props, mark props as optional."
 published: "2021-09-29T15:00Z"
-modified: "2021-10-01T16:40Z"
+modified: "2021-10-08T10:20Z"
 thumbnail: "./images/cover-3.png"
 slug: typescript-react-components
 tags: ['typescript', 'react']
@@ -39,7 +39,7 @@ function FormatDate({ date }: FormatDateProps): JSX.Element {
 
 According to the `FormatDateProps` interface, the component `FormatDate` the value of `date` prop can only be an instance of `Date`. That is a *constraint*.  
 
-Why is this constraint important? Because the `FormatDate` component calls the method `date.toLocaleString()` on the date instance, and the `date` prop have to be a date instance. Otherwise the component wouldn't work.    
+Why is this constraint important? Because the `FormatDate` component calls the method `date.toLocaleString()` on the date instance, and the `date` prop have to be a date instance. Otherwise, the component wouldn't work.    
 
 Then the user of the `FormatDate` component would have to satisfy the constraint, and provide `date` prop only with `Date` instances:
 
@@ -75,7 +75,7 @@ Typing a React component is usually a 2 steps process.
 A) Define the interface that describes what props the component accepts using an [object type](https://www.typescriptlang.org/docs/handbook/2/objects.html). A good naming convention for the
 props interface is `ComponentName` + `Props` = `ComponentNameProps`
 
-B) The use the interface to annotate the props parameter inside the functional component function.  
+B) Then use the interface to annotate the props parameter inside the functional component function.  
 
 For example, let's annotate a component `Message` that accepts 2 props: `text` (a string) and `important` (a boolean):
 
@@ -263,8 +263,6 @@ type MessageReturnType = ReturnType<typeof Message>;
 //      ^?
 ```
 
-My recommendation is to enforce each function to explicitly indicate the return type. Many silly mistakes and typos can be caught by doing so.   
-
 In the case of React functional components the return type is usually `JSX.Element`:
 
 ```tsx twoslash{5}
@@ -303,6 +301,33 @@ function ShowText({ show, text }: ShowTextProps): JSX.Element | null {
 
 `ShowText` returns an element if `show` prop is `true`, otherwise returns `null`. That's why the `ShowText` function's return type is a union `JSX.Element | null`.  
 
+### 3.1 Tip: enforce the return type
+
+My recommendation is to [enforce](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md) each function to explicitly indicate the return type. Many silly mistakes and typos can be caught by doing so.  
+
+For example, if you set a newline between `return` and the returned expression, then the explicitly indicated return type would catch this problem:
+
+```tsx twoslash
+// @errors: 2322
+function BrokenComponent(): JSX.Element {
+  return
+    <div>Hello!</div>;
+}
+```
+
+(Note: when there's a newline between the `return` keyword and an expression, then the function returns `undefined` rather than the expression.)  
+
+However, if there's no return type indicated, the incorrectly used `return` remains unnoticed by TypeScript (and by you!):
+
+```tsx twoslash
+function BrokenComponent() {
+  return 
+    <div>Hello!</div>;
+}
+```
+
+Then good luck debugging!
+
 ## 4. Conclusion
 
 React components can greatly benefit from TypeScript.  
@@ -311,4 +336,4 @@ Typing components is especially useful to validate the component props. Usually,
 
 Then, when the annotated component renders, TypeScript verifies if correct prop values were supplied.  
 
-On top of data validation, the types can be a great source of meta information with clues of how the annotated function or variable works.  
+On top of data validation, the types can be a great source of meta-information with clues of how the annotated function or variable works.  
