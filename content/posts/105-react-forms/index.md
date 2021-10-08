@@ -155,7 +155,7 @@ function RegisterYourCatForm() {
 
 `values` is the state variable that holds the data of the entire form. This is a plain JavaScript object with properties `name`, `color`, `age`, and `habits` corresponding to each input field in the form.  
 
-`set(key)` is a higher-order function that returns on change handlers. Its purpose is to avoid writing manually on change handlers for each field in the form. 
+`set(key)` is a [higher-order function](/javascript-higher-order-functions/) that returns on change handlers. Its purpose is to avoid writing manually on change handlers for each field in the form. 
 
 For example, `set('name')` returns a handler that updates `values.name` property when a change in the *Name* field happens.  
 

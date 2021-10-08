@@ -47,7 +47,7 @@ However, outside of the `foo()` scope, `count` is inaccessible. If you try to ac
 
 If you've defined a variable inside of a function or code block, then you can use this variable only within that function or code block. The above example demonstrates this behavior.   
 
-![The JavaScript scope](./images/javascript-scope-3.png)
+![The JavaScript scope](./images/javascript-scope-3.svg)
 
 Now, let's see a general formulation:
 
@@ -84,8 +84,6 @@ bar();
 
 Let's play a bit more with scopes, and nest one scope into another. For example, the function `innerFunc()` is nested inside an outer function `outerFunc()`.
 
-![The JavaScript scopes can be nested](./images/javascript-nested-scopes.png)
-
 How would the 2 function scopes interact with each other? Can I access the variable `outerVar` of `outerFunc()` from within `innerFunc()` scope?  
 
 Let's try that in the example:
@@ -109,6 +107,8 @@ outerFunc();
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/x4rzf61c/)
 
 Indeed, `outerVar` variable is accessible inside `innerFunc()` scope. The variables of the outer scope are accessible inside the inner scope.  
+
+![The JavaScript scopes can be nested](./images/javascript-nested-scopes-3.svg)
 
 Now you know 2 interesting things:
 
@@ -222,7 +222,7 @@ In other words, `innerFunc()` *closes over* (a.k.a. captures, remembers) the var
 
 In other words, `innerFunc()` is a *closure* because it closes over the variable `outerVar` from its lexical scope.  
 
-![The JavaScript closure](./images/javascript-closure-4.svg)
+![The JavaScript closure](./images/javascript-closure-6.svg)
 
 You've made the final step to understanding what a closure is:
 
@@ -253,7 +253,7 @@ myButton.addEventListener('click', function handleClick() {
 
 [Open the demo](https://codesandbox.io/s/event-handling-ymvr9) and click the button. The text updates to show the number of clicks.  
 
-When the button is clicked, `handleClick()` is executed somewhere inside of the DOM code. The execution happens far from the place of definition.  
+When the button is clicked, `handleClick()` is executed somewhere inside of the DOM code. The execution happens far from the place of the definition.  
 
 But being a closure, `handleClick()` captures `countClicked` from the lexical scope and updates it when a click happens. Even more, `myText` is captured too.  
 
@@ -262,6 +262,7 @@ But being a closure, `handleClick()` captures `countClicked` from the lexical sc
 Capturing variables from the lexical scope is useful in callbacks.  
 
 A `setTimeout()` callback:
+
 ```javascript
 const message = 'Hello, World!';
 
@@ -272,6 +273,7 @@ setTimeout(function callback() {
 The `callback()` is a closure because it captures the variable `message`.  
 
 An iterator function for `forEach()`:
+
 ```javascript
 let countEven = 0;
 const items = [1, 5, 100, 10];

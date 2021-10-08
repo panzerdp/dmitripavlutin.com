@@ -100,7 +100,7 @@ A *function declaration* occurs when a statement contains the `function` keyword
 
 The function declaration creates a *function variable* &mdash; a variable with the same name as the function name (e.g. `sumA` from the previous example). The function variable is accessible in the current scope (*before* and *after* the function declaration) and even *inside* the function's scope itself. 
 
-The function variable is normally used to invoke the function or pass around the function object to other functions (to [higher-order functions](https://dev.to/damcosset/higher-order-functions-in-javascript-4j8b)).  
+The function variable is normally used to invoke the function or pass around the function object to other functions (to [higher-order functions](/javascript-higher-order-functions/)).  
 
 For example, let's write a function `sumArray(array)` that sums recursively items of an array (the array can contain either numbers or other arrays):  
 

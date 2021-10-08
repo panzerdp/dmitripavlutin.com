@@ -2,7 +2,7 @@
 title: "A Simple Explanation of React.useEffect()"
 description: "useEffect() hook executes side-effects in React components."
 published: "2020-10-13T08:50Z"
-modified: "2021-09-12T09:10Z"
+modified: "2021-10-06T08:20Z"
 thumbnail: "./images/effect-4.jpg"
 slug: react-useeffect-explanation
 tags: ['react', 'hook', 'useeffect']
@@ -64,6 +64,8 @@ useEffect(callback[, dependencies]);
 * `dependencies` is an optional array of dependencies. `useEffect()` executes `callback` only if the dependencies have changed between renderings.  
 
 *Put your side-effect logic into the `callback` function, then use the `dependencies` argument to control when you want the side-effect to run. That's the sole purpose of `useEffect()`.*  
+
+![React useEffect() Hook: when callback is invoked](./images/react-useeffect-callback-3.svg)
 
 For example, in the previous code snippet you saw the `useEffect()` in action:
 
@@ -155,6 +157,8 @@ Even if the component re-renders with different `name` property, the side-effect
 <Greet name="Butters"/> // Side-effect DOES NOT RUN
 ```
 
+[Try the demo.](https://codesandbox.io/s/sweet-jepsen-r8m6t?file=/src/Greet.js)
+
 ## 4. The side-effect on component did update
 
 Each time the side-effect uses props or state values, you must indicate these values as dependencies:
@@ -208,6 +212,8 @@ function Greet({ name }) {
 // Fourth render, name prop changes
 <Greet name="Butters"/> // Side-effect RUNS
 ```
+
+[Try the demo.](https://codesandbox.io/s/nifty-yonath-mo2qf?file=/src/Greet.js)
 
 ## 5. Fetching data
 
@@ -288,6 +294,8 @@ A) After initial rendering, `useEffect()` invokes the callback having the side-e
 B) On later renderings, before invoking the next side-effect callback, `useEffect()` *invokes* the `cleanup` function from the previous side-effect execution (to clean up everything after the previous side-effect), then runs the current side-effect.  
 
 C) Finally, after unmounting the component, `useEffect()` *invokes* the cleanup function from the latest side-effect.  
+
+![React useEffect() Hook: when callback and cleanup are invoked](./images/react-useeffect-callback-cleanup-3.svg)
 
 Let's see an example when the side-effect cleanup is useful.  
 

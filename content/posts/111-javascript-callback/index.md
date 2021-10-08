@@ -45,7 +45,7 @@ The `persons.map(greet)` is a function that accepts another function as an argum
 
 > The *callback function* is supplied as an argument to a *higher-order function*  that invokes ("calls back") the callback function to perform an operation.  
 
-What's important is that the higher-order function takes the full responsibility of invoking the callback and supplying it with the right arguments. 
+What's important is that the [higher-order function](/javascript-higher-order-functions/) takes the full responsibility of invoking the callback and supplying it with the right arguments. 
 
 In the previous example, the higher-order function `persons.map(greet)` takes the responsibility to invoke the `greet()` callback function with each item of the array as an argument: `'Cristina'` and `'Ana'`.  
 
