@@ -30,7 +30,7 @@ The numbers are the input, and the function `calculate()` returns the sum &mdash
 
 What about implementing a more universal function that would support more operations on numbers: addition, multiplication, and more. How would you implement that?  
 
-Let's what the concept of the higher-order functions is, and how it can make `calculate()` function more universal in regards to operations it can support.  
+Let's see what the concept of the higher-order functions is, and how it can make `calculate()` function more universal in regards to operations it can support.  
 
 ## 1. Higher-order functions
 
