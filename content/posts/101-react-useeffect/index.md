@@ -82,7 +82,7 @@ Also, you don't want the document title update to execute every time `Greet` com
 
 *Put your side-effect logic into the `callback` function, then use the `dependencies` argument to control when you want the side-effect to run. That's the sole purpose of `useEffect()`.*  
 
-## 2. *useEffect()* dependencies argument
+## 2. Dependencies argument
 
 `dependencies` argument of `useEffect(callback, dependencies)` lets you control when the side-effect runs. When dependencies are:
 
@@ -126,7 +126,7 @@ function MyComponent({ prop }) {
 
 Let's detail into the cases B) and C) since they're used often.  
 
-## 3. *useEffect()* and component lifecycle
+## 3. Component lifecycle
 
 ### 3.1 Component did mount
 
