@@ -30,7 +30,7 @@ The numbers are the input, and the function `calculate()` returns the sum &mdash
 
 What about implementing a more universal function that would support more operations on numbers: addition, multiplication, and more. How would you implement that?  
 
-Let's what the concept of the higher-order functions is, and how it can make `calculate()` function more universal in regards to operations it can support.  
+Let's see what the concept of the higher-order functions is, and how it can make `calculate()` function more universal in regards to operations it can support.  
 
 ## 1. Higher-order functions
 
@@ -135,7 +135,7 @@ Same way `multiply()` describes the multiplication operation. `calculate(multipl
 
 What's great is you can *reuse* the `calculate()` function to support multiple operations by providing different operation functions: addition, multiplication, and more.  
 
-Additionally, the concept of the higher-order function allows *composability* of functions. For example, if you compose `calculate()` with `sum()` to calculate the sum of all numbers in an array. If you want to calculate the production, then you compose `calculate()` and `multiply()`.  
+Additionally, the concept of the higher-order function allows *composability* of functions. For example, you compose `calculate()` with `sum()` to calculate the sum of all numbers in an array. If you want to calculate the production, then you compose `calculate()` and `multiply()`.  
 
 In conclusion, higher-order functions enable better reusability and composability of functions. As result, they reduce the [code duplication](https://en.wikipedia.org/wiki/Duplicate_code) and favor the [single-responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle).  
 
@@ -154,7 +154,7 @@ For example, the `array.map(mapperFunc)` method is a higher-order function becau
 ```javascript
 const numbers = [1, 2, 4];
 
-const doubled = numbers.map(function mapper(number) {
+const doubles = numbers.map(function mapper(number) {
   return 2 * number;
 });
 
@@ -179,4 +179,4 @@ On the other side, if the function uses only primitives or objects as arguments 
 
 Higher-order functions provide the reusability benefit: the main behavior is provided by the higher-order function itself, and by accepting a function as an argument you extend that behavior at your will.  
 
-*Challenge: does the array object has a higher-order method similar to `calculate(operation, initialValue, numbers)`? Write your guess in a comment below!*
+*Challenge: Is there a built-in higher-order method on the array object similar to `calculate(operation, initialValue, numbers)`? Write your guess in a comment below!*
