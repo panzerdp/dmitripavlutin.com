@@ -135,7 +135,7 @@ Same way `multiply()` describes the multiplication operation. `calculate(multipl
 
 What's great is you can *reuse* the `calculate()` function to support multiple operations by providing different operation functions: addition, multiplication, and more.  
 
-Additionally, the concept of the higher-order function allows *composability* of functions. For example, if you compose `calculate()` with `sum()` to calculate the sum of all numbers in an array. If you want to calculate the production, then you compose `calculate()` and `multiply()`.  
+Additionally, the concept of the higher-order function allows *composability* of functions. For example, you compose `calculate()` with `sum()` to calculate the sum of all numbers in an array. If you want to calculate the production, then you compose `calculate()` and `multiply()`.  
 
 In conclusion, higher-order functions enable better reusability and composability of functions. As result, they reduce the [code duplication](https://en.wikipedia.org/wiki/Duplicate_code) and favor the [single-responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle).  
 
