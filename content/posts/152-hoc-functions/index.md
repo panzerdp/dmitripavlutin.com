@@ -154,7 +154,7 @@ For example, the `array.map(mapperFunc)` method is a higher-order function becau
 ```javascript
 const numbers = [1, 2, 4];
 
-const doubled = numbers.map(function mapper(number) {
+const doubles = numbers.map(function mapper(number) {
   return 2 * number;
 });
 
