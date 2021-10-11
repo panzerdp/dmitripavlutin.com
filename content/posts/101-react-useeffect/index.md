@@ -66,6 +66,8 @@ useEffect(callback[, dependencies]);
 * `callback` is the function containing the side-effect logic. `callback` is executed right after changes were being pushed to DOM.  
 * `dependencies` is an optional array of dependencies. `useEffect()` executes `callback` only if the dependencies have changed between renderings.  
 
+*Put your side-effect logic into the `callback` function, then use the `dependencies` argument to control when you want the side-effect to run. That's the sole purpose of `useEffect()`.*  
+
 ![React useEffect() Hook: when callback is invoked](./images/react-useeffect-callback-3.svg)
 
 For example, in the previous code snippet you saw the `useEffect()` in action:
@@ -80,9 +82,7 @@ The *document title update* is the side-effect because it doesn't directly calcu
 
 Also, you don't want the document title update to execute every time `Greet` component renders. You just want it executed when `name` prop changes &mdash; that's the reason you supplied `name` as a dependency to `useEffect(callback, [name])`.  
 
-*Put your side-effect logic into the `callback` function, then use the `dependencies` argument to control when you want the side-effect to run. That's the sole purpose of `useEffect()`.*  
-
-## 2. *useEffect()* dependencies argument
+## 2. Dependencies argument
 
 `dependencies` argument of `useEffect(callback, dependencies)` lets you control when the side-effect runs. When dependencies are:
 
@@ -126,7 +126,7 @@ function MyComponent({ prop }) {
 
 Let's detail into the cases B) and C) since they're used often.  
 
-## 3. *useEffect()* and component lifecycle
+## 3. Component lifecycle
 
 ### 3.1 Component did mount
 
