@@ -10,7 +10,7 @@ recommended: ['typescript-unknown-vs-any', 'typescript-index-signatures']
 type: post
 ---
 
-Let's say you have a simple class `User`:
+Let's say you have a class `User`:
 
 ```twoslash include user
 class User {
@@ -20,21 +20,31 @@ class User {
     this.userName = userName;
   }
 }
-// - 1
+```
+
+```ts twoslash
+// @include: user
+```
+
+And another class `AdminUser` that extends `User` class defined above:
+
+```twoslash include admin-user
 class AdminUser extends User {
 
 }
-// - 2
 ```
 
 ```ts twoslash
-// @include: user-1
-```
-
-and also there's another class `AdminUser`, which is a subtype of `User`:
-
-```ts twoslash
-// @include: user-1
+// @include: user
 // ---cut---
-// @include: user-2
+// @include: admin-user
 ```
+
+Since `AdminUser` extends `User`, you could say that `AdminUser` is a subtype of `User`.  
+
+Now let's introduce the symbol `<:`, which means *"is a subtype of"*. Because `AdminUser` is a subtype of `User`, now you could write shorter:
+
+```
+AdminUser <: User
+```
+
