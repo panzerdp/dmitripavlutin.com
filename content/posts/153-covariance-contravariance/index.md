@@ -34,7 +34,7 @@ class User {
 
 And another class `Admin` that extends `User` class defined above:
 
-```twoslash include admin-user
+```twoslash include admin
 class Admin extends User {
 
 }
@@ -43,7 +43,7 @@ class Admin extends User {
 ```ts twoslash
 // @include: user
 // ---cut---
-// @include: admin-user
+// @include: admin
 ```
 
 Since `Admin` extends `User`, you could say that `Admin` is a subtype of `User`.  
@@ -58,22 +58,43 @@ Thanks to the fact that `Admin <: User`, you could assign to a variable of type 
 
 ```ts twoslash
 // @include: user
-// @include: admin-user
+// @include: admin
 // ---cut---
 const user1: User = new User('user1');   // OK
 const user2: User = new Admin('admin1'); // OK
 ```
 
-Let's then use the symbol `A =: B` to denote *"A is assignable to B"*. Following the previous example, you could write:
+<!-- Let's then use the symbol `A =: B` to denote *"A is assignable to B"*. Following the previous example, you could write:
 
 ```
 User  =: User
 Admin =: User
-```
+``` -->
 
 ## 2. Covariance
 
-Now let me ask you a question: 
+Now let's try an experiment. Suppose that you're dealing with some asynchornous code, and you have to work with Promise type of `User` and `Admin`.  
+
+Having `Admin <: User`, does it mean that `Promise<Admin> <: Promise<User>` holds as well? 
+
+In other words, does it mean that `Promise<Admin>` is a subtype of `Promise<User>`?
+
+Let's see what TypeScript is saying:
+
+```ts twoslash{5}
+// @include: user
+// @include: admin
+// ---cut---
+const admin = new Admin('admin1');
+
+const promise: Promise<User> = new Promise<Admin>(r => r(admin)); // OK
+```
+
+TypeScript has showed that indeed `Promise<Admin> <: Promise<User>` holds true as result of `Admin <: User`. In other words, you could say that `Promise` type is *covariant*.  
+
+Now let's write a more formal definition of *covariance*:
+
+> A type `T` is *covariant* if having 2 types `S` and `P` for which holds `S <: P`, it results `T<S> <: T<P>`.  
 
 ## 3. Contravariance
 
