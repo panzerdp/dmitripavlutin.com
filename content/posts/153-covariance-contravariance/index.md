@@ -90,7 +90,7 @@ const admin = new Admin('admin1');
 const promise: Promise<User> = new Promise<Admin>(r => r(admin)); // OK
 ```
 
-TypeScript has showed that indeed `Promise<Admin> <: Promise<User>` holds true as result of `Admin <: User`. In other words, you could say that `Promise` type is *covariant*.  
+TypeScript has showed that indeed `Promise<Admin> <: Promise<User>` holds true as result of `Admin <: User`. Saying it formal, `Promise` type is *covariant*.  
 
 Now let's write a more formal definition of *covariance*:
 
