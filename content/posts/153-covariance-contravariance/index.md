@@ -73,7 +73,7 @@ Admin =: User
 
 ## 2. Covariance
 
-Now let's try an experiment. Suppose that you're dealing with some asynchornous code, and you have to work with Promise type of `User` and `Admin`.  
+Suppose that you're working with some asynchornous code that fetches `User` and `Admin` instances. Thus you have to work with promises of `User` and `Admin`.  
 
 Having `Admin <: User`, does it mean that `Promise<Admin> <: Promise<User>` holds as well? 
 
@@ -92,9 +92,9 @@ const promise: Promise<User> = new Promise<Admin>(r => r(admin)); // OK
 
 TypeScript has showed that indeed `Promise<Admin> <: Promise<User>` holds true as result of `Admin <: User`. Saying it formal, `Promise` type is *covariant*.  
 
-Now let's write a more formal definition of *covariance*:
+Here's a definition of *covariance*:
 
-> A type `T` is *covariant* if having 2 types `S` and `P` for which holds `S <: P`, it results `T<S> <: T<P>`.  
+> A type `T` is *covariant* if having `S <: P`, then `T<S> <: T<P>`.  
 
 ## 3. Contravariance
 
