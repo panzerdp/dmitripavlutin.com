@@ -10,13 +10,15 @@ recommended: ['typescript-unknown-vs-any', 'typescript-index-signatures']
 type: post
 ---
 
-Learning the covariance and contravariance in TypeScript could be tricky (I know from my own experience!), but knowing them is a great addition to your types understanding.  
+Learning covariance and contravariance in TypeScript could be tricky (I know from my experience!), but knowing them is a great addition to your types understanding.  
 
-In this post, I'm going to use a good example and a bit of theory to explain the covariance and contravariance concepts.  
+In this post, I'll read an accessible explanation of covariance and contravariance concepts.  
 
 ## 1. Subtyping
 
-Let's say you have a class `User`:
+Thanks to inheriance, in TypeScript a base type can be extended by another type. 
+
+For example, let's define a base class `User`, then extend that class by a new `Admin` class:
 
 ```twoslash include user
 class User {
@@ -27,12 +29,6 @@ class User {
   }
 }
 ```
-
-```ts twoslash
-// @include: user
-```
-
-And another class `Admin` that extends `User` class defined above:
 
 ```twoslash include admin
 class Admin extends User {
@@ -47,20 +43,21 @@ class Admin extends User {
 
 ```ts twoslash
 // @include: user
-// ---cut---
+
 // @include: admin
 ```
 
-Since `Admin` extends `User`, you could say that `Admin` is a subtype of `User`.  
+Since `Admin` extends `User` (note the `Admin extends User`), you could say that `Admin` is a *subtype* of `User`.  
 
-Now let's introduce the symbol `A <: B`, which means *"A is a subtype of B"*. Because `Admin` is a subtype of `User`, now you could write shorter:
+Subtyping is possible not only on classes, but also on other types. For example, the literal string type `'Hello'` is a subtype of `string`, or the literal number type `42` 
+
+Now let's introduce the symbol `A <: B` &mdash; meaning *"A is a subtype of B"*. Because `Admin` is a subtype of `User`, now you could write shorter:
 
 ```
 Admin <: User
 ```
 
 Aditionally, I'm going to use a helper type `IsSubtype<S, P>`, which evaluates to `true` if `S` if a subtype of `P`, and `false` otherwise:
-
 
 ```twoslash include is-subtype
 type IsSubtype<S, P> = S extends P ? true : false;
@@ -140,14 +137,14 @@ type T4 = IsSubtype<Func<User>, Func<Admin>>
 //   ^?
 ```
 
-For the `Func` type, having `Admin <: User`, doesn't mean that `Func<Admin> <: Func<User>`. But vice versa, `Func<User> <: Func<Admin>` holds true.  
+For the `Func` type, having `Admin <: User`, doesn't mean that `Func<Admin> <: Func<User>`. But vice versa, `Func<User> <: Func<Admin>` holds true (note the subtyping direction has flipped compared to the original types `Admin <: User`).  
 
 That demonstrates that `Func` type is contravariant.  
 
 > A type `T` is *contravarian* if having `S <: P`, then `T<P> <: T<S>`.  
 
-To be honest, contravariance looks a big contreintuitive to me. Having `S` a subtype of `P`, then I *expect* for any type `T` it would result `T<S>` is a subtype of 
-`P<T>`. But that's not always true, as you saw earlier! 
+On a personal note, the contravariance looks a bit contreintuitive to me. Having `S` a subtype of `P`, then I *expect* for any type `T` it would result `T<S>` to be a subtype of 
+`P<T>`. But that's not always true, as you saw earlier!  
 
 ## 4. Conclusion
 
