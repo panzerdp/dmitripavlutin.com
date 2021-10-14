@@ -1,6 +1,6 @@
 ---
 title: "Covariance and Contravariance in TypeScript"
-description: "Covariance and contravariance describes the which's the base type and which's a subtype in composable types."
+description: "Covariance and contravariance are the concepts behind the subtyping of composable types."
 published: "2021-10-14T12:00Z"
 modified: "2021-10-14T12:00Z"
 thumbnail: "./images/cover-1.png"
@@ -10,7 +10,7 @@ recommended: ['typescript-unknown-vs-any', 'typescript-index-signatures']
 type: post
 ---
 
-Learning covariance and contravariance in TypeScript could be tricky (I know from my experience!), but knowing them is a great addition to your types understanding.  
+Learning covariance and contravariance in TypeScript could be tricky (I know from my experience!), but knowing them is a great addition to understnading types and subtyping.  
 
 In this post, I'll read an accessible explanation of covariance and contravariance concepts.  
 
