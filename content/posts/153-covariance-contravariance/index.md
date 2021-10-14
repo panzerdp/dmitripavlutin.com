@@ -16,7 +16,7 @@ In this post, I'll read an accessible explanation of covariance and contravarian
 
 ## 1. Subtyping
 
-Thanks to inheriance, in TypeScript a base type can be extended by another type. 
+Thanks to inheritance, in TypeScript a *base* type can be extended by another type named *subtype*. 
 
 For example, let's define a base class `User`, then extend that class by a new `Admin` class:
 
@@ -24,7 +24,7 @@ For example, let's define a base class `User`, then extend that class by a new `
 class User {
   userName: string;
 
-  constructor(userName: string) { 
+  constructor(userName: string) {
     this.userName = userName;
   }
 }
@@ -49,7 +49,7 @@ class Admin extends User {
 
 Since `Admin` extends `User` (note the `Admin extends User`), you could say that `Admin` is a *subtype* of `User`.  
 
-Subtyping is possible not only on classes, but also on other types. For example, the literal string type `'Hello'` is a subtype of `string`, or the literal number type `42` 
+Subtyping is possible not only in classes but also in other types. For example, the literal string type `'Hello'` is a subtype of `string`, or the literal number type `42` is a subtype of `number`.  
 
 Now let's introduce the symbol `A <: B` &mdash; meaning *"A is a subtype of B"*. Because `Admin` is a subtype of `User`, now you could write shorter:
 
@@ -57,7 +57,7 @@ Now let's introduce the symbol `A <: B` &mdash; meaning *"A is a subtype of B"*.
 Admin <: User
 ```
 
-Aditionally, I'm going to use a helper type `IsSubtype<S, P>`, which evaluates to `true` if `S` if a subtype of `P`, and `false` otherwise:
+Additionally, I'm going to use a helper type `IsSubtype<S, P>`, which evaluates to `true` if `S` if a subtype of `P`, and `false` otherwise:
 
 ```twoslash include is-subtype
 type IsSubtype<S, P> = S extends P ? true : false;
@@ -83,7 +83,7 @@ type T1 = IsSubtype<Admin, User>;
 
 ## 2. Covariance
 
-Let's think about some asynchornous code that fetches `User` and `Admin` instances. Thus, you have to work with promises of `User` and `Admin`.  
+Let's think about some asynchronous code that fetches `User` and `Admin` instances. Thus, you have to work with promises of `User` and `Admin`.  
 
 Having `Admin <: User`, does it mean that `Promise<Admin> <: Promise<User>` holds as well? In other words, is `Promise<Admin>` is a subtype of `Promise<User>`?
 
@@ -94,15 +94,34 @@ Let's see what TypeScript is saying:
 // @include: admin
 // @include: is-subtype
 // ---cut---
-type T2 = IsSubtype<Promise<Admin>, Promise<User>>
+type T21 = IsSubtype<Promise<Admin>, Promise<User>>
 //   ^?
 ```
 
 TypeScript has showed that indeed `Promise<Admin> <: Promise<User>` holds true as result of `Admin <: User`. Saying it formal, `Promise` type is *covariant*.  
 
+![Covariance](./images/covariance.svg)
+
 Here's a definition of *covariance*:
 
 > A type `T` is *covariant* if having `S <: P`, then `T<S> <: T<P>`.  
+
+The covariance of a type is usually intuitive. If `Admin` is a subtype of `User`, then you can expect `Promise<Admin>` to be a subtype of `Promise<User>`.  
+
+Covariance holds for many types in TypeScript, for example:
+
+```ts twoslash
+// @include: user
+// @include: admin
+// @include: is-subtype
+// ---cut---
+
+// Capitalize<T>
+type T22 = IsSubtype<'Hello', string>;
+//   ^?
+type T23 = IsSubtype<Capitalize<'Hello'>, Capitalize<string>>;
+//   ^?
+```
 
 ## 3. Contravariance
 
@@ -137,19 +156,45 @@ type T4 = IsSubtype<Func<User>, Func<Admin>>
 //   ^?
 ```
 
-For the `Func` type, having `Admin <: User`, doesn't mean that `Func<Admin> <: Func<User>`. But vice versa, `Func<User> <: Func<Admin>` holds true (note the subtyping direction has flipped compared to the original types `Admin <: User`).  
+For the `Func` type, having `Admin <: User`, doesn't mean that `Func<Admin> <: Func<User>`. But vice versa, `Func<User> <: Func<Admin>` holds true &mdash; the subtyping direction has flipped compared to the original types `Admin <: User`.  
 
-That demonstrates that `Func` type is contravariant.  
+Such behavior of `Func` type makes it *contravariant*.  
 
-> A type `T` is *contravarian* if having `S <: P`, then `T<P> <: T<S>`.  
+![Contravariance](./images/contravariance.svg)
 
-On a personal note, the contravariance looks a bit contreintuitive to me. Having `S` a subtype of `P`, then I *expect* for any type `T` it would result `T<S>` to be a subtype of 
-`P<T>`. But that's not always true, as you saw earlier!  
+> A type `T` is *contravariant* if having `S <: P`, then `T<P> <: T<S>`.  
+
+Function types are contravariant in regards to their parameter types.  
+
+### 3.1 The idea of contravariance
+
+Most likely the dry theory above is a bit difficult to understand. So let's find the intuitive sense behind contravariance.  
+
+Let's define 2 simple functions that log the information stored in an `Admin` and `User` instance:
+
+```twoslash include log
+function logAdmin(admin: Admin): void {
+  console.log(`Name: ${admin.userName}`);
+  console.log(`Is super admin: ${admin.isSuperAdmin}`);
+}
+
+function logUser(user: User): void {
+  console.log(`Name: ${user.userName}`);
+}
+```
+
+```ts twoslash
+// @include: user
+// @include: admin
+// ---cut---
+// @include: log
+```
+
 
 ## 4. Conclusion
 
-The type `T` is covariant if having 2 types `S <: P`, then `T<S> <: T<P>` (the subtyping direction is mainained). 
+The type `T` is covariant if having 2 types `S <: P`, then `T<S> <: T<P>` (the subtyping direction is maintained). 
 
 But if `T<P> <: T<S>` (the subtyping is flipper), then `T` is contravariant.   
 
-*Challenge: do you know other contravariant types in TypeScript?*
+*Challenge: What other covariant or contravariant types do you know?*
