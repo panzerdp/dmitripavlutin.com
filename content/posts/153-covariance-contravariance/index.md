@@ -3,7 +3,7 @@ title: "Covariance and Contravariance in TypeScript"
 description: "Covariance and contravariance describes the assignment compatiblity between types in TypeScript."
 published: "2021-10-12T10:00Z"
 modified: "2021-10-12T10:00Z"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover-1.png"
 slug: typescript-covariance-contravariance
 tags: ['typescript']
 recommended: ['typescript-unknown-vs-any', 'typescript-index-signatures']
@@ -13,6 +13,10 @@ type: post
 Learning covariance and contravariance in TypeScript could be tricky (I know from my experience!), but knowing them is a great addition to your types understanding.  
 
 In this post, I'll read an accessible explanation of covariance and contravariance concepts.  
+
+```toc
+
+```
 
 ## 1. Subtyping
 
@@ -127,12 +131,12 @@ type T23 = IsSubtype<Capitalize<'Hello'>, Capitalize<string>>;
 
 Now let's consider the following generic type:
 
-```twoslash include func-param
+```twoslash include param
 type Func<Param> = (param: Param) => void;
 ```
 
 ```ts twoslash
-// @include: func-param
+// @include: param
 ```
 
 `Func<Param>` creates function types with one parameter of type `Param`.  
@@ -148,7 +152,7 @@ Let's take a try:
 // @include: user
 // @include: admin
 // @include: is-subtype
-// @include: func-param
+// @include: param
 // ---cut---
 type T3 = IsSubtype<Func<Admin>, Func<User>>
 //   ^?
@@ -168,33 +172,112 @@ Function types are contravariant in regards to their parameter types.
 
 ### 3.1 The idea of contravariance
 
-Most likely the dry theory above is a bit difficult to understand. So let's find the intuitive sense behind contravariance.  
+The dry theory above is a bit difficult to understand, so let's find the intuitive sense behind contravariance.  
 
 Let's define 2 simple functions that log the information stored in an `Admin` and `User` instance:
 
 ```twoslash include log
-function logAdmin(admin: Admin): void {
+const logAdmin: Func<Admin> = (admin: Admin): void => {
   console.log(`Name: ${admin.userName}`);
-  console.log(`Is super admin: ${admin.isSuperAdmin}`);
+  console.log(`Is super admin: ${admin.isSuperAdmin.toString()}`);
 }
 
-function logUser(user: User): void {
+const logUser: Func<User> = (user: User): void => {
   console.log(`Name: ${user.userName}`);
 }
 ```
 
 ```ts twoslash
+// @include: param
 // @include: user
 // @include: admin
 // ---cut---
 // @include: log
 ```
 
+Now let's define a variable of function type with an `Admin` parameter:
+
+```ts twoslash
+// @include: user
+// @include: admin
+// @include: param
+// @include: log
+// ---cut---
+
+const admin = new Admin('admin1', true);
+
+let logger: Func<Admin>;
+
+logger = logUser;
+logger(admin); // OK
+
+logger = logAdmin;
+logger(admin); // OK
+```
+
+You can assign to `logger` variable both `logUser` and `logAdmin` functions, and then invoke both of these functions using an `Admin` instance. TypeScript doesn't complain about doing so.  
+
+Now let's try the other way around: define a variable of function type with a `User` parameter:  
+
+```ts twoslash
+// @errors: 2322
+// @include: user
+// @include: admin
+// @include: param
+// @include: log
+// ---cut---
+
+const user = new User('user1');
+
+let logger: Func<User>;
+
+logger = logUser;
+logger(user); // OK
+
+logger = logAdmin;
+logger(user); // Ooops!
+```
+
+This time, however, TypeScript doesn't allow the assignment of `logAdmin` function to `logger`.  
+
+Why...?
+
+Look at the latest line in the snippet: `logger(user); // Ooops!`.
+
+What would happen if you invoke `logger(user)` (`logger` variable holds `logAdmin` function)? It would be an error because `user` variable of type `User`
+doesn't have the property `isSuperAdmin` which `logAdmin()` function is using.  
+
+As an experiment, let's disable type checking on the line `logger = logAdmin` by using type assertion to `any`. Then let's see what would happen during runtime:
+
+```ts twoslash{9}
+// @include: user
+// @include: admin
+// @include: param
+// @include: log
+// ---cut---
+
+const user = new User('user1');
+
+let logger: Func<User>;
+
+logger = logUser;
+logger(user); // OK
+
+logger = logAdmin as any;
+logger(user); // Ooops!
+// @error: "TypeError: Cannot read properties of undefined (reading 'toString')"
+```
+
+[Try the demo.](https://codesandbox.io/s/musing-mountain-kgsh6?file=/src/index.ts)
+
+A runtime error is thrown because `logger(user)`, where `logger` is `logAdmin`, cannot log the instance data because `isSuperAdmin` property doesn't exist in the class `User`.  
+
+Contravariance prevents such kind of errors on functions subtyping.  
 
 ## 4. Conclusion
 
-The type `T` is covariant if having 2 types `S <: P`, then `T<S> <: T<P>` (the subtyping direction is maintained). 
+The type `T` is covariant if having 2 types `S <: P`, then `T<S> <: T<P>` (the subtyping direction is maintained). An example of covariant type is the `Promise<T>`.  
 
-But if `T<P> <: T<S>` (the subtyping is flipper), then `T` is contravariant.   
+But if `T<P> <: T<S>` (the subtyping is flipper), then `T` is contravariant. The function type is contravariant by the parameter types.  
 
 *Challenge: What other covariant or contravariant types do you know?*
