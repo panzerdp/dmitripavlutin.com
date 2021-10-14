@@ -1,8 +1,8 @@
 ---
 title: "Covariance and Contravariance in TypeScript"
-description: "Covariance and contravariance describes the assignment compatiblity between types in TypeScript."
-published: "2021-10-12T10:00Z"
-modified: "2021-10-12T10:00Z"
+description: "Covariance and contravariance describes the which's the base type and which's a subtype in composable types."
+published: "2021-10-14T12:00Z"
+modified: "2021-10-14T12:00Z"
 thumbnail: "./images/cover-1.png"
 slug: typescript-covariance-contravariance
 tags: ['typescript']
