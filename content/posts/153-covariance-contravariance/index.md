@@ -12,7 +12,7 @@ type: post
 
 Learning covariance and contravariance in TypeScript could be tricky (I know from my experience!), but knowing them is a great addition to understanding types and subtyping.  
 
-In this post, I'll read an accessible explanation of covariance and contravariance concepts.  
+In this post, you'll read an accessible explanation of covariance and contravariance concepts.  
 
 ```toc
 
@@ -22,7 +22,7 @@ In this post, I'll read an accessible explanation of covariance and contravarian
 
 Thanks to inheritance, in TypeScript a *base* type can be extended by another type named *subtype*. 
 
-For example, let's define a base class `User`, then extend that class by a new `Admin` class:
+For example, let's define a base class `User`, then extend that class by an `Admin` class:
 
 ```twoslash include user
 class User {
@@ -51,7 +51,7 @@ class Admin extends User {
 // @include: admin
 ```
 
-Since `Admin` extends `User` (note the `Admin extends User`), you could say that `Admin` is a *subtype* of `User`.  
+Since `Admin` extends `User` (`Admin extends User`), you could say that `Admin` is a *subtype* of base class `User`.  
 
 Subtyping is possible not only in classes but also in other types. For example, the literal string type `'Hello'` is a subtype of `string`, or the literal number type `42` is a subtype of `number`.  
 
@@ -89,7 +89,7 @@ type T1 = IsSubtype<Admin, User>;
 
 Let's think about some asynchronous code that fetches `User` and `Admin` instances. Thus, you have to work with promises of `User` and `Admin`.  
 
-Having `Admin <: User`, does it mean that `Promise<Admin> <: Promise<User>` holds as well? In other words, is `Promise<Admin>` is a subtype of `Promise<User>`?
+Having `Admin <: User`, does it mean that `Promise<Admin> <: Promise<User>` holds as well? In other words, is `Promise<Admin>` a subtype of `Promise<User>`?
 
 Let's see what TypeScript is saying:
 
@@ -110,7 +110,7 @@ Here's a definition of *covariance*:
 
 > A type `T` is *covariant* if having `S <: P`, then `T<S> <: T<P>`.  
 
-The covariance of a type is usually intuitive. If `Admin` is a subtype of `User`, then you can expect `Promise<Admin>` to be a subtype of `Promise<User>`.  
+The covariance of a type is intuitive. If `Admin` is a subtype of `User`, then you can expect `Promise<Admin>` to be a subtype of `Promise<User>`.  
 
 Covariance holds for many types in TypeScript, for example:
 
@@ -141,10 +141,10 @@ type Func<Param> = (param: Param) => void;
 
 `Func<Param>` creates function types with one parameter of type `Param`.  
 
-Having `Admin <: User`, which of the expressions below is true?
+Having `Admin <: User`, which of the expressions is true: `Func<Admin> <: Func<User>`, or
+`Func<User> <: Func<Admin>`.  
 
-A) `Func<Admin> <: Func<User>`, or  
-B) `Func<User> <: Func<Admin>`
+In other words, is `Func<Admin>` a subtype of `Func<User>`, or vice-versa: `Func<User>` is a subtype of `Func<Admin>`?  
 
 Let's take a try:
 
@@ -160,21 +160,21 @@ type T4 = IsSubtype<Func<User>, Func<Admin>>
 //   ^?
 ```
 
-For the `Func` type, having `Admin <: User`, doesn't mean that `Func<Admin> <: Func<User>`. But vice versa, `Func<User> <: Func<Admin>` holds true &mdash; the subtyping direction has flipped compared to the original types `Admin <: User`.  
+As the example above shows, `Func<Admin> <: Func<User>` is false.  
 
-Such behavior of `Func` type makes it *contravariant*.  
+On the contrary, `Func<User> <: Func<Admin>` holds true &mdash; meaning that `Func<User>` is a subtype of `Func<Admin>` . The subtyping direction has flipped compared to the original types `Admin <: User`.  
+
+Such behavior of `Func` type makes it *contravariant*. In other words, function types are contravariant in regards to their parameter types.   
 
 ![Contravariance](./images/contravariance.svg)
 
 > A type `T` is *contravariant* if having `S <: P`, then `T<P> <: T<S>`.  
 
-Function types are contravariant in regards to their parameter types.  
-
 ### 3.1 The idea of contravariance
 
 The dry theory above is a bit difficult to understand, so let's find the intuitive sense behind contravariance.  
 
-Let's define 2 simple functions that log the information stored in an `Admin` and `User` instance:
+Let's define 2 functions that log the information stored in an `Admin` and `User` types of instances. `logAdmin()` logs `Admin` instances, while `logUser()` logs `User` instances information to the console.   
 
 ```twoslash include log
 const logAdmin: Func<Admin> = (admin: Admin): void => {
@@ -195,7 +195,7 @@ const logUser: Func<User> = (user: User): void => {
 // @include: log
 ```
 
-Now let's define a variable of function type with an `Admin` parameter:
+Now let's try to assign `logUser()` function to a variable of type `Func<Admin>`, would it work?
 
 ```ts twoslash
 // @include: user
@@ -203,21 +203,14 @@ Now let's define a variable of function type with an `Admin` parameter:
 // @include: param
 // @include: log
 // ---cut---
-
-const admin = new Admin('admin1', true);
-
-let logger: Func<Admin>;
-
-logger = logUser;
-logger(admin); // OK
-
-logger = logAdmin;
-logger(admin); // OK
+const logger: Func<Admin> = logUser;  // OK
 ```
 
-You can assign to `logger` variable both `logUser` and `logAdmin` functions, and then invoke both of these functions using an `Admin` instance. TypeScript doesn't complain about doing so.  
+Yes, you can! Thanks to contravariance.  
 
-Now let's try the other way around: define a variable of function type with a `User` parameter:  
+The variable `logger` is of the base type `Func<Admin>`, so you can assign to it `logUser` function of type `Func<User>`.  
+
+Now let's try the other way around: assign `logAdmin()` function to a variable of type `Func<User>`:
 
 ```ts twoslash
 // @errors: 2322
@@ -226,28 +219,16 @@ Now let's try the other way around: define a variable of function type with a `U
 // @include: param
 // @include: log
 // ---cut---
-
-const user = new User('user1');
-
-let logger: Func<User>;
-
-logger = logUser;
-logger(user); // OK
-
-logger = logAdmin;
-logger(user); // Ooops!
+const logger: Func<User> = logAdmin;
 ```
 
-This time, however, TypeScript doesn't allow the assignment of `logAdmin` function to `logger`.  
+Nope, you can't! Again, thanks to the contravariance of functions in regards to parameter types.  
 
 Why...?
 
-Look at the latest line in the snippet: `logger(user); // Ooops!`.
+`logger` variable is of type `Func<User>` &mdash; the subtype. And you cannot assign a variable of base type (`logAdmin` is `Func<Admin>`) to a subtype.  
 
-What would happen if you invoke `logger(user)` (`logger` variable holds `logAdmin` function)? It would be an error because `user` variable of type `User`
-doesn't have the property `isSuperAdmin` which `logAdmin()` function is using.  
-
-As an experiment, let's disable type checking on the line `logger = logAdmin` by using type assertion to `any`. Then let's see what would happen during runtime:
+As an experiment, let's disable type checking on the assignment by using type assertion to `any`. Then let's see what would happen during runtime:
 
 ```ts twoslash{9}
 // @include: user
@@ -255,16 +236,10 @@ As an experiment, let's disable type checking on the line `logger = logAdmin` by
 // @include: param
 // @include: log
 // ---cut---
+const logger: Func<User> = logAdmin as any;
 
 const user = new User('user1');
-
-let logger: Func<User>;
-
-logger = logUser;
-logger(user); // OK
-
-logger = logAdmin as any;
-logger(user); // Ooops!
+logger(user);
 // @error: "TypeError: Cannot read properties of undefined (reading 'toString')"
 ```
 
@@ -272,7 +247,7 @@ logger(user); // Ooops!
 
 A runtime error is thrown because `logger(user)`, where `logger` is `logAdmin`, cannot log the instance data because `isSuperAdmin` property doesn't exist in the class `User`.  
 
-Contravariance prevents such kind of errors on functions subtyping.  
+Contravariance prevents such errors on functions subtyping.  
 
 ## 4. Conclusion
 
