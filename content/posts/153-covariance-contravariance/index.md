@@ -10,7 +10,7 @@ recommended: ['typescript-unknown-vs-any', 'typescript-index-signatures']
 type: post
 ---
 
-Learning covariance and contravariance in TypeScript could be tricky (I know from my experience!), but knowing them is a great addition to understnading types and subtyping.  
+Learning covariance and contravariance in TypeScript could be tricky (I know from my experience!), but knowing them is a great addition to understanding types and subtyping.  
 
 In this post, I'll read an accessible explanation of covariance and contravariance concepts.  
 
