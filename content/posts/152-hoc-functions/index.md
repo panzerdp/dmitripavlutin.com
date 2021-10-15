@@ -131,6 +131,8 @@ Here's what changed: `calculate(operation, initialValue, numbers)` accepts the f
 
 Same way `multiply()` describes the multiplication operation. `calculate(multiply, 1, [1, 2, 4])` is using `multiply()` function to perform the production of all numbers.  
 
+Also, in the invocation `calculate(sum, 0, [1, 2, 4])`, the first argument is also called a [callback](/javascript-callback/) function. You could think that a higher-order function accepts or returns callback functions.  
+
 ## 3. The benefits of higher-order functions
 
 What's great is you can *reuse* the `calculate()` function to support multiple operations by providing different operation functions: addition, multiplication, and more.  
@@ -139,15 +141,9 @@ Additionally, the concept of the higher-order function allows *composability* of
 
 The composability of functions thanks to higher-order functions is an important instrument in functional programming.  
 
-In conclusion, higher-order functions enable better reusability and composability of functions. As result, they reduce the [code duplication](https://en.wikipedia.org/wiki/Duplicate_code) and favor the [single-responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle).   
+The higher-order functions help reduce the [code duplication](https://en.wikipedia.org/wiki/Duplicate_code) and favor the [single-responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle).  
 
-## 4. Higher-order functions and callbacks
-
-In the invocation `calculate(sum, 0, [1, 2, 4])`, the function `sum` supplied as an argument is also called a [callback](/javascript-callback/) function.  
-
-In other words, you could think that a higher-order function accepts or returns callback functions.  
-
-## 5. Examples of higher-order functions
+## 4. Examples of higher-order functions
 
 If you look closer at the built-in JavaScript function on arrays, strings, DOM methods, promise method &mdash; you could notice that many of them are higher-order functions as soon as they accept a function as an argument.  
 
@@ -173,7 +169,7 @@ document
   });
 ```
 
-## 6. Conclusion
+## 5. Conclusion
 
 Higher-order functions in JavaScript are a special category of functions that either accept functions as an argument or return functions.  
 
