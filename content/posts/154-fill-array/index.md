@@ -10,7 +10,7 @@ recommended: ['javascript-array-from-applications', 'operations-on-arrays-javasc
 type: post
 ---
 
-Many algorithms require initializing arrays with initial values. For example, the algorithms that use dynamic programming technique.  
+Many algorithms require initializing arrays with initial values. For example, the algorithms that use dynamic programming.  
 
 JavaScript provides many ways to initialize arrays with data. Let's see in this post which ways are the most simple and popular.  
 
@@ -21,7 +21,7 @@ JavaScript provides many ways to initialize arrays with data. Let's see in this 
 
 Let's say that you'd like to initialize an array of length `3` with zeros. 
 
-The [array.fill()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) method available on the array instance is a convinient way to initialize arrays.  
+The [array.fill()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) method available on the array instance is a convenient way to initialize arrays.  
 
 ```javascript
 const length = 3;
@@ -35,7 +35,7 @@ filledArray; // [0, 0, 0]
 
 Then `Array(length).fill(0)` method fills the array with zeroes. Then returns the modified and filled array: `[0, 0, 0]`.  
 
-`Array(length).fill(initialValue)` is a very convinient way to create arrays with desired length and initialized with a primitive value (number, string, boolean).  
+`Array(length).fill(initialValue)` is a convenient way to create arrays with the desired length and initialized with a primitive value (number, string, boolean).  
 
 ## 2. Fill an array with objects
 
@@ -43,7 +43,7 @@ Then `Array(length).fill(0)` method fills the array with zeroes. Then returns th
 
 What if you need to fill an array with objects?  
 
-If you don't mind initializing the array with same object instance, then you could easily use `array.fill()` method mentioned above:
+If you don't mind initializing the array with the same object instance, then you could easily use `array.fill()` method mentioned above:
 
 ```javascript
 const length = 5;
@@ -79,7 +79,7 @@ In case if you want the array to fill with copies of the initial object, then yo
 
 `Array.from()` invokes the `mapperFunction` upon each item of the array, pushes the result to a new array, and finally returns the newly mapped array.  
 
-Thus `Array.from()` method can easily create and initalize an array with different object instances:
+Thus `Array.from()` method can easily create and initialize an array with different object instances:
 
 ```javascript
 const length = 3;
@@ -158,7 +158,7 @@ filledArray; // [{ value: 0 }, { value: 0 }, { value: 0 }]
 
 The expression `[...Array(length)]` creates an array with items initialized as `undefined`. On such an array, `array.map()` can map to new object instances.  
 
-I prefer the `Array.from()` approach to fill an array with objects because it involves less magic.  
+I prefer the `Array.from()` approach to filling an array with objects because it involves less magic.  
 
 ## 3. Conclusion
 
