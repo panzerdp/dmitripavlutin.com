@@ -28,10 +28,10 @@ For example, let's define a base class `User`, then extend it by `Admin` class:
 
 ```twoslash include user
 class User {
-  userName: string;
+  username: string;
 
-  constructor(userName: string) {
-    this.userName = userName;
+  constructor(username: string) {
+    this.username = username;
   }
 }
 ```
@@ -40,8 +40,8 @@ class User {
 class Admin extends User {
   isSuperAdmin: boolean;
 
-  constructor(userName: string, isSuperAdmin: boolean) {
-    super(userName);
+  constructor(username: string, isSuperAdmin: boolean) {
+    super(username);
     this.isSuperAdmin = isSuperAdmin;
   }
 }
@@ -55,6 +55,10 @@ class Admin extends User {
 
 Since `Admin` extends `User` (`Admin extends User`), you could say that `Admin` is a *subtype* of the *base type* `User`.  
 
+![User and Admin Classes](./images/user-admin-3.svg)
+
+### 1.1 Why understanding subtyping?
+
 The substitutability of `Admin` (subtype) and `User` (base type) consists, for example, in the ability to assign to a variable of type `User` an instance of type `Admin`:
 
 ```ts twoslash
@@ -64,7 +68,37 @@ The substitutability of `Admin` (subtype) and `User` (base type) consists, for e
 const user: User = new Admin('admin1', true); // OK
 ```
 
-## 1.1 Why knowing subtyping 
+That's a good trick. But why is this important? How can you benefit from understanding subtyping and the substitutability?
+
+Of the many benefits is the ability to create functions that accept a base type, but also all of the subtypes.  
+
+For example, let's write a function that logs the user name to console:
+
+```twoslash include log-username
+function logUsername(user: User): void {
+  console.log(user.username);
+}
+```
+
+```ts twoslash
+// @include: user
+// @include: admin
+// ---cut---
+// @include: log-username
+```
+
+This function accepts as an argument both a `User` and `Admin` instances (and instances of any other subtypes of `User` you might create later), becoming more reusable and less bothered with details:
+
+```ts twoslash
+// @include: user
+// @include: admin
+// @include: log-username
+// ---cut---
+logUsername(new User('user1'));         // logs "user1"
+logUsername(new Admin('admin1', true)); // logs "user2"
+```
+
+### 1.2 A few helpers
 
 Now let's introduce the symbol `A <: B` &mdash; meaning *"A is a subtype of B"*. Because `Admin` is a subtype of `User`, now you could write shorter:
 
@@ -72,10 +106,10 @@ Now let's introduce the symbol `A <: B` &mdash; meaning *"A is a subtype of B"*.
 Admin <: User
 ```
 
-Let's also define a helper type `IsSubtype<S, P>`, which evaluates to `true` if `S` if a subtype of `P`, and `false` otherwise:
+Let's also define a helper type `IsSubtypeOf<S, P>`, which evaluates to `true` if `S` if a subtype of `P`, and `false` otherwise:
 
 ```twoslash include is-subtype
-type IsSubtype<S, P> = S extends P ? true : false;
+type IsSubtypeOf<S, P> = S extends P ? true : false;
 ```
 
 ```ts twoslash
@@ -85,14 +119,14 @@ type IsSubtype<S, P> = S extends P ? true : false;
 // @include: is-subtype
 ```
 
-`IsSubtype<Admin, User>` evaluates to `true` because `Admin` is a subtype of `User`:
+`IsSubtypeOf<Admin, User>` evaluates to `true` because `Admin` is a subtype of `User`:
 
 ```ts twoslash
 // @include: user
 // @include: admin
 // @include: is-subtype
 // ---cut---
-type T11 = IsSubtype<Admin, User>;
+type T11 = IsSubtypeOf<Admin, User>;
 //   ^?
 ```
 
@@ -101,9 +135,9 @@ On a side note, subtyping is possible for other types. For example, the literal 
 ```ts twoslash
 // @include: is-subtype
 // ---cut---
-type T12 = IsSubtype<'hello', string>;
+type T12 = IsSubtypeOf<'hello', string>;
 //   ^?
-type T13 = IsSubtype<42, number>;
+type T13 = IsSubtypeOf<42, number>;
 //   ^?
 ```
 
@@ -120,13 +154,22 @@ Let's see what TypeScript is saying:
 // @include: admin
 // @include: is-subtype
 // ---cut---
-type T21 = IsSubtype<Promise<Admin>, Promise<User>>
+type T21 = IsSubtypeOf<Promise<Admin>, Promise<User>>
 //   ^?
 ```
 
-TypeScript has showed that indeed `Promise<Admin> <: Promise<User>` holds true as result of `Admin <: User`. Saying it formal, `Promise` type is *covariant*.  
+Indeed `Promise<Admin> <: Promise<User>` holds true, having `Admin <: User`. Saying it formal, `Promise` type is *covariant*.  
 
 ![Covariance](./images/covariance.svg)
+
+The subtyping direction of a composed type in relation with its consituent types subtyping direction is named *variance*. 
+
+Variance can be either:
+
+* *covariant* (same direction)
+* *contravariant* (opposite direction)
+* *bivariant* (both same and opposite direction)
+* or *invariant* (composed type has no relation with the direction of the substituent types).  
 
 Here's a definition of *covariance*:
 
@@ -134,18 +177,35 @@ Here's a definition of *covariance*:
 
 The covariance of a type is intuitive. If `Admin` is a subtype of `User`, then you can expect `Promise<Admin>` to be a subtype of `Promise<User>`.  
 
-Covariance holds for many types in TypeScript, for example:
+Covariance holds for many types in TypeScript.
+
+A) `Promise<V>` (demonstrated above)
+
+B) `Record<K,V>`:
 
 ```ts twoslash
 // @include: user
 // @include: admin
 // @include: is-subtype
 // ---cut---
+type RecordOfAdmin = Record<string, Admin>;
+type RecordOfUser  = Record<string, User>;
 
-// Capitalize<T>
-type T22 = IsSubtype<'Hello', string>;
+type T22 = IsSubtypeOf<RecordOfAdmin, RecordOfUser>;
 //   ^?
-type T23 = IsSubtype<Capitalize<'Hello'>, Capitalize<string>>;
+```
+
+C) `Map<K,V>`:
+
+```ts twoslash
+// @include: user
+// @include: admin
+// @include: is-subtype
+// ---cut---
+type MapOfAdmin = Map<string, Admin>;
+type MapOfUser  = Map<string, User>;
+
+type T23 = IsSubtypeOf<MapOfAdmin, MapOfUser>;
 //   ^?
 ```
 
@@ -176,9 +236,9 @@ Let's take a try:
 // @include: is-subtype
 // @include: param
 // ---cut---
-type T3 = IsSubtype<Func<Admin>, Func<User>>
+type T3 = IsSubtypeOf<Func<Admin>, Func<User>>
 //   ^?
-type T4 = IsSubtype<Func<User>, Func<Admin>>
+type T4 = IsSubtypeOf<Func<User>, Func<Admin>>
 //   ^?
 ```
 
@@ -200,12 +260,12 @@ Let's define 2 functions that log the information stored in an `Admin` and `User
 
 ```twoslash include log
 const logAdmin: Func<Admin> = (admin: Admin): void => {
-  console.log(`Name: ${admin.userName}`);
+  console.log(`Name: ${admin.username}`);
   console.log(`Is super admin: ${admin.isSuperAdmin.toString()}`);
 }
 
 const logUser: Func<User> = (user: User): void => {
-  console.log(`Name: ${user.userName}`);
+  console.log(`Name: ${user.username}`);
 }
 ```
 
