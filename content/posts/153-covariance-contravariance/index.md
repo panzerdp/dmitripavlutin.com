@@ -20,9 +20,11 @@ In this post, you'll read an accessible explanation of covariance and contravari
 
 ## 1. Subtyping
 
-Thanks to inheritance, in TypeScript a *base* type can be extended by another type named *subtype*. 
+Subtyping is a form of [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) in which a *subtype* data type is associated with a *supertype* data type, also named base type by some form of substitutability.  
 
-For example, let's define a base class `User`, then extend that class by an `Admin` class:
+The substitutability means that each variable, function parameter of base type can also accept subtype values.
+
+For example, let's define a base class `User`, then extend it by `Admin` class:
 
 ```twoslash include user
 class User {
@@ -51,9 +53,18 @@ class Admin extends User {
 // @include: admin
 ```
 
-Since `Admin` extends `User` (`Admin extends User`), you could say that `Admin` is a *subtype* of base class `User`.  
+Since `Admin` extends `User` (`Admin extends User`), you could say that `Admin` is a *subtype* of the *base type* `User`.  
 
-Subtyping is possible not only in classes but also in other types. For example, the literal string type `'Hello'` is a subtype of `string`, or the literal number type `42` is a subtype of `number`.  
+The substitutability of `Admin` (subtype) and `User` (base type) consists, for example, in the ability to assign to a variable of type `User` an instance of type `Admin`:
+
+```ts twoslash
+// @include: user
+// @include: admin
+// ---cut---
+const user: User = new Admin('admin1', true); // OK
+```
+
+## 1.1 Why knowing subtyping 
 
 Now let's introduce the symbol `A <: B` &mdash; meaning *"A is a subtype of B"*. Because `Admin` is a subtype of `User`, now you could write shorter:
 
@@ -61,7 +72,7 @@ Now let's introduce the symbol `A <: B` &mdash; meaning *"A is a subtype of B"*.
 Admin <: User
 ```
 
-Additionally, I'm going to use a helper type `IsSubtype<S, P>`, which evaluates to `true` if `S` if a subtype of `P`, and `false` otherwise:
+Let's also define a helper type `IsSubtype<S, P>`, which evaluates to `true` if `S` if a subtype of `P`, and `false` otherwise:
 
 ```twoslash include is-subtype
 type IsSubtype<S, P> = S extends P ? true : false;
@@ -74,14 +85,25 @@ type IsSubtype<S, P> = S extends P ? true : false;
 // @include: is-subtype
 ```
 
-Since `Admin` is a subtype of `User`, as expected, `IsSubtype<Admin, User>` is `true`:
+`IsSubtype<Admin, User>` evaluates to `true` because `Admin` is a subtype of `User`:
 
 ```ts twoslash
 // @include: user
 // @include: admin
 // @include: is-subtype
 // ---cut---
-type T1 = IsSubtype<Admin, User>;
+type T11 = IsSubtype<Admin, User>;
+//   ^?
+```
+
+On a side note, subtyping is possible for other types. For example, the literal string type `'Hello'` is a subtype of `string`, or the literal number type `42` is a subtype of `number`.  
+
+```ts twoslash
+// @include: is-subtype
+// ---cut---
+type T12 = IsSubtype<'hello', string>;
+//   ^?
+type T13 = IsSubtype<42, number>;
 //   ^?
 ```
 
