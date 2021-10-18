@@ -2,7 +2,7 @@
 title: "Covariance and Contravariance in TypeScript"
 description: "Covariance and contravariance are the concepts behind the subtyping of composable types."
 published: "2021-10-14T12:00Z"
-modified: "2021-10-14T12:00Z"
+modified: "2021-10-18T13:00Z"
 thumbnail: "./images/cover-1.png"
 slug: typescript-covariance-contravariance
 tags: ['typescript']
@@ -68,11 +68,11 @@ The substitutability of `Admin` (subtype) and `User` (base type) consists, for e
 const user: User = new Admin('admin1', true); // OK
 ```
 
-That's a good trick. But why is this important? How can you benefit from understanding subtyping and the substitutability?
+That's a good trick. But why is this important? How can you benefit from understanding subtyping and substitutability?
 
 Of the many benefits is the ability to create functions that accept a base type, but also all of the subtypes.  
 
-For example, let's write a function that logs the user name to console:
+For example, let's write a function that logs the user name to the console:
 
 ```twoslash include log-username
 function logUsername(user: User): void {
@@ -259,13 +259,13 @@ type T34 = IsSubtypeOf<(n: number) => void, (n: 1 | 2 | 3) => void>
 
 ## 4. Function types subtyping
 
-What is really interesting about function types subtyping is that it combines both variances and contravariance.  
+What is interesting about function types subtyping is that it combines both variances and contravariance.  
 
 > A function type is a *subtype* of a base type if its parameter types are *contravariant* with the base type' parameter types, and the return type is *covariant** with the base type' return type.  
 
 **when [strictFunctionTypes](https://www.typescriptlang.org/tsconfig#strictFunctionTypes) mode is enabled.*
 
-In other words, the subtyping for functions requires that the parameter types to be contravariant, while the return type covariant.  
+In other words, the subtyping for functions requires that the parameter types be contravariant, while the return types covariant.  
 
 ![Function Types Subtyping in TypeScript](./images/function-types-subtyping-2.svg)
 
@@ -289,11 +289,11 @@ type T41 = IsSubtypeOf<SubtypeFunc, BaseFunc>
 A) parameter types are contravariant (subtyping direction flipped `User :> Admin`)  
 B) return types are covariant (same subtyping direction `'1' | '2' <: string`).  
 
-Knowing how function types subtyping works helps you understand the substituaiability of function types.  
+Knowing how function types subtyping works helps you understand the substitutability of function types.  
 
 ## 5. Conclusion
 
-The type `T` is covariant if having 2 types `S <: P`, then `T<S> <: T<P>` (the subtyping direction is maintained). An example of covariant type is the `Promise<T>`.  
+The type `T` is covariant if having 2 types `S <: P`, then `T<S> <: T<P>` (the subtyping direction is maintained). An example of a covariant type is the `Promise<T>`.  
 
 But if `T<P> <: T<S>` (the subtyping is flipper), then `T` is contravariant. The function type is contravariant by the parameter types, but covariant by the return types.  
 
