@@ -253,6 +253,6 @@ Contravariance prevents such errors on functions subtyping.
 
 The type `T` is covariant if having 2 types `S <: P`, then `T<S> <: T<P>` (the subtyping direction is maintained). An example of covariant type is the `Promise<T>`.  
 
-But if `T<P> <: T<S>` (the subtyping is flipper), then `T` is contravariant. The function type is contravariant by the parameter types.  
+But if `T<P> <: T<S>` (the subtyping is flipped), then `T` is contravariant. The function type is contravariant by the parameter types.  
 
 *Challenge: What other covariant or contravariant types do you know?*
