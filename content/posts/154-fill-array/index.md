@@ -10,9 +10,7 @@ recommended: ['javascript-array-from-applications', 'operations-on-arrays-javasc
 type: post
 ---
 
-Many algorithms require initializing arrays with initial values. For example, the algorithms that use dynamic programming.  
-
-JavaScript provides many ways to initialize arrays with data. Let's see in this post which ways are the most simple and popular.  
+JavaScript provides many ways to initialize arrays with initial data. Let's see in this post which ways are the most simple and popular.  
 
 ```toc
 ```
@@ -21,7 +19,9 @@ JavaScript provides many ways to initialize arrays with data. Let's see in this 
 
 Let's say that you'd like to initialize an array of length `3` with zeros. 
 
-The [array.fill()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) method available on the array instance is a convenient way to initialize arrays.  
+The [array.fill(initalValue)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) method available on the array instance is a convenient way to initialize an arrays: when the method is called on an array, the entire array is filled with `initialValue`, and the modified array is returned.  
+
+But you need to use `array.fill(initialValue)` in combination with `Array(n)` (the array constructor):
 
 ```javascript
 const length = 3;
@@ -31,27 +31,31 @@ const filledArray = Array(length).fill(0);
 filledArray; // [0, 0, 0]
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/ntaLhkzu/)
+
 `Array(length)` creates a [sparse array](/power-up-the-array-creation-in-javascript/#21-numeric-argument-creates-sparse-array) with the `length` of `3`.  
 
-Then `Array(length).fill(0)` method fills the array with zeroes. Then returns the modified and filled array: `[0, 0, 0]`.  
+Then `Array(length).fill(0)` method fills the array with zeroes, returning the filled array: `[0, 0, 0]`.  
 
-`Array(length).fill(initialValue)` is a convenient way to create arrays with the desired length and initialized with a primitive value (number, string, boolean).  
+`Array(length).fill(initialValue)` is a convenient way to create arrays with a desired length and initialized with a primitive value (number, string, boolean).  
 
 ## 2. Fill an array with objects
 
-### 2.1 Using *array.fill()*
+What if you need to fill an array with objects? This requirement is slightly nuanced depending if you want the array filled with the initial object instances, or different instances.  
 
-What if you need to fill an array with objects?  
+### 2.1 Using *array.fill()*
 
 If you don't mind initializing the array with the same object instance, then you could easily use `array.fill()` method mentioned above:
 
 ```javascript
-const length = 5;
+const length = 3;
 
 const filledArray = Array(length).fill({ value: 0 });
 
 filledArray; // [{ value: 0 }, { value: 0 }, { value: 0 }]
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/vx4rmkqn/)
 
 `Array(length).fill({ value: 0 })` creates an array of length `3`, and assigns to each item the `{ value: 0 }` (note: same object instance).  
 
@@ -68,6 +72,8 @@ filledArray[1].value = 3;
 
 filledArray; // [{ value: 3 }, { value: 3 }, { value: 3 }]
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/t90gusyo/)
 
 Altering the second item of the array `filledArray[1].value = 3` alters all the items in the array.  
 
@@ -91,6 +97,8 @@ const filledArray = Array.from(Array(length), () => {
 filledArray; // [{ value: 0 }, { value: 0 }, { value: 0 }]
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/6zaoyqk8/)
+
 `Array.from()` invokes the mapper function on each empty slot of the array and creates a new array with every value returned from the mapper function.  
 
 You get a filled array with different object instances because each mapper function call returns a new object instance.  
@@ -110,6 +118,8 @@ filledArray[1].value = 3;
 
 filledArray; // [{ value: 0 }, { value: 3 }, { value: 0 }]
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/z9g254qf/)
 
 `filledArray[1].value = 3` modifies only the second item of the array.  
 
@@ -138,10 +148,12 @@ const filledArray = Array(length).map(() => {
   return { value: 0 };
 });
 
-filledArray; // []
+filledArray; // [empty × 3]
 ```
 
-Because of that using directly `Array(length).map(mapperFunc)` would create empty arrays.  
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/ac5xrL29/2/)
+
+Thus using directly `Array(length).map(mapperFunc)` would create sparse arrays.  
 
 Fortunately, you can use the spread operator to transform a sparse array into an array with items initialized with `undefined`. Then apply `array.map()` method 
 on that array:
@@ -155,6 +167,8 @@ const filledArray = [...Array(length)].map(() => {
 
 filledArray; // [{ value: 0 }, { value: 0 }, { value: 0 }]
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/yzhe031g/)
 
 The expression `[...Array(length)]` creates an array with items initialized as `undefined`. On such an array, `array.map()` can map to new object instances.  
 
