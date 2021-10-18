@@ -289,7 +289,7 @@ type T41 = IsSubtypeOf<SubtypeFunc, BaseFunc>
 A) parameter types are contravariant (subtyping direction flipped `User :> Admin`)  
 B) return types are covariant (same subtyping direction `'1' | '2' <: string`).  
 
-Knowing how function types subtyping works helps you understand the substitutability of function types.  
+Knowing subtyping greatly helps to understand the substitutability of function types.  
 
 ## 5. Conclusion
 
