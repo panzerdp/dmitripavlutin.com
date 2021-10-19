@@ -1,8 +1,8 @@
 ---
 title: "How to Fill an Array with Initial Values in JavaScript"
 description: "How to initialize an array with initial values in JavaScript using array.fill(), Array.from(), or array.map()"
-published: "2021-10-19T12:00Z"
-modified: "2021-10-19T12:00Z"
+published: "2021-10-19T06:00Z"
+modified: "2021-10-19T06:00Z"
 thumbnail: "./images/cover.png"
 slug: javascript-fill-array
 tags: ['javascript', 'array']
