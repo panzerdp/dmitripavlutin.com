@@ -176,7 +176,7 @@ I prefer the `Array.from()` approach to filling an array with objects because it
 
 ## 3. Conclusion
 
-JavaScrip provides a bunch of good ways to fill an array with initial values.  
+JavaScript provides a bunch of good ways to fill an array with initial values.  
 
 If you'd like to create an array initialized with primitive values, then the best approach is `Array(length).fill(initialValue)`.  
 
