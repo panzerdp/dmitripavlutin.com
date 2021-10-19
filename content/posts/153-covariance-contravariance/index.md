@@ -295,6 +295,6 @@ Knowing subtyping greatly helps to understand the substitutability of function t
 
 The type `T` is covariant if having 2 types `S <: P`, then `T<S> <: T<P>` (the subtyping direction is maintained). An example of a covariant type is the `Promise<T>`.  
 
-But if `T<P> <: T<S>` (the subtyping is flipper), then `T` is contravariant. The function type is contravariant by the parameter types, but covariant by the return types.  
+But if `T<P> <: T<S>` (the subtyping is flipped), then `T` is contravariant. The function type is contravariant by the parameter types, but covariant by the return types.  
 
 *Challenge: What other covariant or contravariant types do you know?*
