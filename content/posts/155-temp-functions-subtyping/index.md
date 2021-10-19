@@ -29,15 +29,58 @@ class Admin extends User {
 }
 ```
 
+### 3.2 Functions subtyping and callbacks
 
-Why is it important to know functions subtyping?
+Why should you understand functions subtyping?
 
-For example, having a list of `Admin` instances, which kind of callbacks
-does the `admins.filter(...)` accept?
+For example, having a list of `Admin` instances:
 
-Obvisouly, it would accept a callback which has one parameter of type `Admin`:
+```twoslash include admins
+const admins: Admin[] = [
+  new Admin('john.smith', false),
+  new Admin('jane.doe', true),
+  new Admin('joker', false)
+];
+```
 
 ```ts twoslash
-@include: user-admin
+// @include: user-admin
+// ---cut---
+// @include: admins
 ```
+
+ which kind of callbacks
+does the `admins.filter(...)` accept?
+
+Obviously, it would accept a callback which has one parameter of type `Admin`:
+
+```ts twoslash
+// @include: user-admin
+// ---cut---
+// @include: admins
+
+const superAdmins = admins.filter((admin: Admin): boolean => {
+  return admin.isSuperAdmin;
+});
+
+superAdmins; // [ Admin('jane.doe', true) ]
+```
+
+But would `admins.filter(...)` accept a callback which parameter type is `User` (the base type of `Admin`):
+
+```ts twoslash
+// @include: user-admin
+// @include: admins
+// ---cut---
+const jokers = admins.filter((user: User): boolean => {
+  return user.username.startsWith('joker');
+});
+
+jokers; // [ Admin('joker', false) ]
+```
+
+Yes, `admins.filter()` accepts `(admin: Admin) => boolean` base type, but also the
+subtypes of this function, like `(user: User) => boolean`.  
+
+### 3.3 Functions subtying and inheritance
 
