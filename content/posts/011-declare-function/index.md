@@ -468,7 +468,7 @@ const g = obj.indexGenerator();
 console.log(g.next().value); // => 0
 console.log(g.next().value); // => 1
 ```
-In all 3 cases the generator function returns the generator object `g`. Later `g` is used to generated series of incremented numbers.
+In all 3 cases the generator function returns the generator object `g`. Later `g` is used to generate a series of incremented numbers.
 
 ## 6. One more thing: new Function
 
@@ -519,11 +519,26 @@ Remember that functions **almost never** should be declared using `new Function(
 
 ## 7. At the end, which way is better?
 
-There is no winner or looser. The decision which declaration type to choose depends on the situation.  
+There is no winner or loser. The decision which declaration type to choose depends on the situation.  
 
 There are some rules however that you may follow in common situations.
 
-If the function uses `this` from the enclosing function, the arrow function is a good solution. When the callback function has one short statement, the arrow function is a good option too, because it creates short and light code. 
+Declaring a method using arrow function will not work properly when referring to other properties of the same object using `this`.
+
+```
+const obj = {
+  number: 50,
+	print() { console.log(this.number) }
+}
+
+obj.print();
+
+obj.sayHi = () => console.log('Hi ' + this.number);
+
+obj.sayHi(); // => 'Hi undefined
+```
+
+If the function uses `this` from the enclosing function, the arrow function is a good solution. (Example?) When the callback function has one short statement, the arrow function is a good option too, because it creates short and light code. 
 
 For a shorter syntax when declaring methods on object literals, the shorthand method declaration is preferable.  
 
