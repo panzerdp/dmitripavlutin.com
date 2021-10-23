@@ -523,22 +523,7 @@ There is no winner or loser. The decision which declaration type to choose depen
 
 There are some rules however that you may follow in common situations.
 
-Declaring a method using arrow function will not work properly when referring to other properties of the same object using `this`.
-
-```
-const obj = {
-  number: 50,
-	print() { console.log(this.number) }
-}
-
-obj.print();
-
-obj.sayHi = () => console.log('Hi ' + this.number);
-
-obj.sayHi(); // => 'Hi undefined
-```
-
-If the function uses `this` from the enclosing function, the arrow function is a good solution. (Example?) When the callback function has one short statement, the arrow function is a good option too, because it creates short and light code. 
+If the function uses `this` from the enclosing function, the arrow function is a good solution. When the callback function has one short statement, the arrow function is a good option too, because it creates short and light code.  
 
 For a shorter syntax when declaring methods on object literals, the shorthand method declaration is preferable.  
 

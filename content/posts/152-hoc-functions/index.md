@@ -88,7 +88,7 @@ On the other side, the functions that use only primitives or objects as argument
 
 In the previous examples, `hiFunction()` is a first-order function since it simply returns a number.  
 
-So, in JavaScript *a function can be either first-order or high-order.*  
+So, in JavaScript *a function can be either first-order or higher-order.*  
 
 That's interesting, but why are higher-order functions useful? Let's find out next!
 

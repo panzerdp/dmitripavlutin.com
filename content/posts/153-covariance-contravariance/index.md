@@ -257,7 +257,7 @@ type T34 = IsSubtypeOf<(n: number) => void, (n: 1 | 2 | 3) => void>
 //   ^?
 ```
 
-## 4. Function types subtyping
+## 4. Functions subtyping
 
 What is interesting about function types subtyping is that it combines both variances and contravariance.  
 
@@ -267,7 +267,7 @@ What is interesting about function types subtyping is that it combines both vari
 
 In other words, the subtyping for functions requires that the parameter types be contravariant, while the return types covariant.  
 
-![Function Types Subtyping in TypeScript](./images/function-types-subtyping-2.svg)
+![Function Types Subtyping in TypeScript](./images/function-types-subtyping-4.svg)
 
 For example:
 
@@ -290,6 +290,58 @@ A) parameter types are contravariant (subtyping direction flipped `User :> Admin
 B) return types are covariant (same subtyping direction `'1' | '2' <: string`).  
 
 Knowing subtyping greatly helps to understand the substitutability of function types.  
+
+For example, having a list of `Admin` instances:
+
+```twoslash include admins
+const admins: Admin[] = [
+  new Admin('john.smith', false),
+  new Admin('jane.doe', true),
+  new Admin('joker', false)
+];
+```
+
+```ts twoslash
+// @include: user
+// @include: admin
+// ---cut---
+// @include: admins
+```
+
+What types of callbacks does the `admins.filter(...)` accept?
+
+Obviously, it accepts a callback with one parameter of type `Admin`:
+
+```ts twoslash
+// @include: user
+// @include: admin
+// ---cut---
+// @include: admins
+
+const superAdmins = admins.filter((admin: Admin): boolean => {
+  return admin.isSuperAdmin;
+});
+
+superAdmins; // [ Admin('jane.doe', true) ]
+```
+
+But would `admins.filter(...)` accept a callback which parameter type is `User`?
+
+```ts twoslash
+// @include: user
+// @include: admin
+// @include: admins
+// ---cut---
+const jokers = admins.filter((user: User): boolean => {
+  return user.username.startsWith('joker');
+});
+
+jokers; // [ Admin('joker', false) ]
+```
+
+Yes, `admins.filter()` accepts `(admin: Admin) => boolean` base type, but also its subtypes like `(user: User) => boolean`.  
+
+If a [higher-order function](/javascript-higher-order-functions/) accepts callbacks of a specific type, e.g. `(admin: Admin) => boolean`, then you can also supply callbacks that are subtypes of the specific type, e.g. `(user: User) => boolean`.  
 
 ## 5. Conclusion
 
