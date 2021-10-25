@@ -38,6 +38,6 @@ The array also has a property `length`, which indicates the number of items in t
 
 However... in some situations array instances can have holes in them.  
 
-## 3.Ways that generate sparse arrays
+## 3. Ways to create sparse arrays
 
 ## 4. Array methods and sparse arrays
