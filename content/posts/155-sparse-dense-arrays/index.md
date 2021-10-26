@@ -3,7 +3,7 @@ title: "Sparse vs Dense Arrays in JavaScript"
 description: "What's the difference between sparse and dence arrays in JavaScript"
 published: "2021-10-26T12:00Z"
 modified: "2021-10-26T12:00Z"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover-1.png"
 slug: javascript-sparse-dense-arrays
 tags: ['javascript', 'array']
 recommended: ['javascript-fill-array', 'javascript-array-from-applications']
@@ -172,7 +172,7 @@ names.forEach(name => {
 
 Same way `array.map(mapperFunc)`, `array.filter(predicateFunc)`, and more functions do simply skip the holes.  
 
-*Challenge: what utility function in JavaScript doesn't skip the empty holes?*
+*Challenge: give examples of array functions in JavaScript that don't skip the empty holes?*
 
 ## 5. Conclusion
 
