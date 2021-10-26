@@ -2,7 +2,7 @@
 title: 'The Complete Guide to useRef() and Refs in React'
 description: 'How to use React.useRef() hook to create persisted mutable values (also known as references or refs), as well access DOM elements.'
 published: "2021-03-02T12:00Z"
-modified: "2021-07-04T07:30Z"
+modified: "2021-10-26T08:10Z"
 thumbnail: "./images/cover-7.png"
 slug: react-useref-guide
 tags: ['react', 'useref', 'hook', 'dom', 'element']
@@ -40,7 +40,7 @@ function MyComponent() {
 
 `reference.current` accesses the reference value, and `reference.current = newValue` updates the reference value. Pretty simple.  
 
-![React reference object](./images/reference-5.svg)
+![React reference object](./images/reference-7.svg)
 
 There are 2 rules to remember about references:  
 
