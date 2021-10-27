@@ -30,6 +30,8 @@ console.log(names[2]); // logs 'Bane'
 console.log(names.length); // logs 3
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/e1xkqvLm/)
+
 `names[0]` accesses the item of the array at index `0` (the first element).  
 
 The array also has a property `length`, which indicates the number of items in the array. In the previous example, `names.length` is `3` since the number of items in the array is `3`.
@@ -51,6 +53,8 @@ function isDense(array) {
 const names = ['Batman', 'Joker', 'Bane'];
 console.log(isDense(names)); // logs true
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/bq5tohLk/)
 
 where `index in array` determines if the `array` has an item at `index` position.   
 
@@ -74,6 +78,9 @@ console.log(names[2]); // logs 'Bane'
 console.log(isDense(names)); // logs false
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/krva0udw/)
+
+
 `['Batman', , 'Bane']` array literal creates a sparse array, having a hole at the `1` index. If you access the value of a hole &mdash; `names[1]` &mdash; it evaluates to `undefined`.  
 
 To check explicitly whether there's a hole at a specific index you need to use `index in names` expression:
@@ -87,12 +94,16 @@ console.log(0 in names); // logs true
 console.log(1 in names); // logs false
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/hj7dk0tq/)
+
 Of course, if you run `isDense()` on a sparse array it would return `false`:
 
 ```javascript
 const names = ['Batman', , 'Bane'];
 console.log(isDense(names)); // logs false
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/quLjmoav/)
 
 Now you have a clue about the sparse arrays. But what are the common ways to create sparse arrays?  
 
@@ -109,8 +120,10 @@ As already mentioned, omitting a value when using the array literal creates a sp
 ```javascript
 const names = ['Batman', , 'Bane'];
 
-console.log(names);          // logs ['Batman', empty, 'Bane']
+console.log(names); // logs ['Batman', empty, 'Bane']
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/ej3a62f4/)
 
 ### 3.2 *Array()* constructor
 
@@ -120,8 +133,10 @@ Invoking `Array(length)` or `new Array(length)` (with a number argument) creates
 const array = Array(3);
 
 console.log(isDense(array)); // logs false
-console.log(array);                // logs [empty, empty, empty]
+console.log(array);          // logs [empty, empty, empty]
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/zb3mxgLq/)
 
 ### 3.3 *delete* operator
 
@@ -133,8 +148,10 @@ const names = ['Batman', 'Joker', 'Bane'];
 delete names[1];
 
 console.log(isDense(names)); // logs false
-console.log(names);                 // logs ['Batman', empty, 'Bane']
+console.log(names);          // logs ['Batman', empty, 'Bane']
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/xn5zvosa/)
 
 Initially, `names` array is dense. 
 
@@ -149,14 +166,17 @@ const names = ['Batman', 'Joker', 'Bane'];
 
 names.length = 5;
 
+console.log(isDense(names)); // logs false
 console.log(names); // logs ['Batman', 'Joker', 'Bane', empty, empty]
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/xn5zvosa/2/)
+
 Initially `names` array had 3 items, and it was a dense array.
 
-However, increasing the `names.length` to `5` items, the array now has 2 holes at `3` and `4` indexes.   
+However, increasing the `names.length` to `5` items creates 2 holes &mdash; at `3` and `4` indexes.   
 
-On a side note, *decreasing* the `length` property doesn't create a sparse array but simply removes items from the end of the array.  
+On a side note, *decreasing* the `length` property doesn't create a sparse array but removes items from the end of the array.  
 
 ## 4. Array methods and sparse arrays
 
@@ -174,7 +194,9 @@ names.forEach(name => {
 // logs 'Bane'
 ```
 
-Same way `array.map(mapperFunc)`, `array.filter(predicateFunc)`, and more functions do skip the holes.  If you've accidentally created a sparse array, you might find a hard time understanding why some array functions aren't working as expected.  
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/3df4mLn8/)
+
+Same way `array.map(mapperFunc)`, `array.filter(predicateFunc)`, and more functions do skip the holes.  If you've accidentally created a sparse array, you might find a hard time understanding why an array method doesn't work as expected.  
 
 *Challenge: do you know array functions in JavaScript that don't skip the empty holes?*
 
