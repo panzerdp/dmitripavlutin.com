@@ -10,15 +10,15 @@ recommended: ['javascript-fill-array', 'javascript-array-from-applications']
 type: post
 ---
 
-Arrays in JavaScript are pretty easy to use. However, there's a nuance you should be aware about the arrays: the possible existence of holes (aka empty spaces) in arrays.  
+Arrays in JavaScript are pretty easy to use. However, there's a nuance you should be aware of: some arrays might have holes in them.
 
-In this post, I'm going to describe the difference between sparse and dense arrays in JavaScript. Also you'll read about the common ways that create sparse arrays: just to be aware of.  
+In this post, I'm going to describe the difference between sparse and dense arrays in JavaScript. Also, you'll find the common ways to create sparse arrays, just to be aware of.  
 
 ## 1. Dense arrays
 
 An array in JavaScript is an object representing an ordered collection of items.  
 
-The items in the array have a exact order. You can access an item from the array using a special number *index* &mdash; the nth item of the array (zero based):
+The items in the array have an exact order. You can access the nth item of the array using a special number &mdash; the *index*.
 
 ```javascript
 const names = ['Batman', 'Joker', 'Bane'];
@@ -32,9 +32,9 @@ console.log(names.length); // logs 3
 
 `names[0]` accesses the item of the array at index `0` (the first element).  
 
-The array also has a property `length`, which indicates the number of items in the array. In the previous example, `names.length` is `3` since the number of items in the array are `3`.
+The array also has a property `length`, which indicates the number of items in the array. In the previous example, `names.length` is `3` since the number of items in the array is `3`.
 
-`names` array created a above is a *dense* array: meaning that it conains items at each index starting `0` until `names.lenght - 1`.  
+`names` array created above is a *dense* array: meaning that it contains items at each index starting `0` until `names.length - 1`.  
 
 Here's a function `isDense(array)` that determines whether the array has items at each index:
 
@@ -52,17 +52,17 @@ const names = ['Batman', 'Joker', 'Bane'];
 console.log(isDense(names)); // logs true
 ```
 
-where `index in array` determines if the `array` has an item at `index` position.  
+where `index in array` determines if the `array` has an item at `index` position.   
 
-Here's an interesting question: are all arrays in JavaScript dense? Or maybe there are arrays for which `isDense(array)` would return `false`?  
+Here's an interesting question: are all arrays in JavaScript dense? Or there might be arrays when `isDense(array)` would return `false`?  
 
 Let's dig more!
 
 ## 2. Sparse arrays
 
-Unfortunately... there are situations when JavaScript arrays can have holes in them, also named a *sparse* array.  
+Unfortunately... there are situations when JavaScript arrays can have holes in them. Such arrays are named *sparse*.   
 
-For example, if you use the array literal but omit indicating an item, then a hole is created instead of the missing item. And as result a sparse array is created:
+For example, if you use the array literal but omit indicating an item, then a hole is created in the place of the missing item. And as result a sparse array is created:
 
 ```javascript
 const names = ['Batman', , 'Bane'];
@@ -74,9 +74,9 @@ console.log(names[2]); // logs 'Bane'
 console.log(isDense(names)); // logs false
 ```
 
-`['Batman', , 'Bane']` array literal creates a sparse arrays, where there's a hole at the `1` index. If you access the value of a hole &mdash; `names[1]` &mdash; it evaluates to `undefined`.  
+`['Batman', , 'Bane']` array literal creates a sparse array, having a hole at the `1` index. If you access the value of a hole &mdash; `names[1]` &mdash; it evaluates to `undefined`.  
 
-To check explicity whether at a specific index there's a hole you need to use `index in names` expression:
+To check explicitly whether there's a hole at a specific index you need to use `index in names` expression:
 
 ```javascript
 const names = ['Batman', , 'Bane'];
@@ -94,33 +94,33 @@ const names = ['Batman', , 'Bane'];
 console.log(isDense(names)); // logs false
 ```
 
-Now, hopefully, you have a clue about the sparse arrays. But what are the common ways to create sparse arrays?  
+Now you have a clue about the sparse arrays. But what are the common ways to create sparse arrays?  
 
-Let's find in the next section.  
+Let's find out in the next section.  
 
 ## 3. Ways to create sparse arrays
 
-Here's a list of most common ways to create sparse arrays in JavaScript.  
+Here's a list of the most common ways to create sparse arrays in JavaScript.  
 
 ### 3.1 Array literal
 
-As already mentioned, omitting a value when using the array literal creates a sparse array:
+As already mentioned, omitting a value when using the array literal creates a sparse array (note the `empty` word in the logger array):
 
 ```javascript
 const names = ['Batman', , 'Bane'];
 
-console.log(isDense(names)); // logs false
 console.log(names);          // logs ['Batman', empty, 'Bane']
 ```
 
 ### 3.2 *Array()* constructor
 
-When invoking `Array(length)` or `new Array(length)` (with a number argument) creates a fully sparse array:
+Invoking `Array(length)` or `new Array(length)` (with a number argument) creates a fully sparse array:
 
 ```javascript
 const array = Array(3);
 
-console.log(array); // logs [empty, empty, empty]
+console.log(isDense(array)); // logs false
+console.log(array);                // logs [empty, empty, empty]
 ```
 
 ### 3.3 *delete* operator
@@ -133,14 +133,16 @@ const names = ['Batman', 'Joker', 'Bane'];
 delete names[1];
 
 console.log(isDense(names)); // logs false
-console.log(names);          // logs ['Batman', empty, 'Bane']
+console.log(names);                 // logs ['Batman', empty, 'Bane']
 ```
 
-Initially `names` array is dense. But executing `delete names[1]` deletes the item at index `1` and makes `names` array sparse.  
+Initially, `names` array is dense. 
+
+But executing `delete names[1]` deletes the item at index `1` and makes `names` array sparse.   
 
 ### 3.4 Increase *length* property
 
-If you increase `length` property of an existing array, then you also create holes in the array:
+If you *increase* `length` property of an array, then you also create holes in the array:
 
 ```javascript
 const names = ['Batman', 'Joker', 'Bane'];
@@ -152,13 +154,15 @@ console.log(names); // logs ['Batman', 'Joker', 'Bane', empty, empty]
 
 Initially `names` array had 3 items, and it was a dense array.
 
-However, increase the `names.length` to `5` items, the array now has 2 holes at `3` and `4` indexes.  
+However, increasing the `names.length` to `5` items, the array now has 2 holes at `3` and `4` indexes.   
+
+On a side note, *decreasing* the `length` property doesn't create a sparse array but simply removes items from the end of the array.  
 
 ## 4. Array methods and sparse arrays
 
 A problem of the sparse arrays is that many array built-in methods just skip the holes in a sparse array.  
 
-For example `array.forEach(eachFunc)` doesn't not invoke `eachFunc` on the holes:
+For example, `array.forEach(eachFunc)` doesn't not invoke `eachFunc` on the holes:
 
 ```javascript
 const names = ['Batman', , 'Bane'];
@@ -170,17 +174,17 @@ names.forEach(name => {
 // logs 'Bane'
 ```
 
-Same way `array.map(mapperFunc)`, `array.filter(predicateFunc)`, and more functions do simply skip the holes.  
+Same way `array.map(mapperFunc)`, `array.filter(predicateFunc)`, and more functions do skip the holes.  If you've accidentally created a sparse array, you might find a hard time understanding why some array functions aren't working as expected.  
 
-*Challenge: give examples of array functions in JavaScript that don't skip the empty holes?*
+*Challenge: do you know array functions in JavaScript that don't skip the empty holes?*
 
 ## 5. Conclusion
 
 In JavaScript, an array can be *dense* or *sparse*.  
 
-An array is dense if there are items at each index starting `0` until `array.length - 1` . Otherwise, if at least one item is missing at an index, the array is sparse.  
+An array is dense if there are items at each index starting `0` until `array.length - 1` . Otherwise, if at least one item is missing at any index, the array is sparse.  
 
-While you won't deal much with sparse arrays, it worth knowing the situations when one can be created: 
+While you won't deal much with sparse arrays, you should be aware of the situations when one can be created: 
 
 * when skipping a value inside an array literal `[1, , 3]`
 * when using `Array(length)`
