@@ -1,8 +1,8 @@
 ---
 title: "Sparse vs Dense Arrays in JavaScript"
 description: "What's the difference between sparse and dence arrays in JavaScript"
-published: "2021-10-26T12:00Z"
-modified: "2021-10-26T12:00Z"
+published: "2021-10-27T07:00Z"
+modified: "2021-10-27T07:00Z"
 thumbnail: "./images/cover-1.png"
 slug: javascript-sparse-dense-arrays
 tags: ['javascript', 'array']
