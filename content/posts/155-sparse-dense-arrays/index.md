@@ -213,6 +213,6 @@ While you won't deal much with sparse arrays, you should be aware of the situati
 * when using `delete array[index]`
 * when increasing `array.length` property
 
-The problem with sparse arrays is that some JavaScript functions (like `array.forEach()`, `array.map()`, etc.).  
+The problem with sparse arrays is that some JavaScript functions (like `array.forEach()`, `array.map()`, etc.) skip empty holes when iterating over the array items.  
 
 *What other ways to create sparse arrays in JavaScript do you know?*
