@@ -18,7 +18,7 @@ All types in JavaScript (except the `null` and `undefined` values) have a constr
 var num = 150;
 num.constructor === Number // => true
 var obj = {};
-str.constructor === Object // => true
+obj.constructor === Object // => true
 var reg = /\d/g;
 reg.constructor === RegExp; // => true
 ```
