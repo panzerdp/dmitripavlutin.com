@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import PostTemplate from 'components/Pages/Post/Template';
 import { PostBySlugQuery } from 'graphql-types';
 import { toPostPlain } from 'utils/mapper';
+import { PostDetailed } from 'typings/post';
 
 interface PostTemplateFetchProps {
   data: PostBySlugQuery;
@@ -14,7 +15,7 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
   const post: PostDetailed = {
     ...markdownRemark.frontmatter,
     html: markdownRemark.html,
-    thumbnail: markdownRemark.frontmatter.thumbnail.childImageSharp.fluid,
+    thumbnail: markdownRemark.frontmatter.thumbnail.childImageSharp.gatsbyImageData,
   };
   const postRelativePath = markdownRemark.fileAbsolutePath
     .split('/')
@@ -37,7 +38,7 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
       post={post}
       recommendedPosts={recommendedPosts}
       popularPostsByCategory={popularPlainPostsByCategory}
-      authorProfilePictureSrc={authorProfilePicture.childImageSharp.resize.src}
+      authorProfilePictureSrc={authorProfilePicture.childImageSharp.gatsbyImageData.src}
       githubCommentsRepository={githubCommentsRepository}
     />
   );
@@ -105,9 +106,7 @@ export const pageQuery = graphql`
     }
     authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {
       childImageSharp {
-        resize(width: 256, height: 256, quality: 100) {
-          src
-        }
+        gatsbyImageData(width: 256, height: 256, quality: 100, layout: FIXED)
       }
     }
     markdownRemark(frontmatter: { slug: { eq: $slug } }) {
@@ -119,9 +118,7 @@ export const pageQuery = graphql`
         recommended
         thumbnail {
           childImageSharp {
-            fluid(maxWidth: 650, maxHeight: 360, quality: 90) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
+            gatsbyImageData(width: 650, height: 360, quality: 90, layout: CONSTRAINED)
           }
         }
       }

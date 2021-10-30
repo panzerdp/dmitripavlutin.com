@@ -67,9 +67,7 @@ export const pageQuery = graphql`
     }
     authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {
       childImageSharp {
-        resize(width: 256, height: 256, quality: 100) {
-          src
-        }
+        gatsbyImageData(width: 256, height: 256, quality: 100, layout: FIXED)
       }
     }
     popularPostsMarkdown: allMarkdownRemark(filter: { frontmatter: { slug: { in: $popularPostsSlugs } } }) {
@@ -79,9 +77,7 @@ export const pageQuery = graphql`
             ...Post
             thumbnail {	
               childImageSharp {	
-                fixed(width: 180, height: 100, quality: 90) {	
-                  ...GatsbyImageSharpFixed_withWebp	
-                }	
+                gatsbyImageData(width: 180, height: 100, quality: 90, layout: FIXED)
               }	
             }
           }
@@ -100,9 +96,7 @@ export const pageQuery = graphql`
             ...Post
             thumbnail {
               childImageSharp {
-                fluid(maxWidth: 650, maxHeight: 360, quality: 90) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
+                fluid(maxWidth: 650, maxHeight: 360, quality: 90, formats: [AUTO, WEBP, AVIF], layout: FLUID)
               }
             }
           }

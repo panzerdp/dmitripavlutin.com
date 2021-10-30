@@ -20,7 +20,15 @@ module.exports = {
               fromHeading: 1,
             },
           },
-          `gatsby-plugin-sharp`,
+          {
+            resolve: 'gatsby-plugin-image',
+            options: {
+              defaults: {
+                formats: ['auto', 'webp']
+              }
+            }
+          },
+          'gatsby-plugin-sharp',
           {
             resolve: `gatsby-remark-images`,
             options: {

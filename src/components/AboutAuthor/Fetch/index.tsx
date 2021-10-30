@@ -2,11 +2,12 @@ import * as React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 
 import { AboutAuthorQuery } from 'graphql-types';
+import { IGatsbyImageData } from 'gatsby-plugin-image';
 
 export interface AboutAuthorFetchResult {
   authorInfo: AuthorInfo;
-  authorProfilePictureSmall: FixedImage;
-  authorProfilePictureBig: FluidImage;
+  authorProfilePictureSmall: IGatsbyImageData;
+  authorProfilePictureBig: IGatsbyImageData;
 }
 
 interface AboutAuthorFetchProps {
@@ -28,16 +29,12 @@ export default function AboutAuthorFetch({ render }: AboutAuthorFetchProps) {
           }
           authorProfilePictureSmall: file(relativePath: { eq: "louvre.jpg" }) {
             childImageSharp {
-              fixed(width: 120, height: 120, quality: 100) {
-                ...GatsbyImageSharpFixed_withWebp
-              }
+              gatsbyImageData(width: 120, height: 120, quality: 100, layout: FIXED)
             }
           }
           authorProfilePictureBig: file(relativePath: { eq: "louvre.jpg" }) {
             childImageSharp {
-              fluid(maxWidth: 350, quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
+              gatsbyImageData(width: 350, quality: 90, layout: CONSTRAINED)
             }
           }
         }
@@ -52,8 +49,8 @@ export default function AboutAuthorFetch({ render }: AboutAuthorFetchProps) {
         } = data;
         return render({
           authorInfo,
-          authorProfilePictureSmall: authorProfilePictureSmall.childImageSharp.fixed,
-          authorProfilePictureBig: authorProfilePictureBig.childImageSharp.fluid,
+          authorProfilePictureSmall: authorProfilePictureSmall.childImageSharp.gatsbyImageData,
+          authorProfilePictureBig: authorProfilePictureBig.childImageSharp.gatsbyImageData,
         });
       }}
     />

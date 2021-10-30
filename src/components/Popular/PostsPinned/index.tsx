@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Link from 'gatsby-link';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import { Post } from 'typings/post';
 
 import * as styles from './index.module.scss';
 import { TO_POST } from 'routes/path';
@@ -8,7 +9,7 @@ import Tag from 'components/Tag';
 
 interface PopularPostsPinnedProps {
   popularPostsByCategory: {
-    plainPosts: Post<FixedImage>[],
+    plainPosts: Post[],
     category: string
   }[];
 }
@@ -47,12 +48,12 @@ export default function PopularPostsPinned({ popularPostsByCategory }: PopularPo
   );
 }
 
-function mapPost(post: Post<FixedImage>) {
+function mapPost(post: Post) {
   const toPost = TO_POST({ slug: post.slug });
   return (
     <div key={post.slug} className={styles.item}>
       <Link to={toPost} className={styles.thumbnailAnchor} title={post.title}>
-        <Img fixed={post.thumbnail} />
+        <GatsbyImage image={post.thumbnail} alt="Post image" />
       </Link>
       <div>
         <span className={styles.square}>&#x25A0;</span>
