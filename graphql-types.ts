@@ -4774,6 +4774,103 @@ export type MailchimpListSortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
+export type AboutAuthorQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AboutAuthorQuery = { site: Maybe<{ siteMetadata: Maybe<{ authorInfo: Maybe<AuthorInfoAllFragment> }> }>, authorProfilePictureSmall: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, authorProfilePictureBig: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> };
+
+export type CarbonAdsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CarbonAdsQuery = { site: Maybe<{ siteMetadata: Maybe<{ carbonAdsService: Maybe<CarbonAdsServiceAllFragment> }> }> };
+
+export type LayoutQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LayoutQuery = { file: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, site: Maybe<{ siteMetadata: Maybe<{ siteInfo: Maybe<SiteInfoAllFragment>, authorInfo: Maybe<AuthorInfoAllFragment> }> }> };
+
+export type ExcerptsListQueryVariables = Exact<{
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  popularPostsSlugs: Array<Maybe<Scalars['String']>> | Maybe<Scalars['String']>;
+}>;
+
+
+export type ExcerptsListQuery = { site: Maybe<{ siteMetadata: Maybe<{ siteInfo: Maybe<SiteInfoAllFragment>, authorInfo: Maybe<AuthorInfoAllFragment>, featured: Maybe<{ popularPostsByCategory: Maybe<Array<Maybe<Pick<SiteSiteMetadataFeaturedPopularPostsByCategory, 'category' | 'slugs'>>>> }> }> }>, authorProfilePicture: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, popularPostsMarkdown: { edges: Array<{ node: { frontmatter: Maybe<(
+          { thumbnail: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
+          & PostFragment
+        )> } }> }, allMarkdownRemark: { edges: Array<{ node: { frontmatter: Maybe<(
+          { thumbnail: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
+          & PostFragment
+        )> } }> } };
+
+export type PlainListByTagQueryVariables = Exact<{
+  tag: Scalars['String'];
+}>;
+
+
+export type PlainListByTagQuery = { allMarkdownRemark: { edges: Array<{ node: { frontmatter: Maybe<PostFragment> } }> } };
+
+export type SiteInfoAllFragment = Pick<SiteSiteMetadataSiteInfo, 'title' | 'description' | 'metaTitle' | 'metaDescription' | 'url' | 'repositoryUrl'>;
+
+export type AuthorInfoAllFragment = (
+  Pick<SiteSiteMetadataAuthorInfo, 'name' | 'description' | 'email' | 'jobTitle'>
+  & { profiles: Maybe<Pick<SiteSiteMetadataAuthorInfoProfiles, 'stackoverflow' | 'twitter' | 'linkedin' | 'github' | 'facebook'>>, nicknames: Maybe<Pick<SiteSiteMetadataAuthorInfoNicknames, 'twitter'>> }
+);
+
+export type CarbonAdsServiceAllFragment = Pick<SiteSiteMetadataCarbonAdsService, 'isEnabled' | 'isProductionMode' | 'scriptSrc'>;
+
+export type PostFragment = Pick<MarkdownRemarkFrontmatter, 'title' | 'description' | 'published' | 'modified' | 'slug' | 'tags'>;
+
+export type PostBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+  recommended: Array<Maybe<Scalars['String']>> | Maybe<Scalars['String']>;
+  popularPostsSlugs: Array<Maybe<Scalars['String']>> | Maybe<Scalars['String']>;
+}>;
+
+
+export type PostBySlugQuery = { site: Maybe<{ siteMetadata: Maybe<(
+      Pick<SiteSiteMetadata, 'githubCommentsRepository'>
+      & { siteInfo: Maybe<SiteInfoAllFragment>, authorInfo: Maybe<AuthorInfoAllFragment>, featured: Maybe<{ popularPostsByCategory: Maybe<Array<Maybe<Pick<SiteSiteMetadataFeaturedPopularPostsByCategory, 'category' | 'slugs'>>>> }> }
+    )> }>, authorProfilePicture: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, markdownRemark: Maybe<(
+    Pick<MarkdownRemark, 'id' | 'html' | 'fileAbsolutePath'>
+    & { frontmatter: Maybe<(
+      Pick<MarkdownRemarkFrontmatter, 'recommended'>
+      & { thumbnail: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
+      & PostFragment
+    )> }
+  )>, recommendedPostsMarkdown: { edges: Array<{ node: { frontmatter: Maybe<PostFragment> } }> }, popularPostsMarkdown: { edges: Array<{ node: { frontmatter: Maybe<PostFragment> } }> } };
+
+export type PopularTagsFetchQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PopularTagsFetchQuery = { allMarkdownRemark: { edges: Array<{ node: { frontmatter: Maybe<PostFragment> } }> } };
+
+export type EmailSubscriptionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type EmailSubscriptionQuery = { site: Maybe<{ siteMetadata: Maybe<{ emailSubscriptionService: Maybe<Pick<SiteSiteMetadataEmailSubscriptionService, 'endpoint' | 'hiddenFieldName'>> }> }>, allMailchimpList: { edges: Array<{ node: { stats: Maybe<Pick<MailchimpListStats, 'member_count'>> } }> } };
+
+export type Page404QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Page404Query = { allMarkdownRemark: { edges: Array<{ node: Pick<MarkdownRemark, 'html'> }> } };
+
+export type AboutQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AboutQuery = { site: Maybe<{ siteMetadata: Maybe<{ siteInfo: Maybe<SiteInfoAllFragment>, authorInfo: Maybe<AuthorInfoAllFragment> }> }>, allMarkdownRemark: { edges: Array<{ node: Pick<MarkdownRemark, 'html'> }> }, authorProfilePicture: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> };
+
+export type PlainListAllQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PlainListAllQuery = { allMarkdownRemark: { edges: Array<{ node: { frontmatter: Maybe<PostFragment> } }> } };
+
+export type SearchQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SearchQuery = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'googleCustomSearchId'>> }> };
+
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
 export type GatsbyImageSharpFixed_TracedSvgFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;

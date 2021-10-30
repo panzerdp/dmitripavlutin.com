@@ -39,7 +39,7 @@ export default function ExcerptsFetch({
     <ExcerptsListTemplate
       siteInfo={siteInfo}
       posts={allMarkdownRemark.edges.map(toPostImageFluid)}
-      authorProfilePictureSrc={authorProfilePicture.childImageSharp.resize.src}
+      authorProfilePictureSrc={authorProfilePicture.childImageSharp.gatsbyImageData.src}
       currentPage={pageContext.currentPage}
       pagesSum={pageContext.pagesSum}
       popularPostsByCategory={popularPlainPostsByCategory}
@@ -96,7 +96,7 @@ export const pageQuery = graphql`
             ...Post
             thumbnail {
               childImageSharp {
-                fluid(maxWidth: 650, maxHeight: 360, quality: 90, formats: [AUTO, WEBP, AVIF], layout: FLUID)
+                gatsbyImageData(width: 650, height: 360, quality: 90, layout: CONSTRAINED)
               }
             }
           }

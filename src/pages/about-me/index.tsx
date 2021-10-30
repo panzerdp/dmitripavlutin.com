@@ -17,7 +17,7 @@ export default function AboutFetch({ data }: AboutFetchProps) {
     <AboutTemplate
       siteInfo={siteInfo}
       authorInfo={authorInfo}
-      authorProfilePictureSrc={data.authorProfilePicture.childImageSharp.resize.src}
+      authorProfilePictureSrc={data.authorProfilePicture.childImageSharp.gatsbyImageData.src}
       html={edges[0].node.html}
     />
   );
@@ -44,9 +44,7 @@ export const pageQuery = graphql`
     }
     authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {
       childImageSharp {
-        resize(width: 256, height: 256, quality: 100) {
-          src
-        }
+        gatsbyImageData(width: 256, height: 256, quality: 100, layout: FIXED)
       }
     }
   }

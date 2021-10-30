@@ -15,7 +15,7 @@ export function Header({ authorProfilePicture, siteInfo }: HeaderProps) {
     <header>
       <div className={styles.headerContent}>
         <Link to={TO_INDEX()}>
-          <GatsbyImage title="Home" image={authorProfilePicture} className={styles.picture} />
+          <GatsbyImage alt="Home" image={authorProfilePicture} className={styles.picture} />
         </Link>
         <div className={styles.profileInfo}>
           <Link to={TO_INDEX()} className={styles.name}>

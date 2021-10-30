@@ -1,7 +1,8 @@
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 import 'prismjs/themes/prism.css';
 
+import { PostPlain, PostDetailed } from 'typings/post';
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData';
 import MetaTags from 'components/Pages/Post/Meta/Tags';
 import Layout from 'components/Layout/Fetch';
@@ -73,7 +74,7 @@ export default function PostTemplate({
       <CarbonFetch render={(service) => <CarbonMetaTags carbonAdsService={service} />} />
       <article>
         <div className={styles.postCover}>
-          <Img fluid={post.thumbnail} />
+          <GatsbyImage image={post.thumbnail} alt="Post cover" />
         </div>
         <h1>{post.title}</h1>
         <Subheader post={post}>
