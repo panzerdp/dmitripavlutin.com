@@ -118,7 +118,7 @@ export const pageQuery = graphql`
         recommended
         thumbnail {
           childImageSharp {
-            gatsbyImageData(width: 650, height: 360, quality: 90, layout: CONSTRAINED)
+            gatsbyImageData(width: 650, height: 360, quality: 90, layout: FULL_WIDTH)
           }
         }
       }
