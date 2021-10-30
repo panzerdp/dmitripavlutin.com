@@ -99,10 +99,8 @@ module.exports = {
       options: {
         documentPaths: [
           './src/**/*.{ts,tsx}',
-          './.cache/fragments/*.js', 
           './node_modules/gatsby-*/**/*.js',
           './node_modules/gatsby-transformer-sharp/**/*.js',
-          './node_modules/gatsby-transformer-remark/**/*.js'
         ],
         codegenConfig: {
           avoidOptionals: true
