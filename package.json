@@ -42,6 +42,7 @@
     "gatsby-transformer-remark": "4.11.0",
     "gatsby-transformer-sharp": "3.14.0",
     "graphql": "15.6.0",
+    "js-yaml": "4.1.0",
     "normalize.css": "8.0.1",
     "path-to-regexp": "6.2.0",
     "prismjs": "1.25.0",
