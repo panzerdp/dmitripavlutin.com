@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 
 import PlainListAllTemplate from 'components/Pages/PlainListAll/Template';
-import { PlainListAllQuery } from 'typings/graphql';
+import { PlainListAllQuery } from 'graphql-types';
 import { toPostPlain } from 'utils/mapper';
 
 interface PlainListAllFetchProps {

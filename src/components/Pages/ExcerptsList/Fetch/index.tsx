@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 
 import ExcerptsListTemplate from 'components/Pages/ExcerptsList/Template';
-import { ExcerptsListQuery } from 'typings/graphql';
+import { ExcerptsListQuery } from 'graphql-types';
 import { toPostImageFluid, toPostImageFixed } from 'utils/mapper';
 
 interface ExcerptsFetchProps {

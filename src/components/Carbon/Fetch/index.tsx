@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 
-import { CarbonAdsQuery } from 'typings/graphql';
+import { CarbonAdsQuery } from 'graphql-types';
 
 interface CarbonAdsFetchProps {
   render(carbonAdsService: CarbonAdsService): React.ReactNode;

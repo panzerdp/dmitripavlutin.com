@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 
 import SearchTemplate from 'components/Pages/Search/Template';
-import { SearchQuery } from 'typings/graphql';
+import { SearchQuery } from 'graphql-types';
 
 interface SearchFetchProps {
   data: SearchQuery;

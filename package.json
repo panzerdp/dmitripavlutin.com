@@ -7,9 +7,6 @@
     "url": "https://github.com/panzerdp/dmitripavlutin.com/issues"
   },
   "dependencies": {
-    "@graphql-codegen/cli": "1.21.6",
-    "@graphql-codegen/typescript": "1.22.4",
-    "@graphql-codegen/typescript-operations": "1.18.3",
     "@rogovdm/gatsby-source-mailchimp": "1.0.16",
     "@types/classnames": "2.3.1",
     "@types/react": "17.0.24",
@@ -25,6 +22,7 @@
     "gatsby-link": "3.14.0",
     "gatsby-plugin-feed": "3.14.0",
     "gatsby-plugin-google-analytics": "3.14.0",
+    "gatsby-plugin-graphql-codegen": "3.0.0",
     "gatsby-plugin-minify-classnames": "0.3.1",
     "gatsby-plugin-react-helmet": "4.14.0",
     "gatsby-plugin-remove-serviceworker": "1.0.0",
@@ -75,9 +73,7 @@
     "lint": "eslint 'src/**/*.ts?(x)'",
     "lint:fix": "npm run lint -- --fix",
     "build": "gatsby build",
-    "type:check": "tsc -p tsconfig.json --noEmit",
-    "type:generate": "graphql-codegen",
-    "type:dev": "npm run type:generate -- --watch"
+    "type:check": "tsc -p tsconfig.json --noEmit"
   },
   "resolutions": {
     "gatsby-react-router-scroll": "3.0.3",

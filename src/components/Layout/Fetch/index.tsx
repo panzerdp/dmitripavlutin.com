@@ -2,7 +2,7 @@ import * as React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 
 import LayoutContainer from 'components/Layout/Container';
-import { LayoutQuery } from 'typings/graphql';
+import { LayoutQuery } from 'graphql-types';
 
 interface LayoutFetchQueryProps {
   children: React.ReactNode;

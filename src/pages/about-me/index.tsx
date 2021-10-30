@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 
 import AboutTemplate from 'components/Pages/About/Template';
-import { AboutQuery } from 'typings/graphql';
+import { AboutQuery } from 'graphql-types';
 
 interface AboutFetchProps {
   data: AboutQuery;

@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 
 import PlainListByTagTemplate from 'components/Pages/PlainListByTag/Template';
-import { PlainListByTagQuery } from 'typings/graphql';
+import { PlainListByTagQuery } from 'graphql-types';
 import { toPostPlain } from 'utils/mapper';
 
 interface PlainListByTagProps {

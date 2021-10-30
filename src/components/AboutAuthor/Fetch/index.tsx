@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 
-import { AboutAuthorQuery } from 'typings/graphql';
+import { AboutAuthorQuery } from 'graphql-types';
 
 export interface AboutAuthorFetchResult {
   authorInfo: AuthorInfo;

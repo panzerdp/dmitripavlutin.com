@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 
 import PostTemplate from 'components/Pages/Post/Template';
-import { PostBySlugQuery } from 'typings/graphql';
+import { PostBySlugQuery } from 'graphql-types';
 import { toPostPlain } from 'utils/mapper';
 
 interface PostTemplateFetchProps {

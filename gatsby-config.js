@@ -94,6 +94,21 @@ module.exports = {
         trackingId: 'UA-66648045-1',
       },
     },
+    {
+      resolve: 'gatsby-plugin-graphql-codegen',
+      options: {
+        documentPaths: [
+          './src/**/*.{ts,tsx}',
+          './.cache/fragments/*.js', 
+          './node_modules/gatsby-*/**/*.js',
+          './node_modules/gatsby-transformer-sharp/**/*.js',
+          './node_modules/gatsby-transformer-remark/**/*.js'
+        ],
+        codegenConfig: {
+          avoidOptionals: true
+        }
+      }
+    },
     'gatsby-plugin-remove-serviceworker',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',

@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 
 import Page404Template from 'components/Pages/404/Template';
-import { Page404Query } from 'typings/graphql';
+import { Page404Query } from 'graphql-types';
 
 interface Page404FetchProps {
   data: Page404Query;

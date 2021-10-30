@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 
-import { EmailSubscriptionQuery } from 'typings/graphql';
+import { EmailSubscriptionQuery } from 'graphql-types';
 
 interface CarbonAdsFetchProps {
   render(emailSubscriptionService: EmailSubscriptionService, count: number): React.ReactNode;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 
-import { PopularTagsFetchQuery } from 'typings/graphql';
+import { PopularTagsFetchQuery } from 'graphql-types';
 import { toPostPlain } from 'utils/mapper';
 
 interface PopularTagsFetch {

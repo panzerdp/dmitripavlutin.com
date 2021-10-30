@@ -17,10 +17,13 @@
     "noImplicitAny": true,
     "resolveJsonModule": true,
     "lib": ["es2015", "dom"],
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "paths": {
+      "graphql-types": ["../graphql-types.ts"]
+    }
   },
   "exclude": ["node_modules", "**/node_modules/*"],
   "include": [
     "src/**/*"
-  ]
+  ],
 }

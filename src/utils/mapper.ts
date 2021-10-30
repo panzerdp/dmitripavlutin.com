@@ -1,4 +1,4 @@
-import { PostFragment } from 'typings/graphql';
+import { PostFragment } from 'graphql-types';
 
 export function toPostImageFluid({ node: { frontmatter } }: { node: { frontmatter: any } }): Post<FluidImage> {
   return {
