@@ -4796,7 +4796,7 @@ export type ExcerptsListQueryVariables = Exact<{
 }>;
 
 
-export type ExcerptsListQuery = { site: Maybe<{ siteMetadata: Maybe<{ siteInfo: Maybe<SiteInfoAllFragment>, authorInfo: Maybe<AuthorInfoAllFragment>, featured: Maybe<{ popularPostsByCategory: Maybe<Array<Maybe<Pick<SiteSiteMetadataFeaturedPopularPostsByCategory, 'category' | 'slugs'>>>> }> }> }>, authorProfilePicture: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, popularPostsMarkdown: { edges: Array<{ node: { frontmatter: Maybe<(
+export type ExcerptsListQuery = { site: Maybe<{ siteMetadata: Maybe<{ featured: Maybe<{ popularPostsByCategory: Maybe<Array<Maybe<Pick<SiteSiteMetadataFeaturedPopularPostsByCategory, 'category' | 'slugs'>>>> }> }> }>, popularPostsMarkdown: { edges: Array<{ node: { frontmatter: Maybe<(
           { thumbnail: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
           & PostFragment
         )> } }> }, allMarkdownRemark: { edges: Array<{ node: { frontmatter: Maybe<(

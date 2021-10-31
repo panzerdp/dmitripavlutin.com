@@ -16,14 +16,12 @@ export default function ExcerptsFetch({
   data: {
     site: {
       siteMetadata: {
-        siteInfo,
         featured: {
           popularPostsByCategory
         }        
       },
     },
     allMarkdownRemark,
-    authorProfilePicture,
     popularPostsMarkdown
   },
   pageContext,
@@ -37,9 +35,7 @@ export default function ExcerptsFetch({
   });
   return (
     <ExcerptsListTemplate
-      siteInfo={siteInfo}
       posts={allMarkdownRemark.edges.map(toPostImageFluid)}
-      authorProfilePictureSrc={authorProfilePicture.childImageSharp.gatsbyImageData.src}
       currentPage={pageContext.currentPage}
       pagesSum={pageContext.pagesSum}
       popularPostsByCategory={popularPlainPostsByCategory}
@@ -51,23 +47,12 @@ export const pageQuery = graphql`
   query ExcerptsList($skip: Int, $limit: Int, $popularPostsSlugs: [String]!) {
     site {
       siteMetadata {
-        siteInfo {
-          ...SiteInfoAll
-        }
-        authorInfo {
-          ...AuthorInfoAll
-        }
         featured {
           popularPostsByCategory {
             category
             slugs
           }
         }
-      }
-    }
-    authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {
-      childImageSharp {
-        gatsbyImageData(width: 256, height: 256, quality: 100, layout: FIXED)
       }
     }
     popularPostsMarkdown: allMarkdownRemark(filter: { frontmatter: { slug: { in: $popularPostsSlugs } } }) {

@@ -1,9 +1,9 @@
 import { Helmet } from 'react-helmet';
 
-import { useAuthorAndSideInfo } from 'hooks/useAuthorAndSiteInfo';
+import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
 
 export default function AboutMetaStructuredData() {
-  const { author, site } = useAuthorAndSideInfo();
+  const { author, site } = useAuthorAndSiteInfo();
   const authorProfilePictureUrl = `${site.url}${author.profilePictureSrc}`;
   const sameAs = Object.keys(author.info.profiles)
     .reduce((list, key: keyof typeof author.info.profiles) => [...list, author.info.profiles[key]], []);

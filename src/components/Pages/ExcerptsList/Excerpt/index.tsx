@@ -9,7 +9,6 @@ import * as styles from './index.module.scss';
 
 interface ExcerptProps {
   post: Post;
-  siteUrl: string;
 }
 
 export default function Excerpt({ post }: ExcerptProps) {

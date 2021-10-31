@@ -3,7 +3,7 @@ import { getSrc } from 'gatsby-plugin-image';
 
 import { AuthorInfoAndPicturesQuery } from 'graphql-types';
 
-export const useAuthorAndSideInfo = () => {
+export const useAuthorAndSiteInfo = () => {
   const data = useStaticQuery<AuthorInfoAndPicturesQuery>(
     graphql`
       query AuthorInfoAndPictures {
