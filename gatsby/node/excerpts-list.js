@@ -4,7 +4,7 @@ const { TO_INDEX, TO_PAGE } = require('../../src/routes/path.js');
 
 const POSTS_PER_PAGE = 10;
 
-const pageComponentPath = path.resolve(__dirname, '../../src/components/Pages/ExcerptsList/Fetch/index.tsx');
+const pageComponentPath = path.resolve(__dirname, '../../src/components/Pages/ExcerptsList/Fetch.tsx');
 
 module.exports = function createExcerptsList(createPage, edges, popularPostsSlugs) {
   const pagesSum = Math.ceil(edges.length / POSTS_PER_PAGE);

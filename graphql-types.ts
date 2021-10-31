@@ -4784,6 +4784,16 @@ export type CarbonAdsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type CarbonAdsQuery = { site: Maybe<{ siteMetadata: Maybe<{ carbonAdsService: Maybe<CarbonAdsServiceAllFragment> }> }> };
 
+export type AuthorInfoAndPicturesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AuthorInfoAndPicturesQuery = { site: Maybe<{ siteMetadata: Maybe<{ authorInfo: Maybe<AuthorInfoAllFragment> }> }>, authorProfilePictureSmall: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, authorProfilePictureBig: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, authorThumbnail: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> };
+
+export type SiteInfoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SiteInfoQuery = { site: Maybe<{ siteMetadata: Maybe<{ siteInfo: Maybe<SiteInfoAllFragment> }> }> };
+
 export type LayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
