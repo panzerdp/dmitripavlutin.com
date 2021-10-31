@@ -2,6 +2,8 @@ import Layout from 'components/Layout/Fetch';
 import SimpleList from 'components/Simple/List';
 import PlainListByTagMetaTags from '../Meta/Tags';
 
+import { PostPlain } from 'typings/post';
+
 interface PlainListByTagTemplateProps {
   tag: string;
   posts: PostPlain[];
