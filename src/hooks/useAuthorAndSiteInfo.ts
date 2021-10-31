@@ -1,0 +1,37 @@
+import { useStaticQuery, graphql } from 'gatsby';
+import { getSrc } from 'gatsby-plugin-image';
+
+import { AuthorInfoAndPicturesQuery } from 'graphql-types';
+
+export const useAuthorAndSideInfo = () => {
+  const data = useStaticQuery<AuthorInfoAndPicturesQuery>(
+    graphql`
+      query AuthorInfoAndPictures {
+        site {
+          siteMetadata {
+            authorInfo {
+              ...AuthorInfoAll
+            }
+            siteInfo {
+              ...SiteInfoAll
+            }
+          }
+        }
+        authorProfilePicture: file(relativePath: { eq: "louvre.jpg" }) {
+          childImageSharp {
+            gatsbyImageData(width: 300, quality: 90, layout: CONSTRAINED)
+          }
+        }
+      }
+    `
+  );
+  const imageData = data.authorProfilePicture.childImageSharp.gatsbyImageData;
+  return {
+    author: {
+      info: data.site.siteMetadata.authorInfo,
+      profilePicture: imageData,
+      profilePictureSrc: getSrc(imageData)
+    },
+    site: data.site.siteMetadata.siteInfo
+  }
+}
