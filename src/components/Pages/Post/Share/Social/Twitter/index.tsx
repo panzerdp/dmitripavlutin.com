@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 
 import withWindowOpen, { WindowOpenOptions } from 'components/With/WindowOpen';
 import { slugify } from 'utils/string';

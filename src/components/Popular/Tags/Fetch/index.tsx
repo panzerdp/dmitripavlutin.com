@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import { graphql, StaticQuery } from 'gatsby';
 
 import { PopularTagsFetchQuery } from 'graphql-types';

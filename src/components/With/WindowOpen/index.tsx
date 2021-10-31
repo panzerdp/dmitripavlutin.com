@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 
 export interface WindowOpenOptions {
   url: string;

@@ -7,6 +7,7 @@ import Paginator from 'components/Pages/ExcerptsList/Paginator';
 import RightSidebar from 'components/Pages/ExcerptsList/Sidebar/Right';
 import LeftSidebar from 'components/Pages/ExcerptsList/Sidebar/Left';
 import PopularPostsPinned from 'components/Popular/PostsPinned';
+import { Post } from 'typings/post';
 
 interface ExcerptsTemplateProps {
   siteInfo: SiteInfo;
@@ -15,7 +16,7 @@ interface ExcerptsTemplateProps {
   pagesSum: number;
   authorProfilePictureSrc: string;
   popularPostsByCategory: {
-    plainPosts: Post<FixedImage>[],
+    plainPosts: Post[],
     category: string
   }[];
 }
@@ -34,9 +35,7 @@ export default function ExcerptsListTemplate({
       <MetaStructuredData siteInfo={siteInfo} authorProfilePictureSrc={authorProfilePictureSrc} />
       <MetaPaginator currentPage={currentPage} pagesSum={pagesSum} siteUrl={siteInfo.url} />
       <PopularPostsPinned popularPostsByCategory={popularPostsByCategory} />
-      {posts.map((post, index) => (
-        <Excerpt post={post} siteUrl={siteInfo.url} key={index} />
-      ))}
+      {posts.map(post => <Excerpt post={post} siteUrl={siteInfo.url} key={post.slug} />)}
       <Paginator currentPage={currentPage} pagesSum={pagesSum} />
     </Layout>
   );

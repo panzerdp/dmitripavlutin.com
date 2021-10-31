@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 
 function CarbonBannerDemo(_: unknown, ref: React.RefObject<HTMLDivElement>): null {
   React.useEffect(() => {

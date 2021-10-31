@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 
 import { AboutAuthorQuery } from 'graphql-types';
@@ -14,7 +13,6 @@ interface AboutAuthorFetchProps {
   render(result: AboutAuthorFetchResult): React.ReactNode;
 }
 
-/* istanbul ignore next */
 export default function AboutAuthorFetch({ render }: AboutAuthorFetchProps) {
   return (
     <StaticQuery
