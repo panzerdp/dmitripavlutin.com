@@ -426,6 +426,7 @@ export type SitePluginPluginOptions = {
   disableBgImage: Maybe<Scalars['Boolean']>;
   wrapperStyle: Maybe<Scalars['String']>;
   theme: Maybe<Scalars['String']>;
+  vfsRoot: Maybe<Scalars['String']>;
   defaultText: Maybe<Scalars['String']>;
   directory: Maybe<Scalars['String']>;
   html: Maybe<Scalars['String']>;
@@ -491,6 +492,7 @@ export type SitePluginPluginOptionsPluginsPluginOptions = {
   disableBgImage: Maybe<Scalars['Boolean']>;
   wrapperStyle: Maybe<Scalars['String']>;
   theme: Maybe<Scalars['String']>;
+  vfsRoot: Maybe<Scalars['String']>;
   defaultText: Maybe<Scalars['String']>;
   directory: Maybe<Scalars['String']>;
   html: Maybe<Scalars['String']>;
@@ -2943,6 +2945,7 @@ export type SitePluginPluginOptionsFilterInput = {
   disableBgImage: Maybe<BooleanQueryOperatorInput>;
   wrapperStyle: Maybe<StringQueryOperatorInput>;
   theme: Maybe<StringQueryOperatorInput>;
+  vfsRoot: Maybe<StringQueryOperatorInput>;
   defaultText: Maybe<StringQueryOperatorInput>;
   directory: Maybe<StringQueryOperatorInput>;
   html: Maybe<StringQueryOperatorInput>;
@@ -3012,6 +3015,7 @@ export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
   disableBgImage: Maybe<BooleanQueryOperatorInput>;
   wrapperStyle: Maybe<StringQueryOperatorInput>;
   theme: Maybe<StringQueryOperatorInput>;
+  vfsRoot: Maybe<StringQueryOperatorInput>;
   defaultText: Maybe<StringQueryOperatorInput>;
   directory: Maybe<StringQueryOperatorInput>;
   html: Maybe<StringQueryOperatorInput>;
@@ -3275,6 +3279,7 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___disableBgImage'
   | 'pluginCreator___pluginOptions___wrapperStyle'
   | 'pluginCreator___pluginOptions___theme'
+  | 'pluginCreator___pluginOptions___vfsRoot'
   | 'pluginCreator___pluginOptions___defaultText'
   | 'pluginCreator___pluginOptions___directory'
   | 'pluginCreator___pluginOptions___html'
@@ -3514,6 +3519,7 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___plugins___pluginOptions___disableBgImage'
   | 'pluginOptions___plugins___pluginOptions___wrapperStyle'
   | 'pluginOptions___plugins___pluginOptions___theme'
+  | 'pluginOptions___plugins___pluginOptions___vfsRoot'
   | 'pluginOptions___plugins___pluginOptions___defaultText'
   | 'pluginOptions___plugins___pluginOptions___directory'
   | 'pluginOptions___plugins___pluginOptions___html'
@@ -3549,6 +3555,7 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___disableBgImage'
   | 'pluginOptions___wrapperStyle'
   | 'pluginOptions___theme'
+  | 'pluginOptions___vfsRoot'
   | 'pluginOptions___defaultText'
   | 'pluginOptions___directory'
   | 'pluginOptions___html'
