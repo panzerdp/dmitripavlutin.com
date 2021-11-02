@@ -169,7 +169,7 @@ The above example renders the HTML content:
 <div>Dummy text</div></div>
 ```
 
-`<div :class="{ invisible: !value2 }">Only my space is visible!</div>` applies the `invisible` class to the element because `!value2` is `true`.  
+`<div :class="{ invisible: !value2 }">Only my space is visible!</div>` applies the `invisible` class to the element because `!value2` is `true` (I know the negation here is confusing!).  
 
 That's how you can hide the element while keeping its space on the screen.  
 
