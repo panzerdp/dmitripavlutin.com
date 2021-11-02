@@ -14,12 +14,11 @@ I like about Vue the many built-in mini-features that are helpful in everyday Fr
 
 Toggling the display of an element on the page is one of such features.  
 
-In this post, I'm going to describe how Vue can show and hide elemente on a web page. 2 approaches to hiding are presented: 
+In this post, I'm going to describe how Vue can show and hide elemente on a web page. 3 approaches to hiding are presented: 
 
 * When the element is completely removed from DOM using `v-if`;
-* When it's just been hidden using CSS styles using `v-show`.
-
-As a bonus, you'll also find how to apply CSS animations when showing/hiding your element.  
+* When it's just been hidden using CSS styles using `v-show`;
+* Applying the `visibility: hidden` using the `:class` binding.
 
 ## 1. Hiding using *v-if*
 
@@ -78,7 +77,7 @@ Often it's useful to keep the element rendered in the DOM, but having it visuall
 <div v-show="value">I am an element</div>
 ```
 
-`v-show` deals as follows with showing the element:
+`v-show` deals with showing the element as follows:
 
 A) If the value supplied to `v-show` is `true` (or truthy), then the element is visible;  
 
@@ -113,16 +112,74 @@ When you run the above component *both elements* are rendered into the DOM:
 <div style="display: none;">I'm hidden!</div>
 ```
 
-The first element is visible on the screen. While the second is hidden because Vue applies `display: none` inline style, thanks to `v-show="false"`. 
+The first element is visible on the screen. However, the second is hidden because Vue applies `display: none` inline style, thanks to `v-show="false"`. 
 
-`v-show` directive applies `display: none` inline style and hides the element visually when assigned with a `false` value.  
+`v-show`, when assigned with `false`, applies `display: none` inline style and hides the element visually.  
 
 *Challenge: how can you implement in Vue a button that toggles the display of an element? Share your solution in a comment!*  
 
-When `display: none` is applied to an element, then it is completely hidden from the screen, and the space that the element would normally ocuppy isn't preserver. The element completely disappears.  
+`display: none` applied to an element hides it on the screen, and the space the element would normally ocuppy isn't preserved. The element disappears completely.  
 
 ## 3. Hiding but keeping the space
 
+What if you need to hide the element's content, while keeping the space it occupies? The CSS style that hides the element content but keep its space is `visibility: hidden`.  
 
+Unfortunately, you can no longer can `v-show` directive because it applies only `display: none` style.  
+
+A viable solution is to use `:class` binding that is pretty flexible in Vue.  
+
+When the object literal `{ className: boolValue }` is assigned to the `:class`, Vue would apply the `"className"` as a class to the element if `boolValue` is `true`.  
+
+Assign a CSS class `invisible` having the `visibility: hidden` style to the element when you want it hidden.  
+
+```vue{1-2}
+<template>
+  <div :class="{ invisible: !value1 }">I'm visible!</div>
+  <div :class="{ invisible: !value2 }">Only my space is visible!</div>
+  <div>Dummy text</div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      value1: true,
+      value2: false
+    }
+  }
+};
+</script>
+
+<style>
+  .invisible {
+    visibility: hidden;
+  }
+</style>
+```
+
+[Try the demo.](https://codesandbox.io/s/invisible-class-sfvvi?file=/src/App.vue)
+
+If you open the demo, you'd see the element *I'm visible* and *Dummy text*, and an empty space in between which is the hidden second element.  
+
+The above example renderes the HTML content:
+
+```html
+<div class="">I'm visible!</div>
+<div class="invisible">Only my space is visible!</div>
+<div>Dummy text</div></div>
+```
+
+`<div :class="{ invisible: !value2 }">Only my space is visible!</div>` applies the `invisible` class to the element because `!value2` is `true`.  
+
+That's how you can hide the element, while keeping its space on the screen.  
 
 ## 4. Conclusion
+
+Vue gives you a bunch of good ways to hide the element on the screen.  
+
+When using `v-if="false"` the element isn't rendered at all in the DOM.  
+
+When using `v-show="false"` the element is rendered in the DOM, however Vue applies the inline style `display: none` that hides the element completely.  
+
+Also, do not forget about the powerful `:class` binding. If you'd like to apply `visibility: hidden` and hide the element while preserving its space, then you can
+use `:class="{ invisible: !value }"` to assign `invisible` class (which has `visibility: hidden` style applied to it).  
