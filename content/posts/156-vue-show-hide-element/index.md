@@ -10,11 +10,11 @@ recommended: ['simple-explanation-of-javascript-closures', 'gentle-explanation-o
 type: post
 ---
 
-I like about Vue the many built-in mini-features that are helpful in everyday Frontend programming. 
+What I like about Vue is the many built-in mini-features that are helpful in everyday Frontend programming. 
 
 Toggling the display of an element on the page is one of such features.  
 
-In this post, I'm going to describe how Vue can show and hide elemente on a web page. 3 approaches to hiding are presented: 
+In this post, I'm going to describe how Vue can show and hide elements on a web page. 3 approaches to hiding are presented: 
 
 * When the element is completely removed from DOM using `v-if`;
 * When it's just been hidden using CSS styles using `v-show`;
@@ -69,7 +69,7 @@ DOM because `v-if="value2"` was supplied with a `false`.
 
 ## 2. Hiding using *v-show*
 
-Often it's useful to keep the element rendered in the DOM, but having it visually hidden using CSS styles.  
+Often it's useful to keep the element rendered in the DOM, but have it visually hidden using CSS styles.  
 
 `v-show` is a built-in directive that shows or hides visually the element:
 
@@ -118,11 +118,11 @@ The first element is visible on the screen. However, the second is hidden becaus
 
 *Challenge: how can you implement in Vue a button that toggles the display of an element? Share your solution in a comment!*  
 
-`display: none` applied to an element hides it on the screen, and the space the element would normally ocuppy isn't preserved. The element disappears completely.  
+`display: none` applied to an element hides it on the screen, and the space the element would normally occupy isn't preserved. The element disappears completely.  
 
 ## 3. Hiding but keeping the space
 
-What if you need to hide the element's content, while keeping the space it occupies? The CSS style that hides the element content but keep its space is `visibility: hidden`.  
+What if you need to hide the element's content while keeping the space it occupies? The CSS style that hides the element content but keeps its space is `visibility: hidden`.  
 
 Unfortunately, you can no longer can `v-show` directive because it applies only `display: none` style.  
 
@@ -159,9 +159,9 @@ export default {
 
 [Try the demo.](https://codesandbox.io/s/invisible-class-sfvvi?file=/src/App.vue)
 
-If you open the demo, you'd see the element *I'm visible* and *Dummy text*, and an empty space in between which is the hidden second element.  
+Open the demo you'd see the elements *I'm visible* and *Dummy text*, and a space in between the two &mdash; the hidden second element.  
 
-The above example renderes the HTML content:
+The above example renders the HTML content:
 
 ```html
 <div class="">I'm visible!</div>
@@ -171,7 +171,7 @@ The above example renderes the HTML content:
 
 `<div :class="{ invisible: !value2 }">Only my space is visible!</div>` applies the `invisible` class to the element because `!value2` is `true`.  
 
-That's how you can hide the element, while keeping its space on the screen.  
+That's how you can hide the element while keeping its space on the screen.  
 
 ## 4. Conclusion
 
@@ -179,7 +179,9 @@ Vue gives you a bunch of good ways to hide the element on the screen.
 
 When using `v-if="false"` the element isn't rendered at all in the DOM.  
 
-When using `v-show="false"` the element is rendered in the DOM, however Vue applies the inline style `display: none` that hides the element completely.  
+When using `v-show="false"` the element is rendered in the DOM, however, Vue applies the inline style `display: none` that hides the element completely.  
 
-Also, do not forget about the powerful `:class` binding. If you'd like to apply `visibility: hidden` and hide the element while preserving its space, then you can
+Also, do not forget about the powerful `:class` binding. 
+
+To apply `visibility: hidden` to hide the element but keep its space, then you can
 use `:class="{ invisible: !value }"` to assign `invisible` class (which has `visibility: hidden` style applied to it).  
