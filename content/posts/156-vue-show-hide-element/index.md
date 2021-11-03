@@ -10,7 +10,7 @@ recommended: ['simple-explanation-of-javascript-closures', 'gentle-explanation-o
 type: post
 ---
 
-Hiding and showing elements on a web page is an often occuring UI-related task. You might want to toggle the visibility of some detail sections, tooltips, and more.  
+Hiding and showing elements on a web page is an often occurring UI-related task. You might want to toggle the visibility of some detail sections, tooltips, and more.  
 
 In this post, you'll learn how to hide elements on a web page using 3 approaches provided by Vue:
 
@@ -70,11 +70,11 @@ In simple words, `v-if` directive allows you to show or hide the element just by
 
 ### 1.1 When to use *v-if*
 
-When `v-if` directive is assigned with `false`, Vue also doesn't initialize the event listeners on the element, even if you explicitely use the [event directives](https://v3.vuejs.org/guide/events.html#listening-to-events). 
+When `v-if` directive is assigned with `false`, Vue also doesn't initialize the event listeners on the element, even if you explicitly use the [event directives](https://v3.vuejs.org/guide/events.html#listening-to-events). 
 
 `v-if` toggling is relatively expensive (since each time you change `v-if` value the element is inserted/removed from DOM, as well event listeners are initialized/uninitialized) compared to `v-show` (presented in the next section). But it has a low initialization cost if the element is initially hidden.  
 
-You'd use `v-if` on the elements which visibility isn't toggled too often and are initially hidden. For example, to show/hide a section having detailed information about an entity.    
+You'd use `v-if` on the elements which visibility isn't toggled too often and is initially hidden. For example, to show/hide a section having detailed information about an entity.    
 
 *Challenge: would `v-if` render the element if assigned with `0`? What about `'0'`?*
 
@@ -131,7 +131,9 @@ The first element is visible on the screen. However, the second is hidden becaus
 
 ### 2.1 When to use *v-show*
 
-`v-show`, when assigned with `false`, applies `display: none` inline style and hides the element visually and makes almost no modifications to the DOM. Toggling the element's visibility using `v-show` is relatively cheap (compared to `v-if` described above), so you might use this directive with an element which visibility is toggled often.  
+`v-show`, when assigned with `false`, applies `display: none` inline style and hides the element visually and makes almost no modifications to the DOM. 
+
+Thus toggling the element's visibility using `v-show` is relatively cheap (compared to `v-if` described above), so you might use this directive with an element which visibility is toggled often.  
 
 ## 3. Hiding but keeping the space
 
@@ -182,7 +184,7 @@ The above example renders the HTML content:
 
 `<div :class="{ invisible: !value2 }">Only my space is visible!</div>` applies the `invisible` class to the element because `value2` is `false` (I know the negation here is confusing!).  
 
-Note that you can also hide the element by using `opacity: 0`, or even offset the element out of the viewport using `position: absolute; left: -9999px`. Just create the appropriate class and then toggled it using `:class`.   
+Note that you can also hide the element by using `opacity: 0`, or even offset the element out of the viewport using `position: absolute; left: -9999px`. Just create the appropriate CSS class and then toggle it using `:class`.   
 
 ## 4. Conclusion
 
