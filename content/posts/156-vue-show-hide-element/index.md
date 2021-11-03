@@ -68,9 +68,13 @@ DOM because `v-if="value2"` was supplied with a `false`.
 
 In simple words, `v-if` directive allows you to show or hide the element just by inserting or not the element into the DOM. Brutally simple.  
 
-When `v-if` directive is assigned with `false`, then the element isn't inserted in the DOM but also Vue doesn't initialize any event listeners on the element. Using `v-if` to toggle the element visibility is relatively expensive compared to `v-show` (presented in the next section), but has a low initialization cost if the element is initially hidden.
+### 1.1 When to use *v-if*
 
-You'd use `v-if` on the elements which visibility isn't toggled too often. For example, to show/hide a section having detailed information about an entity.    
+When `v-if` directive is assigned with `false`, Vue also doesn't initialize the event listeners on the element, even if you explicitely use the [event directives](https://v3.vuejs.org/guide/events.html#listening-to-events). 
+
+`v-if` toggling is relatively expensive (since each time you change `v-if` value the element is inserted/removed from DOM, as well event listeners are initialized/uninitialized) compared to `v-show` (presented in the next section). But it has a low initialization cost if the element is initially hidden.  
+
+You'd use `v-if` on the elements which visibility isn't toggled too often and are initially hidden. For example, to show/hide a section having detailed information about an entity.    
 
 *Challenge: would `v-if` render the element if assigned with `0`? What about `'0'`?*
 
@@ -123,10 +127,11 @@ The first element is visible on the screen. However, the second is hidden becaus
 
 `display: none` applied to an element makes the element disappear completely.  
 
-`v-show`, when assigned with `false`, applies `display: none` inline style and hides the element visually and makes almost no modifications to the DOM. Toggling the element's visibility using `v-show` is relatively cheap (compared to `v-if` described above), so you might use this directive with an element which visibility is toggled often.  
-
 *Challenge: how can you implement in Vue a button that toggles the display of an element? Share your solution in a comment!*  
 
+### 2.1 When to use *v-show*
+
+`v-show`, when assigned with `false`, applies `display: none` inline style and hides the element visually and makes almost no modifications to the DOM. Toggling the element's visibility using `v-show` is relatively cheap (compared to `v-if` described above), so you might use this directive with an element which visibility is toggled often.  
 
 ## 3. Hiding but keeping the space
 
