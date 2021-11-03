@@ -10,7 +10,11 @@ recommended: ['simple-explanation-of-javascript-closures', 'gentle-explanation-o
 type: post
 ---
 
-In this post, I'm going to describe how Vue can show and hide elements on a web page. You'll read about 3 approaches to hiding:
+Hiding and showing elements on a web page is an often occuring UI-related task. You might want to toggle the visibility of some detail sections, tooltips, and more.  
+
+In this post, I'm going to describe how Vue can show and hide elements on a web page. 
+
+You'll read about 3 approaches to hiding:
 
 * When the element is completely removed from DOM using `v-if`;
 * When the element is hidden using `display: none` applied by `v-show`;
@@ -27,11 +31,11 @@ In this post, I'm going to describe how Vue can show and hide elements on a web 
 <div v-if="value">I am an element</div>
 ```
 
-Here's how `v-if` deals withing showing/hiding the element:
+`v-if` deals withing showing/hiding the element as follows:
 
 A) If the value supplied to `v-if` is `true` (or generally a [truthy value](/javascript-and-or-logical-operators/#2-truthy-value)), then the element is inserted into the DOM;  
 
-B) Otherwise, if the value supplied to `v-if` is `false` (or generally a [falsy value](/javascript-and-or-logical-operators/#1-falsy-value)), then the element *is not rendered in the DOM*.
+B) Otherwise, if the value supplied to `v-if` is `false` (or generally a [falsy value](/javascript-and-or-logical-operators/#1-falsy-value)), then the element *is not inserted into the DOM*.
 
 Let's consider the following example:
 
@@ -55,7 +59,7 @@ export default {
 
 [Try the demo.](https://codesandbox.io/s/v-if-byie6?file=/src/App.vue)
 
-When the above component runs, the following HTML content is inserted into the web page:
+When the above component runs, here's what HTML content is inserted into the web page:
 
 ```html
 <div>I'm rendered!</div>
@@ -64,9 +68,9 @@ When the above component runs, the following HTML content is inserted into the w
 The first element is rendered because `v-if="value1"` was supplied with a `true` value. The second element, however, isn't rendered into the
 DOM because `v-if="value2"` was supplied with a `false`.  
 
-In simple words, `v-if` directive allows you to show or hide the element just by inserting or not inserting the element into the DOM.  
+In simple words, `v-if` directive allows you to show or hide the element just by inserting or not the element into the DOM. Brutally simple.  
 
-When `v-if` directive is assigned with `false`, then the element isn't inserted in the DOM but also Vue doesn't initialize event listeners on the element. Using `v-if` to toggle the element visibility is relatively expensive compared to `v-show` (presented in the next section), but has a low initialization cost if the element from the beginning is rendered as hidden.    
+When `v-if` directive is assigned with `false`, then the element isn't inserted in the DOM but also Vue doesn't initialize any event listeners on the element. Using `v-if` to toggle the element visibility is relatively expensive compared to `v-show` (presented in the next section), but has a low initialization cost if the element is initially hidden.
 
 You'd use `v-if` on the elements which visibility isn't toggled too often. For example, to show/hide a section having detailed information about an entity.    
 
@@ -121,7 +125,7 @@ The first element is visible on the screen. However, the second is hidden becaus
 
 `display: none` applied to an element makes the element disappear completely.  
 
-`v-show`, when assigned with `false`, applies `display: none` inline style and hides the element visually and makes almost no modifications to the DOM. Toggling the element visibility using `v-show` is relatively cheap (compared to `v-if` described above), so you might use this directive with an element which visibility is toggled often.  
+`v-show`, when assigned with `false`, applies `display: none` inline style and hides the element visually and makes almost no modifications to the DOM. Toggling the element's visibility using `v-show` is relatively cheap (compared to `v-if` described above), so you might use this directive with an element which visibility is toggled often.  
 
 *Challenge: how can you implement in Vue a button that toggles the display of an element? Share your solution in a comment!*  
 
@@ -175,9 +179,7 @@ The above example renders the HTML content:
 
 `<div :class="{ invisible: !value2 }">Only my space is visible!</div>` applies the `invisible` class to the element because `value2` is `false` (I know the negation here is confusing!).  
 
-That's how you can hide the element while keeping its space on the screen.  
-
-Note that you can also hide the element by using `opacity: 0`, or even offset the element out of the viewport using `position: absolute; left: -9999px`.  
+Note that you can also hide the element by using `opacity: 0`, or even offset the element out of the viewport using `position: absolute; left: -9999px`. Just create the appropriate class and then toggled it using `:class`.   
 
 ## 4. Conclusion
 
@@ -189,5 +191,4 @@ When using `v-show="false"` the element is rendered in the DOM, however, Vue app
 
 Also, do not forget about the powerful `:class` binding if you'd like more visibility customization.  
 
-To apply `visibility: hidden` to hide the element but keep its space, then you can
-use `:class="{ invisible: !value }"` to assign `invisible` class (which has `visibility: hidden` style applied to it).  
+To hide the element but keep its space use `:class="{ invisible: !value }"` to assign `invisible` class (which has `visibility: hidden` style applied to it).  
