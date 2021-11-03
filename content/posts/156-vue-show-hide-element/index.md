@@ -1,6 +1,6 @@
 ---
 title: "How to Show/Hide Elements in Vue"
-description: "v-if and v-show are the main directives that allow you to show/hide elements in Vue"
+description: "How to use v-if, v-show and :class to show/hide elements in Vue."
 published: "2021-11-03T09:20Z"
 modified: "2021-11-03T09:20Z"
 thumbnail: "./images/cover-3.png"
