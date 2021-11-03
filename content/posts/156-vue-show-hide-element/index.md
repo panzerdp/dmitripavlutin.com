@@ -12,9 +12,7 @@ type: post
 
 Hiding and showing elements on a web page is an often occuring UI-related task. You might want to toggle the visibility of some detail sections, tooltips, and more.  
 
-In this post, I'm going to describe how Vue can show and hide elements on a web page. 
-
-You'll read about 3 approaches to hiding:
+In this post, you'll learn how to hide elements on a web page using 3 approaches provided by Vue:
 
 * When the element is completely removed from DOM using `v-if`;
 * When the element is hidden using `display: none` applied by `v-show`;
