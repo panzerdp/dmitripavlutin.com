@@ -3,31 +3,21 @@ import Media from 'react-media';
 import * as styles from './index.module.scss';
 
 import ShareGroupVertical from 'components/Pages/Post/Share/Group/Vertical';
-import CardonSection from 'components/Carbon/Section';
-import { TO_POST } from 'routes/path';
+import CarbonSection from 'components/Carbon/Section';
+import { PostPlain } from 'typings/post';
 
 interface PostLeftSidebarProps {
-  siteInfo: SiteInfo;
   post: PostPlain;
   showShareButtons: boolean;
-  twitterName: string;
 }
 
-export default function PostLeftSidebar({ siteInfo, post, showShareButtons, twitterName }: PostLeftSidebarProps) {
-  const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
+export default function PostLeftSidebar({ post, showShareButtons }: PostLeftSidebarProps) {
   return (
     <div className={styles.leftSidebar}>
       <Media query="(min-width: 1251px)" defaultMatches={false}>
-        <CardonSection />
+        <CarbonSection />
       </Media>
-      <ShareGroupVertical
-        url={postUrl}
-        siteInfo={siteInfo}
-        text={post.title}
-        tags={post.tags}
-        show={showShareButtons}
-        twitterName={twitterName}
-      />
+      <ShareGroupVertical post={post} show={showShareButtons} />
     </div>
   );
 }

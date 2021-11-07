@@ -4,17 +4,19 @@ module.exports = {
   siteUrl, // ensure compatibility with plugins that require `siteUrl`
   siteInfo: {
     title: 'Dmitri Pavlutin',
-    description: 'I help developers understand JavaScript and React',
+    description: 'I help developers understand Frontend technologies',
     metaTitle: 'Dmitri Pavlutin Blog',
     metaDescription:
-      'Dmitri Pavlutin Blog is a place to learn about JavaScript, CSS, React and more on Frontend development',
+      'Dmitri Pavlutin Blog is a place to learn about JavaScript, CSS, React, Vue and more on Frontend development',
     url: siteUrl,
     repositoryUrl: 'https://github.com/panzerdp/dmitripavlutin.com',
+    githubCommentsRepository: 'panzerdp/dmitripavlutin.com-comments',
+    googleCustomSearchId: '004443697379288327791:1zr8pgnumxn'
   },
   authorInfo: {
     name: 'Dmitri Pavlutin',
     description:
-      'Software developer, tech writer and coach. My daily routine consists of (but not limited to) drinking coffee, coding, writing, coaching, overcoming boredom 😉.',
+      'Tech writer and coach. My daily routine consists of (but not limited to) drinking coffee, coding, writing, coaching, overcoming boredom 😉.',
     email: 'dmitripavlutin@gmail.com',
     jobTitle: 'Software Developer',
     profiles: {
@@ -60,7 +62,5 @@ module.exports = {
         'javascript-arrow-functions-best-practices'
       ]
     }]
-  },
-  googleCustomSearchId: '004443697379288327791:1zr8pgnumxn',
-  githubCommentsRepository: 'panzerdp/dmitripavlutin.com-comments'
+  }
 };

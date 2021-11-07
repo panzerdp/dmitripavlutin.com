@@ -1,11 +1,9 @@
+import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
 import * as styles from './index.module.scss';
 
-interface AboutAuthorContact {
-  authorInfo: AuthorInfo;
-}
-
-export default function Coaching({ authorInfo }: AboutAuthorContact) {
-  return null;
+export default function Coaching(): JSX.Element {
+  const { author: { info } } = useAuthorAndSiteInfo();
+  
   return (
     <div className={styles.contactAuthor}>
       <h3>Your JavaScript Coach</h3>
@@ -22,10 +20,10 @@ export default function Coaching({ authorInfo }: AboutAuthorContact) {
         </ul>
       </div>
       <div className={styles.links}>
-        <a className={styles.icon} href={`mailto:${authorInfo.email}`} title={`Write a message to ${authorInfo.name}`}>
+        <a className={styles.icon} href={`mailto:${info.email}`} title={`Write a message to ${info.name}`}>
           <img alt="Email address" src="/icons/email.svg" />
         </a>
-        <a className={styles.text} href={`mailto:${authorInfo.email}?subject=Book a JavaScript coaching session`} title={`Write a message to ${authorInfo.name}`}>
+        <a className={styles.text} href={`mailto:${info.email}?subject=Book a JavaScript coaching session`} title={`Write a message to ${info.name}`}>
           Book a Coaching Session
         </a>
       </div>

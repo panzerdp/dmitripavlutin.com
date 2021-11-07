@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import withWindowOpen, { WindowOpenOptions } from 'components/With/WindowOpen';
 import PostShareButton from 'components/Pages/Post/Share/Button';
 import * as styles from './index.module.scss';

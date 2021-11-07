@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 
 import * as styles from './index.module.scss';
 import withWindowOpen, { WindowOpenOptions } from 'components/With/WindowOpen';

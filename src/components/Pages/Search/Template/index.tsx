@@ -5,11 +5,7 @@ import ClientOnly from '../ClientOnly';
 
 import * as styles from './index.module.scss';
 
-interface SearchTemplateProps {
-  googleCustomSearchId: string;
-}
-
-export default function SearchTemplate({ googleCustomSearchId }: SearchTemplateProps) {
+export default function SearchTemplate() {
   return (
     <Layout rightSidebar={<SearchRightSidebar />}>
       <div className={styles.search}>
@@ -21,7 +17,7 @@ export default function SearchTemplate({ googleCustomSearchId }: SearchTemplateP
           <div className="gcse-search"></div>
         </ClientOnly>
       </div>
-      <SearchMetaTags googleCustomSearchId={googleCustomSearchId} />
+      <SearchMetaTags />
     </Layout>
   );
 }

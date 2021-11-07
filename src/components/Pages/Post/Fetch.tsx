@@ -3,24 +3,24 @@ import { graphql } from 'gatsby';
 import PostTemplate from 'components/Pages/Post/Template';
 import { PostBySlugQuery } from 'graphql-types';
 import { toPostPlain } from 'utils/mapper';
+import { PostDetailed } from 'typings/post';
 
 interface PostTemplateFetchProps {
   data: PostBySlugQuery;
 }
 
 export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
-  const { siteInfo, authorInfo, githubCommentsRepository, featured: { popularPostsByCategory } } = data.site.siteMetadata;
-  const { markdownRemark, recommendedPostsMarkdown, popularPostsMarkdown, authorProfilePicture } = data;
+  const { featured: { popularPostsByCategory } } = data.site.siteMetadata;
+  const { markdownRemark, recommendedPostsMarkdown, popularPostsMarkdown } = data;
   const post: PostDetailed = {
     ...markdownRemark.frontmatter,
     html: markdownRemark.html,
-    thumbnail: markdownRemark.frontmatter.thumbnail.childImageSharp.fluid,
+    thumbnail: markdownRemark.frontmatter.thumbnail.childImageSharp.gatsbyImageData,
   };
   const postRelativePath = markdownRemark.fileAbsolutePath
     .split('/')
     .slice(-4)
     .join('/');
-  const postRepositoryFileUrl = `${siteInfo.repositoryUrl}/edit/master/${postRelativePath}`;
   const recommendedPosts = recommendedPostsMarkdown.edges.map(toPostPlain);
   const popularPosts = popularPostsMarkdown.edges.map(toPostPlain);
   const popularPlainPostsByCategory = popularPostsByCategory.map(({ category, slugs }) => {
@@ -31,45 +31,15 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
   });
   return (
     <PostTemplate
-      siteInfo={siteInfo}
-      authorInfo={authorInfo}
-      postRepositoryFileUrl={postRepositoryFileUrl}
+      postRelativePath={postRelativePath}
       post={post}
       recommendedPosts={recommendedPosts}
       popularPostsByCategory={popularPlainPostsByCategory}
-      authorProfilePictureSrc={authorProfilePicture.childImageSharp.resize.src}
-      githubCommentsRepository={githubCommentsRepository}
     />
   );
 }
 
 export const pageQuery = graphql`
-  fragment SiteInfoAll on SiteSiteMetadataSiteInfo {
-    title
-    description
-    metaTitle
-    metaDescription
-    url
-    repositoryUrl
-  }
-
-  fragment AuthorInfoAll on SiteSiteMetadataAuthorInfo {
-    name
-    description
-    email
-    jobTitle
-    profiles {
-      stackoverflow
-      twitter
-      linkedin
-      github
-      facebook
-    }
-    nicknames {
-      twitter
-    }
-  }
-
   fragment CarbonAdsServiceAll on SiteSiteMetadataCarbonAdsService {
     isEnabled
     isProductionMode
@@ -88,25 +58,11 @@ export const pageQuery = graphql`
   query PostBySlug($slug: String!, $recommended: [String]!, $popularPostsSlugs: [String]!) {
     site {
       siteMetadata {
-        siteInfo {
-          ...SiteInfoAll
-        }
-        authorInfo {
-          ...AuthorInfoAll
-        }
         featured {
           popularPostsByCategory {
             category
             slugs
           }
-        }
-        githubCommentsRepository
-      }
-    }
-    authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {
-      childImageSharp {
-        resize(width: 256, height: 256, quality: 100) {
-          src
         }
       }
     }
@@ -119,9 +75,7 @@ export const pageQuery = graphql`
         recommended
         thumbnail {
           childImageSharp {
-            fluid(maxWidth: 650, maxHeight: 360, quality: 90) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
+            gatsbyImageData(width: 650, height: 360, quality: 90, layout: FULL_WIDTH)
           }
         }
       }

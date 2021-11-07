@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll';
 
 const LOAD_COMMENTS_AFTER_Y = -500;

@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import { graphql, StaticQuery } from 'gatsby';
 
 import LayoutContainer from 'components/Layout/Container';
@@ -19,9 +19,7 @@ export default function LayoutFetchQuery({ children, leftSidebar, rightSidebar }
         query Layout {
           file(relativePath: { eq: "face.jpg" }) {
             childImageSharp {
-              fixed(width: 64, height: 64, quality: 100) {
-                ...GatsbyImageSharpFixed_withWebp
-              }
+              gatsbyImageData(width: 64, height: 64, quality: 100, layout: FIXED)
             }
           }
           site {
@@ -65,7 +63,7 @@ export function LayoutFetch({
     <LayoutContainer
       siteInfo={siteMetadata.siteInfo}
       authorInfo={siteMetadata.authorInfo}
-      authorProfilePicture={file.childImageSharp.fixed}
+      authorProfilePicture={file.childImageSharp.gatsbyImageData}
       leftSidebar={leftSidebar}
       rightSidebar={rightSidebar}
     >

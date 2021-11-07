@@ -1,34 +1,32 @@
 import { Helmet } from 'react-helmet';
+import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
 
-interface MetaStructuredData {
-  siteInfo: SiteInfo;
-  authorProfilePictureSrc: string;
-}
+export function ExcerptsListMetaStructuredData() {
+  const { author, site } = useAuthorAndSiteInfo();
 
-export default function MetaStructuredData({ siteInfo, authorProfilePictureSrc }: MetaStructuredData) {
-  const authorProfilePictureUrl = `${siteInfo.url}${authorProfilePictureSrc}`;
+  const authorProfilePictureUrl = `${site.url}${author.profilePictureSrc}`;
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Website',
     publisher: {
       '@type': 'Organization',
-      name: siteInfo.metaTitle,
+      name: site.metaTitle,
       logo: {
         '@type': 'ImageObject',
         url: authorProfilePictureUrl,
       },
     },
-    url: siteInfo.url,
+    url: site.url,
     image: {
       '@type': 'ImageObject',
       url: authorProfilePictureUrl,
       width: 256,
       height: 256,
     },
-    description: siteInfo.description,
+    description: site.description,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': siteInfo.url,
+      '@id': site.url,
     },
   };
   return (

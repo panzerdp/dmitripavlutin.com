@@ -9,15 +9,11 @@ interface AboutTemplateProps {
   authorProfilePictureSrc: string;
 }
 
-export default function AboutTemplate({ html, authorInfo, siteInfo, authorProfilePictureSrc }: AboutTemplateProps) {
+export default function AboutTemplate({ html }: AboutTemplateProps) {
   return (
     <Layout>
-      <AboutMetaTags authorInfo={authorInfo} />
-      <AboutMetaStructuredData
-        authorInfo={authorInfo}
-        siteInfo={siteInfo}
-        authorProfilePictureSrc={authorProfilePictureSrc}
-      />
+      <AboutMetaTags />
+      <AboutMetaStructuredData />
       <div dangerouslySetInnerHTML={{ __html: html }} />
     </Layout>
   );

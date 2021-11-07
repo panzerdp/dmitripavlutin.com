@@ -3,8 +3,10 @@ import SimpleList from 'components/Simple/List';
 import MetaTags from '../Meta/Tags';
 import PlainListAllRightSidebar from 'components/Pages/PlainListAll/Sidebar/Right';
 import { formatDateToMonth } from 'utils/date';
+import { Post, PostPlain } from 'typings/post';
 
 import * as styles from './index.module.scss';
+
 
 interface PlainListAllTemplateProps {
   posts: PostPlain[];

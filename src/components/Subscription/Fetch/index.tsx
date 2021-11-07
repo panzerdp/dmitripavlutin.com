@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import { graphql, StaticQuery } from 'gatsby';
 
 import { EmailSubscriptionQuery } from 'graphql-types';

@@ -1,13 +1,14 @@
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import Link from 'gatsby-link';
 
 import SubheaderWithComments from 'components/Subheader/WithComments';
 import { TO_POST } from 'routes/path';
+import { Post } from 'typings/post';
+
 import * as styles from './index.module.scss';
 
 interface ExcerptProps {
   post: Post;
-  siteUrl: string;
 }
 
 export default function Excerpt({ post }: ExcerptProps) {
@@ -15,7 +16,7 @@ export default function Excerpt({ post }: ExcerptProps) {
   return (
     <article key={post.slug} className={styles.excerpt}>
       <Link to={to} className={styles.thumbnailAnchor}>
-        <Img fluid={post.thumbnail} />
+        <GatsbyImage image={post.thumbnail} alt="Post image" />
       </Link>
       <div className={styles.content}>
         <h4>

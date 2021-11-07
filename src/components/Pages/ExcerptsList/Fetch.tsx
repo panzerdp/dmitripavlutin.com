@@ -16,14 +16,12 @@ export default function ExcerptsFetch({
   data: {
     site: {
       siteMetadata: {
-        siteInfo,
         featured: {
           popularPostsByCategory
         }        
       },
     },
     allMarkdownRemark,
-    authorProfilePicture,
     popularPostsMarkdown
   },
   pageContext,
@@ -37,9 +35,7 @@ export default function ExcerptsFetch({
   });
   return (
     <ExcerptsListTemplate
-      siteInfo={siteInfo}
       posts={allMarkdownRemark.edges.map(toPostImageFluid)}
-      authorProfilePictureSrc={authorProfilePicture.childImageSharp.resize.src}
       currentPage={pageContext.currentPage}
       pagesSum={pageContext.pagesSum}
       popularPostsByCategory={popularPlainPostsByCategory}
@@ -51,24 +47,11 @@ export const pageQuery = graphql`
   query ExcerptsList($skip: Int, $limit: Int, $popularPostsSlugs: [String]!) {
     site {
       siteMetadata {
-        siteInfo {
-          ...SiteInfoAll
-        }
-        authorInfo {
-          ...AuthorInfoAll
-        }
         featured {
           popularPostsByCategory {
             category
             slugs
           }
-        }
-      }
-    }
-    authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {
-      childImageSharp {
-        resize(width: 256, height: 256, quality: 100) {
-          src
         }
       }
     }
@@ -79,9 +62,7 @@ export const pageQuery = graphql`
             ...Post
             thumbnail {	
               childImageSharp {	
-                fixed(width: 180, height: 100, quality: 90) {	
-                  ...GatsbyImageSharpFixed_withWebp	
-                }	
+                gatsbyImageData(width: 180, height: 100, quality: 90, layout: FIXED)
               }	
             }
           }
@@ -100,9 +81,7 @@ export const pageQuery = graphql`
             ...Post
             thumbnail {
               childImageSharp {
-                fluid(maxWidth: 650, maxHeight: 360, quality: 90) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
+                gatsbyImageData(width: 650, height: 360, quality: 90, layout: CONSTRAINED)
               }
             }
           }

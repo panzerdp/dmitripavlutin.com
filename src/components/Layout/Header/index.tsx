@@ -1,12 +1,12 @@
-import Img from 'gatsby-image';
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import Link from 'gatsby-link';
 import { memo } from 'react';
 
-import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_SEARCH } from 'routes/path';
+import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_SEARCH } from 'routes/path';
 import * as styles from './index.module.scss';
 
 interface HeaderProps {
-  authorProfilePicture: FixedImage;
+  authorProfilePicture: IGatsbyImageData;
   siteInfo: SiteInfo;
 }
 
@@ -15,7 +15,7 @@ export function Header({ authorProfilePicture, siteInfo }: HeaderProps) {
     <header>
       <div className={styles.headerContent}>
         <Link to={TO_INDEX()}>
-          <Img title="Home" fixed={authorProfilePicture} className={styles.picture} />
+          <GatsbyImage alt="Home" image={authorProfilePicture} className={styles.picture} />
         </Link>
         <div className={styles.profileInfo}>
           <Link to={TO_INDEX()} className={styles.name}>
