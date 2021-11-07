@@ -1,6 +1,6 @@
 import * as styles from './index.module.scss';
 
-import SidebarItemsCommon from 'components/SidebarItems/Common/Commo';
+import SidebarItemsCommon from 'components/SidebarItems/Common';
 
 export default function ExcerptsListRightSidebar() {
   return (

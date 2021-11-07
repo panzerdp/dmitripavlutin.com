@@ -9,7 +9,7 @@ export default function SidebarItemsCommon() {
     <>
       <SubscriptionRegion />
       <AboutAuthorDetailed />
-      {/* <AuthorJobOpportunities authorInfo={authorInfo} /> */}
+      {/* <AuthorJobOpportunities /> */}
       <AuthorCoaching />
       <JobOpportunities />
     </>
