@@ -1,6 +1,7 @@
-
-
+import * as React from 'react';
+import { PostPlain } from 'typings/post';
 import SimplePost from '../Post';
+
 
 interface SimpleListProps {
   posts: PostPlain[];
