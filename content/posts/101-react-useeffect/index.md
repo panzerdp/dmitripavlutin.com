@@ -344,7 +344,7 @@ function FetchEmployees() {
 }
 ```
 
-To run the fetch request dependeing on a prop or state value, simply indicate the required dependency in the dependencies argument: `useEffect(fetchSideEffect, [prop, stateValue])`.  
+To run the fetch request depending on a prop or state value, simply indicate the required dependency in the dependencies argument: `useEffect(fetchSideEffect, [prop, stateValue])`.  
 
 ## 7. Conclusion
 
