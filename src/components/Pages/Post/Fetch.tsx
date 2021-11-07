@@ -10,8 +10,8 @@ interface PostTemplateFetchProps {
 }
 
 export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
-  const { siteInfo, authorInfo, githubCommentsRepository, featured: { popularPostsByCategory } } = data.site.siteMetadata;
-  const { markdownRemark, recommendedPostsMarkdown, popularPostsMarkdown, authorProfilePicture } = data;
+  const { featured: { popularPostsByCategory } } = data.site.siteMetadata;
+  const { markdownRemark, recommendedPostsMarkdown, popularPostsMarkdown } = data;
   const post: PostDetailed = {
     ...markdownRemark.frontmatter,
     html: markdownRemark.html,
@@ -21,7 +21,6 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
     .split('/')
     .slice(-4)
     .join('/');
-  const postRepositoryFileUrl = `${siteInfo.repositoryUrl}/edit/master/${postRelativePath}`;
   const recommendedPosts = recommendedPostsMarkdown.edges.map(toPostPlain);
   const popularPosts = popularPostsMarkdown.edges.map(toPostPlain);
   const popularPlainPostsByCategory = popularPostsByCategory.map(({ category, slugs }) => {
@@ -32,45 +31,15 @@ export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
   });
   return (
     <PostTemplate
-      siteInfo={siteInfo}
-      authorInfo={authorInfo}
-      postRepositoryFileUrl={postRepositoryFileUrl}
+      postRelativePath={postRelativePath}
       post={post}
       recommendedPosts={recommendedPosts}
       popularPostsByCategory={popularPlainPostsByCategory}
-      authorProfilePictureSrc={authorProfilePicture.childImageSharp.gatsbyImageData.src}
-      githubCommentsRepository={githubCommentsRepository}
     />
   );
 }
 
 export const pageQuery = graphql`
-  fragment SiteInfoAll on SiteSiteMetadataSiteInfo {
-    title
-    description
-    metaTitle
-    metaDescription
-    url
-    repositoryUrl
-  }
-
-  fragment AuthorInfoAll on SiteSiteMetadataAuthorInfo {
-    name
-    description
-    email
-    jobTitle
-    profiles {
-      stackoverflow
-      twitter
-      linkedin
-      github
-      facebook
-    }
-    nicknames {
-      twitter
-    }
-  }
-
   fragment CarbonAdsServiceAll on SiteSiteMetadataCarbonAdsService {
     isEnabled
     isProductionMode
@@ -89,24 +58,12 @@ export const pageQuery = graphql`
   query PostBySlug($slug: String!, $recommended: [String]!, $popularPostsSlugs: [String]!) {
     site {
       siteMetadata {
-        siteInfo {
-          ...SiteInfoAll
-        }
-        authorInfo {
-          ...AuthorInfoAll
-        }
         featured {
           popularPostsByCategory {
             category
             slugs
           }
         }
-        githubCommentsRepository
-      }
-    }
-    authorProfilePicture: file(relativePath: { eq: "profile-picture.jpg" }) {
-      childImageSharp {
-        gatsbyImageData(width: 256, height: 256, quality: 100, layout: FIXED)
       }
     }
     markdownRemark(frontmatter: { slug: { eq: $slug } }) {

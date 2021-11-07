@@ -1,30 +1,28 @@
 import { Helmet } from 'react-helmet';
+import { getSrc } from 'gatsby-plugin-image';
 
+import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { Post } from 'typings/post';
 import { TO_POST } from 'routes/path';
 
 interface PostMetaStructuredDataProps {
   post: Post;
-  siteInfo: SiteInfo;
-  authorInfo: AuthorInfo;
-  authorProfilePictureSrc: string;
 }
 
-export default function PostMetaStructuredData({
-  post,
-  siteInfo,
-  authorInfo,
-  authorProfilePictureSrc,
-}: PostMetaStructuredDataProps) {
-  const postUrl = `${siteInfo.url}${TO_POST({ slug: post.slug })}`;
-  const postImageUrl = `${siteInfo.url}${post.thumbnail.src}`;
-  const authorProfilePictureUrl = `${siteInfo.url}${authorProfilePictureSrc}`;
-  const sameAs = Object.keys(authorInfo.profiles).reduce((list, key) => [...list, authorInfo.profiles[key]], []);
+export default function PostMetaStructuredData({ post }: PostMetaStructuredDataProps) {
+  const { author: { info: authorInfo, profilePictureSrc }, site } = useAuthorAndSiteInfo();
+
+  const postUrl = `${site.url}${TO_POST({ slug: post.slug })}`;
+  const postImageUrl = `${site.url}${getSrc(post.thumbnail)}`;
+  const authorProfilePictureUrl = `${site.url}${profilePictureSrc}`;
+  const sameAs = Object.keys(authorInfo.profiles)
+    .reduce((list, key: keyof typeof authorInfo.profiles) => [...list, authorInfo.profiles[key]], []);
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     publisher: {
       '@type': 'Organization',
-      name: siteInfo.metaTitle,
+      name: site.metaTitle,
       logo: {
         '@type': 'ImageObject',
         url: authorProfilePictureUrl,
@@ -39,7 +37,7 @@ export default function PostMetaStructuredData({
         width: 256,
         height: 256,
       },
-      url: siteInfo.url,
+      url: site.url,
       sameAs: sameAs,
       description: authorInfo.description,
     },
@@ -57,7 +55,7 @@ export default function PostMetaStructuredData({
     description: post.description,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': siteInfo.url,
+      '@id': site.url,
     },
   };
   return (

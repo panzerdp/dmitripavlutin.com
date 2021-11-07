@@ -3,26 +3,29 @@ import * as styles from './index.module.scss';
 import ShareSocialFacebook from 'components/Pages/Post/Share/Social/Facebook';
 import PostShareSocialTwitter from 'components/Pages/Post/Share/Social/Twitter';
 import PostShareSocialGithubStar from 'components/Pages/Post/Share/Social/GitHubStar';
+import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { PostPlain } from 'typings/post';
+import { TO_POST } from 'routes/path';
 
 interface ShareButtonsHorizontalProps {
-  siteInfo: SiteInfo;
-  url: string;
-  text: string;
-  tags: Tags;
-  twitterName: string;
+  post: PostPlain;
 }
 
-export default function ShareButtonsHorizontal({ siteInfo, url, text, tags, twitterName }: ShareButtonsHorizontalProps) {
-  const shareProps = {
-    url,
-    text,
-    tags,
+export default function ShareButtonsHorizontal({ post }: ShareButtonsHorizontalProps) {
+  const { author: { info: authorInfo }, site } = useAuthorAndSiteInfo();
+  const postUrl = site.url + TO_POST({ slug: post.slug });
+
+  const sharedProps = {
+    url: postUrl,
+    text: post.title,
+    tags: post.tags,
   };
+  
   return (
     <div className={styles.horizontalGroup}>
-      <PostShareSocialTwitter {...shareProps} twitterName={twitterName} />
-      <ShareSocialFacebook {...shareProps} />
-      <PostShareSocialGithubStar repositoryUrl={siteInfo.repositoryUrl} />
+      <PostShareSocialTwitter {...sharedProps} twitterName={authorInfo.nicknames.twitter} />
+      <ShareSocialFacebook {...sharedProps} />
+      <PostShareSocialGithubStar repositoryUrl={site.repositoryUrl} />
     </div>
   );
 }

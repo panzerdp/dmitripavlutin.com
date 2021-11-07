@@ -1,24 +1,26 @@
 import { Helmet } from 'react-helmet';
+import { getSrc } from 'gatsby-plugin-image';
 
 import { TO_POST } from 'routes/path';
-import { Post, PostPlain } from 'typings/post';
+import { Post } from 'typings/post';
+import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
 
 interface PostMetaTagsProps {
   post: Post;
-  siteInfo: SiteInfo;
-  authorInfo: AuthorInfo;
 }
 
-export default function PostMetaTags({ post, siteInfo, authorInfo }: PostMetaTagsProps) {
-  const postUrl = `${siteInfo.url}${TO_POST({ slug: post.slug })}`;
-  const imageUrl = `${siteInfo.url}${post.thumbnail.src}`;
+export default function PostMetaTags({ post }: PostMetaTagsProps) {
+  const { author: { info: authorInfo }, site } = useAuthorAndSiteInfo();
+
+  const postUrl = `${site.url}${TO_POST({ slug: post.slug })}`;
+  const imageUrl = `${site.url}${getSrc(post.thumbnail)}`;
   return (
     <Helmet titleTemplate="%s">
       <title>{post.title}</title>
       <meta name="description" content={post.description} />
       <link rel="canonical" href={postUrl} />
 
-      <meta property="og:site_name" content={siteInfo.metaTitle} />
+      <meta property="og:site_name" content={site.metaTitle} />
       <meta property="og:type" content="article" />
       <meta property="og:title" content={post.title} />
       <meta property="og:description" content={post.description} />

@@ -3,6 +3,7 @@ import Link from 'gatsby-link';
 
 import * as styles from './index.module.scss';
 import { TO_POST } from 'routes/path';
+import { PostPlain } from 'typings/post';
 
 interface PopularPostsProps {
   popularPostsByCategory: {

@@ -4774,11 +4774,6 @@ export type MailchimpListSortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type AboutAuthorQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AboutAuthorQuery = { site: Maybe<{ siteMetadata: Maybe<{ authorInfo: Maybe<AuthorInfoAllFragment> }> }>, authorProfilePictureSmall: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, authorProfilePictureBig: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> };
-
 export type CarbonAdsQueryVariables = Exact<{ [key: string]: never; }>;
 
 

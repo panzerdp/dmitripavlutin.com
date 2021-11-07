@@ -1,11 +1,10 @@
+import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
 import { useRef, useEffect, useState, memo } from 'react';
 import Placeholder from '../Placeholder';
 
-interface CommentsThreadProps {
-  githubCommentsRepository: string;
-}
+export function CommentsThread(): JSX.Element {
+  const { site: { githubCommentsRepository } } = useAuthorAndSiteInfo();
 
-export function CommentsThread({ githubCommentsRepository }: CommentsThreadProps): JSX.Element {
   const commentBox = useRef<HTMLDivElement>();
 
   const [isLoading, setIsLoading] = useState(false);

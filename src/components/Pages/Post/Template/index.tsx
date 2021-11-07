@@ -15,62 +15,39 @@ import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import CommentsThread from 'components/Comments/Thread';
 import CommentsInView from 'components/Comments/InView';
 import AboutAuthorConcise from 'components/AboutAuthor/Concise';
-import AboutAuthorFetch from 'components/AboutAuthor/Fetch';
 import SubscriptionRegion from 'components/Subscription/Region';
 import CarbonFetch from 'components/Carbon/Fetch';
 import CarbonMetaTags from 'components/Carbon/Meta/Tags';
 import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll';
 import CommentsCount from 'components/Comments/Count';
-import { TO_POST } from 'routes/path';
 import * as styles from './index.module.scss';
 
 const SHOW_SHARE_AFTER_Y = 500;
 
 interface PostTemplateProps {
-  siteInfo: SiteInfo;
-  authorInfo: AuthorInfo;
-  postRepositoryFileUrl: string;
+  postRelativePath: string;
   post: PostDetailed;
   recommendedPosts: PostPlain[];
   popularPostsByCategory: {
     plainPosts: PostPlain[],
     category: string
   }[];
-  authorProfilePictureSrc: string;
-  githubCommentsRepository: string;
 }
 
 export default function PostTemplate({
-  siteInfo,
-  authorInfo,
-  postRepositoryFileUrl,
+  postRelativePath,
   post,
   recommendedPosts,
   popularPostsByCategory,
-  authorProfilePictureSrc,
-  githubCommentsRepository
 }: PostTemplateProps) {
   const relativePosition = useVerticalScroll(SHOW_SHARE_AFTER_Y);
   const showShareButtons = relativePosition === RelativePosition.Below;
-  const leftSidebar = (
-    <LeftSidebar
-      post={post}
-      siteInfo={siteInfo}
-      showShareButtons={showShareButtons}
-      twitterName={authorInfo.nicknames.twitter}
-    />
-  );
-  const rightSidebar = <RightSidebar popularPostsByCategory={popularPostsByCategory} siteUrl={siteInfo.url} />;
-  const postUrl = siteInfo.url + TO_POST({ slug: post.slug });
+  const leftSidebar = <LeftSidebar post={post} showShareButtons={showShareButtons} />;
+  const rightSidebar = <RightSidebar popularPostsByCategory={popularPostsByCategory} />;
   return (
     <Layout leftSidebar={leftSidebar} rightSidebar={rightSidebar}>
-      <MetaTags post={post} siteInfo={siteInfo} authorInfo={authorInfo} />
-      <MetaStructuredData
-        post={post}
-        siteInfo={siteInfo}
-        authorInfo={authorInfo}
-        authorProfilePictureSrc={authorProfilePictureSrc}
-      />
+      <MetaTags post={post} />
+      <MetaStructuredData post={post} />
       <CarbonFetch render={(service) => <CarbonMetaTags carbonAdsService={service} />} />
       <article>
         <div className={styles.postCover}>
@@ -78,38 +55,29 @@ export default function PostTemplate({
         </div>
         <h1>{post.title}</h1>
         <Subheader post={post}>
-          <CommentsCount postUrl={post.slug} githubCommentsRepository={githubCommentsRepository} />
+          <CommentsCount post={post} />
         </Subheader>
         <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
         <div className={styles.shareGroup}>
           <div className={styles.shareBottom}>
-            <ShareBottom url={postUrl} text={post.title} tags={post.tags} twitterName={authorInfo.nicknames.twitter} siteInfo={siteInfo} />
+            <ShareBottom post={post} />
           </div>
           <div className={styles.postEdit}>
-            <Edit url={postRepositoryFileUrl} />
+            <Edit postRelativePath={postRelativePath} />
           </div>
         </div>
         <div className={styles.bottomSubscriptionForm}>
           <SubscriptionRegion />
         </div>
         <div className={`${styles.delimiter} ${styles.authorInfoContainer}`}>
-          <AboutAuthorFetch
-            render={({ authorProfilePictureSmall }) => {
-              return (
-                <AboutAuthorConcise
-                  authorInfo={authorInfo}
-                  authorProfilePicture={authorProfilePictureSmall}
-                />
-              );
-            }}
-          />
+          <AboutAuthorConcise />
         </div>
         <div className={styles.delimiter}>
           <RecommendedList posts={recommendedPosts} />
         </div>
         <div className={`${styles.delimiter} ${styles.comments}`} id="comments">
           <CommentsInView>
-            <CommentsThread githubCommentsRepository={githubCommentsRepository} />
+            <CommentsThread />
           </CommentsInView>
         </div>
       </article>

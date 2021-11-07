@@ -1,18 +1,16 @@
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 import * as styles from './index.module.scss';
 import AuthorLinks from 'components/AboutAuthor/Links';
+import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
 
-interface AboutAuthorConcise {
-  authorInfo: AuthorInfo;
-  authorProfilePicture: IGatsbyImageData;
-}
+export default function AboutAuthorConcise() {
+  const { author: { info: { name, description, email, profiles }, profilePicture } } = useAuthorAndSiteInfo();
 
-export default function AboutAuthorConcise({ authorInfo: { name, description, email, profiles }, authorProfilePicture }: AboutAuthorConcise) {
   return (
     <div className={styles.aboutAuthor}>
       <div className={styles.profilePicture}>
-        <GatsbyImage image={authorProfilePicture} alt={name} />
+        <GatsbyImage image={profilePicture} alt={name} />
       </div>
       <div className={styles.authorInfo}>
         <h4>About {name}</h4>

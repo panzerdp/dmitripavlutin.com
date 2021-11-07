@@ -6,6 +6,34 @@ import { AuthorInfoAndPicturesQuery } from 'graphql-types';
 export const useAuthorAndSiteInfo = () => {
   const data = useStaticQuery<AuthorInfoAndPicturesQuery>(
     graphql`
+      fragment SiteInfoAll on SiteSiteMetadataSiteInfo {
+        title
+        description
+        metaTitle
+        metaDescription
+        url
+        repositoryUrl
+        githubCommentsRepository
+        googleCustomSearchId
+      }
+    
+      fragment AuthorInfoAll on SiteSiteMetadataAuthorInfo {
+        name
+        description
+        email
+        jobTitle
+        profiles {
+          stackoverflow
+          twitter
+          linkedin
+          github
+          facebook
+        }
+        nicknames {
+          twitter
+        }
+      }
+      
       query AuthorInfoAndPictures {
         site {
           siteMetadata {

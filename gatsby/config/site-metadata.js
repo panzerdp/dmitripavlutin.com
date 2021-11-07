@@ -10,6 +10,8 @@ module.exports = {
       'Dmitri Pavlutin Blog is a place to learn about JavaScript, CSS, React, Vue and more on Frontend development',
     url: siteUrl,
     repositoryUrl: 'https://github.com/panzerdp/dmitripavlutin.com',
+    githubCommentsRepository: 'panzerdp/dmitripavlutin.com-comments',
+    googleCustomSearchId: '004443697379288327791:1zr8pgnumxn'
   },
   authorInfo: {
     name: 'Dmitri Pavlutin',
@@ -60,7 +62,5 @@ module.exports = {
         'javascript-arrow-functions-best-practices'
       ]
     }]
-  },
-  googleCustomSearchId: '004443697379288327791:1zr8pgnumxn',
-  githubCommentsRepository: 'panzerdp/dmitripavlutin.com-comments'
+  }
 };

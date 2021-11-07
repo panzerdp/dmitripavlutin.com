@@ -3,27 +3,30 @@ import * as styles from './index.module.scss';
 import ShareSocialFacebook from 'components/Pages/Post/Share/Social/Facebook';
 import PostShareSocialTwitter from 'components/Pages/Post/Share/Social/Twitter';
 import PostShareSocialGithubStar from 'components/Pages/Post/Share/Social/GitHubStar';
+import { PostPlain } from 'typings/post';
+import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { TO_POST } from 'routes/path';
 
 interface ShareGroupVerticalProps {
-  siteInfo: SiteInfo;
-  url: string;
-  text: string;
-  tags: Tags;
+  post: PostPlain;
   show: boolean;
-  twitterName: string;
 }
 
-export default function ShareGroupVertical({ siteInfo, url, text, tags, show, twitterName }: ShareGroupVerticalProps) {
+export default function ShareGroupVertical({ post, show }: ShareGroupVerticalProps) {
+  const { author: { info: authorInfo }, site } = useAuthorAndSiteInfo();
+  const postUrl = site.url + TO_POST({ slug: post.slug });
+
   const sharedProps = {
-    url,
-    text,
-    tags,
+    url: postUrl,
+    text: post.title,
+    tags: post.tags,
   };
+  
   return (
     <div className={`${styles.verticalGroup} ${show ? styles.show : ''}`}>
-      <PostShareSocialTwitter {...sharedProps} twitterName={twitterName} />
+      <PostShareSocialTwitter {...sharedProps} twitterName={authorInfo.nicknames.twitter} />
       <ShareSocialFacebook {...sharedProps} />
-      <PostShareSocialGithubStar repositoryUrl={siteInfo.repositoryUrl} />
+      <PostShareSocialGithubStar repositoryUrl={site.repositoryUrl} />
     </div>
   );
 }
