@@ -258,8 +258,6 @@ export type DirectoryCtimeArgs = {
 export type Site = Node & {
   buildTime: Maybe<Scalars['Date']>;
   siteMetadata: Maybe<SiteSiteMetadata>;
-  port: Maybe<Scalars['Int']>;
-  host: Maybe<Scalars['String']>;
   pathPrefix: Maybe<Scalars['String']>;
   flags: Maybe<SiteFlags>;
   polyfill: Maybe<Scalars['Boolean']>;
@@ -1172,8 +1170,6 @@ export type QueryAllDirectoryArgs = {
 export type QuerySiteArgs = {
   buildTime: Maybe<DateQueryOperatorInput>;
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
-  port: Maybe<IntQueryOperatorInput>;
-  host: Maybe<StringQueryOperatorInput>;
   pathPrefix: Maybe<StringQueryOperatorInput>;
   flags: Maybe<SiteFlagsFilterInput>;
   polyfill: Maybe<BooleanQueryOperatorInput>;
@@ -2567,8 +2563,6 @@ export type SiteFieldsEnum =
   | 'siteMetadata___featured___popularPostsByCategory'
   | 'siteMetadata___featured___popularPostsByCategory___category'
   | 'siteMetadata___featured___popularPostsByCategory___slugs'
-  | 'port'
-  | 'host'
   | 'pathPrefix'
   | 'flags___DEV_SSR'
   | 'polyfill'
@@ -2703,8 +2697,6 @@ export type SiteGroupConnectionGroupArgs = {
 export type SiteFilterInput = {
   buildTime: Maybe<DateQueryOperatorInput>;
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
-  port: Maybe<IntQueryOperatorInput>;
-  host: Maybe<StringQueryOperatorInput>;
   pathPrefix: Maybe<StringQueryOperatorInput>;
   flags: Maybe<SiteFlagsFilterInput>;
   polyfill: Maybe<BooleanQueryOperatorInput>;
