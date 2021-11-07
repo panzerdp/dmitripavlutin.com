@@ -4,6 +4,7 @@ import CarbonFetch from 'components/Carbon/Fetch';
 import CarbonAd from 'components/Carbon/Ad';
 
 export default function CarbonSection(): JSX.Element {
+  return null;
   return (
     <div className={styles.carbonSection}>
       <CarbonFetch render={renderCarbon} />
