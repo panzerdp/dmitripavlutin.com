@@ -290,8 +290,6 @@ export type SiteSiteMetadata = {
   emailSubscriptionService: Maybe<SiteSiteMetadataEmailSubscriptionService>;
   carbonAdsService: Maybe<SiteSiteMetadataCarbonAdsService>;
   featured: Maybe<SiteSiteMetadataFeatured>;
-  googleCustomSearchId: Maybe<Scalars['String']>;
-  githubCommentsRepository: Maybe<Scalars['String']>;
 };
 
 export type SiteSiteMetadataSiteInfo = {
@@ -301,6 +299,8 @@ export type SiteSiteMetadataSiteInfo = {
   metaDescription: Maybe<Scalars['String']>;
   url: Maybe<Scalars['String']>;
   repositoryUrl: Maybe<Scalars['String']>;
+  githubCommentsRepository: Maybe<Scalars['String']>;
+  googleCustomSearchId: Maybe<Scalars['String']>;
 };
 
 export type SiteSiteMetadataAuthorInfo = {
@@ -364,14 +364,14 @@ export type SitePage = Node & {
   internalComponentName: Scalars['String'];
   componentChunkName: Scalars['String'];
   matchPath: Maybe<Scalars['String']>;
-  isCreatedByStatefulCreatePages: Maybe<Scalars['Boolean']>;
-  pluginCreator: Maybe<SitePlugin>;
-  pluginCreatorId: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   parent: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
+  isCreatedByStatefulCreatePages: Maybe<Scalars['Boolean']>;
   context: Maybe<SitePageContext>;
+  pluginCreator: Maybe<SitePlugin>;
+  pluginCreatorId: Maybe<Scalars['String']>;
 };
 
 export type SitePageContext = {
@@ -382,7 +382,6 @@ export type SitePageContext = {
   popularPostsSlugs: Maybe<Array<Maybe<Scalars['String']>>>;
   slug: Maybe<Scalars['String']>;
   recommended: Maybe<Array<Maybe<Scalars['String']>>>;
-  githubIssueSearchQuery: Maybe<Scalars['String']>;
   tag: Maybe<Scalars['String']>;
 };
 
@@ -1224,14 +1223,14 @@ export type QuerySitePageArgs = {
   internalComponentName: Maybe<StringQueryOperatorInput>;
   componentChunkName: Maybe<StringQueryOperatorInput>;
   matchPath: Maybe<StringQueryOperatorInput>;
-  isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
-  pluginCreator: Maybe<SitePluginFilterInput>;
-  pluginCreatorId: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
+  isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
   context: Maybe<SitePageContextFilterInput>;
+  pluginCreator: Maybe<SitePluginFilterInput>;
+  pluginCreatorId: Maybe<StringQueryOperatorInput>;
 };
 
 
@@ -2432,8 +2431,6 @@ export type SiteSiteMetadataFilterInput = {
   emailSubscriptionService: Maybe<SiteSiteMetadataEmailSubscriptionServiceFilterInput>;
   carbonAdsService: Maybe<SiteSiteMetadataCarbonAdsServiceFilterInput>;
   featured: Maybe<SiteSiteMetadataFeaturedFilterInput>;
-  googleCustomSearchId: Maybe<StringQueryOperatorInput>;
-  githubCommentsRepository: Maybe<StringQueryOperatorInput>;
 };
 
 export type SiteSiteMetadataSiteInfoFilterInput = {
@@ -2443,6 +2440,8 @@ export type SiteSiteMetadataSiteInfoFilterInput = {
   metaDescription: Maybe<StringQueryOperatorInput>;
   url: Maybe<StringQueryOperatorInput>;
   repositoryUrl: Maybe<StringQueryOperatorInput>;
+  githubCommentsRepository: Maybe<StringQueryOperatorInput>;
+  googleCustomSearchId: Maybe<StringQueryOperatorInput>;
 };
 
 export type SiteSiteMetadataAuthorInfoFilterInput = {
@@ -2550,6 +2549,8 @@ export type SiteFieldsEnum =
   | 'siteMetadata___siteInfo___metaDescription'
   | 'siteMetadata___siteInfo___url'
   | 'siteMetadata___siteInfo___repositoryUrl'
+  | 'siteMetadata___siteInfo___githubCommentsRepository'
+  | 'siteMetadata___siteInfo___googleCustomSearchId'
   | 'siteMetadata___authorInfo___name'
   | 'siteMetadata___authorInfo___description'
   | 'siteMetadata___authorInfo___email'
@@ -2568,8 +2569,6 @@ export type SiteFieldsEnum =
   | 'siteMetadata___featured___popularPostsByCategory'
   | 'siteMetadata___featured___popularPostsByCategory___category'
   | 'siteMetadata___featured___popularPostsByCategory___slugs'
-  | 'siteMetadata___googleCustomSearchId'
-  | 'siteMetadata___githubCommentsRepository'
   | 'port'
   | 'host'
   | 'pathPrefix'
@@ -2922,6 +2921,17 @@ export type SiteFunctionSortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
+export type SitePageContextFilterInput = {
+  skip: Maybe<IntQueryOperatorInput>;
+  limit: Maybe<IntQueryOperatorInput>;
+  currentPage: Maybe<IntQueryOperatorInput>;
+  pagesSum: Maybe<IntQueryOperatorInput>;
+  popularPostsSlugs: Maybe<StringQueryOperatorInput>;
+  slug: Maybe<StringQueryOperatorInput>;
+  recommended: Maybe<StringQueryOperatorInput>;
+  tag: Maybe<StringQueryOperatorInput>;
+};
+
 export type SitePluginFilterInput = {
   resolve: Maybe<StringQueryOperatorInput>;
   name: Maybe<StringQueryOperatorInput>;
@@ -3122,18 +3132,6 @@ export type SitePluginPackageJsonPeerDependenciesFilterInput = {
   version: Maybe<StringQueryOperatorInput>;
 };
 
-export type SitePageContextFilterInput = {
-  skip: Maybe<IntQueryOperatorInput>;
-  limit: Maybe<IntQueryOperatorInput>;
-  currentPage: Maybe<IntQueryOperatorInput>;
-  pagesSum: Maybe<IntQueryOperatorInput>;
-  popularPostsSlugs: Maybe<StringQueryOperatorInput>;
-  slug: Maybe<StringQueryOperatorInput>;
-  recommended: Maybe<StringQueryOperatorInput>;
-  githubIssueSearchQuery: Maybe<StringQueryOperatorInput>;
-  tag: Maybe<StringQueryOperatorInput>;
-};
-
 export type SitePageConnection = {
   totalCount: Scalars['Int'];
   edges: Array<SitePageEdge>;
@@ -3185,7 +3183,101 @@ export type SitePageFieldsEnum =
   | 'internalComponentName'
   | 'componentChunkName'
   | 'matchPath'
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type'
   | 'isCreatedByStatefulCreatePages'
+  | 'context___skip'
+  | 'context___limit'
+  | 'context___currentPage'
+  | 'context___pagesSum'
+  | 'context___popularPostsSlugs'
+  | 'context___slug'
+  | 'context___recommended'
+  | 'context___tag'
   | 'pluginCreator___resolve'
   | 'pluginCreator___name'
   | 'pluginCreator___version'
@@ -3321,102 +3413,7 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___internal___mediaType'
   | 'pluginCreator___internal___owner'
   | 'pluginCreator___internal___type'
-  | 'pluginCreatorId'
-  | 'id'
-  | 'parent___id'
-  | 'parent___parent___id'
-  | 'parent___parent___parent___id'
-  | 'parent___parent___parent___children'
-  | 'parent___parent___children'
-  | 'parent___parent___children___id'
-  | 'parent___parent___children___children'
-  | 'parent___parent___internal___content'
-  | 'parent___parent___internal___contentDigest'
-  | 'parent___parent___internal___description'
-  | 'parent___parent___internal___fieldOwners'
-  | 'parent___parent___internal___ignoreType'
-  | 'parent___parent___internal___mediaType'
-  | 'parent___parent___internal___owner'
-  | 'parent___parent___internal___type'
-  | 'parent___children'
-  | 'parent___children___id'
-  | 'parent___children___parent___id'
-  | 'parent___children___parent___children'
-  | 'parent___children___children'
-  | 'parent___children___children___id'
-  | 'parent___children___children___children'
-  | 'parent___children___internal___content'
-  | 'parent___children___internal___contentDigest'
-  | 'parent___children___internal___description'
-  | 'parent___children___internal___fieldOwners'
-  | 'parent___children___internal___ignoreType'
-  | 'parent___children___internal___mediaType'
-  | 'parent___children___internal___owner'
-  | 'parent___children___internal___type'
-  | 'parent___internal___content'
-  | 'parent___internal___contentDigest'
-  | 'parent___internal___description'
-  | 'parent___internal___fieldOwners'
-  | 'parent___internal___ignoreType'
-  | 'parent___internal___mediaType'
-  | 'parent___internal___owner'
-  | 'parent___internal___type'
-  | 'children'
-  | 'children___id'
-  | 'children___parent___id'
-  | 'children___parent___parent___id'
-  | 'children___parent___parent___children'
-  | 'children___parent___children'
-  | 'children___parent___children___id'
-  | 'children___parent___children___children'
-  | 'children___parent___internal___content'
-  | 'children___parent___internal___contentDigest'
-  | 'children___parent___internal___description'
-  | 'children___parent___internal___fieldOwners'
-  | 'children___parent___internal___ignoreType'
-  | 'children___parent___internal___mediaType'
-  | 'children___parent___internal___owner'
-  | 'children___parent___internal___type'
-  | 'children___children'
-  | 'children___children___id'
-  | 'children___children___parent___id'
-  | 'children___children___parent___children'
-  | 'children___children___children'
-  | 'children___children___children___id'
-  | 'children___children___children___children'
-  | 'children___children___internal___content'
-  | 'children___children___internal___contentDigest'
-  | 'children___children___internal___description'
-  | 'children___children___internal___fieldOwners'
-  | 'children___children___internal___ignoreType'
-  | 'children___children___internal___mediaType'
-  | 'children___children___internal___owner'
-  | 'children___children___internal___type'
-  | 'children___internal___content'
-  | 'children___internal___contentDigest'
-  | 'children___internal___description'
-  | 'children___internal___fieldOwners'
-  | 'children___internal___ignoreType'
-  | 'children___internal___mediaType'
-  | 'children___internal___owner'
-  | 'children___internal___type'
-  | 'internal___content'
-  | 'internal___contentDigest'
-  | 'internal___description'
-  | 'internal___fieldOwners'
-  | 'internal___ignoreType'
-  | 'internal___mediaType'
-  | 'internal___owner'
-  | 'internal___type'
-  | 'context___skip'
-  | 'context___limit'
-  | 'context___currentPage'
-  | 'context___pagesSum'
-  | 'context___popularPostsSlugs'
-  | 'context___slug'
-  | 'context___recommended'
-  | 'context___githubIssueSearchQuery'
-  | 'context___tag';
+  | 'pluginCreatorId';
 
 export type SitePageGroupConnection = {
   totalCount: Scalars['Int'];
@@ -3465,14 +3462,14 @@ export type SitePageFilterInput = {
   internalComponentName: Maybe<StringQueryOperatorInput>;
   componentChunkName: Maybe<StringQueryOperatorInput>;
   matchPath: Maybe<StringQueryOperatorInput>;
-  isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
-  pluginCreator: Maybe<SitePluginFilterInput>;
-  pluginCreatorId: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
+  isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
   context: Maybe<SitePageContextFilterInput>;
+  pluginCreator: Maybe<SitePluginFilterInput>;
+  pluginCreatorId: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageSortInput = {
@@ -4806,13 +4803,6 @@ export type PlainListByTagQueryVariables = Exact<{
 
 export type PlainListByTagQuery = { allMarkdownRemark: { edges: Array<{ node: { frontmatter: Maybe<PostFragment> } }> } };
 
-export type SiteInfoAllFragment = Pick<SiteSiteMetadataSiteInfo, 'title' | 'description' | 'metaTitle' | 'metaDescription' | 'url' | 'repositoryUrl'>;
-
-export type AuthorInfoAllFragment = (
-  Pick<SiteSiteMetadataAuthorInfo, 'name' | 'description' | 'email' | 'jobTitle'>
-  & { profiles: Maybe<Pick<SiteSiteMetadataAuthorInfoProfiles, 'stackoverflow' | 'twitter' | 'linkedin' | 'github' | 'facebook'>>, nicknames: Maybe<Pick<SiteSiteMetadataAuthorInfoNicknames, 'twitter'>> }
-);
-
 export type CarbonAdsServiceAllFragment = Pick<SiteSiteMetadataCarbonAdsService, 'isEnabled' | 'isProductionMode' | 'scriptSrc'>;
 
 export type PostFragment = Pick<MarkdownRemarkFrontmatter, 'title' | 'description' | 'published' | 'modified' | 'slug' | 'tags'>;
@@ -4824,10 +4814,7 @@ export type PostBySlugQueryVariables = Exact<{
 }>;
 
 
-export type PostBySlugQuery = { site: Maybe<{ siteMetadata: Maybe<(
-      Pick<SiteSiteMetadata, 'githubCommentsRepository'>
-      & { siteInfo: Maybe<SiteInfoAllFragment>, authorInfo: Maybe<AuthorInfoAllFragment>, featured: Maybe<{ popularPostsByCategory: Maybe<Array<Maybe<Pick<SiteSiteMetadataFeaturedPopularPostsByCategory, 'category' | 'slugs'>>>> }> }
-    )> }>, authorProfilePicture: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, markdownRemark: Maybe<(
+export type PostBySlugQuery = { site: Maybe<{ siteMetadata: Maybe<{ featured: Maybe<{ popularPostsByCategory: Maybe<Array<Maybe<Pick<SiteSiteMetadataFeaturedPopularPostsByCategory, 'category' | 'slugs'>>>> }> }> }>, markdownRemark: Maybe<(
     Pick<MarkdownRemark, 'id' | 'html' | 'fileAbsolutePath'>
     & { frontmatter: Maybe<(
       Pick<MarkdownRemarkFrontmatter, 'recommended'>
@@ -4845,6 +4832,13 @@ export type EmailSubscriptionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type EmailSubscriptionQuery = { site: Maybe<{ siteMetadata: Maybe<{ emailSubscriptionService: Maybe<Pick<SiteSiteMetadataEmailSubscriptionService, 'endpoint' | 'hiddenFieldName'>> }> }>, allMailchimpList: { edges: Array<{ node: { stats: Maybe<Pick<MailchimpListStats, 'member_count'>> } }> } };
+
+export type SiteInfoAllFragment = Pick<SiteSiteMetadataSiteInfo, 'title' | 'description' | 'metaTitle' | 'metaDescription' | 'url' | 'repositoryUrl' | 'githubCommentsRepository' | 'googleCustomSearchId'>;
+
+export type AuthorInfoAllFragment = (
+  Pick<SiteSiteMetadataAuthorInfo, 'name' | 'description' | 'email' | 'jobTitle'>
+  & { profiles: Maybe<Pick<SiteSiteMetadataAuthorInfoProfiles, 'stackoverflow' | 'twitter' | 'linkedin' | 'github' | 'facebook'>>, nicknames: Maybe<Pick<SiteSiteMetadataAuthorInfoNicknames, 'twitter'>> }
+);
 
 export type AuthorInfoAndPicturesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4865,11 +4859,6 @@ export type PlainListAllQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type PlainListAllQuery = { allMarkdownRemark: { edges: Array<{ node: { frontmatter: Maybe<PostFragment> } }> } };
-
-export type SearchQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SearchQuery = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'googleCustomSearchId'>> }> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

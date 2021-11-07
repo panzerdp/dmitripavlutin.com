@@ -1,7 +1,7 @@
 import * as styles from './index.module.scss';
 
 import PopularPosts from 'components/Popular/Posts';
-import SidebarItemsCommon from 'components/SidebarItems/Common';
+import SidebarItemsCommon from 'components/SidebarItems/Common/Commo';
 import { PostPlain } from 'typings/post';
 
 interface PostRightSidebarProps {

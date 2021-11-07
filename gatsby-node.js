@@ -14,7 +14,6 @@ const query = `
           slugs
         }
       }
-      githubCommentsRepository
     }
   }
   allMarkdownRemark(
@@ -52,15 +51,14 @@ exports.createPages = async ({ graphql, actions }) => {
     console.log(result.errors);
     throw result.errors;
   }
-  const githubCommentsRepository = result.data.site.siteMetadata.githubCommentsRepository;
   // Create blog posts pages.
   const edges = result.data.allMarkdownRemark.edges;
 
   const popularPostsByCategory = result.data.site.siteMetadata.featured.popularPostsByCategory;
   const popularPostsSlugs = popularPostsByCategory.reduce((acc, postsByCategory) => [...acc, ...postsByCategory.slugs], []);
 
-  createExcerptsList(createPage, edges, popularPostsSlugs, githubCommentsRepository);
-  createPost(createPage, edges, popularPostsSlugs, githubCommentsRepository);
+  createExcerptsList(createPage, edges, popularPostsSlugs);
+  createPost(createPage, edges, popularPostsSlugs);
   createPlainListByTag(createPage, edges);
   return result;  
 };
