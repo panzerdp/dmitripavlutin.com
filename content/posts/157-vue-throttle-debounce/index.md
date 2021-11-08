@@ -18,7 +18,7 @@ In such cases you would be interested to amortize, or slow down, the execution o
 
 In this post, let's see how you can apply debouncing and throttling to Vue components.  
 
-## 1. Debouncing input change watcher
+## 1. Debouncing a watcher
 
 Let's start with a simple component, where your task is to log to console the value that the user has introduced into a text input.  
 
@@ -61,29 +61,20 @@ I use a debounce implementation from `'lodash.debounce'`
 </template>
 
 <script>
-import debounce from 'lodash.debounce';
-import { beforeCreate } from 'vue';
+import debounce from "lodash.debounce";
 
 export default {
-  value: '',
-  methods: {
-    handleChange(event) {
-      this.value = event.target.value;
-    }
+  data() {
+    return {
+      value: "",
+    };
   },
-  watch: {
-    value(newValue, oldValue) {
-      console.log("Value changed: ", newValue);
-    }
+  created() {
+    const debouncedWatcher = debounce((oldValue, newValue) => {
+      console.log("New value:", newValue);
+    }, 500);
+    this.$watch("value", debouncedWatcher);
   },
-  setup() {
-    beforeCreate(() => {
-      this.watch.value = debounce(
-        this.watch.value.bind(this),
-        500
-      );
-    });
-  }
 };
 </script>
 ```
@@ -95,7 +86,11 @@ in the previous example.
 
 However, if you take a look at console, you'd notice that the new value logging is debounced. The component logs to console the new value only if `500ms` has passed since last typing.  
 
-## 2. Throttling of a window scroll handler
+Here are the changes made to the component. Inside the `created()` hook the callback that loggs to console is debounced using `debounce(callback, 500)`. Then the debounced callback `debouncedWatcher` is assigned as a watcher of `value` property: `this.$watch("value", debouncedWatcher)`.  
+
+## 2. Throttling an event handler
+
+
 
 ## 3. A word a caution
 
