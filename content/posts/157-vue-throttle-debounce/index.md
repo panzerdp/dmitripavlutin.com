@@ -62,6 +62,7 @@ I use a debounce implementation from `'lodash.debounce'`
 
 <script>
 import debounce from 'lodash.debounce';
+import { beforeCreate } from 'vue';
 
 export default {
   value: '',
@@ -72,18 +73,27 @@ export default {
   },
   watch: {
     value(newValue, oldValue) {
-      console.log(newValue);
+      console.log("Value changed: ", newValue);
     }
   },
-  created() {
-    this.watch.value = debounce(
-      this.watch.value.bind(this),
-      400
-    );
+  setup() {
+    beforeCreate(() => {
+      this.watch.value = debounce(
+        this.watch.value.bind(this),
+        500
+      );
+    });
   }
 };
 </script>
 ```
+
+[Try the demo](https://codesandbox.io/s/vue-input-debounced-4vwex?file=/src/App.vue)
+
+Now if you open the demo you'd notice that from use perspective nothing changed: you can still introduce characters as you were
+in the previous example.  
+
+However, if you take a look at console, you'd notice that the new value logging is debounced. The component logs to console the new value only if `500ms` has passed since last typing.  
 
 ## 2. Throttling of a window scroll handler
 
