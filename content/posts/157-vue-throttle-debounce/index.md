@@ -1,8 +1,8 @@
 ---
 title: "How to Debounce and Throttle Event Handlers in Vue"
 description: "How to apply debouncing and throttling techniques to amortize the execution of event handlers in Vue"
-published: "2021-11-03T09:20Z"
-modified: "2021-11-03T09:20Z"
+published: "2021-11-09T12:00Z"
+modified: "2021-11-09T12:00Z"
 thumbnail: "./images/cover-3.png"
 slug: vue-debounce-throttle
 tags: ['vue', 'callback', 'event']
@@ -18,7 +18,7 @@ In such cases you would be interested to amortize, or slow down, the execution o
 
 In this post, let's see how you can apply debouncing and throttling to Vue components.  
 
-## 1. Debouncing input change event
+## 1. Debouncing input change watcher
 
 Let's start with a simple component, where your task is to log to console the value that the user has introduced into a text input.  
 
@@ -30,6 +30,40 @@ Let's start with a simple component, where your task is to log to console the va
 
 <script>
 export default {
+  data() {
+    return {
+      value: "",
+    };
+  },
+  watch: {
+    value(newValue, oldValue) {
+      console.log("Value changed: ", newValue);
+    },
+  },
+};
+</script>
+```
+
+[Open the demo](https://codesandbox.io/s/vue-input-szgn1?file=/src/App.vue)
+
+Open the demo and type a few characters into the input field. You would notice that inside the watcher of `value` data logs to console the new value each time you type into the input field.  
+
+That's not exactly convinient. If you'd like to perform a fetch request using the `value` as a GET parameter, for example, most likely you wouldn't want to start fetch requests so often.  
+
+Let's debounce the logging to console of the input value. To do so you need to created a debounced version of the function, then use it inside the watcher. 
+
+I use a debounce implementation from `'lodash.debounce'`
+
+```vue
+<template>
+  <input v-model="value" type="text" />
+  <p>{{ value }}</p>
+</template>
+
+<script>
+import debounce from 'lodash.debounce';
+
+export default {
   value: '',
   methods: {
     handleChange(event) {
@@ -40,16 +74,19 @@ export default {
     value(newValue, oldValue) {
       console.log(newValue);
     }
+  },
+  created() {
+    this.watch.value = debounce(
+      this.watch.value.bind(this),
+      400
+    );
   }
 };
 </script>
 ```
 
-[Open the demo]()
+## 2. Throttling of a window scroll handler
 
-Open the demo and type a few characters into the input field. You would notice that inside the watcher of `value` data logs to console the new value each time you type into the input field.  
+## 3. A word a caution
 
-That's not exactly convinient. If you'd like to perform a fetch request using the `value` as a GET parameter, for example, most likely you wouldn't want to start fetch requests so often.  
-
-Let's debounce the logging to console of the input value.  
-
+## 4. Conclusion
