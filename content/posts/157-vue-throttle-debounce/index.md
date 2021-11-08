@@ -92,7 +92,7 @@ in the previous example.
 
 However, if you take a look at console, you'd notice that the new value logging is debounced. The component logs to console the new value only if `500ms` has passed since last typing.  
 
-Inside the `created()` hook the watch `watch.value` callback is overwritten with the debounced version of the function. Note that `watch.value.bind(this)` is used to [preserve](/gentle-explanation-of-this-in-javascript/#6-bound-function) `this` value as the component instance.  
+Inside the `beforeCreate()` hook the watch `watch.value` callback is overwritten with the debounced version of the function. Note that `watch.value.bind(this)` is used to [preserve](/gentle-explanation-of-this-in-javascript/#6-bound-function) `this` value as the component instance.  
 
 Also `beforeUnmount()` hook cancels any pending executions of the debounced function.  
 
@@ -100,7 +100,35 @@ Same way you can debounce watching any data property inside of your component. A
 
 ## 2. Debouncing an event handler
 
-The section above showed how to debounce wathers, but what about regular event handlers? Let's take a try.  
+The section above showed how to debounce watchers, but what about regular event handlers? Let's take a try.  
+
+Let's reuse again the example when the user enters data into the input field, but this time without use `v-model` and directly watching for change events.  
+
+As usual, if you don't perform any amortization, the changed value is logged to console exactly when user types:
+
+```vue
+<template>
+  <input @change="changeHandler" type="text" />
+  <p>{{ value }}</p>
+</template>
+
+<script>
+export default {
+  methods: {
+    changeHandler(event) {
+      console.log('New value:', event.target.value);
+    }
+  }
+};
+</script>
+```
+
+[Try the demo.](https://codesandbox.io/s/vue-event-handler-plls4?file=/src/App.vue)
+
+Open the demo and type a few characters into the input. If you have the console opened, you'd notice that the console gets update
+right when you type.  
+
+Again, that's not always convinient if you want to perform some relatively heavy operations with the input value, like performing a fetch request.  
 
 ## 3. A word a caution
 
