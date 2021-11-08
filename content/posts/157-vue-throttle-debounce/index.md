@@ -52,7 +52,7 @@ That's not exactly convinient. If you'd like to perform a fetch request using th
 
 Let's debounce the logging to console of the input value. To do so you need to created a debounced version of the function, then use it inside the watcher. 
 
-I use a debounce implementation from `'lodash.debounce'`
+I use a debounce implementation from `'lodash.debounce'`, but you can use whatever implemenation you like.  
 
 ```vue
 <template>
@@ -69,11 +69,17 @@ export default {
       value: "",
     };
   },
-  created() {
-    const debouncedWatcher = debounce((oldValue, newValue) => {
+  watch: {
+    value(newValue, oldValue) {
       console.log("New value:", newValue);
-    }, 500);
-    this.$watch("value", debouncedWatcher);
+    },
+  },
+  beforeCreate() {
+    const { $options: { watch } } = this;
+    watch.value = debounce(watch.value.bind(this), 500);
+  },
+  beforeUnmount() {
+    this.$options.watch.value.cancel();
   },
 };
 </script>
@@ -86,11 +92,15 @@ in the previous example.
 
 However, if you take a look at console, you'd notice that the new value logging is debounced. The component logs to console the new value only if `500ms` has passed since last typing.  
 
-Here are the changes made to the component. Inside the `created()` hook the callback that loggs to console is debounced using `debounce(callback, 500)`. Then the debounced callback `debouncedWatcher` is assigned as a watcher of `value` property: `this.$watch("value", debouncedWatcher)`.  
+Inside the `created()` hook the watch `watch.value` callback is overwritten with the debounced version of the function. Note that `watch.value.bind(this)` is used to [preserve](/gentle-explanation-of-this-in-javascript/#6-bound-function) `this` value as the component instance.  
 
-## 2. Throttling an event handler
+Also `beforeUnmount()` hook cancels any pending executions of the debounced function.  
 
+Same way you can debounce watching any data property inside of your component. And perform inside the debounced callback relatively heavy operation like data fetching, expensive DOM manipulations, and more.  
 
+## 2. Debouncing an event handler
+
+The section above showed how to debounce wathers, but what about regular event handlers? Let's take a try.  
 
 ## 3. A word a caution
 
