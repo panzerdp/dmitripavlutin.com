@@ -20,3 +20,36 @@ In this post, let's see how you can apply debouncing and throttling to Vue compo
 
 ## 1. Debouncing input change event
 
+Let's start with a simple component, where your task is to log to console the value that the user has introduced into a text input.  
+
+```vue
+<template>
+  <input v-model="value" type="text" />
+  <p>{{ value }}</p>
+</template>
+
+<script>
+export default {
+  value: '',
+  methods: {
+    handleChange(event) {
+      this.value = event.target.value;
+    }
+  },
+  watch: {
+    value(newValue, oldValue) {
+      console.log(newValue);
+    }
+  }
+};
+</script>
+```
+
+[Open the demo]()
+
+Open the demo and type a few characters into the input field. You would notice that inside the watcher of `value` data logs to console the new value each time you type into the input field.  
+
+That's not exactly convinient. If you'd like to perform a fetch request using the `value` as a GET parameter, for example, most likely you wouldn't want to start fetch requests so often.  
+
+Let's debounce the logging to console of the input value.  
+
