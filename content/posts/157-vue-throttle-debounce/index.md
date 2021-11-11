@@ -70,16 +70,17 @@ export default {
     };
   },
   watch: {
-    value(newValue, oldValue) {
-      console.log("New value:", newValue);
+    value(...args) {
+      this.debValueWatch(...args);
     },
   },
-  beforeCreate() {
-    const { $options: { watch } } = this;
-    watch.value = debounce(watch.value.bind(this), 500);
+  create() {
+    this.debValueWatch = debounce((newValue, oldValue) => {
+      console.log('New value:', newValue);
+    }, 500);
   },
   beforeUnmount() {
-    this.$options.watch.value.cancel();
+    this.debValueWatch.cancel();
   },
 };
 </script>
@@ -87,14 +88,15 @@ export default {
 
 [Try the demo](https://codesandbox.io/s/vue-input-debounced-4vwex?file=/src/App.vue)
 
-Now if you open the demo you'd notice that from use perspective nothing changed: you can still introduce characters as you were
-in the previous example.  
+Now if you open the demo you'd notice that from the user's perspective little changed: you can still introduce characters as you were in the previous example.  
 
-However, if you take a look at console, you'd notice that the new value logging is debounced. The component logs to console the new value only if `500ms` has passed since last typing.  
+But look at console and you'll notice that the new value logging is debounced. The component logs to console the new value only if `500ms` has passed since last typing.  
 
-Inside the `beforeCreate()` hook the watch `watch.value` callback is overwritten with the debounced version of the function. Note that `watch.value.bind(this)` is used to [preserve](/gentle-explanation-of-this-in-javascript/#6-bound-function) `this` value as the component instance.  
+Inside the `created()` hook the callback invoked when the `value` changes is debounced and assigned to an instance property `this.debValueWatch`.  
 
-Also `beforeUnmount()` hook cancels any pending executions of the debounced function.  
+Then inside the proper watch callback `watch.value()` the `this.debValueWatch()` is invoked with the right arguments. 
+
+Also `beforeUnmount()` hook cancels any pending executions of the debounced function `this.debValueWatch.cancel()` right before unmounting the component. This is done to avoid executing of the value watcher callback on an already unmounted component.  
 
 Same way you can debounce watching any data property inside of your component. And perform inside the debounced callback relatively heavy operation like data fetching, expensive DOM manipulations, and more.  
 
@@ -108,8 +110,7 @@ As usual, if you don't perform any amortization, the changed value is logged to 
 
 ```vue
 <template>
-  <input @change="changeHandler" type="text" />
-  <p>{{ value }}</p>
+  <input v-on:change="changeHandler" type="text" />
 </template>
 
 <script>
