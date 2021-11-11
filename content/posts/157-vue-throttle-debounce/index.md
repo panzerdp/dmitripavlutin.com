@@ -3,24 +3,24 @@ title: "How to Debounce and Throttle Callbacks in Vue"
 description: "How to apply debouncing and throttling techniques to amortize the execution of event handlers in Vue"
 published: "2021-11-09T12:00Z"
 modified: "2021-11-09T12:00Z"
-thumbnail: "./images/cover-3.png"
+thumbnail: "./images/cover.png"
 slug: vue-debounce-throttle
 tags: ['vue', 'callback', 'event']
 recommended: ['react-throttle-debounce', 'vue-show-hide-elements']
 type: post
 ---
 
-If you've been dealing with often occurring events like user typing into the input field, window resize, scroll, intersection observer events, you might notice that invoking an action when such an event occurs is not the best choice.  
+Dealing with often occurring events like user typing into the input field, window resize, scroll, intersection observer events, requires precaution. 
 
-These events could occurs so often, e.g. a few times per second, that invoking an action a fetch request, on every event isn't a wise approach.  
+These events could occur so often, e.g. a few times per second, that invoking an action like a fetch request on every event isn't a wise approach.  
 
-In such cases you would be interested to amortize, or slow down, the execution of the event handlers. Such amortizing techniques are [debouncing and throttling](https://css-tricks.com/debouncing-throttling-explained-examples/).  
+In such cases, you would be interested to amortize, or slow down, the execution of the event handlers. Such amortizing techniques are [debouncing and throttling](https://css-tricks.com/debouncing-throttling-explained-examples/).  
 
-In this post, let's see how you can apply debouncing and throttling to Vue components.  
+In this post, you'll find how you can apply debouncing and throttling to callbacks in Vue components.  
 
 ## 1. Debouncing a watcher
 
-Let's start with a simple component, where your task is to log to console the value that the user has introduced into a text input.  
+Let's start with a simple component, where your task is to log to console the value that the user introduces into a text input:
 
 ```vue
 <template>
@@ -46,13 +46,15 @@ export default {
 
 [Open the demo.](https://codesandbox.io/s/vue-input-szgn1?file=/src/App.vue)
 
-Open the demo and type a few characters into the input field. You would notice that inside the watcher of `value` data logs to console the new value each time you type into the input field.  
+Open the demo and type a few characters into the input field. The console logs a new value each time you type into the input field. This is implemented using a watcher on the `value` data property.  
 
-That's not exactly convinient. If you'd like to perform a fetch request using the `value` as a GET parameter, for example, most likely you wouldn't want to start fetch requests so often.  
+If you'd like to perform a fetch request using the `value` as a GET parameter inside the watcher callback, you wouldn't want to start fetch requests so often.  
 
-Let's debounce the logging to console of the input value. To do so you need to created a debounced version of the function, then use it inside the watcher. 
+Let's debounce the logging to the console of the input value. You need to create a debounced version of the function, then use it inside the watcher. 
 
-I use a debounce implementation from `'lodash.debounce'`, but you can use whatever implemenation you like.  
+I use a debounce implementation from `'lodash.debounce'`, but you can use whatever implementation you like.  
+
+Let's update the component with debouncing:
 
 ```vue
 <template>
@@ -90,23 +92,25 @@ export default {
 
 Now if you open the demo you'd notice that from the user's perspective little changed: you can still introduce characters as you were in the previous example.  
 
-But look at console and you'll notice that the new value logging is debounced. The component logs to console the new value only if `500ms` has passed since last typing.  
+But there's a change: the component logs to console the new value only if `500ms` has passed since the last typing. That's debouncing in action.  
 
-Inside the `created()` hook the callback invoked when the `value` changes is debounced and assigned to an instance property `this.debouncedWatch`.  
+Debouncing of a watcher is implemented in 3 simple steps:
 
-Then inside the proper watch callback `watch.value()` the `this.debouncedWatch()` is invoked with the right arguments. 
+1) Inside the `created()` hook the debounced callback is created and as a property on the instance: `this.debouncedWatch = debounce(..., 500)`.  
 
-Also `beforeUnmount()` hook cancels any pending executions of the debounced function `this.debouncedWatch.cancel()` right before unmounting the component. This is done to avoid executing of the value watcher callback on an already unmounted component.  
+2) Then inside the watch callback `watch.value() { ... }` the `this.debouncedWatch()` is invoked with the right arguments. 
 
-Same way you can debounce watching any data property inside of your component. And perform inside the debounced callback relatively heavy operation like data fetching, expensive DOM manipulations, and more.  
+3) Finally, `beforeUnmount()` hook cancels any pending executions of the debounced function `this.debouncedWatch.cancel()` right before unmounting the component. This is done to avoid executing the value watcher callback on an already unmounted component.  
+
+The same way you can debounce watching any data property and perform inside the debounced callback relatively heavy operations like data fetching, expensive DOM manipulations, and more.  
 
 ## 2. Debouncing an event handler
 
 The section above showed how to debounce watchers, but what about regular event handlers? Let's take a try.  
 
-Let's reuse again the example when the user enters data into the input field, but this time without use `v-model` and directly watching for change events.  
+Let's reuse again the example when the user enters data into the input field, but this time without using `v-model` and directly attaching an event handler to the input.  
 
-As usual, if you don't perform any amortization, the changed value is logged to console exactly when user types:
+As usual, if you don't perform any amortization, the changed value is logged to console exactly when the user types:
 
 ```vue
 <template>
@@ -126,10 +130,9 @@ export default {
 
 [Try the demo.](https://codesandbox.io/s/vue-event-handler-plls4?file=/src/App.vue)
 
-Open the demo and type a few characters into the input. If you have the console opened, you'd notice that the console gets update
-each time you type.   
+Open the demo and type a few characters into the input. Look at the console: you'd notice that the console gets updated each time you type.   
 
-Again, that's not always convinient if you want to perform some relatively heavy operations with the input value, like performing a fetch request.  
+Again, that's not always convenient if you want to perform some relatively heavy operations with the input value, e.g. performing a fetch request.  
 
 Debouncing the event handler invocation can be implemented as follows:
 
@@ -156,19 +159,27 @@ export default {
 
 [Try the demo.](https://codesandbox.io/s/vue-event-handler-debounced-973vn?file=/src/App.vue)
 
-Open the demo and type a few characters. Looking at the console you'll see that the value logging is debounced. The component logs to console the new value only if `500ms` has passed since last typing.  
+Open the demo and type a few characters. The component logs to console the new value only if `500ms` has passed since the last typing. Again, debouncing works!
 
-The `created()` hook, right after the instance creation, assigns to `this.debouncedHandler` the debounced callback `debounce(event => {...}, 500)`.  
+Debouncing the event handler is implemented in 3 easy steps:
 
-Also, note that the input field inside the template uses `debouncedHandler` function assigned to `v-on:input`: `<input v-on:input="debouncedHandler" type="text" />`.  
+1) Inside the `created()` hook, right after the instance creation, assign to `this.debouncedHandler` the debounced callback `debounce(event => {...}, 500)`.  
 
-Finally, at the time the component instance should unmount inside `beforeUnmount()` hook the `this.debouncedHandler.cancel()` is called to cancel any pending function calls.  
+2) The input field inside the template uses `debouncedHandler` as the callback of `v-on:input`: 
 
-On a side note, the examples were using the debouncing technique. However, the same implementation is used to created throttled functions.  
+```html
+<input v-on:input="debouncedHandler" type="text" />
+```
 
-## 3. A word a caution
+3) Finally, at the time the component instance should unmount, inside `beforeUnmount()` hook the `this.debouncedHandler.cancel()` is called to cancel any pending function calls.  
 
-You might be wondering why can't you just assign the debounced right away as method, and then use the method as an event handler inside the template?  
+On a side note, the examples were using the debouncing technique. However, the same implementation is used to create throttled functions.  
+
+## 3. A word of caution
+
+You might be wondering: why not make the debounced function as a method directly on the component options, and then use the method as an event handler inside the template?  
+
+That would be an easier approach than creating properties on the instance as in the previous examples.  
 
 For example:
 
@@ -199,11 +210,11 @@ And if you try the demo, it works!
 
 The problem is that the options object exported from the component using `export default { ... }`, including the methods, are going to be reused by all the instances of the component. 
 
-In case if the web page has 2 or more instances of the component, all these functions would use the same debounced function `methods.debouncedHandler` &mdash; and the debouncing could glitch.  
+In case if the web page has 2 or more instances of the component, all the components would use the *same* debounced function `methods.debouncedHandler` &mdash; and the debouncing could glitch.  
 
 ## 4. Conclusion
 
-In Vue you can easily apply the debouncing and bouncing techniques to callbacks of watchers and event handlers.  
+In Vue, you can easily apply the debouncing and throttling techniques to callbacks of watchers and event handlers.  
 
 The main approach is to create the debounced or throttled callback as a property of the instance in the `created()` hook:
 
@@ -229,10 +240,14 @@ A) Then call the debounced instance either inside the watcher:
 // ...
 ```
 
-B) or set an event handler inside the template:
+B) or set as an event handler inside the template:
 
 ```vue
 <template>
   <input v-on:input="debouncedHandler" type="text" />
 </template>
 ```
+
+Then, each time the `this.debouncedCallback(...args)` is invoked, even at very fast rates, the callback that it wraps is going to be amortized.  
+
+*Do you still have questions about debouncing and throttling in Vue? Ask a question!*
