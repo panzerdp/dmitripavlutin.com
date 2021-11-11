@@ -20,15 +20,6 @@ export type Scalars = {
   JSON: any;
 };
 
-
-
-
-
-
-
-
-
-
 export type File = Node & {
   sourceInstanceName: Scalars['String'];
   absolutePath: Scalars['String'];
@@ -156,7 +147,6 @@ export type Internal = {
   type: Scalars['String'];
 };
 
-
 export type Directory = Node & {
   sourceInstanceName: Scalars['String'];
   absolutePath: Scalars['String'];
@@ -258,6 +248,8 @@ export type DirectoryCtimeArgs = {
 export type Site = Node & {
   buildTime: Maybe<Scalars['Date']>;
   siteMetadata: Maybe<SiteSiteMetadata>;
+  port: Maybe<Scalars['Int']>;
+  host: Maybe<Scalars['String']>;
   pathPrefix: Maybe<Scalars['String']>;
   flags: Maybe<SiteFlags>;
   polyfill: Maybe<Scalars['Boolean']>;
@@ -362,14 +354,14 @@ export type SitePage = Node & {
   internalComponentName: Scalars['String'];
   componentChunkName: Scalars['String'];
   matchPath: Maybe<Scalars['String']>;
+  isCreatedByStatefulCreatePages: Maybe<Scalars['Boolean']>;
+  pluginCreator: Maybe<SitePlugin>;
+  pluginCreatorId: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   parent: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
-  isCreatedByStatefulCreatePages: Maybe<Scalars['Boolean']>;
   context: Maybe<SitePageContext>;
-  pluginCreator: Maybe<SitePlugin>;
-  pluginCreatorId: Maybe<Scalars['String']>;
 };
 
 export type SitePageContext = {
@@ -424,6 +416,7 @@ export type SitePluginPluginOptions = {
   disableBgImage: Maybe<Scalars['Boolean']>;
   wrapperStyle: Maybe<Scalars['String']>;
   theme: Maybe<Scalars['String']>;
+  vfsRoot: Maybe<Scalars['String']>;
   defaultText: Maybe<Scalars['String']>;
   directory: Maybe<Scalars['String']>;
   html: Maybe<Scalars['String']>;
@@ -490,6 +483,7 @@ export type SitePluginPluginOptionsPluginsPluginOptions = {
   disableBgImage: Maybe<Scalars['Boolean']>;
   wrapperStyle: Maybe<Scalars['String']>;
   theme: Maybe<Scalars['String']>;
+  vfsRoot: Maybe<Scalars['String']>;
   defaultText: Maybe<Scalars['String']>;
   directory: Maybe<Scalars['String']>;
   html: Maybe<Scalars['String']>;
@@ -665,7 +659,6 @@ export type MarkdownRemarkFrontmatterPublishedArgs = {
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type GatsbyImageFormat =
   | 'NO_CHANGE'
@@ -1170,6 +1163,8 @@ export type QueryAllDirectoryArgs = {
 export type QuerySiteArgs = {
   buildTime: Maybe<DateQueryOperatorInput>;
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
+  port: Maybe<IntQueryOperatorInput>;
+  host: Maybe<StringQueryOperatorInput>;
   pathPrefix: Maybe<StringQueryOperatorInput>;
   flags: Maybe<SiteFlagsFilterInput>;
   polyfill: Maybe<BooleanQueryOperatorInput>;
@@ -1217,14 +1212,14 @@ export type QuerySitePageArgs = {
   internalComponentName: Maybe<StringQueryOperatorInput>;
   componentChunkName: Maybe<StringQueryOperatorInput>;
   matchPath: Maybe<StringQueryOperatorInput>;
+  isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
+  pluginCreator: Maybe<SitePluginFilterInput>;
+  pluginCreatorId: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
-  isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
   context: Maybe<SitePageContextFilterInput>;
-  pluginCreator: Maybe<SitePluginFilterInput>;
-  pluginCreatorId: Maybe<StringQueryOperatorInput>;
 };
 
 
@@ -2563,6 +2558,8 @@ export type SiteFieldsEnum =
   | 'siteMetadata___featured___popularPostsByCategory'
   | 'siteMetadata___featured___popularPostsByCategory___category'
   | 'siteMetadata___featured___popularPostsByCategory___slugs'
+  | 'port'
+  | 'host'
   | 'pathPrefix'
   | 'flags___DEV_SSR'
   | 'polyfill'
@@ -2697,6 +2694,8 @@ export type SiteGroupConnectionGroupArgs = {
 export type SiteFilterInput = {
   buildTime: Maybe<DateQueryOperatorInput>;
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
+  port: Maybe<IntQueryOperatorInput>;
+  host: Maybe<StringQueryOperatorInput>;
   pathPrefix: Maybe<StringQueryOperatorInput>;
   flags: Maybe<SiteFlagsFilterInput>;
   polyfill: Maybe<BooleanQueryOperatorInput>;
@@ -2911,17 +2910,6 @@ export type SiteFunctionSortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type SitePageContextFilterInput = {
-  skip: Maybe<IntQueryOperatorInput>;
-  limit: Maybe<IntQueryOperatorInput>;
-  currentPage: Maybe<IntQueryOperatorInput>;
-  pagesSum: Maybe<IntQueryOperatorInput>;
-  popularPostsSlugs: Maybe<StringQueryOperatorInput>;
-  slug: Maybe<StringQueryOperatorInput>;
-  recommended: Maybe<StringQueryOperatorInput>;
-  tag: Maybe<StringQueryOperatorInput>;
-};
-
 export type SitePluginFilterInput = {
   resolve: Maybe<StringQueryOperatorInput>;
   name: Maybe<StringQueryOperatorInput>;
@@ -2963,6 +2951,7 @@ export type SitePluginPluginOptionsFilterInput = {
   disableBgImage: Maybe<BooleanQueryOperatorInput>;
   wrapperStyle: Maybe<StringQueryOperatorInput>;
   theme: Maybe<StringQueryOperatorInput>;
+  vfsRoot: Maybe<StringQueryOperatorInput>;
   defaultText: Maybe<StringQueryOperatorInput>;
   directory: Maybe<StringQueryOperatorInput>;
   html: Maybe<StringQueryOperatorInput>;
@@ -3033,6 +3022,7 @@ export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
   disableBgImage: Maybe<BooleanQueryOperatorInput>;
   wrapperStyle: Maybe<StringQueryOperatorInput>;
   theme: Maybe<StringQueryOperatorInput>;
+  vfsRoot: Maybe<StringQueryOperatorInput>;
   defaultText: Maybe<StringQueryOperatorInput>;
   directory: Maybe<StringQueryOperatorInput>;
   html: Maybe<StringQueryOperatorInput>;
@@ -3120,6 +3110,17 @@ export type SitePluginPackageJsonPeerDependenciesFilterInput = {
   version: Maybe<StringQueryOperatorInput>;
 };
 
+export type SitePageContextFilterInput = {
+  skip: Maybe<IntQueryOperatorInput>;
+  limit: Maybe<IntQueryOperatorInput>;
+  currentPage: Maybe<IntQueryOperatorInput>;
+  pagesSum: Maybe<IntQueryOperatorInput>;
+  popularPostsSlugs: Maybe<StringQueryOperatorInput>;
+  slug: Maybe<StringQueryOperatorInput>;
+  recommended: Maybe<StringQueryOperatorInput>;
+  tag: Maybe<StringQueryOperatorInput>;
+};
+
 export type SitePageConnection = {
   totalCount: Scalars['Int'];
   edges: Array<SitePageEdge>;
@@ -3171,101 +3172,7 @@ export type SitePageFieldsEnum =
   | 'internalComponentName'
   | 'componentChunkName'
   | 'matchPath'
-  | 'id'
-  | 'parent___id'
-  | 'parent___parent___id'
-  | 'parent___parent___parent___id'
-  | 'parent___parent___parent___children'
-  | 'parent___parent___children'
-  | 'parent___parent___children___id'
-  | 'parent___parent___children___children'
-  | 'parent___parent___internal___content'
-  | 'parent___parent___internal___contentDigest'
-  | 'parent___parent___internal___description'
-  | 'parent___parent___internal___fieldOwners'
-  | 'parent___parent___internal___ignoreType'
-  | 'parent___parent___internal___mediaType'
-  | 'parent___parent___internal___owner'
-  | 'parent___parent___internal___type'
-  | 'parent___children'
-  | 'parent___children___id'
-  | 'parent___children___parent___id'
-  | 'parent___children___parent___children'
-  | 'parent___children___children'
-  | 'parent___children___children___id'
-  | 'parent___children___children___children'
-  | 'parent___children___internal___content'
-  | 'parent___children___internal___contentDigest'
-  | 'parent___children___internal___description'
-  | 'parent___children___internal___fieldOwners'
-  | 'parent___children___internal___ignoreType'
-  | 'parent___children___internal___mediaType'
-  | 'parent___children___internal___owner'
-  | 'parent___children___internal___type'
-  | 'parent___internal___content'
-  | 'parent___internal___contentDigest'
-  | 'parent___internal___description'
-  | 'parent___internal___fieldOwners'
-  | 'parent___internal___ignoreType'
-  | 'parent___internal___mediaType'
-  | 'parent___internal___owner'
-  | 'parent___internal___type'
-  | 'children'
-  | 'children___id'
-  | 'children___parent___id'
-  | 'children___parent___parent___id'
-  | 'children___parent___parent___children'
-  | 'children___parent___children'
-  | 'children___parent___children___id'
-  | 'children___parent___children___children'
-  | 'children___parent___internal___content'
-  | 'children___parent___internal___contentDigest'
-  | 'children___parent___internal___description'
-  | 'children___parent___internal___fieldOwners'
-  | 'children___parent___internal___ignoreType'
-  | 'children___parent___internal___mediaType'
-  | 'children___parent___internal___owner'
-  | 'children___parent___internal___type'
-  | 'children___children'
-  | 'children___children___id'
-  | 'children___children___parent___id'
-  | 'children___children___parent___children'
-  | 'children___children___children'
-  | 'children___children___children___id'
-  | 'children___children___children___children'
-  | 'children___children___internal___content'
-  | 'children___children___internal___contentDigest'
-  | 'children___children___internal___description'
-  | 'children___children___internal___fieldOwners'
-  | 'children___children___internal___ignoreType'
-  | 'children___children___internal___mediaType'
-  | 'children___children___internal___owner'
-  | 'children___children___internal___type'
-  | 'children___internal___content'
-  | 'children___internal___contentDigest'
-  | 'children___internal___description'
-  | 'children___internal___fieldOwners'
-  | 'children___internal___ignoreType'
-  | 'children___internal___mediaType'
-  | 'children___internal___owner'
-  | 'children___internal___type'
-  | 'internal___content'
-  | 'internal___contentDigest'
-  | 'internal___description'
-  | 'internal___fieldOwners'
-  | 'internal___ignoreType'
-  | 'internal___mediaType'
-  | 'internal___owner'
-  | 'internal___type'
   | 'isCreatedByStatefulCreatePages'
-  | 'context___skip'
-  | 'context___limit'
-  | 'context___currentPage'
-  | 'context___pagesSum'
-  | 'context___popularPostsSlugs'
-  | 'context___slug'
-  | 'context___recommended'
-  | 'context___tag'
   | 'pluginCreator___resolve'
   | 'pluginCreator___name'
   | 'pluginCreator___version'
@@ -3304,6 +3211,7 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___disableBgImage'
   | 'pluginCreator___pluginOptions___wrapperStyle'
   | 'pluginCreator___pluginOptions___theme'
+  | 'pluginCreator___pluginOptions___vfsRoot'
   | 'pluginCreator___pluginOptions___defaultText'
   | 'pluginCreator___pluginOptions___directory'
   | 'pluginCreator___pluginOptions___html'
@@ -3400,7 +3308,101 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___internal___mediaType'
   | 'pluginCreator___internal___owner'
   | 'pluginCreator___internal___type'
-  | 'pluginCreatorId';
+  | 'pluginCreatorId'
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type'
+  | 'context___skip'
+  | 'context___limit'
+  | 'context___currentPage'
+  | 'context___pagesSum'
+  | 'context___popularPostsSlugs'
+  | 'context___slug'
+  | 'context___recommended'
+  | 'context___tag';
 
 export type SitePageGroupConnection = {
   totalCount: Scalars['Int'];
@@ -3449,14 +3451,14 @@ export type SitePageFilterInput = {
   internalComponentName: Maybe<StringQueryOperatorInput>;
   componentChunkName: Maybe<StringQueryOperatorInput>;
   matchPath: Maybe<StringQueryOperatorInput>;
+  isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
+  pluginCreator: Maybe<SitePluginFilterInput>;
+  pluginCreatorId: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
-  isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
   context: Maybe<SitePageContextFilterInput>;
-  pluginCreator: Maybe<SitePluginFilterInput>;
-  pluginCreatorId: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageSortInput = {
@@ -3543,6 +3545,7 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___plugins___pluginOptions___disableBgImage'
   | 'pluginOptions___plugins___pluginOptions___wrapperStyle'
   | 'pluginOptions___plugins___pluginOptions___theme'
+  | 'pluginOptions___plugins___pluginOptions___vfsRoot'
   | 'pluginOptions___plugins___pluginOptions___defaultText'
   | 'pluginOptions___plugins___pluginOptions___directory'
   | 'pluginOptions___plugins___pluginOptions___html'
@@ -3579,6 +3582,7 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___disableBgImage'
   | 'pluginOptions___wrapperStyle'
   | 'pluginOptions___theme'
+  | 'pluginOptions___vfsRoot'
   | 'pluginOptions___defaultText'
   | 'pluginOptions___directory'
   | 'pluginOptions___html'
@@ -4759,12 +4763,12 @@ export type MailchimpListSortInput = {
 export type CarbonAdsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CarbonAdsQuery = { site: Maybe<{ siteMetadata: Maybe<{ carbonAdsService: Maybe<CarbonAdsServiceAllFragment> }> }> };
+export type CarbonAdsQuery = { site: { siteMetadata: { carbonAdsService: { isEnabled: boolean | null, isProductionMode: boolean | null, scriptSrc: string | null } | null } | null } | null };
 
 export type LayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LayoutQuery = { file: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, site: Maybe<{ siteMetadata: Maybe<{ siteInfo: Maybe<SiteInfoAllFragment>, authorInfo: Maybe<AuthorInfoAllFragment> }> }> };
+export type LayoutQuery = { file: { childImageSharp: { gatsbyImageData: any } | null } | null, site: { siteMetadata: { siteInfo: { title: string | null, description: string | null, metaTitle: string | null, metaDescription: string | null, url: string | null, repositoryUrl: string | null, githubCommentsRepository: string | null, googleCustomSearchId: string | null } | null, authorInfo: { name: string | null, description: string | null, email: string | null, jobTitle: string | null, profiles: { stackoverflow: string | null, twitter: string | null, linkedin: string | null, github: string | null, facebook: string | null } | null, nicknames: { twitter: string | null } | null } | null } | null } | null };
 
 export type ExcerptsListQueryVariables = Exact<{
   skip: Maybe<Scalars['Int']>;
@@ -4773,24 +4777,18 @@ export type ExcerptsListQueryVariables = Exact<{
 }>;
 
 
-export type ExcerptsListQuery = { site: Maybe<{ siteMetadata: Maybe<{ featured: Maybe<{ popularPostsByCategory: Maybe<Array<Maybe<Pick<SiteSiteMetadataFeaturedPopularPostsByCategory, 'category' | 'slugs'>>>> }> }> }>, popularPostsMarkdown: { edges: Array<{ node: { frontmatter: Maybe<(
-          { thumbnail: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
-          & PostFragment
-        )> } }> }, allMarkdownRemark: { edges: Array<{ node: { frontmatter: Maybe<(
-          { thumbnail: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
-          & PostFragment
-        )> } }> } };
+export type ExcerptsListQuery = { site: { siteMetadata: { featured: { popularPostsByCategory: Array<{ category: string | null, slugs: Array<string | null> | null } | null> | null } | null } | null } | null, popularPostsMarkdown: { edges: Array<{ node: { frontmatter: { title: string | null, description: string | null, published: any | null, modified: string | null, slug: string | null, tags: Array<string | null> | null, thumbnail: { childImageSharp: { gatsbyImageData: any } | null } | null } | null } }> }, allMarkdownRemark: { edges: Array<{ node: { frontmatter: { title: string | null, description: string | null, published: any | null, modified: string | null, slug: string | null, tags: Array<string | null> | null, thumbnail: { childImageSharp: { gatsbyImageData: any } | null } | null } | null } }> } };
 
 export type PlainListByTagQueryVariables = Exact<{
   tag: Scalars['String'];
 }>;
 
 
-export type PlainListByTagQuery = { allMarkdownRemark: { edges: Array<{ node: { frontmatter: Maybe<PostFragment> } }> } };
+export type PlainListByTagQuery = { allMarkdownRemark: { edges: Array<{ node: { frontmatter: { title: string | null, description: string | null, published: any | null, modified: string | null, slug: string | null, tags: Array<string | null> | null } | null } }> } };
 
-export type CarbonAdsServiceAllFragment = Pick<SiteSiteMetadataCarbonAdsService, 'isEnabled' | 'isProductionMode' | 'scriptSrc'>;
+export type CarbonAdsServiceAllFragment = { isEnabled: boolean | null, isProductionMode: boolean | null, scriptSrc: string | null };
 
-export type PostFragment = Pick<MarkdownRemarkFrontmatter, 'title' | 'description' | 'published' | 'modified' | 'slug' | 'tags'>;
+export type PostFragment = { title: string | null, description: string | null, published: any | null, modified: string | null, slug: string | null, tags: Array<string | null> | null };
 
 export type PostBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -4799,74 +4797,64 @@ export type PostBySlugQueryVariables = Exact<{
 }>;
 
 
-export type PostBySlugQuery = { site: Maybe<{ siteMetadata: Maybe<{ featured: Maybe<{ popularPostsByCategory: Maybe<Array<Maybe<Pick<SiteSiteMetadataFeaturedPopularPostsByCategory, 'category' | 'slugs'>>>> }> }> }>, markdownRemark: Maybe<(
-    Pick<MarkdownRemark, 'id' | 'html' | 'fileAbsolutePath'>
-    & { frontmatter: Maybe<(
-      Pick<MarkdownRemarkFrontmatter, 'recommended'>
-      & { thumbnail: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
-      & PostFragment
-    )> }
-  )>, recommendedPostsMarkdown: { edges: Array<{ node: { frontmatter: Maybe<PostFragment> } }> }, popularPostsMarkdown: { edges: Array<{ node: { frontmatter: Maybe<PostFragment> } }> } };
+export type PostBySlugQuery = { site: { siteMetadata: { featured: { popularPostsByCategory: Array<{ category: string | null, slugs: Array<string | null> | null } | null> | null } | null } | null } | null, markdownRemark: { id: string, html: string | null, fileAbsolutePath: string | null, frontmatter: { recommended: Array<string | null> | null, title: string | null, description: string | null, published: any | null, modified: string | null, slug: string | null, tags: Array<string | null> | null, thumbnail: { childImageSharp: { gatsbyImageData: any } | null } | null } | null } | null, recommendedPostsMarkdown: { edges: Array<{ node: { frontmatter: { title: string | null, description: string | null, published: any | null, modified: string | null, slug: string | null, tags: Array<string | null> | null } | null } }> }, popularPostsMarkdown: { edges: Array<{ node: { frontmatter: { title: string | null, description: string | null, published: any | null, modified: string | null, slug: string | null, tags: Array<string | null> | null } | null } }> } };
 
 export type PopularTagsFetchQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PopularTagsFetchQuery = { allMarkdownRemark: { edges: Array<{ node: { frontmatter: Maybe<PostFragment> } }> } };
+export type PopularTagsFetchQuery = { allMarkdownRemark: { edges: Array<{ node: { frontmatter: { title: string | null, description: string | null, published: any | null, modified: string | null, slug: string | null, tags: Array<string | null> | null } | null } }> } };
 
 export type EmailSubscriptionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type EmailSubscriptionQuery = { site: Maybe<{ siteMetadata: Maybe<{ emailSubscriptionService: Maybe<Pick<SiteSiteMetadataEmailSubscriptionService, 'endpoint' | 'hiddenFieldName'>> }> }>, allMailchimpList: { edges: Array<{ node: { stats: Maybe<Pick<MailchimpListStats, 'member_count'>> } }> } };
+export type EmailSubscriptionQuery = { site: { siteMetadata: { emailSubscriptionService: { endpoint: string | null, hiddenFieldName: string | null } | null } | null } | null, allMailchimpList: { edges: Array<{ node: { stats: { member_count: number | null } | null } }> } };
 
-export type SiteInfoAllFragment = Pick<SiteSiteMetadataSiteInfo, 'title' | 'description' | 'metaTitle' | 'metaDescription' | 'url' | 'repositoryUrl' | 'githubCommentsRepository' | 'googleCustomSearchId'>;
+export type SiteInfoAllFragment = { title: string | null, description: string | null, metaTitle: string | null, metaDescription: string | null, url: string | null, repositoryUrl: string | null, githubCommentsRepository: string | null, googleCustomSearchId: string | null };
 
-export type AuthorInfoAllFragment = (
-  Pick<SiteSiteMetadataAuthorInfo, 'name' | 'description' | 'email' | 'jobTitle'>
-  & { profiles: Maybe<Pick<SiteSiteMetadataAuthorInfoProfiles, 'stackoverflow' | 'twitter' | 'linkedin' | 'github' | 'facebook'>>, nicknames: Maybe<Pick<SiteSiteMetadataAuthorInfoNicknames, 'twitter'>> }
-);
+export type AuthorInfoAllFragment = { name: string | null, description: string | null, email: string | null, jobTitle: string | null, profiles: { stackoverflow: string | null, twitter: string | null, linkedin: string | null, github: string | null, facebook: string | null } | null, nicknames: { twitter: string | null } | null };
 
 export type AuthorInfoAndPicturesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AuthorInfoAndPicturesQuery = { site: Maybe<{ siteMetadata: Maybe<{ authorInfo: Maybe<AuthorInfoAllFragment>, siteInfo: Maybe<SiteInfoAllFragment> }> }>, authorProfilePicture: Maybe<{ childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> };
+export type AuthorInfoAndPicturesQuery = { site: { siteMetadata: { authorInfo: { name: string | null, description: string | null, email: string | null, jobTitle: string | null, profiles: { stackoverflow: string | null, twitter: string | null, linkedin: string | null, github: string | null, facebook: string | null } | null, nicknames: { twitter: string | null } | null } | null, siteInfo: { title: string | null, description: string | null, metaTitle: string | null, metaDescription: string | null, url: string | null, repositoryUrl: string | null, githubCommentsRepository: string | null, googleCustomSearchId: string | null } | null } | null } | null, authorProfilePicture: { childImageSharp: { gatsbyImageData: any } | null } | null };
 
 export type Page404QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Page404Query = { allMarkdownRemark: { edges: Array<{ node: Pick<MarkdownRemark, 'html'> }> } };
+export type Page404Query = { allMarkdownRemark: { edges: Array<{ node: { html: string | null } }> } };
 
 export type AboutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AboutQuery = { allMarkdownRemark: { edges: Array<{ node: Pick<MarkdownRemark, 'html'> }> } };
+export type AboutQuery = { allMarkdownRemark: { edges: Array<{ node: { html: string | null } }> } };
 
 export type PlainListAllQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PlainListAllQuery = { allMarkdownRemark: { edges: Array<{ node: { frontmatter: Maybe<PostFragment> } }> } };
+export type PlainListAllQuery = { allMarkdownRemark: { edges: Array<{ node: { frontmatter: { title: string | null, description: string | null, published: any | null, modified: string | null, slug: string | null, tags: Array<string | null> | null } | null } }> } };
 
-export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
+export type GatsbyImageSharpFixedFragment = { base64: string | null, width: number, height: number, src: string, srcSet: string };
 
-export type GatsbyImageSharpFixed_TracedSvgFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
+export type GatsbyImageSharpFixed_TracedSvgFragment = { tracedSVG: string | null, width: number, height: number, src: string, srcSet: string };
 
-export type GatsbyImageSharpFixed_WithWebpFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+export type GatsbyImageSharpFixed_WithWebpFragment = { base64: string | null, width: number, height: number, src: string, srcSet: string, srcWebp: string | null, srcSetWebp: string | null };
 
-export type GatsbyImageSharpFixed_WithWebp_TracedSvgFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+export type GatsbyImageSharpFixed_WithWebp_TracedSvgFragment = { tracedSVG: string | null, width: number, height: number, src: string, srcSet: string, srcWebp: string | null, srcSetWebp: string | null };
 
-export type GatsbyImageSharpFixed_NoBase64Fragment = Pick<ImageSharpFixed, 'width' | 'height' | 'src' | 'srcSet'>;
+export type GatsbyImageSharpFixed_NoBase64Fragment = { width: number, height: number, src: string, srcSet: string };
 
-export type GatsbyImageSharpFixed_WithWebp_NoBase64Fragment = Pick<ImageSharpFixed, 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+export type GatsbyImageSharpFixed_WithWebp_NoBase64Fragment = { width: number, height: number, src: string, srcSet: string, srcWebp: string | null, srcSetWebp: string | null };
 
-export type GatsbyImageSharpFluidFragment = Pick<ImageSharpFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+export type GatsbyImageSharpFluidFragment = { base64: string | null, aspectRatio: number, src: string, srcSet: string, sizes: string };
 
-export type GatsbyImageSharpFluidLimitPresentationSizeFragment = { maxHeight: ImageSharpFluid['presentationHeight'], maxWidth: ImageSharpFluid['presentationWidth'] };
+export type GatsbyImageSharpFluidLimitPresentationSizeFragment = { maxHeight: number, maxWidth: number };
 
-export type GatsbyImageSharpFluid_TracedSvgFragment = Pick<ImageSharpFluid, 'tracedSVG' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+export type GatsbyImageSharpFluid_TracedSvgFragment = { tracedSVG: string | null, aspectRatio: number, src: string, srcSet: string, sizes: string };
 
-export type GatsbyImageSharpFluid_WithWebpFragment = Pick<ImageSharpFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+export type GatsbyImageSharpFluid_WithWebpFragment = { base64: string | null, aspectRatio: number, src: string, srcSet: string, srcWebp: string | null, srcSetWebp: string | null, sizes: string };
 
-export type GatsbyImageSharpFluid_WithWebp_TracedSvgFragment = Pick<ImageSharpFluid, 'tracedSVG' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+export type GatsbyImageSharpFluid_WithWebp_TracedSvgFragment = { tracedSVG: string | null, aspectRatio: number, src: string, srcSet: string, srcWebp: string | null, srcSetWebp: string | null, sizes: string };
 
-export type GatsbyImageSharpFluid_NoBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+export type GatsbyImageSharpFluid_NoBase64Fragment = { aspectRatio: number, src: string, srcSet: string, sizes: string };
 
-export type GatsbyImageSharpFluid_WithWebp_NoBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+export type GatsbyImageSharpFluid_WithWebp_NoBase64Fragment = { aspectRatio: number, src: string, srcSet: string, srcWebp: string | null, srcSetWebp: string | null, sizes: string };
