@@ -1,6 +1,6 @@
 ---
 title: "How to Debounce and Throttle Callbacks in Vue"
-description: "How to apply debouncing and throttling techniques to amortize the execution of event handlers in Vue"
+description: "How to debounce and throttle watchers and event handlers in Vue components."
 published: "2021-11-12T07:30Z"
 modified: "2021-11-12T07:30Z"
 thumbnail: "./images/cover.png"
