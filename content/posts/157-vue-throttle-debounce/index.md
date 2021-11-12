@@ -10,13 +10,13 @@ recommended: ['react-throttle-debounce', 'vue-show-hide-elements']
 type: post
 ---
 
-Dealing with often occurring events like user typing into the input field, window resize, scroll, intersection observer events, requires precaution. 
+Listening for often occurring events like user typing into the input field, window resize, scroll, intersection observer events, etc. requires precaution. 
 
 These events could occur so often, e.g. a few times per second, that invoking an action like a fetch request on every event isn't a wise approach.  
 
-In such cases, you would be interested to amortize, or slow down, the execution of the event handlers. Such amortizing techniques are [debouncing and throttling](https://css-tricks.com/debouncing-throttling-explained-examples/).  
+What you could do is slow down the execution of the event handlers. Such amortizing techniques are [debouncing and throttling](https://css-tricks.com/debouncing-throttling-explained-examples/).  
 
-In this post, you'll find how you can apply debouncing and throttling to callbacks in Vue components.  
+In this post, you'll find how to debounce and throttle watchers and event handlers in Vue components.  
 
 ## 1. Debouncing a watcher
 
@@ -46,11 +46,11 @@ export default {
 
 [Open the demo.](https://codesandbox.io/s/vue-input-szgn1?file=/src/App.vue)
 
-Open the demo and type a few characters into the input field. The console logs a new value each time you type into the input field. This is implemented using a watcher on the `value` data property.  
+Open the demo and type a few characters into the input. Each time you type, the value is logged to console.  
 
-If you'd like to perform a fetch request using the `value` as a GET parameter inside the watcher callback, you wouldn't want to start fetch requests so often.  
+Logging is implemented using a watcher on the `value` data property. And if you'd like to perform a fetch request using the `value` as a GET parameter inside the watcher callback, you wouldn't want to start fetch requests so often.  
 
-Let's debounce the logging to the console of the input value. You need to create a debounced version of the function, then use it inside the watcher. 
+Let's debounce the logging to the console of the input value. The idea is to create a debounced function, then invoke that function inside the watcher.  
 
 I use a debounce implementation from `'lodash.debounce'`, but you can use whatever implementation you like.  
 
@@ -90,25 +90,25 @@ export default {
 
 [Try the demo](https://codesandbox.io/s/vue-input-debounced-4vwex?file=/src/App.vue)
 
-Now if you open the demo you'd notice that from the user's perspective little changed: you can still introduce characters as you were in the previous example.  
+If you open the demo you'd notice that from the user's perspective little changed: you can still introduce characters as you were in the previous example.  
 
 But there's a change: the component logs to console the new value only if `500ms` has passed since the last typing. That's debouncing in action.  
 
 Debouncing of a watcher is implemented in 3 simple steps:
 
-1) Inside the `created()` hook the debounced callback is created and as a property on the instance: `this.debouncedWatch = debounce(..., 500)`.  
+1) Inside the `created()` hook the debounced callback is created and assigned to a property on the instance: `this.debouncedWatch = debounce(..., 500)`.  
 
-2) Then inside the watch callback `watch.value() { ... }` the `this.debouncedWatch()` is invoked with the right arguments. 
+2) Inside the watch callback `watch.value() { ... }` the `this.debouncedWatch()` is invoked with the right arguments. 
 
-3) Finally, `beforeUnmount()` hook cancels any pending executions of the debounced function `this.debouncedWatch.cancel()` right before unmounting the component. This is done to avoid executing the value watcher callback on an already unmounted component.  
+3) Finally, `beforeUnmount()` hook cancels `this.debouncedWatch.cancel()` any pending executions of the debounced function  right before unmounting the component.  
 
-The same way you can debounce watching any data property and perform inside the debounced callback relatively heavy operations like data fetching, expensive DOM manipulations, and more.  
+The same way you can debounce watching any data property. Then you are safe to execute inside the debounced callback relatively heavy operations like data fetching, expensive DOM manipulations, and more.  
 
 ## 2. Debouncing an event handler
 
-The section above showed how to debounce watchers, but what about regular event handlers? Let's take a try.  
+The section above has showed how to debounce watchers, but what about regular event handlers?  
 
-Let's reuse again the example when the user enters data into the input field, but this time without using `v-model` and directly attaching an event handler to the input.  
+Let's reuse again the example when the user enters data into the input field, but this time attach an event handler to the input.  
 
 As usual, if you don't perform any amortization, the changed value is logged to console exactly when the user types:
 
@@ -130,11 +130,11 @@ export default {
 
 [Try the demo.](https://codesandbox.io/s/vue-event-handler-plls4?file=/src/App.vue)
 
-Open the demo and type a few characters into the input. Look at the console: you'd notice that the console gets updated each time you type.   
+Open the demo and type a few characters into the input. Look at the console: you'd notice that the console updates each time you type.  
 
 Again, that's not always convenient if you want to perform some relatively heavy operations with the input value, e.g. performing a fetch request.  
 
-Debouncing the event handler invocation can be implemented as follows:
+Debouncing the event handler can be implemented as follows:
 
 ```vue
 <template>
@@ -165,7 +165,7 @@ Debouncing the event handler is implemented in 3 easy steps:
 
 1) Inside the `created()` hook, right after the instance creation, assign to `this.debouncedHandler` the debounced callback `debounce(event => {...}, 500)`.  
 
-2) The input field inside the template uses `debouncedHandler` as the callback of `v-on:input`: 
+2) The input field inside the template has `v-on:input` assigned with `debouncedHandler`:
 
 ```html
 <input v-on:input="debouncedHandler" type="text" />
@@ -173,13 +173,22 @@ Debouncing the event handler is implemented in 3 easy steps:
 
 3) Finally, at the time the component instance should unmount, inside `beforeUnmount()` hook the `this.debouncedHandler.cancel()` is called to cancel any pending function calls.  
 
-On a side note, the examples were using the debouncing technique. However, the same implementation is used to create throttled functions.  
+On a side note, the examples were using the debouncing technique. However, the same approach can be used to create throttled functions.  
 
 ## 3. A word of caution
 
 You might be wondering: why not make the debounced function as a method directly on the component options, and then use the method as an event handler inside the template?  
 
-That would be an easier approach than creating properties on the instance as in the previous examples.  
+```javascript
+// ...
+  methods: {
+    // Why not?
+    debouncedHandler: debounce(function () { ... }}, 500)
+  }
+// ...
+```
+
+That would be an easier approach than creating debounced functions as properties on the instance.  
 
 For example:
 
@@ -210,7 +219,7 @@ And if you try the demo, it works!
 
 The problem is that the options object exported from the component using `export default { ... }`, including the methods, are going to be reused by all the instances of the component. 
 
-In case if the web page has 2 or more instances of the component, all the components would use the *same* debounced function `methods.debouncedHandler` &mdash; and the debouncing could glitch.  
+In case if the web page has 2 or more instances of the component, then all the components would use the *same* debounced function `methods.debouncedHandler` &mdash; and the debouncing could glitch.  
 
 ## 4. Conclusion
 
