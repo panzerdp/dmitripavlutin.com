@@ -139,7 +139,7 @@ Thus toggling the element's visibility using `v-show` is relatively cheap (compa
 
 What if you need to hide the element's content while keeping the space it occupies? The CSS style that hides the element content but keeps its space is `visibility: hidden`.  
 
-Unfortunately, you can no longer can `v-show` directive because it applies only `display: none` style.  
+Unfortunately, you cannot use `v-show` directive because it applies only `display: none` style.  
 
 But a viable solution is to use `:class` binding, which is pretty flexible in Vue. When the object literal `{ className: boolValue }` is assigned to the `:class`, Vue would apply the `"className"` as a class to the element if `boolValue` is `true`.  
 
