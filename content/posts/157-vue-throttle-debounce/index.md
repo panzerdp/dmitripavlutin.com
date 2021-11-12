@@ -1,8 +1,8 @@
 ---
 title: "How to Debounce and Throttle Callbacks in Vue"
 description: "How to apply debouncing and throttling techniques to amortize the execution of event handlers in Vue"
-published: "2021-11-09T12:00Z"
-modified: "2021-11-09T12:00Z"
+published: "2021-11-12T07:30Z"
+modified: "2021-11-12T07:30Z"
 thumbnail: "./images/cover.png"
 slug: vue-debounce-throttle
 tags: ['vue', 'callback', 'event']
@@ -10,7 +10,7 @@ recommended: ['react-throttle-debounce', 'vue-show-hide-elements']
 type: post
 ---
 
-Listening for often occurring events like user typing into the input field, window resize, scroll, intersection observer events, etc. requires precaution. 
+Listening for often occurring events like user typing into the input field, window resize, scroll, intersection observer events etc. requires precaution. 
 
 These events could occur so often, e.g. a few times per second, that invoking an action like a fetch request on every event isn't a wise approach.  
 
@@ -46,7 +46,7 @@ export default {
 
 [Open the demo.](https://codesandbox.io/s/vue-input-szgn1?file=/src/App.vue)
 
-Open the demo and type a few characters into the input. Each time you type, the value is logged to console.  
+Open the demo and type a few characters into the input. Each time you type, the value is logged to the console.  
 
 Logging is implemented using a watcher on the `value` data property. And if you'd like to perform a fetch request using the `value` as a GET parameter inside the watcher callback, you wouldn't want to start fetch requests so often.  
 
@@ -102,11 +102,11 @@ Debouncing of a watcher is implemented in 3 simple steps:
 
 3) Finally, `beforeUnmount()` hook cancels `this.debouncedWatch.cancel()` any pending executions of the debounced function  right before unmounting the component.  
 
-The same way you can debounce watching any data property. Then you are safe to execute inside the debounced callback relatively heavy operations like data fetching, expensive DOM manipulations, and more.  
+In the same way, you can debounce watching any data property. Then you are safe to execute inside the debounced callback relatively heavy operations like data fetching, expensive DOM manipulations, and more.  
 
 ## 2. Debouncing an event handler
 
-The section above has showed how to debounce watchers, but what about regular event handlers?  
+The section above has shown how to debounce watchers, but what about regular event handlers?  
 
 Let's reuse again the example when the user enters data into the input field, but this time attach an event handler to the input.  
 
