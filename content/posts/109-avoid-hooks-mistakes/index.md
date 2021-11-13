@@ -129,7 +129,7 @@ function MyIncreaser() {
     setCount(count + 1);
   }, [count]);
 
-  const handleClick = () {
+  const handleClick = () => {
     increase();
     increase();
     increase();
