@@ -76,7 +76,7 @@ export default {
       this.debouncedWatch(...args);
     },
   },
-  create() {
+  created() {
     this.debouncedWatch = debounce((newValue, oldValue) => {
       console.log('New value:', newValue);
     }, 500);
