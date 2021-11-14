@@ -48,7 +48,7 @@ module.exports = {
           {
             resolve: 'gatsby-remark-shiki-twoslash',
             options: {
-              theme: 'github-light',
+              theme: 'light-plus',
             }
           },
           'gatsby-remark-copy-linked-files',

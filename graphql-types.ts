@@ -633,7 +633,6 @@ export type MarkdownRemarkTableOfContentsArgs = {
 
 export type MarkdownRemarkFrontmatter = {
   title: Maybe<Scalars['String']>;
-  type: Maybe<Scalars['String']>;
   description: Maybe<Scalars['String']>;
   published: Maybe<Scalars['Date']>;
   modified: Maybe<Scalars['String']>;
@@ -641,6 +640,7 @@ export type MarkdownRemarkFrontmatter = {
   slug: Maybe<Scalars['String']>;
   tags: Maybe<Array<Maybe<Scalars['String']>>>;
   recommended: Maybe<Array<Maybe<Scalars['String']>>>;
+  type: Maybe<Scalars['String']>;
 };
 
 
@@ -1415,7 +1415,6 @@ export type MarkdownRemarkFilterInput = {
 
 export type MarkdownRemarkFrontmatterFilterInput = {
   title: Maybe<StringQueryOperatorInput>;
-  type: Maybe<StringQueryOperatorInput>;
   description: Maybe<StringQueryOperatorInput>;
   published: Maybe<DateQueryOperatorInput>;
   modified: Maybe<StringQueryOperatorInput>;
@@ -1423,6 +1422,7 @@ export type MarkdownRemarkFrontmatterFilterInput = {
   slug: Maybe<StringQueryOperatorInput>;
   tags: Maybe<StringQueryOperatorInput>;
   recommended: Maybe<StringQueryOperatorInput>;
+  type: Maybe<StringQueryOperatorInput>;
 };
 
 export type FileFilterInput = {
@@ -1676,7 +1676,6 @@ export type FileFieldsEnum =
   | 'childrenMarkdownRemark'
   | 'childrenMarkdownRemark___id'
   | 'childrenMarkdownRemark___frontmatter___title'
-  | 'childrenMarkdownRemark___frontmatter___type'
   | 'childrenMarkdownRemark___frontmatter___description'
   | 'childrenMarkdownRemark___frontmatter___published'
   | 'childrenMarkdownRemark___frontmatter___modified'
@@ -1721,6 +1720,7 @@ export type FileFieldsEnum =
   | 'childrenMarkdownRemark___frontmatter___slug'
   | 'childrenMarkdownRemark___frontmatter___tags'
   | 'childrenMarkdownRemark___frontmatter___recommended'
+  | 'childrenMarkdownRemark___frontmatter___type'
   | 'childrenMarkdownRemark___excerpt'
   | 'childrenMarkdownRemark___rawMarkdownBody'
   | 'childrenMarkdownRemark___fileAbsolutePath'
@@ -1775,7 +1775,6 @@ export type FileFieldsEnum =
   | 'childrenMarkdownRemark___internal___type'
   | 'childMarkdownRemark___id'
   | 'childMarkdownRemark___frontmatter___title'
-  | 'childMarkdownRemark___frontmatter___type'
   | 'childMarkdownRemark___frontmatter___description'
   | 'childMarkdownRemark___frontmatter___published'
   | 'childMarkdownRemark___frontmatter___modified'
@@ -1820,6 +1819,7 @@ export type FileFieldsEnum =
   | 'childMarkdownRemark___frontmatter___slug'
   | 'childMarkdownRemark___frontmatter___tags'
   | 'childMarkdownRemark___frontmatter___recommended'
+  | 'childMarkdownRemark___frontmatter___type'
   | 'childMarkdownRemark___excerpt'
   | 'childMarkdownRemark___rawMarkdownBody'
   | 'childMarkdownRemark___fileAbsolutePath'
@@ -3982,7 +3982,6 @@ export type MarkdownRemarkEdge = {
 export type MarkdownRemarkFieldsEnum =
   | 'id'
   | 'frontmatter___title'
-  | 'frontmatter___type'
   | 'frontmatter___description'
   | 'frontmatter___published'
   | 'frontmatter___modified'
@@ -4067,6 +4066,7 @@ export type MarkdownRemarkFieldsEnum =
   | 'frontmatter___slug'
   | 'frontmatter___tags'
   | 'frontmatter___recommended'
+  | 'frontmatter___type'
   | 'excerpt'
   | 'rawMarkdownBody'
   | 'fileAbsolutePath'
