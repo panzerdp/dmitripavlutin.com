@@ -354,14 +354,14 @@ export type SitePage = Node & {
   internalComponentName: Scalars['String'];
   componentChunkName: Scalars['String'];
   matchPath: Maybe<Scalars['String']>;
-  isCreatedByStatefulCreatePages: Maybe<Scalars['Boolean']>;
-  pluginCreator: Maybe<SitePlugin>;
-  pluginCreatorId: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   parent: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
+  isCreatedByStatefulCreatePages: Maybe<Scalars['Boolean']>;
   context: Maybe<SitePageContext>;
+  pluginCreator: Maybe<SitePlugin>;
+  pluginCreatorId: Maybe<Scalars['String']>;
 };
 
 export type SitePageContext = {
@@ -394,13 +394,13 @@ export type SitePlugin = Node & {
 
 export type SitePluginPluginOptions = {
   plugins: Maybe<Array<Maybe<SitePluginPluginOptionsPlugins>>>;
-  tight: Maybe<Scalars['Boolean']>;
-  fromHeading: Maybe<Scalars['Int']>;
-  defaults: Maybe<SitePluginPluginOptionsDefaults>;
   base64Width: Maybe<Scalars['Int']>;
   stripMetadata: Maybe<Scalars['Boolean']>;
   defaultQuality: Maybe<Scalars['Int']>;
   failOnError: Maybe<Scalars['Boolean']>;
+  tight: Maybe<Scalars['Boolean']>;
+  fromHeading: Maybe<Scalars['Int']>;
+  defaults: Maybe<SitePluginPluginOptionsDefaults>;
   linkImagesToOriginal: Maybe<Scalars['Boolean']>;
   sizeByPixelDensity: Maybe<Scalars['Boolean']>;
   quality: Maybe<Scalars['Int']>;
@@ -416,7 +416,6 @@ export type SitePluginPluginOptions = {
   disableBgImage: Maybe<Scalars['Boolean']>;
   wrapperStyle: Maybe<Scalars['String']>;
   theme: Maybe<Scalars['String']>;
-  vfsRoot: Maybe<Scalars['String']>;
   defaultText: Maybe<Scalars['String']>;
   directory: Maybe<Scalars['String']>;
   html: Maybe<Scalars['String']>;
@@ -464,10 +463,6 @@ export type SitePluginPluginOptionsPluginsPluginOptions = {
   tight: Maybe<Scalars['Boolean']>;
   fromHeading: Maybe<Scalars['Int']>;
   defaults: Maybe<SitePluginPluginOptionsPluginsPluginOptionsDefaults>;
-  base64Width: Maybe<Scalars['Int']>;
-  stripMetadata: Maybe<Scalars['Boolean']>;
-  defaultQuality: Maybe<Scalars['Int']>;
-  failOnError: Maybe<Scalars['Boolean']>;
   linkImagesToOriginal: Maybe<Scalars['Boolean']>;
   sizeByPixelDensity: Maybe<Scalars['Boolean']>;
   quality: Maybe<Scalars['Int']>;
@@ -483,7 +478,6 @@ export type SitePluginPluginOptionsPluginsPluginOptions = {
   disableBgImage: Maybe<Scalars['Boolean']>;
   wrapperStyle: Maybe<Scalars['String']>;
   theme: Maybe<Scalars['String']>;
-  vfsRoot: Maybe<Scalars['String']>;
   defaultText: Maybe<Scalars['String']>;
   directory: Maybe<Scalars['String']>;
   html: Maybe<Scalars['String']>;
@@ -491,9 +485,6 @@ export type SitePluginPluginOptionsPluginsPluginOptions = {
   icon: Maybe<Scalars['String']>;
   offsetY: Maybe<Scalars['Int']>;
   className: Maybe<Scalars['String']>;
-  isTSX: Maybe<Scalars['Boolean']>;
-  jsxPragma: Maybe<Scalars['String']>;
-  allExtensions: Maybe<Scalars['Boolean']>;
 };
 
 export type SitePluginPluginOptionsPluginsPluginOptionsDefaults = {
@@ -1212,14 +1203,14 @@ export type QuerySitePageArgs = {
   internalComponentName: Maybe<StringQueryOperatorInput>;
   componentChunkName: Maybe<StringQueryOperatorInput>;
   matchPath: Maybe<StringQueryOperatorInput>;
-  isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
-  pluginCreator: Maybe<SitePluginFilterInput>;
-  pluginCreatorId: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
+  isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
   context: Maybe<SitePageContextFilterInput>;
+  pluginCreator: Maybe<SitePluginFilterInput>;
+  pluginCreatorId: Maybe<StringQueryOperatorInput>;
 };
 
 
@@ -2910,6 +2901,17 @@ export type SiteFunctionSortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
+export type SitePageContextFilterInput = {
+  skip: Maybe<IntQueryOperatorInput>;
+  limit: Maybe<IntQueryOperatorInput>;
+  currentPage: Maybe<IntQueryOperatorInput>;
+  pagesSum: Maybe<IntQueryOperatorInput>;
+  popularPostsSlugs: Maybe<StringQueryOperatorInput>;
+  slug: Maybe<StringQueryOperatorInput>;
+  recommended: Maybe<StringQueryOperatorInput>;
+  tag: Maybe<StringQueryOperatorInput>;
+};
+
 export type SitePluginFilterInput = {
   resolve: Maybe<StringQueryOperatorInput>;
   name: Maybe<StringQueryOperatorInput>;
@@ -2929,13 +2931,13 @@ export type SitePluginFilterInput = {
 
 export type SitePluginPluginOptionsFilterInput = {
   plugins: Maybe<SitePluginPluginOptionsPluginsFilterListInput>;
-  tight: Maybe<BooleanQueryOperatorInput>;
-  fromHeading: Maybe<IntQueryOperatorInput>;
-  defaults: Maybe<SitePluginPluginOptionsDefaultsFilterInput>;
   base64Width: Maybe<IntQueryOperatorInput>;
   stripMetadata: Maybe<BooleanQueryOperatorInput>;
   defaultQuality: Maybe<IntQueryOperatorInput>;
   failOnError: Maybe<BooleanQueryOperatorInput>;
+  tight: Maybe<BooleanQueryOperatorInput>;
+  fromHeading: Maybe<IntQueryOperatorInput>;
+  defaults: Maybe<SitePluginPluginOptionsDefaultsFilterInput>;
   linkImagesToOriginal: Maybe<BooleanQueryOperatorInput>;
   sizeByPixelDensity: Maybe<BooleanQueryOperatorInput>;
   quality: Maybe<IntQueryOperatorInput>;
@@ -2951,7 +2953,6 @@ export type SitePluginPluginOptionsFilterInput = {
   disableBgImage: Maybe<BooleanQueryOperatorInput>;
   wrapperStyle: Maybe<StringQueryOperatorInput>;
   theme: Maybe<StringQueryOperatorInput>;
-  vfsRoot: Maybe<StringQueryOperatorInput>;
   defaultText: Maybe<StringQueryOperatorInput>;
   directory: Maybe<StringQueryOperatorInput>;
   html: Maybe<StringQueryOperatorInput>;
@@ -3003,10 +3004,6 @@ export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
   tight: Maybe<BooleanQueryOperatorInput>;
   fromHeading: Maybe<IntQueryOperatorInput>;
   defaults: Maybe<SitePluginPluginOptionsPluginsPluginOptionsDefaultsFilterInput>;
-  base64Width: Maybe<IntQueryOperatorInput>;
-  stripMetadata: Maybe<BooleanQueryOperatorInput>;
-  defaultQuality: Maybe<IntQueryOperatorInput>;
-  failOnError: Maybe<BooleanQueryOperatorInput>;
   linkImagesToOriginal: Maybe<BooleanQueryOperatorInput>;
   sizeByPixelDensity: Maybe<BooleanQueryOperatorInput>;
   quality: Maybe<IntQueryOperatorInput>;
@@ -3022,7 +3019,6 @@ export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
   disableBgImage: Maybe<BooleanQueryOperatorInput>;
   wrapperStyle: Maybe<StringQueryOperatorInput>;
   theme: Maybe<StringQueryOperatorInput>;
-  vfsRoot: Maybe<StringQueryOperatorInput>;
   defaultText: Maybe<StringQueryOperatorInput>;
   directory: Maybe<StringQueryOperatorInput>;
   html: Maybe<StringQueryOperatorInput>;
@@ -3030,9 +3026,6 @@ export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
   icon: Maybe<StringQueryOperatorInput>;
   offsetY: Maybe<IntQueryOperatorInput>;
   className: Maybe<StringQueryOperatorInput>;
-  isTSX: Maybe<BooleanQueryOperatorInput>;
-  jsxPragma: Maybe<StringQueryOperatorInput>;
-  allExtensions: Maybe<BooleanQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsPluginsPluginOptionsDefaultsFilterInput = {
@@ -3110,17 +3103,6 @@ export type SitePluginPackageJsonPeerDependenciesFilterInput = {
   version: Maybe<StringQueryOperatorInput>;
 };
 
-export type SitePageContextFilterInput = {
-  skip: Maybe<IntQueryOperatorInput>;
-  limit: Maybe<IntQueryOperatorInput>;
-  currentPage: Maybe<IntQueryOperatorInput>;
-  pagesSum: Maybe<IntQueryOperatorInput>;
-  popularPostsSlugs: Maybe<StringQueryOperatorInput>;
-  slug: Maybe<StringQueryOperatorInput>;
-  recommended: Maybe<StringQueryOperatorInput>;
-  tag: Maybe<StringQueryOperatorInput>;
-};
-
 export type SitePageConnection = {
   totalCount: Scalars['Int'];
   edges: Array<SitePageEdge>;
@@ -3172,7 +3154,101 @@ export type SitePageFieldsEnum =
   | 'internalComponentName'
   | 'componentChunkName'
   | 'matchPath'
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type'
   | 'isCreatedByStatefulCreatePages'
+  | 'context___skip'
+  | 'context___limit'
+  | 'context___currentPage'
+  | 'context___pagesSum'
+  | 'context___popularPostsSlugs'
+  | 'context___slug'
+  | 'context___recommended'
+  | 'context___tag'
   | 'pluginCreator___resolve'
   | 'pluginCreator___name'
   | 'pluginCreator___version'
@@ -3189,13 +3265,13 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___plugins___browserAPIs'
   | 'pluginCreator___pluginOptions___plugins___ssrAPIs'
   | 'pluginCreator___pluginOptions___plugins___pluginFilepath'
-  | 'pluginCreator___pluginOptions___tight'
-  | 'pluginCreator___pluginOptions___fromHeading'
-  | 'pluginCreator___pluginOptions___defaults___formats'
   | 'pluginCreator___pluginOptions___base64Width'
   | 'pluginCreator___pluginOptions___stripMetadata'
   | 'pluginCreator___pluginOptions___defaultQuality'
   | 'pluginCreator___pluginOptions___failOnError'
+  | 'pluginCreator___pluginOptions___tight'
+  | 'pluginCreator___pluginOptions___fromHeading'
+  | 'pluginCreator___pluginOptions___defaults___formats'
   | 'pluginCreator___pluginOptions___linkImagesToOriginal'
   | 'pluginCreator___pluginOptions___sizeByPixelDensity'
   | 'pluginCreator___pluginOptions___quality'
@@ -3211,7 +3287,6 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___disableBgImage'
   | 'pluginCreator___pluginOptions___wrapperStyle'
   | 'pluginCreator___pluginOptions___theme'
-  | 'pluginCreator___pluginOptions___vfsRoot'
   | 'pluginCreator___pluginOptions___defaultText'
   | 'pluginCreator___pluginOptions___directory'
   | 'pluginCreator___pluginOptions___html'
@@ -3308,101 +3383,7 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___internal___mediaType'
   | 'pluginCreator___internal___owner'
   | 'pluginCreator___internal___type'
-  | 'pluginCreatorId'
-  | 'id'
-  | 'parent___id'
-  | 'parent___parent___id'
-  | 'parent___parent___parent___id'
-  | 'parent___parent___parent___children'
-  | 'parent___parent___children'
-  | 'parent___parent___children___id'
-  | 'parent___parent___children___children'
-  | 'parent___parent___internal___content'
-  | 'parent___parent___internal___contentDigest'
-  | 'parent___parent___internal___description'
-  | 'parent___parent___internal___fieldOwners'
-  | 'parent___parent___internal___ignoreType'
-  | 'parent___parent___internal___mediaType'
-  | 'parent___parent___internal___owner'
-  | 'parent___parent___internal___type'
-  | 'parent___children'
-  | 'parent___children___id'
-  | 'parent___children___parent___id'
-  | 'parent___children___parent___children'
-  | 'parent___children___children'
-  | 'parent___children___children___id'
-  | 'parent___children___children___children'
-  | 'parent___children___internal___content'
-  | 'parent___children___internal___contentDigest'
-  | 'parent___children___internal___description'
-  | 'parent___children___internal___fieldOwners'
-  | 'parent___children___internal___ignoreType'
-  | 'parent___children___internal___mediaType'
-  | 'parent___children___internal___owner'
-  | 'parent___children___internal___type'
-  | 'parent___internal___content'
-  | 'parent___internal___contentDigest'
-  | 'parent___internal___description'
-  | 'parent___internal___fieldOwners'
-  | 'parent___internal___ignoreType'
-  | 'parent___internal___mediaType'
-  | 'parent___internal___owner'
-  | 'parent___internal___type'
-  | 'children'
-  | 'children___id'
-  | 'children___parent___id'
-  | 'children___parent___parent___id'
-  | 'children___parent___parent___children'
-  | 'children___parent___children'
-  | 'children___parent___children___id'
-  | 'children___parent___children___children'
-  | 'children___parent___internal___content'
-  | 'children___parent___internal___contentDigest'
-  | 'children___parent___internal___description'
-  | 'children___parent___internal___fieldOwners'
-  | 'children___parent___internal___ignoreType'
-  | 'children___parent___internal___mediaType'
-  | 'children___parent___internal___owner'
-  | 'children___parent___internal___type'
-  | 'children___children'
-  | 'children___children___id'
-  | 'children___children___parent___id'
-  | 'children___children___parent___children'
-  | 'children___children___children'
-  | 'children___children___children___id'
-  | 'children___children___children___children'
-  | 'children___children___internal___content'
-  | 'children___children___internal___contentDigest'
-  | 'children___children___internal___description'
-  | 'children___children___internal___fieldOwners'
-  | 'children___children___internal___ignoreType'
-  | 'children___children___internal___mediaType'
-  | 'children___children___internal___owner'
-  | 'children___children___internal___type'
-  | 'children___internal___content'
-  | 'children___internal___contentDigest'
-  | 'children___internal___description'
-  | 'children___internal___fieldOwners'
-  | 'children___internal___ignoreType'
-  | 'children___internal___mediaType'
-  | 'children___internal___owner'
-  | 'children___internal___type'
-  | 'internal___content'
-  | 'internal___contentDigest'
-  | 'internal___description'
-  | 'internal___fieldOwners'
-  | 'internal___ignoreType'
-  | 'internal___mediaType'
-  | 'internal___owner'
-  | 'internal___type'
-  | 'context___skip'
-  | 'context___limit'
-  | 'context___currentPage'
-  | 'context___pagesSum'
-  | 'context___popularPostsSlugs'
-  | 'context___slug'
-  | 'context___recommended'
-  | 'context___tag';
+  | 'pluginCreatorId';
 
 export type SitePageGroupConnection = {
   totalCount: Scalars['Int'];
@@ -3451,14 +3432,14 @@ export type SitePageFilterInput = {
   internalComponentName: Maybe<StringQueryOperatorInput>;
   componentChunkName: Maybe<StringQueryOperatorInput>;
   matchPath: Maybe<StringQueryOperatorInput>;
-  isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
-  pluginCreator: Maybe<SitePluginFilterInput>;
-  pluginCreatorId: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
+  isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
   context: Maybe<SitePageContextFilterInput>;
+  pluginCreator: Maybe<SitePluginFilterInput>;
+  pluginCreatorId: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageSortInput = {
@@ -3526,10 +3507,6 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___plugins___version'
   | 'pluginOptions___plugins___pluginOptions___tight'
   | 'pluginOptions___plugins___pluginOptions___fromHeading'
-  | 'pluginOptions___plugins___pluginOptions___base64Width'
-  | 'pluginOptions___plugins___pluginOptions___stripMetadata'
-  | 'pluginOptions___plugins___pluginOptions___defaultQuality'
-  | 'pluginOptions___plugins___pluginOptions___failOnError'
   | 'pluginOptions___plugins___pluginOptions___linkImagesToOriginal'
   | 'pluginOptions___plugins___pluginOptions___sizeByPixelDensity'
   | 'pluginOptions___plugins___pluginOptions___quality'
@@ -3545,7 +3522,6 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___plugins___pluginOptions___disableBgImage'
   | 'pluginOptions___plugins___pluginOptions___wrapperStyle'
   | 'pluginOptions___plugins___pluginOptions___theme'
-  | 'pluginOptions___plugins___pluginOptions___vfsRoot'
   | 'pluginOptions___plugins___pluginOptions___defaultText'
   | 'pluginOptions___plugins___pluginOptions___directory'
   | 'pluginOptions___plugins___pluginOptions___html'
@@ -3553,20 +3529,17 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___plugins___pluginOptions___icon'
   | 'pluginOptions___plugins___pluginOptions___offsetY'
   | 'pluginOptions___plugins___pluginOptions___className'
-  | 'pluginOptions___plugins___pluginOptions___isTSX'
-  | 'pluginOptions___plugins___pluginOptions___jsxPragma'
-  | 'pluginOptions___plugins___pluginOptions___allExtensions'
   | 'pluginOptions___plugins___nodeAPIs'
   | 'pluginOptions___plugins___browserAPIs'
   | 'pluginOptions___plugins___ssrAPIs'
   | 'pluginOptions___plugins___pluginFilepath'
-  | 'pluginOptions___tight'
-  | 'pluginOptions___fromHeading'
-  | 'pluginOptions___defaults___formats'
   | 'pluginOptions___base64Width'
   | 'pluginOptions___stripMetadata'
   | 'pluginOptions___defaultQuality'
   | 'pluginOptions___failOnError'
+  | 'pluginOptions___tight'
+  | 'pluginOptions___fromHeading'
+  | 'pluginOptions___defaults___formats'
   | 'pluginOptions___linkImagesToOriginal'
   | 'pluginOptions___sizeByPixelDensity'
   | 'pluginOptions___quality'
@@ -3582,7 +3555,6 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___disableBgImage'
   | 'pluginOptions___wrapperStyle'
   | 'pluginOptions___theme'
-  | 'pluginOptions___vfsRoot'
   | 'pluginOptions___defaultText'
   | 'pluginOptions___directory'
   | 'pluginOptions___html'
