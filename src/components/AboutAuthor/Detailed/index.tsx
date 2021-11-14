@@ -19,7 +19,7 @@ export default function AboutAuthorDetailed() {
         <a href={`mailto:${email}`} title={`Send an email to ${name}`}>
           <img alt="Email address" src="/icons/email.svg" />
         </a>
-        <a href={profiles.twitter} title={`${name}'s Twitter profile`}>
+        {/* <a href={profiles.twitter} title={`${name}'s Twitter profile`}>
           <img alt="Twitter profile" src="/icons/twitter.svg" />
         </a>
         <a href={profiles.facebook} title={`${name}'s Facebook page`}>
@@ -27,7 +27,7 @@ export default function AboutAuthorDetailed() {
         </a>
         <a href={profiles.linkedin} title={`${name}'s Linkedin profile`}>
           <img alt="LinkedIn profile" src="/icons/linkedin.svg" />
-        </a>
+        </a> */}
       </AuthorLinks>
     </div>
   );
