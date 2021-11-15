@@ -213,7 +213,7 @@ export default {
 
 [Try the demo.](https://codesandbox.io/s/vue-event-handler-debounced-incorrectly-320ci?file=/src/App.vue)
 
-Instead of creating a debounced callback inside the `created()` hook, this time you assigned the debounced callback to the `method.debouncedHandler`. 
+Instead of creating a debounced callback inside the `created()` hook, this time you assigned the debounced callback to the `methods.debouncedHandler`. 
 
 And if you try the demo, it works!
 

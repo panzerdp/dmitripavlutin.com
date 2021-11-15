@@ -134,7 +134,7 @@ React checks the difference between the new and the current state to determine w
 
 Wiring all these terms together, here's how the state update using a reducer works.  
 
-![React useReducer()](./images/reducer-4.svg)
+![React useReducer()](./images/diagram.svg)
 
 As a result of an event handler or after completing a fetch request, you call the *dispatch* function with the *action object*. 
 
