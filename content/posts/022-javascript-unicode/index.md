@@ -2,7 +2,7 @@
 title: "What every JavaScript developer should know about Unicode"
 description: "Unicode in JavaScript: basic concepts, escape sequences, normalization, surrogate pairs, combining marks and how to avoid pitfalls"
 published: "2016-09-14"
-modified: "2020-05-19T08:50Z"
+modified: "2021-11-15T11:30Z"
 thumbnail: "./images/cover.jpg"
 slug: what-every-javascript-developer-should-know-about-unicode
 tags: ["javascript", "string", "unicode"]
@@ -15,7 +15,7 @@ When a programming task required Unicode knowledge, I was searching for a hackab
 
 My avoidance continued until I faced a problem that required detailed Unicode knowledge. There was no way to apply situational solutions.  
 
-After putting in some efforts, reading a bunch of articles &mdash; surprisingly it wasn't hard to understand it. Well... some articles have required reading at least 3 times.  
+After putting in some effort, reading a bunch of articles &mdash; surprisingly it wasn't hard to understand it. Well... some articles have required reading at least 3 times.  
 
 As it turns out, Unicode is a universal and elegant standard, but it may be tough because of a bunch of abstract terms it operates with.  
 
@@ -39,9 +39,9 @@ Let's start with a simple question. How are you able to read and understand the 
 
 Why are you able to understand the meaning of letters? Simply: because you (reader) and me (writer) have an agreement over the association between the graphical symbol (what is seen on the screen) and the English language letter (the meaning).  
 
-The same happens with computers. The difference is that computers don't understand the meaning of letters. For computers the letters are just sequences of bits.  
+The same happens with computers. The difference is that computers don't understand the meaning of letters. For computers, the letters are just sequences of bits.  
 
-Imagine the *User1* sends through network a message `'hello'` to *User2* .  
+Imagine the *User1* sends through the network a message `'hello'` to *User2* .  
 
 *User1*'s computer doesn't know the meaning of letters. So it transforms `'hello'` into a sequence of numbers `0x68 0x65 0x6C 0x6C 0x6F`, where each letter uniquely corresponds to a number: `h` is `0x68`, `e` is `0x65`, etc. 
 These numbers are sent to *User2*'s computer.  
@@ -74,7 +74,7 @@ It was complicated to create an application that supports all character sets and
 
 *If you think that Unicode is hard, programming without Unicode would be even more difficult.* 
 
-I still remember picking randomly charsets and encodings to read the content of files. Pure lottery!
+I still remember picking random charsets and encodings to read the content of files. Pure lottery!
 
 ### 2.1 Characters and code points
 
@@ -140,7 +140,7 @@ Let's see some characters from astral planes:
 
 ### 2.3 Code units
 
-Ok, the Unicode characters, code points and planes are abstractions.  
+Ok, the Unicode characters, code points, and planes are abstractions.  
 
 But now let's see how Unicode is implemented at the physical, hardware level. 
 
@@ -212,7 +212,7 @@ However, UTF-16 is memory efficient. 99% of the processed characters are from BM
 
 A **grapheme** is how a user thinks about a character. A concrete image of a grapheme displayed on the screen is named **glyph**.  
 
-In many cases a single Unicode character represents a single grapheme. For instance `U+0066` *LATIN SMALL LETTER F* is an English writing `f`.
+In many cases, a single Unicode character represents a single grapheme. For instance `U+0066` *LATIN SMALL LETTER F* is an English writing `f`.
 
 There are cases when a grapheme contains a sequence of characters.  
 
@@ -257,7 +257,7 @@ console.log('café');       // => 'café'
 
 > **The length of a String** is the number of elements (i.e., 16-bit values) within it. [...] Where ECMAScript operations interpret String values, each element is interpreted as a single UTF-16 code unit.
 
-As you know from surrogate pairs and combining marks above chapters, some symbols need 2 or more code units to be represented. So you should take precautions when counting the number of character or accessing characters by index:  
+As you know from surrogate pairs and combining marks above chapters, some symbols need 2 or more code units to be represented. So you should take precautions when counting the number of characters or accessing characters by index:  
 
 ```javascript
 const smile = '\uD83D\uDE00';
@@ -357,7 +357,7 @@ console.log(niceEmoticon === spNiceEmoticon); // => true
 
 The string literal assigned to variable `niceEmoticon` has a code point escape `'\u{1F607}'` that represents an astral code point `U+1F607`.  
 
-Nevertheless, under the hood the code point escape creates a surrogate pair (2 code units). The `spNiceEmoticon` (created using a surrogate pair of unicode escapes `'\uD83D\uDE07'`) equals to `niceEmoticon`.  
+Nevertheless, under the hood, the code point escape creates a surrogate pair (2 code units). The `spNiceEmoticon` (created using a surrogate pair of unicode escapes `'\uD83D\uDE07'`) equals to `niceEmoticon`.  
 
 ![Unicode escape sequences JavaScript](./images/unicode-escape-sequence.png)
 
@@ -404,7 +404,7 @@ How to handle such situations and compare correctly the strings? The answer is s
 
 > **Normalization** is a string conversion to a canonical representation, to ensure that canonical-equivalent (and/or compatibility-equivalent) strings have unique representations.  
 
-In other words, when a string has a complex structure with combining character sequences or other compound constructs, you can *normalize* it to a canonical form. Normalized strings are painless to compare or perform string operations like text search, etc.  
+In other words, when a string has a complex structure containing combining character sequences or other compound constructs, you can *normalize* it to a canonical form. Normalized strings are painless to compare or perform string operations like text search, etc.  
 
 [Unicode Standard Annex #15](http://unicode.org/reports/tr15/) has interesting details about the normalization process.
 
@@ -415,7 +415,7 @@ In JavaScript to normalize a string invoke `myString.normalize([normForm])` meth
 * `'NFKC'` as Normalization Form Compatibility Composition
 * `'NFKD'` as Normalization Form Compatibility Decomposition
 
-Let's improve the previous example by applying a string normalization, which will allow to correctly compare the strings:
+Let's improve the previous example by applying a string normalization to correctly compare the strings:
 
 ```javascript
 const str1 = 'ça va bien';
@@ -478,7 +478,7 @@ console.log([...str].length); // => 4
 
 #### Length and combining marks
 
-What about the combining character sequences? Because each combining mark is a code unit, you can encounter the same difficulties.  
+What about combining character sequences? Because each combining mark is a code unit, you can encounter the same difficulties.  
 
 The problem is solved when normalizing the string. If you're lucky, the combining character sequence is normalized to a single character. Let's try:  
 
@@ -494,7 +494,7 @@ console.log(drink.normalize().length); // => 4
 
 When normalizing `drink`, luckily the combining character sequence `'e\u0301'` has a canonical form `'é'`. So `drink.normalize().length` contains the expected `4` symbols.  
 
-Unfortunately, normalization is not an universal solution. Long combining character sequences not always have canonical equivalents in one symbol. Let's see such case:  
+Unfortunately, normalization is not a universal solution. Long combining character sequences do not always have canonical equivalents in one symbol. Let's see such a case:  
 
 ```javascript
 const drink = 'cafe\u0327\u0301';
@@ -567,7 +567,7 @@ console.log(String.fromCodePoint(number)); // => '𝛀'
 
 #### Character positioning and combining marks
 
-Character positioning in strings with combining marks has the same problem as string length describe above.  
+Character positioning in strings with combining marks has the same problem as string length described above.  
 
 Accessing characters by index in a string is accessing code units. However, the combining mark sequence should be accessed as a whole, without splitting into separated code units.  
 
@@ -603,7 +603,7 @@ Fortunately, it should work in most of the cases for European / North America's 
 
 Regular expressions, as well as strings, work in terms of code units. Similar to previously described scenarios, this creates difficulties when processing surrogate pairs and combining character sequences using regular expressions.   
 
-BMP characters match as expected, because a single code unit represents a symbol:  
+BMP characters match as expected because a single code unit represents a symbol:  
 
 ```javascript
 const greetings = 'Hi!';
@@ -703,12 +703,12 @@ Note that most of the string methods in JavaScript are not Unicode-aware: like `
 
 ECMAScript 2015 introduced nice features like code point escape sequences `\u{1F600}` in strings and regular expressions.  
 
-The new regular expression flag `u` enables Unicode-aware string matching. It makes simpler to match astral symbols.  
+The new regular expression flag `u` enables Unicode-aware string matching. It easies matching astral symbols.  
 
-String iterator `String.prototype[@@iterator]()` is Unicode-aware. You can use the spread operator `[...str]` or `Array.from(str)` to create an array of symbols, and calculate the string length or access characters by index without breaking the surrogate pair. Note that these operations have some performance impact.  
+String iterator `String.prototype[@@iterator]()` is Unicode-aware. You can use the spread operator `[...str]` or `Array.from(str)` to create an array of symbols and calculate the string length or access characters by index without breaking the surrogate pair. Note that these operations have some performance impact.  
 
 If you need a better way to process Unicode characters, you can use [punycode](https://github.com/bestiejs/punycode.js/) library or [generate](https://github.com/mathiasbynens/regenerate) specialized regular expressions.  
 
-I hope the article has helped you master the Unicode!
+I hope the article has helped you master Unicode!
 
 *Do you know other interesting Unicode nuances in JavaScript? Feel free to write a comment below!*
