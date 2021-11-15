@@ -20,7 +20,6 @@ export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.E
       <link rel="shortcut icon" href="/favicon.ico" />
       <meta name="referrer" content="no-referrer-when-downgrade" />
       <meta name="robots" content="index, follow" />
-      <meta name="monetization" content="$ilp.uphold.com/fpXqxfkAKLb8" />
       <html lang="en" />
     </Helmet>
   );
