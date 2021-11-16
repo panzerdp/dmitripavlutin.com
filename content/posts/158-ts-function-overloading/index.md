@@ -3,10 +3,34 @@ title: "A Simple Explanation of Function Overloading in TypeScript"
 description: "How you can define multiple signatures of the same function in TypeScript to increase its usability."
 published: "2021-11-17T12:00Z"
 modified: "2021-11-17T12:00Z"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover-2.png"
 slug: typescript-function-overloading
 tags: ['typescript', 'function']
 recommended: ['typescript-unknown-vs-any', 'typescript-covariance-contravariance']
 type: post
 ---
 
+Most of the functions accept a fixed set of arguments. However, there are functions that accept a variable number of arguments, as well arguments
+of different types.  
+
+To be able to comfortable type the functions that accept variable arguments, TypeScript offers the function overloading feature. 
+
+Let's see how function overloading works.  
+
+## 1. When to use function overloading
+
+Let's consider a function that returns the difference in seconds between 2 date instances:
+
+```ts twoslash
+function diff(from: Date, to: Date) {
+  return (to.getTime() - from.getTime()) / 1000;
+}
+
+diff(new Date(''))
+```
+
+## 2. Function overloading and function subtyping
+
+## 3. Method overloading
+
+## 4. Conclusion
