@@ -29,7 +29,7 @@ function diff(from: Date, to: Date) {
 diff(new Date(''))
 ```
 
-## 2. Function overloading and function subtyping
+## 2. Function overloading and subtyping
 
 ## 3. Method overloading
 
