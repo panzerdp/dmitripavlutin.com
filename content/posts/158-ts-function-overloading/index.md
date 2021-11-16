@@ -43,10 +43,44 @@ For example, let's determine the difference between January 1, 2021 and January 
 const start = new Date('2021-01-01');
 const end = new Date('2021-01-02');
 
-diffInDays(start, end); // 1
+console.log(diffInDays(start, end)); // logs 1
 ```
 
 As expected, the difference between these dates is 1 day.  
+
+What if you'd like to make the `diffInDays()` function more universal. For example, improve it to accept Unix timestamp numbers as arguments.  
+
+```twoslash include to-date
+function toDate(value: Date | number): Date {
+  const SECOND = 1000;
+
+  if (typeof value === 'number') {
+    return new Date(value * SECOND);
+  } else {
+    return value;
+  }
+}
+```
+
+How to type such a function? There are mainly 2 approaches.  
+
+The first approach is straighforward and involves modifying the function signature directly by updating the parameter types from `Date` to `Date | number`.  
+
+Here's how `diffInDays()` looks after updating the parameter types:
+
+```ts twoslash{1}
+// @include: to-date
+// ---cut---
+function diffInDays(start: Date | number, end: Date | number): number {
+  const DAY = 1000 * 60 * 60;
+
+  return (toDate(start).getTime() - toDate(end).getTime()) / DAY;
+}
+```
+
+where `toDate()` is a helper function that creates `Date` instances from an argument of type `Date | number`.  
+
+
 
 ## 2. Function overloading and subtyping
 
