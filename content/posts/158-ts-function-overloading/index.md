@@ -19,15 +19,34 @@ Let's see how function overloading works.
 
 ## 1. When to use function overloading
 
-Let's consider a function that returns the difference in seconds between 2 date instances:
+Let's consider a function that returns the difference in days between 2 date instances:
+
+```twoslash include diff
+function diffInDays(start: Date, end: Date): number {
+  const DAY = 1000 * 60 * 60;
+  return (end.getTime() - start.getTime()) / DAY;
+}
+```
 
 ```ts twoslash
-function diff(from: Date, to: Date) {
-  return (to.getTime() - from.getTime()) / 1000;
-}
-
-diff(new Date(''))
+// @include: diff
 ```
+
+The function above accepts 2 arguments of type `Date`: the start and end dates. Then the function returns the difference in 
+days between start and end dates.  
+
+For example, let's determine the difference between January 1, 2021 and January 2, 2021:
+
+```ts twoslash
+// @include: diff
+// ---cut---
+const start = new Date('2021-01-01');
+const end = new Date('2021-01-02');
+
+diffInDays(start, end); // 1
+```
+
+As expected, the difference between these dates is 1 day.  
 
 ## 2. Function overloading and subtyping
 
