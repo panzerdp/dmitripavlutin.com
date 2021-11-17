@@ -3,7 +3,7 @@ title: "A Simple Explanation of Function Overloading in TypeScript"
 description: "How you can define multiple signatures of the same function in TypeScript to increase its usability."
 published: "2021-11-17T12:00Z"
 modified: "2021-11-17T12:00Z"
-thumbnail: "./images/cover-2.png"
+thumbnail: "./images/cover-4.png"
 slug: typescript-function-overloading
 tags: ['typescript', 'function']
 recommended: ['typescript-unknown-vs-any', 'typescript-covariance-contravariance']
@@ -176,7 +176,7 @@ class Greeter {
 // @include: greeter
 ```
 
-The class contains 2 overload signatures and one implementation signature.  
+The `Greeter` class contains  `greet()` overload method. The overloading of this method is done using 2 overload signatures (which describes the exact parameter and return types), and the implementation signatures contains the proper implementation.  
 
 Thanks to `greet()` method overloading you can call it in 2 ways: using a string or using an array of strings.  
 
