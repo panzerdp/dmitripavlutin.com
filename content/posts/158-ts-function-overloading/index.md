@@ -17,81 +17,68 @@ To be able to comfortable type the functions that accept variable arguments, Typ
 
 Let's see how function overloading works.  
 
-## 1. The difference between dates
+## 1. Updating the function signature
 
-Let's consider a function that returns the difference in days between 2 date instances:
+Let's consider a function that returns welcome message to a particular person:
 
-```twoslash include diff
-function diff(start: Date, end: Date): number {
-  const DAY = 1000 * 60 * 60;
-  return (end.getTime() - start.getTime()) / DAY;
+```twoslash include greet
+function greet(person: string): string {
+  return `Hello, ${person}!`;
 }
 ```
 
 ```ts twoslash
-// @include: diff
+// @include: greet
 ```
 
-The function above accepts 2 arguments of type `Date`: the start and end dates, and returns the difference (in days) between these dates.  
+The function above accepts 2 arguments of type `string`: the name of the person and the greeting message.  
 
-For example, let's determine the difference between January 1, 2021 and January 2, 2021:
+The usage of the function is pretty straingforward:
 
 ```ts twoslash
-// @include: diff
+// @include: greet
 // ---cut---
-const start = new Date('2021-01-01');
-const end = new Date('2021-01-02');
-
-diff(start, end); // logs 1
+greet('World'); // 'Hello, World!'
 ```
 
-As expected, the difference between these dates is 1 day.  
-
-What if you'd like to make the `diff()` function more universal. For example, improve it more to accept Unix timestamp numbers as arguments.  
+What if you'd like to make the `greet()` function more flexible. For example, improve it more to accept a list of persons and welcome messages, too.  
 
 How to type such a function? There are 2 approaches.  
 
-## 2. Updating the function signature
+The first approach is straighforward and involves modifying the function signature directly by updating the parameter types.  
 
-The first approach is straighforward and involves modifying the function signature directly by updating the parameter types from `Date` to `Date | number`.  
-
-```twoslash include diff-signature
-function diff(start: Date | number, end: Date | number): number {
-  const DAY = 1000 * 60 * 60;
-
-  return (toDate(start).getTime() - toDate(end).getTime()) / DAY;
-}
-
-function toDate(value: Date | number): Date {
-  if (typeof value === 'number') {
-    return new Date(value);
+```twoslash include greet-signature
+function greet(person: string | string[]): string | string[] {
+  if (typeof person === 'string') {
+    return `Hello, ${person}!`;
+  } else if (Array.isArray(person)) {
+    return person.map(name => `Hello, ${name}!`);
   }
-  return value;
+  throw new Error('Unable to greet');
 }
 ```
 
-Here's how `diff()` looks after updating the parameter types:
-
-```ts twoslash{1}
-// ---cut---
-// @include: diff-signature
-```
-
-where `toDate()` is a helper function that returns date instances.  
-
-Now you can invoke `diff()` using arguments of type `Date` or Unix timestamp:
+Here's how `greet()` looks after updating the parameter types:
 
 ```ts twoslash
-// @include: diff-signature
 // ---cut---
-diff(new Date('2021-01-01'), new Date('2021-01-02')); // => 1
-diff(1609459200, 1609545600);                         // => 1
-diff(1609459200, new Date('2021-01-02'));             // => 1
+// @include: greet-signature
 ```
 
-While the approach to modify the function signature directly works, it might be a problem if you want to add more types. For example, you'd like to introduce string type, or you'd like to make the second argument optional. In time, such a complex signature would be difficult to understand.  
+Now you can invoke `greet()` using arguments using the new types of arguments:
 
-## 3. The function overloading
+```ts twoslash
+// @include: greet-signature
+// ---cut---
+greet('World');          // 'Hello, World!'
+greet(['Jane', 'Joe']);  // ['Hello, Jane!', 'Hello, Joe!']
+```
+
+The approach to modify the function signature directly usually works, and you should try to stick with all the possible types of parameters to be included in the function signature.  
+
+However, there are situations when you might want to take an alternative approach and define separately all the ways your function can be invoked: use so called function overloading.  
+
+## 2. The function overloading
 
 The second approach is to use the *function overloading* feature. I recommend it when the function signature is relatively complex and has multiple types involed.  
 
@@ -101,65 +88,106 @@ The overload signature defines the parameter types and the return type of the fu
 
 The implementation signature, on the other side, also has the parameter types and return type, but also a body that implements the function. There can be only one implementation signature.  
 
-Let's transform the function `diff()` to use the function overloading:
+Let's transform the function `greet()` to use the function overloading:
 
-```twoslash include diff-overloading
+```twoslash include greet-overloading
 // Overload signatures
-function diff(startDate:      Date,   endDate: Date):        number;
-function diff(startTimestamp: number, endTimestamp: number): number;
-function diff(startTimestamp: number, endDate: Date):        number;
-function diff(startDate:      Date,   endTimestamp: number): number;
+function greet(person: string): string;
+function greet(persons: string[]): string[];
 
 // Implementation signature
-function diff(start: unknown, end: unknown): number {
-  const DAY = 1000 * 60 * 60;
-
-  return (toDate(start).getTime() - toDate(end).getTime()) / DAY;
-}
-
-function toDate(value: unknown): Date {
-  if (typeof value === 'number') {
-    return new Date(value);
-  } else if (value instanceof Date) {
-    return value;
+function greet(person: unknown): unknown {
+  if (typeof person === 'string') {
+    return `Hello, ${person}!`;
+  } else if (Array.isArray(person)) {
+    return person.map(name => `Hello, ${name}!`);
   }
-  throw new Error('Unknown type');
+  throw new Error('Unable to greet');
 }
 ```
 
 ```ts twoslash
-// @include: diff-overloading
+// @include: greet-overloading
 ```
 
-The `diff()` function has 4 overload signatures and one implementation signature.  
+The `greet()` function has 2 overload signatures and one implementation signature.  
 
-Each overload signature describes exactly what kind of arguments the function can support. In case of `diff()` function, you can call it with in 4 different ways by combining the `Date` and `number` types.  
+Each overload signature describes exactly what kind of arguments the function can support. In case of `greet()` function, you can call it with in 2 ways: with a string or with an array of strings as an argument.  
 
-Now, as before, you can invoke `diff()` with the arguments of type `Date` or `number`:
+Now, as before, you can invoke `greet()` with the arguments of type string or array of strings:
 
 ```ts twoslash
-// @include: diff-overloading
+// @include: greet-overloading
 // ---cut---
-diff(new Date('2021-01-01'), new Date('2021-01-02')); // => 1
-diff(1609459200, 1609545600);                         // => 1
-diff(1609459200, new Date('2021-01-02'));             // => 1
+greet('World');          // 'Hello, World!'
+greet(['Jane', 'Joe']);  // ['Hello, Jane!', 'Hello, Joe!']
 ```
 
-### 3.1 Overload signatures are callable
+### 2.1 Only overload signatures are callable
 
-Here's an important nuance to remember about the implementation signature. While the implementation signature implements the function behavior, however, it is not directly callable. Only the overload signatures are callable.  
+Here's an important nuance about the function overleading. 
 
-For example, if you try to autocomplete all the possible ways to call `diff()`, you would see it is callable only in 4 ways (i.e. the 4 overload signatures), and the implementation signature is not available.  
+While the implementation signature implements the function behavior, however, it is not directly callable. Only the overload signatures are callable.  
+
+For example, if you try to autocomplete all the possible ways to call `greet()`, you would see it is callable only in 2 ways (i.e. the 2 overload signatures), and the implementation signature is not available.  
 
 ```ts twoslash
-// @include: diff-overloading
+// @include: greet-overloading
 // ---cut---
-diff
+greet
 //^?
 ```
 
-## 5. Function overloading and subtyping
+<!-- ## 3. Function overloading and subtyping -->
 
-## 5. Method overloading
+## 3. Method overloading
 
-## 6. Conclusion
+While in the previous examples the function overloading was applied to a regular function, still, you can use overloading to a method.  
+
+The only difference is that both the overload signatures and implementation signature are now a part of the class.  
+
+For example, let's implement a `Greeter` class, with an overloaded `greet()` method.  
+
+```twoslash include greeter
+class Greeter {
+  message: string;
+
+  constructor(message: string) {
+    this.message = message;
+  }
+
+  // Overload signatures
+  greet(person: string): string;
+  greet(persons: string[]): string[];
+
+  // Implementation signature
+  greet(person: unknown): unknown {
+    if (typeof person === 'string') {
+      return `${this.message}, ${person}!`;
+    } else if (Array.isArray(person)) {
+      return person.map(name => `${this.message}, ${name}!`);
+    }
+    throw new Error('Unable to greet');
+  }
+}
+```
+
+```ts twoslash
+// @include: greeter
+```
+
+The class contains 2 overload signatures and one implementation signature.  
+
+Thanks to `greet()` method overloading you can call it in 2 ways: using a string or using an array of strings.  
+
+```ts twoslash
+// @include: greeter
+// ---cut---
+const hi = new Greeter('Hi');
+
+hi.greet('Angela');       // 'Hi, Angela!'
+hi.greet(['Pam', 'Jim']); // ['Hi, Pam!', 'Hi, Jim!']
+```
+
+## 4. Conclusion
+
