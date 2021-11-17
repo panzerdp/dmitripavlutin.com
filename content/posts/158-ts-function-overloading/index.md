@@ -80,6 +80,19 @@ function diffInDays(start: Date | number, end: Date | number): number {
 
 where `toDate()` is a helper function that creates `Date` instances from an argument of type `Date | number`.  
 
+<details>
+  <summary>Expand toDate() function</summary>
+
+```ts twoslash
+// @include: to-date
+```
+
+</details>
+
+While at first the approach to modify the function signature works, it might be a problem if you want to add more types. For example, you'd like to introduce string type, or you'd like to make the second argument optional. In time, such a complex signature would be difficult to understand.  
+
+The second approach, which I recommend to use when the function signature is relatively complex and has multiple types involed, is to use the *function overloading* feature.  
+
 
 
 ## 2. Function overloading and subtyping
