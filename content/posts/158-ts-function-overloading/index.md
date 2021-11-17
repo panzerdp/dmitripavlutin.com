@@ -113,7 +113,9 @@ The second approach is to use the *function overloading* feature. I recommend it
 
 Putting the function overloading in practice requires defining the so called *overload signatures* and an *implementation signature*.  
 
-The overload signatures is a list of function types 
+The overload signature defines the parameter types and the return type of the function, and has no body. Usually you have multiple overload signatures that describe the different ways your function can be used.  
+
+The implementation signature, on the other side, also has the parameter types and return type, but also a body that implements the function. Note that there can be only one implementation signature.  
 
 ## 2. Function overloading and subtyping
 
