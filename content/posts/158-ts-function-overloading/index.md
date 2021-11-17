@@ -74,7 +74,7 @@ greet('World');          // 'Hello, World!'
 greet(['Jane', 'Joe']);  // ['Hello, Jane!', 'Hello, Joe!']
 ```
 
-The approach to modify the function signature directly usually works, and you should try to stick with all the possible types of parameters to be included in the function signature.  
+The approach to modify the function signature directly is the usual way. You should try to keep the possible types of parameters included in the function signature.  
 
 However, there are situations when you might want to take an alternative approach and define separately all the ways your function can be invoked: use so called function overloading.  
 
@@ -191,3 +191,13 @@ hi.greet(['Pam', 'Jim']); // ['Hi, Pam!', 'Hi, Jim!']
 
 ## 4. Conclusion
 
+Function overloading in TypeScript let's you define functions that can be called in multiple ways: using a different set of arguments.  
+
+Using function overloading requires defining the overload signatures: a set of functions with parameter and return types, but without a body. These signatures indicate
+how the function should be invoked.  
+
+Additionally, you have to write the proper implementation of the function (implementation signature): the parameter and return types, as well the function body.  
+
+Later, when you want to use an overload function, you are able to call the function only according to the overload signatures.  
+
+Aside from regular function, overloading can also be applied methods in classes.  
