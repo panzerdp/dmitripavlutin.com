@@ -32,8 +32,7 @@ function diffInDays(start: Date, end: Date): number {
 // @include: diff
 ```
 
-The function above accepts 2 arguments of type `Date`: the start and end dates. Then the function returns the difference in 
-days between start and end dates.  
+The function above accepts 2 arguments of type `Date`: the start and end dates, and returns the difference (in days) between these dates.  
 
 For example, let's determine the difference between January 1, 2021 and January 2, 2021:
 
@@ -43,12 +42,12 @@ For example, let's determine the difference between January 1, 2021 and January 
 const start = new Date('2021-01-01');
 const end = new Date('2021-01-02');
 
-console.log(diffInDays(start, end)); // logs 1
+diffInDays(start, end); // logs 1
 ```
 
 As expected, the difference between these dates is 1 day.  
 
-What if you'd like to make the `diffInDays()` function more universal. For example, improve it to accept Unix timestamp numbers as arguments.  
+What if you'd like to make the `diffInDays()` function more universal. For example, improve it more to accept Unix timestamp numbers as arguments.  
 
 ```twoslash include to-date
 function toDate(value: Date | number): Date {
@@ -64,18 +63,24 @@ function toDate(value: Date | number): Date {
 
 How to type such a function? There are 2 approaches.  
 
+### 1.1 Updating the function signature
+
 The first approach is straighforward and involves modifying the function signature directly by updating the parameter types from `Date` to `Date | number`.  
+
+```twoslash include diff-updated-signature
+function diffInDays(start: Date | number, end: Date | number): number {
+  const DAY = 1000 * 60 * 60;
+
+  return (toDate(start).getTime() - toDate(end).getTime()) / DAY;
+}
+```
 
 Here's how `diffInDays()` looks after updating the parameter types:
 
 ```ts twoslash{1}
 // @include: to-date
 // ---cut---
-function diffInDays(start: Date | number, end: Date | number): number {
-  const DAY = 1000 * 60 * 60;
-
-  return (toDate(start).getTime() - toDate(end).getTime()) / DAY;
-}
+// @include: diff-updated-signature
 ```
 
 where `toDate()` is a helper function that creates `Date` instances from an argument of type `Date | number`.  
@@ -89,11 +94,26 @@ where `toDate()` is a helper function that creates `Date` instances from an argu
 
 </details>
 
-While at first the approach to modify the function signature works, it might be a problem if you want to add more types. For example, you'd like to introduce string type, or you'd like to make the second argument optional. In time, such a complex signature would be difficult to understand.  
+Now you can invoke `diffInDays()` using arguments of type `Date` or Unix timestamp:
 
-The second approach, which I recommend to use when the function signature is relatively complex and has multiple types involed, is to use the *function overloading* feature.  
+```ts twoslash
+// @include: to-date
+// @include: diff-updated-signature
+// ---cut---
+diffInDays(new Date('2021-01-01'), new Date('2021-01-02')); // => 1
+diffInDays(1609459200, 1609545600);                         // => 1
+diffInDays(1609459200, new Date('2021-01-02'));             // => 1
+```
 
+While the approach to modify the function signature directly works, it might be a problem if you want to add more types. For example, you'd like to introduce string type, or you'd like to make the second argument optional. In time, such a complex signature would be difficult to understand.  
 
+### 1.2 The function overloading
+
+The second approach is to use the *function overloading* feature. I recommend it when the function signature is relatively complex and has multiple types involed.  
+
+Putting the function overloading in practice requires defining the so called *overload signatures* and an *implementation signature*.  
+
+The overload signatures is a list of function types 
 
 ## 2. Function overloading and subtyping
 
