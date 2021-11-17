@@ -59,10 +59,14 @@ The first approach is straighforward and involves modifying the function signatu
 function diff(start: Date | number, end: Date | number): number {
   const DAY = 1000 * 60 * 60;
 
-  const startDate = typeof start === 'number' ? new Date(start) : start;
-  const endDate   = typeof end   === 'number' ? new Date(end)   : end;
+  return (toDate(start).getTime() - toDate(end).getTime()) / DAY;
+}
 
-  return (startDate.getTime() - endDate.getTime()) / DAY;
+function toDate(value: Date | number): Date {
+  if (typeof value === 'number') {
+    return new Date(value);
+  }
+  return value;
 }
 ```
 
@@ -72,6 +76,8 @@ Here's how `diff()` looks after updating the parameter types:
 // ---cut---
 // @include: diff-signature
 ```
+
+where `toDate()` is a helper function that returns date instances.  
 
 Now you can invoke `diff()` using arguments of type `Date` or Unix timestamp:
 
@@ -98,16 +104,26 @@ The implementation signature, on the other side, also has the parameter types an
 Let's transform the function `diff()` to use the function overloading:
 
 ```twoslash include diff-overloading
-function diff(startDate: Date, endDate: Date): number;
+// Overload signatures
+function diff(startDate:      Date,   endDate: Date):        number;
 function diff(startTimestamp: number, endTimestamp: number): number;
+function diff(startTimestamp: number, endDate: Date):        number;
+function diff(startDate:      Date,   endTimestamp: number): number;
 
+// Implementation signature
 function diff(start: unknown, end: unknown): number {
   const DAY = 1000 * 60 * 60;
 
-  const startDate = typeof start === 'number' ? new Date(start) : start;
-  const endDate   = typeof end   === 'number' ? new Date(end)   : end;
+  return (toDate(start).getTime() - toDate(end).getTime()) / DAY;
+}
 
-  return (startDate.getTime() - endDate.getTime()) / DAY;
+function toDate(value: unknown): Date {
+  if (typeof value === 'number') {
+    return new Date(value);
+  } else if (value instanceof Date) {
+    return value;
+  }
+  throw new Error('Unknown type');
 }
 ```
 
@@ -115,7 +131,34 @@ function diff(start: unknown, end: unknown): number {
 // @include: diff-overloading
 ```
 
-## 4. Function overloading and subtyping
+The `diff()` function has 4 overload signatures and one implementation signature.  
+
+Each overload signature describes exactly what kind of arguments the function can support. In case of `diff()` function, you can call it with in 4 different ways by combining the `Date` and `number` types.  
+
+Now, as before, you can invoke `diff()` with the arguments of type `Date` or `number`:
+
+```ts twoslash
+// @include: diff-overloading
+// ---cut---
+diff(new Date('2021-01-01'), new Date('2021-01-02')); // => 1
+diff(1609459200, 1609545600);                         // => 1
+diff(1609459200, new Date('2021-01-02'));             // => 1
+```
+
+### 3.1 Overload signatures are callable
+
+Here's an important nuance to remember about the implementation signature. While the implementation signature implements the function behavior, however, it is not directly callable. Only the overload signatures are callable.  
+
+For example, if you try to autocomplete all the possible ways to call `diff()`, you would see it is callable only in 4 ways (i.e. the 4 overload signatures), and the implementation signature is not available.  
+
+```ts twoslash
+// @include: diff-overloading
+// ---cut---
+diff
+//^?
+```
+
+## 5. Function overloading and subtyping
 
 ## 5. Method overloading
 
