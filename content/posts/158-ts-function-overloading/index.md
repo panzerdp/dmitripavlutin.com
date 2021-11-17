@@ -17,12 +17,12 @@ To be able to comfortable type the functions that accept variable arguments, Typ
 
 Let's see how function overloading works.  
 
-## 1. When to use function overloading
+## 1. The difference between dates
 
 Let's consider a function that returns the difference in days between 2 date instances:
 
 ```twoslash include diff
-function diffInDays(start: Date, end: Date): number {
+function diff(start: Date, end: Date): number {
   const DAY = 1000 * 60 * 60;
   return (end.getTime() - start.getTime()) / DAY;
 }
@@ -42,72 +42,50 @@ For example, let's determine the difference between January 1, 2021 and January 
 const start = new Date('2021-01-01');
 const end = new Date('2021-01-02');
 
-diffInDays(start, end); // logs 1
+diff(start, end); // logs 1
 ```
 
 As expected, the difference between these dates is 1 day.  
 
-What if you'd like to make the `diffInDays()` function more universal. For example, improve it more to accept Unix timestamp numbers as arguments.  
-
-```twoslash include to-date
-function toDate(value: Date | number): Date {
-  const SECOND = 1000;
-
-  if (typeof value === 'number') {
-    return new Date(value * SECOND);
-  } else {
-    return value;
-  }
-}
-```
+What if you'd like to make the `diff()` function more universal. For example, improve it more to accept Unix timestamp numbers as arguments.  
 
 How to type such a function? There are 2 approaches.  
 
-### 1.1 Updating the function signature
+## 2. Updating the function signature
 
 The first approach is straighforward and involves modifying the function signature directly by updating the parameter types from `Date` to `Date | number`.  
 
-```twoslash include diff-updated-signature
-function diffInDays(start: Date | number, end: Date | number): number {
+```twoslash include diff-signature
+function diff(start: Date | number, end: Date | number): number {
   const DAY = 1000 * 60 * 60;
 
-  return (toDate(start).getTime() - toDate(end).getTime()) / DAY;
+  const startDate = typeof start === 'number' ? new Date(start) : start;
+  const endDate   = typeof end   === 'number' ? new Date(end)   : end;
+
+  return (startDate.getTime() - endDate.getTime()) / DAY;
 }
 ```
 
-Here's how `diffInDays()` looks after updating the parameter types:
+Here's how `diff()` looks after updating the parameter types:
 
 ```ts twoslash{1}
-// @include: to-date
 // ---cut---
-// @include: diff-updated-signature
+// @include: diff-signature
 ```
 
-where `toDate()` is a helper function that creates `Date` instances from an argument of type `Date | number`.  
-
-<details>
-  <summary>Expand toDate() function</summary>
+Now you can invoke `diff()` using arguments of type `Date` or Unix timestamp:
 
 ```ts twoslash
-// @include: to-date
-```
-
-</details>
-
-Now you can invoke `diffInDays()` using arguments of type `Date` or Unix timestamp:
-
-```ts twoslash
-// @include: to-date
-// @include: diff-updated-signature
+// @include: diff-signature
 // ---cut---
-diffInDays(new Date('2021-01-01'), new Date('2021-01-02')); // => 1
-diffInDays(1609459200, 1609545600);                         // => 1
-diffInDays(1609459200, new Date('2021-01-02'));             // => 1
+diff(new Date('2021-01-01'), new Date('2021-01-02')); // => 1
+diff(1609459200, 1609545600);                         // => 1
+diff(1609459200, new Date('2021-01-02'));             // => 1
 ```
 
 While the approach to modify the function signature directly works, it might be a problem if you want to add more types. For example, you'd like to introduce string type, or you'd like to make the second argument optional. In time, such a complex signature would be difficult to understand.  
 
-### 1.2 The function overloading
+## 3. The function overloading
 
 The second approach is to use the *function overloading* feature. I recommend it when the function signature is relatively complex and has multiple types involed.  
 
@@ -115,10 +93,30 @@ Putting the function overloading in practice requires defining the so called *ov
 
 The overload signature defines the parameter types and the return type of the function, and has no body. Usually you have multiple overload signatures that describe the different ways your function can be used.  
 
-The implementation signature, on the other side, also has the parameter types and return type, but also a body that implements the function. Note that there can be only one implementation signature.  
+The implementation signature, on the other side, also has the parameter types and return type, but also a body that implements the function. There can be only one implementation signature.  
 
-## 2. Function overloading and subtyping
+Let's transform the function `diff()` to use the function overloading:
 
-## 3. Method overloading
+```twoslash include diff-overloading
+function diff(startDate: Date, endDate: Date): number;
+function diff(startTimestamp: number, endTimestamp: number): number;
 
-## 4. Conclusion
+function diff(start: unknown, end: unknown): number {
+  const DAY = 1000 * 60 * 60;
+
+  const startDate = typeof start === 'number' ? new Date(start) : start;
+  const endDate   = typeof end   === 'number' ? new Date(end)   : end;
+
+  return (startDate.getTime() - endDate.getTime()) / DAY;
+}
+```
+
+```ts twoslash
+// @include: diff-overloading
+```
+
+## 4. Function overloading and subtyping
+
+## 5. Method overloading
+
+## 6. Conclusion
