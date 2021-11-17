@@ -62,7 +62,7 @@ function toDate(value: Date | number): Date {
 }
 ```
 
-How to type such a function? There are mainly 2 approaches.  
+How to type such a function? There are 2 approaches.  
 
 The first approach is straighforward and involves modifying the function signature directly by updating the parameter types from `Date` to `Date | number`.  
 
