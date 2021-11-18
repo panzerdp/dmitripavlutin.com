@@ -1,8 +1,8 @@
 ---
 title: "A Simple Explanation of Function Overloading in TypeScript"
 description: "Function overloading in TypeScript lets you define functions that can be called in multiple ways."
-published: "2021-11-17T13:40Z"
-modified: "2021-11-17T13:40Z"
+published: "2021-11-18T13:40Z"
+modified: "2021-11-18T13:40Z"
 thumbnail: "./images/cover-4.png"
 slug: typescript-function-overloading
 tags: ['typescript', 'function']
