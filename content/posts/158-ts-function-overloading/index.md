@@ -12,7 +12,7 @@ type: post
 
 Most of the functions accept a fixed set of arguments. 
 
-However, some functions accept a variable number of arguments, as well as arguments of different types.  To annotate the functions that accept variable arguments, TypeScript offers the function overloading feature. 
+But some functions can accept a variable number of arguments, arguments of different types, and could even return different types depending on how you invoke the function. To annotate such function TypeScript offers the function overloading feature.  
 
 Let's see how function overloading works.  
 
@@ -43,9 +43,9 @@ Invoking the function is pretty simple:
 greet('World'); // 'Hello, World!'
 ```
 
-What if you'd like to make the `greet()` function more flexible? For example, improve it to accept a list of persons to greet.  
+What if you'd like to make the `greet()` function more flexible? For example, make it additionally accept a list of persons to greet.  
 
-Such a function would accept a string or array of strings as an argument, as well as return a string or an array of strings.  
+Such a function would accept a string or an array of strings as an argument, as well as return a string or an array of strings.  
 
 How to annotate such a function? There are 2 approaches.  
 
@@ -62,7 +62,7 @@ function greet(person: string | string[]): string | string[] {
 }
 ```
 
-Here's how `greet()` looks after updating the parameter types:
+Here's how `greet()` looks after updating the parameter and return types:
 
 ```ts twoslash
 // ---cut---
@@ -78,7 +78,7 @@ greet('World');          // 'Hello, World!'
 greet(['Jane', 'Joe']); // ['Hello, Jane!', 'Hello, Joe!']
 ```
 
-Updating the function signature directly to support the multiple ways of invocation is the usual and good way to annotate. Try to keep the possible types of parameters included in the function signature.  
+Updating the function signature directly to support the multiple ways of invocation is the usual and a good approach.  
 
 However, there are situations when you might want to take an alternative approach and define separately all the ways your function can be invoked.  This approach is called *function overloading*.  
 
@@ -88,7 +88,7 @@ The second approach is to use the *function overloading* feature. I recommend it
 
 Putting the function overloading in practice requires defining the so-called *overload signatures* and an *implementation signature*.  
 
-The overload signature defines the parameter and return types of the function and doesn't have a body. The function signatures describe the different ways your function can be invoked.  
+The overload signature defines the parameter and return types of the function, and doesn't have a body. A function can have multiple overload signatures: corresponding to the different ways you can invoke the function.  
 
 The implementation signature, on the other side, also has the parameter types and return type, but also a body that implements the function. There can be only one implementation signature.   
 
@@ -118,6 +118,8 @@ The `greet()` function has 2 overload signatures and one implementation signatur
 
 Each overload signature describes one way the function can be invoked. In the case of `greet()` function, you can call it 2 ways: with a string argument, or with an array of strings argument.  
 
+The implementation signature `function greet(person: unknown): unknown { ... }` contains the proper logic how the function works.  
+
 Now, as before, you can invoke `greet()` with the arguments of type string or array of strings:
 
 ```ts twoslash
@@ -142,7 +144,7 @@ const someValue: unknown = 'Unknown';
 greet(someValue);       // Implementation signature NOT callable
 ```
 
-In the example above `greet(someValue)` you cannot call `greet()` function with an argument of type `unknown`, even if the implementation signature accepts `unknown` argument.  
+In the example above you cannot call `greet()` function with an argument of type `unknown` (`greet(someValue)`), even if the implementation signature accepts `unknown` argument.  
 
 ### 2.2 Implementation signature must be general
 
@@ -169,15 +171,13 @@ Then the overload signature `function greet(persons: string[]): string[]` is mar
 
 `string` return type of the implementation signature isn't general enough to be compatible with `string[]` return type of the overload signature.  
 
-In other words, the overload signatures must be kind of subtypes of implementation signatures.  
-
 ## 3. Method overloading
 
-While in the previous examples the function overloading was applied to a regular function, still, you can overload a method too.  
+While in the previous examples the function overloading was applied to a regular function. But you can overload a methods too! 
 
 During method overloading, both the overload signatures and implementation signature are now a part of the class.  
 
-For example, let's implement a `Greeter` class, with an overloaded `greet()` method:
+For example, let's implement a `Greeter` class, with an overload method `greet()`:
 
 ```twoslash include greeter
 class Greeter {
@@ -209,7 +209,7 @@ class Greeter {
 
 The `Greeter` class contains  `greet()` overload method: 2 overload signatures describing how the method can be called, and the implementation signature containing the proper implementation.  
 
-Thanks to method overloading you can call `hi.greet()` in 2 ways: using a string or using an array of strings.  
+Thanks to method overloading you can call `hi.greet()` in 2 ways: using a string or using an array of strings as argument.    
 
 ```ts twoslash
 // @include: greeter
@@ -222,7 +222,7 @@ hi.greet(['Pam', 'Jim']); // ['Hi, Pam!', 'Hi, Jim!']
 
 ## 4. When to use function overloading
 
-Function overloading, when used the right way, can greatly increase the usability of functions that may be invoked in multiple ways.  
+Function overloading, when used the right way, can greatly increase the usability of functions that may be invoked in multiple ways. That especially useful during autocomplete: you get listed all the possible overloadings as separate records in autocomplete.   
 
 However, there are situations when I'd recommend not to use the function overloading, but rather stick to the function signature.  
 
@@ -256,8 +256,6 @@ Function overloading in TypeScript lets you define functions that can be called 
 
 Using function overloading requires defining the overload signatures: a set of functions with parameter and return types, but without a body. These signatures indicate how the function should be invoked.  
 
-Additionally, you have to write the proper implementation of the function (implementation signature): the parameter and return types, as well the function body.  
+Additionally, you have to write the proper implementation of the function (implementation signature): the parameter and return types, as well the function body. Note that the implementation signature is not callable.   
 
-Later you can call the function only according to the overload signatures.  
-
-Aside from regular functions, overloading can also be applied methods in classes.  
+Aside from regular functions, methods in classes can be overload too.  
