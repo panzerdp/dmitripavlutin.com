@@ -176,7 +176,7 @@ class Greeter {
 // @include: greeter
 ```
 
-The `Greeter` class contains  `greet()` overload method. The overloading of this method is done using 2 overload signatures (which describes the exact parameter and return types), and the implementation signatures contains the proper implementation.  
+The `Greeter` class contains  `greet()` overload method. The overloading of this method is done using 2 overload signatures (which describes the exact parameter and return types), and the implementation signature contains the proper implementation.  
 
 Thanks to `greet()` method overloading you can call it in 2 ways: using a string or using an array of strings.  
 
@@ -189,7 +189,37 @@ hi.greet('Angela');       // 'Hi, Angela!'
 hi.greet(['Pam', 'Jim']); // ['Hi, Pam!', 'Hi, Jim!']
 ```
 
-## 4. Conclusion
+## 4. When to use function overloading
+
+Function overloading, when used the right way, can greatly increase the usability of functions that may be invoked in multiple ways.  
+
+However, there are situations when I'd recommend not to use the function overloading, but rather stick to the function signature.  
+
+For example, don't use the function overloading for optional parameters:
+
+```ts
+// Not recommended
+function myFunc(): string;
+function myFunc(param1: string): string;
+function myFunc(param1: string, param2: string): string;
+
+function myFunc(...args: string[]): string {
+  // implementation...
+}
+```
+
+Using the optional parameters in the function signature should be enough:
+
+```ts
+// OK
+function myFunc(param1?: string, param2: string): string {
+  // implementation...
+}
+```
+
+For more details I recommend checking [Function overloading Do's and Don'ts](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#function-overloads).
+
+## 5. Conclusion
 
 Function overloading in TypeScript let's you define functions that can be called in multiple ways: using a different set of arguments.  
 
