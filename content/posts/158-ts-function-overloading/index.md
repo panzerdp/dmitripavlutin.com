@@ -17,7 +17,10 @@ To be able to comfortable type the functions that accept variable arguments, Typ
 
 Let's see how function overloading works.  
 
-## 1. Updating the function signature
+```toc
+```
+
+## 1. The function signature
 
 Let's consider a function that returns welcome message to a particular person:
 
@@ -165,7 +168,7 @@ Then the overload signature `function greet(persons: string[]): string[]` is mar
 
 `string` return type of the implementation signature isn't general enough to be compatible with `string[]` return type of the overload signature.  
 
-In other words, the overload signature types should be subtypes of implementation signature type.    
+In other words, the overload signatures must be kind of subtypes of implementation signatures.  
 
 ## 3. Method overloading
 
