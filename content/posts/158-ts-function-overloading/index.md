@@ -125,20 +125,47 @@ greet(['Jane', 'Joe']);  // ['Hello, Jane!', 'Hello, Joe!']
 
 ### 2.1 Only overload signatures are callable
 
-Here's an important nuance about the function overleading. 
-
 While the implementation signature implements the function behavior, however, it is not directly callable. Only the overload signatures are callable.  
 
-For example, if you try to autocomplete all the possible ways to call `greet()`, you would see it is callable only in 2 ways (i.e. the 2 overload signatures), and the implementation signature is not available.  
-
 ```ts twoslash
+// @errors: 2769
 // @include: greet-overloading
 // ---cut---
-greet
-//^?
+greet('World');         // Overload signature callable
+greet(['Jane', 'Joe']); // Overload signature callable
+
+const someValue: unknown = 'Unknown';
+greet(someValue);       // Implementation signature NOT callable
 ```
 
-<!-- ## 3. Function overloading and subtyping -->
+In the example above `greet(someValue)` tries to call `greet()` function with an argument of type `unknown`. 
+
+### 2.2 Implementation signature must be general
+
+Be aware that the implementation signature type should be generic enough to include the overload signatures.  
+
+Otherwise, TypeScript won't accept the overload signature as being incompatible. 
+
+For example, if you modify the implementation signature's return type from `unknown` to `string`:
+
+```ts twoslash
+// @errors: 2394 2322
+// Overload signatures
+function greet(person: string): string;
+function greet(persons: string[]): string[];
+
+// Implementation signature
+function greet(person: unknown): string {
+  // ...
+  throw new Error('Unable to greet');
+}
+```
+
+Then the overload signature `function greet(persons: string[]): string[]` is marked as being incompatible with `function greet(person: unknown): string`.  
+
+`string` return type of the implementation signature isn't general enough to be compatible with `string[]` return type of the overload signature.  
+
+In other words, the overload signature types should be subtypes of implementation signature type.    
 
 ## 3. Method overloading
 
@@ -217,7 +244,7 @@ function myFunc(param1?: string, param2: string): string {
 }
 ```
 
-For more details I recommend checking [Function overloading Do's and Don'ts](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#function-overloads).
+For more details check [Function overloading Do's and Don'ts](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#function-overloads).
 
 ## 5. Conclusion
 
