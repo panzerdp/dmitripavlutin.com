@@ -21,6 +21,7 @@ export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.E
       <meta name="referrer" content="no-referrer-when-downgrade" />
       <meta name="robots" content="index, follow" />
       <html lang="en" />
+      <meta name="google-site-verification" content="A3lH-k4h-4bEnJ4lt6BsPuTh5iUck5ElEV5xeyvkCxo" />
     </Helmet>
   );
 }
