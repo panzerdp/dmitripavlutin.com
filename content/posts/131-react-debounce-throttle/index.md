@@ -245,7 +245,52 @@ export function FilterList({ names }) {
 
 I recommend checking my [How to Cleanup Async Effects in React](/react-cleanup-async-effects).  
 
-## 6. Conclusion
+## 6. without using loadash
+import React, { useState, useMemo } from "react";
+
+export function FilterList({ names }) {
+  const [query, setQuery] = useState("");
+
+  let filteredNames = names;
+
+  if (query !== "") {
+    filteredNames = names.filter((name) => {
+      return name.toLowerCase().includes(query.toLowerCase());
+    });
+  }
+
+  const changeHandler = (event) => {
+    setQuery(event.target.value);
+  };
+
+  const debounce = (fn, delay) => {
+      let timer;
+      return function(){
+        clearTimeout(timer);
+        let context = this;
+        timer = setTimeout(()=>{fn.apply(context,arguments)}, delay);
+      }
+  };
+
+  const dEn = useMemo(()=>debounce(changeHandler,300),[]);
+
+  return (
+    <div>
+      <input
+        onChange={dEn}
+        type="text"
+        placeholder="Type a query..."
+      />
+      {filteredNames.map((name) => (
+        <div key={name}>{name}</div>
+      ))}
+      <div>{filteredNames.length === 0 && query !== "" && "No matches..."}</div>
+    </div>
+  );
+}
+
+
+## 7. Conclusion
 
 A good way to create debounced and throttled functions, to handle often happening events, is by using the `useMemo()` hook:
 
@@ -270,6 +315,8 @@ function MyComponent() {
   // ...
 }
 ```
+
+
 
 If the debounced or throttled event handler accesses props or state values, do not forget to set the dependencies argument of `useMemo(..., dependencies)`.  
 
