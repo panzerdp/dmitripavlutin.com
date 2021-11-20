@@ -1,18 +1,16 @@
 ---
-title: "What Makes JavaScript JavaScript? Prototypal Inheritance"
-description: "The guide that will make you understand prototypal inheritance in JavaScript: prototype object, inherited propertes, chain of prototypes."
+title: "Prototypal Inheritance in JavaScript"
+description: "The guide on prototypal inheritance in JavaScript: prototype object, inherited propertes, chain of prototypes."
 published: "2020-11-03T10:00Z"
-modified: "2020-11-05T14:30Z"
-thumbnail: "./images/cover.png"
+modified: "2021-11-20T18:00Z"
+thumbnail: "./images/cover-2.png"
 slug: javascript-prototypal-inheritance
 tags: ['javascript', 'prototype', 'inheritance']
 recommended: ['simple-explanation-of-javascript-closures', 'own-and-inherited-properties-in-javascript']
 type: post
 ---
 
-You don't know JavaScript until you know prototypal inheritance. Prototypes greatly influence how objects work in JavaScript.
-
-The prototypal inheritance is often asked during coding interviews since this knowledge is an indicator of how you know JavaScript.    
+Understanding prototypal inheritance is the key to understanding JavaScript. 
 
 This guide will help you easily understand prototypal inheritance in JavaScript.  
 
@@ -20,15 +18,13 @@ This guide will help you easily understand prototypal inheritance in JavaScript.
 
 JavaScript has only primitives types, `null`, `undefined` and objects. A big world of objects. In JavaScript, contrary to languages like Java or PHP, there’s no concept of class that serves as a template to create objects.  
 
-An object is a composable structure and consists of multiple properties: key and value pairs.  
-
-For example, the following object `cat` contains 2 properties:
+Let's also recall that an object is a composable structure having properties: key and value pairs. For example, the following object `cat` contains 2 properties:
 
 ```javascript
 const cat = { sound: 'Meow!', legs: 4 };
 ```
 
-Since I'd like to reuse `legs` property in other objects, let's extract `legs` property into a specialized object `pet`:
+Since I'd like to reuse `legs` property in other objects (on dogs, for example), let's extract `legs` property into a specialized object `pet`:
 
 ```javascript{0}
 const pet = { legs: 4 };
@@ -38,9 +34,7 @@ const cat = { sound: 'Meow!' };
 
 That looks better.  
 
-But I still want to have `legs` property on `cat`. How can you connect `cat` with `pet`?  
-
-Inheritance can help you!
+But how can I connect `cat` with `pet`? I can make `pet` a prototype object for `cat`!  
 
 ## 2. The prototype object
 
@@ -48,7 +42,7 @@ In JavaScript, an object can *inherit* properties of another object. The object 
 
 Following the example, you can make `pet` a *prototype* of `cat` which will then *inherit* `legs` property.  
 
-When creating an object using the object literal, you can as well use the special property `__proto__` to set the prototype of the created object.  
+When creating an object using the object literal, you can use the special property `__proto__` to set the prototype of the created object.  
 
 Let's use `__proto__` and make `pet` the prototype of `cat`:
 
@@ -143,9 +137,13 @@ const petPrototype = Object.getPrototypeOf(pet);
 pet.toString === petPrototype.toString; // => true
 ```
 
+`petPrototype` is the implement (aka default) prototype of the created object.  
+
 [Object.getPrototypeOf(object)]() is an utility function that returns the prototype of an object.  
 
 ## 4. The prototype chain
+
+What's interesting about prototypes is that they can be connected in chain. An object can have a prototype, and that prototype by itself can have another prototype... and so on in *chain*.
 
 Let's go deeper and create an object `tail`, making it also a prototype of `pet`:
 
