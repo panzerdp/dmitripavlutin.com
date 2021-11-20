@@ -16,7 +16,7 @@ This guide will help you easily understand prototypal inheritance in JavaScript.
 
 ## 1. Introduction
 
-JavaScript has only primitives types, `null`, `undefined` and objects. A big world of objects. In JavaScript, contrary to languages like Java or PHP, there’s no concept of class that serves as a template to create objects.  
+JavaScript has only primitives types, `null`, `undefined`, and objects. A big world of objects. In JavaScript, contrary to languages like Java or PHP, there’s no concept of class that serves as a template to create objects.  
 
 Let's also recall that an object is a composable structure having properties: key and value pairs. For example, the following object `cat` contains 2 properties:
 
@@ -143,7 +143,7 @@ pet.toString === petPrototype.toString; // => true
 
 ## 4. The prototype chain
 
-What's interesting about prototypes is that they can be connected in chain. An object can have a prototype, and that prototype by itself can have another prototype... and so on in *chain*.
+What's interesting about prototypes is that they can be connected in a chain. An object can have a prototype, and that prototype by itself can have another prototype... and so on in *chain*.
 
 Let's go deeper and create an object `tail`, making it also a prototype of `pet`:
 
