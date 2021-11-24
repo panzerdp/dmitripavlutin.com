@@ -10,9 +10,11 @@ recommended: ['simple-explanation-of-javascript-closures', 'own-and-inherited-pr
 type: post
 ---
 
-Understanding prototypal inheritance is the key to understanding JavaScript. 
+Understanding prototypal inheritance is the key to understanding how objects inherit properties in JavaScript.  
 
-This guide will help you easily understand prototypal inheritance in JavaScript.  
+This concept is also asked often during JavaScript interviews.  
+
+In this post, I'll help you understand prototypal inheritance.  
 
 ## 1. Introduction
 
