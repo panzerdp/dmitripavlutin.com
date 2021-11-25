@@ -3,7 +3,7 @@ title: "How to Trim Strings in JavaScript"
 description: "How to trim (aka remove whitespaces and line terminators) from strings in JavaScript."  
 published: "2021-11-23T12:00Z"
 modified: "2021-11-23T12:00Z"
-thumbnail: "./images/cover-4.png"
+thumbnail: "./images/cover.png"
 slug: javascript-string-trim
 tags: ['javascript', 'string', 'whitespace']
 recommended: ['replace-all-string-occurrences-javascript', 'compare-javascript-strings']
