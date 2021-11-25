@@ -66,9 +66,22 @@ const phoneNumber = '\t  555-123\n ';
 phoneNumber.trim(); // => '555-123'
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/8x3n40rh/)
+
 `name.trim()` removes the spaces from the start and end of the string. `'  Kate '` becomes `'Kate'`.  
 
 Also `phoneNumber.trim()` removes the sequences of whitespaces and line terminals from both start and end of the string. `'\t  555-123\n '` becomes `'555-123'`.  
+
+The trim function removes from both ends of the string sequences of *consecutive* white spaces and line terminals. But if a whitespace is found in between two letters, then, of course, this whitespace is preserved:
+
+```javascript
+const fullName = '  Kate Smith  ';
+fullName.trim(); // => 'Kate Smith'
+```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/k3jfdvtb/)
+
+`fullName.trim()` has removes the spaces from both start and end of the string, however has keept the space between `Kate` and `Smith` words.  
 
 ### 2.2 *string.trimStart()*
 
@@ -76,11 +89,13 @@ Also `phoneNumber.trim()` removes the sequences of whitespaces and line terminal
 
 ```javascript
 const name = '  Jane ';
-name.trimStart(); // => 'Kate '
+name.trimStart(); // => 'Jane '
 
 const phoneNumber = '\t  555-123 \n';
 phoneNumber.trimStart(); // => '555-123 \n'
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/4w2p3oxz/)
 
 `name.trimStart()` removes the spaces only from the start of the string, and doesn't touch the space at the end of the string. `'  Jane '` becomes `'Jane '`.  
 
@@ -97,6 +112,8 @@ name.trimEnd(); // => '  Jim'
 const phoneNumber = '\t  555-123 \n';
 phoneNumber.trimEnd(); // => '\t  555-123'
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/1u8ym5wx/)
 
 `name.trimEnd()` removes the one space from the end of the string, and doesn't touch the leading part. `'  Jim '` becomes `'  Jim'`.  
 
