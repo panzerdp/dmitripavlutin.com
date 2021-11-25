@@ -10,7 +10,7 @@ recommended: ['replace-all-string-occurrences-javascript', 'compare-javascript-s
 type: post
 ---
 
-A good practice when using string values from fields is to remove the whitespaces from the start and end of the strings.  
+A good practice when using string values from form fields is to remove the whitespaces from the start and end of the strings &mdash; i.e. trim the string.    
 
 In this post, I'm going to describe what is a whitespace and a line terminator character in JavaScript. 
 
@@ -18,9 +18,9 @@ Plus, you'll read how to trim strings, aka remove whitespaces and line terminato
 
 ## 1. The whitespaces and line terminators
 
-Before diving into the actual trim functions, let's understand first what special characters the trims function is getting rid of.  
+Before diving into the actual trim functions, let's first agree what special characters the trim functions are removing from strings.  
 
-First, the whitespaces is a special set of characters consisting of:
+First, the whitespace is any character from the following list:
 
 * *SPACE* (`U+0020` code point)
 * *CHARACTER TABULATION* (`U+0009` code point)
@@ -30,7 +30,7 @@ First, the whitespaces is a special set of characters consisting of:
 * *ZERO WIDTH NO-BREAK SPACE* (`U+FEFFU` code point)
 * Any other character from [Space Separator](https://www.compart.com/en/unicode/category/Zs) category
 
-In simple words, the whitespaces are characters that when rendered on the screen create an empty white space. 
+In simple words, the whitespaces are characters that rendered on the screen create an empty white space. 
 
 Common whitespace characters are space `' '` and tab `'\t'`.  
 
@@ -41,19 +41,19 @@ Secondly, the line terminator is also a special set of characters consisting of:
 * *LINE SEPARATOR* (`U+2028` code point)
 * *PARAGRAPH SEPARATOR* (`U+2029` code point)
 
-In simple words, the line terminator represents a character that exists at the end of a text line and has a special meaning.  
+The line terminator represents a character that exists at the end of a text line and has some special purpose.  
 
 A common line terminator character is the line feed `'\n'`, which means moving one line forward. 
 
 ## 2. Trim strings in JavaScript
 
-There are situations when you want to clean strings entering from the application input. For example, you'd definitely want to trim strings from form fields representing a username, first name, last name, phone number, etc.  
+There are situations when you want to clean strings entering from the application input. For example, you'd definitely want to trim strings from the form fields representing a username, first name, last name, phone number, etc.  
 
-JavaScript provides 3 simple functions on how to remove sequences of whitespaces and line terminators.  
+JavaScript provides 3 simple functions on how to trim strings. 
 
 ### 2.1 *string.trim()*
 
-`string.trim()` removes sequences of whitespaces and line terminators from both ends of the string: at the start and at the end of the string.  
+`string.trim()` removes sequences of whitespaces and line terminators from both the start and the end of the string.  
 
 Let's see a few examples:
 
@@ -69,7 +69,7 @@ phoneNumber.trim(); // => '555-123'
 
 `name.trim()` removes the spaces from the start and end of the string. `'  Kate '` becomes `'Kate'`.  
 
-Also `phoneNumber.trim()` removes the sequences of whitespaces and line terminals from both the start and end of the string. `'\t  555-123\n '` becomes `'555-123'`.  
+`phoneNumber.trim()` also cleans boths ends: `'\t  555-123\n '` becomes `'555-123'`.  
 
 The trim function removes from both ends of the string sequences of *consecutive* white spaces and line terminals. But if a whitespace is found in between two letters, then, of course, this whitespace is preserved:
 
@@ -96,9 +96,9 @@ phoneNumber.trimStart(); // => '555-123 \n'
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/4w2p3oxz/)
 
-`name.trimStart()` removes the spaces only from the start of the string, and doesn't touch the space at the end of the string. `'  Jane '` becomes `'Jane '`.  
+`name.trimStart()` removes the spaces only from the start of the string, and doesn't touch the space at the end. `'  Jane '` becomes `'Jane '`.  
 
-`phoneNumber.trimStart()` removes the sequence of whitespaces and line terminals from the start only. `'\t  555-123\n '` becomes `'555-123\n '`.   
+`phoneNumber.trimStart()` removes the sequence of whitespaces and line terminals from the start only. `'\t  555-123 \n'` becomes `'555-123 \n'`.   
 
 ### 2.3 *string.trimEnd()*
 
@@ -114,7 +114,7 @@ phoneNumber.trimEnd(); // => '\t  555-123'
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/1u8ym5wx/)
 
-`name.trimEnd()` removes the one space from the end of the string, and doesn't touch the leading part. `'  Jim '` becomes `'  Jim'`.  
+`name.trimEnd()` removes the one space from the end, and doesn't touch the leading part. `'  Jim '` becomes `'  Jim'`.  
 
 `phoneNumber.trimEnd()` trims the end of the string too. `'\t  555-123\n '` becomes `'\t  555-123'`.   
 
