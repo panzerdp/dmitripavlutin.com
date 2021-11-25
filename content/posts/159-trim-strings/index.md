@@ -10,12 +10,11 @@ recommended: ['replace-all-string-occurrences-javascript', 'compare-javascript-s
 type: post
 ---
 
-A good practice when using string values from the input and textarea fields is to remove the whitespaces from the start and end of the strings.  
+A good practice when using string values from fields is to remove the whitespaces from the start and end of the strings.  
 
-For example the user might write his first name like `'Dmitri'` into an input field. But also might introduce accidently
-the value `'Dmitri '` &mdash; and the extra space wouldn't be visible inside the form on the web page.  
+In this post, I'm going to describe what is a whitespace and a line terminator character in JavaScript. 
 
-In this post, I'm going to describe what is exactly a whitespace and a line terminator character in JavaScript. Plus, you'll read how to trim strings, aka remove whitespaces and line terminator characters.  
+Plus, you'll read how to trim strings, aka remove whitespaces and line terminator characters from the start and/or end of the string.  
 
 ## 1. The whitespaces and line terminators
 
@@ -42,13 +41,13 @@ Secondly, the line terminator is also a special set of characters consisting of:
 * *LINE SEPARATOR* (`U+2028` code point)
 * *PARAGRAPH SEPARATOR* (`U+2029` code point)
 
-In simple words, the line terminator represent characters that exists and the end of a text line, having a special meaning.  
+In simple words, the line terminator represents a character that exists at the end of a text line and has a special meaning.  
 
-A common line terminator character are the line feed `'\n'`, which means moving one line forward. 
+A common line terminator character is the line feed `'\n'`, which means moving one line forward. 
 
 ## 2. Trim strings in JavaScript
 
-There are situations when you want to clean strings entering from the application input. For example, you'd definetely want to trim strings from form fields representing an username, first names, last name, phone number, etc.  
+There are situations when you want to clean strings entering from the application input. For example, you'd definitely want to trim strings from form fields representing a username, first name, last name, phone number, etc.  
 
 JavaScript provides 3 simple functions on how to remove sequences of whitespaces and line terminators.  
 
@@ -70,7 +69,7 @@ phoneNumber.trim(); // => '555-123'
 
 `name.trim()` removes the spaces from the start and end of the string. `'  Kate '` becomes `'Kate'`.  
 
-Also `phoneNumber.trim()` removes the sequences of whitespaces and line terminals from both start and end of the string. `'\t  555-123\n '` becomes `'555-123'`.  
+Also `phoneNumber.trim()` removes the sequences of whitespaces and line terminals from both the start and end of the string. `'\t  555-123\n '` becomes `'555-123'`.  
 
 The trim function removes from both ends of the string sequences of *consecutive* white spaces and line terminals. But if a whitespace is found in between two letters, then, of course, this whitespace is preserved:
 
@@ -81,7 +80,7 @@ fullName.trim(); // => 'Kate Smith'
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/k3jfdvtb/)
 
-`fullName.trim()` has removes the spaces from both start and end of the string, however has keept the space between `Kate` and `Smith` words.  
+`fullName.trim()` removes the spaces from both the start and end of the string, however keeps the space between `Kate` and `Smith` words.  
 
 ### 2.2 *string.trimStart()*
 
@@ -125,6 +124,6 @@ The whitespaces, like a space or tab, are special characters that create empty s
 
 Also the line terminals, like the line feed, you may find at the end of lines in a multiline string.  
 
-Often you may find useful to remove these special characters from a string. The JavaScript trim functions can help you.  
+Often you may find it useful to remove these special characters from a string. The JavaScript trim functions can help you.  
 
 `string.trim()` removes sequences of white spaces and line terminators from both the start and end of the string, `string.trimStart()` removes them from start, and finally `string.trimEnd()` removes them from the end.  
