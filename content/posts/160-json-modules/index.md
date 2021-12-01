@@ -3,7 +3,7 @@ title: "JSON Modules in JavaScript"
 description: "How to import JSON data directly into an ES module."  
 published: "2021-12-01T12:00Z"
 modified: "2021-12-01T12:00Z"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover-2.png"
 slug: javascript-json-modules
 tags: ['javascript', 'json', 'module']
 recommended: ['fetch-with-json', 'ecmascript-modules-nodejs']
