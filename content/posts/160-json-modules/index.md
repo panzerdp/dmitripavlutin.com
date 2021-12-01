@@ -12,7 +12,7 @@ type: post
 
 The ECMAScript modules system (`import` and `export` keywords) allows importing inside of an ES module only an another ES module. In other words, you can only import JavaScript code inside of an importing module.  
 
-What if you'd like to import data from a JSON file? For example, it's convinient to keep application's configuration values in a JSON file.  
+What if you'd like to import data from a JSON file? For example, it's convenient to keep an application's configuration values in a JSON file.  
 
 Importing JSON is supported by commonjs modules format.  
 
@@ -56,7 +56,7 @@ When trying to run the application, Node.js throws an error `TypeError [ERR_UNKN
 
 The essence of the [JSON modules proposal](https://github.com/tc39/proposal-json-modules) is to allow importing JSON data inside of an ES module.  
 
-To make JavaScript aware about the specific format you're trying to import you need to use a so called import assertion.  
+To make JavaScript aware of the specific format you're trying to import you need to use a so-called import assertion.  
 
 ```javascript
 import jsonContent from "./file.json" assert { type: "json" };
@@ -64,13 +64,13 @@ import jsonContent from "./file.json" assert { type: "json" };
 
 where `assert { type: "json" }` is an import assertion indicating the module should be parsed and imported as JSON.  
 
-Note that engines can allow to skip the assertion part `assert { type: "json" }` if it can determine by the file extension what data type you're importing.  
+Note that engines can allow skipping the assertion part `assert { type: "json" }` if it can determine by the file extension what data type you're importing.  
 
-The import assertion in this particular cases indicates a JSON type. However, there's a more general proposal [import assertions](https://github.com/tc39/proposal-import-assertions/) (currently at stage 3) that allows importing even other data formats, like CSS modules.  
+The import assertion in this particular case indicates a JSON type. However, there's a more general proposal [import assertions](https://github.com/tc39/proposal-import-assertions/) (currently at stage 3) that allows importing even other data formats, like CSS modules.  
 
 ## 3. Enabling JSON modules
 
-Now, applying these updates to the simple application:
+Now, apply these updates to the simple application:
 
 ```javascript{1}
 import http from 'http';
@@ -101,8 +101,10 @@ In a browser environment, the JSON modules are available starting Chrome 91.
 
 By default, an ES module can import only JavaScript code.  
 
-Thanks to JSON modules proposal you can import JSON content directly into an ES module. This is done by using an import assertion right after the import statement:  
+Thanks to the JSON modules proposal you can import JSON content directly into an ES module. This is done by using an import assertion right after the import statement:  
 
 ```javascript
 import jsonContent from "./file.json" assert { type: "json" };
 ```
+
+You can use JSON modules starting Node.js 17.1 with the experimental flag `--experimental-json-modules`. Also, JSON modules are available in Chrome 91 and above.   
