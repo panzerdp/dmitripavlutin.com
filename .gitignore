@@ -12,4 +12,4 @@ src/typings/graphql.d.ts
 .env*
 !.env.example
 
-.firebase
+graphql-types.ts

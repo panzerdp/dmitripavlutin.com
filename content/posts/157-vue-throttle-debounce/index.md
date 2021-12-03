@@ -56,7 +56,7 @@ I use a debounce implementation from `'lodash.debounce'`, but you can use whatev
 
 Let's update the component with debouncing:
 
-```vue
+```vue{16,20-22,25}
 <template>
   <input v-model="value" type="text" />
   <p>{{ value }}</p>
@@ -76,7 +76,7 @@ export default {
       this.debouncedWatch(...args);
     },
   },
-  create() {
+  created() {
     this.debouncedWatch = debounce((newValue, oldValue) => {
       console.log('New value:', newValue);
     }, 500);
@@ -136,7 +136,7 @@ Again, that's not always convenient if you want to perform some relatively heavy
 
 Debouncing the event handler can be implemented as follows:
 
-```vue
+```vue{1,9-11,14}
 <template>
   <input v-on:input="debouncedHandler" type="text" />
 </template>
@@ -213,7 +213,7 @@ export default {
 
 [Try the demo.](https://codesandbox.io/s/vue-event-handler-debounced-incorrectly-320ci?file=/src/App.vue)
 
-Instead of creating a debounced callback inside the `created()` hook, this time you assigned the debounced callback to the `method.debouncedHandler`. 
+Instead of creating a debounced callback inside the `created()` hook, this time you assigned the debounced callback to the `methods.debouncedHandler`. 
 
 And if you try the demo, it works!
 
