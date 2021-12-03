@@ -72,7 +72,7 @@
     "dev": "export NODE_OPTIONS=--openssl-legacy-provider; gatsby develop --port 3000",
     "lint": "eslint 'src/**/*.ts?(x)'",
     "lint:fix": "npm run lint -- --fix",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider; gatsby build",
+    "build": "gatsby build",
     "type:check": "tsc -p tsconfig.json --noEmit"
   },
   "resolutions": {
