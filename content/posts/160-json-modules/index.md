@@ -1,26 +1,27 @@
 ---
 title: "JSON Modules in JavaScript"
 description: "How to import JSON data directly into an ES module."  
-published: "2021-12-01T12:00Z"
-modified: "2021-12-01T12:00Z"
-thumbnail: "./images/cover-2.png"
+published: "2021-12-03"
+modified: "2021-12-03"
+thumbnail: "./images/cover-3.png"
 slug: javascript-json-modules
 tags: ['javascript', 'json', 'module']
 recommended: ['fetch-with-json', 'ecmascript-modules-nodejs']
 type: post
 ---
 
-The ECMAScript modules system (`import` and `export` keywords) by default can import only JavaScript code of another module.  
+The ECMAScript modules system (`import` and `export` keywords) by default can import only JavaScript code.  
 
-What if you'd like to import data from a JSON file? It's often convenient to keep an application's configuration inside of a JSON file.  
+But it's often convenient to keep an application's configuration inside of a JSON file, and as result, you might want to
+import a JSON file directly into an ES module.  
 
-For a long time, importing JSON is supported by commonjs modules format.  
+For a long time, importing JSON was supported by commonjs modules format.  
 
 Fortunately, a new proposal at stage 3 named [JSON modules](https://github.com/tc39/proposal-json-modules) proposes a way to import JSON into an ES module. Let's see how JSON modules work.
 
 ## 1. Importing config.json
 
-You have a simple JSON file named `config.json` that contains useful config values of an application: the name and the current version.  
+Let's start with a JSON file named `config.json` that contains useful config values of an application: the name and the current version.  
 
 ```json
 {
@@ -41,7 +42,7 @@ import config from './config.json';
 
 http
   .createServer((req, res) => {
-    res.write(`App name: ${config.name}`);
+    res.write(`App name: ${config.name}\n`);
     res.write(`App version: ${config.version}`);
     res.end();
   })
@@ -52,7 +53,7 @@ When trying to run the application, Node.js throws an error `TypeError [ERR_UNKN
 
 ![Cannot import JSON error](./images/error.png)
 
-That's expected because Node.js expects JavaScript code inside any imported module.  
+Node.js expects JavaScript code by default when using the `import` statement. But thanks to JSON module proposal, you can indicate the type of data you want to import: JSON.  
 
 Before fixing the application, let's see in a few sentences what JSON module proposal is.   
 
@@ -60,13 +61,13 @@ Before fixing the application, let's see in a few sentences what JSON module pro
 
 The essence of the [JSON modules proposal](https://github.com/tc39/proposal-json-modules) is to allow importing JSON data inside of an ES module using a regular `import` statement.  
 
-To import a JSON file as a module you need to use a so called import assertion right after the `import` statement:
+JSON content can be imported by adding an import assertion:
 
 ```javascript
 import jsonContent from "./file.json" assert { type: "json" };
 ```
 
-where `assert { type: "json" }` is an import assertion indicating the module should be parsed and imported as JSON.  
+`assert { type: "json" }` is an *import assertion* indicating the module should be parsed and imported as JSON.  
 
 `jsonContent` variable contains the plain JavaScript object that's created after parsing the content of `file.json`.  
 
@@ -82,7 +83,7 @@ const jsonContent = await import('./file.json', {
 });
 ```
 
-The import assertion in this particular case indicates a JSON type. However, there's a more general proposal [import assertions](https://github.com/tc39/proposal-import-assertions/) (currently at stage 3) that allows importing more data formats, like CSS modules.  
+The import assertion, in this case, indicates a JSON type. However, there's a more general proposal [import assertions](https://github.com/tc39/proposal-import-assertions/) (currently at stage 3) that allows importing more data formats, like CSS modules.  
 
 ## 3. Enabling JSON modules
 
@@ -94,14 +95,14 @@ import config from './config.json' assert { type: "json" };
 
 http
   .createServer((req, res) => {
-    res.write(`App name: ${config.name}`);
+    res.write(`App name: ${config.name}\n`);
     res.write(`App version: ${config.version}`);
     res.end();
   })
   .listen(8080);
 ```
 
-The main module can import the `config.json` file, and access its value `config.name` and `config.version`.  
+The main module now imports the `config.json` file, and access its values `config.name` and `config.version`.  
 
 ![Web app using JSON modules](./images/web-app.png)
 
@@ -117,7 +118,7 @@ In a browser environment, the JSON modules are available starting Chrome 91.
 
 By default, an ES module can import only JavaScript code.  
 
-Thanks to the JSON modules proposal you can import JSON content directly into an ES module. This is done by using an import assertion right after the import statement:  
+Thanks to the JSON modules proposal you can import JSON content directly into an ES module. Just use an import assertion right after the import statement:  
 
 ```javascript
 import jsonContent from "./file.json" assert { type: "json" };
