@@ -394,13 +394,13 @@ export type SitePlugin = Node & {
 
 export type SitePluginPluginOptions = {
   plugins: Maybe<Array<Maybe<SitePluginPluginOptionsPlugins>>>;
-  tight: Maybe<Scalars['Boolean']>;
-  fromHeading: Maybe<Scalars['Int']>;
-  defaults: Maybe<SitePluginPluginOptionsDefaults>;
   base64Width: Maybe<Scalars['Int']>;
   stripMetadata: Maybe<Scalars['Boolean']>;
   defaultQuality: Maybe<Scalars['Int']>;
   failOnError: Maybe<Scalars['Boolean']>;
+  tight: Maybe<Scalars['Boolean']>;
+  fromHeading: Maybe<Scalars['Int']>;
+  defaults: Maybe<SitePluginPluginOptionsDefaults>;
   linkImagesToOriginal: Maybe<Scalars['Boolean']>;
   sizeByPixelDensity: Maybe<Scalars['Boolean']>;
   quality: Maybe<Scalars['Int']>;
@@ -464,10 +464,6 @@ export type SitePluginPluginOptionsPluginsPluginOptions = {
   tight: Maybe<Scalars['Boolean']>;
   fromHeading: Maybe<Scalars['Int']>;
   defaults: Maybe<SitePluginPluginOptionsPluginsPluginOptionsDefaults>;
-  base64Width: Maybe<Scalars['Int']>;
-  stripMetadata: Maybe<Scalars['Boolean']>;
-  defaultQuality: Maybe<Scalars['Int']>;
-  failOnError: Maybe<Scalars['Boolean']>;
   linkImagesToOriginal: Maybe<Scalars['Boolean']>;
   sizeByPixelDensity: Maybe<Scalars['Boolean']>;
   quality: Maybe<Scalars['Int']>;
@@ -491,9 +487,6 @@ export type SitePluginPluginOptionsPluginsPluginOptions = {
   icon: Maybe<Scalars['String']>;
   offsetY: Maybe<Scalars['Int']>;
   className: Maybe<Scalars['String']>;
-  isTSX: Maybe<Scalars['Boolean']>;
-  jsxPragma: Maybe<Scalars['String']>;
-  allExtensions: Maybe<Scalars['Boolean']>;
 };
 
 export type SitePluginPluginOptionsPluginsPluginOptionsDefaults = {
@@ -2929,13 +2922,13 @@ export type SitePluginFilterInput = {
 
 export type SitePluginPluginOptionsFilterInput = {
   plugins: Maybe<SitePluginPluginOptionsPluginsFilterListInput>;
-  tight: Maybe<BooleanQueryOperatorInput>;
-  fromHeading: Maybe<IntQueryOperatorInput>;
-  defaults: Maybe<SitePluginPluginOptionsDefaultsFilterInput>;
   base64Width: Maybe<IntQueryOperatorInput>;
   stripMetadata: Maybe<BooleanQueryOperatorInput>;
   defaultQuality: Maybe<IntQueryOperatorInput>;
   failOnError: Maybe<BooleanQueryOperatorInput>;
+  tight: Maybe<BooleanQueryOperatorInput>;
+  fromHeading: Maybe<IntQueryOperatorInput>;
+  defaults: Maybe<SitePluginPluginOptionsDefaultsFilterInput>;
   linkImagesToOriginal: Maybe<BooleanQueryOperatorInput>;
   sizeByPixelDensity: Maybe<BooleanQueryOperatorInput>;
   quality: Maybe<IntQueryOperatorInput>;
@@ -3003,10 +2996,6 @@ export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
   tight: Maybe<BooleanQueryOperatorInput>;
   fromHeading: Maybe<IntQueryOperatorInput>;
   defaults: Maybe<SitePluginPluginOptionsPluginsPluginOptionsDefaultsFilterInput>;
-  base64Width: Maybe<IntQueryOperatorInput>;
-  stripMetadata: Maybe<BooleanQueryOperatorInput>;
-  defaultQuality: Maybe<IntQueryOperatorInput>;
-  failOnError: Maybe<BooleanQueryOperatorInput>;
   linkImagesToOriginal: Maybe<BooleanQueryOperatorInput>;
   sizeByPixelDensity: Maybe<BooleanQueryOperatorInput>;
   quality: Maybe<IntQueryOperatorInput>;
@@ -3030,9 +3019,6 @@ export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
   icon: Maybe<StringQueryOperatorInput>;
   offsetY: Maybe<IntQueryOperatorInput>;
   className: Maybe<StringQueryOperatorInput>;
-  isTSX: Maybe<BooleanQueryOperatorInput>;
-  jsxPragma: Maybe<StringQueryOperatorInput>;
-  allExtensions: Maybe<BooleanQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsPluginsPluginOptionsDefaultsFilterInput = {
@@ -3189,13 +3175,13 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___plugins___browserAPIs'
   | 'pluginCreator___pluginOptions___plugins___ssrAPIs'
   | 'pluginCreator___pluginOptions___plugins___pluginFilepath'
-  | 'pluginCreator___pluginOptions___tight'
-  | 'pluginCreator___pluginOptions___fromHeading'
-  | 'pluginCreator___pluginOptions___defaults___formats'
   | 'pluginCreator___pluginOptions___base64Width'
   | 'pluginCreator___pluginOptions___stripMetadata'
   | 'pluginCreator___pluginOptions___defaultQuality'
   | 'pluginCreator___pluginOptions___failOnError'
+  | 'pluginCreator___pluginOptions___tight'
+  | 'pluginCreator___pluginOptions___fromHeading'
+  | 'pluginCreator___pluginOptions___defaults___formats'
   | 'pluginCreator___pluginOptions___linkImagesToOriginal'
   | 'pluginCreator___pluginOptions___sizeByPixelDensity'
   | 'pluginCreator___pluginOptions___quality'
@@ -3526,10 +3512,6 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___plugins___version'
   | 'pluginOptions___plugins___pluginOptions___tight'
   | 'pluginOptions___plugins___pluginOptions___fromHeading'
-  | 'pluginOptions___plugins___pluginOptions___base64Width'
-  | 'pluginOptions___plugins___pluginOptions___stripMetadata'
-  | 'pluginOptions___plugins___pluginOptions___defaultQuality'
-  | 'pluginOptions___plugins___pluginOptions___failOnError'
   | 'pluginOptions___plugins___pluginOptions___linkImagesToOriginal'
   | 'pluginOptions___plugins___pluginOptions___sizeByPixelDensity'
   | 'pluginOptions___plugins___pluginOptions___quality'
@@ -3553,20 +3535,17 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___plugins___pluginOptions___icon'
   | 'pluginOptions___plugins___pluginOptions___offsetY'
   | 'pluginOptions___plugins___pluginOptions___className'
-  | 'pluginOptions___plugins___pluginOptions___isTSX'
-  | 'pluginOptions___plugins___pluginOptions___jsxPragma'
-  | 'pluginOptions___plugins___pluginOptions___allExtensions'
   | 'pluginOptions___plugins___nodeAPIs'
   | 'pluginOptions___plugins___browserAPIs'
   | 'pluginOptions___plugins___ssrAPIs'
   | 'pluginOptions___plugins___pluginFilepath'
-  | 'pluginOptions___tight'
-  | 'pluginOptions___fromHeading'
-  | 'pluginOptions___defaults___formats'
   | 'pluginOptions___base64Width'
   | 'pluginOptions___stripMetadata'
   | 'pluginOptions___defaultQuality'
   | 'pluginOptions___failOnError'
+  | 'pluginOptions___tight'
+  | 'pluginOptions___fromHeading'
+  | 'pluginOptions___defaults___formats'
   | 'pluginOptions___linkImagesToOriginal'
   | 'pluginOptions___sizeByPixelDensity'
   | 'pluginOptions___quality'
