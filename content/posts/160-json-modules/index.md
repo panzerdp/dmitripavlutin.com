@@ -64,24 +64,26 @@ The essence of the [JSON modules proposal](https://github.com/tc39/proposal-json
 JSON content can be imported by adding an import assertion:
 
 ```javascript
-import jsonContent from "./file.json" assert { type: "json" };
+import jsonObject from "./file.json" assert { type: "json" };
 ```
 
 `assert { type: "json" }` is an *import assertion* indicating the module should be parsed and imported as JSON.  
 
-`jsonContent` variable contains the plain JavaScript object that's created after parsing the content of `file.json`.  
+`jsonObject` variable contains the plain JavaScript object that's created after parsing the content of `file.json`.  
 
 The content of a JSON module is imported using a default import. Named imports are not available.  
 
 A JSON module can also be imported dynamically:
 
 ```javascript
-const jsonContent = await import('./file.json', {
+const { default: jsonObject } = await import('./file.json', {
   assert: {
     type: 'json'
   }
 });
 ```
+
+When a module is imported dynamically, including a JSON module, the [default content](/ecmascript-modules-dynamic-import/#22-importing-of-default-export) is available at `default` property.  
 
 The import assertion, in this case, indicates a JSON type. However, there's a more general proposal [import assertions](https://github.com/tc39/proposal-import-assertions/) (currently at stage 3) that allows importing more data formats, like CSS modules.  
 
@@ -124,4 +126,4 @@ Thanks to the JSON modules proposal you can import JSON content directly into an
 import jsonContent from "./file.json" assert { type: "json" };
 ```
 
-You can use JSON modules starting Node.js 17.1 with the experimental flag `--experimental-json-modules` and in Chrome 91 and above.   
+You can use JSON modules starting Node.js 17.1 with the experimental flag `--experimental-json-modules` and in Chrome 91 and above.
