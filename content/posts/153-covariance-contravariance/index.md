@@ -2,7 +2,7 @@
 title: "Covariance and Contravariance in TypeScript"
 description: "Covariance and contravariance are the concepts behind the subtyping of composable types."
 published: "2021-10-14T12:00Z"
-modified: "2021-10-18T13:00Z"
+modified: "2021-12-06"
 thumbnail: "./images/cover-1.png"
 slug: typescript-covariance-contravariance
 tags: ['typescript']
@@ -15,16 +15,15 @@ Learning covariance and contravariance in TypeScript could be tricky (I know fro
 In this post, you'll read an accessible explanation of covariance and contravariance concepts.  
 
 ```toc
-
 ```
 
 ## 1. Subtyping
 
-Subtyping is a form of [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) in which a *subtype* data type is associated with a *supertype* data type, also named base type by some form of substitutability.  
+Subtyping is a form of [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) in which a *subtype* is associated with a base type by some form of substitutability.  
 
-The substitutability means that each variable, function parameter of base type can also accept subtype values.
+The substitutability means that a variable of base type can also accept subtype values.
 
-For example, let's define a base class `User`, then extend it by `Admin` class:
+For example, let's define a base class `User`, then extend it by `Admin` class by creating a subtype:
 
 ```twoslash include user
 class User {
@@ -57,20 +56,19 @@ Since `Admin` extends `User` (`Admin extends User`), you could say that `Admin` 
 
 ![User and Admin Classes](./images/user-admin-3.svg)
 
-### 1.1 Why understanding subtyping?
-
 The substitutability of `Admin` (subtype) and `User` (base type) consists, for example, in the ability to assign to a variable of type `User` an instance of type `Admin`:
 
 ```ts twoslash
 // @include: user
 // @include: admin
 // ---cut---
-const user: User = new Admin('admin1', true); // OK
+const user1: User = new User('user1');         // OK
+const user2: User = new Admin('admin1', true); // also OK
 ```
 
-That's a good trick. But why is this important? How can you benefit from understanding subtyping and substitutability?
+But how can you benefit from understanding subtyping and substitutability?
 
-Of the many benefits is the ability to create functions that accept a base type, but also all of the subtypes.  
+One of the great benefits is that you can define behavior that doesn't depend on details. In simple words, you can create functions that accept the base type as a parameter, but then you can invoke that function with subtypes.  
 
 For example, let's write a function that logs the user name to the console:
 
@@ -87,7 +85,7 @@ function logUsername(user: User): void {
 // @include: log-username
 ```
 
-This function accepts as an argument both a `User` and `Admin` instances (and instances of any other subtypes of `User` you might create later), becoming more reusable and less bothered with details:
+This function accepts arguments of type `User`, `Admin`, and instances of any other subtypes of `User` you might create later.   Because of that `logUsername()` is more reusable and less bothered with details:
 
 ```ts twoslash
 // @include: user
@@ -98,9 +96,11 @@ logUsername(new User('user1'));         // logs "user1"
 logUsername(new Admin('admin1', true)); // logs "user2"
 ```
 
-### 1.2 A few helpers
+### 1.1 A few helpers
 
-Now let's introduce the symbol `A <: B` &mdash; meaning *"A is a subtype of B"*. Because `Admin` is a subtype of `User`, now you could write shorter:
+Now let's introduce the symbol `A <: B` &mdash; meaning *"A is a subtype of B"*. 
+
+For example, because `Admin` is a subtype of `User`, now you could write shorter:
 
 ```
 Admin <: User
@@ -130,7 +130,9 @@ type T11 = IsSubtypeOf<Admin, User>;
 //   ^?
 ```
 
-On a side note, subtyping is possible for other types. For example, the literal string type `'Hello'` is a subtype of `string`, or the literal number type `42` is a subtype of `number`.  
+Subtyping is possible for many other types, including primitives and built-in JavaScript types. 
+
+For example, the literal string type `'Hello'` is a subtype of `string`, or the literal number type `42` is a subtype of `number`.  
 
 ```ts twoslash
 // @include: is-subtype
@@ -143,9 +145,9 @@ type T13 = IsSubtypeOf<42, number>;
 
 ## 2. Covariance
 
-Let's think about some asynchronous code that fetches `User` and `Admin` instances. Thus, you have to work with promises of `User` and `Admin`.  
+Let's think about some asynchronous code that fetches `User` and `Admin` instances. You have to work with promises of `User` and `Admin`: `Promise<User>` and `<: Promise<Admin>`.  
 
-Having `Admin <: User`, does it mean that `Promise<Admin> <: Promise<User>` holds as well? In other words, is `Promise<Admin>` a subtype of `Promise<User>`?
+Here's an interesting question. Having `Admin <: User`, does it mean that `Promise<Admin> <: Promise<User>` holds as well? In other words, is `Promise<Admin>` a subtype of `Promise<User>`?
 
 Let's see what TypeScript is saying:
 
@@ -158,7 +160,7 @@ type T21 = IsSubtypeOf<Promise<Admin>, Promise<User>>
 //   ^?
 ```
 
-Indeed `Promise<Admin> <: Promise<User>` holds true, having `Admin <: User`. Saying it formal, `Promise` type is *covariant*.  
+Having `Admin <: User`, then indeed `Promise<Admin> <: Promise<User>` holds true. Saying it formal &mdash; `Promise` type is *covariant*.  
 
 ![Covariance](./images/covariance-2.svg)
 
@@ -215,7 +217,7 @@ type Func<Param> = (param: Param) => void;
 `Func<Param>` creates function types with one parameter of type `Param`.  
 
 Having `Admin <: User`, which of the expressions is true: `Func<Admin> <: Func<User>`, or
-`Func<User> <: Func<Admin>`.  
+`Func<User> <: Func<Admin>`?   
 
 Is `Func<Admin>` a subtype of `Func<User>`, or vice-versa: `Func<User>` is a subtype of `Func<Admin>`?  
 
@@ -243,7 +245,7 @@ Such behavior of `Func` type makes it *contravariant*. In other words, function 
 
 > A type `T` is *contravariant* if having `S <: P`, then `T<P> <: T<S>`.  
 
-In simple words, the subtyping of function types is determined in the opposite direction with the subtyping of the parameter types (when returning types are the same).  
+The subtyping direction of function types is the opposite direction of the subtyping of the parameter types (when returning types are the same).  
 
 ```ts twoslash
 // @include: user
@@ -251,15 +253,19 @@ In simple words, the subtyping of function types is determined in the opposite d
 // @include: is-subtype
 // @include: param
 // ---cut---
-type T33 = IsSubtypeOf<(p: User) => void, (p: Admin) => void>
+type FuncUser = (p: User) => void;
+type FuncAdmin = (p: Admin) => void;
+
+type T31 = IsSubtypeOf<Admin, User>;
 //   ^?
-type T34 = IsSubtypeOf<(n: number) => void, (n: 1 | 2 | 3) => void>
+
+type T32 = IsSubtypeOf<FuncUser, FuncAdmin>;
 //   ^?
 ```
 
 ## 4. Functions subtyping
 
-What is interesting about function types subtyping is that it combines both variances and contravariance.  
+What is interesting about function types subtyping is that it combines both covariance and contravariance.  
 
 > A function type is a *subtype* of a base type if its parameter types are *contravariant* with the base type' parameter types, and the return type is *covariant** with the base type' return type.  
 
@@ -347,6 +353,8 @@ If a [higher-order function](/javascript-higher-order-functions/) accepts callba
 
 The type `T` is covariant if having 2 types `S <: P`, then `T<S> <: T<P>` (the subtyping direction is maintained). An example of a covariant type is the `Promise<T>`.  
 
-But if `T<P> <: T<S>` (the subtyping is flipped), then `T` is contravariant. The function type is contravariant by the parameter types, but covariant by the return types.  
+But if `T<P> <: T<S>` (the subtyping is flipped), then `T` is contravariant. 
+
+The function type is contravariant by the parameter types, but covariant by the return types.  
 
 *Challenge: What other covariant or contravariant types do you know?*
