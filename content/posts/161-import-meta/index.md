@@ -50,4 +50,6 @@ Then `import.meta.url` would contain the absolute URL to the script, e.g. `http:
 
 ## 2. Script's attributes
 
+
+
 ## 3. Conclusion
