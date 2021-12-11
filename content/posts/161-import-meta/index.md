@@ -53,19 +53,21 @@ Then `import.meta.url` would contain the absolute URL to the script, e.g. `http:
 Another useful thing you can access using the `import.meta` is the data attached to the module script tag.  
 
 For example, let's say you want to include an ES module as a script tag, but also attach to it some API key for the service
-that the module provides.  
+that the module provides:  
 
 ```html{1}
 <script
-  data-api-key="0123456-abc"
+  data-api-key="abc-0123456"
   src="my-service.mjs"
   type="module"
 ></script>
 ```
 
+The script tag above is of type `module`, and as well has a data attribute `data-api-key` containing the API key value: `'abc-0123456'`.  
+
 Then the browser assigns the script tag element to the `import.meta.scriptElement`, from where you can access the `api-key` data.
 
-Here's how it would work:
+Here's how it works:
 
 ```javascript
 const apiKey = import.meta.scriptElement.dataset.apiKey;
