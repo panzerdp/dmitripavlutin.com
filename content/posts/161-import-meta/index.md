@@ -1,5 +1,5 @@
 ---
-title: "How to Access the Module Metadata: import.meta"
+title: "How to Access ES Module Metadata using import.meta"
 description: "How to access the meta information (url, script attributes, etc.) of an ES module in JavaScript."  
 published: "2021-12-09"
 modified: "2021-12-09"
@@ -50,6 +50,29 @@ Then `import.meta.url` would contain the absolute URL to the script, e.g. `http:
 
 ## 2. Script's attributes
 
+Another useful thing you can access using the `import.meta` is the data attached to the module script tag.  
 
+For example, let's say you want to include an ES module as a script tag, but also attach to it some API key for the service
+that the module provides.  
+
+```html{1}
+<script
+  data-api-key="0123456-abc"
+  src="my-service.mjs"
+  type="module"
+></script>
+```
+
+Then the browser assigns the script tag element to the `import.meta.scriptElement`, from where you can access the `api-key` data.
+
+Here's how it would work:
+
+```javascript
+const apiKey = import.meta.scriptElement.dataset.apiKey;
+
+console.log(apiKey); // 'abc-0123456'
+```
+
+[Try the demo.](https://codesandbox.io/s/import-meta-dataset-qcbrj?file=/my-service.mjs)
 
 ## 3. Conclusion
