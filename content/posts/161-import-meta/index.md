@@ -15,10 +15,21 @@ about the environment the module runs.
 
 Let's see what useful meta information about the module you can access using `import.meta`.  
 
-## 1. Module's URL: Node.js
+## 1. Module's URL: The browser
 
 You can access the current module's path using the special property `import.meta.url`. The value of the `url` property
 might be slightly different depending on the host that executes JavaScript.  
+
+But if you include the module using a script tag in a browser:
+
+```html
+<script src="main.mjs" type="module"></script>
+```
+[Try the demo.](https://codesandbox.io/s/interesting-dewdney-r7th5?file=/main.mjs)
+
+Then `import.meta.url` would contain the absolute URL to the script, e.g. `http://mysite.com/main.mjs`.  
+
+## 2. Module's URL: Node.js
 
 Let's define a simple module named `main.mjs` that logs the value of the `import.meta.url`:
 
@@ -39,44 +50,20 @@ The absolute path inside `import.meta.value` is always prefixed with `file://`.
 
 *Challenge: create the file `main.mjs` on your computer, then run `node main.mjs`. What is logged to console?*
 
-## 2. Module's URL: The browser
+## 3. Relative URL resolver
 
-But if you include the module using a script tag in a browser:
+In Node.js the async function `import.meta.resolve(specifier[, parent])` helps determining the absolute URL from a `specifier` and `parent` URL (which is optional, and defaults to current's module absolute URL).  
 
-```html
-<script src="main.mjs" type="module"></script>
-```
-[Try the demo.](https://codesandbox.io/s/interesting-dewdney-r7th5?file=/main.mjs)
+The function is still experimental, so to use be sure to add the flag `--experimental-import-meta-resolve` to the Node.js execution command.  
 
-Then `import.meta.url` would contain the absolute URL to the script, e.g. `http://mysite.com/main.mjs`.  
-
-## 2. Script's attributes
-
-Another useful thing you can access using the `import.meta` is the data attached to the module script tag.  
-
-For example, let's say you want to include an ES module as a script tag, but also attach to it some API key for the service
-that the module provides:  
-
-```html{1}
-<script
-  data-api-key="abc-0123456"
-  src="my-service.mjs"
-  type="module"
-></script>
-```
-
-The script tag above is of type `module`, and as well has a data attribute `data-api-key` containing the API key value: `'abc-0123456'`.  
-
-Then the browser assigns the script tag element to the `import.meta.scriptElement`, from where you can access the `api-key` data.
-
-Here's how it works:
+Let's say that you have a module `main.mjs` under the absolute path `/home/user/web-app/main.mjs`.  
 
 ```javascript
-const apiKey = import.meta.scriptElement.dataset.apiKey;
+const resolvedPath = await import.meta.resolve('index.module.css');
 
-console.log(apiKey); // 'abc-0123456'
+console.log(resolvedPath); // '/home/user/web-app/index.module.css'
 ```
 
-[Try the demo.](https://codesandbox.io/s/import-meta-dataset-qcbrj?file=/my-service.mjs)
+Executing `await import.meta.resolve('index.module.css')` would resolve `'index.module.css'` relative to the current module's path: `'/home/user/web-app/index.module.css'`.
 
-## 3. Conclusion
+## 4. Conclusion
