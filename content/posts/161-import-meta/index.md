@@ -15,7 +15,7 @@ about the environment the module runs.
 
 Let's see what useful meta information about the module you can access using `import.meta`.  
 
-## 1. Module's URL
+## 1. Module's URL: Node.js
 
 You can access the current module's path using the special property `import.meta.url`. The value of the `url` property
 might be slightly different depending on the host that executes JavaScript.  
@@ -27,7 +27,7 @@ Let's define a simple module named `main.mjs` that logs the value of the `import
 console.log(import.meta.url); 
 ```
 
-A) If you run `main.mjs` as Node.js script:
+If you run `main.mjs` as Node.js script:
 
 ```bash
 node main.mjs
@@ -39,7 +39,9 @@ The absolute path inside `import.meta.value` is always prefixed with `file://`.
 
 *Challenge: create the file `main.mjs` on your computer, then run `node main.mjs`. What is logged to console?*
 
-B) But if you include the module using a script tag in a browser:
+## 2. Module's URL: The browser
+
+But if you include the module using a script tag in a browser:
 
 ```html
 <script src="main.mjs" type="module"></script>
