@@ -54,16 +54,23 @@ The absolute path inside `import.meta.value` is always prefixed with `file://`.
 
 In Node.js the async function `import.meta.resolve(specifier[, parent])` helps determining the absolute URL from a `specifier` and `parent` URL (which is optional, and defaults to current's module absolute URL).  
 
-The function is still experimental, so to use be sure to add the flag `--experimental-import-meta-resolve` to the Node.js execution command.  
+The function is still experimental, so add the flag `--experimental-import-meta-resolve` to the Node.js execution command.  
 
 Let's say that you have a module `main.mjs` under the absolute path `/home/user/web-app/main.mjs`.  
 
 ```javascript
-const resolvedPath = await import.meta.resolve('index.module.css');
+const resolvedPath = await import.meta.resolve('./helper.mjs');
 
-console.log(resolvedPath); // '/home/user/web-app/index.module.css'
+console.log(resolvedPath); // '/home/user/web-app/helper.mjs'
 ```
 
-Executing `await import.meta.resolve('index.module.css')` would resolve `'index.module.css'` relative to the current module's path: `'/home/user/web-app/index.module.css'`.
+Executing `await import.meta.resolve('./helper.mjs')` would resolve `'./helper.mjs'` relative to the current module's path: `'/home/user/web-app/index.module.css'`.  
+
+What's important is that if the resolved module doesn't exist, then the function would throw a module not found error.  
 
 ## 4. Conclusion
+
+`import.meta` is an object available inside the ES module scope. This object contains useful metadata information about the module.  
+
+One of the most useful meta information about the module is `import.meta.url`: which indicates the absolute URL of the module in the browser, and the absolute path (prefixed with `file://`) in Node.js.  
+
