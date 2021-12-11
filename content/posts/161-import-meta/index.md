@@ -56,7 +56,9 @@ In Node.js the async function `import.meta.resolve(specifier[, parent])` helps d
 
 The function is still experimental, so add the flag `--experimental-import-meta-resolve` to the Node.js execution command.  
 
-Let's say that you have a module `main.mjs` under the absolute path `/home/user/web-app/main.mjs`.  
+Let's say that you have a module `main.mjs` under the absolute path `/home/user/web-app/main.mjs`. You also have a module `helper.mjs` that is located in the same folder, and you'd like to get the absolute path to `helper.mjs`.  
+
+Here's how you could do it:
 
 ```javascript
 const resolvedPath = await import.meta.resolve('./helper.mjs');
@@ -64,7 +66,7 @@ const resolvedPath = await import.meta.resolve('./helper.mjs');
 console.log(resolvedPath); // '/home/user/web-app/helper.mjs'
 ```
 
-Executing `await import.meta.resolve('./helper.mjs')` would resolve `'./helper.mjs'` relative to the current module's path: `'/home/user/web-app/index.module.css'`.  
+Executing `await import.meta.resolve('./helper.mjs')` would resolve `'./helper.mjs'` relative to the current module's path: `'/home/user/web-app/helper.mjs'`.  
 
 What's important is that if the resolved module doesn't exist, then the function would throw a module not found error.  
 
