@@ -1,11 +1,11 @@
 ---
 title: "How to Access ES Module Metadata using import.meta"
 description: "How to access the meta information (module URL, etc.) of an ES module in JavaScript."  
-published: "2021-12-09"
-modified: "2021-12-09"
+published: "2021-12-12"
+modified: "2021-12-12"
 thumbnail: "./images/cover.png"
 slug: javascript-import-meta
-tags: ['javascript', 'module']
+tags: ['javascript', 'module', 'url']
 recommended: ['javascript-json-modules', 'ecmascript-modules-nodejs']
 type: post
 ---
@@ -20,7 +20,7 @@ Let's see what useful information about the module you can access using `import.
 
 A useful property both browser and Node.js assign to `import.meta` is the `url` property.  
 
-In a browser `import.meta.url` contains the absolute URL to the current ES module.  
+In a browser, `import.meta.url` contains the absolute URL to the current ES module.  
 
 For example, let's define a module named `main.mjs` that logs the value of the `import.meta.url`:
 
@@ -29,7 +29,7 @@ For example, let's define a module named `main.mjs` that logs the value of the `
 console.log(import.meta.url); 
 ```
 
-If you load this module using a script tag (adding `type="module"` attribute) to a web page located on `http://mysite.com`:
+If you load `main.mjs` module using a script tag (adding `type="module"` attribute) in a web page located at `http://mysite.com`:
 
 ```html
 <script src="main.mjs" type="module"></script>
@@ -54,9 +54,15 @@ The absolute path inside `import.meta.url` is always prefixed with `file://`.
 
 ## 3. Relative path resolver (Node.js)
 
-Node.js also provides under `import.meta ` an async function `resolve(specifier[, parent])` that resolves a relative path `specifier` in regards to a `parent` path.  
+Node.js also provides under `import.meta ` an async function:
 
-`parent` argument is optional and defaults to the current module absolute path.  
+```javascript
+const absolutePath = await import.meta.resolve(specifier[, parent]);
+```
+
+that resolves a relative `specifier` in regards to a `parent` absolute path.  
+
+`parent` argument is optional and defaults to the current module absolute path (i.e. `import.meta.url`).  
 
 The function is still experimental and is available with `--experimental-import-meta-resolve` flag.  
 
@@ -79,6 +85,6 @@ If the resolved module doesn't exist, then the function would throw a module not
 
 `import.meta` is an object available inside the ES module scope. This object contains useful metadata information about the module.  
 
-A useful meta property about the module is `import.meta.url` &mdash; which indicates the absolute URL of the module in the browser, and the absolute path (prefixed with `file://`) in Node.js.  
+A useful module meta property is `import.meta.url` &mdash; which indicates the absolute URL of the module in the browser or the absolute path in Node.js (prefixed with `file://`).  
 
 *Challenge: without using `import.meta.url`, how would you determine the URL of the script tag?*
