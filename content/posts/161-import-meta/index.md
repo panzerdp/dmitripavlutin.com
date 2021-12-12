@@ -10,10 +10,9 @@ recommended: ['javascript-json-modules', 'ecmascript-modules-nodejs']
 type: post
 ---
 
-`import.meta` is an object available inside of an ES module that contains useful information
-about the environment the module runs.  
+`import.meta` is an object available inside of an ES module that contains useful information about the environment in which the module runs.  
 
-The contents of the `import.meta` object is extensible, and the host can write any useful information into it.  
+`import.meta` object is extensible, and the host can write any useful information into it.  
 
 Let's see what useful information about the module you can access using `import.meta`.  
 
@@ -57,7 +56,7 @@ The absolute path inside `import.meta.url` is always prefixed with `file://`.
 
 Node.js also provides under `import.meta ` an async function `resolve(specifier[, parent])` that resolves a relative path `specifier` in regards to a `parent` path.  
 
-`parent` argument is optional, and defaults to current's module absolute path.  
+`parent` argument is optional and defaults to the current module absolute path.  
 
 The function is still experimental and is available with `--experimental-import-meta-resolve` flag.  
 
