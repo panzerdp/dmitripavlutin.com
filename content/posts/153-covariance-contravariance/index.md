@@ -93,7 +93,7 @@ This function accepts arguments of type `User`, `Admin`, and instances of any ot
 // @include: log-username
 // ---cut---
 logUsername(new User('user1'));         // logs "user1"
-logUsername(new Admin('admin1', true)); // logs "user2"
+logUsername(new Admin('admin1', true)); // logs "admin1"
 ```
 
 ### 1.1 A few helpers
