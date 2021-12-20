@@ -1,5 +1,5 @@
 ---
-title: "Grouping Array Items in JavaScript: Welcome array.groupBy()"
+title: "Array Grouping in JavaScript: Welcome array.groupBy()"
 description: "array.groupBy() method let's you group items of an array by a certain criteria."  
 published: "2021-12-19"
 modified: "2021-12-19"
@@ -16,7 +16,7 @@ standard utility libraries. For example, the [array in Ruby](https://ruby-doc.or
 JavaScript step by steps also enriches its standard library on strings and arrays. In one of the previous posts I described
 the new [array.at()](/javascript-array-at/) method.  
 
-The todays's hero is the new [array group proposal](https://github.com/tc39/proposal-array-grouping) (currently at stage 3) that introduces new methods `array.groupBy()` and `array.groupByToMap()`.
+The todays's hero is the new [array group proposal](https://github.com/tc39/proposal-array-grouping) (currently at stage 3) that introduces new methods `array.groupBy()` and `array.groupByToMap()`. The [polyfills](https://github.com/zloirock/core-js#array-grouping) are available in `core-js` library.  
 
 Let's see how you may benefit from these methods.  
 
@@ -60,7 +60,16 @@ const groupByCategory = products.reduce((group, product) => {
   return group;
 }, {});
 
-console.log(groupByCategory); // { fruits: [...], vegetables: [...] }
+console.log(groupByCategory);
+// {
+//   'fruits': [
+//     { name: 'apples', category: 'fruits' }, 
+//     { name: 'oranges', category: 'fruits' },
+//   ],
+//   'vegetables': [
+//     { name: 'potatoes', category: 'vegetables' }
+//   ]
+// }
 ```
 [Try the demo.](https://codesandbox.io/s/elastic-montalcini-tlgvt?file=/src/index.js)
 
@@ -77,12 +86,68 @@ const groupByCategory = products.groupBy(product => {
   return product.category;
 });
 
-console.log(groupByCategory); // { fruits: [...], vegetables: [...] }
+console.log(groupByCategory); 
+// {
+//   'fruits': [
+//     { name: 'apples', category: 'fruits' }, 
+//     { name: 'oranges', category: 'fruits' },
+//   ],
+//   'vegetables': [
+//     { name: 'potatoes', category: 'vegetables' }
+//   ]
+// }
 ```
 
-`products.groupBy(callback)` accepts a callback function. The callback function is being invoked with 3 arguments: the current array item, index, and the array itself. 
+[Try the demo.](https://codesandbox.io/s/bold-goodall-r3c4c?file=/src/index.js)
+
+`products.groupBy(product => {...})` returns an object where the properties are the category names, and each property is an array with the products from the corresponding category name.  
+
+The benefit is that performing grouping using `products.groupBy()` requires less code and is easier to understand that using `product.reduce()`.  
+
+`array.groupBy(callback)` returns an object where each property contains an array and each item ends up in the array at the property which name is returned by the `callback` function.  
+
+`array.groupBy(callback)` accepts a callback function that's invoked with 3 arguments: the current array item, index, and the array itself. The `callback` should return a string: the property, aka group name, at which you'd like to add the item.  
+
+```javascript
+const groupedObject = array.groupBy((item, index, array) => {
+  // ...
+  return groupNameAsString;
+});
+```
 
 ## 2. *array.groupByToMap()*
 
+Sometimes you may want to use a `Map` instead of a plain object. The biggest benefit of `Map` is that it accepts any data type as a key, wherein in case of the plain object you're limited to strings only.  
+
+So, if you'd like to group data into a `Map`, you can use the method `array.groupByToMap()`. 
+
+`array.groupByToMap(callback)` works exactly like `array.groupBy(callback)`, only that it groups items into a `Map` instead of a plain JavaScript object.  
+
+For example, grouping the products array into a map by category name is performed as follows:
+
+```javascript
+const groupByCategory = products.groupByToMap(product => {
+  return product.category;
+});
+
+console.log(groupByCategory); 
+// Map([
+//   ['fruits', [
+//     { name: 'apples', category: 'fruits' }, 
+//     { name: 'oranges', category: 'fruits' },
+//   ]],
+//   ['vegetables', [
+//     { name: 'potatoes', category: 'vegetables' }
+//   ]
+// ])
+```
+
+[Try the demo.](https://codesandbox.io/s/sparkling-waterfall-kdlpy?file=/src/index.js)
+
 ## 3. Conclusion
 
+If you want to easily group the items of an array (similarly to `GROUP BY` in SQL), then welcome the new methods `array.groupBy()` and `array.groupByToMap()`.  
+
+Both functions accept a callback that should return the key of the group where the current items must be inserted.  
+
+`array.groupBy()` groups the items into a plain JavaScript object, while `array.groupByToMap()` groups them into a `Map` instance.  
