@@ -10,10 +10,9 @@ recommended: ['javascript-array-at', 'operations-on-arrays-javascript']
 type: post
 ---
 
-I have little experience in Ruby programming language, but many developers like it because of the rich 
-standard utility libraries. For example, the [array in Ruby](https://ruby-doc.org/core-3.0.2/Array.html) has a huge number of methods.  
+I have little experience with Ruby programming language, but many developers like it because of the rich standard utility libraries. For example, the [array in Ruby](https://ruby-doc.org/core-3.0.2/Array.html) has a huge number of methods.  
 
-JavaScript step by steps also enriches its standard library on strings and arrays. In one of the previous posts I described
+JavaScript step by step also enriches its standard library on strings and arrays. In one of the previous posts, I described
 the new [array.at()](/javascript-array-at/) method.  
 
 The todays's hero is the new [array group proposal](https://github.com/tc39/proposal-array-grouping) (currently at stage 3) that introduces new methods `array.groupBy()` and `array.groupByToMap()`. The [polyfills](https://github.com/zloirock/core-js#array-grouping) are available in `core-js` library.  
@@ -50,7 +49,7 @@ const groupByCategory = {
 
 How would you get an array like `groupByCategory` from `products` array?  
 
-The usual way to do this is invoking the `array.reduce()` method with the right callback function:
+The usual way to do this is by invoking the `array.reduce()` method with the right callback function:
 
 ```javascript
 const groupByCategory = products.reduce((group, product) => {
@@ -102,7 +101,7 @@ console.log(groupByCategory);
 
 `products.groupBy(product => {...})` returns an object where the properties are the category names, and each property is an array with the products from the corresponding category name.  
 
-The benefit is that performing grouping using `products.groupBy()` requires less code and is easier to understand that using `product.reduce()`.  
+The benefit is that performing grouping using `products.groupBy()` requires less code and is easier to understand than using `product.reduce()`.  
 
 `array.groupBy(callback)` returns an object where each property contains an array and each item ends up in the array at the property which name is returned by the `callback` function.  
 
@@ -117,7 +116,7 @@ const groupedObject = array.groupBy((item, index, array) => {
 
 ## 2. *array.groupByToMap()*
 
-Sometimes you may want to use a `Map` instead of a plain object. The biggest benefit of `Map` is that it accepts any data type as a key, wherein in case of the plain object you're limited to strings only.  
+Sometimes you may want to use a `Map` instead of a plain object. The biggest benefit of `Map` is that it accepts any data type as a key, wherein in the case of the plain object you're limited to strings only.  
 
 So, if you'd like to group data into a `Map`, you can use the method `array.groupByToMap()`. 
 
