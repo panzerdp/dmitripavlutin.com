@@ -151,3 +151,5 @@ If you want to easily group the items of an array (similarly to `GROUP BY` in SQ
 Both functions accept a callback that should return the key of the group where the current items must be inserted.  
 
 `array.groupBy()` groups the items into a plain JavaScript object, while `array.groupByToMap()` groups them into a `Map` instance.  
+
+If you'd like to use these functions right away in your code, then use the [polyfill](https://github.com/zloirock/core-js#array-grouping) provided by core-js library.  
