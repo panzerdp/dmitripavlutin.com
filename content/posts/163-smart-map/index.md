@@ -50,7 +50,7 @@ But thanks to the `array.flatMap()` method, you can perform mapping and removing
 ```javascript
 const numbers = [0, 3, 6];
 const doubled = numbers.flatMap(number => {
-  return number === 0 ? [] : [number * 2];
+  return number === 0 ? [] : [2 * number];
 });
 
 console.log(doubled); // [6, 12]
@@ -92,8 +92,43 @@ But beyond simple flattening, the method can do much more. By controlling the nu
 * modify the mapped item by returning an array with on the new value `[newValue]`
 * or add new items by returning an array with multiple values: `[newValue1, newValue2, ...]`.  
 
-For example, let's remove all `0` values from the array using `array.flatMap()`:
+For example, as you saw in the previous section, you can create a new array by doubling the values, but also remove the zeroes `0`:
 
+```javascript
+const numbers = [0, 3, 6];
+const doubled = numbers.flatMap(number => {
+  return number === 0 ? [] : [2 * number];
+});
 
+console.log(doubled); // [6, 12]
+```
+
+Let's look into more detail on how this works.  
+
+The callback function returns an empty array `[]` in case if the current iterated item is `0`. That would mean that when being flattened, the empty array `[]` provides no value at all.  
+
+However, if the current iterated item is non-zero, then `[number * 2]` is returned. When `[number * 2]` array is flatenned, only `number * 2` is added in the resulted array.  
+
+Of course, you can use `array.flatMap()` to increase the number of items in the mapped array. 
+
+For example, the following code snipped an array of numbers is increased by adding a doubled and trippled value:
+
+```javascript
+const numbers = [1, 4];
+const trippled = numbers.flatMap(number => {
+  return [number, 2 * number, 3 * number];
+});
+
+console.log(trippled);
+// [1, 2, 3, 4, 8, 12]
+```
 
 ## 3. Conclusion
+
+If you want to map an array to a new array, but also have control over how many items you'd like to add to the new mapped array, then `array.flatMap()` method is the way to go.  
+
+The callback function of the `array.flatMap(callback)` is called with 3 arguments: the current iterated item, index, and the original array. The array returned from the callback function is then flattened at 1 level deep, and the resulted items are inserted in the resulted mapped array.  
+
+Note that if you just want to map a single item value to a single new value, then the standard `array.map()` is the way to go. 
+
+*Challenge: can you implement a function `filter(array, predicateFunc)` that would return a new filtered array using `predicateFunc`? Please use `array.filterMap()` for your implementation.*
