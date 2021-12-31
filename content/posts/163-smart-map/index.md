@@ -3,7 +3,7 @@ title: "A Smarter JavaScript Mapper: array.flatMap()"
 description: "array.flatMap() is a method on the array that let's you map elements a littler smarter."  
 published: "2021-12-31"
 modified: "2021-12-31"
-thumbnail: "./images/cover-3.png"
+thumbnail: "./images/cover.png"
 slug: javascript-array-flatmap
 tags: ['javascript', 'array']
 recommended: ['javascript-array-at', 'javascript-array-group']
