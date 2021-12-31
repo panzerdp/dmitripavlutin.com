@@ -10,11 +10,11 @@ recommended: ['javascript-array-at', 'javascript-array-group']
 type: post
 ---
 
-`array.map()` is a very useful and widely used mapper function: it takes an array and a mapper function, and returns the mapped array.  
+`array.map()` is a useful and widely used mapper function: it takes an array and a mapper function, and returns a mapped array.  
 
 But in this post I'm going to present an interesting array method `array.flatMap()` (available starting ES2019), as an alternative to `array.map()`.  
 
-## 1. Smarter map
+## 1. Smarter mapper
 
 Having an array of numbers, how would you create a new array with the items doubled?  
 
