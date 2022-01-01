@@ -1349,7 +1349,7 @@ Testability is a practical criteria to identify how well your components are str
 
 > A **meaningful** component is easy to understand what it does.  
 
-It's hard underestimate the importance of readable code. How many times did you stuck with obscured code? You see the characters, but don't see the meaning.  
+It's hard overstate the importance of readable code. How many times did you stuck with obscured code? You see the characters, but don't see the meaning.  
 
 Developer spends most of the time reading and understanding code, than actually writing it. Coding activity is 75% of time understanding code, 20% of time modifying existing code and only 5% writing new ([source](https://blog.codinghorror.com/when-understanding-means-rewriting/)).  
 
