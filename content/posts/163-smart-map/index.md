@@ -27,6 +27,8 @@ const doubled = numbers.map(n => n * 2);
 console.log(doubled); // logs [0, 6, 12]
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/7g5fz93y/)
+
 `numbers.map(number => 2 * number)` maps `numbers` array to a new array where each number is doubled.  
 
 But what if you need to double the numbers, but also remove the zeroes in the mapped array?  
@@ -41,6 +43,8 @@ const doubled = numbers
 
 console.log(doubled); // logs [6, 12]
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/cvtjyLpo/)
 
 `doubled` array now has the elements from `numbers` doubled and also has the zeroes removed.  
 
@@ -59,6 +63,8 @@ const doubled = numbers.flatMap(number => {
 console.log(doubled); // logs [6, 12]
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/j945qunz/)
+
 By using only the `numbers.flatMap()` you can map an array to another array, but also skip certain elements from mapping.  
 
 Let's see in more detail how `array.flatMap()` works.  
@@ -70,7 +76,7 @@ Let's see in more detail how `array.flatMap()` works.
 ```javascript
 const mappedArray = array.flatMap((item, index, origArray) => {
   // ...
-  return array;
+  return [value1, value2, ..., valueN];
 }[, thisArg]);
 ```
 
@@ -86,6 +92,8 @@ const flatten = arrays.flatMap(item => item);
 
 console.log(flatten); // logs [2, 4, 6]
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/5rwvcz17/)
 
 In the example above `arrays` items as arrays. `arrays` was flatten using `array.flatMap(item => item)`.  
 
@@ -106,6 +114,8 @@ const doubled = numbers.flatMap(number => {
 console.log(doubled); // logs [6, 12]
 ```
 
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/av1w9jd3/)
+
 Let's look into more detail on how this works.  
 
 The callback function returns an empty array `[]` if the current item is `0`. That would mean that when being flattened, the empty array `[]` provides no value at all.  
@@ -125,6 +135,8 @@ const trippled = numbers.flatMap(number => {
 console.log(trippled);
 // logs [1, 2, 3, 4, 8, 12]
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/k7p2x1ar/)
 
 ## 3. Conclusion
 
