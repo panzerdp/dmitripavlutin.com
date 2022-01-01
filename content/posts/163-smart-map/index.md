@@ -10,7 +10,7 @@ recommended: ['javascript-array-at', 'javascript-array-group']
 type: post
 ---
 
-`array.map()` is a useful and widely used mapper function: it takes an array and a mapper function, and returns a mapped array.  
+`array.map()` is a useful and widely used mapper function: it takes an array and a mapper function and returns a mapped array.  
 
 In this post I'm going to present an array method `array.flatMap()` (available starting ES2019), as an alternative to `array.map()`.  
 
@@ -42,7 +42,7 @@ const doubled = numbers
 console.log(doubled); // logs [6, 12]
 ```
 
-`doubled` array now has the elements from `numbers` doubled and also have the zeroes removed.  
+`doubled` array now has the elements from `numbers` doubled and also has the zeroes removed.  
 
 Ok, a combination of `array.map()` and `array.filter()` maps and filters arrays. But is there a shorter approach?  
 
@@ -74,9 +74,9 @@ const mappedArray = array.flatMap((item, index, origArray) => {
 }[, thisArg]);
 ```
 
-The callback function is invoked with 3 arguments: the current item, index, and the original array. The array returned by the callback is then flatten by 1 level deep, and the resulted items are added to the mapped array.  
+The callback function is invoked with 3 arguments: the current item, index, and the original array. The array returned by the callback is then flattened by 1 level deep, and the resulting items are added to the mapped array.  
 
-Also the method accepts a second, optional argument, indicating the `this` value inside of the callback.  
+Also, the method accepts a second, optional argument, indicating the `this` value inside of the callback.  
 
 The simplest way you can use `array.flatMap()` is to flatten an array that contains items as arrays:
 
@@ -110,11 +110,11 @@ Let's look into more detail on how this works.
 
 The callback function returns an empty array `[]` if the current item is `0`. That would mean that when being flattened, the empty array `[]` provides no value at all.  
 
-If the current iterated item is non-zero then `[2 * number]` is returned. When `[2 * number]` array is flatenned, only `2 *number` is added into the resulted array.  
+If the current iterated item is non-zero then `[2 * number]` is returned. When `[2 * number]` array is flattened, only `2 *number` is added into the resulting array.  
 
 You can also use `array.flatMap()` to increase the number of items in the mapped array. 
 
-For example, the following code snipped maps an array of numbers to a new array by adding a doubled and trippled numbers:
+For example, the following code snipped maps an array of numbers to a new array by adding doubled and tripled numbers:
 
 ```javascript
 const numbers = [1, 4];
@@ -130,7 +130,7 @@ console.log(trippled);
 
 `array.flatMap()` method is the way to go if you want to map an array to a new array, but also have control over how many items you'd like to add to the new mapped array.  
 
-The callback function of `array.flatMap(callback)` is called with 3 arguments: the current iterated item, index, and the original array. The array returned from the callback function is then flattened at 1 level deep, and the resulted items are inserted in the resulted mapped array.  
+The callback function of `array.flatMap(callback)` is called with 3 arguments: the current iterated item, index, and the original array. The array returned from the callback function is then flattened at 1 level deep, and the resulting items are inserted in the resulting mapped array.  
 
 Note that if you just want to map a single item to a single new value, then strive to the standard `array.map()`.  
 
