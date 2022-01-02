@@ -12,13 +12,13 @@ type: post
 
 `array.map()` is a very useful mapper function: it takes an array and a mapper function, then returns a new mapped array.  
 
-But in this post you'll read about an alternative to `array.map()`: the `array.flatMap()` (available starting ES2019). This method gives you the ability to map, but also to remove or even add new items in the resulting mapped array.    
+However, there's an alternative to `array.map()`: the `array.flatMap()` (available starting ES2019). This method gives you the ability to map, but also to remove or even add new items in the resulting mapped array.    
 
 ## 1. Smarter mapper
 
 Having an array of numbers, how would you create a new array with the items doubled?  
 
-Using the `array.map()` function is the best approach:
+Using the `array.map()` function is a good approach:
 
 ```javascript
 const numbers = [0, 3, 6];
@@ -31,7 +31,9 @@ console.log(doubled); // logs [0, 6, 12]
 
 `numbers.map(number => 2 * number)` maps `numbers` array to a new array where each number is doubled.  
 
-But what if you need to double the numbers, but also remove the zeroes in the mapped array?  
+For the cases when you need to map one to one, meaning that the mapped array will have the same number of items as the original array, `array.map()` works pretty well.
+
+But what if you need to double the numbers of an array and also skip zeroes from the mapping?  
 
 Using `array.map()` directly isn't possible, because the method always creates a mapped array with the same number of items as the original array. But you can use a combination of `array.map()` and `array.filter()`:
 
@@ -46,13 +48,13 @@ console.log(doubled); // logs [6, 12]
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/cvtjyLpo/)
 
-`doubled` array now has the elements from `numbers` doubled and also has the zeroes removed.  
+`doubled` array now contains items of `numbers` multiplied by 2 and also also doesn't contain any zeroes.  
 
 Ok, a combination of `array.map()` and `array.filter()` maps and filters arrays. But is there a shorter approach?  
 
 Yes! Thanks to `array.flatMap()` method you can perform mapping and removing items with just one method call. 
 
-Here's how you can use `array.flatMap()` to return a new mapped array with items doubled, at the same time filtering from zeroes `0`:
+Here's how you can use `array.flatMap()` to return a new mapped array with items doubled, at the same time filtering zeroes `0`:
 
 ```javascript
 const numbers = [0, 3, 6];
@@ -82,7 +84,7 @@ const mappedArray = array.flatMap((item, index, origArray) => {
 
 The callback function is invoked upen each iteam in the original array with 3 arguments: the current item, index, and the original array. The array returned by the callback is then flattened by 1 level deep, and the resulting items are added to the mapped array.  
 
-Also, the method accepts a second, optional argument, indicating the `this` value inside of the callback.  
+Also, the method accepts a second, optional, argument indicating the `this` value inside of the callback.  
 
 The simplest way you can use `array.flatMap()` is to flatten an array that contains items as arrays:
 
@@ -95,13 +97,13 @@ console.log(flatten); // logs [2, 4, 6]
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/5rwvcz17/)
 
-In the example above `arrays` contains arrays of numbers: `[[2, 4], [6]]`. `arrays.flatMap(item => item)` flattens the array to `[2, 4, 6]`.  
+In the example above `arrays` contains arrays of numbers: `[[2, 4], [6]]`. Calling `arrays.flatMap(item => item)` flattens the array to `[2, 4, 6]`.  
 
-But beyond simple flattening, the method can do more. By controlling the number of array items you return from the callback, you can:
+But `array.flatMap()` can do more beyond simple flattening. By controlling the number of array items you return from the callback, you can:
 
-* remove the item from the resulting array by returning an empty array `[]`
-* modify the mapped item by returning an array with on the new value `[newValue]`
-* or add new items by returning an array with multiple values: `[newValue1, newValue2, ...]`.  
+* *remove* the item from the resulting array by returning an empty array `[]`
+* *modify* the mapped item by returning an array with one new value `[newValue]`
+* or *add* new items by returning an array with multiple values: `[newValue1, newValue2, ...]`.  
 
 For example, as you saw in the previous section, you can create a new array by doubling the items, but also remove the zeroes `0`:
 
@@ -116,11 +118,11 @@ console.log(doubled); // logs [6, 12]
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/av1w9jd3/)
 
-Let's look into more detail on how this works.  
+Let's look into more detail on how the example above works.  
 
 The callback function returns an empty array `[]` if the current item is `0`. That would mean that when being flattened, the empty array `[]` provides no value at all.  
 
-If the current iterated item is non-zero then `[2 * number]` is returned. When `[2 * number]` array is flattened, only `2 *number` is added into the resulting array.  
+If the current iterated item is non-zero, then `[2 * number]` is returned. When `[2 * number]` array is flattened, only `2 * number` is added into the resulting array.  
 
 You can also use `array.flatMap()` to increase the number of items in the mapped array. 
 
