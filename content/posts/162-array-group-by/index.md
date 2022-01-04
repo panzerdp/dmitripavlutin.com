@@ -114,7 +114,7 @@ const groupedObject = array.groupBy((item, index, array) => {
 
 ## 2. *array.groupByToMap()*
 
-Sometimes you may want to use a `Map` instead of a plain object. The benefit of `Map` is that it accepts any data type as a key, but the plain object is limited to strings only.  
+Sometimes you may want to use a `Map` instead of a plain object. The benefit of `Map` is that it accepts any data type as a key, but the plain object is limited to strings and symbols only.  
 
 So, if you'd like to group data into a `Map`, you can use the method `array.groupByToMap()`. 
 
