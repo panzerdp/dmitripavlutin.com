@@ -48,7 +48,7 @@ console.log(doubled); // logs [6, 12]
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/cvtjyLpo/)
 
-`doubled` array now contains items of `numbers` multiplied by 2 and also also doesn't contain any zeroes.  
+`doubled` array now contains items of `numbers` multiplied by 2 and also doesn't contain any zeroes.  
 
 Ok, a combination of `array.map()` and `array.filter()` maps and filters arrays. But is there a shorter approach?  
 
