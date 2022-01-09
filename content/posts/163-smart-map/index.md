@@ -82,7 +82,7 @@ const mappedArray = array.flatMap((item, index, origArray) => {
 }[, thisArg]);
 ```
 
-The callback function is invoked upen each iteam in the original array with 3 arguments: the current item, index, and the original array. The array returned by the callback is then flattened by 1 level deep, and the resulting items are added to the mapped array.  
+The callback function is invoked upon each iteam in the original array with 3 arguments: the current item, index, and the original array. The array returned by the callback is then flattened by 1 level deep, and the resulting items are added to the mapped array.  
 
 Also, the method accepts a second, optional, argument indicating the `this` value inside of the callback.  
 
