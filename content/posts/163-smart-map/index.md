@@ -58,9 +58,9 @@ Here's how you can use `array.flatMap()` to return a new mapped array with items
 
 ```javascript
 const numbers = [0, 3, 6];
-const doubled = numbers.flatMap(number => {
-  return number === 0 ? [] : [2 * number];
-});
+const doubled = numbers.flatMap(number =>
+  number === 0 ? [] : [2 * number]
+);
 
 console.log(doubled); // logs [6, 12]
 ```
@@ -109,9 +109,9 @@ For example, as you saw in the previous section, you can create a new array by d
 
 ```javascript
 const numbers = [0, 3, 6];
-const doubled = numbers.flatMap(number => {
-  return number === 0 ? [] : [2 * number];
-});
+const doubled = numbers.flatMap(number =>
+  number === 0 ? [] : [2 * number]
+);
 
 console.log(doubled); // logs [6, 12]
 ```
@@ -130,9 +130,9 @@ For example, the following code snipped maps an array of numbers to a new array 
 
 ```javascript
 const numbers = [1, 4];
-const trippled = numbers.flatMap(number => {
-  return [number, 2 * number, 3 * number];
-});
+const trippled = numbers.flatMap(number =>
+  [number, 2 * number, 3 * number]
+);
 
 console.log(trippled);
 // logs [1, 2, 3, 4, 8, 12]
