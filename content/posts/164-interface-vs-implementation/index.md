@@ -39,14 +39,15 @@ And you have to implement a `<SortedList>` component that would render the list 
 Here's a typical, first thought, implementation of the `<SortedList>` component:
 
 ```tsx twoslash
-interface SortedListProps {
+interface Props {
   list: { name: string; salary: number }[];
   sortType: 'name' | 'salary'
 }
 
-export function SortedListProps(
-  { list, sortType }: SortedListProps
-): JSX.Element {
+export function SortedListProps({ 
+  list, 
+  sortType 
+}: Props): JSX.Element {
   return <div></div>;
 }
 ```
