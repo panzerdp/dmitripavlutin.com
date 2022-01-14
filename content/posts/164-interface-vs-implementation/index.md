@@ -18,7 +18,7 @@ If you haven't taken the time, *in advance*, to think about the possible ways yo
 
 In this post, I'm going to discuss about a software design principle that *advises to program to an interface rather that an implementation*.  
 
-# 1. Sorting behavior
+# 1. Programming to an implementation
 
 A good way to understand the benefits of the software design principles is to follow an example and demonstrate visible benefits (like the before and after commercials).  
 
@@ -49,8 +49,14 @@ export function SortedListProps({
   sortBy 
 }: Props): JSX.Element {
   const list = [...list].sort((person1, person2) => {
-    
+
   });
   return <div></div>;
 }
 ```
+
+## 2. Programming to an interface
+
+## 3. Benefits vs increased complexity
+
+## 4. Conclusion
