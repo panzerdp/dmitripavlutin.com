@@ -12,7 +12,7 @@ type: post
 
 You've written some code, tested it, and shipped to production. Then you never have to modify that code again. Wouldn't that be great?
 
-But putting the dreams aside... you have to modify, even multiple times, the code that has been written. 
+But putting the dreams aside... you have to modify, even multiple times, the code that has been written. And this in my opinion one of the greatest challenges in software development: update the already written code.  
 
 If you haven't taken the time, *in advance*, to think about the possible ways your code can change, you are quickly going to start have problems with [rigid and fragile code](https://www.excella.com/insights/top-4-symptoms-of-bad-code).  
 
@@ -20,9 +20,9 @@ In this post, I'm going to discuss about a software design principle that *advis
 
 # 1. Sorting behavior
 
-A good way to understand the benefits of the software design principles is to follow an example and demonstrate visible benefits.  
+A good way to understand the benefits of the software design principles is to follow an example and demonstrate visible benefits (like the before and after commercials).  
 
-First, I'm going to show you an implementation that's not adapted to change. Then by applying the *program to an interface* principle redesign the component and demonstrate to you the advantages of the new design. 
+First, I'm going to show you an implementation that's not adapted to change. Then by applying the *program to an interface* principle redesign the component and demonstrate the advantages of the new design. 
 
 You have the task of creating a component that displays a list of employees, alongside with their salaries. Here's a sample of the data that the component should accept:
 
@@ -41,13 +41,16 @@ Here's a typical, first thought, implementation of the `<SortedList>` component:
 ```tsx twoslash
 interface Props {
   list: { name: string; salary: number }[];
-  sortType: 'name' | 'salary'
+  sortBy: 'name' | 'salary'
 }
 
 export function SortedListProps({ 
   list, 
-  sortType 
+  sortBy 
 }: Props): JSX.Element {
+  const list = [...list].sort((person1, person2) => {
+    
+  });
   return <div></div>;
 }
 ```
