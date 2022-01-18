@@ -24,6 +24,46 @@ A good way to understand the benefits of the software design principles is to fo
 
 First, I'm going to show you an implementation that's not adapted to change. Then by applying the *program to an interface* principle redesign the component and demonstrate the advantages of the new design. 
 
+For example, you have the task of implementing a class `ListRenderer`. The class has just one method `listRender.render(names)` that renders a list of names into an unordered HTML list.  
+
+Here's an example of the implementation:
+
+```twoslash include list-renderer
+class ListRenderer {
+  render(names: string[]): string {
+    let html = '<ul>';
+    for (const name of names) {
+      html += `<li>${name}</li>`;
+    }
+    html += '</ul>';
+    return html;
+  }
+}
+```
+
+```ts twoslash
+// @include: list-renderer
+```
+
+Now here's how you can use the list renderer:
+
+```ts twoslash
+// @include: list-renderer
+// ---cut---
+const renderer = new ListRenderer();
+
+console.log(renderer.render(['Joker', 'Bane', 'Batman']));
+// <ul>
+//  <li>Batman</li>
+//  <li>Joker</li>
+// </ul>
+```
+
+The above implementation is a good solution.  At least without any further changes to the requirements of how `ListRenderer` works.  
+
+But like I mentioned in the post introduction, there's a good chance that the already written code have to be modified for the new requirements. 
+
+For example, there's a new requirement to the list renderer class to also sort alphabetically the names before rendering.  
 
 ## 2. Programming to an interface
 
