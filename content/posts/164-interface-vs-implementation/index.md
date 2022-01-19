@@ -18,7 +18,7 @@ If you haven't taken the time, *in advance*, to think about the possible ways yo
 
 In this post, I'm going to discuss about a software design principle that *advises to program to an interface rather that an implementation*.  
 
-# 1. Programming to an implementation
+# 1. The list renderer
 
 A good way to understand the benefits of the software design principles is to follow an example and demonstrate visible benefits.  
 
@@ -59,14 +59,65 @@ console.log(renderer.render(['Joker', 'Bane', 'Batman']));
 // </ul>
 ```
 
-The above implementation is a good solution.  At least without any further changes to the requirements of how `ListRenderer` works.  
+The above implementation is a good solution. At least without any further changes to the requirements of how `ListRenderer` works.  
 
-But like I mentioned in the post introduction, there's a good chance that the already written code have to be modified for the new requirements. 
+# 2. Programming to an implementation
 
-For example, there's a new requirement to the list renderer class to also sort alphabetically the names before rendering.  
+Like I mentioned in the post introduction, there's a good chance that the already written code will be modified for the new requirements that might arise. 
 
-## 2. Programming to an interface
+Let's say there's a new requirement to the list renderer to also *sort alphabetically the rendered names*.  
 
-## 3. Benefits vs increased complexity
+You can implement this requirement by creating a new sorter class, for example `SortAlphabetically`:
 
-## 4. Conclusion
+```twoslash include sort-alphabetically
+class SortAlphabetically {
+  sort(strings: string[]): string[] {
+    return [...strings].sort((s1, s2) => s1.localeCompare(s2))
+  }
+}
+```
+
+```ts twoslash
+// @include: sort-alphabetically
+```
+
+where `s1.localCompare(s2)` is a [string method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare) that compare whether `s1` comes alphabetically before or after `s2`.  
+
+Then make use of the `SortAlphabetically` into the `ListRender` class:
+
+```ts twoslash{2,5,9}
+// @include: sort-alphabetically
+// ---cut---
+class ListRenderer {
+  sorter: SortAlphabetically
+
+  constructor() {
+    this.sorter = new SortAlphabetically();
+  }
+
+  render(names: string[]): string {
+    const sortedNames = this.sorter.sort(names)
+
+    let html = '<ul>';
+    for (const name of sortedNames) {
+      html += `<li>${name}</li>`;
+    }
+    html += '</ul>';
+
+    return html;
+  }
+}
+```
+
+Now with the new sorting order integrated, the list renders the names sorted alphabetically:
+
+```ts twoslash
+// @include: sort-alphabetically
+// @include: 
+```
+
+## 3. Programming to an interface
+
+## 4. Benefits vs increased complexity
+
+## 5. Conclusion
