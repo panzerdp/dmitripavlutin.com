@@ -85,11 +85,9 @@ where `s1.localCompare(s2)` is a [string method](https://developer.mozilla.org/e
 
 Then make use of the `SortAlphabetically` into the `ListRender` class:
 
-```ts twoslash{2,5,9}
-// @include: sort-alphabetically
-// ---cut---
+```twoslash include list-renderer-to-implementation
 class ListRenderer {
-  sorter: SortAlphabetically
+  sorter: SortAlphabetically;
 
   constructor() {
     this.sorter = new SortAlphabetically();
@@ -109,11 +107,25 @@ class ListRenderer {
 }
 ```
 
-Now with the new sorting order integrated, the list renders the names sorted alphabetically:
+```ts twoslash{2,5,9}
+// @include: sort-alphabetically
+// ---cut---
+// @include: list-renderer-to-implementation
+```
+
+Now with the new sorting logic integrated, the list renders the names sorted alphabetically:
 
 ```ts twoslash
 // @include: sort-alphabetically
-// @include: 
+// @include: list-renderer-to-implementation
+// ---cut---
+const renderer = new ListRenderer();
+
+console.log(renderer.render(['Joker', 'Bane', 'Batman']));
+// <ul>
+//  <li>Batman</li>
+//  <li>Joker</li>
+// </ul>
 ```
 
 ## 3. Programming to an interface
