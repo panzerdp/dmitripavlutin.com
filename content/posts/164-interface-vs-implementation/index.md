@@ -3,9 +3,9 @@ title: "Programming to an Interface VS to an Implementation"
 description: "How programming to an interface can make your application easier to change in the future."  
 published: "2022-01-12"
 modified: "2022-01-12"
-thumbnail: "./images/cover-2.png"
+thumbnail: "./images/cover-3.png"
 slug: interface-vs-implementation
-tags: ['typescript', 'software design']
+tags: ['typescript', 'interface', 'software design']
 recommended: ['frontend-architecture-stable-and-volatile-dependencies', 'the-art-of-writing-small-and-plain-functions']
 type: post
 ---
