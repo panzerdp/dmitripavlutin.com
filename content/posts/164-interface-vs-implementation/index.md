@@ -52,12 +52,15 @@ Now here's how you can use the list renderer:
 // ---cut---
 const renderer = new ListRenderer();
 
-console.log(renderer.render(['Joker', 'Bane', 'Batman']));
+console.log(renderer.render(['Joker', 'Catwoman', 'Batman']));
 // <ul>
-//  <li>Batman</li>
 //  <li>Joker</li>
+//  <li>catwoman</li>
+//  <li>Batman</li>
 // </ul>
 ```
+
+[Try the demo.](https://codesandbox.io/s/simple-renderer-qld0c?file=/src/index.ts)
 
 The above implementation is a good solution. At least without any further changes to the requirements of how `ListRenderer` works.  
 
@@ -121,12 +124,15 @@ Now with the new sorting logic integrated, the list renders the names sorted alp
 // ---cut---
 const renderer = new ListRenderer();
 
-console.log(renderer.render(['Joker', 'Bane', 'Batman']));
+console.log(renderer.render(['Joker', 'Catwoman', 'Batman']));
 // <ul>
-//  <li>Batman</li>
+//  <li>Bane</li>
+//  <li>Catwoman</li>
 //  <li>Joker</li>
 // </ul>
 ```
+
+[Try the demo.](https://codesandbox.io/s/sorted-renderer-efuj6?file=/src/index.ts)
 
 ## 3. Programming to an interface
 
