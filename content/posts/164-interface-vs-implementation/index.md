@@ -140,15 +140,15 @@ Is programming to an implementation a problem? The answer depends on *how your c
 
 If you are sure that list renderer will sort the names in alphabetically ascending order &mdash; then the programming to the concrete sorting implementation is good. No problem with such a design. 
 
-### 1.1 When programming to implementation is bad
+### 1.1 Changing implementations
 
 But you might have difficulties with the *programming to an implementation* if the sorting implementation might *change* in the future, or that you need different implementations depending on runtime values.  
 
 For example, you might want to sort the names alphabetically in ascending or descending order depending on the user's choice.  
 
-When using programming to an implementation when the implementation can change, you will start bloating your main component with the implementation details. This quickly can make your code hard to reason about and 
+When using programming to an implementation when the implementation can change, you will start bloating your main component with the implementation details. This quickly makes your code hard to reason about and hard to change:
 
-```typescript
+```typescript{4-6}
 class ListRenderer {
   sorter: SortAlphabetically | SortAlphabeticallyDescending;
 
@@ -165,6 +165,8 @@ class ListRenderer {
 ```
 
 In the example above `ListRenderer` can sort the names ascending or descending. What kind of sorting to use depends on the `ascending` parameter.  
+
+
 
 How to design the code for the cases when implementations might change? Welcome *programming to an interface*.  
 
