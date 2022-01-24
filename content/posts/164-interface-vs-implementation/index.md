@@ -1,9 +1,9 @@
 ---
-title: "Programming to an Interface VS to an Implementation"
+title: "Programming to Interface Vs Implementation"
 description: "How programming to an interface can make your application easier to change in the future."  
 published: "2022-01-12"
 modified: "2022-01-12"
-thumbnail: "./images/cover-3.png"
+thumbnail: "./images/cover-4.png"
 slug: interface-vs-implementation
 tags: ['typescript', 'interface', 'software design']
 recommended: ['frontend-architecture-stable-and-volatile-dependencies', 'the-art-of-writing-small-and-plain-functions']
@@ -88,7 +88,7 @@ where `s1.localCompare(s2)` is a [string method](https://developer.mozilla.org/e
 
 Then make use of the `SortAlphabetically` into the `ListRender` class:
 
-```twoslash include list-renderer-to-implementation
+```twoslash include renderer-implementation
 class ListRenderer {
   sorter: SortAlphabetically;
 
@@ -113,14 +113,14 @@ class ListRenderer {
 ```ts twoslash{2,5,9}
 // @include: sort-alphabetically
 // ---cut---
-// @include: list-renderer-to-implementation
+// @include: renderer-implementation
 ```
 
 Now with the new sorting logic integrated, the list renders the names sorted alphabetically:
 
 ```ts twoslash
 // @include: sort-alphabetically
-// @include: list-renderer-to-implementation
+// @include: renderer-implementation
 // ---cut---
 const renderer = new ListRenderer();
 
@@ -164,14 +164,45 @@ class ListRenderer {
 }
 ```
 
-In the example above `ListRenderer` can sort the names ascending or descending. What kind of sorting to use depends on the `ascending` parameter.  
+In the example above `ListRenderer` can sort the names ascending or descending. What kind of sorting is used depends on the `ascending` parameter.  
 
+While such an approach works for the short time ahead, you can clealry see how complex becomes `ListRenderer`. The rendering logic becomes bloated with the sorting implementation details.  
 
+What if later you'd like to add more sorting implementations? If proceeding the same way by adding the new sorting implementations directly into `ListRenderer`, the class will soon become hard to understand, modify and maintain.  
 
-How to design the code for the cases when implementations might change? Welcome *programming to an interface*.  
+How to design the code for the cases when implementations change? Welcome *programming to an interface*.  
 
 ## 3. Programming to an interface
 
+If you want to make `ListRenderer` more extensible and decouple it from a concrete sorting implementation, then you need to use the *programming to an interface* approach.  
+
+Here's what you need to do.  
+
+1) Define the interface (or an abstract class) `Sorter` that defines the structure of the implementation
+2) Make the `ListRender` depend on the `Sorter` interface, rather then the concrete implementation (`SortAlphabetically` and `SortAlphabeticallyDescending`)
+3) Make the concrete sorting implementations (`SortAlphabetically` and `SortAlphabeticallyDescending`) implement the `Sorter` interface
+
+Ok, let's see how all this stuff works in the code.  
+
+1) Defining the interface `Sorter` should be relatively easy:
+
+```twoslash include sorter
+interface Sorter {
+  sort(strings: string[]): string[]
+}
+```
+
+```ts twoslash
+// @include: sorter
+```
+
+`Sorter` interface contains just one method that sorts an array of strings. The interface isn't concerned about how the `sort()` method works: just that it accepts an array of strings and should return an array of sorted strings.  
+
+2) Making the `ListRender` use the `Sorter` interface is quite easy too. Just remove the references to the concrete implementations , and use the `Sorter` interface:
+
+```twoslash include renderer-to-interface
+
+```
 
 
 ## 4. Benefits vs increased complexity
