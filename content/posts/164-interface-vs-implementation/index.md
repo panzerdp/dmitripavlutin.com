@@ -18,7 +18,10 @@ If you haven't taken the time, *in advance*, to think about the possible ways yo
 
 In this post, I'm going to discuss a software design principle that *advises to program to an interface rather than an implementation* to help you write code that's relatively easy to modify in the future.  
 
-# 1. The list renderer
+```toc
+```
+
+## 1. The list renderer
 
 A good way to understand the benefits of software design principles is to follow an example and demonstrate visible benefits.  
 
@@ -65,7 +68,7 @@ renderer.render(['Joker', 'Catwoman', 'Batman']);
 
 The above implementation is a good solution if you want to simply render a list of names. But what if you need to change further this code, for example add sorting functionality?  
 
-# 2. Programming to an implementation
+## 2. Programming to an implementation
 
 As I mentioned in the post introduction, there's a good chance that the already written code will have to be modified when new requirements arise.  
 
@@ -176,7 +179,13 @@ In the example above `ListRenderer` can sort the names ascending or descending. 
 
 You can see how complex becomes `ListRenderer` &mdash; it becomes bloated with the sorting implementation details.  
 
-What if later you'd like to add more sorting implementations? If proceeding the same way by adding the new sorting implementations directly into `ListRenderer`, the class will soon become hard to understand, modify and maintain.  
+What if later you'd like to add more sorting implementations? By referencing new sorting implementations in `ListRenderer` makes the class over-complicated with details it doesn't have to know.  
+
+Such design breaks another 2 important software design principles. 
+
+Firstly, the design breaks the [Single Responsibility Principle](https://en.wikipedia.org/wiki/Single-responsibility_principle). The `ListRenderer` should be solely responsible to render the names, but now *additionally* it is also responsible to instantiate and select its right sorting implementation.  
+
+Secondly, adding new ways of sorting by directly modifying the `ListRenderer` breaks the [Open/Closed Principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle).  
 
 How to design the changeable dependency implementations? Welcome *programming to an interface*!
 
