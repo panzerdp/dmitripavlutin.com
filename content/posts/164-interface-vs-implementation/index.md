@@ -10,13 +10,13 @@ recommended: ['frontend-architecture-stable-and-volatile-dependencies', 'the-art
 type: post
 ---
 
-You've written some code, tested it, and shipped to production. Then you never have to modify that code again. Wouldn't that be great?
+You've written some code, tested it, and shipped it to production. Then you never have to modify that code again. Wouldn't that be great?
 
-But putting the dreams aside... you have to modify, even multiple times, the code that has been written. And this in my opinion one of the greatest challenges in software development: update the already written code.  
+But putting the dreams aside... you have to modify, even multiple times, the code that has been written. And this in my opinion one of the greatest challenges in software development: updating the already written code.  
 
-If you haven't taken the time, *in advance*, to think about the possible ways your code can change, you are quickly going to start have problems with [rigid and fragile code](https://www.excella.com/insights/top-4-symptoms-of-bad-code).  
+If you haven't taken the time, *in advance*, to think about the possible ways your code can change, you are quickly going to start to have problems with [rigid and fragile code](https://www.excella.com/insights/top-4-symptoms-of-bad-code).  
 
-In this post, I'm going to discuss about a software design principle that *advises to program to an interface rather that an implementation*.  
+In this post, I'm going to discuss a software design principle that *advises to program to an interface rather than an implementation*.  
 
 # 1. The list renderer
 
@@ -67,11 +67,11 @@ The above implementation is a good solution. At least without any further change
 
 # 2. Programming to an implementation
 
-Like I mentioned in the post introduction, there's a good chance that the already written code will be modified for the new requirements that might arise. 
+As I mentioned in the post introduction, there's a good chance that the already written code will be modified for the new requirements that might arise. 
 
 Let's say there's a new requirement to the list renderer to also *sort alphabetically the rendered names*.  
 
-You can implement this requirement by creating a new sorter class, for example `SortAlphabetically`:
+You can implement this requirement by creating a new sorter class, for example, `SortAlphabetically`:
 
 ```twoslash include sort-alphabetically
 class SortAlphabetically {
@@ -136,19 +136,19 @@ renderer.render(['Joker', 'Catwoman', 'Batman']);
 
 [Try the demo.](https://codesandbox.io/s/sorted-renderer-efuj6?file=/src/index.ts)
 
-Now let's look closer at the sorter instantiation line: `this.sorter = new SortAlphabetically()`. This is programming to an implementation, because `ListRenderer` uses a *concrete* implementation of the sorter, and exactly `SortAlphabetically` implementation.  
+Now let's look closer at the sorter instantiation line: `this.sorter = new SortAlphabetically()`. This is programming to implementation, because `ListRenderer` uses a *concrete* implementation of the sorter, and exactly `SortAlphabetically` implementation.  
 
 Is programming to an implementation a problem? The answer depends on *how your code would change in the future*. 
 
-If you are sure that list renderer will sort the names in alphabetically ascending order &mdash; then the programming to the concrete sorting implementation is good. No problem with such a design. 
+If you are sure that the list renderer will sort the names in alphabetically ascending order &mdash; then the programming to the concrete sorting implementation is good. No problem with such a design. 
 
 ### 2.1 Changing implementations
 
-But you might have difficulties with the *programming to an implementation* if the sorting implementation might *change* in the future, or that you need different implementations depending on runtime values.  
+But you might have difficulties with the *programming to implementation* if the sorting implementation might *change* in the future, or if you need different implementations depending on runtime values.  
 
 For example, you might want to sort the names alphabetically in ascending or descending order depending on the user's choice.  
 
-When using programming to an implementation when the implementation can change, you will start bloating your main component with the implementation details. This quickly makes your code hard to reason about and hard to change:
+When using programming to implementation when the implementation can change, you will start bloating your main component with the implementation details. This quickly makes your code hard to reason about and hard to change:
 
 ```typescript{4-6}
 class ListRenderer {
@@ -168,11 +168,11 @@ class ListRenderer {
 
 In the example above `ListRenderer` can sort the names ascending or descending. What kind of sorting is used depends on the `ascending` parameter.  
 
-While such an approach works for the short time ahead, you can clealry see how complex becomes `ListRenderer`. The rendering logic becomes bloated with the sorting implementation details.  
+While such an approach works for the short time ahead, you can see how complex becomes `ListRenderer`. The rendering logic becomes bloated with the sorting implementation details.  
 
 What if later you'd like to add more sorting implementations? If proceeding the same way by adding the new sorting implementations directly into `ListRenderer`, the class will soon become hard to understand, modify and maintain.  
 
-How to design the code for the cases when implementations change? Welcome *programming to an interface*.  
+How to design the code for the cases when implementations change? Welcome, *programming to an interface*.  
 
 ## 3. Programming to an interface
 
@@ -181,7 +181,7 @@ If you want to make `ListRenderer` more extensible and decouple it from a concre
 Here's what you need to do.  
 
 1) Define the interface (or an abstract class) `Sorter` that defines the structure of the implementation
-2) Make the `ListRender` depend on the `Sorter` interface, rather then the concrete implementation (`SortAlphabetically` and `SortAlphabeticallyDescending`)
+2) Make the `ListRender` depend on the `Sorter` interface, rather than the concrete implementation (`SortAlphabetically` and `SortAlphabeticallyDescending`)
 3) Make the concrete sorting implementations (`SortAlphabetically` and `SortAlphabeticallyDescending`) implement the `Sorter` interface
 
 ### 3.1 Programming to an interface in practice
@@ -232,7 +232,7 @@ class ListRenderer {
 // @include: renderer-to-interface
 ```
 
-Now `ListRenderer` doesn't depend on a concrete implementation of the sorting. That makes the class easy to reason about, and decoupled from sorting logic. It depends on a very stable thing: the `Sorter` interface.  
+Now `ListRenderer` doesn't depend on a concrete implementation of the sorting. That makes the class easy to reason about and decoupled from sorting logic. It depends on a very stable thing: the `Sorter` interface.  
 
 The presence of `sorter: Sorter` in the `ListRenderer` is what is called *programming to an interface*.  
 
@@ -270,9 +270,9 @@ class SortAlphabeticallyDescending implements Sorter {
 
 I agree with you that using the implementation to an interface requires more moving parts than coding to an implementation.  
 
-The biggest benefits, as you might see already, is the `ListRenderer` class using an abstract interface `Sorter`. As such `ListRenderer` is decoupled from any concrete implementations of sortings (`SortAlphabetically` or `SortAlphabeticallyDescending`).  
+The biggest benefit, as you might see already, is the `ListRenderer` class using an abstract interface `Sorter`. As such `ListRenderer` is decoupled from any concrete implementations of sortings (`SortAlphabetically` or `SortAlphabeticallyDescending`).  
 
-Now you can supply different implementations of sorting mechanism depending on runtime values:
+Now you can supply different implementations of sorting mechanisms depending on runtime values:
 
 ```ts twoslash
 // @include: sorter
@@ -333,6 +333,6 @@ const rendererDescending = new ListRenderer(
 
 ## 5. Conclusion
 
-*Programming to an interface* is a useful tool to design a class which dependency can change in time or which dependency is chosen depending on some runtime value.  
+*Programming to an interface* is a useful tool to design a class in which the dependency can change in time or different dependency implementations can be selected by some runtime value.  
 
-Programming to an interface usually requires the main class to depend on an interface, and the concrete implementations to implement the interface. Then the main class depenency is supplied as an argument to its constructor.
+Programming to an interface usually requires the main class to depend on an interface, and the concrete implementations to implement the interface. Then the main class dependency is supplied as an argument to its constructor.  
