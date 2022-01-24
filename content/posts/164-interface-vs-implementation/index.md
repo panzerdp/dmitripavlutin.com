@@ -1,8 +1,8 @@
 ---
 title: "Programming to Interface Vs Implementation"
 description: "How programming to an interface can make your application easier to change in the future."  
-published: "2022-01-12"
-modified: "2022-01-12"
+published: "2022-01-24"
+modified: "2022-01-24"
 thumbnail: "./images/cover-4.png"
 slug: interface-vs-implementation
 tags: ['typescript', 'interface', 'software design']
@@ -52,10 +52,11 @@ Now here's how you can use the list renderer:
 // ---cut---
 const renderer = new ListRenderer();
 
-console.log(renderer.render(['Joker', 'Catwoman', 'Batman']));
+renderer.render(['Joker', 'Catwoman', 'Batman']);
+// =>
 // <ul>
 //  <li>Joker</li>
-//  <li>catwoman</li>
+//  <li>Catwoman</li>
 //  <li>Batman</li>
 // </ul>
 ```
@@ -124,11 +125,12 @@ Now with the new sorting logic integrated, the list renders the names sorted alp
 // ---cut---
 const renderer = new ListRenderer();
 
-console.log(renderer.render(['Joker', 'Catwoman', 'Batman']));
+renderer.render(['Joker', 'Catwoman', 'Batman']);
+// =>
 // <ul>
-//  <li>Bane</li>
-//  <li>Catwoman</li>
-//  <li>Joker</li>
+//   <li>Bane</li>
+//   <li>Catwoman</li>
+//   <li>Joker</li>
 // </ul>
 ```
 
@@ -140,7 +142,7 @@ Is programming to an implementation a problem? The answer depends on *how your c
 
 If you are sure that list renderer will sort the names in alphabetically ascending order &mdash; then the programming to the concrete sorting implementation is good. No problem with such a design. 
 
-### 1.1 Changing implementations
+### 2.1 Changing implementations
 
 But you might have difficulties with the *programming to an implementation* if the sorting implementation might *change* in the future, or that you need different implementations depending on runtime values.  
 
@@ -182,6 +184,8 @@ Here's what you need to do.
 2) Make the `ListRender` depend on the `Sorter` interface, rather then the concrete implementation (`SortAlphabetically` and `SortAlphabeticallyDescending`)
 3) Make the concrete sorting implementations (`SortAlphabetically` and `SortAlphabeticallyDescending`) implement the `Sorter` interface
 
+### 3.1 Programming to an interface in practice
+
 Ok, let's see how all this stuff works in the code.  
 
 1) Defining the interface `Sorter` should be relatively easy:
@@ -198,13 +202,137 @@ interface Sorter {
 
 `Sorter` interface contains just one method that sorts an array of strings. The interface isn't concerned about how the `sort()` method works: just that it accepts an array of strings and should return an array of sorted strings.  
 
-2) Making the `ListRender` use the `Sorter` interface is quite easy too. Just remove the references to the concrete implementations , and use the `Sorter` interface:
+2) Making the `ListRender` use the `Sorter` interface is quite easy too. Just remove the references to the concrete implementations and use the `Sorter` interface solely:
 
 ```twoslash include renderer-to-interface
+class ListRenderer {
+  sorter: Sorter;
 
+  constructor(sorter: Sorter) {
+    this.sorter = sorter;
+  }
+
+  render(names: string[]): string {
+    const sortedNames = this.sorter.sort(names)
+
+    let html = '<ul>';
+    for (const name of sortedNames) {
+      html += `<li>${name}</li>`;
+    }
+    html += '</ul>';
+
+    return html;
+  }
+}
 ```
 
+```ts twoslash{2,4-5}
+// @include: sorter
+// ---cut---
+// @include: renderer-to-interface
+```
+
+Now `ListRenderer` doesn't depend on a concrete implementation of the sorting. That makes the class easy to reason about, and decoupled from sorting logic. It depends on a very stable thing: the `Sorter` interface.  
+
+The presence of `sorter: Sorter` in the `ListRenderer` is what is called *programming to an interface*.  
+
+3) Finally, making the concrete sorting class implement the `Sorter` interface is relatively easy too:
+
+```twoslash include sort-alpha
+class SortAlphabetically implements Sorter {
+  sort(strings: string[]): string[] {
+    return [...strings].sort((s1, s2) => s1.localeCompare(s2))
+  }
+}
+```
+
+```twoslash include sort-alpha-desc
+class SortAlphabeticallyDescending implements Sorter {
+  sort(strings: string[]): string[] {
+    return [...strings].sort((s1, s2) => s2.localeCompare(s1))
+  }
+}
+```
+
+```ts twoslash
+// @include: sorter
+// ---cut---
+// @include: sort-alpha
+```
+
+```ts twoslash
+// @include: sorter
+// ---cut---
+// @include: sort-alpha-desc
+```
 
 ## 4. Benefits vs increased complexity
 
+I agree with you that using the implementation to an interface requires more moving parts than coding to an implementation.  
+
+The biggest benefits, as you might see already, is the `ListRenderer` class using an abstract interface `Sorter`. As such `ListRenderer` is decoupled from any concrete implementations of sortings (`SortAlphabetically` or `SortAlphabeticallyDescending`).  
+
+Now you can supply different implementations of sorting mechanism depending on runtime values:
+
+```ts twoslash
+// @include: sorter
+// @include: renderer-to-interface
+// @include: sort-alpha
+// ---cut---
+const names = ['Joker', 'Catwoman', 'Batman'];
+
+const rendererAscending = new ListRenderer(
+  new SortAlphabetically()
+);
+rendererAscending.render(names); 
+// =>
+// <ul>
+//   <li>Bane</li>
+//   <li>Catwoman</li>
+//   <li>Joker</li>
+// </ul>
+```
+[Try the demo.](https://codesandbox.io/s/sorted-renderer-interface-alpha-0nv8v?file=/src/index.ts)
+
+In another case you can easily compose the `ListRenderer` to sort the names descending, without modifying the source code of `ListRenderer`:
+
+```ts twoslash
+// @include: sorter
+// @include: renderer-to-interface
+// @include: sort-alpha-desc
+// ---cut---
+const names = ['Joker', 'Catwoman', 'Batman']
+
+const rendererDescending = new ListRenderer(
+  new SortAlphabeticallyDescending()
+);
+rendererDescending.render(names);
+// =>
+// <ul>
+//   <li>Joker</li>
+//   <li>Catwoman</li>
+//   <li>Bane</li>
+// </ul>
+```
+[Try the demo.](https://codesandbox.io/s/sorted-renderer-interface-desc-eyuci?file=/src/index.ts)
+
+But you can also choose the concrete sorting implementation depending on a runtime value:
+
+```ts 
+const sortingMechanism = 
+  someRuntimeBoolean ?
+    new SortAlphabetically() :
+    new SortAlphabeticallyDescending();
+
+const rendererDescending = new ListRenderer(
+  sortingMechanism
+);
+
+// ...
+```
+
 ## 5. Conclusion
+
+*Programming to an interface* is a useful tool to design a class which dependency can change in time or which dependency is chosen depending on some runtime value.  
+
+Programming to an interface usually requires the main class to depend on an interface, and the concrete implementations to implement the interface. Then the main class depenency is supplied as an argument to its constructor.
