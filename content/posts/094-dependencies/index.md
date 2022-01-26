@@ -5,7 +5,7 @@ published: "2020-08-25T07:50Z"
 modified: "2020-09-02T08:311Z"
 thumbnail: "./images/cover-7.png"
 slug: frontend-architecture-stable-and-volatile-dependencies
-tags: ['architecture', 'clean code', 'dependency']
+tags: ['software design', 'dependency']
 recommended: ['7-architectural-attributes-of-a-reliable-react-component', 'the-art-of-writing-small-and-plain-functions']
 type: post
 ---
