@@ -14,7 +14,7 @@ A change to Vue component data (props or state) isn't immediately reflected in t
 
 After updating the component's data, how can you catch the moment when DOM has been updated too? Welcome `vm.$nextTick(callback)` method.  
 
-Let's see in more detail how `vm.$nextTick(callback)` method works in Vue.  
+Let's see in detail how `vm.$nextTick(callback)` works in Vue.  
 
 ## 1. Vue.$nextTick()
 
@@ -22,4 +22,6 @@ Let's see in more detail how `vm.$nextTick(callback)` method works in Vue.
 
 ## 3. async/await ticks
 
-## 4. Conclusion
+## 4. mounted() and updated()
+
+## 5. Conclusion
