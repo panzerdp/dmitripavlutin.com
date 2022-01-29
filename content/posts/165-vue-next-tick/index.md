@@ -18,6 +18,38 @@ Let's see in detail how `vm.$nextTick(callback)` works in Vue.
 
 ## 1. Vue.$nextTick()
 
+When you change Vue's component data, you're actually updating the virtual DOM. Then Vue updates the real DOM elements (in the most efficient way since updating real DOM is expensive) according according to virtual DOM changes.  
+
+```vue
+<template>
+  <span v-if="show">I am an element</span>
+  <button @click="handleClick">Click me!</button>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        show: true
+      }
+    },
+    methods: {
+      handleClick() {
+        this.show = !this.show
+      }
+    }
+  }
+</script>
+```
+
+In the example above clicking on the *"Click me!"* button changes the `this.show` data value. Changing `this.show` triggers the update of virtual DOM: specifically showing/hiding the `<span>` element.  
+
+*Note: Vue compiles the templates into Virtual DOM render functions (see [docs](https://vuejs.org/v2/guide/syntax.html)).* 
+
+But sometimes you need direct access to DOM elements. So you'd like to know the right moment when real DOM has been updated.  
+
+
+
 ## 2. this.$nextTick()
 
 ## 3. async/await ticks
