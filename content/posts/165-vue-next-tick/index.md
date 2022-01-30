@@ -22,7 +22,7 @@ When you change Vue's component data, you're actually updating the virtual DOM. 
 
 ```vue
 <template>
-  <span v-if="show">I am an element</span>
+  <span v-if="show" id="span-1">I am an element</span>
   <button @click="handleClick">Click me!</button>
 </template>
 
@@ -48,7 +48,23 @@ In the example above clicking on the *"Click me!"* button changes the `this.show
 
 But sometimes you need direct access to DOM elements. So you'd like to know the right moment when real DOM has been updated.  
 
+For example, let's find the moment when the `<span>` element in the above code snippet is inserted or removed from the DOM:
 
+```vue
+<template>
+  <span v-if="show" id="span-1">I am an element</span>
+  <button @click="handleClick">Click me!</button>
+</template>
+
+<script>
+  export default {
+    // ...
+  }
+  Vue.$nextTick(() => {
+    console.log(document.getElementById('span-1'));
+  })
+</script>
+```
 
 ## 2. this.$nextTick()
 
