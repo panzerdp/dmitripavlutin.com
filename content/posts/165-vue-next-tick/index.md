@@ -14,59 +14,115 @@ A change to Vue component data (props or state) isn't immediately reflected in t
 
 After updating the component's data, how can you catch the moment when DOM has been updated too? Welcome `vm.$nextTick(callback)` method.  
 
-Let's see in detail how `vm.$nextTick(callback)` works in Vue.  
+Let's see in detail how `nextTick(callback)` works in Vue.  
 
 ## 1. Vue.$nextTick()
 
-When you change Vue's component data, you're actually updating the virtual DOM. Then Vue updates the real DOM elements (in the most efficient way since updating real DOM is expensive) according according to virtual DOM changes.  
+An important idea to understand when changing Vue component data is that the update of the DOM happens asynchronously.  
+
+For example, let's consider the following component that toggles the display of an element:
 
 ```vue
 <template>
-  <span v-if="show" id="span-1">I am an element</span>
-  <button @click="handleClick">Click me!</button>
+  <div>
+    <button @click="handleClick">Insert/Remove</button>
+    <div v-if="show" id="content">I am an element</div>
+  </div>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        show: true
-      }
+export default {
+  data() {
+    return {
+      show: true,
+    };
+  },
+  methods: {
+    handleClick() {
+      this.show = !this.show;
     },
-    methods: {
-      handleClick() {
-        this.show = !this.show
-      }
-    }
-  }
+  },
+};
 </script>
 ```
 
-In the example above clicking on the *"Click me!"* button changes the `this.show` data value. Changing `this.show` triggers the update of virtual DOM: specifically showing/hiding the `<span>` element.  
+Clicking on the *Insert/Remove* button changes the `this.show` data, which toggles the display of the `<div id="content">` element.  
 
-*Note: Vue compiles the templates into Virtual DOM render functions (see [docs](https://vuejs.org/v2/guide/syntax.html)).* 
+After changing `this.show` the changes don't reach the DOM right away. Rather, Vue accumulates the updates from all the components, combines them in an efficient way, then patches the DOM.  
 
-But sometimes you need direct access to DOM elements. So you'd like to know the right moment when real DOM has been updated.  
+If you want to access the update-to-date DOM elements after some changes to the component data, you need to use a special function `Vue.nextTick(callback)`. The function executes `callback` right after the currently scheduled data updates have reached DOM.  
 
-For example, let's find the moment when the `<span>` element in the above code snippet is inserted or removed from the DOM:
+For example, let's find the moment when the `<div>` element is inserted or removed from the DOM:
 
-```vue
+```vue{19-21}
 <template>
-  <span v-if="show" id="span-1">I am an element</span>
-  <button @click="handleClick">Click me!</button>
+  <div>
+    <button @click="handleClick">Insert/Remove</button>
+    <div v-if="show" ref="content">I am an element</div>
+  </div>
 </template>
 
 <script>
-  export default {
-    // ...
-  }
-  Vue.$nextTick(() => {
-    console.log(document.getElementById('span-1'));
-  })
+import Vue from "vue";
+
+export default {
+  data() {
+    return {
+      show: true,
+    };
+  },
+  methods: {
+    handleClick() {
+      this.show = !this.show;
+      Vue.nextTick(() => {
+        console.log(this.$refs.content);
+      });
+    },
+  },
+};
 </script>
 ```
+
+[Try the demo.](https://codesandbox.io/s/vue-next-tick-031dj?file=/src/ToggleButton.vue)
+
+Open the demo and click a few times the *Insert/Remove* button. You'd see that `this.$refs.content` (the reference that contains the `<div>` element) is `undefined` or contains an element &mdash; depending on the `this.show` value.  
+
+Note that `Vue.nextTick(callback)` executes the `callback` when also all of the child components of the current component have been updated.  
 
 ## 2. this.$nextTick()
+
+Vue also provides the ability to use the function right on the component instance: e.g. `this.$nextTick(callback)`.  
+
+Let's reuse the previous component and catch the moment when the div element is available or not in the reference:
+
+```vue{19-21}
+<template>
+  <div>
+    <button @click="handleClick">Insert/Remove</button>
+    <div v-if="show" ref="content">I am an element</div>
+  </div>
+</template>
+
+<script>
+import Vue from "vue";
+
+export default {
+  data() {
+    return {
+      show: true,
+    };
+  },
+  methods: {
+    handleClick() {
+      this.show = !this.show;
+      this.$nextTick(() => {
+        console.log(this.$refs.content);
+      });
+    },
+  },
+};
+</script>
+```
 
 ## 3. async/await ticks
 
