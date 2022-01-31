@@ -1,9 +1,9 @@
 ---
-title: "How to Use $nextTick() in Vue"
-description: "$nextTick(callback) catches the moment when Vue updates DOM."  
+title: "How to Use nextTick() in Vue"
+description: "nextTick(callback) catches the moment when Vue updates DOM."  
 published: "2022-01-27"
 modified: "2022-01-27"
-thumbnail: "./images/cover-2.png"
+thumbnail: "./images/cover.png"
 slug: vue-next-tick
 tags: ['vue', 'dom']
 recommended: ['vue-debounce-throttle', 'vue-show-hide-elements']
@@ -16,7 +16,7 @@ After updating the component's data, how can you catch the moment when DOM has b
 
 Let's see in detail how `nextTick(callback)` works in Vue.  
 
-## 1. Vue.$nextTick()
+## 1. Vue.nextTick()
 
 An important idea to understand when changing Vue component data is that the update of the DOM happens asynchronously.  
 
@@ -87,15 +87,15 @@ export default {
 
 Open the demo and click a few times the *Insert/Remove* button. You'd see that `this.$refs.content` (the reference that contains the `<div>` element) is `undefined` or contains an element &mdash; depending on the `this.show` value.  
 
-Note that `Vue.nextTick(callback)` executes the `callback` when also all of the child components of the current component have been updated.  
+Note that `Vue.nextTick(callback)` executes the `callback` when also all of the child components updates have been submitted to DOM.  
 
 ## 2. this.$nextTick()
 
 Vue also provides the ability to use the function right on the component instance: e.g. `this.$nextTick(callback)`.  
 
-Let's reuse the previous component and catch the moment when the div element is available or not in the reference:
+Let's reuse the previous component and catch the moment when the `<div>` element is available or not in the reference:
 
-```vue{19-21}
+```vue{17-19}
 <template>
   <div>
     <button @click="handleClick">Insert/Remove</button>
@@ -104,8 +104,6 @@ Let's reuse the previous component and catch the moment when the div element is 
 </template>
 
 <script>
-import Vue from "vue";
-
 export default {
   data() {
     return {
