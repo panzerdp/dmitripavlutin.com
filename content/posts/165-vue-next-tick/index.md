@@ -93,7 +93,7 @@ Note that `Vue.nextTick(callback)` executes the `callback` when also all of the 
 
 Vue also provides the ability to use the function right on the component instance: e.g. `this.$nextTick(callback)`.  
 
-Let's reuse the previous component and catch the moment when the `<div>` element is available or not in the reference:
+Let's reuse the previous component and catch the moment when the `<div>` element exists or not in the DOM (and the reference):
 
 ```vue{17-19}
 <template>
