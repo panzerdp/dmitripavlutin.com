@@ -10,11 +10,9 @@ recommended: ['vue-debounce-throttle', 'vue-show-hide-elements']
 type: post
 ---
 
-A change to Vue component data (props or state) isn't immediately reflected in the DOM. Rather, Vue updates DOM asynchronously.  
+A change to Vue component's data (props or state) isn't immediately reflected in the DOM. Rather, Vue updates DOM asynchronously.  
 
-After updating the component's data, how can you catch the moment when DOM has been updated too? Welcome `vm.$nextTick(callback)` method.  
-
-Let's see in detail how `nextTick(callback)` works in Vue.  
+You can catch the moment when Vue updates DOM using `Vue.nextTick()` or `vm.$nextTick()` methods. Let's see in detail how these methods work.
 
 ## 1. Vue.nextTick()
 
@@ -87,7 +85,7 @@ export default {
 
 Open the demo and click a few times the *Insert/Remove* button. You'd see that `this.$refs.content` (the reference that contains the `<div>` element) is `undefined` or contains an element &mdash; depending on the `this.show` value.  
 
-Note that `Vue.nextTick(callback)` executes the `callback` when also all of the child components updates have been submitted to DOM.  
+Note that `Vue.nextTick(callback)` executes the `callback` when all child components updates have been submitted to DOM.  
 
 ## 2. this.$nextTick()
 
