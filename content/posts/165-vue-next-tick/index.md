@@ -1,9 +1,9 @@
 ---
 title: "How to Use nextTick() in Vue"
-description: "nextTick(callback) catches the moment when Vue updates DOM."  
+description: "nextTick(callback) executes the callback when the DOM has been updated."  
 published: "2022-01-27"
 modified: "2022-01-27"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover-2.png"
 slug: vue-next-tick
 tags: ['vue', 'dom']
 recommended: ['vue-debounce-throttle', 'vue-show-hide-elements']
