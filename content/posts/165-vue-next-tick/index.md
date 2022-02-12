@@ -10,13 +10,13 @@ recommended: ['vue-debounce-throttle', 'vue-show-hide-elements']
 type: post
 ---
 
-A change to Vue component's data (props or state) isn't immediately reflected in the DOM. Rather, Vue updates DOM asynchronously.  
+A change to the Vue component's data (props or state) isn't immediately reflected in the DOM. Rather, Vue updates DOM asynchronously.  
 
 You can catch the moment when Vue updates DOM using `Vue.nextTick()` or `vm.$nextTick()` functions. Let's see in detail how these methods work.
 
 ## 1. Vue.nextTick()
 
-When changing Vue component data the DOM happen asynchronously. That's expected because Vue collects multiple updates from all the components, then tries to create a single batch to update the DOM.
+When changing Vue component data the DOM updates asynchronously. That's expected because Vue collects multiple updates from all the components, then tries to create a single batch to update the DOM.
 
 For example, let's consider a component that toggles the display of an element:
 
@@ -124,15 +124,15 @@ export default {
 ```
 [Try the demo.](https://codesandbox.io/s/this-next-tick-3mtol?file=/src/ToggleButton.vue)
 
-`this.$nextTick()` is more convinient to use if you want to access the updates of the current component instance.  
+`this.$nextTick()` is more convenient to use if you want to access the updates of the current component instance.  
 
 ## 3. nextTick() with async/await
 
-If `Vue.nextTick()` or `this.$nextTick()` is called without a callback argument, then the methods return a promise that gets resolved when component data changes reaches DOM.  
+If `Vue.nextTick()` or `this.$nextTick()` is called without a callback argument, then the methods return a promise that gets resolved when component data changes reach DOM.  
 
-You can use this to get rid of the callback at all, and laverage the more readable `async/await` syntax.
+You can use this to get rid of the callback at all, and leverage the more readable `async/await` syntax.
 
-For example, let's make the previous component more readably by catching the DOM update with the `async/await` syntax:
+For example, let's make the previous component more readable by catching the DOM update with the `async/await` syntax:
 
 ```vue{17-18}
 <template>
@@ -164,15 +164,15 @@ export default {
 
 `async handleClick()` has been marked as an asynchronous function. 
 
-When the *Insert/Remove* button is clicked, the value of `this.show` changes. Then `await this.$nextTick()` awaits until the changes have reached DOM. Finally `console.log(this.$refs.content)` logs the actual content of the reference.  
+When the *Insert/Remove* button is clicked, the value of `this.show` changes. Then `await this.$nextTick()` awaits until the changes reach DOM. Finally, `console.log(this.$refs.content)` logs the actual content of the reference.  
 
 My recommendation is to use the `this.$nextTick()` with the `async/await` syntax since it's more readable than the callback approach.  
 
 ## 4. Conclusion
 
-When you change component's data, Vue updates the DOM asynchornously. If you want to catch the moment when DOM has been updated after component's data change, then you need to use `Vue.nextTick(callback)` or `this.$nextTick(callback)` functions.  
+When you change the component's data, Vue updates the DOM asynchronously. If you want to catch the moment when DOM has been updated after the component's data change, then you need to use `Vue.nextTick(callback)` or `this.$nextTick(callback)` functions.  
 
-Their single `callback` argument is goint to be invoked right after DOM updates: and you are gurantueed to get the latest DOM.  
+Their single `callback` argument is going to be invoked right after DOM updates: and you are guaranteed to get the latest DOM.  
 
 Alternatively, if you don't supply the callback argument to `Vue.nextTick()` or `this.$nextTick()`: then the functions would return a promise that's being resolved when DOM is updated. 
 
