@@ -16,9 +16,9 @@ You can catch the moment when Vue updates DOM using `Vue.nextTick()` or `vm.$nex
 
 ## 1. Vue.nextTick()
 
-An important idea to understand when changing Vue component data is that the update of the DOM happens asynchronously.  
+When changing Vue component data the DOM happen asynchronously. That's expected because Vue collects multiple updates from all the components, then tries to create a single batch to update the DOM.
 
-For example, let's consider the following component that toggles the display of an element:
+For example, let's consider a component that toggles the display of an element:
 
 ```vue
 <template>
@@ -44,11 +44,13 @@ export default {
 </script>
 ```
 
-Clicking on the *Insert/Remove* button changes the `this.show` data, which toggles the display of the `<div id="content">` element.  
+Clicking on the *Insert/Remove* button changes the `this.show` data, which toggles the display of the `<div id="content">` element using `v-if="show"` directive.  
 
-After changing `this.show` the changes don't reach the DOM right away. Rather, Vue accumulates the updates from all the components, combines them in an efficient way, then patches the DOM.  
+When `this.show` is updated, the change doesn't reach DOM right away. 
 
-If you want to access the update-to-date DOM elements after some changes to the component data, you need to use a special function `Vue.nextTick(callback)`. The function executes `callback` right after the currently scheduled data updates have reached DOM.  
+If you want to catch the moment when DOM has just been updated, then you need to use a special function `Vue.nextTick(callback)`. 
+
+The function executes `callback` right after the currently scheduled data updates have reached DOM.  
 
 For example, let's find the moment when the `<div>` element is inserted or removed from the DOM:
 
@@ -85,13 +87,13 @@ export default {
 
 Open the demo and click a few times the *Insert/Remove* button. You'd see that `this.$refs.content` (the reference that contains the `<div>` element) is `undefined` or contains an element &mdash; depending on the `this.show` value.  
 
-Note that `Vue.nextTick(callback)` executes the `callback` when all child components updates have been submitted to DOM.  
+Also, `Vue.nextTick(callback)` executes the `callback` when all child components updates have been submitted to DOM.  
 
 ## 2. this.$nextTick()
 
-Vue also provides the ability to use `this.$nextTick(callback)` right on the component instance.  
+Vue allows to use `this.$nextTick(callback)` right on the component instance.  
 
-After updating the `this.show` data property
+In the following example `handleClick()` method changes `this.show` data, and right away `this.$nextTick()` is setup to catch the moment when this update reaches DOM:
 
 ```vue{17-19}
 <template>
@@ -120,8 +122,47 @@ export default {
 </script>
 ```
 
-## 3. async/await ticks
+`this.$nextTick()` is more convinient to use if you want to access the updates of the current component instance.  
 
-## 4. mounted() and updated()
+## 3. async/await and nextTick()
 
-## 5. Conclusion
+In case if the `Vue.nextTick()` or `this.$nextTick()` is called without a callback argument, then the methods return a promise that gets resolved when component data changes reaches DOM.  
+
+You can use this to get rid of the callback at all, and laverage the more readable `async/await` syntax.
+
+For example, let's make the previous component more readably by catching the DOM update with the `async/await` syntax:
+
+```vue{17-18}
+<template>
+  <div>
+    <button @click="handleClick">Insert/Remove</button>
+    <div v-if="show" ref="content">I am an element</div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      show: true,
+    };
+  },
+  methods: {
+    async handleClick() {
+      this.show = !this.show;
+      await this.$nextTick();
+      console.log(this.$refs.content);
+    },
+  },
+};
+</script>
+```
+
+`async handleClick()` has been marked as an asynchronous function. 
+
+When the *Insert/Remove* button is clicked, the value of `this.show` changes. Then `await this.$nextTick()` awaits until the changes have reached DOM. Finally `console.log(this.$refs.content)` logs the actual content of the reference.  
+
+My recommendation is to use the `this.$nextTick()` with the `async/await` syntax since it's more readable than the callback approach.  
+
+## 4. Conclusion
+
