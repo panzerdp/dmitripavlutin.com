@@ -209,6 +209,6 @@ Playgrounds are a great way to play with the new features of React, test ideas, 
 
 To setup a local React playground 3 easy steps are needed. Install parcel bundler globally, create your project directory with 2 source files: the HTML and React source files. Finally, just run the `parcel` build command. The playground is ready!
 
-If for some reason you don't like `parcel`, an alternative is the known [react-create-app](https://github.com/facebook/create-react-app). If you don't like local playgrounds, I have had a good experience with [codesandbox.io](https://codesandbox.io/).  
+If for some reason you don't like `parcel`, an alternative is the known [create-react-app](https://github.com/facebook/create-react-app). If you don't like local playgrounds, I have had a good experience with [codesandbox.io](https://codesandbox.io/).  
 
 Happy playing!
