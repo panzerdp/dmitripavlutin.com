@@ -315,7 +315,7 @@ const rendererAscending = new ListRenderer(
 rendererAscending.render(names); 
 // =>
 // <ul>
-//   <li>Bane</li>
+//   <li>Batman</li>
 //   <li>Catwoman</li>
 //   <li>Joker</li>
 // </ul>
@@ -339,7 +339,7 @@ rendererDescending.render(names);
 // <ul>
 //   <li>Joker</li>
 //   <li>Catwoman</li>
-//   <li>Bane</li>
+//   <li>Batman</li>
 // </ul>
 ```
 [Try the demo.](https://codesandbox.io/s/sorted-renderer-interface-desc-eyuci?file=/src/index.ts)
