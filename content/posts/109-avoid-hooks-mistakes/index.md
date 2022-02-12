@@ -289,7 +289,7 @@ To prevent closures from capturing old values:
 
 ## 4. Do Not use the state for infrastructure data
 
-Once I needed to invoke a side-effect on state update, but without invoking the side-effect on the first render. `useEffect(callback, deps)` always invokes the `callback` after mounting of the component: so I want to avoid that.  
+Once I needed to invoke a side-effect on state update, but without invoking the side-effect on the first render. `useEffect(callback, deps)` always invokes the `callback` after mounting of the component, so I wanted to avoid that.  
 
 Surprisingly for me, I found the following solution:
 
