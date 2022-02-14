@@ -181,7 +181,7 @@ Then let's consider what *action objects* the stopwatch should have. It's easy t
 { type: 'tick' }
 ```
 
-Having the state structure, as well the possible actions, let's use the *reducer* function to define how the action objects update the state:
+Having the state structure, as well as the possible actions, let's use the *reducer* function to define how the action objects update the state:
 
 ```javascript
 function reducer(state, action) {
