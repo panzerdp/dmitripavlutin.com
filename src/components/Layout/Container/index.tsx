@@ -1,5 +1,3 @@
-
-
 import 'normalize.css/normalize.css';
 import * as styles from './index.module.scss';
 
