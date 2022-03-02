@@ -89,7 +89,7 @@ const action = {
 };
 ```
 
-`user` is a property that hold the information about the user to add.  
+`user` is a property that holds the information about the user to add.  
 
 #### C. Dispatch function
 
