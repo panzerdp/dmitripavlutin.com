@@ -36,7 +36,7 @@ Luckily, reliable components have common characteristics. Let's study these 7 us
 
 > A component has a **single responsibility** when it has one reason to change.  
 
-An fundamental rule to consider when writing React components is the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle).  
+A fundamental rule to consider when writing React components is the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle).  
 
 Single responsibility principle (abbreviated SRP) requires a component to have *one reason to change*.  
 
