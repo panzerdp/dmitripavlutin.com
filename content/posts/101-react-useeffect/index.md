@@ -60,7 +60,7 @@ function Greet({ name }) {
 `useEffect()` hook accepts 2 arguments:
 
 ```javascript
-useEffect(callback[, dependencies]);
+useEffect(callback, [dependencies]);
 ```
 
 * `callback` is the function containing the side-effect logic. `callback` is executed right after changes were being pushed to DOM.  
