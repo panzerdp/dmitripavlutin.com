@@ -188,7 +188,7 @@ function uniqueReducer(state, action) {
     case 'add':
       return [...new Set([...state, action.name])];
     case 'delete':
-      return state.filter(name => name === action.name);
+      return state.filter(name => name !== action.name);
     default:
       throw new Error();
   }
