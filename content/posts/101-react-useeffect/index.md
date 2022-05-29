@@ -2,7 +2,7 @@
 title: "A Simple Explanation of React.useEffect()"
 description: "useEffect() hook executes side-effects in React components."
 published: "2020-10-13T08:50Z"
-modified: "2021-10-06T08:20Z"
+modified: "2022-05-29"
 thumbnail: "./images/effect-4.jpg"
 slug: react-useeffect-explanation
 tags: ['react', 'hook', 'useeffect']
@@ -268,7 +268,7 @@ function RepeatMessage({ message }) {
 
 Open the demo and type some messages. The console logs every 2 seconds any message that's been ever typed into the input. However, you need to log only the latest message.  
 
-That's the case to clean up the side-effect: cancel the previous timer when starting a new one. Let's return a cleanup function that stops the previous timer:
+That's the case to clean up the side-effect: cancel the previous timer when starting a new one. Let's return a cleanup function that stops the previous timer before starting a new one:
 
 ```jsx{7-9}
 import { useEffect } from 'react';
@@ -289,7 +289,7 @@ function RepeatMessage({ message }) {
 
 [Try the demo.](https://codesandbox.io/s/gracious-tdd-gy4zo?file=/src/App.js)
 
-Open the demo and type some messages: only the latest message logs to console.  
+Open the demo and type some messages. You'll see that each 2 seconds only the latest message logs to console. Which means that all of the previous timers were cleanup.  
 
 ## 6. *useEffect()* in practice
 
