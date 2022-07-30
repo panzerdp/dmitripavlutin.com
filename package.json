@@ -20,7 +20,7 @@
     "gatsby-cli": "4.4.0",
     "gatsby-link": "4.4.0",
     "gatsby-plugin-feed": "4.4.0",
-    "gatsby-plugin-google-analytics": "4.4.0",
+    "gatsby-plugin-google-gtag": "4.19.0",
     "gatsby-plugin-graphql-codegen": "3.1.0",
     "gatsby-plugin-image": "2.4.0",
     "gatsby-plugin-minify-classnames": "4.1.0",
