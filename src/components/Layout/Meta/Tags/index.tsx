@@ -5,7 +5,7 @@ interface LayoutMetaTagsProps {
 }
 
 export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.Element {
-  const fontsUrl = '//fonts.googleapis.com/css?family=Open+Sans:700|EB+Garamond:400,400i,600,700Roboto+Mono:400'
+  const fontsUrl = '//fonts.googleapis.com/css?family=Open+Sans:700|EB+Garamond:400,400i,600,700Roboto+Mono:400&display=optional'
   return (
     <Helmet>
       <link rel="preconnect" href="//fonts.gstatic.com/" crossOrigin="" />
