@@ -278,7 +278,7 @@ article h1 {
   }
   
    pre code {
-    font-size: 1.1rem !important;
+    font-size: 1rem !important;
     font-family: $mono-font-family !important;
      white-space: pre;
      -webkit-overflow-scrolling: touch;
@@ -474,7 +474,7 @@ article h1 {
 
 p, em, li, a, strong {
   > code {
-    font-size: 1.2rem;
+    font-size: 1rem;
     background-color: #f5f2f0;
     color: black;
     font-family: $mono-font-family;
