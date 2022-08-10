@@ -49,14 +49,8 @@ a {
   display: flex;
   min-height: 100vh;
 
-  .leftSidebar {
+  .leftSidebar, .rightSidebar {
     flex: 1 1 320px;
-    order: 1;
-  }
-
-  .rightSidebar {
-    flex: 1 0 320px;
-    order: 3;
   }
 
   @media (max-width: $sidebars-max-width) {
@@ -72,7 +66,6 @@ a {
   }
 
   .main {
-    order: 2;
     flex: 0 0 740px;
     max-width: 100%;
     padding: 0 1rem;
