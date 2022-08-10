@@ -71,6 +71,7 @@
     "lint": "eslint 'src/**/*.ts?(x)'",
     "lint:fix": "npm run lint -- --fix",
     "build": "gatsby build",
+    "serve": "gatsby serve",
     "type:check": "tsc -p tsconfig.json --noEmit"
   },
   "resolutions": {
