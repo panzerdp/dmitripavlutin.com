@@ -46,24 +46,7 @@ a {
 }
 
 .container {
-  display: flex;
   min-height: 100vh;
-
-  .leftSidebar, .rightSidebar {
-    flex: 1 1 320px;
-  }
-
-  @media (max-width: $sidebars-max-width) {
-    .leftSidebar,
-    .rightSidebar {
-      display: none;
-      width: 0;
-    }
-
-    .main {
-      margin: 0 auto;
-    }
-  }
 
   .main {
     width: 740px;
