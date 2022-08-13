@@ -47,19 +47,41 @@ a {
 
 .container {
   min-height: 100vh;
+  width: 740px;
+  max-width: 100%;
+  padding: 0 1rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: relative;
+  overflow: visible;
 
-  .main {
-    width: 740px;
-    max-width: 100%;
-    padding: 0 1rem;
-    margin: 0 auto;
-    box-sizing: border-box;
+  .left {
+    position: absolute;
+    top: 0;
+    right: 100%;
+  }
+
+  .right {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: 320px;
+  }
+}
+
+@media (max-width: $medium-device-width) {
+  .container {
+    .right {
+      display: none;
+    }
   }
 }
 
 @media (max-width: $small-device-width) {
-  .container .main {
-    padding: 0 0.5rem;
+  .container {
+    .main {
+      padding: 0 0.5rem;
+    }
   }
 
   h1 {

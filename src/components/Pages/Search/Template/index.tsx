@@ -1,5 +1,4 @@
 import Layout from 'components/Layout/Fetch';
-import SearchRightSidebar from 'components/Pages/Search/Sidebar/Right';
 import SearchMetaTags from 'components/Pages/Search/Meta/Tags';
 import ClientOnly from '../ClientOnly';
 
@@ -7,7 +6,7 @@ import * as styles from './index.module.scss';
 
 export default function SearchTemplate() {
   return (
-    <Layout rightSidebar={<SearchRightSidebar />}>
+    <Layout>
       <div className={styles.search}>
         <h1>
           Search blog posts

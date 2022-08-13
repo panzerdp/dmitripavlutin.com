@@ -27,7 +27,9 @@ export default function LayoutContainer({
       <LayoutMetaTags siteInfo={siteInfo} />
       <LayoutHeader authorProfilePicture={authorProfilePicture} siteInfo={siteInfo} />
       <div className={styles.container}>
+        <div className={styles.left}>{leftSidebar}</div>
         <main className={styles.main}>{children}</main>
+        <div className={styles.right}>{rightSidebar}</div>
       </div>
       <Footer authorInfo={authorInfo} />
     </>

@@ -1,12 +1,11 @@
-import * as styles from './index.module.scss';
-
 import PopularTagsFetch from 'components/Popular/Tags/Fetch';
 import PopularTagsList from 'components/Popular/Tags/List';
+import { RightSidebar } from 'components/Layout/RightSidebar';
 
-export default function PostRightSidebar() {
+export default function PlainListAllRightSidebar() {
   return (
-    <div className={styles.rightSidebar}>
+    <RightSidebar>
       <PopularTagsFetch render={(posts) => <PopularTagsList posts={posts} title="Tags" />} />
-    </div>
+    </RightSidebar>
   );
 }
