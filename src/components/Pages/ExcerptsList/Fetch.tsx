@@ -62,7 +62,7 @@ export const pageQuery = graphql`
             ...Post
             thumbnail {	
               childImageSharp {	
-                gatsbyImageData(width: 180, height: 100, quality: 90, layout: FIXED)
+                gatsbyImageData(width: 180, height: 100, quality: 90, layout: FIXED, formats: [AUTO, AVIF])
               }	
             }
           }
@@ -81,7 +81,7 @@ export const pageQuery = graphql`
             ...Post
             thumbnail {
               childImageSharp {
-                gatsbyImageData(width: 650, height: 360, quality: 90, layout: CONSTRAINED)
+                gatsbyImageData(width: 650, height: 360, quality: 90, layout: CONSTRAINED, formats: [AUTO, AVIF])
               }
             }
           }
