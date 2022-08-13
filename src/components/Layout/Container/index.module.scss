@@ -59,6 +59,10 @@ a {
     position: absolute;
     top: 0;
     right: 100%;
+
+    @media (max-width: $medium-device-width) {
+      display: none;
+    }
   }
 
   .right {
@@ -66,10 +70,14 @@ a {
     left: 100%;
     top: 0;
     width: 320px;
+
+    @media (max-width: $large-device-width) {
+      display: none;
+    }
   }
 }
 
-@media (max-width: $medium-device-width) {
+@media (max-width: $large-device-width) {
   .container {
     .right {
       display: none;
