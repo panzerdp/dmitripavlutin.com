@@ -16,7 +16,7 @@ export default function PlainListAllTemplate({ posts }: PlainListAllTemplateProp
   return (
     <Layout rightSidebar={<PlainListAllRightSidebar />}>
       <MetaTags />
-      <div className={styles.plainListAllTemplate}>
+      <div className={styles.plainList}>
         <h1>All posts</h1>
         <SimpleList posts={posts} beforeEachPost={beforeEachPost.bind(undefined, [])} />
       </div>
