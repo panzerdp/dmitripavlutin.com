@@ -25,7 +25,8 @@ module.exports = {
             resolve: 'gatsby-plugin-image',
             options: {
               defaults: {
-                formats: ['auto', 'avif']
+                formats: ['auto', 'avif'],
+                quality: 60
               }
             }
           },

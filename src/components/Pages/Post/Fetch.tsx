@@ -75,7 +75,7 @@ export const pageQuery = graphql`
         recommended
         thumbnail {
           childImageSharp {
-            gatsbyImageData(aspectRatio: 1.8, quality: 90, width: 708, formats: [AUTO, AVIF])
+            gatsbyImageData(aspectRatio: 1.8, quality: 60, width: 708, formats: [AUTO, AVIF])
           }
         }
       }
