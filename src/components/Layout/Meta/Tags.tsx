@@ -5,13 +5,10 @@ interface LayoutMetaTagsProps {
 }
 
 export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.Element {
-  const fontsUrl = '//fonts.googleapis.com/css?family=Open+Sans:700|EB+Garamond:400,400i,600,700|Roboto+Mono:400&display=swap'
   return (
     <Helmet>
-      <link rel="preconnect" href="//fonts.gstatic.com/" crossOrigin="" />
       <title>{siteInfo.metaTitle}</title>
       <meta name="description" content={siteInfo.metaDescription} />
-      <link href={fontsUrl} rel="stylesheet" type="text/css" />
       <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
       <meta name="HandheldFriendly" content="True" />
       <link rel="shortcut icon" href="/favicon.ico" />
