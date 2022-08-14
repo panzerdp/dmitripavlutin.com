@@ -118,7 +118,7 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
     require('./gatsby/config/gatsby-plugin-sass'),
-    'gatsby-plugin-minify-classnames',
+    // 'gatsby-plugin-minify-classnames',
     require('./gatsby/config/gatsby-plugin-feed'),
     require('./gatsby/config/gatsby-plugin-source-mailchimp'),
   ],
