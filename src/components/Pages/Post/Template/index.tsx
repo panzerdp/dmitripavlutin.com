@@ -16,8 +16,8 @@ import CommentsThread from 'components/Comments/Thread';
 import CommentsInView from 'components/Comments/InView';
 import AboutAuthorConcise from 'components/AboutAuthor/Concise';
 import SubscriptionRegion from 'components/Subscription/Region';
-import CarbonFetch from 'components/Carbon/Fetch';
-import CarbonMetaTags from 'components/Carbon/Meta/Tags';
+// import CarbonFetch from 'components/Carbon/Fetch';
+// import CarbonMetaTags from 'components/Carbon/Meta/Tags';
 import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll';
 import CommentsCount from 'components/Comments/Count';
 import * as styles from './index.module.scss';
@@ -48,7 +48,7 @@ export default function PostTemplate({
     <Layout leftSidebar={leftSidebar} rightSidebar={rightSidebar}>
       <MetaTags post={post} />
       <MetaStructuredData post={post} />
-      <CarbonFetch render={(service) => <CarbonMetaTags carbonAdsService={service} />} />
+      {/* <CarbonFetch render={(service) => <CarbonMetaTags carbonAdsService={service} />} /> */}
       <article>
         <div className={styles.postCover}>
           <GatsbyImage image={post.thumbnail} alt="Post cover" />

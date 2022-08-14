@@ -72,6 +72,7 @@
     "lint:fix": "npm run lint -- --fix",
     "build": "gatsby build",
     "serve": "gatsby serve",
+    "clean": "gatsby clean",
     "type:check": "tsc -p tsconfig.json --noEmit"
   },
   "resolutions": {

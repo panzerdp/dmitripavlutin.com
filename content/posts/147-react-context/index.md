@@ -91,7 +91,7 @@ function MyComponent() {
 
 Again, in case if the context value changes, `<Context.Consumer>` will re-render its render function.  
 
-![React Context](./images/react-context-3.svg)
+<img src="./images/react-context-3.svg" width="621" height="542" alt="React context" />
 
 You can have as many consumers as you want for a single context. If the context value changes (by changing the `value` prop of the provider `<Context.Provider value={value} />`), then all consumers are immediately notified and re-rendered.  
 
