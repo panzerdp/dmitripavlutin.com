@@ -54,13 +54,6 @@ module.exports = {
         'dont-overuse-react-usecallback',
         'use-react-memo-wisely',
       ]
-    }, {
-      category: 'Best Practices',
-      slugs: [
-        'javascript-variables-best-practices',
-        'javascript-modules-best-practices',
-        'javascript-arrow-functions-best-practices'
-      ]
     }]
   }
 };
