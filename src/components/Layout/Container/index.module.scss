@@ -55,6 +55,10 @@ a {
   position: relative;
   overflow: visible;
 
+  @media (max-width: $small-device-width) {
+    padding: 0 0.5rem;
+  }
+
   .left {
     position: absolute;
     top: 0;
