@@ -8,7 +8,7 @@ interface CommentsCountProps {
 
 export default function CommentsCount({ post }: CommentsCountProps): JSX.Element {
   const { site: { githubCommentsRepository } } = useAuthorAndSiteInfo();
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(-1);
   useEffect(() => {
     const loadCommentsCount = async () => {
       const q = `${post.slug}+in:title+is:issue+repo:${githubCommentsRepository}`;
@@ -24,5 +24,12 @@ export default function CommentsCount({ post }: CommentsCountProps): JSX.Element
     };
     loadCommentsCount();
   }, []);
-  return <>{ count === 0 ? 'Start discussion' : `${count} Comments` }</>;
+
+  let message = '-- Comments'
+  if (count === 0) {
+    message = 'Start discussion'
+  } else if (count > 0) {
+    message = `${count} Comments`
+  }
+  return <>{message}</>;
 }
