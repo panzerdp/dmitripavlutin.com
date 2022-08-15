@@ -18,16 +18,16 @@ export default function AboutAuthorConcise() {
         <div className={styles.links}>
           <AuthorLinks>
             <a href={`mailto:${email}`} title={`Send an email to ${name}`}>
-              <img alt="Email address" src="/icons/email.svg" />
+              <img width="20" height="20" alt="Email address" src="/icons/email.svg" />
             </a>
             <a href={profiles.twitter} title={`${name}'s Twitter profile`}>
-              <img alt="Twitter profile" src="/icons/twitter.svg" />
+              <img width="20" height="20" alt="Twitter profile" src="/icons/twitter.svg" />
             </a>
             <a href={profiles.facebook} title={`${name}'s Facebook page`}>
-              <img alt="Facebook page" src="/icons/facebook.svg" />
+              <img width="20" height="20" alt="Facebook page" src="/icons/facebook.svg" />
             </a>
             <a href={profiles.linkedin} title={`${name}'s Linkedin profile`}>
-              <img alt="LinkedIn profile" src="/icons/linkedin.svg" />
+              <img width="20" height="20" alt="LinkedIn profile" src="/icons/linkedin.svg" />
             </a>
           </AuthorLinks>
         </div>
