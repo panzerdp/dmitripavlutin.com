@@ -14,13 +14,15 @@ export default function CommentsCount({ post }: CommentsCountProps): JSX.Element
       const q = `${post.slug}+in:title+is:issue+repo:${githubCommentsRepository}`;
       const respone = await fetch(`https://api.github.com/search/issues?q=${q}&per_page=5`);
       const { items = [] } = await respone.json();
+      let detectedCount = 0
       for (const item of items) {
         const cleanTitle = item.title.replace(/\//g, '');
         if (cleanTitle === post.slug) {
-          setCount(item.comments);
+          detectedCount = item.comments
           break;
         }
       }
+      setCount(detectedCount)
     };
     loadCommentsCount();
   }, []);
