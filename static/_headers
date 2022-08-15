@@ -1,10 +1,2 @@
-{
-  headers: [
-    {
-      for: "/fonts/*",
-      values: {
-        "cache-control": "max-age=365000000,public,immutable"
-      }
-    }
-  ]
-}
+/fonts/*
+  Cache-Control: max-age=365000000,public,immutable
