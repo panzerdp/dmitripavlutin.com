@@ -173,7 +173,7 @@ Then the overload signature `function greet(persons: string[]): string[]` is mar
 
 ## 3. Method overloading
 
-While in the previous examples the function overloading was applied to a regular function. But you can overload a methods too! 
+In the previous examples the function overloading was applied to a regular function. But you can overload methods too! 
 
 During method overloading, both the overload signatures and implementation signature are now a part of the class.  
 
