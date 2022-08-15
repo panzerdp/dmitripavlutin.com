@@ -27,7 +27,7 @@ export default function SubheaderWithComments({ post, children }: SubheaderWithC
       <div className={styles.line}>
         <div className={styles.tags}>{post.tags.map(mapTag)}</div>
         <div className={styles.commentsCount}>
-          <img alt="Comments" src="/icons/comments.svg" className={styles.icon} />
+          <img alt="Comments" src="/icons/comments.svg" width="20" height="20" className={styles.icon} />
           <a href={`${postUrl}#comments`} title="Jump to comments section" className={styles.anchor}>
             {children ?? 'Start discussion'}
           </a>
