@@ -1,11 +1,10 @@
 import { Helmet } from 'react-helmet';
 
 export default function LayoutMetaFontTags(): JSX.Element {
-  const fontsUrl = '//fonts.googleapis.com/css?family=Open+Sans:700|Roboto+Mono:400&display=swap'
   return (
     <Helmet>
-      <link rel="preconnect" href="//fonts.gstatic.com/" crossOrigin="" />
-      <link href={fontsUrl} rel="stylesheet"  />
+      <link rel="preload" href="/fonts/open-sans-v29-latin-700.woff2" as="font" type="font/woff2" crossOrigin="" />
+      <link rel="preload" href="/fonts/roboto-mono-v22-latin-regular.woff2" as="font" type="font/woff2" crossOrigin="" />
     </Helmet>
   );
 }
