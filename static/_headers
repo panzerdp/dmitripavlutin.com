@@ -1,2 +1,4 @@
 /fonts/*
   Cache-Control: max-age=365000000,public,immutable
+/static/*
+  Cache-Control: max-age=365000000,public,immutable
