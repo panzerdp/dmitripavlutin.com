@@ -726,7 +726,7 @@ myRabbit; // { name: 'White Rabbit', countLegs: 4 }
 
 **A bound function** is a function whose context and/or arguments are bound to specific values. You create a bound function using [`.bind()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind) method. The original and bound functions share the same code and scope, but different contexts and arguments on execution.
 
-`myFunc.bind(thisArg[, arg1, arg2, ...)` accepts the first argument `thisArg` as the context and an optional list of arguments `arg1, arg2, ...` to bound to. `.bind()` returns a new function which context is bound to `thisArg` and arguments to `arg1, arg2, ...`.  
+`myFunc.bind(thisArg,[arg1, arg2, ...)` accepts the first argument `thisArg` as the context and an optional list of arguments `arg1, arg2, ...` to bound to. `.bind()` returns a new function which context is bound to `thisArg` and arguments to `arg1, arg2, ...`.  
 
 The following code creates a bound function and later invokes it:
 
