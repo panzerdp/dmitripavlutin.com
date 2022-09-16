@@ -95,7 +95,7 @@ const action = {
 
 > The *dispatch* is a special function that dispatches an action object.  
 
-The dispatch function is created for your by the `useReducer()` hook: 
+The dispatch function is created for you by the `useReducer()` hook: 
 
 ```javascript
 const [state, dispatch] = useReducer(reducer, initialState);
