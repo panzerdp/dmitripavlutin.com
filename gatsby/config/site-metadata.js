@@ -51,7 +51,7 @@ module.exports = {
       category: 'React',
       slugs: [
         'react-useeffect-explanation',
-        'dont-overuse-react-usecallback',
+        'react-usecallback',
         'use-react-memo-wisely',
       ]
     }]

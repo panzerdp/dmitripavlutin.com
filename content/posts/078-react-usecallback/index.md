@@ -199,10 +199,9 @@ When thinking about performance tweaks, recall the [statement](https://wiki.c2.c
 
 When deciding to use an optimization technique, including memoization and particularly `useCallback()`, do:
 
-* First &mdash; [profile](https://developer.chrome.com/docs/devtools/evaluate-performance/)
-* Then quantify the increased performance (e.g. `150ms` vs `50ms` render speed increase)
-
-*Then ask yourself: does the increased performance, compared to increased complexity, worth using `useCallback()`?*
+1. [Profile](https://developer.chrome.com/docs/devtools/evaluate-performance/)
+2. Quantify the increased performance (e.g. `150ms` vs `50ms` render speed increase)
+3. Ask yourself: does the increased performance, compared to increased complexity, worth using `useCallback()`?  
 
 To enable the memoization of the entire component output I recommend checking my post [Use React.memo() wisely](/use-react-memo-wisely/).  
 

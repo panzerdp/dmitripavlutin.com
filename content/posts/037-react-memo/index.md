@@ -6,7 +6,7 @@ modified: "2021-04-25T06:30Z"
 thumbnail: "./images/instruments.jpg"
 slug: use-react-memo-wisely
 tags: ["react", "memoization"]
-recommended: ["react-useeffect-explanation", "dont-overuse-react-usecallback"]
+recommended: ["react-useeffect-explanation", "react-usecallback"]
 type: post
 ---
 
@@ -286,6 +286,6 @@ Take precautions when memoizing components that use props as callbacks. Make sur
 
 Don't forget to use [profiling](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab) to measure the performance gains of memoization.  
 
-What to read next? To memoize callbacks in React I recommend checking my post [Your Guide to React.useCallback()](/dont-overuse-react-usecallback/).  
+What to read next? To memoize callbacks in React I recommend checking my post [Your Guide to React.useCallback()](/react-usecallback/).  
 
 *Do you know interesting use cases of React.memo()? If so, please write a comment below!*
