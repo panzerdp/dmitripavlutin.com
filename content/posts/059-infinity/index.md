@@ -152,7 +152,7 @@ function findMin(array) {
 findMin([5, 2, 1, 4]); // => 1
 ```
 
-The `min` variable is initialized with `Infinity`. On first `for()` iteration the minimum value becomes the first item. 
+On first `for()` iteration the minimum value becomes the first item because any finite value is smaller than `Infinity`.   
 
 ## 5. Pitfalls of *Infinity*
 
