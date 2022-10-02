@@ -2,7 +2,7 @@
 title: "How to Correctly Debounce and Throttle Callbacks in React"
 description: "How to correctly debounce and throttle callbacks in React using useCallback() and useMemo() hooks."
 published: "2021-05-11T07:40Z"
-modified: "2021-05-11T07:40Z"
+modified: "2022-10-02"
 thumbnail: "./images/cover-3.png"
 slug: react-throttle-debounce
 tags: ['react', 'callback']
@@ -137,7 +137,7 @@ Let's see how to avoid creating debounced functions on each render in the next s
 
 ## 3. Debouncing a callback, second attempt
 
-Fortunately, using `useMemo()` hook as an alternative to `useCallback()` is a more optimal choice:
+Fortunately, using `useMemo()` hook as an alternative to `useCallback()` is a more performant choice:
 
 ```jsx{18-20}
 import { useState, useMemo } from 'react';
@@ -181,7 +181,9 @@ export function FilterList({ names }) {
 
 *This approach also works with creating throttled functions: `useMemo(() => throttle(callback, time), [])`.*
 
-If you open the [demo](https://codesandbox.io/s/use-memo-debouncing-jwsog?file=/src/FilterList.js), you'd see that typing into the input field is still debounced.  
+If you open the [demo](https://codesandbox.io/s/use-memo-debouncing-jwsog?file=/src/FilterList.js), you'd see that typing into the input field is still debounced. 
+
+*Note: Currently `useMemo()` re-calculates the memoized value only when the deps change. But possibly in the future React [could "forget"](https://reactjs.org/docs/hooks-reference.html#usememo) time to time the memoized value, which could lead to re-recreation of debounced callbacks even if the deps haven't changed. The `useCallback` solution presented above doesn't have this nuance.*
 
 ## 4. Be careful with dependencies
 
@@ -247,30 +249,39 @@ I recommend checking my [How to Cleanup Async Effects in React](/react-cleanup-a
 
 ## 6. Conclusion
 
-A good way to create debounced and throttled functions, to handle often happening events, is by using the `useMemo()` hook:
+You have 2 options to create debounced and throttled functions in React: using `useCallback()` or `useMemo()` hooks.
 
 ```jsx{9-11,13-15}
 import { useMemo } from 'react';
 import debounce from 'lodash.debounce';
-import throttle from 'lodash.throttle';
 
 function MyComponent() {
   const eventHandler = () => {
     // handle the event...
   };
 
-  const debouncedEventHandler = useMemo(
-    () => debounce(eventHandler, 300)
+  // Option A: useCallback() stores the debounced callback
+  const debouncedChangeHandler = useCallback(
+    debounce(changeHandler, 300)
   , []);
 
-  const throttledEventHandler = useMemo(
-    () => throttle(eventHandler, 300)
+  // Option B: useMemo() stores the debounced callback
+  const debouncedEventHandler = useMemo(
+    () => debounce(eventHandler, 300)
   , []);
   
   // ...
 }
 ```
 
-If the debounced or throttled event handler accesses props or state values, do not forget to set the dependencies argument of `useMemo(..., dependencies)`.  
+If the debounced or throttled event handler accesses props or state values, do not forget to set the dependencies argument: 
+
+```javascript
+// Optiona A:
+useCallback(debouncedCallback, [dep1, dep2, ..., depN])
+
+// Option B:
+useMemo(() => debouncedCallback, [dep1, dep2, ..., depN])
+```
 
 *What events, in your opinion, worth debouncing and throttling?*
