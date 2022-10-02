@@ -2,9 +2,9 @@
 title: "Your Guide to React.useCallback()"
 description: "React.useCallback() memoizes callback functions."
 published: "2020-05-04T08:40Z"
-modified: "2021-09-11T08:00Z"
+modified: "2022-10-02"
 thumbnail: "./images/cover-6.png"
-slug: dont-overuse-react-usecallback
+slug: react-usecallback
 tags: ["react", "memoization"]
 recommended: ["use-react-memo-wisely", "react-usestate-hook-guide"]
 type: post
@@ -167,13 +167,11 @@ function MyChild ({ onClick }) {
 }
 ```
 
-Does it make sense to apply `useCallback()`? Most likely not because `<MyChild>` component is light and its re-rendering doesn't create performance issues.  
+The first problem is that `useCallback()` hook is called every time `MyComponent` renders. That reduces the render performance already.  
 
-Don't forget that `useCallback()` hook is called every time `MyComponent` renders. Even `useCallback()` returning the same function object, still, the inline function is re-created on every re-rendering (`useCallback()` just skips it).  
+The second problem is using `useCallback()` increases code complexity. You have to keep the `deps` of `useCallback(..., deps)` in sync with what you're using inside the memoized callback.  
 
-By using `useCallback()` you also increased code complexity. You have to keep the `deps` of `useCallback(..., deps)` in sync with what you're using inside the memoized callback.  
-
-In conclusion, *the optimization costs more than not having the optimization*.  
+Does it make sense to apply `useCallback()`? Most likely not because `<MyChild>` component is light and its re-rendering doesn't create performance issues. In conclusion, *the optimization costs more than not having the optimization*.  
 
 Simply *accept* that rendering creates new function objects:
 

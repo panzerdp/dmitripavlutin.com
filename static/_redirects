@@ -1,2 +1,3 @@
 # Support old rss path
-/rss/         /rss.xml            301
+/rss/                            /rss.xml            301
+/dont-overuse-react-usecallback/ /react-usecallback/ 301
