@@ -1,9 +1,9 @@
 ---
-title: "How to Use Triangulation in Test-Driven Development"
+title: "Triangulation in Test-Driven Development"
 description: "How to use triangulation technique to guide the creation of generic code in test-driven development."  
 published: "2022-09-26"
 modified: "2022-09-26"
-thumbnail: "./images/cover-3.png"
+thumbnail: "./images/cover-2.png"
 slug: triangulation-test-driven-development
 tags: ['test-driven development', 'unit test']
 recommended: ['frontend-architecture-stable-and-volatile-dependencies', '7-architectural-attributes-of-a-reliable-react-component']
@@ -113,7 +113,7 @@ Running the unit test you can see that it passes. The addition code has been gen
 
 Now the generic code is created and the assertions prove it to be working. You can remove one of the assertions:
 
-```javascript{5}
+```javascript
 import { sum } from './sum'
 
 describe('sum', () => {
