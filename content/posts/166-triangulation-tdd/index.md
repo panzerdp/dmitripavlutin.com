@@ -58,7 +58,7 @@ Now let's continue with the proper addition testing. Let's update the unit test 
 import { sum } from './sum'
 
 describe('sum', () => {
-  it('should execute', () => {
+  it('should calculate sum', () => {
     expect(sum(1, 2)).toBe(3)
   })
 })
@@ -88,7 +88,7 @@ Now starts the interesting part. Instead of going to the refactor phase to write
 import { sum } from './sum'
 
 describe('sum', () => {
-  it('should execute', () => {
+  it('should calculate sum', () => {
     expect(sum(1, 2)).toBe(3)
     expect(sum(3, 4)).toBe(7)
   })
@@ -111,13 +111,13 @@ Running the unit test you can see that it passes. The addition code has been gen
 
 ### Step 7: refactor
 
-Because now the generic code is already deducted and it is proved to be working, you can remove one of the assertions:
+Now the generic code is created and the assertions prove it to be working. You can remove one of the assertions:
 
 ```javascript{5}
 import { sum } from './sum'
 
 describe('sum', () => {
-  it('should execute', () => {
+  it('should calculate sum', () => {
     expect(sum(1, 2)).toBe(3)
   })
 })
