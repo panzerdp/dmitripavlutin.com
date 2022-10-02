@@ -6,7 +6,7 @@ modified: "2022-05-29"
 thumbnail: "./images/effect-4.jpg"
 slug: react-useeffect-explanation
 tags: ['react', 'hook', 'useeffect']
-recommended: ['dont-overuse-react-usecallback', 'use-react-memo-wisely']
+recommended: ['react-usecallback', 'use-react-memo-wisely']
 type: post
 ---
 

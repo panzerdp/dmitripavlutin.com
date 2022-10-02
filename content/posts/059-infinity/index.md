@@ -2,7 +2,7 @@
 title: 'Infinity in JavaScript'
 description: 'Infinity in JavaScript is a special number bigger than any finite number.'
 published: '2019-12-17T13:00Z'
-modified: '2019-12-17T13:00Z'
+modified: '2022-10-02'
 thumbnail: './images/infinity.png'
 slug: infinity-in-javascript
 tags: ['javascript', 'number']
@@ -134,11 +134,11 @@ Number.isFinite(-Infinity); // => false
 Number.isFinite(999);       // => true
 ```
 
-## 4. *Infinity* use cases
+## 4. When to use *Infinity*
 
-The infinity value is handy when you'd like to initialize computations involving comparisons of numbers.  
+The infinity value is handy to initialize computations involving comparisons of numbers.  
 
-For example, when searching for a minimum value in an array:
+For example, when searching for a minimum value in an array, you could initialize the `min` variable with `Inifinity`.
 
 ```javascript{1}
 function findMin(array) {
@@ -152,7 +152,7 @@ function findMin(array) {
 findMin([5, 2, 1, 4]); // => 1
 ```
 
-The `min` variable is initialized with `Infinity`. On first `for()` iteration the minimum value becomes the first item. 
+On first `for()` iteration the minimum value becomes the first item because any finite value is smaller than `Infinity`.   
 
 ## 5. Pitfalls of *Infinity*
 

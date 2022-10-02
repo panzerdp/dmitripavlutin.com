@@ -6,7 +6,7 @@ modified: "2021-06-04T13:00Z"
 thumbnail: "./images/cover-6.png"
 slug: react-usememo-hook
 tags: ['react', 'usememo', 'hook']
-recommended: ['use-react-memo-wisely', 'dont-overuse-react-usecallback']
+recommended: ['use-react-memo-wisely', 'react-usecallback']
 type: post
 ---
 
@@ -171,4 +171,4 @@ When memoization is used inappropriately, it could harm the performance.
 `useMemo(() => computation(a, b), [a, b])` is the hook that lets you memoize expensive computations. Given the same `[a, b]` dependencies, once memoized, the hook is 
 going to return the memoized value without invoking `computation(a, b)`.  
 
-Also check the post [Your Guide to React.useCallback()](/dont-overuse-react-usecallback/) if you'd like to read about `useCallback()` hook.  
+Also check the post [Your Guide to React.useCallback()](/react-usecallback/) if you'd like to read about `useCallback()` hook.  
