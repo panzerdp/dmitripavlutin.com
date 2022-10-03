@@ -31,7 +31,7 @@ First, you need to write the unit test from the sum function:
 ```javascript
 import { sum } from './sum'
 
-describe('sum', () => {
+describe('sum()', () => {
   it('should execute', () => {
     expect(sum()).toBeUndefined()
   })
@@ -57,7 +57,7 @@ Now let's continue with the proper addition testing. Let's update the unit test 
 ```javascript{4}
 import { sum } from './sum'
 
-describe('sum', () => {
+describe('sum()', () => {
   it('should calculate sum', () => {
     expect(sum(1, 2)).toBe(3)
   })
@@ -87,7 +87,7 @@ Now starts the interesting part. Instead of going to the refactor phase to write
 ```javascript{5}
 import { sum } from './sum'
 
-describe('sum', () => {
+describe('sum()', () => {
   it('should calculate sum', () => {
     expect(sum(1, 2)).toBe(3)
     expect(sum(3, 4)).toBe(7)
@@ -116,7 +116,7 @@ Now the generic code is created and the assertions prove it to be working. You c
 ```javascript
 import { sum } from './sum'
 
-describe('sum', () => {
+describe('sum()', () => {
   it('should calculate sum', () => {
     expect(sum(1, 2)).toBe(3)
   })
@@ -127,8 +127,42 @@ Of course, running the unit test still passes.
 
 ## 2. Triangulation
 
-As seen in the previous example, the triangulation is a technique to derive generic code from 2 assertions.  
+Having seen the triangulation in practice, let's formulate a simple definition of it.  
 
-## 3. Conclusion
+> *Triangulation* is a technique that involves writing 2 assertions to force the creation of a more general solution.  
 
-I like the triangulation technique because it can easier drive the creation of the generic code having potentially less misses along the way.  
+In the previous example, the triangulation has been used in step 5 to force the creation of a more general solution in step 6.  
+
+![Triangulation in Test-Driven Development](./images/triangulation-3.svg)
+
+Now you might be asking yoursel: why exactly 2 assertions are necessary and why a single assertion is not enough?  
+
+## 3. Example: things going wrong
+
+Let's suppose an alternative path starting the step 5, which doesn't involve the triangulation technique. 
+
+After faking in the step 4, you decide to go directly to refactor phase and throw a flawed generic solution. 
+
+### Step 5: refactor (alternative)
+
+Let's try the following generic solution:
+
+```javascript{1}
+export function sum(a) {
+  return a + 2
+}
+```
+
+What I've done is just throwing a simple but flawed generic solution. What's interesting, is that the unit test still passes!
+
+Having used the triangulation technique here, the flawed generic solution wouldn't have passed the unit test with 2 assertions.  
+
+The triangulation technique can be helpful when you're unsure about your generic solution. Having 2 assertions can give you more confidence
+that the generic code you created is correct.  
+
+## 4. Conclusion
+
+I like the triangulation technique because it can ease the creation of the generic code, having less misses along the way.  
+
+You will find the technique useful when you're not sure about the correctness of the generic you want to write. Having 2 assertions can give you more confidence
+and drive you better towards a correct generic solution.  
