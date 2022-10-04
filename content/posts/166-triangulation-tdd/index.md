@@ -14,19 +14,23 @@ Test-driven development (aka TDD) consists of 3 phases: the red, the green and t
 
 The transition from green to refactor phase involves generalization of the code under test. Especially if you've been using the [faking technique](https://www.qwan.eu/2021/07/20/tdd-faking-cheating.html) in the green phase.   
 
-The idea of triangulation is to create 2 assertions to trigger the creation of the generic code from a fake implementation. Let's see in more details how it works and how useful it could be.  
+The idea of triangulation is to use 2 assertions to drive a safer creation of the generic code.  
+
+Let's see in more detail how triangulation works.
 
 *Note: if you're not familiar with test-driven development, I recommend checking [TDD in JavaScript video guide](https://www.youtube.com/watch?v=89Pl2Uok8xc) before continuing with the article.*
 
 ## 1. Example: develop a sum calculator
 
-The best way to understand the benefits of the triangulation technique is to follow an example.  
+A good way to understand the benefits of the triangulation technique is to follow an example.  
 
-Let's say that you'd like to create a simple function: calculate the sum of 2 numbers. Simple as that.  
+Let's say that you'd like to create a simple function: calculate the sum of 2 numbers. And let's imagine that you're unsure whether the addition operator is the right way to implement the sum.  
 
 ### Step 1: red
 
-First, you need to write the unit test from the sum function:
+When doing TDD, I always start with the simplest test possible. In this case, I'm going to import the sum function and check that it returns `undefined`.  
+
+First, you need to write the unit test of the sum function:
 
 ```javascript
 import { sum } from './sum'
@@ -38,7 +42,7 @@ describe('sum()', () => {
 })
 ```
 
-Of course if you run the test it throws an error that the module doesn't exist.  
+Of course the test throws an error because the module `sum.js` doesn't exist.  
 
 ```
  FAIL  sum.spec.js
@@ -49,13 +53,13 @@ Of course if you run the test it throws an error that the module doesn't exist.
 
 ### Step 2: green
 
-Let's then create a simple function with an empty body:
+Let's then create the `sum.js` module exporting a simple function with an empty body:
 
 ```javascript
 export function sum() {}
 ```
 
-Now running the test you are being in the green phase.
+The unit test passes and I'm successfully in the green phase.  
 
 ```
  PASS  sum.spec.js
@@ -103,7 +107,7 @@ Running the updated test triggers an assertion error because currently the `sum(
 
 ### Step 4: green
 
-Because the green phase have to be passed as soon as possible, let's use a fake implementation and simply return `3`.
+Because the green phase has to be passed as soon as possible (with any programming sins you can imagine), let's use a fake implementation and simply return `3`.
 
 ```javascript{1}
 export function sum() {
@@ -123,7 +127,9 @@ Now the fake function passes the unit test.
 
 In the previous 4 steps I followed the standard TDD. Nothing fancy.  
 
-Now starts the interesting part. Instead of going to the refactor phase to write the sum implementation, let's get back to the red phase and write another assertion:
+Now starts the interesting part. 
+
+Instead of going to the refactor phase to write the sum implementation, and because I'm unsure that 1 assertion is enought to test my future generic code, let's get back to the red phase and write another assertion:
 
 ```javascript{5}
 import { sum } from './sum'
@@ -171,7 +177,7 @@ export function sum(n1, n2) {
 }
 ```
 
-Running the unit test you can see that it passes. The addition code has been generated from the 2 assertions.
+The unit test succussfully pases. The addition code has been generated from the 2 assertions and now I have more confidence in the correctness of my generic solution.  
 
 ```
  PASS  sum.spec.js
@@ -181,7 +187,7 @@ Running the unit test you can see that it passes. The addition code has been gen
 
 ### Step 7: refactor
 
-Now the generic code is created and the assertions prove it to be working. You can remove one of the assertions:
+Now the generic code is created and the assertions prove it working. You can remove one of the assertions:
 
 ```javascript
 import { sum } from './sum'
@@ -205,7 +211,7 @@ Of course, running the unit test still passes.
 
 Having seen the triangulation in practice, let's formulate a simple definition of it.  
 
-> *Triangulation* is a technique that involves writing 2 assertions to force the creation of a more general solution.  
+> *Triangulation* is a technique that involves writing 2 assertions to drive a safer creation of a more general implementation.  
 
 In the previous example, the triangulation has been used in step 5 to force the creation of a more general solution in step 6.  
 
@@ -215,7 +221,7 @@ Now you might be asking yoursel: why exactly 2 assertions are necessary and why 
 
 ## 3. Example: things going wrong
 
-Let's suppose an alternative path starting the step 5, which doesn't involve the triangulation technique. 
+Let's suppose an alternative path starting at the step 5 without using the triangulation technique. 
 
 After faking in the step 4, you decide to go directly to refactor phase and throw a flawed generic solution. 
 
@@ -229,7 +235,7 @@ export function sum(n) {
 }
 ```
 
-What I've done is just throwing a simple but flawed generic solution. What's interesting, is that the unit test still passes!
+What I've done is just throwing a simple but flawed generic solution. What's interesting, is that the unit test, the one defined in step 4 with 1 assertion: `expect(sum(1, 2)).toBe(3)`, still passes!
 
 ```
  PASS  sum.spec.js
@@ -237,7 +243,14 @@ What I've done is just throwing a simple but flawed generic solution. What's int
     ✓ should calculate sum (2 ms)
 ```
 
-Having used the triangulation technique here, the flawed generic solution wouldn't have passed the unit test with 2 assertions.  
+But having used the triangulation technique here, the flawed generic solution wouldn't have passed the unit test with 2 assertions:
+
+```javascript
+// ...
+  expect(sum(1, 2)).toBe(3); 
+  expect(sum(3, 4)).toBe(7)
+// ...
+```
 
 The triangulation technique can be helpful when you're unsure about your generic solution. Having 2 assertions can give you more confidence
 that the generic code you created is correct.  
@@ -246,5 +259,4 @@ that the generic code you created is correct.
 
 I like the triangulation technique because it can ease the creation of the generic code, having less misses along the way.  
 
-You will find the technique useful when you're not sure about the correctness of the generic you want to write. Having 2 assertions can give you more confidence
-and drive you better towards a correct generic solution.  
+You will find the technique useful when you're not sure about the correctness of the generic code you want to write. Having 2 assertions can give you more confidence.  
