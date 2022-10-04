@@ -1,8 +1,8 @@
 ---
 title: "Triangulation in Test-Driven Development"
 description: "How to use triangulation technique to guide the creation of generic code in test-driven development."  
-published: "2022-09-26"
-modified: "2022-09-26"
+published: "2022-10-04"
+modified: "2022-10-04"
 thumbnail: "./images/cover-2.png"
 slug: triangulation-test-driven-development
 tags: ['test-driven development', 'unit test']
