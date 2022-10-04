@@ -257,6 +257,6 @@ that the generic code you created is correct.
 
 ## 4. Conclusion
 
-I like the triangulation technique because it can ease the creation of the generic code, having fewer misses along the way.  
+I like the triangulation technique because it helps to create a generic implementation by reducing misses along the way.  
 
 You will find the technique useful when you're not sure about the correctness of the generic code you want to write. Having 2 assertions can give you more confidence.  
