@@ -24,7 +24,7 @@ The best way to understand the benefits of the triangulation technique is to fol
 
 Let's say that you'd like to create a simple function: calculate the sum of 2 numbers. Simple as that.  
 
-#### Step 1: red
+### Step 1: red
 
 First, you need to write the unit test from the sum function:
 
@@ -40,7 +40,14 @@ describe('sum()', () => {
 
 Of course if you run the test it throws an error that the module doesn't exist.  
 
-#### Step 2: green
+```
+ FAIL  sum.spec.js
+  ● Test suite failed to run
+
+    Cannot find module './sum' from 'sum.test.js'
+```
+
+### Step 2: green
 
 Let's then create a simple function with an empty body:
 
@@ -49,6 +56,13 @@ export function sum() {}
 ```
 
 Now running the test you are being in the green phase.
+
+```
+ PASS  sum.spec.js
+  sum()
+    ✓ should execute (1 ms)
+```
+
 
 ### Step 3: red
 
@@ -64,7 +78,28 @@ describe('sum()', () => {
 })
 ```
 
-Running the updated test is triggerring an assertion error because currently.
+Running the updated test triggers an assertion error because currently the `sum()` implementation does nothing.  
+
+```
+ FAIL  sum.spec.js
+  sum()
+    ✕ should calculate sum (3 ms)
+
+  ● sum() › should calculate sum
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 3
+    Received: undefined
+
+      3 | describe('sum()', () => {
+      4 |   it('should calculate sum', () => {
+    > 5 |     expect(sum(1, 2)).toBe(3)
+        |                       ^
+      6 |   })
+      7 | })
+      8 |
+```
 
 ### Step 4: green
 
@@ -77,6 +112,12 @@ export function sum() {
 ```
 
 Now the fake function passes the unit test.  
+
+```
+ PASS  sum.spec.js
+  sum()
+    ✓ should calculate sum (2 ms)
+```
 
 ### Step 5: red
 
@@ -97,9 +138,32 @@ describe('sum()', () => {
 
 This is the triangulation technique in practice: you use 2 assertions to drive the generalization of the code.  
 
+Running the test fails because of the second assertion.  
+
+```
+ FAIL  sum.spec.js
+  sum()
+    ✕ should calculate sum (4 ms)
+
+  ● sum() › should calculate sum
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 7
+    Received: 3
+
+      4 |   it('should calculate sum', () => {
+      5 |     expect(sum(1, 2)).toBe(3)
+    > 6 |     expect(sum(3, 4)).toBe(7)
+        |                       ^
+      7 |   })
+      8 | })
+      9 |
+```
+
 ### Step 6: green
 
-Having the 2 assertions that check the future code, let's deduce the code that implement the sum:
+Having the 2 assertions that check the future code, let's write the proper implemention of sum:
 
 ```javascript
 export function sum(n1, n2) {
@@ -108,6 +172,12 @@ export function sum(n1, n2) {
 ```
 
 Running the unit test you can see that it passes. The addition code has been generated from the 2 assertions.
+
+```
+ PASS  sum.spec.js
+  sum()
+    ✓ should calculate sum (2 ms)
+```
 
 ### Step 7: refactor
 
@@ -124,6 +194,12 @@ describe('sum()', () => {
 ```
 
 Of course, running the unit test still passes.
+
+```
+ PASS  sum.spec.js
+  sum()
+    ✓ should calculate sum (2 ms)
+```
 
 ## 2. Triangulation
 
@@ -148,12 +224,18 @@ After faking in the step 4, you decide to go directly to refactor phase and thro
 Let's try the following generic solution:
 
 ```javascript{1}
-export function sum(a) {
-  return a + 2
+export function sum(n) {
+  return n + 2
 }
 ```
 
 What I've done is just throwing a simple but flawed generic solution. What's interesting, is that the unit test still passes!
+
+```
+ PASS  sum.spec.js
+  sum()
+    ✓ should calculate sum (2 ms)
+```
 
 Having used the triangulation technique here, the flawed generic solution wouldn't have passed the unit test with 2 assertions.  
 
