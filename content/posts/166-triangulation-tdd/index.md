@@ -285,9 +285,6 @@ describe('sum()', () => {
       9 |
 ```
 
-The triangulation technique can be helpful when you're unsure about your generic solution. Having 2 assertions can give you more confidence
-that the generic code you created is correct.  
-
 ## 4. Conclusion
 
 I like the triangulation technique because it helps to create a generic implementation by reducing misses along the way.  
