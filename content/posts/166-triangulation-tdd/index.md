@@ -221,9 +221,7 @@ Now you might be asking yourself: why exactly 2 assertions are necessary and why
 
 ## 3. Example: things going wrong
 
-Let's suppose an alternative path starts at step 5 without using the triangulation technique. 
-
-After faking in step 4, you decide to go directly to refactor phase and throw a flawed generic solution. 
+Let's say I take an alternative approach at step 5. Without using the triangulation technique I go directly to refactor phase and throw a flawed generic solution.  
 
 ### Step 5: refactor (alternative)
 
@@ -235,7 +233,17 @@ export function sum(n) {
 }
 ```
 
-What I've done is just dump a simple but flawed generic solution. What's interesting, is that the unit test, the one defined in step 4 with 1 assertion: `expect(sum(1, 2)).toBe(3)`, still passes!
+What I've done is just dump a simple but flawed generic solution. What's interesting, is that the unit test, the one defined in step 3 with 1 assertion... still passes!
+
+```javascript
+import { sum } from './sum'
+
+describe('sum()', () => {
+  it('should calculate sum', () => {
+    expect(sum(1, 2)).toBe(3)
+  })
+})
+```
 
 ```
  PASS  sum.spec.js
@@ -246,10 +254,35 @@ What I've done is just dump a simple but flawed generic solution. What's interes
 But having used the triangulation technique here, the flawed generic solution wouldn't have passed the unit test with 2 assertions:
 
 ```javascript
-// ...
-  expect(sum(1, 2)).toBe(3); 
-  expect(sum(3, 4)).toBe(7)
-// ...
+import { sum } from './sum'
+
+describe('sum()', () => {
+  it('should calculate sum', () => {
+    expect(sum(1, 2)).toBe(3)
+    expect(sum(3, 4)).toBe(7)
+  })
+})
+```
+
+```
+ FAIL  sum.spec.js
+  sum()
+    ✕ should calculate sum (4 ms)
+
+  ● sum() › should calculate sum
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 7
+    Received: 5
+
+      4 |   it('should calculate sum', () => {
+      5 |     expect(sum(1, 2)).toBe(3)
+    > 6 |     expect(sum(3, 4)).toBe(7)
+        |                       ^
+      7 |   })
+      8 | })
+      9 |
 ```
 
 The triangulation technique can be helpful when you're unsure about your generic solution. Having 2 assertions can give you more confidence
@@ -260,3 +293,5 @@ that the generic code you created is correct.
 I like the triangulation technique because it helps to create a generic implementation by reducing misses along the way.  
 
 You will find the technique useful when you're not sure about the correctness of the generic code you want to write. Having 2 assertions can give you more confidence.  
+
+*In what scenarios do you find the triangulation technique useful?*
