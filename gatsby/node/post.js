@@ -25,8 +25,8 @@ module.exports = function createPost({ createPage, edges, popularPostsSlugs }, {
 };
 
 function createPostImagePermalinkWithRedirection(post, createRedirect) {
-  const permalinkThumbnailSrc = `/${post.node.frontmatter.slug}/cover.png`
   const dynamicThumbnailSrc = gatsbyPluginImage.getSrc(post.node.frontmatter.thumbnail)
+  const permalinkThumbnailSrc = `/${post.node.frontmatter.slug}/cover.png`
 
-  createRedirect({ fromPath: dynamicThumbnailSrc, toPath: permalinkThumbnailSrc, isPermanent: false })
+  // createRedirect({ fromPath: dynamicThumbnailSrc, toPath: permalinkThumbnailSrc, isPermanent: false })
 }
