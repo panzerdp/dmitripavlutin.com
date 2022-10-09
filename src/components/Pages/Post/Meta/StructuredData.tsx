@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet';
-import { getSrc } from 'gatsby-plugin-image';
 
 import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
 import { Post } from 'typings/post';

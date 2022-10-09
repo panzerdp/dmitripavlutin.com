@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet';
-import { getSrc } from 'gatsby-plugin-image';
 
 import { TO_POST } from 'routes/path';
 import { Post } from 'typings/post';
@@ -13,7 +12,7 @@ export default function PostMetaTags({ post }: PostMetaTagsProps) {
   const { author: { info: authorInfo }, site } = useAuthorAndSiteInfo();
 
   const postUrl = `${site.url}${TO_POST({ slug: post.slug })}`;
-  const imageUrl = `${site.url}${getSrc(post.thumbnail)}`;
+  const imageUrl = `${postUrl}cover.png`;
   return (
     <Helmet titleTemplate="%s">
       <title>{post.title}</title>
