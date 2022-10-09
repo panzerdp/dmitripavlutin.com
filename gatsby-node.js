@@ -37,6 +37,11 @@ const query = `
           slug
           tags
           recommended
+          thumbnail {
+            childImageSharp {
+              gatsbyImageData(aspectRatio: 1.8, quality: 60, width: 708, formats: [PNG], layout: FIXED)
+            }
+          }
         }
       }
     }
@@ -58,7 +63,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const popularPostsSlugs = popularPostsByCategory.reduce((acc, postsByCategory) => [...acc, ...postsByCategory.slugs], []);
 
   createExcerptsList(createPage, edges, popularPostsSlugs);
-  createPost(createPage, edges, popularPostsSlugs);
+  createPost({ createPage, edges, popularPostsSlugs }, actions);
   createPlainListByTag(createPage, edges);
   return result;  
 };
