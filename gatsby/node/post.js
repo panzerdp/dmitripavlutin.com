@@ -28,5 +28,5 @@ function createPostImagePermalinkWithRedirection(post, createRedirect) {
   const dynamicThumbnailSrc = gatsbyPluginImage.getSrc(post.node.frontmatter.thumbnail)
   const permalinkThumbnailSrc = `/${post.node.frontmatter.slug}/cover.png`
 
-  // createRedirect({ fromPath: dynamicThumbnailSrc, toPath: permalinkThumbnailSrc, isPermanent: false })
+  createRedirect({ fromPath: permalinkThumbnailSrc, toPath: dynamicThumbnailSrc, isPermanent: false })
 }
