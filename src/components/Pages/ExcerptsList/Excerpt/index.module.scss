@@ -2,10 +2,13 @@
 
 .excerpt {
   border-radius: 8px;
-  box-shadow: inset 0 0 0 1px $border-color, 0 5px 15px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: $box-shadow;
   margin-top: 2rem;
-  background: #fff;
   overflow: hidden;
+
+  @media (prefers-color-scheme: dark) {
+    box-shadow: $box-shadow-dark-mode;
+  }
 }
 
 .content {
@@ -49,6 +52,10 @@
 
     &:last-child {
       border-bottom: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      border-bottom-color: $border-color-dark-mode;
     }
   }
 

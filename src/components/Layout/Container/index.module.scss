@@ -33,7 +33,7 @@ summary {
 }
 
 body {
-  background-color: #fff;
+  background-color: $body-background-color;
   font-size: 1.25rem;
   font-family: $serif-font-family;
   font-weight: normal;
@@ -41,6 +41,11 @@ body {
   min-height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $body-background-color-dark-mode;
+    color: $body-color-dark-mode;
+  }
 }
 
 h1,
