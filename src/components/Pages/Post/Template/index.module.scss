@@ -509,6 +509,10 @@ blockquote {
   padding-left: 4rem;
   border-radius: 3px;
 
+  @media (prefers-color-scheme: dark) {
+    background-image: url('/icons/column-2.svg');
+  }
+
   p {
     quotes: '“' '”' '‘' '’';
   }
