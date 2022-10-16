@@ -496,6 +496,11 @@ p, em, li, a, strong {
     border-radius: .3em;
     padding: .1em;
     white-space: normal;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: $background-color-dark-mode;
+      color: inherit;
+    }
   }
 }
 
