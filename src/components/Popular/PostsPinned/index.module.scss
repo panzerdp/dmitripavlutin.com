@@ -8,6 +8,10 @@
   margin-top: 1.5rem;
   position: relative;
   max-width: 35rem;
+
+  @media (prefers-color-scheme: dark) {
+    box-shadow: $box-shadow-dark-mode;
+  }
   
   h3 {
     margin: 0;
@@ -26,9 +30,13 @@
       @media (max-width: $small-device-width) {
         padding: 0 0.5rem;
       }
+
+      @media (prefers-color-scheme: dark) {
+        border-bottom-color: $border-color-dark-mode;
+      }
     
       .title {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         padding: 0.75rem;
         cursor: pointer;
 

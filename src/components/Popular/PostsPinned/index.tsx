@@ -18,6 +18,7 @@ export default function PopularPostsPinned({ popularPostsByCategory }: PopularPo
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   return (
     <div className={styles.popularPostsPinned}>
+      <h3>Popular posts</h3>
       <div className={styles.tabs}>
         <div className={styles.titles}>
           {popularPostsByCategory.map(({ category }, index) => {
@@ -39,10 +40,6 @@ export default function PopularPostsPinned({ popularPostsByCategory }: PopularPo
             </div>
           );
         })}
-      </div>
-      <div className={styles.popular}>
-        <img src="/icons/popular.svg" className={styles.icon} />
-        <div className={styles.popularTitle}>Popular</div>
       </div>
     </div>
   );
