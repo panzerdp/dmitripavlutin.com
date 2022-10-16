@@ -67,6 +67,10 @@
     display: block;
     max-width: 100%;
     height: auto;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: white;
+    }
   }
 
   details summary {
@@ -80,6 +84,10 @@
       padding: 1rem;
       padding-left: 1.5rem;
 
+      @media (prefers-color-scheme: dark) {
+        background-color: $background-color-dark-mode;
+      }
+
       p {
         margin: 0;
         padding: 0;
@@ -87,6 +95,11 @@
 
       a {
         color: $anchor-dark-color;
+
+        @media (prefers-color-scheme: dark) {
+          background-color: $background-color-dark-mode;
+          color: $anchor-color;
+        }
       }
 
       ul,
