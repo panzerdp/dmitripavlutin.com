@@ -541,29 +541,6 @@ blockquote {
   min-height: 300px;
 }
 
-:global {
-  .token.function {
-    color: #883f44;
-  }
-
-  .token.operator,
-  .token.entity,
-  .token.url,
-  .language-css .token.string,
-  .style .token.string {
-    background: inherit;
-  }
-
-  .gatsby-highlight-code-line {
-    background-color: rgba(#feb, 0.6);
-    display: block;
-    margin-right: -0.8rem;
-    margin-left: -0.8rem;
-    padding: 2px 0.8rem 2px 0.7rem;
-    border-left: 0.1rem solid #f99;
-  }
-}
-
 @media (max-width: 1080px) {
   .postCover {
     margin: 1rem 0;

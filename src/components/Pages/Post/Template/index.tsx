@@ -1,7 +1,5 @@
 import { GatsbyImage } from 'gatsby-plugin-image';
 
-import 'prismjs/themes/prism.css';
-
 import { PostPlain, PostDetailed } from 'typings/post';
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData';
 import MetaTags from 'components/Pages/Post/Meta/Tags';
