@@ -21,6 +21,10 @@
     text-decoration: none;
     border-radius: 2px;
 
+    @media (prefers-color-scheme: dark) {
+      background-color: $background-color-dark-mode;
+    }
+
     &:hover {
       color: white;
       background-color: rgba($anchor-color, 0.5);

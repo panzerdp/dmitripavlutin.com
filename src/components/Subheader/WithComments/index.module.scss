@@ -23,6 +23,12 @@
     .commentsCount {
       white-space: nowrap;
       margin-left: auto;
+      padding-left: 1.75rem;
+      background: no-repeat left 8px/20px url('/icons/comments.svg');
+
+      @media (prefers-color-scheme: dark) {
+        background-image: url('/icons/comments-2.svg');
+      }
 
       .icon {
         vertical-align: middle;
