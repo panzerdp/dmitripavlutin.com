@@ -64,9 +64,13 @@ h6 {
 }
 
 a {
-  color: #33805b;
+  color: $anchor-color;
   text-decoration: none;
 
+  @media (prefers-color-scheme: dark) { 
+    color: $anchor-color-dark-mode
+  }
+  
   &:hover {
     text-decoration: underline;
   }

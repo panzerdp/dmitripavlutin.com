@@ -47,6 +47,11 @@
         &.activeTitle {
           color: $anchor-color;
           border-bottom: 2px solid $anchor-color; 
+
+          @media (prefers-color-scheme: dark) {
+            color: $anchor-color-dark-mode;
+            border-bottom: 2px solid $anchor-color-dark-mode; 
+          }
         }
       }
     }
@@ -86,6 +91,10 @@
           color: $anchor-color;
           font-size: 1.2rem;
           display: none;
+
+          @media (prefers-color-scheme: dark) {
+            color: $anchor-color-dark-mode;
+          }
 
           @media (max-width: $small-device-width) {
             display: inline-block;
@@ -131,6 +140,10 @@
       color: $anchor-color;
       font-weight: bold;
       font-size: 1.25rem;
+
+      @media (prefers-color-scheme: dark) {
+        color: $anchor-color-dark-mode;
+      }
     }
 
     @media (max-width: 660px) {

@@ -34,6 +34,11 @@
         &.activeTitle {
           color: $anchor-color;
           border-bottom: 2px solid $anchor-color; 
+
+          @media (prefers-color-scheme: dark) {
+            color: $anchor-color-dark-mode;
+            border-bottom: 2px solid $anchor-color-dark-mode; 
+          }
         }
       }
     }
@@ -56,6 +61,10 @@
           margin-right: 0.5rem;
           color: $anchor-color;
           font-size: 1.2rem;
+
+          @media (prefers-color-scheme: dark) {
+            color: $anchor-color-dark-mode;
+          }
         }
     
         &:last-child {
