@@ -2,7 +2,7 @@
 title: "A Simple Explanation of Function Overloading in TypeScript"
 description: "Function overloading in TypeScript lets you define functions that can be called in multiple ways."
 published: "2021-11-18T13:40Z"
-modified: "2021-11-18T13:40Z"
+modified: "2022-10-22"
 thumbnail: "./images/cover-4.png"
 slug: typescript-function-overloading
 tags: ['typescript', 'function']
@@ -222,7 +222,7 @@ hi.greet(['Pam', 'Jim']); // ['Hi, Pam!', 'Hi, Jim!']
 
 ## 4. When to use function overloading
 
-Function overloading, when used the right way, can greatly increase the usability of functions that may be invoked in multiple ways. That especially useful during autocomplete: you get listed all the possible overloadings as separate records in autocomplete.   
+Function overloading, when used the right way, can greatly increase the usability of functions that may be invoked in multiple ways. That is especially useful during autocomplete: you get listed all the possible overloadings as separate records.  
 
 However, there are situations when I'd recommend not to use the function overloading, but rather stick to the function signature.  
 
@@ -239,11 +239,11 @@ function myFunc(...args: string[]): string {
 }
 ```
 
-Using the optional parameters in the function signature should be enough:
+Using the optional parameters in the function signature is simpler and should be enough:
 
 ```ts
 // OK
-function myFunc(param1?: string, param2: string): string {
+function myFunc(param1?: string, param2?: string): string {
   // implementation...
 }
 ```
