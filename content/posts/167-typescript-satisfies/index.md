@@ -12,7 +12,7 @@ type: post
 
 While most of the time you might be use TypeScript's type checking capabitilies on the background,
 
-## 1. Checking a value type: old way
+## 1. Conforming a value to a type: the old way
 
 Let's say that you have an object that represents some favorties movies:
 
@@ -24,7 +24,7 @@ type Favorites = {
 
 The type represents an object having a property `movie`, which can be either a string or an array of strings (if you're many favorite movies).
 
-## 2. Checking a value type using satisfies
+## 2. Conforming a value to a type: satisfies
 
 
 
