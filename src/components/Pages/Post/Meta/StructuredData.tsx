@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet';
-import { getSrc } from 'gatsby-plugin-image';
 
 import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
 import { Post } from 'typings/post';
@@ -13,7 +12,7 @@ export default function PostMetaStructuredData({ post }: PostMetaStructuredDataP
   const { author: { info: authorInfo, profilePictureSrc }, site } = useAuthorAndSiteInfo();
 
   const postUrl = `${site.url}${TO_POST({ slug: post.slug })}`;
-  const postImageUrl = `${site.url}${getSrc(post.thumbnail)}`;
+  const postImageUrl = `${postUrl}cover.png`;
   const authorProfilePictureUrl = `${site.url}${profilePictureSrc}`;
   const sameAs = Object.keys(authorInfo.profiles)
     .reduce((list, key: keyof typeof authorInfo.profiles) => [...list, authorInfo.profiles[key]], []);

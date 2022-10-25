@@ -1,4 +1,3 @@
-import { SkeletonAnimation } from 'components/Skeleton';
 import classNames from 'classnames';
 
 import * as styles from './index.module.scss';
@@ -13,9 +12,7 @@ function Placeholder(): JSX.Element {
         <div className={classNames(styles.text, styles.textLine100)} />
         <div className={classNames(styles.text, styles.textLine70)} />
         <div className={classNames(styles.text, styles.textLine100)} />
-        <SkeletonAnimation />
       </div>
-      <SkeletonAnimation />
     </div>
   );
 }

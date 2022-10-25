@@ -6,6 +6,10 @@
   overflow: hidden;
   padding: 1.5rem;
 
+  @media (prefers-color-scheme: dark) {
+    box-shadow: $box-shadow-dark-mode;
+  }
+
   :global {
     .gatsby-image-wrapper {
       border-radius: 8px;

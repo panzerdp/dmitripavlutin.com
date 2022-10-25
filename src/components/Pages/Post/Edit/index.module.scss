@@ -11,6 +11,10 @@
       border-radius: 4px;
       padding: 0.25rem;
       margin-right: 0.4rem;
+
+      @media (prefers-color-scheme: dark) {
+        background-color: rgba($anchor-color-dark-mode, 0.9);
+      }
     }
   }
 }

@@ -12,9 +12,9 @@ export default function SimplePost({ post }: SimplePostProps) {
   const to = TO_POST({ slug: post.slug });
   return (
     <div className={styles.simplePost}>
-      <h4>
+      <h3>
         <Link to={to}>{post.title}</Link>
-      </h4>
+      </h3>
       <SubheaderSimple post={post} />
     </div>
   );

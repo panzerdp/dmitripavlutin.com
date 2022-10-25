@@ -48,7 +48,7 @@ module.exports = {
           {
             resolve: 'gatsby-remark-shiki-twoslash',
             options: {
-              theme: 'light-plus',
+              theme: 'one-dark-pro',
             }
           },
           'gatsby-remark-copy-linked-files',
@@ -117,6 +117,7 @@ module.exports = {
     'gatsby-plugin-remove-serviceworker',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
+    'gatsby-plugin-netlify',
     require('./gatsby/config/gatsby-plugin-sass'),
     // 'gatsby-plugin-minify-classnames',
     require('./gatsby/config/gatsby-plugin-feed'),

@@ -9,6 +9,10 @@
   justify-content: center;
   padding: 1rem;
 
+  @media (prefers-color-scheme: dark) {
+    background-color: $background-color-dark-mode;
+  }
+
   .profilePicture {
     flex: 0 0 100px;
     text-align: center;

@@ -6,7 +6,11 @@
   border-radius: 8px;
   padding: 1rem 1rem 0.4rem 1rem;
 
-  h4 {
+  @media (prefers-color-scheme: dark) {
+    box-shadow: $box-shadow-dark-mode;
+  }
+
+  h3 {
     margin: 0;
   }
 

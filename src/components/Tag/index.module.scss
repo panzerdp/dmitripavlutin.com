@@ -1,5 +1,7 @@
 @import '~styles/variables';
 
+$tag-background-color-dark-mode: #082032;
+
 .tag {
   font-size: 1.2rem;
   margin-right: 0.5rem;
@@ -10,6 +12,11 @@
   color: $anchor-dark-color;
   margin-top: 0.2rem;
 
+  @media (prefers-color-scheme: dark) {
+    background-color: $tag-background-color-dark-mode;
+    color: $body-color-dark-mode;
+  }
+
   span {
     vertical-align: middle;
   }
@@ -19,5 +26,10 @@
     color: $anchor-color;
     background-color: #ebf5f0;
     text-decoration: none;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: rgba($tag-background-color-dark-mode, 0.6);
+      color: $body-color-dark-mode;
+    }
   }
 }

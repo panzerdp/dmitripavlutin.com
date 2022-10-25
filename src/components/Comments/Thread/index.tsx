@@ -16,8 +16,10 @@ export function CommentsThread(): JSX.Element {
     scriptEl.setAttribute('repo', githubCommentsRepository);
     scriptEl.setAttribute('issue-term', 'pathname');
     scriptEl.setAttribute('id', 'utterances');
-    scriptEl.setAttribute('theme', 'github-light');
     scriptEl.setAttribute('crossorigin', 'anonymous');
+
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    scriptEl.setAttribute('theme', isDarkMode ? 'github-dark' : 'github-light');
 
     if (commentBox && commentBox.current) {
       setIsLoading(true);

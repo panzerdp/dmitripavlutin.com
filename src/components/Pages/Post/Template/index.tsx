@@ -1,7 +1,6 @@
 import { GatsbyImage } from 'gatsby-plugin-image';
 
-import 'prismjs/themes/prism.css';
-
+import * as styles from './index.module.scss';
 import { PostPlain, PostDetailed } from 'typings/post';
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData';
 import MetaTags from 'components/Pages/Post/Meta/Tags';
@@ -20,7 +19,6 @@ import SubscriptionRegion from 'components/Subscription/Region';
 // import CarbonMetaTags from 'components/Carbon/Meta/Tags';
 import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll';
 import CommentsCount from 'components/Comments/Count';
-import * as styles from './index.module.scss';
 
 const SHOW_SHARE_AFTER_Y = 500;
 

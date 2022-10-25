@@ -6,6 +6,10 @@
   font-size: 1.3rem;
   padding: 1.5rem;
 
+  @media (prefers-color-scheme: dark) {
+    box-shadow: $box-shadow-dark-mode;
+  }
+
   h3 {
     margin: 0;
     margin-bottom: 0.5rem;

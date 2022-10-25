@@ -5,6 +5,10 @@
   border-radius: 8px;
   font-size: 1.3rem;
 
+  @media (prefers-color-scheme: dark) {
+    box-shadow: $box-shadow-dark-mode;
+  }
+
   h3 {
     margin: 0;
     padding: 1.5rem;
@@ -17,7 +21,10 @@
       justify-content: flex-start;
       border-bottom: 1px solid $border-color;
       padding: 0 1.5rem;
-      // background-color: rgba($border-color, 0.4);
+      
+      @media (prefers-color-scheme: dark) {
+        border-bottom-color: $border-color-dark-mode;
+      }
     
       .title {
         font-size: 1.3rem;
@@ -27,6 +34,11 @@
         &.activeTitle {
           color: $anchor-color;
           border-bottom: 2px solid $anchor-color; 
+
+          @media (prefers-color-scheme: dark) {
+            color: $anchor-color-dark-mode;
+            border-bottom: 2px solid $anchor-color-dark-mode; 
+          }
         }
       }
     }
@@ -49,6 +61,10 @@
           margin-right: 0.5rem;
           color: $anchor-color;
           font-size: 1.2rem;
+
+          @media (prefers-color-scheme: dark) {
+            color: $anchor-color-dark-mode;
+          }
         }
     
         &:last-child {

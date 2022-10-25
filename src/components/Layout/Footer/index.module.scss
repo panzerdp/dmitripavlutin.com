@@ -6,6 +6,10 @@ footer {
   background-color: rgba($border-color, 0.2);
   padding: 0.8rem;
   font-size: 1.3rem;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $background-color-dark-mode;
+  }
 }
 
 .footerContent {

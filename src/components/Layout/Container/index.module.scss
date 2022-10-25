@@ -33,14 +33,19 @@ summary {
 }
 
 body {
-  background-color: #fff;
-  font-size: 1.25rem;
+  background-color: $body-background-color;
+  font-size: 1.2rem;
   font-family: $serif-font-family;
   font-weight: normal;
   color: $body-color;
   min-height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $body-background-color-dark-mode;
+    color: $body-color-dark-mode;
+  }
 }
 
 h1,
@@ -59,9 +64,13 @@ h6 {
 }
 
 a {
-  color: #33805b;
+  color: $anchor-color;
   text-decoration: none;
 
+  @media (prefers-color-scheme: dark) { 
+    color: $anchor-color-dark-mode
+  }
+  
   &:hover {
     text-decoration: underline;
   }

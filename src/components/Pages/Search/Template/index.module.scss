@@ -1,11 +1,17 @@
+@import '~styles/variables';
+
 .search {
   box-sizing: border-box;
+}
 
-  :global {
-    .gsc-control-cse {
-      padding: 0;
-      max-width: 650px;
-      margin: 0 auto;
-    }
+:global {
+  .gsc-control-cse {
+    padding: 0;
+    max-width: 650px;
+    margin: 0 auto;
+  }
+
+  .gsc-completion-container {
+    color: $body-color !important;
   }
 }

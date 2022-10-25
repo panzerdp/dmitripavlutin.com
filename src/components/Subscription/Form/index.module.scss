@@ -6,6 +6,10 @@
   font-size: 1.2rem;
   padding: 1rem;
 
+  @media (prefers-color-scheme: dark) {
+    background-color: $background-color-dark-mode;
+  }
+
   ul {
     padding-left: 30px;
 
@@ -44,6 +48,11 @@
         font-family: $serif-font-family;
         padding: 0 1rem;
         background-color: white;
+
+        @media (prefers-color-scheme: dark) {
+          background-color: $background-color-dark-mode;
+          color: $body-color-dark-mode;
+        }
       }
     }
 
@@ -79,5 +88,9 @@
     font-size: 1rem;
     margin-top: 0.5rem;
     color: rgba($body-color, 0.8);
+
+    @media (prefers-color-scheme: dark) {
+      color: $body-color-dark-mode;
+    }
   }
 }
