@@ -102,7 +102,7 @@ Tips:
 
 ### 2.1 *array.map()* method
 
-`array.map(callback)` method creates to a new array by using `callback` invocation result on each array item.  
+`array.map(callback)` method creates a new array by using `callback` invocation result on each array item.  
 
 On each iteration `callback(item[, index[, array]])` is invoked with arguments: current item, index and the array itself. It should return the new item.  
 
