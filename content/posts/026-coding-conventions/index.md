@@ -2,20 +2,13 @@
 title: "Coding like Shakespeare: Practical Function Naming Conventions"
 description: "Code like a poet! The article describes practical function naming conventions to increase the code readability. Useful clean code tips and examples."
 published: "2016-10-12"
-modified: "2019-07-11T08:40Z"
+modified: "2022-10-29T08:40Z"
 thumbnail: "./images/cover.jpg"
 slug: coding-like-shakespeare-practical-function-naming-conventions
 tags: ["clean code"]
 recommended: ["the-path-of-software-development-craftsmanship", "the-art-of-writing-small-and-plain-functions"]
 type: post
 ---
-
-> What a piece of work is a man!  
-How noble in reason, how infinite in faculty!
-
-*Hamlet, William Shakespeare*
-
-The code is prose. 
 
 A clear and meaningful prose is easy to read and follow. Everyone enjoys reading such prose.  
 
@@ -98,8 +91,7 @@ In the meantime try not to make the name too verbose. Extended names like `getAb
 
 My advice is to find a balance between short and verbose in naming, and put accent on clarity:  
 
-> Not too short, not too verbose:  
-Just exactly what it does.
+> Not too short, not too verbose: Just exactly what it does.
 
 I don't see a problem if a function is renamed multiple times to find the best name that describes it. A fresh view over an old function may help to find a better name.
 
@@ -109,7 +101,7 @@ Not sure if someone is happy to read the assembly language. Such language is nat
 
 The textual information is easier to process in a natural language form: good old English. Write your code as a detailed and interesting story. 
 
-Be Shakespeare!  
+Be Shakespeare! (why not?)  
 
 ![Write code as an interesting story](./images/book.jpg)
 
@@ -129,12 +121,14 @@ elements // => [1, 8, 5, 7]
 elements.remove(at: 2)
 elements // => [1, 8, 7]
 ```
+
 `elements.insert(8, at: 1)` invocation flows naturally when reading it: *in `elements` insert `8` `at` position `1`*.  
 The same natural flow applies to `elements.remove(at: 2)`: *in `elements` remove the item `at` position `2`*.  
 
 In both cases notice the readability improvement that the argument label `at` adds: expressing the position when the operation should apply.  
 
 When the argument label is omitted, the ambiguity increases.  
+
 In the case of `elements.insert(8, 1)`, what does `8` and `1` mean? What is the position and what is the element to insert? Hard to guess without diving into method details or reading the documentation.
 
 ## 4. Avoid pointless function names
@@ -170,7 +164,7 @@ greet() // => "Hello, world"
 
 Precautions should be taken with general action names like `do()`, `execute()`, `run()`, `go()` and so on. Such naming may fit only when the context is expressive: `directoryCopyCommand.execute()`.  
 
-## 5. Avoid the same name covering many concepts
+## 5. Avoid the same name covering multiple concepts
 
 The function name indicates a well-determined type of action. It should be a one-to-one relation.  
 
@@ -203,7 +197,9 @@ person.children.add(child)
 ```
 
 At first sight, the code looks good.  
+
 However a more detailed review could wonder why `person.phoneNumbers` uses `append()` method and `person.children` uses `add()`? These methods perform the same action, and there is no reason to name them differently.  
+
 `person.children.add()` method should be refactored to `append()` name.
 
 If you're not sure which word to choose for a specific function, try the following steps:
@@ -253,6 +249,7 @@ if (collection.add(5)) {
 ```
 
 The name of the method `add()` pretends to add items into the collection, changing the state of the object. And unexpectedly it returns the insertion result.  
+
 `add` word doesn't say anything about the collection fullness state. It might be unexpected to see `add` method in a conditional statement:  
 `if (collection.add(5)) { ... }`.  
 
@@ -299,8 +296,7 @@ Reading meaningful code is easy and enjoyable. However writing quality code requ
 
 As a part of the code readability, function names have an important place. Looking at any code, most of the expressions are actually function/method calls.  
 
-A function name should clearly indicate what the function does. You don't have to scroll around, open the function source code to understand how it works.  
-Also, the name should describe only one concept: one-to-one relation.  
+A function name should clearly indicate what the function does. You don't have to scroll around, open the function source code to understand how it works. Also, the name should describe only one concept: one-to-one relation.  
 
 In the end, you probably don't want to communicate like [these guys](https://www.youtube.com/watch?v=jjRsY7pJ18M)!  
 
