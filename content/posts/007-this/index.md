@@ -599,7 +599,7 @@ reg1.source === reg2.source; // => true
 
 When executing `new RegExp('\\w+')` and `RegExp('\\w+')`, JavaScript creates equivalent regular expression objects.
 
-⚠️ Using a function invocation to create objects is a potential problem (excluding [factory pattern](http://javascript.info/tutorial/factory-constructor-pattern)), because some constructors may omit the logic to initialize the object when `new` keyword is missing.
+⚠️ Using a function invocation to create objects is a potential problem (excluding [factory pattern](https://www.patterns.dev/posts/factory-pattern/)), because some constructors may omit the logic to initialize the object when `new` keyword is missing.
 
 The following example illustrates the problem:
 
