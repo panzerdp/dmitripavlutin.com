@@ -220,7 +220,7 @@ const numbers = {
 numbers.sum(); // => NaN or throws TypeError in strict mode
 ```
 
-⚠️ `numbers.sum()` is a method invocation on an object (see [3.](#3-method-invocation)) thus `this` equals `number`. `calculate()` function is defined inside `sum()`, so you might expect to have `this` as `numbers` object in when invoking `calculate()` too.  
+⚠️ `numbers.sum()` is a method invocation on an object (see [3.](#3-method-invocation)) thus `this` equals `numbers`. `calculate()` function is defined inside `sum()`, so you might expect to have `this` as `numbers` object when invoking `calculate()` too.  
 
 `calculate()` is a function invocation (but **not** method invocation), thus here `this` is the global object `window` (case [2.1.](#21-this-in-function-invocation)) or `undefined` in strict mode (case [2.2.](#22-this-in-function-invocation-strict-mode)). Even if the outer function `numbers.sum()` has the context as `numbers` object, it doesn't have influence here.  
 
