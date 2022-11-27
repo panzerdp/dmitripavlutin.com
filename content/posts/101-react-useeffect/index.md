@@ -220,7 +220,7 @@ function Greet({ name }) {
 
 [Try the demo.](https://codesandbox.io/s/nifty-yonath-mo2qf?file=/src/Greet.js)
 
-## 5. Side-effect cleanup
+## 4. Side-effect cleanup
 
 Some side-effects need cleanup: close a socket, clear timers.  
 
@@ -291,9 +291,9 @@ function RepeatMessage({ message }) {
 
 Open the demo and type some messages. You'll see that each 2 seconds only the latest message logs to console. Which means that all of the previous timers were cleanup.  
 
-## 6. *useEffect()* in practice
+## 5. *useEffect()* in practice
 
-### 6.1 Fetching data
+### 5.1 Fetching data
 
 `useEffect()` can perform data fetching side-effect.  
 
@@ -346,7 +346,7 @@ function FetchEmployees() {
 
 To run the fetch request depending on a prop or state value, simply indicate the required dependency in the dependencies argument: `useEffect(fetchSideEffect, [prop, stateValue])`.  
 
-## 7. Conclusion
+## 6. Conclusion
 
 `useEffect(callback, dependencies)` is the hook that manages the side-effects in functional components. `callback` argument is a function to put the side-effect logic. `dependencies` is a list of dependencies of your side-effect: being props or state values.  
 
