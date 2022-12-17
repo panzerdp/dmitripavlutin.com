@@ -202,20 +202,25 @@ To make it work you'll need to create a reference to the input, assign the refer
 Here's a possible implementation of the `<InputFocus>` component:
 
 ```jsx{3,6,11}
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 
 function InputFocus() {
   const inputRef = useRef();
 
-  useEffect(() => {
+const inputFocus = () => {
     inputRef.current.focus();
-  }, []);
+  };
 
   return (
+  <>
     <input 
       ref={inputRef} 
       type="text" 
     />
+    <button onClick={inputFocus}>
+      Click
+    </button>
+  </>
   );
 }
 ```
