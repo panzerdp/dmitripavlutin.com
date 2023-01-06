@@ -17,6 +17,7 @@ In this post, you'll read an accessible explanation of covariance and contravari
 ```toc
 ```
 
+
 ## 1. Subtyping
 
 Subtyping is a form of [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) in which a *subtype* is associated with a base type by some form of substitutability.  

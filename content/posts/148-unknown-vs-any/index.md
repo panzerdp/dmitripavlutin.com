@@ -2,7 +2,7 @@
 title: "unknown vs any in TypeScript"
 description: "What is the difference between unknown and any types in TypeScript."
 published: "2021-09-08T13:00Z"
-modified: "2021-09-08T13:00Z"
+modified: "2023-01-06"
 thumbnail: "./images/cover-4.png"
 slug: typescript-unknown-vs-any
 tags: ['typescript', 'unknown', 'any']
@@ -59,7 +59,7 @@ An `unknown` type variable, same as `any`, accepts any value. But when trying to
 Let's change the type of `callback` param from `any` to `unknown`, and see what happens:
 
 ```ts twoslash
-// @errors: 2571
+// @errors: 18046
 function invokeAnything(callback: unknown) {
   callback();
 }
@@ -100,7 +100,6 @@ The case of `unknown`:
 ```ts twoslash
 function invokeAnything(callback: unknown) {
   if (typeof callback === 'function') {
-// @annotate: left { "arrowRot": "90deg 15px 27px", "textDegree": "3deg", "top": "0rem" } - Requires a type check
     callback();
   }
 }
@@ -114,7 +113,6 @@ The case of `any`:
 
 ```ts twoslash
 function invokeAnything(callback: any) {
-// @annotate: left { "arrowRot": "90deg 20px 20px", "textDegree": "3deg", "top": "0rem" } - Any operation is allowed
   callback();
 }
 
