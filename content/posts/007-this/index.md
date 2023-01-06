@@ -392,7 +392,7 @@ earth.getName(); // => 'Earth'
 
 A bound function `const alone = myObj.myMethod.bind(myObj)` (using [`.bind()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind), see [6.](#6-bound-function)) fixes the context by binding `this` the object that owns the method.  
 
-The following example defines `Pet` constructor and makes an instance of it: `myCat`. Then `setTimout()` after 1 second logs `myCat` object information:
+The following example defines `Pet` constructor and makes an instance of it: `myCat`. Then `setTimeout()` after 1 second logs `myCat` object information:
 
 ```javascript{5}
 function Pet(type, legs) {
@@ -413,15 +413,15 @@ setTimeout(myCat.logInfo, 1000);
 
 ⚠️ You might think that `setTimeout(myCat.logInfo, 1000)` will call the `myCat.logInfo()`, which should log the information about `myCat` object.
 
-Unfortunately the method is separated from its object when passed as a parameter: `setTimout(myCat.logInfo)`. The following cases are equivalent:
+Unfortunately the method is separated from its object when passed as a parameter: `setTimeout(myCat.logInfo)`. The following cases are equivalent:
 
 ```javascript
-setTimout(myCat.logInfo);
+setTimeout(myCat.logInfo);
 
 // is equivalent to:
 
 const extractedLogInfo = myCat.logInfo;
-setTimout(extractedLogInfo);
+setTimeout(extractedLogInfo);
 ```
 
 When the separated `logInfo` is invoked as a function, `this` is global object or `undefined` in strict mode (but **not** `myCat` object). So the object information does not log correctly.
