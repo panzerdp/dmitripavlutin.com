@@ -1,5 +1,5 @@
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby-link';
 import { memo } from 'react';
 
 import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_SEARCH } from 'routes/path';

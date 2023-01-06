@@ -1,4 +1,4 @@
-import Link from 'gatsby-link';
+import { Link } from 'gatsby-link';
 import { Component } from 'react';
 
 import { TO_INDEX, TO_PAGE } from 'routes/path';

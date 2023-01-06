@@ -1,4 +1,4 @@
-import Link from 'gatsby-link';
+import { Link } from 'gatsby-link';
 
 import Tag from 'components/Tag';
 import { TO_POST } from 'routes/path';

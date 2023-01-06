@@ -1,4 +1,4 @@
-import Link from 'gatsby-link';
+import { Link } from 'gatsby-link';
 
 import { TO_TAG } from 'routes/path';
 import { slugify } from 'utils/string';

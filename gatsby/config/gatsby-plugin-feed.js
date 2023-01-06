@@ -55,10 +55,11 @@ module.exports = {
           {
             allMarkdownRemark(
               limit: 1000,
-              sort: { 
-                order: DESC,
-                fields: [frontmatter___published]
-              },
+              sort: {
+                frontmatter: {
+                  published: DESC
+                }
+              }
               filter: {
                 frontmatter: {
                   type: {

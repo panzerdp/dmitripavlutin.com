@@ -70,7 +70,11 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      sort: { fields: [frontmatter___published], order: DESC }
+      sort: {
+        frontmatter: {
+          published: DESC
+        }
+      }
       filter: { frontmatter: { type: { eq: "post" } } }
       skip: $skip
       limit: $limit

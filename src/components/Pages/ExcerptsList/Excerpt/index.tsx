@@ -1,5 +1,5 @@
 import { GatsbyImage } from 'gatsby-plugin-image';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby-link';
 
 import SubheaderWithComments from 'components/Subheader/WithComments';
 import { TO_POST } from 'routes/path';

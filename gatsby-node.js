@@ -17,17 +17,18 @@ const query = `
     }
   }
   allMarkdownRemark(
-    sort: { 
-      fields: [frontmatter___published], 
-      order: DESC 
-    }, 
+    sort: {
+      frontmatter: {
+        published: DESC
+      }
+    }
     filter: {
       frontmatter: { 
         type: {
           eq: "post"
         }
       }
-    },
+    }
     limit: 1000
   ) {
     edges {

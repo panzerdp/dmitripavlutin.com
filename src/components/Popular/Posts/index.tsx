@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby-link';
 
 import * as styles from './index.module.scss';
 import { TO_POST } from 'routes/path';

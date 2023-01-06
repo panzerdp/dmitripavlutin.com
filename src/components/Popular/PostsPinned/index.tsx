@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby-link';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { Post } from 'typings/post';
 

@@ -18,7 +18,11 @@ export default function PlainListByTagFetch({ pageContext: { tag }, data }: Plai
 export const pageQuery = graphql`
   query PlainListByTag($tag: String!) {
     allMarkdownRemark(
-      sort: { fields: [frontmatter___published], order: DESC }
+      sort: {
+        frontmatter: {
+          published: DESC
+        }
+      }
       filter: { frontmatter: { tags: { eq: $tag }, type: { eq: "post" } } }
     ) {
       edges {
