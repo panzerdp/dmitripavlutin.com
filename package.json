@@ -2,6 +2,7 @@
   "name": "dmitri-pavlutin-blog",
   "description": "Dmitri Pavlutin Blog",
   "version": "1.0.0",
+  "private": true,
   "author": "Dmitri Pavlutin <dmitripavlutin@gmail.com>",
   "bugs": {
     "url": "https://github.com/panzerdp/dmitripavlutin.com/issues"
@@ -75,5 +76,8 @@
   },
   "resolutions": {
     "gatsby-react-router-scroll": "3.0.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
