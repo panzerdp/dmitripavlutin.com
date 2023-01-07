@@ -5,7 +5,7 @@ published: "2023-01-07"
 modified: "2023-01-07"
 thumbnail: "./images/cover-2.png"
 slug: props-destructure-vue-composition
-tags: ['vue', 'props']
+tags: ['vue', 'vue composition', 'props']
 recommended: ['vue-next-tick', 'vue-debounce-throttle']
 type: post
 ---
@@ -47,11 +47,11 @@ const even = computed(() => props.count ? 'even' : 'odd')
 <template>The number is {{ even }}</template>
 ```
 
-In the example above accessing `props.count` inside the computed property keeps the reactivity working.  
+In the example above accessing `props.count` maintins the reactivity when `props.count` changes.  
 
 Of course, the downside of this approach is you always have to use `props` object to access the props. 
 
-On the other side, I find this approach quite useful when I am accessing the property value just once. In the example above, I would keep `props.count` because it doesn't bring too much boilerplate code.  
+Despite the verbosity I find this approach convinient when I am accessing the property value just once. In the example above, I would keep `props.count` because it doesn't bring too much boilerplate code.  
 
 ## 3. Solution 2: use toRefs() helper
 
@@ -80,12 +80,12 @@ This approach requires an additional import of `toRefs` function (line 2), and a
 
 ## 4. Conclusion
 
-`const props = defineProps()` returns a reactive object having the component props. However, if you apply the destructuring `const { prop1, prop2, ... } = defineProps()` you loose the reactivity.  
+`const props = defineProps()` returns a reactive object having the component props. Be aware that appling the destructuring `const { prop1, prop2, ... } = defineProps()` you loose the reactivity.  
 
 There are mainly 2 approaches to solve the lost reactivity.  
 
-The first one, useful in case if you don't access often the prop values, is to simply not use the destructuring, and access the properties directly using `props.prop1`, `props.props2`, etc. property accessor. In small components, I almost always use this approach.  
+The first one, useful in case if you don't access often the prop values, is to simply not use the destructuring, and access the properties directly using a property accessor: `props.prop1`, `props.props2`. In small components I almost always use this approach.  
 
-The second approach involves deliberately transforming the props object into an object containing refs: `const { prop1, prop2, ... } = toRefs(props)`. This approach keeps the reactivity on destructuring. Then you can access properties as standalone variable, e.g. `props1`, `prop2`, etc.  
+The second approach involves deliberately transforming the props object into an object containing refs: `const { prop1, prop2, ... } = toRefs(props)` keeping the reactivity on destructuring. Then you can access properties as standalone variable, e.g. `props1`, `prop2`, etc.  
 
-I find the second approach more useful when I have to access the same prop value multiple times in the setup script.  
+I find the second approach useful when I have to access the same prop value multiple times in the setup script.  
