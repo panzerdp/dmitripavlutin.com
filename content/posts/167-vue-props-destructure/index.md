@@ -22,27 +22,21 @@ If you want to access the properties supplied to a component inside the script s
 
 To my honest suprise, one of such unexpected behavior happens when you try to destructure the props in the setup script:
 
-```vue
+```vue {1}
 <script lang="ts" setup>
 const { count } = defineProps<{ count: number }>()
 // Won't work...
 const even = computed(() => count ? 'even' : 'odd')
 </script>
-<template>The number is {{ even }}</template>
+
+<template>
+  The number is {{ even }}
+</template>
 ```
 
-## 2. Solution 1: always use "props" object
+## 2. Solution 1: use "props" object
 
-The first obvious solution is to simply no destructure the props object:
-
-```vue {1}
-<script lang="ts" setup>
-const props = defineProps<Props>()
-// use props.prop1, props.prop2, etc
-</script>
-```
-
-In the example above `props` object contains the component properties. Because no destructuring happens, `props` internally is a reactive object.
+The first obvious solution is to simply not destructure the `props` object. Because no destructuring happens, `props` internally is a reactive object:
 
 ```vue {1}
 <script lang="ts" setup>
@@ -53,33 +47,36 @@ const even = computed(() => props.count ? 'even' : 'odd')
 <template>The number is {{ even }}</template>
 ```
 
-Of course, the downside to this approach is that you always have to use `props` object to access the props. For example, in template `props.count` is used to reactively access the `count` prop.  
+In the example above accessing `props.count` inside the computed property keeps the reactivity working.  
+
+Of course, the downside of this approach is you always have to use `props` object to access the props. 
 
 On the other side, I find this approach quite useful when I am accessing the property value just once. In the example above, I would keep `props.count` because it doesn't bring too much boilerplate code.  
 
 ## 3. Solution 2: use toRefs() helper
 
-The second approach is to deliberately transform the `props` reactive object into an object whose properties are refs. To make the `props` destructuring keep the reactivity use a special helper `toRefs()` provided by the Vue Composition API.  
+The second approach is to deliberately transform the `props` object properties into refs. To make the `props` destructuring keep the reactivity use a special helper `toRefs()` provided by the Vue Composition API.  
 
 Here's how it could work:
 
-```vue {1,5}
+```vue {4}
 <script lang="ts" setup>
 import { toRefs } from 'vue'
 
 const props = defineProps<{ count: number }>()
-const { number } = toRefs(props)
+const { count } = toRefs(props)
 // Works!
 const even = computed(() => count ? 'even' : 'odd')
 </script>
+
 <template>
   The number is {{ even }}
 </template>
 ```
 
-Note that on the line 3 `const { number } = toRefs(props)` transforms the reactive object `props` into an object having each property as refs. After that, the destructuring is safe because `number` is a reactive value.  
+Note that on the line 3 `const { count } = toRefs(props)` transforms the reactive object `props` into an object having each property as refs. After that, the destructuring is safe because `count` is a reactive value.  
 
-This approach requires an additional import of `toRefs` function, and as well calling `toRefs(props)` itself. Anyways, I find this approach more convinient when I have to access many times the value of a prop: which thanks to destructuring allows me to skip using `props.<prop>` every time.  
+This approach requires an additional import of `toRefs` function (line 2), and as well calling `toRefs(props)` itself (line 5). Anyways, I find this approach more convinient when I have to access many times the value of a prop: which thanks to destructuring allows me to skip using `props.<prop>` every time.  
 
 ## 4. Conclusion
 
