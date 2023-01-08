@@ -5,8 +5,9 @@ import AuthorLinks from 'components/AboutAuthor/Links';
 import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
 
 export default function AboutAuthorConcise() {
-  const { author: { info: { name, description, email, profiles }, profilePicture } } = useAuthorAndSiteInfo();
+  const { author: { info: { name, description, job, email, profiles }, profilePicture } } = useAuthorAndSiteInfo();
 
+  const jobElement = job ? <p dangerouslySetInnerHTML={{ __html: job }} /> : null
   return (
     <div className={styles.aboutAuthor}>
       <div className={styles.profilePicture}>
@@ -14,7 +15,10 @@ export default function AboutAuthorConcise() {
       </div>
       <div className={styles.authorInfo}>
         <h4>About {name}</h4>
-        <div className={styles.description}>{description}</div>
+        <div className={styles.description}>
+          {description}
+          {jobElement}         
+        </div>
         <div className={styles.links}>
           <AuthorLinks>
             <a href={`mailto:${email}`} title={`Send an email to ${name}`}>

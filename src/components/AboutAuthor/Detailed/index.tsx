@@ -6,14 +6,18 @@ import * as styles from './index.module.scss';
 import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
 
 export default function AboutAuthorDetailed() {
-  const { author: { info: { name, description, email, profiles }, profilePicture } } = useAuthorAndSiteInfo();
+  const { author: { info: { name, description, job, email, profiles }, profilePicture } } = useAuthorAndSiteInfo();
 
+  const jobElement = job ? <p dangerouslySetInnerHTML={{ __html: job }} /> : null
   return (
     <div className={styles.aboutAuthor}>
       <div className={styles.authorInfo}>
         <GatsbyImage image={profilePicture} alt={name} />
         <h3>About {name}</h3>
-        <div className={styles.description}>{description}</div>
+        <div className={styles.description}>
+          {description}
+          {jobElement}
+        </div>
       </div>
       <AuthorLinks>
         <a href={`mailto:${email}`} title={`Send an email to ${name}`}>

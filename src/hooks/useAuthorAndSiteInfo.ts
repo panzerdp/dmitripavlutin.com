@@ -20,6 +20,7 @@ export const useAuthorAndSiteInfo = () => {
       fragment AuthorInfoAll on SiteSiteMetadataAuthorInfo {
         name
         description
+        job
         email
         jobTitle
         profiles {
