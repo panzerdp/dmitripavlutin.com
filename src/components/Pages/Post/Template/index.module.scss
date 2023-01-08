@@ -53,6 +53,11 @@
     background: left center / 25px no-repeat url('/icons/codesandbox.svg');
   }
 
+  a[href^="https://stackblitz.com"] {
+    padding-left: 30px;
+    background: left center / 25px no-repeat url('/icons/stackblitz.svg');
+  }
+
   a[href^="https://jsfiddle.net"] {
     padding-left: 30px;
     background: left center / 25px no-repeat url('/icons/javascript-2.svg');
