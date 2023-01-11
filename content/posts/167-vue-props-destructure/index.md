@@ -1,6 +1,6 @@
 ---
 title: "How to Destructure Props in Vue (Composition API)"
-description: "How to correctly destructure props object in a Vue component and keep the reactivity"  
+description: "How to correctly destructure props object in a Vue component while maintaining the reactivity."  
 published: "2023-01-07"
 modified: "2023-01-07"
 thumbnail: "./images/cover.png"
@@ -10,7 +10,7 @@ recommended: ['vue-next-tick', 'vue-debounce-throttle']
 type: post
 ---
 
-The [reactivity API](https://vuejs.org/api/reactivity-core.html) adds many possibilities to the composition API, while keeping the code brief. However, you should be aware of some of the pitfalls of reactivity, for example, losing reactivity.  
+The [reactivity API](https://vuejs.org/api/reactivity-core.html) adds many possibilities to the composition API while keeping the code brief. However, you should be aware of some of the pitfalls of reactivity, for example, losing reactivity.  
 
 In this post, you will learn how to correctly destructure props of a Vue component so that props do not lose reactivity.  
 
@@ -74,7 +74,7 @@ In the example above accessing `props.count` inside `computed()` maintains the r
 
 The downside of this approach is you *always* have to use a property accessor (e.g. `props.count`) to access a prop inside of the setup script. 
 
-Anyways, I recommend using `props` object directly in most of the cases.  
+Anyways, I recommend using `props` object directly in most cases.  
 
 ## 3. Solution 2: use toRefs() helper
 
