@@ -10,15 +10,13 @@ recommended: ['vue-next-tick', 'vue-debounce-throttle']
 type: post
 ---
 
-Vue [composition API](https://vuejs.org/guide/extras/composition-api-faq.html) uses an [imperative approach](https://en.wikipedia.org/wiki/Imperative_programming) to code the behavior of components. Compared to the [options API](https://vuejs.org/guide/typescript/options-api.html), I find the composition API being more brittle while sacrificing a bit in explicitness.  
-
-The [reactivity API](https://vuejs.org/api/reactivity-core.html) adds many possibilities to the composition API, while, again, keeping the code brief. But sometimes the reactivity in Vue might work surprisingly, for example, you might unexpectedly lose the reactivity of data.  
+The [reactivity API](https://vuejs.org/api/reactivity-core.html) adds many possibilities to the composition API, while keeping the code brief. However, you should be aware of some of the pitfalls of reactivity, for example, losing reactivity.  
 
 In this post, you will learn how to correctly destructure props of a Vue component so that props do not lose reactivity.  
 
 ## 1. Destructuring props
 
-If you want to access the props supplied to a component inside the [setup script](https://vuejs.org/api/sfc-script-setup.html), you need to use a special compiler macro [defineProps()](https://vuejs.org/api/sfc-script-setup.html#defineprops-defineemits):
+The compiler macro [defineProps()](https://vuejs.org/api/sfc-script-setup.html#defineprops-defineemits) helps to access the props supplied to a component inside the [setup script](https://vuejs.org/api/sfc-script-setup.html):
 
 ```vue
 <script lang="ts" setup>
@@ -27,9 +25,9 @@ const props = defineProps()
 </script>
 ```
 
-`props` in the above example would be a reactive object containing the props supplied to the component.  
+`props` in the above example would be a reactive object containing the props supplied to the component. If the component props changes, `props` reactive object changes accordingly.  
 
-What comes to my mind (and most likely yours too) when accessing the `props` object is the willingness to destructure it to access the individual props. But to my surprise (when I was learning Vue composition API) the destructured props lose their reactivity!
+The first thing you might want to do when accessing the `props` object is to destructure it to access the individual props. But to my surprise (when I was learning Vue composition API) the destructured props lose their reactivity!
 
 Let's look at an example. The following component `<EvenOdd :count="5">` accepts a `count` prop as a number, and displays a message whether `count` is even or odd.  
 
@@ -52,7 +50,7 @@ Open the demo and click a few times the increase button. You'd notice that `"The
 
 *When destructuring the `props` object `const { count } = defineProps()` the reactivity is lost.*  
 
-The reactivity is lost because on destructuring `count` becomes a variable having a primitive value (a number). But Vue's reactivity cannot work directly on primitive values: it works either using a ref or a reactive object.  
+The reactivity is lost because on destructuring `count` becomes a variable having a primitive value (a number). But Vue's reactivity cannot work directly on primitive values: it works either using a ref or a reactive *object*.  
 
 > Be careful when assigning a primitive value directly to a variable in Vue: that's a premise of lost reactivity.  
 
@@ -74,9 +72,9 @@ const even = computed(() => (props.count % 2 === 0 ? 'even' : 'odd'));
 
 In the example above accessing `props.count` inside `computed()` maintains the reactivity when `props.count` changes. `props` object is reactive and any changes to it are tracked correctly.  
 
-The downside of this approach is you *always* have to use a property accessor (e.g. `props.count`) to access any prop inside of the setup script. 
+The downside of this approach is you *always* have to use a property accessor (e.g. `props.count`) to access a prop inside of the setup script. 
 
-Anyways, I find myself using this approach most of the time.  
+Anyways, I recommend using `props` object directly in most of the cases.  
 
 ## 3. Solution 2: use toRefs() helper
 
@@ -84,7 +82,7 @@ If you continue reading I bet you're big a fan of destructuring and cannot live 
 
 Ok, then you can keep the reactivity of the destructured props by deliberately transforming each property of the `props` object into a ref. Vue provides a special helper [toRefs(reactiveObject)](https://vuejs.org/api/reactivity-utilities.html#torefs) that does this exactly.  
 
-Here's how it could work:
+Here's how it works:
 
 ```vue {4}
 <script lang="ts" setup>
@@ -103,9 +101,9 @@ const even = computed(() => (count.value % 2 === 0 ? 'even' : 'odd'));
 
 Now the destructuring `const { count } = toRefs(props)` is safe because `count` is a ref to the "count" prop. Now every time the "count" prop changes, the ref `count` reacts to the prop change.  
 
-Having `count` as a ref, now inside the `computed()` you have to access the prop value using `count.value` (because `myRef.value` is how you access the value of a ref).   
+Having `count` as a ref, inside the `computed()` you have to access the prop value using `count.value` (because `count.value` is how you access the value of a ref).   
 
-I find this approach very convenient to pass the prop ref as an argument to a [composable](https://vuejs.org/guide/reusability/composables.html#mouse-tracker-example): e.g. `useMyComposable(count)` and not lose reactivity.  
+I find this approach convenient to pass the prop ref as an argument to a [composable](https://vuejs.org/guide/reusability/composables.html#mouse-tracker-example): e.g. `useMyComposable(count)` and not lose reactivity.  
 
 Otherwise, I'd stick to the [previous approach](#2-solution-1-use-props-object) by using `props` object directly to access the props.   
 
