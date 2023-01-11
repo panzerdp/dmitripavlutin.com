@@ -1,8 +1,8 @@
 ---
 title: "How to Destructure Props in Vue (Composition API)"
 description: "How to correctly destructure props object in a Vue component while maintaining the reactivity."  
-published: "2023-01-07"
-modified: "2023-01-07"
+published: "2023-01-11"
+modified: "2023-01-11"
 thumbnail: "./images/cover.png"
 slug: props-destructure-vue-composition
 tags: ['vue', 'vue composition', 'props']
