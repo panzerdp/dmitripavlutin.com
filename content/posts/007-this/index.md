@@ -16,7 +16,7 @@ type: post
 
 From a background like Java, PHP or other *standard* language, [`this`](https://en.wikipedia.org/wiki/This_(computer_programming)) is the instance of the current object in the class method. `this` cannot be used outside the method and such a simple approach does not create confusion. 
 
-In JavaScript the situation is different: `this` is the context of a function invocation (a.k.a. exection). The language has 4 function invocation types:  
+In JavaScript the situation is different: `this` is the context of a function invocation (a.k.a. execution). The language has 4 function invocation types:  
 
  * function invocation: `alert('Hello World!')`
  * method invocation: `console.log('Hello World!')`
