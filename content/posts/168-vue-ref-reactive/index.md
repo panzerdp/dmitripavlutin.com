@@ -250,6 +250,25 @@ In conclusion:
 
 > `watch()` by default *watches only `myRef.value` change* of `ref()`, while doing a *deep watch* of a `reactive()` object.
 
-## 5.  
+## 5. Usage
+
+Finally, and probably one of the most important difference to know, is when you'd use `ref()` and when `reactive()`?  
+
+Unfortunately there isn't an exact right answer. 
+
+But fortunetaly there are some situations when using a specific reactivity function is preferable. These preferences can be easily derivated from the above presented behaviour differences. 
+
+1. If you need a reactive primitive value, then using `ref()` is the right choice.  
+2. If you need a reactive but immutable [value object](https://en.wikipedia.org/wiki/Value_object) (an object whose properties never change), then using `ref()` is a good option.
+3. If you need a reactive mutable object, and you want to track even the deeply mutated properties of that object, then using `reactive()` is a good option.
+
 
 ## 6. Conclusion
+
+In this post you familriazed with the differences in behavior of `ref()` and `reactive()` APIs in composition API.
+
+First, the most notable difference between the two is that `ref()` can store a primitive value, while `reactive()` cannot. 
+
+Secondly, you access the value stored in a `ref()` using a special property `myRef.value`, while `reactive()` object can be used directly as a regular object.  
+
+*What other differences between `ref()` and `reactive()` do you know?*
