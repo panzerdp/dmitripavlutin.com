@@ -10,11 +10,11 @@ recommended: ['vue-next-tick', 'props-destructure-vue-composition']
 type: post
 ---
 
-If you landed on this post most likely you have a basic understanding of Vue reactivity in the composition API. 
+If you landed on this post most likely you have a basic understanding of Vue reactivity.  
 
-However, like me, you might be asking yourself the eternal question: what are the main differences between `ref()` and `reactive()`, and, importantly, when would you use one or another? 
+However, like me, you might be asking yourself the eternal question: what are the main differences between `ref()` and `reactive()`? And when would you use one or another? 
 
-Luckily, this post describes 5 important differences between the reactive objects created by `ref()` and `reactive()`. 
+Let's find the answer toghether.
 
 ## 1. Primitive values
 
@@ -46,9 +46,11 @@ const numberReactive = reactive(0);           // NOT OK!
 const objectReactive = reactive({ count: 0}); // OK
 ```
 
-`0` (a primitive value) is an invalid value for `reactive()` API. Don't do this. If you need to make reactive primitive values, `ref(0)` is the way to go.
+Calling `reactive(0)` with a primitive value is invalid. Don't do this. If you need to make reactive primitive values, `ref(0)` is the way to go.  
 
-Nevertheless, `reactive({ count: 0})` is perfectly valid and creates a reactive object. 
+The main reason why `reactive()` works only with objects lies in the Vue's reactivity implementation details. [Vue uses Proxies](https://github.com/vuejs/core/blob/main/packages/reactivity/src/reactive.ts#L212) that can intercept property changes on objects only but not on primitives.  
+
+Nevertheless, `reactive({ count: 0})` initialized with an object is perfectly valid and creates a reactive object. 
 
 In conclusion:
 
@@ -56,7 +58,7 @@ In conclusion:
 
 ## 2. Accessing reactive data
 
-The second difference is accessing how you'd access the primitive data stored inside `ref()` and `reactive()`.  
+The second difference is how you'd access the data stored inside `ref()` and `reactive()`.  
 
 ### 2.1 ref()
 
@@ -74,11 +76,11 @@ console.log(objectRef.value.count); // logs 0
 
 `numberRef.value` is how you access the primitive value from the ref `numberRef`. 
 
-`.value` is a special property available on all the refs specifically to read or update the ref value.  
+`.value` is a special property available on all the refs to read or update the ref value.  
 
-In case if the ref contains an object, then `objectRef.value.count` is how you can access a property of that object.  
+`objectRef.value.count` is how you can access a property of in the ref data is an object.  
 
-Note that in the template you don't have to use `value` to access a ref value. This is also called ref auto-unwrapping in templates:
+In the template you don't have to use `.value` to access a ref value. This is also called ref auto-unwrapping in templates:
 
 ```vue {6}
 <script setup>
@@ -92,8 +94,6 @@ const numberRef = ref(0);
 ```
 
 `{{ numberRef }}` reads the ref value directly. 
-
-also works if you assign the ref to a 
 
 ### 2.2 reactive()
 
@@ -110,28 +110,28 @@ Accessing reactive data created using `reactive({ count: 0} )` doesn't need addi
 
 In conclusion:
 
-> In the setup script, `ref()` data is accessed using *`value` property*, while `reactive()` data is accessed *directly*.  
+> `ref()` data is accessed using *`value` property* (exception: in templates the ref is auto-unwrapped), while `reactive()` data is accessed *directly*.  
 
 ## 3. Typing
 
 ### 3.1 ref()
 
-A direct consequence of ref data being accessed through `value` property is how you would annotate in refs TypeScript.  
+A direct consequence of ref data being accessed through `.value` property is refs typing.  
 
-In the case of `ref()` data, you need to use a special type `Ref`, which is available for importing from `vue` library:
+To annotate a ref you need to use a special type `Ref`, which is available for importing from `vue` library:
 
 ```ts
-import { ref, type Ref } from 'vue'
+import { ref, Ref } from 'vue'
 
 const numberRef: Ref<number> = ref(0);
 ```
 
-`Ref<number>` is the type meaning a ref holding a number. This is the type returned by `ref(0)`.  
+`Ref<number>` is the type meaning a ref holding a number.  
 
-If you want to assign a ref as an argument to a composable, for example, then please make sure to use the `Ref<V>` type (where `V` is the value's type) to annotate a ref parameter:  
+If you want to assign a ref as an argument to a composable, for example, then make sure to use the `Ref<V>` type (where `V` is the value's type) to annotate a ref parameter:  
 
 ```ts{4}
-import { ref, type Ref } from 'vue'
+import { ref, Ref } from 'vue'
 
 const numberRef: Ref<number> = ref(0)
 
@@ -151,9 +151,11 @@ import { reactive } from 'vue'
 const objectReactive: { count: number } = reactive({ count: 0});
 ```
 
-`reactive({ count: 0})` returns an object of type `{ count: number }`, which exactly represents the reactive object. The reactive object normally keeps the type of the original object.  
+`reactive({ count: 0})` returns an object of type `{ count: number }`, which exactly represents the reactive object. 
 
-Still, there's one exception to typing `reactive()` data typing: if the reactive object contains refs, then these refs are unwrapped:
+The reactive object normally keeps the type of the original object.  
+
+But there's one exception: if the reactive object contains refs, then these refs are unwrapped:
 
 ```ts
 import { reactive, ref } from 'vue'
@@ -165,16 +167,16 @@ Even though the reactive object is `{ count: ref(0) }`, the returned type is sti
 
 In conclusion:
 
-> refs returned by `ref(value: T)` are of type `Ref<T>`, while reactive objects returned by `reactive(object: T)` are of type `T`.
+> refs returned by `ref(value: T)` are of type `Ref<T>`, while reactive objects returned by `reactive(object: T)` are of type `T` (exception: refs in reactive are unwrapped).
 
 
 ## 4. Watching
 
-`watch()` is used to watch reactive data change. The default behavior of `watch()` differs when watching changes inside of an object wrapped into `ref()` and `reactive()`.  
+`watch()` watches reactive data change. The default behavior of `watch()` differs for `ref()` and `reactive()`.  
 
 ### ref()
 
-If you take the most basic example of a `ref()` being watched, `watch()` without problems determines if `value` ref was changed:
+ `watch()` without problems determines if `.value` property of the ref was changed:
 
 ```ts {4-6}
 <script setup>
@@ -193,7 +195,7 @@ const increase = () => countNumberRef.value++
 </template>
 ```
 
-Every time you click the "Increase" button, you'll see in the console the message "changed!". It means that `watch(count, callback)` calls `callback` every time `countNumberRef.value` changes.  
+Every time you click the "Increase" button, you'll see in the console the message "changed!". `watch(count, callback)` calls `callback` every time `countNumberRef.value` changes.  
 
 But does `watch()` watch deep changes of an object stored in `ref()`? Let's try!
 
@@ -249,11 +251,11 @@ const increase = () => countObjectReactive.counter.val++
 </template>
 ```
 
-Every time you click the "Increase" button, you'll see in the console the message "changed!". This means that `watch(countObjectReactive, callback)` calls `callback` every time any property (even a deep one) of `countObjectReactive` changes.  
+Every time you click the "Increase" button, you'll see in the console the message "changed!". `watch(countObjectReactive, callback)` calls `callback` every time any property (even a deep one) of `countObjectReactive` changes.  
 
 In conclusion:
 
-> `watch()` by default *watches only `myRef.value` change* of `ref()`, while doing a *deep watch* of a `reactive()` object.
+> `watch()` by default watches *only `myRef.value` change* of `ref()`, while doing a *deep* watch of a `reactive()` object.
 
 ## 5. Usage
 
