@@ -284,9 +284,7 @@ While there isn't a strict rule, still, there are situations when using a specif
 
 ## 6. Conclusion
 
-This post presented the differences between `ref()` and `reactive()` in composition API.
-
-Let's review the conclusion:
+This post presented the differences between `ref()` and `reactive()` in composition API:
 
 1. `ref()` can store a primitive value, while `reactive()` cannot. 
 2. You access the value stored in a `ref()` using `<ref>.value`, while `reactive()` object can be used directly as a regular object.  
