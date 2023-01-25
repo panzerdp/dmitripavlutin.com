@@ -2,7 +2,7 @@
 title: "How to Use Fetch with async/await"
 description: "How to use fetch() with async/await syntax in JavaScript: fetch JSON data, handle errors, make parallel requests, cancel requests."
 published: "2020-09-15T08:40Z"
-modified: "2021-02-18T16:30Z"
+modified: "2023-01-25"
 thumbnail: "./images/cover-4.png"
 slug: javascript-fetch-async-await
 tags: ['fetch', 'async await']
@@ -10,9 +10,9 @@ recommended: ['javascript-async-await', 'react-fetch-lifecycle-methods-hooks-sus
 type: post
 ---
 
-The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is the default tool to make network in web applications. While `fetch()` is generally easy to use, there some nuances to be aware of.  
+The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is the default tool to network operations in web applications. While `fetch()` is generally easy to use, there some nuances to be aware of.  
 
-In this post, you'll find the common scenarios of how to use `fetch()` with `async/await` syntax. You'll understand how to fetch data, handle fetch errors, cancel a fetch request, and more.  
+In this post, you'll find the common scenarios of how to use `fetch()` with `async/await` syntax. You'll understand how to fetch data, handle fetch errors, cancel a fetch request, and more. 
 
 ```toc
 ```
@@ -32,11 +32,11 @@ which accepts 2 arguments:
 * `resource`: the URL string, or a [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) object  
 * `options`: the configuration object with properties like `method`, `headers`, `body`, `credentials`, [and more](https://javascript.info/fetch-api).  
 
-`fetch()` starts a request and returns a promise. When the request completes, the promise is resolved with the [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object. If the request fails due to some network problems, the promise is rejected.    
+`fetch()` starts a request and returns a promise. When the request completes, the promise is resolved with the [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object. If the request fails due to some network problems, the promise is rejected.   
 
-`async/await` syntax fits great with `fetch()` because it simplifies the work with promises.      
+`async/await` syntax fits great with `fetch()` because it simplifies the work with promises with syntactic sugar.      
 
-For example, let's make a request to fetch some movies:
+For example, let's make a request to fetch movies:
 
 ```javascript
 async function fetchMovies() {
@@ -82,7 +82,7 @@ The [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object
 
 ## 3. Handling fetch errors
 
-When I was familiarizing with `fetch()`, I was surprised that `fetch()` doesn't throw an error when the server returns a bad HTTP status, e.g. client (`400–499`) or server errors (`500–599`).  
+When I was familiarizing with `fetch()`, I was surprised that `fetch()` doesn't throw an error when the server returns a bad HTTP status, e.g. client errors (`400–499`) or server errors (`500–599`).  
 
 For example, let's access a non-existing page `'/oops'` on the server. As expected, such request ends in a `404` response status:
 
@@ -104,7 +104,7 @@ fetchMovies404().then(text => {
 
 When fetching the URL `'/oops'` the server responds with status `404` and text `'Page not found'`. Surprisingly, `fetch()` doesn't throw an error for a missing URL, but considers this as a *completed* HTTP request.  
 
-`fetch()` rejects only if a request cannot be made or a response cannot be retrieved. It might happen because of network problems: no internet connection, host not found, the server is not responding.  
+`fetch()` rejects only if a request cannot be made or a response cannot be retrieved. This can happen during network problems: no internet connection, host not found, the server is not responding.  
 
 Fortunately, `response.ok` property lets you separate good from bad HTTP response statuses. The property is set to `true` only if the response has status `200-299`.  
 
@@ -177,9 +177,11 @@ cancelFetchButton.addEventListener('click', () => {
 });
 ```
 
-Open [the demo](https://codesandbox.io/s/cancel-fetch-request-ggieh?file=/src/index.html). Click *Fetch movies* to start the request, then right away click *Cancel fetch* to cancel it. This makes the active request cancel: `await fetch()` gets rejected by throwing an abort error. The `catch` block then catches the abort error.  
+[Try the demo.](https://codesandbox.io/p/sandbox/cancel-fetch-request-ggieh?file=%2Fsrc%2Findex.html&selection=%5B%7B%22endColumn%22%3A15%2C%22endLineNumber%22%3A28%2C%22startColumn%22%3A15%2C%22startLineNumber%22%3A28%7D%5D)
 
-The abort controller instances aren't reusable. Each time you start a `fetch()` request, you have to create a new abort controller instance for each request.  
+Open [the demo](https://codesandbox.io/p/sandbox/cancel-fetch-request-ggieh?file=%2Fsrc%2Findex.html&selection=%5B%7B%22endColumn%22%3A15%2C%22endLineNumber%22%3A28%2C%22startColumn%22%3A15%2C%22startLineNumber%22%3A28%7D%5D). Click *Fetch movies* to start the request, then right away click *Cancel fetch* to cancel it. This makes the active request cancel: `await fetch()` gets rejected by throwing an abort error. The `catch` block then catches the abort error.  
+
+The abort controller instances *are not reusable*. Each time you start a `fetch()` request, you have to create a new abort controller instance for each request.  
 
 On a side note, if you'd like to timeout a `fetch()` request, follow my post [How to Timeout a fetch() Request](/timeout-fetch-request/).  
 
@@ -222,7 +224,7 @@ Calling `fetch()` starts a request and returns a promise. When the request compl
 
 Because `fetch()` returns a promise, you can simplify the code by using the `async/await` syntax: `response = await fetch()`.    
 
-You've found out how to use `fetch()` accompanied with `async/await` to fetch JSON data, handle fetching errors, cancel a request, perform parallel requests.  
+If you need to cancel a `fetch()` request, then you need to connect the request with an abort controller.  
 
 Having mastered the basics of `fetch()` with `async/await`, follow my post on [How to Timeout a fetch() Request](/timeout-fetch-request/).  
 
