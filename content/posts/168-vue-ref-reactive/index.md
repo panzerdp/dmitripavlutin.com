@@ -5,7 +5,7 @@ published: "2023-01-25"
 modified: "2023-01-25"
 thumbnail: "./images/cover-2.png"
 slug: ref-reactive-differences-vue
-tags: ['vue', 'vue composition']
+tags: ['vue', 'vue composition', 'reactivity']
 recommended: ['vue-next-tick', 'props-destructure-vue-composition']
 type: post
 ---

@@ -5,8 +5,8 @@ published: "2023-01-11"
 modified: "2023-01-11"
 thumbnail: "./images/cover-2.png"
 slug: props-destructure-vue-composition
-tags: ['vue', 'vue composition', 'props']
-recommended: ['vue-next-tick', 'vue-debounce-throttle']
+tags: ['vue', 'vue composition', 'props', 'reactivity']
+recommended: ['vue-next-tick', 'ref-reactive-differences-vue']
 type: post
 ---
 
