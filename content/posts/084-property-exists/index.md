@@ -38,7 +38,7 @@ On the other side, `hero` doesn't have `realName` property. Thus `hero.hasOwnPro
 
 The method name `hasOwnProperty()` suggests that it looks in the [own properties](/own-and-inherited-properties-in-javascript/#1-own-properties) of the object. The own properties are those defined directly upon the object.  
 
-`hasOwnProperty()` checks only within own properties, the method doesn't detect the inherited `toString` property:
+This way `hasOwnProperty()` doesn't detect the `toString` &mdash; an inherited method from the prototype object:
 
 ```javascript{6}
 const hero = {
