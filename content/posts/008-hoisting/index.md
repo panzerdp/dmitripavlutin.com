@@ -12,7 +12,7 @@ type: post
 
 Variables in a program are everywhere. They are small pieces of data and logic that interact with each other: and this activity makes the application alive.  
 
-In JavaScript an important aspect of working with variables is hoisting, which defines when a variable is accessible. If you're looking 
+In JavaScript, an important aspect of working with variables is hoisting, which defines when a variable is accessible. If you're looking 
 for a detailed description of this aspect, then you're in the right place. Let's begin.
 
 ```toc
@@ -24,13 +24,13 @@ toHeading: 2
 
 **Hoisting** is the mechanism of moving the variables and functions declaration to the top of the function scope (or global scope if outside any function). 
 
-Hoisting influences the variable life-cycle, which consists of 3 steps: 
+Hoisting influences the variable life cycle, which consists of 3 steps: 
 
 * **Declaration** - create a new variable. E.g. `let myValue`
 * **Initialization** - initialize the variable with a value. E.g. `myValue = 150`
 * **Usage** - access and use the variable value. E.g. `alert(myValue)`
 
-The process usually goes this way: first a variable should be *declared*, then *initialized* with a value and finally *used*. Let's see an example:
+The process usually goes this way. First, a variable should be *declared*, then *initialized* with a value, and finally *used*. Let's see an example:
 
 ```javascript
 // Declare
@@ -76,16 +76,16 @@ It happens because the [function declaration](https://developer.mozilla.org/en/d
 
 Hoisting affects differently:  
 
-* variable declarations: using `var`, `let` or `const` keywords
+* variable declarations: using `var`, `let`, or `const` keywords
 * function declarations: using `function <name>() {...}` syntax 
 * class declarations: using `class` keyword
 
-Let's examine these differences in more details.
+Let's examine these differences in more detail.
 
 ## 2. Function scope variables: var
 The [variable statement](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/var) creates and initializes variables inside the function scope: `var myVar, myVar2 = 'Init'`. By default a declared yet not initialized variable has `undefined` value.  
 
-Plain and simple, developers use this statement from first JavaScript versions:
+Plain and simple, developers use this statement from the first JavaScript versions:
 
 ```javascript
 // Declare num variable
@@ -100,7 +100,7 @@ console.log(str); // => 'Hello World!'
 
 #### Hoisting and var
 
-Variables declared with `var` are hoisted to the top of the enclosing function scope. If the variable is accessed before declaration, it evaluates to `undefined`.
+Variables declared with `var` are hoisted to the top of the enclosing function scope. If the variable is accessed before the declaration, it evaluates to `undefined`.
 
 Suppose `myVariable` is accessed before declaration with `var`. In this situation the declaration is **moved to the top** of `double()` function scope and the variable is assigned with `undefined`:
 
@@ -116,7 +116,7 @@ console.log(double(3)); // => 6
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/nks9jmd7/)
 
-JavaScript moves the declaration `var myVariable` to the top of `double()`  scope and interpret the code this way:
+JavaScript moves the declaration `var myVariable` to the top of `double()`  scope and interprets the code this way:
 
 ```javascript
 function double(num) {
@@ -130,7 +130,7 @@ console.log(double(3)); // => 6
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/fajdk7ng/)
 
-The `var` syntax allows not only to declare, but right away to assign an initial value: `var str = 'initial value'`. When the variable is hoisted, the declaration is moved to the top, but the initial value assignment **remains** in place:
+The `var` syntax allows not only to declare but right away to assign an initial value: `var str = 'initial value'`. When the variable is hoisted, the declaration is moved to the top, but the initial value assignment **remains** in place:
 
 ```javascript
 function sum(a, b) {
@@ -183,7 +183,7 @@ console.log(year); // ReferenceError: year is not defined
 
 ### Hoisting and let
 
-`let` variables are registered at the top of the block. But when the variable is accessed before declaration, JavaScript throws an error: `ReferenceError: <variable> is not defined`.
+`let` variables are registered at the top of the block. But when the variable is accessed before the declaration, JavaScript throws an error: `ReferenceError: <variable> is not defined`.
 
 From the declaration statement up to the beginning of the block the variable is in a *temporal dead zone* and cannot be accessed.
 
@@ -211,10 +211,6 @@ isTruthy(1)
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/e0jqcv2z/2/)
 
 `myVariable` is in a temporal dead zone from the top of the block `if (value) {...}` until `let myVariable`. If trying to access the variable in this zone, JavaScript throws a [`ReferenceError`](http://www.ecma-international.org/ecma-262/6.0/#sec-native-error-types-used-in-this-standard-referenceerror).  
-
-`let` expansion in the entire block protects variables from modification by outer scopes, even before declaration. The generation of reference errors when accessing a `let` variables in the temporal dead zone ensures better coding practice: first declare - then use.  
-
-The restriction is an effective approach to write better JavaScript in terms of encapsulation and code flow. This is a result of lessons based on `var` usage, where accessing the variable before declaration is a source of misunderstanding.
 
 ## 4. Constants: const
 
@@ -244,7 +240,7 @@ PI = 2.14; // TypeError: Assignment to constant variable
 
 Constants `const` are registered at the top of the block.  
 
-The constants cannot be accessed before declaration because of the *temporal dead zone*. When accessed before declaration, JavaScript throws an error: `ReferenceError: <constant> is not defined`.  
+The constants cannot be accessed before declaration because of the *temporal dead zone*. When accessed before the declaration, JavaScript throws an error: `ReferenceError: <constant> is not defined`.  
 
 `const` hoisting has the same behavior as the variables declared with `let` statement (see [hoisting and `let`](#hoistingandlet)).  
 
@@ -269,7 +265,7 @@ If `TWO` is used before the declaration, JavaScript throws an error `ReferenceEr
 ## 5. Function declarations
 
 The [function declaration](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/function) defines a function with the provided name and parameters.  
-An example of function declaration:
+An example of a function declaration:
 
 ```javascript
 function isOdd(number) {
@@ -285,9 +281,9 @@ The code `function isOdd(number) {...}` is a declaration that defines a function
 
 ### Hoisting and function declaration
 
-Hoisting in a function declaration allows to use the function anywhere in the enclosing scope, even before the declaration. In other words, the function can be called from any place of the current or inner scopes.  
+Hoisting in a function declaration allows using of the function anywhere in the enclosing scope, even before the declaration. In other words, the function can be called from any place of the current or inner scopes.  
 
-The following code from the start invokes a function, and after defines it:
+The following code from the start invokes a function, but defines it afterward:
 
 ```javascript
 // Call the hoisted function
@@ -301,7 +297,7 @@ function equal(value1, value2) {
 
 The code works nicely because `equal()` is created by a function declaration and hoisted to the top of the scope.
 
-Notice the **difference** between a **function declaration** `function <name>() {...}` and a [**function expression**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function) `var <name> = function() {...}`. Both are used to create functions, however have different hoisting mechanisms.
+Notice the **difference** between a **function declaration** `function <name>() {...}` and a [**function expression**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function) `var <name> = function() {...}`. Both are used to create functions, however, have different hoisting mechanisms.
 
 The following sample demonstrates the distinction:
 
@@ -309,29 +305,29 @@ The following sample demonstrates the distinction:
 // Call the hoisted function
 console.log(addition(4, 7)); // => 11
 // The variable is hoisted, but is undefined
-console.log(substraction(10, 7)); // TypeError: substraction is not a function
+console.log(minus(10, 7)); // TypeError: minus is not a function
 // Function declaration
 function addition(num1, num2) {
    return num1 + num2;
 }
 // Function expression
-var substraction = function (num1, num2) {
+var minus = function (num1, num2) {
   return num1 - num2;
 };
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/bgoak5pm/3/)
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/bgoak5pm/5/)
 
 `addition` is hoisted entirely and can be called before the declaration.  
 
-However `substraction` is declared using a variable statement and is hoisted too, but has an `undefined` value when invoked. This scenario throws an error: `TypeError: substraction is not a function`.
+However `minus` is declared using a variable statement and is hoisted too, but has an `undefined` value when invoked. This scenario throws an error: `TypeError: minus is not a function`.
  
 ## 6. Class declarations
 
 The [class declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Class_declarations) defines a constructor function with the provided name and methods. Classes are a great addition introduced by ECMAScript 6.
-Classes are built on top of the JavaScript prototypal inheritance and have some additional goodies like `super` (to access the parent class), `static` (to define static methods), `extends` (to define a child class) and more.
+Classes are built on top of the JavaScript prototypal inheritance and have some additional goodies like `super` (to access the parent class), `static` (to define static methods), `extends` (to define a child class), and more.
 
-Take a look how to declare a class and instantiate an object: 
+Take a look at how to declare a class and instantiate an object: 
 
 ```javascript
 class Point {
@@ -374,10 +370,10 @@ const microsoft = new Company('Microsoft');
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/z64Luqwm/)
 
-As expected, executing `new Company('Apple')` before the class definition throws `ReferenceError`. This is nice, because JavaScript suggests to use a good approach to first declare something and then make use of it.  
+As expected, executing `new Company('Apple')` before the class definition throws `ReferenceError`. This is nice because JavaScript suggests using a good approach to first declare something and then make use of it.  
 
 ## 7. Final thoughts
 
 Hoisting in JavaScript has many forms. Even if you know exactly how it works, the general advice is to code variables in a sequence of *declare* > *initialize* > *use*. This will save you from *unexpected* variable appearances, `undefined` and `ReferenceError`.
 
-As an exception, sometimes functions can be invoked before the definition: an effect of function declaration hoisting. It's useful in cases when you need to read quickly how functions are invoked at the top of the source file, without scrolling down and read the details about function implementation.  
+As an exception, sometimes functions can be invoked before the definition: an effect of function declaration hoisting. It's useful in cases when you need to read quickly how functions are invoked at the top of the source file, without scrolling down and reading the details about function implementation.  
