@@ -2,7 +2,7 @@
 title: '3 Ways To Access Object Properties in JavaScript'
 description: 'You can access an object property in JavaScript in 3 ways: dot property accessor, square brackets property accessor, or object destructuring.'
 published: '2020-02-05T10:25Z'
-modified: '2020-02-05T10:25Z'
+modified: '2023-01-25'
 thumbnail: './images/access-object-properties-2.png'
 slug: access-object-properties-javascript
 tags: ['javascript', 'object', 'property', 'destructuring']
@@ -13,7 +13,7 @@ type: post
 You can access the properties of an object in JavaScript in 3 ways: 
 
 1. Dot property accessor: `object.property`
-2. Square brackets property access: `object['property']`
+2. Square brackets property accessor: `object['property']`
 3. Object destructuring: `const { property } = object`
 
 Let's see how each syntax to access the properties work. And understand when it's reasonable, depending on the situation, to use one way or another.  
@@ -39,8 +39,9 @@ const hero = {
 };
 
 // Dot property accessor
-hero.name; // => 'Batman'
+console.log(hero.name); // => 'Batman'
 ```
+[Try the demo.](https://jsfiddle.net/v41hjdqy/)
 
 `hero.name` is a dot property accessor that reads the property `name` of the object `hero`.  
 
@@ -65,6 +66,7 @@ const weirdObject = {
 weirdObject.prop-3; // => NaN
 weirdObject.3;      // throws SyntaxError: Unexpected number
 ```
+[Try the demo.](https://jsfiddle.net/dnbe7crq/)
 
 Because `prop-3` and `3` are invalid identifiers, the dot property accessor doesn't work:
 
@@ -81,11 +83,12 @@ const weirdObject = {
   '3': 'three'
 };
 
-weirdObject['prop-3']; // => 'three'
-weirdObject[3];        // => 'three' 
+console.log(weirdObject['prop-3']); // => 'three'
+console.log(weirdObject['3']);      // => 'three' 
 ```
+[Try the demo.](https://jsfiddle.net/5eqbs3zk/)
 
-The square brackets syntax accesses without problems the properties that have special names: `weirdObject['prop-3']` and `weirdObject[3]`. 
+The square brackets syntax accesses without problems the properties that have special names: `weirdObject['prop-3']` and `weirdObject['3']`. 
 
 ## 2. Square brackets property accessor
 
@@ -106,9 +109,10 @@ const hero = {
 };
 
 // Square brackets property accessor:
-hero['name'];   // => 'Batman'
-hero[property]; // => 'Batman'
+console.log(hero['name']);   // => 'Batman'
+console.log(hero[property]); // => 'Batman'
 ```
+[Try the demo.](https://jsfiddle.net/9df5wvou/)
 
 `hero['name']` and `hero[property]` both read the property `name` by using the square brackets syntax.  
 
@@ -133,8 +137,9 @@ const hero = {
 
 // Object destructuring:
 const { name } = hero;
-name; // => 'Batman'
+console.log(name); // => 'Batman'
 ```
+[Try the demo.](https://jsfiddle.net/7j5o6hyb/)
 
 `const { name } = hero` is an object destructuring. The destructuring defines a variable `name` with the value of property `name`.  
 
@@ -145,18 +150,18 @@ When you get used to object destructuring, you will find that its syntax is a gr
 Note that you can extract as many properties as you'd like: 
 
 ```javascript
-const { identifier1, identifier2, .., identifierN } = expression;
+const { identifier1, identifier2, identifierN } = expression;
 ``` 
 
 ### 3.1 Alias variable
 
-If you'd like to access the property, but create a variable name different than the property name, you could use aliasing.  
+If you'd like to access the property, but create a variable with a name different than the property name, you could use aliasing.  
 
 ```javascript
 const { identifier: aliasIdentifier } = expression;
 ```
 
-`identifier` is the name of the property to access, `aliasIdentifier` is the variable name, and `expression` should evaluate to an object. After the destructuring, the variable `aliasIdentifier` contains the property value.  
+`identifier` is the name of the property to access, `aliasIdentifier` is the variable name, and `expression` should evaluate to an object. After the destructuring, the variable `aliasIdentifier` contains `identifier` property value.  
 
 Here's an example:
 
@@ -167,20 +172,22 @@ const hero = {
 
 // Object destructuring:
 const { name: heroName } = hero;
-heroName; // => 'Batman'
+console.log(heroName); // => 'Batman'
 ```
+
+[Try the demo.](https://jsfiddle.net/rc84nfg6/)
 
 `const { name: heroName } = hero` is an object destructuring. The destucturing defines a new variable `heroName` (instead of `name` as in previous example), and assigns to `heroName` the value `hero.name`.  
 
 ### 3.2 Dynamic property name
 
-What makes the object destructuring even more useful is that you could extract to variables properties with the dynamic value:
+What makes the object destructuring even more useful is extracting dynamic name properties into variables:
 
 ```javascript
 const { [expression]: identifier } = expression;
 ```
 
-The first `expression` should evaluate to a property name, and the `identifier` should indicate the variable name created after the destructuring. The second `expression` should evaluate to the object you'd like to destructure.  
+The first `expression` should evaluate to a property name, and the `identifier` should indicate the variable name created after the destructuring. `expression` should evaluate to the object you'd like to destructure.  
 
 Here's an example:
 
@@ -192,8 +199,10 @@ const hero = {
 
 // Object destructuring:
 const { [property]: name } = hero;
-name; // => 'Batman'
+console.log(name); // => 'Batman'
 ```
+
+[Try the demo.](https://jsfiddle.net/ytpeg2a1/1/)
 
 `const { [property]: name } = hero` is an object destructuring that dynamically, at runtime, determines what property to extract. 
 
@@ -206,11 +215,13 @@ const hero = {
   characterName: 'Batman'
 };
 
-hero.name;    // => undefined
-hero['name']; // => undefined
+console.log(hero.name);    // => undefined
+console.log(hero['name']); // => undefined
 const { name } = hero;
-name;         // => undefined
+console.log(name);         // => undefined
 ```
+
+[Try the demo.](https://jsfiddle.net/Lfuenohs/)
 
 The property `name` doesn't exist in the object `hero`. Thus the dot property accessor `hero.name`, square brackets property accessor `hero['name']` and the variable `name` after destructuring evaluate to `undefined`.  
 
@@ -222,6 +233,6 @@ The dot property accessor syntax `object.property` works nicely when you know th
 
 When the property name is dynamic or is not a valid identifier, a better alternative is square brackets property accessor: `object[propertyName]`. 
 
-The object destructuring extracts the property directly into a variable: `{ property } = object`. Moreover, you can extract the dynamic property names (determined at runtime): `{ [propertName]: variable } = object`. 
+The object destructuring extracts the property directly into a variable: `const { property } = object`. Moreover, you can extract the dynamic property names (determined at runtime): `const { [propertName]: variable } = object`. 
 
-There are no good or bad ways to access properties. Choose depending on your particular situation. 
+There are no good or bad ways to access properties. Choose depending on your particular situation and personal preferences.  
