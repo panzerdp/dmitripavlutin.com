@@ -16,7 +16,8 @@ In JavaScript an important aspect of working with variables is hoisting, which d
 for a detailed description of this aspect, then you're in the right place. Let's begin.
 
 ```toc
-toHeading: 1
+# Table of contents
+toHeading: 2
 ```
 
 ## 1. Introduction
