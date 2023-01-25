@@ -2,7 +2,7 @@
 title: "3 Ways to Check If an Object Has a Property in JavaScript"
 description: "The 3 ways to check if an object has a property in JavaScript: hasOwnProperty() method, in operator, comparing with undefined."
 published: "2020-06-16T09:00Z"
-modified: "2020-10-16T07:15Z"
+modified: "2023-01-25"
 thumbnail: "./images/cover.png"
 slug: check-if-object-has-property-javascript
 tags: ["javascript", "object", "property"]
@@ -26,9 +26,11 @@ const hero = {
   name: 'Batman'
 };
 
-hero.hasOwnProperty('name');     // => true
-hero.hasOwnProperty('realName'); // => false
+console.log(hero.hasOwnProperty('name'));     // => true
+console.log(hero.hasOwnProperty('realName')); // => false
 ```
+
+[Try the demo.](https://jsfiddle.net/u4o85ckr/1/)
 
 `hero.hasOwnProperty('name')` returns `true` because the property `name` exists in the object `hero`.  
 
@@ -36,17 +38,18 @@ On the other side, `hero` doesn't have `realName` property. Thus `hero.hasOwnPro
 
 The method name `hasOwnProperty()` suggests that it looks in the [own properties](/own-and-inherited-properties-in-javascript/#1-own-properties) of the object. The own properties are those defined directly upon the object.  
 
-Because of that `hasOwnProperty()` doesn't detect the inherited `toString` property:
+`hasOwnProperty()` checks only within own properties, the method doesn't detect the inherited `toString` property:
 
 ```javascript{6}
 const hero = {
   name: 'Batman'
 };
 
-hero.toString; // => function() {...}
+console.log(hero.toString); // => function() {...}
 
-hero.hasOwnProperty('toString'); // => false
+console.log(hero.hasOwnProperty('toString')); // => false
 ```
+[Try the demo.](https://jsfiddle.net/frtdawc4/)
 
 ## 2. *in* operator
 
@@ -59,9 +62,10 @@ const hero = {
   name: 'Batman'
 };
 
-'name' in hero;     // => true
-'realName' in hero; // => false
+console.log('name' in hero);     // => true
+console.log('realName' in hero); // => false
 ```
+[Try the demo.](https://jsfiddle.net/r9g0nae3/)
 
 `'name' in hero` evaluates to `true` because `hero` has a property `name`. 
 
@@ -78,11 +82,12 @@ const hero = {
   name: 'Batman'
 };
 
-hero.toString; // => function() {...}
+console.log(hero.toString); // => function() {...}
 
-'toString' in hero;              // => true
-hero.hasOwnProperty('toString'); // => false
+console.log('toString' in hero);              // => true
+console.log(hero.hasOwnProperty('toString')); // => false
 ```
+[Try the demo.](https://jsfiddle.net/2urp4n0a/)
 
 ## 3. Comparing with *undefined*
 
@@ -93,9 +98,10 @@ const hero = {
   name: 'Batman'
 };
 
-hero.name;     // => 'Batman'
-hero.realName; // => undefined
+console.log(hero.name);     // => 'Batman'
+console.log(hero.realName); // => undefined
 ```
+[Try the demo.](https://jsfiddle.net/cq60uw1f/)
 
 `hero.realName` evaluates to `undefined` because `realName` property is missing.  
 
@@ -106,9 +112,10 @@ const hero = {
   name: 'Batman'
 };
 
-hero.name !== undefined;     // => true
-hero.realName !== undefined; // => false
+console.log(hero.name !== undefined);     // => true
+console.log(hero.realName !== undefined); // => false
 ```
+[Try the demo.](https://jsfiddle.net/ouhgvf15/)
 
 `hero.name !== undefined` evaluates to `true`, which shows the existence of property. 
 
@@ -123,8 +130,9 @@ const hero = {
   name: undefined
 };
 
-hero.name !== undefined; // => false
+console.log(hero.name !== undefined); // => false
 ```
+[Try the demo.](https://jsfiddle.net/5ukpcxe7/)
 
 Even if the property `name` exists (but has `undefined` value), `hero.name !== undefined` evaluates to `false`: which incorrectly indicates a missing property.  
 
