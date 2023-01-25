@@ -102,12 +102,6 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
-      resolve: 'gatsby-plugin-google-gtag',
-      options: {
-        trackingIds: ['G-P51KQJDK5T'],
-      },
-    },
-    {
       resolve: 'gatsby-plugin-graphql-codegen',
       options: {
         documentPaths: [
