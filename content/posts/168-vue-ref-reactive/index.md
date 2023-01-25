@@ -16,9 +16,13 @@ However, like me, you might be asking yourself the eternal question: what are th
 
 Let's find the answer toghether.
 
+```toc
+
+```
+
 ## 1. Primitive values
 
-The first difference is that `ref()` and `reactive()` handle differently primitive values: strings, numbers, booleans, `null`, and `undefined`.  
+`ref()` and `reactive()` handle differently primitive values: strings, numbers, booleans, `null`, and `undefined`.  
 
 ### 1.1 ref()
 
@@ -48,7 +52,7 @@ const objectReactive = reactive({ count: 0}); // OK
 
 Calling `reactive(0)` with a primitive value is invalid. Don't do this. If you need to make reactive primitive values, `ref(0)` is the way to go.  
 
-The main reason why `reactive()` works only with objects lies in the Vue's reactivity implementation details. [Vue uses Proxies](https://github.com/vuejs/core/blob/main/packages/reactivity/src/reactive.ts#L212) that can intercept property changes on objects only but not on primitives.  
+The reason why `reactive()` works only with objects is in the Vue's reactivity implementation. [Vue uses Proxies](https://github.com/vuejs/core/blob/main/packages/reactivity/src/reactive.ts#L212) to intercept property changes on objects. However, proxies do not work with primitives.  
 
 Nevertheless, `reactive({ count: 0})` initialized with an object is perfectly valid and creates a reactive object. 
 
@@ -76,9 +80,9 @@ console.log(objectRef.value.count); // logs 0
 
 `numberRef.value` is how you access the primitive value from the ref `numberRef`. 
 
-`.value` is a special property available on all the refs to read or update the ref value.  
+`<ref>.value` is a special property available on all the refs to read or update the ref value.  
 
-`objectRef.value.count` is how you can access a property of in the ref data is an object.  
+Regarding objects in refs, `objectRef.value.count` is how you can access a property of in the ref data is an object.  
 
 In the template you don't have to use `.value` to access a ref value. This is also called ref auto-unwrapping in templates:
 
@@ -93,7 +97,7 @@ const numberRef = ref(0);
 </template>
 ```
 
-`{{ numberRef }}` reads the ref value directly. 
+`{{ numberRef }}` reads the ref value directly.  
 
 ### 2.2 reactive()
 
@@ -107,6 +111,8 @@ console.log(objectReactive.count); // logs 0
 ```
 
 Accessing reactive data created using `reactive({ count: 0} )` doesn't need additional syntax and is done directly: `objectReactive.count`.  
+
+The reactive object returned by `reactive(originalObject)` is a proxy object of `originalObject`. Which means that the reactive object has the same properties (aka has the same interface) as the `originalObject`.
 
 In conclusion:
 
@@ -168,7 +174,6 @@ Even though the reactive object is `{ count: ref(0) }`, the returned type is sti
 In conclusion:
 
 > refs returned by `ref(value: T)` are of type `Ref<T>`, while reactive objects returned by `reactive(object: T)` are of type `T` (exception: refs in reactive are unwrapped).
-
 
 ## 4. Watching
 
@@ -255,29 +260,28 @@ Every time you click the "Increase" button, you'll see in the console the messag
 
 In conclusion:
 
-> `watch()` by default watches *only `myRef.value` change* of `ref()`, while doing a *deep* watch of a `reactive()` object.
+> `watch()` by default watches *only direct `.value` change* of `ref()`, while doing a *deep* watch of a `reactive()` object.
 
 ## 5. Usage
 
 Finally, and probably one of the most important difference to know, is when you'd use `ref()` and when `reactive()`?  
 
-Unfortunately, there isn't an exact right answer. 
-
-(mention about atomic values for `ref()`, and deep watching of `reactive()`?)
-
-But fortunately, there are some situations when using a specific reactivity function is preferable. These preferences can be easily derivated from the above-presented behavior differences. 
+While there isn't a strict rule, still, there are situations when using a specific reactivity function is preferable:
 
 1. If you need a reactive primitive value, then using `ref()` is the right choice.  
-2. If you need a reactive but immutable [value object](https://en.wikipedia.org/wiki/Value_object) (an object whose properties never change), then using `ref()` is a good option.
+2. If you need a reactive [value object](https://en.wikipedia.org/wiki/Value_object) (an object whose properties usually don't change), then using `ref()` is a good option.
 3. If you need a reactive mutable object, and you want to track even the deeply mutated properties of that object, then using `reactive()` is a good option.
-
 
 ## 6. Conclusion
 
 This post presented the differences between `ref()` and `reactive()` in composition API.
 
-First, the most notable difference between the two is that `ref()` can store a primitive value, while `reactive()` cannot. 
+Let's review the conclusion:
 
-Secondly, you access the value stored in a `ref()` using a special property `myRef.value`, while `reactive()` object can be used directly as a regular object.  
+1. `ref()` can store a primitive value, while `reactive()` cannot. 
+2. You access the value stored in a `ref()` using `<ref>.value`, while `reactive()` object can be used directly as a regular object.  
+3. `ref()` is typed as `Ref<V>`, while reactive object returned by `reactive(originalObject)` usually maintains the type of the `originalObject`.  
+4. `watch()` (when used without options) normally watches only direct changes of `<ref>.value`, while performs a deep watch of `reactive()` objects.  
+5. You'd use `ref()` to store primitives or value objects, while `reactive()` if you're interested to watch deep changes of a mutable object.  
 
 *What other differences between `ref()` and `reactive()` do you know?*
