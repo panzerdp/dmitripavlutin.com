@@ -1,8 +1,8 @@
 ---
 title: "5 Must-Know Differences Between ref() and reactive() in Vue"
-description: "That are the 5 important differences between ref() and reactive() in Vue."  
-published: "2023-01-21"
-modified: "2023-01-21"
+description: "What are the main differences between `ref()` and `reactive()`? And when would you use one or another? "  
+published: "2023-01-25"
+modified: "2023-01-25"
 thumbnail: "./images/cover.png"
 slug: ref-reactive-differences-vue
 tags: ['vue', 'vue composition']
@@ -14,10 +14,9 @@ If you landed on this post most likely you have a basic understanding of Vue rea
 
 However, like me, you might be asking yourself the eternal question: what are the main differences between `ref()` and `reactive()`? And when would you use one or another? 
 
-Let's find the answer toghether.
+Let's find the answer together.
 
 ```toc
-
 ```
 
 ## 1. Primitive values
@@ -52,7 +51,7 @@ const objectReactive = reactive({ count: 0}); // OK
 
 Calling `reactive(0)` with a primitive value is invalid. Don't do this. If you need to make reactive primitive values, `ref(0)` is the way to go.  
 
-The reason why `reactive()` works only with objects is in the Vue's reactivity implementation. [Vue uses Proxies](https://github.com/vuejs/core/blob/main/packages/reactivity/src/reactive.ts#L212) to intercept property changes on objects. However, proxies do not work with primitives.  
+The reason why `reactive()` works only with objects is in Vue's reactivity implementation. [Vue uses Proxies](https://github.com/vuejs/core/blob/main/packages/reactivity/src/reactive.ts#L212) to intercept property changes on objects. However, proxies do not work with primitives.  
 
 Nevertheless, `reactive({ count: 0})` initialized with an object is perfectly valid and creates a reactive object. 
 
@@ -82,9 +81,9 @@ console.log(objectRef.value.count); // logs 0
 
 `<ref>.value` is a special property available on all the refs to read or update the ref value.  
 
-Regarding objects in refs, `objectRef.value.count` is how you can access a property of in the ref data is an object.  
+Also, `objectRef.value.count` is how you can access a property of an object in ref.
 
-In the template you don't have to use `.value` to access a ref value. This is also called ref auto-unwrapping in templates:
+In the template, you don't have to use `.value` to access a ref value. This is also called ref auto-unwrapping in templates:
 
 ```vue {6}
 <script setup>
@@ -96,6 +95,8 @@ const numberRef = ref(0);
   <div>{{ numberRef }}</div> <!-- <div>0</div> -->
 </template>
 ```
+
+[Open the demo.](https://codesandbox.io/s/ref-unwrapping-template-hp5ixh?file=/src/App.vue)
 
 `{{ numberRef }}` reads the ref value directly.  
 
@@ -112,7 +113,7 @@ console.log(objectReactive.count); // logs 0
 
 Accessing reactive data created using `reactive({ count: 0} )` doesn't need additional syntax and is done directly: `objectReactive.count`.  
 
-The reactive object returned by `reactive(originalObject)` is a proxy object of `originalObject`. Which means that the reactive object has the same properties (aka has the same interface) as the `originalObject`.
+The reactive object returned by `reactive(originalObject)` is a proxy object of `originalObject`. This means that the reactive object has the same properties (aka has the same interface) as the `originalObject`.
 
 In conclusion:
 
@@ -200,6 +201,8 @@ const increase = () => countNumberRef.value++
 </template>
 ```
 
+[Open the demo.](https://codesandbox.io/s/watch-ref-value-y6ery8?file=/src/App.vue)
+
 Every time you click the "Increase" button, you'll see in the console the message "changed!". `watch(count, callback)` calls `callback` every time `countNumberRef.value` changes.  
 
 But does `watch()` watch deep changes of an object stored in `ref()`? Let's try!
@@ -221,7 +224,11 @@ const increase = () => countObjectRef.value.count++
 </template>
 ```
 
+[Open the demo.](https://codesandbox.io/s/watch-ref-value-deep-x8re97?file=/src/App.vue)
+
 This time, however, if you click the "Increase" button there will be no message in the console! The conclusion is that `watch()` doesn't perform a deep watch by default on refs.
+
+While do note that DOM still updates while `countObjectRef.count`: meaning that the object in ref is still reactive in regards of the rendered output.  
 
 Of course, if you ask `watch()` to watch the ref deeply, it's going to work as expected:
 
@@ -234,6 +241,7 @@ watch(count, () => {
 
 // ...
 ```
+[Open the demo.](https://codesandbox.io/s/watch-ref-value-deep-working-m7t9eq?file=/src/App.vue)
 
 ### reactive()
 
@@ -255,6 +263,8 @@ const increase = () => countObjectReactive.counter.val++
   <button @click="increase">Increase</button>
 </template>
 ```
+
+[Open the demo.](https://codesandbox.io/s/reactive-deep-watch-3klsxl?file=/src/App.vue)
 
 Every time you click the "Increase" button, you'll see in the console the message "changed!". `watch(countObjectReactive, callback)` calls `callback` every time any property (even a deep one) of `countObjectReactive` changes.  
 
@@ -280,8 +290,8 @@ Let's review the conclusion:
 
 1. `ref()` can store a primitive value, while `reactive()` cannot. 
 2. You access the value stored in a `ref()` using `<ref>.value`, while `reactive()` object can be used directly as a regular object.  
-3. `ref()` is typed as `Ref<V>`, while reactive object returned by `reactive(originalObject)` usually maintains the type of the `originalObject`.  
-4. `watch()` (when used without options) normally watches only direct changes of `<ref>.value`, while performs a deep watch of `reactive()` objects.  
+3. `ref()` is typed as `Ref<V>`, while the reactive object returned by `reactive(originalObject)` usually maintains the type of the `originalObject`.  
+4. `watch()` (when used without options) normally watches only direct changes of `<ref>.value`, while watching deeply `reactive()` objects.  
 5. You'd use `ref()` to store primitives or value objects, while `reactive()` if you're interested to watch deep changes of a mutable object.  
 
 *What other differences between `ref()` and `reactive()` do you know?*
