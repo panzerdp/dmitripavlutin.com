@@ -44,7 +44,7 @@ module.exports = {
     popularPostsByCategory: [{
       category: 'JavaScript',
       slugs: [
-        'simple-explanation-of-javascript-closures',
+        'javascript-closure',
         'gentle-explanation-of-this-in-javascript',
         'differences-between-arrow-and-regular-functions'
       ]

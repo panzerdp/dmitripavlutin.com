@@ -186,7 +186,7 @@ Fetching logic implemented in hooks is easy to reuse.
 #### Drawbacks
 
 *Entry barrier*  
-Hooks are slighly counter-intuitive, thus you have [to make sense of them](https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889) before usage. Hooks rely on closures, so be sure to [know them well](/simple-explanation-of-javascript-closures/) too.   
+Hooks are slighly counter-intuitive, thus you have [to make sense of them](https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889) before usage. Hooks rely on closures, so be sure to [know them well](/javascript-closure/) too.   
 
 *Imperative*  
 With hooks, you still have to use an imperative approach to perform data fetching.  

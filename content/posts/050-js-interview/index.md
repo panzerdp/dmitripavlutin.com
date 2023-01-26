@@ -239,7 +239,7 @@ The second phase happens after 100ms:
 
 That's why the output to the console is `3`, `3` and `3`.  
 
-If you struggle understanding closures, I recommend reading [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).  
+If you struggle understanding closures, I recommend reading [A Simple Explanation of JavaScript Closures](/javascript-closure/).  
 
 *Do you know how to fix the snippet to log `0`, `1`, and `2`? Please write your solution in a comment below!*
 

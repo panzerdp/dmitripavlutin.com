@@ -6,7 +6,7 @@ modified: "2020-12-23T19:00Z"
 thumbnail: "./images/cover-4.png"
 slug: javascript-callback
 tags: ['javascript', 'function']
-recommended: ['simple-explanation-of-javascript-closures', 'javascript-arrow-functions']
+recommended: ['javascript-closure', 'javascript-arrow-functions']
 type: post
 ---
 

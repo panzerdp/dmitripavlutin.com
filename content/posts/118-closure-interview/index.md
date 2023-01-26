@@ -6,7 +6,7 @@ modified: "2021-09-22T18:20Z"
 thumbnail: "./images/cover-5.jpg"
 slug: javascript-closures-interview-questions
 tags: ['javascript', 'closure', 'interview']
-recommended: ['simple-explanation-of-javascript-closures', 'simple-but-tricky-javascript-interview-questions']
+recommended: ['javascript-closure', 'simple-but-tricky-javascript-interview-questions']
 type: post
 ---
 
@@ -18,7 +18,7 @@ Take a pencil and a piece of paper, and try to answer the questions without look
 
 Have fun!
 
-*If you need a refresh on closures, I recommend checking the post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).*  
+*If you need a refresh on closures, I recommend checking the post [A Simple Explanation of JavaScript Closures](/javascript-closure/).*  
 
 ```toc
 ```
@@ -329,6 +329,6 @@ But if `number2` is `undefined`, it means that `multiply()` function has been ca
 Compare your answers with the answers in the post:
 
 * You have a good understanding of closures if you answered correctly 5 or more questions  
-* But you need a good refresher on closures if you answered correctly less than 5 questions. I recommend checking my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).  
+* But you need a good refresher on closures if you answered correctly less than 5 questions. I recommend checking my post [A Simple Explanation of JavaScript Closures](/javascript-closure/).  
 
 Ready for a new challenge? Try to solve the [7 Interview Questions on "this" keyword in JavaScript](/javascript-this-interview-questions/).

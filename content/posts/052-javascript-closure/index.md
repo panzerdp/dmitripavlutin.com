@@ -1,16 +1,16 @@
 ---
-title: A Simple Explanation of JavaScript Closures
+title: "JavaScript Closure: A Simple Explanation"
 description: A closure is a function that captures variables from where it is defined (or its lexical scope).  
 published: '2019-10-25T04:00Z'
-modified: '2021-10-02T15:00Z'
-thumbnail: './images/cover-2.png'
-slug: simple-explanation-of-javascript-closures
+modified: '2023-01-26'
+thumbnail: './images/cover-3.png'
+slug: javascript-closure
 tags: ['javascript', 'closure', 'scope']
 recommended: ['6-ways-to-declare-javascript-functions', 'javascript-scope']
 type: post
 ---
 
-The callbacks, event handlers, higher-order functions can access outer scope variables thanks to closures. Closures are important in functional programming and are often asked during the JavaScript coding interview.  
+The callbacks, event handlers, higher-order functions can access outer scope variables thanks to the closure. The closure concept is important in functional programming and is often asked during the JavaScript coding interview.  
 
 While being used everywhere, closures are difficult to grasp. If you haven't had your "Aha!" moment in understanding closures, then this post is for you.  
 
@@ -330,8 +330,6 @@ Finally, a closure is a function that captures variables from its lexical scope.
 
 Closures allow event handlers, callbacks to capture variables. They're used in functional programming. Moreover, you could be asked how closures work during a Frontend job interview.  
 
-Every JavaScript developer must know how closures work. Deal with it <nobr>⌐■_■</nobr>.
-
 What about a challenge? [7 Interview Questions on JavaScript Closures. Can You Answer Them?](/javascript-closures-interview-questions/)  
 
-*Do you still struggle to understand closures? If so, ask me a question in a comment below!*
+*Do you have any closure questions? Ask me in a comment below!*

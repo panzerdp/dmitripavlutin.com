@@ -396,7 +396,7 @@ function Switch() {
 
 ### 4.2 Stale state
 
-[A closure](/simple-explanation-of-javascript-closures/) is a function that captures variables from the outer scopes.  
+[A closure](/javascript-closure/) is a function that captures variables from the outer scopes.  
 
 Closures (e.g. event handlers, callbacks) might capture state variables from the functional component scope. Because state variables change between renderings, closures should capture variables with the latest state value.  
 

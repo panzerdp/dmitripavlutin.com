@@ -6,7 +6,7 @@ modified: "2021-11-20T18:00Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-prototypal-inheritance
 tags: ['javascript', 'prototype', 'inheritance']
-recommended: ['simple-explanation-of-javascript-closures', 'own-and-inherited-properties-in-javascript']
+recommended: ['javascript-closure', 'own-and-inherited-properties-in-javascript']
 type: post
 ---
 

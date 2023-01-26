@@ -6,19 +6,19 @@ modified: '2021-01-09T16:30Z'
 thumbnail: './images/landscape.jpg'
 slug: react-hooks-stale-closures
 tags: ['react', 'hook']
-recommended: ['use-react-memo-wisely', 'simple-explanation-of-javascript-closures']
+recommended: ['use-react-memo-wisely', 'javascript-closure']
 type: post
 ---
 
 Hooks ease the management of state and side effects inside functional React components. Moreover, repeated logic can be extracted into a custom hook to reuse across the application.  
 
-Hooks heavily rely on JavaScript [closures](/simple-explanation-of-javascript-closures/). That's why hooks are so expressive and simple. But closures are sometimes tricky.  
+Hooks heavily rely on JavaScript [closures](/javascript-closure/). That's why hooks are so expressive and simple. But closures are sometimes tricky.  
 
 One issue you can encounter when using hooks is stale closure. And it might be difficult to solve!
 
 Let's start with distilling what the stale closure is. Then you'll see how a stale closure affects React hooks, and how to solve that.  
 
-*If you need a refresh on closures, I recommend reading [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/).*  
+*If you need a refresh on closures, I recommend reading [A Simple Explanation of JavaScript Closures](/javascript-closure/).*  
 
 ## 1. The stale closure
 

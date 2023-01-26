@@ -6,7 +6,7 @@ modified: '2020-04-24T16:00Z'
 thumbnail: './images/javascript-scope-cover-2.png'
 slug: javascript-scope
 tags: ['javascript', 'scope', 'variable']
-recommended: ['simple-explanation-of-javascript-closures', 'javascript-hoisting-in-details']
+recommended: ['javascript-closure', 'javascript-hoisting-in-details']
 type: post
 ---
 
@@ -301,7 +301,7 @@ In the example, the lexical scope of `innerFunc()` consists of the scope of `out
 
 Moreover, the `innerFunc()` is a *closure* because it captures the variable `outerVar` from the lexical scope. 
 
-If you'd like to master the closure concept, I highly recommend reading my post [A Simple Explanation of JavaScript Closures](/simple-explanation-of-javascript-closures/#4-the-closure).  
+If you'd like to master the closure concept, I highly recommend reading my post [A Simple Explanation of JavaScript Closures](/javascript-closure/#4-the-closure).  
 
 ## 8. Variables isolation
 
@@ -338,7 +338,7 @@ While `const` and `let` variables are scoped by code blocks, functions or module
 
 Scopes can be nested. Inside an inner scope you can access the variables of an outer scope.  
 
-The lexical scope consists of the outer function scopes determined statically. Any function, no matter the place where being executed, can access the variables of its lexical scope (this is the concept of [closure](/simple-explanation-of-javascript-closures/)).  
+The lexical scope consists of the outer function scopes determined statically. Any function, no matter the place where being executed, can access the variables of its lexical scope (this is the concept of [closure](/javascript-closure/)).  
 
 Hopefully, my post has helped you understand the scope better!
 

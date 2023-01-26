@@ -212,7 +212,7 @@ Here's a good rule to avoid stale state variables:
 
 React hooks heavily rely on the concept of closures. Relying on closures is what makes them so expressive.  
 
-As a quick reminder, the [closure](/simple-explanation-of-javascript-closures/) in JavaScript is the function that captures variables from its lexical scope. No matter where the closure is executed, it always has access to the variables from the place where it is defined.  
+As a quick reminder, the [closure](/javascript-closure/) in JavaScript is the function that captures variables from its lexical scope. No matter where the closure is executed, it always has access to the variables from the place where it is defined.  
 
 When using hooks that accept callbacks as arguments (like `useEffect(callback, deps)`, `useCallback(callback, deps)`) you might create a stale closure &mdash; a closure that has captured outdated state or prop variables.  
 

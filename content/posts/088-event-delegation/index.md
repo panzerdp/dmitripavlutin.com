@@ -6,7 +6,7 @@ modified: "2020-09-18T06:30Z"
 thumbnail: "./images/cover-3.png"
 slug: javascript-event-delegation
 tags: ['javascript', 'event delegation']
-recommended: ['simple-explanation-of-javascript-closures', 'simple-but-tricky-javascript-interview-questions']
+recommended: ['javascript-closure', 'simple-but-tricky-javascript-interview-questions']
 type: post
 ---
 
