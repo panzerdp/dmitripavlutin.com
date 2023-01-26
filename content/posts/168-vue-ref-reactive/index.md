@@ -2,7 +2,7 @@
 title: "5 Must-Know Differences Between ref() and reactive() in Vue"
 description: "What are the main differences between ref() and reactive()? And when would you use one or another?"  
 published: "2023-01-25"
-modified: "2023-01-25"
+modified: "2023-01-26"
 thumbnail: "./images/cover-2.png"
 slug: ref-reactive-differences-vue
 tags: ['vue', 'vue composition', 'reactivity']
@@ -121,11 +121,11 @@ In conclusion:
 
 ## 3. Reassigning data
 
-A consequence of the fact that `ref()` is access and updated using `.value` property, while `reactive()` is a proxy of the original object, is the fact that `ref()` can be reassigned, while `reactive()` cannot.  
+A consequence of the fact that `ref()` is accessed and updated using `.value` property, while `reactive()` is a proxy of the original object, is the fact that `ref()` can be reassigned, while `reactive()` cannot.  
 
 ### ref()
 
-Reassigning the value of a `ref()` entirely with a new value is perfectely valid:
+Reassigning the value of a `ref()` entirely with a new value is perfectly valid:
 
 ```vue
 <script setup>
@@ -274,7 +274,7 @@ const increase = () => countObjectRef.value.count++
 
 This time, however, if you click the "Increase" button there will be no message in the console! The conclusion is that `watch()` doesn't perform a deep watch by default on refs.
 
-While do note that DOM still updates while `countObjectRef.count`: meaning that the object in ref is still reactive in regards of the rendered output.  
+DOM still updates while `countObjectRef.count`: which means the object in ref is still reactive in regards to the rendered output.  
 
 Of course, if you ask `watch()` to watch the ref deeply, it's going to work as expected:
 
