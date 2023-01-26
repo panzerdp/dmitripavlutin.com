@@ -30,6 +30,22 @@
   }
 }
 
+.carbonSection {
+  display: none;
+  float: right;
+  width: 250px;
+  margin: 6px;
+
+  @media (max-width: 600px) {
+    float: none;
+    margin: 6px auto;
+  }
+
+  @media (max-width: 1250px) {
+    display: block;
+  }
+}
+
 .postContent {
   word-wrap: break-word;
 
