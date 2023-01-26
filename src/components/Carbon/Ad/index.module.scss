@@ -6,6 +6,10 @@
       Helvetica, Arial, sans-serif;
     width: 100%;
     color: rgba(black, 0.8);
+
+    @media (prefers-color-scheme: dark) {
+      color: $body-color-dark-mode;
+    }
   }
 
   #carbonads {
