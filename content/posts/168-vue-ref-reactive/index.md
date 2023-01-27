@@ -272,9 +272,9 @@ const increase = () => countObjectRef.value.count++
 
 [Open the demo.](https://codesandbox.io/s/watch-ref-value-deep-x8re97?file=/src/App.vue)
 
-This time, however, if you click the "Increase" button there will be no message in the console! The conclusion is that `watch()` doesn't perform a deep watch by default on refs.
+This time, however, if you click the "Increase" button there will be no message in the console! The conclusion is that `watch()` doesn't deeply watch refs by default.  
 
-DOM still updates while `countObjectRef.count`: which means the object in ref is still reactive in regards to the rendered output.  
+However, DOM still updates when `countObjectRef.value.count`: which means the object in the ref is still reactive in regards to the rendered output.  
 
 Of course, if you ask `watch()` to watch the ref deeply, it's going to work as expected:
 
