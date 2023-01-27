@@ -2,7 +2,7 @@
 title: 'The Complete Guide to useRef() and Refs in React'
 description: 'How to use React.useRef() hook to create persisted mutable values (also known as references or refs), as well access DOM elements.'
 published: "2021-03-02T12:00Z"
-modified: "2021-10-26T08:10Z"
+modified: "2023-01-27"
 thumbnail: "./images/cover-7.png"
 slug: react-useref-guide
 tags: ['react', 'useref', 'hook', 'dom', 'element']
@@ -24,6 +24,7 @@ toHeading: 3
 import { useRef } from 'react';
 
 function MyComponent() {
+  const initialValue = 0;
   const reference = useRef(initialValue);
 
   const someHandler = () => {
@@ -74,7 +75,7 @@ function LogButtonClicks() {
 
 `const countRef = useRef(0)` creates a references `countRef` initialized with `0`.  
 
-When the button is clicked, `handle` function is invoked and the reference value is incremented: `countRef.current++`. The reference value is logged to the console.  
+When the button is clicked, `handle` callback is invoked and the reference value is incremented: `countRef.current++`. Then the reference value is logged to the console.  
 
 Updating the reference value `countRef.current++` doesn't trigger component re-rendering. This is demonstrated by the fact that `'I rendered!'` is logged to the console just once, at initial rendering, and no re-rendering happens when the reference is updated.    
 
@@ -106,7 +107,7 @@ function LogButtonClicks() {
 
 Open the demo and click the button. Each time you click, you will see in the console the message `'I rendered!'` &mdash; meaning that each time the state is updated, the component re-renders.  
 
-So, the 2 main differences between references and state:
+So, the 2 main differences between reference and state:
 
 1. Updating a reference doesn't trigger re-rendering, while updating the state makes the component re-render;
 2. The reference update is synchronous (the updated reference value is available right away), while the state update is asynchronous (the state variable is updated after re-rendering).
@@ -115,9 +116,9 @@ From a higher point of view, references store infrastructure data of side-effect
 
 ### 1.2 Use case: implementing a stopwatch
 
-You can store inside a reference infrastructure data of side effects. For example, you can store into reference pointers: timer ids, socket ids, etc.  
+You can store inside a reference infrastructure data of side effects: timer ids, socket ids, etc.  
 
-The component `Stopwatch` uses `setInterval(callback, time)` timer function to increase each second the counter of a stopwatch. The timer id is stored into a reference `timerIdRef`:  
+The component `Stopwatch` uses `setInterval(callback, time)` timer function to increase each second the counter of a stopwatch. The timer id is stored in a reference `timerIdRef`:  
 
 ```jsx{3,8}
 import { useRef, useState, useEffect } from 'react';
@@ -156,9 +157,9 @@ function Stopwatch() {
 
 `startHandler()` function, which is invoked when the *Start* button is clicked, starts the timer and saves the timer id in the reference `timerIdRef.current = setInterval(...)`.  
 
-To stop the stopwatch user clicks *Stop* button. The *Stop* button handler `stopHandler()` accesses the timer id from the reference and stops the timer `clearInterval(timerIdRef.current)`.  
+To stop the stopwatch user clicks *Stop* button. The *Stop* button handler `stopHandler` accesses the timer id from the reference and stops the timer `clearInterval(timerIdRef.current)`.  
 
-Additionally, if the component unmounts with the stopwatch active, the [cleanup](/react-useeffect-explanation/#6-the-side-effect-cleanup) function of `useEffect()` is going to stop the timer too.  
+Additionally, if the component unmounts while the stopwatch is active, the [cleanup](/react-useeffect-explanation/#6-the-side-effect-cleanup) function of `useEffect()` is going to stop the timer too.  
 
 In the stopwatch example, the reference was used to store the infrastructure data &mdash; the active timer id.  
 
@@ -166,7 +167,7 @@ In the stopwatch example, the reference was used to store the infrastructure dat
 
 ## 2. Accessing DOM elements
 
-Another useful application of the `useRef()` hook is to access DOM elements. This is performed in 3 steps:
+Another useful application of the `useRef()` hook is to access DOM elements directly. This is performed in 3 steps:
 
 1. Define the reference to access the element `const elementRef = useRef()`; 
 2. Assign the reference to `ref` attribute of the element: `<div ref={elementRef}></div>`;
@@ -226,13 +227,15 @@ function InputFocus() {
 
 `inputRef` is then assigned to `ref` attribute of the input field: `<input ref={inputRef} type="text" />`. 
 
-React then, after mounting, sets `inputRef.current` to be the input element. Now you can set the focus to the input programatically: `inputRef.current.focus()`.  
+React then, after mounting, sets `inputRef.current` to be the input element. Inside the callback of `useEffect()` you can set the focus to the input programmatically: `inputRef.current.focus()`.  
+
+*Tip: if you want to learn more about `useEffect()`, I highly recommend checking my post [A Simple Explanation of React.useEffect()](/react-useeffect-explanation/).*
 
 #### Ref is null on initial rendering
 
 During initial rendering, the reference supposed to hold the DOM element is empty:  
 
-```jsx{7,13}
+```jsx {7,13}
 import { useRef, useEffect } from 'react';
 
 function InputFocus() {
@@ -254,9 +257,9 @@ function InputFocus() {
 
 [Try the demo.](https://codesandbox.io/s/empty-on-initial-rendering-5my4g?file=/src/App.js)
 
-During initial rendering React still determines what is the output of the component, so there's no DOM structure created yet. That's why `inputRef.current` evaluates to `undefined` during initial rendering.
+During initial rendering React still determines the output of the component, so there's no DOM structure created yet. That's why `inputRef.current` evaluates to `undefined` during initial rendering.
 
-`useEffect(callback, [])` [hook](/react-useeffect-explanation/) invokes the callback right after mounting, when the input element has already been created in DOM. 
+`useEffect(callback, [])` [hook](/react-useeffect-explanation/) invokes the callback right after mounting when the input element has already been created in DOM. 
 
 `callback` function of the `useEffect(callback, [])` is the right place to access `inputRef.current` because it is guaranteed that the DOM is constructed.  
 
@@ -302,12 +305,12 @@ function MyComponent({ prop }) {
 
 Calling `const reference = useRef(initialValue)` with the initial value returns a special object named reference. The reference object has a property `current`: you can use this property to read the reference value `reference.current`, or update `reference.current = newValue`.  
 
-Between the component re-renderings, the value of the reference is persistent. 
+Between the component re-renderings, the value of the reference is persisted. 
 
 Updating a reference, contrary to updating state, doesn't trigger component re-rendering.  
 
-References can also access DOM elements. Assign the reference to `ref` attribute of the element you'd like to access: `<div ref={reference}>Element</div>` &mdash; and the element is available at `reference.current`.  
+References can also access DOM elements. Assign the reference to `ref` attribute of the element you'd like to access: `<div ref={reference}>Element</div>` &mdash; and the element is available at `reference.current` after the component mounting.    
 
-Want to improve you React knowledge further? Follow [A Simple Explanation of React.useEffect()](/react-useeffect-explanation/).  
+Want to improve your React knowledge further? Follow [A Simple Explanation of React.useEffect()](/react-useeffect-explanation/).  
 
 *Challenge: write a custom hook `useEffectSkipFirstRender()` that works as `useEffect()`, only that it doesn't invoke the callback after initial rendering (Hint: you need to use `useRef()`). Share your solution in a comment below!*
