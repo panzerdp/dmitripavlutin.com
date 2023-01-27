@@ -121,32 +121,32 @@ In conclusion:
 
 ## 3. Reassigning data
 
-A consequence of the fact that `ref()` is accessed and updated using `.value` property, while `reactive()` is a proxy of the original object, is the fact that `ref()` can be reassigned, while `reactive()` cannot.  
+`ref()` is accessed and updated using `.value` property, while `reactive()` is a proxy of the original object: thus `ref()` can be reassigned with an entirely new object, while `reactive()` cannot.  
 
 ### ref()
 
 Reassigning the value of a `ref()` entirely with a new value is perfectly valid:
 
-```vue
+```vue {5}
 <script setup>
 import { ref, onMounted } from "vue"
 
 const objectRef = ref({ count: 0 })
 
-onMounted(() => (objectRef.value = { count: 1 }))
+onMounted(() => objectRef.value = { count: 1 })
 </script>
 <template>{{ objectRef.count }}</template>
 ```
 
 [Try the demo.](https://codesandbox.io/s/ref-reassign-oi4zjy?file=/src/App.vue)
 
-Open the demo, and you'd see that replacing entirely the ref value `objectRef.value = { count: 1 }` after mounting is reflected in the output. 
+Open the demo, and see that replacing entirely the ref value `objectRef.value = { count: 1 }` after mounting is reflected in the output. The reactivity is kept.  
 
 ### reactive()
 
 Reassigning entirely the reactive object in case of `reactive()`, however, is not possible:
 
-```vue
+```vue {5}
 <script setup>
 import { reactive, onMounted } from 'vue'
 
@@ -159,7 +159,7 @@ onMounted(() => objectReactive = { count: 1 })
 
 [Try the demo.](https://codesandbox.io/s/reactive-reassign-dpf9yf?file=/src/App.vue)
 
-Open the demo, and you'd see that replacing entirely the reactive object value `objectReactive = { count: 1 }` after mounting is not reflected in the output. Doing so would break the reactivity of `objectReactive`.  
+Open the demo, and see that replacing entirely the reactive object value `objectReactive = { count: 1 }` after mounting is not reflected in the output. Doing so would break the reactivity of `objectReactive`.  
 
 In conclusion:
 
@@ -335,6 +335,7 @@ This post presented the differences between `ref()` and `reactive()` in composit
 3. You can reassign entirely a `ref()` value with a new object, while a `reactive()` cannot.  
 4. `ref()` is typed as `Ref<V>`, while the reactive object returned by `reactive(originalObject)` usually maintains the type of the `originalObject`.  
 5. `watch()` (when used without options) normally watches only direct changes of `<ref>.value`, while watching deeply `reactive()` objects.  
-6. You'd use `ref()` to store primitives or value objects, while `reactive()` if you're interested to watch deep changes of a mutable object.  
+
+You'd use `ref()` to store primitives or value objects, while `reactive()` if you're interested to watch deep changes of a mutable object.  
 
 *What other differences between `ref()` and `reactive()` do you know?*
