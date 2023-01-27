@@ -2,7 +2,7 @@
 title: '3 Ways To Replace All String Occurrences in JavaScript'
 description: 'You can replace all occurrences of a string using split and join approach, replace() with a regular expression and the new replaceAll() string method.'
 published: '2019-12-24T11:15Z'
-modified: '2020-07-24T15:40Z'
+modified: '2023-01-27'
 thumbnail: './images/replace-4.png'
 slug: replace-all-string-occurrences-javascript
 tags: ['javascript', 'string']
@@ -10,11 +10,7 @@ recommended: ['announcing-voca-the-ultimate-javascript-string-library', 'what-ev
 type: post
 ---
 
-There's no easy way to replace all string occurrences in JavaScript. Java, which had served an inspiration for JavaScript in the first days, has the `replaceAll()` method on strings since 1995!  
-
-In this post, you'll learn how to replace all string occurrences in JavaScript by splitting and joining a string, and `string.replace()` combined with a global regular expression. 
-
-Moreover, you'll read about the new proposal [string.replaceAll()](https://github.com/tc39/proposal-string-replaceall) (at stage 4) that brings the replace all method to JavaScript strings. This is the most convenient approach.    
+In this post, you'll learn how to replace all string occurrences in JavaScript by splitting and joining a string, `string.replace()` combined with a global regular expression, and `string.replaceAll()`.  
 
 ```toc
 toHeading: 2
@@ -46,8 +42,9 @@ const replaceWith = '-';
 
 const result = 'duck duck go'.split(search).join(replaceWith);
 
-result; // => 'duck-duck-go'
+console.log(result); // => 'duck-duck-go'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/0cbfjwhz/)
 
 `'duck duck go'.split(' ')` splits the string into pieces: `['duck', 'duck', 'go']`.  
 
@@ -60,10 +57,12 @@ function replaceAll(string, search, replace) {
   return string.split(search).join(replace);
 }
 
-replaceAll('abba', 'a', 'i');          // => 'ibbi'
-replaceAll('go go go!', 'go', 'move'); // => 'move move move!'
-replaceAll('oops', 'z', 'y');          // => 'oops'
+console.log(replaceAll('abba', 'a', 'i'));          // => 'ibbi'
+console.log(replaceAll('go go go!', 'go', 'move')); // => 'move move move!'
+console.log(replaceAll('oops', 'z', 'y'));          // => 'oops'
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/rf3bnz2y/)
 
 This approach requires transforming the string into an array, and then back into a string. Let's continue looking for better alternatives.  
 
@@ -84,8 +83,10 @@ const replaceWith = '-';
 
 const result = 'duck duck go'.replace(searchRegExp, replaceWith);
 
-result; // => 'duck-duck-go'
+console.log(result); // => 'duck-duck-go'
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/479oarmj/)
 
 The regular expression literal `/\s/g` (note the `g` global flag) matches the space `' '`.  
 
@@ -120,12 +121,11 @@ const replaceWith = '-';
 
 const result = '5+2+1'.replace(searchRegExp, replaceWith);
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/32wrdafe/)
 
 The above snippet tries to transform the search string `'+'` into a regular expression. But `'+'` is an invalid regular expression, thus `SyntaxError: Invalid regular expression: /+/` is thrown.  
 
 Escaping the character `'\\+'` solves the problem. 
-
-Nevertheless, does it worth escaping the search string using a function like [escapeRegExp()](https://vocajs.com/#escapeRegExp) to be used as a regular expression? Most likely not.  
 
 ### 2.2 *replace()* with a string
 
@@ -137,8 +137,9 @@ const replace = '-';
 
 const result = 'duck duck go'.replace(search, replace);
 
-result; // => 'duck-duck go'
+console.log(result); // => 'duck-duck go'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/L7qutvmg/)
 
 `'duck duck go'.replace(' ', '-')` replaces only the first appearance of a space.  
 
@@ -154,8 +155,10 @@ const replaceWith = '-';
 
 const result = 'duck duck go'.replaceAll(search, replaceWith);
 
-result; // => 'duck-duck-go'
+console.log(result); // => 'duck-duck-go'
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/m5e603so/)
 
 `'duck duck go'.replaceAll(' ', '-')` replaces all occurrences of `' '` string with `'-'`.  
 
@@ -172,13 +175,13 @@ The string methods `replaceAll(search, replaceWith)` and `replace(search, replac
 
 ## 4. Key takeaway
 
-The primitive approach to replace all occurrences is to split the string into chunks by the search string, the join back the string placing the replace string between chunks: `string.split(search).join(replaceWith)`. This approach works, but it's hacky.
+The first approach to replace all occurrences is to split the string into chunks by the search string, the join back the string placing the replace string between chunks: `string.split(search).join(replaceWith)`. This approach works, but it's hacky.
 
 Another approach is to use `string.replace(/SEARCH/g, replaceWith)` with a regular expression having the global flag enabled. 
 
-Unfortunately, you cannot easily generate regular expressions from a string at runtime, because the special characters of regular expressions have to be escaped. And dealing with a regular expression for a simple replacement of strings is overwhelming.
+Unfortunately, you cannot easily generate regular expressions from a string at runtime, because the special characters of regular expressions have to be escaped.   
 
-Finally, the new string method `string.replaceAll(search, replaceWith)` replaces all string occurrences. The method is a proposal at stage 4, and hopefully, it will land in a new JavaScript standard pretty soon.
+Finally, the string method `string.replaceAll(search, replaceWith)` replaces all string occurrences. 
 
 My recommendation is to use `string.replaceAll()` to replace strings.  
 
