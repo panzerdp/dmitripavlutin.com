@@ -2,7 +2,7 @@
 title: "How to Use Object Destructuring in JavaScript"
 description: "The object destructuring is a JavaScript feature to extract properties from objects and bind them to variables."
 published: "2020-05-10T13:40Z"
-modified: "2020-05-26T07:50Z"
+modified: "2023-01-28"
 thumbnail: "./images/cover.png"
 slug: javascript-object-destructuring
 tags: ["javascript", "destructuring"]
@@ -14,7 +14,7 @@ The object destructuring is a useful JavaScript feature to extract properties fr
 
 What's better, object destructuring can extract multiple properties in one statement, can access properties from nested objects, and can set a default value if the property doesn't exist.  
 
-In this post, I'll explain how to use object destructuring in JavaScript.  
+This post will help you understand how to use object destructuring in JavaScript.  
 
 ```toc
 # Table of contents
@@ -23,7 +23,7 @@ toHeading: 2
 
 ## 1. The need for object destructuring
 
-Imagine you'd like to extract some properties of an object. In a pre-ES2015 environment, you would need to write the following code:
+Imagine you'd like to extract some properties of an object. In a pre-ES2015 environment, you'd need to write the following code:
 
 ```javascript{5-6}
 var hero = {
@@ -34,13 +34,15 @@ var hero = {
 var name     = hero.name;
 var realName = hero.realName;
 
-name;     // => 'Batman',
-realName; // => 'Bruce Wayne'
+console.log(name);     // => 'Batman',
+console.log(realName); // => 'Bruce Wayne'
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/pr9o2fgx/)
 
 The property `hero.name` value is assigned to the variable `name`. Same way `hero.realName` value is assigned to `realName`.  
 
-Such a way to access properties and assign them to variables requires boilerplate code. By writing `var name = hero.name`, you have to mention the `name` binding 2 times, and the same for `realName`.  
+By writing `var name = hero.name`, you have to mention the `name` binding 2 times, and the same for `realName`. Such a way to access properties and assign them to variables requires boilerplate code.  
 
 That's where the object destructuring syntax is useful: you can read a property and assign its value to a variable without duplicating the property name.  More than that, you can read multiple properties from the same object in just one statement!  
 
@@ -54,9 +56,11 @@ const hero = {
 
 const { name, realName } = hero;
 
-name;     // => 'Batman',
-realName; // => 'Bruce Wayne'
+console.log(name);     // => 'Batman',
+console.log(realName); // => 'Bruce Wayne'
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/6jbehpf4/)
 
 `const { name, realName } = hero` is an object destructuring assignment. This statement defines the variables `name` and `realName`, then assigns to them the values of properties `hero.name` and `hero.realName` correspondigly. 
 
@@ -71,13 +75,13 @@ const realName = hero.realName;
 const { name, realName } = hero;
 ```
 
-it's visible that the object destructuring is handier because neither the property names nor the object variable is duplicated.  
+it's visible that the object destructuring is handier because neither the property names nor the object variable are duplicated.  
 
 ![JavaScript Object Destructuring Inforgraphic](./images/javascript-object-destructuring-infographic-2.png)
 
 ## 2. Extracting a property
 
-The basic syntax of object destructuring is pretty simple:
+The syntax of object destructuring is pretty simple:
 
 ```javascript
 const { identifier } = expression;
@@ -101,8 +105,10 @@ const hero = {
 
 const { name } = hero;
 
-name; // => 'Batman'
+console.log(name); // => 'Batman'
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/Lxs8jk3t/)
 
 The statement `const { name } = hero` defines the variable `name` and initializes it with the value of `hero.name` property.  
 
@@ -135,9 +141,11 @@ const hero = {
 
 const { name, realName } = hero;
 
-name;     // => 'Batman',
-realName; // => 'Bruce Wayne'
+console.log(name);     // => 'Batman',
+console.log(realName); // => 'Bruce Wayne'
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/6jbehpf4/)
 
 `const { name, realName } = hero` creates 2 variables `name` and `realName` assigned with values of corresponding properties `hero.name` and `hero.realName`.   
 
@@ -153,12 +161,14 @@ const hero = {
 
 const { enemies } = hero;
 
-enemies;     // => undefined
+console.log(enemies);     // => undefined
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/8spL1mkc/)
 
 After destructuring the variable `enemies` is `undefined` because the property `enemies` doesn't exist in the object `hero`.  
 
-Fortunately, you can set a default value if the property doesn't exist in the destructured object. Here's the basic syntax:
+Fortunately, you can set a default value if the property doesn't exist in the destructured object:
 
 ```javascript
 const { identifier = defaultValue } = expression;
@@ -183,14 +193,16 @@ const hero = {
 
 const { enemies = ['Joker'] } = hero;
 
-enemies;     // => ['Joker']
+console.log(enemies);     // => ['Joker']
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/vt8gcL2d/)
 
 Now, instead of being `undefined`, the variable `enemies` defaults to `['Joker']`.  
 
 ## 5. Aliases
 
-If you'd like to create variables of different names than the properties, then you can use the aliasing feature of object destructuring.  
+To create variables of different names than the properties, then you can use the aliasing feature of object destructuring.  
 
 ```javascript
 const { identifier: aliasIdentifier } = expression;
@@ -416,7 +428,7 @@ names; // => ['Batman', 'Joker']
 
 The object destructuring is a powerful feature that lets you extract properties from an object and bind these values to variables.   
 
-I especially like about object destructuring is the concise syntax and ability to extract multiple variables in one statement.  
+I like about object destructuring the concise syntax and the ability to extract multiple variables in one statement.  
 
 Hopefully, my post has helped you see how useful object destructuring is!
 
