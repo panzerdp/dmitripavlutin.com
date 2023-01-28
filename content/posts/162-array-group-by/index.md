@@ -1,8 +1,8 @@
 ---
 title: "Array Grouping in JavaScript: array.groupBy()"
-description: "array.groupBy() and array.groupByToMap() methods let's you group an array by a certain criteria."  
+description: "array.groupBy() and array.groupByToMap() methods let you group an array by certain criteria."  
 published: "2021-12-20"
-modified: "2021-12-20"
+modified: "2023-01-28"
 thumbnail: "./images/cover.png"
 slug: javascript-array-group
 tags: ['javascript', 'array']
@@ -10,12 +10,12 @@ recommended: ['javascript-array-at', 'operations-on-arrays-javascript']
 type: post
 ---
 
-Many developers like Ruby programming language because of the rich standard utility libraries. For example, the [array in Ruby](https://ruby-doc.org/core-3.0.2/Array.html) has a huge number of methods.  
+Many developers appreciate Ruby programming language because of the rich standard utility libraries. For example, the [array in Ruby](https://ruby-doc.org/core-3.0.2/Array.html) has a huge number of methods.  
 
-JavaScript step by step also enriches its standard library on strings and arrays. For example in a previous posts I described
+JavaScript step by step also enriches its standard library on strings and arrays. For example, in a previous post, I described
 the new [array.at()](/javascript-array-at/) method.  
 
-The todays's hero is the new [array group proposal](https://github.com/tc39/proposal-array-grouping) (currently at stage 3) that introduces new methods `array.groupBy()` and `array.groupByToMap()`. Their [polyfills](https://github.com/zloirock/core-js#array-grouping) are available in `core-js` library.  
+Today's hero is the new [array group proposal](https://github.com/tc39/proposal-array-grouping) (currently at stage 3) that introduces new methods `array.groupBy()` and `array.groupByToMap()`. Their [polyfills](https://github.com/zloirock/core-js#array-grouping) are available in `core-js` library.  
 
 Let's see how you may benefit from the grouping methods.  
 
@@ -33,7 +33,7 @@ const products = [
 
 In the example above `products` is an array of product objects.  
 
-Now you have to perform a simple manipulation with the list of products &mdash; group the products by category.  
+Now your task is to group the products by category. The result would look like this:  
 
 ```javascript
 const groupByCategory = {
@@ -47,9 +47,9 @@ const groupByCategory = {
 };
 ```
 
-How would you get an array like `groupByCategory` from `products` array?  
+How would you get an array like `groupByCategory` from `products` array in JavaScript?  
 
-The usual way is by invoking the `array.reduce()` method with the right callback function:
+The usual way is by invoking the `array.reduce()` method with a callback function implementing the grouping logic:
 
 ```javascript
 const groupByCategory = products.reduce((group, product) => {
@@ -72,11 +72,11 @@ console.log(groupByCategory);
 ```
 [Try the demo.](https://codesandbox.io/s/elastic-montalcini-tlgvt?file=/src/index.js)
 
-`products.reduce((acc, product) => { ... })` reduces the `products` array to an object of products grouped by the category.  
+`products.reduce((acc, product) => { ... })` reduces the `products` array to an object of products grouped by category.  
 
 While I do consider `array.reduce()` method useful and powerful, sometimes its readability is not the best.  
 
-Because grouping data is an often occuring task (recall `GROUP BY` from SQL?) the [array group proposal](https://github.com/tc39/proposal-array-grouping) introduces two useful methods: `array.groupBy()` and `array.groupByToMap()`.  
+Because grouping data is an often occurring task ([recall](https://www.programiz.com/sql/group-by) `GROUP BY` from SQL?) the [array group proposal](https://github.com/tc39/proposal-array-grouping) introduces two useful methods: `array.groupBy()` and `array.groupByToMap()`.  
 
 Here's how you would use `array.groupBy()` to create the same grouping by category:
 
@@ -99,11 +99,11 @@ console.log(groupByCategory);
 
 [Try the demo.](https://codesandbox.io/s/bold-goodall-r3c4c?file=/src/index.js)
 
-`products.groupBy(product => {...})` returns an object where each property has the key as category name and value as an array with the products from the corresponding category.  
+`products.groupBy(product => {...})` returns an object where properties are category names and values are arrays of category products.
 
 Grouping using `products.groupBy()` requires less code and is easier to understand than using `product.reduce()`.  
 
-`array.groupBy(callback)` accepts a callback function that's invoked with 3 arguments: the current array item, index, and the array itself. The `callback` should return a string: the group name where you'd like to add the item.  
+`array.groupBy(callback)` accepts a callback function that's invoked with 3 arguments: the current array item, the index, and the array itself. The `callback` should return a string: the group name where you'd like to add the item.  
 
 ```javascript
 const groupedObject = array.groupBy((item, index, array) => {
@@ -114,7 +114,7 @@ const groupedObject = array.groupBy((item, index, array) => {
 
 ## 2. *array.groupByToMap()*
 
-Sometimes you may want to use a `Map` instead of a plain object. The benefit of `Map` is that it accepts any data type as a key, but the plain object is limited to strings and symbols only.  
+[Sometimes](/maps-vs-plain-objects-javascript/) you may want to use a `Map` instead of a plain object. The benefit of `Map` is that it accepts any data type as a key, but the plain object is limited to strings and symbols only.  
 
 So, if you'd like to group data into a `Map`, you can use the method `array.groupByToMap()`. 
 
