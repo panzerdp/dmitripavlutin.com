@@ -12,7 +12,7 @@ type: post
 
 I am impressed by the expressiveness of React hooks. You can do so much by writing so little.   
 
-But the brevity of hooks has a price &mdash; they're relatively difficult grasp at the beginning. That's especially the case of `useEffect()` &mdash; the hook that manages side-effects in functional React components.  
+But the brevity of hooks has a price &mdash; they're relatively difficult to grasp at the beginning. That's especially the case of `useEffect()` &mdash; the hook that manages side-effects in functional React components.  
 
 I'll help you understand `useEffect()` in an accessible way. Let's get started. 
 
@@ -25,7 +25,7 @@ A functional React component uses props and/or state to calculate the output. If
 
 Examples of side-effects are fetch requests, manipulating DOM directly, using timer functions like `setTimeout()`, and [more](https://www.reddit.com/r/reactjs/comments/8avfej/what_does_side_effects_mean_in_react/).  
 
-The component rendering and the side-effect logic are *independent*. Performing side-effects directly in the body of the component is a mistake, because the body computes the component output or calls hooks.
+The component rendering and the side-effect logic are *independent*. Performing side-effects directly in the body of the component is a mistake because the body computes the component's output or calls hooks.
 
 How often the component renders isn't something you can control &mdash; if React wants to render the component, you cannot stop it.    
 
@@ -65,7 +65,7 @@ function Greet({ name }) {
 useEffect(callback[, dependencies]);
 ```
 
-* `callback` is the function containing the side-effect logic. `callback` is executed right after DOM change.   
+* `callback` is the function containing the side-effect logic. `callback` is executed right after the DOM update.   
 * `dependencies` is an optional array of dependencies. `useEffect()` executes `callback` only if the dependencies have changed between renderings.  
 
 *Put your side-effect logic into the `callback` function, then use the `dependencies` argument to control when you want the side-effect to run. That's the sole purpose of `useEffect()`.*  
@@ -80,7 +80,7 @@ useEffect(() => {
 }, [name]);
 ```
 
-The *document title update* is the side-effect because it doesn't directly calculate the component output. That's why document title update is placed in a callback and supplied to `useEffect()`. 
+The *document title update* is the side-effect because it doesn't directly calculate the component output. That's why the document title update is placed in a callback and supplied to `useEffect()`. 
 
 Also, you don't want the document title update to execute every time `Greet` component renders. You just want it executed when `name` prop changes &mdash; that's the reason you supplied `name` as a dependency to `useEffect(callback, [name])`.  
 
@@ -112,7 +112,7 @@ function MyComponent() {
 }
 ```
 
-C) <u>Has props or state values</u> `[prop1, prop2, ..., state1, state2]`: the side-effect runs once after initial rendering and then *only when any depenendecy value changes*.  
+C) <u>Has props or state values</u> `[prop1, prop2, ..., state1, state2]`: the side-effect runs once after initial rendering and then *only when any dependency value changes*.  
 
 ```jsx{7}
 import { useEffect, useState } from 'react';
@@ -126,7 +126,7 @@ function MyComponent({ prop }) {
 }
 ```
 
-Let's detail into the cases B) and C) since they're used often.  
+Let's detail cases B) and C) since they're used often.  
 
 ## 3. Component lifecycle
 
@@ -250,9 +250,9 @@ C) Finally, after unmounting the component, `useEffect()` *invokes* the `cleanup
 
 <img src="./images/react-useeffect-hook-cleanup.svg" width="531" height="706" alt="React useEffect() Hook: when callback and cleanup are invoked" />
 
-Let's see an example when the side-effect cleanup is useful.  
+Let's see an example of when the side-effect cleanup is useful.  
 
-The following component `<RepeatMessage message="My Message" />` accepts a prop `message`. Then, every 2 seconds the `message` prop is logged to console:  
+The following component `<RepeatMessage message="My Message" />` accepts a prop `message`. Then, every 2 seconds the `message` prop is logged to the console:  
 
 ```jsx
 import { useEffect } from 'react';
@@ -293,7 +293,7 @@ function RepeatMessage({ message }) {
 
 [Try the demo.](https://codesandbox.io/s/gracious-tdd-gy4zo?file=/src/App.js)
 
-Open the demo and type some messages. You'll see that each 2 seconds only the latest message logs to console. Which means that all of the previous timers were cleaned up.  
+Open the demo and type some messages. You'll see that every 2 seconds only the latest message logs to the console. Which means that all of the previous timers were cleaned up.  
 
 ## 5. *useEffect()* in practice
 
