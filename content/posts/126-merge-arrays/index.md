@@ -1,6 +1,6 @@
 ---
 title: "3 Ways to Merge Arrays in JavaScript"
-description: "How to merge arrays in JavaScript using spread operator, array.concat() and array.push()."
+description: "How to merge arrays in JavaScript using spread operator, array.concat(), and array.push()."
 published: "2021-04-06T06:30Z"
 modified: "2023-01-28"
 thumbnail: "./images/cover.png"
@@ -22,7 +22,7 @@ In this post, you'll find 3 ways to merge arrays in JavaScript: 2 immutable (a n
 
 ### 1.1 Merge using the spread operator
 
-If you want to know one but good way to merge arrays in JavaScript, then remember the merge using the spread operator.  
+If you want to know one good way to merge arrays in JavaScript, then remember the merge using the spread operator.  
 
 Write inside the array literal two or more arrays prefixed with the spread operator `...`, and JavaScript will create a new array with all these arrays merged:
 
@@ -44,7 +44,7 @@ console.log(all); // ['Batman', 'Superman', 'Joker', 'Bane']
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/7ktcmnvs/)
 
-`const all = [...heros, ...villains]` creates a new array having `heroes` and `villains` arrays merged.  
+`const all = [...heroes, ...villains]` creates a new array having `heroes` and `villains` arrays merged.  
 
 The order of merged arrays inside the array literal does matter: items of the merged arrays are inserted in the same order as the arrays appear inside the literal. 
 
@@ -153,7 +153,7 @@ console.log(heroes); // ['Batman', 'Superman', 'Joker', 'Bane']
 
 JavaScript offers multiple ways to merge arrays.  
 
-You can use either the spread operator `[...array1, ...array2]`, or a functional way `[].concat(array1, array2)` to merge 2 or more arrays. These approaches are immutable because the merge result is stored into a new array.  
+You can use either the spread operator `[...array1, ...array2]`, or a functional way `[].concat(array1, array2)` to merge 2 or more arrays. These approaches are immutable because the merge result is stored in a new array.  
 
 If you'd like to perform a mutable merge, i.e. merge into an array without creating a new one, then you can use `array1.push(...array2)` approach.  
 
