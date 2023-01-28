@@ -2,7 +2,7 @@
 title: "Your Guide to React.useCallback()"
 description: "React.useCallback() memoizes callback functions."
 published: "2020-05-04T08:40Z"
-modified: "2022-10-02"
+modified: "2023-01-28"
 thumbnail: "./images/cover-6.png"
 slug: react-usecallback
 tags: ["react", "memoization"]
@@ -26,7 +26,7 @@ function MyComponent() {
 
 *"Every callback function should be memoized to prevent useless re-rendering of child components that use the callback function"* is the reasoning of his teammates.   
 
-This reasoning is far from the truth. Such usage of `useCallback()` without profiling makes the component slower.  
+This reasoning is far from the truth. Such usage of `useCallback()` without profiling makes the component slower and increases code complexity.    
 
 In this post, I'm going to explain how to use correctly `useCallback()`.
 
@@ -43,19 +43,20 @@ function factory() {
   return (a, b) => a + b;
 }
 
-const sum1 = factory();
-const sum2 = factory();
+const sumFunc1 = factory();
+const sumFunc2 = factory();
 
-sum1(1, 2); // => 3
-sum2(1, 2); // => 3
+console.log(sumFunc1(1, 2)); // => 3
+console.log(sumFunc2(1, 2)); // => 3
 
-sum1 === sum2; // => false
-sum1 === sum1; // => true
+console.log(sumFunc1 === sumFunc2); // => false
+console.log(sumFunc1 === sumFunc1); // => true
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/zf8t2kx7/2/)
 
-`sum1` and `sum2` are functions that sum two numbers. They've been created by the `factory()` function.  
+`sumFunc1` and `sumFunc2` are functions that sum two numbers. They've been created by the `factory()` function.  
 
-The functions `sum1` and `sum2` share the same code source but they are different function objects. Comparing them `sum1 === sum2` evaluates to `false`.  
+The functions `sumFunc1` and `sumFunc2` share the same code source, but they are different function objects. Comparing them `sumFunc1 === sumFunc2` evaluates to `false`.  
 
 That's just how JavaScript objects works. An object (including a function object) [equals](/the-legend-of-javascript-equality-operator/#the-identity-operator) only to itself.  
 
@@ -80,7 +81,7 @@ Because inline functions are cheap, the re-creation of functions on each renderi
 
 But in some cases you need to maintain a single function instance between renderings:
 
-1. A functional component wrapped inside `React.memo()` accepts a  function object prop
+1. A functional component wrapped inside [React.memo() accepts a function object as prop](/use-react-memo-wisely/#4-reactmemo-and-callback-functions)
 2. When the function object is a dependency to other hooks, e.g. `useEffect(..., [callback])`  
 3. When the function has some internal state, e.g. when the [function is debounced or throttled](/react-throttle-debounce/#2-debouncing-a-callback-the-first-attempt).  
 
@@ -103,7 +104,7 @@ function MyComponent() {
 
 ## 3. A good use case
 
-Imagine you have a component that renders a big list of items:
+You have a component `<MyBigList>` that renders a big list of items:
 
 ```jsx
 import useSearch from './fetch-items';
@@ -156,7 +157,7 @@ import { useCallback } from 'react';
 function MyComponent() {
   // Contrived use of `useCallback()`
   const handleClick = useCallback(() => {
-    // handle the click event
+    console.log('You clicked');
   }, []);
 
   return <MyChild onClick={handleClick} />;
@@ -171,7 +172,7 @@ The first problem is that `useCallback()` hook is called every time `MyComponent
 
 The second problem is using `useCallback()` increases code complexity. You have to keep the `deps` of `useCallback(..., deps)` in sync with what you're using inside the memoized callback.  
 
-Does it make sense to apply `useCallback()`? Most likely not because `<MyChild>` component is light and its re-rendering doesn't create performance issues. In conclusion, *the optimization costs more than not having the optimization*.  
+Does it worth using `useCallback()`? Most likely not because `<MyChild>` component is light and its re-rendering doesn't create performance issues. *The optimization costs more than not having the optimization*.  
 
 Simply *accept* that rendering creates new function objects:
 
@@ -180,7 +181,7 @@ import { useCallback } from 'react';
 
 function MyComponent() {
   const handleClick = () => {
-    // handle the click event
+    console.log('You clicked');
   };
 
   return <MyChild onClick={handleClick} />;
@@ -197,7 +198,7 @@ When thinking about performance tweaks, recall the [statement](https://wiki.c2.c
 
 > Profile before optimizing
 
-When deciding to use an optimization technique, including memoization and particularly `useCallback()`, do:
+When deciding to use an optimization technique, like memoization with `useCallback()`, do:
 
 1. [Profile](https://developer.chrome.com/docs/devtools/evaluate-performance/)
 2. Quantify the increased performance (e.g. `150ms` vs `50ms` render speed increase)
