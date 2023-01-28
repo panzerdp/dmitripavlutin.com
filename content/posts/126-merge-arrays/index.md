@@ -18,6 +18,9 @@ For example, having two arrays `[1, 2]` and `[5, 6]`, then merging these arrays 
 
 In this post, you'll find 3 ways to merge arrays in JavaScript: 2 immutable (a new array is created after the merge) and 1 mutable (items are merged into an array).  
 
+```toc
+```
+
 ## 1. Immutable merge of arrays
 
 ### 1.1 Merge using the spread operator
@@ -107,7 +110,7 @@ The concat method accepts multiple arrays as arguments, thus you can merge 2 or 
 const mergeResult = [].concat(array1, array2, array3, arrayN);
 ```
 
-# 2. Mutable merge of arrays
+## 2. Mutable merge of arrays
 
 The merge performed using the spread operator or `array.concat()` creates a new array. However, sometimes you don't want to create a new array, but rather merge it into some existing array.  
 
@@ -155,6 +158,6 @@ JavaScript offers multiple ways to merge arrays.
 
 You can use either the spread operator `[...array1, ...array2]`, or a functional way `[].concat(array1, array2)` to merge 2 or more arrays. These approaches are immutable because the merge result is stored in a new array.  
 
-If you'd like to perform a mutable merge, i.e. merge into an array without creating a new one, then you can use `array1.push(...array2)` approach.  
+To perform a mutable merge, i.e. merge into an array without creating a new one, then you can use `array1.push(...array2)` approach.  
 
 *What other ways to merge arrays do you know?*
