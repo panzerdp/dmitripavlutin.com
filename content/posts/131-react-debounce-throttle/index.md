@@ -1,6 +1,6 @@
 ---
-title: "How to Correctly Debounce and Throttle Callbacks in React"
-description: "How to correctly debounce and throttle callbacks in React using useCallback() and useMemo() hooks."
+title: "How to Debounce and Throttle Callbacks in React"
+description: "How to debounce and throttle callbacks in React using useCallback() and useMemo() hooks."
 published: "2021-05-11T07:40Z"
 modified: "2023-01-28"
 thumbnail: "./images/cover-3.png"
