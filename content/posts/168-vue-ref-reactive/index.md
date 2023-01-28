@@ -10,7 +10,7 @@ recommended: ['vue-next-tick', 'props-destructure-vue-composition']
 type: post
 ---
 
-If you landed on this post most likely you have a basic understanding of Vue reactivity.  
+If you landed on this post, you probably have a basic understanding of Vue reactivity.  
 
 However, like me, you might be asking yourself the eternal question: what are the main differences between `ref()` and `reactive()`? And when would you use one or another? 
 
@@ -25,7 +25,7 @@ Let's find the answer together.
 
 ### 1.1 ref()
 
-`refs()` stores both primitive values, as well as objects:
+`refs()` stores both primitive values and objects:
 
 ``` typescript
 import { ref } from 'vue'
@@ -49,7 +49,7 @@ const numberReactive = reactive(0);           // NOT OK!
 const objectReactive = reactive({ count: 0}); // OK
 ```
 
-Calling `reactive(0)` with a primitive value is invalid. Don't do this. If you need to make reactive primitive values, `ref(0)` is the way to go.  
+Calling `reactive(0)` with a primitive value is incorrect. Don't do this. If you need to make reactive primitive values, `ref(0)` is the way to go.  
 
 The reason why `reactive()` works only with objects is in Vue's reactivity implementation. [Vue uses Proxies](https://github.com/vuejs/core/blob/main/packages/reactivity/src/reactive.ts#L212) to intercept property changes on objects. However, proxies do not work with primitives.  
 
@@ -83,7 +83,7 @@ console.log(objectRef.value.count); // logs 0
 
 Also, `objectRef.value.count` is how you can access a property of an object in ref.
 
-In the template, you don't have to use `.value` to access a ref value. This is also called ref auto-unwrapping in templates:
+In the template below, you don't have to use `.value` to access a ref value. This is also called ref auto-unwrapping in templates:
 
 ```vue {6}
 <script setup>
@@ -121,11 +121,11 @@ In conclusion:
 
 ## 3. Reassigning data
 
-`ref()` is accessed and updated using `.value` property, while `reactive()` is a proxy of the original object: thus `ref()` can be reassigned with an entirely new object, while `reactive()` cannot.  
+`ref()` is accessed and updated using `.value` property, while `reactive()` is a proxy of the original object: thus `ref()` can be reassigned to an new object, while `reactive()` cannot.  
 
 ### ref()
 
-Reassigning the value of a `ref()` entirely with a new value is perfectly valid:
+Reassigning the value of a `ref()` entirely to a new value is perfectly valid:
 
 ```vue {5}
 <script setup>
@@ -163,7 +163,7 @@ Open the demo, and see that replacing entirely the reactive object value `object
 
 In conclusion:
 
-> `ref()` value can be reassigned entirely with a new object, while a `reactive()` cannot.  
+> `ref()` value can be reassigned entirely to a new object, while a `reactive()` cannot.  
 
 ## 4. Typing
 
@@ -332,10 +332,10 @@ This post presented the differences between `ref()` and `reactive()` in composit
 
 1. `ref()` can store a primitive value, while `reactive()` cannot. 
 2. You access the value stored in a `ref()` using `<ref>.value`, while `reactive()` object can be used directly as a regular object.  
-3. You can reassign entirely a `ref()` value with a new object, while a `reactive()` cannot.  
+3. `ref()` value can be reassigned to an entirely new object, while `reactive()` cannot.
 4. `ref()` is typed as `Ref<V>`, while the reactive object returned by `reactive(originalObject)` usually maintains the type of the `originalObject`.  
 5. `watch()` (when used without options) normally watches only direct changes of `<ref>.value`, while watching deeply `reactive()` objects.  
 
-You'd use `ref()` to store primitives or value objects, while `reactive()` if you're interested to watch deep changes of a mutable object.  
+You'd use `ref()` to store primitives or value objects, but `reactive()` if you're interested to watch deep changes of a mutable object.  
 
 *What other differences between `ref()` and `reactive()` do you know?*
