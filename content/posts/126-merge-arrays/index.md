@@ -1,8 +1,8 @@
 ---
-title: '3 Ways to Merge Arrays in JavaScript'
+title: "3 Ways to Merge Arrays in JavaScript"
 description: "How to merge arrays in JavaScript using spread operator, array.concat() and array.push()."
 published: "2021-04-06T06:30Z"
-modified: "2021-04-10T08:30Z"
+modified: "2023-01-28"
 thumbnail: "./images/cover.png"
 slug: javascript-merge-arrays
 tags: ['javascript', 'array']
@@ -22,7 +22,7 @@ In this post, you'll find 3 ways to merge arrays in JavaScript: 2 immutable (a n
 
 ### 1.1 Merge using the spread operator
 
-If you want to know one but a good way to merge arrays in JavaScript, then remember the merge using the spread operator.  
+If you want to know one but good way to merge arrays in JavaScript, then remember the merge using the spread operator.  
 
 Write inside the array literal two or more arrays prefixed with the spread operator `...`, and JavaScript will create a new array with all these arrays merged:
 
@@ -39,8 +39,10 @@ const villains = ['Joker', 'Bane'];
 
 const all = [...heroes, ...villains];
 
-all; // ['Batman', 'Superman', 'Joker', 'Bane']
+console.log(all); // ['Batman', 'Superman', 'Joker', 'Bane']
 ```
+
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/7ktcmnvs/)
 
 `const all = [...heros, ...villains]` creates a new array having `heroes` and `villains` arrays merged.  
 
@@ -54,8 +56,9 @@ const villains = ['Joker', 'Bane'];
 
 const all = [...villains,  ...heroes];
 
-all; // ['Joker', 'Bane', 'Batman', 'Superman']
+console.log(all); // ['Joker', 'Bane', 'Batman', 'Superman']
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/esqxrctg/)
 
 The spread operator approach lets you merge 2 and even more arrays at once: 
 
@@ -90,11 +93,13 @@ const villains = ['Joker', 'Bane'];
 const all1 = heroes.concat(villains);
 const all2 = [].concat(heroes, villains);
 
-all1; // ['Batman', 'Superman', 'Joker', 'Bane']
-all2; // ['Batman', 'Superman', 'Joker', 'Bane']
+console.log(all1); // ['Batman', 'Superman', 'Joker', 'Bane']
+console.log(all2); // ['Batman', 'Superman', 'Joker', 'Bane']
 ```
 
-`heroes.concat(villains)` as well as `[].concat(heroes, villains)` return a new array where `heroes` and `villains` arrays are merged.  
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/swkpyqug/)
+
+`heroes.concat(villains)` or `[].concat(heroes, villains)` return a new array where `heroes` and `villains` arrays are merged.  
 
 The concat method accepts multiple arrays as arguments, thus you can merge 2 or more arrays at once:
 
@@ -110,17 +115,18 @@ The approach below performs a mutable way to merge.
 
 ### 2.1 Merge using *array.push()* method
 
-You might know already that `array.push(item)` method pushes an item at the end of the array, mutating the array upon which the method is called:  
+You might know already that `array.push(item)` method pushes an item to the end of the array, mutating the array upon which the method is called:  
 
 ```javascript
 const heroes = ['Batman'];
 
 heroes.push('Superman');
 
-heroes; // ['Batman', 'Superman']
+console.log(heroes); // ['Batman', 'Superman']
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/w837cxfd/)
 
-Thanks to the fact that `array.push(item1, item2, ..., itemN)` accepts multiple items to push, you can push an entire array using the spread operator applied to arguments (in other words, performing a merge into):
+`array.push(item1, item2, ..., itemN)` also accepts multiple items to push at once, thus you can push an entire array using the spread operator applied to arguments (in other words, performing a merge into):
 
 ```javascript
 // merge array2 into array1
@@ -135,8 +141,9 @@ const villains = ['Joker', 'Bane'];
 
 heroes.push(...villains);
 
-heroes; // ['Batman', 'Superman', 'Joker', 'Bane']
+console.log(heroes); // ['Batman', 'Superman', 'Joker', 'Bane']
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/94nuokzs/)
 
 `heroes.push(...villains)` pushes all the items of `villains` array at the end of `heroes` array &mdash; performing a mutable merge. `heroes` array is mutated.  
 
@@ -146,7 +153,7 @@ heroes; // ['Batman', 'Superman', 'Joker', 'Bane']
 
 JavaScript offers multiple ways to merge arrays.  
 
-You can use either the spread operator `[...array1, ...array2]`, or a functional way `[].concat(array1, array2)` to merge 2 or more arrays. These approaches are immutable because the merge result is stored in a new array.  
+You can use either the spread operator `[...array1, ...array2]`, or a functional way `[].concat(array1, array2)` to merge 2 or more arrays. These approaches are immutable because the merge result is stored into a new array.  
 
 If you'd like to perform a mutable merge, i.e. merge into an array without creating a new one, then you can use `array1.push(...array2)` approach.  
 
