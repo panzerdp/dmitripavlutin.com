@@ -59,6 +59,8 @@ export const MemoizedMovie = React.memo(Movie);
 />
 ```
 
+[Try the demo.](https://codesandbox.io/s/react-memo-demo-c9dx1)
+
 [Open the demo](https://codesandbox.io/s/react-memo-demo-c9dx1), then expand the console. You will see that React renders `<MemoizedMovie>` (memoized) just once, while `<Movie>` (non-memoized) re-renders every time.  
 
 You gain a *performance boost*: by reusing the memoized content, React skips rendering the component and doesn't perform a virtual DOM difference check.  
@@ -139,6 +141,8 @@ The application regularly polls the server in the background (every second), upd
 // etc
 ```
 
+[Try the demo.](https://codesandbox.io/s/react-memo-no-memoization-06vp1y?file=/src/index.js:152-187)
+
 Every time `views` prop is updated with a new number, `MovieViewsRealtime` renders. This triggers `Movie` rendering too, even if `title` and `releaseDate` remain the same.  
 
 That's the right case to apply memoization on `Movie` component.  
@@ -155,6 +159,8 @@ function MovieViewsRealtime({ title, releaseDate, views }) {
   )
 }
 ```
+
+[Try the demo.](https://codesandbox.io/s/react-memo-memoization-uxhnuv?file=/src/index.js)
 
 As long as `title` and `releaseDate` props are the same, React skips rendering `MemoizedMovie`. This improves the performance of `MovieViewsRealtime` component.  
 
