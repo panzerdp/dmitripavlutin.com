@@ -2,7 +2,7 @@
 title: "How to Correctly Debounce and Throttle Callbacks in React"
 description: "How to correctly debounce and throttle callbacks in React using useCallback() and useMemo() hooks."
 published: "2021-05-11T07:40Z"
-modified: "2022-10-02"
+modified: "2023-01-28"
 thumbnail: "./images/cover-3.png"
 slug: react-throttle-debounce
 tags: ['react', 'callback']
@@ -12,7 +12,7 @@ type: post
 
 When a React component handles bursting events like window resize, scrolling, user typing into an input, etc. &mdash; it's wise to soften the handlers of these events. 
 
-Otherwise, when the handlers are invoked too often you risk making the application lagging or even unresponsive for a few seconds. Fortunately, debouncing and throttling techniques can help you control the invocation of the event handlers.  
+Otherwise, if the handlers are invoked too often you risk making the application lagging or even unresponsive for a few seconds. In this regrards, debouncing and throttling techniques can help you control the invocation of the event handlers.  
 
 In this post, you'll learn how to correctly use React hooks to apply debouncing and throttling techniques to callbacks in React.  
 
@@ -20,7 +20,7 @@ In this post, you'll learn how to correctly use React hooks to apply debouncing 
 
 ## 1. The callback without debouncing
 
-Let's say that a component `<FilterList>` accepts a big list of names (at least 200 records). The component has an input field where the user types a query and the names are filtered by that query.  
+The component `<FilterList>` accepts a big list of names (at least 200 records). The component has an input field where the user types a query &mdash; as result the names are filtered by the query.  
 
 Here's the first version of `<FilterList>` component:
 
@@ -57,15 +57,15 @@ export function FilterList({ names }) {
 
 [Try the demo.](https://codesandbox.io/s/no-debouncing-bbd0e?file=/src/FilterList.js)
 
-When typing the query into the input field, you can notice that the list gets filtered for every introduced character.  
+Type the query the query into the input field, and you'll see the list filtered for every introduced character.  
 
-For example, if you type char by char the word `Michael`, then the component would display flashes of filtered lists for the queries `M`, `Mi`, `Mic`, `Mich`, `Micha`, `Michae`, `Michael`. However, the user would need to see just one filter result: for the word `Michael`.  
+For example, if you type char by char the word `"Michael"`, then the component would display flashes of filtered lists for the queries `M`, `Mi`, `Mic`, `Mich`, `Micha`, `Michae`, `Michael`. However, the user normally wants to see just one filter result: for the word `Michael`.  
 
-Let's improve the process of filtering by applying `300ms` time debouncing on the `changeHandler` callback function.  
+Let's soften the filtering by applying `300ms` time debouncing on the `changeHandler` callback function.  
 
 ## 2. Debouncing a callback, the first attempt
 
-To debounce the `changeHandler` function I'm going to use the `lodash.debounce` package. You can use any other library at your will, or even write the debounce function by yourself.  
+To debounce the `changeHandler` function I'm going to use the [lodash.debounce](https://www.npmjs.com/package/lodash.debounce) package (but you can use any other library you like).
 
 First, let's look at how to use the [debounce()](https://lodash.com/docs/#debounce) function:
 
@@ -75,17 +75,17 @@ import debounce from 'lodash.debounce';
 const debouncedCallback = debounce(callback, waitTime);
 ```
 
-`debounce()` function accepts the `callback` argument function, and returns a debounced version of that function.  
+`debounce()` function accepts a `callback` function as argument, and returns a debounced version of that function.  
 
 When the debounced function `debouncedCallback` gets invoked multiple times, in bursts, it will invoke the callback only after `waitTime` has passed after the last invocation.  
 
-The debouncing fits nicely to soften the filtering inside the `<FilterList>`: let's debounce `changeHandler` to `300ms` wait time.  
+The debouncing fits nicely to soften the filtering inside the `<FilterList>`: you can apply a debounce of `300ms` to `changeHandler`.  
 
-The only problem with applying debouncing to `changeHandler` inside a React component is that the debounced version of the function should remain the same between component re-renderings. 
+A nuance with debouncing of `changeHandler` inside a React component is that the debounced version of the function should remain the same between component re-renderings. 
 
-The first approach would be to use the `useCallback(callback, dependencies)` that would keep one instance of the debounced function between component re-renderings.  
+The first approach is to use `useCallback(callback, dependencies)` to keep one instance of the debounced function between component re-renderings.  
 
-```jsx{1,18-20,25}
+```jsx {1,18-20,25}
 import { useState, useCallback } from 'react';
 import debounce from 'lodash.debounce';
 
@@ -181,7 +181,7 @@ export function FilterList({ names }) {
 
 *This approach also works with creating throttled functions: `useMemo(() => throttle(callback, time), [])`.*
 
-If you open the [demo](https://codesandbox.io/s/use-memo-debouncing-jwsog?file=/src/FilterList.js), you'd see that typing into the input field is still debounced. 
+Open the [demo](https://codesandbox.io/s/use-memo-debouncing-jwsog?file=/src/FilterList.js) and check that typing into the input field is still debounced. 
 
 *Note: Currently `useMemo()` re-calculates the memoized value only when the deps change. But possibly in the future React [could "forget"](https://reactjs.org/docs/hooks-reference.html#usememo) time to time the memoized value, which could lead to re-recreation of debounced callbacks even if the deps haven't changed. The `useCallback` solution presented above doesn't have this nuance.*
 
@@ -216,7 +216,7 @@ Because debouncing and throttling execute the function with a delay, you might e
 
 When no longer needed, it is recommended to cancel debouncing and throttling.  
 
-The debounce and throttle implementations usually provide a special method to cancel the execution. For example `lodash.debounce` library provides `debouncedCallback.cancel()` to cancel any scheduled calls.  
+The debounce and throttle implementations usually provide a special method to cancel the execution. For example lodash's [debounce()](https://lodash.com/docs/4.17.15#debounce) provides `debouncedCallback.cancel()` to cancel any scheduled calls.  
 
 Here's how you can cancel the debounced function when the component unmounts:
 
@@ -277,7 +277,7 @@ function MyComponent() {
 If the debounced or throttled event handler accesses props or state values, do not forget to set the dependencies argument: 
 
 ```javascript
-// Optiona A:
+// Option A:
 useCallback(debouncedCallback, [dep1, dep2, ..., depN])
 
 // Option B:
