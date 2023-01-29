@@ -36,7 +36,7 @@ console.log(hero.hasOwnProperty('realName')); // => false
 
 On the other side, `hero` doesn't have `realName` property. Thus `hero.hasOwnProperty('realName')` returns `false` &mdash; denoting a missing property.  
 
-The method name `hasOwnProperty()` suggests that it looks in the [own properties](/own-and-inherited-properties-in-javascript/#1-own-properties) of the object. The own properties are those defined directly upon the object.  
+The method name `hasOwnProperty()` suggests that it looks for the [own properties](/own-and-inherited-properties-in-javascript/#1-own-properties) of the object. The own properties are those defined directly upon the object.  
 
 This way `hasOwnProperty()` doesn't detect the `toString` &mdash; an inherited method from the prototype object:
 
@@ -105,7 +105,7 @@ console.log(hero.realName); // => undefined
 
 `hero.realName` evaluates to `undefined` because `realName` property is missing.  
 
-Now you can see an idea: you can compare with `undefined` to determine the existence of the property.  
+Now you can see the idea: you can compare with `undefined` to determine the existence of the property.  
 
 ```javascript{5}
 const hero = {

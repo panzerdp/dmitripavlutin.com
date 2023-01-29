@@ -10,7 +10,7 @@ recommended: ['javascript-async-await', 'react-fetch-lifecycle-methods-hooks-sus
 type: post
 ---
 
-The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is the default tool to network operations in web applications. While `fetch()` is generally easy to use, there some nuances to be aware of.  
+The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is the default tool for performing network operations in web applications. Although `fetch()` is generally easy to use, there are some nuances to be aware of.  
 
 In this post, you'll find the common scenarios of how to use `fetch()` with `async/await` syntax. You'll understand how to fetch data, handle fetch errors, cancel a fetch request, and more. 
 
@@ -70,7 +70,7 @@ fetchMoviesJSON().then(movies => {
 });
 ```
 
-`response.json()` is a method on the Response object that lets you extract a JSON object from the response. The method returns a promise, so you have to wait for the JSON: `await response.json()`.
+`response.json()` is a method of the Response object that allows a JSON object to be extracted from the response. The method returns a promise, so you have to wait for the JSON: `await response.json()`.
 
 The [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object offers a lot of useful methods (all returning promises):
 
@@ -106,11 +106,11 @@ When fetching the URL `'/oops'` the server responds with status `404` and text `
 
 `fetch()` rejects only if a request cannot be made or a response cannot be retrieved. This can happen during network problems: no internet connection, host not found, the server is not responding.  
 
-Fortunately, `response.ok` property lets you separate good from bad HTTP response statuses. The property is set to `true` only if the response has status `200-299`.  
+Fortunately, `response.ok` property lets you distinguish good from bad HTTP response statuses. The property is set to `true` only if the response has status `200-299`.  
 
 In the above example, the `response.ok` property is `false` because the response has the status `404`.
 
-If you'd like to throw an error on a *bad HTTP status* (outside of the range `200-299`), check the value of `response.ok` property and throw an error manually:
+To throw an error on a *bad HTTP status* (outside of the range `200-299`), check the value of `response.ok` property and throw an error manually:
 
 ```javascript{3-6}
 async function fetchMoviesBadStatus() {
