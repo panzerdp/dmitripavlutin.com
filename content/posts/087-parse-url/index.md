@@ -20,7 +20,7 @@ https://dmitripavlutin.com/parse-url-javascript
 
 Often you need to access specific components of an URL: the *hostname* (e.g. `dmitripavlutin.com`), or *pathname* (e.g. `/parse-url-javascript`).   
 
-A convinient parser to access components of an URL is the `URL()` constructor.    
+A convenient parser to access components of an URL is the `URL()` constructor.    
 
 In this post, I'm going to show you the structure of an URL and its main components. Then, I'm going to describe how to use the `URL()` constructor to easily pick components of an URL like hostname, pathname, query, or hash. 
 
@@ -35,7 +35,7 @@ An image worth a thousand words. Without much textual description, in the follow
 
 ## 2. *URL()* constructor
 
-The `URL()` is a constuctor function to parse components of an URL:
+The `URL()` is a constructor function to parse components of an URL:
 
 ```javascript
 const url = new URL(relativeOrAbsolute [, absoluteBase]);
@@ -52,7 +52,7 @@ console.log(url.href); // => 'http://example.com/path/index.html'
 ```
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/y2qbsptL/)
 
-or combine a relative and absolute URLs:
+or combine relative and absolute URLs:
 
 ```javascript
 const url = new URL('/path/index.html', 'http://example.com');
@@ -229,7 +229,7 @@ Only `origin` and `searchParams` properties of the `URL()` instance are readonly
 
 The `URL()` constructor is handy to parse (and validate) URLs in JavaScript.  
 
-`new URL(relativeOrAbsolute [, absoluteBase])` accepts as first argument an absolute or relative URL. When the first argument is relative, you have to indicate the second argument as an abolsute URL that serves the base for the first argument.    
+`new URL(relativeOrAbsolute [, absoluteBase])` accepts as the first argument an absolute or relative URL. When the first argument is relative, you have to indicate the second argument as an absolute URL that serves as the base for the first argument.    
 
 After creating the `URL()` instance, you can easily access the most common URL components like:
 
