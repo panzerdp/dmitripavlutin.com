@@ -1,6 +1,6 @@
 ---
 title: "How to Use Object Destructuring in JavaScript"
-description: "The object destructuring is a JavaScript feature to extract properties from objects and bind them to variables."
+description: "Object destructuring is a JavaScript feature to extract properties from objects and bind them to variables."
 published: "2020-05-10T13:40Z"
 modified: "2023-01-28"
 thumbnail: "./images/cover.png"
@@ -10,7 +10,7 @@ recommended: ["5-interesting-uses-javascript-destructuring", "object-rest-spread
 type: post
 ---
 
-The object destructuring is a useful JavaScript feature to extract properties from objects and bind them to variables.    
+Object destructuring is a useful JavaScript feature to extract properties from objects and bind them to variables.    
 
 What's better, object destructuring can extract multiple properties in one statement, can access properties from nested objects, and can set a default value if the property doesn't exist.  
 
@@ -62,7 +62,7 @@ console.log(realName); // => 'Bruce Wayne'
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/6jbehpf4/)
 
-`const { name, realName } = hero` is an object destructuring assignment. This statement defines the variables `name` and `realName`, then assigns to them the values of properties `hero.name` and `hero.realName` correspondigly. 
+`const { name, realName } = hero` is an object destructuring assignment. This statement defines the variables `name` and `realName`, then assigns to them the values of properties `hero.name` and `hero.realName` correspondingly. 
 
 Comparing the 2 approaches to access the object properties:
 
@@ -75,7 +75,7 @@ const realName = hero.realName;
 const { name, realName } = hero;
 ```
 
-it's visible that the object destructuring is handier because neither the property names nor the object variable are duplicated.  
+it's visible that object destructuring is handier because neither the property names nor the object variable is duplicated.  
 
 ![JavaScript Object Destructuring Inforgraphic](./images/javascript-object-destructuring-infographic-2.png)
 
@@ -95,7 +95,7 @@ Here's the equivalent code using a [property accessor](/access-object-properties
 const identifier = expression.identifier;
 ```
 
-Let's try the object destructuring in practice:
+Let's try object destructuring in practice:
 
 ```javascript{5}
 const hero = {
@@ -216,7 +216,7 @@ The equivalent code:
 const aliasIdentifier = expression.identifier;
 ```
 
-Here's an example of object destructuring alias feature:
+Here's an example of an object destructuring alias feature:
 
 ```javascript{5}
 const hero = {
@@ -230,7 +230,7 @@ console.log(secretName); // => 'Bruce Wayne'
 ```
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/pbuehm5t/)
 
-Looking at `const { realName: secretName } = hero`, the destucturing defines a new variable `secretName` (alias variable), and assigns to it the value of `hero.realName`.  
+Looking at `const { realName: secretName } = hero`, the destructuring defines a new variable `secretName` (alias variable) and assigns to it the value of `hero.realName`.  
 
 ## 6. Extracting properties from nested objects
 
@@ -238,7 +238,7 @@ In the previous examples, the objects were plain: the properties have primitive 
 
 But objects can be nested in other objects. In other words, some properties can contain objects.  
 
-In such case, you still can use the object destructuring and access properties from deep. Here's the basic syntax:
+In such a case, you still can use the object destructuring and access properties from deep. Here's the basic syntax:
 
 ```javascript
 const { nestedObjectProp: { identifier } } = expression;
@@ -282,7 +282,7 @@ The object destructuring `const { address: { city } } = hero` accesses the prope
 
 ## 7. Extracting a dynamic name property
 
-You can extract to variables properties with a dynamic name (the property name is known at runtime):
+You can extract into variables properties with a dynamic name (the property name is known at runtime):
 
 ```javascript
 const { [propName]: identifier } = expression;
@@ -338,7 +338,7 @@ console.log(rest); // => { realName: 'Bruce Wayne', company: 'WayneCorp' }
 ```
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/yuab78Lr/2/)
 
-The destructuring `const { name, ...realHero } = hero` extracts the property `name`. Also the remaining properties (`realName` and `company`) are collected into `rest`.  
+The destructuring `const { name, ...realHero } = hero` extracts the property `name`. Also, the remaining properties (`realName` and `company`) are collected into `rest`.  
 
 ## 9. Common use cases
 
@@ -346,7 +346,7 @@ The destructuring `const { name, ...realHero } = hero` extracts the property `na
 
 As seen in many examples before, the object destructuring binds property values to variables.  
 
-The object destructuring can assign values to variables declared using `const`, `let` and `var`. Or even assign to an already existing variable.  
+The object destructuring can assign values to variables declared using `const`, `let`, and `var`. Or even assign to an already existing variable.  
 
 For example, here's how to destructure using `let` statement:
 
@@ -408,7 +408,7 @@ for (const { name } of heroes) {
 
 ### 9.2 Function parameter destructuring
 
-The object destructuring can be placed anywhere where an assignment happens. 
+Object destructuring can be placed anywhere where an assignment happens. 
 
 For example, you could destruct an object right inside the parameter of a function:
 
@@ -432,8 +432,8 @@ console.log(names); // => ['Batman', 'Joker']
 
 ## 10. Summary
 
-The object destructuring is a powerful feature to extract properties from an object and bind these values to variables.   
+Object destructuring is a powerful feature to extract properties from an object and bind these values to variables.   
 
-I like about object destructuring the concise syntax and the ability to extract multiple variables in one statement.  
+I like object destructuring due to the concise syntax and the ability to extract multiple variables in one statement.  
 
 *Have questions regarding object destructuring? Ask in a comment below!*
