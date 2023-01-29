@@ -16,7 +16,7 @@ You can access the properties of an object in JavaScript in 3 ways:
 2. Square brackets property accessor: `object['property']`
 3. Object destructuring: `const { property } = object`
 
-Let's see how each syntax to access the properties work. And understand when it's reasonable, depending on the situation, to use one way or another.  
+Let's see how each way works. And understand when it's reasonable, depending on the situation, to use one way or another.  
 
 ```toc
 ```
@@ -73,7 +73,7 @@ Because `prop-3` and `3` are invalid identifiers, the dot property accessor does
 * `weirdObject.prop-3` evaluates to `NaN`, instead of the expected `'tree'` 
 * `weirdObject.3` throws a `SyntaxError`! 
 
-*Why does the expression `weirdObject.prop-3` evaluate to `NaN`? Please write your answer in a comment below!*
+*Why does the expression `weirdObject.prop-3` evaluate to `NaN`? Please write your answer below!*
 
 To access the properties with these special names, use the square brackets property accessor (which is described in the next section):
 
@@ -177,7 +177,7 @@ console.log(heroName); // => 'Batman'
 
 [Try the demo.](https://jsfiddle.net/rc84nfg6/)
 
-`const { name: heroName } = hero` is an object destructuring. The destucturing defines a new variable `heroName` (instead of `name` as in previous example), and assigns to `heroName` the value `hero.name`.  
+`const { name: heroName } = hero` is an object destructuring. The destucturing defines a new variable `heroName` (instead of `name`, as in the previous example), and assigns to `heroName` the value `hero.name`.  
 
 ### 3.2 Dynamic property name
 
