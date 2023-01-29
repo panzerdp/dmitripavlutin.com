@@ -202,7 +202,7 @@ Now, instead of being `undefined`, the variable `enemies` defaults to `['Joker']
 
 ## 5. Aliases
 
-To create variables of different names than the properties, then you can use the aliasing feature of object destructuring.  
+To create variables of different names than the properties you can use the aliasing feature of object destructuring.  
 
 ```javascript
 const { identifier: aliasIdentifier } = expression;
@@ -226,16 +226,17 @@ const hero = {
 
 const { realName: secretName } = hero;
 
-secretName; // => 'Bruce Wayne'
+console.log(secretName); // => 'Bruce Wayne'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/pbuehm5t/)
 
-Looking at `const { realName: secretName } = hero`, the destucturing defines a new variable `secretName` (alias variable), and assigns to it the value `hero.realName`.  
+Looking at `const { realName: secretName } = hero`, the destucturing defines a new variable `secretName` (alias variable), and assigns to it the value of `hero.realName`.  
 
 ## 6. Extracting properties from nested objects
 
 In the previous examples, the objects were plain: the properties have primitive data types (e.g. strings).  
 
-Often objects can be nested in other objects. In other words, some properties can contain objects.  
+But objects can be nested in other objects. In other words, some properties can contain objects.  
 
 In such case, you still can use the object destructuring and access properties from deep. Here's the basic syntax:
 
@@ -253,7 +254,7 @@ The above syntax is equivalent to:
 const identifier = expression.nestedObjectProp.identifier;
 ```
 
-The level of nesting you can extract properties from is unlimited. If you want to extract properties from deep, just add more nested curly braces:
+The level of nesting to extract properties from is unlimited. If you want to extract properties from deep, just add more nested curly braces:
 
 ```javascript
 const { propA: { propB: { propC: { .... } } } } = object;
@@ -273,10 +274,11 @@ const hero = {
 // Object destructuring:
 const { address: { city } } = hero;
 
-city; // => 'Gotham'
+console.log(city); // => 'Gotham'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/2hpvoazL/)
 
-The object destructuring `const { address: { city } } = hero` let's you access the property `city` from the nested object.  
+The object destructuring `const { address: { city } } = hero` accesses the property `city` from the nested object and creates a variable `city` having the property value.  
 
 ## 7. Extracting a dynamic name property
 
@@ -286,7 +288,7 @@ You can extract to variables properties with a dynamic name (the property name i
 const { [propName]: identifier } = expression;
 ```
 
-`propName` expression should evaluate to a property name (usually a string), and the `identifier` should indicate the variable name created after the destructuring. The second `expression` should evaluate to the object you'd like to destructure.  
+`propName` expression should evaluate to a property name (usually a string), and the `identifier` should indicate the variable name created after the destructuring. `expression` should evaluate to the object you'd like to destructure.  
 
 An equivalent code without object destructuring:
 
@@ -305,8 +307,9 @@ const hero = {
 const prop = 'name';
 const { [prop]: name } = hero;
 
-name; // => 'Batman'
+console.log(name); // => 'Batman'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/31w04z6p/)
 
 `const { [prop]: name } = hero` is an object destructuring that assigns to variable `name` the value `hero[prop]`, where `prop` is a variable holding the property name.  
 
@@ -318,26 +321,24 @@ The rest syntax is useful to collect the remaining properties after the destruct
 const { identifier, ...rest } = expression;
 ```
 
-Where `identifier` is the name of the property to access and `expression` should evaluate to an object.  
+Where `identifier` is the name of the property to access and `expression` should evaluate to an object. After the destructuring, the variable `identifier` contains the property value. `rest` variable is a plain object with the remaining properties.  
 
-After the destructuring, the variable `identifier` contains the property value. `rest` variable is a plain object with the remaining properties.  
-
-For example, let's extract the property `name`, but keep the rest of the properties:
+For example, let's extract the property `name`, but collect the rest of the properties into a variable `rest`:
 
 ```javascript{5}
 const hero = {
   name: 'Batman',
-  realName: 'Bruce Wayne'
+  realName: 'Bruce Wayne',
+  company: 'WayneCorp'
 };
 
-const { name, ...realHero } = hero;
+const { name, ...rest } = hero;
 
-realHero; // => { realName: 'Bruce Wayne' }
+console.log(rest); // => { realName: 'Bruce Wayne', company: 'WayneCorp' }
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/yuab78Lr/2/)
 
-The destructuring `const { name, ...realHero } = hero` extracts the property `name`. 
-
-At the same time, the remaining properties (`realName` in this case) are collected into the variable `realHero`: `{ realName: 'Bruce Wayne' }`.  
+The destructuring `const { name, ...realHero } = hero` extracts the property `name`. Also the remaining properties (`realName` and `company`) are collected into `rest`.  
 
 ## 9. Common use cases
 
@@ -357,8 +358,9 @@ const hero = {
 
 let { name } = hero;
 
-name; // => 'Batman'
+console.log(name); // => 'Batman'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/3pv740e9/)
 
 How to destructure using `var` statement:
 
@@ -370,8 +372,9 @@ const hero = {
 
 var { name } = hero;
 
-name; // => 'Batman'
+console.log(name); // => 'Batman'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/pkoqud4x/)
 
 And how to destructure to an already declared variable:
 
@@ -385,8 +388,9 @@ const hero = {
 
 ({ name } = hero);
 
-name; // => 'Batman'
+console.log(name); // => 'Batman'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/6bc4oL0a/)
 
 I find it satisfying to combine `for..of` cycle with object destructuring to extract the property right away:
 
@@ -400,12 +404,13 @@ for (const { name } of heroes) {
   console.log(name); // logs 'Batman', 'Joker'
 }
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/vb9z6qhu/)
 
 ### 9.2 Function parameter destructuring
 
-Generally, the object destructuring can be placed anywhere where an assignment happens. 
+The object destructuring can be placed anywhere where an assignment happens. 
 
-For instance, you could destruct an object right inside the parameters list of a function:
+For example, you could destruct an object right inside the parameter of a function:
 
 ```javascript{6}
 const heroes = [
@@ -419,16 +424,16 @@ const names = heroes.map(
   }
 );
 
-names; // => ['Batman', 'Joker']
+console.log(names); // => ['Batman', 'Joker']
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/gmtbs5ny/)
 
-`function({ name })` destructures the function parameter, creating a variable `name` holding the value of `name` property.  
+`function({ name })` destructures the function parameter and creates a variable `name` holding the value of `name` property.  
 
 ## 10. Summary
 
-The object destructuring is a powerful feature that lets you extract properties from an object and bind these values to variables.   
+The object destructuring is a powerful feature to extract properties from an object and bind these values to variables.   
 
 I like about object destructuring the concise syntax and the ability to extract multiple variables in one statement.  
 
-Hopefully, my post has helped you see how useful object destructuring is!
-
+*Have questions regarding object destructuring? Ask in a comment below!*
