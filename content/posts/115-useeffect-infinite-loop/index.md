@@ -10,9 +10,9 @@ recommended: ['react-hooks-mistakes-to-avoid', 'react-useeffect-explanation']
 type: post
 ---
 
-`useEffect()` hook manages the side-effects like fetching over the network, manipulating DOM directly, starting and ending timers.  
+`useEffect()` hook manages the side-effects like fetching over the network, manipulating DOM directly, and starting/ending timers.  
 
-While the `useEffect()` is, alongside with `useState()`, is one of the most used hooks, it requires some time to familiarize and use correctly.  
+While the `useEffect()`, alongside `useState()`, is one of the most used hooks, it requires time to familiarize and use correctly.  
 
 A pitfall you might experience when working with `useEffect()` is the infinite loop of component renderings. In this post, I'll describe the common scenarios that generate infinite loops and how to avoid them.  
 
@@ -20,7 +20,7 @@ A pitfall you might experience when working with `useEffect()` is the infinite l
 
 ## 1. The infinite loop and side-effect updating state
 
-Let's say you want to create a component having an input element, and also display how many times the input has been changed by the used.
+Let's say you want to create a component having an input field, and also display how many times the user changed that input.  
 
 Here's a possible implementation of `<CountInputChanges>` component:
 
@@ -46,9 +46,9 @@ function CountInputChanges() {
 
 `<input type="text" value={value} onChange={onChange} />` is a [controlled component](/controlled-inputs-using-react-hooks/). 
 
-`value` state variable holds the input value, and the `onChange` event handler updates the `value` state when user types into the input.  
+`value` state variable holds the input value, and the `onChange` event handler updates the `value` state when the user types into the input.  
 
-I took the decision to update the `count` variable using `useEffect()` hook. Every time the component re-renders due to user typing into the input, the `useEffect(() => setCount(count + 1))` updates the counter.  
+I decided to update the `count` variable using `useEffect()` hook. Every time the component re-renders due to the user typing into the input, the `useEffect(() => setCount(count + 1))` updates the counter.  
 
 Because `useEffect(() => setCount(count + 1))` is used without the dependencies argument, `() => setCount(count + 1)` callback is [executed](/react-useeffect-explanation/#2-the-dependencies-of-useeffect) after every rendering of the component.  
 
@@ -56,7 +56,7 @@ Do you expect any problems with this component? Open the [demo](https://codesand
 
 The demo shows that `count` state variable increases uncontrollably, even if you haven't typed anything into the input. That's an infinite loop.  
 
-The problem lays in the way `useEffect()` is used:
+The problem is in the way `useEffect()` is used:
 
 ```jsx{2}
 useEffect(() => setCount(count + 1));
@@ -186,7 +186,7 @@ which increments the secrets counter `countSecrets`, but also creates *a new obj
 
 ### 2.1 Avoid objects as dependencies
 
-Because of the objects creation and referential equality problem, it's wise to a avoid objects as deps argugments in `useEffect()`, and stick to primitives when possible:
+Because of the objects creation and referential equality problem, it's wise to avoid objects as deps in `useEffect()`. Stick to primitives when possible:
 
 ```javascript{4}
 let count = 0;
@@ -245,7 +245,7 @@ Open the fixed [demo](https://codesandbox.io/s/infinite-loop-obj-dependency-fixe
 
 `useEffect(callback, deps)` is the hook that executes `callback` (the side-effect) after deps changes. If you aren't careful with what the side-effect does, you might trigger an infinite loop of component renderings.  
 
-A common case that generates an infinite loop is updating state in the side-effect without having any dependency argument at all:
+A common case that generates an infinite loop is updating the state in the side-effect without having any dependency argument at all:
 
 ```javascript
 useEffect(() => {
@@ -281,7 +281,7 @@ useEffect(() => {
 }, [object]);
 ```
 
-Avoid using objects as dependencies, but stick to use a specific properties with primitive values:
+Avoid using objects as dependencies, but use the object property values directly as dependencies:
 
 ```javascript
 useEffect(() => {
