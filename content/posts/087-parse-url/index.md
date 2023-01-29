@@ -2,7 +2,7 @@
 title: "How to Parse URL in JavaScript: hostname, pathname, query, hash"
 description: "How to easily parse URL in JavaScript and access components like hostname, pathname, query, or hash."
 published: "2020-07-07T06:30Z"
-modified: "2020-07-07T06:30Z"
+modified: "2023-01-29"
 thumbnail: "./images/cover-8.png"
 slug: parse-url-javascript
 tags: ["url", "hostname", "pathname", "query string", "hash"]
@@ -18,13 +18,11 @@ For example, here's the URL of this blog post:
 https://dmitripavlutin.com/parse-url-javascript
 ```
 
-Often you need to access specific components of an URL. These might be the *hostname* (e.g. `dmitripavlutin.com`), or *pathname* (e.g. `/parse-url-javascript`).   
+Often you need to access specific components of an URL: the *hostname* (e.g. `dmitripavlutin.com`), or *pathname* (e.g. `/parse-url-javascript`).   
 
 A convinient parser to access components of an URL is the `URL()` constructor.    
 
-In this post, I'm going to show you the structure of an URL and its main components.    
-
-Then, I'm going to describe how to use the `URL()` constructor to easily pick components of an URL like hostname, pathname, query, or hash. 
+In this post, I'm going to show you the structure of an URL and its main components. Then, I'm going to describe how to use the `URL()` constructor to easily pick components of an URL like hostname, pathname, query, or hash. 
 
 ```toc
 ```
@@ -37,29 +35,31 @@ An image worth a thousand words. Without much textual description, in the follow
 
 ## 2. *URL()* constructor
 
-The `URL()` is a constuctor function that enables the parsing of components of an URL:
+The `URL()` is a constuctor function to parse components of an URL:
 
 ```javascript
 const url = new URL(relativeOrAbsolute [, absoluteBase]);
 ```
 
-`relativeOrAbsolute` argument can be either an absolute or relative URL. If the first argument is relative, then the second argument `absoluteBase` is obligatory and must be an absolute URL being the base for the first argument.   
+`relativeOrAbsolute` argument can be either an absolute or relative URL. If the first argument is relative, then the second argument `absoluteBase` is obligatory and must be an absolute URL being the base for the relative path.   
 
 For example, let's initialize `URL()` with an absolute URL:
 
 ```javascript
 const url = new URL('http://example.com/path/index.html');
 
-url.href; // => 'http://example.com/path/index.html'
+console.log(url.href); // => 'http://example.com/path/index.html'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/y2qbsptL/)
 
 or combine a relative and absolute URLs:
 
 ```javascript
 const url = new URL('/path/index.html', 'http://example.com');
 
-url.href; // => 'http://example.com/path/index.html'
+console.log(url.href); // => 'http://example.com/path/index.html'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/gn975bu6/)
 
 The `href` property of the `URL()` instance returns the entire URL string.  
 
@@ -89,15 +89,16 @@ where `USVString` type maps to a string when returned in JavaScript.
 
 ## 3. Query string
 
-`url.search` property accesses the query string of the URL prefixed with `?`:
+`url.search` property accesses the query string of the URL (the one that starts with `?`):
 
 ```javascript
 const url = new URL(
   'http://example.com/path/index.html?message=hello&who=world'
 );
 
-url.search; // => '?message=hello&who=world'
+console.log(url.search); // => '?message=hello&who=world'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/2p1qh3ua/)
 
 If the query string is missing, `url.search` evaluates to an empty string `''`:
 
@@ -105,13 +106,14 @@ If the query string is missing, `url.search` evaluates to an empty string `''`:
 const url1 = new URL('http://example.com/path/index.html');
 const url2 = new URL('http://example.com/path/index.html?');
 
-url1.search; // => ''
-url2.search; // => ''
+console.log(url1.search); // => ''
+console.log(url2.search); // => ''
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/zwa6rn23/)
 
-### 3.1 Parsing query string
+### 3.1 Parsing the query string
 
-More handy than accessing the raw query string is to access the query parameters.  
+But more often you might need to access a specific query parameter.  
 
 An easy way to pick query parameters gives `url.searchParams` property. This property holds an instance of [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams).  
 
@@ -124,13 +126,14 @@ const url = new URL(
   'http://example.com/path/index.html?message=hello&who=world'
 );
 
-url.searchParams.get('message'); // => 'hello'
-url.searchParams.get('missing'); // => null
+console.log(url.searchParams.get('message')); // => 'hello'
+console.log(url.searchParams.get('missing')); // => null
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/msz6jk0t/1/)
 
 `url.searchParams.get('message')` returns the value of `message` query parameter &mdash; `'hello'`.  
 
-However accessing a non-existing parameter `url.searchParams.get('missing')` evaluates to `null`.  
+But accessing a non-existing parameter `url.searchParams.get('missing')` evaluates to `null`.  
 
 ## 4. *hostname*
 
@@ -139,8 +142,9 @@ However accessing a non-existing parameter `url.searchParams.get('missing')` eva
 ```javascript
 const url = new URL('http://example.com/path/index.html');
 
-url.hostname; // => 'example.com'
+console.log(url.hostname); // => 'example.com'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/5armb03u/)
 
 ## 5. *pathname*
 
@@ -149,53 +153,58 @@ url.hostname; // => 'example.com'
 ```javascript
 const url = new URL('http://example.com/path/index.html?param=value');
 
-url.pathname; // => '/path/index.html'
+console.log(url.pathname); // => '/path/index.html'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/842Lez7h/)
 
 If the URL doesn't have a path, the `url.pathname` property returns a slash character `/`:
 
 ```javascript
 const url = new URL('http://example.com/');
 
-url.pathname; // => '/'
+console.log(url.pathname); // => '/'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/nsqo4xpL/)
 
 ## 6. *hash*
 
-Finally, the hash can be accessed using `url.hash` property:
+Finally, the hash is accessed using `url.hash` property:
 
 ```javascript
-const url = new URL('http://example.com/path/index.html#bottom');
+const url = new URL('http://example.com/path/index.html#top');
 
-url.hash; // => '#bottom'
+console.log(url.hash); // => '#top'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/5x19cLba/)
 
 When the hash in the URL is missing, `url.hash` evaluates to an empty string `''`:
 
 ```javascript
 const url = new URL('http://example.com/path/index.html');
 
-url.hash; // => ''
+console.log(url.hash); // => ''
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/r3eL264m/)
 
 ## 7. URL validation
 
 When `new URL()` constructor creates an instance, as a side effect, it also validates
-the URL for correctness. If the URL value is invalid, a `TypeError` is thrown.  
+the URL for correctness. A `TypeError` is thrown if the URL value is invalid.  
 
-For example, `http ://example.com` is an invalid URL because of the space character after `http`.  
+For example, `http**://example.com` is an invalid URL because of the `**` characters after `http`.  
 
 Let's use this invalid URL to initialize the parser:  
 
 ```javascript{6}
 try {
-  const url = new URL('http ://example.com');
+  const url = new URL('http**://example.com');
 } catch (error) {
-  error; // => TypeError, "Failed to construct URL: Invalid URL"
+  console.log(error); // => TypeError, "Failed to construct URL: Invalid URL"
 }
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/qw45mhde/1/)
 
-Because `'http ://example.com'` is an invalid URL, as expected, `new URL('http ://example.com')` throws a `TypeError`.  
+Because `'http**://example.com'` is an invalid URL, as expected, `new URL('http ://example.com')` throws a `TypeError`.  
 
 ## 8. URL manipulation
 
@@ -206,14 +215,15 @@ For example, let's modify the hostname of an existing URL from `red.com` to `blu
 ```javascript
 const url = new URL('http://red.com/path/index.html');
 
-url.href; // => 'http://red.com/path/index.html'
+console.log(url.href); // => 'http://red.com/path/index.html'
 
 url.hostname = 'blue.io';
 
-url.href; // => 'http://blue.io/path/index.html'
+console.log(url.href); // => 'http://blue.io/path/index.html'
 ```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/3anL24y6/)
 
-Note that only `origin` and `searchParams` properties of the `URL()` instance are readonly. All the other one are writable and modify the URL when you change them.
+Only `origin` and `searchParams` properties of the `URL()` instance are readonly. The other ones are writable and modify the URL when you change them.  
 
 ## 9. Summary
 
