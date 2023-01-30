@@ -134,4 +134,4 @@ Their single `callback` argument is invoked right after DOM update: and you are 
 
 Alternatively, if you don't supply the callback argument to `nextTick()`: then the functions would return a promise that's being resolved when DOM is updated. 
 
-I recommend using `nextTick()` with `async/await` syntax since it makes the code more readable.  
+I recommend using `nextTick()` with `async/await` syntax thanks to better readability.  
