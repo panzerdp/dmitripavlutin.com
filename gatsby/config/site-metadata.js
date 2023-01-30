@@ -17,7 +17,7 @@ module.exports = {
     name: 'Dmitri Pavlutin',
     description:
       'Tech writer and coach. My daily routine consists of (but not limited to) drinking coffee, coding, writing, coaching, overcoming boredom 😉.',
-    job: 'Now working as a full-time open source developer on <a target="_blank" href="https://github.com/ContentSquare/readapt" rel="noreferrer">Readapt</a> project - aiming to make the web accessible for everyone.',
+    job: '',
     email: 'dmitripavlutin@gmail.com',
     jobTitle: 'Software Developer',
     profiles: {
