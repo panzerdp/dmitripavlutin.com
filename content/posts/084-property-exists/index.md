@@ -12,6 +12,8 @@ type: post
 
 In this post, you'll read 3 common ways to check for property or key existence in a JavaScript object. 
 
+*Note: In the post, I  describe property existence checking, which is the same as checking for key existence in an object.*  
+
 ```toc
 ```
 
