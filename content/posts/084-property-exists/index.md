@@ -1,6 +1,6 @@
 ---
 title: "3 Ways to Check If an Object Has a Property in JavaScript"
-description: "The 3 ways to check if an object has a property in JavaScript: hasOwnProperty() method, in operator, comparing with undefined."
+description: "The 3 ways to check if an object has a property or key in JavaScript: hasOwnProperty() method, in operator, comparing with undefined."
 published: "2020-06-16T09:00Z"
 modified: "2023-01-25"
 thumbnail: "./images/cover.png"
@@ -10,7 +10,7 @@ recommended: ["access-object-properties-javascript", "javascript-defined-variabl
 type: post
 ---
 
-In this post, you'll read 3 common ways to check for property existence in a JavaScript object.  
+In this post, you'll read 3 common ways to check for property or key existence in a JavaScript object. 
 
 ```toc
 ```
@@ -138,7 +138,7 @@ Even if the property `name` exists (but has `undefined` value), `hero.name !== u
 
 ## 4. Summary
 
-There are mainly 3 ways to check if the property exists.  
+There are mainly 3 ways to check if the properties or keys exist in an object.  
 
 The first way is to invoke `object.hasOwnProperty(propName)`. The method returns `true` if the `propName` exists inside `object`, and `false` otherwise.  
 
