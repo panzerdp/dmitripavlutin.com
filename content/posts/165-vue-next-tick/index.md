@@ -80,9 +80,9 @@ const handleClick = () => {
 
 Open the demo and click a few times the *Insert/Remove* button. You'd see that `content` (the reference that contains the `<div>` element) is `null` or contains an element in exact correspondence with `show` value.  
 
-Also, `nextTick(callback)` executes the `callback` when all child components updates have been submitted to DOM.  
+Also, `nextTick(callback)` executes the `callback` when all children components updates have been submitted to DOM.  
 
-There's also `this.$nextTick(callback)` available on the component instance, which you might find useful in case of options API.  
+There's also `this.$nextTick(callback)` available on the component instance, which you might find useful in the case of options API.  
 
 ## 2. nextTick() with async/await
 
@@ -128,7 +128,7 @@ My recommendation is to use the `nextTick()` with the `async/await` syntax since
 
 When you change the component's data, Vue updates the DOM asynchronously. 
 
-If you want to catch the moment when DOM has been updated after the component's data change, then you need to use `Vue.nextTick(callback)` or `this.$nextTick(callback)` functions.  
+If you want to catch the moment when DOM has been updated after the component's data change, then you need to use `nextTick(callback)` or `this.$nextTick(callback)` functions.  
 
 Their single `callback` argument is going to be invoked right after DOM updates: and you are guaranteed to get the latest DOM in sync with the component's data.    
 
