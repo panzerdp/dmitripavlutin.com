@@ -12,7 +12,7 @@ type: post
 
 When a React component handles bursting events like window resize, scrolling, user typing into an input, etc. &mdash; it's wise to soften the handlers of these events. 
 
-Otherwise, if the handlers are invoked too often you risk making the application lagging or even unresponsive for a few seconds. In this regrards, debouncing and throttling techniques can help you control the invocation of the event handlers.  
+Otherwise, if the handlers are invoked too often you risk making the application lagging or even unresponsive for a few seconds. In this regards, debouncing and throttling techniques can help you control the invocation of the event handlers.  
 
 In this post, you'll learn how to correctly use React hooks to apply debouncing and throttling techniques to callbacks in React.  
 
@@ -57,9 +57,9 @@ export function FilterList({ names }) {
 
 [Try the demo.](https://codesandbox.io/s/no-debouncing-bbd0e?file=/src/FilterList.js)
 
-Type the query the query into the input field, and you'll see the list filtered for every introduced character.  
+Type the query into the input field, and you'll see the list filtered for every introduced character.  
 
-For example, if you type char by char the word `"Michael"`, then the component would display flashes of filtered lists for the queries `M`, `Mi`, `Mic`, `Mich`, `Micha`, `Michae`, `Michael`. However, the user normally wants to see just one filter result: for the word `Michael`.  
+For example, if you type char by char the word `"Michael"`, then the component will display flashes of filtered lists for the queries `M`, `Mi`, `Mic`, `Mich`, `Micha`, `Michae`, `Michael`. However, the user usually wants to see just one filter result: for the word `Michael`.  
 
 Let's soften the filtering by applying `300ms` time debouncing on the `changeHandler` callback function.  
 
@@ -123,7 +123,7 @@ export function FilterList({ names }) {
 
 [Try the demo.](https://codesandbox.io/s/use-callback-debouncing-0ch2q?file=/src/FilterList.js)
 
-`debounce(changeHandler, 300)` creates a debounced version of the event handled, and `useCallback(debounce(changeHandler, 300), [])` makes sure to return the same instance of the debounced callback between re-renderings.  
+`debounce(changeHandler, 300)` creates a debounced version of the event handler, and `useCallback(debounce(changeHandler, 300), [])` makes sure to return the same instance of the debounced callback between re-renderings.  
 
 *Note: the approach also works with creating throttled functions, e.g. `useCallback(throttle(callback, time), [])`.*
 
@@ -181,7 +181,7 @@ export function FilterList({ names }) {
 
 *This approach also works with creating throttled functions: `useMemo(() => throttle(callback, time), [])`.*
 
-Open the [demo](https://codesandbox.io/s/use-memo-debouncing-jwsog?file=/src/FilterList.js) and check that typing into the input field is still debounced. 
+Open the [demo](https://codesandbox.io/s/use-memo-debouncing-jwsog?file=/src/FilterList.js) and check if typing into the input field is still debounced. 
 
 *Note: Currently `useMemo()` re-calculates the memoized value only when the deps change. But possibly in the future React [could "forget"](https://reactjs.org/docs/hooks-reference.html#usememo) time to time the memoized value, which could lead to re-recreation of debounced callbacks even if the deps haven't changed. The `useCallback` solution presented above doesn't have this nuance.*
 
@@ -284,4 +284,4 @@ useCallback(debouncedCallback, [dep1, dep2, ..., depN])
 useMemo(() => debouncedCallback, [dep1, dep2, ..., depN])
 ```
 
-*What events, in your opinion, worth debouncing and throttling?*
+*What events in your opinion are worth debouncing and throttling?*
