@@ -125,7 +125,7 @@ const result = '5+2+1'.replace(searchRegExp, replaceWith);
 
 The above snippet tries to transform the search string `'+'` into a regular expression. But `'+'` is an invalid regular expression, thus `SyntaxError: Invalid regular expression: /+/` is thrown.  
 
-Escaping the character `'\\+'` solves the problem. 
+Escaping the character `'\\+'` solves the problem. [Try the fixed demo](https://jsfiddle.net/dmitri_pavlutin/32wrdafe/2/).
 
 ### 2.2 *replace()* with a string
 
