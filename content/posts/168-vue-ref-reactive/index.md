@@ -51,7 +51,7 @@ const objectReactive = reactive({ count: 0}); // OK
 
 Calling `reactive(0)` with a primitive value is incorrect. Don't do this. If you need to make reactive primitive values, `ref(0)` is the way to go.  
 
-The reason why `reactive()` works only with objects is in Vue's reactivity implementation. [Vue uses Proxies](https://github.com/vuejs/core/blob/main/packages/reactivity/src/reactive.ts#L212) to intercept property changes on objects. However, proxies do not work with primitives.  
+The reason why `reactive()` works only with objects is in Vue's reactivity implementation. [Vue uses Proxies](https://github.com/vuejs/core/blob/main/packages/reactivity/src/reactive.ts#L212) to intercept property changes on objects. And proxies do not work with primitives.  
 
 Nevertheless, `reactive({ count: 0})` initialized with an object is perfectly valid and creates a reactive object. 
 
@@ -83,7 +83,7 @@ console.log(objectRef.value.count); // logs 0
 
 Also, `objectRef.value.count` is how you can access a property of an object in ref.
 
-In the template below, you don't have to use `.value` to access a ref value. This is also called ref auto-unwrapping in templates:
+Note that inside templates you don't have to use `.value` to access a ref value: they're auto-unwrapped.  
 
 ```vue {6}
 <script setup>
@@ -98,7 +98,7 @@ const numberRef = ref(0)
 
 [Open the demo.](https://codesandbox.io/s/ref-unwrapping-template-hp5ixh?file=/src/App.vue)
 
-`{{ numberRef }}` reads the ref value directly.  
+In the interpolation `{{ numberRef }}` the ref is auto-unwrapped. 
 
 ### 2.2 reactive()
 
@@ -113,7 +113,7 @@ console.log(objectReactive.count) // logs 0
 
 Accessing reactive data created using `reactive({ count: 0} )` doesn't need additional syntax and is done directly: `objectReactive.count`.  
 
-The reactive object returned by `reactive(originalObject)` is a proxy object of `originalObject`. This means that the reactive object has the same properties (aka has the same interface) as the `originalObject`.
+The reactive object returned by `reactive(originalObject)` is a proxy object of `originalObject`. Meaning that the reactive object has the same properties (aka has the same interface) as the `originalObject`.
 
 In conclusion:
 
@@ -121,7 +121,7 @@ In conclusion:
 
 ## 3. Reassigning data
 
-`ref()` is accessed and updated using `.value` property, while `reactive()` is a proxy of the original object: thus `ref()` can be reassigned to an new object, while `reactive()` cannot.  
+`ref()` is accessed and updated using `.value` property, while `reactive()` is a proxy of the original object. As result `ref()` can be reassigned to an new object, while `reactive()` cannot.  
 
 ### ref()
 
@@ -144,7 +144,7 @@ Open the demo, and see that replacing entirely the ref value `objectRef.value = 
 
 ### reactive()
 
-Reassigning entirely the reactive object in case of `reactive()`, however, is not possible:
+Reassigning entirely a `reactive()` object, however, is not possible:
 
 ```vue {5}
 <script setup>
@@ -159,7 +159,7 @@ onMounted(() => objectReactive = { count: 1 })
 
 [Try the demo.](https://codesandbox.io/s/reactive-reassign-dpf9yf?file=/src/App.vue)
 
-Open the demo, and see that replacing entirely the reactive object value `objectReactive = { count: 1 }` after mounting is not reflected in the output. Doing so would break the reactivity of `objectReactive`.  
+Open the demo, and see that replacing entirely the reactive object value `objectReactive = { count: 1 }` after mounting is not reflected in the output. Doing so breaks the reactivity of `objectReactive`.  
 
 In conclusion:
 
@@ -169,9 +169,9 @@ In conclusion:
 
 ### ref()
 
-A direct consequence of ref data being accessed through `.value` property is refs typing.  
+A direct consequence of ref data being accessed through `.value` property is how refs are typed.  
 
-To annotate a ref you need to use a special type `Ref`, which is available for importing from `vue` library:
+To annotate a ref you need to use a special type `Ref`, available for importing from `vue` library:
 
 ```ts
 import { ref, Ref } from 'vue'
@@ -196,7 +196,7 @@ const isEven = useIsEven(numberRef) // type check passed
 
 ### reactive()
 
-On the other hand, reactive data returned by `reactive()` is typed like the initial object:
+On the other hand, reactive data returned by `reactive()` is typed as the initial object:
 
 ```ts
 import { reactive } from 'vue'
@@ -204,11 +204,9 @@ import { reactive } from 'vue'
 const objectReactive: { count: number } = reactive({ count: 0})
 ```
 
-`reactive({ count: 0})` returns an object of type `{ count: number }`, which exactly represents the reactive object. 
+`reactive({ count: 0})` returns an object of type `{ count: number }`. The reactive object normally keeps the type of the original object.  
 
-The reactive object normally keeps the type of the original object.  
-
-But there's one exception: if the reactive object contains refs, then these refs are unwrapped:
+But there's one exception &mdash; if the reactive object contains refs, then these refs are unwrapped.
 
 ```ts
 import { reactive, ref } from 'vue'
@@ -228,7 +226,7 @@ In conclusion:
 
 ### ref()
 
- `watch()` without problems determines if `.value` property of the ref was changed:
+ `watch()` determines if `.value` property of the ref is changed:
 
 ```ts {4-6}
 <script setup>
@@ -274,9 +272,9 @@ const increase = () => countObjectRef.value.count++
 
 This time, however, if you click the "Increase" button there will be no message in the console! The conclusion is that `watch()` doesn't deeply watch refs by default.  
 
-However, DOM still updates when `countObjectRef.value.count`: which means the object in the ref is still reactive in regards to the rendered output.  
+However, DOM still updates when `countObjectRef.value.count` changes: which means the object in the ref is still reactive in regards to the rendered output.  
 
-Of course, if you ask `watch()` to watch the ref deeply, it's going to work as expected:
+Of course, if you ask `watch()` to watch the ref deeply, it's working as full deep watch:
 
 ```ts {4}
 // ...

@@ -45,7 +45,7 @@ function MyComponent() {
 
 There are 2 rules to remember about references:  
 
-1. The value of the reference is *persisted* (stays the same) between component re-renderings;  
+1. The value of the reference is *persisted* (remains unchanged) between component re-renderings;  
 2. Updating a reference *doesn't trigger a component re-rendering*.
 
 Now, let's see how to use `useRef()` in practice.  
@@ -73,13 +73,13 @@ function LogButtonClicks() {
 
 [Try the demo.](https://codesandbox.io/s/logging-button-clicks-reference-ogcnc?file=/src/App.js)
 
-`const countRef = useRef(0)` creates a references `countRef` initialized with `0`.  
+`const countRef = useRef(0)` creates a reference `countRef` initialized with `0`.  
 
 When the button is clicked, `handle` callback is invoked and the reference value is incremented: `countRef.current++`. Then the reference value is logged to the console.  
 
 Updating the reference value `countRef.current++` doesn't trigger component re-rendering. This is demonstrated by the fact that `'I rendered!'` is logged to the console just once, at initial rendering, and no re-rendering happens when the reference is updated.    
 
-Now a reasonable question: what's the main difference between references and state?  
+Now a reasonable question: what's the main difference between reference and state?  
 
 #### Reference and state diff
 
@@ -194,7 +194,7 @@ function AccessingElement() {
 
 [Try the demo.](https://codesandbox.io/s/access-dom-element-hrh78?file=/src/App.js)
 
-### 2.1 Use case: focusing an input
+### 2.1 Use case: focusing on an input
 
 You would need to access DOM elements, for example, to focus on the input field when the component mounts.  
 
