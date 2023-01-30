@@ -1,5 +1,5 @@
 ---
-title: "3 Ways to Check If an Object Has a Property in JavaScript"
+title: "3 Ways to Check If an Object Has a Property/Key in JavaScript"
 description: "The 3 ways to check if an object has a property or key in JavaScript: hasOwnProperty() method, in operator, comparing with undefined."
 published: "2020-06-16T09:00Z"
 modified: "2023-01-25"
