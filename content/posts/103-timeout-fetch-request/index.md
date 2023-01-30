@@ -2,7 +2,7 @@
 title: "How to Timeout a fetch() Request"
 description: "How to use setTimeout(), the abort controller, and fetch() API to make requests with a configurable timeout."
 published: "2020-10-27T09:00Z"
-modified: "2020-12-03T08:00Z"
+modified: "2023-01-30"
 thumbnail: "./images/cover-2.png"
 slug: timeout-fetch-request
 tags: ['fetch']
@@ -10,9 +10,9 @@ recommended: ['javascript-fetch-async-await', 'javascript-async-await']
 type: post
 ---
 
-When developing an application that uses the network, the first rule to remember is *don't rely on the network*.  
+The first rule to remember when working with the network is *don't rely on the network*.  
 
-The network is unreliable because an HTTP request or response can fail for many reasons: 
+The network is unreliable because an HTTP request or response can fail: 
 
 * The user is offline
 * DNS lookup failed
@@ -22,7 +22,7 @@ The network is unreliable because an HTTP request or response can fail for many 
 
 Users are OK to wait up to 8 seconds for simple requests to complete. That's why you need to set a timeout on the network requests and inform the user after 8 seconds about the network problems.  
 
-I'm going to show you how to use `setTimeout()`, the abort controller, and `fetch()` API to make requests with a configurable timeout time (interesting demos included!).
+I'll show you how to use `setTimeout()`, the abort controller, and `fetch()` to implement configurable request timeouts.  
 
 ## 1. Default fetch() timeout
 
@@ -37,9 +37,9 @@ async function loadGames() {
 }
 ```
 
-300 seconds and even 90 seconds are way more than a user would expect a simple network request to complete.  
+300 seconds and even 90 seconds are way more than a user would expect a network request to complete.  
 
-In the [demo](https://codesandbox.io/s/strange-merkle-xqs7n?file=/src/index.html:271-470) the `/games` URL was configured to respond in 301 seconds. Click *Load games* button to start the request, and it will timeout at 300 seconds (in Chrome).  
+As an experiment, in the [demo](https://codesandbox.io/s/strange-merkle-xqs7n?file=/src/index.html:271-470) the `/games` API response takes 301 seconds. Click *Load games* button to start the request, and it will timeout at 300 seconds (in Chrome).  
 
 ## 2. Timeout a fetch() request
 
@@ -66,13 +66,13 @@ async function fetchWithTimeout(resource, options = {}) {
 
 First, `const { timeout = 8000 } = options` extracts the timeout param in milliseconds from the `options` object (defaults to 8 seconds).   
 
-`const controller = new AbortController()` creates an instance of the [abort controller](https://developer.mozilla.org/en-US/docs/Web/API/AbortController). This controller lets you stop `fetch()` requests at will. Note that for each request a new abort controlled must be created, in other words, controllers aren't reusable.   
+`const controller = new AbortController()` creates an instance of the [abort controller](https://developer.mozilla.org/en-US/docs/Web/API/AbortController). This controller lets you stop `fetch()` requests at will. A new abort controlled must be created for each request, in other words, controllers aren't reusable.   
 
-`const id = setTimeout(() => controller.abort(), timeout)` starts a timing function. After `timeout` time, if the timining function wasn't cleared, `controller.abort()` is going to abort (or cancel) the fetch request.  
+`const id = setTimeout(() => controller.abort(), timeout)` starts a timing function. After `timeout` time, if the timining function wasn't cleared, `controller.abort()` cancels the fetch request.  
 
 Next line `await fetch(resource, { ...option, signal: controller.signal })` starts properly the fetch request. Note the special `controller.signal` value assigned to `signal` property: it connectes `fetch()` with the abort controller.  
 
-Finally, `clearTimeout(id)` clears the abort timing function if the request completes faster than `timeout` time.  
+Finally, `clearTimeout(id)` clears the abort timing function if the request completes earlier than `timeout` time passed.  
 
 Now here's how to use `fetchWithTimeout()`:
 
@@ -92,6 +92,8 @@ async function loadGames() {
 }
 ```
 
+[Try the demo.](https://codesandbox.io/s/stoic-dust-cctin?file=/src/index.html)
+
 `fetchWithTimeout()` (instead of simple `fetch()`) starts a request that cancels at `timeout` time &mdash; 6 seconds.
 
 If the request to `/games` hasn't finished in 6 seconds, then the request is canceled and a timeout error is thrown.
@@ -102,14 +104,14 @@ Open the [demo](https://codesandbox.io/s/stoic-dust-cctin?file=/src/index.html) 
 
 ## 3. Summary
 
-By default a `fetch()` request timeouts at the time setup by the browser. In Chrome, for example, this setting equals 300 seconds. That's way longer than a user would expect for a simple network request to complete.  
+By default a `fetch()` request timeouts at the time setup by the browser. In Chrome, for example, this setting equals 300 seconds. That's way longer than a user would expect for a network request to complete.  
 
 A good approach when making network requests is to configure a request timeout of about 8 - 10 seconds.  
 
-As shown in the post, using `setTimeout()` and abort controller you can create `fetch()` requests configured to timeout when you'd like to.  
+Using `setTimeout()` and abort controller you can create `fetch()` requests configured to timeout when you'd like to.  
 
-Check the [browser support](https://caniuse.com/?search=abort%20controller) of the abort controller because as of 2020 it is an experimental technology. There's also a [polyfill](https://github.com/mo/abortcontroller-polyfill) for it.  
+Check the [browser support](https://caniuse.com/?search=abort%20controller) of the abort controller. There's also a [polyfill](https://github.com/mo/abortcontroller-polyfill) for it.  
 
-Please note that without the use of an abort controller there's no way you can stop a `fetch()` request. Don't use solutions like [this](https://stackoverflow.com/a/46946573/1894471).  
+Note that without the use of an abort controller there's no way you can stop a `fetch()` request. Don't use solutions like [this](https://stackoverflow.com/a/46946573/1894471).  
 
-*What other good practices regarding network requests do you know?*
+*What good practices regarding network requests do you know? Please write a comment!*
