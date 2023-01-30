@@ -181,7 +181,7 @@ export function FilterList({ names }) {
 
 *This approach also works with creating throttled functions: `useMemo(() => throttle(callback, time), [])`.*
 
-Open the [demo](https://codesandbox.io/s/use-memo-debouncing-jwsog?file=/src/FilterList.js) and check if that typing into the input field is still debounced. 
+Open the [demo](https://codesandbox.io/s/use-memo-debouncing-jwsog?file=/src/FilterList.js) and check if typing into the input field is still debounced. 
 
 *Note: Currently `useMemo()` re-calculates the memoized value only when the deps change. But possibly in the future React [could "forget"](https://reactjs.org/docs/hooks-reference.html#usememo) time to time the memoized value, which could lead to re-recreation of debounced callbacks even if the deps haven't changed. The `useCallback` solution presented above doesn't have this nuance.*
 
