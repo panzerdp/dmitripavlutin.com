@@ -130,7 +130,7 @@ When you change the component's data, Vue updates the DOM asynchronously.
 
 If you want to catch the moment when DOM has been updated after the component's data change, then you need to use `nextTick(callback)` or `this.$nextTick(callback)` (options API) functions.  
 
-Their single `callback` argument is going to be invoked right after DOM updates: and you are guaranteed to get the latest DOM in sync with the component's data.    
+Their single `callback` argument is invoked right after DOM update: and you are guaranteed to get the latest DOM in sync with the component's data.    
 
 Alternatively, if you don't supply the callback argument to `nextTick()`: then the functions would return a promise that's being resolved when DOM is updated. 
 
