@@ -18,7 +18,7 @@ toHeading: 2
 
 ## 1. Splitting and joining an array
 
-If you google how to "replace all string occurrences in JavaScript", most likely the first approach you'd find is to use an intermediate array.  
+If you google how to "replace all string occurrences in JavaScript", the first approach you are likely to find is to use an intermediate array.  
 
 Here's how it works:
 
@@ -50,7 +50,7 @@ console.log(result); // => 'duck-duck-go'
 
 Then the pieces  `['duck', 'duck', 'go'].join('-')` are joined by inserting `'-'` in between them, which results in the string `'duck-duck-go'`.  
 
-Here's a generalized helper function that uses splitting and joining approach:
+Here's a generalized helper function that uses splitting and joining approaches:
 
 ```javascript
 function replaceAll(string, search, replace) {
@@ -70,9 +70,9 @@ This approach requires transforming the string into an array, and then back into
 
 The string method `string.replace(regExpSearch, replaceWith)` searches and replaces the occurrences of the regular expression `regExpSearch` with `replaceWith` string.  
 
-To make the method `replace()` replace all occurrences of the pattern you have to enable the global flag on the regular expression:
+To make the method `replace()` replace all occurrences of the pattern - you have to enable the global flag on the regular expression:
 
-1) Append `g` after at the end of regular expression literal: `/search/g`
+1) Append `g` to the end of regular expression literal: `/search/g`
 2) Or when using a regular expression constructor, add `'g'` to the second argument: `new RegExp('search', 'g')`  
 
 Let's replace all occurrences of `' '` with `'-'`:
@@ -164,18 +164,18 @@ console.log(result); // => 'duck-duck-go'
 
 `string.replaceAll(search, replaceWith)` is the best way to replace all string occurrences in a string 
 
-Note that currently, the method [support](https://caniuse.com/#search=replaceAll) in browsers is limited, and you might require a [polyfill](https://github.com/es-shims/String.prototype.replaceAll).  
+Note that browser [support](https://caniuse.com/#search=replaceAll) for this method is currently limited, and you might require a [polyfill](https://github.com/es-shims/String.prototype.replaceAll).  
 
 ### 3.1 The difference between *replaceAll()* and *replace()*
 
-The string methods `replaceAll(search, replaceWith)` and `replace(search, replaceWith)` work the same way, expect 2 things:
+The string methods `replaceAll(search, replaceWith)` and `replace(search, replaceWith)` work the same way, except 2 things:
 
-1) If `search` argument is a string, `replaceAll()` replaces *all occurrences* of `search` with `replaceWith`, while `replace()` *only the first occurence*  
+1) If `search` argument is a string, `replaceAll()` replaces *all occurrences* of `search` with `replaceWith`, while `replace()` replaces *only the first occurence*  
 2) If `search` argument is a non-global regular expression, then `replaceAll()` throws a `TypeError` exception.  
 
 ## 4. Key takeaway
 
-The first approach to replace all occurrences is to split the string into chunks by the search string, the join back the string placing the replace string between chunks: `string.split(search).join(replaceWith)`. This approach works, but it's hacky.
+The first approach to replacing all occurrences is to split the string into chunks by the search string and then join back the string, placing the replace string between the chunks: `string.split(search).join(replaceWith)`. This approach works, but it's hacky.
 
 Another approach is to use `string.replace(/SEARCH/g, replaceWith)` with a regular expression having the global flag enabled. 
 
@@ -183,6 +183,6 @@ Unfortunately, you cannot easily generate regular expressions from a string at r
 
 Finally, the string method `string.replaceAll(search, replaceWith)` replaces all string occurrences. 
 
-My recommendation is to use `string.replaceAll()` to replace strings.  
+I recommend using string.replaceAll() to replace strings.  
 
 *What other ways to replace all string occurrences do you know? Please share in a comment below!*
