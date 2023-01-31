@@ -50,7 +50,7 @@ console.log(result); // => 'duck-duck-go'
 
 Then the pieces  `['duck', 'duck', 'go'].join('-')` are joined by inserting `'-'` in between them, which results in the string `'duck-duck-go'`.  
 
-Here's a generalized helper function that uses splitting and joining approaches:
+Here's a generalized helper function that uses splitting and joining approach:
 
 ```javascript
 function replaceAll(string, search, replace) {
