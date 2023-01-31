@@ -119,9 +119,9 @@ You can hold inside the context:
 
 On the other side, you should think carefully before deciding to use context in your application.  
 
-First, integrating the context adds complexity. Creating the context, wrapping everything in the provider, and using the `useContext()` in every consumer &mdash; increases complexity.  
+First, integrating the context adds complexity. Creating a context, wrapping everything in a provider, and using the `useContext()` in every consumer &mdash; increases complexity.  
 
-Secondly, adding context makes it more difficult to unit test the components. During testing, you'd have to wrap the consumer components into a context provider. Including the components that are indirectly affected by the context &mdash; the ancestors of context consumers!  
+Secondly, adding context complicates unit testing of components. During testing, you'll have to wrap the consumer components into a context provider. Including the components that are indirectly affected by the context &mdash; the ancestors of context consumers!  
 
 ## 3. Use case: global user name
 
@@ -283,7 +283,7 @@ function Application() {
 
 [Try the demo.](https://codesandbox.io/s/react-context-example-change-hw32y?file=/src/Application.js)
 
-Open the [demo](https://codesandbox.io/s/react-context-example-change-hw32y?file=/src/Application.js) and you'd see `'John Smith'` (context value) displayed on the screen. After 2 seconds, the context value changes to `'Smith, John Smith'`, and correspondingly the screen is updated with the new value.  
+Open the [demo](https://codesandbox.io/s/react-context-example-change-hw32y?file=/src/Application.js) and you'll see `'John Smith'` (context value) displayed on the screen. After 2 seconds, the context value changes to `'Smith, John Smith'`, and correspondingly the screen is updated with the new value.  
 
 The demo shows that `<UserInfo />` component, the consumer that renders the context value on the screen, re-renders when the context value changes.  
 
@@ -350,7 +350,7 @@ function UserInfo() {
 
 `<UserInfo />` is another consumer of the context. When `<UserNameInput />` updates the context, this component is updated too.  
 
-Note that `<Application />` memoizes the context value. Memoization keeps the context value object the same as long as `userName` is the same, preventing re-rendering of consumers every time the `<Application />` re-renders.  
+Note that `<Application />` memoizes the context value. Memoization keeps the context value object unchanged as long as `userName` remains the same, preventing re-rendering of consumers every time the `<Application />` re-renders.  
 
 Otherwise, without memoization, `const value = { userName, setUserName }` would create different object instances during re-rendering of `<Application />`, triggering re-rendering in context consumers. See more about [referential equality of objects](/how-to-compare-objects-in-javascript/#1-referential-equality).
 
