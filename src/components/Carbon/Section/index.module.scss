@@ -8,4 +8,9 @@
   box-sizing: border-box;
   min-height: 190px;
   width: 100%;
+
+  @media (max-width: 600px) {
+    min-height: 135px;
+    padding: 0.5rem;
+  }
 }
