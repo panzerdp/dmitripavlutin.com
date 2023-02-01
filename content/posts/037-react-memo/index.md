@@ -14,7 +14,7 @@ Users enjoy fast and responsive user interfaces (UI). A UI response delay of few
 
 To improve user interface performance, React offers a higher-order component `React.memo()`. When `React.memo()` wraps a component, React memoizes the rendered output of the wrapped component and then skips unnecessary renderings.  
 
-This post describes the situations where `React.memo()` improves the performance, and, not less importantly, warns when its use is useless.  
+This post describes the situations where `React.memo()` improves the performance, and, not less importantly, warns when its usage is useless.  
 
 In addition, I'll describe some useful memoization tips you should be aware of.  
 
