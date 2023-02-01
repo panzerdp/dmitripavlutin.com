@@ -2,7 +2,7 @@
 title: "Prototypal Inheritance in JavaScript"
 description: "The guide on prototypal inheritance in JavaScript: prototype object, inherited propertes, chain of prototypes."
 published: "2020-11-03T10:00Z"
-modified: "2021-11-20T18:00Z"
+modified: "2023-02-01"
 thumbnail: "./images/cover-2.png"
 slug: javascript-prototypal-inheritance
 tags: ['javascript', 'prototype', 'inheritance']
@@ -195,12 +195,10 @@ The secret is that `class` syntax in JavaScript is [syntactic sugar](https://en.
 The above `class`-based code snippet is equivalent to the following:
 
 ```javascript
-const pet = {
-  legs: 4
-};
+const pet = { };
 
 function CreatePet(sound) {
-  return { sound, __proto__: pet };
+  return { sound, __proto__: pet, legs: 4 };
 }
 CreatePet.prototype = pet;
 
