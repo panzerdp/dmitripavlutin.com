@@ -32,7 +32,7 @@ In this post, I'm going to explain how to use correctly `useCallback()`.
 
 ## 1. Understanding functions equality check
 
-Before diving into `useCallback()` usage, let's distinguish the problem `useCallback()` solves &mdash; the functions equality check.    
+Before diving into `useCallback()` use, let's distinguish the problem `useCallback()` solves &mdash; the functions equality check.    
 
 Functions in JavaScript are first-class citizens, meaning that a function is a regular object. The function object can be returned by other functions, be compared, etc.: anything you can do with an object.  
 
@@ -58,7 +58,7 @@ console.log(sumFunc1 === sumFunc1); // => true
 
 The functions `sumFunc1` and `sumFunc2` share the same code source, but they are different function objects. Comparing them `sumFunc1 === sumFunc2` evaluates to `false`.  
 
-That's just how JavaScript objects works. An object (including a function object) [equals](/the-legend-of-javascript-equality-operator/#the-identity-operator) only to itself.  
+That's just how JavaScript objects work. An object (including a function object) [equals](/the-legend-of-javascript-equality-operator/#the-identity-operator) only to itself.  
 
 ## 2. The purpose of useCallback()
 
@@ -168,11 +168,11 @@ function MyChild ({ onClick }) {
 }
 ```
 
-The first problem is that `useCallback()` hook is called every time `MyComponent` renders. That reduces the render performance already.  
+The first problem is that `useCallback()` hook is called every time `MyComponent` renders. This already reduces the render performance.  
 
-The second problem is using `useCallback()` increases code complexity. You have to keep the `deps` of `useCallback(..., deps)` in sync with what you're using inside the memoized callback.  
+The second problem is that using `useCallback()` increases the complexity of the code. You have to keep the `deps` of `useCallback(..., deps)` in sync with what you're using inside the memoized callback.  
 
-Does it worth using `useCallback()`? Most likely not because `<MyChild>` component is light and its re-rendering doesn't create performance issues. *The optimization costs more than not having the optimization*.  
+Does it worth using `useCallback()`? Most likely not because `<MyChild>` component is light, and its re-rendering doesn't create performance issues. *The optimization costs more than not having the optimization*.  
 
 Simply *accept* that rendering creates new function objects:
 
@@ -198,7 +198,7 @@ When thinking about performance tweaks, recall the [statement](https://wiki.c2.c
 
 > Profile before optimizing
 
-When deciding to use an optimization technique, like memoization with `useCallback()`, do:
+When deciding to use an optimization technique, such as memoization with `useCallback()`, do:
 
 1. [Profile](https://developer.chrome.com/docs/devtools/evaluate-performance/)
 2. Quantify the increased performance (e.g. `150ms` vs `50ms` render speed increase)
