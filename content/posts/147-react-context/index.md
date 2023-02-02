@@ -2,7 +2,7 @@
 title: "A Guide to React Context and useContext() Hook"
 description: "The React context provides data to components no matter how deep they are in the components hierarchy."
 published: "2021-09-02T11:00Z"
-modified: "2023-01-27"
+modified: "2023-02-02"
 thumbnail: "./images/cover.png"
 slug: react-context-and-usecontext
 tags: ['react', 'context', 'hook']
@@ -319,8 +319,12 @@ function Application() {
   
   return (
     <UserContext.Provider value={value}>
-      <UserNameInput />
-      <UserInfo />
+      {useMemo(() => (
+        <>
+          <UserNameInput />
+          <UserInfo />
+        </>
+      ), [])}
     </UserContext.Provider>
   );
 }
