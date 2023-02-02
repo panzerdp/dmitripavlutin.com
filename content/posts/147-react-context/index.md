@@ -302,7 +302,7 @@ But this can be easily implemented by integrating a state management mechanism (
 
 In the following example, `<Application />` component uses `useState()` hook to manage the context value. 
 
-```jsx{9-12,15,23}
+```jsx{9-12,15}
 import { createContext, useState, useContext, useMemo } from 'react';
 
 const UserContext = createContext({
