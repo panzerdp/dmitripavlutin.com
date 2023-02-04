@@ -12,7 +12,7 @@ type: post
 
 Many developers appreciate Ruby programming language because of the rich standard utility libraries. For example, the [array in Ruby](https://ruby-doc.org/core-3.0.2/Array.html) has a huge number of methods.  
 
-JavaScript step by step also enriches its standard library on strings and arrays. For example, in a previous post, I described
+JavaScript also enriches its standard library on strings and arrays step by step. For example, in a previous post, I described
 the new [array.at()](/javascript-array-at/) method.  
 
 Today's hero is the new [array group proposal](https://github.com/tc39/proposal-array-grouping) (currently at stage 3) that introduces new methods `array.groupBy()` and `array.groupByToMap()`. Their [polyfills](https://github.com/zloirock/core-js#array-grouping) are available in `core-js` library.  
@@ -118,7 +118,7 @@ const groupedObject = array.groupBy((item, index, array) => {
 
 So, if you'd like to group data into a `Map`, you can use the method `array.groupByToMap()`. 
 
-`array.groupByToMap(callback)` works exactly like `array.groupBy(callback)`, only that it groups items into a `Map` instead of a plain JavaScript object.  
+`array.groupByToMap(callback)` works the same way as `array.groupBy(callback)`, only that it groups items into a `Map` instead of a plain JavaScript object.  
 
 For example, grouping the products array into a map by category name is performed as follows:
 
