@@ -28,8 +28,55 @@ Let's see how you can access the environmnet variables (either OS or Node.js spe
 
 ## 1. *process.env* object
 
-Let's say that you use the following command to execute a JavaSciprt file:
+When executing a JavaScript file in a Node environment, `process.env` is a special object that contains all the environment variables accessible to the script.  
+
+The keys are the env variable names, while the values are the env variable values.  
+
+The following command uses Node.js to execute a JavaScript file `main.js` in the command line:
+
+```bash
+NODE_ENV=production node main.js
+```
+
+And let's say that `/home/dmitri/main.js` file contains the following code:
+
+```javascript
+// main.js
+console.log(process.env.USER); // dmitri
+console.log(process.env.PWD);  // '/home/dmitri/
+
+console.log(process.env.NODE_ENV); // production
+```
+
+`process.env.USER` accesses the operating system user name that executes the command. 
+
+`process.env.PWD` contains the absolute path to the folder of where the executed file (`main.js`) is located. 
+
+These environment variables are taken from the environment of the operating system.  
+
+`process.env.NODE_ENV` variable, however, is defined by the prefix `NODE_ENV=production` of the command `NODE_ENV=production node main.js`.  
+
 
 ## 2. *import.meta* object
 
-## 3. Conclusion
+In an ES module you use `import.meta` to access the environment variables. `import.meta` is a special keyword available only inside the scope of an ES module.  
+
+```bash
+NODE_ENV=production node main.mjs
+```
+
+And let's say that `/home/dmitri/main.mjs` file contains the following code:
+
+```javascript
+// main.mjs
+console.log(import.meta.USER); // dmitri
+console.log(import.meta.PWD);  // '/home/dmitri/
+
+console.log(import.meta.NODE_ENV); // production
+```
+
+Same way as in the previous chapter, `import.meta.USER` accesses the user name, `import.meta.PWD` contains the absolute path to the folder where the executed file (`main.js`) is located, and `import.meta.NODE_ENV` is the env variable defined inside the command itself.
+
+## 3. Accessing env variables in a browser environment
+
+## 4. Conclusion
