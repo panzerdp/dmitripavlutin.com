@@ -16,3 +16,15 @@ refs in Vue composition API are the primary blocks of reactivity. And knowing re
 
 In this post I'm going to help you understand all the details that you need to know about Vue refs to work them very efficiently. Let's get started.  
 
+## 1. ref()
+
+## 2. ref's value
+
+## 3. Watching ref changes
+
+## 4. Implicit refs creation
+
+## 5. Shallow refs
+
+## 6. Conclusion
+
