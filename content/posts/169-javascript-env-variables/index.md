@@ -56,4 +56,51 @@ These environment variables are taken from the environment of the operating syst
 
 `process.env.NODE_ENV` variable, however, is defined by the prefix `NODE_ENV=production` of the command `NODE_ENV=production node main.js`.  
 
-## 2. Exposing process.env to browser environment
+If you'd like to provide local default values to certain environment variables, then I definetely recommend you to check the [dotenv](https://github.com/motdotla/dotenv) project.
+
+## 2. *process.env* in a browser environment
+
+The environment variables are accessible to scripts running in the command line interface (CLI) mode.  
+
+However, something you might find it useful to access a certain environment variable during the runtime of your application.  
+
+Exposing certain environment variables can be done using the specific bundler you're using.  
+
+### 2.1 Vite
+
+Vite exposes a predefined set of variables using `import.meta.env` object. 
+
+There's a list of predefined variables: 
+
+* `import.meta.env.MODE`: is either `'develpment'` or `'production'`
+* `import.meta.env.PROD`: is `true` in production mode
+* `import.meta.env.DEV`: is `true` in development mode
+* `import.meta.env.SSR`: is a boolean indicating if the app runs on the server side
+* `import.meta.env.BASE_URL`: the base URL
+
+On top of that, Vite can load variables from `.env` file:
+
+```bash
+VITE_MY_VAR=value
+```
+
+which then you can access in the browser during runtime as `import.meta.env.VITE_MY_VAR`.  
+
+Here is important to note that Vite exposes publicitly only variables that start with `VITE_` prefix.  
+
+Under the hood Vite uses [dotenv](https://github.com/motdotla/dotenv). But you don't have to manually call anything related to dotenv: Vite does everything for you.
+
+In the [demo](https://stackblitz.com/edit/vitejs-vite-61fsdd?file=src%2FApp.vue) the variables provided by Vite are exposed into a webpage.  
+
+Vite has a [detailed guide](https://vitejs.dev/guide/env-and-mode.html) on how to access the environment variables.  
+
+
+## 3. Conclusion
+
+A JavaScript file that is executed in CLI can access the environment variables using the special object `process.env`. 
+
+For example, `process.env.NODE_ENV` contains the value of the `NODE_ENV` variable.  
+
+Normally the environment variables are not available to the web application during runtime in a browser environment. But modern bundlers like Vite can expose certain variables to the application runtime. 
+
+For example Vite exposes the current running mode of the application using `import.meta.env.MODE`.  
