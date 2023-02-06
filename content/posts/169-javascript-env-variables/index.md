@@ -28,7 +28,7 @@ Let's see how you can access the environmnet variables (either OS or Node.js spe
 
 ## 1. *process.env* object
 
-When executing a JavaScript file in a Node environment, `process.env` is a special object that contains all the environment variables accessible to the script.  
+When executing a JavaScript file in a CLI (command line interface) environment, `process.env` contains the environment variables accessible to the script.  
 
 The keys are the env variable names, while the values are the env variable values.  
 
