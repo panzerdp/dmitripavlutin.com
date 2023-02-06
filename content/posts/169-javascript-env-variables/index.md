@@ -43,7 +43,7 @@ And let's say that `/home/dmitri/main.js` file contains the following code:
 ```javascript
 // main.js
 console.log(process.env.USER); // dmitri
-console.log(process.env.PWD);  // '/home/dmitri/
+console.log(process.env.PWD);  // /home/dmitri/
 
 console.log(process.env.NODE_ENV); // production
 ```
@@ -56,27 +56,4 @@ These environment variables are taken from the environment of the operating syst
 
 `process.env.NODE_ENV` variable, however, is defined by the prefix `NODE_ENV=production` of the command `NODE_ENV=production node main.js`.  
 
-
-## 2. *import.meta* object
-
-In an ES module you use `import.meta` to access the environment variables. `import.meta` is a special keyword available only inside the scope of an ES module.  
-
-```bash
-NODE_ENV=production node main.mjs
-```
-
-And let's say that `/home/dmitri/main.mjs` file contains the following code:
-
-```javascript
-// main.mjs
-console.log(import.meta.USER); // dmitri
-console.log(import.meta.PWD);  // '/home/dmitri/
-
-console.log(import.meta.NODE_ENV); // production
-```
-
-Same way as in the previous chapter, `import.meta.USER` accesses the user name, `import.meta.PWD` contains the absolute path to the folder where the executed file (`main.js`) is located, and `import.meta.NODE_ENV` is the env variable defined inside the command itself.
-
-## 3. Accessing env variables in a browser environment
-
-## 4. Conclusion
+## 2. Exposing process.env to browser environment
