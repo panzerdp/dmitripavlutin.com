@@ -62,7 +62,7 @@ If you'd like to provide local default values to certain environment variables, 
 
 The environment variables are accessible to scripts running in the command line interface (CLI) mode.  
 
-However, something you might find it useful to access a certain environment variable during the runtime of your application.  
+But often you might need useful to access a certain environment variable during the runtime of your application.  
 
 Exposing certain environment variables can be done using the specific bundler you're using.  
 
@@ -75,7 +75,7 @@ There's a list of predefined variables:
 * `import.meta.env.MODE`: is either `'develpment'` or `'production'`
 * `import.meta.env.PROD`: is `true` in production mode
 * `import.meta.env.DEV`: is `true` in development mode
-* `import.meta.env.SSR`: is a boolean indicating if the app runs on the server side
+* `import.meta.env.SSR`: is a boolean whether the app runs on server side
 * `import.meta.env.BASE_URL`: the base URL
 
 On top of that, Vite can load variables from `.env` file:
@@ -90,10 +90,53 @@ Here is important to note that Vite exposes publicitly only variables that start
 
 Under the hood Vite uses [dotenv](https://github.com/motdotla/dotenv). But you don't have to manually call anything related to dotenv: Vite does everything for you.
 
-In the [demo](https://stackblitz.com/edit/vitejs-vite-61fsdd?file=src%2FApp.vue) the variables provided by Vite are exposed into a webpage.  
+Open the [demo](https://stackblitz.com/edit/vitejs-vite-61fsdd?file=src%2FApp.vue) and see that the variables provided by Vite are rendered on a webpage.  
 
 Vite has a [detailed guide](https://vitejs.dev/guide/env-and-mode.html) on how to access the environment variables.  
 
+### 2.2 Webpack
+
+Unlike Vite, Webpack out of the box doesn't expose any variables to the web application.  
+
+But it can be easily achieved using the [EnvironmentPlugin](https://webpack.js.org/plugins/environment-plugin/).  
+
+For example, if you'd like to expose the `NODE_ENV` env variable, you can use the following configuration:
+
+```javascript {7}
+// webpack.config.js
+const { EnvironmentPlugin } = require('webpack');
+
+module.exports = {
+  // ...
+  plugins: [
+    // ...
+    new EnvironmentPlugin(['NODE_ENV'])
+  ]
+}
+```
+
+Open the [demo](https://stackblitz.com/edit/webpack-5-react-starter-twfbyv?file=src%2Fapp.tsx) and take a look that `NODE_ENV` variable was exposed by webpack and is rendered on the webpage.  
+
+A nuance with the above configuration is that in case `NODE_ENV` variable is not available in the environment, the plugin will throw an error.  
+
+To assign a default value to variable use a plain JavaScript object with the value being the default value:
+
+```javascript {8}
+// webpack.config.js
+const { EnvironmentPlugin } = require('webpack');
+
+module.exports = {
+  // ...
+  plugins: [
+    // ...
+    new EnvironmentPlugin({
+      NODE_ENV: 'development'
+    })
+  ]
+}
+``` 
+
+With the above configuration, if `NODE_ENV` variable isn't setup, Webpack will simply default `process.env.NODE_ENV` to `development`.  
 
 ## 3. Conclusion
 
