@@ -1,9 +1,9 @@
 ---
-title: "Environment Variables in JavaScript: env.process and import.meta"
-description: "How to access enviroment variables in JavaScript: env.process and import.meta"  
-published: "2023-02-05"
-modified: "2023-02-05"
-thumbnail: "./images/cover-2.png"
+title: "Environment Variables in JavaScript: process.env"
+description: "How to access enviroment variables in JavaScript: process.env"  
+published: "2023-02-07"
+modified: "2023-02-07"
+thumbnail: "./images/environment-variables-javascript-2.png"
 slug: enviroment-variables-javascript
 tags: ['javascript']
 recommended: ['vue-next-tick', 'props-destructure-vue-composition']
@@ -48,15 +48,15 @@ console.log(process.env.PWD);  // /home/dmitri/
 console.log(process.env.NODE_ENV); // production
 ```
 
-`process.env.USER` accesses the operating system user name that executes the command. 
+`process.env.USER` accesses the operating system user name that executes the command. The variable has a value of `'dmitri'` because this is my user name in the operating system.  
 
-`process.env.PWD` contains the absolute path to the folder of where the executed file (`main.js`) is located. 
+`process.env.PWD` contains the absolute path to the folder of where the executed file (`main.js`) is located. Since the executed file path is `/home/dmitri/main.js`, then the current working folder path is `'/home/dmitri/'`.  
 
 These environment variables are taken from the environment of the operating system.  
 
-`process.env.NODE_ENV` variable, however, is defined by the prefix `NODE_ENV=production` of the command `NODE_ENV=production node main.js`.  
+`process.env.NODE_ENV` variable, however, is defined by the prefix `NODE_ENV=production` of the command `NODE_ENV=production node main.js`. 
 
-If you'd like to provide local default values to certain environment variables, then I definetely recommend you to check the [dotenv](https://github.com/motdotla/dotenv) project.
+If you'd like to provide local default values to certain environment variables, then I definetely recommend you to check the [dotenv](https://github.com/motdotla/dotenv) project.  
 
 ## 2. *process.env* in a browser environment
 
