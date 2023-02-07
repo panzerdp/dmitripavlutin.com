@@ -22,21 +22,27 @@ Let's say that a component renders a reactive value to the screen. When the reac
 
 `ref()`, as a part of the composition API, is the API that let's you create a simple reactive value. 
 
-`ref()` is called as a regular function and accept an optional argument as the initial value, and returns a special value called ref (which is in essence a reactive value).  
+`ref()` is called as a regular function and accepts an optional argument as the initial value, and returns a special value called ref (which is in essence a reactive value).  
 
 ```vue
 <script setup>
 import { ref } from 'vue'
 
 const count = ref(0)
+
+console.log(count.value); // 0
 </script>
 ```
 
 In the example above `ref(0)` creates a ref value (which is also a reactive value) initialize with the number `0`. The ref is then stored into the variable `count` for later use.  
 
-`ref()` is a part of the Vue composition API, so you have to use it inside the `<script setup>` tag like was done in the example above.  
+A ref value can be accessed simply by reading the special property `anyRef.value` available on all the refs.  
 
+For example, `count.value` evaluates to the `count` ref value as being `0`. Because `0` was the initial value of the ref.
 
+`ref()` is a part of the Vue composition API, so you have to use it inside the `<script setup>` tag like it was done in the example above.  
+
+Ok, simply creating refs isn't fun. The real magic happens when you change the value of a ref.  
 
 ### 1.1 Non-reactive values
 
@@ -48,15 +54,21 @@ import { ref } from 'vue'
 
 export default defineComponent({
   setup() {
-    const count = ref()
+    const count = ref(0)
 
     return { count }
   }
 })
 </script>
+<template>
+  <button>Increase</button>
+  <div>{{ count }}</div>
+</template>
 ```
 
-The composition API coded insidehe `<script setup>` is usually shorter that using the options API with `setup` method. Thus in the following examples I will use `ref()` directly inside `<script setup>`. Of course, the behavior of `ref()` is exactly the same in `<script setup>` as in `defineComponent({ setup() {...} })`.  
+The composition API coded inside `<script setup>` is usually shorter that using the options API with `setup` method.  In the following examples I will use `ref()` directly inside `<script setup>`. 
+
+Of course, the behavior of `ref()` is exactly the same in `<script setup>` as in `defineComponent({ setup() {...} })`.  
 
 ## 2. ref's value
 
