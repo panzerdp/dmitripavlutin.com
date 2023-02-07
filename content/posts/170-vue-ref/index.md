@@ -22,7 +22,7 @@ Let's say that a component renders a reactive value to the screen. When the reac
 
 `ref()`, as a part of the composition API, is the API that let's you create a simple reactive value. 
 
-`ref()` is called as a regular function and accepts an optional argument as the initial value, and returns a special value called ref (which is in essence a reactive value).  
+`ref()` is called as a regular function and accepts an optional argument as the initial value, then returns a special value called ref (which is the reactive value).
 
 ```vue
 <script setup>
@@ -34,19 +34,44 @@ console.log(count.value); // 0
 </script>
 ```
 
-In the example above `ref(0)` creates a ref value (which is also a reactive value) initialize with the number `0`. The ref is then stored into the variable `count` for later use.  
+In the example above `ref(0)` creates a ref initialize with the number `0`. The ref is then stored into the variable `count` for later use.  
 
-A ref value can be accessed simply by reading the special property `anyRef.value` available on all the refs.  
+A ref value can be accessed simply by reading the special property `count.value` available on all the refs.  
 
-For example, `count.value` evaluates to the `count` ref value as being `0`. Because `0` was the initial value of the ref.
+`count.value` evaluates currently to `0`, because `0` is the initial value of the ref.  
 
 `ref()` is a part of the Vue composition API, so you have to use it inside the `<script setup>` tag like it was done in the example above.  
 
 Ok, simply creating refs isn't fun. The real magic happens when you change the value of a ref.  
 
-### 1.1 Non-reactive values
+What would happen if you change the value of the ref, i.e. update the `count.value`? Let's try to to it in the following example:
 
-### 1.2 A note about *setup()*
+```vue
+<script setup>
+import { ref } from 'vue'
+
+const count = ref(0)
+
+const onClick = () => count.value++
+</script>
+<template>
+  <button @click="onClick">Increase</button>
+  <div>{{ count }}</div>
+</template>
+```
+[Open the demo.]()
+
+Open the demo. You'll see that initially count ref displays `0` on the screen.  
+
+But after a few clicks on the Increase button, you'd notice that the count on the screen increased by the same amount of clicks. 
+
+Cool! 
+
+`count` ref is a reactive value: every time `count.value` changes (), Vue makes sure to update the component and reflect the new value on the screen.  
+
+## 2. A non-reactive value
+
+## 3. *ref()* in *setup()*
 
 ```vue
 <script>
