@@ -140,10 +140,10 @@ With the above configuration, if `NODE_ENV` variable isn't set up, Webpack will 
 
 ## 3. Conclusion
 
-A JavaScript file that is executed in CLI can access the environment variables using the special object `process.env`. 
+A JavaScript file executed in CLI can access the environment variables using the special object `process.env`. 
 
 For example, `process.env.NODE_ENV` contains the value of the `NODE_ENV` variable.  
 
-Normally the environment variables are not available to the web application during runtime in a browser environment. But modern bundlers like Vite can expose certain variables to the application runtime. 
+Normally the environment variables are not available to the web application during runtime in a browser environment. But modern bundlers like Vite and Webpack can expose certain variables.  
 
 For example, Vite exposes the current running mode of the application using `import.meta.env.MODE`.  
