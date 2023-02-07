@@ -27,7 +27,7 @@ const item = fruits[1];
 item; // => 'apple'
 ```
 
-The expression `array[index]` evaluates to the array item located at `index` and is named *property accessor*. As you might know already, the indexing of arrays in JavaScript starts at `0`.  
+The expression `array[index]` evaluates to the array item located at `index` and is named *property accessor*. As you may already know, array indexing in JavaScript starts at `0`.  
 
 In most cases, the square brackets syntax is a good way to access items by a positive index (`>= 0`). It has a simple and readable syntax.  
 
