@@ -71,6 +71,24 @@ Cool!
 
 ## 2. A non-reactive value
 
+Let's make a scientific experiment. Is the ref really necessary? Maybe simple having a `let` variable, and updating it would trigger the same effect?  
+
+Let's take a try in the following example:
+
+```vue
+<script setup>
+let count = 0
+
+const onClick = () => count++
+</script>
+<template>
+  <button @click="onClick">Increase</button>
+  <div>{{ count }}</div>
+</template>
+```
+
+Let's create a variable `let count = 0` intialized with `0`. When the user clicks on the button, inside `onClick` the variable simply increments `count++`.  
+
 ## 3. *ref()* in *setup()*
 
 ```vue
