@@ -92,9 +92,7 @@ Vite has a [detailed guide](https://vitejs.dev/guide/env-and-mode.html) on how t
 
 ### 2.2 webpack
 
-webpack doesn't expose variables to the web application out of the box.  
-
-But it can be easily achieved using the [EnvironmentPlugin](https://webpack.js.org/plugins/environment-plugin/), which is a built-in webpack plugin.  
+The built-in plugin [EnvironmentPlugin](https://webpack.js.org/plugins/environment-plugin/) exposes environment variables in webpack.  
 
 For example, to expose the `NODE_ENV` env variable, you can use the following configuration:
 
