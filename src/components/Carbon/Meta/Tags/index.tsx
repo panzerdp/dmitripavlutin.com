@@ -12,6 +12,7 @@ export default function LayoutCarbonAdsMetaTags({
       <Helmet>
         <link rel="preload" href={scriptSrc} />
         <link rel="preconnect" href="//cdn4.buysellads.net" />
+        <link rel="preconnect" href="//srv.carbonads.net" />
       </Helmet>
     );
   }
