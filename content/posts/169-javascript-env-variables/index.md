@@ -1,6 +1,6 @@
 ---
 title: "Environment Variables in JavaScript: process.env"
-description: "How to access environment variables in JavaScript using process.env."  
+description: "How to access environment variables in JavaScript using process.env and expose them to the browser runtime using bundlers like Vite and webpack."  
 published: "2023-02-08"
 modified: "2023-02-08"
 thumbnail: "./images/environment-variables-javascript-2.png"
