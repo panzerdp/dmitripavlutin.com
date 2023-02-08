@@ -76,7 +76,7 @@ Vite exposes a predefined set of variables through `import.meta.env` object:
 
 On top of that, Vite can also load variables from `.env` file. Under the hood, Vite uses [dotenv](https://github.com/motdotla/dotenv). But you don't have to manually call anything related to dotenv: Vite does everything for you.
 
-For example having an `.env` file like this:
+For example, having an `.env` file like this:
 
 ```bash
 VITE_MY_VAR=value
@@ -140,4 +140,4 @@ For example, `process.env.USER` contains the user name that executes the script.
 
 The environment variables are not available during runtime in a browser. But modern bundlers like Vite and Webpack can expose certain variables.  
 
-For example, Vite exposes the current running mode of the application using `import.meta.env.MODE`. In webpack `EnvironmentPlugin` let's you expose the necessary variables.  
+For example, Vite exposes the current running mode of the application using `import.meta.env.MODE`. In webpack `EnvironmentPlugin` lets you expose the necessary variables.  
