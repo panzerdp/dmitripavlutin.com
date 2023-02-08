@@ -10,7 +10,9 @@ recommended: ['vue-next-tick', 'props-destructure-vue-composition']
 type: post
 ---
 
-Environment variables in JavaScript are helpful to define how your application must behave depending on conditions defined in the environment where the app runs. The environment can be the Operating System, the Docker container, etc.  
+Environment variables in JavaScript can define how your application behaves depending on conditions defined in the environment. 
+
+For example, it's common for an application to run in development or production mode: which is usually defined by some sort of environment variable (usually `NODE_ENV`).  
 
 There's a set of environment variables defined by the OS, for example:
 
@@ -19,7 +21,7 @@ There's a set of environment variables defined by the OS, for example:
 * `PWD`: the current working directory
 * `PATH`: directories to search to execute a command
 
-In regards to JavaScript and Node.js ecosystem, you might find the following variables:
+In regards to JavaScript and Node.js ecosystem, you might find the following variables common:
 
 * `NODE_ENV`: determines if the script runs in development or production mode. Usually takes one of the values: `production`, `prod`, `development`, `dev`, or `test`
 * `PORT`: the port with which the started application should work with
@@ -30,15 +32,15 @@ Let's see how you can access the environment variables (either OS or Node.js spe
 
 When executing a JavaScript file in a CLI (command line interface) environment, `process.env` contains the environment variables accessible to the script.  
 
-The keys are the env variable names, while the values are the env variable values.  
+`process.env` is plain object where the keys are the variables names and values are the variable values.  
 
-The following command uses Node.js to execute a JavaScript file `main.js` in the command line:
+The following command uses Node.js to execute a JavaScript file `/home/dmitri/main.js` in the command line:
 
 ```bash
 NODE_ENV=production node main.js
 ```
 
-And let's say that `/home/dmitri/main.js` file contains the following code:
+Where `main.js` file contains the following code:
 
 ```javascript
 // main.js
@@ -48,29 +50,27 @@ console.log(process.env.PWD);  // /home/dmitri/
 console.log(process.env.NODE_ENV); // production
 ```
 
-`process.env.USER` accesses the operating system user name that executes the command. The variable has a value of `'dmitri'` because this is my user name in the operating system.  
+`process.env.USER` is the operating system user name that executes the command. The variable has a value of `'dmitri'` because this is my OS user name.  
 
-`process.env.PWD` contains the absolute path to the folder where the executed file (`main.js`) is located. Since the executed file path is `/home/dmitri/main.js`, then the current working folder path is `'/home/dmitri/'`.  
+`process.env.PWD` contains the absolute path to the directory where the executed file (`main.js`) is located. Since the executed file path is `/home/dmitri/main.js`, then the current working directory path is `'/home/dmitri/'`.  
 
-These environment variables are taken from the environment of the operating system.  
+These above variables are taken from the environment of the operating system.  
 
-`process.env.NODE_ENV` variable, however, is defined by the prefix `NODE_ENV=production` of the command `NODE_ENV=production node main.js`. 
+`process.env.NODE_ENV` variable equals `'production'`. This variable, contrary to the 2 above, is defined by the prefix `NODE_ENV=production` of the command `NODE_ENV=production node main.js`. 
 
 If you'd like to provide local default values to certain environment variables, then I recommend you to check the [dotenv](https://github.com/motdotla/dotenv) project.  
 
 ## 2. *process.env* in a browser environment
 
-The environment variables are accessible to scripts running in the command line interface (CLI) mode.  
+The environment variables, including `process.env`, are accessible to scripts running in the CLI.  
 
-To access a certain environment variable during the runtime of your application requires additional steps.  
+But if you run the same script in a browser environment, then `process.env` is not available. The browser doesn't define `process.env`.  
 
-Exposing certain environment variables can be done using the specific bundler you're using.  
+Fortunately, *exposing* environment variables to the runtime in the browser can be done using bundlers. Let's see how it's done using Vite and Webpack.   
 
 ### 2.1 Vite
 
-Vite exposes a predefined set of variables using `import.meta.env` object. 
-
-There's a list of predefined variables: 
+Vite exposes a predefined set of variables using `import.meta.env` object:
 
 * `import.meta.env.MODE`: is either `'development'` or `'production'`
 * `import.meta.env.PROD`: is `true` in production mode
@@ -78,29 +78,29 @@ There's a list of predefined variables:
 * `import.meta.env.SSR`: is a boolean whether the app runs on the server side
 * `import.meta.env.BASE_URL`: the base URL
 
-On top of that, Vite can load variables from `.env` file:
+On top of that, Vite can also load variables from `.env` file. Under the hood, Vite uses [dotenv](https://github.com/motdotla/dotenv). But you don't have to manually call anything related to dotenv: Vite does everything for you.
+
+For example having an `.env` file like this:
 
 ```bash
 VITE_MY_VAR=value
 ```
 
-which then you can access in the browser during runtime as `import.meta.env.VITE_MY_VAR`.  
+then you can access in the browser during runtime `import.meta.env.VITE_MY_VAR`, which is going to be `'value'`.  
 
-Here is important to note that Vite exposes publicity only variables that start with `VITE_` prefix.  
+Please note that Vite exposes publicly only variables starting with `VITE_` prefix. 
 
-Under the hood, Vite uses [dotenv](https://github.com/motdotla/dotenv). But you don't have to manually call anything related to dotenv: Vite does everything for you.
-
-Open the [demo](https://stackblitz.com/edit/vitejs-vite-61fsdd?file=src%2FApp.vue) and see that the variables provided by Vite are rendered on a webpage.  
+Open the [demo](https://stackblitz.com/edit/vitejs-vite-61fsdd?file=src%2FApp.vue) and see that the variables provided by Vite are rendered on the webpage.  
 
 Vite has a [detailed guide](https://vitejs.dev/guide/env-and-mode.html) on how to access the environment variables.  
 
 ### 2.2 Webpack
 
-Unlike Vite, Webpack out of the box doesn't expose any variables to the web application.  
+Unlike Vite, Webpack doesn't expose variables to the web application out of the box.  
 
-But it can be easily achieved using the [EnvironmentPlugin](https://webpack.js.org/plugins/environment-plugin/).  
+But it can be easily achieved using the [EnvironmentPlugin](https://webpack.js.org/plugins/environment-plugin/), which is a built-in webpack plugin.  
 
-For example, if you'd like to expose the `NODE_ENV` env variable, you can use the following configuration:
+For example, to expose the `NODE_ENV` env variable, you can use the following configuration:
 
 ```javascript {7}
 // webpack.config.js
@@ -115,11 +115,9 @@ module.exports = {
 }
 ```
 
-Open the [demo](https://stackblitz.com/edit/webpack-5-react-starter-twfbyv?file=src%2Fapp.tsx) and take a look that `NODE_ENV` variable was exposed by Webpack and is rendered on the webpage.  
+Open the [demo](https://stackblitz.com/edit/webpack-5-react-starter-twfbyv?file=src%2Fapp.tsx). `NODE_ENV` variable was exposed by Webpack and its value is rendered on the webpage.  
 
-A nuance with the above configuration is that in case `NODE_ENV` variable is not available in the environment, the plugin will throw an error.  
-
-To assign a default value to variable use a plain JavaScript object with the value being the default value:
+If `NODE_ENV` variable is not available in the environment, the plugin will throw an error. But you can assign a default value to a variable using a plain JavaScript object (with the value being the default value):
 
 ```javascript {8}
 // webpack.config.js
@@ -136,14 +134,16 @@ module.exports = {
 }
 ``` 
 
-With the above configuration, if `NODE_ENV` variable isn't set up, Webpack will simply default `process.env.NODE_ENV` to `development`.  
+With the above configuration, if `NODE_ENV` variable isn't set up, Webpack will default `process.env.NODE_ENV` to `development`.  
 
 ## 3. Conclusion
 
 A JavaScript file executed in CLI can access the environment variables using the special object `process.env`. 
 
-For example, `process.env.NODE_ENV` contains the value of the `NODE_ENV` variable.  
+For example, `process.env.USER` contains the user name that executes the script.  
 
-Normally the environment variables are not available to the web application during runtime in a browser environment. But modern bundlers like Vite and Webpack can expose certain variables.  
+The environment variables are not available during runtime in a browser. But modern bundlers like Vite and Webpack can expose certain variables.  
 
-For example, Vite exposes the current running mode of the application using `import.meta.env.MODE`.  
+For example, Vite exposes the current running mode of the application using `import.meta.env.MODE`. 
+
+In webpack `EnvironmentPlugin` let's you expose the necessary variables.  
