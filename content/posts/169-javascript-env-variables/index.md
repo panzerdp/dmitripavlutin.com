@@ -10,7 +10,7 @@ recommended: ['javascript-import-meta', 'ecmascript-modules-nodejs']
 type: post
 ---
 
-Environment variables are variables defined outside of the JavaScript execution environment.  
+The environment variables are defined outside of the JavaScript execution context.  
 
 There's a set of environment variables defined by the OS, for example:
 
