@@ -5,7 +5,7 @@ published: "2023-02-08"
 modified: "2023-02-08"
 thumbnail: "./images/environment-variables-javascript-2.png"
 slug: environment-variables-javascript
-tags: ['javascript']
+tags: ['javascript', 'nodejs']
 recommended: ['javascript-import-meta', 'ecmascript-modules-nodejs']
 type: post
 ---
@@ -62,7 +62,7 @@ The environment variables, including `process.env`, are accessible to scripts ru
 
 `process.env`, however, is not available in a browser environment. The browser doesn't define `process.env`.  
 
-Fortunately, *exposing* environment variables to the runtime in the browser can be done using bundlers. Let's see how it's done using Vite and Webpack.   
+Fortunately, *exposing* environment variables to the runtime in the browser can be done using bundlers. Let's see how it's done using Vite and webpack.   
 
 ### 2.1 Vite
 
@@ -90,9 +90,9 @@ Open the [demo](https://stackblitz.com/edit/vitejs-vite-61fsdd?file=src%2FApp.vu
 
 Vite has a [detailed guide](https://vitejs.dev/guide/env-and-mode.html) on how to access the environment variables.  
 
-### 2.2 Webpack
+### 2.2 webpack
 
-Webpack doesn't expose variables to the web application out of the box.  
+webpack doesn't expose variables to the web application out of the box.  
 
 But it can be easily achieved using the [EnvironmentPlugin](https://webpack.js.org/plugins/environment-plugin/), which is a built-in webpack plugin.  
 
@@ -111,7 +111,7 @@ module.exports = {
 }
 ```
 
-Open the [demo](https://stackblitz.com/edit/webpack-5-react-starter-twfbyv?file=src%2Fapp.tsx). `NODE_ENV` variable was exposed by Webpack and its value is rendered on the webpage.  
+Open the [demo](https://stackblitz.com/edit/webpack-5-react-starter-twfbyv?file=src%2Fapp.tsx). `NODE_ENV` variable was exposed by webpack and its value is rendered on the webpage.  
 
 If `NODE_ENV` variable is not available in the environment, the plugin will throw an error. But you can assign a default value to a variable using a plain JavaScript object (with the value being the default value):
 
@@ -130,7 +130,7 @@ module.exports = {
 }
 ``` 
 
-With the above configuration, if `NODE_ENV` variable isn't set up, Webpack defaults `process.env.NODE_ENV` to `development`.  
+With the above configuration, if `NODE_ENV` variable isn't set up, webpack defaults `process.env.NODE_ENV` to `development`.  
 
 ## 3. Conclusion
 
@@ -138,6 +138,6 @@ A JavaScript file executed in Node CLI can access the environment variables usin
 
 For example, `process.env.USER` contains the user name that executes the script.  
 
-The environment variables are not available during runtime in a browser. But modern bundlers like Vite and Webpack can expose certain variables.  
+The environment variables are not available during runtime in a browser. But modern bundlers like Vite and webpack can expose certain variables.  
 
 For example, Vite exposes the current running mode of the application using `import.meta.env.MODE`. In webpack `EnvironmentPlugin` lets you expose the necessary variables.  
