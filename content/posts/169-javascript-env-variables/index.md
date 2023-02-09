@@ -82,7 +82,7 @@ For example, having an `.env` file like this:
 VITE_MY_VAR=value
 ```
 
-then you can access this value in the browser at runtime `import.meta.env.VITE_MY_VAR`, which is will be `'value'`.  
+then you can access this value in the browser at runtime `import.meta.env.VITE_MY_VAR`, which will be `'value'`.  
 
 Please note that Vite exposes publicly only variables starting with `VITE_` prefix. 
 
