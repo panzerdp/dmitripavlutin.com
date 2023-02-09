@@ -17,18 +17,18 @@ There's a set of environment variables defined by the OS, for example:
 * `USER`: the current user
 * `HOME`: the current user's home path
 * `PWD`: the current working directory
-* `PATH`: directories to search to execute a command
+* `PATH`: directories to search in order to execute a command
 
-In regards to JavaScript and Node.js ecosystem, you might find the following variables common:
+In terms of the JavaScript and Node.js ecosystem, you may find the following variables common:
 
 * `NODE_ENV`: determines if the script runs in development or production mode. Usually takes one of the values: `production`, `prod`, `development`, `dev`, or `test`
-* `PORT`: the port which the running application should be working with (e.g. `3000`, `8080`, etc.)
+* `PORT`: the port the running application will use (e.g. `3000`, `8080`, etc.)
 
 Let's see how you can access these environment variables (either OS or Node.js specific) in a JavaScript file.  
 
 ## 1. *process.env* object
 
-When executing a JavaScript file as a Node CLI (command line interface) command, Node creates a special object `process.env` which contains the environment variables as properties.  
+When executing a JavaScript file as a Node CLI (command line interface) command, Node creates a special `process.env` object that contains the environment variables as properties.  
 
 For example, let's execute the JavaScript file `/home/dmitri/main.js` in the command line:
 
@@ -62,7 +62,7 @@ The environment variables, including `process.env`, are accessible to scripts ru
 
 `process.env`, however, is not available in a browser environment. The browser doesn't define `process.env`.  
 
-Fortunately, *exposing* environment variables to the runtime in the browser can be done using bundlers. Let's see how it's done using Vite and webpack.   
+Fortunately, *exposing* environment variables to the browser runtime can be done using bundlers. Let's take a look at how it's done using Vite and webpack.   
 
 ### 2.1 Vite
 
@@ -82,7 +82,7 @@ For example, having an `.env` file like this:
 VITE_MY_VAR=value
 ```
 
-then you can access this value in the browser during runtime `import.meta.env.VITE_MY_VAR`, which is going to be `'value'`.  
+then you can access this value in the browser at runtime `import.meta.env.VITE_MY_VAR`, which is will be `'value'`.  
 
 Please note that Vite exposes publicly only variables starting with `VITE_` prefix. 
 
@@ -136,6 +136,6 @@ A JavaScript file executed in Node CLI can access the environment variables usin
 
 For example, `process.env.USER` contains the user name that executes the script.  
 
-The environment variables are not available during runtime in a browser. But modern bundlers like Vite and webpack can expose certain variables.  
+The environment variables are not available at runtime in a browser. But modern bundlers like Vite and webpack can expose certain variables.  
 
 For example, Vite exposes the current running mode of the application using `import.meta.env.MODE`. In webpack `EnvironmentPlugin` lets you expose the necessary variables.  
