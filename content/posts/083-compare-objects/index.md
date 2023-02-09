@@ -19,7 +19,7 @@ Comparing primitive values in JavaScript is simple. Just use any of the availabl
 
 Objects, however, are more difficult to compare because they are structured data. 
 
-In this post, you will learn how to correctly compare objects in JavaScript.  
+In this post, you will learn how to compare objects correctly in JavaScript.  
 
 ```toc
 ```
@@ -32,7 +32,7 @@ JavaScript provides 3 ways to compare values:
 * The loose equality operator `==` 
 * `Object.is()` function
 
-When comparing objects using any of the above, the comparison evaluates to `true` only if the compared values reference the same object instance. This is *referential equality*.  
+When comparing objects using any of the above, the comparison evaluates to `true` only if the compared values refer to the same object instance. This is *referential equality*.  
 
 *If you want to learn more about values and references, then check [this post](/value-vs-reference-javascript/).*
 
@@ -66,7 +66,7 @@ Interestingly `hero1` and `hero2` objects have the same content: both have one p
 
 Referential equality is useful when you'd like to compare object references, rather than their content. 
 
-But more often you'd need to compare the actual content of the objects: the properties and their values. Let's see how to do that.  
+But more often you'll need to compare the actual contents of the objects: the properties and their values. Let's see how to do this.  
 
 ## 2. Manual comparison
 
@@ -128,7 +128,7 @@ function shallowEqual(object1, object2) {
 }
 ```
 
-Inside the function, `keys1` and `keys2` are arrays having the property names of `object1` and `object2`. 
+Inside the function, `keys1` and `keys2` are arrays containing the property names of `object1` and `object2`. 
 
 `for` cycle iterates over the keys, and compares objects' properties (`object1[key]` and `object2[key]`) for equality.  
 
@@ -158,7 +158,7 @@ On the other side, `shallowEqual(hero1, hero3)` returns `false` since `hero1` an
 
 If the properties' values of objects to compare are primitive values, then the shallow equality check is the way to go.  
 
-But objects in JavaScript can be nested. In such a case, unfortunately, shallow equality doesn't work well.    
+But objects in JavaScript can be nested. In this case, unfortunately, shallow equality doesn't work well.    
 
 Let's perform a shallow equality check on objects having nested objects:
 
@@ -185,13 +185,13 @@ This time, even `hero1` and `hero2` have the same content, `shallowEqual(hero1, 
 
 The nested objects `hero1.address` and `hero2.address` are different object instances. Thus shallow equality considers `hero1.address` and `hero2.address` to be not equal.  
 
-Fortunately, the deep equality correctly compares the objects containing other objects. Let's see how it works.  
+Fortunately, the deep equality correctly compares the objects that contain other objects. Let's take a look at how this works.  
 
 ## 4. Deep equality
 
-Deep equality is similar to shallow equality, but with one difference. During the object check, if the compared values are objects, then a recursive equality check is performed on these nested objects.  
+Deep equality is similar to shallow equality, but with one difference. During the object check, if the values being compared are objects, then a recursive equality check is performed on these nested objects.  
 
-Let's see an implementation of deep equality check:
+Let's look at the implementation of a deep equality check:
 
 ```javascript{13}
 function deepEqual(object1, object2) {
@@ -257,9 +257,9 @@ To deeply compare objects I recommend to use:
 
 The referential equality (using `===`, `==` or `Object.is()`) determines whether the operands are the same object instance.  
 
-The manual equality check requires a manual comparison of properties' values. While this check requires writing by hand the properties to compare, I find this approach convenient because of its simplicity.  
+The manual equality check requires a manual comparison of properties' values. Although this check requires writing down the properties to be compared by hand, I find this approach convenient because of its simplicity.
 
-When the compared objects have a lot of properties or the structure of the objects is determined during runtime, a better approach is to use a shallow check.  
+If the objects being compared have a lot of properties or if the structure of the objects is determined at runtime, a better approach is to use a shallow check.  
 
 Finally, if the compared objects have nested objects, the deep equality check is the way to go.  
 
