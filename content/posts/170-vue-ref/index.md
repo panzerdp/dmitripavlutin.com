@@ -1,10 +1,10 @@
 ---
-title: "Vue refs in Composition API"
-description: "refs are reactive blocks of data in Vue composition API"  
-published: "2023-01-25"
-modified: "2023-01-26"
+title: "Vue ref() and refs"
+description: "ref() is a Vue composition API function that return refs: small reactive values."  
+published: "2023-02-10"
+modified: "2023-02-10"
 thumbnail: "./images/cover-2.png"
-slug: vue-ref
+slug: vue-ref-api
 tags: ['vue', 'vue composition', 'reactivity']
 recommended: ['vue-next-tick', 'ref-reactive-differences-vue']
 type: post
@@ -18,13 +18,15 @@ In this post I'm going to help you understand all the details that you need to k
 
 ## 1. ref()
 
-Let's say that a component renders a reactive value to the screen. When the reactive value changes (for example based on a user event), Vue makes sure to re-render the component to reflect the new value on the screen.  That's the idea of reactivity in Vue.  
+Let's say that a component renders a reactive value to the screen. When the reactive value changes (for example based on a user event), Vue makes sure to re-render the component to reflect the new value on the screen.  
 
-`ref()`, as a part of the composition API, is the API that let's you create a simple reactive value. 
+That's the idea of reactivity in Vue.  
 
-`ref()` is called as a regular function and accepts an optional argument as the initial value, then returns a special value called ref (which is the reactive value).
+`ref()` reactivity API let's you create simple reactive values. It works inside the `<script setup>`  or `setup()` method of options API.
 
-```vue
+`ref(initialValue)` is called as a regular function and accepts an optional argument as the initial value. `ref()` returns a special value called ref (which is the reactive value).
+
+```vue {3}
 <script setup>
 import { ref } from 'vue'
 
@@ -34,19 +36,23 @@ console.log(count.value); // 0
 </script>
 ```
 
-In the example above `ref(0)` creates a ref initialize with the number `0`. The ref is then stored into the variable `count` for later use.  
+`ref(0)` creates and returns a ref initialized with `0`. The ref is stored into the variable `count` for later use.  
 
 A ref value can be accessed simply by reading the special property `count.value` available on all the refs.  
 
-`count.value` evaluates currently to `0`, because `0` is the initial value of the ref.  
+Right after creation, `count.value` is `0` because that's the initial value of the ref.  
 
-`ref()` is a part of the Vue composition API, so you have to use it inside the `<script setup>` tag like it was done in the example above.  
+## 2. Updating refs
 
-Ok, simply creating refs isn't fun. The real magic happens when you change the value of a ref.  
+Ok, simply creating refs isn't fun. The real magic happens when you change the ref's value.  
 
-What would happen if you change the value of the ref, i.e. update the `count.value`? Let's try to to it in the following example:
+Let's implement a simple scenario with a button and a count state. When the user clicks the button, the count state should increase by one. The actual value of the count, if it changes, has to be rendered on the screen.  
 
-```vue
+Implementing the scenario using a ref fits well. You can see in the scenario the need for *reactivity*: the screen should render always the actual value of the count.  
+
+Here's an implementation of the scenario using `ref()`:
+
+```vue {5}
 <script setup>
 import { ref } from 'vue'
 
@@ -61,35 +67,18 @@ const onClick = () => count.value++
 ```
 [Open the demo.]()
 
-Open the demo. You'll see that initially count ref displays `0` on the screen.  
+Open the demo. You'll see that initially count is `0` on the screen. Clicking *Increase* button increases the count. Importantly, the most actual value of the count is rendered on the screen.  
 
-But after a few clicks on the Increase button, you'd notice that the count on the screen increased by the same amount of clicks. 
 
-Cool! 
-
-`count` ref is a reactive value: every time `count.value` changes (), Vue makes sure to update the component and reflect the new value on the screen.  
-
-## 2. A non-reactive value
-
-Let's make a scientific experiment. Is the ref really necessary? Maybe simple having a `let` variable, and updating it would trigger the same effect?  
-
-Let's take a try in the following example:
-
-```vue
-<script setup>
-let count = 0
-
-const onClick = () => count++
-</script>
-<template>
-  <button @click="onClick">Increase</button>
-  <div>{{ count }}</div>
-</template>
-```
-
-Let's create a variable `let count = 0` intialized with `0`. When the user clicks on the button, inside `onClick` the variable simply increments `count++`.  
+This demonstrates that `count` is a *reactive* value. When `count.value` changes, Vue updates the component and shows the new value on the screen.  
 
 ## 3. *ref()* in *setup()*
+
+The composition API can be used inside [\<script setup\>](https://vuejs.org/api/sfc-script-setup.html) (see the previous examples), or inside the [setup()](https://vuejs.org/api/composition-api-setup.html) method of options API.  
+
+I like to use `<script setup>` because it's usually shorter and more expressive than `setup()`. But that's me.   
+
+Either way, you can also use `ref()` inside the `setup()` method if that's your preference:
 
 ```vue
 <script>
@@ -109,18 +98,18 @@ export default defineComponent({
 </template>
 ```
 
-The composition API coded inside `<script setup>` is usually shorter that using the options API with `setup` method.  In the following examples I will use `ref()` directly inside `<script setup>`. 
+The behavior of `ref()` is exactly the same in `<script setup>` as in `setup() {...}`. Just don't forget to return the ref from the setup function, otherwise it won't be accessible in the component methods and template.  
 
-Of course, the behavior of `ref()` is exactly the same in `<script setup>` as in `defineComponent({ setup() {...} })`.  
+## 3. Template refs
 
-## 2. ref's value
 
-## 3. Watching ref changes
 
-## 4. Implicit refs creation
+## 4. Implicit refs
 
-## 5. Shallow refs
+## 5. Watching refs
 
-## 6. Conclusion
+## 6. Shallow refs
 
-// 151
+## 7. Conclusion
+
+// 656
