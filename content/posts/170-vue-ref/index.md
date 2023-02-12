@@ -10,19 +10,19 @@ recommended: ['vue-next-tick', 'ref-reactive-differences-vue']
 type: post
 ---
 
-Well designed reactivity is one of the selling points of Vue. As a result of an user action a reactive value is updated, and automagically all of the components that use the reactive value are updated.  
+Well designed reactivity is one of the selling points of Vue. A reactive value is updated (e.g. after a user action), and automagically all of the components that use the reactive value are updated.  
 
-refs in Vue composition API are the primary blocks of reactivity. And knowing refs well is a good path to working efficiently with reactivity in Vue.  
+refs in Vue composition API are the primary tool of reactivity. Knowing refs well is the right path to get the most of Vue reactivity.  
 
-In this post I'm going to help you understand all the details that you need to know about Vue refs to work them very efficiently. Let's get started.  
+In this post I'll help you understand the necessary details you need to know about Vue refs. Let's get started.  
 
 ## 1. ref()
 
-Let's say that a component renders a reactive value to the screen. When the reactive value changes (for example based on a user event), Vue makes sure to re-render the component to reflect the new value on the screen.  
+A component renders a value to the screen. When the value changes (e.g. based on an event triggered by the user), Vue makes re-renders the component to reflect the new value on the screen. *That's the idea of reactivity in Vue.*  
 
-That's the idea of reactivity in Vue.  
+`ref()` reactivity API let's you create simple reactive values. 
 
-`ref()` reactivity API let's you create simple reactive values. It works inside the `<script setup>`  or `setup()` method of options API.
+`ref()` works inside the `<script setup>`  or `setup()` method of options API.
 
 `ref(initialValue)` is called as a regular function and accepts an optional argument as the initial value. `ref()` returns a special value called ref (which is the reactive value).
 
@@ -41,13 +41,19 @@ console.log(count.value); // 2) ref read
 
 `ref(0)` creates and returns a ref initialized with `0`. The ref is stored into the variable `count` for later use.  
 
-A ref value can be accessed simply by reading the special property `count.value` available on all the refs. `count.value` is now `0` because that's the initial value of the ref.  
+A ref value can be accessed simply by reading the special property `count.value` available on all the refs. `count.value` is currently `0` because that's the initial value of the ref.  
 
 ## 2. Updating refs
 
-Let's implement a scenario with a button and a count state. When the user clicks the button, the count state should increase by one. The actual value of the count (even if it changes) has to be rendered on the screen.  
+The true power of refs opens when you update them, and see how Vue magically re-renders the content on the screen to reflect the changes.  
 
-Implementing the scenario using a ref fits well. You can see in the scenario the need for *reactivity*: the screen should render always the actual value of the count.  
+Updating a ref is done straigforward. All you have to do is just update the `myRef.value` property.  
+
+Contrary to the ref creation, you can update a ref value anywhere you want, e.g. even outside `<script setup>`. More ofter, however, you will update refs inside event handlers.  
+
+Let's implement a scenario having a button and a count state. When the user clicks the button, the count state increases by one. The actual value of the count (even if it changes) needs to be rendered on the screen.  
+
+You can see in the scenario *the need for reactivity*: the screen must render always the actual value of the count. Using a ref fits well, since a ref is reactive.  
 
 Here's an implementation of the scenario using `ref()`:
 
@@ -69,7 +75,6 @@ const onClick = () => count.value++ // ref update
 Open the demo. You'll see that initially count is `0` on the screen. 
 
 Click *Increase* button and count increases. Importantly, the most actual value of the count is rendered on the screen. *That's reactivity in action.* 
-
 
 This demonstrates that `count` is a *reactive* value. When `count.value` changes, Vue updates the component and shows the new value on the screen.  
 
@@ -104,11 +109,11 @@ export default defineComponent({
 </template>
 ```
 
-The behavior of `ref()` is almost the same in `<script setup>` as in `setup() {...}`.  
+The behavior of `ref()` is almost the same in `<script setup>` as in `setup() {...}`. Just there are 2 nuances to remember.  
 
-Just don't forget to return the ref from the setup function, otherwise it won't be accessible in the component methods and template.  
+First, don't forget to return the ref from the setup function. Otherwise it won't be accessible in the component methods and template.  
 
-And also inside the methods (like in `onClick` method above) you have to access the ref using `this` keyword: `this.count`.    
+Second, you have to access the ref using `this` keyword. For example `this.count` inside the methods (like in `onClick` method above).  
 
 ## 3. Template refs
 
