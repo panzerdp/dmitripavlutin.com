@@ -2,7 +2,7 @@
 title: "How to Memoize with React.useMemo()"
 description: "How and when to use React.useMemo() hook to improve the performance of React components."  
 published: "2021-06-04T13:00Z"
-modified: "2021-06-04T13:00Z"
+modified: "2023-02-12"
 thumbnail: "./images/cover-6.png"
 slug: react-usememo-hook
 tags: ['react', 'usememo', 'hook']
@@ -18,7 +18,7 @@ In this post, I'm going to describe how and when to use the `useMemo()` React ho
 
 ## 1. *useMemo()* hook
 
-`useMemo()` is a built-in React hook that accepts 2 arguments &mdash; a function `compute` that computes a result and the `depedencies` array:  
+`useMemo()` is a built-in React hook that accepts 2 arguments &mdash; a function `compute` that computes a result, and the `depedencies` array:  
 
 ```javascript
 const memoizedResult = useMemo(compute, dependencies);
@@ -26,9 +26,9 @@ const memoizedResult = useMemo(compute, dependencies);
 
 During initial rendering, `useMemo(compute, dependencies)` invokes `compute`, memoizes the calculation result, and returns it to the component.  
 
-If during next renderings the dependencies don't change, then `useMemo()` *doesn't invoke* `compute` but returns the memoized value. 
+If the dependencies don't change during the next renderings, then `useMemo()` *doesn't invoke* `compute`, but returns the memoized value. 
 
-But if dependencies change during re-rendering, then `useMemo()` *invokes* `compute`, memoizes the new value, and returns it.  
+But if the dependencies change during re-rendering, then `useMemo()` *invokes* `compute`, memoizes the new value, and returns it.  
 
 That's the essence of `useMemo()` hook.  
 
@@ -143,7 +143,7 @@ function MyComponent({ prop }) {
 }
 ```
 
-In the above example, `useCallback(() => {...}, [prop])` returns the same function instance as long as `prop` dependency is the same. 
+In the above example, `useCallback(() => {...}, [prop])` returns the same function instance as long as `prop` dependency remains the same. 
 
 You can use the same way the `useMemo()` to memoize callbacks:
 
