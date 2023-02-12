@@ -76,7 +76,7 @@ Open the demo. You'll see that initially count is `0` on the screen.
 
 Click *Increase* button and count increases. Importantly, the most actual value of the count is rendered on the screen. *That's reactivity in action.* 
 
-This demonstrates that `count` is a *reactive* value. When `count.value` changes, Vue updates the component and shows the new value on the screen.  
+`count` is a *reactive* value. When `count.value` changes, Vue updates the component and shows the new count value on the screen.  
 
 ## 3. *ref()* in *setup()*
 
@@ -109,21 +109,39 @@ export default defineComponent({
 </template>
 ```
 
-The behavior of `ref()` is almost the same in `<script setup>` as in `setup() {...}`. Just there are 2 nuances to remember.  
+The behavior of `ref()` is almost the same in `<script setup>` as in `setup() {...}`. There are just 2 nuances to remember.  
 
-First, don't forget to return the ref from the setup function. Otherwise it won't be accessible in the component methods and template.  
+First, don't forget to return the ref from the setup function `return { count }`. Otherwise it won't be accessible in the component methods and template.  
 
-Second, you have to access the ref using `this` keyword. For example `this.count` inside the methods (like in `onClick` method above).  
+Second, you have to access the ref using `this` keyword. For example `this.count` inside the methods in `onClick` event handler above accesses the ref (not directly `count`).  
 
-## 3. Template refs
+## 3. Values of refs
 
+In the examples above I've been using the count ref, which normally operates on a an integer value. Thus refs can store primitive values like numbers, strings, booleans, `undefined` or `null`.  
+ 
+But a ref can store and even more complex data structures: objects, arrays, maps, and even DOM elements (I'll describe how it does that in the next section).  
 
+Let's store inside of a ref a plain JavaScript object:
 
-## 4. Implicit refs
+``` vue
+<script setup>
+import { ref } from 'vue'
 
-## 5. Watching refs
+const hero = ref({ name: 'Batman' }) // ref stores an object
 
-## 6. Shallow refs
+console.log(hero.value.name) // logs 'Batman'
+</script>
+```
+
+`ref({ name: 'Batman' })` creates a ref that stores an object. Then you can easily access the object using `hero.value`. And also access any properties of that object using regular property accessors: `hero.value.name`.  
+
+Moreover, the object stored in a ref automagically *becomes reactive*! And the reactivity is applied through any nested objects or arrays.  
+
+## 4. Template refs
+
+## 5. Implicit refs
+
+## 6. Watching refs
 
 ## 7. Conclusion
 
