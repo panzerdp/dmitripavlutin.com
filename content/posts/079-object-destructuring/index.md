@@ -12,7 +12,7 @@ type: post
 
 Object destructuring is a useful JavaScript feature to extract properties from objects and bind them to variables.    
 
-What's better, object destructuring can extract multiple properties in one statement, can access properties from nested objects, and can set a default value if the property doesn't exist.  
+Even better, object destructuring can extract multiple properties in a single statement, can access properties from nested objects, and can set a default value if the property doesn't exist.  
 
 This post will help you understand how to use object destructuring in JavaScript.  
 
@@ -42,9 +42,9 @@ console.log(realName); // => 'Bruce Wayne'
 
 The property `hero.name` value is assigned to the variable `name`. Same way `hero.realName` value is assigned to `realName`.  
 
-By writing `var name = hero.name`, you have to mention the `name` binding 2 times, and the same for `realName`. Such a way to access properties and assign them to variables requires boilerplate code.  
+By writing `var name = hero.name`, you have to mention the `name` binding 2 times, and the same for `realName`. This way of accessing properties and assigning them to variables requires boilerplate code.  
 
-That's where the object destructuring syntax is useful: you can read a property and assign its value to a variable without duplicating the property name.  More than that, you can read multiple properties from the same object in just one statement!  
+That's where the object destructuring syntax is useful: you can read a property and assign its value to a variable without duplicating the property name.  What is more, you can read multiple properties from the same object in just one statement!  
 
 Let's refactor the above script and apply the object destructuring to access the properties `name` and `realName`:
 
@@ -64,7 +64,7 @@ console.log(realName); // => 'Bruce Wayne'
 
 `const { name, realName } = hero` is an object destructuring assignment. This statement defines the variables `name` and `realName`, then assigns to them the values of properties `hero.name` and `hero.realName` correspondingly. 
 
-Comparing the 2 approaches to access the object properties:
+Compare two approaches to accessing the object properties:
 
 ```javascript
 const name     = hero.name;
@@ -174,7 +174,7 @@ Fortunately, you can set a default value if the property doesn't exist in the de
 const { identifier = defaultValue } = expression;
 ```
 
-Where `identifier` is the name of the property to access and `expression` should evaluate to an object. After the destructuring, the variable `identifier` contains the property value or is assigned with `defaultValue` if `identifier` property doesn't exist.  
+Where `identifier` is the name of the property to access and `expression` should evaluate to an object. After destructuring, the variable `identifier` contains the property value or is assigned with `defaultValue` if the property `identifier` doesn't exist.  
 
 Here's the equivalent code:
 
@@ -208,7 +208,7 @@ To create variables of different names than the properties you can use the alias
 const { identifier: aliasIdentifier } = expression;
 ```
 
-`identifier` is the name of the property to access, `aliasIdentifier` is the variable name, and `expression` should evaluate to an object. After the destructuring, the variable `aliasIdentifier` contains the property value.  
+`identifier` is the name of the property to access, `aliasIdentifier` is the variable name, and `expression` should evaluate to an object. After destructuring, the variable `aliasIdentifier` contains the property value.  
 
 The equivalent code:
 
@@ -246,7 +246,7 @@ const { nestedObjectProp: { identifier } } = expression;
 
 `nestedObjectProp` is the name of the property that holds a nested object. `identifier` is the property name to access from the nested object. `expression` should evaluate to the destructured object.  
 
-After the destructuring, the variable `identifier` contains the property value of the nested object.  
+After destructuring, the variable `identifier` contains the property value of the nested object.  
 
 The above syntax is equivalent to:
 
@@ -288,7 +288,7 @@ You can extract into variables properties with a dynamic name (the property name
 const { [propName]: identifier } = expression;
 ```
 
-`propName` expression should evaluate to a property name (usually a string), and the `identifier` should indicate the variable name created after the destructuring. `expression` should evaluate to the object you'd like to destructure.  
+`propName` expression should evaluate to a property name (usually a string), and the `identifier` should indicate the variable name created after destructuring. `expression` should evaluate to the object you'd like to destructure.  
 
 An equivalent code without object destructuring:
 
@@ -315,13 +315,13 @@ console.log(name); // => 'Batman'
 
 ## 8. Rest object after destructuring
 
-The rest syntax is useful to collect the remaining properties after the destructuring:
+The rest syntax is useful to collect the remaining properties after destructuring:
 
 ```javascript
 const { identifier, ...rest } = expression;
 ```
 
-Where `identifier` is the name of the property to access and `expression` should evaluate to an object. After the destructuring, the variable `identifier` contains the property value. `rest` variable is a plain object with the remaining properties.  
+Where `identifier` is the name of the property to access and `expression` should evaluate to an object. After destructuring, the variable `identifier` contains the property value. `rest` variable is a plain object with the remaining properties.  
 
 For example, let's extract the property `name`, but collect the rest of the properties into a variable `rest`:
 
