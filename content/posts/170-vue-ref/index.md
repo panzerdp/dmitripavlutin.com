@@ -127,7 +127,7 @@ Let's store inside of a ref a plain JavaScript object:
 <script setup>
 import { ref } from 'vue'
 
-const hero = ref({ name: 'Batman' }) // ref stores an object
+const hero = ref({ name: 'Batman' }) // ref contains an object
 
 console.log(hero.value.name) // logs 'Batman'
 </script>
@@ -156,14 +156,14 @@ Since `hero` ref is reactive, the change `hero.value.name = 'Joker'` is reflecte
 
 ## 4. Template refs
 
+Normally you don't have to access and manipulate DOM elements directly. Let Vue take care of everything regarding DOM. 
+
+But there are situations you need to access DOM elements. For example when integrating a 3rd party code that isn't Vue-aware.  
 
 
-Normally you don't have to access and manipulat DOM elements directly since you have to let Vue take care of everything regarding DOM. sometimes you need to access DOM elements.  
 
 ## 5. Implicit refs
 
 ## 6. Watching refs
 
 ## 7. Conclusion
-
-// 656
