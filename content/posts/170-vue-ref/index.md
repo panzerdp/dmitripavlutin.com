@@ -1,8 +1,8 @@
 ---
 title: "Vue ref() and refs"
 description: "ref() is a Vue composition API function that return refs: small reactive values."  
-published: "2023-02-10"
-modified: "2023-02-10"
+published: "2023-02-12"
+modified: "2023-02-12"
 thumbnail: "./images/cover-2.png"
 slug: vue-ref-api
 tags: ['vue', 'vue composition', 'reactivity']
@@ -135,9 +135,30 @@ console.log(hero.value.name) // logs 'Batman'
 
 `ref({ name: 'Batman' })` creates a ref that stores an object. Then you can easily access the object using `hero.value`. And also access any properties of that object using regular property accessors: `hero.value.name`.  
 
-Moreover, the object stored in a ref automagically *becomes reactive*! And the reactivity is applied through any nested objects or arrays.  
+Moreover, the object stored in a ref automagically *becomes reactive*! And the reactivity is applied through any deeply nested object or array of the object stores in the ref.    
+
+Let's update the hero name from `'Batman'` to `'Joker'` when a button is clicked:
+``` vue
+<script setup>
+import { ref } from 'vue'
+
+const hero = ref({ name: 'Batman' })
+
+const onClick = () => hero.value.name = 'Joker' // reactive change
+</script>
+<template>
+  {{ hero.name }} 
+  <button @click="onClick">Change</button>
+</template>
+```
+
+Since `hero` ref is reactive, the change `hero.value.name = 'Joker'` is reflected on the screen by changing from `'Batman'` to `'Joker'`.  
 
 ## 4. Template refs
+
+
+
+Normally you don't have to access and manipulat DOM elements directly since you have to let Vue take care of everything regarding DOM. sometimes you need to access DOM elements.  
 
 ## 5. Implicit refs
 
