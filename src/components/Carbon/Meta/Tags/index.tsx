@@ -10,8 +10,9 @@ export default function LayoutCarbonAdsMetaTags({
   if (isEnabled && isProductionMode) {
     return (
       <Helmet>
-        <link rel="prefetch" href={scriptSrc} />
+        <link rel="preload" href={scriptSrc} />
         <link rel="preconnect" href="//cdn4.buysellads.net" />
+        <link rel="preconnect" href="//srv.carbonads.net" />
       </Helmet>
     );
   }
