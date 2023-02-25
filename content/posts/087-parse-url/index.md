@@ -204,7 +204,7 @@ try {
 ```
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/qw45mhde/1/)
 
-Because `'http**://example.com'` is an invalid URL, as expected, `new URL('http ://example.com')` throws a `TypeError`.  
+Because `'http**://example.com'` is an invalid URL, as expected, `new URL('http**://example.com')` throws a `TypeError`.  
 
 ## 8. URL manipulation
 
@@ -227,7 +227,7 @@ Only `origin` and `searchParams` properties of the `URL()` instance are readonly
 
 ## 9. Summary
 
-The `URL()` constructor is handy to parse (and validate) URLs in JavaScript.  
+The `URL()` constructor is handy for parsing (and validating) URLs in JavaScript.  
 
 `new URL(relativeOrAbsolute [, absoluteBase])` accepts as the first argument an absolute or relative URL. When the first argument is relative, you have to indicate the second argument as an absolute URL that serves as the base for the first argument.    
 
@@ -239,6 +239,6 @@ After creating the `URL()` instance, you can easily access the most common URL c
 * `url.pathname` to read the pathname
 * `url.hash` to determine the hash value
 
-Regarding browser support, `URL` constructor is [available](https://caniuse.com/#feat=url) in modern browsers. It is not, however, available in Internet Explorer.  
+In terms of browser support, `URL` constructor is [available](https://caniuse.com/#feat=url) in modern browsers. However, it is not available in Internet Explorer.  
 
 *What is your favorite tool to parse URLs in JavaScript?*
