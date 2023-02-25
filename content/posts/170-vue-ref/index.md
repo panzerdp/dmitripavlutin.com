@@ -16,6 +16,9 @@ refs in Vue composition API are the primary tool of reactivity. Knowing refs wel
 
 In this post I'll help you understand the necessary details you need to know about Vue refs. Let's get started.  
 
+```toc
+```
+
 ## 1. ref()
 
 A component renders a value to the screen. When the value changes (e.g. based on an event triggered by the user), Vue makes re-renders the component to reflect the new value on the screen. *That's the idea of reactivity in Vue.*  
@@ -300,6 +303,9 @@ More often than simple console logs you can invoke inside of the watcher differe
 To access the value stored inside a ref simply read `myRef.value` property. Same way if you want to update the value of a ref simply update `myRef.value = 'New value'` property.  
 
 Refs in Vue are *reactive* values. Meaning that if you render in the template a ref value, then changing that value programatically makes Vue re-render the output to reflect the ref change.  
+
+Other than storing reactive values, a ref can also give direct access to a DOM element rendered in the template. To assign a ref with the DOM element, simply assign `:ref` attribute with a ref: `<div :ref="myRef">`. After component mounting,
+`myRef.value` will contain the DOM element instance.  
 
 Vue can also create refs implicitely: for example `computed()` API returns a ref.   
 
