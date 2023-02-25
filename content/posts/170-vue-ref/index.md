@@ -38,6 +38,7 @@ console.log(count.value); // 2) ref read
   <div>{{ count }}</div> <!-- 3) ref read (unwraped) -->
 </template>
 ```
+[Open the demo.]()
 
 `ref(0)` creates and returns a ref initialized with `0`. The ref is stored into the variable `count` for later use.  
 
@@ -108,6 +109,7 @@ export default defineComponent({
   <div>{{ count }}</div>
 </template>
 ```
+[Open the demo.]()
 
 The behavior of `ref()` is almost the same in `<script setup>` as in `setup() {...}`. There are just 2 nuances to remember.  
 
@@ -115,7 +117,7 @@ First, don't forget to return the ref from the setup function `return { count }`
 
 Second, you have to access the ref using `this` keyword. For example `this.count` inside the methods in `onClick` event handler above accesses the ref (not directly `count`).  
 
-## 3. Values of refs
+## 4. Values of refs
 
 In the examples above I've been using the count ref, which normally operates on a an integer value. Thus refs can store primitive values like numbers, strings, booleans, `undefined` or `null`.  
  
@@ -132,12 +134,14 @@ const hero = ref({ name: 'Batman' }) // ref contains an object
 console.log(hero.value.name) // logs 'Batman'
 </script>
 ```
+[Open the demo.]()
 
 `ref({ name: 'Batman' })` creates a ref that stores an object. Then you can easily access the object using `hero.value`. And also access any properties of that object using regular property accessors: `hero.value.name`.  
 
 Moreover, the object stored in a ref automagically *becomes reactive*! And the reactivity is applied through any deeply nested object or array of the object stores in the ref.    
 
 Let's update the hero name from `'Batman'` to `'Joker'` when a button is clicked:
+
 ``` vue
 <script setup>
 import { ref } from 'vue'
@@ -151,19 +155,82 @@ const onClick = () => hero.value.name = 'Joker' // reactive change
   <button @click="onClick">Change</button>
 </template>
 ```
+[Open the demo.]()
 
 Since `hero` ref is reactive, the change `hero.value.name = 'Joker'` is reflected on the screen by changing from `'Batman'` to `'Joker'`.  
 
-## 4. Template refs
+## 5. Template refs
 
 Normally you don't have to access and manipulate DOM elements directly. Let Vue take care of everything regarding DOM. 
 
-But there are situations you need to access DOM elements. For example when integrating a 3rd party code that isn't Vue-aware.  
+But there are situations when you need to access DOM elements. For example, when integrating a 3rd party code that isn't Vue-aware.  
+
+There are only 3 steps necessary to access DOM elements using a ref in Vue:
+
+1. Define create the ref that is supposed to hold the DOM element: `const element = ref()`
+2. Inside the template, use the special attribute `ref` of the tag and assign the ref to it: `<div ref={element}>...</div>`
+3. After mounting, you can access the DOM element by reading `element.value`
+
+Let's continue with a simple example.  
+
+A common case when you need to access a DOM element is to focus an input element as soon as it is rendered on the screen:
+
+```vue
+<script setup>
+import { ref, onMounted } from 'vue'
+
+const input = ref() // 1. create the ref
+
+onMounted(() => {
+  input.value.focus() // 3. Access the element after mounting
+})
+</script>
+<template>
+   <!-- 2. Connect the ref to the element -->
+  <input :ref="input" type="text" />
+</template>
+```
+[Open the demo.]()
+
+`const input = ref()` inside of the script setup creates the ref which later will contain the input element as a value.  
+
+When rendering the input element inside the template, please use `:ref` attribute and assign to it the ref: `<input :ref="input" type="text" />`.  
+
+Finally, after component mounting, you can freely access the input element and call the input method on it: `input.value.focus()`.  
+
+The moment when the component mounts is captured using the `onMounted()` hook. After mounting you are guaranteed that the ref links to the element.  
+
+If you accidently access `input` before mounting, then `input.value` is simply `undefined`.  
+
+## 6. Implicit refs
+
+In the examples presented until now I've created refs explicitely: using `ref()` factory function provided by Vue.  
+
+But some reactivity APIs can also create refs. A common API creating refs is [computed()](https://vuejs.org/api/reactivity-core.html#computed).  
+
+`const computedRef = computed(calc)` accepts a callback function `calc` that uses reactive values to calculate a value. The calculated value is returned as a ref.  
+
+Let's create a computed ref `evenOdd` that changes to `'even'` or `'odd'` depending on the `count` ref value:
+
+```vue {4}
+<script setup>
+import { ref, computed } from 'vue'
+
+const count = ref(0)
+const evenOdd = computed(() => count.value % 2 === 0 ? 'even' : 'odd')
+
+const onClick = () => count.value++ // ref update
+</script>
+<template>
+  <button @click="onClick">Increase</button>
+  <div>{{ count }}</div>
+  <div>{{ evenOdd }}</div>
+</template>
+```
+[Open the demo.]()
 
 
 
-## 5. Implicit refs
+## 7. Watching refs
 
-## 6. Watching refs
-
-## 7. Conclusion
+## 8. Conclusion
