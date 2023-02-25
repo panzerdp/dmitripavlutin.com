@@ -1,6 +1,6 @@
 ---
 title: "What is ref() in Vue?"
-description: "ref() is a Vue composition API function that return refs: small reactive values."  
+description: "ref() is a Vue composition API function that returns refs: small reactive values."  
 published: "2023-02-28"
 modified: "2023-02-28"
 thumbnail: "./images/vue-ref.png"
@@ -10,17 +10,17 @@ recommended: ['vue-next-tick', 'ref-reactive-differences-vue']
 type: post
 ---
 
-Well designed reactivity is one of the selling points of Vue. A reactive value is updated (e.g. after a user action), and automagically all of the components that use the reactive value are updated.  
+Well-designed reactivity is one of the selling points of Vue. A reactive value is updated (e.g. after a user action), and automagically all of the components that use the reactive value are updated.  
 
-refs in Vue composition API are the primary tool of reactivity. Knowing refs well is the right path to get the most of Vue reactivity.  
+refs, created by `ref()` Vue composition API, are the primary tool of reactivity. Knowing refs well is the right path to get the most out of Vue reactivity.  
 
-This post is a 101 guide on refs in Vue. Let's get started.  
+This post is a 101 guide on refs and `ref()` API. Let's get started.  
 
 ## 1. ref()
 
 A component renders a value to the screen. When the value changes (e.g. based on an event triggered by the user), Vue makes re-renders the component to reflect the new value on the screen. *That's the idea of reactivity in Vue.*  
 
-[ref()](https://vuejs.org/api/reactivity-core.html#ref) reactivity API let's you create simple reactive values. 
+[ref()](https://vuejs.org/api/reactivity-core.html#ref) reactivity API lets you create simple reactive values. 
 
 `ref()` works inside the `<script setup>`  or `setup()` method of options API.
 
@@ -40,21 +40,21 @@ console.log(count.value); // 2) ref read
 ```
 [Open the demo.](https://codesandbox.io/s/basic-ref-uvyxhv?file=/src/App.vue)
 
-`ref(0)` creates and returns a ref initialized with `0`. The ref is stored into the variable `count` for later use.  
+`ref(0)` creates and returns a ref initialized with `0`. The ref is stored in the variable `count` for later use.  
 
 A ref value can be accessed simply by reading the special property `count.value` available on all the refs. `count.value` is currently `0` because that's the initial value of the ref.  
 
 ## 2. Updating refs
 
-The true power of refs opens when you update them, and see how Vue magically re-renders the content on the screen to reflect the changes.  
+The true power of refs arises when you update them and see how Vue magically re-renders the webpage to reflect the changes.  
 
-Updating a ref is done straigforward. All you have to do is just update the `myRef.value` property.  
+Updating a ref is easy: just update the `myRef.value = 'New Value'` property.  
 
-Contrary to the ref creation, you can update a ref value anywhere you want, e.g. even outside `<script setup>`. More ofter, however, you will update refs inside event handlers.  
+Contrary to the ref creation, you can update a ref value anywhere you want, e.g. even outside `<script setup>`. More often, however, you will update refs inside event handlers.  
 
 Let's implement a scenario having a button and a count state. When the user clicks the button, the count state increases by one. The actual value of the count (even if it changes) needs to be rendered on the screen.  
 
-You can see in the scenario *the need for reactivity*: the screen must render always the actual value of the count. Using a ref fits well, since a ref is reactive.  
+You can see in the scenario *the need for reactivity*: the screen must render always the actual value of the count. Using a ref fits well since a ref is reactive.  
 
 Here's an implementation of the scenario using `ref()`:
 
@@ -73,7 +73,7 @@ const onClick = () => count.value++ // ref update
 ```
 [Open the demo.](https://codesandbox.io/s/ref-update-gw7vhc?file=/src/App.vue)
 
-Open the demo. You'll see that initially count is `0` on the screen. 
+Open the demo. You'll see that at first count is `0`.
 
 Click *Increase* button and count increases. Importantly, the most actual value of the count is rendered on the screen. *That's reactivity in action.* 
 
@@ -113,7 +113,7 @@ export default defineComponent({
 
 The behavior of `ref()` is almost the same in `<script setup>` as in `setup() {...}`. There are just 3 nuances to remember.  
 
-First, don't forget to return the ref from the setup function `return { count }`. Otherwise it won't be accessible in the component methods and template.  
+First, don't forget to return the ref from the setup function `return { count }`. Otherwise, it won't be accessible in the component methods and template.  
 
 Second, you have to access the ref using `this` keyword. For example `this.count` inside the methods in `onClick` event handler above accesses the ref (not directly `count`).  
 
@@ -121,9 +121,9 @@ Third, the refs are automatically unwrapped when accessed inside the options API
 
 ## 4. Values of refs
 
-In the examples above I've been using the count ref, which normally operates on a an integer value. Thus refs can store primitive values like numbers, strings, booleans, `undefined` or `null`.  
+In the examples above I've been using the count ref, which normally operates on an integer value. Thus refs can store primitive values like numbers, strings, booleans, `undefined`, or `null`.  
  
-But a ref can store and even more complex data structures: objects, arrays, maps, and even DOM elements (I'll describe how it does that in the next section).  
+But a ref can also store more complex data structures: objects, arrays, maps, and even DOM elements (I'll describe how it does that in the next section).  
 
 Let's store inside of a ref a plain JavaScript object:
 
@@ -202,11 +202,11 @@ Finally, after component mounting, you can freely access the input element and c
 
 The moment when the component mounts is captured using the `onMounted()` hook. After mounting you are guaranteed that the ref links to the element.  
 
-If you accidently access `input` before mounting, then `input.value` is simply `undefined`.  
+If you accidentally access `input` before mounting, then `input.value` is simply `undefined`.  
 
 ## 6. Implicit refs
 
-In the examples presented until now I've created refs explicitely: using `ref()` factory function provided by Vue.  
+In the examples presented until now, I've created refs explicitly: using `ref()` factory function provided by Vue.  
 
 But some reactivity APIs can also create refs. A common API creating refs is [computed()](https://vuejs.org/api/reactivity-core.html#computed).  
 
@@ -233,7 +233,7 @@ const onClick = () => count.value++ // ref update
 
 `computed(() => count.value % 2 === 0 ? 'even' : 'odd')` creates a ref which depending on `count.value ` number evaluates to `'even'` or `'odd'`.  
 
-While in the example above `computed()` uses only one ref to compute a new value, please not that you can use multiple refs, even mixed with reactive objects, to create a computed ref.  
+While in the example above `computed()` uses only one ref to compute a new value, please note that you can use multiple refs, even mixed with reactive objects, to create a computed ref.  
 
 ```vue
 <script setup>
@@ -268,7 +268,7 @@ When any reactive value used inside `computed()` callback changes, the value of 
 
 [watch(myRef, callback)](https://vuejs.org/api/reactivity-core.html#watch) API provided by Vue watches ref value change.  
 
-Set the ref as the first argument and the second argument the callback to be invoked when the ref changes:  
+Set the ref as the first argument and the second argument as the callback to be invoked when the ref changes:  
 
 ``` vue {5-8}
 <script setup>
@@ -291,7 +291,7 @@ const change = () => myRef.value = 10 // change ref value
 
 Clicking *Change ref* button changes `myRef` value to `10`. As result `watch()` invokes the callback and logs to console `'myRef changed'` message.  
 
-More often than simple console logs you can invoke inside of the watcher different kinds of side effects &mdash; for example initiate fetch requests.  
+More often than simple console logs you can invoke inside of the watcher different kinds of side effects &mdash; for example, initiate fetch requests.  
 
 ## 8. Conclusion
 
@@ -301,11 +301,11 @@ More often than simple console logs you can invoke inside of the watcher differe
 
 To access the value stored inside a ref simply read `myRef.value` property. Same way if you want to update the value of a ref simply update `myRef.value = 'New value'` property.  
 
-Refs in Vue are *reactive* values. Meaning that if you render in the template a ref value, then changing that value programatically makes Vue re-render the output to reflect the ref change.  
+Refs in Vue are *reactive* values. Meaning that if you render in the template a ref value, then changing that value programmatically makes Vue re-render the output to reflect the ref change.  
 
 Other than storing reactive values, a ref can also give direct access to a DOM element rendered in the template. To assign a ref with the DOM element, simply assign `:ref` attribute with a ref: `<div ref="myRef">`. After component mounting,
 `myRef.value` will contain the DOM element instance.  
 
-Vue can also create refs implicitely: for example `computed()` API returns a ref.   
+Vue can also create refs implicitly: for example `computed()` API returns a ref.   
 
 Last but not least `watch()` API lets you detect when a ref value changes: `watch(myRef, callback)`.  
