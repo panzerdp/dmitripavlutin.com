@@ -299,9 +299,8 @@ More often than simple console logs you can invoke inside of the watcher differe
 
 To access the value stored inside a ref simply read `myRef.value` property. Same way if you want to update the value of a ref simply update `myRef.value = 'New value'` property.  
 
-It is important to remember that refs in Vue are *reactive*. Which means that if you render inside the template a ref value, then changing that value programatically makes Vue re-render the ref value on the webpage.  
+Refs in Vue are *reactive* values. Meaning that if you render in the template a ref value, then changing that value programatically makes Vue re-render the output to reflect the ref change.  
 
-Vue can also create refs implicitely: for example when you use `computed()` API.  
+Vue can also create refs implicitely: for example `computed()` API returns a ref.   
 
-Last but not least you can `watch()` API to detect when a ref value changes.   
-
+Last but not least `watch()` API lets you detect when a ref value changes: `watch(myRef, callback)`.  
