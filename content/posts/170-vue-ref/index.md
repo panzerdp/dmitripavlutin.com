@@ -1,8 +1,8 @@
 ---
-title: "Vue ref() and refs"
+title: "What is ref() in Vue?"
 description: "ref() is a Vue composition API function that return refs: small reactive values."  
-published: "2023-02-12"
-modified: "2023-02-12"
+published: "2023-02-28"
+modified: "2023-02-28"
 thumbnail: "./images/cover-2.png"
 slug: vue-ref-api
 tags: ['vue', 'vue composition', 'reactivity']
@@ -229,8 +229,79 @@ const onClick = () => count.value++ // ref update
 ```
 [Open the demo.]()
 
+`computed(() => count.value % 2 === 0 ? 'even' : 'odd')` creates a ref which depending on `count.value ` number evaluates to `'even'` or `'odd'`.  
 
+While in the example above `computed()` uses only one ref to compute a new value, please not that you can use multiple refs, even mixed with reactive objects, to create a computed ref.  
+
+```vue
+<script setup>
+import { computed } from 'vue'
+
+const ref1 = ref(0)
+const ref2 = ref(0)
+const object = reactive({
+  myNumber: 0
+})
+
+const sum = computed(() => {
+  // computed can use multiple refs and reactive object values
+  return ref1.value + ref2.value + object.myNumber
+})
+</script>
+<template>
+  <div>{{ sum }}</div>
+  <button @click="ref1 = 100">ref1 to 100</button>
+  <button @click="ref2 = 200">ref2 to 200</button>
+  <button @click="object.myNumber = 300">object.myNumber to 300</button>
+</template>
+```
+
+[Open the demo.]()
+
+`sum` is a computed ref which is a sum of 2 refs and one reactive object property. 
+
+When any reactive value used inside `computed()` callback changes, the value of `sum` ref recalculates reactively.  
 
 ## 7. Watching refs
 
+[watch(myRef, callback)](https://vuejs.org/api/reactivity-core.html#watch) API provided by Vue watches ref value change.  
+
+Set the ref as the first argument and the second argument the callback to be invoked when the ref changes:  
+
+``` vue {5-8}
+<script setup>
+import { ref, watch } from 'vue'
+
+const myRef = ref(0)
+
+watch(myRef, () => {
+  // this callback is invoked when myRef changes
+  console.log('myRef changed')
+})
+const change = () => myRef.value = 10 // change ref value
+</script>
+<template>
+  <button @click="change">Change ref</button>
+</template>
+```
+
+[Open the demo.]()
+
+Clicking *Change ref* button changes `myRef` value to `10`. As result `watch()` invokes the callback and logs to console `'myRef changed'` message.  
+
+More often than simple console logs you can invoke inside of the watcher different kinds of side effects &mdash; for example initiate fetch requests.  
+
 ## 8. Conclusion
+
+`ref()` is a factory function that creates special reactive values in Vue: refs.  
+
+`const myRef = ref(initialValue)` accepts as the first argument the initial value of the ref, then returns the newly created ref.  
+
+To access the value stored inside a ref simply read `myRef.value` property. Same way if you want to update the value of a ref simply update `myRef.value = 'New value'` property.  
+
+It is important to remember that refs in Vue are *reactive*. Which means that if you render inside the template a ref value, then changing that value programatically makes Vue re-render the ref value on the webpage.  
+
+Vue can also create refs implicitely: for example when you use `computed()` API.  
+
+Last but not least you can `watch()` API to detect when a ref value changes.   
+
