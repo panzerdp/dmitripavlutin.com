@@ -1,8 +1,8 @@
 ---
 title: "How to Solve the Infinite Loop of React.useEffect()"
 description: "Be careful when using React.useEffect() hook because it can generate infinite loops."
-published: "2021-01-19T11:00Z"
-modified: "2023-01-29"
+published: "2021-01-19"
+modified: "2023-02-26"
 thumbnail: "./images/cover-4.png"
 slug: react-useeffect-infinite-loop
 tags: ['react', 'hook', 'useeffect']
