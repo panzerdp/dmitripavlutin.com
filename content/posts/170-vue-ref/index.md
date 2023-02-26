@@ -113,19 +113,19 @@ export default defineComponent({
 
 The behavior of `ref()` is almost the same in `<script setup>` as in `setup() {...}`. There are just 3 nuances to remember.  
 
-First, don't forget to return the ref from the setup function `return { count }`. Otherwise, it won't be accessible in the component methods and template.  
+First, don't forget to return the ref from the `setup()` method: `return { count }`. Otherwise, it won't be accessible in the component methods and template.  
 
-Second, you have to access the ref using `this` keyword. For example `this.count` inside the methods in `onClick` event handler above accesses the ref (not directly `count`).  
+Second, you have to access the ref using `this` keyword. For example, `this.count` accesses the ref (not directly `count`) inside the methods like `onClick`.  
 
-Third, the refs are automatically unwrapped when accessed inside the options API methods. Thus you access and update the value of a ref directly using `this.count`, without using `.value` special property.  
+Third, the refs are automatically unwrapped when accessed inside the options API methods. Thus you access and update the value of a ref directly using `this.count` (not using `this.count.value`).  
 
 ## 4. Values of refs
 
-In the examples above I've been using the count ref, which normally operates on an integer value. Thus refs can store primitive values like numbers, strings, booleans, `undefined`, or `null`.  
+In the examples above I've been using the count ref that usually operates on integers. Refs can store primitive values like numbers, strings, booleans, `undefined`, or `null`.  
  
-But a ref can also store more complex data structures: objects, arrays, maps, and even DOM elements (I'll describe how it does that in the next section).  
+But refs can also store complex data structures like objects, arrays, maps, and even DOM elements. 
 
-Let's store inside of a ref a plain JavaScript object:
+Let's store in a ref a plain JavaScript object:
 
 ``` vue
 <script setup>
@@ -138,9 +138,9 @@ console.log(hero.value.name) // logs 'Batman'
 ```
 [Open the demo.](https://codesandbox.io/s/ref-having-object-du3x1d?file=/src/App.vue)
 
-`ref({ name: 'Batman' })` creates a ref that stores an object. Then you can easily access the object using `hero.value`. And also access any properties of that object using regular property accessors: `hero.value.name`.  
+`ref({ name: 'Batman' })` creates a ref that stores an object. You can access the object from the ref using `hero.value`. And also access any properties of that object using regular property accessors: `hero.value.name`.  
 
-Moreover, the object stored in a ref automagically *becomes reactive*! And the reactivity is applied through any deeply nested object or array of the object stores in the ref.    
+Moreover, the object stored in a ref automagically *becomes reactive*! Plus the reactivity is applied deeply on nested objects or arrays of the original object stored in the ref.    
 
 Let's update the hero name from `'Batman'` to `'Joker'` when a button is clicked:
 
@@ -159,18 +159,22 @@ const onClick = () => hero.value.name = 'Joker' // reactive change
 ```
 [Open the demo.](https://codesandbox.io/s/ref-object-update-njr2s7?file=/src/App.vue)
 
-Since `hero` ref is reactive, the change `hero.value.name = 'Joker'` is reflected on the screen by changing from `'Batman'` to `'Joker'`.  
+Since `hero` ref is reactive, the change `hero.value.name = 'Joker'` is also reflected on the screen by changing from `'Batman'` to `'Joker'`. 
+
+Changes to an object in ref is deeply reactive.  
 
 ## 5. Template refs
 
-Normally you don't have to access and manipulate DOM elements directly. Let Vue take care of everything regarding DOM. 
+Usually you don't have to access and manipulate DOM elements directly. Just let Vue take care of everything regarding DOM. 
 
 But there are situations when you need to access DOM elements. For example, when integrating a 3rd party code that isn't Vue-aware.  
 
-There are only 3 steps necessary to access DOM elements using a ref in Vue:
+Vue uses refs to give you access to DOM elements. 
+
+There are only 3 steps to make a ref access a DOM element:
 
 1. Define create the ref that is supposed to hold the DOM element: `const element = ref()`
-2. Inside the template, use the special attribute `ref` of the tag and assign the ref to it: `<div ref={element}>...</div>`
+2. Inside the template, use the special attribute `ref` and assign the ref to it: `<div ref={element}>...</div>`
 3. After mounting, you can access the DOM element by reading `element.value`
 
 Let's continue with a simple example.  
@@ -194,15 +198,15 @@ onMounted(() => {
 ```
 [Open the demo.](https://codesandbox.io/s/ref-template-j96qkq?file=/src/App.vue)
 
-`const input = ref()` inside of the script setup creates the placeholder ref (which later will contain the input element DOM).  
+`const input = ref()` creates the placeholder ref, which later will contain the input element DOM.  
 
 When rendering the input element inside the template, please use `ref` attribute and assign to it the ref: `<input ref="input" type="text" />`.  
 
 Finally, after component mounting, you can freely access the input element and call the input method on it: `input.value.focus()`.  
 
-The moment when the component mounts is captured using the `onMounted()` hook. After mounting you are guaranteed that the ref links to the element.  
+The moment when the component mounts is captured using the `onMounted()` hook. Only after mounting you are guaranteed that the `input` ref links to the element.  
 
-If you accidentally access `input` before mounting, then `input.value` is simply `undefined`.  
+If you accidentally access `input` before mounting, then `input.value` is `undefined`.  
 
 ## 6. Implicit refs
 
@@ -233,7 +237,7 @@ const onClick = () => count.value++ // ref update
 
 `computed(() => count.value % 2 === 0 ? 'even' : 'odd')` creates a ref which depending on `count.value ` number evaluates to `'even'` or `'odd'`.  
 
-While in the example above `computed()` uses only one ref to compute a new value, please note that you can use multiple refs, even mixed with reactive objects, to create a computed ref.  
+While in the example `computed()` uses only one ref to compute a new value, note that you can use multiple refs, even mixed with reactive objects, to create a computed ref.  
 
 ```vue
 <script setup>
@@ -291,7 +295,7 @@ const change = () => myRef.value = 10 // change ref value
 
 Clicking *Change ref* button changes `myRef` value to `10`. As result `watch()` invokes the callback and logs to console `'myRef changed'` message.  
 
-More often than simple console logs you can invoke inside of the watcher different kinds of side effects &mdash; for example, initiate fetch requests.  
+More often you can invoke inside of the watcher different kinds of side effects &mdash; for example, initiate fetch requests.  
 
 ## 8. Conclusion
 
@@ -299,13 +303,15 @@ More often than simple console logs you can invoke inside of the watcher differe
 
 `const myRef = ref(initialValue)` accepts as the first argument the initial value of the ref, then returns the newly created ref.  
 
-To access the value stored inside a ref simply read `myRef.value` property. Same way if you want to update the value of a ref simply update `myRef.value = 'New value'` property.  
+To access the value stored inside a ref just read `myRef.value` property. Same way if you want to update the value of a ref  update `myRef.value = 'New value'` property.  
 
 Refs in Vue are *reactive* values. Meaning that if you render in the template a ref value, then changing that value programmatically makes Vue re-render the output to reflect the ref change.  
 
-Other than storing reactive values, a ref can also give direct access to a DOM element rendered in the template. To assign a ref with the DOM element, simply assign `:ref` attribute with a ref: `<div ref="myRef">`. After component mounting,
+Other than storing reactive values, a ref can also give direct access to a DOM element rendered in the template. To make ref access a DOM element, assign `ref` attribute with a ref: `<div ref="myRef">`. After component mounting,
 `myRef.value` will contain the DOM element instance.  
 
 Vue can also create refs implicitly: for example `computed()` API returns a ref.   
 
 Last but not least `watch()` API lets you detect when a ref value changes: `watch(myRef, callback)`.  
+
+*What Vue composition APIs that return refs do you know?*
