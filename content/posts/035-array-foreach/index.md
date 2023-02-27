@@ -14,6 +14,10 @@ What's the usual thing you do with an array? Iterate through its items! This is 
 
 This post describes how to use `forEach()` array method to iterate items of an array in JavaScript. Plus, you will read about `forEach()` best practices like correct handling of `this` and how to iterate array-like objects.  
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 ## 1. Basic forEach example
 
 > `array.forEach()` method iterates over the array items, in ascending order, without mutating the array. 

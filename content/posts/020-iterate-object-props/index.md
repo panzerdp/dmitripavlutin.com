@@ -10,10 +10,6 @@ recommended: ["detailed-overview-of-well-known-symbols", "object-rest-spread-pro
 type: post
 ---
 
->I like my code to be elegant and efficient. The logic should be straightforward to make it hard for bugs to hide, the dependencies minimal to ease maintenance [...]. Clean code does one thing well.
-
-*Bjarne Stroustrup, inventor of C++*
-
 In the same period of [ECMAScript 2016](/must-know-details-about-es2016-features/) released in June 2016, JavaScript developers are happy to know that another bunch of awesome proposals [reached the stage 4](https://github.com/tc39/proposals/blob/master/finished-proposals.md) (finished).  
 
 Let's list these features:  
@@ -35,6 +31,10 @@ This article is focused on how to improve the iteration over object properties:
 
 At first sight, these static functions don't seem to add significant value. But when they're combined with destructuring assignments and `for..of` loops, you get a short and sweet way to iterate over object's properties.  
 Let's dive in.  
+
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
 ## 1. Own and enumerable properties
 

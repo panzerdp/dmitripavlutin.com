@@ -27,6 +27,10 @@ person.age; // => undefined
 
 On the other side, `null` represents a missing object reference. JavaScript doesn't initialize variables or object properties with `null`.  
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 Some native methods like `String.prototype.match()` can return `null` to denote a missing object. Take a look at the sample:
 
 ```javascript

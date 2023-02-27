@@ -16,6 +16,10 @@ If you'd like to code in JavaScript, understanding the scope of variables is a m
 
 In this post, I will explain step by step, in-depth, how the scope works in JavaScript.  
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 ```toc
 ```
 

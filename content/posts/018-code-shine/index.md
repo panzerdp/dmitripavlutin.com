@@ -15,6 +15,10 @@ For simple scripts [ES5](http://www.ecma-international.org/ecma-262/5.1/) code w
 
 Because you have to implement the application requirements, you can't jump over the parts of code that are troublesome to implement in ES5 style. The possible solution, yet not reasonable, is [to start using hacks](https://blog.jscrambler.com/12-extremely-useful-hacks-for-javascript/).  
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 In the long term code with hacks and workarounds creates a lot of problems. Especially it becomes harder to read and maintain, not even talking about the aesthetic pleasure.  
 
 And as a general rule:  

@@ -21,6 +21,10 @@ Working with arrays consists in the following phases:
 The current article covers the array initialization and setting the initial elements. The basic way to do this in JavaScript is using an array literal, e.g. `[1, 5, 8]`  or an array constructor `new Array (1, 5, 8)`. 
 
 Fortunately JavaScript offers more interesting and straightforward ways to create arays, not limited to manual enumeration. Let's illustrate the common and advanced scenarios how to initialize arrays in JavaScript.
+
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
  
 ## 1. Array literal
 

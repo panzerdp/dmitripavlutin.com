@@ -22,6 +22,10 @@ Hm... `numbers.sort()` returns `[10, 11, 5]` &mdash; which doesn't look like a s
 
 Why does `array.sort()` method, when invoked without arguments, doesn't sort the numbers as expected? Let's find the answer.  
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 ## 1. *array.sort()* without arguments
 
 `array.sort()` is a method on array instance that sorts the array in place (mutates the original array) and returns the sorted array.  

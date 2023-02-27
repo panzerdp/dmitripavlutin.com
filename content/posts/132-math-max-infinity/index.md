@@ -34,8 +34,11 @@ But what would happen if you invoke `Math.max()` without arguments at all?
 Math.max(); // => -Infinity
 ```
 
-While it might be unexpected at first, but calling `Math.max()` without arguments returns `-Infinity`. Let's find out why it happens, 
-and why it's important to happen this way.  
+While it might be unexpected at first, but calling `Math.max()` without arguments returns `-Infinity`. Let's find out why it happens, and why it's important to happen this way.  
+
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
 ## 1. Max of one array
 

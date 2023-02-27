@@ -16,6 +16,10 @@ That's all good, but how do you structure modules? How many functions, classes a
 
 This post presents 4 best practices on how to organize better your JavaScript modules.  
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 ## 1. Prefer named exports
 
 When I started using JavaScript modules, I had used the *default* syntax to export the single piece that my module defines, either a class or a function.  

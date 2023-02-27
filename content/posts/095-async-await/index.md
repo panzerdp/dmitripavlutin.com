@@ -46,7 +46,9 @@ Finally, the third attempt is the `async/await` syntax (starting ES2017). It let
 
 In this post I'm going to explain, step by step, how to use `async/await` in JavaScript.  
 
-Note: *`async/await` is syntactic sugar on top of promises*. I recommend getting familiar with [promises](https://javascript.info/promise-basics) before continuing.  
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
 ```toc
 ```

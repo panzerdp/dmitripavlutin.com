@@ -24,6 +24,10 @@ The exponentiation operator `**` has edge cases when it comes to `NaN`.
 
 The current article covers the details about ES2016 features with informative examples. Also it makes a comparison with older approaches in terms of compatibility, so you could migrate JavaScript code without surprises.  
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 ## 1. The array method includes()
 
 The array method `includes(element, [fromIndex])` determines whether an array contains a specific `element` and returns the corresponding *boolean* (`true` if `element` is found, `false` otherwise). An optional argument `fromIndex` allows to search from a specific index.  

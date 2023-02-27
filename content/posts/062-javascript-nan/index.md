@@ -34,6 +34,10 @@ While working directly with `NaN` is rare, it can appear surprisingly after a fa
 
 Let's take a closer look at `NaN` special value: how to check if a variable has `NaN`, and importantly understand the scenarios that create "Not A Number" values.  
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 ## 1. NaN number
 
 The number type in JavaScript is a set of all number values, including "Not A Number", positive infinity and negative infinity.  

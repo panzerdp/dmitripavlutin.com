@@ -39,6 +39,10 @@ That's why, sometimes, you need to check the variable's type in JavaScript &mdas
 
 Let's see in more detail how to use `typeof` and `instanceof` operators in JavaScript.  
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 ## 1. *typeof* operator
 
 In JavaScript, you can find primitive types like strings, numbers, booleans, symbols. Additionally, there are functions, objects, and the special values `undefined` and `null`.  

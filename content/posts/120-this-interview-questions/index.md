@@ -16,9 +16,13 @@ The challenge is that `this` has a complicated behavior. That's why during a Jav
 
 Since the best way to prepare for a coding interview is to practice, in this post I compiled a list of 7 interesting interview questions on `this` keyword.  
 
-*If you're not familiar with `this` keyword, I recommend reading the post [Gentle Explanation of "this" in JavaScript](/gentle-explanation-of-this-in-javascript/) before continuing.*  
+If you're not familiar with `this` keyword, I recommend reading the post [Gentle Explanation of "this" in JavaScript](/gentle-explanation-of-this-in-javascript/).
 
 Note: JavaScript snippets below run in non-strict mode, also known as sloppy mode.  
+
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
 ```toc
 ```

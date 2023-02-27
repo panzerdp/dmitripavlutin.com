@@ -36,6 +36,10 @@ But some behavior of `typeof` and `instanceof` can be confusing. The edge cases 
 
 This post describes the pitfalls and remedial workarounds of using `typeof` and `instanceof`.
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 ## 1. The type of null
 
 ![typeof null in JavaScript meme](./images/typeof-5.jpg)
