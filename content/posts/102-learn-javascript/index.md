@@ -20,7 +20,7 @@ Note: JavaScript fundamentals I consider the  keywords, data types, operators, v
 
 *Before I continue, allow me to make a recommendation.* 
 
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+*If you want to significantly improve your JavaScript knowledge, take the  amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
 ## 1. Step by step
 
@@ -44,7 +44,7 @@ My preference is to learn from books. Books let me understand the information in
 
 The game-changer for me in understanding JavaScript was reading from cover to cover [JavaScript: The Definitive Guide](https://www.amazon.com/JavaScript-Definitive-Guide-Activate-Guides/dp/0596805527) (6th edition). The book teaches in an accessible manner all simple to advanced concepts of JavaScript.  
 
-If books are your thing, I recommend the following:
+If books are your thing, take the  following:
 
 * [JavaScript: The Definitive Guide](https://www.amazon.com/JavaScript-Definitive-Most-Used-Programming-Language/dp/1491952024/) (7th edition)
 * [Head First JavaScript Programming](https://www.amazon.com/Head-First-JavaScript-Programming-Brain-Friendly/dp/144934013X)

@@ -14,6 +14,10 @@ The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is t
 
 In this post, you'll find the common scenarios of how to use `fetch()` with `async/await` syntax. You'll understand how to fetch data, handle fetch errors, cancel a fetch request, and more. 
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your JavaScript knowledge, take the  amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 ```toc
 ```
 

@@ -22,7 +22,7 @@ This post describes 3 easy rules that answer the above questions and help you de
 
 *Before I continue, allow me to make a recommendation.* 
 
-*If you want to significantly improve your React knowledge, I recommend the fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+*If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
 ## 1. One concern
 
