@@ -30,6 +30,10 @@ This reasoning is far from the truth. Such usage of `useCallback()` without prof
 
 In this post, I'm going to explain how to use correctly `useCallback()`.
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your React knowledge, I recommend the fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 ## 1. Understanding functions equality check
 
 Before diving into `useCallback()` use, let's distinguish the problem `useCallback()` solves &mdash; the functions equality check.    

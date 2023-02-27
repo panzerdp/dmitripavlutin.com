@@ -14,6 +14,10 @@ To start using React you don't have to learn a lot. Learn the concept of compone
 
 In this post, you'll read a simple but pragmatic guide on how to use props on React components.  
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your React knowledge, I recommend the fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 ## 1. The component props
 
 A component is an encpasulated piece of logic. For example, here's a component that displays a `Hello, World!` message:

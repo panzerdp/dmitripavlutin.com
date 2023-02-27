@@ -16,6 +16,10 @@ In such cases, with care, you can try to improve the performance of your compone
 
 In this post, I'm going to describe how and when to use the `useMemo()` React hook.  
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your React knowledge, I recommend the fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 ## 1. *useMemo()* hook
 
 `useMemo()` is a built-in React hook that accepts 2 arguments &mdash; a function `compute` that computes a result, and the `depedencies` array:  

@@ -14,6 +14,10 @@ React offers 2 approaches to access the value of an input field: using a control
 
 In this post, you'll read how to implement controlled components using React hooks.  
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your React knowledge, I recommend the fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 ## 1. The controlled component
 
 Let's say you have a simple text input field, and you'd like to access its value:

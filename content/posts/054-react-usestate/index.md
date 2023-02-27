@@ -16,6 +16,10 @@ I prefer functional components because they are simple. To enable state manageme
 
 The guide step by step explains how to work with `useState()` hook. Moreover, I will present the common `useState()` pitfalls you must be aware of.  
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your React knowledge, I recommend the fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 ```toc
 # Table of contents
 toHeading: 3

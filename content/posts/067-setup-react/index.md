@@ -16,6 +16,10 @@ The same approach is useful in programming. If you'd like to try new React featu
 
 In this post, I will show you how to setup a React playground with almost zero configuration in 3 easy steps (using [parcel](https://parceljs.org/) bundler).  
 
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your React knowledge, I recommend the fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+
 ## 1. Step 1: install parcel
 
 The first step is one command: install globally the parcel bundler (I'm using the version `1.12.4`).  

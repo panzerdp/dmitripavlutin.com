@@ -12,11 +12,13 @@ type: post
 
 `useEffect()` hook manages the side-effects like fetching over the network, manipulating DOM directly, and starting/ending timers.  
 
-Although the `useEffect()` is one of the most used hooks along with `useState()`, it requires time to familiarize and use correctly.  
+Although the [useEffect()](/react-useeffect-explanation/) is one of the most used hooks along with `useState()`, it requires time to familiarize and use correctly.  
 
 A pitfall you might experience when working with `useEffect()` is the infinite loop of component renderings. In this post, I'll describe the common scenarios that generate infinite loops and how to avoid them.  
 
-*If you aren't familiar with `useEffect()`, I recommend reading my post [A Simple Explanation of React.useEffect()](/react-useeffect-explanation/) before continuing. Having good fundamental knowledge will help you bypass rookie mistakes*.  
+*Before I continue, allow me to make a recommendation.* 
+
+*If you want to significantly improve your React knowledge, I recommend the fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
 ## 1. The infinite loop and side-effect updating state
 
