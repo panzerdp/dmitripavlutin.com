@@ -2,7 +2,7 @@
 title: 'How to Implement a Queue in JavaScript'
 description: 'The guide on how to implement a queue data structure in JavaScript.'
 published: "2021-03-16T12:30Z"
-modified: "2021-03-16T12:30Z"
+modified: "2023-02-27"
 thumbnail: "./images/cover-2.png"
 slug: javascript-queue
 tags: ['javascript', 'computer science', 'data structure' ,'queue']
@@ -168,12 +168,64 @@ Regarding the implementation: inside the `Queue` class the plain object `this.it
 
 Thus the time complexity of these methods is constant time `O(1)`.  
 
-## 4. Summary
+## 4. Further improvements
+
+The above queue implementation is very simple to demonstrate the underlying algorithm to keep the queue operations at `O(1)` complexity.  
+
+But you can easily make further improvements.  
+
+For example, if you want to protect yourself from dequeuing or picking the head of an empty queue, then you can easily add the corresponding verifications:
+
+```javascript{13,21,24-29}
+class Queue {
+  constructor() {
+    this.items = {};
+    this.headIndex = 0;
+    this.tailIndex = 0;
+  }
+
+  enqueue(item) {
+    this.items[this.tailIndex] = item;
+    this.tailIndex++;
+  }
+
+  dequeue() {
+    this.#validate() // validate if not empty
+    const item = this.items[this.headIndex];
+    delete this.items[this.headIndex];
+    this.headIndex++;
+    return item;
+  }
+
+  peek() {
+    this.#validate() // validate if not empty
+    return this.items[this.headIndex];
+  }
+
+  #validate() { // validation logic
+    if (this.headIndex === this.tailIndex) { 
+      throw new Error('Cannot perform operation on an empty queue')
+    }
+  }
+
+  get length() {
+    return this.tailIndex - this.headIndex;
+  }
+}
+
+const queue = new Queue();
+
+queue.dequeue(); // throws error
+```
+
+[Try the demo.](https://jsfiddle.net/ezhLo6mx/)
+
+If you call, for example, `queue.dequeue()` on an empty queue, the method throws an error.  
+
+## 5. Summary
 
 The queue data structure is a type of First Input First Output (FIFO): the earliest enqueued item is the earlies to dequeue.  
 
 The queue has 2 main operations: enqueue and dequeue. Additionally, queues can have helper operations like peek and length.  
 
 All queue operations have to be performed in constant time `O(1)`.  
-
-*Challenge: improve `dequeue()` and `peek()` methods to throw an error if performed on an empty queue. Write your solution in a comment below!*
