@@ -27,7 +27,7 @@ Ok, that was a short intro to scopes. If you'd like to learn more, I recommend r
 
 What follows are 5 interesting cases when the JavaScript scope behaves differently than you expect. You might study these cases to improve your knowledge of scopes, or just to prepare for a fancy coding interview.  
 
-*Before I continue, allow me to make a recommendation.* 
+*Before I go on, let me recommend something to you.* 
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 

@@ -16,7 +16,7 @@ Reading object properties and accessing array items are frequent operations. The
 
 In this post, I will describe 5 interesting uses of destructuring in JavaScript, beyond the basic usage. 
 
-*Before I continue, allow me to make a recommendation.* 
+*Before I go on, let me recommend something to you.* 
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 

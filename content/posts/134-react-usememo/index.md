@@ -16,7 +16,7 @@ In such cases, with care, you can try to improve the performance of your compone
 
 In this post, I'm going to describe how and when to use the `useMemo()` React hook.  
 
-*Before I continue, allow me to make a recommendation.* 
+*Before I go on, let me recommend something to you.* 
 
 *If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 

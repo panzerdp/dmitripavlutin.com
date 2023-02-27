@@ -15,7 +15,7 @@ For simple scripts [ES5](http://www.ecma-international.org/ecma-262/5.1/) code w
 
 Because you have to implement the application requirements, you can't jump over the parts of code that are troublesome to implement in ES5 style. The possible solution, yet not reasonable, is [to start using hacks](https://blog.jscrambler.com/12-extremely-useful-hacks-for-javascript/).  
 
-*Before I continue, allow me to make a recommendation.* 
+*Before I go on, let me recommend something to you.* 
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 

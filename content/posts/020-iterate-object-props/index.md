@@ -32,7 +32,7 @@ This article is focused on how to improve the iteration over object properties:
 At first sight, these static functions don't seem to add significant value. But when they're combined with destructuring assignments and `for..of` loops, you get a short and sweet way to iterate over object's properties.  
 Let's dive in.  
 
-*Before I continue, allow me to make a recommendation.* 
+*Before I go on, let me recommend something to you.* 
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 

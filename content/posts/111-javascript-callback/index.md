@@ -14,7 +14,7 @@ The callback function is one of those concepts that every JavaScript developer s
 
 In this post, I will explain the concept of a callback function. Also, I'll help you distinguish the 2 types of callbacks: synchronous and asynchronous.  
 
-*Before I continue, allow me to make a recommendation.* 
+*Before I go on, let me recommend something to you.* 
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 

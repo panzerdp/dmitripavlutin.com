@@ -15,7 +15,7 @@ In this post, you'll find 3 easy ways to perform shallow clone (aka copy) of obj
 As a bonus, I'm going to show how you can also update, add, or remove properties in place on the clone. That's useful when you want to perform an update on the object
 in an immutable manner.    
 
-*Before I continue, allow me to make a recommendation.* 
+*Before I go on, let me recommend something to you.* 
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 

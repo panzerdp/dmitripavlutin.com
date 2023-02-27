@@ -16,7 +16,7 @@ Otherwise, if the handlers are invoked too often you risk making the application
 
 In this post, you'll learn how to correctly use React hooks to apply [debouncing and throttling techniques](https://css-tricks.com/debouncing-throttling-explained-examples/) to callbacks in React.  
 
-*Before I continue, allow me to make a recommendation.* 
+*Before I go on, let me recommend something to you.* 
 
 *If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 

@@ -14,7 +14,7 @@ In this post, I'm going to discuss why and how to use TypeScript to type React c
 
 You'll find how to annotate component props, mark a prop optional, and indicate the return type.
 
-*Before I continue, allow me to make a recommendation.* 
+*Before I go on, let me recommend something to you.* 
 
 *If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 

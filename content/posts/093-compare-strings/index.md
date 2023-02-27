@@ -34,7 +34,7 @@ While `str1` and `str2` look the same, the comparison `str1 === str2` evaluates 
 
 Let's detail into how to correctly compare strings in JavaScript. Before starting, I'm going to familiarize you with the terms of grapheme (a unit of writing) and combining character (specialized character that modify the look of a base character).  
 
-*Before I continue, allow me to make a recommendation.* 
+*Before I go on, let me recommend something to you.* 
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
