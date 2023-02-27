@@ -29,7 +29,7 @@ That's the way to go to listen for events on a single element, particularly a bu
 
 *Before I go on, let me recommend something to you.* 
 
-*If you want to significantly improve your JavaScript knowledge, take the  amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+*If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
 What about listening for events on multiple buttons? Here's a <span id="many-event-listeners">possible implementation</span>:
 
