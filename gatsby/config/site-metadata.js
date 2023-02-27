@@ -56,5 +56,18 @@ module.exports = {
         'use-react-memo-wisely',
       ]
     }]
-  }
+  },
+  affiliates: [
+    { 
+      tag: 'react',
+      courseTitle: 'React Front To Back Course',
+      courseLink: 'https://www.traversymedia.com/a/2147528895/FqXWyazh',
+      pitch: "This is just an example of pitch"
+    }, { 
+      tag: 'javascript',
+      courseTitle: 'Modern JavaScript From The Beginning 2.0',
+      courseLink: 'https://www.traversymedia.com/a/2147528886/FqXWyazh',
+      pitch: 'This is just an example of pitch'
+    }
+  ]
 };

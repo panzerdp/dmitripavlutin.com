@@ -34,7 +34,7 @@ export const useAuthorAndSiteInfo = () => {
           twitter
         }
       }
-      
+
       query AuthorInfoAndPictures {
         site {
           siteMetadata {
@@ -43,6 +43,12 @@ export const useAuthorAndSiteInfo = () => {
             }
             siteInfo {
               ...SiteInfoAll
+            }
+            affiliates {
+              tag
+              courseTitle
+              pitch
+              courseLink
             }
           }
         }
@@ -61,6 +67,7 @@ export const useAuthorAndSiteInfo = () => {
       profilePicture: imageData,
       profilePictureSrc: getSrc(imageData)
     },
-    site: data.site.siteMetadata.siteInfo
+    site: data.site.siteMetadata.siteInfo,
+    affiliates: data.site.siteMetadata.affiliates
   }
 }
