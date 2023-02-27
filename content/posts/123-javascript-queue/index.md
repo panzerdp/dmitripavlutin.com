@@ -174,7 +174,7 @@ The above queue implementation is very simple to demonstrate the underlying algo
 
 But you can easily make further improvements.  
 
-For example, if you want to protect yourself from dequeuing or picking the head of an empty queue, then you can easily add the corresponding verifications:
+For example, if you want to protect yourself from dequeuing or picking the head of an empty queue, then you can add the verification for emptiness:
 
 ```javascript{13,21,24-29}
 class Queue {
