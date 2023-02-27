@@ -14,11 +14,9 @@ When a React component handles bursting events like window resize, scrolling, us
 
 Otherwise, if the handlers are invoked too often you risk making the application lagging or even unresponsive for a few seconds. In this regards, debouncing and throttling techniques can help you control the invocation of the event handlers.  
 
-In this post, you'll learn how to correctly use React hooks to apply [debouncing and throttling techniques](https://css-tricks.com/debouncing-throttling-explained-examples/) to callbacks in React.  
+In this post, you'll learn how to correctly use React hooks to apply debouncing and throttling techniques to callbacks in React.  
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your React knowledge, I recommend the fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+*If you're unfamiliar with debounce and throttle concepts, I recommend checking [Debouncing and Throttling Explained Through Examples](https://css-tricks.com/debouncing-throttling-explained-examples/).*
 
 ## 1. The callback without debouncing
 

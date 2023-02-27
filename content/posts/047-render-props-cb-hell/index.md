@@ -32,10 +32,6 @@ When using this pattern, sooner or later you'll face a problem of nesting compon
 
 In this post, I will describe 3 simple and efficient approaches on how to solve this problem: using class component, function composition or `react-adopt` tool.  
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your React knowledge, I recommend the fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ## 1. Render props callback hell
 
 Let's say you need to detect and display the city of the website visitor.

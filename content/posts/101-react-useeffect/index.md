@@ -14,11 +14,7 @@ I am impressed by the expressiveness of React hooks. You can do so much by writi
 
 But the brevity of hooks comes at a price &mdash; they're relatively difficult to understand at the beginning. That's especially true for `useEffect()` &mdash; the hook that manages side-effects in functional React components.  
 
-I'll help you understand `useEffect()` in an accessible way. Let's get started.  
-
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your React knowledge, I recommend the fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+I'll help you understand `useEffect()` in an accessible way. Let's get started. 
 
 ```toc
 ```

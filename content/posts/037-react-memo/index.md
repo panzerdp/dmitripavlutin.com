@@ -18,10 +18,6 @@ This post describes the situations where `React.memo()` improves the performance
 
 In addition, I'll describe some useful memoization tips you should be aware of.  
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your React knowledge, I recommend the fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ## 1. React.memo()
 
 When deciding to update DOM, React first renders your component, then compares the result with the previous render. If the render results are different, React updates the DOM.  
