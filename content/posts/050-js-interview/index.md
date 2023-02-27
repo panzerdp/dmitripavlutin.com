@@ -31,10 +31,6 @@ In this post, you will find 7 at first sight simple, but tricky JavaScript inter
 
 While at first the questions might seem random, they try to hook into important concepts of JavaScript. So you better practice them before your next interview!
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ## 1. Accidental global variable
 
 #### Question

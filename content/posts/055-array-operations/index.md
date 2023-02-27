@@ -18,10 +18,6 @@ Often I find myself overwhelmed by the number of possible operations on arrays a
 
 I've decided to implement 15 common operations on arrays. If you need to perform a specific operation, just pick the implementation from the table of contents.  
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ```toc
 # Table of contents
 tableLayout: true

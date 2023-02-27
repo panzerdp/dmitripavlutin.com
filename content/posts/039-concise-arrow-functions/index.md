@@ -18,10 +18,6 @@ With fat arrow syntax you can define functions shorter than a [function expressi
 
 Let's explore how to make arrow functions concise and straightforward to read. Plus you'll find some tricky shortening cases to be aware of.   
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ## 1. Basic syntax
 
 An arrow function declaration in its full version consists of:

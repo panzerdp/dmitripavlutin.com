@@ -14,10 +14,6 @@ I don't like `arguments` keyword when I access the arguments of a function call.
 
 Even worse `arguments` is an array-like object. You cannot use array methods like `.map()` or `.forEach()` directly on it.  
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 To access `arguments` from the enclosing function, you have to use workarounds by storing it into a separated variable. And to walk through this array-like object, you have to use *duck typing* and make indirect invocations. See the following example:
 
 ```javascript

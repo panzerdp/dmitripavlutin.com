@@ -20,10 +20,6 @@ These are the signs of bad coding habits.
 
 In this post, I describe 5 common bad coding habits in JavaScript. And importantly I will present my actionable recommendations on how to get rid of these habits.  
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ## 1. Don't use implicit type conversion
 
 JavaScript is a loosely typed language. If used correctly, this is a benefit because of the flexibility it gives you.   

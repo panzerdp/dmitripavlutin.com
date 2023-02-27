@@ -31,10 +31,6 @@ sum; // 12
 
 In this post, you'll learn about the reduce operation, and how to use `array.reduce(callback, initialValue)` method to perform the reduce operation on arrays.  
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ## 1. Reduce operation
 
 Before diving into how to use the `array.reduce()` method, let's find distinguish what problem it tries to solve: reducing an array to a value.  

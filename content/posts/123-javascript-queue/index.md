@@ -18,10 +18,6 @@ However, on top of knowing the programming language, you also have to understand
 
 In this post, I'm going to describe the queue data structure, what operations it has, as well as present you with a queue implementation in JavaScript.  
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ## 1. The queue data structure
 
 If you enjoy traveling (like I do), most likely you passed the check-in process at the airport. If there are a lot of travelers willing to check-in, naturally a queue of people is formed at the check-in desk.  

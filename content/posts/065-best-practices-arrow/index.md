@@ -14,10 +14,6 @@ The arrow function deserves the popularity. Its syntax is concise, binds `this` 
 
 In this post, you'll read 5 best practices to get even more benefits from the arrow functions. 
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ## 1. Arrow function name inference
 
 The arrow function in JavaScript is *anonymous*: the `name` property of the function is an empty string `''`.  

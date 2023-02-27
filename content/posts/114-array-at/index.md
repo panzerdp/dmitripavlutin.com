@@ -16,10 +16,6 @@ In this post, I'm going to present the new array method `array.at(index)`.
 
 The main benefit of the new method is accessing elements from the end of the array using a negative index, which isn't possible using the regular square brackets syntax `array[index]`.  
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ## 1. The limitation of the square brackets syntax
 
 The usual way to access an array element by index is the use of square brackets `array[index]`:

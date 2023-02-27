@@ -18,10 +18,6 @@ I'll start with the fundamental terms: scope and lexical scope. Then, after gras
 
 Before starting, I suggest you resist the urge to skip the scope and lexical scope sections. These concepts are crucial to closures, and if you get them well, the idea of closure becomes self-evident.  
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ## 1. The scope
 
 When you define a variable, you want it to exist within some boundaries. E.g. a `result` variable makes sense to exist within a `calculate()` function, as an internal detail. Outside of the `calculate()`, the `result` variable is useless.  

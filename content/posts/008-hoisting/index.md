@@ -12,11 +12,8 @@ type: post
 
 Variables in a program are everywhere. They are small pieces of data and logic that interact with each other: and this activity makes the application alive.  
 
-In JavaScript, an important aspect of working with variables is hoisting, which defines when a variable is accessible. If you're looking for a detailed description of this aspect, then you're in the right place. Let's begin.  
-
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+In JavaScript, an important aspect of working with variables is hoisting, which defines when a variable is accessible. If you're looking 
+for a detailed description of this aspect, then you're in the right place. Let's begin.
 
 ```toc
 # Table of contents

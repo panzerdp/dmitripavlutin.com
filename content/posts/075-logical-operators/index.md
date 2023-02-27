@@ -26,10 +26,6 @@ This post explains in detail how `&&` and `||` operators work in JavaScript.
 
 Before jumping into how the operators work, let's start with the basic concepts of *truthy* and *falsy*.
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ## 1. Falsy value
 
 Because JavaScript is a loosely typed language, logical operations can be performed on any type. The expressions like `1 && 2`, `null || undefined`, `'hello' && true` are weird, but still valid in JavaScript.  

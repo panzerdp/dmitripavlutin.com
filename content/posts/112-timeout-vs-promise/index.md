@@ -33,10 +33,6 @@ Open the [demo](https://jsitor.com/wJFrt5VCiU) and check the console. You'll not
 
 Might the promise process faster because the `Promise.resolve(true).then(...)` was called before the `setTimeout(..., 0)`? Fair enough question.  
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 Let's change slighly the conditions of the experiment and call `setTimeout(..., 0)` first:
 
 ```javascript

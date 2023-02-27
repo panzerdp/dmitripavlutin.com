@@ -16,10 +16,6 @@ This concept is also asked often during JavaScript interviews.
 
 In this post, I'll help you understand prototypal inheritance.  
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ## 1. Introduction
 
 JavaScript has only primitives types, `null`, `undefined`, and objects. A big world of objects. In JavaScript, contrary to languages like Java or PHP, there’s no concept of class that serves as a template to create objects.  

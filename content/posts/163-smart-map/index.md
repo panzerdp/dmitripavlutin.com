@@ -14,10 +14,6 @@ type: post
 
 However, there's an alternative to `array.map()`: the `array.flatMap()` (available starting ES2019). This method gives you the ability to map, but also to remove or even add new items in the resulting mapped array.    
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ## 1. Smarter mapper
 
 Having an array of numbers, how would you create a new array with the items doubled?  

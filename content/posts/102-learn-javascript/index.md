@@ -18,10 +18,6 @@ In this post I share my experience and principles on how to learn JavaScript fun
 
 Note: JavaScript fundamentals I consider the  keywords, data types, operators, variables, expressions, functions, closures, objects, prototypal inheritance, classes, `this`, promises, `async/await`.  
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ## 1. Step by step
 
 Stephen King is one of my favorite writers. He has published around 61 novels. Many of these have been adapted into movies and TV series.  

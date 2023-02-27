@@ -18,10 +18,6 @@ The prototypal inheritance can emulate the classic class inheritance. To bring t
 
 This post familiarizes you with JavaScript classes: how to define a class, initialize the instance, define fields and methods, understand the private and public fields, grasp the static fields and methods.  
 
-*Before I continue, allow me to make a recommendation.* 
-
-*If you want to significantly improve your JavaScript knowledge, I recommend the amazingly useful ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
-
 ```toc
 
 ```
