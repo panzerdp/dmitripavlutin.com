@@ -1,6 +1,6 @@
 ---
 title: "What is ref() in Vue?"
-description: "ref() is a Vue composition API function that returns refs: small reactive values."  
+description: "ref() is a Vue composition API function that creates refs: small reactive values."  
 published: "2023-02-28"
 modified: "2023-02-28"
 thumbnail: "./images/vue-ref.png"
