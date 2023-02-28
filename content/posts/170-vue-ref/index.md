@@ -12,7 +12,7 @@ type: post
 
 Well-designed reactivity is one of the selling points of Vue. When a reactive value is updated (after a user event) then automagically the components using the reactive value are updated.  
 
-refs, created by `ref()` composition API, are the primary tool of Vue reactivity. Knowing refs is a requirement is you want to understand reactivity.  
+refs, created by `ref()` composition API, are the primary tool of Vue reactivity. Knowing refs is a requirement if you want to understand reactivity.  
 
 Let's see how refs and `ref()` API work in Vue.  
 
@@ -52,7 +52,7 @@ The true benefit of refs shows when you update them and see how Vue magically re
 
 Updating a ref is easy: just change the value of `myRef.value = 'New Value'` property.  
 
-You can update a ref value anywhere you want. But usually you'll update refs inside event handlers.  
+You can update a ref value anywhere you want. But usually, you'll update refs inside event handlers.  
 
 Let's implement a scenario having a button and a count state. When the user clicks the button, the count state increases by one. The actual value of the count (even if it changes) needs to be rendered on the screen.  
 
@@ -75,7 +75,7 @@ const onClick = () => count.value++ // ref update
 ```
 [Open the demo.](https://codesandbox.io/s/ref-update-gw7vhc?file=/src/App.vue)
 
-Open the demo. You'll see that initially count is `0`.
+Open the demo. You'll see that count is `0`.
 
 Click *Increase* button and count increases. Importantly, the most actual value of the count is rendered on the screen. *That's reactivity in action.*
 
@@ -123,7 +123,7 @@ Third, the refs are automatically unwrapped when accessed inside the options API
 
 ## 4. Values of refs
 
-In the examples above I've created the count ref that operated on numbers. In general refs can store any primitive value: numbers, strings, booleans, `undefined`, or `null`.  
+In the examples above I've created the count ref that operated on numbers. In general, refs can store any primitive value: numbers, strings, booleans, `undefined`, or `null`.  
  
 refs can also store complex data structures like objects, arrays, maps, and even DOM elements. 
 
@@ -163,13 +163,13 @@ const onClick = () => hero.value.name = 'Joker' // reactive change
 
 Since `hero` ref is reactive, the change `hero.value.name = 'Joker'` is also reflected on the screen by changing from `'Batman'` to `'Joker'`. 
 
-Changes to an object in ref is deeply reactive. 
+Changes to an object in ref are deeply reactive. 
 
 *Side note: if you don't want deeply reactive refs, consider using [shallowRef()](https://vuejs.org/api/reactivity-advanced.html#shallowref) API.*
 
 ## 5. Template refs
 
-Usually you don't have to access and manipulate DOM elements directly. Just let Vue take care of everything regarding DOM. 
+Usually, you don't have to access and manipulate DOM elements directly. Just let Vue take care of everything regarding DOM. 
 
 But there are situations when you need to access DOM elements. For example, when integrating a 3rd party code that isn't Vue-aware.  
 
