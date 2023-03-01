@@ -18,9 +18,9 @@ What you could do is slow down the execution of the event handlers. Such amortiz
 
 In this post, you'll find how to debounce and throttle watchers and event handlers in Vue components.  
 
-*Before I go on, let me recommend something to you.* 
+*Before I go on, let me recommend something to you.*
 
-*If you want to truly understand Vue, do yourself a favor and take ["Vue.js 3 Fundamentals with the Composition API"](https://vueschool.io/courses/vue-js-fundamentals-with-the-composition-api?friend=dmitripavlutin) course on Vueschool.*
+*If you want to become proficient in Vue, take ["Vue.js 3 Fundamentals with the Composition API"](https://vueschool.io/courses/vue-js-fundamentals-with-the-composition-api?friend=dmitripavlutin) course on Vueschool.*
 
 ## 1. Debouncing a watcher
 

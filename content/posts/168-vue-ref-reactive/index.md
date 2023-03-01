@@ -18,7 +18,7 @@ Let's find the answer together.
 
 *Before I go on, let me recommend something to you.* 
 
-*If you want to truly understand Vue composition API, do yourself a favor and take ["Vue 3 Composition API"](https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin) course on Vueschool.*
+*If you need an easy and accessible explanation of Vue composition API, take ["Vue 3 Composition API"](https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin) course on Vueschool.*
 
 ```toc
 ```

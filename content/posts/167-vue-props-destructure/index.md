@@ -16,7 +16,7 @@ In this post, you will learn how to correctly destructure props of a Vue compone
 
 *Before I go on, let me recommend something to you.* 
 
-*If you want to truly understand Vue composition API, do yourself a favor and take ["Vue 3 Composition API"](https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin) course on Vueschool.*
+*If you need an easy and accessible explanation of Vue composition API, take ["Vue 3 Composition API"](https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin) course on Vueschool.*
 
 ## 1. Destructuring props
 
