@@ -14,6 +14,10 @@ The [reactivity API](https://vuejs.org/api/reactivity-core.html) adds many possi
 
 In this post, you will learn how to correctly destructure props of a Vue component so that props do not lose reactivity.  
 
+*Before I go on, let me recommend something to you.* 
+
+*If you want to truly understand Vue composition API, do yourself a favor and take ["Vue 3 Composition API"](https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin) course on Vueschool.*
+
 ## 1. Destructuring props
 
 The compiler macro [defineProps()](https://vuejs.org/api/sfc-script-setup.html#defineprops-defineemits) helps to access the props supplied to a component inside the [setup script](https://vuejs.org/api/sfc-script-setup.html):

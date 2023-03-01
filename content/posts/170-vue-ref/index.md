@@ -16,6 +16,10 @@ refs, created by `ref()` composition API, are the primary tool of Vue reactivity
 
 Let's see how refs and `ref()` API work in Vue.  
 
+*Before I go on, let me recommend something to you.* 
+
+*If you want to truly understand Vue composition API, do yourself a favor and take the ["Vue 3 Composition API"](https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin) course on Vueschool.*     
+
 ## 1. ref()
 
 A component renders a value on the screen. When the value changes (e.g. based on an event triggered by the user), Vue re-renders the component to reflect the new value on the screen. *That's the idea of reactivity in Vue.*  
