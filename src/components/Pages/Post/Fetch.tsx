@@ -13,11 +13,11 @@ interface PostTemplateFetchProps {
 export default function PostTemplateFetch({ data, children }: PostTemplateFetchProps) {
   const { featured: { popularPostsByCategory } } = data.site.siteMetadata;
   const { mdx, recommendedPostsMarkdown, popularPostsMarkdown } = data;
-  console.log(children);
   const post: PostDetailed = {
     ...mdx.frontmatter,
     children,
     thumbnail: mdx.frontmatter.thumbnail.childImageSharp.gatsbyImageData,
+    tableOfContents: mdx.tableOfContents
   };
   const postRelativePath = mdx.internal.contentFilePath
     .split('/')
@@ -73,6 +73,7 @@ export const pageQuery = graphql`
       internal {
         contentFilePath
       }
+      tableOfContents
       frontmatter {
         ...Post
         recommended
