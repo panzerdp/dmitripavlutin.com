@@ -71,7 +71,6 @@ module.exports = {
               edges {
                 node {
                   excerpt
-                  html
                   frontmatter {
                     title
                     date: published
