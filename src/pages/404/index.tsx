@@ -8,19 +8,19 @@ interface Page404FetchProps {
 }
 
 export default function Page404Fetch({ data }: Page404FetchProps) {
-  const edges = data.allMarkdownRemark.edges;
+  const edges = data.allMdx.edges;
   if (edges.length === 0) {
     throw new Error('404 page content not found. Create a markdown file which type is "404"');
   }
-  return <Page404Template html={edges[0].node.html} />;
+  return <Page404Template html={edges[0].node.body} />;
 }
 
 export const pageQuery = graphql`
   query Page404 {
-    allMarkdownRemark(filter: { frontmatter: { type: { eq: "404" } } }) {
+    allMdx(filter: { frontmatter: { type: { eq: "404" } } }) {
       edges {
         node {
-          html
+          body
         }
       }
     }

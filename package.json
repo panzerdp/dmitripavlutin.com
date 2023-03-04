@@ -8,6 +8,7 @@
     "url": "https://github.com/panzerdp/dmitripavlutin.com/issues"
   },
   "dependencies": {
+    "@mdx-js/react": "2.3.0",
     "@rogovdm/gatsby-source-mailchimp": "1.0.16",
     "@types/classnames": "2.3.1",
     "@types/react": "18.0.26",
@@ -23,6 +24,7 @@
     "gatsby-plugin-feed": "5.3.1",
     "gatsby-plugin-graphql-codegen": "3.1.1",
     "gatsby-plugin-image": "3.3.2",
+    "gatsby-plugin-mdx": "5.7.0",
     "gatsby-plugin-netlify": "5.1.0",
     "gatsby-plugin-react-helmet": "6.3.0",
     "gatsby-plugin-remove-serviceworker": "1.0.0",
@@ -38,9 +40,9 @@
     "gatsby-remark-responsive-iframe": "6.3.0",
     "gatsby-remark-shiki-twoslash": "3.0.35",
     "gatsby-source-filesystem": "5.3.1",
-    "gatsby-transformer-remark": "6.3.2",
     "gatsby-transformer-sharp": "5.3.1",
     "js-yaml": "4.1.0",
+    "mdast-util-toc": "6.1.1",
     "normalize.css": "8.0.1",
     "path-to-regexp": "6.2.1",
     "query-string": "8.1.0",

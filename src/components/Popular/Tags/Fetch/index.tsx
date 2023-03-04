@@ -14,7 +14,7 @@ export default function PopularTagsFetch({ render }: PopularTagsFetch) {
     <StaticQuery
       query={graphql`
         query PopularTagsFetch {
-          allMarkdownRemark(filter: { frontmatter: { type: { eq: "post" } } }, limit: 1000) {
+          allMdx(filter: { frontmatter: { type: { eq: "post" } } }, limit: 1000) {
             edges {
               node {
                 frontmatter {
@@ -25,7 +25,7 @@ export default function PopularTagsFetch({ render }: PopularTagsFetch) {
           }
         }
       `}
-      render={(data: PopularTagsFetchQuery) => render(data.allMarkdownRemark.edges.map(toPostPlain))}
+      render={(data: PopularTagsFetchQuery) => render(data.allMdx.edges.map(toPostPlain))}
     />
   );
 }

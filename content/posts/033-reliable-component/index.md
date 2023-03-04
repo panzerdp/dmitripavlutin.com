@@ -1,6 +1,6 @@
 ---
-title: 7 Architectural Attributes of a Reliable React Component
-description: A detailed explanation of how to architecture React components based on single responsibility principle, encapsulation and composition.
+title: '7 Architectural Attributes of a Reliable React Component'
+description: 'A detailed explanation of how to architecture React components based on single responsibility principle, encapsulation and composition.'
 published: "2017-09-26"
 modified: "2017-09-26"
 thumbnail: "./images/temple.jpg"
@@ -54,7 +54,7 @@ Having one responsibility restricts the component size and makes it focused on o
 
 Let's follow a few examples.  
 
-<u>Example 1</u> A component fetches remote data, correspondingly it has *one reason to change when fetch logic changes*.  
+**Example 1** A component fetches remote data, correspondingly it has *one reason to change when fetch logic changes*.  
 A reason to change happens when:
 
 * The server URL is modified
@@ -62,7 +62,7 @@ A reason to change happens when:
 * You want to use a different HTTP requests library  
 * Or any modification related to fetch logic *only*.  
 
-<u>Example 2</u> A table component maps an array of data to a list of row components, as result having *one reason to change when mapping logic changes*.  
+**Example 2** A table component maps an array of data to a list of row components, as result having *one reason to change when mapping logic changes*.  
 A reason to change occurs when:  
 
 * You have a task to limit the number of rendered row components (e.g. display up to 25 rows)  
@@ -288,8 +288,7 @@ The component `<PersistentForm>` consists of an input field and a button *Save t
 
 Let's look at the demo:
 
-<iframe width="100%" height='265' scrolling='no' title='Persistent form' src='//codepen.io/dmitri_pavlutin/embed/NaGgVw/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/dmitri_pavlutin/pen/NaGgVw/'>Persistent form</a> by Dmitri Pavlutin (<a href='https://codepen.io/dmitri_pavlutin'>@dmitri_pavlutin</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
+<iframe width="100%" height='265' scrolling='no' title='Persistent form' src='//codepen.io/dmitri_pavlutin/embed/NaGgVw/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true'></iframe>
 
 On input field change component's state gets updated inside `handleChange(event)` method. On button click the value is saved to local storage in `handleClick()`:  
 
@@ -514,8 +513,7 @@ Let's study such a situation.
 
 A simple application shows a number and 2 buttons. First button increases and second button decreases the number:  
 
-<iframe width="100%" height='265' scrolling='no' title='Increase or decrease the number' src='//codepen.io/dmitri_pavlutin/embed/BdWRpq/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/dmitri_pavlutin/pen/BdWRpq/'>Increase or decrease the number</a> by Dmitri Pavlutin (<a href='https://codepen.io/dmitri_pavlutin'>@dmitri_pavlutin</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
+<iframe width="100%" height='265' scrolling='no' title='Increase or decrease the number' src='//codepen.io/dmitri_pavlutin/embed/BdWRpq/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true'></iframe>
 
 The application consists of two components: `<App>` and `<Controls>`.
 
@@ -646,8 +644,7 @@ Fortunately, composition is easy to understand. Take a set of small pieces, comb
 
 Let's look at a common frontend application composition pattern. The application is composed of a header at the top, footer at the bottom, sidebar on the left and payload content in the middle:  
 
-<iframe width="100%" height='400' scrolling='no' title='The composition of a modern Frontend application' src='//codepen.io/dmitri_pavlutin/embed/EvQJZx/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/dmitri_pavlutin/pen/EvQJZx/'>The composition of a modern Frontend application</a> by Dmitri Pavlutin (<a href='https://codepen.io/dmitri_pavlutin'>@dmitri_pavlutin</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
+<iframe width="100%" height='400' scrolling='no' title='The composition of a modern Frontend application' src='//codepen.io/dmitri_pavlutin/embed/EvQJZx/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true'></iframe>
 
 The application skeleton demonstrates how well composition builds the application. Such organization is expressive and open for understanding.  
 

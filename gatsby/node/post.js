@@ -14,7 +14,7 @@ module.exports = function createPost({ createPage, edges, popularPostsSlugs }, {
       path: TO_POST({
         slug,
       }),
-      component: postComponentPath,
+      component: `${postComponentPath}?__contentFilePath=${post.node.internal.contentFilePath}`,
       context: {
         slug,
         recommended,

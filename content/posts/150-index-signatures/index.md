@@ -228,7 +228,7 @@ JavaScript implicitly coerces numbers to strings when used as keys in property a
 
 You can think that `[key: string]` is the same as `[key: string | number]`.  
 
-## 4. Index signature vs Record<Keys, Type>
+## 4. Index signature vs `Record<Keys, Type>`
 
 TypeScript has a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeystype) `Record<Keys, Type>` to annotate records, similar to the index signature.  
 

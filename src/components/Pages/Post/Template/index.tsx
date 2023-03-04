@@ -62,7 +62,7 @@ export default function PostTemplate({
             <CarbonSection />
           </Media>
         </div>
-        <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
+        <div className={styles.postContent}>{post.children}</div>
         <div className={styles.shareGroup}>
           <div className={styles.shareBottom}>
             <ShareBottom post={post} />

@@ -11,16 +11,17 @@ module.exports = {
   plugins: [
     'gatsby-plugin-sharp',
     {
-      resolve: 'gatsby-transformer-remark',
+      resolve: 'gatsby-plugin-mdx',
       options: {
-        plugins: [
-          {
-            resolve: `gatsby-remark-table-of-contents`,
-            options: {
-              tight: true,
-              fromHeading: 1,
-            },
-          },
+        extensions: [`.md`, `.mdx`],
+        gatsbyRemarkPlugins: [
+          // {
+          //   resolve: `gatsby-remark-table-of-contents`,
+          //   options: {
+          //     tight: true,
+          //     fromHeading: 1,
+          //   },
+          // },
           {
             resolve: 'gatsby-plugin-image',
             options: {

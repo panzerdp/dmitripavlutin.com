@@ -93,7 +93,7 @@ node ./month.mjs "2022-02-01"
 
 `February` is printed in the terminal.  
 
-### 1.2 { "type": "module" } in *package.json*
+### 1.2 `{ "type": "module" }` in *package.json*
 
 By default `.js` files in Node.js are considered CommonJS modules. To make `.js` files as ES modules simply set `"type"` field as `"module"` in the `package.json`:
 

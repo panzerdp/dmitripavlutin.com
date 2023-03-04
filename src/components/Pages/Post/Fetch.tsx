@@ -7,20 +7,22 @@ import { PostDetailed } from 'typings/post';
 
 interface PostTemplateFetchProps {
   data: PostBySlugQuery;
+  children: JSX.Element;
 }
 
-export default function PostTemplateFetch({ data }: PostTemplateFetchProps) {
+export default function PostTemplateFetch({ data, children }: PostTemplateFetchProps) {
   const { featured: { popularPostsByCategory } } = data.site.siteMetadata;
-  const { markdownRemark, recommendedPostsMarkdown, popularPostsMarkdown } = data;
+  const { mdx, recommendedPostsMarkdown, popularPostsMarkdown } = data;
+  console.log(children);
   const post: PostDetailed = {
-    ...markdownRemark.frontmatter,
-    html: markdownRemark.html,
-    thumbnail: markdownRemark.frontmatter.thumbnail.childImageSharp.gatsbyImageData,
+    ...mdx.frontmatter,
+    children,
+    thumbnail: mdx.frontmatter.thumbnail.childImageSharp.gatsbyImageData,
   };
-  const postRelativePath = markdownRemark.fileAbsolutePath
-    .split('/')
-    .slice(-4)
-    .join('/');
+  const postRelativePath = '' //mdx.fileAbsolutePath
+  // .split('/')
+  // .slice(-4)
+  // .join('/');
   const recommendedPosts = recommendedPostsMarkdown.edges.map(toPostPlain);
   const popularPosts = popularPostsMarkdown.edges.map(toPostPlain);
   const popularPlainPostsByCategory = popularPostsByCategory.map(({ category, slugs }) => {
@@ -46,7 +48,7 @@ export const pageQuery = graphql`
     scriptSrc
   }
 
-  fragment Post on MarkdownRemarkFrontmatter {
+  fragment Post on MdxFrontmatter {
     title
     description
     published
@@ -66,10 +68,8 @@ export const pageQuery = graphql`
         }
       }
     }
-    markdownRemark(frontmatter: { slug: { eq: $slug } }) {
+    mdx(frontmatter: { slug: { eq: $slug } }) {
       id
-      html
-      fileAbsolutePath
       frontmatter {
         ...Post
         recommended
@@ -80,7 +80,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    recommendedPostsMarkdown: allMarkdownRemark(filter: { frontmatter: { slug: { in: $recommended } } }) {
+    recommendedPostsMarkdown: allMdx(filter: { frontmatter: { slug: { in: $recommended } } }) {
       edges {
         node {
           frontmatter {
@@ -89,7 +89,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    popularPostsMarkdown: allMarkdownRemark(filter: { frontmatter: { slug: { in: $popularPostsSlugs } } }) {
+    popularPostsMarkdown: allMdx(filter: { frontmatter: { slug: { in: $popularPostsSlugs } } }) {
       edges {
         node {
           frontmatter {

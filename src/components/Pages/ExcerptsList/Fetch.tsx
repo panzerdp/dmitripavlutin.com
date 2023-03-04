@@ -21,7 +21,7 @@ export default function ExcerptsFetch({
         }        
       },
     },
-    allMarkdownRemark,
+    allMdx,
     popularPostsMarkdown
   },
   pageContext,
@@ -35,7 +35,7 @@ export default function ExcerptsFetch({
   });
   return (
     <ExcerptsListTemplate
-      posts={allMarkdownRemark.edges.map(toPostImageFluid)}
+      posts={allMdx.edges.map(toPostImageFluid)}
       currentPage={pageContext.currentPage}
       pagesSum={pageContext.pagesSum}
       popularPostsByCategory={popularPlainPostsByCategory}
@@ -55,7 +55,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    popularPostsMarkdown: allMarkdownRemark(filter: { frontmatter: { slug: { in: $popularPostsSlugs } } }) {
+    popularPostsMarkdown: allMdx(filter: { frontmatter: { slug: { in: $popularPostsSlugs } } }) {
       edges {
         node {
           frontmatter {
@@ -69,7 +69,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allMarkdownRemark(
+    allMdx(
       sort: {
         frontmatter: {
           published: DESC

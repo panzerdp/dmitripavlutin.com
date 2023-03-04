@@ -8,19 +8,19 @@ interface AboutFetchProps {
 }
 
 export default function AboutFetch({ data }: AboutFetchProps) {
-  const edges = data.allMarkdownRemark.edges;
+  const edges = data.allMdx.edges;
   if (edges.length === 0) {
     throw new Error('About me page content not found. Create a markdown file with the type "about-me"');
   }
-  return <AboutTemplate html={edges[0].node.html} />;
+  return <AboutTemplate html={edges[0].node.body} />;
 }
 
 export const pageQuery = graphql`
   query About {
-    allMarkdownRemark(filter: { frontmatter: { type: { eq: "about-me" } } }) {
+    allMdx(filter: { frontmatter: { type: { eq: "about-me" } } }) {
       edges {
         node {
-          html
+          body
         }
       }
     }
