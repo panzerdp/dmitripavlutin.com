@@ -58,7 +58,7 @@ module.exports = {
             options: {
               defaultText: 'Click here',
               dependencies: [],
-              directory: `${__dirname}/content/posts/`,
+              directory: `${__dirname}/posts/`,
               externals: [],
               html: '',
               target: '_blank',
