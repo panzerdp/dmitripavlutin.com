@@ -19,10 +19,10 @@ export default function PostTemplateFetch({ data, children }: PostTemplateFetchP
     children,
     thumbnail: mdx.frontmatter.thumbnail.childImageSharp.gatsbyImageData,
   };
-  const postRelativePath = '' //mdx.fileAbsolutePath
-  // .split('/')
-  // .slice(-4)
-  // .join('/');
+  const postRelativePath = mdx.internal.contentFilePath
+    .split('/')
+    .slice(-4)
+    .join('/');
   const recommendedPosts = recommendedPostsMarkdown.edges.map(toPostPlain);
   const popularPosts = popularPostsMarkdown.edges.map(toPostPlain);
   const popularPlainPostsByCategory = popularPostsByCategory.map(({ category, slugs }) => {
@@ -70,6 +70,9 @@ export const pageQuery = graphql`
     }
     mdx(frontmatter: { slug: { eq: $slug } }) {
       id
+      internal {
+        contentFilePath
+      }
       frontmatter {
         ...Post
         recommended
