@@ -16,6 +16,7 @@ import * as styles from './index.module.scss';
 
 export function MdxTableOfContents({ tableOfContents: { items }, tableLayout = false, maxLevel = Infinity }: Props) {
   const className = classNames(styles.toc, { [styles.tableLayout]: tableLayout });
+  return null;
 
   return (
     <div className={className}>
