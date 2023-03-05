@@ -20,7 +20,7 @@ When you update the component's state, does React update the state *immediately*
 
 *If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-## 1. State update using *useState()*
+## 1. State update using useState()
 
 Consider a functional component `DoubleIncreaser`:
 

@@ -16,8 +16,7 @@ But some functions can accept a variable number of arguments, arguments of diffe
 
 Let's see how function overloading works.  
 
-```toc
-```
+<TableOfContents />
 
 ## 1. The function signature
 

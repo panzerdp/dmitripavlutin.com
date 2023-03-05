@@ -22,8 +22,7 @@ In this post, you'll find 3 ways to merge arrays in JavaScript: 2 immutable (a n
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-```
+<TableOfContents />
 
 ## 1. Merge using the spread operator
 
@@ -71,7 +70,7 @@ The spread operator approach lets you merge 2 and even more arrays at once:
 const mergeResult = [...array1, ...array2, ...array3, ...arrayN];
 ```
 
-## 2. Merge using *array.concat()*
+## 2. Merge using array.concat()
 
 If you prefer a functional way to merge arrays, then you can use the `array1.concat(array2)` method:
 
@@ -112,7 +111,7 @@ The concat method accepts multiple arrays as arguments, thus you can merge 2 or 
 const mergeResult = [].concat(array1, array2, array3, arrayN);
 ```
 
-## 3. Merge using *array.push()*
+## 3. Merge using array.push()
 
 The merge performed using the spread operator or `array.concat()` creates a new array. However, sometimes you don't want to create a new array, but rather merge it into some existing array.  
 

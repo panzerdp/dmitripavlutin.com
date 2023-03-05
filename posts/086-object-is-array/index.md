@@ -19,7 +19,7 @@ In this post, you'll find 3 good ways to detect an array instance in JavaScript.
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-## 1. *Array.isArray(value)*
+## 1. Array.isArray(value)
 
 If you don't have time to read the entire post, here's a good way to detect an array in JavaScript: just use `Array.isArray(value)` utility function.  
 
@@ -44,7 +44,7 @@ for an array in JavaScript.
 
 > `Array.isArray(value)` utility function returns `true` if `value` is an array.  
 
-## 2. *value instanceof Array*
+## 2. value instanceof Array
 
 An array is an object. And like any object in JavaScript, the array instance has a constructor function &mdash; `Array`.  
 
@@ -88,7 +88,7 @@ Resuming:
 
 *Note: `value instanceof Array` evaluates to `false` when `value` is an array created in a different iframe than the `Array` constructor function. If you're not writing cross-frames JavaScript, use this approach without worries.*  
 
-## 3. *({}).toString.call(value)*
+## 3. ({}).toString.call(value)
 
 `toString()` method of a plain JavaScript object returns `'[object <type>]'`, where `<type>` is the object type it was called upon. Take a look at the [specification](http://www.ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring) which indicates how exactly `Object.prototype.toString()` works.  
 

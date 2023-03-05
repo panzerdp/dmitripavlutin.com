@@ -20,7 +20,7 @@ Let's look at the properties of `Infinity` number in JavaScript, understand the 
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-## 1. The definition of *Infinity*
+## 1. The definition of Infinity
 
 The ECMAScript standard describes `Infinity` as follows:
 
@@ -46,7 +46,7 @@ Number.POSITIVE_INFINITY; // => Infinity
 Number.NEGATIVE_INFINITY; // => -Infinity
 ```
 
-## 2. The properties of *Infinity*
+## 2. The properties of Infinity
 
 > `Infinity` is bigger than any finite number.  
 
@@ -115,7 +115,7 @@ Infinity / -2; // => -Infinity
 -2 / 0;        // => -Infinity
 ```
  
-## 3. Checking for *Infinity*
+## 3. Checking for Infinity
 
 Fortunately, an infinite value equals to an infinite value of the same sign:
 
@@ -138,7 +138,7 @@ Number.isFinite(-Infinity); // => false
 Number.isFinite(999);       // => true
 ```
 
-## 4. When to use *Infinity*
+## 4. When to use Infinity
 
 The infinity value is handy to initialize computations involving comparisons of numbers.  
 
@@ -158,7 +158,7 @@ findMin([5, 2, 1, 4]); // => 1
 
 On first `for()` iteration the minimum value becomes the first item because any finite value is smaller than `Infinity`.   
 
-## 5. Pitfalls of *Infinity*
+## 5. Pitfalls of Infinity
 
 Most likely you won't work directly with `Infinity` values so often. However, it worth knowing when the infinite values could appear. 
 

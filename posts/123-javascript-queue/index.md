@@ -159,7 +159,7 @@ Finally, `queue.length` shows how many items are still in the queue.
 
 Regarding the implementation: inside the `Queue` class the plain object `this.items` keeps the items of the queue by a numerical index. The index of the head item is tracked by `this.headIndex`, and the tail item is tracked by `this.tailIndex`.  
 
-#### *Queue* methods complexity
+#### Queue methods complexity
 
 `queue()`, `dequeue()`, `peek()` and `length()` methods of the `Queue` class use only:
 

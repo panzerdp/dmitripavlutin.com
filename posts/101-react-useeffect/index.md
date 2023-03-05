@@ -20,8 +20,7 @@ I'll help you understand `useEffect()` in an accessible way. Let's get started.
 
 *If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-```
+<TableOfContents />
 
 ## 1. Side-effects
 
@@ -61,7 +60,7 @@ function Greet({ name }) {
 }
 ```
 
-## 2. *useEffect()* arguments
+## 2. useEffect() arguments
 
 `useEffect()` hook accepts 2 arguments:
 
@@ -299,7 +298,7 @@ function RepeatMessage({ message }) {
 
 Open the demo and type some messages. You'll see that every 2 seconds only the latest message logs to the console. Which means that all of the previous timers were cleaned up.  
 
-## 5. *useEffect()* in practice
+## 5. useEffect() in practice
 
 ### 5.1 Fetching data
 

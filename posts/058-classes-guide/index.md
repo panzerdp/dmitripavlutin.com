@@ -22,11 +22,9 @@ This post familiarizes you with JavaScript classes: how to define a class, initi
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
+<TableOfContents />
 
-```
-
-## 1. Definition: *class* keyword
+## 1. Definition: class keyword
 
 The special keyword `class` defines a class in JavaScript:
 
@@ -76,7 +74,7 @@ const myUser = new User();
 
 `new User()` creates an instance of the `User` class.  
 
-## 2. Initialization: *constructor()*
+## 2. Initialization: constructor()
 
 `constructor(param1, param2, ...)` is a special method in the body of a class that initializes the instance. That's the place where you set the initial values for the fields, or do any kind of object setup.
 
@@ -468,7 +466,7 @@ User.isNameTaken('Arya Stark'); // => false
 
 Static methods can be private: `static #staticFunction() {...}`. Again, they follow the rules of privacy: you can call a private static method only within the class body.   
 
-## 5. Inheritance: *extends*
+## 5. Inheritance: extends
 
 The classes in JavaScript support single inheritance using the `extends` keyword.  
 
@@ -504,7 +502,7 @@ writer.posts;     // => []
 
 Note that private members of a parent class are *not inherited* by the child class.  
 
-### 5.1 Parent constructor: *super()* in *constructor()*
+### 5.1 Parent constructor: super() in constructor()
 
 If you'd like to call the parent constructor in a child class, you need to use the `super()` special function available in the child constructor.  
 
@@ -551,7 +549,7 @@ class Child extends Parent {
 }
 ```
 
-### 5.2 Parent instance: *super* in methods
+### 5.2 Parent instance: super in methods
 
 If you'd like to access the parent method inside of a child method, you can use the special shortcut `super`.  
 
@@ -595,7 +593,7 @@ This feature is called [method overriding](https://en.wikipedia.org/wiki/Method_
 
 Note that you can use `super` with static methods too, to access the parent's static methods.  
 
-## 6. Object type checking: *instanceof*
+## 6. Object type checking: instanceof
 
 `object instanceof Class` is the operator that determines if `object` is an instance of `Class`.  
 

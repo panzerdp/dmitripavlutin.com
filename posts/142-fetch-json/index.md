@@ -25,7 +25,7 @@ Here's an example of JSON containing an object with props and values:
 
 In this post, you'll learn how to use `fetch()` API to load (HTTP `GET`) or post (HTTP's `POST`) JSON data.  
 
-## 1. Recalling *fetch()*
+## 1. Recalling fetch()
 
 `fetch()` accepts 2 arguments:  
 
@@ -45,7 +45,7 @@ Calling `fetch()` starts a request and returns a promise. When the request compl
 
 Response object provides useful [methods](https://developer.mozilla.org/en-US/docs/Web/API/Response#methods) to extract data from a multitude of formats. But to parse data from JSON you need just one method &mdash; [response.json()](https://developer.mozilla.org/en-US/docs/Web/API/Response/json).  
 
-## 2. *GET* JSON data
+## 2. GET JSON data
 
 Let's fetch from the path `/api/names` a list of persons in JSON format:
 
@@ -93,7 +93,7 @@ const response = await fetch('/api/names', {
 
 When making the request, the server will understand that you're asking for data in JSON format.  
 
-## 3. *POST* JSON data
+## 3. POST JSON data
 
 `POST`-ing JSON data to the server is slightly trickier.  
 

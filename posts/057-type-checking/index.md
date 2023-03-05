@@ -276,7 +276,7 @@ isValidNumber(5 + 10);        // => true
 
 In addition to `typeof value === 'number'`, it's wise to verify `!isNaN(value)` for `NaN`.  
 
-## 5. *instanceof* and the prototype chain
+## 5. instanceof and the prototype chain
 
 Every object in JavaScript references a special function: the constructor of the object.  
 

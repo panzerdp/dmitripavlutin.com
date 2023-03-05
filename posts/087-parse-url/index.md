@@ -24,8 +24,7 @@ A convenient parser to access components of an URL is the `URL()` constructor.
 
 In this post, I'm going to show you the structure of an URL and its main components. Then, I'm going to describe how to use the `URL()` constructor to easily pick components of an URL like hostname, pathname, query, or hash. 
 
-```toc
-```
+<TableOfContents />
 
 ## 1. URL structure
 
@@ -33,7 +32,7 @@ An image worth a thousand words. Without much textual description, in the follow
 
 ![URL() constructor components in JavaScript](./images/url-constructor-components-10.png)
 
-## 2. *URL()* constructor
+## 2. URL() constructor
 
 The `URL()` is a constructor function to parse components of an URL:
 
@@ -135,7 +134,7 @@ console.log(url.searchParams.get('missing')); // => null
 
 But accessing a non-existing parameter `url.searchParams.get('missing')` evaluates to `null`.  
 
-## 4. *hostname*
+## 4. hostname
 
 `url.hostname` property holds the hostname of the URL:
 
@@ -146,7 +145,7 @@ console.log(url.hostname); // => 'example.com'
 ```
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/5armb03u/)
 
-## 5. *pathname*
+## 5. pathname
 
 `url.pathname` property accesses the pathname of the URL:
 
@@ -166,7 +165,7 @@ console.log(url.pathname); // => '/'
 ```
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/nsqo4xpL/)
 
-## 6. *hash*
+## 6. hash
 
 Finally, the hash is accessed using `url.hash` property:
 

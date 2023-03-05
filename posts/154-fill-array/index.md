@@ -16,8 +16,7 @@ JavaScript provides many ways to initialize arrays with initial data. Let's see 
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-```
+<TableOfContents />
 
 ## 1. Fill an array with primitives
 
@@ -47,7 +46,7 @@ Then `Array(length).fill(0)` method fills the array with zeroes, returning the f
 
 What if you need to fill an array with objects? This requirement is slightly nuanced depending if you want the array filled with the initial object instances, or different instances.  
 
-### 2.1 Using *array.fill()*
+### 2.1 Using array.fill()
 
 If you don't mind initializing the array with the same object instance, then you could easily use `array.fill()` method mentioned above:
 

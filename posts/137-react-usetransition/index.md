@@ -23,7 +23,7 @@ In this post, you'll learn how to use `useTransition()` hook to mark UI updates 
 
 *If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-## 1. *useTransition()* hook
+## 1. useTransition() hook
 
 By default, all updates in React are considered urgent. That could create a problem when quick updates are slowed down by heavy updates.    
 

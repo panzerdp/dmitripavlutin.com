@@ -16,9 +16,7 @@ In this post, you'll learn how to replace all string occurrences in JavaScript b
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-toHeading: 2
-```
+<TableOfContents maxLevel={2} />
 
 ## 1. Splitting and joining an array
 
@@ -70,7 +68,7 @@ console.log(replaceAll('oops', 'z', 'y'));          // => 'oops'
 
 This approach requires transforming the string into an array, and then back into a string. Let's continue looking for better alternatives.  
 
-## 2. *replace()* with a global regular expression
+## 2. replace() with a global regular expression
 
 The string method `string.replace(regExpSearch, replaceWith)` searches and replaces the occurrences of the regular expression `regExpSearch` with `replaceWith` string.  
 
@@ -131,7 +129,7 @@ The above snippet tries to transform the search string `'+'` into a regular expr
 
 Escaping the character `'\\+'` solves the problem. [Try the fixed demo](https://jsfiddle.net/dmitri_pavlutin/32wrdafe/2/).
 
-### 2.2 *replace()* with a string
+### 2.2 replace() with a string
 
 If the first argument `search` of `string.replace(search, replaceWith)` is a string, then the method replaces *only the first occurrence* of `search`:  
 
@@ -147,7 +145,7 @@ console.log(result); // => 'duck-duck go'
 
 `'duck duck go'.replace(' ', '-')` replaces only the first appearance of a space.  
 
-## 3. *replaceAll()* method
+## 3. replaceAll() method
 
 Finally, the method `string.replaceAll(search, replaceWith)` replaces all appearances of `search` string with `replaceWith`.  
 
@@ -170,7 +168,7 @@ console.log(result); // => 'duck-duck-go'
 
 Note that browser [support](https://caniuse.com/#search=replaceAll) for this method is currently limited, and you might require a [polyfill](https://github.com/es-shims/String.prototype.replaceAll).  
 
-### 3.1 The difference between *replaceAll()* and *replace()*
+### 3.1 The difference between replaceAll() and replace()
 
 The string methods `replaceAll(search, replaceWith)` and `replace(search, replaceWith)` work the same way, except 2 things:
 

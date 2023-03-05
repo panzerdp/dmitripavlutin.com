@@ -37,7 +37,7 @@ That's pretty much a short introduction to `parseInt()`.
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-## 1. A mystery behavior of *parseInt()*
+## 1. A mystery behavior of parseInt()
 
 `parseInt(numericalString)` always converts its first argument to a string (if it's not a string), then parses that numeric string to the integer value.  
 
@@ -68,7 +68,7 @@ parseInt(0.0000005); // => 5
 
 Why does `parseInt(0.0000005)` have such a mystery behavior?  
 
-## 2. Solving the mystery of *parseInt()*
+## 2. Solving the mystery of parseInt()
 
 Let's look again at what `parseInt(numericalString)` does with its first argument: if it's not a string, then it is converted to a string, then parsed, and the parsed integer returned.  
 

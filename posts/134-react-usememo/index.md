@@ -20,7 +20,7 @@ In this post, I'm going to describe how and when to use the `useMemo()` React ho
 
 *If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-## 1. *useMemo()* hook
+## 1. useMemo() hook
 
 `useMemo()` is a built-in React hook that accepts 2 arguments &mdash; a function `compute` that computes a result, and the `depedencies` array:  
 
@@ -46,7 +46,7 @@ const memoizedResult = useMemo(() => {
 
 Now let's see how `useMemo()` works in an example.  
 
-## 2. *useMemo()* &mdash; an example
+## 2. useMemo(): an example
 
 A component `<CalculateFactorial />` calculates the factorial of a number introduced into an input field.
 
@@ -130,7 +130,7 @@ Open the [demo](https://codesandbox.io/s/factorial-with-memoization-65mkk?file=/
 
 However, if you click *Re-render* button, `'factorialOf(n) called!'` isn't logged to console because `useMemo(() => factorialOf(number), [number])` returns the memoized factorial calculation. Great! 
 
-## 3. *useMemo()* vs *useCallback()*
+## 3. useMemo() vs useCallback()
 
 `useCallback()`, compared to `useMemo()`, is a more specialized hook that memoizes callbacks:  
 

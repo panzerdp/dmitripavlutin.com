@@ -46,10 +46,9 @@ In this post, I'll show the main differences between the two, so you could choos
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-```
+<TableOfContents />
 
-## 1. *this* value
+## 1. this value
 
 ### 1.1 Regular function
 
@@ -166,7 +165,7 @@ const redCar = new Car('red'); // TypeError: Car is not a constructor
 
 Invoking `new Car('red')`, where `Car` is an arrow function, throws `TypeError: Car is not a constructor`. 
 
-## 3. *arguments* object
+## 3. arguments object
 
 ### 3.1 Regular function
 
@@ -222,7 +221,7 @@ myRegularFunction('a', 'b'); // logs ['c', 'd']
 
 `...args` rest parameter collects the execution arguments of the arrow function: `['c', 'd']`.  
 
-## 4. Implicit *return*
+## 4. Implicit return
 
 ### 4.1 Regular function
 

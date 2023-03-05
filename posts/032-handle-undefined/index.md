@@ -59,8 +59,7 @@ function undefined() {
 
 To reduce such errors, you have to understand the cases when `undefined` is generated. Let's explore `undefined` and its effect on code safety.  
 
-```toc
-```
+<TableOfContents />
 
 ## 1. What is undefined
 

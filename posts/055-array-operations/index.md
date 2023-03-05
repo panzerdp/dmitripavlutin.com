@@ -22,15 +22,11 @@ I've decided to implement 15 common operations on arrays. If you need to perform
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-# Table of contents
-tableLayout: true
-toHeading: 3
-```
+<TableOfContents maxLevel={3} tableLayout={true} />
 
 ## 1. Iterate
 
-### 1.1 *for..of* cycle
+### 1.1 for..of cycle
 
 `for(const item of items)` cycle iterates over array items. 
 
@@ -53,7 +49,7 @@ Tips:
 
 * You can stop iterating at any time using a `break` statement.
 
-### 1.2 *for* cycle
+### 1.2 for cycle
 
 `for(let i; i < array.length; i++)` cycle iterates over array items using an incrementing index variable. 
 
@@ -77,7 +73,7 @@ Tips:
 
 * You can stop iterating at any time using a `break` statement.
 
-### 1.3 *array.forEach()* method
+### 1.3 array.forEach() method
 
 `array.forEach(callback)` method iterates over array items by invoking `callback` function on every array item. 
 
@@ -104,7 +100,7 @@ Tips:
 
 ## 2. Map
 
-### 2.1 *array.map()* method
+### 2.1 array.map() method
 
 `array.map(callback)` method creates a new array by using `callback` invocation result on each array item.  
 
@@ -128,7 +124,7 @@ Tips:
 
 * `array.map()` creates a new mapped array, without mutating the original one.
 
-### 2.2 *Array.from()* function
+### 2.2 Array.from() function
 
 `Array.from(arrayLike[, callback])` method creates to a new array by using `callback` invocation result on each array item.  
 
@@ -157,7 +153,7 @@ Tips:
 
 ## 3. Reduce
 
-### 3.1 *array.reduce()* method
+### 3.1 array.reduce() method
 
 `array.reduce(callback[, initialValue])` reduces the array to a value by invoking `callback` function as a reducer. 
 
@@ -185,7 +181,7 @@ Tips:
 
 ## 4. Concat
 
-### 4.1 *array.concat()* method
+### 4.1 array.concat() method
 
 `array.concat(array1[, array2, ...])` concatenates to the original array one or more arrays. 
 
@@ -228,7 +224,7 @@ names; // => ['Batman', 'Catwoman', 'Joker', 'Bane']
 
 ## 5. Slice
 
-### 5.1 *array.slice()* method
+### 5.1 array.slice() method
 
 `array.slice([fromIndex[, toIndex]])` returns a slice of the array starting `fromIndex` and ending `toIndex` (excluding `toIndex` itself). `fromIndex` optional argument defaults to `0`, `toIndex` optional argument defaults to `array.length`.  
 
@@ -275,7 +271,7 @@ Tips:
 
 * `[...array]` creates a shallow copy.
 
-### 6.2 *array.concat()* method
+### 6.2 array.concat() method
 
 `[].concat(array)` is yet another approach on how to clone `array`. 
 
@@ -294,7 +290,7 @@ Tips:
 
 * `[].concat(array)` creates a shallow copy.
 
-### 6.3 *array.slice()* method
+### 6.3 array.slice() method
 
 `array.slice()` is another approach on how to clone `array`.
 
@@ -315,7 +311,7 @@ Tips:
 
 ## 7. Search
 
-### 7.1 *array.includes()* method
+### 7.1 array.includes() method
 
 `array.includes(itemToSearch[, fromIndex])` returns a boolean whether `array` contains `itemToSearch`. The optional argument `fromIndex`, defaulting to `0`, indicates the index to start searching.  
 
@@ -332,7 +328,7 @@ numbers.includes(99); // => false
 
 `numbers.includes(99)` is, however, `false` because `numbers` doesn't contain `99`.  
 
-### 7.2 *array.find()* method
+### 7.2 array.find() method
 
 `array.find(predicate)` method returns the first array item that satisfies the `predicate` function.
 
@@ -358,7 +354,7 @@ Tips:
 
 * `array.find()` returns `undefined` if no item has satisfied the predicate.  
 
-### 7.3 *array.indexOf()* method
+### 7.3 array.indexOf() method
 
 `array.indexOf(itemToSearch[, fromIndex])` returns the index of the first appearance `itemToSearch` in `array`. The optional argument `fromIndex`, defaulting to `0`, is the index to start searching.  
 
@@ -381,7 +377,7 @@ Tips:
 
 ## 8. Query
 
-### 8.1 *array.every()* method
+### 8.1 array.every() method
 
 `array.every(predicate)` method returns `true` if every item passes `predicate` check.  
 
@@ -405,7 +401,7 @@ numbers.every(isEven); // => false
 
 However, `numbers.every(isEven)` evaluates to `false` because `numbers` contains an odd number `1`.  
 
-### 8.2 *array.some()* method
+### 8.2 array.some() method
 
 `array.some(predicate)` method returns `true` if at least one item passes `predicate` check.  
 On each iteration `predicate(item[, index[, array]])` function is invoked with the arguments: iterated item, index and the array itself.  
@@ -430,7 +426,7 @@ But `odds.some(isEven)` is `false` because `odds` contains only odd numbers.
 
 ## 9. Filter
 
-### 9.1 *array.filter()*
+### 9.1 array.filter()
 
 `array.filter(predicate)` method returns a new array with items that have passed `predicate` check.  
 
@@ -458,7 +454,7 @@ Tips:
 
 ## 10. Insert
 
-### 10.1 *array.push()* method
+### 10.1 array.push() method
 
 `array.push(item1[..., itemN])` method appends one or more items to the end of an array, returning the new length.  
 
@@ -479,7 +475,7 @@ Tips:
 * `array.push()` mutates the array in place
 * `array.push(item1, item2, ..., itemN)` can push multiple items.  
 
-### 10.2 *array.unshift()* method
+### 10.2 array.unshift() method
 
 `array.unshift(item1[..., itemN])` method appends one or more items to the beginning of an array, returning the new length of the array.
 
@@ -547,7 +543,7 @@ names2; // => ['Joker', 'Batman', 'Bane'];
 
 ## 11. Remove
 
-### 11.1 *array.pop()* method
+### 11.1 array.pop() method
 
 `array.pop()` method removes the last item from an array, then returns that item.
 
@@ -568,7 +564,7 @@ Tips:
 
 * `array.pop()` mutates the array in place.
 
-### 11.2 *array.shift()* method
+### 11.2 array.shift() method
 
 `array.shift()` method removes the first item from an array, then returns that item.
 
@@ -590,7 +586,7 @@ Tips:
 * `array.shift()` mutates the array in place
 * `array.shift()` has O(n) complexity.
 
-### 11.3 *array.splice()* method
+### 11.3 array.splice() method
 
 `array.splice(fromIndex[, removeCount[, item1[, item2[, ...]]]])` removes items from an array and inserts new items instead.
 
@@ -643,7 +639,7 @@ newNames; // => ['Batman', 'Bane']
 
 ## 12. Empty
 
-### 12.1 *array.length* property
+### 12.1 array.length property
 
 `array.length` is a property that holds the array length. More than that, `array.length` is writable.  
 
@@ -661,7 +657,7 @@ colors; // []
 
 `colors.length = 0` removes all items from `colors` array. 
 
-### 12.2 *array.splice()* method
+### 12.2 array.splice() method
 
 `array.splice(fromIndex[, removeCount[, item1[, item2[, ...]]]])` removes items from an array and inserts new items instead.
 
@@ -681,7 +677,7 @@ colors; // []
 
 ## 13. Fill
 
-### 13.1 *array.fill()* method
+### 13.1 array.fill() method
 
 `array.fill(value[, fromIndex[, toIndex]])` fills the array with `value` starting `fromIndex` until `toIndex` (excluding `toIndex` itself). `fromIndex` optional argument defaults to `0`, `toIndex` optional argument defaults to `array.length`.  
 
@@ -712,7 +708,7 @@ Tips:
 
 * `array.fill()` mutates the array in place.
 
-### 13.2 *Array.from()* function
+### 13.2 Array.from() function
 
 `Array.from()` can be useful to initialize an array of certain length with objects:
 
@@ -729,7 +725,7 @@ emptyObjects; // [{}, {}, {}, {}]
 
 ## 14. Flatten
 
-### 14.1 *array.flat()* method
+### 14.1 array.flat() method
 
 `array.flat([depth])` method creates a new array by recursively flatting the items that are arrays, until certain `depth`. `depth` optional argument defaults to `1`. 
 
@@ -751,7 +747,7 @@ Tips:
 
 ## 15. Sort
 
-### 15.1 *array.sort()* method
+### 15.1 array.sort() method
 
 `array.sort([compare])` method sorts the items of the array. When the compare function is omitted, the method converts the items to strings, then orders them ascending by UTF-16 code units values.  
 

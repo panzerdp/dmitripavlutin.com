@@ -34,8 +34,7 @@ In this post, you'll learn how to enable and use ES modules in Node.js.
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-```
+<TableOfContents />
 
 ## 1. Enabling ECMAScript modules in Node.js
 
@@ -49,7 +48,7 @@ Node.js uses [ECMAScript modules](https://nodejs.org/docs/latest/api/esm.html#es
 
 Let's detail into the first (`.mjs` extension) and second (`{ "type": "module" }` in `package.json`) ways.  
 
-### 1.1 *.mjs* file extension
+### 1.1 .mjs file extension
 
 An easy way to tell Node.js to treat the modules in ECMAScript format is to use the `.mjs` file extension.  
 
@@ -93,7 +92,7 @@ node ./month.mjs "2022-02-01"
 
 `February` is printed in the terminal.  
 
-### 1.2 `{ "type": "module" }` in *package.json*
+### 1.2 &#123; "type": "module" &#125; in package.json
 
 By default `.js` files in Node.js are considered CommonJS modules. To make `.js` files as ES modules simply set `"type"` field as `"module"` in the `package.json`:
 

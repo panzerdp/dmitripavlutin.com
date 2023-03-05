@@ -18,8 +18,7 @@ You'll find how to annotate component props, mark a prop optional, and indicate 
 
 *If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-```
+<TableOfContents />
 
 ## 1. Why typing React components?
 
@@ -149,7 +148,7 @@ or without a prop:
 
 then TypeScript will warn about that.  
 
-### 2.2 *children* prop
+### 2.2 children prop
 
 `children` is a special prop in React components: it holds the content between the opening and closing tag when the component is rendered: `<Component>children</Component>`.  
 

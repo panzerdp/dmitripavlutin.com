@@ -18,9 +18,7 @@ I'm going to explain in a few easy steps how to use arrow functions in JavaScrip
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-toHeading: 2
-```
+<TableOfContents maxLevel={2} />
 
 ## 1. The syntax
 
@@ -62,7 +60,7 @@ doubled; // => [8, 10, 4, 12]
 
 `(number) => { return number * 2; }` is an arrow function used as a callback of `number.map()` method.  
 
-## 2. *this* value
+## 2. this value
 
 > The arrow function resolves `this` lexically. 
 
@@ -111,7 +109,7 @@ object.method();
 
 Then inside of the regular function `this` equals the global object, which is `window` in a browser environment.  
 
-## 3. *arguments* object
+## 3. arguments object
 
 > The arrow function resolves `arguments` lexically. 
 

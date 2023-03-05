@@ -34,7 +34,7 @@ There are no shortcuts or silver bullets to write a good book: you write one wor
 
 Step by step principle applies to learning JavaScript language too. There are no shortcuts or silver bullets on how to learn JavaScript: you need, step by step, to understand each concept of the language.  
 
-## 2. Learn the way *you* like it
+## 2. Learn the way you like it
 
 There are plenty of ways to learn JavaScript: by reading books, watching video courses, attending [freeCodeCamp](https://www.freecodecamp.org/learn).  
 

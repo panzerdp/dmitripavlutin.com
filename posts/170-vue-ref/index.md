@@ -83,7 +83,7 @@ Click *Increase* button and count increases. Importantly, the most actual value 
 
 `count` is a ref and also a *reactive* value. When `count.value` changes, Vue updates the component and shows the new count value on the screen. Pure magic! 
 
-## 3. *ref()* in *setup()*
+## 3. ref() in setup()
 
 The composition API can be used inside [\<script setup\>](https://vuejs.org/api/sfc-script-setup.html) (see the previous examples), but also inside the [setup()](https://vuejs.org/api/composition-api-setup.html) method of options API.  
 

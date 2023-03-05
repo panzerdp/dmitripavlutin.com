@@ -23,7 +23,7 @@ Let's see how you may benefit from the grouping methods.
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-## 1. *array.groupBy()*
+## 1. array.groupBy()
 
 You have a list of products, where each product is an object having 2 properties: `name` and `category`.  
 
@@ -116,7 +116,7 @@ const groupedObject = array.groupBy((item, index, array) => {
 });
 ```
 
-## 2. *array.groupByToMap()*
+## 2. array.groupByToMap()
 
 [Sometimes](/maps-vs-plain-objects-javascript/) you may want to use a `Map` instead of a plain object. The benefit of `Map` is that it accepts any data type as a key, but the plain object is limited to strings and symbols only.  
 

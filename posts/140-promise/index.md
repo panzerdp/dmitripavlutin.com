@@ -21,8 +21,7 @@ What follows is the post that I had wanted to read to understand promises myself
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-```
+<TableOfContents />
 
 ## 1. Why promises
 
@@ -410,7 +409,7 @@ delayDouble(5)
 
 [Try the demo.](https://codesandbox.io/s/interesting-gates-dbjj1?file=/src/index.js)
 
-## 4. *async/await*
+## 4. async/await
 
 While looking at the previous code samples that use promises, you might wonder:
 
@@ -428,7 +427,7 @@ Applying the `async/await` syntax on top of promises is relatively easy:
 * Inside of the `async` function body, whenever you want to wait for a promise to resolve, use `await promiseExpression` syntax
 * An `async` function always returns a promise, which enables calling `async` functions inside `async` functions.  
 
-### 4.1 *await*-ing promise value
+### 4.1 await-ing promise value
 
 If the promise is fulfilled `await promise` statement evaluates to the fulfill value: 
 
@@ -470,7 +469,7 @@ After the promise being fulfilled, the expression `async findPerson(who)` evalua
 
 Looking at the `async findPerson(who)` function you would notice how similar it is to the [synchronous version](#sync-code) of that function from the beginning of the post! That's the goal of promises and `async/await` syntax.  
 
-### 4.2 *catch*-ing promise error
+### 4.2 catch-ing promise error
 
 If the promise rejects while being awaited, you can easily catch the error by wrapping `await promise` into a `try/catch` clause:
 
@@ -515,7 +514,7 @@ findPerson('Joker');
 
 This time the promise `await getList()` rejects. Right away the execution jumps into `catch(error)`: where `error` indicates the rejection reason &mdash; `new Error('Nobody here!')`.  
 
-### 4.3 *await*-ing chain
+### 4.3 await-ing chain
 
 You can use as many `await` statements as you need inside of an `async` function. For example, let's transform the example from chain of promises section to `async/await` syntax:
 

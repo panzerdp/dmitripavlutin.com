@@ -116,7 +116,7 @@ A bit out of theme. I consider an oddity that simple and flexible solutions requ
 If something looks too complex or not comfortable to use, probably it wasn't considered enough.  
 What is your opinion about simplicity? (feel free to write a comment below)
 
-### 2.1 Special cases of \_**\_proto\_\_** usage
+### 2.1 Special cases of __proto__ usage
 
 Even if `__proto__` seems simple, there are some particular scenarios that you should be aware of.
 

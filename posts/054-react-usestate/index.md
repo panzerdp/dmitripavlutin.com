@@ -20,12 +20,9 @@ The guide step by step explains how to work with `useState()` hook. Moreover, I 
 
 *If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-# Table of contents
-toHeading: 3
-```
+<TableOfContents maxLevel={3} />
 
-## 1. State management using *useState()*
+## 1. State management using useState()
 
 A *stateless functional component* doesn't have a state. Here's an example:  
 
@@ -318,7 +315,7 @@ Now you have the first grasp of how to use `useState()`.
 
 Still, you have to be aware of common issues that you might encounter when using `useState()`. Let's continue with them.  
 
-### 4.1 Where to call *useState()*
+### 4.1 Where to call useState()
 
 When using `useState()` hook you have to follow [the rules of hooks](https://reactjs.org/docs/hooks-rules.html):  
 
@@ -327,7 +324,7 @@ When using `useState()` hook you have to follow [the rules of hooks](https://rea
 
 Let's follow examples of correct and incorrect usage of `useState()`.  
 
-#### Valid call of *useState()*
+#### Valid call of useState()
 
 `useState()` is *correctly* called at the top level of functional component:
 
@@ -364,7 +361,7 @@ function Bulbs() {
 }
 ```
 
-#### Invalid call of *useState()*
+#### Invalid call of useState()
 
 `useState()` is *incorrectly* called within a condition:
 

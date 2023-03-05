@@ -109,7 +109,7 @@ colors.forEach(iterate);
 
 The 3rd parameter `array` inside the callback function is the array on which `forEach()` method was called on. 
 
-## 4. *this* inside the callback
+## 4. this inside the callback
 
 Let's run the following example in a browser, and pay attention to the value of `this`:
 ```javascript{3}

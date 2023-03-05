@@ -43,7 +43,7 @@ Let's see in more detail how to use `typeof` and `instanceof` operators in JavaS
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-## 1. *typeof* operator
+## 1. typeof operator
 
 In JavaScript, you can find primitive types like strings, numbers, booleans, symbols. Additionally, there are functions, objects, and the special values `undefined` and `null`.  
 
@@ -121,7 +121,7 @@ typeof greet; // => 'function'
 
 What about the type of `null`? Uh, that's a nasty one!
 
-### 1.1 *typeof null*
+### 1.1 typeof null
 
 As mentioned in the previous section, `typeof` of an object evaluates to `'object'`. That's expected.  
 
@@ -148,7 +148,7 @@ isObject(null);               // => false
 
 Follow my post [Everything about null in JavaScript](/javascript-null/) to read more about `null` in JavaScript.    
 
-### 1.2. *typeof* and not defined variables
+### 1.2. typeof and not defined variables
 
 While usually `typeof expression` determines the type of `expression`, you can use `typeof` also to determine if a variable is defined or not.  
 
@@ -172,7 +172,7 @@ You can use `typeof` to detect if a variable is not defined: `typeof myVar === '
 
 Follow the post [3 Ways to Check if a Variable is Defined in JavaScript](/javascript-defined-variable-checking/) to read more about defined/not defined variables.  
 
-## 2. *instanceof* operator
+## 2. instanceof operator
 
 The usual way to use a JavaScript function is to invoke it by adding a pair of parentheses after its name:
 
@@ -252,7 +252,7 @@ isArray([1, 2, 3]); // => true
 isArray({ prop: 'Val' }); // => false
 ```
 
-### 2.1 *instanceof* and the parent class
+### 2.1 instanceof and the parent class
 
 Now the class `Cat` extends the parent class `Pet`:
 

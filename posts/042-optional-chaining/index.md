@@ -236,7 +236,7 @@ These forms can be combined to create a long optional chain, if you need it:
 const value = object.maybeUndefinedProp?.maybeNull()?.[propName];
 ```
 
-## 5. Short-circuiting: stopping on *null/undefined*  
+## 5. Short-circuiting: stopping on null/undefined  
 
 What's interesting about the optional chaining operator is that as soon as a nullish value is encountered on its left-hand side `leftHandSide?.rightHandSide`, the evaluation of the right-hand side accessors stops. This is called short-circuiting.  
 

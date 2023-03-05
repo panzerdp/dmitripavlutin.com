@@ -26,7 +26,7 @@ Why does `array.sort()` method, when invoked without arguments, doesn't sort the
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-## 1. *array.sort()* without arguments
+## 1. array.sort() without arguments
 
 `array.sort()` is a method on array instance that sorts the array in place (mutates the original array) and returns the sorted array.  
 
@@ -52,7 +52,7 @@ numbers.sort(); // => [10, 11, 5]
 
 The method returns the array `[10, 11, 5]` having numbers sorted alphabetically, rather than by their numeric value.  
 
-## 2. *array.sort()* with a comparator
+## 2. array.sort() with a comparator
 
 Fortunately, `array.sort()` method accepts an optional argument: the comparator function.
 

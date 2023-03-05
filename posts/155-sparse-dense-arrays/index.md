@@ -129,7 +129,7 @@ console.log(names); // logs ['Batman', empty, 'Bane']
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/ej3a62f4/)
 
-### 3.2 *Array()* constructor
+### 3.2 Array() constructor
 
 Invoking `Array(length)` or `new Array(length)` (with a number argument) creates a fully sparse array:
 
@@ -142,7 +142,7 @@ console.log(array);          // logs [empty, empty, empty]
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/zb3mxgLq/)
 
-### 3.3 *delete* operator
+### 3.3 delete operator
 
 When you use `delete array[index]` operator on the array:
 
@@ -161,7 +161,7 @@ Initially, `names` array is dense.
 
 But executing `delete names[1]` deletes the item at index `1` and makes `names` array sparse.   
 
-### 3.4 Increase *length* property
+### 3.4 Increase length property
 
 If you *increase* `length` property of an array, then you also create holes in the array:
 
