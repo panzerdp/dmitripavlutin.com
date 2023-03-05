@@ -41,7 +41,6 @@
     "gatsby-remark-shiki-twoslash": "3.0.36",
     "gatsby-source-filesystem": "5.7.0",
     "gatsby-transformer-sharp": "5.7.0",
-    "js-yaml": "4.1.0",
     "normalize.css": "8.0.1",
     "path-to-regexp": "6.2.1",
     "query-string": "8.1.0",
