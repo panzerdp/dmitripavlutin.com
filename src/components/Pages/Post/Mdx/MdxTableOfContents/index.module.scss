@@ -1,0 +1,80 @@
+@import 'styles/variables.scss';
+
+.toc {
+  background-color: rgba($border-color, 0.25);
+  border-radius: 8px;
+  padding: 1rem;
+  padding-left: 1.5rem;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $background-color-dark-mode;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    color: $anchor-dark-color;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: $background-color-dark-mode;
+      color: $anchor-color-dark-mode;
+    }
+  }
+
+  ul,
+  li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  > h3 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  > ul {
+    > li {
+      padding: 0.2rem 0;
+
+      > a,
+      > p > a {
+        font-size: 1.5rem;
+      }
+
+      > ul > li {
+        > a,
+        > p > a {
+          font-size: 1.3rem;
+        }
+      }
+    }
+
+    ul {
+      margin-left: 3.5rem;
+
+      @media (max-width: $small-device-width) {
+        margin-left: 1.5rem;
+      }
+
+      a,
+      p > a {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  &.tableLayout {
+    > ul {
+      display: flex;
+      flex-wrap: wrap;
+
+      > li {
+        flex: 1 0 17rem;
+      }
+    }
+  }
+}

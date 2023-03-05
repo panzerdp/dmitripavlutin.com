@@ -18,8 +18,7 @@ Let's find the answer together.
 
 *Before I go on, let me recommend something to you. If you want an easy and accessible explanation of Vue composition API, take ["Vue 3 Composition API"](https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin) course on Vueschool.*
 
-```toc
-```
+<TableOfContents maxLevel={1} />
 
 ## 1. Primitive values
 

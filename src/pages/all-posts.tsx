@@ -9,12 +9,12 @@ interface PlainListAllFetchProps {
 }
 
 export default function PlainListAllFetch({ data }: PlainListAllFetchProps) {
-  return <PlainListAllTemplate posts={data.allMarkdownRemark.edges.map(toPostPlain)} />;
+  return <PlainListAllTemplate posts={data.allMdx.edges.map(toPostPlain)} />;
 }
 
 export const pageQuery = graphql`
   query PlainListAll {
-    allMarkdownRemark(
+    allMdx(
       sort: {
         frontmatter: {
           published: DESC

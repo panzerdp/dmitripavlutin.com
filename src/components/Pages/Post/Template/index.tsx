@@ -21,6 +21,7 @@ import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll';
 import CommentsCount from 'components/Comments/Count';
 import Media from 'react-media';
 import CarbonSection from 'components/Carbon/Section';
+import { MdxPostProvider } from 'components/Pages/Post/Mdx/MdxPostProvider';
 
 const SHOW_SHARE_AFTER_Y = 500;
 
@@ -62,7 +63,9 @@ export default function PostTemplate({
             <CarbonSection />
           </Media>
         </div>
-        <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.html }} />
+        <MdxPostProvider tableOfContents={post.tableOfContents}>
+          <div className={styles.postContent}>{post.children}</div>
+        </MdxPostProvider>
         <div className={styles.shareGroup}>
           <div className={styles.shareBottom}>
             <ShareBottom post={post} />

@@ -12,12 +12,12 @@ interface PlainListByTagProps {
 }
 
 export default function PlainListByTagFetch({ pageContext: { tag }, data }: PlainListByTagProps) {
-  return <PlainListByTagTemplate tag={tag} posts={data.allMarkdownRemark.edges.map(toPostPlain)} />;
+  return <PlainListByTagTemplate tag={tag} posts={data.allMdx.edges.map(toPostPlain)} />;
 }
 
 export const pageQuery = graphql`
   query PlainListByTag($tag: String!) {
-    allMarkdownRemark(
+    allMdx(
       sort: {
         frontmatter: {
           published: DESC

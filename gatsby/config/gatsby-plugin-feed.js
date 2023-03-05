@@ -36,10 +36,10 @@ module.exports = {
             site: {
               siteMetadata: { siteInfo, authorInfo },
             },
-            allMarkdownRemark,
+            allMdx,
           },
         }) => {
-          return allMarkdownRemark.edges.map((edge) => {
+          return allMdx.edges.map((edge) => {
             const url = siteInfo.url + '/' + edge.node.frontmatter.slug + '/';
             return Object.assign({}, edge.node.frontmatter, {
               description: edge.node.frontmatter.description,
@@ -53,7 +53,7 @@ module.exports = {
         },
         query: `
           {
-            allMarkdownRemark(
+            allMdx(
               limit: 1000,
               sort: {
                 frontmatter: {
@@ -71,7 +71,6 @@ module.exports = {
               edges {
                 node {
                   excerpt
-                  html
                   frontmatter {
                     title
                     date: published

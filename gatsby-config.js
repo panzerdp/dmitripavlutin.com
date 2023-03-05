@@ -11,16 +11,17 @@ module.exports = {
   plugins: [
     'gatsby-plugin-sharp',
     {
-      resolve: 'gatsby-transformer-remark',
+      resolve: 'gatsby-plugin-mdx',
       options: {
-        plugins: [
-          {
-            resolve: `gatsby-remark-table-of-contents`,
-            options: {
-              tight: true,
-              fromHeading: 1,
-            },
-          },
+        extensions: [`.md`, `.mdx`],
+        gatsbyRemarkPlugins: [
+          // {
+          //   resolve: `gatsby-remark-table-of-contents`,
+          //   options: {
+          //     tight: true,
+          //     fromHeading: 1,
+          //   },
+          // },
           {
             resolve: 'gatsby-plugin-image',
             options: {
@@ -57,7 +58,7 @@ module.exports = {
             options: {
               defaultText: 'Click here',
               dependencies: [],
-              directory: `${__dirname}/content/posts/`,
+              directory: `${__dirname}/posts/`,
               externals: [],
               html: '',
               target: '_blank',
@@ -88,8 +89,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/content`,
-        name: 'content',
+        path: `${__dirname}/posts`,
+        name: 'posts',
       },
     },
     {

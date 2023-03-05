@@ -16,7 +16,7 @@ const query = `
       }
     }
   }
-  allMarkdownRemark(
+  allMdx(
     sort: {
       frontmatter: {
         published: DESC
@@ -33,6 +33,9 @@ const query = `
   ) {
     edges {
       node {
+        internal {
+          contentFilePath
+        }
         frontmatter {
           title
           slug
@@ -58,7 +61,7 @@ exports.createPages = async ({ graphql, actions }) => {
     throw result.errors;
   }
   // Create blog posts pages.
-  const edges = result.data.allMarkdownRemark.edges;
+  const edges = result.data.allMdx.edges;
 
   const popularPostsByCategory = result.data.site.siteMetadata.featured.popularPostsByCategory;
   const popularPostsSlugs = popularPostsByCategory.reduce((acc, postsByCategory) => [...acc, ...postsByCategory.slugs], []);
@@ -66,7 +69,7 @@ exports.createPages = async ({ graphql, actions }) => {
   createExcerptsList(createPage, edges, popularPostsSlugs);
   createPost({ createPage, edges, popularPostsSlugs }, actions);
   createPlainListByTag(createPage, edges);
-  return result;  
+  return result;
 };
 
 exports.onCreateWebpackConfig = ({ stage, actions, getConfig  }) => {
