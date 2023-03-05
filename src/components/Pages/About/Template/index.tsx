@@ -10,7 +10,7 @@ export default function AboutTemplate() {
       query AboutPictureQuery {
         aboutPicture: file(relativePath: { eq: "dmitri-pavlutin-seine-4.jpg" }) {
           childImageSharp {
-            gatsbyImageData(width: 600, quality: 60, layout: CONSTRAINED, formats: [AUTO, AVIF])
+            gatsbyImageData(width: 600, quality: 60, layout: CONSTRAINED, formats: [WEBP])
           }
         }
       }

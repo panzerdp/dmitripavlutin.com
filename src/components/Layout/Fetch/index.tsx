@@ -19,7 +19,7 @@ export default function LayoutFetchQuery({ children, leftSidebar, rightSidebar }
         query Layout {
           file(relativePath: { eq: "face.jpg" }) {
             childImageSharp {
-              gatsbyImageData(width: 64, height: 64, quality: 100, layout: FIXED, formats: [AUTO, AVIF])
+              gatsbyImageData(width: 64, height: 64, quality: 100, layout: FIXED, formats: [WEBP])
             }
           }
           site {
