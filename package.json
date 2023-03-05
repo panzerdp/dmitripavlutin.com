@@ -18,7 +18,6 @@
     "classnames": "2.3.2",
     "eslint": "8.35.0",
     "eslint-plugin-react": "7.32.2",
-    "lmdb-store": "1.6.14",
     "gatsby": "5.7.0",
     "gatsby-cli": "5.7.0",
     "gatsby-link": "5.7.0",
