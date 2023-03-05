@@ -79,7 +79,7 @@ export const pageQuery = graphql`
         recommended
         thumbnail {
           childImageSharp {
-            gatsbyImageData(aspectRatio: 1.8, quality: 60, width: 708, placeholder: BLURRED)
+            gatsbyImageData(aspectRatio: 1.8, quality: 60, width: 708, formats: [WEBP], placeholder: BLURRED)
           }
         }
       }
