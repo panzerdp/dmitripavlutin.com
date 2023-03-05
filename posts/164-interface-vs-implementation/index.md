@@ -18,8 +18,7 @@ If you haven't taken the time, *in advance*, to think about the possible ways yo
 
 In this post, I'm going to discuss a software design principle that *advises to program to an interface rather than an implementation* to help you write code can be modified easier in the future.  
 
-```toc
-```
+<TableOfContents />
 
 ## 1. The list renderer
 

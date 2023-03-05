@@ -106,7 +106,7 @@ Now, after calling 3 times the `increment()` function, calling `log()` logs the 
 
 ## 3. Stale closures of hooks
 
-### 3.1 *useEffect()*
+### 3.1 useEffect()
 
 Let's study a common case of stale closure when using `useEffect()` hook.
 
@@ -181,7 +181,7 @@ Proper management of hooks dependencies is an efficient way to solve the stale c
 
 I recommend to enable [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks), which detects the forgotten dependencies.  
 
-### 3.2 *useState()*
+### 3.2 useState()
 
 The component `<DelayedCount>` has 1 button *Increase async* that increments the counter asynchronously with 1 second delay.  
 

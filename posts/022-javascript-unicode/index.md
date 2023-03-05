@@ -32,10 +32,7 @@ You'll learn also how to apply new ECMAScript 2015 features to solve a part of t
 
 Ready? Let's start!  
 
-```toc
-# Table of contents
-toHeading: 3
-```
+<TableOfContents maxLevel={3} />
 
 ## 1. The idea behind Unicode
 
@@ -641,7 +638,7 @@ The astral code points are encoded to surrogate pairs. So JavaScript represents 
 
 The `\uDE00-\uD83D` part of the character class is not valid, because `\uDE00` is greater than `\uD83D`. As a result, an error is generated.  
 
-#### Regular expression *u* flag
+#### Regular expression u flag
 
 Fortunately, ECMAScript 2015 introduced a useful `u` flag, making the regular expression Unicode-aware. This flag enables the correct processing of astral symbols.  
 

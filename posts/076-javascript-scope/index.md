@@ -20,8 +20,7 @@ In this post, I will explain step by step, in-depth, how the scope works in Java
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-```
+<TableOfContents />
 
 ## 1. The scope
 
@@ -117,7 +116,7 @@ In JavaScript you can define standalone code blocks. The standalone code blocks 
 console.log(message); // throws ReferenceError
 ```
 
-### 2.1 *var* is not block scoped
+### 2.1 var is not block scoped
 
 As seen in the previous section, the code block creates a scope for variables declared using `const` and `let`. However, that's not the case of variables declared using `var`.
 

@@ -32,7 +32,7 @@ Now... the big question is: what is the difference between using `any` and `unkn
 
 Let's find out in this post.  
 
-## 1. *unknown* vs *any*
+## 1. unknown vs any
 
 To better understand the difference between `unknown` and `any`, let's start with writing a function that wants to invoke its only argument.  
 
@@ -84,7 +84,7 @@ invokeAnything(1);
 
 Having added `typeof callback === 'function'` check, you can safely invoke `callback()` because `unknown` has narrowed to `Function` type. No type errors and no runtime errors! Great!
 
-## 2. The mental model of *unknown* vs *any*
+## 2. The mental model of unknown vs any
 
 To be honest, I had difficulties understanding `unknown` when I had been learning it. How does it differ from `any`, since both types accept any value?  
 

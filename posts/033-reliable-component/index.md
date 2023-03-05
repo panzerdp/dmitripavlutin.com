@@ -32,9 +32,7 @@ Luckily, reliable components have common characteristics. Let's study these 7 us
 
 *If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-# Table of contents
-```
+<TableOfContents />
 
 ## 1. "Single responsibility"
 

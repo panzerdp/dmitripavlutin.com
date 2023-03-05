@@ -18,10 +18,9 @@ Note: In the post, I  describe property existence checking, which is the same as
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-```
+<TableOfContents />
 
-## 1. *hasOwnProperty()* method
+## 1. hasOwnProperty() method
 
 Every JavaScript object has a special method `object.hasOwnProperty('myProp')` that returns a boolean indicating whether `object` has a property `myProp`. 
 
@@ -57,7 +56,7 @@ console.log(hero.hasOwnProperty('toString')); // => false
 ```
 [Try the demo.](https://jsfiddle.net/frtdawc4/)
 
-## 2. *in* operator
+## 2. in operator
 
 `'myProp' in object` also determines whether `myProp` property exists in `object`.  
 
@@ -95,7 +94,7 @@ console.log(hero.hasOwnProperty('toString')); // => false
 ```
 [Try the demo.](https://jsfiddle.net/2urp4n0a/)
 
-## 3. Comparing with *undefined*
+## 3. Comparing with undefined
 
 Accessing a non-existing property from an object results in `undefined`:
 

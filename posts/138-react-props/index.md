@@ -280,7 +280,7 @@ The property names inside of the spread object have to correspond to the prop na
 
 While you are free to use any prop names you like, React, however, has some properties with special use.  
 
-### 6.1 *children*
+### 6.1 children
 
 `children` is a special property assigned by React with the content of the body of the component: the content between open tag `<MyComponent>` and closing tag `</MyComponent>`.  
 
@@ -301,7 +301,7 @@ function Parent({ children }) {
 <div><span>I'm a child!</span></div>
 ```
 
-### 6.2 *key*
+### 6.2 key
 
 If you recall the `<HelloPeople persons={persons} />` component:
 

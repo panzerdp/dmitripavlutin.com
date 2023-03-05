@@ -144,7 +144,7 @@ In the example above, `<div id="buttons">` is the parent element of the buttons.
 
 `document.getElementById('buttons') .addEventListener('click', handler)` attaches the event listener to the parent element of buttons. This listener reacts to buttons clicks because the *button click event bubbles through ancestors* (thanks to the event propagation).  
 
-#### Step 3. Use *event.target* to select the target element
+#### Step 3. Use event.target to select the target element
 
 When a button is clicked, the handler function is invoked with an argument: the `event` object. The property `event.target` is the element upon which the event has been dispatched, which in the example is a button: 
 

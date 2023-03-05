@@ -25,9 +25,7 @@ The 3 ways to clone objects described in this post perform *shallow copy*.
 
 A shallow copy means that only the actual object gets copied. If the copied object contains nested objects &mdash; these nested objects *aren't get cloned*.  
 
-```toc
-toHeading: 2
-```
+<TableOfContents maxLevel={2} />
 
 ## 1. Cloning using object spread
 
@@ -150,7 +148,7 @@ heroClone; // { name: 'Batman', realName: 'Bruce Wayne' }
 
 Combining the object spread and rest to clone objects and perform properties manipulation in a single statement is great!  
 
-## 3. Cloning using *Object.assign()*
+## 3. Cloning using Object.assign()
 
 Finally, `Object.assign(target, ...sources)` let's you peform the same object clone:
 
@@ -175,7 +173,7 @@ hero === heroClone; // => false
 
 `Object.assign({}, hero)` creates a clone of `hero` object by merging the second argument `hero` into the first argument `{}`.  
 
-### 3.1 *Object.assign()* bonus: add or update cloned props
+### 3.1 Object.assign() bonus: add or update cloned props
 
 `Object.assign()` enables also to update or add new properties to the clone.  
 

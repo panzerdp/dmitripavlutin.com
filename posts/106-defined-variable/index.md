@@ -93,7 +93,7 @@ let result; // result is uninitialized
 result; // => undefined
 ```
 
-## 2. Using *typeof*
+## 2. Using typeof
 
 Knowing the possible states of variables, let's consider the techniques to find whether a variable is defined or not.  
 
@@ -140,7 +140,7 @@ const myVar = 42;
 typeof myVar === 'undefined'; // => false
 ```
 
-## 3. Using *try/catch*
+## 3. Using try/catch
 
 When accessing a not defined variable, JavaScript throws a reference error:
 
@@ -181,7 +181,7 @@ try {
 
 Compared to `typeof` approach, the `try/catch` is more precise because it determines solely if the variable is *not defined*, despite being initialized or uninitialized.    
 
-## 4. Using *window.hasOwnProperty()*
+## 4. Using window.hasOwnProperty()
 
 Finally, to check for the existence of global variables, you can go with a simpler approach. 
 

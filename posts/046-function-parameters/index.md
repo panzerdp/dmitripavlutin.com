@@ -148,7 +148,7 @@ greeFirstPerson(persons); // => 'Hello, John Smith!'
 
 The destructuring of parameter `[{ name }]` is more complex. It extracts the first item of the array, then reads from this item the `name` property.  
 
-## 4. *arguments* object
+## 4. arguments object
 
 Another nice feature of JavaScript functions is the ability to call the same function with a variable number of arguments. 
 

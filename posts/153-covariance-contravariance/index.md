@@ -14,8 +14,7 @@ Learning covariance and contravariance in TypeScript could be tricky (I know fro
 
 In this post, you'll read an accessible explanation of covariance and contravariance concepts.  
 
-```toc
-```
+<TableOfContents />
 
 
 ## 1. Subtyping

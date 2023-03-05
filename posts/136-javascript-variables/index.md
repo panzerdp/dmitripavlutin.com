@@ -48,9 +48,9 @@ For example, the identifiers `myNumber` and `mynumber` are different, because th
 
 Having that, now let's see the 3 ways you can declare variables in JavaScript: `const`, `let`, and `var` statements.  
 
-## 2. *const* variables
+## 2. const variables
 
-### 2.1 *const* declaration and initialization
+### 2.1 const declaration and initialization
 
 Here's how you can *declare* a `const` variable with the identifier `myConstVariable`:
 
@@ -76,7 +76,7 @@ What's also specific to `const` variables (contrary to `let` and `var` variables
 const hero; // SyntaxError: Missing initializer in const declaration
 ```
 
-### 2.2 *const* access and assignment
+### 2.2 const access and assignment
 
 After the declaration and initialization, you can *access* the variable value just by using its name (aka identifier):
 
@@ -131,9 +131,9 @@ const hero = 'Batman';
 
 From the usage perspective, you should use `const` variables as read-only that you don't plan to reassign. 
 
-## 3. *let* variables
+## 3. let variables
 
-### 3.1 *let* declaration and initialization
+### 3.1 let declaration and initialization
 
 Here's how you can *declare* a `let` variables with the identifiers `myVariable1` and `myVariable2`:
 
@@ -157,7 +157,7 @@ let name;
 
 The `let` variable named `villain` is declared and initialized with the string literal `'Joker'`. `name` variable also has been defined, but it wasn't initialized.   
 
-### 3.2 *let* access and assignment
+### 3.2 let access and assignment
 
 After the declaration and initialization, you can *access* the `let` variable value just by writing the identifier:
 
@@ -211,9 +211,9 @@ console.log(villain); // throws ReferenceError
 let villain = 'Joker';
 ```
 
-## 4. *var* variables
+## 4. var variables
 
-### 4.1 *var* declaration and initialization
+### 4.1 var declaration and initialization
 
 Here's how you can *declare* a `var` variable with the identifier `myVariable1` or `myVariable2`:
 
@@ -237,7 +237,7 @@ var name;
 
 The `var` variable `city` is declared and initialized with the string literal `'Gotham'`. `name` variable also has been defined, but it wasn't initialized.   
 
-### 4.2 *var* access and assignment
+### 4.2 var access and assignment
 
 After the declaration and optional initialization, you can *access* the `var` variable value just by using its name (or identifier):
 

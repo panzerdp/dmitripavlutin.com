@@ -87,7 +87,7 @@ typeof Symbol.iterator; // => 'symbol'
 `Object.getOwnPropertiesNames(Symbol)` returns the owned properties of `Symbol` function object, including the list of well-known symbols.  
 The type of `Symbol.iterator` of course is `'symbol'`.  
 
-## 2. *@@iterator* to make the object iterable
+## 2. @@iterator to make the object iterable
 
 `Symbol.iterator` is probably the most known symbol. It allows to define how the object should be iterated using `for...of` statement or consumed by `...` spread operator.  
 
@@ -176,7 +176,7 @@ If the primitive type or object have an *@@iterator* method, they can be applied
 * In constructors for `Map(iterableObject)`, `WeakMap(iterableObject)`, `Set(iterableObject)`, `WeakSet(iterableObject)`
 * In promise static methods `Promise.all(iterableObject)`, `Promise.race(iterableObject)`
 
-## 3. *@@hasInstance* to customize `instanceof`
+## 3. @@hasInstance to customize instanceof
 
 By default `obj instanceof Constructor` operator verifies if the prototype chain of `obj` contains `Constructor.prototype` object.  Let's see an example:
 
@@ -218,7 +218,7 @@ Later `Iterable` is used to verify different types of variables. `array` and `st
 In my opinion, using *@@hasInstance* such way with `instanceof` and constructors is more graceful than simply `isIterable(array)` calls.  
 `array instanceof Iterable` clearly suggests that `array` is verified that it conforms to iterable protocol.  
 
-## 4. *@@toPrimitive* to convert an object to a primitive
+## 4. @@toPrimitive to convert an object to a primitive
 
 Use `Symbol.toPrimitive` to specify a property whose value is a function to transform an object to a primitive. 
 *@@toPrimitive* method has one parameter *hint* that takes `"number"`, `"string"` or `"default"` value.  *hint* parameter indicates the suggested type of primitive that should be returned.  
@@ -257,7 +257,7 @@ The final `'array elements: ' + array` uses `'default'` hint for the transformat
 * In subtraction operator `object - primitive`
 * Different situations when an object is coerced to a primitive: `String(object)`, `Number(object)`, etc.
 
-## 5. *@@toStringTag* to create the default description of an object
+## 5. @@toStringTag to create the default description of an object
 
 Use `Symbol.toStringTag` to specify a property whose value is a string that describes object's type tag. *@@toStringTag* method is used by `Object.prototype.toString()`.
 
@@ -315,7 +315,7 @@ In the constructor of `MyTypeClass`, the instance is configured with a custom ta
 
 Notice that *@@toStringTag* exists more in terms of backward compatibility. Its usage is not encouraged. You probably should use other ways to determine the object type, e.g. `instanceof` (including with *@@hasInstance* symbol) or `typeof`.  
 
-## 6. *@@species* to create derived objects
+## 6. @@species to create derived objects
 
 Use `Symbol.species` to specify a property whose value is a constructor function used to create derived objects.  
 
@@ -357,7 +357,7 @@ If *@@species* property is not customized, `array.filter()` would return an `MyA
 *@@species* accessor property is used with `Array` and `TypedArray` methods like `.map()`, `.concat()`, `.slice()`, `.splice()` that return derived objects.  
 It is useful for extending maps, regular expression objects, promises, and still keep the original constructor.  
 
-## 7. Create regular expression like objects: *@@match*, *@@replace*, *@@search* and *@@split*
+## 7. Create regular expression like objects: @@match, @@replace, @@search and @@split
 
 JavaScript's string prototype has 4 methods that accept regular expression objects:
 
@@ -407,7 +407,7 @@ let sunExp = new Expression('sun');
 `Expression` class defines the methods *@@match*, *@@replace*, *@@search* and *@@split*.  
 `sunExp` instance later is used in the corresponding string methods, roughly simulating a regular expression.  
 
-## 8. *@@isConcatSpreadable* to flat an object to array elements
+## 8. @@isConcatSpreadable to flat an object to array elements
 
 `Symbol.isConcatSpreadable` is a boolean valued property that indicates if an object should be flattened to its array elements by `Array.prototype.concat()` method.  
 
@@ -444,7 +444,7 @@ otherLetters.concat('e', letters); // => ['c', 'd', 'e', 'a', 'b']
 On first `.concat()` call the array-like object `letters` remains unmodified in the concatenation result array. This is the default for array-like objects.  
 Then *@@isConcatSpreadable* property is set to `true` for `letters`. So the concatenation spreads the array-like object to its elements.   
 
-## 9. *@@unscopables* for properties accessibility within with
+## 9. @@unscopables for properties accessibility within with
 
 `Symbol.unscopables` is an object valued property whose own property names are property names that are excluded from the `with` environment bindings of the associated object.  
 *@@unscopables* property value has this format: `{ propertyName: <boolean_exclude_binding> }`.  

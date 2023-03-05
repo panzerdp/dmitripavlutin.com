@@ -30,7 +30,7 @@ Let's see how you can access these environment variables (either OS or Node.js s
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-## 1. *process.env* object
+## 1. process.env object
 
 When executing a JavaScript file as a Node CLI (command line interface) command, Node creates a special `process.env` object that contains the environment variables as properties.  
 
@@ -61,7 +61,7 @@ The above variables are taken from the environment of the operating system.
 
 If you'd like to provide local defaults to certain environment variables, then check the [dotenv](https://github.com/motdotla/dotenv) project.  
 
-## 2. *process.env* in a browser environment
+## 2. process.env in a browser environment
 
 The environment variables, including `process.env`, are accessible to scripts running in the CLI.  
 

@@ -26,8 +26,7 @@ In this post, as a part of the iterator pattern, you'll learn what are *iterable
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-```
+<TableOfContents />
 
 ## 1. Digging up the iterable
 
@@ -139,7 +138,7 @@ When there are no more items to iterate, `iterator.next()` returns `{ value: und
 
 JavaScript provides a good set of cycles, syntaxes, and functions that consume iterables.
 
-### 3.1 *for...of* cycle
+### 3.1 for...of cycle
 
 As you know already, `for...of` cycle accepts an iterable object and iterates through its items:
 

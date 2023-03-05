@@ -75,7 +75,7 @@ By using only the `numbers.flatMap()` you can map an array to another array, but
 
 Let's see in more detail how `array.flatMap()` works.  
 
-## 2. *array.flatMap()*
+## 2. array.flatMap()
 
 `array.flatMap()` function accepts a callback function as an argument and returns a new mapped array:
 

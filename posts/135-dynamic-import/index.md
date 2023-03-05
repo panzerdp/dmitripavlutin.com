@@ -86,7 +86,7 @@ Now, knowing how to load the module, let's extract components (default or named)
 
 ## 2. Importing components
 
-### 2.1 Importing of *named* exports
+### 2.1 Importing of named exports
 
 Let's consider the following module, named `namedConcat.js`:
 
@@ -108,7 +108,7 @@ async function loadMyModule() {
 loadMyModule();
 ```
 
-### 2.2 Importing of *default* export
+### 2.2 Importing of default export
 
 To dynamically import a *default*, just read the `default` property from the module object.  
 

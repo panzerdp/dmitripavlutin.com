@@ -24,11 +24,9 @@ Let's see how the `useReducer()` hook works. As a nice bonus, you will find in t
 
 *If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-```toc
-toHeading: 2
-```
+<TableOfContents maxLevel={3} />
 
-## 1. *useReducer()*
+## 1. useReducer()
 
 The `useReducer(reducer, initialState)` hook accept 2 arguments: the *reducer* function and the *initial state*. The hook then returns an array of 2 items: the current state and the *dispatch* function.
 

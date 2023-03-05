@@ -35,7 +35,7 @@ Let's see what utility functions provide JavaScript to extract the keys, values,
 
 *If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
 
-## 1. *Object.keys()* returns keys
+## 1. Object.keys() returns keys
 
 `Object.keys(object)` is a utility function that returns the list of keys of `object`.  
 
@@ -74,7 +74,7 @@ Object.keys(nonEmpty).length === 0; // => false
 
 `Object.keys(empty).length === 0` evaluates to `true`, which means that `empty` has no properties.  
 
-## 2. *Object.values()* returns values
+## 2. Object.values() returns values
 
 `Object.values(object)` is the JavaScript utility function that returns the list of values of `object`.  
 
@@ -119,7 +119,7 @@ sum; // => 19.85
 
 Then `prices.reduce(Math.sum)` summarizes the prices.  
 
-## 3. *Object.entries()* returns entries
+## 3. Object.entries() returns entries
 
 Finally, `Object.entries(object)` is an useful function to access the entries of `object`.  
 

@@ -55,7 +55,7 @@ There are situations when you want to clean strings entering from the applicatio
 
 JavaScript provides 3 simple functions on how to trim strings. 
 
-### 2.1 *string.trim()*
+### 2.1 string.trim()
 
 `string.trim()` removes sequences of whitespaces and line terminators from both the start and the end of the string.  
 
@@ -86,7 +86,7 @@ fullName.trim(); // => 'Kate Smith'
 
 `fullName.trim()` removes the spaces from both the start and end of the string, however keeps the space between `Kate` and `Smith` words.  
 
-### 2.2 *string.trimStart()*
+### 2.2 string.trimStart()
 
 `string.trimStart()` removes sequences of whitespaces and line terminators only from the start of the string.  
 
@@ -104,7 +104,7 @@ phoneNumber.trimStart(); // => '555-123 \n'
 
 `phoneNumber.trimStart()` removes the sequence of whitespaces and line terminals from the start only. `'\t  555-123 \n'` becomes `'555-123 \n'`.   
 
-### 2.3 *string.trimEnd()*
+### 2.3 string.trimEnd()
 
 `string.trimEnd()` removes sequences of whitespaces and line terminators only from the end of the string.  
 
