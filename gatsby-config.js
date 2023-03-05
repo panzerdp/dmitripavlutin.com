@@ -15,13 +15,6 @@ module.exports = {
       options: {
         extensions: [`.md`, `.mdx`],
         gatsbyRemarkPlugins: [
-          // {
-          //   resolve: `gatsby-remark-table-of-contents`,
-          //   options: {
-          //     tight: true,
-          //     fromHeading: 1,
-          //   },
-          // },
           {
             resolve: 'gatsby-plugin-image',
             options: {
