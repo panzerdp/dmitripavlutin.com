@@ -6,7 +6,8 @@ module.exports = {
   siteMetadata: require('./gatsby/config/site-metadata'),
   pathPrefix: '/',
   flags: {
-    DEV_SSR: false
+    DEV_SSR: false,
+    PARALLEL_QUERY_RUNNING: true
   },  
   plugins: [
     'gatsby-plugin-sharp',
