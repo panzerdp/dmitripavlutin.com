@@ -54,7 +54,7 @@
     "typescript": "4.7.4",
 
     "gatsby-plugin-mdx": "4.1.1",
-    "gatsby-plugin-no-sourcemaps": "5.19.0",
+    "gatsby-plugin-no-sourcemaps": "4.19.0",
     "gatsby-remark-external-links": "0.0.4"
   },
   "devDependencies": {
