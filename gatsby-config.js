@@ -9,6 +9,7 @@ module.exports = {
     DEV_SSR: false
   },  
   plugins: [
+    'gatsby-plugin-no-sourcemaps',
     'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-plugin-mdx',
