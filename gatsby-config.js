@@ -114,7 +114,7 @@ module.exports = {
     'gatsby-plugin-netlify',
     require('./gatsby/config/gatsby-plugin-sass'),
     // 'gatsby-plugin-minify-classnames',
-    require('./gatsby/config/gatsby-plugin-feed'),
+    // require('./gatsby/config/gatsby-plugin-feed'),
     require('./gatsby/config/gatsby-plugin-source-mailchimp'),
   ],
 };
