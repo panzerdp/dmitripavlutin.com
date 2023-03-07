@@ -26,7 +26,7 @@ module.exports = {
         image_url: `${siteInfo.url}/favicon256.png`,
         copyright: `2015 ${authorInfo.name}`,
         language: 'en',
-        categories: ['JavaScript', 'React', 'CSS', 'Software development', 'Frontend development'],
+        categories: ['JavaScript', 'React', 'Vue', 'CSS', 'Software development', 'Frontend development'],
       };
     },
     feeds: [
@@ -70,7 +70,6 @@ module.exports = {
             ) {
               edges {
                 node {
-                  excerpt
                   frontmatter {
                     title
                     date: published
