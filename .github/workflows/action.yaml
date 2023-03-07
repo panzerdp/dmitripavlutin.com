@@ -14,7 +14,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '18'
           cache: 'npm'
       - name: Install Dependencies
         run: npm install
@@ -22,9 +22,3 @@ jobs:
         run: npm run build
         env:
           MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
-      - name: Install firebase CLI
-        run: npm install firebase-tools
-      - name: Deploy
-        run: ./node_modules/.bin/firebase deploy
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
