@@ -307,7 +307,7 @@ By default `watch(myRef, callback)` watches only the changes of `myRef.value`.
 
 If you want to watch deep changes of a ref (e.g. when a ref contains object or arrays), then set the third argument as `{deep: true}`: 
 
-```
+```vue
 watch(myRef, () => {
   //...
 }, { deep: true }) // deep watch of ref
