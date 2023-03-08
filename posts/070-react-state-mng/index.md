@@ -20,9 +20,7 @@ I like that `useState()` indeed makes the work with state quite easy. But often 
 
 This post describes 3 easy rules that answer the above questions and help you design the component's state.  
 
-*Before I go on, let me recommend something to you.* 
-
-*If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+<Affiliate type="traversyReact" />
 
 ## 1. One concern
 

@@ -39,9 +39,7 @@ Before starting, let's familiarize with a couple of terms:
 * **Context** of an invocation is the value of `this` within function body.  
 * **Scope** of a function is the set of variables and functions accessible within a function body.
 
-*Before I go on, let me recommend something to you.* 
-
-*If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+<Affiliate type="traversyJavaScript" />
 
 <TableOfContents />
 

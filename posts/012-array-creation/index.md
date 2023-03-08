@@ -22,9 +22,7 @@ The current article covers the array initialization and setting the initial elem
 
 Fortunately JavaScript offers more interesting and straightforward ways to create arays, not limited to manual enumeration. Let's illustrate the common and advanced scenarios how to initialize arrays in JavaScript.
 
-*Before I go on, let me recommend something to you.* 
-
-*If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+<Affiliate type="traversyJavaScript" />
  
 ## 1. Array literal
 

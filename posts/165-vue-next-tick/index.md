@@ -14,9 +14,7 @@ A change to Vue component's data (props or state) isn't immediately reflected in
 
 You can catch the moment when Vue updates DOM using `Vue.nextTick()` or `vm.$nextTick()` functions. Let's see in detail how these functions work.
 
-*Before I go on, let me recommend something to you.*
-
-*If you want to become proficient in Vue, take ["Vue.js 3 Fundamentals with the Composition API"](https://vueschool.io/courses/vue-js-fundamentals-with-the-composition-api?friend=dmitripavlutin) course on Vueschool.*
+<Affiliate type="vueschoolVue" />
 
 ## 1. nextTick()
 

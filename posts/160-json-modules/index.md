@@ -19,9 +19,7 @@ For a long time, importing JSON was supported by commonjs modules format.
 
 Fortunately, a new proposal at stage 3 named [JSON modules](https://github.com/tc39/proposal-json-modules) proposes a way to import JSON into an ES module. Let's see how JSON modules work.
 
-*Before I go on, let me recommend something to you.* 
-
-*If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+<Affiliate type="traversyJavaScript" />
 
 ## 1. Importing config.json
 

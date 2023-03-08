@@ -35,9 +35,7 @@ This article guides through object spread and rest syntax. Including how object 
 
 What follows is a short recap on enumerable properties, and how to distinguish own from inherited properties. These are necessary basics to understand how object spread and rest works.  
 
-*Before I go on, let me recommend something to you.* 
-
-*If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+<Affiliate type="traversyJavaScript" />
 
 <TableOfContents maxLevel={3} />
 

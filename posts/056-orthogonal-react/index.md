@@ -28,9 +28,7 @@ But these weren't the main problem. Without realizing it, I was fighting tightly
 
 Don't make my mistake: learn design principles. One particularly influential is the orthogonality principle, which says to isolate things that change for different reasons.  
 
-*Before I go on, let me recommend something to you.* 
-
-*If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+<Affiliate type="traversyReact" />
 
 ## 2. Orthogonal components
 

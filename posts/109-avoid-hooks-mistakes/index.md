@@ -14,9 +14,7 @@ You've read many posts on how to use React hooks. But *knowing how Not to use*, 
 
 In this post, I will describe the React hooks usage mistakes, and how to fix them.    
 
-*Before I go on, let me recommend something to you.* 
-
-*If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+<Affiliate type="traversyReact" />
 
 <TableOfContents />
 

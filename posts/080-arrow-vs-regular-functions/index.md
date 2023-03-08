@@ -42,9 +42,7 @@ While both the regular and arrow syntaxes define functions, when would you choos
 
 In this post, I'll show the main differences between the two, so you could choose the right syntax for your needs.  
 
-*Before I go on, let me recommend something to you.* 
-
-*If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+<Affiliate type="traversyJavaScript" />
 
 <TableOfContents />
 

@@ -12,9 +12,7 @@ type: post
 
 In this post, you'll learn how to replace all string occurrences in JavaScript by splitting and joining a string, `string.replace()` combined with a global regular expression, and `string.replaceAll()`.  
 
-*Before I go on, let me recommend something to you.* 
-
-*If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+<Affiliate type="traversyJavaScript" />
 
 <TableOfContents maxLevel={2} />
 

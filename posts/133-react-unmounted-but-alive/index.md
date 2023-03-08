@@ -22,9 +22,7 @@ Warning: Can't perform a React state update on an unmounted component.
 
 In this post, I'll show you when the above warning appears and how to correctly clean side-effects in React.  
 
-*Before I go on, let me recommend something to you.* 
-
-*If you want to significantly improve your React knowledge, take the  fantastic ["React Front To Back Course"](https://www.traversymedia.com/a/2147528895/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+<Affiliate type="traversyReact" />
 
 ## 1. State update after unmounting
 

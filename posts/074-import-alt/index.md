@@ -25,9 +25,7 @@ This is a module `stringUtils`. The module has a named export `equalsIgnoreCase`
 
 Everything looks good so far.  
 
-*Before I go on, let me recommend something to you.* 
-
-*If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+<Affiliate type="traversyJavaScript" />
 
 Now, let's try to import `equalsIgnoreCase` function from `stringUtils` module inside of another JavaScript module `app`:
 

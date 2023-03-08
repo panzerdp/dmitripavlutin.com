@@ -18,9 +18,7 @@ Often I find myself overwhelmed by the number of possible operations on arrays a
 
 I've decided to implement 15 common operations on arrays. If you need to perform a specific operation, just pick the implementation from the table of contents.  
 
-*Before I go on, let me recommend something to you.* 
-
-*If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course ["Modern JavaScript From The Beginning 2.0"](https://www.traversymedia.com/a/2147528886/FqXWyazh) by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!*
+<Affiliate type="traversyJavaScript" />
 
 <TableOfContents maxLevel={3} tableLayout={true} />
 
