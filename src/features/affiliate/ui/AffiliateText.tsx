@@ -2,11 +2,15 @@ import { useSiteMetadata } from 'hooks/useSiteMetadata';
 
 interface Props {
   type: string;
+  disabled?: boolean;
 }
 
-export function AffiliateText({ type }: Props) {
-  const { affiliates } = useSiteMetadata()
+export function AffiliateText({ type, disabled = false }: Props) {
+  if (disabled) {
+    return null;
+  }
 
+  const { affiliates } = useSiteMetadata()
   const affiliate = affiliates.find((affiliate) => affiliate.type === type)
 
   if (!affiliate) {

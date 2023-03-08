@@ -18,7 +18,7 @@ In this post, you'll learn how to hide elements on a web page using 3 approaches
 * When the element is hidden using `display: none` applied by `v-show`;
 * Applying the `visibility: hidden` using the `:class` binding.
 
-<Affiliate type="vueschoolVue" />
+<Affiliate type="vueschoolVue" disabled={true} />
 
 <TableOfContents />
 
