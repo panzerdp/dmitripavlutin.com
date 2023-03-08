@@ -21,7 +21,7 @@ import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll';
 import CommentsCount from 'components/Comments/Count';
 import Media from 'react-media';
 import CarbonSection from 'components/Carbon/Section';
-import { MdxPostProvider } from 'components/Pages/Post/Mdx/MdxPostProvider';
+import { MdxPostProvider } from 'components/Pages/Post/MdxPostProvider';
 
 const SHOW_SHARE_AFTER_Y = 500;
 

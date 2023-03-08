@@ -4,7 +4,7 @@ interface Props {
   type: string;
 }
 
-export function MdxAffiliate({ type }: Props) {
+export function AffiliatePostText({ type }: Props) {
   const { affiliates } = useSiteMetadata()
 
   const affiliate = affiliates.find((affiliate) => affiliate.type === type)
