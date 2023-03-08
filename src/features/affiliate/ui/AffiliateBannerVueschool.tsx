@@ -1,4 +1,4 @@
-import Helmet from 'react-helmet';
+import { useEffect } from 'react';
 
 interface Props {
   tags: string[]
@@ -8,15 +8,26 @@ import * as styles from './AffiliateBannerVueschool.module.scss'
 
 export function AffiliateBannerVueschool({ tags }: Props) {
   const TAG_VUE = 'vue';
-  if (!tags.includes(TAG_VUE)) {
-    return null;
+  const isVuePost = tags.includes(TAG_VUE)
+
+  useEffect(() => {
+    if (!isVuePost) {
+      return;
+    }
+    window.BitterBrainsBanner = undefined;
+    const script = document.createElement('script')
+    script.async = true
+    script.src = 'https://vueschool.io/banner.js?affiliate=dmitripavlutin&type=inline'
+    document.head.appendChild(script)
+
+    return () => {
+      document.head.removeChild(script)
+    }
+  }, [])
+
+
+  if (!isVuePost) {
+    return null
   }
-  return (
-    <>
-      <Helmet>
-        <script type="text/javascript" src="https://vueschool.io/banner.js?affiliate=dmitripavlutin&type=inline" async />
-      </Helmet>
-      <div className={styles.banner} id="bb-banner-container" />
-    </>
-  );
+  return <div className={styles.banner} id="bb-banner-container" />;
 }
