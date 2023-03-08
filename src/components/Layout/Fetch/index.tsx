@@ -8,11 +8,12 @@ interface LayoutFetchQueryProps {
   children: React.ReactNode;
   leftSidebar?: React.ReactNode;
   rightSidebar?: React.ReactNode;
+  preHeader?: JSX.Element;
 }
 
 /* istanbul ignore next */
 
-export default function LayoutFetchQuery({ children, leftSidebar, rightSidebar }: LayoutFetchQueryProps) {
+export default function LayoutFetchQuery(props: LayoutFetchQueryProps) {
   return (
     <StaticQuery
       query={graphql`
@@ -34,21 +35,12 @@ export default function LayoutFetchQuery({ children, leftSidebar, rightSidebar }
           }
         }
       `}
-      render={(data: LayoutQuery) => (
-        <LayoutFetch data={data} leftSidebar={leftSidebar} rightSidebar={rightSidebar}>
-          {children}
-        </LayoutFetch>
-      )}
+      render={(data: LayoutQuery) => <LayoutFetch data={data} {...props} />}
     />
   );
 }
 
-interface LayoutFetchProps {
-  data: LayoutQuery;
-  children: React.ReactNode;
-  leftSidebar?: React.ReactNode;
-  rightSidebar?: React.ReactNode;
-}
+type LayoutFetchProps = { data: LayoutQuery; } & LayoutFetchQueryProps
 
 export function LayoutFetch({
   data: {
@@ -58,6 +50,7 @@ export function LayoutFetch({
   children,
   leftSidebar,
   rightSidebar,
+  preHeader
 }: LayoutFetchProps) {
   return (
     <LayoutContainer
@@ -66,6 +59,7 @@ export function LayoutFetch({
       authorProfilePicture={file.childImageSharp.gatsbyImageData}
       leftSidebar={leftSidebar}
       rightSidebar={rightSidebar}
+      preHeader={preHeader}
     >
       {children}
     </LayoutContainer>

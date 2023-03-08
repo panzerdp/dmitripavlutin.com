@@ -1,6 +1,6 @@
 import { MDXProvider } from "@mdx-js/react"
 import { TableOfContents } from 'features/tableOfContents';
-import { AffiliatePostText } from 'features/affiliate';
+import { AffiliateText } from 'features/affiliate';
 
 interface Props {
   children: JSX.Element,
@@ -14,7 +14,7 @@ export function MdxPostProvider({ children, tableOfContents }: Props) {
     TableOfContents(props: ContentProps) {
       return <TableOfContents {...props} tableOfContents={tableOfContents} />;
     },
-    Affiliate: AffiliatePostText
+    Affiliate: AffiliateText
   };
 
   return <MDXProvider components={components}>{children}</MDXProvider>;
