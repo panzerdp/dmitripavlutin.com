@@ -2,14 +2,14 @@ import { Helmet } from 'react-helmet';
 
 import { TO_POST } from 'routes/path';
 import { Post } from 'typings/post';
-import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { useSiteMetadata } from 'hooks/useSiteMetadata';
 
 interface PostMetaTagsProps {
   post: Post;
 }
 
 export default function PostMetaTags({ post }: PostMetaTagsProps) {
-  const { author: { info: authorInfo }, site } = useAuthorAndSiteInfo();
+  const { author: { info: authorInfo }, site } = useSiteMetadata();
 
   const postUrl = `${site.url}${TO_POST({ slug: post.slug })}`;
   const imageUrl = `${postUrl}cover.png`;

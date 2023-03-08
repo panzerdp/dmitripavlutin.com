@@ -1,9 +1,9 @@
-import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { useSiteMetadata } from 'hooks/useSiteMetadata';
 import { useRef, useEffect, useState, memo } from 'react';
 import Placeholder from '../Placeholder';
 
 export function CommentsThread(): JSX.Element {
-  const { site: { githubCommentsRepository } } = useAuthorAndSiteInfo();
+  const { site: { githubCommentsRepository } } = useSiteMetadata();
 
   const commentBox = useRef<HTMLDivElement>();
 

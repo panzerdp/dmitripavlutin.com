@@ -56,5 +56,15 @@ module.exports = {
         'use-react-memo-wisely',
       ]
     }]
-  }
+  },
+  affiliates: [{
+    type: 'traversyReact',
+    message: '<p><em>Before I go on, let me recommend something to you.</em></p><p><em>If you want to significantly improve your React knowledge, take the  fantastic <a href="https://www.traversymedia.com/a/2147528895/FqXWyazh" target="_blank" rel="noopener noreferrer">"React Front To Back Course"</a> by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!</em></p>',
+  }, {
+    type: 'traversyJavaScript',
+    message: '<p><em>Before I go on, let me recommend something to you.</em></p><p><em>If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">"Modern JavaScript From The Beginning 2.0"</a> by Brad Traversy. Use the coupon code "DMITRI" and get up to 20% discount!</em></p>'
+  }, {
+    type: 'vueschooldCompositionApi',
+    message: '<p><em>Before I go on, let me recommend something to you. If you want an easy and accessible explanation of Vue composition API, take <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> course on Vueschool.</em></p>'
+  }]
 };

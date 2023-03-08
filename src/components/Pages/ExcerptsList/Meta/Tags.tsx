@@ -1,13 +1,13 @@
 import { Helmet } from 'react-helmet';
 
-import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { useSiteMetadata } from 'hooks/useSiteMetadata';
 
 interface MetaTagsProps {
   currentPage: number;
 }
 
 export function ExcerptsListMetaTags({ currentPage }: MetaTagsProps) {
-  const { author, site } = useAuthorAndSiteInfo();
+  const { author, site } = useSiteMetadata();
 
   let metaTitle = site.metaTitle;
   let metaDescription = site.metaDescription;

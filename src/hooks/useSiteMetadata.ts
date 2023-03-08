@@ -3,7 +3,7 @@ import { getSrc } from 'gatsby-plugin-image';
 
 import { AuthorInfoAndPicturesQuery } from 'graphql-types';
 
-export const useAuthorAndSiteInfo = () => {
+export const useSiteMetadata = () => {
   const data = useStaticQuery<AuthorInfoAndPicturesQuery>(
     graphql`
       fragment SiteInfoAll on SiteSiteMetadataSiteInfo {
@@ -15,6 +15,7 @@ export const useAuthorAndSiteInfo = () => {
         repositoryUrl
         githubCommentsRepository
         googleCustomSearchId
+        
       }
     
       fragment AuthorInfoAll on SiteSiteMetadataAuthorInfo {
@@ -44,6 +45,10 @@ export const useAuthorAndSiteInfo = () => {
             siteInfo {
               ...SiteInfoAll
             }
+            affiliates {
+              type
+              message
+            }
           }
         }
         authorProfilePicture: file(relativePath: { eq: "louvre.jpg" }) {
@@ -55,12 +60,14 @@ export const useAuthorAndSiteInfo = () => {
     `
   );
   const imageData = data.authorProfilePicture.childImageSharp.gatsbyImageData;
+  const { siteMetadata } = data.site
   return {
     author: {
-      info: data.site.siteMetadata.authorInfo,
+      info: siteMetadata.authorInfo,
       profilePicture: imageData,
-      profilePictureSrc: getSrc(imageData)
+      profilePictureSrc: getSrc(imageData),
     },
-    site: data.site.siteMetadata.siteInfo
+    site: siteMetadata.siteInfo,
+    affiliates: siteMetadata.affiliates
   }
 }

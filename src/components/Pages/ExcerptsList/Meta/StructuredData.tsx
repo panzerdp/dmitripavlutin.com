@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet';
-import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { useSiteMetadata } from 'hooks/useSiteMetadata';
 
 export function ExcerptsListMetaStructuredData() {
-  const { author, site } = useAuthorAndSiteInfo();
+  const { author, site } = useSiteMetadata();
 
   const authorProfilePictureUrl = `${site.url}${author.profilePictureSrc}`;
   const structuredData = {

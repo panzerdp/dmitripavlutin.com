@@ -4,7 +4,7 @@ import ShareSocialFacebook from 'components/Pages/Post/Share/Social/Facebook';
 import PostShareSocialTwitter from 'components/Pages/Post/Share/Social/Twitter';
 import PostShareSocialGithubStar from 'components/Pages/Post/Share/Social/GitHubStar';
 import { PostPlain } from 'typings/post';
-import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { useSiteMetadata } from 'hooks/useSiteMetadata';
 import { TO_POST } from 'routes/path';
 
 interface ShareGroupVerticalProps {
@@ -13,7 +13,7 @@ interface ShareGroupVerticalProps {
 }
 
 export default function ShareGroupVertical({ post, show }: ShareGroupVerticalProps) {
-  const { author: { info: authorInfo }, site } = useAuthorAndSiteInfo();
+  const { author: { info: authorInfo }, site } = useSiteMetadata();
   const postUrl = site.url + TO_POST({ slug: post.slug });
 
   const sharedProps = {

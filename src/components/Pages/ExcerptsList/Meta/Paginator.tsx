@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 
-import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { useSiteMetadata } from 'hooks/useSiteMetadata';
 import { TO_PAGE } from 'routes/path';
 
 interface MetaPaginatorProps {
@@ -9,7 +9,7 @@ interface MetaPaginatorProps {
 }
 
 export function ExcerptsListMetaPaginator({ pagesSum, currentPage }: MetaPaginatorProps) {
-  const { site } = useAuthorAndSiteInfo();
+  const { site } = useSiteMetadata();
   
   function prev() {
     if (currentPage === 1) {

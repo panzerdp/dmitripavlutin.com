@@ -1,8 +1,8 @@
-import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { useSiteMetadata } from 'hooks/useSiteMetadata';
 import * as styles from './index.module.scss';
 
 export default function JobOpportunities() {
-  const { author: { info: { email } } } = useAuthorAndSiteInfo();
+  const { author: { info: { email } } } = useSiteMetadata();
 
   return (
     <div className={styles.jobOpportunities}>

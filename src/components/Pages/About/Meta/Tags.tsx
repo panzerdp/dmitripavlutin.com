@@ -1,9 +1,9 @@
 import { Helmet } from 'react-helmet';
 
-import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { useSiteMetadata } from 'hooks/useSiteMetadata';
 
 export default function AboutMetaTags() {
-  const { author } = useAuthorAndSiteInfo();
+  const { author } = useSiteMetadata();
 
   return (
     <Helmet>

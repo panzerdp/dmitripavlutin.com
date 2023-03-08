@@ -1,10 +1,10 @@
-import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { useSiteMetadata } from 'hooks/useSiteMetadata';
 import { Helmet } from 'react-helmet';
 
 import ClientOnly from './ClientOnly';
 
 export default function PostMetaTags() {
-  const { site: { googleCustomSearchId } } = useAuthorAndSiteInfo();
+  const { site: { googleCustomSearchId } } = useSiteMetadata();
   return (
     <>
       <Helmet titleTemplate="%s">

@@ -1,4 +1,4 @@
-import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { useSiteMetadata } from 'hooks/useSiteMetadata';
 import { useEffect, useState } from 'react';
 import { PostPlain } from 'typings/post';
 
@@ -7,7 +7,7 @@ interface CommentsCountProps {
 }
 
 export default function CommentsCount({ post }: CommentsCountProps): JSX.Element {
-  const { site: { githubCommentsRepository } } = useAuthorAndSiteInfo();
+  const { site: { githubCommentsRepository } } = useSiteMetadata();
   const [count, setCount] = useState(-1);
   useEffect(() => {
     const loadCommentsCount = async () => {

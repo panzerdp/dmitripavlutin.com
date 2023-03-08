@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 
-import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { useSiteMetadata } from 'hooks/useSiteMetadata';
 import { Post } from 'typings/post';
 import { TO_POST } from 'routes/path';
 
@@ -9,7 +9,7 @@ interface PostMetaStructuredDataProps {
 }
 
 export default function PostMetaStructuredData({ post }: PostMetaStructuredDataProps) {
-  const { author: { info: authorInfo, profilePictureSrc }, site } = useAuthorAndSiteInfo();
+  const { author: { info: authorInfo, profilePictureSrc }, site } = useSiteMetadata();
 
   const postUrl = `${site.url}${TO_POST({ slug: post.slug })}`;
   const postImageUrl = `${postUrl}cover.png`;

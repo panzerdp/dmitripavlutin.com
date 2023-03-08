@@ -1,4 +1,4 @@
-import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { useSiteMetadata } from 'hooks/useSiteMetadata';
 import * as styles from './index.module.scss';
 
 interface PostEditProps {
@@ -6,7 +6,7 @@ interface PostEditProps {
 }
 
 export default function PostEdit({ postRelativePath }: PostEditProps) {
-  const { site } = useAuthorAndSiteInfo();
+  const { site } = useSiteMetadata();
     
   const postRepositoryFileUrl = `${site.repositoryUrl}/edit/master/${postRelativePath}`;
 

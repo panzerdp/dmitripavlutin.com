@@ -1,8 +1,8 @@
-import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { useSiteMetadata } from 'hooks/useSiteMetadata';
 import * as styles from './index.module.scss';
 
 export default function Coaching(): JSX.Element {
-  const { author: { info } } = useAuthorAndSiteInfo();
+  const { author: { info } } = useSiteMetadata();
   
   return (
     <div className={styles.contactAuthor}>

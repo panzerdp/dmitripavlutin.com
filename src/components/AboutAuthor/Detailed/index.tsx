@@ -3,10 +3,10 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import AuthorLinks from 'components/AboutAuthor/Links';
 
 import * as styles from './index.module.scss';
-import { useAuthorAndSiteInfo } from 'hooks/useAuthorAndSiteInfo';
+import { useSiteMetadata } from 'hooks/useSiteMetadata';
 
 export default function AboutAuthorDetailed() {
-  const { author: { info: { name, description, job, email, profiles }, profilePicture } } = useAuthorAndSiteInfo();
+  const { author: { info: { name, description, job, email, profiles }, profilePicture } } = useSiteMetadata();
 
   const jobElement = job ? <p dangerouslySetInnerHTML={{ __html: job }} /> : null
   return (
