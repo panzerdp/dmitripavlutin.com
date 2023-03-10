@@ -41,7 +41,7 @@ function MyComponent() {
 
 `reference.current` accesses the reference value, and `reference.current = newValue` updates the reference value. Pretty simple.  
 
-<img src="./images/reference-7.svg" width="262" height="127" alt="React reference object" />
+![React useRef()](./images/reference-7.svg)
 
 There are 2 rules to remember about references:  
 
