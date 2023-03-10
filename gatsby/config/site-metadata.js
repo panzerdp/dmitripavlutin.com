@@ -67,7 +67,7 @@ module.exports = {
       </p>
       <p>
         <em>
-          If you want to significantly improve your React knowledge, take the  fantastic <a href="https://www.traversymedia.com/a/2147528895/FqXWyazh" target="_blank" rel="noopener noreferrer">"React Front To Back Course"</a> by Brad Traversy. Get 20% discount today by entering the coupon code "DMITRI"!
+          If you want to significantly improve your React knowledge, take the  fantastic <a href="https://www.traversymedia.com/a/2147528895/FqXWyazh" target="_blank" rel="noopener noreferrer">"React Front To Back Course"</a> by Brad Traversy. Use the coupon code "DMITRI" and get 20% discount!
         </em>
       </p>`,
   }, {
@@ -78,7 +78,7 @@ module.exports = {
       </p>
       <p>
         <em>
-          If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">"Modern JavaScript From The Beginning 2.0"</a> by Brad Traversy. Get 20% discount today by entering the coupon code "DMITRI"!
+          If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">"Modern JavaScript From The Beginning 2.0"</a> by Brad Traversy. Use the coupon code "DMITRI" and get 20% discount!
         </em>
       </p>`
   }, {
