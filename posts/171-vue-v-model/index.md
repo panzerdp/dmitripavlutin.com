@@ -1,20 +1,20 @@
 ---
-title: "v-model in Vue"
-description: "v-model allows the two-way data binding in Vue."
+title: "How to Bind Form Inputs using v-model in Vue"
+description: "How to bind form input elements like text input, select, textarea using v-model in Vue."
 published: "2023-03-11"
 modified: "2023-03-11"
-thumbnail: "./images/vue-v-model-cover.jpg"
-slug: vue-v-model
-tags: ['vue', 'v-model']
+thumbnail: "./images/vue-v-model-cover-3.jpg"
+slug: vue-v-model-form-inputs
+tags: ['vue', 'v-model', 'input', 'form', 'reactivity']
 recommended: ['vue-next-tick', 'ref-in-vue']
 type: post
 ---
 
 I prefer one-way data flow because of its simplicity. You can easily understand where the data comes from, and where it goes to.  
 
-For example, component props flows in one-way. The parent component sets the props of the child component: `parent -> child`.  
+For example, component props flow one-way. The parent component sets the props of the child component: `parent -> child`.  
 
-But some situations require the parent and the child to communicate two-ways. The parent provides data for the child, but the child also can provide data for the parent through the same bus: `parent <-> child`.  
+But some situations require the parent and the child to communicate two-ways. The parent provides data for the child, but the child can also provide data for the parent: `parent <-> child`.  
 
 `v-model` implements the two-way data binding in Vue. 
 
@@ -46,20 +46,22 @@ const value = ref('Unknown') // Step 1: create data bus
 ```
 [Open the demo.](https://codesandbox.io/s/v-model-input-1l5ybw?file=/src/App.vue)
 
-Open the demo. Initially the input field has the value `'Unknown'`. When you type something into the input field, you can see that both the value of the input field and also the text on the screen are updated.  
+Open the demo. Initially the input field has the value `'Unknown'`. Type something into the input field: and both the input field value and the text on the screen are updated.  
 
-In simple words, that's the *two-way data binding* in Vue. The design of `v-model` in Vue is simple and elegant.  
+That's the *two-way data binding* in Vue.  
 
+OK. But why exactly is it two-ways?  
 
+The first way, or direction, of data flow happens during the initilization. The input value uses `'Unknown'` initial value from the `value` ref.  
 
-## 2. v-model vs v-bind
+The second way, or direction, of data flow happens when you type into the input field. The input field updates `value` ref according what user types.  
 
-## 3. v-model modifiers
+## 3. v-model vs v-bind
 
-## 4. v-model for components
+## 4. v-model and reactive
 
-### 4.1 Multiple v-model
+## 5. v-model and computed
 
-## 5. Testing v-model
+## 6. v-model modifiers
 
-## 6. Conclusion
+## 7. Conclusion
