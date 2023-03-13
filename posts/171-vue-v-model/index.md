@@ -14,9 +14,9 @@ The two-way data flow provided by `v-model` is useful for working with form inpu
 
 In this post, I'll help you understand how to use `v-model` to bind form inputs in Vue 3.  
 
-<TableOfContents />
+<TableOfContents maxLevel={1} />
 
-## 1. v-model for input fields
+## 1. v-model and form input
 
 Let's implement a component that renders an input field with the initial value `'Unknown'`. Also, as soon as the user types into the input field, the typed value should be rendered on the screen as text.  
 
@@ -48,7 +48,7 @@ The first direction of flow happens during the initilization. The input value is
 
 The second direction of flow occurs when you type into the input field. The input field updates `text` ref according what user types.  
 
-## 3. v-model vs v-bind
+## 2. v-model vs v-bind
 
 [v-bind](https://vuejs.org/api/built-in-directives.html#v-bind) is another data binding mechanism in Vue: `<input v-bind:value="text" />`. `v-bind:value` can be shortened to `:value` (`v-bind` part can be omitted, but don't forget to keep the colon `:value`).  
 
@@ -79,15 +79,45 @@ Type something into the input field. You'll see that the text rendered on the sc
 
 `v-model` enables a *two-way* data flow, while `:value` enables a *one-way* data flow.  
 
-## 4. v-model and other bus types
+### 2.1 :value + @input = v-model
 
-In the previous examples the [ref()](/ref-in-vue/) API was used as a data bus for two-way binding. But thanks to the well-designed Vue's reactivity API, you have more options than just refs: `reactive()` and `computed()`.  
+Despite the difference, there's a deep relationship between `:value` and `v-model`.  
 
-### 4.1 reactive
+The html template:
+
+```html
+<input v-model="text" />
+```
+can be expresss as:
+ 
+```html
+<input :value="text" @input="text = $event" />
+```
+
+In other words, `v-model` under the hood uses `:value`.
+
+Take a look at the next example:
+
+```vue {6}
+<script setup>
+import { ref } from 'vue'
+
+const text = ref('Unknown')
+</script>
+<template>
+  <input :value="text" @input="text = $event" type="input" />
+  <div>{{ text }}</div>
+</template>
+```
+[Try the demo.]()
+
+Open the demo and type into the input field. You'll see that the two-way binding is working perfectly. 
+
+## 3. v-model and reactive()
 
 [reactive()](https://vuejs.org/api/reactivity-core.html#reactive) is a Vue reactivity API that makes an object reactive. 
 
-The main difference between the use of `ref()` vs `reactive()` is that refs can accept primitive values (the `text` ref above holds a string), while `reactive()` accepts only objects.  
+The main difference between `ref()` and `reactive()` is that refs can store primitives and objects, while `reactive()` accepts only objects.  
 
 Anyways, binding objects to form inputs is helpful is you have multiple input fields in the same form, and each form field has to bound to a specific property of the object.  
 
@@ -102,7 +132,7 @@ const person = reactive({ firstName: 'John', lastName: 'Smith' })
 <template>
   <input v-model="person.firstName" type="input" />
   <input v-model="person.lastName" type="input" />
-  <div>Your full name is {{ person.firstName }} {{ person.lastName }}</div>
+  <div>Full name is {{ person.firstName }} {{ person.lastName }}</div>
 </template>
 ```
 [Open the demo.]()
@@ -117,35 +147,36 @@ Type into the first or last name input fields, and you'll see that the rendered 
 
 As seen, properties of reactive objects can also serve as a bus to bind to input fields in Vue.  
 
-If you have multiple fields of a form, and you'd like to bind that form, then I recommend you to bind all those input fields to properties of a reactive object.  
+If you deal with a form having multiple fields, and you'd like to bind that form, then bind all the input fields to properties of a reactive object. It's way more concise than creating refs for each of the fields.  
 
-### 4.2 computed
+## 4. v-model and input types
 
-[computed()](https://vuejs.org/api/reactivity-core.html#computed) is another wonderful reactivity API. As you might know already, it uses another reactive data to compute new reactive data.  
+The the examples until now the regular input fext field was bound using `v-model`. 
 
-Most of the time `computer()` is used exactly what is supposed to do: compute some additional data based on existing data. For example, having `count` a ref, you might use `computed()` to determine whether the `count` number is even or odd:
+Fortunately, all of the other input field types like select, textarea, etc. can be bound using `v-model`. Let's explore them.  
+
+### 4.1 Select
+
+The select input field offers the user to select a value from a set of predefined options.  
+
+Binding a select field is simple: `<select v-model="selected" />`. The ref `selected` must contain the value of the option that must be selected.  
+
+Let's take a look at an example:
 
 ```vue
 <script setup>
-import { ref, computed} from 'vue'
+import { ref } from 'vue'
 
-const count = ref(0)
-const isEven = computed(() => count.value % 2 === 0)
-
+const color = ref('')
 </script>
-<template>...</template>
 ```
 
-## 5. v-model and other input types
+### 4.2 Textarea
 
-### 5.1 Select
+### 4.3 Checkbox
 
-### 5.2 Textarea
+### 4.4 Radio
 
-### 5.3 Checkbox
+## 5. v-model modifiers
 
-### 5.4 Radio
-
-## 6. v-model modifiers
-
-## 7. Conclusion
+## 6. Conclusion
