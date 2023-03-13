@@ -94,10 +94,47 @@ Anyways, binding objects to form inputs is helpful is you have multiple input fi
 Let's implement a form having the first and last name input fields. These input fields have to be bound with a reactive object: `{ firstName: 'John', lastName: 'Smith' }`.
 
 ```vue
+<script setup>
+import { ref } from 'vue'
 
+const person = reactive({ firstName: 'John', lastName: 'Smith' })
+</script>
+<template>
+  <input v-model="person.firstName" type="input" />
+  <input v-model="person.lastName" type="input" />
+  <div>Your full name is {{ person.firstName }} {{ person.lastName }}</div>
+</template>
 ```
+[Open the demo.]()
+
+`const person = reactive({ firstName: '', lastName: '' })` creates a reactive object.   
+
+Then you have 2 input fields that are to correspoondingly the `person.firstName` and `person.lastName`.  
+
+Open the demo. You'll see that initially both input fields and the text render `'John Smith'` full name.  
+
+Type into the first or last name input fields, and you'll see that the rendered text changes according to the name you type.  
+
+As seen, properties of reactive objects can also serve as a bus to bind to input fields in Vue.  
+
+If you have multiple fields of a form, and you'd like to bind that form, then I recommend you to bind all those input fields to properties of a reactive object.  
 
 ### 4.2 computed
+
+[computed()](https://vuejs.org/api/reactivity-core.html#computed) is another wonderful reactivity API. As you might know already, it uses another reactive data to compute new reactive data.  
+
+Most of the time `computer()` is used exactly what is supposed to do: compute some additional data based on existing data. For example, having `count` a ref, you might use `computed()` to determine whether the `count` number is even or odd:
+
+```vue
+<script setup>
+import { ref, computed} from 'vue'
+
+const count = ref(0)
+const isEven = computed(() => count.value % 2 === 0)
+
+</script>
+<template>...</template>
+```
 
 ## 5. v-model and other input types
 
