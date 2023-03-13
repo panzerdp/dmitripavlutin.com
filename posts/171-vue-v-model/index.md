@@ -1,24 +1,20 @@
 ---
-title: "How to Bind Form Inputs using v-model in Vue"
-description: "How to bind form input elements like text input, select, textarea using v-model in Vue."
+title: "How to Use Vue v-model with Form Inputs"
+description: "How to access form inputs values using Vue's v-model."
 published: "2023-03-11"
 modified: "2023-03-11"
-thumbnail: "./images/v-model-form-input-cover.png"
+thumbnail: "./images/v-model-form-input-cover-2.png"
 slug: vue-v-model-form-inputs
 tags: ['vue', 'v-model', 'input', 'form', 'reactivity']
 recommended: ['vue-next-tick', 'ref-in-vue']
 type: post
 ---
 
-I prefer one-way data flow because of its simplicity. For example, component props flow one-way. The parent component sets the props of the child: `parent -> child`.  
+The two-way data flow provided by `v-model` is useful for working with form inputs. You can set an initial value in the input field (first data flow) and access the value user types into the input (the second data flow).  
 
-But some situations require the parent and child to communicate two-ways. The parent provides data for the child, but the child can also provide data for the parent: `parent <-> child`.  
+In this post, I'll help you understand how to use `v-model` to bind form inputs in Vue 3.  
 
-The two-way data flow is useful when working with form inputs. You might want to set an initial value in the input field (one way data flow), but also access the value that user types into the input (the second data flow).  
-
-In this post, I'll help you understand how to use `v-model` to bind form inputs in Vue 3 to take advantage of the two-ways data flow.  
-
-<TableOfContents maxLevel={1} />
+<TableOfContents />
 
 ## 1. v-model for input fields
 
@@ -26,7 +22,7 @@ Let's implement a component that renders an input field with the initial value `
 
 `v-model` fits nicely to implement such a component. Connecting `v-model` with the input field requires 2 simple steps.  
 
-First, `v-model` requires a *bus*: a reactive value that holds the data. The simplest bus is a [ref](/ref-in-vue/). Let's create a ref called `text`, initialized with the string `'Unknown'`.  
+First, `v-model` requires a *bus*: a reactive value that holds the data. The simplest bus is a [ref()](/ref-in-vue/). Let's create a ref called `text`, initialized with the string `'Unknown'`.  
 
 Second, add `v-model` as a regular attribute the input field tag in the template and assign to it the `text` ref: `v-model="text"`:
 
@@ -54,36 +50,54 @@ The second direction of flow occurs when you type into the input field. The inpu
 
 ## 3. v-model vs v-bind
 
-Now you can ask an interesting question. What is the difference between using `v-model` and `:value` in Vue?
+[v-bind](https://vuejs.org/api/built-in-directives.html#v-bind) is another data binding mechanism in Vue: `<input v-bind:value="text" />`. `v-bind:value` can be shortened to `:value` (`v-bind` part can be omitted, but don't forget to keep the colon `:value`).  
 
-The answer is simple: `<input :value="value" />` provide only one direction of data flow: from the `value` ref. When user types into the input field, in such an implementation the `value` ref does not get updated.  
+What is the difference between `v-model` and `:value`?
 
-Let's simply change the previous example from `v-model="value"` to `:value="value"`:
+`<input :value="value" />` is a one-way data flow mechanism. To understand the difference let's look at an example.  
+
+Let's change the previous example from `v-model="text"` to `:value="text"`:
 
 ```vue {6}
 <script setup>
 import { ref } from 'vue'
 
-const value = ref('Unknown')
+const text = ref('Unknown')
 </script>
 <template>
-  <input :value="value" type="input" />
-  <div>{{ value }}</div>
+  <input :value="text" type="input" />
+  <div>{{ text }}</div>
 </template>
 ```
 [Open the demo.](https://codesandbox.io/s/value-input-xnkptb?file=/src/App.vue)
 
 Open the demo. The input field is initialized with `'Unknown'`.  
 
-Type some characters into the input field, however, you'll see that the text rendered on the screen still stays as `'Unknown'`.  
+Type something into the input field. You'll see that the text rendered on the screen always stays as `'Unknown'`.  Which means that `text` ref *is not updated* when the value of the input field changes.
 
-The conclusion is in case of `:value="value"` data flow just in one direction: the input field value is assigned at first with ``
+`:value="text"` data flows just in one direction: from the `text` ref into the input field. Typing into the input field, however, doesn't change the `text` ref.  
+
+`v-model` enables a *two-way* data flow, while `:value` enables a *one-way* data flow.  
 
 ## 4. v-model and other bus types
 
-## 4.1 reactive
+In the previous examples the [ref()](/ref-in-vue/) API was used as a data bus for two-way binding. But thanks to the well-designed Vue's reactivity API, you have more options than just refs: `reactive()` and `computed()`.  
 
-## 4.2 computed
+### 4.1 reactive
+
+[reactive()](https://vuejs.org/api/reactivity-core.html#reactive) is a Vue reactivity API that makes an object reactive. 
+
+The main difference between the use of `ref()` vs `reactive()` is that refs can accept primitive values (the `text` ref above holds a string), while `reactive()` accepts only objects.  
+
+Anyways, binding objects to form inputs is helpful is you have multiple input fields in the same form, and each form field has to bound to a specific property of the object.  
+
+Let's implement a form having the first and last name input fields. These input fields have to be bound with a reactive object: `{ firstName: 'John', lastName: 'Smith' }`.
+
+```vue
+
+```
+
+### 4.2 computed
 
 ## 5. v-model and other input types
 
