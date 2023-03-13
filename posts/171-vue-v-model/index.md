@@ -79,7 +79,7 @@ Type something into the input field. You'll see that the text rendered on the sc
 
 `v-model` enables a *two-way* data flow, while `:value` enables a *one-way* data flow.  
 
-### 2.1 :value, @input and v-model
+## 3. v-model and v-bind
 
 Despite the difference, there's a deep relationship between `:value` and `v-model`.  
 
@@ -113,7 +113,7 @@ const text = ref('Unknown')
 
 Open the demo and type into the input field. You'll see that the two-way binding is working perfectly. 
 
-## 3. v-model and reactive()
+## 4. v-model and reactive()
 
 [reactive()](https://vuejs.org/api/reactivity-core.html#reactive) is a Vue reactivity API that makes an object reactive. 
 
@@ -149,13 +149,13 @@ As seen, properties of reactive objects can also serve as a bus to bind to input
 
 If you deal with a form having multiple fields, and you'd like to bind that form, then bind all the input fields to properties of a reactive object. It's way more concise than creating refs for each of the fields.  
 
-## 4. v-model and input types
+## 5. v-model and input types
 
 The the examples until now the regular input fext field was bound using `v-model`. 
 
 Fortunately, all of the other input field types like select, textarea, etc. can be bound using `v-model`. Let's explore them.  
 
-### 4.1 Textareas
+### 5.1 Textareas
 
 Binding a textarea to a ref is straighforward. All you have to do is use `v-model` on the textarea tag: `<textarea v-model="longText" />`.  
 
@@ -172,7 +172,7 @@ const longText = ref("Well... here's my story. One morning...")
 ```
 [Open the demo.]()
 
-### 4.2 Select fields
+### 5.2 Select fields
 
 The select input field offers the user to select a value from a set of predefined options.  
 
@@ -224,7 +224,7 @@ const employee = ref('Jane Doe')
 
 Now the binding works directly with the textual value of the options.  
 
-### 4.3 Checkboxes
+### 5.3 Checkboxes
 
 Not sure why but I've always found it a pain to read and set the check status of the checkboxes. 
 
@@ -252,10 +252,48 @@ Clicking the *Uncheck* button changes `checked` ref value to `false`, which corr
 
 Aside from simplifying the burden around check status, Vue makes an additional step and lets you customize the check and uncheck values. That could be useful if you'd like, for example, to use `'on'` or `'off'` values as a checkbox status.  
 
+The customization of check/unckech value is performed by Vue specific attributes:  
 
+```html
+<input v-model="checked" true-value="on" false-value="off" />
+```
 
-### 4.4 Radio buttons
+Let's slighly modify the previous checkbox example to use the custom check value `'on'` and `'off'`:
 
-## 5. v-model modifiers
+```vue
+<script setup>
+import { ref } from 'vue'
 
-## 6. Conclusion
+const checked = ref('on')
+</script>
+<template>
+  <input v-model="checked" type="checkbox" true-value="on" false-value="off" />
+  <button @click="checked = 'on'">Check</button>
+  <button @click="checked = 'off'">Uncheck</button>
+</template>
+```
+[Open the demo.]()
+
+Now `checked` ref is bound to the checkbox status, but has either `'on'` or `'off'` value.  
+
+### 5.4 Radio buttons
+
+If you'd like to bound a group of radio buttons, then you need to apply to the group the same `v-model` binding.  
+
+```html
+<input type="radio" v-model="option" value="a" />
+<input type="radio" v-model="option" value="b" />
+<input type="radio" v-model="option" value="c" />
+```
+
+For example, let's implement a radio button group that is used to select the color of a T-shirt:
+
+```vue
+<script setup>
+
+</script>
+```
+
+## 6. v-model modifiers
+
+## 7. Conclusion
