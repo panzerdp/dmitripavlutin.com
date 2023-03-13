@@ -1,9 +1,9 @@
 ---
-title: "How to Use Vue v-model with Form Inputs"
-description: "How to access form inputs values using Vue's v-model."
+title: "How to Use v-model with Form Inputs in Vue"
+description: "v-model binds form input fields for accessing and setting data to forms."
 published: "2023-03-11"
 modified: "2023-03-11"
-thumbnail: "./images/v-model-form-input-cover-2.png"
+thumbnail: "./images/v-model-form-input-cover-3.png"
 slug: vue-v-model-form-inputs
 tags: ['vue', 'v-model', 'input', 'form', 'reactivity']
 recommended: ['vue-next-tick', 'ref-in-vue']
@@ -12,7 +12,7 @@ type: post
 
 The two-way data flow provided by `v-model` is useful for working with form inputs. You can set an initial value in the input field (first data flow) and access the value user types into the input (the second data flow).  
 
-In this post, I'll help you understand how to use `v-model` to bind form inputs in Vue 3.  
+I'll help you understand how to use `v-model` to bind form inputs in Vue 3.  
 
 <TableOfContents maxLevel={1} />
 
@@ -79,7 +79,7 @@ Type something into the input field. You'll see that the text rendered on the sc
 
 `v-model` enables a *two-way* data flow, while `:value` enables a *one-way* data flow.  
 
-### 2.1 :value + @input = v-model
+### 2.1 :value, @input and v-model
 
 Despite the difference, there's a deep relationship between `:value` and `v-model`.  
 
@@ -155,7 +155,24 @@ The the examples until now the regular input fext field was bound using `v-model
 
 Fortunately, all of the other input field types like select, textarea, etc. can be bound using `v-model`. Let's explore them.  
 
-### 4.1 Select
+### 4.1 Textareas
+
+Binding a textarea to a ref is straighforward. All you have to do is use `v-model` on the textarea tag: `<textarea v-model="longText" />`.  
+
+```vue
+<script setup>
+import { ref } from 'vue'
+
+const longText = ref("Well... here's my story. One morning...")
+</script>
+<template>
+  <textarea v-model="longText" />
+  <div>{{ longText }}</div>
+</template>
+```
+[Open the demo.]()
+
+### 4.2 Select fields
 
 The select input field offers the user to select a value from a set of predefined options.  
 
@@ -167,15 +184,77 @@ Let's take a look at an example:
 <script setup>
 import { ref } from 'vue'
 
-const color = ref('')
+const employeeId = ref('2')
 </script>
+<template>
+  <select v-model="employeedId">
+    <option value="1">Jane Doe</option>
+    <option value="2">John Doe</option>
+    <option value="3">John Smith</option>
+  </select>
+  <div>Selected id: {{ employeeId }}</div>
+</template>
 ```
+[Open the demo.]()
 
-### 4.2 Textarea
+`employeeId` is the ref bound to the select field. `employeeId` should bind to the `value` attribute of the option tags inside the select (but not to the text of the option).  
 
-### 4.3 Checkbox
+Because `employeeId` ref is initialized with `'2'`, `John Doe` option is initially selected.  
 
-### 4.4 Radio
+When you select another option, you can see that `employeeId` update with the newly selected option value.  
+
+If the options of the select do not have an option attribute, then the binding will work with the text of the options. 
+
+```vue
+<script setup>
+import { ref } from 'vue'
+
+const employee = ref('Jane Doe')
+</script>
+<template>
+  <select v-model="employeedId">
+    <option>Jane Doe</option>
+    <option>John Doe</option>
+    <option>John Smith</option>
+  </select>
+  <div>Selected: {{ employee }}</div>
+</template>
+```
+[Try the demo.]()
+
+Now the binding works directly with the textual value of the options.  
+
+### 4.3 Checkboxes
+
+Not sure why but I've always found it a pain to read and set the check status of the checkboxes. 
+
+Fortunately thanks to `v-model` binding to checkboxes now you can check and unckeck them much easier. If the bound ref is `true` &mdash; the checkbox is checked, `false` &mdash; unchecked.  
+
+Let's create an exaple with 2 buttons and a checkbox. One button checks and another unchecks the checkbox:
+
+```vue
+<script setup>
+import { ref } from 'vue'
+
+const checked = ref(true)
+</script>
+<template>
+  <input v-model="checked" type="checkbox" />
+  <button @click="checked = true">Check</button>
+  <button @click="checked = false">Uncheck</button>
+</template>
+```
+[Open the demo.]()
+
+Because `checked` ref is initialized with `true`, during the initial rendering the checkbox is checked.  
+
+Clicking the *Uncheck* button changes `checked` ref value to `false`, which correspndingly unchecks the checkbox.  
+
+Aside from simplifying the burden around check status, Vue makes an additional step and lets you customize the check and uncheck values. That could be useful if you'd like, for example, to use `'on'` or `'off'` values as a checkbox status.  
+
+
+
+### 4.4 Radio buttons
 
 ## 5. v-model modifiers
 
