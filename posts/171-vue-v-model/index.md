@@ -86,12 +86,13 @@ Despite the difference, there's a deep relationship between `:value` and `v-mode
 The html template:
 
 ```html
-<input v-model="text" />
+<input v-model="text" type="text" />
 ```
+
 can be expressed as:
  
 ```html
-<input :value="text" @input="text = $event" />
+<input :value="text" @input="text = $event" type="text" />
 ```
 
 In other words, `v-model` under the hood uses `:value`.
@@ -105,13 +106,15 @@ import { ref } from 'vue'
 const text = ref('Unknown')
 </script>
 <template>
-  <input :value="text" @input="text = $event" type="input" />
+  <input :value="text" @input="text = $event.target.value" type="input" />
   <div>{{ text }}</div>
 </template>
 ```
-[Try the demo.]()
+[Open the demo.](https://codesandbox.io/s/v-model-using-v-bind-ble7s9?file=/src/App.vue)
 
-Open the demo and type into the input field. You'll see that the two-way binding is working perfectly. 
+Open the demo and type into the input field. You'll see that the two-way binding is working correctly. 
+
+When the user type into the input field, `@input="text = $event.target.value"` gets triggered. The value of the input (accessed using `$event.target.value`) is assigned to `text` ref.  
 
 ## 3. Binding using reactive()
 
@@ -125,7 +128,7 @@ Let's implement a form having the first and last name input fields. These input 
 
 ```vue
 <script setup>
-import { ref } from 'vue'
+import { reactive } from 'vue'
 
 const person = reactive({ firstName: 'John', lastName: 'Smith' })
 </script>
@@ -135,7 +138,7 @@ const person = reactive({ firstName: 'John', lastName: 'Smith' })
   <div>Full name is {{ person.firstName }} {{ person.lastName }}</div>
 </template>
 ```
-[Open the demo.]()
+[Open the demo.](https://codesandbox.io/s/v-model-reactive-2p5oce?file=/src/App.vue)
 
 `const person = reactive({ firstName: '', lastName: '' })` creates a reactive object.   
 
@@ -170,7 +173,7 @@ const longText = ref("Well... here's my story. One morning...")
   <div>{{ longText }}</div>
 </template>
 ```
-[Open the demo.]()
+[Open the demo.](https://codesandbox.io/s/v-model-textarea-i1hfxf?file=/src/App.vue)
 
 ### 4.2 Select fields
 
@@ -187,7 +190,7 @@ import { ref } from 'vue'
 const employeeId = ref('2')
 </script>
 <template>
-  <select v-model="employeedId">
+  <select v-model="employeeId">
     <option value="1">Jane Doe</option>
     <option value="2">John Doe</option>
     <option value="3">John Smith</option>
@@ -195,7 +198,7 @@ const employeeId = ref('2')
   <div>Selected id: {{ employeeId }}</div>
 </template>
 ```
-[Open the demo.]()
+[Open the demo.](https://codesandbox.io/s/v-model-select-6bmc9t?file=/src/App.vue)
 
 `employeeId` is the ref bound to the select field. `employeeId` should bind to the `value` attribute of the option tags inside the select (but not to the text of the option).  
 
@@ -212,7 +215,7 @@ import { ref } from 'vue'
 const employee = ref('Jane Doe')
 </script>
 <template>
-  <select v-model="employeedId">
+  <select v-model="employee">
     <option>Jane Doe</option>
     <option>John Doe</option>
     <option>John Smith</option>
@@ -220,7 +223,7 @@ const employee = ref('Jane Doe')
   <div>Selected: {{ employee }}</div>
 </template>
 ```
-[Try the demo.]()
+[Try the demo.](https://codesandbox.io/s/v-model-select-without-option-value-xgqj0p?file=/src/App.vue)
 
 Now the binding works directly with the textual value of the options.  
 
@@ -244,7 +247,7 @@ const checked = ref(true)
   <button @click="checked = false">Uncheck</button>
 </template>
 ```
-[Open the demo.]()
+[Open the demo.](https://codesandbox.io/s/v-model-checkbox-oyqej0)
 
 Because `checked` ref is initialized with `true`, during the initial rendering the checkbox is checked.  
 
@@ -268,11 +271,11 @@ const checked = ref('on')
 </script>
 <template>
   <input v-model="checked" type="checkbox" true-value="on" false-value="off" />
-  <button @click="checked = 'on'">Check</button>
-  <button @click="checked = 'off'">Uncheck</button>
+  <button @click="checked = 'on'">On</button>
+  <button @click="checked = 'off'">Off</button>
 </template>
 ```
-[Open the demo.]()
+[Open the demo.](https://codesandbox.io/s/v-model-checkbox-custom-check-values-go1f9u?file=/src/App.vue)
 
 `checked` ref is bound to the checkbox status but has either `'on'` or `'off'` value.  
 
@@ -290,18 +293,18 @@ For example, let's implement a radio button group that is used to select the col
 
 ``` vue
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const color = ref('white')
+const color = ref("white");
 </script>
 <template>
-  <label>White <input type="radio" v-model="color" value="white" /></label>
-  <label>Red <input type="radio" v-model="color" value="red" /></label>
-  <label>Blue <input type="radio" v-model="color" value="blue" /></label>
+  <label><input type="radio" v-model="color" value="white" />White</label>
+  <label><input type="radio" v-model="color" value="red" />Red</label>
+  <label><input type="radio" v-model="color" value="blue" />Blue</label>
   <div>T-shirt color: {{ color }}</div>
 </template>
 ```
-[Open the demo.]()
+[Open the demo.](https://codesandbox.io/s/v-model-checkbox-custom-check-values-forked-jwei9o?file=/src/App.vue)
 
 Initially, the `white` radio option is selected because the `color` ref is initialized with `white`.  
 
@@ -309,26 +312,26 @@ Click on any other T-shirt color, and the `color` ref value changes according to
 
 `value` attribute of the radio is bindable (aka you can use `:value`). That is helpful when the list of options comes from an array, for example:
 
-``` vue{11}
+```vue {12}
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const color = ref('white')
+const color = ref("white");
 const COLORS = [
-  ['White', 'white'],
-  ['Black', 'black'],
-  ['Blue', 'blue']
-]
+  { option: "white", label: "White" },
+  { option: "black", label: "Black" },
+  { option: "blue", label: "Blue" },
+];
 </script>
 <template>
-  <label v-for="[label, option] in COLORS" :key="option">
-    {{ label }} <input type="radio" v-model="color" :value="option" />
+  <label v-for="{ option, label } in COLORS" :key="option">
+    <input type="radio" v-model="color" :value="option" /> {{ label }}
   </label>
   <div>T-shirt color: {{ color }}</div>
 </template>
 ```
 
-[Open the demo.]()
+[Open the demo.](https://codesandbox.io/s/v-model-radio-bind-value-m16nlk?file=/src/App.vue)
 
 ## 5. v-model modifiers
 
@@ -348,12 +351,12 @@ const text = ref('')
 </script>
 <template>
   <input v-model.trim="text" type="text" />
-  <pre>{{ text }}</pre>
+  <pre>"{{ text }}"</pre>
 </template>
 ```
-[Open the demo.]()
+[Open the demo.](https://codesandbox.io/s/v-model-trim-34d97r?file=/src/App.vue)
 
-Open the demo and type a value that starts or ends with spaces, e.g. `'  Hi!  '`. You'll see that the rendered text doesn't have any spaces on both ends, meaning that it is trimmed.  
+Open the demo and type a value that starts or ends with spaces, e.g. `'  Hi!  '`. You'll see that the rendered text `Hi!` doesn't have any spaces on both ends.  
 
 ### 5.2 number
 
@@ -361,24 +364,32 @@ If you'd like to create an input that accepts only numbers, then `v-mode.number`
 
 ```vue
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const number = ref('')
+const number = ref("");
 </script>
 <template>
   <input v-model.number="number" type="text" />
-  <div>{{ number }}</div>
+  <div>{{ typeof number }}</div>
 </template>
 ```
-[Open the demo.]()
+[Open the demo.](https://codesandbox.io/s/v-model-number-vbeifz?file=/src/App.vue)
 
-Open the demo and type some numbers `'345'` &mdash; everything works.  
+Open the demo and type some numbers `'345'` &mdash; `typeof number` inside the template displays `numbers`.   
 
-But if you try to type something other than numbers, like `'abc'`: you'll see that all non-numeric characters are stripped.  
+But if you try to type something other than numbers, like `'abc'`: you'll see that `typeof number` displays as `string`.  
+
+`v-model.number="number"` assigns to `number` ref a real number if the user introduced a value that can be parsed to a number (e.g. `'1', '200', '-505'`). In other cases, if the introduced value is not a numeric, `number` ref is assigned simply to the string value from the input.  
 
 ### 5.3 lazy
 
-By default `v-model` uses `input` event to determine when the user types into the input field. But using the modifier `v-model.lazy` you can change the event to be `change`.
+By default `v-model` uses [input](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) event to determine when to update the bound ref. But using the modifier `v-model.lazy` you can change the event to be [change](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event).  
+
+What's the main difference between `input` and `change` events? 
+
+`input` is triggered every time you keypress into the input field.
+
+`change`, however is triggered only when you take the focus from the input field. Typing properly into the input field does not trigger `chnage`.  
 
 ```vue {6}
 <script setup>
@@ -387,13 +398,15 @@ import { ref } from 'vue'
 const text = ref('Unknown')
 </script>
 <template>
-  <input :value.lazy="text" type="input" />
+  <input v-model.lazy="text" type="input" />
   <div>{{ text }}</div>
 </template>
 ```
-[Open the demo.]()
+[Open the demo.](https://codesandbox.io/s/v-model-lazy-ldi2x9?file=/src/App.vue)
 
-When would you need to use `v-model.lazy`?
+Open the demo and type a few characters into the input field. You'll see that the rendered plain text stays the same: `Unknown`.  
+
+Now click somewhere outside of the input field to make it loose its focus. Then the rendered text changes to the value that you had introduced earlier.  
 
 ## 6. Conclusion
 
