@@ -1,8 +1,8 @@
 ---
 title: "How to Use v-model with Form Inputs in Vue"
 description: "v-model binds form input fields for accessing and setting data to forms."
-published: "2023-03-11"
-modified: "2023-03-11"
+published: "2023-03-15"
+modified: "2023-03-15"
 thumbnail: "./images/v-model-form-input-cover-3.png"
 slug: vue-v-model-form-inputs
 tags: ['vue', 'v-model', 'input', 'form', 'reactivity']
@@ -10,13 +10,15 @@ recommended: ['vue-next-tick', 'ref-in-vue']
 type: post
 ---
 
-The two-way data flow provided by `v-model` is useful for working with form inputs. You can set an initial value in the input field (first data flow) and access the value user types into the input (the second data flow).  
+The two-way data flow provided by `v-model` is useful for working with form inputs. 
 
-I'll help you understand how to use `v-model` to bind form inputs in Vue 3.  
+You can set an initial value in the input field (first data flow) and access the value user types into the input (the second data flow).  
+
+Let's see how you can use `v-model` to bind form inputs in Vue 3.  
 
 <TableOfContents maxLevel={1} />
 
-## 1. v-model and form input
+## 1. Binding a form input
 
 Let's implement a component that renders an input field with the initial value `'Unknown'`. Also, as soon as the user types into the input field, the typed value should be rendered on the screen as text.  
 
@@ -79,8 +81,6 @@ Type something into the input field. You'll see that the text rendered on the sc
 
 `v-model` enables a *two-way* data flow, while `:value` enables a *one-way* data flow.  
 
-## 3. v-model and v-bind
-
 Despite the difference, there's a deep relationship between `:value` and `v-model`.  
 
 The html template:
@@ -113,7 +113,7 @@ const text = ref('Unknown')
 
 Open the demo and type into the input field. You'll see that the two-way binding is working perfectly. 
 
-## 4. v-model and reactive()
+## 3. Binding using reactive()
 
 [reactive()](https://vuejs.org/api/reactivity-core.html#reactive) is a Vue reactivity API that makes an object reactive. 
 
@@ -149,13 +149,13 @@ As seen, properties of reactive objects can also serve as a bus to bind to input
 
 If you deal with a form having multiple fields, and you'd like to bind that form, then bind all the input fields to properties of a reactive object. It's way more concise than creating refs for each of the fields.  
 
-## 5. v-model and input types
+## 4. Binding different input types
 
 The the examples until now the regular input fext field was bound using `v-model`. 
 
 Fortunately, all of the other input field types like select, textarea, etc. can be bound using `v-model`. Let's explore them.  
 
-### 5.1 Textareas
+### 4.1 Textareas
 
 Binding a textarea to a ref is straighforward. All you have to do is use `v-model` on the textarea tag: `<textarea v-model="longText" />`.  
 
@@ -172,7 +172,7 @@ const longText = ref("Well... here's my story. One morning...")
 ```
 [Open the demo.]()
 
-### 5.2 Select fields
+### 4.2 Select fields
 
 The select input field offers the user to select a value from a set of predefined options.  
 
@@ -224,7 +224,7 @@ const employee = ref('Jane Doe')
 
 Now the binding works directly with the textual value of the options.  
 
-### 5.3 Checkboxes
+### 4.3 Checkboxes
 
 Not sure why but I've always found it a pain to read and set the check status of the checkboxes. 
 
@@ -276,7 +276,7 @@ const checked = ref('on')
 
 Now `checked` ref is bound to the checkbox status, but has either `'on'` or `'off'` value.  
 
-### 5.4 Radio buttons
+### 4.4 Radio buttons
 
 If you'd like to bound a group of radio buttons, then you need to apply to the group the same `v-model` binding.  
 
@@ -288,12 +288,114 @@ If you'd like to bound a group of radio buttons, then you need to apply to the g
 
 For example, let's implement a radio button group that is used to select the color of a T-shirt:
 
-```vue
+``` vue
 <script setup>
+import { ref } from 'vue'
 
+const color = ref('white')
 </script>
+<template>
+  <label>White <input type="radio" v-model="color" value="white" /></label>
+  <label>Red <input type="radio" v-model="color" value="red" /></label>
+  <label>Blue <input type="radio" v-model="color" value="blue" /></label>
+  <div>T-shirt color: {{ color }}</div>
+</template>
+```
+[Open the demo.]()
+
+Initially, the `white` radio option is selected because the `color` ref is initialized with `white`.  
+
+Click on any other T-shirt color, and the `color` ref value changes according to the selected color.  
+
+`value` attribute of the radio is bindable (aka you can use `:value`). That is helpful when the list of options comes from an array, for example:
+
+``` vue{11}
+<script setup>
+import { ref } from 'vue'
+
+const color = ref('white')
+const COLORS = [
+  ['White', 'white'],
+  ['Black', 'black'],
+  ['Blue', 'blue']
+]
+</script>
+<template>
+  <label v-for="[label, option] in COLORS" :key="option">
+    {{ label }} <input type="radio" v-model="color" :value="option" />
+  </label>
+  <div>T-shirt color: {{ color }}</div>
+</template>
 ```
 
-## 6. v-model modifiers
+[Open the demo.]()
 
-## 7. Conclusion
+## 5. v-model modifiers
+
+On top of doing a wonderful work with binding form inputs, `v-model` has an additional feature called *modifier*.
+
+A modifier is a piece of logic applied to `v-model` behavior to improve it in a certain way you need.  
+
+### 5.1 trim
+
+If you'd like to trim the content that user introduces into the input field, then `v-model.trim` is helpful:
+
+```vue
+<script setup>
+import { ref } from 'vue'
+
+const text = ref('')
+</script>
+<template>
+  <input v-model.trim="text" type="text" />
+  <pre>{{ text }}</pre>
+</template>
+```
+[Open the demo.]()
+
+Open the demo and type a value thats or ends with spaces, e.g. `'  Hi!  '`. You'll see that the rendered text doesn't have any spaces on both ends, meaning that it is trimmed.  
+
+### 5.2 number
+
+If you'd like to create an input that accepts only number, then `v-mode.number` is the way to go:
+
+```vue
+<script setup>
+import { ref } from 'vue'
+
+const number = ref('')
+</script>
+<template>
+  <input v-model.number="number" type="text" />
+  <div>{{ number }}</div>
+</template>
+```
+[Open the demo.]()
+
+Open the demo and type some numbers `'345'` &mdash; everything works.  
+
+But if you try to type something other than numbers, like `'abc'`: you'll see that all non-numeric characters are stripped.  
+
+### 5.3 lazy
+
+By default `v-model` uses `input` event to determine when user types into the input field. But using the modifier `v-model.lazy` you can change the event to be `change`.
+
+```vue {6}
+<script setup>
+import { ref } from 'vue'
+
+const text = ref('Unknown')
+</script>
+<template>
+  <input :value.lazy="text" type="input" />
+  <div>{{ text }}</div>
+</template>
+```
+[Open the demo.]()
+
+When would you need to use `v-model.lazy`?
+
+## 6. Conclusion
+
+`v-model` allows binding form input to bus reactive values.  
+
