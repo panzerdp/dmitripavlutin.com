@@ -397,5 +397,12 @@ When would you need to use `v-model.lazy`?
 
 ## 6. Conclusion
 
-`v-model` allows binding form input to bus reactive values.  
+`v-model` binds form inpus to refs or reactive objects.  
+
+Binding is performed in 2 easy steps:
+
+* First, create the ref `const text = ref('')`. 
+* Second, assign the ref to the `v-model` attribute: `<input v-model="text" type="text" />`
+
+Then, `text` ref will be in sync with the value that user typed into the input field.  
 
