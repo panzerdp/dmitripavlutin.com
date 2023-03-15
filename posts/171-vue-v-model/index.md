@@ -389,7 +389,7 @@ What's the main difference between `input` and `change` events?
 
 `input` is triggered every time you keypress into the input field.
 
-`change`, however is triggered only when you take the focus from the input field. Typing properly into the input field does not trigger `chnage`.  
+`change`, however, is triggered only when you take the focus from the input field. Typing properly into the input field does not trigger `chnage`.  
 
 ```vue {6}
 <script setup>
