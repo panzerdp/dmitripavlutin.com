@@ -301,7 +301,7 @@ This time `asnwer` ref is initialized with `Yes!`: one of the check values.
 
 ### 4.4 Radio buttons
 
-To bind a group of radio buttons apply to the group the same `v-model` binding.  
+To bind a group of radio buttons apply to the group the same the same bus binding `v-model="option"`:
 
 ```html
 <input type="radio" v-model="option" value="a" />
@@ -309,7 +309,7 @@ To bind a group of radio buttons apply to the group the same `v-model` binding.
 <input type="radio" v-model="option" value="c" />
 ```
 
-For example, let's implement a radio button group that is used to select the color of a T-shirt:
+For example, let's implement a radio buttons group to select the color of a T-shirt:
 
 ``` vue
 <script setup>
@@ -326,22 +326,22 @@ const color = ref("white")
 ```
 [Open the demo.](https://codesandbox.io/s/v-model-checkbox-custom-check-values-forked-jwei9o?file=/src/App.vue)
 
-Initially, the `White` radio option is selected because the `color` ref is initialized with `white`.  
+Initially, the `White` radio is selected because the `color` ref is initialized with `'white'`.  
 
-Click on any other T-shirt color, and the `color` ref value changes according to the selected color.
+Click on any other T-shirt color, and the `color` ref changes according to the selected color.
 
 `value` attribute of the radio is bindable: you can use `:value`. That is helpful when the list of options comes from an array, for example:
 
 ```vue {12}
 <script setup>
-import { ref } from "vue";
+import { ref } from "vue"
 
-const color = ref("white");
+const color = ref("white")
 const COLORS = [
   { option: "white", label: "White" },
   { option: "black", label: "Black" },
   { option: "blue", label: "Blue" },
-];
+]
 </script>
 <template>
   <label v-for="{ option, label } in COLORS" :key="option">
@@ -355,15 +355,17 @@ const COLORS = [
 
 ## 5. v-model modifiers
 
-On top of doing a wonderful job with binding form inputs, `v-model` has an additional feature called *modifier*.
+On top of doing a wonderful job with binding form inputs, `v-model` has an additional feature called modifier.
 
-A modifier is a piece of logic applied to `v-model` to customize its behavior. By default Vue offers 3 modifies: trime, number, and lazy.  
+> *A modifier* is a piece of logic applied to `v-model` to customize its behavior. A modifier is applied to `v-model` by using a dot syntax `v-model.<modifier>`, for example `v-mode.trim`.  
 
-A modifier is applied to `v-model` by using a dot syntax `v-model.<modifier>`, for example `v-mode.trim`.  
+By default Vue offers 3 modifies: trim, number, and lazy.  
 
 ### 5.1 trim
 
-Use `v-model.trim` to trim the content (remove whitespaces from the beginning and the end of a string) user introduces into the input:
+Trimming a string means removing whitespaces from the beginning and the end of the string. For example, trim applied to `' Wow!  '` results in `'Wow!'`.   
+
+`v-model.trim` modifier trims the input field value before assinging the value to the bound ref.  
 
 ```vue
 <script setup>
@@ -378,11 +380,13 @@ const text = ref('')
 ```
 [Open the demo.](https://codesandbox.io/s/v-model-trim-34d97r?file=/src/App.vue)
 
-Open the demo. Type a value that starts or ends with spaces, e.g. `'  Hi!  '`. You'll see that the rendered text `Hi!` doesn't have spaces on both ends.  
+Open the demo. Type a value that starts or ends with spaces, e.g. `'  Hi!  '`. You'll see that the rendered text `'Hi!'` doesn't have spaces on both ends.  
 
 ### 5.2 number
 
-`v-mode.number` modifier applies a number parser on the input field value.
+`v-mode.number` modifier applies a number parser on the input field value.  
+
+`v-model.number="number"` assigns to `number` a real number if the user introduced a value that can be parsed to a number. In other cases, if the introduced value is not numeric, `number` ref is just assigned to the original string.  
 
 ```vue
 <script setup>
@@ -397,21 +401,21 @@ const number = ref("");
 ```
 [Open the demo.](https://codesandbox.io/s/v-model-number-vbeifz?file=/src/App.vue)
 
-When you introduce `'345'` into the input, then the `number` ref becomes `345` (a number). Parsing of the number happens automatically.  
+When you introduce `'345'` into the input, then `number` ref becomes `345` (a number). Value parsing happens automatically.  
 
 But if you introduce a non-numeric value into the input, like `'abc'`, then `number` ref is assigned with the same value `'abc'`.   
 
-`v-model.number="number"` assigns to `number` a real number if the user introduced a value that can be parsed to a number. In other cases, if the introduced value is not numeric, `number` ref is just assigned to a string.  
-
 ### 5.3 lazy
 
-By default, `v-model` uses [input](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) event to determine when to update the bound ref. But using the modifier `v-model.lazy` you can change the event to be [change](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event).  
+By default, `v-model` uses ["input"](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) event to determine when to update the bound ref. But using the modifier `v-model.lazy` you can alter the event to be ["change"](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event) event.  
 
 What's the main difference between `input` and `change` events? 
 
-`input` is triggered every time you keypress into the input field.
+`input` is triggered every time you keypress in the input field. 
 
-`change`, however, is triggered only when you take the focus from the input field. Typing properly into the input field does not trigger `change`.  
+`change`, however, is triggered *only* when you take the focus from the input field. Typing into the input field does not trigger `change`.  
+
+The following example uses lazy binding:
 
 ```vue {6}
 <script setup>
@@ -428,13 +432,13 @@ const text = ref('Unknown')
 
 Open the demo and type a few characters into the input. The rendered text stays the same: `Unknown`.  
 
-Now click somewhere outside of the input field to make it lose focus. Then the rendered text updates to the value that you introduced earlier.  
+Now click somewhere outside of the input field to make it lose focus. The rendered text updates to the value that you introduced earlier.  
 
-`v-model.lazy` can be useful when you don't need realtime reactivity. That's useful in big forms and could make user's typing experience more performant: lazy mode doesn't update the component state on every character introduced.  
+If you have a form with many input fields and heavy state, you can apply the lazy modifier to disable realtime reactivity as the user types. That could prevent page *freezes* during typing.  
 
 ## 6. Conclusion
 
-That was a long post. From all the details you've read, remember just one.  
+From all the details you've read, remember just one.  
 
 `v-model` binds form inputs to refs or reactive objects.  
 
