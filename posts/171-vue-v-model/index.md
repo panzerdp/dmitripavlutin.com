@@ -23,13 +23,12 @@ Let's see how to use `v-model` to bind form inputs in Vue 3.
 
 ## 1. Binding a form input
 
-Let's implement a component that renders an input field with the initial value `'Unknown'`. The value that user introduces into the input field has to be rendered on the screen.  
+Let's implement a component that renders an input field with the initial value `'Unknown'`. The value that user introduces into the input field renders on the screen.  
 
-`v-model` fits nicely to implement such a component. Connecting `v-model` with the input field requires 2 simple steps.  
+`v-model` fits nicely to implement such a component. Connecting `v-model` with the input field requires 2 simple steps:
 
-First, `v-model` requires a *bus*: a reactive value to hold the data. The simplest bus is a [ref()](/ref-in-vue/). Let's create a ref called `text`, initialized with the string `'Unknown'`.  
-
-Second, add `v-model` to the input field tag in the template and assign to it the `text` ref: `v-model="text"`:
+1) `const text = ref()`: reactive value to serve as a *data bus* for `v-model`
+2) `v-model="text"`: add `v-model` to the input field tag assigned with `text`.
 
 ```vue
 <script setup>
@@ -69,7 +68,7 @@ which can be shortened to:
 
 What is the difference between `v-model` and `:value`? `<input :value="value" />` is a *one-way* data flow mechanism. 
 
-To understand the difference let's change the previous example's input tag from `v-model="text"` to `:value="text"`. How does it affect `text` ref?
+To understand the difference let's change the previous example's input tag from `v-model="text"` to `:value="text"`:
 
 ```vue {6}
 <script setup>
@@ -88,7 +87,7 @@ Open the demo. The input field is initialized with `'Unknown'`.
 
 Type some characters into the input field... and the text rendered on the screen always stays the same &mdash; `'Unknown'`. `text` ref *is not updated* when the input field changes.  
 
-`:value="text"` makes data flow in one direction only: from the `text` ref into the input field. Changing the input field value, however, doesn't change `text` ref.  
+`:value="text"` makes data flow in one direction only: from the `text` ref to the input field. Changing the input field value, however, doesn't change `text` ref.  
 
 In conclusion, `v-model` enables a *two-way* data flow, while `:value` enables a *one-way* data flow.  
 
@@ -106,7 +105,7 @@ can be expressed as:
 <input :value="text" @input="text = $event.target.value" type="text" />
 ```
 
-The following code doesn't use `v-model`, but still the two-way data flow mechanism works:
+The following code doesn't use `v-model`, but still has two-way data flow working:
 
 ```vue {7-8}
 <script setup>
@@ -129,13 +128,13 @@ Open the demo and type some characters into the input. The two-way binding is wo
 
 The regular binding `:value="text"` enables the first flow.  
 
-`@input="text = $event.target.value"` updates `text` ref when user types into the input field gets triggered. That's the second flow.  
+`@input="text = $event.target.value"` updates `text` when user types into the input field gets triggered. That's the second flow.  
 
 ## 3. Binding using reactive()
 
 [reactive()](https://vuejs.org/api/reactivity-core.html#reactive) is a Vue reactivity API that makes an object reactive.  
 
-The main [difference](/ref-reactive-differences-vue/) between `ref()` and `reactive()` is that refs can store primitives and objects, while `reactive()` accepts only objects. And `reactive()` object can be access directly without `.value` property (as in the case of refs).
+The main [difference](/ref-reactive-differences-vue/) between `ref()` and `reactive()` is that refs can store primitives and objects, while `reactive()` accepts only objects. And `reactive()` object can be access directly (without `.value` property as in the case of refs).
 
 Binding a reactive object to form inputs is handy when you have a lot of inputs. You can bind each input field with a specific property of the reactive object.  
 
@@ -157,7 +156,7 @@ const person = reactive({ firstName: 'John', lastName: 'Smith' })
 
 `const person = reactive({ firstName: '', lastName: '' })` creates a reactive object.   
 
-`v-model="person.firstName"` binds with the first name property, same as `v-model="person.lastName"` binds to the last name property.  
+`v-model="person.firstName"` binds with the first name property, as well as `v-model="person.lastName"` binds to the last name property.  
 
 Open the demo. Type into the first or last name inputs, and you'll see that the rendered text changes according to the name you type.  
 
@@ -165,9 +164,7 @@ Pretty nice! Properties of a reactive object can serve as data buses for `v-mode
 
 ## 4. Binding different input types
 
-The examples until now bound simple text inputs.  
-
-Fortunately, other types like select, textarea, checkboxes, radio buttons can be easily bound using `v-model`. Let's explore them.  
+Many other input types like select, textarea, checkboxes, radio buttons can bind using `v-model`. Let's explore them.  
 
 ### 4.1 Textareas
 
@@ -188,7 +185,7 @@ const longText = ref("Well... here's my story. One morning...")
 
 ### 4.2 Select fields
 
-The select (aka dropdown) field offers user a pre-defined set of options to select from.  
+The select (aka dropdown) field offers user a pre-defined set of options to choose from.  
 
 Binding a select is simple: `<select v-model="selected" />`:
 
@@ -209,13 +206,13 @@ const employeeId = ref('2')
 ```
 [Open the demo.](https://codesandbox.io/s/v-model-select-6bmc9t?file=/src/App.vue)
 
-`employeeId` is the ref bound to the select. `employeeId` should bind to the `value` attribute of the option tags inside the select (but not to the text of the option).  
+`employeeId` is the ref bound to the select and will get the value of the option being selected.  
 
 Because `employeeId` ref is initialized with `'2'`, `John Doe` option is initially selected.  
 
 When you select another option, you can see that `employeeId` updates with the newly selected option value.  
 
-If the select options do not have an `value` attribute, then the binding works with the *text* of the options:  
+If the select options do not have `value` attributes, then the binding works with the *text* of the options:  
 
 ```vue
 <script setup>
@@ -234,7 +231,7 @@ const employee = ref('Jane Doe')
 ```
 [Open the demo.](https://codesandbox.io/s/v-model-select-without-option-value-xgqj0p?file=/src/App.vue)
 
-In the example the binding works directly with the textual value of the options. For example if you'd select the second option, then `employee` ref is assigned with `'John Does'`.  
+Now the binding works directly with the textual value of the options. If you'd select the second option, then `employee` ref is assigned with `'John Doe'`.  
 
 ### 4.3 Checkboxes
 
@@ -246,10 +243,7 @@ Thanks to `v-model` binding checkboxes is easy:
 
 `checked` ref is assigned with a boolean value indicating whether the checkbox is checked or not.  
 
- If `checked` bus ref is `true` &mdash; the checkbox is checked, if `false` &mdash; unchecked.  
-
-Let's create an example with 2 buttons and a checkbox. One button checks and another unchecks the checkbox:
-
+Let's create a checkbox that bounds to a `checked` ref:
 ```vue
 <script setup>
 import { ref } from 'vue'
@@ -263,19 +257,19 @@ const checked = ref(true)
 ```
 [Open the demo.](https://codesandbox.io/s/v-model-checkbox-oyqej0?file=/src/App.vue)
 
-`checked` ref is initialized with `true` and thus initially the checkbox is checked.
+`checked` ref is initialized with `true` and thus initially the checkbox is checked. Checking or unchecking the checkbox updates `checked` ref correspondingly with `true` or `false`. No rocket science here.  
 
-Checking/unchecking the field updates correspondingly `checked` ref with `true` or `false`.  
-
-The customization of check/uncheck value is done by 2 Vue-specific attributes:  
+To customize the checked/unchecked binding to other values that a boolean, then Vue offers 2 Vue-specific attributes on the checkbox:  
 
 ```html {2-3}
 <input 
   v-model="checked" 
-  true-value="on" 
-  false-value="off" 
+  true-value="Yes!" 
+  false-value="No" 
 />
 ```
+
+Now `checked` would be assigned to `'Yes!'` (as true value) or `'No'` (as false value) string depending on the checkbox status.  
 
 Let's modify the previous example to use the custom values `'Yes!'` and `'No'`:
 
@@ -294,8 +288,6 @@ const answer = ref('Yes!')
 </template>
 ```
 [Open the demo.](https://codesandbox.io/s/v-model-checkbox-custom-check-values-go1f9u?file=/src/App.vue)
-
-This time `asnwer` ref is initialized with `Yes!`: one of the check values.
 
 `answer` now can have either `'Yes!'` or `'No'` depending on the checkbox's check status.  
 
