@@ -14,7 +14,7 @@ The [reactivity API](https://vuejs.org/api/reactivity-core.html) adds many possi
 
 In this post, you will learn how to correctly destructure props of a Vue component so that props do not lose reactivity.  
 
-<Affiliate type="vueschoolCompositionApi" disabled={true} />
+<Affiliate type="vueschoolCompositionApi" />
 
 ## 1. Destructuring props
 

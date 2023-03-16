@@ -2,19 +2,19 @@ import { useSiteMetadata } from 'hooks/useSiteMetadata';
 
 interface Props {
   type: string;
-  disabled?: boolean;
 }
 
-export function AffiliateText({ type, disabled = false }: Props) {
-  if (disabled) {
-    return null;
-  }
+export function AffiliateText({ type }: Props) {
 
-  const { affiliates } = useSiteMetadata()
-  const affiliate = affiliates.find((affiliate) => affiliate.type === type)
+  const { affiliates: { inText } } = useSiteMetadata()
+  const affiliate = inText.find((affiliate) => affiliate.type === type)
 
   if (!affiliate) {
     throw new Error(`Unable to find an affiliate of type ${type}`)
+  }
+
+  if (!affiliate.enabled) {
+    return null;
   }
 
   return <div dangerouslySetInnerHTML={{ __html: affiliate.message }} />

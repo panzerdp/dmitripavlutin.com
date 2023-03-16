@@ -57,9 +57,37 @@ module.exports = {
       ]
     }]
   },
-  affiliates: [{
-    type: 'traversyReact',
-    message: `
+  affiliates: {
+    inText: [{
+      type: 'traversyReact',
+      enabled: true,
+      message: `
+        <p>
+          <em>
+            Before I go on, let me recommend something to you.
+          </em>
+        </p>
+        <p>
+          <em>
+            If you want to significantly improve your React knowledge, take the fantastic <a href="https://www.traversymedia.com/a/2147528895/FqXWyazh" target="_blank" rel="noopener noreferrer">"React Front To Back Course"</a> by Brad Traversy. Use the coupon code "DMITRI" and get 20% discount!
+          </em>
+        </p>`,
+    }, {
+      type: 'traversyJavaScript',
+      enabled: true,
+      message: `
+        <p>
+          <em>Before I go on, let me recommend something to you.</em>
+        </p>
+        <p>
+          <em>
+            If you want to significantly improve your JavaScript knowledge, take the amazingly useful course <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">"Modern JavaScript From The Beginning 2.0"</a> by Brad Traversy. Use the coupon code "DMITRI" and get 20% discount!
+          </em>
+        </p>`
+    }, {
+      type: 'vueschoolCompositionApi',
+      enabled: true,
+      message: `
       <p>
         <em>
           Before I go on, let me recommend something to you.
@@ -67,42 +95,26 @@ module.exports = {
       </p>
       <p>
         <em>
-          If you want to significantly improve your React knowledge, take the  fantastic <a href="https://www.traversymedia.com/a/2147528895/FqXWyazh" target="_blank" rel="noopener noreferrer">"React Front To Back Course"</a> by Brad Traversy. Use the coupon code "DMITRI" and get 20% discount!
-        </em>
-      </p>`,
-  }, {
-    type: 'traversyJavaScript',
-    message: `
-      <p>
-        <em>Before I go on, let me recommend something to you.</em>
-      </p>
-      <p>
-        <em>
-          If you want to significantly improve your JavaScript knowledge, take the  amazingly useful course <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">"Modern JavaScript From The Beginning 2.0"</a> by Brad Traversy. Use the coupon code "DMITRI" and get 20% discount!
+          If you want to truly understand how to use Vue composition API, take <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> course on Vueschool.
         </em>
       </p>`
-  }, {
-    type: 'vueschoolCompositionApi',
-    message: `
-    <p>
-      <em>
-        Before I go on, let me recommend something to you. If you want an easy and accessible explanation of Vue composition API, take <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> course on Vueschool.
-      </em>
-    </p>`
-  }, {
-    type: 'vueschoolVue',
-    message: `
-    <p>
-      <em>
-        Before I go on, let me recommend something to you.
-      </em>
-    </p>
-
-    <p>
-      <em>
-        If you want to become proficient in Vue, take ["Vue.js 3 Fundamentals with the Composition API"](https://vueschool.io/courses/vue-js-fundamentals-with-the-composition-api?friend=dmitripavlutin) course on Vueschool.
-      </em>
-    </p>
-    `
-  }]
+    }, {
+      type: 'vueschoolVue',
+      enabled: true,
+      message: `
+      <p>
+        <em>
+          Before I go on, let me recommend something to you.
+        </em>
+      </p>
+  
+      <p>
+        <em>
+          If you want to become proficient in Vue, take ["Vue.js 3 Fundamentals with the Composition API"](https://vueschool.io/courses/vue-js-fundamentals-with-the-composition-api?friend=dmitripavlutin) course on Vueschool.
+        </em>
+      </p>
+      `
+    }],
+    showVueschoolTopBanner: true
+  }
 };

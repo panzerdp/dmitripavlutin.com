@@ -10,7 +10,7 @@ recommended: ['javascript-fetch-async-await', 'timeout-fetch-request']
 type: post
 ---
 
-[JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) is popular format to send data over the network.  
+[JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) is a popular format for sending data over the network.  
 
 Here's an example of JSON containing an object with props and values:
 
@@ -39,11 +39,11 @@ The first obligatory argument of `fetch()` is the URL of the request, or general
 
 * `options.method`: the HTTP method to perform the request. Defaults to `'GET'`
 * `options.body`: the body of the HTTP request
-* `option.headers`: an object with the headers to attach to the request
+* `options.headers`: an object with the headers to attach to the request
 
 Calling `fetch()` starts a request and returns a promise. When the request completes, the promise resolves to the [response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object.  
 
-Response object provides useful [methods](https://developer.mozilla.org/en-US/docs/Web/API/Response#methods) to extract data from a multitude of formats. But to parse data from JSON you need just one method &mdash; [response.json()](https://developer.mozilla.org/en-US/docs/Web/API/Response/json).  
+Response object provides useful [methods](https://developer.mozilla.org/en-US/docs/Web/API/Response#methods) for extracting data from a variety of formats. But to parse data from JSON, you only need one method &mdash; [response.json()](https://developer.mozilla.org/en-US/docs/Web/API/Response/json).  
 
 ## 2. GET JSON data
 
@@ -120,13 +120,13 @@ Take a look at `body` option value. `JSON.stringify(object)` utility function st
 
 `body` option requires a string, but not an object.  
 
-This approach works when performing `POST`, but as well `PUT` and `PATCH` requests.  
+This approach works for `POST`, but also for `PUT` and `PATCH` requests.  
 
 ### 3.1 Explicitly posting JSON
 
 Again, some servers might require you to indicate explicitly that you `POST` (or `PATCH`, or `PUT`) data in JSON format.  
 
-In such a case indicate the content type of data you're pushing, particularly setting the `Content-Type` header to `application/json`.  
+In such a case, specify the content type of the data you're pushing, in particular by setting the `Content-Type` header to `application/json`.  
 
 ```javascript{5-7}
 // ...
@@ -171,6 +171,6 @@ const response = await fetch(request);
 
 When loading data, make sure to extract and parse JSON to an actual object from the response using `const object = await response.json()` method.  
 
-But when posting JSON data, make sure to indicate the stringified object into a JSON string using `JSON.stringify(object)`. Assign the JSON to `body` option of the request.  
+However, when posting JSON data, be sure to indicate the stringified object into a JSON string using `JSON.stringify(object)`. Assign the JSON to the `body` option of the request.  
 
 Would you like to know more on how to use `fetch()`? I recommend checking [How to Use Fetch with async/await](/javascript-fetch-async-await/).

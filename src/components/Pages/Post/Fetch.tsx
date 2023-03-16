@@ -21,7 +21,7 @@ export default function PostTemplateFetch({ data, children }: PostTemplateFetchP
   };
   const postRelativePath = mdx.internal.contentFilePath
     .split('/')
-    .slice(-4)
+    .slice(-3)
     .join('/');
   const recommendedPosts = recommendedPostsMarkdown.edges.map(toPostPlain);
   const popularPosts = popularPostsMarkdown.edges.map(toPostPlain);
