@@ -23,7 +23,6 @@ export default function PostTemplateFetch({ data, children }: PostTemplateFetchP
     .split('/')
     .slice(-3)
     .join('/');
-    console.log(postRelativePath);
   const recommendedPosts = recommendedPostsMarkdown.edges.map(toPostPlain);
   const popularPosts = popularPostsMarkdown.edges.map(toPostPlain);
   const popularPlainPostsByCategory = popularPostsByCategory.map(({ category, slugs }) => {
