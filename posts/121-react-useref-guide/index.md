@@ -14,7 +14,7 @@ In this post you'll learn how to use `React.useRef()` hook to create persisted m
 
 <Affiliate type="traversyReact" />
 
-<TableOfContents maxLevel={3} />
+<TableOfContents maxLevel={2} />
 
 ## 1. Mutable values
 
