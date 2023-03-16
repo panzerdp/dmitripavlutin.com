@@ -3,7 +3,9 @@ public/
 build/
 .cache/
 coverage/
-.vscode/
+
+.vscode/*
+!.vscode/extensions.json
 
 src/typings/graphql.d.ts
 .gatsby-context.js

@@ -1,0 +1,9 @@
+{
+	"recommendations": [
+    "dbaeumer.vscode-eslint",
+    "rido3.wordcount",
+    "donaldshen.markdown-vue",
+    "eamodio.gitlens",
+    "hediet.vscode-drawio"
+	]
+}
