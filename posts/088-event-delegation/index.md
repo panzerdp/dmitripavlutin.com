@@ -1,9 +1,9 @@
 ---
-title: "A Simple Explanation of Event Delegation in JavaScript"
+title: "JavaScript Event Delegation: An Accessible Explanation"
 description: "The event delegation is an useful pattern to listen for events on multiple elements using just one event handler."
 published: "2020-07-14T07:10Z"
-modified: "2020-09-18T06:30Z"
-thumbnail: "./images/cover-3.png"
+modified: "2023-03-17"
+thumbnail: "./images/javascript-event-delegation-cover.png"
 slug: javascript-event-delegation
 tags: ['javascript', 'event delegation']
 recommended: ['javascript-closure', 'simple-but-tricky-javascript-interview-questions']
