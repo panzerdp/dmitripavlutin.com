@@ -95,7 +95,7 @@ Type some characters into the input field... and the text rendered on the screen
 
 In conclusion, `v-model` enables a *two-way* data flow, while `:value` enables a *one-way* data flow.  
 
-### 2.2 Emulating v-model
+### 2.1 Emulating v-model
 
 Despite the difference, `v-model` can be emulated using `:value` and `@input`:
 
