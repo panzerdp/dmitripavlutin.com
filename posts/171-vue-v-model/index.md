@@ -14,8 +14,8 @@ The idea of `v-model` in Vue is simple.
 
 Define a reactive `text` (usually a ref), and then bind this value to an input using `v-model="text"`. This creates a two-way data flow:
 
-* User types into the input: `text` ref changes (first flow)
-* `text` ref changes programmaticaly: the value of the input changes (second flow)
+1) User types into the input and `text` ref changes.  
+2) `text` ref changes programmaticaly and the input value changes.  
 
 Let's see how to use `v-model` to bind form inputs in Vue 3.  
 
@@ -48,7 +48,7 @@ Open the demo. The input field contains initially `'Unknown'`. Type something in
 
 `v-model="text"` is *two-way data binding* in Vue.  
 
-The first direction of flow happens during the initialization. The input value is initialized with `'Unknown'` the `text` ref's initial value.  
+The first direction of flow happens during the initialization. The input value is initialized with `'Unknown'` &mdash; `text`'s initial value.  
 
 The second direction of flow occurs when you type into the input field. `v-model` takes the value of the input and updates `text` ref with it.  
 
