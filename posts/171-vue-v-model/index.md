@@ -1,8 +1,8 @@
 ---
 title: "How to Use v-model with Form Inputs in Vue"
 description: "Use Vue v-model to bind form input elements like text input, textarea, select, checkbox, radio."
-published: "2023-03-15"
-modified: "2023-03-15"
+published: "2023-03-17"
+modified: "2023-03-17"
 thumbnail: "./images/v-model-form-input-cover-3.png"
 slug: vue-v-model-form-inputs
 tags: ['vue', 'v-model', 'input', 'form', 'reactivity']
