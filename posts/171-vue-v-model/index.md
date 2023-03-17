@@ -445,4 +445,4 @@ Binding is performed in 2 easy steps:
 
 `text` ref is kept in sync (bound) with the input field value.  
 
-*Do you have any questions about `v-model`? Write a comment!*
+*Do you have any questions about `v-model`?*
