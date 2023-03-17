@@ -1,9 +1,9 @@
 ---
-title: "How to Use ref() and refs in Vue"
+title: "How to Use refs and ref() in Vue"
 description: "ref() is a Vue composition API function that creates refs: small reactive values."  
 published: "2023-02-28"
 modified: "2023-03-07"
-thumbnail: "./images/vue-ref-2.png"
+thumbnail: "./images/vue-ref-3.png"
 slug: ref-in-vue 
 tags: ['vue', 'vue composition', 'ref', 'reactivity']
 recommended: ['vue-next-tick', 'ref-reactive-differences-vue']
