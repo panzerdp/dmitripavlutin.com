@@ -108,6 +108,12 @@ module.exports = {
         }
       }
     },
+    {
+      resolve: 'gatsby-plugin-google-gtag',
+      options: {
+        trackingIds: ['G-P51KQJDK5T'],
+      },
+    },
     'gatsby-plugin-remove-serviceworker',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',

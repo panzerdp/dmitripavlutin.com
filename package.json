@@ -22,6 +22,7 @@
     "gatsby-cli": "5.7.0",
     "gatsby-link": "5.7.0",
     "gatsby-plugin-feed": "5.7.0",
+    "gatsby-plugin-google-gtag": "5.7.0",
     "gatsby-plugin-graphql-codegen": "3.1.1",
     "gatsby-plugin-image": "3.7.0",
     "gatsby-plugin-mdx": "5.7.0",
