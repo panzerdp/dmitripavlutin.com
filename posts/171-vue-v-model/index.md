@@ -52,7 +52,7 @@ The first direction of flow happens during the initialization. The input value i
 
 The second direction of flow occurs when you type into the input field. `v-model` takes the value of the input and updates `text` ref with it.  
 
-![Vue v-model binding](./diagrams/vue-v-model.svg)
+![Vue v-model binding](./diagrams/vue-v-model-2.svg)
 
 ## 2. v-model vs v-bind
 
@@ -91,7 +91,7 @@ Type some characters into the input field... and the text rendered on the screen
 
 `:value="text"` makes data flow in one direction only: from the `text` ref to the input field. Changing the input field value, however, doesn't change `text` ref.  
 
-![Vue v-bind binding](./diagrams/vue-v-bind.svg)
+![Vue v-bind binding](./diagrams/vue-v-bind-2.svg)
 
 In conclusion, `v-model` enables a *two-way* data flow, while `:value` enables a *one-way* data flow.  
 
