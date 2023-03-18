@@ -55,6 +55,15 @@ export const pageQuery = graphql`
     tags
   }
 
+  # PostThumbnail fragment should be everywhere exactly the same to guarantee the same images generation
+  fragment PostThumbnail on MdxFrontmatter {
+    thumbnail {
+      childImageSharp {
+        gatsbyImageData(aspectRatio: 1.8, quality: 60, width: 708, formats: [WEBP], layout: CONSTRAINED, placeholder: NONE)
+      }
+    }
+  }
+
   query PostBySlug($slug: String!, $popularPostsSlugs: [String]!) {
     site {
       siteMetadata {
@@ -74,11 +83,7 @@ export const pageQuery = graphql`
       tableOfContents
       frontmatter {
         ...Post
-        thumbnail {
-          childImageSharp {
-            gatsbyImageData(aspectRatio: 1.8, quality: 60, width: 708, formats: [WEBP], placeholder: BLURRED)
-          }
-        }
+        ...PostThumbnail
       }
     }
     popularPostsMarkdown: allMdx(filter: { frontmatter: { slug: { in: $popularPostsSlugs } } }) {
