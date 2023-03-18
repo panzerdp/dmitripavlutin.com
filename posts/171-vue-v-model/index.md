@@ -6,7 +6,6 @@ modified: "2023-03-17"
 thumbnail: "./images/v-model-form-input-cover-3.png"
 slug: vue-v-model-form-inputs
 tags: ['vue', 'v-model', 'input', 'form', 'reactivity']
-recommended: ['vue-next-tick', 'ref-in-vue']
 type: post
 ---
 

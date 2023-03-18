@@ -6,7 +6,6 @@ modified: "2021-07-02T12:00Z"
 thumbnail: "./images/cover.png"
 slug: react-props
 tags: ['react']
-recommended: ['react-state-management', 'use-react-memo-wisely']
 type: post
 ---
 

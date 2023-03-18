@@ -6,7 +6,6 @@ modified: "2021-11-15T11:30Z"
 thumbnail: "./images/cover.jpg"
 slug: what-every-javascript-developer-should-know-about-unicode
 tags: ["javascript", "string", "unicode"]
-recommended: ["javascriptss-addition-operator-demystified", "announcing-voca-the-ultimate-javascript-string-library"]
 type: post
 ---
 

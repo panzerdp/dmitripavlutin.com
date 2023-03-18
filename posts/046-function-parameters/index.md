@@ -6,7 +6,6 @@ modified: "2019-09-17T13:00Z"
 thumbnail: "./images/flower.jpg"
 slug: javascript-function-parameters
 tags: ["javascript", "function", "parameter"]
-recommended: ["6-ways-to-declare-javascript-functions", "when-not-to-use-arrow-functions-in-javascript"]
 type: post
 ---
 

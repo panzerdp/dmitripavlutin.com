@@ -6,7 +6,6 @@ modified: "2016-01-02"
 thumbnail: "./images/cover.jpg"
 slug: javascriptss-addition-operator-demystified
 tags: ["javascript", "addition"]
-recommended: ["the-legend-of-javascript-equality-operator", "what-every-javascript-developer-should-know-about-unicode"]
 type: post
 ---
 

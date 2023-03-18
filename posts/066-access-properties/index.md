@@ -6,7 +6,6 @@ modified: '2023-01-25'
 thumbnail: './images/access-object-properties-2.png'
 slug: access-object-properties-javascript
 tags: ['javascript', 'object', 'property', 'destructuring']
-recommended: ['check-if-object-has-property-javascript', 'object-rest-spread-properties-javascript']
 type: post
 ---
 

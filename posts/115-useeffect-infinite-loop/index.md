@@ -6,7 +6,6 @@ modified: "2023-02-26"
 thumbnail: "./images/cover-4.png"
 slug: react-useeffect-infinite-loop
 tags: ['react', 'hook', 'useeffect']
-recommended: ['react-hooks-mistakes-to-avoid', 'react-useeffect-explanation']
 type: post
 ---
 

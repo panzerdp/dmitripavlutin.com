@@ -6,7 +6,6 @@ modified: "2020-06-19T11:00Z"
 thumbnail: "./images/cover.jpg"
 slug: foreach-iterate-array-javascript
 tags: ["javascript", "array", "foreach"]
-recommended: ["how-to-iterate-easily-over-object-properties-in-javascript", "power-up-the-array-creation-in-javascript"]
 type: post
 ---
 

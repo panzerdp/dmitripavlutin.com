@@ -6,7 +6,6 @@ modified: '2019-11-07T06:24Z'
 thumbnail: './images/oldman-sea.jpg'
 slug: react-fetch-lifecycle-methods-hooks-suspense
 tags: ['react', 'lifecycle', 'hook', 'suspense']
-recommended: ['7-architectural-attributes-of-a-reliable-react-component', 'use-react-memo-wisely']
 type: post
 ---
 

@@ -6,7 +6,6 @@ modified: "2021-05-25T07:30Z"
 thumbnail: "./images/cover.png"
 slug: react-cleanup-async-effects
 tags: ['react', 'async']
-recommended: ['react-useeffect-infinite-loop', 'react-hooks-stale-closures']
 type: post
 ---
 

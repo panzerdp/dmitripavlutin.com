@@ -6,7 +6,6 @@ modified: "2021-01-07T10:00Z"
 thumbnail: "./images/cover-2.png"
 slug: dom-node-element
 tags: ['dom', 'node', 'element']
-recommended: ['javascript-event-delegation', 'simple-but-tricky-javascript-interview-questions']
 type: post
 ---
 

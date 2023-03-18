@@ -6,7 +6,6 @@ modified: "2021-12-12"
 thumbnail: "./images/cover.png"
 slug: javascript-import-meta
 tags: ['javascript', 'module', 'url']
-recommended: ['javascript-json-modules', 'ecmascript-modules-nodejs']
 type: post
 ---
 

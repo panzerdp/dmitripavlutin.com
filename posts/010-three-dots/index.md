@@ -6,7 +6,6 @@ modified: "2020-01-18T12:40Z"
 thumbnail: "./images/cover.jpg"
 slug: how-three-dots-changed-javascript
 tags: ["javascript", "spread", "rest", "iterable", "iterator"]
-recommended: ["object-rest-spread-properties-javascript", "7-tips-to-handle-undefined-in-javascript"]
 type: post
 ---
 

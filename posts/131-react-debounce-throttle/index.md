@@ -6,7 +6,6 @@ modified: "2023-01-28"
 thumbnail: "./images/react-throttle-debounce-cover.png"
 slug: react-throttle-debounce
 tags: ['react', 'callback']
-recommended: ['javascript-callback', 'controlled-inputs-using-react-hooks']
 type: post
 ---
 

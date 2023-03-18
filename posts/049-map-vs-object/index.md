@@ -6,7 +6,6 @@ modified: '2019-10-19T16:15Z'
 thumbnail: './images/named.jpg'
 slug: maps-vs-plain-objects-javascript
 tags: ['javascript', 'map', 'object']
-recommended: ['why-object-literals-in-javascript-are-cool', 'how-to-iterate-easily-over-object-properties-in-javascript']
 type: post
 ---
 

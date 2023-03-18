@@ -6,7 +6,6 @@ modified: '2020-04-14T20:30Z'
 thumbnail: './images/cover-2.png'
 slug: javascript-and-or-logical-operators
 tags: ['javascript']
-recommended: ['javascript-modules-best-practices', 'javascript-utility-libraries']
 type: post
 ---
 

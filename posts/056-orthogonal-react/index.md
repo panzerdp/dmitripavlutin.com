@@ -6,7 +6,6 @@ modified: '2019-11-28T09:50Z'
 thumbnail: './images/lego.png'
 slug: orthogonal-react-components
 tags: ['react', 'component', 'architecture']
-recommended: ['7-architectural-attributes-of-a-reliable-react-component', 'the-art-of-writing-small-and-plain-functions']
 type: post
 ---
 

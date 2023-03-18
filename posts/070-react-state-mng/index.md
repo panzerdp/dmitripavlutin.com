@@ -6,7 +6,6 @@ modified: '2020-03-15T15:30Z'
 thumbnail: './images/couch.jpg'
 slug: react-state-management
 tags: ['javascript', 'react', 'state']
-recommended: ['react-usestate-hook-guide', 'use-react-memo-wisely']
 type: post
 ---
 

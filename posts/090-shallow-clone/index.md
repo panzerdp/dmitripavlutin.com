@@ -6,7 +6,6 @@ modified: "2020-07-28T11:00Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-shallow-clone-objects
 tags: ['javascript', 'object']
-recommended: ['object-rest-spread-properties-javascript', 'how-to-compare-objects-in-javascript']
 type: post
 ---
 

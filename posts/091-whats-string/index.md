@@ -6,7 +6,6 @@ modified: "2020-08-04T07:00Z"
 thumbnail: "./images/cover-2.png"
 slug: what-is-string-in-javascript
 tags: ['javascript', 'string']
-recommended: ['what-every-javascript-developer-should-know-about-unicode', 'string-interpolation-in-javascript']
 type: post
 ---
 

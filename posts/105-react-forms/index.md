@@ -6,7 +6,6 @@ modified: "2020-11-10T10:00Z"
 thumbnail: "./images/cover-2.png"
 slug: react-forms-tutorial
 tags: ['react', 'form', 'input']
-recommended: ['controlled-inputs-using-react-hooks', 'react-state-management']
 type: post
 ---
 

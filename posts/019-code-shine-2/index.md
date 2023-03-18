@@ -6,7 +6,6 @@ modified: "2019-07-05"
 thumbnail: "./images/cover.jpg"
 slug: make-your-javascript-code-shine-knockout-old-es5-hacks-part-2
 tags: ["javascript", "es2015"]
-recommended: ["make-your-javascript-code-shide-knockout-old-es5-hack", "must-know-details-about-es2016-features"]
 type: post
 ---
 

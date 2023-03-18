@@ -6,7 +6,6 @@ modified: "2023-01-25"
 thumbnail: "./images/cover.jpg"
 slug: javascript-hoisting-in-details
 tags: ["javascript", "variable", "hoisting", "es2015"]
-recommended: ["variables-lifecycle-and-why-let-is-not-hoisted", "6-ways-to-declare-javascript-functions"]
 type: post
 ---
 

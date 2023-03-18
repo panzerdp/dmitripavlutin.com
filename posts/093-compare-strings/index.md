@@ -6,7 +6,6 @@ modified: "2020-08-18T10:15Z"
 thumbnail: "./images/cover-4.png"
 slug: compare-javascript-strings
 tags: ['javascript', 'equality', 'string']
-recommended: ['what-every-javascript-developer-should-know-about-unicode', 'what-is-string-in-javascript']
 type: post
 ---
 

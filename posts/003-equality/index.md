@@ -6,7 +6,6 @@ modified: "2016-01-04"
 thumbnail: "./images/cover.jpg"
 slug: the-legend-of-javascript-equality-operator
 tags: ["javascript", "equality"]
-recommended: ["javascriptss-addition-operator-demystified", "7-tips-to-handle-undefined-in-javascript"]
 type: post
 ---
 

@@ -6,7 +6,6 @@ modified: "2019-07-05"
 thumbnail: "./images/cover.jpg"
 slug: power-up-the-array-creation-in-javascript
 tags: ["javascript", "array"]
-recommended: ["the-magic-behind-array-length-property", "how-three-dots-changed-javascript"]
 type: post
 ---
 

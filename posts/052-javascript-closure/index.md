@@ -6,7 +6,6 @@ modified: '2023-01-26'
 thumbnail: './images/cover-3.png'
 slug: javascript-closure
 tags: ['javascript', 'closure', 'scope']
-recommended: ['6-ways-to-declare-javascript-functions', 'javascript-scope']
 type: post
 ---
 

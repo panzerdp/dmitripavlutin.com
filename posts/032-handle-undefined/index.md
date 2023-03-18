@@ -6,7 +6,6 @@ modified: "2020-08-02T08:50Z"
 thumbnail: "./images/blade-runner-rachel.png"
 slug: 7-tips-to-handle-undefined-in-javascript
 tags: ["javascript", "undefined"]
-recommended: ["when-not-to-use-arrow-functions-in-javascript", "object-rest-spread-properties-javascript"]
 type: post
 ---
 

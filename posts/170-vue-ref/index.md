@@ -6,7 +6,6 @@ modified: "2023-03-07"
 thumbnail: "./images/vue-ref-3.png"
 slug: ref-in-vue 
 tags: ['vue', 'vue composition', 'ref', 'reactivity']
-recommended: ['vue-next-tick', 'ref-reactive-differences-vue']
 type: post
 ---
 

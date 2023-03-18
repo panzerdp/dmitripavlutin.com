@@ -6,7 +6,6 @@ modified: '2020-04-26T17:30Z'
 thumbnail: './images/javascript-scope-gotchas-cover-2.png'
 slug: javascript-scope-gotchas
 tags: ['javascript', 'scope', 'variable']
-recommended: ['javascript-closure', 'javascript-scope']
 type: post
 ---
 

@@ -6,7 +6,6 @@ modified: "2020-06-23T06:50Z"
 thumbnail: "./images/cover-1.png"
 slug: screen-window-page-sizes
 tags: ["browser", "window"]
-recommended: ["javascript-modules-best-practices", "react-playground-setup"]
 type: post
 ---
 

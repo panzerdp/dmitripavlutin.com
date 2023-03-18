@@ -6,7 +6,6 @@ modified: "2023-01-30"
 thumbnail: "./images/cover-3.png"
 slug: vue-next-tick
 tags: ['vue', 'dom']
-recommended: ['vue-debounce-throttle', 'vue-show-hide-elements']
 type: post
 ---
 

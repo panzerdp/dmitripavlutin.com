@@ -6,7 +6,6 @@ modified: "2023-01-28"
 thumbnail: "./images/cover.png"
 slug: javascript-merge-arrays
 tags: ['javascript', 'array']
-recommended: ['javascript-array-sort-numbers', 'operations-on-arrays-javascript']
 type: post
 ---
 

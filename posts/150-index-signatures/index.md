@@ -6,7 +6,6 @@ modified: "2021-09-22T18:10Z"
 thumbnail: "./images/cover-2.png"
 slug: typescript-index-signatures
 tags: ['typescript', 'object']
-recommended: ['typescript-unknown-vs-any', 'how-to-iterate-easily-over-object-properties-in-javascript']
 type: post
 ---
 

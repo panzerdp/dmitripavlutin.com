@@ -6,7 +6,6 @@ modified: "2019-12-22T14:07Z"
 thumbnail: "./images/chain.jpg"
 slug: javascript-optional-chaining
 tags: ["javascript", "optional chaining", "nullish coalescing"]
-recommended: ["5-interesting-uses-javascript-destructuring", "7-tips-to-handle-undefined-in-javascript"]
 type: post
 ---
 

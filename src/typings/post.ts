@@ -17,5 +17,4 @@ export interface Post extends PostPlain {
 export interface PostDetailed extends Post {
   children: JSX.Element;
   tableOfContents: unknown;
-  recommended: string[];
-}
+  }

@@ -6,7 +6,6 @@ modified: "2023-01-25"
 thumbnail: "./images/cover.png"
 slug: check-if-object-has-property-javascript
 tags: ["javascript", "object", "property"]
-recommended: ["access-object-properties-javascript", "javascript-defined-variable-checking"]
 type: post
 ---
 

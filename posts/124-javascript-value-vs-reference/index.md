@@ -6,7 +6,6 @@ modified: "2021-03-28T12:10Z"
 thumbnail: "./images/cover-3.png"
 slug: value-vs-reference-javascript
 tags: ['javascript', 'object']
-recommended: ['the-legend-of-javascript-equality-operator', 'how-to-compare-objects-in-javascript']
 type: post
 ---
 

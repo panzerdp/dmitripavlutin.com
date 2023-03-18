@@ -6,7 +6,6 @@ modified: "2023-02-12"
 thumbnail: "./images/cover-6.png"
 slug: react-usememo-hook
 tags: ['react', 'usememo', 'hook']
-recommended: ['use-react-memo-wisely', 'react-usecallback']
 type: post
 ---
 

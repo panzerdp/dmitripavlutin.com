@@ -6,7 +6,6 @@ modified: "2021-09-15T15:20Z"
 thumbnail: "./images/cover.png"
 slug: react-usereducer
 tags: ['react', 'usereducer', 'hook']
-recommended: ['react-useref-guide', 'react-useeffect-explanation']
 type: post
 ---
 

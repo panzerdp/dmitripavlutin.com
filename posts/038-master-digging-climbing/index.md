@@ -6,7 +6,6 @@ modified: "2019-07-23T13:20Z"
 thumbnail: "./images/trying-to-fly.jpg"
 slug: become-better-software-developer-digging-climbing
 tags: ["craftsmanship", "clean code", "architecture"]
-recommended: ["the-path-of-software-development-craftsmanship", "the-art-of-writing-small-and-plain-functions"]
 type: post
 ---
 

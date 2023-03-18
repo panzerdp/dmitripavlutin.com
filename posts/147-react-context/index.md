@@ -6,7 +6,6 @@ modified: "2023-02-02"
 thumbnail: "./images/cover.png"
 slug: react-context-and-usecontext
 tags: ['react', 'context', 'hook']
-recommended: ['react-useref-guide', 'react-useeffect-explanation']
 type: post
 ---
 

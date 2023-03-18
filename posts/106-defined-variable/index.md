@@ -6,7 +6,6 @@ modified: "2020-11-17T09:00Z"
 thumbnail: "./images/cover-10.png"
 slug: javascript-defined-variable-checking
 tags: ['javascript', 'variable', 'undefined']
-recommended: ['javascript-hoisting-in-details', 'javascript-variables-and-temporal-dead-zone']
 type: post
 ---
 

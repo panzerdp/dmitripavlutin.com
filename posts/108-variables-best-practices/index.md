@@ -6,7 +6,6 @@ modified: "2020-12-01T08:30Z"
 thumbnail: "./images/cover-4.png"
 slug: javascript-variables-best-practices
 tags: ['javascript', 'variable', 'clean code']
-recommended: ['javascript-modules-best-practices', 'javascript-arrow-functions-best-practices']
 type: post
 ---
 

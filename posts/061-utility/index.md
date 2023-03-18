@@ -6,7 +6,6 @@ modified: '2020-01-11T13:00Z'
 thumbnail: './images/javascript-utility-libraries-9.png'
 slug: javascript-utility-libraries
 tags: ['javascript', 'module']
-recommended: ['announcing-voca-the-ultimate-javascript-string-library', 'the-art-of-writing-small-and-plain-functions']
 type: post
 ---
 

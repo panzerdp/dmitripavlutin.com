@@ -6,7 +6,6 @@ modified: "2020-09-22T06:30Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-null
 tags: ['javascript', 'null', 'object']
-recommended: ['7-tips-to-handle-undefined-in-javascript', 'nan-in-javascript']
 type: post
 ---
 

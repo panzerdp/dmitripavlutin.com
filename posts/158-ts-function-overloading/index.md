@@ -6,7 +6,6 @@ modified: "2022-10-22"
 thumbnail: "./images/cover-4.png"
 slug: typescript-function-overloading
 tags: ['typescript', 'function']
-recommended: ['typescript-unknown-vs-any', 'typescript-covariance-contravariance']
 type: post
 ---
 

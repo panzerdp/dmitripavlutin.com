@@ -6,7 +6,6 @@ modified: '2019-07-05'
 thumbnail: './images/cover.jpg'
 slug: why-object-literals-in-javascript-are-cool
 tags: ['javascript', 'object', 'es2015']
-recommended: ['how-three-dots-changed-javascript', 'object-rest-spread-properties-javascript']
 type: post
 ---
 

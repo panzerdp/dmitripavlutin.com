@@ -6,7 +6,6 @@ modified: "2021-06-18T07:20Z"
 thumbnail: "./images/cover-3.png"
 slug: javascript-variables-const-let-var
 tags: ['javascript', 'variable', 'const', 'let', 'var']
-recommended: ['javascript-hoisting-in-details', 'javascript-defined-variable-checking']
 type: post
 ---
 

@@ -6,7 +6,6 @@ modified: "2023-01-28"
 thumbnail: "./images/cover.png"
 slug: javascript-object-destructuring
 tags: ["javascript", "destructuring"]
-recommended: ["5-interesting-uses-javascript-destructuring", "object-rest-spread-properties-javascript"]
 type: post
 ---
 

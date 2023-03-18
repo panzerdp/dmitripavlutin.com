@@ -6,7 +6,6 @@ modified: "2016-07-27"
 thumbnail: "./images/cover.jpg"
 slug: variables-lifecycle-and-why-let-is-not-hoisted
 tags: ["javascript", "variable", "hoisting"]
-recommended: ["javascript-hoisting-in-details", "make-your-javascript-code-shide-knockout-old-es5-hack"]
 type: post
 ---
 
@@ -166,8 +165,7 @@ Based on this lesson, ES2015 introduces `let`. It uses an improved algorithm to 
 
 Because the declaration and initialization phases are decoupled, hoisting is not valid for a `let` variable (including for `const` and `class`). Before initialization, the variable is in temporal dead zone and is not accessible.  
 
-To keep the variables declaration smooth, these tips are recommended:  
-
+To keep the variables declaration smooth, these tips are 
 * Declare, initialize and then use variables. This flow is correct and easy to follow.
 * Keep the variables as hidden as possible. The less variables are exposed, the more modular your code becomes.  
 

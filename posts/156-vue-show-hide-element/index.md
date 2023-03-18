@@ -6,7 +6,6 @@ modified: "2021-11-03T09:20Z"
 thumbnail: "./images/cover-3.png"
 slug: vue-show-hide-elements
 tags: ['vue', 'dom', 'element']
-recommended: ['javascript-closure', 'gentle-explanation-of-this-in-javascript']
 type: post
 ---
 

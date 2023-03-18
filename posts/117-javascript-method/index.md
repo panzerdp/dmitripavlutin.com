@@ -6,7 +6,6 @@ modified: "2021-02-02T10:30Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-method
 tags: ['javascript', 'function', 'method']
-recommended: ['6-ways-to-declare-javascript-functions', 'javascript-arrow-functions']
 type: post
 ---
 

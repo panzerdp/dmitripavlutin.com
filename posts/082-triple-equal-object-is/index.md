@@ -6,7 +6,6 @@ modified: "2020-06-02T10:00Z"
 thumbnail: "./images/cover-3.png"
 slug: object-is-vs-strict-equality-operator
 tags: ["javascript", "equality"]
-recommended: ["the-legend-of-javascript-equality-operator", "javascriptss-addition-operator-demystified"]
 type: post
 ---
 

@@ -6,7 +6,6 @@ modified: "2022-10-29T08:40Z"
 thumbnail: "./images/cover.jpg"
 slug: coding-like-shakespeare-practical-function-naming-conventions
 tags: ["clean code"]
-recommended: ["the-path-of-software-development-craftsmanship", "the-art-of-writing-small-and-plain-functions"]
 type: post
 ---
 

@@ -6,7 +6,6 @@ modified: "2019-07-10T10:00:00Z"
 thumbnail: "./images/cover.jpg"
 slug: how-to-iterate-easily-over-object-properties-in-javascript
 tags: ["javascript", "object"]
-recommended: ["detailed-overview-of-well-known-symbols", "object-rest-spread-properties-javascript"]
 type: post
 ---
 

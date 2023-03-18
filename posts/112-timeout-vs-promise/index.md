@@ -6,7 +6,6 @@ modified: "2020-12-29T09:30Z"
 thumbnail: "./images/cover-4.png"
 slug: javascript-promises-settimeout
 tags: ['javascript', 'promise', 'event loop']
-recommended: ['javascript-callback', 'timeout-fetch-request']
 type: post
 ---
 

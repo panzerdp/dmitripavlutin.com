@@ -6,7 +6,6 @@ modified: '2020-04-24T16:00Z'
 thumbnail: './images/javascript-scope-cover-2.png'
 slug: javascript-scope
 tags: ['javascript', 'scope', 'variable']
-recommended: ['javascript-closure', 'javascript-hoisting-in-details']
 type: post
 ---
 

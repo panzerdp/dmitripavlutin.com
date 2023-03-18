@@ -6,7 +6,6 @@ modified: "2023-01-28"
 thumbnail: "./images/instruments.jpg"
 slug: use-react-memo-wisely
 tags: ["react", "memoization"]
-recommended: ["react-useeffect-explanation", "react-usecallback"]
 type: post
 ---
 

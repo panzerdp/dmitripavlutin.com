@@ -6,7 +6,6 @@ modified: "2021-10-03T06:20Z"
 thumbnail: "./images/cover.png"
 slug: ecmascript-modules-dynamic-import
 tags: ['javascript', 'module']
-recommended: ['ecmascript-modules-nodejs', 'javascript-modules-best-practices']
 type: post
 ---
 

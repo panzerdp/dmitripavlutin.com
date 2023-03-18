@@ -6,7 +6,6 @@ modified: '2022-10-02'
 thumbnail: './images/infinity.png'
 slug: infinity-in-javascript
 tags: ['javascript', 'number']
-recommended: ['the-legend-of-javascript-equality-operator', '7-tips-to-handle-undefined-in-javascript']
 type: post
 ---
 

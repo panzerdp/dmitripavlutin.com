@@ -6,7 +6,6 @@ modified: "2021-04-20T07:00Z"
 thumbnail: "./images/cover-3.png"
 slug: parseint-mystery-javascript
 tags: ['javascript', 'number']
-recommended: ['nan-in-javascript', 'infinity-in-javascript']
 type: post
 ---
 

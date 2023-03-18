@@ -6,7 +6,6 @@ modified: "2023-01-11"
 thumbnail: "./images/vue-props-destructuring.png"
 slug: props-destructure-vue-composition
 tags: ['vue', 'vue composition', 'props', 'reactivity']
-recommended: ['vue-next-tick', 'ref-reactive-differences-vue']
 type: post
 ---
 

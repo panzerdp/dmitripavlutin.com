@@ -6,7 +6,6 @@ modified: "2021-01-13T17:00Z"
 thumbnail: "./images/cover-3.png"
 slug: javascript-array-at
 tags: ['javascript', 'array']
-recommended: ['operations-on-arrays-javascript', 'javascript-array-contains-value']
 type: post
 ---
 

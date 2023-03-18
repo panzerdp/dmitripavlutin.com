@@ -6,7 +6,6 @@ modified: "2019-09-03T13:10Z"
 thumbnail: "./images/powerboat.jpg"
 slug: javascript-spread-operator-performance-optimization
 tags: ["javascript", "spread", "performance"]
-recommended: ["how-three-dots-changed-javascript", "object-rest-spread-properties-javascript"]
 type: post
 ---
 

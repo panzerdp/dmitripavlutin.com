@@ -6,7 +6,6 @@ modified: "2020-07-21T11:00Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-array-contains-value
 tags: ['javascript', 'array']
-recommended: ['javascript-closure', 'simple-but-tricky-javascript-interview-questions']
 type: post
 ---
 

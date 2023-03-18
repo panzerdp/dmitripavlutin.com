@@ -6,7 +6,6 @@ modified: "2016-10-05"
 thumbnail: "./images/cover.jpg"
 slug: mastering-swift-essential-details-about-strings
 tags: ["swift", "string", "unicode"]
-recommended: ["make-your-swift-code-expressive-addition-operator-use-cases", "how-to-use-correctly-self-keyword-in-swift"]
 type: post
 ---
 

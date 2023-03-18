@@ -40,7 +40,6 @@ const query = `
           title
           slug
           tags
-          recommended
           thumbnail {
             childImageSharp {
               gatsbyImageData(aspectRatio: 1.8, quality: 60, width: 708, formats: [PNG], layout: FIXED)

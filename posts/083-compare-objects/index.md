@@ -6,7 +6,6 @@ modified: "2023-01-28"
 thumbnail: "./images/cover-3.png"
 slug: how-to-compare-objects-in-javascript
 tags: ["javascript", "equality", "object"]
-recommended: ["the-legend-of-javascript-equality-operator", "object-is-vs-strict-equality-operator"]
 type: post
 ---
 

@@ -6,7 +6,6 @@ modified: "2021-04-19T07:00Z"
 thumbnail: "./images/cover-3.png"
 slug: javascript-this-algorithm
 tags: ['javascript', 'this', 'function']
-recommended: ['gentle-explanation-of-this-in-javascript', 'javascript-this-interview-questions']
 type: post
 ---
 

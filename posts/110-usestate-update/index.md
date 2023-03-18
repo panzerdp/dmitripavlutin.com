@@ -6,7 +6,6 @@ modified: "2020-12-15T12:30Z"
 thumbnail: "./images/cover-3.png"
 slug: how-react-updates-state
 tags: ['react', 'hook', 'usestate']
-recommended: ['react-usestate-hook-guide', 'react-hooks-mistakes-to-avoid']
 type: post
 ---
 

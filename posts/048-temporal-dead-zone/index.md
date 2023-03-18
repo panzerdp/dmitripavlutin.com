@@ -6,7 +6,6 @@ modified: '2019-10-03T08:23Z'
 thumbnail: './images/hourglass.jpg'
 slug: javascript-variables-and-temporal-dead-zone
 tags: ['javascript', 'variable', 'tdz', 'es2015']
-recommended: ['variables-lifecycle-and-why-let-is-not-hoisted', 'javascript-hoisting-in-details']
 type: post
 ---
 

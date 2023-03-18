@@ -6,7 +6,6 @@ modified: '2019-11-13T13:00Z'
 thumbnail: './images/wood.jpg'
 slug: react-usestate-hook-guide
 tags: ['react', 'state', 'hook']
-recommended: ['react-fetch-lifecycle-methods-hooks-suspense', 'use-react-memo-wisely']
 type: post
 ---
 

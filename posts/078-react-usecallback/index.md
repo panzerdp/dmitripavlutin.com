@@ -6,7 +6,6 @@ modified: "2023-01-28"
 thumbnail: "./images/cover-6.png"
 slug: react-usecallback
 tags: ["react", "memoization"]
-recommended: ["use-react-memo-wisely", "react-usestate-hook-guide"]
 type: post
 ---
 

@@ -6,7 +6,6 @@ modified: "2023-01-29"
 thumbnail: "./images/cover-8.png"
 slug: parse-url-javascript
 tags: ["url", "hostname", "pathname", "query string", "hash"]
-recommended: ['replace-all-string-occurrences-javascript', 'what-every-javascript-developer-should-know-about-unicode']
 type: post
 ---
 

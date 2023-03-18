@@ -6,7 +6,6 @@ modified: '2020-02-11T13:40Z'
 thumbnail: './images/react-playground-3.png'
 slug: react-playground-setup
 tags: ['react']
-recommended: ['use-react-memo-wisely', 'react-fetch-lifecycle-methods-hooks-suspense']
 type: post
 ---
 

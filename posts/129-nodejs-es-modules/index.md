@@ -6,7 +6,6 @@ modified: "2021-04-29T17:00Z"
 thumbnail: "./images/cover-4.png"
 slug: ecmascript-modules-nodejs
 tags: ['javascript', 'module', 'nodejs']
-recommended: ['javascript-modules-best-practices', 'javascript-module-import-twice']
 type: post
 ---
 

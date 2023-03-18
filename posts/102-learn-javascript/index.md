@@ -6,7 +6,6 @@ modified: "2020-10-14T11:30Z"
 thumbnail: "./images/cover.png"
 slug: how-to-learn-javascript
 tags: ['javascript', 'craftsmanship']
-recommended: ['unlearn-javascript-bad-coding-habits', 'the-path-of-software-development-craftsmanship']
 type: post
 ---
 

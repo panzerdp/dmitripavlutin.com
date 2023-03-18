@@ -6,7 +6,6 @@ modified: "2016-11-01"
 thumbnail: "./images/aircraft.jpg"
 slug: concise-initialization-of-collections-in-swift
 tags: ["swift", "array", "set"]
-recommended: ["mastering-swift-essential-details-about-strings", "make-your-swift-code-expressive-addition-operator-use-cases"]
 type: post
 ---
 

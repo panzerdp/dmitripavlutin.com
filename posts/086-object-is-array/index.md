@@ -6,7 +6,6 @@ modified: "2020-06-30T05:40Z"
 thumbnail: "./images/cover-1.png"
 slug: is-array-javascript
 tags: ["javascript", "array"]
-recommended: ["operations-on-arrays-javascript", "the-magic-behind-array-length-property"]
 type: post
 ---
 

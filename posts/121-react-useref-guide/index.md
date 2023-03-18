@@ -6,7 +6,6 @@ modified: "2023-01-27"
 thumbnail: "./images/cover-7.png"
 slug: react-useref-guide
 tags: ['react', 'useref', 'hook', 'dom', 'element']
-recommended: ['react-useeffect-explanation', 'use-react-memo-wisely']
 type: post
 ---
 

@@ -6,7 +6,6 @@ modified: "2023-01-28"
 thumbnail: "./images/cover.png"
 slug: javascript-array-group
 tags: ['javascript', 'array']
-recommended: ['javascript-array-at', 'operations-on-arrays-javascript']
 type: post
 ---
 

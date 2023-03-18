@@ -6,7 +6,6 @@ modified: "2023-01-06"
 thumbnail: "./images/cover-4.png"
 slug: typescript-unknown-vs-any
 tags: ['typescript', 'unknown', 'any']
-recommended: ['javascript-null', 'typescript-react-components']
 type: post
 ---
 

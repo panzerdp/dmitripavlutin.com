@@ -6,7 +6,6 @@ modified: '2020-04-01T14:15Z'
 thumbnail: './images/javascript-import-module-drawback-cover-3.png'
 slug: javascript-import-module-drawback
 tags: ['javascript', 'es2015', 'module']
-recommended: ['javascript-modules-best-practices', 'javascript-utility-libraries']
 type: post
 ---
 
