@@ -114,7 +114,5 @@ module.exports = {
     require('./gatsby/config/gatsby-plugin-sass'),
     require('./gatsby/config/gatsby-plugin-feed'),
     require('./gatsby/config/gatsby-plugin-source-mailchimp'),
-    `gatsby-plugin-perf-budgets`,
-    `gatsby-plugin-webpack-bundle-analyser-v2`
   ],
 };
