@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useLocation } from '@reach/router';
 
-import * as styles from './index.module.scss';
+import './index.module.scss';
 import CarbonBannerDemo from 'components/Carbon/Banner/Demo';
 import CarbonBannerLive from 'components/Carbon/Banner/Live';
 
@@ -23,7 +23,7 @@ export default function CarbonAd(props: CarbonAdProps): JSX.Element {
     : <CarbonBannerDemo ref={container} />;
 
   return (
-    <div ref={container} className={styles.carbonAd} key={pathname}>
+    <div ref={container} key={pathname}>
       {carbonElement}
     </div>
   );
