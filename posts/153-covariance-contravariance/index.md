@@ -6,7 +6,6 @@ modified: "2022-01-11"
 thumbnail: "./images/cover-1.png"
 slug: typescript-covariance-contravariance
 tags: ['typescript']
-recommended: ['typescript-unknown-vs-any', 'typescript-index-signatures']
 type: post
 ---
 

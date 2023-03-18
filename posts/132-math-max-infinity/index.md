@@ -6,7 +6,6 @@ modified: "2021-05-18T12:30Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-math-max-infinity
 tags: ['javascript', 'number']
-recommended: ['infinity-in-javascript', 'nan-in-javascript']
 type: post
 ---
 

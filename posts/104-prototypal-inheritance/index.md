@@ -6,7 +6,6 @@ modified: "2023-02-01"
 thumbnail: "./images/cover-2.png"
 slug: javascript-prototypal-inheritance
 tags: ['javascript', 'prototype', 'inheritance']
-recommended: ['javascript-closure', 'own-and-inherited-properties-in-javascript']
 type: post
 ---
 

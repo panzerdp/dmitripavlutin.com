@@ -6,7 +6,6 @@ modified: "2021-12-31"
 thumbnail: "./images/cover.png"
 slug: javascript-array-flatmap
 tags: ['javascript', 'array']
-recommended: ['javascript-array-at', 'javascript-array-group']
 type: post
 ---
 

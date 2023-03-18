@@ -6,7 +6,6 @@ modified: "2019-07-30T13:00Z"
 thumbnail: "./images/arrows.jpg"
 slug: javascript-arrow-functions-shortening-recipes
 tags: ['javascript', 'arrow function', 'es2015']
-recommended: ["6-ways-to-declare-javascript-functions", "when-not-to-use-arrow-functions-in-javascript"]
 type: post
 ---
 

@@ -6,7 +6,6 @@ modified: "2019-07-05"
 thumbnail: "./images/cover.jpg"
 slug: detailed-overview-of-well-known-symbols
 tags: ["javascript", "symbol", "es2015"]
-recommended: ["how-to-iterate-easily-over-object-properties-in-javascript", "object-rest-spread-properties-javascript"]
 type: post
 ---
 

@@ -6,7 +6,6 @@ modified: '2020-02-11T15:00Z'
 thumbnail: './images/quality-2.png'
 slug: javascript-arrow-functions-best-practices
 tags: ['javascript', 'arrow function', 'clean code']
-recommended: ['javascript-modules-best-practices', 'javascript-variables-best-practices']
 type: post
 ---
 

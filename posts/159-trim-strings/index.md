@@ -6,7 +6,6 @@ modified: "2021-11-25T09:00Z"
 thumbnail: "./images/cover.png"
 slug: javascript-string-trim
 tags: ['javascript', 'string', 'whitespace']
-recommended: ['replace-all-string-occurrences-javascript', 'compare-javascript-strings']
 type: post
 ---
 

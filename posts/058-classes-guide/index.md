@@ -6,7 +6,6 @@ modified: '2019-12-13T10:50Z'
 thumbnail: './images/classes-guide.png'
 slug: javascript-classes-complete-guide
 tags: ['javascript', 'class', 'instanceof']
-recommended: ['gentle-explanation-of-this-in-javascript', 'why-object-literals-in-javascript-are-cool']
 type: post
 ---
 

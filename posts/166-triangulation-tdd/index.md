@@ -6,7 +6,6 @@ modified: "2022-10-04"
 thumbnail: "./images/cover-2.png"
 slug: triangulation-test-driven-development
 tags: ['test-driven development', 'unit test']
-recommended: ['frontend-architecture-stable-and-volatile-dependencies', '7-architectural-attributes-of-a-reliable-react-component']
 type: post
 ---
 

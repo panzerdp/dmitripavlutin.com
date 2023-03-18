@@ -83,11 +83,7 @@ export const pageQuery = graphql`
         node {
           frontmatter {
             ...Post
-            thumbnail {
-              childImageSharp {
-                gatsbyImageData(width: 650, height: 360, quality: 60, layout: CONSTRAINED, formats: [WEBP])
-              }
-            }
+            ...PostThumbnail
           }
         }
       }

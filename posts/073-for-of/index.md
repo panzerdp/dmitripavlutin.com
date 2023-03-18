@@ -6,7 +6,6 @@ modified: '2020-03-25T13:40Z'
 thumbnail: './images/cover-4.png'
 slug: javascript-for-of
 tags: ['javascript', 'for']
-recommended: ['foreach-iterate-array-javascript', 'how-to-iterate-easily-over-object-properties-in-javascript']
 type: post
 ---
 

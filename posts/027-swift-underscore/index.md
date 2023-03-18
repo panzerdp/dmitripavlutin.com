@@ -6,7 +6,6 @@ modified: "2016-10-25"
 thumbnail: "./images/cover.jpg"
 slug: useful-details-about-underscore-keyword-in-swift
 tags: ["swift", "underscore"]
-recommended: ["mastering-swift-essential-details-about-strings", "concise-initialization-of-collections-in-swift"]
 type: post
 ---
 

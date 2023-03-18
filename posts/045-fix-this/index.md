@@ -6,7 +6,6 @@ modified: "2019-09-11T14:44Z"
 thumbnail: "./images/birds.jpg"
 slug: fix-this-in-javascript
 tags: ["javascript", "this"]
-recommended: ["gentle-explanation-of-this-in-javascript", "5-interesting-uses-javascript-destructuring"]
 type: post
 ---
 

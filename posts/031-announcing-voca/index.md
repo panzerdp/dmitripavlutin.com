@@ -6,7 +6,6 @@ modified: "2016-12-14"
 thumbnail: "./images/future-car.jpg"
 slug: announcing-voca-the-ultimate-javascript-string-library
 tags: ["javascript", "string", "open source"]
-recommended: ["the-art-of-writing-small-and-plain-functions", "what-every-javascript-developer-should-know-about-unicode"]
 type: post
 ---
 

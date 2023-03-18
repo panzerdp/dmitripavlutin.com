@@ -9,7 +9,6 @@ module.exports = function createPost({ createPage, edges, popularPostsSlugs }, {
   edges.forEach(post => {
     createPostImagePermalinkWithRedirection(post, createRedirect)
     const slug = post.node.frontmatter.slug;
-    const recommended = post.node.frontmatter.recommended;
     createPage({
       path: TO_POST({
         slug,
@@ -17,7 +16,6 @@ module.exports = function createPost({ createPage, edges, popularPostsSlugs }, {
       component: `${postComponentPath}?__contentFilePath=${post.node.internal.contentFilePath}`,
       context: {
         slug,
-        recommended,
         popularPostsSlugs,
       },
     });

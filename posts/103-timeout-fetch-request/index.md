@@ -6,7 +6,6 @@ modified: "2023-01-30"
 thumbnail: "./images/cover-2.png"
 slug: timeout-fetch-request
 tags: ['fetch']
-recommended: ['javascript-fetch-async-await', 'javascript-async-await']
 type: post
 ---
 

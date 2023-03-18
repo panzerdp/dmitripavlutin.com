@@ -6,7 +6,6 @@ modified: "2018-01-03"
 thumbnail: "./future-car.jpg"
 slug: object-rest-spread-properties-javascript
 tags: ["javascript", "spread", "rest"]
-recommended: ["how-three-dots-changed-javascript", "7-tips-to-handle-undefined-in-javascript"]
 type: post
 ---
 

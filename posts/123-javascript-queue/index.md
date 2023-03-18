@@ -6,7 +6,6 @@ modified: "2023-02-27"
 thumbnail: "./images/cover-2.png"
 slug: javascript-queue
 tags: ['javascript', 'computer science', 'data structure' ,'queue']
-recommended: ['gentle-explanation-of-this-in-javascript', 'javascript-this-interview-questions']
 type: post
 ---
 

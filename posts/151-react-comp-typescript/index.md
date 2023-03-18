@@ -6,7 +6,6 @@ modified: "2021-10-08T10:20Z"
 thumbnail: "./images/cover-3.png"
 slug: typescript-react-components
 tags: ['typescript', 'react']
-recommended: ['typescript-unknown-vs-any', 'typescript-index-signatures']
 type: post
 ---
 

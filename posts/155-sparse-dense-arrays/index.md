@@ -6,7 +6,6 @@ modified: "2021-10-27T07:00Z"
 thumbnail: "./images/cover-1.png"
 slug: javascript-sparse-dense-arrays
 tags: ['javascript', 'array']
-recommended: ['javascript-fill-array', 'javascript-array-from-applications']
 type: post
 ---
 

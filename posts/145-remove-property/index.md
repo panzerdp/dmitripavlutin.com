@@ -6,7 +6,6 @@ modified: "2021-08-17T12:00Z"
 thumbnail: "./images/cover-2.png"
 slug: remove-object-property-javascript
 tags: ['javascript', 'object', 'property']
-recommended: ['check-if-object-has-property-javascript', 'access-object-properties-javascript']
 type: post
 ---
 

@@ -6,7 +6,6 @@ modified: "2021-05-04T07:50Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-function-expressions-and-declarations
 tags: ['javascript', 'function']
-recommended: ['differences-between-arrow-and-regular-functions', '6-ways-to-declare-javascript-functions']
 type: post
 ---
 

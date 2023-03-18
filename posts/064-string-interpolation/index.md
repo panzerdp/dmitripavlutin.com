@@ -6,7 +6,6 @@ modified: '2020-07-31T15:00Z'
 thumbnail: './images/string-interpolation.png'
 slug: string-interpolation-in-javascript
 tags: ['javascript', 'string', 'es2015']
-recommended: ['what-every-javascript-developer-should-know-about-unicode', 'replace-all-string-occurrences-javascript']
 type: post
 ---
 

@@ -9,7 +9,6 @@ import Subheader from 'components/Subheader/WithComments';
 import Edit from 'components/Pages/Post/Edit';
 import LeftSidebar from 'components/Pages/Post/Sidebar/Left';
 import RightSidebar from 'components/Pages/Post/Sidebar/Right';
-import RecommendedList from 'components/Pages/Post/Recommended/List';
 import ShareBottom from 'components/Pages/Post/Share/Bottom';
 import CommentsThread from 'components/Comments/Thread';
 import CommentsInView from 'components/Comments/InView';
@@ -29,7 +28,6 @@ const SHOW_SHARE_AFTER_Y = 500;
 interface PostTemplateProps {
   postRelativePath: string;
   post: PostDetailed;
-  recommendedPosts: PostPlain[];
   popularPostsByCategory: {
     plainPosts: PostPlain[],
     category: string
@@ -39,7 +37,6 @@ interface PostTemplateProps {
 export default function PostTemplate({
   postRelativePath,
   post,
-  recommendedPosts,
   popularPostsByCategory,
 }: PostTemplateProps) {
   const relativePosition = useVerticalScroll(SHOW_SHARE_AFTER_Y);
@@ -81,9 +78,6 @@ export default function PostTemplate({
         </div>
         <div className={`${styles.delimiter} ${styles.authorInfoContainer}`}>
           <AboutAuthorConcise />
-        </div>
-        <div className={styles.delimiter}>
-          <RecommendedList posts={recommendedPosts} />
         </div>
         <div className={`${styles.delimiter} ${styles.comments}`} id="comments">
           <CommentsInView>

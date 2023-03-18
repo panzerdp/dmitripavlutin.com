@@ -75,13 +75,6 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src`,
-        name: 'src',
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
         path: `${__dirname}/posts`,
         name: 'posts',
       },
@@ -119,7 +112,6 @@ module.exports = {
     'gatsby-plugin-sitemap',
     'gatsby-plugin-netlify',
     require('./gatsby/config/gatsby-plugin-sass'),
-    // 'gatsby-plugin-minify-classnames',
     require('./gatsby/config/gatsby-plugin-feed'),
     require('./gatsby/config/gatsby-plugin-source-mailchimp'),
   ],

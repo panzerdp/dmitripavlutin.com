@@ -6,7 +6,6 @@ modified: "2021-09-22T18:20Z"
 thumbnail: "./images/cover-5.jpg"
 slug: javascript-closures-interview-questions
 tags: ['javascript', 'closure', 'interview']
-recommended: ['javascript-closure', 'simple-but-tricky-javascript-interview-questions']
 type: post
 ---
 

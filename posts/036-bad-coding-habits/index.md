@@ -6,7 +6,6 @@ modified: "2019-07-11T05:00Z"
 thumbnail: "./images/cover.jpg"
 slug: unlearn-javascript-bad-coding-habits
 tags: ["javascript", "undefined", "clean code", "craftsmanship"]
-recommended: ["the-art-of-writing-small-and-plain-functions", "make-your-javascript-code-shide-knockout-old-es5-hack"]
 type: post
 ---
 

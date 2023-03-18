@@ -6,7 +6,6 @@ modified: "2023-01-23"
 thumbnail: "./images/cover-3.png"
 slug: fetch-with-json
 tags: ['fetch', 'json']
-recommended: ['javascript-fetch-async-await', 'timeout-fetch-request']
 type: post
 ---
 

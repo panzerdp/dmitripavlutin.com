@@ -6,7 +6,6 @@ modified: "2021-11-12T07:30Z"
 thumbnail: "./images/cover.png"
 slug: vue-debounce-throttle
 tags: ['vue', 'callback', 'event']
-recommended: ['react-throttle-debounce', 'vue-show-hide-elements']
 type: post
 ---
 

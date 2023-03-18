@@ -6,7 +6,6 @@ modified: "2020-08-11T07:30Z"
 thumbnail: "./images/cover.png"
 slug: access-object-keys-values-entries
 tags: ['javascript', 'object']
-recommended: ['how-to-compare-objects-in-javascript', 'check-if-object-has-property-javascript']
 type: post
 ---
 

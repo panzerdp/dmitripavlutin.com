@@ -6,7 +6,6 @@ modified: '2020-01-08T13:20Z'
 thumbnail: './images/nan-in-javascript-6.png'
 slug: nan-in-javascript
 tags: ['javascript', 'number']
-recommended: ['infinity-in-javascript', '7-tips-to-handle-undefined-in-javascript']
 type: post
 ---
 

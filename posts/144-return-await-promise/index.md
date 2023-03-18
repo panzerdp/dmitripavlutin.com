@@ -6,7 +6,6 @@ modified: "2021-08-10T06:40Z"
 thumbnail: "./images/cover.png"
 slug: return-await-promise-javascript
 tags: ['javascript', 'promise', 'async']
-recommended: ['promise-all', 'what-is-javascript-promise']
 type: post
 ---
 

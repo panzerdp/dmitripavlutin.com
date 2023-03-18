@@ -6,7 +6,6 @@ modified: "2020-10-24T10:30Z"
 thumbnail: "./images/cover.jpg"
 slug: gentle-explanation-of-this-in-javascript
 tags: ["javascript", "this"]
-recommended: ["fix-this-in-javascript", "when-not-to-use-arrow-functions-in-javascript"]
 type: post
 ---
 

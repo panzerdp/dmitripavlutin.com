@@ -6,7 +6,6 @@ modified: "2017-09-26"
 thumbnail: "./images/temple.jpg"
 slug: 7-architectural-attributes-of-a-reliable-react-component
 tags: ['react', 'component', 'architecture']
-recommended: ["use-react-memo-wisely", "solve-react-render-props-callback-hell"]
 type: post
 ---
 

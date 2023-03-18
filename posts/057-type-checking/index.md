@@ -6,7 +6,6 @@ modified: '2019-12-03T13:20Z'
 thumbnail: './images/upside-3.jpg'
 slug: javascript-type-checking-screwed
 tags: ['javascript', 'typeof', 'instanceof']
-recommended: ['7-tips-to-handle-undefined-in-javascript', 'the-legend-of-javascript-equality-operator']
 type: post
 ---
 

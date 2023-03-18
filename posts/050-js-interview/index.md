@@ -6,7 +6,6 @@ modified: '2019-11-21T10:15Z'
 thumbnail: './images/people-at-interview.jpg'
 slug: simple-but-tricky-javascript-interview-questions
 tags: ['javascript', 'closure', 'array', 'hoisting', 'interview']
-recommended: ['javascript-this-interview-questions', 'javascript-closures-interview-questions']
 type: post
 ---
 

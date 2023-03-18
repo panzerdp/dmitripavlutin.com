@@ -6,7 +6,6 @@ modified: "2021-07-21T08:30Z"
 thumbnail: "./images/cover-4.png"
 slug: javascript-promises-then-vs-then-catch
 tags: ['javascript', 'promise']
-recommended: ['what-is-javascript-promise', 'promise-all']
 type: post
 ---
 

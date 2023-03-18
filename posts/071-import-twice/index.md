@@ -6,7 +6,6 @@ modified: '2020-03-10T12:00Z'
 thumbnail: './images/import-module-twice-2.png'
 slug: javascript-module-import-twice
 tags: ['javascript', 'es2015', 'module']
-recommended: ['javascript-modules-best-practices', 'javascript-utility-libraries']
 type: post
 ---
 

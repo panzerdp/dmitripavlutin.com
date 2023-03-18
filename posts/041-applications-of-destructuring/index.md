@@ -6,7 +6,6 @@ modified: "2019-08-18T09:14Z"
 thumbnail: "./images/logs.jpg"
 slug: 5-interesting-uses-javascript-destructuring
 tags: ["javascript", "destructuring", "rest", "es2015"]
-recommended: ["how-three-dots-changed-javascript", "object-rest-spread-properties-javascript"]
 type: post
 ---
 

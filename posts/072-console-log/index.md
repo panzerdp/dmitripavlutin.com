@@ -6,7 +6,6 @@ modified: '2020-03-19T12:30Z'
 thumbnail: './images/cover-2.png'
 slug: console-log-tips
 tags: ['javascript', 'debugging']
-recommended: ['javascript-modules-best-practices', 'javascript-utility-libraries']
 type: post
 ---
 

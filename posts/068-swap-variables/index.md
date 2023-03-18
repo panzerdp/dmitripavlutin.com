@@ -6,7 +6,6 @@ modified: '2020-02-19T09:20Z'
 thumbnail: './images/swap-variables-cover-11.png'
 slug: swap-variables-javascript
 tags: ['javascript', 'variable']
-recommended: ['5-interesting-uses-javascript-destructuring', 'javascript-hoisting-in-details']
 type: post
 ---
 

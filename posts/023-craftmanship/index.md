@@ -6,7 +6,6 @@ modified: "2019-07-11T08:40Z"
 thumbnail: "./images/cover.jpg"
 slug: the-path-of-software-development-craftsmanship
 tags: ["javascript", "craftsmanship"]
-recommended: ["coding-like-shakespeare-practical-function-naming-conventions", "the-art-of-writing-small-and-plain-functions"]
 type: post
 ---
 

@@ -6,7 +6,6 @@ modified: "2023-01-25"
 thumbnail: "./images/cover-4.png"
 slug: javascript-fetch-async-await
 tags: ['fetch', 'async await']
-recommended: ['javascript-async-await', 'react-fetch-lifecycle-methods-hooks-suspense']
 type: post
 ---
 

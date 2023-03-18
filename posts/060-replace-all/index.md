@@ -6,7 +6,6 @@ modified: '2023-01-27'
 thumbnail: './images/replace-4.png'
 slug: replace-all-string-occurrences-javascript
 tags: ['javascript', 'string']
-recommended: ['announcing-voca-the-ultimate-javascript-string-library', 'what-every-javascript-developer-should-know-about-unicode']
 type: post
 ---
 

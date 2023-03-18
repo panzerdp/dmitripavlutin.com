@@ -3,9 +3,19 @@ const path = require('path');
 const createExcerptsList = require('./gatsby/node/excerpts-list');
 const createPost = require('./gatsby/node/post');
 const createPlainListByTag = require('./gatsby/node/plain-list-by-tag');
-
+ 
+ 
 const query = `
-{
+# PostThumbnail fragment should be everywhere exactly the same to guarantee the same images generation
+fragment PostThumbnail on MdxFrontmatter {
+  thumbnail {
+    childImageSharp {
+      gatsbyImageData(aspectRatio: 1.8, quality: 60, width: 708, formats: [WEBP], layout: CONSTRAINED, placeholder: NONE)
+    }
+  }
+}
+
+query CreatePages {
   site {
     siteMetadata {
       featured {
@@ -40,12 +50,7 @@ const query = `
           title
           slug
           tags
-          recommended
-          thumbnail {
-            childImageSharp {
-              gatsbyImageData(aspectRatio: 1.8, quality: 60, width: 708, formats: [PNG], layout: FIXED)
-            }
-          }
+          ...PostThumbnail
         }
       }
     }

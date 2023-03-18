@@ -6,7 +6,6 @@ modified: "2019-08-06T13:00Z"
 thumbnail: "./images/world.jpg"
 slug: how-to-make-your-open-source-project-successful
 tags: ["open source"]
-recommended: ["announcing-voca-the-ultimate-javascript-string-library", "become-better-software-developer-digging-climbing"]
 type: post
 ---
 

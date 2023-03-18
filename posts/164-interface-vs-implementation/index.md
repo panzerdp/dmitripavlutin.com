@@ -6,7 +6,6 @@ modified: "2022-01-26"
 thumbnail: "./images/cover.png"
 slug: interface-vs-implementation
 tags: ['software design', 'interface', 'typescript']
-recommended: ['frontend-architecture-stable-and-volatile-dependencies', 'the-art-of-writing-small-and-plain-functions']
 type: post
 ---
 

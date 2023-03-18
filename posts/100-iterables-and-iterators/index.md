@@ -6,7 +6,6 @@ modified: "2020-10-06T08:30Z"
 thumbnail: "./images/cover.png"
 slug: javascript-iterators
 tags: ['javascript', 'iterable', 'iterator', 'array']
-recommended: ['javascript-closure', 'javascript-array-from-applications']
 type: post
 ---
 

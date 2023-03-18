@@ -6,7 +6,6 @@ modified: "2016-11-16"
 thumbnail: "./images/cover.jpg"
 slug: make-your-swift-code-expressive-addition-operator-use-cases
 tags: ["swift"]
-recommended: ["mastering-swift-essential-details-about-strings", "concise-initialization-of-collections-in-swift"]
 type: post
 ---
 

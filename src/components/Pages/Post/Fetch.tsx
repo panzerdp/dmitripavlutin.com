@@ -12,7 +12,7 @@ interface PostTemplateFetchProps {
 
 export default function PostTemplateFetch({ data, children }: PostTemplateFetchProps) {
   const { featured: { popularPostsByCategory } } = data.site.siteMetadata;
-  const { mdx, recommendedPostsMarkdown, popularPostsMarkdown } = data;
+  const { mdx, popularPostsMarkdown } = data;
   const post: PostDetailed = {
     ...mdx.frontmatter,
     children,
@@ -23,7 +23,6 @@ export default function PostTemplateFetch({ data, children }: PostTemplateFetchP
     .split('/')
     .slice(-3)
     .join('/');
-  const recommendedPosts = recommendedPostsMarkdown.edges.map(toPostPlain);
   const popularPosts = popularPostsMarkdown.edges.map(toPostPlain);
   const popularPlainPostsByCategory = popularPostsByCategory.map(({ category, slugs }) => {
     return {
@@ -35,7 +34,6 @@ export default function PostTemplateFetch({ data, children }: PostTemplateFetchP
     <PostTemplate
       postRelativePath={postRelativePath}
       post={post}
-      recommendedPosts={recommendedPosts}
       popularPostsByCategory={popularPlainPostsByCategory}
     />
   );
@@ -57,7 +55,16 @@ export const pageQuery = graphql`
     tags
   }
 
-  query PostBySlug($slug: String!, $recommended: [String]!, $popularPostsSlugs: [String]!) {
+  # PostThumbnail fragment should be everywhere exactly the same to guarantee the same images generation
+  fragment PostThumbnail on MdxFrontmatter {
+    thumbnail {
+      childImageSharp {
+        gatsbyImageData(aspectRatio: 1.8, quality: 60, width: 708, formats: [WEBP], layout: CONSTRAINED, placeholder: NONE)
+      }
+    }
+  }
+
+  query PostBySlug($slug: String!, $popularPostsSlugs: [String]!) {
     site {
       siteMetadata {
         featured {
@@ -76,21 +83,7 @@ export const pageQuery = graphql`
       tableOfContents
       frontmatter {
         ...Post
-        recommended
-        thumbnail {
-          childImageSharp {
-            gatsbyImageData(aspectRatio: 1.8, quality: 60, width: 708, formats: [WEBP], placeholder: BLURRED)
-          }
-        }
-      }
-    }
-    recommendedPostsMarkdown: allMdx(filter: { frontmatter: { slug: { in: $recommended } } }) {
-      edges {
-        node {
-          frontmatter {
-            ...Post
-          }
-        }
+        ...PostThumbnail
       }
     }
     popularPostsMarkdown: allMdx(filter: { frontmatter: { slug: { in: $popularPostsSlugs } } }) {

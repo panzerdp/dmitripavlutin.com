@@ -6,7 +6,6 @@ modified: "2016-07-04"
 thumbnail: "./images/cover.jpg"
 slug: javascript-rises
 tags: ["javascript"]
-recommended: ["the-path-of-software-development-craftsmanship", "coding-like-shakespeare-practical-function-naming-conventions"]
 type: post
 ---
 

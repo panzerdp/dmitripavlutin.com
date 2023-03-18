@@ -6,7 +6,6 @@ modified: "2021-03-18T19:50Z"
 thumbnail: "./images/cover-4.png"
 slug: differences-between-arrow-and-regular-functions
 tags: ["javascript", "function", "arrow function"]
-recommended: ["when-not-to-use-arrow-functions-in-javascript", "6-ways-to-declare-javascript-functions"]
 type: post
 ---
 

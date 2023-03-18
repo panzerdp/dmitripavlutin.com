@@ -6,7 +6,6 @@ modified: "2023-02-08"
 thumbnail: "./images/environment-variables-javascript-2.png"
 slug: environment-variables-javascript
 tags: ['javascript', 'nodejs']
-recommended: ['javascript-import-meta', 'ecmascript-modules-nodejs']
 type: post
 ---
 

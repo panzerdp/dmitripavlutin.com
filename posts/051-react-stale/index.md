@@ -6,7 +6,6 @@ modified: '2023-03-17'
 thumbnail: './images/landscape.jpg'
 slug: react-hooks-stale-closures
 tags: ['react', 'hook']
-recommended: ['use-react-memo-wisely', 'javascript-closure']
 type: post
 ---
 

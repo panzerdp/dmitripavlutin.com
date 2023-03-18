@@ -6,7 +6,6 @@ modified: "2019-08-28T08:39Z"
 thumbnail: "./images/bulb.jpg"
 slug: javascript-array-from-applications
 tags: ["javascript", "array", "es2015"]
-recommended: ["how-three-dots-changed-javascript", "power-up-the-array-creation-in-javascript"]
 type: post
 ---
 

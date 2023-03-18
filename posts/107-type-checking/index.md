@@ -6,7 +6,6 @@ modified: "2020-11-24T08:30Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-typeof-instanceof
 tags: ['javascript', 'typeof', 'instanceof']
-recommended: ['javascript-defined-variable-checking', 'javascript-null']
 type: post
 ---
 

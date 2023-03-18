@@ -6,7 +6,6 @@ modified: '2019-12-24T08:00Z'
 thumbnail: './images/birds.jpg'
 slug: operations-on-arrays-javascript
 tags: ['javascript', 'array']
-recommended: ['power-up-the-array-creation-in-javascript', 'javascript-array-from-applications']
 type: post
 ---
 

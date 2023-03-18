@@ -6,7 +6,6 @@ modified: "2021-12-03"
 thumbnail: "./images/cover-3.png"
 slug: javascript-json-modules
 tags: ['javascript', 'json', 'module']
-recommended: ['fetch-with-json', 'ecmascript-modules-nodejs']
 type: post
 ---
 

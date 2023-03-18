@@ -6,7 +6,6 @@ modified: "2021-01-26T09:30Z"
 thumbnail: "./images/cover-2.png"
 slug: javascript-array-sort-numbers
 tags: ['javascript', 'array', 'number', 'sort']
-recommended: ['operations-on-arrays-javascript', 'javascript-array-at']
 type: post
 ---
 

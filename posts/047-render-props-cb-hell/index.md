@@ -6,7 +6,6 @@ modified: "2019-09-24T12:00Z"
 thumbnail: "./images/tree.jpg"
 slug: solve-react-render-props-callback-hell
 tags: ["react", "render prop"]
-recommended: ["use-react-memo-wisely", "7-architectural-attributes-of-a-reliable-react-component"]
 type: post
 ---
 

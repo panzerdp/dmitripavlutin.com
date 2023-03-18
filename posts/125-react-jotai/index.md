@@ -6,7 +6,6 @@ modified: "2021-03-30T08:15Z"
 thumbnail: "./images/cover.png"
 slug: react-jotai-state-management
 tags: ['react', 'state', 'open source']
-recommended: ['react-usestate-hook-guide', 'react-useref-guide']
 type: post
 ---
 

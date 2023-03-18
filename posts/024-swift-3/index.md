@@ -6,7 +6,6 @@ modified: "2016-09-28"
 thumbnail: "./images/cover.jpg"
 slug: useful-tips-for-migrating-to-swift-3-0
 tags: ["swift"]
-recommended: ["mastering-swift-essential-details-about-strings", "concise-initialization-of-collections-in-swift"]
 type: post
 ---
 

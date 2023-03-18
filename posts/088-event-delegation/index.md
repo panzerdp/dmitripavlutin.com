@@ -6,7 +6,6 @@ modified: "2023-03-17"
 thumbnail: "./images/event-delegation.png"
 slug: javascript-event-delegation
 tags: ['javascript', 'event delegation']
-recommended: ['javascript-closure', 'simple-but-tricky-javascript-interview-questions']
 type: post
 ---
 

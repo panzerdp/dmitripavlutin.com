@@ -6,7 +6,6 @@ modified: "2021-06-29T10:10Z"
 thumbnail: "./images/cover-3.png"
 slug: react-usetransition
 tags: ['react', 'usetransition', 'hook']
-recommended: ['react-throttle-debounce', 'controlled-inputs-using-react-hooks']
 type: post
 ---
 

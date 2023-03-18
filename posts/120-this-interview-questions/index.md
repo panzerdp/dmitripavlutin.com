@@ -6,7 +6,6 @@ modified: "2021-02-23T09:30Z"
 thumbnail: "./images/cover.jpg"
 slug: javascript-this-interview-questions
 tags: ['javascript', 'this', 'interview']
-recommended: ['gentle-explanation-of-this-in-javascript', 'javascript-closures-interview-questions']
 type: post
 ---
 

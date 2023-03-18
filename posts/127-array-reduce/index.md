@@ -6,7 +6,6 @@ modified: "2021-04-13T07:30Z"
 thumbnail: "./images/cover-3.png"
 slug: javascript-array-reduce
 tags: ['javascript', 'array', 'reduce']
-recommended: ['foreach-iterate-array-javascript', 'operations-on-arrays-javascript']
 type: post
 ---
 

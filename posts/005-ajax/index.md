@@ -6,7 +6,6 @@ modified: "2016-01-24"
 thumbnail: "./images/cover.jpg"
 slug: catch-the-xmlhttp-request-in-plain-javascript
 tags: ["javascript"]
-recommended: ["gentle-explanation-of-this-in-javascript", "how-three-dots-changed-javascript"]
 type: post
 ---
 

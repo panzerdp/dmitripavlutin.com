@@ -6,7 +6,6 @@ modified: '2020-01-15T14:00Z'
 thumbnail: './images/crystal.jpg'
 slug: explicit-coding-discipline
 tags: ['craftsmanship', 'clean code']
-recommended: ['become-better-software-developer-digging-climbing', 'the-path-of-software-development-craftsmanship']
 type: post
 ---
 

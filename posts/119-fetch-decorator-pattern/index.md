@@ -6,7 +6,6 @@ modified: "2021-02-27T06:30Z"
 thumbnail: "./images/cover.png"
 slug: enhance-fetch-with-decorator-pattern
 tags: ['fetch', 'decorator pattern', 'async await']
-recommended: ['javascript-fetch-async-await', 'timeout-fetch-request']
 type: post
 ---
 
