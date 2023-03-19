@@ -1,11 +1,11 @@
 ---
-title: "How to Declare a JavaScript Function"
-description: "JavaScript allows to declare functions in 6 ways. The article describes how to choose the right declaration type, depending on the function purpose."
+title: "How to Declare Functions in JavaScript"
+description: "Six ways to declare (define) JavaScript functions: function declaration, function expression, arrow function, and more."
 published: "2016-06-22"
 modified: "2023-03-19"
 thumbnail: "./images/cover.jpg"
 slug: 6-ways-to-declare-javascript-functions
-tags: ["javascript", "function"]
+tags: ["javascript", "function", "arrow-function"]
 type: post
 ---
 
@@ -22,7 +22,7 @@ In JavaScript a function is composed of many parts:
 * The variable that holds the function object
 * `arguments` object (or missing in an arrow function)
 
-This post teaches you six approaches to declare (aka define) JavaScript functions: the syntax, examples, and common pitfalls. Moreover, you will understand when to use a specific function type in certain circumstances.  
+This post shows you six approaches to declare (aka define) JavaScript functions: the syntax, examples, and common pitfalls. Moreover, you will understand when to use a specific function type in certain circumstances.  
 
 <Affiliate type="traversyJavaScript" />
 
