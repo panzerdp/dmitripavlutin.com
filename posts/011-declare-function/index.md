@@ -11,7 +11,7 @@ type: post
 
 A **function** is a parametric block of code defined once and called multiple times later. 
 
-In JavaScript a function is composed from many parts:
+In JavaScript a function is composed of many parts:
 
 * JavaScript code that forms the function body
 * The list of parameters
@@ -22,7 +22,7 @@ In JavaScript a function is composed from many parts:
 * The variable that holds the function object
 * `arguments` object (or missing in an arrow function)
 
-This post teaches you six approaches to declare (aka define) JavaScript functions: the syntax, examples and common pitfalls. Moreover, you will understand when to use a specific function type in certain circumstances.  
+This post teaches you six approaches to declare (aka define) JavaScript functions: the syntax, examples, and common pitfalls. Moreover, you will understand when to use a specific function type in certain circumstances.  
 
 <Affiliate type="traversyJavaScript" />
 
@@ -32,7 +32,7 @@ This post teaches you six approaches to declare (aka define) JavaScript function
 
 > **A function declaration** (also known as **function definition**) is made of `function` keyword, followed by an obligatory function name, a list of parameters in a pair of parenthesis `(para1, ..., paramN)` and a pair of curly braces `{...}` that delimits the body code.  
 
-An example of function declaration:
+An example of a function declaration:
 
 ```javascript
 // function declaration
@@ -51,7 +51,7 @@ The function declaration **creates a variable** in the current scope with the id
 
 The function variable is **hoisted** up to the top of the current scope, which means that the function can be invoked before the declaration (see [this chapter](/javascript-hoisting-in-details/#5-function-declarations) for more details).  
 
-The created function is **named**, which means that the `name` property of the function object holds its name. It is useful when viewing the call stack: in debugging or error messages reading.
+The created function is **named**, which means that the `name` property of the function object holds its name. It is useful when viewing the call stack: in debugging or error message reading.
 
 Let's see these properties in an example:
 
@@ -117,7 +117,7 @@ You can read more details about function declaration hoisting [here](/javascript
 
 It is easy to [confuse the function declaration and the function expression](/javascript-function-expressions-and-declarations/). They look very similar but produce functions with different properties.  
 
-An easy to remember rule: the *function declaration* in a statement always **starts** with the keyword `function`. Otherwise it's a *function expression* (see [2.](#2functionexpression)).  
+An easy-to-remember rule: the *function declaration* in a statement always **starts** with the keyword `function`. Otherwise it's a *function expression* (see [2.](#2functionexpression)).  
 
 The following sample is a function declaration where the statement **starts** with `function` keyword:
 
@@ -128,7 +128,7 @@ function isNil(value) {
 }
 ```
 
-In case of function expressions the JavaScript statement **does not start** with `function` keyword (it is somewhere in the middle of the statement code): 
+In the case of function expressions the JavaScript statement **does not start** with `function` keyword (it is somewhere in the middle of the statement code): 
 
 ```javascript
 // Function expression: starts with "const"
@@ -147,7 +147,7 @@ const numbers = ([1, false, 5]).filter(function(item) {
 
 ### 1.3 Function declaration in conditionals
 
-Some JavaScript environments throw a reference error when invoking a function whose declaration appears within blocks `{...}` of `if`, `for` or `while` statements.  
+Some JavaScript environments throw a reference error when invoking a function whose declaration appears within blocks `{...}` of `if`, `for`, or `while` statements.  
 
 Let's enable the strict mode and see what happens when a function is declared in a conditional:
 
@@ -383,15 +383,15 @@ console.log(absValue(5));   // => 5
 
 The function declared using a fat arrow has the following properties:
 
-*  The arrow function does not create its execution context, but takes it lexically (contrary to function expression or function declaration, which create  own `this` depending on invocation)
+*  The arrow function does not create its execution context but takes it lexically (contrary to function expression or function declaration, which creates its own `this` depending on invocation)
 * The arrow function is anonymous. However, the engine can infer its name from the variable holding the function
 * `arguments` object is not available in the arrow function (contrary to other declaration types that provide `arguments` object). You are free to use rest parameters `(...params)`, though.  
 
 ### 4.1 Context transparency
 
-`this` keyword is a confusing aspect of JavaScript (check [this article](/gentle-explanation-of-this-in-javascript/) for a detailed explanation on `this`).   
+`this` keyword is a confusing aspect of JavaScript (check [this article](/gentle-explanation-of-this-in-javascript/) for a detailed explanation of `this`).   
 
-Because functions create own execution context, often it is difficult to detect `this` value.  
+Because functions create their execution context, often it is difficult to detect `this` value.  
 
 ECMAScript 2015 improves `this` usage by introducing the arrow function, which takes the context lexically (or simply uses `this` from the immediate outer scope). This is nice because you don't have to use `myFunc.bind(this)` or store the context `const self = this` when a function needs the enclosing context.
 
@@ -434,7 +434,7 @@ Without the arrow function, you have to manually fix the context. It means using
     }.bind(this);
 //...
 ```
-or store the context into a separated variable `var self = this`:
+or store the context into a separate variable `var self = this`:
 
 ```javascript
 //...
@@ -446,7 +446,7 @@ or store the context into a separated variable `var self = this`:
 //...
 ```
 
-The context transparency can be used when you want to keep `this` as is, taken from the enclosing context.
+Context transparency can be used when you want to keep `this` as is, taken from the enclosing context.
 
 ### 4.2 Short callbacks
 
@@ -469,7 +469,7 @@ If necessary, use the expanded syntax of arrow functions when writing nested arr
 
 ## 5. Generator function
 
-The generator function in JavaScript returns a [Generator object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator). Its syntax is similar to function expression, function declaration or method declaration, just that it requires a star character `*`.
+The generator function in JavaScript returns a [Generator object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator). Its syntax is similar to function expression, function declaration, or method declaration, just that it requires a star character `*`.
 
 The generator function can be declared in the following forms:
 
@@ -520,7 +520,7 @@ console.log(g.next().value); // => 1
 ```
 [Open the demo.](https://jsfiddle.net/dmitri_pavlutin/dmwr2a0u/)
 
-In all 3 cases the generator function returns the generator object `g`. Later `g` is used to generate a series of incremented numbers.
+In all 3 cases, the generator function returns the generator object `g`. Later `g` is used to generate a series of incremented numbers.
 
 ## 6. One more thing: new Function
 
@@ -545,7 +545,7 @@ console.log(typeof sum3 === 'function'); // => true
 
 The function object type has a constructor: [`Function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function).  
 
-When `Function` is invoked as a constructor `new Function(arg1, arg2, ..., argN, bodyString)`, a new function is created. The arguments `arg1, args2, ..., argN` passed to constructor become the parameter names for the new function and the last argument `bodyString` is used as the function body code.  
+When `Function` is invoked as a constructor `new Function(arg1, arg2, ..., argN, bodyString)`, a new function is created. The arguments `arg1, args2, ..., argN` passed to the constructor become the parameter names for the new function, and the last argument `bodyString` is used as the function body code.  
 
 Let's create a function that sums two numbers: 
 
@@ -574,11 +574,11 @@ One *possible* application of `new Function` is a [better way](https://twitter.c
 ```
 [Open the demo.](https://jsfiddle.net/dmitri_pavlutin/dyvgnL82/)
 
-Remember that functions **almost never** should be declared using `new Function()`. Because the function body is evaluated on runtime, this approach inherits many `eval()` usage [problems](http://stackoverflow.com/a/86580/1894471): security risks, harder debugging, no way to apply engine optimizations, no editor auto-complete.
+Remember that functions **seldom** should be declared using `new Function()`. Because the function body is evaluated on runtime, this approach inherits many `eval()` usage [problems](http://stackoverflow.com/a/86580/1894471): security risks, harder debugging, no way to apply engine optimizations, no editor auto-complete.
 
-## 7. At the end, which way is better?
+## 7. In the end, which way is better?
 
-There is no winner or loser. The decision which declaration type to choose depends on the situation.  
+There is no winner or loser. The decision of which declaration type to choose depends on the situation.  
 
 There are some rules however that you may follow in common situations.
 
@@ -586,6 +586,6 @@ If the function uses `this` from the enclosing function, the arrow function is a
 
 For a shorter syntax when declaring methods on object literals, the shorthand method declaration is preferable.  
 
-`new Function` way to declare functions normally should not be used. Mainly because it opens potential security risks, doesn't allow code auto-complete in editors and loses the engine optimizations.
+`new Function` way to declare functions normally should not be used. Mainly because it opens potential security risks, doesn't allow code auto-complete in editors, and loses the engine optimizations.
 
 *Do you prefer arrow functions or function expressions?!*
