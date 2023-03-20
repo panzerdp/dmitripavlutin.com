@@ -1,5 +1,5 @@
 ---
-title: "How to Declare Functions in JavaScript"
+title: "JavaScript Function Declaration: The 6 Ways"
 description: "Six ways to declare (define) JavaScript functions: function declaration, function expression, arrow function, and more."
 published: "2016-06-22"
 modified: "2023-03-19"
