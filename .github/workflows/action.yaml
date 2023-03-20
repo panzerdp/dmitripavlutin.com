@@ -27,7 +27,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gatsby-build-
       - name: Install Dependencies
-        run: npm install --legacy-peer-deps
+        run: npm install
       - name: Build
         run: npm run build
         env:
