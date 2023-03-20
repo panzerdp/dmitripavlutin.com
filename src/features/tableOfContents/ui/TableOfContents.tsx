@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 
 import { TableOfContentsItem } from '../model/TableOfContentsItem'
-import { getFlatList } from './GetFlatList'
+import { GetFlatList } from './GetFlatList'
 
 interface Props {
   tableOfContents: { items: TableOfContentsItem[] };
@@ -17,8 +17,7 @@ export function TableOfContents({ tableOfContents: { items }, tableLayout = fals
   return (
     <div className={className}>
       <h3>Table of Contents</h3>
-
-      {getFlatList(items, maxLevel)}
+      <GetFlatList items={items} maxLevel={maxLevel} />
     </div>
   )
 }
