@@ -3,6 +3,8 @@
     "source.fixAll.eslint": true
   },
   "eslint.validate": ["javascript", "tsx"],
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
   "[javascript]": {
     "editor.tabSize": 2,
   }
