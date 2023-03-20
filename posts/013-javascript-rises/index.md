@@ -14,8 +14,6 @@ These days ECMAScript 2015 makes JavaScript the supreme leader of the Web.
 
 Let's see how JavaScript rises from a complementary language back in 1995 until these days, when it becomes very popular and conquerors the client and server side web development.  
 
-<Affiliate type="traversyJavaScript" />
-
 ## The dark
 
 ![The dark](./images/image-1-3.jpg)

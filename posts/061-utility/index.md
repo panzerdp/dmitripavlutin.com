@@ -15,6 +15,8 @@ The utility libraries (collections of functions implementing common tasks like f
 
 Let's discuss when it makes sense to use utility libraries. And importantly, how to integrate libraries to minimally affect the bundle size.  
 
+<Affiliate type="traversyJavaScript" />
+
 ## 1. My rule of thumb
 
 If the following is true for a particular problem:

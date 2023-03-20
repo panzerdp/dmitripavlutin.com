@@ -9,8 +9,6 @@ tags: ["javascript", "equality"]
 type: post
 ---
 
-> Sometimes when I'm writing Javascript I want to throw up my hands and say 'this is bullshit!'
-
 During everyday JavaScript coding, it may be hard to see how the equality operator works. Especially when the operands have different types. Time to time this creates bugs in conditionals, which are difficult to identify.
 It is easy to understand why `0 == 8` is `false` or `'' == false` is `true`. But why `{} == true` is `false` is not obviously to see.
 If you're interested:

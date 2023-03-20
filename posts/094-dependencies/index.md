@@ -34,6 +34,8 @@ However, your component might need diverse dependency implementations for variou
 
 Designing correctly the dependencies is an important skill to architect Front-end applications. The first step to creating a good design is to identify the *stable* and *volatile* dependencies and treat them accordingly. In this post, you're going to find out how.  
 
+<Affiliate type="traversyJavaScript" />
+
 <TableOfContents />
 
 ## 1. Stable dependencies
