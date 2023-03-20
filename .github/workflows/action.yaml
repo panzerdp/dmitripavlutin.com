@@ -28,6 +28,8 @@ jobs:
             ${{ runner.os }}-gatsby-build-
       - name: Install Dependencies
         run: npm install
+      - name: Unit testing
+        run: npm run test
       - name: Build
         run: npm run build
         env:
