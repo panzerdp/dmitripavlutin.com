@@ -2,15 +2,14 @@
 title: "How to Timeout a fetch() Request"
 description: "How to use setTimeout(), the abort controller, and fetch() API to make requests with a configurable timeout."
 published: "2020-10-27T09:00Z"
-modified: "2023-01-30"
+modified: "2023-03-20"
 thumbnail: "./images/cover-2.png"
 slug: timeout-fetch-request
 tags: ['fetch']
 type: post
 ---
 
-In this article I want to talk about why we *should not rely on a network* when we are working with a network.
-The network is unreliable because an HTTP request or response can fail: 
+Normally, you should not rely on the network when we are working with it. The network is unreliable because an HTTP request or response can fail: 
 
 * The user is offline
 * DNS lookup failed
