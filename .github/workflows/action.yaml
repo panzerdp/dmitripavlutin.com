@@ -44,3 +44,7 @@ jobs:
           build_directory: 'public'
           install_command: "echo 'Skipping installing the dependencies'"
           build_command: "echo 'Skipping building the web files'"
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
