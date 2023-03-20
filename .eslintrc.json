@@ -23,6 +23,9 @@
     "react"
   ],
   "rules": {
+    "quotes": ["error", "single"],
+    "no-trailing-spaces": "error",
+    "@typescript-eslint/semi": ["error", "never"],
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/indent": ["error", 2],
     "@typescript-eslint/explicit-function-return-type": "off",
