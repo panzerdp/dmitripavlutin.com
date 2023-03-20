@@ -5,7 +5,7 @@ published: "2020-10-27T09:00Z"
 modified: "2023-03-20"
 thumbnail: "./images/cover-2.png"
 slug: timeout-fetch-request
-tags: ['fetch']
+tags: ['javascript', 'fetch']
 type: post
 ---
 
@@ -20,6 +20,8 @@ Normally, you should not rely on the network when we are working with it. The ne
 Users are OK to wait up to 8 seconds for simple requests to complete. That's why you need to set a timeout on the network requests and inform the user after 8 seconds about the network problems.  
 
 I'll show you how to use `setTimeout()`, the abort controller, and `fetch()` to implement configurable request timeouts.  
+
+<Affiliate type="traversyJavaScript" />
 
 ## 1. Default fetch() timeout
 
