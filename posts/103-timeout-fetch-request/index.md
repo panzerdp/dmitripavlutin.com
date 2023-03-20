@@ -9,8 +9,7 @@ tags: ['fetch']
 type: post
 ---
 
-The first rule to remember when working with the network is *don't rely on the network*.  
-
+In this article I want to talk about why we *should not rely on a network* when we are working with a network.
 The network is unreliable because an HTTP request or response can fail: 
 
 * The user is offline
@@ -42,7 +41,7 @@ As an experiment, in the [demo](https://codesandbox.io/s/strange-merkle-xqs7n?fi
 
 ## 2. Timeout a fetch() request
 
-`fetch()` API by itself doesn't allow canceling programmatically a request. To stop a request at the desired time you need additionally an [abort controller](https://developer.mozilla.org/en-US/docs/Web/API/AbortController).  
+`fetch()` API by itself doesn't allow canceling programmatically a request. To stop a request at the desired time you also need an [abort controller](https://developer.mozilla.org/en-US/docs/Web/API/AbortController).  
 
 The following `fetchWithTimeout()` is an improved version of `fetch()` that creates requests with a configurable timeout:
 
@@ -65,7 +64,7 @@ async function fetchWithTimeout(resource, options = {}) {
 
 First, `const { timeout = 8000 } = options` extracts the timeout param in milliseconds from the `options` object (defaults to 8 seconds).   
 
-`const controller = new AbortController()` creates an instance of the [abort controller](https://developer.mozilla.org/en-US/docs/Web/API/AbortController). This controller lets you stop `fetch()` requests at will. A new abort controlled must be created for each request, in other words, controllers aren't reusable.   
+`const controller = new AbortController()` creates an instance of the [abort controller](https://developer.mozilla.org/en-US/docs/Web/API/AbortController). This controller allows you stop `fetch()` requests at will. A new abort controller must be created for each request, in other words, controllers aren't reusable.   
 
 `const id = setTimeout(() => controller.abort(), timeout)` starts a timing function. After `timeout` time, if the timing function wasn't cleared, `controller.abort()` cancels the fetch request.  
 
@@ -93,7 +92,7 @@ async function loadGames() {
 
 [Try the demo.](https://codesandbox.io/s/stoic-dust-cctin?file=/src/index.html)
 
-`fetchWithTimeout()` (instead of simple `fetch()`) starts a request that cancels at `timeout` time &mdash; 6 seconds.
+`fetchWithTimeout()` (instead of simple `fetch()`) starts a request that will be canceled at `timeout` time &mdash; 6 seconds.
 
 If the request to `/games` hasn't finished in 6 seconds, then the request is canceled and a timeout error is thrown.
 
@@ -103,14 +102,14 @@ Open the [demo](https://codesandbox.io/s/stoic-dust-cctin?file=/src/index.html) 
 
 ## 3. Summary
 
-By default a `fetch()` request timeouts at the time set up by the browser. In Chrome, for example, this setting equals 300 seconds. That's way longer than a user would expect for a network request to complete.  
+By default a `fetch()` request timeouts at the time set up by the browser. In Chrome, for example, this setting is 300 seconds. That's way longer than a user would expect for a network request to complete.  
 
-A good approach when making network requests is to configure a request timeout of about 8 - 10 seconds.  
+A good approach to network requests is to configure a request timeout of about 8 - 10 seconds.  
 
-Using `setTimeout()` and abort controller you can create `fetch()` requests configured to timeout when you'd like to.  
+Using `setTimeout()` and abort controller you can create `fetch()` requests that are configured to timeout when you'd like to.  
 
-Check the [browser support](https://caniuse.com/?search=abort%20controller) of the abort controller. There's also a [polyfill](https://github.com/mo/abortcontroller-polyfill) for it.  
+Check the [browser support](https://caniuse.com/?search=abort%20controller) for the abort controller. There's also a [polyfill](https://github.com/mo/abortcontroller-polyfill) for it.  
 
-Note that without the use of an abort controller, there's no way you can stop a `fetch()` request. Don't use solutions like [this](https://stackoverflow.com/a/46946573/1894471).  
+Note that there's no way to stop a fetch() request without using an abort controller. Don't use solutions like [this](https://stackoverflow.com/a/46946573/1894471).  
 
 *What good practices regarding network requests do you know? Please write a comment!*
