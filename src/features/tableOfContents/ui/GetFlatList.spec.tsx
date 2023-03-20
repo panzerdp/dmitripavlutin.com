@@ -2,7 +2,7 @@ import { GetFlatList } from './GetFlatList'
 import { TableOfContentsItem } from '../model/TableOfContentsItem'
 import { render } from '@testing-library/react'
 
-describe('getFlatList()', () => {
+describe('<GetFlatList />', () => {
   const items: TableOfContentsItem[] = [
     {
       title: 'Item 1',
