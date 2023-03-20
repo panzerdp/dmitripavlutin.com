@@ -5,7 +5,7 @@ published: "2020-07-07T06:30Z"
 modified: "2023-01-29"
 thumbnail: "./images/cover-8.png"
 slug: parse-url-javascript
-tags: ["url", "hostname", "pathname", "query string", "hash"]
+tags: ['url', 'hostname', 'pathname', 'query string', 'hash']
 type: post
 ---
 
@@ -22,6 +22,8 @@ Often you need to access specific components of an URL: the *hostname* (e.g. `dm
 A convenient parser to access components of an URL is the `URL()` constructor.    
 
 In this post, I'm going to show you the structure of an URL and its main components. Then, I'm going to describe how to use the `URL()` constructor to easily pick components of an URL like hostname, pathname, query, or hash. 
+
+<Affiliate type="traversyJavaScript" />
 
 <TableOfContents />
 

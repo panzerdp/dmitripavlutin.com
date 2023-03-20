@@ -9,9 +9,7 @@ tags: ['fetch', 'json']
 type: post
 ---
 
-[JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) is a popular format for sending data over the network.  
-
-Here's an example of JSON containing an object with props and values:
+[JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) is a popular format for sending data over the network. Here's an example of JSON containing an object with props and values:
 
 ```json
 {
@@ -22,7 +20,9 @@ Here's an example of JSON containing an object with props and values:
 }
 ```
 
-In this post, you'll learn how to use `fetch()` API to load (HTTP `GET`) or post (HTTP's `POST`) JSON data.  
+In this post, you'll learn how to use `fetch()` to load or post JSON data.  
+
+<Affiliate type="traversyJavaScript" />
 
 ## 1. Recalling fetch()
 
