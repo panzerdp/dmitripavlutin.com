@@ -49,11 +49,11 @@ In this post, I'll show you the difference between the two, so you could choose 
 
 ### 1.1 Regular function
 
-Inside of a regular JavaScript function, `this` value (aka the execution context) is dynamic.  
+Inside a regular JavaScript function, `this` value (aka the execution context) is dynamic.  
 
 The dynamic context means that the value of `this` depends on *how* the function is invoked. In JavaScript, there are 4 ways you can invoke a regular function.  
 
-During a *simple invocation* the value of `this` equals to the global object (or `undefined` if the function runs in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)):
+During a *simple invocation* the value of `this` equals the global object (or `undefined` if the function runs in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)):
 
 ```javascript
 function myFunction() {
@@ -89,7 +89,7 @@ myFunction.call(myContext);  // logs { value: 'A' }
 myFunction.apply(myContext); // logs { value: 'A' }
 ```
 
-During a *constructor invocation* using `new` keyword `this` equals to the newly created instance:
+During a *constructor invocation* using `new` keyword `this` equals the newly created instance:
 
 ```javascript
 function MyFunction() {
@@ -121,7 +121,7 @@ const myObject = {
 myObject.myMethod([1, 2, 3]); 
 ```
 
-`this` value inside the arrow function `callback()` equals to `this` of the outer function `myMethod()`.  
+`this` value inside the arrow function `callback()` equals `this` of the outer function `myMethod()`.  
 
 `this` resolved lexically is one of the great features of the arrow functions. When using callbacks inside methods you are sure the arrow function doesn't define its own `this` (no more `const self = this` or `callback.bind(this)` workarounds).    
 
@@ -200,7 +200,7 @@ function myRegularFunction() {
 myRegularFunction('a', 'b'); // logs { 0: 'a', 1: 'b', length: 2 }
 ```
 
-The arrow function `myArrowFunction()` is invoked with the arguments `'c'`, `'d'`. Still, inside of its body, `arguments` object equals to the arguments of `myRegularFunction()` invocation: `'a'`, `'b'`.  
+The arrow function `myArrowFunction()` is invoked with the arguments `'c'`, `'d'`. Still, inside of its body, `arguments` object equals the arguments of `myRegularFunction()` invocation: `'a'`, `'b'`.  
 
 If you'd like to access the direct arguments of the arrow function, then you can use [the rest parameters](/javascript-function-parameters/#5-rest-parameters) feature:
 
@@ -232,7 +232,7 @@ function myFunction() {
 myFunction(); // => 42
 ```
 
-If the `return` statement is missing, or there's no expression after return statement, the regular function implicitely returns `undefined`:
+If the `return` statement is missing, or there's no expression after the return statement, the regular function implicitly returns `undefined`:
 
 ```javascript
 function myEmptyFunction() {
@@ -266,7 +266,7 @@ increment(41); // => 42
 
 ### 5.1 Regular function
 
-The regular functions are the usual way to define methods on classes or objects.  
+Regular functions are the usual way to define methods on classes or objects.  
 
 In the following class `Hero`, the method `logName()` is defined using a regular function:
 
@@ -284,7 +284,7 @@ class Hero {
 const batman = new Hero('Batman');
 ```
 
-Usually, the regular functions as methods are the way to go.  
+Usually, regular functions as methods are the way to go.  
 
 Sometimes you'd need to supply the method as a callback, for example to `setTimeout()` or an event listener. In such cases, you might encounter difficulties accessing `this` value.  
 
@@ -310,7 +310,7 @@ Binding `this` manually requires boilerplate code, especially if you have lots o
 
 ### 5.2 Arrow function
 
-Thanks to class fields feature you can use the arrow function as methods inside classes.  
+Thanks to the class fields feature you can use the arrow function as methods inside classes.  
 
 Now, in contrast with regular functions, the method defined using an arrow binds `this` lexically to the class instance.  
 
@@ -353,4 +353,4 @@ Anyhow the fat arrow method is invoked, `this` always equals the class instance,
 
 To understand all types of functions in JavaScript, I recommend checking [JavaScript Function Declaration: The 6 Ways](/6-ways-to-declare-javascript-functions/).
 
-*What other differences between arrow and regular functions do you know?*
+*What other differences between the arrow and regular functions do you know?*
