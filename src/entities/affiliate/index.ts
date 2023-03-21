@@ -1,0 +1,1 @@
+export type { Affiliate } from './model/Affiliate'
