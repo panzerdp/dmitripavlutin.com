@@ -3,7 +3,7 @@ title: "TypeScript Function Overloading"
 description: "Function overloading in TypeScript lets you define functions that can be called in multiple ways."
 published: "2021-11-18T13:40Z"
 modified: "2023-03-21"
-thumbnail: "./images/typescript-function-overloading.png"
+thumbnail: "./images/typescript-function-overloading-2.png"
 slug: typescript-function-overloading
 tags: ['typescript', 'function']
 type: post
@@ -118,9 +118,9 @@ function greet(person: unknown): unknown {
 
 The `greet()` function has 2 overload signatures and one implementation signature.  
 
-Each overload signature describes one way the function can be invoked. In the case of `greet()` function, you can call it 2 ways: with a string argument, or with an array of strings as argument.  
+Each overload signature describes one way the function can be invoked. In the case of `greet()` function, you can call it 2 ways: with a string argument, or with an array of strings as an argument.  
 
-The implementation signature `function greet(person: unknown): unknown { ... }` contains the proper logic how the function works.    
+The implementation signature `function greet(person: unknown): unknown { ... }` contains the proper logic of how the function works.    
 
 Now, as before, you can invoke `greet()` with the arguments of type string or array of strings:
 
@@ -175,7 +175,7 @@ Then the overload signature `function greet(persons: string[]): string[]` is mar
 
 ## 3. Method overloading
 
-In the previous examples the function overloading was applied to a regular function. But you can overload methods too! 
+In the previous examples, function overloading was applied to a regular function. But you can overload methods too! 
 
 During method overloading, both the overload signatures and implementation signature are now a part of the class.  
 
@@ -230,7 +230,7 @@ Function overloading, when used the right way, simplifies the use of functions t
 
 ![TypeScript Function Overloading Autocomplete Second Signature](./images/autocomplete-second.png)
 
-However, there are situations when I'd recommend not to use the function overloading, but rather stick to the function signature.  
+However, there are situations when I'd recommend not using the function overloading, but rather sticking to the function signature.  
 
 For example, don't use the function overloading for optional parameters:
 
@@ -262,7 +262,7 @@ Function overloading in TypeScript lets you define functions that can be called 
 
 Using function overloading requires defining the overload signatures: a set of functions with parameter and return types, but without a body. These signatures indicate how the function should be invoked.  
 
-Additionally, you have to write the proper implementation of the function (implementation signature): the parameter and return types, as well the function body. Note that the implementation signature is not callable.   
+Additionally, you have to write the proper implementation of the function (implementation signature): the parameter and return types, as well as the function body. Note that the implementation signature is not callable.   
 
 Aside from regular functions, methods in classes can be overload too.  
 
