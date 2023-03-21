@@ -1,4 +1,4 @@
-const siteUrl = 'https://dmitripavlutin.com';
+const siteUrl = 'https://dmitripavlutin.com'
 
 module.exports = {
   siteUrl, // ensure compatibility with plugins that require `siteUrl`
@@ -16,7 +16,7 @@ module.exports = {
   authorInfo: {
     name: 'Dmitri Pavlutin',
     description:
-      'Tech writer and coach. My daily routine consists of (but not limited to) drinking coffee, coding, writing, coaching, overcoming boredom 😉.',
+      'Tech writer and coach. My daily routine consists of (but not limited to) drinking coffee, coding, writing, coaching, overcoming boredom 😉. \n I\'m living in the wonderful city of Barcelona, Catalonia, Spain.',
     job: '',
     email: 'dmitripavlutin@gmail.com',
     jobTitle: 'Software Developer',
@@ -106,4 +106,4 @@ module.exports = {
     }],
     showVueschoolTopBanner: true
   }
-};
+}
