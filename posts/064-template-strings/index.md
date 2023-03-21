@@ -3,7 +3,7 @@ title: 'How to Use Template Strings in JavaScript'
 description: 'Template strings in JavaScript are surrounded by backticks `string` and perform string interpolation: `Hello ${who}!`'
 published: '2020-01-22T11:30Z'
 modified: '2023-03-21'
-thumbnail: './images/string-interpolation.png'
+thumbnail: './images/string.jpg'
 slug: javascript-template-strings
 tags: ['javascript', 'string']
 type: post
