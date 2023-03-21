@@ -1,9 +1,9 @@
 
 
-import * as styles from './index.module.scss';
-import withWindowOpen, { WindowOpenOptions } from 'components/With/WindowOpen';
+import * as styles from './index.module.scss'
+import withWindowOpen, { WindowOpenOptions } from 'components/With/WindowOpen'
 
-const TWITTER_FOLLOW_URL = 'https://twitter.com/intent/user?screen_name=';
+const TWITTER_FOLLOW_URL = 'https://twitter.com/intent/user?screen_name='
 
 interface TwitterFollowButtonProps {
   twitterFollowersCount: string;
@@ -18,15 +18,15 @@ export function TwitterFollowButton({
   authorName,
   windowOpen,
 }: TwitterFollowButtonProps): JSX.Element {
-  const url = TWITTER_FOLLOW_URL + username;
+  const url = TWITTER_FOLLOW_URL + username
   function openFollowWindow(event: React.MouseEvent) {
-    event.preventDefault();
+    event.preventDefault()
     windowOpen({
       name: `${authorName} (${username}) on Twitter`,
       url,
       width: 550,
       height: 500,
-    });
+    })
   }
   return (
     <div className={styles.hcount}>
@@ -53,7 +53,7 @@ export function TwitterFollowButton({
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default withWindowOpen(TwitterFollowButton);
+export default withWindowOpen(TwitterFollowButton)

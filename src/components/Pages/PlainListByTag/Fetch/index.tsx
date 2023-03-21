@@ -1,8 +1,8 @@
-import { graphql } from 'gatsby';
+import { graphql } from 'gatsby'
 
-import PlainListByTagTemplate from 'components/Pages/PlainListByTag/Template';
-import { PlainListByTagQuery } from 'graphql-types';
-import { toPostPlain } from 'utils/mapper';
+import PlainListByTagTemplate from 'components/Pages/PlainListByTag/Template'
+import { PlainListByTagQuery } from 'graphql-types'
+import { toPostPlain } from 'utils/mapper'
 
 interface PlainListByTagProps {
   pageContext: {
@@ -12,7 +12,7 @@ interface PlainListByTagProps {
 }
 
 export default function PlainListByTagFetch({ pageContext: { tag }, data }: PlainListByTagProps) {
-  return <PlainListByTagTemplate tag={tag} posts={data.allMdx.edges.map(toPostPlain)} />;
+  return <PlainListByTagTemplate tag={tag} posts={data.allMdx.edges.map(toPostPlain)} />
 }
 
 export const pageQuery = graphql`
@@ -34,4 +34,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

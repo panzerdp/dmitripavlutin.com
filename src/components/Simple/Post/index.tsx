@@ -1,15 +1,15 @@
-import { Link } from 'gatsby-link';
+import { Link } from 'gatsby-link'
 
-import SubheaderSimple from 'components/Subheader/Simple';
-import { TO_POST } from 'routes/path';
-import * as styles from './index.module.scss';
+import SubheaderSimple from 'components/Subheader/Simple'
+import { TO_POST } from 'routes/path'
+import * as styles from './index.module.scss'
 
 interface SimplePostProps {
   post: PostPlain;
 }
 
 export default function SimplePost({ post }: SimplePostProps) {
-  const to = TO_POST({ slug: post.slug });
+  const to = TO_POST({ slug: post.slug })
   return (
     <div className={styles.simplePost}>
       <h3>
@@ -17,5 +17,5 @@ export default function SimplePost({ post }: SimplePostProps) {
       </h3>
       <SubheaderSimple post={post} />
     </div>
-  );
+  )
 }

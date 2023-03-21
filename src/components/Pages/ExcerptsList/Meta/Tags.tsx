@@ -1,21 +1,21 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet'
 
-import { useSiteMetadata } from 'hooks/useSiteMetadata';
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
 
 interface MetaTagsProps {
   currentPage: number;
 }
 
 export function ExcerptsListMetaTags({ currentPage }: MetaTagsProps) {
-  const { author, site } = useSiteMetadata();
+  const { author, site } = useSiteMetadata()
 
-  let metaTitle = site.metaTitle;
-  let metaDescription = site.metaDescription;
+  let metaTitle = site.metaTitle
+  let metaDescription = site.metaDescription
   if (currentPage > 1) {
-    metaTitle = `${metaTitle}, page ${currentPage}`;
-    metaDescription = `${metaDescription}, page ${currentPage}`;
+    metaTitle = `${metaTitle}, page ${currentPage}`
+    metaDescription = `${metaDescription}, page ${currentPage}`
   }
-  const imageUrl = `${site.url}${author.profilePictureSrc}`;
+  const imageUrl = `${site.url}${author.profilePictureSrc}`
   return (
     <Helmet>
       <title>{metaTitle}</title>
@@ -34,5 +34,5 @@ export function ExcerptsListMetaTags({ currentPage }: MetaTagsProps) {
       <meta name="twitter:url" content={site.url} />
       <meta name="twitter:image" content={imageUrl} />
     </Helmet>
-  );
+  )
 }

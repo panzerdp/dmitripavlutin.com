@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 
 interface CarbonBannerLiveProps {
   scriptSrc: string;
@@ -6,15 +6,15 @@ interface CarbonBannerLiveProps {
 
 function CarbonBannerLive(props: CarbonBannerLiveProps, ref: React.RefObject<HTMLDivElement>): null {
   React.useEffect(() => {
-    const script = document.createElement('script');
-    script.src = props.scriptSrc;
-    script.async = true;
-    script.id = '_carbonads_js';
-    ref.current.appendChild(script);
+    const script = document.createElement('script')
+    script.src = props.scriptSrc
+    script.async = true
+    script.id = '_carbonads_js'
+    ref.current.appendChild(script)
 
     return () => { script.parentElement.removeChild(script) }
-  }, []);
-  return null;
+  }, [])
+  return null
 }
 
-export default React.forwardRef(CarbonBannerLive);
+export default React.forwardRef(CarbonBannerLive)

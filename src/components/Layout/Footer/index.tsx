@@ -1,11 +1,11 @@
-import { Link } from 'gatsby-link';
-import { memo } from 'react';
+import { Link } from 'gatsby-link'
+import { memo } from 'react'
 
-import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_RSS, TO_SEARCH } from 'routes/path';
-import AuthorLinks from 'components/AboutAuthor/Links';
-import * as styles from './index.module.scss';
+import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_RSS, TO_SEARCH } from 'routes/path'
+import AuthorLinks from 'components/AboutAuthor/Links'
+import * as styles from './index.module.scss'
 
-const year = new Date().getFullYear();
+const year = new Date().getFullYear()
 
 interface FooterProps {
   authorInfo: AuthorInfo;
@@ -55,7 +55,7 @@ export function Footer({ authorInfo: { profiles, name, email } }: FooterProps) {
         </div>
       </div>
     </footer>
-  );
+  )
 }
 
-export default memo(Footer);
+export default memo(Footer)

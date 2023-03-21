@@ -1,4 +1,4 @@
-import * as styles from './index.module.scss';
+import * as styles from './index.module.scss'
 
 interface FacebookFollowButtonProps {
   facebookPageUrl: string;
@@ -9,7 +9,7 @@ export default function FacebookFollowButton({
   facebookPageUrl,
   authorName,
 }: FacebookFollowButtonProps): JSX.Element {
-  const url = facebookPageUrl;
+  const url = facebookPageUrl
   return (
     <div className={styles.widget}>
       <div className={styles.btnO}>
@@ -25,5 +25,5 @@ export default function FacebookFollowButton({
         </a>
       </div>
     </div>
-  );
+  )
 }

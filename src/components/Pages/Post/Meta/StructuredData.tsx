@@ -1,21 +1,21 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet'
 
-import { useSiteMetadata } from 'hooks/useSiteMetadata';
-import { Post } from 'typings/post';
-import { TO_POST } from 'routes/path';
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
+import { Post } from 'typings/post'
+import { TO_POST } from 'routes/path'
 
 interface PostMetaStructuredDataProps {
   post: Post;
 }
 
 export default function PostMetaStructuredData({ post }: PostMetaStructuredDataProps) {
-  const { author: { info: authorInfo, profilePictureSrc }, site } = useSiteMetadata();
+  const { author: { info: authorInfo, profilePictureSrc }, site } = useSiteMetadata()
 
-  const postUrl = `${site.url}${TO_POST({ slug: post.slug })}`;
-  const postImageUrl = `${postUrl}cover.png`;
-  const authorProfilePictureUrl = `${site.url}${profilePictureSrc}`;
+  const postUrl = `${site.url}${TO_POST({ slug: post.slug })}`
+  const postImageUrl = `${postUrl}cover.png`
+  const authorProfilePictureUrl = `${site.url}${profilePictureSrc}`
   const sameAs = Object.keys(authorInfo.profiles)
-    .reduce((list, key: keyof typeof authorInfo.profiles) => [...list, authorInfo.profiles[key]], []);
+    .reduce((list, key: keyof typeof authorInfo.profiles) => [...list, authorInfo.profiles[key]], [])
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -56,10 +56,10 @@ export default function PostMetaStructuredData({ post }: PostMetaStructuredDataP
       '@type': 'WebPage',
       '@id': site.url,
     },
-  };
+  }
   return (
     <Helmet>
       <script type="application/ld+json">{JSON.stringify(structuredData, undefined, 2)}</script>
     </Helmet>
-  );
+  )
 }

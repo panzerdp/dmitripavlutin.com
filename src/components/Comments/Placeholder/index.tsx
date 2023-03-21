@@ -1,6 +1,6 @@
-import classNames from 'classnames';
+import classNames from 'classnames'
 
-import * as styles from './index.module.scss';
+import * as styles from './index.module.scss'
 
 function Placeholder(): JSX.Element {
   return (
@@ -14,7 +14,7 @@ function Placeholder(): JSX.Element {
         <div className={classNames(styles.text, styles.textLine100)} />
       </div>
     </div>
-  );
+  )
 }
 
-export default Placeholder;
+export default Placeholder

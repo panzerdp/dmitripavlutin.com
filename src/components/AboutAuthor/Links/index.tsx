@@ -1,4 +1,4 @@
-import * as styles from './index.module.scss';
+import * as styles from './index.module.scss'
 
 interface AuthorLinksProps {
   className?: string;

@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet'
 
 export default function LayoutMetaFontTags(): JSX.Element {
   return (
@@ -6,5 +6,5 @@ export default function LayoutMetaFontTags(): JSX.Element {
       <link rel="preload" href="/fonts/open-sans-v29-latin-700.woff2" as="font" type="font/woff2" crossOrigin="" />
       <link rel="preload" href="/fonts/roboto-mono-v22-latin-regular.woff2" as="font" type="font/woff2" crossOrigin="" />
     </Helmet>
-  );
+  )
 }

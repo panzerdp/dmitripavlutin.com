@@ -1,4 +1,4 @@
-import * as styles from './index.module.scss';
+import * as styles from './index.module.scss'
 
 interface SubscriptionFormProps {
   emailSubscriptionService: EmailSubscriptionService;
@@ -35,5 +35,5 @@ export default function SubscriptionForm({
       </form>
       <div className={styles.subscribersCount}>Join {count} other subscribers.</div>
     </div>
-  );
+  )
 }

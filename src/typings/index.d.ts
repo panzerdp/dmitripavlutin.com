@@ -1,1 +1,1 @@
-type Tags = string[];
+type Tags = string[]

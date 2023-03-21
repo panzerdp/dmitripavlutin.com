@@ -1,18 +1,18 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet'
 
-import { TO_POST } from 'routes/path';
-import { Post } from 'typings/post';
-import { useSiteMetadata } from 'hooks/useSiteMetadata';
+import { TO_POST } from 'routes/path'
+import { Post } from 'typings/post'
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
 
 interface PostMetaTagsProps {
   post: Post;
 }
 
 export default function PostMetaTags({ post }: PostMetaTagsProps) {
-  const { author: { info: authorInfo }, site } = useSiteMetadata();
+  const { author: { info: authorInfo }, site } = useSiteMetadata()
 
-  const postUrl = `${site.url}${TO_POST({ slug: post.slug })}`;
-  const imageUrl = `${postUrl}cover.png`;
+  const postUrl = `${site.url}${TO_POST({ slug: post.slug })}`
+  const imageUrl = `${postUrl}cover.png`
   return (
     <Helmet titleTemplate="%s">
       <title>{post.title}</title>
@@ -49,5 +49,5 @@ export default function PostMetaTags({ post }: PostMetaTagsProps) {
 
       <link rel="preconnect" href="https://api.github.com" />
     </Helmet>
-  );
+  )
 }

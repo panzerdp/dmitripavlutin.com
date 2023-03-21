@@ -1,2 +1,2 @@
-export { AffiliateText } from './ui/AffiliateText';
+export { AffiliateText } from './ui/AffiliateText'
 export { AffiliateBannerVueschool } from './ui/AffiliateBannerVueschool'

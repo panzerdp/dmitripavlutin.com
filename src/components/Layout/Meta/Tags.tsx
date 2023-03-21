@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet'
 
 interface LayoutMetaTagsProps {
   siteInfo: SiteInfo;
@@ -17,5 +17,5 @@ export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.E
       <html lang="en" />
       <meta name="google-site-verification" content="A3lH-k4h-4bEnJ4lt6BsPuTh5iUck5ElEV5xeyvkCxo" />
     </Helmet>
-  );
+  )
 }

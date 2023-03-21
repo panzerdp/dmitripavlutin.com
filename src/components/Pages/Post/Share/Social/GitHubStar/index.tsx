@@ -1,5 +1,5 @@
-import ShareButton from '../../Button';
-import * as styles from './index.module.scss';
+import ShareButton from '../../Button'
+import * as styles from './index.module.scss'
 
 
 interface PostShareGitHubStarProps {
@@ -13,5 +13,5 @@ export default function PostShareSocialGitHubStar({ repositoryUrl }: PostShareGi
       title="Star on GitHub"
       className={styles.gitHubStar}
     />
-  );
+  )
 }

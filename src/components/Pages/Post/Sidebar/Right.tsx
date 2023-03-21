@@ -1,7 +1,7 @@
-import { RightSidebar } from 'components/Layout/RightSidebar';
-import PopularPosts from 'components/Popular/Posts';
-import SidebarItemsCommon from 'components/SidebarItems/Common';
-import { PostPlain } from 'typings/post';
+import { RightSidebar } from 'components/Layout/RightSidebar'
+import PopularPosts from 'components/Popular/Posts'
+import SidebarItemsCommon from 'components/SidebarItems/Common'
+import { PostPlain } from 'typings/post'
 
 interface PostRightSidebarProps {
   popularPostsByCategory: {
@@ -16,5 +16,5 @@ export default function PostRightSidebar({ popularPostsByCategory }: PostRightSi
       <SidebarItemsCommon />
       <PopularPosts popularPostsByCategory={popularPostsByCategory} />
     </RightSidebar>
-  );
+  )
 }

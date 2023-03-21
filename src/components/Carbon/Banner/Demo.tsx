@@ -1,9 +1,9 @@
-import * as React from 'react';
+import * as React from 'react'
 
 function CarbonBannerDemo(_: unknown, ref: React.RefObject<HTMLDivElement>): null {
   React.useEffect(() => {
-    const div = document.createElement('div');
-    div.id = 'carbonads';
+    const div = document.createElement('div')
+    div.id = 'carbonads'
     div.innerHTML = `
     <span>
       <span class="carbon-wrap">
@@ -18,15 +18,15 @@ function CarbonBannerDemo(_: unknown, ref: React.RefObject<HTMLDivElement>): nul
         ads via Carbon (DEV)
       </a>
       <img src="#" border="0" height="1" width="1" alt="ads via Carbon" style="display: none;">
-    </span>`;
+    </span>`
     setTimeout(() => {
-      ref.current.appendChild(div);
-    }, 500);
+      ref.current.appendChild(div)
+    }, 500)
     return () => {
-      div.parentElement.removeChild(div);
-    };
-  }, []);
-  return null;
+      div.parentElement.removeChild(div)
+    }
+  }, [])
+  return null
 }
 
-export default React.forwardRef(CarbonBannerDemo);
+export default React.forwardRef(CarbonBannerDemo)

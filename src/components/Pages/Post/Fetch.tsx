@@ -1,9 +1,9 @@
-import { graphql } from 'gatsby';
+import { graphql } from 'gatsby'
 
-import PostTemplate from 'components/Pages/Post/Template';
-import { PostBySlugQuery } from 'graphql-types';
-import { toPostPlain } from 'utils/mapper';
-import { PostDetailed } from 'typings/post';
+import PostTemplate from 'components/Pages/Post/Template'
+import { PostBySlugQuery } from 'graphql-types'
+import { toPostPlain } from 'utils/mapper'
+import { PostDetailed } from 'typings/post'
 
 interface PostTemplateFetchProps {
   data: PostBySlugQuery;
@@ -11,32 +11,32 @@ interface PostTemplateFetchProps {
 }
 
 export default function PostTemplateFetch({ data, children }: PostTemplateFetchProps) {
-  const { featured: { popularPostsByCategory } } = data.site.siteMetadata;
-  const { mdx, popularPostsMarkdown } = data;
+  const { featured: { popularPostsByCategory } } = data.site.siteMetadata
+  const { mdx, popularPostsMarkdown } = data
   const post: PostDetailed = {
     ...mdx.frontmatter,
     children,
     thumbnail: mdx.frontmatter.thumbnail.childImageSharp.gatsbyImageData,
     tableOfContents: mdx.tableOfContents
-  };
+  }
   const postRelativePath = mdx.internal.contentFilePath
     .split('/')
     .slice(-3)
-    .join('/');
-  const popularPosts = popularPostsMarkdown.edges.map(toPostPlain);
+    .join('/')
+  const popularPosts = popularPostsMarkdown.edges.map(toPostPlain)
   const popularPlainPostsByCategory = popularPostsByCategory.map(({ category, slugs }) => {
     return {
       category,
       plainPosts: slugs.map(popularSlug => popularPosts.find(({ slug }) => popularSlug === slug))
-    };
-  });
+    }
+  })
   return (
     <PostTemplate
       postRelativePath={postRelativePath}
       post={post}
       popularPostsByCategory={popularPlainPostsByCategory}
     />
-  );
+  )
 }
 
 export const pageQuery = graphql`
@@ -96,4 +96,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

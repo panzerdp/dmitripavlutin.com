@@ -1,9 +1,9 @@
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
-import { Link } from 'gatsby-link';
-import { memo } from 'react';
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
+import { Link } from 'gatsby-link'
+import { memo } from 'react'
 
-import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_SEARCH } from 'routes/path';
-import * as styles from './index.module.scss';
+import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_SEARCH } from 'routes/path'
+import * as styles from './index.module.scss'
 
 interface HeaderProps {
   authorProfilePicture: IGatsbyImageData;
@@ -30,7 +30,7 @@ export function Header({ authorProfilePicture, siteInfo }: HeaderProps) {
         </div>
       </div>
     </header>
-  );
+  )
 }
 
-export default memo(Header);
+export default memo(Header)

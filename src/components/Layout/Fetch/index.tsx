@@ -1,8 +1,8 @@
 
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, StaticQuery } from 'gatsby'
 
-import LayoutContainer from 'components/Layout/Container';
-import { LayoutQuery } from 'graphql-types';
+import LayoutContainer from 'components/Layout/Container'
+import { LayoutQuery } from 'graphql-types'
 
 interface LayoutFetchQueryProps {
   children: React.ReactNode;
@@ -37,7 +37,7 @@ export default function LayoutFetchQuery(props: LayoutFetchQueryProps) {
       `}
       render={(data: LayoutQuery) => <LayoutFetch data={data} {...props} />}
     />
-  );
+  )
 }
 
 type LayoutFetchProps = { data: LayoutQuery; } & LayoutFetchQueryProps
@@ -63,5 +63,5 @@ export function LayoutFetch({
     >
       {children}
     </LayoutContainer>
-  );
+  )
 }

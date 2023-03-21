@@ -1,12 +1,12 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet'
 
-import { useSiteMetadata } from 'hooks/useSiteMetadata';
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
 
 export default function AboutMetaStructuredData() {
-  const { author, site } = useSiteMetadata();
-  const authorProfilePictureUrl = `${site.url}${author.profilePictureSrc}`;
+  const { author, site } = useSiteMetadata()
+  const authorProfilePictureUrl = `${site.url}${author.profilePictureSrc}`
   const sameAs = Object.keys(author.info.profiles)
-    .reduce((list, key: keyof typeof author.info.profiles) => [...list, author.info.profiles[key]], []);
+    .reduce((list, key: keyof typeof author.info.profiles) => [...list, author.info.profiles[key]], [])
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -22,10 +22,10 @@ export default function AboutMetaStructuredData() {
     description: author.info.description,
     jobTitle: author.info.jobTitle,
     email: author.info.email,
-  };
+  }
   return (
     <Helmet>
       <script type="application/ld+json">{JSON.stringify(structuredData, undefined, 2)}</script>
     </Helmet>
-  );
+  )
 }

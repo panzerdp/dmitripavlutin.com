@@ -1,4 +1,4 @@
-import { IGatsbyImageData } from 'gatsby-plugin-image';
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 export interface PostPlain {
   title: string;
@@ -17,4 +17,4 @@ export interface Post extends PostPlain {
 export interface PostDetailed extends Post {
   children: JSX.Element;
   tableOfContents: unknown;
-  }
+}

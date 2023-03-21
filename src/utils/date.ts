@@ -11,14 +11,14 @@ const MONTHS = [
   'October',
   'November',
   'December',
-];
+]
 
 export function formatDate(date: string) {
-  const dateInstance = new Date(date);
-  return `${MONTHS[dateInstance.getMonth()]} ${dateInstance.getDate()}, ${dateInstance.getFullYear()}`;
+  const dateInstance = new Date(date)
+  return `${MONTHS[dateInstance.getMonth()]} ${dateInstance.getDate()}, ${dateInstance.getFullYear()}`
 }
 
 export function formatDateToMonth(date: string) {
-  const dateInstance = new Date(date);
-  return `${MONTHS[dateInstance.getMonth()]} ${dateInstance.getFullYear()}`;
+  const dateInstance = new Date(date)
+  return `${MONTHS[dateInstance.getMonth()]} ${dateInstance.getFullYear()}`
 }

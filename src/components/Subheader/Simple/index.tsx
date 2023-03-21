@@ -1,6 +1,6 @@
-import Tag from 'components/Tag';
-import { formatDate } from 'utils/date';
-import * as styles from './index.module.scss';
+import Tag from 'components/Tag'
+import { formatDate } from 'utils/date'
+import * as styles from './index.module.scss'
 
 interface PostSubheaderProps {
   post: PostPlain;
@@ -16,9 +16,9 @@ export default function PostSubheader({ post }: PostSubheaderProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function mapTag(tagName: string) {
-  return <Tag tag={tagName} key={tagName} />;
+  return <Tag tag={tagName} key={tagName} />
 }

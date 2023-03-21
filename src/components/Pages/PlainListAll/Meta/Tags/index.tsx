@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet'
 
 export default function AllPostsMetaTags() {
   return (
@@ -6,5 +6,5 @@ export default function AllPostsMetaTags() {
       <title>All posts</title>
       <meta name="description" content="All posts" />
     </Helmet>
-  );
+  )
 }

@@ -1,7 +1,7 @@
 
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, StaticQuery } from 'gatsby'
 
-import { CarbonAdsQuery } from 'graphql-types';
+import { CarbonAdsQuery } from 'graphql-types'
 
 interface CarbonAdsFetchProps {
   render(carbonAdsService: CarbonAdsService): React.ReactNode;
@@ -24,5 +24,5 @@ export default function CarbonAdsFetch({ render }: CarbonAdsFetchProps) {
       `}
       render={(data: CarbonAdsQuery) => render(data.site.siteMetadata.carbonAdsService)}
     />
-  );
+  )
 }

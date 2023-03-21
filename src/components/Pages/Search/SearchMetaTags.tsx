@@ -1,10 +1,10 @@
-import { useSiteMetadata } from 'hooks/useSiteMetadata';
-import { Helmet } from 'react-helmet';
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
+import { Helmet } from 'react-helmet'
 
-import ClientOnly from './ClientOnly';
+import ClientOnly from './ClientOnly'
 
 export default function PostMetaTags() {
-  const { site: { googleCustomSearchId } } = useSiteMetadata();
+  const { site: { googleCustomSearchId } } = useSiteMetadata()
   return (
     <>
       <Helmet titleTemplate="%s">
@@ -18,5 +18,5 @@ export default function PostMetaTags() {
         </Helmet>
       </ClientOnly>
     </>
-  );
+  )
 }

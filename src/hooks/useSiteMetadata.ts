@@ -1,7 +1,7 @@
-import { useStaticQuery, graphql } from 'gatsby';
-import { getSrc } from 'gatsby-plugin-image';
+import { useStaticQuery, graphql } from 'gatsby'
+import { getSrc } from 'gatsby-plugin-image'
 
-import { AuthorInfoAndPicturesQuery } from 'graphql-types';
+import { AuthorInfoAndPicturesQuery } from 'graphql-types'
 
 export const useSiteMetadata = () => {
   const data = useStaticQuery<AuthorInfoAndPicturesQuery>(
@@ -62,8 +62,8 @@ export const useSiteMetadata = () => {
         }
       }
     `
-  );
-  const imageData = data.authorProfilePicture.childImageSharp.gatsbyImageData;
+  )
+  const imageData = data.authorProfilePicture.childImageSharp.gatsbyImageData
   const { siteMetadata } = data.site
   return {
     author: {

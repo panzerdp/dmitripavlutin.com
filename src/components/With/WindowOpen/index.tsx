@@ -13,8 +13,8 @@ export interface WithWindowOpenProps {
 
 export function windowOpen({ url, name, height = 400, width = 550 }: WindowOpenOptions) {
   /* eslint-disable no-mixed-operators */
-  const left = window.outerWidth / 2 + window.screenX - width / 2;
-  const top = window.outerHeight / 2 + window.screenY - height / 2;
+  const left = window.outerWidth / 2 + window.screenX - width / 2
+  const top = window.outerHeight / 2 + window.screenY - height / 2
   /* eslint-enable no-mixed-operators */
 
   const config: { [index: string]: string | number } = {
@@ -31,7 +31,7 @@ export function windowOpen({ url, name, height = 400, width = 550 }: WindowOpenO
     resizable: 'no',
     centerscreen: 'yes',
     chrome: 'yes',
-  };
+  }
 
   const shareDialog = open(
     url,
@@ -39,15 +39,15 @@ export function windowOpen({ url, name, height = 400, width = 550 }: WindowOpenO
     Object.keys(config)
       .map((key) => `${key}=${config[key]}`)
       .join(', ')
-  );
+  )
 
-  return shareDialog;
+  return shareDialog
 }
 
 export default function withWindowOpen<P extends object>(WrappedComponent: React.ComponentType<P>) {
   function EnhancedComponent(props: P) {
-    return <WrappedComponent {...(props as P)} windowOpen={windowOpen} />;
+    return <WrappedComponent {...(props as P)} windowOpen={windowOpen} />
   }
-  EnhancedComponent.displayName = `withWindowOpen(${WrappedComponent.name})`;
-  return EnhancedComponent;
+  EnhancedComponent.displayName = `withWindowOpen(${WrappedComponent.name})`
+  return EnhancedComponent
 }

@@ -1,7 +1,7 @@
-import * as styles from './index.module.scss';
-import Layout from 'components/Layout/Fetch';
-import SubscriptionRegion from 'components/Subscription/Region';
-import MetaTags from 'components/Pages/Newsletter/Meta/Tags';
+import * as styles from './index.module.scss'
+import Layout from 'components/Layout/Fetch'
+import SubscriptionRegion from 'components/Subscription/Region'
+import MetaTags from 'components/Pages/Newsletter/Meta/Tags'
 
 export default function NewsletterTemplate() {
   return (
@@ -12,5 +12,5 @@ export default function NewsletterTemplate() {
         <SubscriptionRegion />
       </div>
     </Layout>
-  );
+  )
 }

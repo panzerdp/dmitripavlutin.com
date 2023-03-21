@@ -1,8 +1,8 @@
-import { graphql } from 'gatsby';
+import { graphql } from 'gatsby'
 
-import ExcerptsListTemplate from 'components/Pages/ExcerptsList/Template';
-import { ExcerptsListQuery } from 'graphql-types';
-import { toPostImageFluid, toPostImageFixed } from 'utils/mapper';
+import ExcerptsListTemplate from 'components/Pages/ExcerptsList/Template'
+import { ExcerptsListQuery } from 'graphql-types'
+import { toPostImageFluid, toPostImageFixed } from 'utils/mapper'
 
 interface ExcerptsFetchProps {
   data: ExcerptsListQuery;
@@ -18,7 +18,7 @@ export default function ExcerptsFetch({
       siteMetadata: {
         featured: {
           popularPostsByCategory
-        }        
+        }
       },
     },
     allMdx,
@@ -26,13 +26,13 @@ export default function ExcerptsFetch({
   },
   pageContext,
 }: ExcerptsFetchProps) {
-  const popularPosts = popularPostsMarkdown.edges.map(toPostImageFixed);
+  const popularPosts = popularPostsMarkdown.edges.map(toPostImageFixed)
   const popularPlainPostsByCategory = popularPostsByCategory.map(({ category, slugs }) => {
     return {
       category,
       plainPosts: slugs.map(popularSlug => popularPosts.find(({ slug }) => popularSlug === slug))
-    };
-  });
+    }
+  })
   return (
     <ExcerptsListTemplate
       posts={allMdx.edges.map(toPostImageFluid)}
@@ -40,7 +40,7 @@ export default function ExcerptsFetch({
       pagesSum={pageContext.pagesSum}
       popularPostsByCategory={popularPlainPostsByCategory}
     />
-  );
+  )
 }
 
 export const pageQuery = graphql`
@@ -89,4 +89,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

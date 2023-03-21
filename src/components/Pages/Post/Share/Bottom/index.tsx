@@ -1,6 +1,6 @@
-import { PostPlain } from 'typings/post';
-import ShareGroupHorizontal from '../Group/Horizontal';
-import * as styles from './index.module.scss';
+import { PostPlain } from 'typings/post'
+import ShareGroupHorizontal from '../Group/Horizontal'
+import * as styles from './index.module.scss'
 
 interface PostShareButtomProps {
   post: PostPlain;
@@ -14,5 +14,5 @@ export default function PostShareBottom({ post }: PostShareButtomProps) {
         <ShareGroupHorizontal post={post} />
       </div>
     </div>
-  );
+  )
 }

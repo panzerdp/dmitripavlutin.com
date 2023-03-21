@@ -1,7 +1,7 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet'
 
-import { useSiteMetadata } from 'hooks/useSiteMetadata';
-import { TO_PAGE } from 'routes/path';
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
+import { TO_PAGE } from 'routes/path'
 
 interface MetaPaginatorProps {
   pagesSum: number;
@@ -9,27 +9,27 @@ interface MetaPaginatorProps {
 }
 
 export function ExcerptsListMetaPaginator({ pagesSum, currentPage }: MetaPaginatorProps) {
-  const { site } = useSiteMetadata();
-  
+  const { site } = useSiteMetadata()
+
   function prev() {
     if (currentPage === 1) {
-      return null;
+      return null
     }
-    return <link rel="prev" href={pageToUrl(currentPage - 1)} />;
+    return <link rel="prev" href={pageToUrl(currentPage - 1)} />
   }
 
   function next() {
     if (currentPage === pagesSum) {
-      return null;
+      return null
     }
-    return <link rel="next" href={pageToUrl(currentPage + 1)} />;
+    return <link rel="next" href={pageToUrl(currentPage + 1)} />
   }
 
   function pageToUrl(page: number) {
     if (page === 1) {
-      return site.url;
+      return site.url
     }
-    return `${site.url}${TO_PAGE({ page })}`;
+    return `${site.url}${TO_PAGE({ page })}`
   }
 
   return (
@@ -37,5 +37,5 @@ export function ExcerptsListMetaPaginator({ pagesSum, currentPage }: MetaPaginat
       {prev()}
       {next()}
     </Helmet>
-  );
+  )
 }

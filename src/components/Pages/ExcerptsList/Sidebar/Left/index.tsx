@@ -1,8 +1,8 @@
-import Media from 'react-media';
+import Media from 'react-media'
 
-import * as styles from './index.module.scss';
+import * as styles from './index.module.scss'
 
-import CarbonSection from 'components/Carbon/Section';
+import CarbonSection from 'components/Carbon/Section'
 
 export default function ExcerptsListLeftSidebar() {
   return (
@@ -11,5 +11,5 @@ export default function ExcerptsListLeftSidebar() {
         <CarbonSection />
       </Media>
     </div>
-  );
+  )
 }

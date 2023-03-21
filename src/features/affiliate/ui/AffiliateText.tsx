@@ -1,4 +1,4 @@
-import { useSiteMetadata } from 'hooks/useSiteMetadata';
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
 
 interface Props {
   type: string;
@@ -14,7 +14,7 @@ export function AffiliateText({ type }: Props) {
   }
 
   if (!affiliate.enabled) {
-    return null;
+    return null
   }
 
   return <div dangerouslySetInnerHTML={{ __html: affiliate.message }} />

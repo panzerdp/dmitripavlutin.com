@@ -1,4 +1,4 @@
-import Helmet from 'react-helmet';
+import Helmet from 'react-helmet'
 
 interface LayoutCarbonAdsMetaTagsProps {
   carbonAdsService: CarbonAdsService;
@@ -14,7 +14,7 @@ export default function LayoutCarbonAdsMetaTags({
         <link rel="preconnect" href="//cdn4.buysellads.net" />
         <link rel="preconnect" href="//srv.carbonads.net" />
       </Helmet>
-    );
+    )
   }
-  return null;
+  return null
 }

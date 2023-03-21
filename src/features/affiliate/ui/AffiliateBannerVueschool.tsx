@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { Helmet } from 'react-helmet';
-import { useSiteMetadata } from 'hooks/useSiteMetadata';
+import { useEffect } from 'react'
+import { Helmet } from 'react-helmet'
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
 
 interface Props {
   tags: string[]
@@ -11,16 +11,16 @@ import * as styles from './AffiliateBannerVueschool.module.scss'
 export function AffiliateBannerVueschool({ tags }: Props) {
   const { affiliates: { showVueschoolTopBanner } } = useSiteMetadata()
 
-  const TAG_VUE = 'vue';
+  const TAG_VUE = 'vue'
   const VUESCHOOL_SCRIPT_SRC = 'https://vueschool.io/banner.js?affiliate=dmitripavlutin&type=inline'
   const showBanner = showVueschoolTopBanner && tags.includes(TAG_VUE)
 
 
   useEffect(() => {
     if (!showBanner) {
-      return;
+      return
     }
-    window.BitterBrainsBanner = undefined;
+    window.BitterBrainsBanner = undefined
     const script = document.createElement('script')
     script.async = true
     script.src = VUESCHOOL_SCRIPT_SRC

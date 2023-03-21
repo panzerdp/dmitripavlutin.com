@@ -1,10 +1,10 @@
-import { Helmet } from 'react-helmet';
-import { useSiteMetadata } from 'hooks/useSiteMetadata';
+import { Helmet } from 'react-helmet'
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
 
 export function ExcerptsListMetaStructuredData() {
-  const { author, site } = useSiteMetadata();
+  const { author, site } = useSiteMetadata()
 
-  const authorProfilePictureUrl = `${site.url}${author.profilePictureSrc}`;
+  const authorProfilePictureUrl = `${site.url}${author.profilePictureSrc}`
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Website',
@@ -28,10 +28,10 @@ export function ExcerptsListMetaStructuredData() {
       '@type': 'WebPage',
       '@id': site.url,
     },
-  };
+  }
   return (
     <Helmet>
       <script type="application/ld+json">{JSON.stringify(structuredData, undefined, 2)}</script>
     </Helmet>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet'
 
 export default function MetaTags() {
   return (
@@ -6,5 +6,5 @@ export default function MetaTags() {
       <title>Newsletter</title>
       <meta name="description" content="Subscribe to newsletter" />
     </Helmet>
-  );
+  )
 }

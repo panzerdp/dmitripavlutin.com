@@ -1,31 +1,31 @@
-import { useSiteMetadata } from 'hooks/useSiteMetadata';
-import { useEffect, useState } from 'react';
-import { PostPlain } from 'typings/post';
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
+import { useEffect, useState } from 'react'
+import { PostPlain } from 'typings/post'
 
 interface CommentsCountProps {
   post: PostPlain;
 }
 
 export default function CommentsCount({ post }: CommentsCountProps): JSX.Element {
-  const { site: { githubCommentsRepository } } = useSiteMetadata();
-  const [count, setCount] = useState(-1);
+  const { site: { githubCommentsRepository } } = useSiteMetadata()
+  const [count, setCount] = useState(-1)
   useEffect(() => {
     const loadCommentsCount = async () => {
-      const q = `${post.slug}+in:title+is:issue+repo:${githubCommentsRepository}`;
-      const respone = await fetch(`https://api.github.com/search/issues?q=${q}&per_page=5`);
-      const { items = [] } = await respone.json();
+      const q = `${post.slug}+in:title+is:issue+repo:${githubCommentsRepository}`
+      const respone = await fetch(`https://api.github.com/search/issues?q=${q}&per_page=5`)
+      const { items = [] } = await respone.json()
       let detectedCount = 0
       for (const item of items) {
-        const cleanTitle = item.title.replace(/\//g, '');
+        const cleanTitle = item.title.replace(/\//g, '')
         if (cleanTitle === post.slug) {
           detectedCount = item.comments
-          break;
+          break
         }
       }
       setCount(detectedCount)
-    };
-    loadCommentsCount();
-  }, []);
+    }
+    loadCommentsCount()
+  }, [])
 
   let message = '-- Comments'
   if (count === 0) {
@@ -33,5 +33,5 @@ export default function CommentsCount({ post }: CommentsCountProps): JSX.Element
   } else if (count > 0) {
     message = `${count} Comments`
   }
-  return <>{message}</>;
+  return <>{message}</>
 }

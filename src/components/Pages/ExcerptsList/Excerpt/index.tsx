@@ -1,18 +1,18 @@
-import { GatsbyImage } from 'gatsby-plugin-image';
-import { Link } from 'gatsby-link';
+import { GatsbyImage } from 'gatsby-plugin-image'
+import { Link } from 'gatsby-link'
 
-import SubheaderWithComments from 'components/Subheader/WithComments';
-import { TO_POST } from 'routes/path';
-import { Post } from 'typings/post';
+import SubheaderWithComments from 'components/Subheader/WithComments'
+import { TO_POST } from 'routes/path'
+import { Post } from 'typings/post'
 
-import * as styles from './index.module.scss';
+import * as styles from './index.module.scss'
 
 interface ExcerptProps {
   post: Post;
 }
 
 export default function Excerpt({ post }: ExcerptProps) {
-  const to = TO_POST({ slug: post.slug });
+  const to = TO_POST({ slug: post.slug })
   return (
     <article key={post.slug} className={styles.excerpt}>
       <Link to={to} className={styles.thumbnailAnchor}>
@@ -29,5 +29,5 @@ export default function Excerpt({ post }: ExcerptProps) {
         </Link>
       </div>
     </article>
-  );
+  )
 }

@@ -1,16 +1,16 @@
-import * as styles from './index.module.scss';
+import * as styles from './index.module.scss'
 
-import CarbonFetch from 'components/Carbon/Fetch';
-import CarbonAd from 'components/Carbon/Ad';
+import CarbonFetch from 'components/Carbon/Fetch'
+import CarbonAd from 'components/Carbon/Ad'
 
 export default function CarbonSection(): JSX.Element {
   return (
     <div className={styles.carbonSection}>
       <CarbonFetch render={renderCarbon} />
     </div>
-  );
+  )
 }
 
 function renderCarbon(service: CarbonAdsService): JSX.Element {
-  return <CarbonAd carbonAdsService={service} />;
+  return <CarbonAd carbonAdsService={service} />
 }

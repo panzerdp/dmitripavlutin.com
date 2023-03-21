@@ -1,8 +1,8 @@
 
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, StaticQuery } from 'gatsby'
 
-import { PopularTagsFetchQuery } from 'graphql-types';
-import { toPostPlain } from 'utils/mapper';
+import { PopularTagsFetchQuery } from 'graphql-types'
+import { toPostPlain } from 'utils/mapper'
 
 interface PopularTagsFetch {
   render(posts: PostPlain[]): React.ReactNode;
@@ -27,5 +27,5 @@ export default function PopularTagsFetch({ render }: PopularTagsFetch) {
       `}
       render={(data: PopularTagsFetchQuery) => render(data.allMdx.edges.map(toPostPlain))}
     />
-  );
+  )
 }

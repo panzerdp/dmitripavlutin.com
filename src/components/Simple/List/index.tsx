@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { PostPlain } from 'typings/post';
-import SimplePost from '../Post';
+import * as React from 'react'
+import { PostPlain } from 'typings/post'
+import SimplePost from '../Post'
 
 
 interface SimpleListProps {
@@ -18,5 +18,5 @@ export default function SimpleList({ posts, beforeEachPost }: SimpleListProps) {
         </React.Fragment>
       ))}
     </div>
-  );
+  )
 }

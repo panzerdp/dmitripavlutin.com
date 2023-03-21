@@ -1,14 +1,14 @@
-import { useSiteMetadata } from 'hooks/useSiteMetadata';
-import * as styles from './index.module.scss';
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
+import * as styles from './index.module.scss'
 
 interface PostEditProps {
   postRelativePath: string;
 }
 
 export default function PostEdit({ postRelativePath }: PostEditProps) {
-  const { site } = useSiteMetadata();
-    
-  const postRepositoryFileUrl = `${site.repositoryUrl}/edit/master/${postRelativePath}`;
+  const { site } = useSiteMetadata()
+
+  const postRepositoryFileUrl = `${site.repositoryUrl}/edit/master/${postRelativePath}`
 
   return (
     <div className={styles.postEdit}>
@@ -17,5 +17,5 @@ export default function PostEdit({ postRelativePath }: PostEditProps) {
         <span>Suggest Improvement</span>
       </a>
     </div>
-  );
+  )
 }

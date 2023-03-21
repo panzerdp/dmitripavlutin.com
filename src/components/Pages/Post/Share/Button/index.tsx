@@ -1,4 +1,4 @@
-import * as styles from './index.module.scss';
+import * as styles from './index.module.scss'
 
 interface ShareButtonProps {
   className?: string;
@@ -6,5 +6,5 @@ interface ShareButtonProps {
 }
 
 export default function ShareButton({ className = '', ...restProps }: ShareButtonProps) {
-  return <a {...restProps} className={`${className} ${styles.share}`} />;
+  return <a {...restProps} className={`${className} ${styles.share}`} />
 }

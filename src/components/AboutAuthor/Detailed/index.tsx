@@ -1,12 +1,12 @@
-import { GatsbyImage } from 'gatsby-plugin-image';
+import { GatsbyImage } from 'gatsby-plugin-image'
 
-import AuthorLinks from 'components/AboutAuthor/Links';
+import AuthorLinks from 'components/AboutAuthor/Links'
 
-import * as styles from './index.module.scss';
-import { useSiteMetadata } from 'hooks/useSiteMetadata';
+import * as styles from './index.module.scss'
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
 
 export default function AboutAuthorDetailed() {
-  const { author: { info: { name, description, job, email, profiles }, profilePicture } } = useSiteMetadata();
+  const { author: { info: { name, description, job, email, profiles }, profilePicture } } = useSiteMetadata()
 
   const jobElement = job ? <p dangerouslySetInnerHTML={{ __html: job }} /> : null
   return (
@@ -34,5 +34,5 @@ export default function AboutAuthorDetailed() {
         </a>
       </AuthorLinks>
     </div>
-  );
+  )
 }

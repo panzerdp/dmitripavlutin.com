@@ -1,8 +1,8 @@
-import Layout from 'components/Layout/Fetch';
-import SimpleList from 'components/Simple/List';
-import PlainListByTagMetaTags from '../Meta/Tags';
+import Layout from 'components/Layout/Fetch'
+import SimpleList from 'components/Simple/List'
+import PlainListByTagMetaTags from '../Meta/Tags'
 
-import { PostPlain } from 'typings/post';
+import { PostPlain } from 'typings/post'
 
 interface PlainListByTagTemplateProps {
   tag: string;
@@ -16,5 +16,5 @@ export default function PlainListByTagTemplate({ tag, posts }: PlainListByTagTem
       <h1>&quot;{tag}&quot; posts</h1>
       <SimpleList posts={posts} />
     </Layout>
-  );
+  )
 }

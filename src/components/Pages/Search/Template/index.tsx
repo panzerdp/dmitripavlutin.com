@@ -1,8 +1,8 @@
-import Layout from 'components/Layout/Fetch';
-import SearchMetaTags from 'components/Pages/Search/SearchMetaTags';
-import ClientOnly from '../ClientOnly';
+import Layout from 'components/Layout/Fetch'
+import SearchMetaTags from 'components/Pages/Search/SearchMetaTags'
+import ClientOnly from '../ClientOnly'
 
-import * as styles from './index.module.scss';
+import * as styles from './index.module.scss'
 
 export default function SearchTemplate() {
   return (
@@ -18,5 +18,5 @@ export default function SearchTemplate() {
       </div>
       <SearchMetaTags />
     </Layout>
-  );
+  )
 }

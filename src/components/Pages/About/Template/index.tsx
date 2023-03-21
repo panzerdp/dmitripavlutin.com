@@ -1,8 +1,8 @@
-import Layout from 'components/Layout/Fetch';
-import AboutMetaTags from 'components/Pages/About/Meta/Tags';
-import AboutMetaStructuredData from 'components/Pages/About/Meta/StructuredData';
-import { useStaticQuery, graphql } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Layout from 'components/Layout/Fetch'
+import AboutMetaTags from 'components/Pages/About/Meta/Tags'
+import AboutMetaStructuredData from 'components/Pages/About/Meta/StructuredData'
+import { useStaticQuery, graphql } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 export default function AboutTemplate() {
   const data = useStaticQuery(
@@ -15,8 +15,8 @@ export default function AboutTemplate() {
         }
       }
     `
-  );
-  
+  )
+
   return (
     <Layout>
       <AboutMetaTags />
@@ -29,5 +29,5 @@ export default function AboutTemplate() {
 
       <GatsbyImage alt="Dmitri Pavlutin photo" image={data.aboutPicture.childImageSharp.gatsbyImageData} />
     </Layout>
-  );
+  )
 }
