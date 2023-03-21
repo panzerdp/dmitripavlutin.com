@@ -334,9 +334,8 @@ myBoundFunc('Arg 1', 'Arg 2');
 
 Indirect invocation and bounding emulate the method invocation.  
 
-To read about all ways you can define functions in JavaScript follow my post [6 Ways to Declare JavaScript Functions](/6-ways-to-declare-javascript-functions/).  
+To read about all ways you can define functions in JavaScript follow my post [JavaScript Function Declaration: The 6 Ways](/6-ways-to-declare-javascript-functions/).  
 
-Confused about how `this` works in JavaScript? Then I recommend reading my extensive guide [Gentle Explanation of "this" in JavaScript
-](/gentle-explanation-of-this-in-javascript/).  
+Confused about how `this` works in JavaScript? Then I recommend reading my extensive guide [Gentle Explanation of "this" in JavaScript](/gentle-explanation-of-this-in-javascript/).  
 
 *Quizzzzz: can a method in JavaScript be an asynchronous function?*

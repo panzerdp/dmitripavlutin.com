@@ -9,7 +9,7 @@ tags: ['javascript', 'fetch']
 type: post
 ---
 
-Normally, you should not rely on the network when we are working with it. The network is unreliable because an HTTP request or response can fail: 
+You should not rely on the network when working with it. The network is unreliable because an HTTP request or response can fail: 
 
 * The user is offline
 * DNS lookup failed
