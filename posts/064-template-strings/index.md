@@ -1,26 +1,26 @@
 ---
-title: 'String Interpolation in JavaScript'
-description: 'How to use template literals to perform string interplation in JavaScript (w/ examples and best practices).'
+title: 'How to Use Template Strings in JavaScript'
+description: 'Template strings in JavaScript are surrounded by backticks `string` and perform string interpolation: `Hello ${who}!`'
 published: '2020-01-22T11:30Z'
-modified: '2020-07-31T15:00Z'
+modified: '2023-03-21'
 thumbnail: './images/string-interpolation.png'
-slug: string-interpolation-in-javascript
-tags: ['javascript', 'string', 'es2015']
+slug: javascript-template-strings
+tags: ['javascript', 'string']
 type: post
 ---
 
 *String interpolation* is replacing placeholders with values in a string literal.  
 
-The string interpolation in JavaScript is performed by template literals (strings wrapped in backticks `` ` ``) and `${expression}` as a placeholder. For example:
+The string interpolation in JavaScript is done by template literals (strings wrapped in backticks `` ` ``) and `${expression}` as a placeholder. For example:
 
 ```javascript
 const number = 42;
 const message = `The number is ${number}`;
 
-message; // => 'The number is 42'
+console.log(message); // => 'The number is 42'
 ```
 
-Let's see in more detail, with examples and best practices, how to use template strings to perform string interpolation in JavaScript.  
+Let's see in more detail, with examples and best practices, how to use template strings.  
 
 <Affiliate type="traversyJavaScript" />
 
@@ -48,13 +48,15 @@ The third, which permits string interpolation, is to wrap the string into a pair
 const message = `Hello, World!`;
 ```
 
-The string literal wrapped in backticks `` ` `` is also named *template string*. This is the literal that supports the string interpolation.  
+The string literal wrapped in backticks `` ` `` is also named *template string*. This is the literal that supports the string interpolation. 
+
+Let's detail into the template strings.  
 
 ## 2. The placeholders
 
-The template string supports placeholders. The expression inside the placeholder is evaluated during runtime, and the result is inserted into the string.  
+A great benefit of the template strings is the ability to easily inject dynamic values into the string using placeholders. The expression inside the placeholder is evaluated during runtime, and the result is inserted into the string.  
 
-The placeholder has a special format: `${expressionToEvaluate}`. The expression inside the placeholder can be of any kind:
+The placeholder has a special format: `${expressionToEvaluate}`. The expression inside the placeholder can be anything that evaluates to a value (but usually to a string):
 
 * variables: `${myVar}`
 * operators: `${n1 + n2}`, `${cond ? 'val 1' : 'val 2'}`
@@ -67,12 +69,12 @@ const greeting = 'Hello';
 const who = 'World';
 
 const message = `${greeting}, ${who}!`;
-message; // => 'Hello, World!'
+console.log(message); // => 'Hello, World!'
 ```
 
 `` `${greeting}, ${who}!` `` is a template string having placeholders `${greeting}` and `${who}`. 
 
-On script execution, the first placeholder `${greeting}` is replaced with the value of `greeting` variable, and the same for `${who}`. The string interpolation result is `'Hello, World!'`.  
+During runtime the first placeholder `${greeting}` is replaced with the value of `greeting` variable (`'Hello'`), and the same for `${who}` (`'World!'`). The string interpolation result is `'Hello, World!'`.  
 
 You can put any expression inside the placeholder: either an operator, a function call, or even more complex expressions.  
 
@@ -81,18 +83,16 @@ const n1 = 2;
 const n2 = 3;
 
 const message1 = `The sum is ${n1 + n2}`;
-message1; // => 'The sum is 5';
+console.log(message1); // => 'The sum is 5';
 
 function sum(num1, num2) {
   return num1 + num2;
 }
 const message2 = `The sum is ${sum(n1, n2)}`;
-message2; // => 'The sum is 5'
+console.log(message2); // => 'The sum is 5'
 ```
 
-`${n1 + n2}` is a placeholder consisting of the addition operator and 2 operands. 
-
-While the placeholder `${sum(n1, n2)}` contains a function invocation.  
+`${n1 + n2}` is a placeholder consisting of the addition operator and 2 operands. The placeholder `${sum(n1, n2)}` contains a function invocation.  All these values are evaluated during runtime and the resulted value is inserted into the template string.  
 
 ### 2.1 Implicit to string conversion 
 
@@ -104,7 +104,7 @@ For example, a number in a placeholder is transformed into a string:
 const n = 3.5;
 const message = `The number is ${n}`;
 
-message; // => `The number is 3.5`
+console.log(message); // => `The number is 3.5`
 ```
 
 The expression `n` of the placeholder `${n}` is evaluated to number `3.5`. The number `3.5` is then transformed into a string `'3.5'`, and inserted into the interpolation result: `'The number is 3.5'`.
@@ -117,31 +117,31 @@ For example, let's insert an array into a template string:
 const numbers = [1, 2, 3];
 const message = `The numbers are ${numbers}`;
 
-message; // => 'The numbers are 1,2,3'
+console.log(message); // => 'The numbers are 1,2,3'
 ```
 
 The placeholder `${numbers}` contains an array of numbers. 
 
-`toString()` array method executes `array.join(',')` when the array is converted to string. Thus the string interpolation result is `'The numbers are 1,2,3'`. 
+`toString()` array method executes `array.join(',')` when the array is converted to string. The string interpolation result is `'The numbers are 1,2,3'`. 
 
 ## 3. Escaping placeholders
 
-Because the placeholder format `${expression}` has a special meaning in the template literals, you cannot use the sequence of characters `"${someCharacters}"` without escaping. 
+You cannot use the sequence of characters `"${someCharacters}"` without escaping it because the placeholder format `${expression}` has a special meaning in the template literals.
 
-For example, let's try to create a string literal containing the sequence of characters `${abc}`:
+Let's create a string literal containing the sequence of characters `${abc}`:
 
 ```javascript
 const message = `Some weird characters: ${abc}`;
 // Throws "ReferenceError: abc is not defined"
 ```
 
-Inserting `${abc}` directly throws an error because JavaScript interprets `${abc}` as a placeholder. 
+Inserting `${abc}` directly throws an error because JavaScript interprets `${abc}` as a placeholder (and there's no `abc` variable defined).  
 
 A backslash `\` before the placeholder-like sequence of characters `\${abc}` solves the problem:
 
 ```javascript
 const message = `Some weird characters: \${abc}`;
-message; // => 'Some weird characters follow: ${abc}'
+console.log(message); // => 'Some weird characters follow: ${abc}'
 ```
 
 In the template string `` `Some weird characters: \${abc}` `` JavaScript interprets `\${abc}` as a sequence of characters, rather than a placeholder. 
@@ -151,14 +151,14 @@ Alongside with `${abc}`, the sequence of characters like `${abc` and `${` also h
 ```javascript
 const message = `Some weird characters: \${abc} \${abc \${`;
 
-message; // => 'Some weird characters: ${abc} ${abc ${'
+console.log(message); // => 'Some weird characters: ${abc} ${abc ${'
 ```
 
 ## 4. Best practices
 
 ### 4.1 Refactor string concatentation
 
-The string interpolation should be used instead of string concatenation to construct lengthy strings.  
+The template strings should be used instead of string concatenation to construct lengthy strings.  
 
 If for some reason you're still concatenating string literals and expressions using `+` operator:
 
@@ -167,20 +167,20 @@ const n1 = 2;
 const n2 = 3;
 const message = 'The sum of ' + n1 + ' and ' + n2 + ' is ' + (n1 + n2);
 
-message; // => 'The sum of 2 and 3 is 5'
+console.log(message); // => 'The sum of 2 and 3 is 5'
 ```
 
-Then it's the time to switch to string interpolation using template strings:
+Then switch to template strings and placeholders instead:
 
 ```javascript{2}
 const n1 = 2;
 const n2 = 3;
 const message = `The sum of ${n1} and ${n2} is ${n1 + n2}`;
 
-message; // => 'The sum of 2 and 3 is 5'
+console.log(message); // => 'The sum of 2 and 3 is 5'
 ```
 
-The template string usage requires less code and is easier to read. 
+The template string requires less code and is easier to read than the concatenation of string.  
 
 ### 4.2 Helper variables
 
@@ -195,7 +195,7 @@ const n2 = 3;
 const message = 
   `Sum: ${n1 + n2}, difference: ${n1 - n2}, pow: ${Math.pow(n1, n2)}`;
 
-message; // => 'Sum: 5, difference: -1, pow: 8'
+console.log(message); // => 'Sum: 5, difference: -1, pow: 8'
 ```
 
 The more complex the placeholders are, the more tempting is to add helper variables to store intermediate values. 
@@ -210,16 +210,16 @@ const pow = Math.pow(n1, n2);
 
 const message = `Sum: ${sum}, difference: ${diff}, pow: ${pow}`;
 
-message; // => 'Sum: 5, difference: -1, pow: 8'
+console.log(message); // => 'Sum: 5, difference: -1, pow: 8'
 ```
 
-With the introduction of helper variables `sum`, `diff`, and `pow`, the template string becomes lighter. Additionally, the code self-documents when the intermediate variables are used.  
+With the introduction of helper variables `sum`, `diff`, and `pow`, the template string becomes easier to read. Additionally, the code self-documents when the intermediate variables are used.  
 
 ### 4.3 Single quotes in placeholders
 
 I recommended using single quotes `'` rather than backticks `` ` `` in the expressions inside the placeholder.  
 
-Let's use the ternary operator. When the placeholder uses backticks `` ` `` it's quite difficult to grasp the template string because there are too many backticks in the template string:
+Let's use the ternary operator. When the placeholder uses backticks `` ` `` it's quite difficult to read the template string because there are too many backticks in the template string:
 
 ```javascript{1}
 function getLoadingMessage(isLoading) {
@@ -227,7 +227,7 @@ function getLoadingMessage(isLoading) {
 }
 ```
 
-But using single quotes inside the placeholder just looks better:
+Using single quotes inside the placeholder just looks better:
 
 ```javascript{1}
 function getLoadingMessage(isLoading) {
@@ -256,8 +256,7 @@ function LoadingMessage({ isLoading, isModal }) {
 
 The template literal that determines the class name has 2 ternary operators and a mix of string literals. You may find it difficult to understand.  
 
-A tool like [classnames](https://github.com/JedWatson/classnames) might be a better choice than template string. The tool constructs the class name
-in a more declarative way.
+A tool like [classnames](https://github.com/JedWatson/classnames) might be a better choice than the template string. The tool constructs the class name in a more declarative way.
 
 Let's refactor the component to use `classnames`:
 
@@ -290,7 +289,7 @@ The string interpolation in TypeScript works the same way as in JavaScript:
 const count: number = 10;
 const message: string = `You have ${count} products`;
 
-message; // => 'You have 10 products'
+console.log(message); // => 'You have 10 products'
 ```
 
 ## 6. String interpolation in React
@@ -329,7 +328,7 @@ During the interpolation of both attribute and text strings, placeholders `${cou
 
 ## 7. Conclusion
 
-The string interpolation is a great feature because it helps to insert values into string literals in a concise and readable manner. And avoid the clumsy string concatenation approach.
+The template strings are great to insert values into strings in a concise and readable manner. And avoid the clumsy string concatenation approach.
 
 In JavaScript, the template string implements the string interpolation.
 
@@ -338,3 +337,5 @@ A template string is defined by wrapping a sequence of characters into a pair of
 Don't overcomplicate the string literal. If the template string uses complex expressions, try to introduce intermediate variables to store the expressions before putting them into placeholders.
 
 As soon as you need a value inserted into a string literal, the template string is the way to go.
+
+*Do you have any questions about template strings in JavaScript?*
