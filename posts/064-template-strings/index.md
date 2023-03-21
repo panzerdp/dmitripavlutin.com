@@ -30,7 +30,7 @@ Let's see in more detail, with examples and best practices, how to use template 
 
 In JavaScript, there are 3 ways to create string literals.
 
-First, which I prefer for plain strings, is to wrap the string into a pair of single quotes `'`:
+The first, which I prefer for plain strings, is to wrap the string into a pair of single quotes `'`:
 
 ```javascript
 const message = 'Hello, World!';
@@ -50,7 +50,7 @@ const message = `Hello, World!`;
 
 The string literal wrapped in backticks `` ` `` is also named *template string*. This is the literal that supports the string interpolation. 
 
-Let's detail into the template strings.  
+Let's detail the template strings.  
 
 ## 2. The placeholders
 
@@ -74,7 +74,7 @@ console.log(message); // => 'Hello, World!'
 
 `` `${greeting}, ${who}!` `` is a template string having placeholders `${greeting}` and `${who}`. 
 
-During runtime the first placeholder `${greeting}` is replaced with the value of `greeting` variable (`'Hello'`), and the same for `${who}` (`'World!'`). The string interpolation result is `'Hello, World!'`.  
+During runtime, the first placeholder `${greeting}` is replaced with the value of `greeting` variable (`'Hello'`), and the same for `${who}` (`'World!'`). The string interpolation result is `'Hello, World!'`.  
 
 You can put any expression inside the placeholder: either an operator, a function call, or even more complex expressions.  
 
@@ -92,7 +92,7 @@ const message2 = `The sum is ${sum(n1, n2)}`;
 console.log(message2); // => 'The sum is 5'
 ```
 
-`${n1 + n2}` is a placeholder consisting of the addition operator and 2 operands. The placeholder `${sum(n1, n2)}` contains a function invocation.  All these values are evaluated during runtime and the resulted value is inserted into the template string.  
+`${n1 + n2}` is a placeholder consisting of the addition operator and 2 operands. The placeholder `${sum(n1, n2)}` contains a function invocation.  All these values are evaluated during runtime and the resulting value is inserted into the template string.  
 
 ### 2.1 Implicit to string conversion 
 
@@ -122,7 +122,7 @@ console.log(message); // => 'The numbers are 1,2,3'
 
 The placeholder `${numbers}` contains an array of numbers. 
 
-`toString()` array method executes `array.join(',')` when the array is converted to string. The string interpolation result is `'The numbers are 1,2,3'`. 
+`toString()` array method executes `array.join(',')` when the array is converted to a string. The string interpolation result is `'The numbers are 1,2,3'`. 
 
 ## 3. Escaping placeholders
 
@@ -156,7 +156,7 @@ console.log(message); // => 'Some weird characters: ${abc} ${abc ${'
 
 ## 4. Best practices
 
-### 4.1 Refactor string concatentation
+### 4.1 Refactor string concatenation
 
 The template strings should be used instead of string concatenation to construct lengthy strings.  
 
