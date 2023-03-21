@@ -2,7 +2,7 @@
 title: "Index Signatures in TypeScript"
 description: "Index signatures in TypeScript let's you annotate objects of unknown structure."
 published: "2021-09-22T18:10Z"
-modified: "2021-09-22T18:10Z"
+modified: "2023-03-21"
 thumbnail: "./images/cover-2.png"
 slug: typescript-index-signatures
 tags: ['typescript', 'object']
@@ -37,11 +37,11 @@ function totalSalary(salaryObject: ???) {
   return total;
 }
 
-totalSalary(salary1); // => 120_000
-totalSalary(salary2); // => 110_000
+console.log(totalSalary(salary1)); // => 120_000
+console.log(totalSalary(salary2)); // => 110_000
 ```
 
-How would you annotate the `salaryObject` parameter of the `totalSalary()` function to accept objects with string keys and number values?  
+How would you annotate `salaryObject` parameter of `totalSalary()` function to accept objects with key as string and value as number?  
 
 The answer is to use an index signature!
 
@@ -53,7 +53,7 @@ Let's find what are TypeScript index signatures and when they're needed.
 
 The idea of the index signatures is to type objects of unknown structure when you only know the key and value types.  
 
-An index signature fits the case of the salary parameter: the function should accept salary objects of different structures &mdash; only that values to be numbers.  
+An index signature fits the case of the salary parameter: the function should accept salary objects of different structures &mdash; just make sure that object values are numbers.  
 
 Let's annotate the `salaryObject` parameter with an index signature:
 
@@ -73,8 +73,8 @@ function totalSalary(salaryObject: { [key: string]: number }) {
 // ---cut---
 // @include: total-salary
 
-totalSalary(salary1); // => 120_000
-totalSalary(salary2); // => 110_000
+console.log(totalSalary(salary1)); // => 120_000
+console.log(totalSalary(salary2)); // => 110_000
 ```
 
 `{ [key: string]: number }` is the index signature, which tells TypeScript that `salaryObject` has to be an object with `string` type as key and `number` type as value.  
@@ -96,12 +96,11 @@ totalSalary(salary3);
 
 ## 2. Index signature syntax
 
-The syntax of an index signature is pretty simple and looks similar to the syntax of a property, but with one difference. Instead of the property name, you simply write the type of the key
-inside the square brackets: `{ [key: KeyType]: ValueType }`.  
+The syntax of an index signature is simple and looks similar to the syntax of a property. But with one difference: write the type of the key inside the square brackets: `{ [key: KeyType]: ValueType }`.  
 
 Here are a few examples of index signatures.
 
-The `string` type is the key and value:
+`string` type is the key and value:
 
 ```ts twoslash
 interface StringByString {
@@ -158,13 +157,13 @@ interface StringByString {
 const object: StringByString = {};
 
 const value = object['nonExistingProp'];
-value; // => undefined
-// ^?
+console.log(value); // => undefined
+//           ^?
 ```
 
 `value` variable is a `string` type according to TypeScript, however, its runtime value is `undefined`.  
 
-The index signature simply maps a key type to a value type, and that's all. If you don't make that mapping correct, the value type can deviate from the actual runtime data type.  
+The index signature maps a key type to a value type &mdash; that's all. If you don't make that mapping correct, the value type can deviate from the actual runtime data type.  
 
 To make typing more accurate, mark the indexed value as `string` or `undefined`. Doing so, TypeScript becomes aware that the properties you access might not exist:
 
@@ -176,14 +175,13 @@ interface StringByString {
 const object: StringByString = {};
 
 const value = object['nonExistingProp'];
-value; // => undefined
-// ^?
-// @annotate: right { "arrowRot": "270deg 0px -10px", "flipped": false, "textDegree": "3deg", "top": "3rem" } - `string | undefined` because the property can be missing
+console.log(value); // => undefined
+//           ^?
 ```
 
 ### 3.2 String and number key
 
-Let's say that you have a dictionary of number names:
+Let's say you have a dictionary of number names:
 
 ```twoslash include loose
 interface NumbersNames {
@@ -211,7 +209,7 @@ const value1 = names['1'];
 //     ^?
 ```
 
-Would it be an error if you try to access a value by a number `1`?
+Would it be an error if you access a value by a number `1`?
 
 ```ts twoslash
 // @include: loose
@@ -228,14 +226,14 @@ You can think that `[key: string]` is the same as `[key: string | number]`.
 
 ## 4. Index signature vs Record
 
-TypeScript has a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeystype) `Record<Keys, Type>` to annotate records, similar to the index signature.  
+TypeScript has a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type) `Record<Keys, Values>` to annotate records, similar to the index signature.  
 
 ```ts twoslash
 const object1: Record<string, string> = { prop: 'Value' }; // OK
 const object2: { [key: string]: string } = { prop: 'Value' }; // OK
 ```
 
-The big question is... when to use a `Record<Keys, Type>` and when an index signature? At first sight, they look quite similar!
+The big question is... when to use a `Record<Keys, Values>` and when an index signature? At first sight, they look quite similar!
 
 As you saw earlier, the index signature accepts only `string`, `number` or `symbol` as key type. If you try to use, for example, a union of string literal types as keys in an index signature, it would be an error:
 
@@ -248,11 +246,11 @@ interface Salary {
 
 This behavior suggests that *the index signature is meant to be generic in regards to keys.*
 
-But you can use a union of string literals to describe the keys in a `Record<Keys, Type>`:
+But you can use a union of string literals to describe the keys in a `Record<Keys, Values>`:
 
 ```ts twoslash
 type SpecificSalary = Record<'yearlySalary'|'yearlyBonus', number>
-// @annotate: right { "arrowRot": "270deg 0px -25px", "flipped": false, "textDegree": "3deg", "top": "3rem" } - Be specific: indicate the keys of the object
+type GenericSalary = Record<string, number>
 
 const salary1: SpecificSalary = { 
   'yearlySalary': 120_000,
@@ -260,12 +258,14 @@ const salary1: SpecificSalary = {
 }; // OK
 ```
 
-*The `Record<Keys, Type>` is meant to be *specific* in regards to keys.*
-
-I recommend using the index signature to annotate generic objects, e.g. keys are `string` type. But use `Record<Keys, Type>` to annotate specific objects when you know the keys in advance, e.g. a union of string literals `'prop1' | 'prop2'`  is used for keys.  
+If you'd like to limit the keys to a union of specific strings, then `Record<'prop1' | 'prop2' | ... | 'propN', Values>` is the way to go instead of an index signature.  
 
 ## 5. Conclusion
 
-If you don't know the object structure you're going to work with, but you know the possible key and value types, then the index signature is what you need.  
+An index signature annotiation fits well the case when you don't know the exact structure of the object, but you know the key and value types.  
 
-The index signature consists of the index name and its type in square brackets, followed by a colon and the value type: `{ [indexName: KeyType]: ValueType }`. `KeyType` can be a `string`, `number`, or `symbol`, while `ValueType` can be any type.  
+The index signature consists of the index name and its type in square brackets, followed by a colon and the value type: `{ [indexName: Keys]: Values }`. `Keys` can be a `string`, `number`, or `symbol`, while `Values` can be any type.  
+
+To limit the key type to a specific union of strings, then using the `Record<Keys, Values>` utilty type is a better idea. The index signature doesn't support unions of string literal types.  
+
+*Do you prefer index signatures or `Record<Keys, Values>` utility type?*
