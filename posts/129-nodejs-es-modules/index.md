@@ -1,8 +1,8 @@
 ---
-title: 'How to Use ECMAScript Modules in Node.js'
-description: "How to enable and use ECMAScript 2015 modules in Node.js."
+title: 'How to Use ES Modules in Node.js'
+description: "How to Use ES (ECMAScript) Modules in Node.js environment."
 published: "2021-04-27T09:00Z"
-modified: "2021-04-29T17:00Z"
+modified: "2023-03-22"
 thumbnail: "./images/cover-4.png"
 slug: ecmascript-modules-nodejs
 tags: ['javascript', 'module', 'nodejs']
@@ -35,9 +35,9 @@ In this post, you'll learn how to enable and use ES modules in Node.js.
 
 ## 1. Enabling ECMAScript modules in Node.js
 
-The default format of modules in Node.js is the [CommonJS](https://nodejs.org/docs/latest/api/modules.html#modules_modules_commonjs_modules). To make Node.js understand ES modules format, you have to explicitly make so.  
+The default format of modules in Node.js is the [CommonJS](https://nodejs.org/docs/latest/api/modules.html#modules_modules_commonjs_modules).  
 
-Node.js uses [ECMAScript modules](https://nodejs.org/docs/latest/api/esm.html#esm_modules_ecmascript_modules) format if:
+But Node.js will treat a JavaScript file as an [ECMAScript modules](https://nodejs.org/docs/latest/api/esm.html#esm_modules_ecmascript_modules) format if:
 
 1. The module's file extension is `.mjs` 
 2. Or the module's nearest parent folder has `{ "type": "module" }` in `package.json`
@@ -47,7 +47,7 @@ Let's detail into the first (`.mjs` extension) and second (`{ "type": "module" }
 
 ### 1.1 .mjs file extension
 
-An easy way to tell Node.js to treat the modules in ECMAScript format is to use the `.mjs` file extension.  
+If you create a JavaScript file with the extension `.mjs`, then Node.js will consider the file an ES module.  
 
 The following ES module `month-from-date.mjs` (note the `.mjs` file extension) exports a function `monthFromDate()`, which determines the month name of an arbitrary date: 
 
@@ -112,11 +112,11 @@ node ./month.js "2022-03-01"
 
 [Run the command in the demo.](https://codesandbox.io/s/type-module-lcr0m?file=/month.js)
 
-`March` is printed in the terminal.  
+`March` is printed in the terminal. Node.js ran successfully the ES modules `month.mjs` and `month-from-date.mjs`.  
 
 ## 2. Importing ECMAScript modules
 
-The *specifier* is the string literal representing the path from where to import the module.  
+The *specifier* is the string literal having the path from where to import the module.  
 
 In the example below `'path'` is a specifier:
 
@@ -129,7 +129,7 @@ There are 3 kinds of specifiers in Node.js: relative, bare and absolute.
 
 ### 2.1 Relative specifier
 
-Importing a module using a *relative specifier* would resolve the path of the imported module relative to the current (importing) module location.  
+Importing a module using a *relative specifier* resolves the path of the imported module relative to the current (importing) module location.  
 
 Relative specifiers usually start with `'.'`, `'..'`, or `'./'`:
 
@@ -139,7 +139,7 @@ import module1 from './module1.js';
 import module2 from '../folder/module2.mjs';
 ```
 
-When using relative specifiers indicating the file extension (`.js`, `'.mjs'`, etc.) is obligatory.
+When using relative specifiers indicating the file extension (`.js`, `.mjs`, etc.) is obligatory.
 
 ### 2.2 Bare specifier
 
@@ -172,9 +172,9 @@ Note the presence of the `file://` prefix in the absolute specifiers.
 
 ## 3. Dynamic import of modules
 
-The default importing mechanism of ES modules *always* evaluates and imports the module specified in the `import module from 'path'` &mdash; no matter if you use the module or not.  
+The default importing mechanism of ES modules *always* evaluates the imported module: no matter if you use the module or not.  
 
-But sometimes you may want to import the modules dynamically, in which case you can invoke the asynchornous function `import('./path-to-module')`:
+If you want to import the modules dynamically, then invoke the asynchornous function `import('./path-to-module')`:  
 
 ```javascript
 async function loadModule() {
@@ -188,7 +188,10 @@ async function loadModule() {
 loadModule();
 ```
 
-`import('./path-to-module')` loads asynchronously the module and returns a promise that resolves to the imported module components: `default` property as the default import, and the named imports as properties with the same names.  
+`import('./path-to-module')` loads asynchronously the module. `import()` returns a promise that resolves to the imported module components: 
+
+- `default` property as the default import
+- the named imports as properties with the same names
 
 For example, let's improve `month.js` script to load `month-from-date.js` module only when the user sets the date argument:
 
@@ -228,12 +231,12 @@ Fortunately, Node.js allows an ES module to include a CommonJS module as a defau
 
 import defaultComponent from './module.commonjs.js';
 
-// use `defaultComponent`...
+// ...
 ```
 
 When imported in an ES module, the `module.exports` of the CommonJS module becomes the default import. The named imports from a CommonJS module, however, is not supported.  
 
-However, the `require()` function of the CommonJS format *cannot* import an ES module. Instead, you can use the async function `import()` inside CommonJS to load an ES module:
+The `require()` function of the CommonJS format *cannot* import an ES module. Instead, you can use the async function `import()` inside CommonJS to load an ES module:
 
 ```javascript{6}
 // CommonJS module
@@ -249,7 +252,7 @@ async function loadESModule() {
 loadESModule();
 ```
 
-I recommend as much as possible to avoid mixing module formats.  
+I recommend as much as possible to avoid mixing module formats because it is confusing.  
 
 ## 5. ECMAScript modules and Node.js environment
 
@@ -284,4 +287,6 @@ You can import dynamically a module using `import('./path-to-module')` syntax.
 
 While not desirable, but sometimes necessary, you can import a CommonJS module from an ES module using the `import defaultImport from './common.js'` statement. The `module.exports` of the CommonJS becomes the default import `defaultImport` inside the ES module.  
 
-On a side note, how to write quality ECMAScript modules? To find out, follow my post [4 Best Practices to Write Quality JavaScript Modules](/javascript-modules-best-practices/).  
+How to write quality ECMAScript modules? To find out, follow my post [4 Best Practices to Write Quality JavaScript Modules](/javascript-modules-best-practices/).  
+
+*Do you think Node.js should migrate completely to ES modules format?*
