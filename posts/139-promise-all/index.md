@@ -2,16 +2,14 @@
 title: "How to Use Promise.all()"
 description: "How to use Promise.all() to perform parallel async operations in a fail-fast manner."
 published: "2021-07-06T07:00Z"
-modified: "2021-07-10T07:00Z"
+modified: "2023-03-22"
 thumbnail: "./images/cover-6.png"
 slug: promise-all
 tags: ['javascript', 'promise', 'async']
 type: post
 ---
 
-In simple words, a promise is a placeholder for a value that's going to be available sometime later. 
-
-Promises are useful when handling asynchoronous operations.  
+A [promise](/what-is-javascript-promise/) is a placeholder for a value that's going to be available sometime later. The promise helps handle asynchronous operations.  
 
 JavaScript provides a helper function `Promise.all(promisesArrayOrIterable)` to handle multiple promises at once, in parallel, and get the results in a single aggregate array. Let's see how it works.  
 
@@ -19,44 +17,42 @@ JavaScript provides a helper function `Promise.all(promisesArrayOrIterable)` to 
 
 ## 1. Promise.all()
 
-`Promise.all()` is a built-in helper that accepts an array of promises (or generally an iterable). The function returns a promise:  
+`Promise.all()` is a built-in helper that accepts an array of promises (or generally an iterable). The function returns a promise from where you can extract promises resolved values using a `then`-able syntax: 
 
 ```javascript
-const allPromise = Promise.all([promise1, promise2, ...]);
-```
+const allPromise = Promise.all([promise1, promise2]);
 
-Then you can extract promises resolved values using a `then`-able syntax:
-
-```javascript
 allPromise.then(values => {
-  values; // [valueOfPromise1, valueOfPromise2, ...]
+  console.log(values); // [resolvedValue1, resolvedValue2]
 }).catch(error => {
-  error;  // rejectReason of any first rejected promise
+  console.log(error); // rejectReason of any first rejected promise
 });
 ```
 
-or `async/await` syntax:
+In the case of `async/await` syntax:
 
 ```javascript
+const allPromise = Promise.all([promise1, promise2]);
+
 try {
   const values = await allPromise;
-  values; // [valueOfPromise1, valueOfPromise2, ...]
+  console.log(values); // [resolvedValue1, resolvedValue2]
 } catch (error) {
-  error;  // rejectReason of any first rejected promise
+  console.log(error); // rejectReason of any first rejected promise
 }
 ```
 
 The interesting part is in the way the promise returned by `Promise.all()` gets resolved or rejected.  
 
-<u>If all promises are resolved successfully</u>, then `allPromise` fulfills with an array containing fulfilled values of individual promises. The order of promises in the array does matter &mdash; you'll get the fulfilled values in that order.  
+<u>If all promises are resolved successfully</u>, then `allPromise` fulfills with an array containing fulfilled values of the promises. The order of promises in the array does matter &mdash; you'll get the fulfilled values in the same order.  
 
-![Promise.all() - all fullfilled](./images/all-fullfilled-9.svg)
+![Promise.all() - all fullfilled](./diagrams/diagram-1.svg)
 
-<u>But if at least one promise rejects</u>, then `allPromise` rejects right away (without waiting for other promises to resolve) with the same reason.  
+<u>But if at least one promise rejects</u>, then `allPromise` rejects right away (without waiting for the remaining pending promises to resolve) for the same reason.  
 
-![Promise.all() - one rejects](./images/one-rejects-5.svg)
+![Promise.all() - one rejects](./diagrams/diagram-2.svg)
 
-Let's see in a couple of examples how to use `Promise.all()` to perform multiple async operations at once.  
+Let's see some examples.  
 
 ## 2. Example: all promises fulfilled
 
@@ -78,9 +74,9 @@ function rejectTimeout(reason, delay) {
 
 `resolveTimeout(value, delay)` returns a promise that fulfills with `value` after passing `delay` time.  
 
-On the other side, `rejectTimeout(reason, delay)` returns a promise that rejects with `reason` (usually an error) after passing `delay` time.  
+`rejectTimeout(reason, delay)`, however, returns a promise that rejects with `reason` (usually an error) after passing `delay` time.  
 
-For example, let's access, at the same time, the lists of vegetables and fruits available at the local grocerry store. Accessing each list is an asynchornous operation:  
+Let's access, at the same time, the lists of vegetables and fruits available at the local grocery store. Accessing each list is an asynchronous operation:  
 
 ```javascript{0-3}
 const allPromise = Promise.all([
@@ -100,17 +96,19 @@ console.log(lists);
 
 `const allPromise = Promise.all([...])` returns a new promise `allPromise`. 
 
-Then the statement `const lists = await allPromise` awaits 1 second until `allPromise` gets fulfilled with an array containing the first and second promises fulfill values.  
+`const lists = await allPromise` awaits 1 second until `allPromise` fulfills with an array containing the first and second promises fulfill values.  
 
 Finally, `lists` contains the aggregated result: `[['potatoes', 'tomatoes'], ['oranges', 'apples']]`.  
 
-*The order of promises array directly influences the order of the results*. 
+Note that the order of the values in the aggregated result corresponds to the order of the promises in the array supplied to `Promise.all()`:
 
-The vegetables promise is the first item, and the fruits promise is the second item in the input array: `Promise.all([vegetablesPromise, fruitsPromise])`. The results array contains values in the same order &mdash; first vegetables list and second fruits list.  
+```javascript
+const [resolvedOfPromise1, resolvedOfPromise2] = Promise.all([promise1, promise2])
+```
 
 ## 3. Example: one promise rejects
 
-Now imagine the situation that the grocery is out of fruits. In such a case, let's reject the fruits promise with an error `new Error('Out of fruits!')`:
+Now imagine the situation the grocery is out of fruits. Let's reject the fruits promise with an error `new Error('Out of fruits!')`:
 
 ```javascript{2,10}
 const allPromise = Promise.all([
@@ -131,14 +129,14 @@ try {
 
 In this scenario `allPromise = Promise.all([...])` returns, as usual, a promise. 
 
-However, after passing 1 second the second promise (fruits) rejects with an error `new Error('Out of fruits!')`. This makes `allPromise` reject right away with the same `new Error('Out of fruits!')`.  
+After 1 second the second promise rejects with an error `new Error('Out of fruits!')`. This makes `allPromise` reject right away with the same `new Error('Out of fruits!')`.  
 
-Even if the vegetables promise has been fulfilled, `Promise.all()` doesn't take it into account.  
+Even if the vegetables' promise has been fulfilled, `Promise.all()` doesn't take it into account.  
 
-Such behavior of `Promise.all([...])` is named *fail-fast*. If at least one promise in the promises array rejects, then the promise returned by `allPromise = Promise.all([...])` rejects too &mdash; with the same reason.    
+Such behavior of `Promise.all([...])` is named *fail-fast*. If at least one promise in the promises array rejects, then the promise returned by `allPromise = Promise.all([...])` rejects too &mdash; for the same reason.    
 
 ## 4. Conclusion
 
 `Promise.all([...])` is a useful helper function that lets you execute asynchronous operations in parallel, using a fail-fast strategy, and aggregate the results into an array.  
 
-*Challenge: can you implement a function `myPromiseAll(arrayOfPromises)` that would work like `Promise.all()`? Share your solution in a comment below!*
+*How often do you use `Promise.all()`?*
