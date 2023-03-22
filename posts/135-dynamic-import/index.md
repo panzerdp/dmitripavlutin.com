@@ -33,11 +33,11 @@ export const concat = (paramA, paramB) => paramA + paramB;
 
 <Affiliate type="traversyJavaScript" />
 
-Static importing works in most situations. But sometimes to save some client's bandwidth you may choose to load the modules dynamically.  
+Static importing works in most situations. But sometimes to save some clients' bandwidth you may choose to load the modules dynamically.  
 
 You can import modules dynamically if you use `import` as a function &mdash; `import(pathToModule)` &mdash; a feature available starting ES2020.  
 
-Let's see how ES modules dynamic import works, and when it's useful.  
+Let's see how ES modules' dynamic import works, and when it's useful.  
 
 ## 1. Dynamic importing
 
