@@ -9,35 +9,24 @@ tags: ['javascript', 'module']
 type: post
 ---
 
-ES modules are a way to organize cohesive chunks of code in JavaScript.  
-
-The ES modules system has 2 actors.   
-
-The *importing module* &mdash; the one that uses `import { func } from './myModule.js'`. It uses `import` syntax to import a dependency:
+ES modules are a way to organize cohesive chunks of code in JavaScript.  Here's a simple ES module:
 
 ```javascript
-// The importing module
+// An ES module
 import { concat } from './concatModule.js';
 
 concat('a', 'b'); // => 'ab'
 ```
 
-The *imported module* &mdash; the one which exports `export const func = () => {}` and is being imported. It exports its components using `export` syntax:
+`import { concat } from './concatModule.js'` is considered a *static* import.  
 
-```javascript
-// The imported module exports components
-export const concat = (paramA, paramB) => paramA + paramB;
-```
+Static importing works in most situations. But sometimes to save client's bandwidth you may choose to load the modules dynamically.  
 
-`import { concat } from './concatModule.js'` way of using ES modules is *static*: meaning that the dependencies between modules are known at compile time. A static dependency is *always* included in the app's bundle.  
-
-<Affiliate type="traversyJavaScript" />
-
-Static importing works in most situations. But sometimes to save some clients' bandwidth you may choose to load the modules dynamically.  
-
-You can import modules dynamically if you use `import` as a function &mdash; `import(pathToModule)` &mdash; a feature available starting ES2020.  
+You can import ES modules dynamically if you use `import` as a function &mdash; `import(pathToModule)` &mdash; a feature available starting ES2020.  
 
 Let's see how ES modules' dynamic import works, and when it's useful.  
+
+<Affiliate type="traversyJavaScript" />
 
 ## 1. Dynamic importing
 
