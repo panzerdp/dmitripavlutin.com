@@ -273,4 +273,4 @@ To update the state call `dispatch(action)` with the appropriate action object. 
 
 `useReducer()` fits great to deal with complex state management (requiring at least 2-3  update actions). For simple state management, I recommend [useState()](/react-usestate-hook-guide/).  
 
-*Challenge: write a custom hook `myUseState()` that works exactly `useState()`, only using `useReducer()` hook to manage the state. Write your solution in a comment below!*
+*How often do you use `useReducer()` compared to `useState()`?*
