@@ -2,14 +2,14 @@
 title: "How to Use React useReducer() Hook"
 description: "How to use useReducer() hook to manage complex state: initial state, action object, dispatch, reducer in React."
 published: "2021-09-15T15:20Z"
-modified: "2023-03-22"
+modified: "2023-03-23"
 thumbnail: "./images/cover.png"
 slug: react-usereducer
 tags: ['react', 'usereducer', 'hook']
 type: post
 ---
 
-If you've used `useState()` hook to manage non-trivial state like a list of items, where you need to add, update and remove items in the state, you can notice that the state management logic takes a good part of the component's body.  
+If you've used `useState()` hook to manage a non-trivial state like a list of items, where you need to add, update and remove items in the state, you can notice that the state management logic takes a good part of the component's body.  
 
 A React component should usually contain the logic that calculates the output. But the state management
 logic is a different concern that should be managed in a separate place. Otherwise, you get a mix of state management and rendering logic in one place, and that's difficult to read, maintain, and test!  
@@ -24,7 +24,7 @@ Let's see how the `useReducer()` hook works with accessible real-world examples.
 
 ## 1. useReducer()
 
-The `useReducer(reducer, initialState)` hook accept 2 arguments: the *reducer* function and the *initial state*. The hook then returns an array of 2 items: the current state and the *dispatch* function.
+The `useReducer(reducer, initialState)` hook accepts 2 arguments: the *reducer* function and the *initial state*. The hook then returns an array of 2 items: the current state and the *dispatch* function.
 
 ```jsx
 import { useReducer } from 'react';
@@ -75,7 +75,7 @@ const action = {
 
 If the action object must carry some useful information (aka payload) to be used by the reducer, then you can add additional properties to the action object. 
 
-For example, here's an action object meant to add a new user to users state array:
+For example, here's an action object meant to add a new user to the users state array:
 
 ```javascript
 const action = {
@@ -89,7 +89,7 @@ const action = {
 
 `user` is a property that holds the information about the user to add.  
 
-The action object is interperted by the reducer function (described below).  
+The action object is interpreted by the reducer function (described below).  
 
 ### C. Dispatch function
 
@@ -118,7 +118,7 @@ function reducer(state, action) {
     case 'increase':
       newState = { counter: state.counter + 1 };
       break;
-    case 'descrease':
+    case 'decrease':
       newState = { counter: state.counter - 1 };
       break;
     default:
@@ -144,7 +144,7 @@ Then React redirects the action object and the current state value to the *reduc
 
 The reducer function uses the action object and performs a state update, returning the new state.  
 
-React then checks whether the new state differs from the previous one. If the state has been updated, React re-renders the component and `useReducer()` returns the new state value: `[newState, ...] = useReducer(...)`.  
+React then checks whether the new state differs from the previous one. If the state has been updated, React re-renders the component, and `useReducer()` returns the new state value: `[newState, ...] = useReducer(...)`.  
 
 Note that `useReducer()` design is based on the [Flux architecture](https://www.freecodecamp.org/news/an-introduction-to-the-flux-architectural-pattern-674ea74775c9/).  
 
@@ -152,7 +152,7 @@ If all these terms sound too abstract, no worries! Let's see how `useReducer()` 
 
 ## 2. A stopwatch
 
-Let's implement a stopwatch having 3 buttons: Start, Stop and Reset, and a number displaying the passed seconds.  
+Let's implement a stopwatch having 3 buttons: Start, Stop, Reset, and a number displaying the passed seconds.  
 
 Now let's think about structuring the state of the stopwatch. 
 
@@ -261,15 +261,15 @@ You're on the bridge and the ship is at full stop. You (the captain) want the sh
 
 The *engine order telegraph* is the *dispatch* function, the *commands* are the *action objects*, the *engineers in the engine room* are the *reducer* function, and the *engine regime* is the *state*.  
 
-The engine order telegraph helps separate the bridge from the engine room. The same way the `useReducer()` hook helps separate the rendering from the state management logic.  
+The engine order telegraph helps separate the bridge from the engine room. In the same way the `useReducer()` hook helps separate the rendering from the state management logic.  
 
 ## 4. Conclusion
 
 The `useReducer()` hook lets you separate the state management from the rendering logic of the component.  
 
-`const [state, dispatch] = useReducer(reducer, initialState)` accepts 2 argument: the reducer function and the initial state. Also, the reducer returns an array of 2 items: the current state and the dispatch function.  
+`const [state, dispatch] = useReducer(reducer, initialState)` accepts 2 arguments: the reducer function and the initial state. Also, the reducer returns an array of 2 items: the current state and the dispatch function.  
 
-When you'd like to update the state, simply call `dispatch(action)` with the appropriate action object. The action object is then forwarded to the `reducer()` function that updates the state. If the state has been updated by the reducer, then the component re-renders, and `[state, ...] = useReducer(...)` hook returns the new state value.  
+To update the state call `dispatch(action)` with the appropriate action object. The action object is then forwarded to the `reducer()` function that updates the state. If the state has been updated by the reducer, then the component re-renders, and `[state, ...] = useReducer(...)` hook returns the new state value.  
 
 `useReducer()` fits great to deal with complex state management (requiring at least 2-3  update actions). For simple state management, I recommend [useState()](/react-usestate-hook-guide/).  
 
