@@ -1,10 +1,10 @@
-<mxfile host="65bd71144e" pages="3" scale="1.5" border="20">
+<mxfile host="65bd71144e" pages="3" scale="1.4" border="20">
     <diagram id="idhxigilsuWetFB2cpPl" name="useReducer()">
-        <mxGraphModel dx="955" dy="1077" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1997" dy="1077" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="N8z0Ye5YrI288PrtkeDU-3" value="useReducer()" style="text;strokeColor=none;fillColor=none;html=1;fontSize=34;fontStyle=1;verticalAlign=middle;align=center;fontColor=#333333;" parent="1" vertex="1">
+                <mxCell id="N8z0Ye5YrI288PrtkeDU-3" value="useReducer()" style="text;strokeColor=none;fillColor=none;html=1;fontSize=30;fontStyle=1;verticalAlign=middle;align=center;fontColor=#333333;" parent="1" vertex="1">
                     <mxGeometry x="40" y="360" width="230" height="70" as="geometry"/>
                 </mxCell>
                 <mxCell id="-Ry6M9x0l0Hvcf1J6-pP-11" value="" style="html=1;" parent="1" vertex="1">
