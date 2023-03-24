@@ -18,6 +18,8 @@ Define a reactive `text` (usually a ref), and then bind this value to an input u
 
 Let's see how to use `v-model` to bind form inputs in Vue 3.  
 
+<Affiliate type="vueschoolVue" />
+
 <TableOfContents maxLevel={1} />
 
 ## 1. Binding a form input
