@@ -1,8 +1,7 @@
-import { useSiteMetadata } from 'hooks/useSiteMetadata'
 import * as styles from './index.module.scss'
 
 export default function Coaching(): JSX.Element {
-  const { author: { info } } = useSiteMetadata()
+  const CALENDLY_BOOKING = 'https://calendly.com/dmitripavlutin/60min'
 
   return (
     <div className={styles.contactAuthor}>
@@ -20,11 +19,8 @@ export default function Coaching(): JSX.Element {
         </ul>
       </div>
       <div className={styles.links}>
-        <a className={styles.icon} href={`mailto:${info.email}`} title={`Write a message to ${info.name}`}>
-          <img alt="Email address" src="/icons/email.svg" />
-        </a>
-        <a className={styles.text} href="https://calendly.com/dmitripavlutin/60min" target="_blank" rel="noreferrer">
-          Book a Coaching Session
+        <a className={styles.book} href={CALENDLY_BOOKING} title="Book JavaScript Session" target="_blank" rel="noreferrer">
+          <img className={styles.calendarIcon} alt="Calendar" src="/icons/calendar-check.svg" /> Book a Coaching Session
         </a>
       </div>
     </div>
