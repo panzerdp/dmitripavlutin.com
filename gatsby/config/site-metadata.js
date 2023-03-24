@@ -86,7 +86,7 @@ module.exports = {
         </p>`
     }, {
       type: 'vueschoolCompositionApi',
-      enabled: false,
+      enabled: true,
       message: `
       <p>
         <em>
@@ -100,7 +100,7 @@ module.exports = {
       </p>`
     }, {
       type: 'vueschoolVue',
-      enabled: false,
+      enabled: true,
       message: `
       <p>
         <em>
