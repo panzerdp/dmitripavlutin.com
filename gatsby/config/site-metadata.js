@@ -90,7 +90,12 @@ module.exports = {
       message: `
       <p>
         <em>
-        Before I go on, let me recommend something to you. If you want to truly understand how to use Vue composition API, take <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> course on Vueschool.
+          Before I go on, let me recommend something to you.
+        </em>
+      </p>
+      <p>
+        <em>
+          If you want to understand Vue composition API in the longrun, take <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> course on Vueschool.
         </em>
       </p>`
     }, {
@@ -99,11 +104,16 @@ module.exports = {
       message: `
       <p>
         <em>
-        Before I go on, let me recommend something to you. If you want to become proficient in Vue, take ["Vue.js 3 Fundamentals with the Composition API"](https://vueschool.io/courses/vue-js-fundamentals-with-the-composition-api?friend=dmitripavlutin) course on Vueschool.
+          Before I go on, let me recommend something to you.
+        </em>
+      </p>
+      <p>
+        <em>
+          If you want to become proficient in Vue and become more productive, take <a href="https://vueschool.io/courses/vue-js-fundamentals-with-the-composition-api?friend=dmitripavlutin">Vue.js 3 Fundamentals with the Composition API</a> course on Vueschool.
         </em>
       </p>
       `
     }],
-    showVueschoolTopBanner: true
+    showVueschoolTopBanner: false
   }
 }
