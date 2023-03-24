@@ -109,7 +109,7 @@ module.exports = {
       </p>
       <p>
         <em>
-          If you want to become proficient in Vue and become more productive, take <a href="https://vueschool.io/courses/vue-js-fundamentals-with-the-composition-api?friend=dmitripavlutin">Vue.js 3 Fundamentals with the Composition API</a> course on Vueschool.
+          If you want to become proficient in Vue and become more productive, take <a href="https://vueschool.io/courses/vue-js-fundamentals-with-the-composition-api?friend=dmitripavlutin">"Vue.js 3 Fundamentals w/ the Composition API"</a> course on Vueschool.
         </em>
       </p>
       `
