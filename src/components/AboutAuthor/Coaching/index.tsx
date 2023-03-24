@@ -23,7 +23,7 @@ export default function Coaching(): JSX.Element {
         <a className={styles.icon} href={`mailto:${info.email}`} title={`Write a message to ${info.name}`}>
           <img alt="Email address" src="/icons/email.svg" />
         </a>
-        <a className={styles.text} href={`mailto:${info.email}?subject=Book a JavaScript/React/Vue coaching session`} title={`Write a message to ${info.name}`}>
+        <a className={styles.text} href="https://calendly.com/dmitripavlutin/60min" target="_blank" rel="noreferrer">
           Book a Coaching Session
         </a>
       </div>
