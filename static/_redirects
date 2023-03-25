@@ -1,5 +1,6 @@
-/rss/                                       /rss.xml             301
-/dont-overuse-react-usecallback/            /react-usecallback/  301
-/simple-explanation-of-javascript-closures/ /javascript-closure/ 301
-/simple-explanation-of-javascript-closures/ /javascript-closure/ 301
+/rss/                                       /rss.xml                      301
+/dont-overuse-react-usecallback/            /react-usecallback/           301
+/simple-explanation-of-javascript-closures/ /javascript-closure/          301
+/simple-explanation-of-javascript-closures/ /javascript-closure/          301
 /string-interpolation-in-javascript/        /javascript-template-strings/ 301
+/:slug/cover.png                            /:slub/cover/                 301
