@@ -13,9 +13,11 @@ This post describes what you need to know about TypeScript function and methods 
 
 Also you'll find listed some common function types like async functions, using rest parameters, and more.  
 
+<TableOfContents maxLevel={1} />
+
 ## 1. TypeScript function type
 
-When you write a regular function in TypeScript, you don't have to specify its type. TypeScript infers the function type from the definition.  
+When writing a regular function in TypeScript, you don't have to specify its type. TypeScript infers the function type from the definition.  
 
 ```typescript
 const sum = (a: number, b: number) => a + b
@@ -26,7 +28,7 @@ typeof sum
 
 If that's your case: defining a simple function, you don't need to do anything else.  
 
-When working with functions as first-class citizens (like regular objects), or you're dealing with higher-order functions (functions that accepts as argument or return other functions) you need to explicitely define the types of functions.  
+When working with functions as [first-class citizens](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function), or you're dealing with higher-order functions (functions that accepts as argument or return other functions) you need to explicitely define the types of functions.  
 
 Here's how you can write the TypeScript function type for the `sum()` function:
 
@@ -34,7 +36,7 @@ Here's how you can write the TypeScript function type for the `sum()` function:
 type Sum = (a: number, b: number) => number
 ```
 
-Start with a pair of parentheses where you indicate the parameters types, folowed by the fat `=>` arrow and the return type.  
+Start with a pair of parentheses where you indicate the parameters types, followed by the fat `=>` arrow and the return type.  
 
 Now let's check if the actual sum function satisfies the `Sum` type:
 
@@ -44,9 +46,7 @@ const sum = (a: number, b: number) => a + b
 sum satisfies Sum // OK
 ```
 
-
-
-The parameter names inside of the function type and the actual function do not have to be the same:  
+The parameter names in the function type and the function can be different:
 
 ```typescript 
 const sum1 = (num1: number, num2: number) => num1 + num2
@@ -54,7 +54,7 @@ const sum1 = (num1: number, num2: number) => num1 + num2
 sum1 satisfies Sum // OK
 ```
 
-In the example above the function has parameters named `num1` and `num2`, while inside the `Sum` type the parameters are named `a` and corresponingly `b`. That OK and `sum1` stil satisfies the type `Sum`.  
+In the example above the function `sum1` has parameters named `num1` and `num2`, while inside the `Sum` type the parameters are named `a` and corresponingly `b`. That's OK and `sum1` is still of type `Sum`.  
 
 Moreover, you can use only 1 or even no parameters in the functions, and they'd still satisfy `Sum` type:
 
@@ -66,11 +66,16 @@ sum2 satisfies Sum // OK
 sum3 satisfies Sum // OK
 ```
 
+When it comes 
+
 ### 2.1 Useful common function types
 
 ```typescript
 // a function returning nothing (void as return type)
-type VoidReturn = (param: number) => void
+type VoidReturnFunc = (param: number) => void
+
+// a function without parameters
+type NoParamsFunc = () => string
 
 // an async function (Promise<T> as return type)
 type AsyncFunc = (param: number) => Promise<string>
@@ -125,21 +130,31 @@ interface ObjectCommonMethods {
 
 ## 3. TypeScript function interface
 
-Another interesting way to write the function type is by using the function interface. I don't use often, but it can be very useful if you want to add some additional properties to the function type.  
+Another interesting way to write the function type is by using the function interface, aka function call signature. 
 
-The TypeScript function interface looks almost the same like a method type, only that you do not indicate any name before the parentheses:  
+I don't use it often, but it can be very useful if you want to add some additional properties to the function type or define multiple 
+
+TypeScript function interface looks similar to a method type, with the difference that the function interface doesn't have a function name:  
 
 ```typescript
-interface Sum {
+interface SumInterface {
   (n1: number, n2: number) => number
 }
-
-((a: number, b: number) => n1 + n2) satisfies Sum // OK
 ```
 
-The name of the function is missing near the paranthesis. This is important otherwise you're defining a method.  
+Note that near `(n1: number, n2: number) => number` there is no function name indicated.  
+
+As expected, the regular sum function have `SumInterface` type:
+
+```typescript
+const sum = (a: number, b: number) => n1 + n2
+
+satisfies Sum // OK
+```
 
 
 ## 4. Conclusion
 
-To know more about function type subtyping, I recommend checking my post 
+Follow the post [TypeScript Function Overloading](/typescript-function-overloading/) to understand how to define functions that can be invoked in multiple ways.  
+
+*Do you prefer TypeScript function types or function interfaces?*
