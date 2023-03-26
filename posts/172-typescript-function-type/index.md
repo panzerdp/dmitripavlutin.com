@@ -28,7 +28,7 @@ typeof sum
 
 If that's your case: defining a simple function, you don't need to do anything else.  
 
-When working with functions as [first-class citizens](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function), or you're dealing with higher-order functions (functions that accepts as argument or return other functions) you need to explicitely define the types of functions.  
+Functions in TypeScript/JavaScript are [first-class citizens](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function). Which means that you can assign functions to variables, use functions as arguments to other functions, or even return functions.  
 
 Here's how you can write the TypeScript function type for the `sum()` function:
 
@@ -36,37 +36,43 @@ Here's how you can write the TypeScript function type for the `sum()` function:
 type Sum = (a: number, b: number) => number
 ```
 
-Start with a pair of parentheses where you indicate the parameters types, followed by the fat `=>` arrow and the return type.  
+A TypeScript function type is defined by a pair of parentheses with the parameters types `(param1: Type1, param2: Type2)`, followed by the fat `=>` arrow and the return type.  
 
-Now let's check if the actual sum function satisfies the `Sum` type:
+Now let's check if the `sum()` function is `Sum` type:
 
-```typescript 
+```typescript
+type Sum = (a: number, b: number) => number
+
 const sum = (a: number, b: number) => a + b
 
 sum satisfies Sum // OK
 ```
 
-The parameter names in the function type and the function can be different:
+`sum satisfies Sum` doesn't trigger type errors, meaning that `sum` is a type of `Sum` (here's the [satisfies documentation](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html#the-satisfies-operator) if you're not familiar with the operator).
 
-```typescript 
+The parameter names in the function type and the function instance can be different:
+
+```typescript
+type Sum = (a: number, b: number) => number
+
 const sum1 = (num1: number, num2: number) => num1 + num2
 
 sum1 satisfies Sum // OK
 ```
 
-In the example above the function `sum1` has parameters named `num1` and `num2`, while inside the `Sum` type the parameters are named `a` and corresponingly `b`. That's OK and `sum1` is still of type `Sum`.  
+The function `sum1` has parameters named `num1` and `num2`, while inside the `Sum` type the parameters are named `a` and corresponingly `b`. That's OK and `sum1` is still of type `Sum`.  
 
 Moreover, you can use only 1 or even no parameters in the functions, and they'd still satisfy `Sum` type:
 
 ```typescript 
+type Sum = (a: number, b: number) => number
+
 const sum2 = (num1: number) => num1 + num2
 const sum3 = () => 0
 
 sum2 satisfies Sum // OK
 sum3 satisfies Sum // OK
 ```
-
-When it comes 
 
 ### 2.1 Useful common function types
 
@@ -92,21 +98,24 @@ type HOCFunc = (param: number) => (param: number) => number
 You can also define methods on interfaces: 
 
 ```typescript
-interface ObjectWithMethod {
+interface SumMethod {
   sum(a: number, b: number): number
 }
 ```
 
-Write the method name, followed by the list of parameter types in partenetheses `(param1: Type2, param2: Type2)`, and an optional colon `:` folowed by the method return type.  
-
-If you omit the colon and return type `method(): ReturnType`, then TypeScript assumes a `void` type is returned.  
+Write the method name, followed by the list of parameter types in partenetheses `(param1: Type2, param2: Type2)`, followed by a colon `:` and the method return type.  
 
 ```typescript
-interface Logger {
-  log(message: string)
-  // same as
-  // log(message: string): void
+const object = {
+  sum(a: number, b: number): number {
+    return a + b
+  }
 }
+interface SumMethod {
+  sum(a: number, b: number): number
+}
+
+object satisfies SumMethod // OK
 ```
 
 ### 3.1 Useful common method types
@@ -114,8 +123,7 @@ interface Logger {
 ```typescript
 interface ObjectCommonMethods {
   // methods returning nothing (void as return type)
-  voidReturnMethod1(param: number): void
-  voidReturnMethod2(param: number)
+  voidReturnMethod(param: number): void
 
   // an async method (Promise<T> as return type)
   asyncMethod(param: number): Promise<string>
@@ -138,22 +146,53 @@ TypeScript function interface looks similar to a method type, with the differenc
 
 ```typescript
 interface SumInterface {
-  (n1: number, n2: number) => number
+  (a: number, b: number): number
 }
 ```
 
-Note that near `(n1: number, n2: number) => number` there is no function name indicated.  
+Note that near `(a: number, b: number) => number` there is no function name indicated.  
 
 As expected, the regular sum function have `SumInterface` type:
 
 ```typescript
-const sum = (a: number, b: number) => n1 + n2
+const sum = (a: number, b: number) => a + b
 
-satisfies Sum // OK
+sum satisfies SumInterface // OK
+```
+
+To be able to invoke the function in several ways, the function interface let's you define multiple call signatures.  
+
+Let's make the `SumInterface` accept also functions that calculate the sum of an array of numbers
+
+```typescript {2}
+interface SumInterface {
+  (a: number, b: number): number
+  (array: numbers[]): number
+}
+```
+
+The added call signature `(array: numbers[]): number` allows `SumInterface` to be called with an array of numbers as argument.  
+
+```typescript
+interface SumInterface {
+  (a: number, b: number): number
+  (array: numbers[]): number
+}
+
+const sum = (a: number, b: number) => a + b
+const arraySum = (array: numbers) => array.reduce(sum, number => sum + number)
+
+sum      satisfies SumInterface // OK
+arraySum satisfies SumInterface // OK
 ```
 
 
-## 4. Conclusion
+
+## 4. Generic TypeScript function type
+
+
+
+## 5. Conclusion
 
 Follow the post [TypeScript Function Overloading](/typescript-function-overloading/) to understand how to define functions that can be invoked in multiple ways.  
 
