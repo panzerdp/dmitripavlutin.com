@@ -62,7 +62,7 @@ sum1 satisfies Sum // OK
 
 The function `sum1` has parameters named `num1` and `num2`, while inside the `Sum` type the parameters are named `a` and corresponingly `b`. That's OK and `sum1` is still of type `Sum`.  
 
-Moreover, you can use only 1 or even no parameters in the functions, and they'd still satisfy `Sum` type:
+Moreover, you can use 1 or zero parameters in functions, and they'd still satisfy `Sum` type:
 
 ```typescript 
 type Sum = (a: number, b: number) => number
@@ -106,13 +106,14 @@ interface SumMethod {
 Write the method name, followed by the list of parameter types in partenetheses `(param1: Type2, param2: Type2)`, followed by a colon `:` and the method return type.  
 
 ```typescript
+interface SumMethod {
+  sum(a: number, b: number): number
+}
+
 const object = {
   sum(a: number, b: number): number {
     return a + b
   }
-}
-interface SumMethod {
-  sum(a: number, b: number): number
 }
 
 object satisfies SumMethod // OK
@@ -160,36 +161,78 @@ const sum = (a: number, b: number) => a + b
 sum satisfies SumInterface // OK
 ```
 
-To be able to invoke the function in several ways, the function interface let's you define multiple call signatures.  
+You can benefit from the function interface by adding additional properties to the function object (which is not possible using the standard function type describe above).  
 
-Let's make the `SumInterface` accept also functions that calculate the sum of an array of numbers
-
-```typescript {2}
-interface SumInterface {
-  (a: number, b: number): number
-  (array: numbers[]): number
-}
-```
-
-The added call signature `(array: numbers[]): number` allows `SumInterface` to be called with an array of numbers as argument.  
+Let's a property `description` to the sum function:
 
 ```typescript
 interface SumInterface {
   (a: number, b: number): number
-  (array: numbers[]): number
+  description: string
 }
 
 const sum = (a: number, b: number) => a + b
-const arraySum = (array: numbers) => array.reduce(sum, number => sum + number)
+sum.description = 'A function that sums two numbers'
 
-sum      satisfies SumInterface // OK
-arraySum satisfies SumInterface // OK
+sum satisfies SumInterface // OK
 ```
-
-
 
 ## 4. Generic TypeScript function type
 
+In all of the functions until now both the parameter and return types were always `number`.  
+
+What if you want to calculate the sum of 2 numeric strings, for example `'2'` and `'3'`.  
+
+That's when the TypeScript generic types become handy: you can make the sum function be more generic and accept both a `number` and `string`.  
+
+```typescript
+type Sum<T> = (a: T, b: T) => T
+```
+
+`T` is now a type argument, and it can be a type like `string` or `number`.
+
+
+The type argument `T` gets a specific type when you use that type:
+
+```typescript
+type Sum<T> = (a: T, b: T) => T
+
+const sum = (a: number, b: number): number => a + b
+const sumNumeric = (a: string, b: string) => {
+  return `${parseFloat(a) + parseFloat(b)}`
+}
+
+sum        satisfies Sum<number> // OK
+sumNumeric satisfies Sum<string> // OK
+```
+
+You can make generic methods:
+
+```typescript
+interface SumMethodGeneric<T> {
+  sum(a: T, b: T): T
+}
+
+const object = {
+  sum(a: number, b: number): number {
+    return a + b
+  }
+}
+
+object satisfies SumMethodGeneric<number> // OK
+```
+
+And functions defined using function interfaces:
+
+```typescript
+interface SumInterfaceGeneric<T> {
+  (a: T, b: T): T
+}
+
+const sum = (a: number, b: number): number => a + b
+
+sum satisfies SumInterfaceGeneric<number> // OK
+```
 
 
 ## 5. Conclusion
