@@ -149,7 +149,7 @@ This is programming to implementation because `ListRenderer` uses a *concrete* i
 
 ![Depending on one implementation](./images/diagram-02.svg)
 
-Is programming to an implementation a problem? The answer depends on *how your code would change in the future*. 
+Is programming to an implementation a problem? The answer depends on *how your code will change in the future*. 
 
 If you are sure that the list renderer will sort the names alphabetically only &mdash; and this requirement most likely won't change in the future &mdash; then the programming to the concrete sorting implementation is *good*. 
 

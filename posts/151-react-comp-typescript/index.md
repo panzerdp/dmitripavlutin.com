@@ -101,7 +101,7 @@ function Message({ text, important }: MessageProps) {
 
 `MessageProps` is the interface that describes the props the component accepts: `text` prop as `string`, and `important` as `boolean`.  
 
-Now when rendering the component, you would have to set the prop values according to the props type:
+Now when rendering the component, you have to set the prop values according to the props type:
 
 ```tsx twoslash
 // @include: message

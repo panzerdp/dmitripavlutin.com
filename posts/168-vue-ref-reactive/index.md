@@ -1,6 +1,6 @@
 ---
 title: "5 Must-Know Differences Between ref() and reactive() in Vue"
-description: "What are the main differences between ref() and reactive()? And when would you use one or another?"  
+description: "What are the main differences between ref() and reactive()? And when to use one or another?"  
 published: "2023-01-25"
 modified: "2023-01-26"
 thumbnail: "./images/cover-2.png"
@@ -11,7 +11,7 @@ type: post
 
 If you landed on this post, you probably have a basic understanding of Vue reactivity.  
 
-However, like me, you might be asking yourself the eternal question: what are the main differences between `ref()` and `reactive()`? And when would you use one or another? 
+However, like me, you might be asking yourself the eternal question: what are the main differences between `ref()` and `reactive()`? And when to use one or another? 
 
 Let's find the answer together.
 

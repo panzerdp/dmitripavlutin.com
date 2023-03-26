@@ -209,7 +209,7 @@ function getCollectionValues(collection) {
 }
 ```
 
-Then `getCollectionWeight()` would become truly plain, because the only thing it needs to do is: get the collection values `getCollectionValues()` and apply the sum reducer on it.  
+Then `getCollectionWeight()` becomes truly plain, because the only thing it needs to do is: get the collection values `getCollectionValues()` and apply the sum reducer on it.  
 
 You can also create a separated reducer function:
 ```javascript

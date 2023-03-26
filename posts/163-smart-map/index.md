@@ -121,7 +121,7 @@ console.log(doubled); // logs [6, 12]
 
 Let's look into more detail on how the example above works.  
 
-The callback function returns an empty array `[]` if the current item is `0`. That would mean that when being flattened, the empty array `[]` provides no value at all.  
+The callback function returns an empty array `[]` if the current item is `0`. It means that when being flattened, the empty array `[]` provides no value at all.  
 
 If the current iterated item is non-zero, then `[2 * number]` is returned. When `[2 * number]` array is flattened, only `2 * number` is added into the resulting array.  
 

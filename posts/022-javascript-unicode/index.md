@@ -158,7 +158,7 @@ UTF-16 (the long name: 16-bit Unicode Transformation Format) is a [variable-leng
 * Code points from BMP are encoded using a single code unit of 16-bit
 * Code points from astral planes are encoded using two code units of 16-bit each.  
 
-Ok, that would be all for the dry theory. Let's follow some examples.  
+Ok, that is all for the dry theory. Let's follow some examples.  
 
 Suppose you want to save to hard drive *LATIN SMALL LETTER A* character `a`. Unicode tells you that *LATIN SMALL LETTER A* abstract character maps to `U+0061` code point.  
 

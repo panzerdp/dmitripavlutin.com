@@ -141,7 +141,7 @@ What if you need to hide the element's content while keeping the space it occupi
 
 Unfortunately, you cannot use `v-show` directive because it applies only `display: none` style.  
 
-But a viable solution is to use `:class` binding, which is pretty flexible in Vue. When the object literal `{ className: boolValue }` is assigned to the `:class`, Vue would apply the `"className"` as a class to the element if `boolValue` is `true`.  
+But a viable solution is to use `:class` binding, which is pretty flexible in Vue. When the object literal `{ className: boolValue }` is assigned to the `:class`, Vue applies the `"className"` as a class to the element if `boolValue` is `true`.  
 
 Let's create a CSS class `invisible` having the `visibility: hidden` style. Then, using the `:class` binding and an object literal you can apply the `invisible` class to an element:
 

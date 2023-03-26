@@ -97,7 +97,7 @@ console.log(1 in names); // logs false
 
 [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/hj7dk0tq/)
 
-Of course, if you run `isDense()` on a sparse array it would return `false`:
+Of course, if you run `isDense()` on a sparse array it will return `false`:
 
 ```javascript
 const names = ['Batman', , 'Bane'];

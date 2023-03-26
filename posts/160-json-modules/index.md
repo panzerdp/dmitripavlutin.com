@@ -35,7 +35,7 @@ How to import `config.json` into an ES module?
 
 For example, let's create a simple web application that renders the application name and version from the JSON configuration file.  
 
-If you'd try to import `config.json` directly, Node.js would throw an error:
+If you try to import `config.json` directly, Node.js will throw an error:
 
 ```javascript{1}
 import http from 'http';

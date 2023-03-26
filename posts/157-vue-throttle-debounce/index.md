@@ -49,7 +49,7 @@ export default {
 
 Open the demo and type a few characters into the input. Each time you type, the value is logged to the console.  
 
-Logging is implemented using a watcher on the `value` data property. And if you'd like to perform a fetch request using the `value` as a GET parameter inside the watcher callback, you wouldn't want to start fetch requests so often.  
+Logging is implemented using a watcher on the `value` data property. And if you want to perform a fetch request using the `value` as a GET parameter inside the watcher callback, you wouldn't need to do fetch requests so often.  
 
 Let's debounce the logging to the console of the input value. The idea is to create a debounced function, then invoke that function inside the watcher.  
 
@@ -220,7 +220,7 @@ And if you try the demo, it works!
 
 The problem is that the options object exported from the component using `export default { ... }`, including the methods, are going to be reused by all the instances of the component. 
 
-In case if the web page has 2 or more instances of the component, then all the components would use the *same* debounced function `methods.debouncedHandler` &mdash; and the debouncing could glitch.  
+In case if the web page has 2 or more instances of the component, then all the components will use the *same* debounced function `methods.debouncedHandler` &mdash; and the debouncing could glitch.  
 
 ## 4. Conclusion
 

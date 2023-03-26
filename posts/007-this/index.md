@@ -868,7 +868,7 @@ myPoint.log();
 
 `setTimeout()` calls the arrow function with the same context (`myPoint` object) as the `log()` method. As seen, the arrow function "inherits" the context from the function where it is defined. 
 
-A regular function in this example would create its own context (`window` or `undefined` in strict mode). So to make the same code work correctly with a function expression it's necessary to manually bind the context: `setTimeout(function() {...}.bind(this))`. This is verbose, and using an arrow function is a cleaner and shorter solution.
+A regular function in this example creates its own context (`window` or `undefined` in strict mode). So to make the same code work correctly with a function expression it's necessary to manually bind the context: `setTimeout(function() {...}.bind(this))`. This is verbose, and using an arrow function is a cleaner and shorter solution.
 
 If the arrow function is defined in the topmost scope (outside any function), the context is always the global object (`window` in a browser):
 

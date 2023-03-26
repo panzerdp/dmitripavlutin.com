@@ -182,7 +182,7 @@ A high cohesion module is preferable because the elements of such a module focus
 * *Focused* and *understandable*: easier to understand what the module does
 * *Maintainable* and *easier to refactor*: the change in the module affects fewer modules
 * *Reusable*: being focused on a single task, makes the module easier to reuse
-* *Testable*: you would easier test a module that's focused on a single task
+* *Testable*: it's easier to test a module that's focused on a single task
 
 ![Components coupling and cohesion](./images/coupling-vs-cohesion.png)
 

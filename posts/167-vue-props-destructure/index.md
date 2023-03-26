@@ -26,7 +26,7 @@ const props = defineProps()
 </script>
 ```
 
-`props` in the above example would be a reactive object containing the props supplied to the component. If the component props changes, `props` reactive object changes accordingly.  
+`props` in the above example is a reactive object containing the props supplied to the component. If the component props changes, `props` reactive object changes accordingly.  
 
 The first thing you might want to do when accessing the `props` object is to destructure it to access the individual props. But to my surprise (when I was learning Vue composition API) the destructured props lose their reactivity!
 

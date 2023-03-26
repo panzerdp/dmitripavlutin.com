@@ -274,7 +274,7 @@ To customize the checked/unchecked binding to other values that a boolean, then 
 />
 ```
 
-Now `checked` would be assigned to `'Yes!'` (as true value) or `'No'` (as false value) string depending on the checkbox status.  
+Now `checked` is assigned to `'Yes!'` (as true value) or `'No'` (as false value) string depending on the checkbox status.  
 
 Let's modify the previous example to use the custom values `'Yes!'` and `'No'`:
 

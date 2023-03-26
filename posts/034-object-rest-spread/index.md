@@ -629,7 +629,7 @@ The destructuring assignment defines a new variable `width` and sets its value t
 Object rest collects only own and enumerable properties.  
 
 Notice that object rest must be the last element in the destructuring assignment. 
-Hence the code `const { ...margin , width  } = style` is invalid and would trigger a `SyntaxError: Rest element must be last element`.  
+Hence the code `const { ...margin , width  } = style` is invalid and throws `SyntaxError: Rest element must be last element`.  
 
 ## 4. Conclusion  
 

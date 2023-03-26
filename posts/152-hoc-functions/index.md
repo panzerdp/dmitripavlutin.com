@@ -27,7 +27,7 @@ calculate([1, 2, 4]); // => 7
 
 The numbers are the input, and the function `calculate()` returns the sum &mdash; the output.  
 
-What about implementing a more universal function that would support more operations on numbers: addition, multiplication, and more. How would you implement that?  
+What about implementing a more universal function to support more operations on numbers: addition, multiplication, and more. How would you implement that?  
 
 Let's see what the concept of the higher-order functions is, and how it can make `calculate()` function more universal in regards to operations it can support.  
 

@@ -79,7 +79,7 @@ While I do consider `array.reduce()` method useful and powerful, sometimes its r
 
 Because grouping data is an often occurring task ([recall](https://www.programiz.com/sql/group-by) `GROUP BY` from SQL?) the [array group proposal](https://github.com/tc39/proposal-array-grouping) introduces two useful methods: `array.groupBy()` and `array.groupByToMap()`.  
 
-Here's how you would use `array.groupBy()` to create the same grouping by category:
+Here's how to use `array.groupBy()` to create the same grouping by category:
 
 ```javascript
 const groupByCategory = products.groupBy(product => {

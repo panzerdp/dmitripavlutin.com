@@ -328,7 +328,7 @@ First, note that a *derived object* is one created after a specific operation on
 
 Usually derived objects have the same constructor as the original object, which is expected. But sometimes is necessary to indicate a custom constructor (maybe one from the base class): this is where `@@species` property can help.  
 
-Suppose a scenario when you extend `Array` constructor to a child class `MyArray`, in order to add useful methods. When later `MyArray` class instance is used with `.map()` method, you would need an instance of `Array`, but not the child one `MyArray`.  
+Suppose a scenario when you extend `Array` constructor to a child class `MyArray`, in order to add useful methods. When later `MyArray` class instance is used with `.map()` method, you will need an instance of `Array`, but not the child one `MyArray`.  
 To do so, define an accessor property *@@species* and indicate the derived object constructor: `Array`. Let's try an example:  
 
 ```javascript
@@ -349,7 +349,7 @@ odds instanceof MyArray; // => false
 
 In `MyArray` a static accessor property is defined `static get [Symbol.species]() {}`. It indicates that derived objects should have an `Array` constructor.  
 Later when filtering the array elements, `array.filter()` method returns an `Array`.  
-If *@@species* property is not customized, `array.filter()` would return an `MyArray` instance.  
+If *@@species* property is not customized, `array.filter()` returns an `MyArray` instance.  
 
 *@@species* accessor property is used with `Array` and `TypedArray` methods like `.map()`, `.concat()`, `.slice()`, `.splice()` that return derived objects.  
 It is useful for extending maps, regular expression objects, promises, and still keep the original constructor.  
