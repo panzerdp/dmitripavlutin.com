@@ -177,65 +177,7 @@ sum.description = 'A function that sums two numbers'
 sum satisfies SumInterface // OK
 ```
 
-## 4. Generic TypeScript function type
-
-In all of the functions until now both the parameter and return types were always `number`.  
-
-What if you want to calculate the sum of 2 numeric strings, for example `'2'` and `'3'`.  
-
-That's when the TypeScript generic types become handy: you can make the sum function be more generic and accept both a `number` and `string`.  
-
-```typescript
-type Sum<T> = (a: T, b: T) => T
-```
-
-`T` is now a type argument, and it can be a type like `string` or `number`.
-
-
-The type argument `T` gets a specific type when you use that type:
-
-```typescript
-type Sum<T> = (a: T, b: T) => T
-
-const sum = (a: number, b: number): number => a + b
-const sumNumeric = (a: string, b: string) => {
-  return `${parseFloat(a) + parseFloat(b)}`
-}
-
-sum        satisfies Sum<number> // OK
-sumNumeric satisfies Sum<string> // OK
-```
-
-You can make generic methods:
-
-```typescript
-interface SumMethodGeneric<T> {
-  sum(a: T, b: T): T
-}
-
-const object = {
-  sum(a: number, b: number): number {
-    return a + b
-  }
-}
-
-object satisfies SumMethodGeneric<number> // OK
-```
-
-And functions defined using function interfaces:
-
-```typescript
-interface SumInterfaceGeneric<T> {
-  (a: T, b: T): T
-}
-
-const sum = (a: number, b: number): number => a + b
-
-sum satisfies SumInterfaceGeneric<number> // OK
-```
-
-
-## 5. Conclusion
+## 4. Conclusion
 
 Follow the post [TypeScript Function Overloading](/typescript-function-overloading/) to understand how to define functions that can be invoked in multiple ways.  
 
