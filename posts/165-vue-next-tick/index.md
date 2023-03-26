@@ -2,7 +2,7 @@
 title: "How to Use nextTick() in Vue"
 description: "nextTick(callback) executes the callback when the DOM has been updated."  
 published: "2022-02-12"
-modified: "2023-01-30"
+modified: "2023-03-26"
 thumbnail: "./images/cover-3.png"
 slug: vue-next-tick
 tags: ['vue', 'dom']
@@ -50,7 +50,7 @@ Clicking on "Insert/Remove" button changes `show` flag, which toggles the displa
 
 Looking into `handleClick`, right after data mutation `show.value = !show.value`, the logged DOM data doesn't correspond to `show` value. If `show` is `true`, then `content` is `null`: which means that DOM is not in sync with the component's data.   
 
-If you want to catch the moment when DOM has just been updated, then you need to use a special function `nextTick(callback)`. It executes `callback` immediately after the new data updates reach DOM.  
+If you want to catch the moment when DOM has just been updated, then you need to use a special function `nextTick(callback)`. It executes `callback` after the new data updates have reached DOM.  
 
 Let's find the moment when the `<div>` element is inserted or removed from the DOM:
 
@@ -87,7 +87,7 @@ There's also `this.$nextTick(callback)` available on the component instance, whi
 
 ## 2. nextTick() with async/await
 
-If `nextTick()` is called without arguments, it will return a promise that will be resolved when component data changes reach DOM.  
+If `nextTick()` is called without arguments, it will return a promise that resolves when component data changes reach DOM.  
 
 This helps to take advantage of the more readable `async/await` syntax.  
 
