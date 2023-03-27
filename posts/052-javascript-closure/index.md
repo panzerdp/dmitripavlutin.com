@@ -2,7 +2,7 @@
 title: "JavaScript Closure: The Beginner's Friendly Guide"
 description: A closure is a function that captures variables from where it is defined (or its lexical scope).  
 published: '2019-10-25T04:00Z'
-modified: '2023-01-26'
+modified: '2023-03-27'
 thumbnail: './images/cover-5.png'
 slug: javascript-closure
 tags: ['javascript', 'closure', 'scope']
@@ -320,6 +320,70 @@ triple(4); // => 12
 Currying, an important concept of functional programming, is also possible thanks to closures.  
 
 `executeMultiply(b)` is a closure that captures `a` from its lexical scope. When the closure is invoked, the captured variable `a` and the parameter `b` are used to calculate `a * b`.  
+
+### 5.4 Encapsulation
+
+Another good application that I enjoy is the ability to implement the [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)) of a module.  
+
+Suppose you have a task to implement [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) data structure: you can only push or pop items to the stack.  
+
+The regular JavaScript array provides both [array.push()](operations-on-arrays-javascript/#101-arraypush-method) and [array.pop()](/operations-on-arrays-javascript/#111-arraypop-method) methods.  
+
+Here's a simple implementation of a stack:
+
+```javascript
+function Stack() {
+  const items = []
+
+  return items;
+}
+
+const stack = Stack();
+stack.push(3)
+stack.push(2)
+stack.push(1)
+console.log(stack.pop()); // logs 1
+
+stack.length = 0;         // erases the stack
+console.log(stack.pop()); // logs undefined (broken!)
+```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/qfonxvL9/3/)
+
+Yes, the push and pop operations are supported. But there's a problem: the entire array object is exported, and you can easily erase the stack using `stack.length = 0`, or do any other operations that are not permitted normally on a stack. 
+
+
+Let's make the Stack implementation encapsulated: allow only push or pop operations to be possible. That's exactly where the closure can help:
+
+```javascript
+function Stack() {
+  const items = [];
+
+  return {
+    push(item) {
+      items.push(item);
+    },
+    pop() {
+      return items.pop();
+    }
+  }
+}
+
+const stack = Stack();
+stack.push(3)
+stack.push(2)
+stack.push(1)
+console.log(stack.pop()); // logs 1
+
+stack.length = 0; // Does nothing!
+console.log(stack.pop()); // logs 2 (works!)
+```
+[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/j1hreayw/)
+
+This time `push()` and `pop()` methods are closures that close over `items` array. What's interesting is that `items` variable is now private: it is accessible only inside `Stack` scope, but not outside.  
+
+Calling `stack.length` has no effect: `items` is not accessible outside `Stack` scope.  
+
+That was an example of another wonderful benefit of closures: you can use them to create true encapsulation with private variables.  
 
 ## 6. Conclusion
 
