@@ -55,6 +55,19 @@ Let's write the TypeScript function type of the `sum()`:
 
 `type Sum = ...` is a [type alias](https://www.digitalocean.com/community/tutorials/typescript-type-alias#step-2-using-type-alias) in TypeScript. The type alias allows to reuse the type in many places without repetiing its definition.    
 
+
+Use `?` near the parameter name to indicate an optional parameter:*
+
+```typescript
+type SumOpt = (a: number, b?: number) => Promise<number>
+
+// Continue with the example
+```
+
+And use `...args: T[]` to type a rest paramter:
+
+// Add example
+
 ### 1.1 Guiding ideas
 
 To help you understand better how to use the function types, let's see a couple of guiding ideas.  
