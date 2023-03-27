@@ -1,40 +1,57 @@
 ---
-title: "TypeScript Function Type: Let's Annotate Functions"
-description: "How to use function type in TypeScript to annotate functions."
+title: "TypeScript Function Types Explained: Everything You Need to Know"
+description: "Are you struggling to understand TypeScript function types? Look no further! This comprehensive guide covers everything you need to know."
 published: "2023-03-26"
 modified: "2023-03-26"
-thumbnail: "./images/v-model-form-input-cover-3.png"
+thumbnail: "./images/typescript-function-types.png"
 slug: typescript-function-type
 tags: ['typescript', 'function']
 type: post
 ---
 
-This post describes what you need to know about TypeScript function and methods types. 
+Functions are the small pieces of logic that tied toghether form applications. If you write your application in TypeScript, you must know how to type your functions.  
 
-Also you'll find listed some common function types like async functions, using rest parameters, and more.  
+This post has all the information you need to type functions in TypeScript.
 
 <TableOfContents maxLevel={1} />
 
 ## 1. TypeScript function type
 
-When writing a regular function in TypeScript, you don't have to specify its type. TypeScript infers the function type from the definition.  
+Functions in TypeScript are [first-class objects](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function). Which means that you can assign functions to variables, use functions as arguments to other functions, or even return functions.  
 
-```typescript
-const sum = (a: number, b: number) => a + b
+What's why knowning how to type functions in TypeScript is a must if you want to pass functions as objects around.  
 
-typeof sum
-// ^?
+Let's start with a simple case: a function that sums 2 numbers and returns the sum.  
+
+In plain JavaScript, here's how the function looks like:
+
+```javascript
+// JavaScript
+const sum = (a, b) => a + b
 ```
 
-If that's your case: defining a simple function, you don't need to do anything else.  
+`sum` is an arrow function returning the sum of its 2 arguments.  
 
-Functions in TypeScript/JavaScript are [first-class citizens](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function). Which means that you can assign functions to variables, use functions as arguments to other functions, or even return functions.  
+Knowing nothing about TypeScript types, in plain JavaScript, you know that `a` and `b` arguments have to be numbers, and the return value of the function also has to be a number.  
 
-Here's how you can write the TypeScript function type for the `sum()` function:
+```javascript
+// JavaScript
+const sum = (a, b) => a + b
+
+console.log(sum(4, 3)); // logs 7
+```
+
+In the above examples the arguments `4` and `3`, as well the returned value `7` are all *numbers*.  
+
+Now let's write the TypeScript function type corresponding to `sum()`:
 
 ```typescript
-type Sum = (a: number, b: number) => number
+(a: number, b: number) => number
 ```
+
+`(a: number, b: number)` is the part that indicates the parameters and their types. After the fat arrow indicate the return type: `=> number`.  
+
+Having the `sum()` function type, you can do all the operations with functions treating them as objects:  
 
 A TypeScript function type is defined by a pair of parentheses with the parameters types `(param1: Type1, param2: Type2)`, followed by the fat `=>` arrow and the return type.  
 
@@ -78,15 +95,15 @@ sum3 satisfies Sum // OK
 
 ```typescript
 // a function returning nothing (void as return type)
-type VoidReturnFunc = (param: number) => void
+type ReturnNothingFunc = (param: number) => void
 
 // a function without parameters
 type NoParamsFunc = () => string
 
-// an async function (Promise<T> as return type)
+// an async function returning a string wrapped in a promise
 type AsyncFunc = (param: number) => Promise<string>
 
-// a function with a rest parameter (...rest: T[] as param type)
+// a function with a rest parameter
 type RestParamsFunc = (...rest: number[]) => number
 
 // a function that returns another function
@@ -94,6 +111,8 @@ type HOCFunc = (param: number) => (param: number) => number
 ```
 
 ## 2. TypeScript method type
+
+A [method](/javascript-method/) is a function that exists and is executed in the context of an object. 
 
 You can also define methods on interfaces: 
 
@@ -139,9 +158,7 @@ interface ObjectCommonMethods {
 
 ## 3. TypeScript function interface
 
-Another interesting way to write the function type is by using the function interface, aka function call signature. 
-
-I don't use it often, but it can be very useful if you want to add some additional properties to the function type or define multiple 
+Another interesting way to write the function type is using the TypeScript function interface, also named function call signature. 
 
 TypeScript function interface looks similar to a method type, with the difference that the function interface doesn't have a function name:  
 
@@ -178,6 +195,10 @@ sum satisfies SumInterface // OK
 ```
 
 ## 4. Conclusion
+
+`(param1: Type1, param2: Type2) => ReturnType` is the syntax of a TypeScript function type.  
+
+`interface Object { method(param1: Type1, param2: Type2): ReturnType }` is how you define a method.  
 
 Follow the post [TypeScript Function Overloading](/typescript-function-overloading/) to understand how to define functions that can be invoked in multiple ways.  
 
