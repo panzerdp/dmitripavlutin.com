@@ -9,41 +9,43 @@ tags: ['typescript', 'function']
 type: post
 ---
 
-Functions are the small pieces of logic that tied toghether form applications. If you write your application in TypeScript, you must know how to type your functions.  
-
-This post has all the information you need to type functions in TypeScript.
+Functions are the small pieces of logic that tied toghether form applications. If you write applications in TypeScript, you must know how to type your functions. Let's learn how to do that. 
 
 <TableOfContents maxLevel={1} />
 
 ## 1. TypeScript function type
 
-Functions in TypeScript are [first-class objects](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function). Which means that you can assign functions to variables, use functions as arguments to other functions, or even return functions.  
+Functions in JavaScript/TypeScript are [first-class objects](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function). You can assign functions to variables, use functions as arguments to other functions, or even return functions.  
 
-What's why knowning how to type functions in TypeScript is a must if you want to pass functions as objects around.  
+Knowning how to type functions in TypeScript is a must if you want to pass around functions as objects.  
 
 Let's start with a simple case: a function that sums 2 numbers and returns the sum.  
 
-In plain JavaScript, here's how the function looks like:
+Here's how the function in plain JavaScript:
 
 ```javascript
 // JavaScript
-const sum = (a, b) => a + b
+function sum(a, b) {
+  return a + b
+}
 ```
 
-`sum` is an arrow function returning the sum of its 2 arguments.  
+`sum` is a function returning the sum of its 2 arguments.  
 
-Knowing nothing about TypeScript types, in plain JavaScript, you know that `a` and `b` arguments have to be numbers, and the return value of the function also has to be a number.  
+In plain JavaScript, you know that `a` and `b` arguments have to be numbers, and the returned value also has to be a number.  
 
 ```javascript
 // JavaScript
-const sum = (a, b) => a + b
+function sum(a, b) {
+  return a + b
+}
 
 console.log(sum(4, 3)); // logs 7
 ```
 
 In the above examples the arguments `4` and `3`, as well the returned value `7` are all *numbers*.  
 
-Now let's write the TypeScript function type corresponding to `sum()`:
+Knowing this, you can easily write the type of such a function:
 
 ```typescript
 (a: number, b: number) => number
@@ -51,21 +53,46 @@ Now let's write the TypeScript function type corresponding to `sum()`:
 
 `(a: number, b: number)` is the part that indicates the parameters and their types. After the fat arrow indicate the return type: `=> number`.  
 
-Having the `sum()` function type, you can do all the operations with functions treating them as objects:  
-
-A TypeScript function type is defined by a pair of parentheses with the parameters types `(param1: Type1, param2: Type2)`, followed by the fat `=>` arrow and the return type.  
-
-Now let's check if the `sum()` function is `Sum` type:
+Having the `sum` function type, you can pass around the function as an object. You can assign the function to a variable, use it as an argument or return from another function:
 
 ```typescript
 type Sum = (a: number, b: number) => number
 
-const sum = (a: number, b: number) => a + b
+// Assign to variable
+const sum: Sum = function(a, b) { return a + b }
 
-sum satisfies Sum // OK
+// Add as argument to another function
+function someFunc1(func: Sum): void {
+  func(1, 2)
+}
+someFunc1(sum) // OK
+
+// Return from a function
+function someFunc2(): Sum {
+  return sum
+}
 ```
 
-`sum satisfies Sum` doesn't trigger type errors, meaning that `sum` is a type of `Sum` (here's the [satisfies documentation](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html#the-satisfies-operator) if you're not familiar with the operator).
+`type Sum = ...` is a type alias in TypeScript, and it allows to reuse the type in many places.  
+
+Here are some more examples of function types that you might commonly encounter:
+
+```typescript
+// a function without parameters
+type NoParamsFunc = () => string
+
+// a function returning nothing (void as return type)
+type ReturnNothingFunc = (param: number) => void
+
+// an async function returning a string (wrapped in a promise)
+type AsyncFunc = (param: number) => Promise<string>
+
+// a function with a rest parameter
+type RestParamsFunc = (...rest: number[]) => number
+
+// a function that returns another function
+type HOCFunc = (param: number) => (param: number) => number
+```
 
 The parameter names in the function type and the function instance can be different:
 
@@ -92,23 +119,6 @@ sum3 satisfies Sum // OK
 ```
 
 ### 2.1 Useful common function types
-
-```typescript
-// a function returning nothing (void as return type)
-type ReturnNothingFunc = (param: number) => void
-
-// a function without parameters
-type NoParamsFunc = () => string
-
-// an async function returning a string wrapped in a promise
-type AsyncFunc = (param: number) => Promise<string>
-
-// a function with a rest parameter
-type RestParamsFunc = (...rest: number[]) => number
-
-// a function that returns another function
-type HOCFunc = (param: number) => (param: number) => number
-```
 
 ## 2. TypeScript method type
 
