@@ -53,72 +53,16 @@ Let's write the TypeScript function type of the `sum()`:
 
 `(a: number, b: number)` is the part that indicates the parameters and their types. Enumerate as many parameters as you want. After the fat arrow indicate the return type: `=> number`.  
 
-`type Sum = ...` is a [type alias](https://www.digitalocean.com/community/tutorials/typescript-type-alias#step-2-using-type-alias) in TypeScript. The type alias allows to reuse the type in many places without repetiing its definition.    
-
-
-Use `?` near the parameter name to indicate an optional parameter:*
+A few interesting function types examples:
 
 ```typescript
-type SumOpt = (a: number, b?: number) => Promise<number>
-
-// Continue with the example
+// function without parameters that returs nothing
+() => void
+// function with 2 params returning a string
+(p1: string, p2: number) => string
 ```
 
-And use `...args: T[]` to type a rest paramter:
-
-// Add example
-
-### 1.1 Guiding ideas
-
-To help you understand better how to use the function types, let's see a couple of guiding ideas.  
-
-*1) The regular and the arrow functions have the same type:*
-
-```typescript
-type Sum = (a: number, b: number) => number
-
-const regularFunc: Sum = function(a, b) { return a + b } // OK
-const arrowFunc: Sum   = (a, b) => a + b                 // OK
-```
-[Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWygXigCgIYC4oDtEBGEATgDRQE74JHECUKAfHoSQFBsDGA9rgM7AoxCAHM4AGwzEAYnFycc8JKgBmczsACWvTOQIMA3kIjA4xXFAxQA1BSgBfKAHonUAPIBpLrwGXixbgB3WXlFRBR0DD0GZGYrWwIoJOSU1JSXdw8gA)
-
-
-`regularFunc` is a regular function and `arrowFunc` is an arrow function. Both are `Sum` type.  
-
-*2) The parameters name in the function and its type can be different:*
-
-```typescript
-type Sum = (a: number, b: number) => number
-
-const sum: Sum = function(n1, n2) { return n1 + n2 } // OK
-```
-
-It's acceptable that the function type has the parameter name as `a` and `b` but the function parameters to be `n1` and `n2`.  
-
-*3) The function can have less parameters than the function type:*
-
-```typescript 
-type Sum = (a: number, b: number) => number
-
-const sum2: Sum = function (a) { return a } // OK
-const sum3: Sum = function () { return 0 }  // OK
-```
-
-`sum2` and `sum3` have fewer parameters than the `Sum` type, still, this is acceptable.  
-
-*4) The return type of an async function must be a promise `Promise<T>`:*
-
-```typescript
-type SumAsync = (a: number, b: number) => Promise<number>
-
-const sumAsync: SumAsync = async function (a, b) { 
-  return await a + b
-} // OK
-```
-
-`sumAsync` is an async function. The function type of an async function must always return a [promise](/what-is-javascript-promise/), which is denoted by `Promise<T>` [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html).  
-
-### 1.2 The function type in practice
+Working with function types, because of their length, is usually more convinient by storing them into a [type alias](https://www.digitalocean.com/community/tutorials/typescript-type-alias#step-2-using-type-alias). The type alias allows to reuse the type in many places without repetiing its definition.  
 
 Having the `Sum` function type, you can use it to annotate any place you'd like to use a function as a regular value.  
 
@@ -149,11 +93,90 @@ function someFunc2(): Sum {
 someFunc()(1, 2) // OK
 ```
 
-## 2. TypeScript method type
+## 2. TypeScript function type guide
 
-A [method](/javascript-method/) is a function that exists and is executed in the context of an object. That's why method in TypeScript also have to be typed in the same place as the object type.  
+To help you understand better how to use the function types, let's see a couple of guiding ideas.  
 
-You can also define methods on interfaces: 
+*1) Use `?` near the parameter name to indicate an optional parameter:*
+
+```typescript
+type SumOpt = (a: number, b?: number) => number
+
+const sumOpt: SumOpt = function sum(a, b) {
+  if (b === undefined) {
+    return a
+  }
+  return a + b
+}
+
+sumOpt(2) // OK
+```
+
+`b` in the `SumOpt` type is an optional parameter.  
+
+*2) A rest parameter is usually typed using the three dots and an array type:*
+
+```typescript
+type SumRest = (...numbers: number[]) => number
+
+const sumRest: SumRest = function sum(...numbers) {
+  return numbers.reduce((sum, number) => sum + number)
+}
+```
+
+`...numbers: number[]` inside of the function type indicates a rest parameter.  
+
+*3) The regular and the arrow functions have the same type:*
+
+```typescript
+type Sum = (a: number, b: number) => number
+
+const regularFunc: Sum = function(a, b) { return a + b } // OK
+const arrowFunc: Sum   = (a, b) => a + b                 // OK
+```
+[Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWygXigCgIYC4oDtEBGEATgDRQE74JHECUKAfHoSQFBsDGA9rgM7AoxCAHM4AGwzEAYnFycc8JKgBmczsACWvTOQIMA3kIjA4xXFAxQA1BSgBfKAHonUAPIBpLrwGXixbgB3WXlFRBR0DD0GZGYrWwIoJOSU1JSXdw8gA)
+
+
+`regularFunc` is a regular function and `arrowFunc` is an arrow function. Both are `Sum` type.  
+
+*4) The parameters name in the function and its type can be different:*
+
+```typescript
+type Sum = (a: number, b: number) => number
+
+const sum: Sum = function(n1, n2) { return n1 + n2 } // OK
+```
+
+It's acceptable that the function type has the parameter names as `a` and `b` but the function parameters `n1` and `n2`.  
+
+*5) The function can have less parameters than the function type:*
+
+```typescript 
+type Sum = (a: number, b: number) => number
+
+const sum2: Sum = function (a) { return a } // OK
+const sum3: Sum = function () { return 0 }  // OK
+```
+
+`sum2` and `sum3` have fewer parameters than the `Sum` type, still, this is acceptable.  
+
+*6) The return type of an async function must be a promise `Promise<T>`:*
+
+```typescript
+type SumAsync = (a: number, b: number) => Promise<number>
+
+const sumAsync: SumAsync = async function (a, b) { 
+  return await a + b
+} // OK
+```
+
+`sumAsync` is an async function. The function type of an async function must always return a [promise](/what-is-javascript-promise/), which is denoted by `Promise<T>` [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html).  
+
+## 3. TypeScript method type
+
+A [method](/javascript-method/) is a function that exists and is executed in the context of an object. Methods in TypeScript have to exist inside of the object type.  
+
+You can define methods on interfaces: 
 
 ```typescript
 interface ObjectWithMethod {
@@ -163,7 +186,7 @@ interface ObjectWithMethod {
 
 `ObjectWithMethod` is an interface that denotes an object that has a method named `sum`. The first and second parameter types of the `sum` method are numbers, and the return type is also a number.  
 
-Please remember an important difference. The function type uses the fat arrow `=>` to separate parameters list from the return type, while the method type uses the colon `:` (as seen in `sum()` method type above).  
+Remember an important difference. The function type uses the fat arrow `=>` to separate parameters list from the return type, while the method type uses the colon `:` (as seen in `sum()` method type above).  
 
 Let's look at an example:
 
@@ -177,7 +200,7 @@ const object: ObjectWithMethod = {  // OK
 }
 ```
 
-You can add as many method types as you need in an object type:
+You can add as many method types as you need to an object type:
 
 ```typescript
 interface ObjectWithMethod {
@@ -188,11 +211,11 @@ interface ObjectWithMethod {
 }
 ```
 
-## 3. TypeScript function interface
+## 4. TypeScript function interface
 
 Another interesting way to write the function type is using the TypeScript function interface, also named function call signature. 
 
-TypeScript function interface looks similar to a method type, with the difference that the function interface doesn't have a function name:  
+TypeScript function interface looks similar to a method type. The function interface just doesn't have the method name:  
 
 ```typescript
 interface SumInterface {
@@ -200,9 +223,9 @@ interface SumInterface {
 }
 ```
 
-Note that near `(a: number, b: number) => number` there is no function name indicated.  
+`(a: number, b: number) => number` there is no function name indicated.  
 
-As expected, the regular sum function have `SumInterface` type:
+The `sum()` function used until now have `SumInterface` type:
 
 ```typescript
 interface SumInterface {
@@ -214,9 +237,9 @@ const sum: SumInterface = function(a, b) {
 }
 ```
 
-You can benefit from the function interface by adding additional properties to the function object (which is not possible using the standard function type describe above).  
+You can benefit from the function interface by adding properties to the function object, which is not possible using the standard function type describe above.  
 
-Let's a property `description` to the sum function:
+Let's add the property `description` to the sum function type:
 
 ```typescript
 interface SumWithDescription {
@@ -232,24 +255,28 @@ sum.description = 'A function that sums two numbers'
 const sumWithDescription: SumWithDescription = sum // OK
 ```
 
-## 4. Conclusion
+## 5. Conclusion
 
-In conclusion, here's what you've learned.  
-
-The following literal is used to define a TypeScript function type:
+Writing a TypeScript function type is pretty simple:
 
 ```typescript
-(param1: Type1, param2: Type2, /*..*/ paramN: TypeN) => ReturnType
+type Sum = (a: number, b: number) => number
 ```
 
-In case of methods, you have to define the function on an interface:
+Indicate the parameter types in a pair of parentheses, put the fat arrow `=>` followed by the return type.  
+
+In case of methods, you have to define the method on the type of the object:
 
 ```typescript
-interface Object { 
-  (param1: Type1, param2: Type2, /*..*/ paramN: TypeN): ReturnType
+interface ObjectWithMethod {
+  sum(a: number, b: number): number
 }
 ```
 
-Follow the post [TypeScript Function Overloading](/typescript-function-overloading/) to understand how to define functions that can be invoked in multiple ways.  
+Again, put the parameters into a pair of parenetheses, then put a colon `:` and finally indicate the method return type.  
 
-*Do you prefer TypeScript function types or function interfaces?*
+Now you should be ready to type the functions in your TypeScript code.  
+
+How can you type a function that can be invoked in multiple ways? Follow the post [TypeScript Function Overloading](/typescript-function-overloading/) to find more information.  
+
+*Have any questions about function types? Write a comment and let's discuss!*
