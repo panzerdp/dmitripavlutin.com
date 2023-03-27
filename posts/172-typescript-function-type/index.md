@@ -45,13 +45,13 @@ console.log(sum(4, 3)); // logs 7
 
 In the above examples the arguments `4` and `3`, as well the returned value `7` are all *numbers*.  
 
-Knowing this, you can easily write the type of such a function:
+Let's write the TypeScript function type of the `sum()`:
 
 ```typescript
 (a: number, b: number) => number
 ```
 
-`(a: number, b: number)` is the part that indicates the parameters and their types. After the fat arrow indicate the return type: `=> number`.  
+`(a: number, b: number)` is the part that indicates the parameters and their types. Enumerate as many parameters as you want. After the fat arrow indicate the return type: `=> number`.  
 
 `type Sum = ...` is a [type alias](https://www.digitalocean.com/community/tutorials/typescript-type-alias#step-2-using-type-alias) in TypeScript. The type alias allows to reuse the type in many places without repetiing its definition.    
 
