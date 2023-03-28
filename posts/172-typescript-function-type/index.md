@@ -1,7 +1,7 @@
 ---
 title: "Understanding TypeScript Function Types: A Beginner's Guide"
 description: "Are you struggling to understand TypeScript function types? Look no further! This comprehensive guide covers everything you need to know."
-published: "2023-03-26"
+published: "2023-03-28"
 modified: "2023-03-28"
 thumbnail: "./images/typescript-function-types-2.png"
 slug: typescript-function-type
