@@ -74,6 +74,7 @@ type Sum = (a: number, b: number) => number
 const sum1: Sum = function(a: number, b: number): number { return a + b } // OK
 const sum2: Sum = function(a, b) { return a + b } // OK
 ```
+[Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWygXigCgIYC4oDtEBGEATgDRQE74JHECUKAfHoSQFBsD0nUAggM78AlgHNcUYAHsoANwzEhGAgBsIbAMaTc-YFH6IAjDnhJUAMzi51wIVsxVWZCg5ok6L2lADeUYhGBwxOIYUADUFFAAvlDcUADyANIaWjp6iABMxogoUBZWNnYY5AQMPn4BQVAh4QRRMTyJQA)
 
 In the example above `sum1`, as well as `sum2` are of type `Sum`. 
 
@@ -94,8 +95,9 @@ someFunc1((a, b) => a + b) // OK
 function someFunc2(): Sum {
   return (a, b) => a + b
 }
-someFunc()(1, 2) // OK
+someFunc2()(1, 2) // OK
 ```
+[Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWygXigCgIYC4oDtEBGEATgDRQE74JHECUKAfHoSQFBsD0nsiUGAZ37EA5ogi5gbAGZxcAY2ABLAPa4oAlQggAxOfICMaWQpzwEdHADcVSgCZQA3myhQT8tAfIAmOmwC+bJraegpGmOQEDMjMGFAA1BQM3FAA8gDSHCnmUMQQwHDEuBB2MvrKahpauvreaJa8SM6ueQVF6BiR0bEJFAFB1aHydXSePsk8GUA)
 
 ## 2. TypeScript function type guide
 
@@ -115,6 +117,7 @@ const sumOpt: SumOpt = function sum(a, b) {
 
 sumOpt(2) // OK
 ```
+[Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWwPJmFAvFAFAQwFxQB2iARhAE4A0UJA-AcQmeQJQYB8RpFAUDwMYB7QgGc0IxCmAF4yVBigAzOIX7AAlsKgSEuaiTYBvHlCjrF2EhnSYVAEwiL1hCHaMnTUchGBxyhKBwPAF8Pb19-QKgAahoeUJ4dKSwAJjYAenSoJABpIA)
 
 `?b` in the `SumOpt` type is an optional parameter.  
 
@@ -126,8 +129,9 @@ type SumRest = (...numbers: number[]) => number
 const sumRest: SumRest = function sum(...numbers) {
   return numbers.reduce((sum, number) => sum + number)
 }
-sumRest([1, 2]) // OK
+sumRest(1, 2) // OK
 ```
+[Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWwEoQM7CgXigCgHQEB2iARhAE6oBcUxCZ5A2gLoCUWAfLaRQFC8BjAPaF0UVIhToa8ZGgzYAZnEIDgASxHjE+Ij0rsA3ryhRyEYHHKFu9CqjzmAJnAEQcOCQgA0thu0wuLygAaj8KVl4AX14vKWAcAEZfACZ2AHp0qAB5AGkgA)
 
 `...numbers: number[]` inside of the function type indicates a rest parameter.  
 
@@ -151,6 +155,7 @@ type Sum = (a: number, b: number) => number
 
 const sumDiffParam: Sum = function(n1, n2) { return n1 + n2 } // OK
 ```
+[Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWygXigCgIYC4oDtEBGEATgDRQE74JHECUKAfHoSQFBsDGA9rgM7AofRABEAlgDMJABQzEMCHPCSoJcXJ2BjeaXAEZyuAEwMA3lGIRgcYrjx6oAajxGoAXygB6T1ADyAaSA)
 
 It's acceptable that the function type has the parameter names as `a` and `b` but the function parameters `n1` and `n2`.  
 
@@ -162,8 +167,18 @@ type Sum = (a: number, b: number) => number
 const sumShort: Sum = function (a) { return a } // OK
 const sumShorter: Sum = function () { return 0 }  // OK
 ```
+[Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWygXigCgIYC4oDtEBGEATgDRQE74JHECUKAfHoSQFBsDGA9rgM7AofRDAAW3YsBzwkqAGZxcnYAEte6DAwDeUYhGBxiuKBigBfKAHpLUAPIBpLrwFCR4ySWmIUUBUtXqaNq6+obGAAzmUFY2DkA)
 
 `sumShort` and `sumShorter` have fewer parameters than the `Sum` type, still, they are `Sum` type.  
+
+But the function cannot have more parameters than the function type:
+
+```typescript 
+type Sum = (a: number, b: number) => number
+
+const sumLonger: Sum = function (a, b, c) { return a + b + c }  // Type error!
+```
+[Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWygXigCgIYC4oDtEBGEATgDRQE74JHECUKAfHoSQFBsDGA9rgM7AofRABleAcxI54SVADM4uTsACWvdBnIFynBgG8oxCMDjFcUDFADUFa1E5QAvlCgB6V1AAq4aCWLdiAEIgA)
 
 *6) The return type of an async function must be a promise `Promise<T>`:*
 
@@ -174,6 +189,7 @@ const sumAsync: SumAsync = async function (a, b) {
   return await a + b
 } // OK
 ```
+[Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWwIIGcQDsDGUC8UAUAhgFxTqIBGEATgDRQWnkJXUCUuAfFAArUD2CAJYoIAHmatOAKGmZ+6FMCgpEqDJlLxkaLLiiFd2AGZwswIQoKF6FDgG8o0qFGoRgcaugMB3QkOVCKABqBmkAXygAeiioAHkAaSA)
 
 `sumAsync` is an async function. The return type of an async function must always be a [promise](/what-is-javascript-promise/) &mdash; `Promise<T>` type (which is a [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html)).  
 
@@ -212,6 +228,7 @@ const object: ObjectWithMethod = {  // OK
   sum(a, b) { return a + b }
 }
 ```
+[Open the demo.](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgPICMBWEFgOrBgAWAshMQPYAmyA3gFDLIDOArgLYAUcAXMiB3TQANMnR8B7IVACUEwdHoBfevQQUQzMMgpYcYPhmy4CxMpRoBeOkwD0ttAGlGLDt1HoZNqOVZQQyHDIANRiyCpKQA)
 
 `object` is of type `ObjectWithMethod` and contains a method `sum()`.  
 
@@ -249,6 +266,7 @@ interface SumInterface {
 
 const sum: SumInterface = function(a, b) { return a + b } // OK
 ```
+[Open the demo.](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgMoFcC2BJc15LIDeAUMsgBRwBcyIWARtADTIO32ZNQCUHj0EgF8SJBAHsQAZzDIpWWhhx5YiFAF5kMdCARhgkqqwY9iyKBDDooIZHGQBqNsiHIA9G+QB5ANJA)
 
 Most of the times you will use the regular TypeScript function type `(a: number, b: number) => number` instead of a function interface. 
 
@@ -260,13 +278,12 @@ interface SumWithDescription {
   description: string
 }
 
-const sum = function(a, b) {
+const sum: SumWithDescription = function(a, b) {
   return a + b
 }
 sum.description = 'A function that sums two numbers'
-
-const sumWithDescription: SumWithDescription = sum // OK
 ```
+[Open the demo.](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgMoFcC2B1YYAWAIhAM4JTAAOYwA9iMgN4BQyyAFHAFzIhYBG0ADTJ+PPpkFQAlOIHRWyACalyVGvR4kwFEAHNmAX2bME9bchJYeGHHiKqK1OgwC8yGOhAINITiP5pJkUoCDB0KAY4ZABqUSNmK0wAOhUyJ19kdwByAEEPLx8XZAI4MEssEhKAd1peeSgSbKA)
 
 `SumWithDescription` on top of being a function, also has a `description` property of type `string`.  
 
