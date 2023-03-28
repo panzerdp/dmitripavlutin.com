@@ -3,7 +3,7 @@ title: "Understanding TypeScript Function Types: A Beginner's Guide"
 description: "Are you struggling to understand TypeScript function types? Look no further! This comprehensive guide covers everything you need to know."
 published: "2023-03-28"
 modified: "2023-03-28"
-thumbnail: "./images/typescript-function-types-3.png"
+thumbnail: "./images/typescript-function-type-cover.png"
 slug: typescript-function-type
 tags: ['typescript', 'function']
 type: post
@@ -58,7 +58,7 @@ Having the information about parameter and return types, you can easily translat
 
 (Note: the function type looks similar to an [arrow function](/6-ways-to-declare-javascript-functions/#4-arrow-function). But they are different things.)
 
-Working with function types, because of their length, is more convenient by storing them into a [type alias](https://www.digitalocean.com/community/tutorials/typescript-type-alias#step-2-using-type-alias). A type alias allows to reuse a type in many places without repetition:
+Working with function types, because of their length, is more convenient by storing them into a [type alias](https://www.digitalocean.com/community/tutorials/typescript-type-alias#step-2-using-type-alias). A type alias type reuse in multiple places:
 
 ```typescript
 // Sum is a type alias
@@ -66,6 +66,10 @@ type Sum = (a: number, b: number) => number
 ```
 
 Having the `Sum` type, you can use it to annotate any place you want where the function object is passed around in TypeScript.  
+
+<ImgShadow>
+  ![TypeScript function type](./images/typescript-function-type-5.png)
+</ImgShadow>
 
 First, of course, you can assign the function to a variable:
 
@@ -84,7 +88,7 @@ In the example above `sum1`, as well as `sum2` is of type `Sum`.
 
 In case of an [higher-order function](/javascript-higher-order-functions/), you use the function object as an argument or even return it from another function:
 
-```typescript
+```typescript{3,9}
 type Sum = (a: number, b: number) => number
 
 // Sum as argument
@@ -121,7 +125,7 @@ sumOpt(2) // OK
 ```
 [Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWwPJmFAvFAFAQwFxQB2iARhAE4A0UJA-AcQmeQJQYB8RpFAUDwMYB7QgGc0IxCmAF4yVBigAzOIX7AAlsKgSEuaiTYBvHlCjrF2EhnSYVAEwiL1hCHaMnTUchGBxyhKBwPAF8Pb19-QKgAahoeUJ4dKSwAJjYAenSoJABpIA)
 
-`?b` in the `SumOpt` type is an optional parameter.  
+`?b` in the `SumOpt` type is an optional parameter. The second argument can be omitted when invoking `sum(2)`.  
 
 *2) A rest parameter is typed using the three dots and an array type `(...rest: T[])`:*
 
