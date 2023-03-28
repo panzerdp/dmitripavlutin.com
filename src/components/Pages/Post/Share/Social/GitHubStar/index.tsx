@@ -1,4 +1,4 @@
-import ShareButton from '../../Button'
+import ShareLink from '../../Button'
 import * as styles from './index.module.scss'
 
 
@@ -8,7 +8,7 @@ interface PostShareGitHubStarProps {
 
 export default function PostShareSocialGitHubStar({ repositoryUrl }: PostShareGitHubStarProps): JSX.Element {
   return (
-    <ShareButton
+    <ShareLink
       href={`${repositoryUrl}/stargazers`}
       title="Star on GitHub"
       className={styles.gitHubStar}

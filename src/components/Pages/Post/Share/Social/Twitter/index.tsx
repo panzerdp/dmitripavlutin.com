@@ -1,7 +1,7 @@
 import * as React from 'react'
 import withWindowOpen, { WindowOpenOptions } from 'components/With/WindowOpen'
 import { slugify } from 'utils/string'
-import ShareButton from '../../Button'
+import ShareLink from '../../Button'
 import * as styles from './index.module.scss'
 
 export const URL_SHARE_TWITTER = 'https://twitter.com/share'
@@ -17,7 +17,7 @@ interface PostShareSocialTwitterProps {
 export class PostShareSocialTwitter extends React.Component<PostShareSocialTwitterProps> {
   public render() {
     return (
-      <ShareButton
+      <ShareLink
         href={this.getTwitterShareUrl()}
         title="Share on Twitter"
         onClick={this.handleClick}

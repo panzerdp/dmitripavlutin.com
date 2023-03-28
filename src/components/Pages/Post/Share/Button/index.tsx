@@ -5,6 +5,10 @@ interface ShareButtonProps {
   [x: string]: any;
 }
 
-export default function ShareButton({ className = '', ...restProps }: ShareButtonProps) {
+export function ShareLink({ className = '', ...restProps }: ShareButtonProps) {
   return <a {...restProps} className={`${className} ${styles.share}`} />
+}
+
+export function ShareButton({ className = '', ...restProps }: ShareButtonProps) {
+  return <button {...restProps} className={`${className} ${styles.share}`} />
 }
