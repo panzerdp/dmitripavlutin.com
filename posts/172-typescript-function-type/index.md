@@ -3,13 +3,15 @@ title: "Understanding TypeScript Function Types: A Beginner's Guide"
 description: "Are you struggling to understand TypeScript function types? Look no further! This comprehensive guide covers everything you need to know."
 published: "2023-03-28"
 modified: "2023-03-28"
-thumbnail: "./images/typescript-function-types-2.png"
+thumbnail: "./images/typescript-function-types-3.png"
 slug: typescript-function-type
 tags: ['typescript', 'function']
 type: post
 ---
 
-Functions are the small pieces of logic that are tied together to form applications. If you write applications in TypeScript, you must know how to type functions. Let's learn how to do that. 
+Functions are the small pieces of logic that together form applications. If you write applications in TypeScript, knowing function types is a must. 
+
+This guide covers everything you need to know to start using TypeScript function types.  
 
 <TableOfContents maxLevel={1} />
 
