@@ -9,7 +9,7 @@ tags: ['typescript', 'function']
 type: post
 ---
 
-Functions are the small pieces of logic that tied toghether form applications. If you write applications in TypeScript, you must know how to type functions. Let's learn how to do that. 
+Functions are the small pieces of logic that are tied together to form applications. If you write applications in TypeScript, you must know how to type functions. Let's learn how to do that. 
 
 <TableOfContents maxLevel={1} />
 
@@ -56,7 +56,7 @@ Having the information about parameter and return types, you can easily translat
 
 (Note: the function type looks similar to an [arrow function](/6-ways-to-declare-javascript-functions/#4-arrow-function). But they are different things.)
 
-Working with function types, because of their length, is more convinient by storing them into a [type alias](https://www.digitalocean.com/community/tutorials/typescript-type-alias#step-2-using-type-alias). A type alias allows to reuse a type in many places without repetition:
+Working with function types, because of their length, is more convenient by storing them into a [type alias](https://www.digitalocean.com/community/tutorials/typescript-type-alias#step-2-using-type-alias). A type alias allows to reuse a type in many places without repetition:
 
 ```typescript
 // Sum is a type alias
@@ -76,7 +76,7 @@ const sum2: Sum = function(a, b) { return a + b } // OK
 ```
 [Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWygXigCgIYC4oDtEBGEATgDRQE74JHECUKAfHoSQFBsD0nUAggM78AlgHNcUYAHsoANwzEhGAgBsIbAMaTc-YFH6IAjDnhJUAMzi51wIVsxVWZCg5ok6L2lADeUYhGBwxOIYUADUFFAAvlDcUADyANIaWjp6iABMxogoUBZWNnYY5AQMPn4BQVAh4QRRMTyJQA)
 
-In the example above `sum1`, as well as `sum2` are of type `Sum`. 
+In the example above `sum1`, as well as `sum2` is of type `Sum`. 
 
 `sum2` function doesn't have the parameter and return types indicated: all because TypeScript [infers](https://www.typescriptlang.org/docs/handbook/type-inference.html) these types from the `Sum`. In the examples that follow I'm going to use type inference on functions to avoid repetition.  
 
@@ -146,7 +146,7 @@ const arrowFunc: Sum   = (a, b) => a + b                 // OK
 [Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWygXigCgIYC4oDtEBGEATgDRQE74JHECUKAfHoSQFBsDGA9rgM7AoxCAHM4AGwzEAYnFycc8JKgBmczsACWvTOQIMA3kIjA4xXFAxQA1BSgBfKAHonUAPIBpLrwGXixbgB3WXlFRBR0DD0GZGYrWwIoJOSU1JSXdw8gA)
 
 
-`regularFunc` is a regular function and `arrowFunc` is an arrow function. Both are `Sum` type.  
+`regularFunc` is a regular function and `arrowFunc` is an arrow function. Both are `Sum` types.  
 
 *4) The parameter names in the function and the function type can be different:*
 
@@ -157,9 +157,9 @@ const sumDiffParam: Sum = function(n1, n2) { return n1 + n2 } // OK
 ```
 [Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWygXigCgIYC4oDtEBGEATgDRQE74JHECUKAfHoSQFBsDGA9rgM7AofRABEAlgDMJABQzEMCHPCSoJcXJ2BjeaXAEZyuAEwMA3lGIRgcYrjx6oAajxGoAXygB6T1ADyAaSA)
 
-It's acceptable that the function type has the parameter names as `a` and `b` but the function parameters `n1` and `n2`.  
+It's acceptable that the function type has the parameter names `a` and `b` but the function parameters `n1` and `n2`.  
 
-*5) The function can have less parameters than the function type:*
+*5) The function can have fewer parameters than the function type:*
 
 ```typescript 
 type Sum = (a: number, b: number) => number
@@ -213,9 +213,9 @@ type ObjectWithMethod = {
 }
 ```
 
-`ObjectWithMethod` is an object type having a method `sum()`. The first and second parameter types `(a: number, b: number)` are numbers, the return type is also a number `: number`.  
+`ObjectWithMethod` is an object type having a method `sum()`. The first and second parameter types `(a: number, b: number)` are numbers, and the return type is also a number `: number`.  
 
-Remember an important difference. The function type uses the fat arrow `=>` to separate parameter list from the return type, while the method type uses the colon `:`.  
+Remember an important difference. The function type uses the fat arrow `=>` to separate the parameter list from the return type, while the method type uses the colon `:`.  
 
 Let's look at an example:
 
@@ -268,7 +268,7 @@ const sum: SumInterface = function(a, b) { return a + b } // OK
 ```
 [Open the demo.](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgMoFcC2BJc15LIDeAUMsgBRwBcyIWARtADTIO32ZNQCUHj0EgF8SJBAHsQAZzDIpWWhhx5YiFAF5kMdCARhgkqqwY9iyKBDDooIZHGQBqNsiHIA9G+QB5ANJA)
 
-Most of the times you will use the regular TypeScript function type `(a: number, b: number) => number` instead of a function interface. 
+Most of the time you will use the regular TypeScript function type `(a: number, b: number) => number` instead of a function interface. 
 
 But you can benefit from the function interface when you want to add properties to the function object. Let's add the property `description` to the sum function type:
 
@@ -297,7 +297,7 @@ type Sum = (a: number, b: number) => number
 
 Indicate the parameter types in a pair of parentheses, put the fat arrow `=>`, and the return type.  
 
-In case of methods, you have to define the method on the type of the object:
+In the case of methods, you have to define the method on the type of the object:
 
 ```typescript
 interface ObjectWithMethod {
@@ -305,7 +305,7 @@ interface ObjectWithMethod {
 }
 ```
 
-Again, put the parameters into a pair of parenetheses, then put a colon `:` and finally indicate the method return type.  
+Again, put the parameters into a pair of parentheses, then put a colon `:` and finally indicate the method return type.  
 
 Now you should be ready to type functions in your TypeScript code.  
 
