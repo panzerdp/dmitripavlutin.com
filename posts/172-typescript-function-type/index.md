@@ -221,6 +221,10 @@ type ObjectWithMethod = {
 
 `ObjectWithMethod` is an object type having a method `sum()`. The first and second parameter types `(a: number, b: number)` are numbers, and the return type is also a number `: number`.  
 
+<ImgShadow>
+  ![TypeScript Method Type](./images/typescript-method-type.png)
+</ImgShadow>
+
 Remember an important difference. The function type uses the fat arrow `=>` to separate the parameter list from the return type, while the method type uses the colon `:`.  
 
 Let's look at an example:
