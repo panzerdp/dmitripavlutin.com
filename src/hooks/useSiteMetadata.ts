@@ -57,7 +57,7 @@ export const useSiteMetadata = () => {
         }
         authorProfilePicture: file(relativePath: { eq: "louvre.jpg" }) {
           childImageSharp {
-            gatsbyImageData(width: 300, quality: 60, layout: CONSTRAINED, formats: [WEBP])
+            gatsbyImageData(width: 300, quality: 60, layout: CONSTRAINED, formats: [AUTO, WEBP])
           }
         }
       }
