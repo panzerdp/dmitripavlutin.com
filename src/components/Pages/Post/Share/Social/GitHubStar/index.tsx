@@ -1,4 +1,4 @@
-import ShareLink from '../../Button'
+import { ShareLink } from '../../Button'
 import * as styles from './index.module.scss'
 
 

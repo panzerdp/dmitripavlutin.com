@@ -2,7 +2,7 @@ import * as styles from './index.module.scss'
 
 import ShareSocialFacebook from 'components/Pages/Post/Share/Social/Facebook'
 import PostShareSocialTwitter from 'components/Pages/Post/Share/Social/Twitter'
-import PostShareSocialGithubStar from 'components/Pages/Post/Share/Social/GitHubStar'
+import { UrlToClipboard } from 'components/Pages/Post/Share/Social/UrlToClipboard'
 import { useSiteMetadata } from 'hooks/useSiteMetadata'
 import { PostPlain } from 'typings/post'
 import { TO_POST } from 'routes/path'
@@ -25,7 +25,7 @@ export default function ShareButtonsHorizontal({ post }: ShareButtonsHorizontalP
     <div className={styles.horizontalGroup}>
       <PostShareSocialTwitter {...sharedProps} twitterName={authorInfo.nicknames.twitter} />
       <ShareSocialFacebook {...sharedProps} />
-      <PostShareSocialGithubStar repositoryUrl={site.repositoryUrl} />
+      <UrlToClipboard url={postUrl} />
     </div>
   )
 }

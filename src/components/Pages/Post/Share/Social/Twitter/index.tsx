@@ -1,7 +1,7 @@
 import * as React from 'react'
 import withWindowOpen, { WindowOpenOptions } from 'components/With/WindowOpen'
 import { slugify } from 'utils/string'
-import ShareLink from '../../Button'
+import { ShareLink } from '../../Button'
 import * as styles from './index.module.scss'
 
 export const URL_SHARE_TWITTER = 'https://twitter.com/share'
