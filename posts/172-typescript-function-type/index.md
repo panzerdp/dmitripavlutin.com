@@ -299,6 +299,10 @@ sum.description = 'A function that sums two numbers'
 
 `SumWithDescription` on top of being a function, also has a `description` property of type `string`.  
 
+<ImgShadow>
+![TypeScript function interface](./images/typescript-function-interface.png)
+</ImgShadow>
+
 ## 5. Conclusion
 
 Writing a function type is pretty simple:
