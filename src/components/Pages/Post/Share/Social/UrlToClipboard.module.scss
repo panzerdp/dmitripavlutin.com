@@ -1,9 +1,10 @@
 @import '~styles/variables';
 
 .url-to-clipboard {
-
+  display: inline-block;
+  
   .button {
-    background: url('/icons/github-star.svg') center / 1.75rem no-repeat rgba($github-brand-color, 0.75);
+    background: url('/icons/link.svg') center / 1.75rem no-repeat rgba($github-brand-color, 0.75);
     border: none;
 
     &:hover {
@@ -11,7 +12,7 @@
     }
 
     &[tooltip]{
-      position:relative;
+      position: relative;
     }
 
     &[tooltip]::before {
@@ -24,7 +25,7 @@
         border-style: solid;
         border-color: rgba(0,0,0,0.7) transparent transparent transparent;
         z-index: 99;
-        opacity:0;
+        opacity: 0;
     }
     
     &[tooltip-position='left']::before{

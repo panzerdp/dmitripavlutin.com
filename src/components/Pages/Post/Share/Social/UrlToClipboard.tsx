@@ -33,7 +33,7 @@ export function UrlToClipboard({ url, tooltipPosition = 'left' }: Props): JSX.El
       <ShareButton
         tooltip="Link Copied"
         tooltip-position={tooltipPosition}
-        title="Copy post link to clipboard"
+        title="Copy link to clipboard"
         className={className}
         onClick={onClick}
       />

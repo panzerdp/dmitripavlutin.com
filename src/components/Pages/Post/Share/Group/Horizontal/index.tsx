@@ -25,7 +25,7 @@ export default function ShareButtonsHorizontal({ post }: ShareButtonsHorizontalP
     <div className={styles.horizontalGroup}>
       <PostShareSocialTwitter {...sharedProps} twitterName={authorInfo.nicknames.twitter} />
       <ShareSocialFacebook {...sharedProps} />
-      <UrlToClipboard url={postUrl} />
+      <UrlToClipboard url={postUrl} tooltipPosition="right" />
     </div>
   )
 }
