@@ -58,7 +58,7 @@ Having the information about parameter and return types, you can easily translat
 
 (Note: the function type looks similar to an [arrow function](/6-ways-to-declare-javascript-functions/#4-arrow-function). But they are different things.)
 
-Working with function types, because of their length, is more convenient by storing them into a [type alias](https://www.digitalocean.com/community/tutorials/typescript-type-alias#step-2-using-type-alias). An alias allow to reuse the type in multiple places:
+Working with function types, because of their length, is more convenient by storing them into a [type alias](https://www.digitalocean.com/community/tutorials/typescript-type-alias#step-2-using-type-alias). An alias allows to reuse the type in multiple places:
 
 ```typescript
 // Sum is a type alias
@@ -86,7 +86,7 @@ In the example above `sum1` and `sum2` are of type `Sum`.
 
 `sum2` function doesn't have the parameter and return types indicated: all because TypeScript [infers](https://www.typescriptlang.org/docs/handbook/type-inference.html) these types from the `Sum`. 
 
-I recommend you to use type inference in your code to avoid repetition, e.g. annotate your functions like I did with `sum2` rather than `sum1`. In the examples that follow I'm going to use heavily type inference.  
+I recommend using type inference in your code to avoid repetition, e.g. annotate your functions as I did with `sum2` rather than `sum1`. In the examples that follow I'm going to use type inference.  
 
 In case of an [higher-order function](/javascript-higher-order-functions/), you use the function object as an argument or even return it from another function:
 
@@ -257,9 +257,9 @@ interface ObjectWithMethod {
 
 ## 4. TypeScript function interface
 
-Another interesting way to write a function type is using a TypeScript function interface . It's also named function call signature (too scientific for me). 
+Another interesting way to write a function type is using a TypeScript function interface. It's also named function call signature (too scientific for me). 
 
-Function interface looks similar to an object interface with a method. But the function interface *doesn't have the method name written*:  
+The function interface looks similar to an object interface with a method. But the function interface *doesn't have the method name written*:  
 
 ```typescript
 interface SumInterface {
