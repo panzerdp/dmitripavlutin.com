@@ -17,7 +17,7 @@ I'll start with the fundamental terms: scope and lexical scope. Then, after gras
 
 Before starting, I suggest you resist the urge to skip the scope and lexical scope sections. These concepts are crucial to closures, and if you get them well, the idea of closure becomes self-evident.  
 
-<!-- <Affiliate type="traversyJavaScript" /> -->
+<Affiliate type="traversyJavaScript" />
 
 ## 1. The scope
 
