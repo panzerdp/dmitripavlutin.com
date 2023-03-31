@@ -300,7 +300,7 @@ sum.description = 'A function that sums two numbers'
 `SumWithDescription` on top of being a function, also has a `description` property of type `string`.  
 
 <ImgShadow>
-![TypeScript function interface](./images/typescript-function-interface.png)
+![TypeScript function interface](./images/typescript-function-interface-2.png)
 </ImgShadow>
 
 ## 5. Conclusion
