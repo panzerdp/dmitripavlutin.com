@@ -9,7 +9,6 @@ export default function SubscriptionForm({
   emailSubscriptionService: { endpoint, hiddenFieldName },
   count
 }: SubscriptionFormProps) {
-  return false
   return (
     <div className={styles.subscriptionForm}>
       <div className={styles.message}>
