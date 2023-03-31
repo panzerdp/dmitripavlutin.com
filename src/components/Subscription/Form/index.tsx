@@ -9,6 +9,7 @@ export default function SubscriptionForm({
   emailSubscriptionService: { endpoint, hiddenFieldName },
   count
 }: SubscriptionFormProps) {
+  const formUrl = 'https://dashboard.mailerlite.com/forms/386197/84180324159849472/share'
   return (
     <div className={styles.subscriptionForm}>
       <div className={styles.message}>
@@ -22,7 +23,8 @@ export default function SubscriptionForm({
         </ul>
         <p>Subscribe to my newsletter to get them right into your inbox.</p>
       </div>
-      <form action={endpoint} method="post" name="mc-embedded-subscribe-form" target="_blank" className={styles.form}>
+      <a href={formUrl} className={styles.subscribeFormLink} target="_blank" rel="noreferrer">Subscribe</a>
+      {/* <form action={endpoint} method="post" name="mc-embedded-subscribe-form" target="_blank" className={styles.form}>
         <div className={styles.emailField}>
           <input type="email" name="EMAIL" tabIndex={0} className={styles.email} placeholder="Enter your email" />
         </div>
@@ -32,7 +34,7 @@ export default function SubscriptionForm({
         <div aria-hidden="true" className={styles.hiddenField}>
           <input type="text" name={hiddenFieldName} tabIndex={-1} />
         </div>
-      </form>
+      </form> */}
       <div className={styles.subscribersCount}>Join {count} other subscribers.</div>
     </div>
   )

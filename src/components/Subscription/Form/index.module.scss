@@ -32,6 +32,27 @@
     }
   }
 
+  .subscribeFormLink {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: rgba($anchor-color, 0.9);
+    color: white;
+    font-weight: bold;
+    font-family: $sans-serif-font-family;
+    font-size: 1.1rem;
+    cursor: pointer;
+    height: 50px;
+    text-decoration: none;
+    box-sizing: border-box;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: rgba($anchor-color, 1);
+    }
+  }
+
   .form {
     display: flex;
     flex-wrap: wrap;
