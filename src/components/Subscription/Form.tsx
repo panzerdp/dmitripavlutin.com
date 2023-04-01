@@ -1,15 +1,18 @@
-import * as styles from './index.module.scss'
+import * as styles from './Form.module.scss'
 
 interface SubscriptionFormProps {
   emailSubscriptionService: EmailSubscriptionService;
-  count: number;
 }
 
-export default function SubscriptionForm({
-  emailSubscriptionService: { endpoint, hiddenFieldName },
-  count
+export const SUBSCRIBERS_COUNT = 7067
+
+export function SubscriptionForm({
+  emailSubscriptionService: { endpoint },
 }: SubscriptionFormProps) {
-  const formUrl = 'https://dashboard.mailerlite.com/forms/386197/84180324159849472/share'
+  const onSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault()
+    fetch(endpoint)
+  }
   return (
     <div className={styles.subscriptionForm}>
       <div className={styles.message}>
@@ -23,19 +26,22 @@ export default function SubscriptionForm({
         </ul>
         <p>Subscribe to my newsletter to get them right into your inbox.</p>
       </div>
-      <a href={formUrl} className={styles.subscribeFormLink} target="_blank" rel="noreferrer">Subscribe</a>
-      {/* <form action={endpoint} method="post" name="mc-embedded-subscribe-form" target="_blank" className={styles.form}>
+      <form onSubmit={onSubmit} data-testid="form" className={styles.form}>
         <div className={styles.emailField}>
-          <input type="email" name="EMAIL" tabIndex={0} className={styles.email} placeholder="Enter your email" />
+          <input
+            data-testid="email"
+            type="email"
+            required
+            tabIndex={0}
+            className={styles.email}
+            placeholder="Enter your email"
+          />
         </div>
         <button type="submit" name="subscribe" className={styles.submit}>
           Subscribe
         </button>
-        <div aria-hidden="true" className={styles.hiddenField}>
-          <input type="text" name={hiddenFieldName} tabIndex={-1} />
-        </div>
-      </form> */}
-      <div className={styles.subscribersCount}>Join {count} other subscribers.</div>
+      </form>
+      <div className={styles.subscribersCount}>Join {SUBSCRIBERS_COUNT} other subscribers.</div>
     </div>
   )
 }

@@ -1,14 +1,13 @@
-
 import { graphql, StaticQuery } from 'gatsby'
 
 import { EmailSubscriptionQuery } from 'graphql-types'
 
-interface CarbonAdsFetchProps {
-  render(emailSubscriptionService: EmailSubscriptionService, count: number): React.ReactNode;
+interface SubscriptionFetchProps {
+  render(emailSubscriptionService: EmailSubscriptionService): React.ReactNode;
 }
 
 /* istanbul ignore next */
-export default function SubscriptionFetch({ render }: CarbonAdsFetchProps) {
+export default function SubscriptionFetch({ render }: SubscriptionFetchProps) {
   return (
     <StaticQuery
       query={graphql`
@@ -17,26 +16,13 @@ export default function SubscriptionFetch({ render }: CarbonAdsFetchProps) {
             siteMetadata {
               emailSubscriptionService {
                 endpoint
-                hiddenFieldName
-              }
-            }
-          }
-          allMailchimpList {
-            edges {
-              node {
-                stats {
-                  member_count
-                }
               }
             }
           }
         }
       `}
       render={(data: EmailSubscriptionQuery) => {
-        return render(
-          data.site.siteMetadata.emailSubscriptionService,
-          data.allMailchimpList.edges[0].node.stats.member_count
-        )
+        return render(data.site.siteMetadata.emailSubscriptionService)
       }}
     />
   )

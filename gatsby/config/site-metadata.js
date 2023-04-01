@@ -32,8 +32,7 @@ module.exports = {
     },
   },
   emailSubscriptionService: {
-    endpoint: 'https://dmitripavlutin.us13.list-manage.com/subscribe/post?u=7cedcb1f5ab74eb7c907e768e&id=75f44f92b9',
-    hiddenFieldName: 'b_7cedcb1f5ab74eb7c907e768e_75f44f92b9',
+    endpoint: 'https://dashboard.mailerlite.com/forms/386197/84180324159849472/share',
   },
   carbonAdsService: {
     scriptSrc: '//cdn.carbonads.com/carbon.js?serve=CE7DT2QI&placement=dmitripavlutincom',

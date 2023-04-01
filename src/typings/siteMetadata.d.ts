@@ -31,7 +31,6 @@ interface SiteInfo {
 
 interface EmailSubscriptionService {
   endpoint: string;
-  hiddenFieldName: string;
 }
 
 interface CarbonAdsService {
