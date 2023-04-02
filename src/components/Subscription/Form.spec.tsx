@@ -1,5 +1,5 @@
 import { SubscriptionForm, SUBSCRIBERS_COUNT } from './Form'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, screen, act, waitFor } from '@testing-library/react'
 
 describe('<SubscriptionForm>', () => {
   const props = {
@@ -14,81 +14,115 @@ describe('<SubscriptionForm>', () => {
   })
 
   const factory = () => {
-    const { getByText, getByRole, getByTestId } = render(<SubscriptionForm {...props} />)
-    const submit = getByRole('button') as HTMLButtonElement
-    const emailInput = getByRole('textbox') as HTMLInputElement
-    const form = getByTestId('form') as HTMLFormElement
+    render(<SubscriptionForm {...props} />)
+    const emailInput = screen.getByRole('textbox') as HTMLInputElement
+    const form = screen.getByTestId('form') as HTMLFormElement
 
-    return { submit, emailInput, form, getByText }
+    const subscribe = () => {
+      return act(async () => await fireEvent.click(screen.getByRole('button')))
+    }
+
+    return { emailInput, form, subscribe }
   }
 
   it('should render subcription title', () => {
-    const { getByText } = factory()
+    factory()
 
-    expect(getByText('Quality posts into your inbox')).toBeInTheDocument()
+    expect(screen.queryByText('Quality posts into your inbox')).toBeInTheDocument()
   })
 
   it('should render the subscription count', () => {
-    const { getByText } = factory()
+    factory()
 
-    expect(getByText(`Join ${SUBSCRIBERS_COUNT} other subscribers.`)).toBeInTheDocument()
+    expect(screen.queryByText(`Join ${SUBSCRIBERS_COUNT} other subscribers.`)).toBeInTheDocument()
   })
 
   describe('when subscribe button is clicked', () => {
     describe('when the email field is empty', () => {
-      it('should make the form invalid', () => {
-        const { submit, form } = factory()
+      it('should make the form invalid', async () => {
+        const { form, subscribe } = factory()
 
-        fireEvent.click(submit)
+        await subscribe()
 
         expect(form.checkValidity()).toBe(false)
       })
 
-      it('should not subscribe user', () => {
-        const { submit } = factory()
+      it('should not subscribe user', async () => {
+        const { subscribe } = factory()
 
-        fireEvent.click(submit)
+        await subscribe()
 
         expect(fetch).not.toBeCalled()
       })
     })
 
     describe('when the email field does not contain an email', () => {
-      it('should make the form invalid', () => {
-        const { submit, emailInput, form } = factory()
+      it('should make the form invalid', async () => {
+        const { emailInput, form, subscribe } = factory()
 
         emailInput.value = 'zzz'
-        fireEvent.click(submit)
+        await subscribe()
 
         expect(form.checkValidity()).toBe(false)
       })
 
-      it('should not subscribe user', () => {
-        const { submit } = factory()
+      it('should not subscribe user', async () => {
+        const { subscribe } = factory()
 
-        fireEvent.click(submit)
+        await subscribe()
 
         expect(fetch).not.toBeCalled()
       })
     })
 
     describe('when the email field contains an email', () => {
-      it('should make the form valid', () => {
-        const { submit, emailInput, form } = factory()
+      it('should make the form valid', async () => {
+        const { emailInput, form, subscribe } = factory()
 
         emailInput.value = 'user@mail.com'
-        fireEvent.click(submit)
+        await subscribe()
 
         expect(form.checkValidity()).toBe(true)
       })
 
-      it('should subscribe user', () => {
-        const { submit, emailInput } = factory()
+      it('should make a post request with the email address as form data', async () => {
+        const { emailInput, subscribe } = factory()
+        const email = 'user@mail.com'
 
-        emailInput.value = 'user@mail.com'
-        fireEvent.click(submit)
+        emailInput.value = email
+        await subscribe()
 
-        expect(fetch).toHaveBeenCalledWith(props.emailSubscriptionService.endpoint)
+        const formData = new FormData()
+        formData.set('fields[email]', email)
+
+        expect(fetch).toHaveBeenCalledWith(props.emailSubscriptionService.endpoint, {
+          method: 'post',
+          body: formData
+        })
+      })
+    })
+  })
+
+  describe('successful subscription message', () => {
+    describe('when initially rendered', () => {
+      it('should not show successfull subscription message', () => {
+        factory()
+
+        expect(screen.queryByText('Success!')).not.toBeInTheDocument()
+      })
+    })
+
+    describe('when user subscribed successfully', () => {
+      it('should show a success message', async () => {
+        global.fetch = jest.fn().mockResolvedValueOnce(() => { ok: true } )
+
+        const { emailInput, subscribe } = factory()
+        const email = 'user@mail.com'
+
+        emailInput.value = email
+        await subscribe()
+
+        expect(await screen.findByText('Thank you! An email confirmation message has been sent to your inbox.')).toBeInTheDocument()
       })
     })
   })
