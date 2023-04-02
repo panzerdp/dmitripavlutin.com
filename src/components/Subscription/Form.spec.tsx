@@ -9,7 +9,11 @@ describe('<SubscriptionForm>', () => {
     count: 9999
   }
 
-  afterEach(() => {
+  beforeEach(() => {
+    global.fetch = jest.fn().mockResolvedValueOnce({ ok: true })
+  })
+
+  afterAll(() => {
     jest.resetAllMocks()
   })
 
@@ -114,8 +118,6 @@ describe('<SubscriptionForm>', () => {
 
     describe('when user subscribed successfully', () => {
       it('should show a success message', async () => {
-        global.fetch = jest.fn().mockResolvedValueOnce(() => { ok: true } )
-
         const { emailInput, subscribe } = factory()
         const email = 'user@mail.com'
 
@@ -125,5 +127,33 @@ describe('<SubscriptionForm>', () => {
         expect(await screen.findByText('Thank you! An email confirmation message has been sent to your inbox.')).toBeInTheDocument()
       })
     })
+
+    describe('when user subscription failed', () => {
+      it('should show an error', async () => {
+        global.fetch = jest.fn().mockResolvedValueOnce({ ok: false })
+
+        const { emailInput, subscribe } = factory()
+        const email = 'user@mail.com'
+
+        emailInput.value = email
+        await subscribe()
+
+        expect(await screen.findByText('Ooops! An error occured. Please try again later...')).toBeInTheDocument()
+      })
+
+      it('should show an error', async () => {
+        global.fetch = jest.fn().mockRejectedValueOnce(new Error('Some network problem'))
+
+        const { emailInput, subscribe } = factory()
+        const email = 'user@mail.com'
+
+        emailInput.value = email
+        await subscribe()
+
+        expect(await screen.findByText('Ooops! An error occured. Please try again later...')).toBeInTheDocument()
+      })
+    })
+
+
   })
 })

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import * as styles from './Form.module.scss'
 
 interface SubscriptionFormProps {
@@ -13,15 +13,21 @@ export function SubscriptionForm({
   emailSubscriptionService: { endpoint },
 }: SubscriptionFormProps) {
   const [subscribedStatus, setSubscribedStatus] = useState<SubscriptionStatus>('not_subscribed')
+  const emailInput = useRef<HTMLInputElement>()
+
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
     const formData = new FormData()
-    formData.append('fields[email]', 'user@mail.com')
-    await fetch(endpoint, {
-      method: 'post',
-      body: formData
-    })
-    setSubscribedStatus('subscribed')
+    formData.append('fields[email]', emailInput.current.value)
+    let success = false
+    try {
+      const response = await fetch(endpoint, {
+        method: 'post',
+        body: formData
+      })
+      success = response.ok
+    } catch (e) { }
+    setSubscribedStatus(success ? 'subscribed' : 'subscription_error')
   }
 
   let content: JSX.Element = null
@@ -30,6 +36,7 @@ export function SubscriptionForm({
       <form onSubmit={onSubmit} data-testid="form" className={styles.form}>
         <div className={styles.emailField}>
           <input
+            ref={emailInput}
             data-testid="email"
             type="email"
             required
@@ -45,6 +52,8 @@ export function SubscriptionForm({
     )
   } else if (subscribedStatus === 'subscribed') {
     content = <div>Thank you! An email confirmation message has been sent to your inbox.</div>
+  } else if (subscribedStatus === 'subscription_error') {
+    content = <div>Ooops! An error occured. Please try again later...</div>
   }
 
   return (
