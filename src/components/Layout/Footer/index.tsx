@@ -1,4 +1,4 @@
-import { Link } from 'gatsby-link'
+// import { Link } from 'gatsby-link'
 import { memo } from 'react'
 
 import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_RSS, TO_SEARCH } from 'routes/path'
@@ -25,12 +25,12 @@ export function Footer({ authorInfo: { profiles, name, email } }: FooterProps) {
         </div>
         <div className={styles.links}>
           <div className={styles.footerNavigation}>
-            <Link to={TO_INDEX()}>Home</Link>
-            <Link to={TO_NEWSLETTER()}>Newsletter</Link>
+            <a href={TO_INDEX()}>Home</a>
+            <a href={TO_NEWSLETTER()}>Newsletter</a>
             <a href={TO_RSS()}>RSS</a>
-            <Link to={TO_ALL_POSTS()}>All posts</Link>
-            <Link to={TO_SEARCH()}>Search</Link>
-            <Link to={TO_ABOUT_ME()}>About</Link>
+            <a href={TO_ALL_POSTS()}>All posts</a>
+            <a href={TO_SEARCH()}>Search</a>
+            <a href={TO_ABOUT_ME()}>About</a>
           </div>
           <AuthorLinks className={styles.footerAuthorLinks}>
             <a href={`mailto:${email}`} title={`Send an email to ${name}`}>
