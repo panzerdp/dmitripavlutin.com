@@ -1,4 +1,4 @@
-import { Link } from 'gatsby-link'
+// import { Link } from 'gatsby-link'
 
 import SubheaderSimple from 'components/Subheader/Simple'
 import { TO_POST } from 'routes/path'
@@ -13,7 +13,7 @@ export default function SimplePost({ post }: SimplePostProps) {
   return (
     <div className={styles.simplePost}>
       <h3>
-        <Link to={to}>{post.title}</Link>
+        <a href={to}>{post.title}</a>
       </h3>
       <SubheaderSimple post={post} />
     </div>
