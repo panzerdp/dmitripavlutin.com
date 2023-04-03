@@ -82,7 +82,7 @@ module.exports = {
         </p>
         <p>
           <em>
-            If you want to significantly improve your JavaScript knowledge, take the course wonderful <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">"Modern JavaScript From The Beginning 2.0"</a> by Brad Traversy. Use the coupon code "DMITRI" and get 20% discount!
+            If you want to significantly improve your JavaScript knowledge, take the wonderful course <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">"Modern JavaScript From The Beginning 2.0"</a> by Brad Traversy. Use the coupon code "DMITRI" and get 20% discount!
           </em>
         </p>`
     }, {
