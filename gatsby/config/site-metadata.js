@@ -32,7 +32,7 @@ module.exports = {
     },
   },
   emailSubscriptionService: {
-    endpoint: 'https://dashboard.mailerlite.com/forms/386197/84180324159849472/share',
+    endpoint: 'https://assets.mailerlite.com/jsonp/386197/forms/84180324159849472/subscribe',
   },
   carbonAdsService: {
     scriptSrc: '//cdn.carbonads.com/carbon.js?serve=CE7DT2QI&placement=dmitripavlutincom',

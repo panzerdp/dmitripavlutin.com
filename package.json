@@ -18,6 +18,7 @@
     "classnames": "2.3.2",
     "eslint": "8.37.0",
     "eslint-plugin-react": "7.32.2",
+    "fetch-jsonp": "1.2.3",
     "gatsby": "5.8.1",
     "gatsby-cli": "5.8.0",
     "gatsby-link": "5.8.0",

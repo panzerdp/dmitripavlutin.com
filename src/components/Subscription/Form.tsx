@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import * as styles from './Form.module.scss'
+import fetchJsonp from 'fetch-jsonp'
 
 interface SubscriptionFormProps {
   emailSubscriptionService: EmailSubscriptionService;
@@ -17,17 +18,16 @@ export function SubscriptionForm({
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
-    const formData = new FormData()
-    formData.append('fields[email]', emailInput.current.value)
+    const url = new URL(endpoint)
+    url.searchParams.set('fields[email]', emailInput.current.value)
+    url.searchParams.set('ajax', '1')
+    url.searchParams.set('ml-submit', '1')
     let success = false
     try {
-      const response = await fetch(endpoint, {
-        method: 'post',
-        body: formData,
-        mode: 'cors'
-      })
+      const response = await fetchJsonp(url.href)
       success = response.ok
-    } catch (e) { }
+    } catch (e) {
+    }
     setSubscribedStatus(success ? 'subscribed' : 'subscription_error')
   }
 
@@ -52,7 +52,7 @@ export function SubscriptionForm({
       </form>
     )
   } else if (subscribedStatus === 'subscribed') {
-    content = <div>Thank you! An email confirmation message has been sent to your inbox.</div>
+    content = <div>Thank you! Please check your inbox to confirm the email address.</div>
   } else if (subscribedStatus === 'subscription_error') {
     content = <div>Ooops! An error occured. Please try again later...</div>
   }

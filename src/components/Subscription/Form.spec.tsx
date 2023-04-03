@@ -1,5 +1,8 @@
 import { SubscriptionForm, SUBSCRIBERS_COUNT } from './Form'
 import { render, fireEvent, screen, act } from '@testing-library/react'
+import fetchJsonp from 'fetch-jsonp'
+
+jest.mock('fetch-jsonp')
 
 describe('<SubscriptionForm>', () => {
   const props = {
@@ -10,11 +13,12 @@ describe('<SubscriptionForm>', () => {
   }
 
   beforeEach(() => {
-    global.fetch = jest.fn().mockResolvedValueOnce({ ok: true })
-  })
-
-  afterAll(() => {
-    jest.resetAllMocks()
+    jest.mocked(fetchJsonp).mockResolvedValue({
+      ok: true,
+      async json(): Promise<null> {
+        return null
+      }}
+    )
   })
 
   const factory = () => {
@@ -56,7 +60,7 @@ describe('<SubscriptionForm>', () => {
 
         await subscribe()
 
-        expect(fetch).not.toBeCalled()
+        expect(fetchJsonp).not.toBeCalled()
       })
     })
 
@@ -75,7 +79,7 @@ describe('<SubscriptionForm>', () => {
 
         await subscribe()
 
-        expect(fetch).not.toBeCalled()
+        expect(fetchJsonp).not.toBeCalled()
       })
     })
 
@@ -89,7 +93,7 @@ describe('<SubscriptionForm>', () => {
         expect(form.checkValidity()).toBe(true)
       })
 
-      it('should make a post request with the email address as form data', async () => {
+      it('should make a request with the email address', async () => {
         const { emailInput, subscribe } = factory()
         const email = 'user@mail.com'
 
@@ -99,11 +103,8 @@ describe('<SubscriptionForm>', () => {
         const formData = new FormData()
         formData.set('fields[email]', email)
 
-        expect(fetch).toHaveBeenCalledWith(props.emailSubscriptionService.endpoint, {
-          method: 'post',
-          body: formData,
-          mode: 'cors'
-        })
+        const url = props.emailSubscriptionService.endpoint + '?fields%5Bemail%5D=user%40mail.com&ajax=1&ml-submit=1'
+        expect(fetchJsonp).toHaveBeenCalledWith(url)
       })
     })
   })
@@ -125,13 +126,18 @@ describe('<SubscriptionForm>', () => {
         emailInput.value = email
         await subscribe()
 
-        expect(await screen.findByText('Thank you! An email confirmation message has been sent to your inbox.')).toBeInTheDocument()
+        expect(await screen.findByText('Thank you! Please check your inbox to confirm the email address.')).toBeInTheDocument()
       })
     })
 
     describe('when user subscription failed', () => {
       it('should show an error', async () => {
-        global.fetch = jest.fn().mockResolvedValueOnce({ ok: false })
+        jest.mocked(fetchJsonp).mockResolvedValue({
+          ok: false,
+          async json(): Promise<null> {
+            return null
+          }}
+        )
 
         const { emailInput, subscribe } = factory()
         const email = 'user@mail.com'
@@ -143,7 +149,7 @@ describe('<SubscriptionForm>', () => {
       })
 
       it('should show an error', async () => {
-        global.fetch = jest.fn().mockRejectedValueOnce(new Error('Some network problem'))
+        jest.mocked(fetchJsonp).mockRejectedValue(new Error())
 
         const { emailInput, subscribe } = factory()
         const email = 'user@mail.com'
