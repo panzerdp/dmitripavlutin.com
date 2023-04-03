@@ -8,7 +8,7 @@ interface SubscriptionFormProps {
 
 export const SUBSCRIBERS_COUNT = 7067
 
-type SubscriptionStatus = 'not_subscribed' | 'subscribed' | 'subscription_error'
+type SubscriptionStatus = 'not_subscribed' | 'subscribed' | 'subscribing' | 'subscription_error'
 
 export function SubscriptionForm({
   emailSubscriptionService: { endpoint },
@@ -18,6 +18,7 @@ export function SubscriptionForm({
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
+    setSubscribedStatus('subscribing')
     const url = new URL(endpoint)
     url.searchParams.set('fields[email]', emailInput.current.value)
     url.searchParams.set('ajax', '1')
@@ -32,29 +33,45 @@ export function SubscriptionForm({
   }
 
   let content: JSX.Element = null
-  if (subscribedStatus === 'not_subscribed') {
+  if (subscribedStatus === 'not_subscribed' || subscribedStatus === 'subscribing') {
+    let buttonAttrs = {}
+    if (subscribedStatus === 'subscribing') {
+      buttonAttrs = { disabled: true }
+    }
     content = (
-      <form onSubmit={onSubmit} data-testid="form" className={styles.form}>
-        <div className={styles.emailField}>
-          <input
-            ref={emailInput}
-            data-testid="email"
-            type="email"
-            required
-            tabIndex={0}
-            className={styles.email}
-            placeholder="Enter your email"
-          />
-        </div>
-        <button type="submit" name="subscribe" className={styles.submit}>
+      <>
+        <form onSubmit={onSubmit} data-testid="form" className={styles.form}>
+          <div className={styles.emailField}>
+            <input
+              ref={emailInput}
+              data-testid="email"
+              type="email"
+              required
+              tabIndex={0}
+              className={styles.email}
+              placeholder="Enter your email"
+            />
+          </div>
+          <button {...buttonAttrs} type="submit" name="subscribe" className={styles.submit}>
           Subscribe
-        </button>
-      </form>
+          </button>
+        </form>
+        <div className={styles.subscribersCount}>Join {SUBSCRIBERS_COUNT} other subscribers.</div>
+      </>
     )
   } else if (subscribedStatus === 'subscribed') {
-    content = <div>Thank you! Please check your inbox to confirm the email address.</div>
+    content = (
+      <div className={styles.subscriptionMessage}>
+        <img className={styles.successIcon} src="/icons/check.svg" />
+          Subscribed! Check your inbox to confirm the email address.
+      </div>
+    )
   } else if (subscribedStatus === 'subscription_error') {
-    content = <div>Ooops! An error occured. Please try again later...</div>
+    content = (
+      <div className={styles.subscriptionMessage}>
+        <em>Ooops! An error occured. Please try again later...</em>
+      </div>
+    )
   }
 
   return (
@@ -71,7 +88,6 @@ export function SubscriptionForm({
         <p>Subscribe to my newsletter to get them right into your inbox.</p>
       </div>
       {content}
-      <div className={styles.subscribersCount}>Join {SUBSCRIBERS_COUNT} other subscribers.</div>
     </div>
   )
 }

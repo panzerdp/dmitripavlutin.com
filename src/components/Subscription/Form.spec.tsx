@@ -1,5 +1,5 @@
 import { SubscriptionForm, SUBSCRIBERS_COUNT } from './Form'
-import { render, fireEvent, screen, act } from '@testing-library/react'
+import { render, fireEvent, screen, act, waitFor } from '@testing-library/react'
 import fetchJsonp from 'fetch-jsonp'
 
 jest.mock('fetch-jsonp')
@@ -43,6 +43,12 @@ describe('<SubscriptionForm>', () => {
     factory()
 
     expect(screen.queryByText(`Join ${SUBSCRIBERS_COUNT} other subscribers.`)).toBeInTheDocument()
+  })
+
+  it('should render the subscribe button as enabled', () => {
+    factory()
+
+    expect(screen.queryByRole('button')).not.toBeDisabled()
   })
 
   describe('when subscribe button is clicked', () => {
@@ -126,7 +132,7 @@ describe('<SubscriptionForm>', () => {
         emailInput.value = email
         await subscribe()
 
-        expect(await screen.findByText('Thank you! Please check your inbox to confirm the email address.')).toBeInTheDocument()
+        expect(await screen.findByText('Subscribed! Check your inbox to confirm the email address.')).toBeInTheDocument()
       })
     })
 
