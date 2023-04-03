@@ -23,7 +23,8 @@ export function SubscriptionForm({
     try {
       const response = await fetch(endpoint, {
         method: 'post',
-        body: formData
+        body: formData,
+        mode: 'cors'
       })
       success = response.ok
     } catch (e) { }

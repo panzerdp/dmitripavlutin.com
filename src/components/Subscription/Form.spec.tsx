@@ -1,5 +1,5 @@
 import { SubscriptionForm, SUBSCRIBERS_COUNT } from './Form'
-import { render, fireEvent, screen, act, waitFor } from '@testing-library/react'
+import { render, fireEvent, screen, act } from '@testing-library/react'
 
 describe('<SubscriptionForm>', () => {
   const props = {
@@ -101,7 +101,8 @@ describe('<SubscriptionForm>', () => {
 
         expect(fetch).toHaveBeenCalledWith(props.emailSubscriptionService.endpoint, {
           method: 'post',
-          body: formData
+          body: formData,
+          mode: 'cors'
         })
       })
     })
