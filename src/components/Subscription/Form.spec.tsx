@@ -1,4 +1,4 @@
-import { SubscriptionForm, SUBSCRIBERS_COUNT } from './Form'
+import { SubscriptionForm } from './Form'
 import { render, fireEvent, screen, act } from '@testing-library/react'
 import fetchJsonp from 'fetch-jsonp'
 
@@ -6,10 +6,7 @@ jest.mock('fetch-jsonp')
 
 describe('<SubscriptionForm>', () => {
   const props = {
-    emailSubscriptionService: {
-      endpoint: 'http://service.com/email',
-    },
-    count: 9999
+    embedFormEndpoint: 'http://service.com/email',
   }
 
   beforeEach(() => {
@@ -32,18 +29,6 @@ describe('<SubscriptionForm>', () => {
 
     return { emailInput, form, subscribe }
   }
-
-  it('should render subcription title', () => {
-    factory()
-
-    expect(screen.queryByText('Quality posts into your inbox')).toBeInTheDocument()
-  })
-
-  it('should render the subscription count', () => {
-    factory()
-
-    expect(screen.queryByText(`Join ${SUBSCRIBERS_COUNT} other subscribers.`)).toBeInTheDocument()
-  })
 
   it('should render the subscribe button as enabled', () => {
     factory()
@@ -109,7 +94,7 @@ describe('<SubscriptionForm>', () => {
         const formData = new FormData()
         formData.set('fields[email]', email)
 
-        const url = props.emailSubscriptionService.endpoint + '?fields%5Bemail%5D=user%40mail.com&ajax=1&ml-submit=1'
+        const url = props.embedFormEndpoint + '?fields%5Bemail%5D=user%40mail.com&ajax=1&ml-submit=1'
         expect(fetchJsonp).toHaveBeenCalledWith(url)
       })
     })
@@ -166,7 +151,5 @@ describe('<SubscriptionForm>', () => {
         expect(await screen.findByText('Ooops! An error occured. Please try again later...')).toBeInTheDocument()
       })
     })
-
-
   })
 })

@@ -30,7 +30,9 @@ interface SiteInfo {
 }
 
 interface EmailSubscriptionService {
-  endpoint: string;
+  embedFormEndpoint: string;
+  pageFormUrl: string;
+  isFormEmbed: boolean;
 }
 
 interface CarbonAdsService {
