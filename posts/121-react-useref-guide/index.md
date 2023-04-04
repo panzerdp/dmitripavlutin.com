@@ -4,7 +4,7 @@ description: 'React.useRef() hook creates persisted mutable values (aka referenc
 published: "2021-03-02T12:00Z"
 modified: "2023-04-03"
 thumbnail: "./images/cover-9.png"
-slug: react-useref-guide
+slug: react-useref
 tags: ['react', 'useref', 'hook', 'dom', 'element']
 type: post
 ---

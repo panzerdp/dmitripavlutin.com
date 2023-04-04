@@ -1,5 +1,5 @@
 import { SubscriptionForm, SUBSCRIBERS_COUNT } from './Form'
-import { render, fireEvent, screen, act, waitFor } from '@testing-library/react'
+import { render, fireEvent, screen, act } from '@testing-library/react'
 import fetchJsonp from 'fetch-jsonp'
 
 jest.mock('fetch-jsonp')
