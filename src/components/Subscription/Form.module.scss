@@ -2,30 +2,24 @@
 
 .subscriptionForm {
   .form {
-    display: flex;
-    flex-wrap: wrap;
-    border: 1px solid $anchor-color;
-    border-radius: 3px;
-    overflow: hidden;
-
     .emailField {
-      flex: 1 1 300px;
+      border: 1px solid $anchor-color;
+      font-family: $serif-font-family;
+      padding: 0 1rem;
+      background-color: white;
 
-      .email {
-        border: none;
-        width: 100%;
-        font-family: $serif-font-family;
-        padding: 0 1rem;
-        background-color: white;
+      &:focus {
+        outline: none;
+      }
 
-        @media (prefers-color-scheme: dark) {
-          background-color: $background-color-dark-mode;
-          color: $body-color-dark-mode;
-        }
+      @media (prefers-color-scheme: dark) {
+        background-color: $background-color-dark-mode;
+        color: $body-color-dark-mode;
       }
     }
 
     .submit {
+      margin-top: 0.75rem;
       border: none;
       background-color: rgba($anchor-color, 0.9);
       color: white;
@@ -33,7 +27,6 @@
       font-family: $sans-serif-font-family;
       font-size: 1.1rem;
       cursor: pointer;
-      flex: 1 1 100px;
 
       &:hover {
         background-color: rgba($anchor-color, 1);
@@ -44,15 +37,12 @@
       }
     }
 
-    .email,
+    .emailField,
     .submit {
-      height: 50px;
+      border-radius: 3px;
+      width: 100%;
+      height: 3rem;
       box-sizing: border-box;
-    }
-
-    .hiddenField {
-      position: absolute;
-      left: -5000px;
     }
   }
 

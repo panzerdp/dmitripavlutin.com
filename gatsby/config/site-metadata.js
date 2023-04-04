@@ -34,7 +34,7 @@ module.exports = {
   emailSubscriptionService: {
     embedFormEndpoint: 'https://assets.mailerlite.com/jsonp/386197/forms/84180324159849472/subscribe',
     pageFormUrl: 'https://dashboard.mailerlite.com/forms/386197/84180324159849472/share',
-    isFormEmbed: false,
+    isFormEmbed: true,
     subscribersCount: 7063
   },
   carbonAdsService: {

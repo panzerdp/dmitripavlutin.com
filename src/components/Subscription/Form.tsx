@@ -50,17 +50,15 @@ export function SubscriptionForm({ embedFormEndpoint }: SubscriptionFormProps) {
     }
     content = (
       <form onSubmit={onSubmit} data-testid="form" className={styles.form}>
-        <div className={styles.emailField}>
-          <input
-            ref={emailInput}
-            data-testid="email"
-            type="email"
-            required
-            tabIndex={0}
-            className={styles.email}
-            placeholder="Enter your email"
-          />
-        </div>
+        <input
+          ref={emailInput}
+          data-testid="email"
+          type="email"
+          required
+          tabIndex={0}
+          className={styles.emailField}
+          placeholder="Enter your email"
+        />
         <button {...buttonAttrs} type="submit" name="subscribe" className={styles.submit}>
           Subscribe
         </button>
