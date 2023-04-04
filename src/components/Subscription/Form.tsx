@@ -81,7 +81,7 @@ export function SubscriptionForm({
         <p>I regularly publish posts containing: </p>
         <ul>
           <li>Important JavaScript concepts explained in simple words</li>
-          <li>Tutorials on React.js and Hooks</li>
+          <li>Tutorials to master React.js and Hooks</li>
           <li>How to use TypeScript and demistify types</li>
           <li>Software design and good coding practices</li>
         </ul>
