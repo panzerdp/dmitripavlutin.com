@@ -1,8 +1,8 @@
 ---
 title: "React forwardRef(): How to Pass Refs to Child Components"
 description: "React forwardRef() is a tool for passing refs to child components. Discover how to use it with ease in this comprehensive tutorial."
-published: "2023-04-03"
-modified: "2023-04-03"
+published: "2023-04-06"
+modified: "2023-04-06"
 thumbnail: "./images/cover-2.jpg"
 slug: react-forwardref
 tags: ['react', 'ref']
