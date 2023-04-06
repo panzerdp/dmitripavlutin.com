@@ -123,7 +123,7 @@ const HelloWorld = forwardRef(function(props, ref) {
 
 [Open the demo.](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/src/Main.jsx)
 
-Now the parent component can assign `elementRef` as a prop on the child component ` <HelloWorld ref={elementRef} />`. Then, thanks to being wrapped into `forwardRef`, `<HelloWorld>` component reads that ref from the second parameter and use it on its element `<div ref={ref}>`.  
+Now the parent component can assign `elementRef` as a prop on the child component ` <HelloWorld ref={elementRef} />`. Then, thanks to being wrapped into `forwardRef`, `<HelloWorld>` component reads that ref from the second parameter and uses it on its element `<div ref={ref}>`.  
 
 Open the [demo](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/src/Main.jsx) and you'll see that after mounting `elementRef.current` *contains* the DOM element from `<HelloWorld>` component. It works!
 
@@ -133,9 +133,9 @@ Before ending the post, I advise you to keep the refs' usage at a minimum. Here'
 
 React is the library which goal is to abstract you from manipulating DOM, cross-browser compatibility, and DOM manipulation performance. React gives you wonderful components, props, state, hooks, and context abstractions to save you from dealing with DOM and browser-specific details.  
 
-When deciding to use refs to access DOM, including with the help of `forwardRef()` and `useImperativeHandle()`, you do not use React abstractions, but directly the DOM specific details. The code that uses many refs with DOM elements in the [long run is more difficult to maintain](https://blog.logrocket.com/why-you-should-use-refs-sparingly-in-production/).  
+When deciding to use refs to access DOM, including with the help of `forwardRef()` and `useImperativeHandle()`, you do not use React abstractions, but directly the DOM-specific details. The code that uses many refs with DOM elements in the [long run is more difficult to maintain](https://blog.logrocket.com/why-you-should-use-refs-sparingly-in-production/).  
 
-Consider at first using a React abstraction to achieve your goal before using a ref to access DOM. Of course, it's not always possible, and time to time you have to do so.  
+Consider first using a React abstraction to achieve your goal before using a ref to access DOM. Of course, it's not always possible, and from time to time you have to get your hands dirty.
 
 ## 4. Conclusion
 
