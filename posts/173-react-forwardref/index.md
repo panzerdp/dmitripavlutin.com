@@ -23,13 +23,13 @@ Let's see how it works.
 
 ## 1. Refs in child components
 
-There are situations when you have to work with the DOM because the existing React abstractions do not cover all possible use cases:
+There are situations when you have to work with the DOM because the existing React abstractions (components, state, props, hooks, context) do not cover all possible use cases:
 
 * call methods on DOM elements to manage focus, scroll, and text selection
 * integrate 3rd party scripts that are unaware of React abstractions
 * working with animation libraries, for example [GSAP](https://greensock.com/react-basics#refs)
 
-Let's quickly recall how to access a DOM element directly from the body of the component. Consider the following example where the goal is to access the instance of the single `<div>` element rendered by the component:
+Let's recall how to access a DOM element directly from the body of the component:
 
 ```jsx
 import { useRef, useEffect } from 'react'
@@ -52,13 +52,13 @@ export function Main() {
 
 Then `elementRef` have to be assigned to the `ref` attribute of the tag which element you want to access: `<div ref="elementRef">`.  
 
-Finally, after component mounting, `elementRef.current` contains the DOM element instance. The moment right after mounting is captured using `useEffect()` hook using an empty array as a dependency.  
+Finally, after component mounting, `elementRef.current` contains the DOM element instance. When the component is mounted is [detected](react-useeffect-explanation/#31-component-did-mount) using `useEffect()` hook with an empty array as a dependency.  
 
 Open the [demo](https://codesandbox.io/s/competent-grass-89so21?file=/src/Main.jsx) and you'll see the element logged to the console. 
 
-Ok, then what is the limitation of this approach? A problem appears when the element is not rendered directly in the body of the component, but is rather rendered in a child component. The simple approach of using a ref does not work in this case. Let me show you why.  
+Ok, then what is the limitation of this approach? A problem appears when the element is not rendered directly in the body of the component, but rather in a child component. The simple approach of using a ref does not work in this case. Let me show you why.  
 
-Let's modify the previous example by extracting the `<div>Hello, World!</div>` into a child component `<HelloWorld>`. Also, let's create a prop `ref` to allow the parent `<Main>` to access the div element:
+Let's modify the previous example by extracting the `<div>Hello, World!</div>` into a child component `<HelloWorld>`. Also, let's create a prop `ref` on `<HelloWorld>`, to which `<Main>` assigns `elementRef`:
 
 ```jsx
 import { useRef, useEffect } from 'react'
@@ -68,7 +68,7 @@ export function Main() {
 
   useEffect(() => {
     // Does not work!
-    console.log(elementRef.current) // logs null
+    console.log(elementRef.current) // logs undefined
   }, [])
 
   return <HelloWorld ref={elementRef} /> // assign the ref
@@ -84,11 +84,11 @@ Is this code working? Open the [demo](https://codesandbox.io/s/react-ref-dom-chi
 
 React also throws a useful warning: `Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?`
 
-Let's follow React's warning advice and see how `forwardRef()` can help.  
+Let's follow React's advice and see how `forwardRef()` can help.  
 
 ## 2. Introducing forwardRef()
 
-Now is the right moment to introduce `forwardRef()`: a function that wraps a component making it accept a ref as a prop.  
+Now is the right moment to introduce `forwardRef()`: a function that wraps a component allowin it to access a ref from the parent component.
 
 ```javascript
 import { forwardRef } from 'react'
@@ -98,11 +98,9 @@ const Component = forwardRef(function(props, ref) {
 })
 ```
 
-`forwardRef()` is a [higher-order function](/javascript-higher-order-functions/) that wraps a React component. The wrapped component works the same as the original component but also receives as the second parameter the `ref`. 
+`forwardRef()` is a [higher-order function](/javascript-higher-order-functions/) that wraps a React component. The wrapped component works the same as the original component but also receives as the second parameter the `ref`.  
 
-The `ref` parameter then has to be assigned, as usual, to the ref attribute of the tag `<div ref={ref}>`.  
-
-Let's use `forwardRef()` and `<HelloWorld>` component into it:
+Let's wrap `<HelloWorld>` component into  `forwardRef()`:
 
 ```jsx {13-15}
 import { useRef, useEffect, forwardRef } from 'react'
@@ -125,19 +123,19 @@ const HelloWorld = forwardRef(function(props, ref) {
 
 [Open the demo.](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/src/Main.jsx)
 
-`HelloWorld` component is wrapped into `forwardRef()`. Doing so allow the component to access the ref from the second parameter.  
+Now the parent component can assign `elementRef` as a prop on the child component ` <HelloWorld ref={elementRef} />`. Then, thanks to being wrapped into `forwardRef`, `<HelloWorld>` component reads that ref from the second parameter and use it on its element `<div ref={ref}>`.  
 
 Open the [demo](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/src/Main.jsx) and you'll see that after mounting `elementRef.current` *contains* the DOM element from `<HelloWorld>` component. It works!
 
-## 3. Stay declarative as much as possible
+## 3. Stay declarative
 
-Before ending the post, I advise you to keep the refs' usage at a minimum. Here's the main reason why.    
+Before ending the post, I advise you to keep the refs' usage at a minimum. Here's why.    
 
-React is the library which goal is to abstract you from manipulating DOM, cross-browser compatibility, and DOM manipulation performance. React gives you wonderful components, props, state, and hooks abstractions to save you from dealing with DOM and browser-specific details.  
+React is the library which goal is to abstract you from manipulating DOM, cross-browser compatibility, and DOM manipulation performance. React gives you wonderful components, props, state, hooks, and context abstractions to save you from dealing with DOM and browser-specific details.  
 
-When deciding to use refs to access DOM, including with the help of `forwardRef()` and `useImperativeHandle()`, consider at first using a React abstraction to achieve your goal. React abstractions are declarative and easier to deal with.  
+When deciding to use refs to access DOM, including with the help of `forwardRef()` and `useImperativeHandle()`, you do not use React abstractions, but directly the DOM specific details. The code that uses many refs with DOM elements in the [long run is more difficult to maintain](https://blog.logrocket.com/why-you-should-use-refs-sparingly-in-production/).  
 
-The code that uses many refs with DOM elements in the [long run is more difficult to maintain](https://blog.logrocket.com/why-you-should-use-refs-sparingly-in-production/).  
+Consider at first using a React abstraction to achieve your goal before using a ref to access DOM. Of course, it's not always possible, and time to time you have to do so.  
 
 ## 4. Conclusion
 
