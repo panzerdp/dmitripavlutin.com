@@ -1,6 +1,6 @@
 @import '~styles/variables';
 
-.contactAuthor {
+.coaching {
   box-shadow: $box-shadow;
   background-color: rgba($border-color, 0.4);
   border-radius: 8px;
@@ -9,6 +9,7 @@
 
   @media (prefers-color-scheme: dark) {
     box-shadow: $box-shadow-dark-mode;
+    background-color: $background-color-dark-mode;
   }
 
   ul {
@@ -45,7 +46,7 @@
       color: white;
       font-weight: bold;
       font-family: $sans-serif-font-family;
-      height: 50px;
+      height: 3rem;
       border-radius: 3px;
       font-size: 1.1rem;
       text-decoration: none;
