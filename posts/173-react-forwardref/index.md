@@ -193,6 +193,8 @@ const MyComponent = forwardRef(function(props, ref) {
 
 `useImperativeHandle(ref, getRefValue, deps)` accepts 3 arguments: the forwarded `ref`, the function returning the ref value, and the dependencies array.  
 
+The value returned by `getRefValue()` function becomes the value of the forwarded ref. That's the main benefit of `useImperativeHandle()`: it customizes forwarded ref value with anything you want.  
+
 For example, let's use the hook and give the parent just a method `focus()`:
 
 ```jsx
