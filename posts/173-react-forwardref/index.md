@@ -131,7 +131,7 @@ Open the [demo](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/s
 
 ## 3. forwardRef() in TypeScript
 
-Using `forwardRef()` in TypeScript is a bit tricker because you have to indicate the type arguments of `useRef<T>()` in the parent component and `forwardRef()<T, P>` wrapping the child component. Both functions are [generic function types]((https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types)).
+Using `forwardRef()` in TypeScript is a bit trickier because you have to indicate the type arguments of `useRef<T>()` in the parent component and `forwardRef()<T, P>` wrapping the child component. Both functions are [generic function types]((https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types)).
 
 `forwardRef<V, P>()` accepts 2 argument types:
 
@@ -159,11 +159,68 @@ const HelloWorld = forwardRef<HTMLDivElement>(function (props, ref) {
 
 `useRef<HTMLDivElement>(null)` creates a ref holding a div element because `HTMLDivElement` is used as a type argument.  
 
-The ref is initialized with `null` &mdash; this is important to do. Othwerwise TypeScript [throws a type error](<HelloWorld ref={elementRef} />) when assigning the ref to the child component: `<HelloWorld ref={elementRef} />`.  
+The ref is initialized with `null` &mdash; this is important to do. Othwerwise TypeScript [throws a type error](https://stackoverflow.com/a/69143200/1894471) when assigning the ref to the child component: `<HelloWorld ref={elementRef} />`.  
 
 Finally, when wrapping the child component `forwardRef<HTMLDivElement>(...)` indicate `HTMLDivElement` as the type argument: which indicates what ref value is forwarded.  
 
-## 4. Stay declarative
+## 4. forwardRef() and useImperativeHandle()
+
+What if you want to access something else from the child component? For example a simple function to focus the input.  
+
+That's when [useImperativeHandle()](https://react.dev/reference/react/useImperativeHandle) hook can help you.  
+
+```jsx
+import { forwardRef, useImperativeHandle } from 'react'
+
+const MyComponent = forwardRef(function(props, ref) {
+  useImperativeHandle(ref, function() {
+    return {
+      // new ref value...
+    }
+  }, []) // dependencies
+
+  return <div>...</div>
+}
+```
+
+`useImperativeHandle(ref, getRefValue, deps)` accepts 3 arguments: the forwarded `ref`, the function returning the ref value, and the dependencies array.  
+
+For example, let's use the hook and give the parent just a method `focus()`:
+
+```jsx
+import { useRef, forwardRef, useEffect, useImperativeHandle } from "react"
+
+export function Main() {
+  const methodsRef = useRef()
+
+  useEffect(() => methodsRef.current.focus(), [])
+
+  return <FocusableInput ref={methodsRef} />
+}
+
+const FocusableInput = forwardRef(function (props, ref) {
+  const inputRef = useRef()
+
+  useImperativeHandle(ref, function () {
+    return {
+      focus() { inputRef.current.focus() }
+    }
+  }, [])
+
+  return <input type="text" ref={inputRef} />
+});
+
+```
+[Open the demo.](https://codesandbox.io/s/react-useimperativehandle-no2tli?file=/src/Main.jsx)
+
+
+`useImperativeHandle(ref, ..., [])` gives the parent an object with a method `focus()`.  
+
+After mounting, the parent calls `methodsRef.current.focus()` method, which focuses the input element in the child component.  
+
+Finally, remember that `useImperativeHandle()` can be used only inside a component wrapped in `forwardRef()`.  
+
+## 5. Favor declarative approach
 
 Before ending the post, I advise you to keep the refs' usage at a minimum. Here's why.    
 
@@ -171,9 +228,9 @@ React is the library which goal is to abstract you from manipulating DOM, cross-
 
 When deciding to use refs to access DOM, including with the help of `forwardRef()` and `useImperativeHandle()`, you do not use React abstractions, but directly the DOM-specific details. The code that uses many refs with DOM elements in the [long run is more difficult to maintain](https://blog.logrocket.com/why-you-should-use-refs-sparingly-in-production/).  
 
-Consider first using a React abstraction to achieve your goal before using a ref to access DOM. Of course, it's not always possible, and from time to time you have to get your hands dirty.
+Consider using a React abstraction to achieve your goal before using a ref to access DOM. Of course, it's not always possible, and from time to time you have to get your hands dirty.
 
-## 5. Conclusion
+## 6. Conclusion
 
 Accessing a DOM element instance is relatively easy when the element is rendered directly in the body of the component. Just assign the ref to the tag: `<div ref={elementRef} />`.  
 
