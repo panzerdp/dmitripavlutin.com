@@ -88,25 +88,29 @@ Let's follow React's advice and see how `forwardRef()` can help.
 
 ## 2. Introducing forwardRef()
 
-Now is the right moment to introduce `forwardRef()`: a function that wraps a component allowing it to access a ref from the parent component.
+Now is the right moment to introduce `forwardRef()`:
 
-```javascript
-import { forwardRef } from 'react'
+```javascript{7-10}
+import { forwardRef, useRef } from 'react'
 
-const Component = forwardRef(function(props, ref) {
-  return <div ref={ref} />
+function Parent() {
+  const parentRef = useRef()
+  return <Child ref={parentRef} />
+}
+
+const Child = forwardRef(function(props, ref) {
+  // parentRef is forwarded to ref
+  return <div ref={ref}>Child</div>
 })
 ```
 
-`forwardRef()` is a [higher-order function](/javascript-higher-order-functions/) that wraps a React component. The wrapped component works the same as the original component but also receives as the second parameter the `ref`.  
+`forwardRef()` is a [higher-order function](/javascript-higher-order-functions/) that wraps a React component. The wrapped component works same way as the original component but also receives as the second parameter a `ref`: the forwarded ref from the parent component.  
 
-Assigning the forwarded `ref` to a tag `<div ref={ref} />` will connect the ref in the parent component with the DOM element. 
+When the forwarded `ref` in the wrapped component is assigned to a tag `<div ref={ref} />`, what happens is that the DOM element gets connected to the ref `parentRef` in the parent component.  
 
-*That's the essence of the refs forwarding technique:`forwardRef()` forwards the ref to the component that it wraps.*  
+Let's wrap `<HelloWorld>` component into  `forwardRef()`. The goal is to connect `elementRef` with the div `<div>Hello, World!</div>` inside `<HelloWorld>`:
 
-Let's wrap `<HelloWorld>` component into  `forwardRef()`:
-
-```jsx {13-15}
+```jsx
 import { useRef, useEffect, forwardRef } from 'react'
 
 export function Main() {
@@ -127,11 +131,13 @@ const HelloWorld = forwardRef(function(props, ref) {
 
 [Open the demo.](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/src/Main.jsx)
 
-Now the parent component can assign `elementRef` as a prop on the child component ` <HelloWorld ref={elementRef} />`. Then, thanks to being wrapped into `forwardRef`, `<HelloWorld>` component reads that ref from the second parameter and uses it on its element `<div ref={ref}>`.  
+The parent component assigns `elementRef` as an attribute on the child component ` <HelloWorld ref={elementRef} />`. Then, thanks to being wrapped into `forwardRef`, `<HelloWorld>` component reads that ref from the second parameter and uses it on its element `<div ref={ref}>`.  
 
 After mounting `elementRef.current` in the parent component `<Main>` *contains* the DOM element from `<HelloWorld>` component. Open the [demo](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/src/Main.jsx): it works!
 
 ![Element logged in console](./images/element-in-console.png)
+
+*That's the essence of the refs forwarding technique:`forwardRef()` forwards the ref to the component that it wraps.*  
 
 ## 3. forwardRef() in TypeScript
 
@@ -140,9 +146,9 @@ Using `forwardRef()` in TypeScript is a bit trickier because you have to indicat
 `forwardRef<V, P>()` accepts 2 argument types:
 
 1. `V` is the type of the value stored in a ref, which is usually an `HTMLDivElement` or `HTMLInputElement`
-2. `P` is the props type of the component 
+2. `P` is the props type of the wrapped component 
 
-Same way `useRef<V>()` hook in TypeScript is a generic function type. Its single argument type is `V`: denoting the type of the value stored in the ref. If you store DOM elements in the ref, often `V` can be `HTMLDivElement` or `HTMLInputElement`.  
+`useRef<V>()` hook in TypeScript has one argument type `V`: denoting the value type stored in the ref. If you store DOM elements in the ref, `V` can be `HTMLDivElement` or `HTMLInputElement`.  
 
 Now let's annotate the `<Main>` and `<HelloWorld>` components:
 
@@ -163,9 +169,9 @@ const HelloWorld = forwardRef<HTMLDivElement>(function (props, ref) {
 
 `useRef<HTMLDivElement>(null)` creates a ref holding a div element because `HTMLDivElement` is used as a type argument.  
 
-The ref is initialized with `null` &mdash; this is important to do. Otherwise, TypeScript [throws a type error](https://stackoverflow.com/a/69143200/1894471) when assigning the ref to the child component: `<HelloWorld ref={elementRef} />`.  
+The ref is initialized with `null` &mdash; this is important. Otherwise, TypeScript [throws a type error](https://stackoverflow.com/a/69143200/1894471) when assigning the ref to the child component: `<HelloWorld ref={elementRef} />`.  
 
-Finally, when wrapping the child component `forwardRef<HTMLDivElement>(...)` indicate `HTMLDivElement` as the type argument: which indicates what ref value is forwarded.  
+Finally, when wrapping the child component `forwardRef<HTMLDivElement>(...)` indicate `HTMLDivElement` as the value type of the forwarded ref.  
 
 ## 4. forwardRef() and useImperativeHandle()
 
