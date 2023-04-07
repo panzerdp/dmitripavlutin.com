@@ -88,7 +88,7 @@ Let's follow React's advice and see how `forwardRef()` can help.
 
 ## 2. Introducing forwardRef()
 
-Now is the right moment to introduce `forwardRef()`: a function that wraps a component allowin it to access a ref from the parent component.
+Now is the right moment to introduce `forwardRef()`: a function that wraps a component allowing it to access a ref from the parent component.
 
 ```javascript
 import { forwardRef } from 'react'
@@ -159,13 +159,13 @@ const HelloWorld = forwardRef<HTMLDivElement>(function (props, ref) {
 
 `useRef<HTMLDivElement>(null)` creates a ref holding a div element because `HTMLDivElement` is used as a type argument.  
 
-The ref is initialized with `null` &mdash; this is important to do. Othwerwise TypeScript [throws a type error](https://stackoverflow.com/a/69143200/1894471) when assigning the ref to the child component: `<HelloWorld ref={elementRef} />`.  
+The ref is initialized with `null` &mdash; this is important to do. Otherwise TypeScript [throws a type error](https://stackoverflow.com/a/69143200/1894471) when assigning the ref to the child component: `<HelloWorld ref={elementRef} />`.  
 
 Finally, when wrapping the child component `forwardRef<HTMLDivElement>(...)` indicate `HTMLDivElement` as the type argument: which indicates what ref value is forwarded.  
 
 ## 4. forwardRef() and useImperativeHandle()
 
-What if you want to access something else from the child component? For example a simple function to focus the input.  
+What if you want to access something else from the child component? For example, a simple function to focus the input.  
 
 That's when [useImperativeHandle()](https://react.dev/reference/react/useImperativeHandle) hook can help you.  
 
