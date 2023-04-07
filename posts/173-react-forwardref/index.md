@@ -104,11 +104,11 @@ const Child = forwardRef(function(props, ref) {
 })
 ```
 
-`forwardRef()` is a [higher-order function](/javascript-higher-order-functions/) that wraps a React component. The wrapped component works same way as the original component but also receives as the second parameter a `ref`: the forwarded ref from the parent component.  
+`forwardRef()` is a [higher-order function](/javascript-higher-order-functions/) that wraps a React component. The wrapped component works same way as the original component but also receives as *the second parameter a `ref`: the forwarded ref from the parent component*.  
 
 When the forwarded `ref` in the wrapped component is assigned to a tag `<div ref={ref} />`, what happens is that the DOM element gets connected to the ref `parentRef` in the parent component.  
 
-Let's wrap `<HelloWorld>` component into  `forwardRef()`. The goal is to connect `elementRef` with the div `<div>Hello, World!</div>` inside `<HelloWorld>`:
+Let's wrap `<HelloWorld>` component into  `forwardRef()`. The goal is to connect `elementRef` with the div `<div>Hello, World!</div>`:
 
 ```jsx
 import { useRef, useEffect, forwardRef } from 'react'
@@ -131,13 +131,11 @@ const HelloWorld = forwardRef(function(props, ref) {
 
 [Open the demo.](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/src/Main.jsx)
 
-The parent component assigns `elementRef` as an attribute on the child component ` <HelloWorld ref={elementRef} />`. Then, thanks to being wrapped into `forwardRef`, `<HelloWorld>` component reads that ref from the second parameter and uses it on its element `<div ref={ref}>`.  
+The parent component assigns `elementRef` as an attribute on the child component ` <HelloWorld ref={elementRef} />`. Then, thanks to being wrapped into `forwardRef()`, `<HelloWorld>` component reads that ref from the second parameter and uses it on its element `<div ref={ref}>`.  
 
 After mounting `elementRef.current` in the parent component `<Main>` *contains* the DOM element from `<HelloWorld>` component. Open the [demo](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/src/Main.jsx): it works!
 
 ![Element logged in console](./images/element-in-console.png)
-
-*That's the essence of the refs forwarding technique:`forwardRef()` forwards the ref to the component that it wraps.*  
 
 ## 3. forwardRef() in TypeScript
 
