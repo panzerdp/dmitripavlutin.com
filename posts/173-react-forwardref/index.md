@@ -100,13 +100,15 @@ function Parent() {
 
 const Child = forwardRef(function(props, ref) {
   // parentRef is forwarded to ref
-  return <div ref={ref}>Child</div>
+  return <div ref={ref} />
 })
 ```
 
 `forwardRef()` is a [higher-order function](/javascript-higher-order-functions/) that wraps a React component. The wrapped component works same way as the original component but also receives as *the second parameter a `ref`: the forwarded ref from the parent component*.  
 
 When the forwarded `ref` in the wrapped component is assigned to a tag `<div ref={ref} />`, what happens is that the DOM element gets connected to the ref `parentRef` in the parent component.  
+
+![React forwardRef()](./diagrams/react-forwardref.svg)
 
 Let's wrap `<HelloWorld>` component into  `forwardRef()`. The goal is to connect `elementRef` with the div `<div>Hello, World!</div>`:
 
@@ -181,7 +183,7 @@ That's when [useImperativeHandle()](https://react.dev/reference/react/useImperat
 import { forwardRef, useImperativeHandle } from 'react'
 
 const MyComponent = forwardRef(function(props, ref) {
-  useImperativeHandle(ref, function() {
+  useImperativeHandle(ref, function getRefValue() {
     return {
       // new ref value...
     }
@@ -194,6 +196,8 @@ const MyComponent = forwardRef(function(props, ref) {
 `useImperativeHandle(ref, getRefValue, deps)` accepts 3 arguments: the forwarded `ref`, the function returning the ref value, and the dependencies array.  
 
 The value returned by `getRefValue()` function becomes the value of the forwarded ref. That's the main benefit of `useImperativeHandle()`: it customizes forwarded ref value with anything you want.  
+
+![React forwardRef() useImperactiveHandle()](./diagrams/react-useimperativehandle-2.svg)
 
 For example, let's use the hook and give the parent just a method `focus()`:
 
