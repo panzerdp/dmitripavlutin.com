@@ -9,7 +9,7 @@ tags: ['react', 'ref']
 type: post
 ---
 
-To access a DOM element rendered in the component's body you can use [use](/react-useref/#2-accessing-dom-elements) a ref, which is created by `useRef()` hook.  
+To access a DOM element rendered in the component's body you can use [use](/react-useref/#2-accessing-dom-elements) a ref created by `useRef()` hook.  
 
 But what if you need to access a DOM element of a child component? Then a simple ref is not enough and you have to combine refs with `React.forwardRef()`: a technique called *refs forwarding*.  
 
@@ -48,15 +48,13 @@ export function Main() {
 
 [Open the demo.](https://codesandbox.io/s/competent-grass-89so21?file=/src/Main.jsx)
 
-`const elementRef = useRef()` creates a ref. `elementRef` will contain after mounting the DOM element instance. You don't have to initialize the ref with any initial value.  
+`const elementRef = useRef()` creates a ref. Then `elementRef` is assigned to the `ref` attribute of the tag which element you want to access: `<div ref="elementRef">`.  
 
-Then `elementRef` have to be assigned to the `ref` attribute of the tag which element you want to access: `<div ref="elementRef">`.  
-
-Finally, after component mounting, `elementRef.current` contains the DOM element instance. When the component is mounted is [detected](react-useeffect-explanation/#31-component-did-mount) using `useEffect()` hook with an empty array as a dependency.  
+`elementRef` after mounting will contain the DOM element instance. When the component is mounted is [detected](react-useeffect-explanation/#31-component-did-mount) using `useEffect()` hook with an empty array as a dependency.  
 
 Open the [demo](https://codesandbox.io/s/competent-grass-89so21?file=/src/Main.jsx) and you'll see the element logged to the console. 
 
-Ok, then what is the limitation of this approach? A problem appears when the element is not rendered directly in the body of the component, but rather in a child component. The simple approach of using a ref does not work in this case. Let me show you why.  
+Ok, then what is the limitation of this approach? A problem appears when the element is not rendered directly in the body of the component, but rather in a child component. The described approach of using a ref does not work in this case. Let me show you why.  
 
 Let's modify the previous example by extracting the `<div>Hello, World!</div>` into a child component `<HelloWorld>`. Also, let's create a prop `ref` on `<HelloWorld>`, to which `<Main>` assigns `elementRef`:
 
@@ -106,11 +104,11 @@ const Child = forwardRef(function(props, ref) {
 
 `forwardRef()` is a [higher-order function](/javascript-higher-order-functions/) that wraps a React component. The wrapped component works same way as the original component but also receives as *the second parameter a `ref`: the forwarded ref from the parent component*.  
 
-When the forwarded `ref` in the wrapped component is assigned to a tag `<div ref={ref} />`, what happens is that the DOM element gets connected to the ref `parentRef` in the parent component.  
+Assigning the forwarded `ref` in the wrapped component to a tag `<div ref={ref} />` connects the DOM element to `parentRef` in the parent component.  
 
 ![React forwardRef()](./diagrams/react-forwardref.svg)
 
-Let's wrap `<HelloWorld>` component into  `forwardRef()`. The goal is to connect `elementRef` with the div `<div>Hello, World!</div>`:
+Let's wrap `<HelloWorld>` component into  `forwardRef()` with the goal to connect `<Main>`'s `elementRef` with `<div>Hello, World!</div>`:
 
 ```jsx
 import { useRef, useEffect, forwardRef } from 'react'
