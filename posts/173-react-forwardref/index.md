@@ -48,9 +48,9 @@ export function Main() {
 
 [Open the demo.](https://codesandbox.io/s/competent-grass-89so21?file=/src/Main.jsx)
 
-`const elementRef = useRef()` creates a ref. Then `elementRef` is assigned to the `ref` attribute of the tag which element you want to access: `<div ref="elementRef">`.  
+`const elementRef = useRef()` creates a [ref](/react-useref/). Then `elementRef` is assigned to the `ref` attribute of the tag which element you want to access: `<div ref="elementRef">`.  
 
-`elementRef` after mounting will contain the DOM element instance. When the component is mounted is [detected](react-useeffect-explanation/#31-component-did-mount) using `useEffect()` hook with an empty array as a dependency.  
+`elementRef` after mounting will contain the DOM element instance. When the component is mounted is [detected](/react-useeffect-explanation/#31-component-did-mount) using `useEffect()` hook with an empty array as a dependency.  
 
 Open the [demo](https://codesandbox.io/s/competent-grass-89so21?file=/src/Main.jsx) and you'll see the element logged to the console. 
 
