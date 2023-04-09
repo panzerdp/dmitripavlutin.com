@@ -19,7 +19,7 @@ Let's see how it works.
 
 <Affiliate type="traversyReact" />
 
-<TableOfContents maxLevel={1} />
+<TableOfContents maxLevel={2} />
 
 ## 1. Refs in child components
 
@@ -84,7 +84,7 @@ React also throws a useful warning: `Warning: Function components cannot be give
 
 Let's follow React's advice and see how `forwardRef()` can help.  
 
-## 2. Introducing forwardRef()
+## 2. forwardRef()
 
 Now is the right moment to introduce `forwardRef()`:
 
@@ -118,7 +118,7 @@ export function Main() {
 
   useEffect(() => {
     // Works!
-    console.log(elementRef.current) // logs HTMLDivElement
+    console.log(elementRef.current) // logs <div>Hello, World!</div>
   }, [])
 
   return <HelloWorld ref={elementRef} /> // assign the ref
@@ -135,43 +135,7 @@ The parent component assigns `elementRef` as an attribute on the child component
 
 After mounting `elementRef.current` in the parent component `<Main>` *contains* the DOM element from `<HelloWorld>` component. Open the [demo](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/src/Main.jsx): it works!
 
-![Element logged in console](./images/element-in-console.png)
-
-## 3. forwardRef() in TypeScript
-
-Using `forwardRef()` in TypeScript is a bit trickier because you have to indicate the type arguments of `useRef<T>()` in the parent component and `forwardRef()<T, P>` wrapping the child component. Both functions are [generic function types]((https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types)).
-
-`forwardRef<V, P>()` accepts 2 argument types:
-
-1. `V` is the type of the value stored in a ref, which is usually an `HTMLDivElement` or `HTMLInputElement`
-2. `P` is the props type of the wrapped component 
-
-`useRef<V>()` hook in TypeScript has one argument type `V`: denoting the value type stored in the ref. If you store DOM elements in the ref, `V` can be `HTMLDivElement` or `HTMLInputElement`.  
-
-Now let's annotate the `<Main>` and `<HelloWorld>` components:
-
-```tsx
-import { useRef, forwardRef } from "react"
-
-export function Main() {
-  const elementRef = useRef<HTMLDivElement>(null)
-
-  return <HelloWorld ref={elementRef} />
-}
-
-const HelloWorld = forwardRef<HTMLDivElement>(function (props, ref) {
-  return <div ref={ref}>Hello, World!</div>
-})
-```
-[Try the demo.](https://codesandbox.io/s/eloquent-burnell-3vrm0o?file=/src/Main.tsx)
-
-`useRef<HTMLDivElement>(null)` creates a ref holding a div element because `HTMLDivElement` is used as a type argument.  
-
-The ref is initialized with `null` &mdash; this is important. Otherwise, TypeScript [throws a type error](https://stackoverflow.com/a/69143200/1894471) when assigning the ref to the child component: `<HelloWorld ref={elementRef} />`.  
-
-Finally, when wrapping the child component `forwardRef<HTMLDivElement>(...)` indicate `HTMLDivElement` as the value type of the forwarded ref.  
-
-## 4. forwardRef() and useImperativeHandle()
+## 3. useImperativeHandle()
 
 What if you want to access something else from the child component? For example, a simple function to focus the input.  
 
@@ -225,14 +189,120 @@ const FocusableInput = forwardRef(function (props, ref) {
 ```
 [Open the demo.](https://codesandbox.io/s/react-useimperativehandle-no2tli?file=/src/Main.jsx)
 
-
 `useImperativeHandle(ref, ..., [])` gives the parent an object with a method `focus()`.  
 
 After mounting, the parent calls `methodsRef.current.focus()` method, which focuses the input element in the child component.  
 
 Finally, remember that `useImperativeHandle()` can be used only inside a component wrapped in `forwardRef()`.  
 
-## 5. Favor declarative approach
+## 4. Deep refs forwarding
+
+You can forward refs more than 1 level deep in the components hierarchy. Just wrap every child, grandchild and so on components in `forwardRef()`, and pass down the ref until reaching the destination DOM element.  
+
+Let's forward 2 times `elementRef` to access the DOM element from a grandchild component:
+
+```jsx
+import { forwardRef, useRef, useEffect } from 'react'
+
+function Main() {
+  const elementRef = useRef()
+
+  useEffect(() => {
+    console.log(elementRef.current) // logs <div>Deep!</div>
+  })
+
+  return <Child ref={elementRef} />
+}
+
+function Child = forwardRef(function(props, ref) {
+  return <GrandChild ref={ref} />
+})
+
+function GrandChild = forwardRef(function(props, ref) {
+  return <div ref={ref}>Deep!</div>
+})
+```
+[Open the demo.]()
+
+`elementRef` is forwarded to `<Child>`, which then forwards the ref to `<GrandChild>`, which finally connect the ref to `<div>Deep!</div>`.  
+
+On a side note, try to keep the forwarding at a mimimum to avoid increasing the code complexity.  
+
+## 5. Pitfalls
+
+### 5.1 Anonymous component
+
+An anonymous function doesn't have a name near `function` keyword. 
+
+```javascript
+import { forwardRef } from 'react'
+
+const MyComponent = forwardRef(function() { // Anonymous function
+  // ...
+})
+```
+
+In React dev tools an anonymous function wrapped in `forwardRef()` results in a component with an unmeaningful name:
+
+<ImgShadow>
+![Anonymous React component because of forwardRef()](./images/cryptic-name-5.png)
+</ImgShadow>
+
+Having no component name in the hierarchy makes it hard to understand what is rendered on the page. Moreover, you cannot use the search functionality of the React dev tools to find your component.  
+
+To give component a name use the use [named function expressions](/6-ways-to-declare-javascript-functions/#21-named-function-expression) for components wrapped in `forwardRef()`:
+
+```javascript
+import { forwardRef } from 'react'
+
+const MyComponent = forwardRef(function MyComponent() {// Named function
+  // ...
+})
+```
+
+Using `function MyComponent() {...}` displays the component name in React dev tools:
+
+<ImgShadow>
+![Named React component in forwardRef()](./images/good-name.png)
+</ImgShadow>
+
+With the proper names 
+
+## 6. forwardRef() in TypeScript
+
+Using `forwardRef()` in TypeScript is a bit trickier because you have to indicate the type arguments of `useRef<T>()` in the parent component and `forwardRef()<T, P>` wrapping the child component. Both functions are [generic function types]((https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types)).
+
+`forwardRef<V, P>()` accepts 2 argument types:
+
+1. `V` is the type of the value stored in a ref, which is usually an `HTMLDivElement` or `HTMLInputElement`
+2. `P` is the props type of the wrapped component 
+
+`useRef<V>()` hook in TypeScript has one argument type `V`: denoting the value type stored in the ref. If you store DOM elements in the ref, `V` can be `HTMLDivElement` or `HTMLInputElement`.  
+
+Now let's annotate the `<Main>` and `<HelloWorld>` components:
+
+```tsx
+import { useRef, forwardRef } from "react"
+
+export function Main() {
+  const elementRef = useRef<HTMLDivElement>(null)
+
+  return <HelloWorld ref={elementRef} />
+}
+
+const HelloWorld = forwardRef<HTMLDivElement>(function (props, ref) {
+  return <div ref={ref}>Hello, World!</div>
+})
+```
+[Open the demo.](https://codesandbox.io/s/eloquent-burnell-3vrm0o?file=/src/Main.tsx)
+
+`useRef<HTMLDivElement>(null)` creates a ref holding a div element because `HTMLDivElement` is used as a type argument.  
+
+The ref is initialized with `null` &mdash; this is important. Otherwise, TypeScript [throws a type error](https://stackoverflow.com/a/69143200/1894471) when assigning the ref to the child component: `<HelloWorld ref={elementRef} />`.  
+
+Finally, when wrapping the child component `forwardRef<HTMLDivElement>(...)` indicate `HTMLDivElement` as the value type of the forwarded ref.  
+
+## 7. Conclusion
 
 Before ending the post, I advise you to keep the refs' usage at a minimum. Here's why.    
 
@@ -241,8 +311,6 @@ React is the library which goal is to abstract you from manipulating DOM, cross-
 When deciding to use refs to access DOM, including with the help of `forwardRef()` and `useImperativeHandle()`, you do not use React abstractions, but directly the DOM-specific details. The code that uses many refs with DOM elements in the [long run is more difficult to maintain](https://blog.logrocket.com/why-you-should-use-refs-sparingly-in-production/).  
 
 Consider using a React abstraction to achieve your goal before using a ref to access DOM. Of course, it's not always possible, and from time to time you have to get your hands dirty.
-
-## 6. Conclusion
 
 Accessing a DOM element instance is relatively easy when the element is rendered directly in the body of the component. Just assign the ref to the tag: `<div ref={elementRef} />`.  
 
