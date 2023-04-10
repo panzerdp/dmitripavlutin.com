@@ -80,6 +80,8 @@ function Child({ ref }) { // a new component
 
 Is this code working? Open the [demo](https://codesandbox.io/s/react-ref-dom-child-zztlg5?file=/src/Parent.jsx) and you'll see that after mounting `elementRef.current` contains `undefined`. `<Parent>` wasn't able to access the DOM element from the child component. 
 
+![React ref as prop does not work](./diagrams/ref-prop.svg)
+
 React also throws a useful warning: `Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?`
 
 Let's follow React's advice and see how `forwardRef()` can help.  
@@ -92,7 +94,7 @@ Now is the right moment to introduce `forwardRef()`.
 
 Assigning the forwarded `ref` in the wrapped component to a tag `<div ref={ref} />` connects the DOM element to `parentRef` in the parent component.  
 
-![React forwardRef()](./diagrams/react-forwardref.svg)
+![React forwardRef()](./diagrams/forwardref.svg)
 
 Let's wrap `<Child>` component into  `forwardRef()` with the goal to connect `<Parent>`'s `elementRef` with `<div>Hello, World!</div>`:
 
@@ -147,7 +149,7 @@ const MyComponent = forwardRef(function(props, ref) {
 
 The value returned by `getRefValue()` function becomes the value of the forwarded ref. That's the main benefit of `useImperativeHandle()`: you can customize forwarded ref value with anything you want.  
 
-![React forwardRef() useImperactiveHandle()](./diagrams/react-useimperativehandle-2.svg)
+![React forwardRef() and useImperactiveHandle()](./diagrams/useimperativehandle.svg)
 
 For example, let's use the hook and give the parent an object with methods `focus()` and `blur()`:
 
@@ -220,6 +222,8 @@ const GrandChild = forwardRef(function (props, ref) {
 [Open the demo.](https://codesandbox.io/s/react-useimperativehandle-forked-0jzpnw?file=/src/Parent.jsx)
 
 `elementRef` is forwarded to `<Child>`, which then forwards the ref to `<GrandChild>`, which finally connect the ref to `<div>Deep!</div>`.  
+
+![React deep forwardRef()](./diagrams/deep-forwardref.svg)
 
 On a side note, try to keep the forwarding at a minimum to avoid increasing the code complexity.  
 
