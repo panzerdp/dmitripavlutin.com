@@ -174,13 +174,12 @@ export function Main() {
 const FocusableInput = forwardRef(function (props, ref) {
   const inputRef = useRef()
 
-  useImperativeHandle(
-    ref,
+  useImperativeHandle(ref, // forwarded ref
     function () {
       return {
         focus() { inputRef.current.focus() },
         blur() { inputRef.current.blur() }
-      };
+      } // the forwarded ref value
     }, [])
 
   return <input type="text" ref={inputRef} />
@@ -229,7 +228,71 @@ On a side note, try to keep the forwarding at a minimum to avoid increasing the 
 
 ## 5. Pitfalls
 
-### 5.1 Anonymous component
+### 5.1 ref is undefined or null
+
+If the forwarded ref is unexpectedly `undefined` or `null`, there are usually 2 reasons.  
+
+First, you might *forgot to assign the forwarded ref to the `ref` attribute* in the component wrapped in `forwardRef()`:
+
+```jsx{6,13}
+import { useRef, useEffect, forwardRef } from 'react'
+
+export function Parent() {
+  const elementRef = useRef()
+
+  useEffect(() => {
+    console.log(elementRef.current) // logs undefined
+  }, [])
+
+  return <Child ref={elementRef} />
+}
+
+const Child = forwardRef(function(props, ref) {
+  return <div>Hello, World!</div> // ref not assigned to ref attribute!
+})
+```
+[Open the demo.](https://codesandbox.io/s/react-ref-dom-undefined-ebmzyl?file=/src/Parent.jsx)
+
+`elementRef` in the example above is `undefined` because the forwarded ref isn't assigned to `ref` attribute of `<div>Hello, World!</div>` inside of `<Child />` component.
+
+To fix the problem just assign correctly the ref:  `<div ref={ref}>Hello, World!</div>`.
+
+Second, you might *display the referenced DOM element conditionally*:
+
+```jsx{23}
+import { useRef, useEffect, forwardRef, useState } from 'react'
+
+export function Parent() {
+  const elementRef = useRef()
+  const [show, setShow] = useState(true)
+
+  const toggle = () => setShow(!show)
+
+  useEffect(() => {
+    // logs <div>Hello, World!</div> or null
+    console.log(elementRef.current)
+  }, [show])
+
+  return (
+    <>
+      <button onClick={toggle}>Toggle</button>
+      <Child ref={elementRef} show={show} />
+    </>
+  )
+}
+
+const Child = forwardRef(function({ show }, ref) {
+  // displayed conditionally
+  return show ? <div ref={ref}>Hello, World!</div> : null
+})
+```
+[Open the demo.](https://codesandbox.io/s/react-ref-dom-condition-e1yi3m?file=/src/Parent.jsx)
+
+`Child` component renders `<div ref={ref}>Hello, World!</div>` under a condition. Initially `show` prop is `true`, thus `elementRef` is `<div>Hello, World!</div>`.  
+
+But if you click "Toggle" button, then `state` is set to `false`. `<Child>`'s ternary operator component doesn't render `<div>Hello, World!</div>`, thus `elementRef` in the parent becomes `null`.  
+
+### 5.2 Anonymous component
 
 An anonymous function doesn't have a name near `function` keyword. 
 
@@ -249,7 +312,7 @@ In React dev tools an anonymous function wrapped in `forwardRef()` results in a 
 
 Having no component name in the hierarchy makes it hard to understand what is rendered on the page. Moreover, you cannot use the search functionality of the React dev tools to find your component.  
 
-To give component a name use the use [named function expressions](/6-ways-to-declare-javascript-functions/#21-named-function-expression) for components wrapped in `forwardRef()`:
+To give a component a name use the use [named function expressions](/6-ways-to-declare-javascript-functions/#21-named-function-expression) for components wrapped in `forwardRef()`:
 
 ```javascript
 import { forwardRef } from 'react'
