@@ -31,11 +31,9 @@ function BasicFetch() {
 
 ## Tip 2
 
-How React.js useEffect() hook behaves depending on the deps argument.
+React.js useEffect() hook behavior depending on the deps argument.
 
 #reactjs
-
-Sign up to my newsletter to get more useful React.js tips: https://dmitripavlutin.com/newsletter/.
 
 ```javascript
 useEffect(() => {
@@ -64,8 +62,11 @@ Sign up to my newsletter to get more useful JS tips: https://dmitripavlutin.com/
 ```javascript
 const object = {
   method() {
+    // logs true
+    console.log(this === object)
     const func = () => {
-      console.log(this === object) // logs true
+      // logs true
+      console.log(this === object)
     }
     func()
   }
@@ -74,6 +75,16 @@ object.method()
 ```
 
 ## Tip 4
+
+Many developers, including myself, tend to jump right away into coding. Understanding the problem well is usually secondary.
+
+But I have found that understanding the problem first, before coding, makes me a more productive developer.  
+
+Only a good understanding of the problem makes a good solution.
+
+Test-Driven Development encourages you to think about the problem first. That's why TDD makes you productive.  
+
+## Tip 5
 
 Be careful when updating the state in an effect that depends on the same state: that can create an infinite loop.
 
@@ -95,13 +106,3 @@ function MyComponent() {
   // ...
 }
 ```
-
-## Tip 5
-
-Many developers, including myself, tend to jump right away into coding. Understanding the problem well is usually secondary.
-
-But I have found that understanding the problem first, before coding, makes me a more productive developer.  
-
-Only a good understanding of the problem makes a good solution.
-
-Test-Driven Development encourages you to think about the problem first.  That's why TDD makes you productive.  

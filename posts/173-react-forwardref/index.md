@@ -255,7 +255,7 @@ const Child = forwardRef(function(props, ref) {
 
 `elementRef` in the example above is `undefined` because the forwarded ref isn't assigned to `ref` attribute of `<div>Hello, World!</div>` inside of `<Child />` component.
 
-To fix the problem just assign correctly the ref:  `<div ref={ref}>Hello, World!</div>`.
+To fix the problem just assign correctly the ref: `<div ref={ref}>Hello, World!</div>`.
 
 Second, you might *display the referenced DOM element conditionally*:
 
@@ -290,7 +290,7 @@ const Child = forwardRef(function({ show }, ref) {
 
 `Child` component renders `<div ref={ref}>Hello, World!</div>` under a condition. Initially `show` prop is `true`, thus `elementRef` is `<div>Hello, World!</div>`.  
 
-But if you click "Toggle" button, then `state` is set to `false`. `<Child>`'s ternary operator component doesn't render `<div>Hello, World!</div>`, thus `elementRef` in the parent becomes `null`.  
+Clicking "Toggle" button makes `show` as `false`. Which makes the ternary operator in `<Child>` render `null` &mdash; and not render the div element. Thus `elementRef` in the parent becomes `null`.  
 
 ### 5.2 Anonymous component
 
