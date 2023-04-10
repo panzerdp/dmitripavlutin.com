@@ -192,7 +192,7 @@ Finally, remember that `useImperativeHandle()` can be used only inside a compone
 
 ## 4. Deep refs forwarding
 
-You can forward refs more than 1 level deep in the components hierarchy. Just wrap every child, grandchild and so on components in `forwardRef()`, and pass down the ref until reaching the destination DOM element.  
+You can forward refs more than 1 level deep in the components hierarchy. Just wrap every child, grandchild, and so on components in `forwardRef()`, and pass down the ref until reaching the destination DOM element.  
 
 Let's forward 2 times `elementRef` to access the DOM element from a grandchild component:
 
@@ -221,7 +221,7 @@ const GrandChild = forwardRef(function (props, ref) {
 
 `elementRef` is forwarded to `<Child>`, which then forwards the ref to `<GrandChild>`, which finally connect the ref to `<div>Deep!</div>`.  
 
-On a side note, try to keep the forwarding at a mimimum to avoid increasing the code complexity.  
+On a side note, try to keep the forwarding at a minimum to avoid increasing the code complexity.  
 
 ## 5. Pitfalls
 
@@ -327,4 +327,4 @@ const Child = forwardRef(function(props, ref) {
 
 `Parent` component safely assigns `elementRef` to the child component `<Child ref={elementRef} />`. After mounting, `elementRef` contains the DOM element instance of the child component.  
 
-*What questions do you have about `forwardRef()`?*
+*Do you think React should support refs forwarding natively, without the use of `forwardRef()`?*
