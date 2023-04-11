@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: '.env',
+})
+
 module.exports = {
   siteMetadata: require('./gatsby/config/site-metadata'),
   pathPrefix: '/',
@@ -108,6 +112,13 @@ module.exports = {
     'gatsby-plugin-sitemap',
     'gatsby-plugin-netlify',
     require('./gatsby/config/gatsby-plugin-sass'),
-    require('./gatsby/config/gatsby-plugin-feed')
+    require('./gatsby/config/gatsby-plugin-feed'),
+    {
+      resolve: 'gatsby-source-mailerlite-count',
+      options: {
+        groupName: 'Dmitri Pavlutin Blog Newsletter Group',
+        key: process.env.MAILERLITE_KEY
+      }
+    }
   ],
 }

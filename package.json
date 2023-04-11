@@ -8,6 +8,7 @@
     "url": "https://github.com/panzerdp/dmitripavlutin.com/issues"
   },
   "dependencies": {
+    "@mailerlite/mailerlite-nodejs": "^1.0.1",
     "@mdx-js/react": "2.3.0",
     "@types/classnames": "2.3.1",
     "@types/react": "18.0.31",
