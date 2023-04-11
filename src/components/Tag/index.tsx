@@ -1,4 +1,4 @@
-import { Link } from 'gatsby-link'
+// import { Link } from 'gatsby-link'
 
 import { TO_TAG } from 'routes/path'
 import { slugify } from 'utils/string'
@@ -14,8 +14,8 @@ export default function Tag({ tag, label }: TagProps) {
     label = tag
   }
   return (
-    <Link to={TO_TAG({ slug: slugify(tag) })} className={styles.tag}>
+    <a href={TO_TAG({ slug: slugify(tag) })} className={styles.tag}>
       <span>{label}</span>
-    </Link>
+    </a>
   )
 }

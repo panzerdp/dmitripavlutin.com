@@ -1,0 +1,23 @@
+{
+  "name": "@panzerdp/gatsby-source-mailerlite-count",
+  "version": "0.0.1",
+  "private": "true",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "mailerlite"
+  ],
+  "author": "Dmitri Pavlutin",
+  "license": "MIT",
+  "dependencies": {
+    "@mailerlite/mailerlite-nodejs": "^1.0.1"
+  },
+  "devDependencies": {
+    
+  }
+}

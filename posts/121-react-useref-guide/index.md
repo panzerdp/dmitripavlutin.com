@@ -1,10 +1,10 @@
 ---
-title: 'The Complete Guide to useRef() and Refs in React'
-description: 'How to use React.useRef() hook to create persisted mutable values (also known as references or refs), as well access DOM elements.'
+title: 'React useRef() Hook Explained in 3 Steps'
+description: 'React.useRef() hook creates persisted mutable values (aka references or refs). refs are used to access DOM elements.'
 published: "2021-03-02T12:00Z"
-modified: "2023-01-27"
-thumbnail: "./images/cover-7.png"
-slug: react-useref-guide
+modified: "2023-04-03"
+thumbnail: "./images/cover-9.png"
+slug: react-useref
 tags: ['react', 'useref', 'hook', 'dom', 'element']
 type: post
 ---

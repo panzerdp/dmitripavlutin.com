@@ -4,7 +4,7 @@ export default function Coaching(): JSX.Element {
   const CALENDLY_BOOKING = 'https://calendly.com/dmitripavlutin/60min'
 
   return (
-    <div className={styles.contactAuthor}>
+    <div className={styles.coaching}>
       <h3>Your JavaScript Coach</h3>
       <div className={styles.description}>
         <p>

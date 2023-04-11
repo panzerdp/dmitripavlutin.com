@@ -1,4 +1,4 @@
-import SubscriptionRegion from 'components/Subscription/Region'
+import { SubscriptionRegion } from 'components/Subscription/Region'
 import AboutAuthorDetailed from 'components/AboutAuthor/Detailed'
 import AuthorCoaching from 'components/AboutAuthor/Coaching'
 // import AuthorJobOpportunities from 'components/AboutAuthor/JobOpportunities';
