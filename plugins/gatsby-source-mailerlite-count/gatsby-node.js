@@ -12,9 +12,9 @@ exports.sourceNodes = async (
 
   delete configOptions.plugins
 
-  function getNodeData(count) {
-    const nodeId = createNodeId(`mailerlite-stats-${count}`)
-    const nodeContent = { count }
+  function getNodeData(subscribersCount) {
+    const nodeId = createNodeId(`mailerlite-stats-${subscribersCount}`)
+    const nodeContent = { subscribersCount }
     const nodeData = {
       ...nodeContent,
       id: nodeId,
@@ -29,7 +29,7 @@ exports.sourceNodes = async (
     return nodeData
   }
 
-  let count = 0
+  let subscribersCount = 0
 
   try {
     const params = {
@@ -42,12 +42,12 @@ exports.sourceNodes = async (
 
     const response = await mailerlite.groups.get(params)
     if (response.data?.data?.length > 0) {
-      count = response.data.data[0].active_count
+      subscribersCount = response.data.data[0].active_count
     }
   } catch (e) {
     console.warn('Failed to fetch mailerlite stats. Status: ' + e.response.status)
   }
 
-  const dataForNode = getNodeData(count)
+  const dataForNode = getNodeData(subscribersCount)
   return createNode(dataForNode)
 }

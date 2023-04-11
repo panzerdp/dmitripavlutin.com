@@ -6,10 +6,6 @@ It's a plugin a wrote for my single usecase:
 
 ### Installation
 
-```
-yarn add @rogovdm/gatsby-source-mailchimp
-```
-
 ### Usage
 
 `gatsby-config.js`
@@ -17,10 +13,10 @@ yarn add @rogovdm/gatsby-source-mailchimp
 ```javascript
 [
   {
-    resolve: `@rogovdm/gatsby-source-mailchimp`,
+    resolve: `gatsby-source-mailerlite-count`,
     options: {
-      id: '<id-of-your-list>',
-      key: '<MAILCHIMP-API-KEY>'
+      groupName: '<your-group-name>',
+      key: '<MAILERLITE-API-KEY>'
     }
   }
 ];
@@ -31,15 +27,8 @@ yarn add @rogovdm/gatsby-source-mailchimp
 ```javascript
 export const pageQuery = graphql`
   query {
-    allMailchimpList {
-      edges {
-        node {
-          id
-          stats {
-            member_count
-          }
-        }
-      }
+    mailerliteStats {
+      subscribersCount
     }
   }
 `;

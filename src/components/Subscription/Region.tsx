@@ -4,7 +4,7 @@ import * as styles from './Region.module.scss'
 import { graphql, useStaticQuery } from 'gatsby'
 
 export function SubscriptionRegion() {
-  const { site: { siteMetadata: { emailSubscriptionService } } } = useStaticQuery<EmailSubscriptionQuery>(graphql`
+  const { site: { siteMetadata: { emailSubscriptionService } }, mailerliteStats } = useStaticQuery<EmailSubscriptionQuery>(graphql`
     query EmailSubscription {
       site {
         siteMetadata {
@@ -12,13 +12,16 @@ export function SubscriptionRegion() {
             embedFormEndpoint
             pageFormUrl
             isFormEmbed
-            subscribersCount
           }
         }
       }
+      mailerliteStats {
+        subscribersCount
+      }
     }`
   )
-  const { embedFormEndpoint, pageFormUrl, isFormEmbed, subscribersCount } = emailSubscriptionService
+  const { embedFormEndpoint, pageFormUrl, isFormEmbed } = emailSubscriptionService
+  const { subscribersCount } = mailerliteStats
 
   return (
     <div className={styles.subscriptionRegion}>
