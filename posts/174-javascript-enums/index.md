@@ -1,5 +1,5 @@
 ---
-title: "JavaScript Enum: Everything you need to know"
+title: "JavaScript Enum: Everything You Need to Know"
 description: "How to use enums in JavaScript"
 published: "2023-03-28"
 modified: "2023-03-28"
@@ -8,6 +8,8 @@ slug: javascript-enum
 tags: ['javascript', 'enum']
 type: post
 ---
+
+
 
 ## 1. A basic enum
 
