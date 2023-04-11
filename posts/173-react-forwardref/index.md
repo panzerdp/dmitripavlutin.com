@@ -92,7 +92,7 @@ Now is the right moment to introduce `forwardRef()`.
 
 `forwardRef()` is a [higher-order component](https://dev.to/nibble/higher-order-components-in-react-4c7h) that wraps a React component. The wrapped component works the same way as the original component but also receives as *the second parameter a `ref`: the forwarded ref from the parent component*.  
 
-Assigning the redirected `ref` in the wrapped component to a tag `<div ref={ref} />` links the DOM element to `parentRef` in the parent component.  
+Assigning the forwarded `ref` in the wrapped component to a tag `<div ref={ref} />` links the DOM element to `parentRef` in the parent component.  
 
 ![React forwardRef()](./diagrams/forwardref.svg)
 
@@ -119,7 +119,7 @@ const Child = forwardRef(function(props, ref) {
 
 [Open the demo.](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/src/Parent.jsx)
 
-The parent component assigns `elementRef` as an attribute to the child component ` <Child ref={elementRef} />`. Then, thanks to being wrapped into `forwardRef()`, `<Child>` component reads this ref from the second parameter and uses it on its element `<div ref={ref}>`.  
+`<Parent>` component assigns `elementRef` to the child component ` <Child ref={elementRef} />`. Then, thanks to being wrapped into `forwardRef()`, `<Child>` component reads the ref from the second parameter and uses it on its element `<div ref={ref}>`.  
 
 After mounting `elementRef.current` in the parent component `<Parent>` *contains* the DOM element from `<Child>` component. Open the [demo](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/src/Parent.jsx): it works!
 
@@ -145,7 +145,7 @@ const MyComponent = forwardRef(function(props, ref) {
 }
 ```
 
-`useImperativeHandle(ref, getRefValue, deps)` accepts 3 arguments: the forwarded `ref`, the function that returns the ref value, and the array of dependencies.  
+`useImperativeHandle(ref, getRefValue, deps)` accepts 3 arguments: the forwarded `ref`, the function that returns the ref value, and the dependencies array.  
 
 The value returned by `getRefValue()` function becomes the value of the forwarded ref. That's the main benefit of `useImperativeHandle()`: you can customize the forwarded ref value with whatever you want.  
 
@@ -257,7 +257,7 @@ const Child = forwardRef(function(props, ref) {
 
 To fix the problem just assign correctly the ref: `<div ref={ref}>Hello, World!</div>`.
 
-Second, you may have conditionally *displayed the referenced DOM element*:
+Second, you may have *conditionally displayed the referenced DOM element*:
 
 ```jsx{23}
 import { useRef, useEffect, forwardRef, useState } from 'react'
@@ -336,7 +336,7 @@ Second, props are [immutable](https://react.dev/learn/passing-props-to-a-compone
 
 ### 5.3 Anonymous component
 
-An anonymous function doesn't have a name near the `function` keyword. 
+An anonymous function doesn't have a name near `function` keyword. 
 
 ```javascript
 import { forwardRef } from 'react'
@@ -374,12 +374,12 @@ With the proper names of components, debugging the application is much easier.
 
 ## 6. forwardRef() in TypeScript
 
-React `forwardRef()` in TypeScript is a bit trickier because you need to specify the type arguments of `useRef<T>()` in the parent component and `forwardRef()<T, P>` wrapping the child component. Both of these functions are [generic function types]((https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types)).
+React `forwardRef()` in TypeScript is a bit trickier because you need to specify the type arguments of `useRef<T>()` in the parent component and `forwardRef()<T, P>` wrapping the child component. Both functions are [generic function types]((https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types)).
 
 `forwardRef<V, P>()` accepts 2 argument types:
 
 1. `V` is the type of the value stored in a ref, which is usually an `HTMLDivElement` or `HTMLInputElement`
-2. `P` is the prop type of the wrapped component 
+2. `P` is the props type of the wrapped component 
 
 `useRef<V>()` hook in TypeScript has one argument type `V`: denoting the value type stored in the ref. If you store DOM elements in the ref, `V` can be `HTMLDivElement` or `HTMLInputElement`.  
 
