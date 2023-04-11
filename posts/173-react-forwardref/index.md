@@ -54,7 +54,7 @@ export function Parent() {
 
 Open the [demo](https://codesandbox.io/s/competent-grass-89so21?file=/src/Parent.jsx) and you'll see the element logged to the console. 
 
-Ok, so what is the limitation of this approach? A problem arises when the element is not rendered directly in the body of the component, but rather in a child component. The described approach of using a ref does not work in this case. Let me show you why.  
+Ok, so what is the limitation of this approach? A problem arises when the element is not rendered directly in the body of the component, but rather in a child component.  
 
 Let's modify the previous example by extracting the `<div>Hello, World!</div>` into a child component `<Child>`. Also, let's create a prop `ref` on `<Child>`, to which `<Parent>` assigns `elementRef`:
 
@@ -92,11 +92,9 @@ Now is the right moment to introduce `forwardRef()`.
 
 `forwardRef()` is a [higher-order component](https://dev.to/nibble/higher-order-components-in-react-4c7h) that wraps a React component. The wrapped component works the same way as the original component but also receives as *the second parameter a `ref`: the forwarded ref from the parent component*.  
 
-Assigning the forwarded `ref` in the wrapped component to a tag `<div ref={ref} />` links the DOM element to `parentRef` in the parent component.  
-
 ![React forwardRef()](./diagrams/forwardref.svg)
 
-Let's wrap `<Child>` component into  `forwardRef()` with the goal to connect `<Parent>`'s `elementRef` with `<div>Hello, World!</div>`:
+Let's wrap `<Child>` component into  `forwardRef()` with the goal to connect parent's `elementRef` with child's `<div>Hello, World!</div>`:
 
 ```jsx
 import { useRef, useEffect, forwardRef } from 'react'
@@ -121,7 +119,7 @@ const Child = forwardRef(function(props, ref) {
 
 `<Parent>` component assigns `elementRef` to the child component ` <Child ref={elementRef} />`. Then, thanks to being wrapped into `forwardRef()`, `<Child>` component reads the ref from the second parameter and uses it on its element `<div ref={ref}>`.  
 
-After mounting `elementRef.current` in the parent component `<Parent>` *contains* the DOM element from `<Child>` component. Open the [demo](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/src/Parent.jsx): it works!
+After mounting `elementRef.current` in the parent component *contains* the DOM element from child component. Open the [demo](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/src/Parent.jsx): it works!
 
 ## 3. useImperativeHandle()
 
