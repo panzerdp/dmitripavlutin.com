@@ -2,7 +2,7 @@
 title: "React forwardRef(): How to Pass Refs to Child Components"
 description: "React forwardRef() is a tool for passing refs to child components. Discover how to use it with ease in this comprehensive tutorial."
 published: "2023-04-06"
-modified: "2023-04-10"
+modified: "2023-04-11"
 thumbnail: "./images/cover.jpg"
 slug: react-forwardref
 tags: ['react', 'ref']
@@ -90,7 +90,7 @@ Let's follow React's advice and see how `forwardRef()` can help.
 
 Now is the right moment to introduce `forwardRef()`.  
 
-`forwardRef()` is a [higher-order component](https://dev.to/nibble/higher-order-components-in-react-4c7h) that wraps a React component. The wrapped component works same way as the original component but also receives as *the second parameter a `ref`: the forwarded ref from the parent component*.  
+`forwardRef()` is a [higher-order component](https://dev.to/nibble/higher-order-components-in-react-4c7h) that wraps a React component. The wrapped component works the same way as the original component but also receives as *the second parameter a `ref`: the forwarded ref from the parent component*.  
 
 Assigning the forwarded `ref` in the wrapped component to a tag `<div ref={ref} />` connects the DOM element to `parentRef` in the parent component.  
 
@@ -290,13 +290,13 @@ const Child = forwardRef(function({ show }, ref) {
 
 `Child` component renders `<div ref={ref}>Hello, World!</div>` under a condition. Initially `show` prop is `true`, thus `elementRef` is `<div>Hello, World!</div>`.  
 
-Clicking "Toggle" button makes `show` as `false`. Which makes the ternary operator in `<Child>` render `null` &mdash; and not render the div element. Thus `elementRef` in the parent becomes `null`.  
+Clicking "Toggle" button makes `show` become `false`. Which makes the ternary operator in `<Child>` render `null` &mdash; and not render the div element. Thus `elementRef` in the parent becomes `null`.  
 
 ### 5.2 Pass ref as a prop
 
 In the [first section](#1-refs-in-child-components) I mentioned that if you assign to `ref` prop an actual ref, React will throw a warning `Warning: Function components cannot be given refs.`  
 
-But what if you try to use a custom property, for example `elementRef`, and pass the ref down to the child component using that custom property.  
+But what about using a custom property, for example, `elementRef`, and passing the ref down to the child component using the custom prop?  
 
 Let's take a look:
 
@@ -322,13 +322,17 @@ function Child({ elementRef }) {
 
 `<Parent>` component passes `elementRef` to `<Child elementRef={elementRef}>` using a custom prop `elementRef`. `<Child>` component then assigns `elementRef` prop to the tag: `<div ref={elementRef}>Hello, World!</div>`.
 
-What's your bet, does `elementRef` in the parent component access the DOM element from the child? Indee, it is!
+What's your bet, does `elementRef` in the parent component access the DOM element from the child? Indeed, it is!
 
 Then the big question is... why bother at all with using `forwardRef()`? You can just pass the ref using a prop!
 
+I don't recommend doing so, and here are 2 reasons.
+
 First, using `ref` attribute (instead of a custom prop like `elementRef`) is better because it keeps the ref *API consistent* between class-based, function-based, and HTML tags. 
 
-Second, props in React are [immutable](https://react.dev/learn/passing-props-to-a-component#recap). Passing the ref using a prop violates the props immutability rule, because the ref evantually will be assigned (aka mutated) with the DOM element.  
+Second, props in React are [immutable](https://react.dev/learn/passing-props-to-a-component#recap). Passing the ref using a prop violates the props immutability rule because the ref eventually is assigned (aka mutated) with the DOM element.   
+
+*Do you know other issues when passing ref using a custom prop? Write a comment below!*
 
 ### 5.3 Anonymous component
 
