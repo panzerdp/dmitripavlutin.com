@@ -292,7 +292,45 @@ const Child = forwardRef(function({ show }, ref) {
 
 Clicking "Toggle" button makes `show` as `false`. Which makes the ternary operator in `<Child>` render `null` &mdash; and not render the div element. Thus `elementRef` in the parent becomes `null`.  
 
-### 5.2 Anonymous component
+### 5.2 Pass ref as a prop
+
+In the [first section](#1-refs-in-child-components) I mentioned that if you assign to `ref` prop an actual ref, React will throw a warning `Warning: Function components cannot be given refs.`  
+
+But what if you try to use a custom property, for example `elementRef`, and pass the ref down to the child component using that custom property.  
+
+Let's take a look:
+
+```jsx {10,13}
+import { useRef, useEffect } from "react"
+
+export function Parent() {
+  const elementRef = useRef()
+
+  useEffect(() => {
+    // Works!
+    console.log(elementRef.current); // logs <div>Hello, World!</div>
+  }, [])
+
+  return <Child elementRef={elementRef} />
+}
+
+function Child({ elementRef }) {
+  return <div ref={elementRef}>Hello, World!</div>
+}
+```
+[Open the demo.](https://codesandbox.io/s/react-ref-custom-prop-wf8t45?file=/src/Parent.jsx)
+
+`<Parent>` component passes `elementRef` to `<Child elementRef={elementRef}>` using a custom prop `elementRef`. `<Child>` component then assigns `elementRef` prop to the tag: `<div ref={elementRef}>Hello, World!</div>`.
+
+What's your bet, does `elementRef` in the parent component access the DOM element from the child? Indee, it is!
+
+Then the big question is... why bother at all with using `forwardRef()`? You can just pass the ref using a prop!
+
+First, using `ref` attribute (instead of a custom prop like `elementRef`) is better because it keeps the ref *API consistent* between class-based, function-based, and HTML tags. 
+
+Second, props in React are [immutable](https://react.dev/learn/passing-props-to-a-component#recap). Passing the ref using a prop violates the props immutability rule, because the ref evantually will be assigned (aka mutated) with the DOM element.  
+
+### 5.3 Anonymous component
 
 An anonymous function doesn't have a name near `function` keyword. 
 
@@ -332,7 +370,7 @@ With the proper names of components debugging the application is much easier.
 
 ## 6. forwardRef() in TypeScript
 
-Using `forwardRef()` in TypeScript is a bit trickier because you have to indicate the type arguments of `useRef<T>()` in the parent component and `forwardRef()<T, P>` wrapping the child component. Both functions are [generic function types]((https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types)).
+React `forwardRef()` in TypeScript is a bit trickier because you have to indicate the type arguments of `useRef<T>()` in the parent component and `forwardRef()<T, P>` wrapping the child component. Both functions are [generic function types]((https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types)).
 
 `forwardRef<V, P>()` accepts 2 argument types:
 
