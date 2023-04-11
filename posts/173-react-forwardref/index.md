@@ -296,7 +296,7 @@ The child component renders `<div ref={ref}>Hello, World!</div>` under a conditi
 
 Clicking "Toggle" button makes `show` become `false`. This makes the ternary operator in `<Child>` render `null` &mdash; and not render the div element. Thus `elementRef` in the parent becomes `null`.  
 
-### 5.2 Pass ref as a prop
+### 5.2 Pass ref using a prop
 
 In the [first section](#1-refs-in-child-components) I mentioned that if you assign to `ref` prop an actual ref, React will throw a warning `Warning: Function components cannot be given refs.`  
 
