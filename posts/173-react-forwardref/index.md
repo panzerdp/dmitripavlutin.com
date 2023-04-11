@@ -13,7 +13,7 @@ To access a DOM element rendered in the component's body you can [use](/react-us
 
 But what if you need to access a DOM element of a child component? Then a simple ref is not enough and you have to combine refs with `React.forwardRef()`: a technique called *refs forwarding*.  
 
-Also, `useImperativeHandle()` is a hook that extends the capabilities of `forwardRef()` by giving the parent component access to more goodies like multiple refs or imperative methods of a child component. 
+Also, `useImperativeHandle()` is a hook that extends the capabilities of `forwardRef()` by giving the parent component access to more goodies like imperative methods of a child component. 
 
 Let's see how it works.  
 
@@ -48,9 +48,9 @@ export function Parent() {
 
 [Open the demo.](https://codesandbox.io/s/competent-grass-89so21?file=/src/Parent.jsx)
 
-`const elementRef = useRef()` creates a [ref](/react-useref/). Then `elementRef` is assigned to the `ref` attribute of the tag which element you want to access: `<div ref="elementRef">`.  
+`const elementRef = useRef()` creates a [ref](/react-useref/). Then `elementRef` is assigned to the `ref` attribute of the tag: `<div ref="elementRef">`.  
 
-`elementRef` after mounting will contain the DOM element instance. `useEffect()` hook with an empty array as a dependency [detects](/react-useeffect-explanation/#31-component-did-mount) when the component mounts.  
+`elementRef` after mounting will contain the DOM element instance (`useEffect()` hook with an empty array as deps [detects](/react-useeffect-explanation/#31-component-did-mount) when the component mounts).  
 
 Open the [demo](https://codesandbox.io/s/competent-grass-89so21?file=/src/Parent.jsx) and you'll see the element logged to the console. 
 
@@ -78,7 +78,9 @@ function Child({ ref }) { // a new component
 ```
 [Open the demo.](https://codesandbox.io/s/react-ref-dom-child-zztlg5?file=/src/Parent.jsx)
 
-Is this code working? Open the [demo](https://codesandbox.io/s/react-ref-dom-child-zztlg5?file=/src/Parent.jsx) and you'll see that after mounting `elementRef.current` contains `undefined`. `<Parent>` couldn't access the DOM element from the child component. 
+Is this code working? Open the [demo](https://codesandbox.io/s/react-ref-dom-child-zztlg5?file=/src/Parent.jsx) and you'll see that after mounting `elementRef.current` contains `undefined`. 
+
+`<Parent>` couldn't access the DOM element from the child component. 
 
 ![React ref as prop does not work](./diagrams/ref-prop.svg)
 
@@ -94,7 +96,7 @@ Now is the right moment to introduce `forwardRef()`.
 
 ![React forwardRef()](./diagrams/forwardref.svg)
 
-Let's wrap `<Child>` component into  `forwardRef()` with the goal to connect parent's `elementRef` with child's `<div>Hello, World!</div>`:
+Let's wrap the child component into  `forwardRef()` with the goal to connect parent's `elementRef` with child's `<div>Hello, World!</div>`:
 
 ```jsx
 import { useRef, useEffect, forwardRef } from 'react'
@@ -117,9 +119,11 @@ const Child = forwardRef(function(props, ref) {
 
 [Open the demo.](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/src/Parent.jsx)
 
-`<Parent>` component assigns `elementRef` to the child component ` <Child ref={elementRef} />`. Then, thanks to being wrapped into `forwardRef()`, `<Child>` component reads the ref from the second parameter and uses it on its element `<div ref={ref}>`.  
+The parent component assigns `elementRef` to the child component `<Child ref={elementRef} />`. Then, thanks to being wrapped into `forwardRef()`, the child component gets the ref from the second parameter and uses it on its element `<div ref={ref}>`.  
 
 After mounting `elementRef.current` in the parent component *contains* the DOM element from child component. Open the [demo](https://codesandbox.io/s/react-ref-dom-forwardref-kyuklk?file=/src/Parent.jsx): it works!
+
+That's the purpose of `forwardRef()`: give the parent component access to DOM elements in the child component.  
 
 ## 3. useImperativeHandle()
 
@@ -143,9 +147,9 @@ const MyComponent = forwardRef(function(props, ref) {
 }
 ```
 
-`useImperativeHandle(ref, getRefValue, deps)` accepts 3 arguments: the forwarded `ref`, the function that returns the ref value, and the dependencies array.  
+`useImperativeHandle(ref, getRefValue, deps)` is built-in React hook that accepts 3 arguments: the forwarded `ref`, the function that returns the new ref value, and the dependencies array.  
 
-The value returned by `getRefValue()` function becomes the value of the forwarded ref. That's the main benefit of `useImperativeHandle()`: you can customize the forwarded ref value with whatever you want.  
+The value returned of `getRefValue()` function becomes the value of the forwarded ref. That's the main benefit of `useImperativeHandle()`: you can customize the forwarded ref value with whatever you want.  
 
 ![React forwardRef() and useImperactiveHandle()](./diagrams/useimperativehandle.svg)
 
@@ -218,7 +222,9 @@ const GrandChild = forwardRef(function (props, ref) {
 ```
 [Open the demo.](https://codesandbox.io/s/react-useimperativehandle-forked-0jzpnw?file=/src/Parent.jsx)
 
-`elementRef` is forwarded to `<Child>`, which then forwards the ref to `<GrandChild>`, which finally connects the ref to `<div>Deep!</div>`.  
+`elementRef` is forwarded to the child component, which then forwards the same ref to the grandchild, which finally connects the ref to `<div ref={ref}>Deep!</div>`.  
+
+Using 2 forwards the parent component `elementRef` gets access to `<div ref={ref}>Deep!</div>` in the grandchild.  
 
 ![React deep forwardRef()](./diagrams/deep-forwardref.svg)
 
@@ -230,7 +236,7 @@ As a side note, try to keep the forwarding to a minimum to avoid increasing the 
 
 If the forwarded ref is unexpectedly `undefined` or `null`, there are usually 2 reasons.  
 
-First, you may have *forgotten to assign the forwarded ref to the `ref` attribute* in the component wrapped in `forwardRef()`:
+First, you may have *forgotten to assign the forwarded ref to `ref` attribute of the HTML tag*:
 
 ```jsx{6,13}
 import { useRef, useEffect, forwardRef } from 'react'
@@ -251,7 +257,7 @@ const Child = forwardRef(function(props, ref) {
 ```
 [Open the demo.](https://codesandbox.io/s/react-ref-dom-undefined-ebmzyl?file=/src/Parent.jsx)
 
-`elementRef` in the example above is `undefined` because the forwarded ref isn't assigned to `ref` attribute of `<div>Hello, World!</div>` inside of `<Child />` component.
+`elementRef` in the example above is `undefined` because the forwarded ref isn't assigned to `ref` attribute of `<div>Hello, World!</div>` inside the child component.
 
 To fix the problem just assign correctly the ref: `<div ref={ref}>Hello, World!</div>`.
 
@@ -286,7 +292,7 @@ const Child = forwardRef(function({ show }, ref) {
 ```
 [Open the demo.](https://codesandbox.io/s/react-ref-dom-condition-e1yi3m?file=/src/Parent.jsx)
 
-`Child` component renders `<div ref={ref}>Hello, World!</div>` under a condition. Initially `show` prop is `true`, thus `elementRef` is `<div>Hello, World!</div>`.  
+The child component renders `<div ref={ref}>Hello, World!</div>` under a condition. Initially `show` prop is `true`, thus `elementRef` is `<div>Hello, World!</div>`.  
 
 Clicking "Toggle" button makes `show` become `false`. This makes the ternary operator in `<Child>` render `null` &mdash; and not render the div element. Thus `elementRef` in the parent becomes `null`.  
 
@@ -294,7 +300,7 @@ Clicking "Toggle" button makes `show` become `false`. This makes the ternary ope
 
 In the [first section](#1-refs-in-child-components) I mentioned that if you assign to `ref` prop an actual ref, React will throw a warning `Warning: Function components cannot be given refs.`  
 
-But what about using a custom property, for example, `elementRef`, and passing the ref down to the child component using the custom prop?  
+But what about using a custom prop, for example, `elementRef`, and passing the ref down to the child component using the custom prop?  
 
 Let's take a look:
 
@@ -318,17 +324,19 @@ function Child({ elementRef }) {
 ```
 [Open the demo.](https://codesandbox.io/s/react-ref-custom-prop-wf8t45?file=/src/Parent.jsx)
 
-`<Parent>` component passes `elementRef` to `<Child elementRef={elementRef}>` using a custom prop `elementRef`. `<Child>` component then assigns `elementRef` prop to the tag: `<div ref={elementRef}>Hello, World!</div>`.
+The parent component passes `elementRef` to `<Child elementRef={elementRef}>` using a custom prop `elementRef`. The child component then assigns `elementRef` prop to the tag: `<div ref={elementRef}>Hello, World!</div>`.
 
-What's your bet, does `elementRef` in the parent component access the DOM element of the child? Indeed, it does!
+What's your bet, does `elementRef` in the parent component access the DOM element of the child? 
 
-Then the big question is... why bother with using `forwardRef()` at all? You can just pass the ref using a prop!
+Indeed, it does!
+
+Then the big question is... why bother with using `forwardRef()`? You can just pass the ref using a prop!
 
 I don't recommend doing so, and here are 2 reasons.
 
 First, using `ref` attribute (instead of a custom prop like `elementRef`) is better because it keeps the ref *API consistent* between class-based, function-based, and HTML tags. 
 
-Second, props are [immutable](https://react.dev/learn/passing-props-to-a-component#recap) in React. Passing the ref using a prop violates the props immutability rule because the ref eventually is assigned (aka mutated) to the DOM element.   
+Second, props are [immutable](https://react.dev/learn/passing-props-to-a-component#recap) in React. Passing the ref using a prop violates the props immutability because the ref eventually is assigned (aka mutated) with the DOM element.   
 
 *Do you know other issues when passing ref using a custom prop? Write a comment below!*
 
@@ -381,7 +389,7 @@ React `forwardRef()` in TypeScript is a bit trickier because you need to specify
 
 `useRef<V>()` hook in TypeScript has one argument type `V`: denoting the value type stored in the ref. If you store DOM elements in the ref, `V` can be `HTMLDivElement` or `HTMLInputElement`.  
 
-Now let's annotate the `<Parent>` and `<Child>` components:
+Now let's annotate the parent and child components:
 
 ```tsx
 import { useRef, forwardRef } from "react"
@@ -406,7 +414,7 @@ Finally, when wrapping the child component `forwardRef<HTMLDivElement>(...)` spe
 
 ## 7. Conclusion
 
-Before ending the post, I advise you to keep the use refs to a minimum. Here's why.    
+Before ending the post, I advise you to keep the use refs to a minimum. 
 
 React is the library which goal is to abstract you from DOM manipulation, cross-browser compatibility, and DOM manipulation performance. React gives you wonderful components, props, state, hooks, and context abstractions to free you from dealing with DOM and browser-specific details.  
 
@@ -414,9 +422,11 @@ If you choose to use refs to access DOM, including with the help of `forwardRef(
 
 Consider using a React abstraction to achieve your goal before using a ref to access DOM. Of course, this isn't always possible, and you have to get your hands dirty from time to time.
 
-Accessing a DOM element instance is relatively easy when the element is rendered directly in the body of the component. Just assign the ref to the tag: `<div ref={elementRef} />`.  
+Ok. 
 
-Things get trickier when the element you need to access is rendered inside of a child component. In this case, you have to wrap the child component into the built-in React function `forwardRef()`:
+In conclusion, accessing a DOM element instance is relatively easy when the element is rendered directly in the body of the component. Just assign the ref to the tag: `<div ref={elementRef} />`.  
+
+Things get trickier when the element is rendered inside of a child component. In this case, you have to wrap the child component into the built-in React function `forwardRef()`:
 
 ```jsx
 import { forwardRef } from 'react'
@@ -432,6 +442,6 @@ const Child = forwardRef(function(props, ref) {
 })
 ```
 
-`Parent` component safely assigns `elementRef` to the child component `<Child ref={elementRef} />`. After mounting, `elementRef` contains the DOM element instance of the child component.  
+The parent component safely assigns `elementRef` to the child component `<Child ref={elementRef} />`. After mounting, `elementRef` contains the DOM element instance of the child component.  
 
 *Do you think React should support refs forwarding natively, without the use of `forwardRef()`?*
