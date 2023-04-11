@@ -33,6 +33,3 @@ export const pageQuery = graphql`
   }
 `;
 ```
-
-- You can get `id` in settings of your list.
-- You can can your API key in account setting of your mailchimp account.
