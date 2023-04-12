@@ -9,9 +9,9 @@ tags: ['javascript', 'enum']
 type: post
 ---
 
-Certain data types (like strings) can have an infinite number of potential values , while others a resticted to a finite set of possible values.  
+Certain data types like strings have an infinite number of potential values , while others are resticted to a finite set.  
 
-The days of the week (Monday, Tuesday, ..., Sunday), seasons of the year (winter, spring, summer, autumn), cardinal directions (north, east, south, west) are examples of sets having finite values.  
+The days of the week (Monday, Tuesday, ..., Sunday), seasons of the year (winter, spring, summer, autumn), cardinal directions (north, east, south, west) are examples of sets with finite values.  
 
 Using an enum is convinient if a variable has a value from a finite set of pre-defined values. The enum saves you from magic numbers and strings, which are considered an [antipattern](https://stackoverflow.com/questions/47882/what-is-a-magic-number-and-why-is-it-bad).    
 
@@ -61,13 +61,12 @@ console.log(size1 === size2); // logs false
 
 `Sizes.Medium` enum value was changed by accident. The plain object implementation cannot protect these accidental changes.  
 
-A good way to protect the enum object from modifications is to freeze it. When an object is frozen, you cannot modify its properties but all the properties stay the same, including their values.   
+A good way to protect the enum object from modifications is to freeze it. When an object is frozen you cannot modify or add new properties to the object. In other words, the object becomes readonly.  
 
 In JavaScript [Object.freeze()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) utility function freezes an object. Let's freeze the sizes enum object:
 
 ```javascript
 const Sizes = Object.freeze({
-  const Sizes = {
   Small: 'Small',
   Medium: 'Medium',
   Large: 'Large',
