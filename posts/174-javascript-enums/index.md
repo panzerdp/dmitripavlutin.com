@@ -9,17 +9,19 @@ tags: ['javascript', 'enum']
 type: post
 ---
 
-Certain data types like strings have an infinite number of potential values , while others are resticted to a finite set.  
+Certain data types like strings have an infinite number of potential values , while others are restricted to a finite set.  
 
 The days of the week (Monday, Tuesday, ..., Sunday), seasons of the year (winter, spring, summer, autumn), cardinal directions (north, east, south, west) are examples of sets with finite values.  
 
 Using an enum is convinient if a variable has a value from a finite set of pre-defined values. The enum saves you from magic numbers and strings, which are considered an [antipattern](https://stackoverflow.com/questions/47882/what-is-a-magic-number-and-why-is-it-bad).    
 
-Let's see the 3 good ways to create enums in JavaScript, with their pros and cons.    
+Let's see the 3 good ways to create enums in JavaScript (with their pros and cons).  
+
+<TableOfContents maxLevel={1} />
 
 <Affiliate type="traversyJavaScript" />
 
-## 1. A basic enum
+## 1. Plain object enum
 
 An enum is a data structure that defines a finite set of values and provides access to a specific value by its name.  
 
@@ -37,12 +39,11 @@ const Sizes = {
 const mySize = Sizes.Medium
 
 console.log(mySize === Sizes.Medium) // logs true
-console.log(mySize === Sizes.Large)  // logs false
 ```
 
 `Sizes` is an enum based on a plain JavaScript object. Accessing an enum value is done using the property accessor: `Sizes.Medium`.  
 
-## 2. Enum based on Object.freeze()
+### 1.1 Plain object enum is mutable
 
 An issue with the enum implementation based on a plain JavaScript is that the enum can be easily modified. In a large codebase, somebody might accidently modify the enum object, and this will affect the entire runtime of the application.  
 
@@ -56,10 +57,14 @@ const Sizes = {
 const size1 = Sizes.Medium
 const size2 = Sizes.Medium = 'foo' // Changed!
 
-console.log(size1 === size2); // logs false
+console.log(size1 === size2) // logs false
 ```
 
 `Sizes.Medium` enum value was changed by accident. The plain object implementation cannot protect these accidental changes.  
+
+Let's look further into how you could freeze the objects to avoid accidental changes.  
+
+## 2. Enum based on Object.freeze()
 
 A good way to protect the enum object from modifications is to freeze it. When an object is frozen you cannot modify or add new properties to the object. In other words, the object becomes readonly.  
 
@@ -75,10 +80,31 @@ const Sizes = Object.freeze({
 const mySize = Sizes.Medium
 
 console.log(mySize === Sizes.Medium) // logs true
-console.log(mySize === Sizes.Large)  // logs false
 ```
 
+`const Sizes = Object.freeze({ ... })` creates a frozen object. Even being frozen, you can freely access the enum values: `const mySize = Sizes.Medium`.  
 
+In case if you accidently modify a property in a frozen object, JavaScript throws an error.  
+
+```javascript
+const Sizes = Object.freeze({
+  Small: 'Small',
+  Medium: 'Medium',
+  Large: 'Large',
+})
+
+const size1 = Sizes.Medium
+const size2 = Sizes.Medium = 'foo' // throws TypeError
+```
+
+The statement `const size2 = Sizes.Medium = 'foo'` makes an accidental assignment to `Sizes.Medium` property. 
+
+Because `Sizes` is a frozen object, JavaScript throws (in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)):
+```
+TypeError: Cannot assign to read only property 'Medium' of object <Object>
+```
+
+The enum is now protected from accidential changes.  
 
 ## 3. Enum based on a class
 
