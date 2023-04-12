@@ -202,7 +202,7 @@ const sumAsync: SumAsync = async function (a, b) {
 
 ## 3. TypeScript method type
 
-A [method](/javascript-method/) is a function that exists and is executed in the context of an object. Method types in TypeScript have to exist within of the object type.  
+A [method](/javascript-method/) is a function that exists and is executed in the context of an object. Method types in TypeScript have to exist within the object type.  
 
 You can define methods on [interfaces](https://www.typescriptlang.org/docs/handbook/2/objects.html): 
 
