@@ -17,11 +17,11 @@ Using an enum is convinient if a variable has a value from a finite set of pre-d
 
 Let's see the 3 good ways to create enums in JavaScript (with their pros and cons).  
 
-<TableOfContents maxLevel={1} />
-
 <Affiliate type="traversyJavaScript" />
 
-## 1. Plain object enum
+<TableOfContents maxLevel={1} />
+
+## 1. Enum based on plan object
 
 An enum is a data structure that defines a finite set of values and provides access to a specific value by its name.  
 
@@ -31,9 +31,9 @@ A simple way (yet not the most optimal, see the approaches below) to create an e
 
 ```javascript
 const Sizes = {
-  Small: 'Small',
-  Medium: 'Medium',
-  Large: 'Large',
+  Small: 'small',
+  Medium: 'medium',
+  Large: 'large',
 }
 
 const mySize = Sizes.Medium
@@ -43,7 +43,73 @@ console.log(mySize === Sizes.Medium) // logs true
 
 `Sizes` is an enum based on a plain JavaScript object. Accessing an enum value is done using the property accessor: `Sizes.Medium`.  
 
-### 1.1 Plain object enum is mutable
+The value of an enum can be a number:
+
+```javascript
+const Sizes = {
+  Small: 0,
+  Medium: 1,
+  Large: 3
+}
+
+const mySize = Sized.Medium
+
+console.log(mySize === Sizes.Medium) // logs true
+```
+
+Or even a symbol type:
+
+```javascript
+const Sizes = {
+  Small: Symbol('small'),
+  Medium: Symbol('medium'),
+  Large: Symbol('large')
+}
+
+const str = JSON.strigify({ size: Sizes.Small })
+
+console.log(str) // logs true
+```
+
+The benefit of using a symbol is that each symbol is unique. Thus you always have to compare enums using the enum itself:
+
+```javascript
+const Sizes = {
+  Small: Symbol('small'),
+  Medium: Symbol('medium'),
+  Large: Symbol('large')
+}
+
+const mySize = Sized.Medium
+
+console.log(mySize === Sizes.Medium)     // logs true
+console.log(mySize === Symbol('medium')) // logs false
+```
+
+The downside of using symbols is that `JSON.stringify()` stringifies symbols to either `null`, `undefined`, or skips the property having symbol value:
+
+```javascript
+const Sizes = {
+  Small: Symbol('small'),
+  Medium: Symbol('medium'),
+  Large: Symbol('large')
+}
+
+const str1 = JSON.strigify(Sizes.Small)
+console.log(str1) // logs undefined
+
+const str2 = JSON.stringify([Sizes.Small])
+console.log(str2) // logs '[null]'
+
+const str3 = JSON.stringify({ size: Sizes.Small })
+console.log(str3) // logs '{}'
+```
+
+In the following code examples and implementations I will use strings as value. But you are free to use the value type that you need. 
+
+If you don't have restrictions on the enum value type, just go with the strings. The strings are more debuggable compared to numbers or symbols.  
+
+### 1.1 Pros and cons
 
 An issue with the enum implementation based on a plain JavaScript is that the enum can be easily modified. In a large codebase, somebody might accidently modify the enum object, and this will affect the entire runtime of the application.  
 
@@ -99,7 +165,8 @@ const size2 = Sizes.Medium = 'foo' // throws TypeError
 
 The statement `const size2 = Sizes.Medium = 'foo'` makes an accidental assignment to `Sizes.Medium` property. 
 
-Because `Sizes` is a frozen object, JavaScript throws (in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)):
+Because `Sizes` is a frozen object, JavaScript throws (in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)) the error:
+
 ```
 TypeError: Cannot assign to read only property 'Medium' of object <Object>
 ```
