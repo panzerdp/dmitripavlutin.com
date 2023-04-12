@@ -117,7 +117,7 @@ describe('<SubscriptionForm>', () => {
         emailInput.value = email
         await subscribe()
 
-        expect(await screen.findByText('Thank you! Visit your inbox and confirm the email address to activate the subscription.')).toBeInTheDocument()
+        expect(await screen.findByText('Thank you! Check your inbox and confirm the email address to activate the subscription.')).toBeInTheDocument()
       })
 
       describe('when the email address ends @gmail.com', () => {
