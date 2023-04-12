@@ -9,9 +9,9 @@ tags: ['typescript', 'function']
 type: post
 ---
 
-Functions are the small pieces of logic that together form applications. If you write applications in TypeScript, knowing function types is a must. 
+Functions are the small pieces of logic that together form applications. If you write applications in TypeScript, understanding function types is a must. 
 
-This guide covers everything you need to know to start using TypeScript function types.  
+This guide covers everything you need to know to get started with TypeScript function types.  
 
 <TableOfContents maxLevel={1} />
 
@@ -19,7 +19,7 @@ This guide covers everything you need to know to start using TypeScript function
 
 Functions in JavaScript/TypeScript are [first-class objects](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function). You can assign functions to variables, use functions as arguments to other functions, and even return functions.  
 
-Knowing how to type functions in TypeScript is a must if you want to pass around functions as objects.  
+Knowing how to type functions in TypeScript is a must if you want to pass functions around as objects.  
 
 Let's start with a simple case: a function that sums 2 numbers.  
 
@@ -32,9 +32,9 @@ function sum(a, b) {
 }
 ```
 
-`sum()` is a function returning the sum of parameters `a` and `b`.  
+`sum()` is a function that returns the sum of the parameters `a` and `b`.  
 
-In plain JavaScript, you know that `a` and `b` parameters have to be numbers, and the returned value also has to be a number.  
+In plain JavaScript, you know that the parameters `a` and `b` must be numbers, and the returned value must also be a number.  
 
 ```javascript
 // JavaScript
@@ -45,20 +45,20 @@ function sum(a, b) {
 console.log(sum(4, 3)); // logs 7
 ```
 
-In the above examples the arguments `4` and `3`, as well the returned value `7` are all *numbers*.  
+In the example above the arguments `4` and `3`, as well as the returned value `7` are all *numbers*.  
 
-Having the information about parameter and return types, you can easily translate that into a *TypeScript function type* of the `sum()`:
+Now that you have the parameter and return type information, you can easily translate this into a *TypeScript function type* of the `sum()`:
 
 ```typescript
 // TypeScript function type
 (a: number, b: number) => number
 ```
 
-`(a: number, b: number)` is the part that indicates the parameters and their types. After the fat arrow indicate the return type: `=> number`. That's it.  
+`(a: number, b: number)` is the part that specifies the parameters and their types. After the fat arrow indicate the return type: `=> number`. That's it.  
 
 (Note: the function type looks similar to an [arrow function](/6-ways-to-declare-javascript-functions/#4-arrow-function). But they are different things.)
 
-Working with function types, because of their length, is more convenient by storing them into a [type alias](https://www.digitalocean.com/community/tutorials/typescript-type-alias#step-2-using-type-alias). An alias allows to reuse the type in multiple places:
+Because of their length, working with function types is more convenient if you store them into a [type alias](https://www.digitalocean.com/community/tutorials/typescript-type-alias#step-2-using-type-alias). An alias allows the type to be reused in multiple places:
 
 ```typescript
 // Sum is a type alias
@@ -71,8 +71,7 @@ Having the `Sum` type, you can use it to annotate any place where the function o
   ![TypeScript function type](./images/typescript-function-type-5.png)
 </ImgShadow>
 
-First, of course, you can assign the function to a variable:
-
+The first thing you can do, of course, is to assign the function to a variable:
 ```typescript
 type Sum = (a: number, b: number) => number
 
@@ -84,11 +83,11 @@ const sum2: Sum = function(a, b) { return a + b } // OK
 
 In the example above `sum1` and `sum2` are of type `Sum`. 
 
-`sum2` function doesn't have the parameter and return types indicated: all because TypeScript [infers](https://www.typescriptlang.org/docs/handbook/type-inference.html) these types from the `Sum`. 
+`sum2` function doesn't have the parameter and return types indicated: this is because TypeScript [infers](https://www.typescriptlang.org/docs/handbook/type-inference.html) these types from the `Sum`. 
 
-I recommend using type inference in your code to avoid repetition, e.g. annotate your functions as I did with `sum2` rather than `sum1`. In the examples that follow I'm going to use type inference.  
+I recommend using type inference in your code to avoid repetition, e.g. label your functions as I did with `sum2` instead of `sum1`. In the following examples I'm going to use type inference.  
 
-In case of an [higher-order function](/javascript-higher-order-functions/), you use the function object as an argument or even return it from another function:
+In case of a [higher-order function](/javascript-higher-order-functions/), you use the function object as an argument or even return it from another function:
 
 ```typescript{3,9}
 type Sum = (a: number, b: number) => number
@@ -109,7 +108,7 @@ someFunc2()(1, 2) // OK
 
 ## 2. TypeScript function type guide
 
-To help you understand better how to use the function types, let's see a couple of guiding ideas.  
+To help you better understand how to use the function types, let's look at some guiding ideas.  
 
 *1) Use `?` to indicate an optional parameter:*
 
@@ -127,7 +126,7 @@ sumOpt(2) // OK
 ```
 [Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWwPJmFAvFAFAQwFxQB2iARhAE4A0UJA-AcQmeQJQYB8RpFAUDwMYB7QgGc0IxCmAF4yVBigAzOIX7AAlsKgSEuaiTYBvHlCjrF2EhnSYVAEwiL1hCHaMnTUchGBxyhKBwPAF8Pb19-QKgAahoeUJ4dKSwAJjYAenSoJABpIA)
 
-`?b` in `SumOpt` function type is an optional parameter. The second argument can be omitted when invoking `sumOpt(2)`.  
+`b?` in `SumOpt` function type is an optional parameter. The second argument can be omitted when invoking `sumOpt(2)`.  
 
 *2) A rest parameter is typed using the three dots and an array type:*
 
@@ -165,7 +164,7 @@ const sumDiffParam: Sum = function(n1, n2) { return n1 + n2 } // OK
 ```
 [Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWygXigCgIYC4oDtEBGEATgDRQE74JHECUKAfHoSQFBsDGA9rgM7AofRABEAlgDMJABQzEMCHPCSoJcXJ2BjeaXAEZyuAEwMA3lGIRgcYrjx6oAajxGoAXygB6T1ADyAaSA)
 
-It's acceptable that the function type has the parameter names `a` and `b` but the function instance parameters `n1` and `n2`.  
+It's acceptable for the function type to have the parameter names `a` and `b`, but the function instance parameters `n1` and `n2`.  
 
 *5) The function instance can have fewer parameters than the function type:*
 
@@ -177,7 +176,7 @@ const sumShorter: Sum = function () { return 0 }  // OK
 ```
 [Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWygXigCgIYC4oDtEBGEATgDRQE74JHECUKAfHoSQFBsDGA9rgM7AofRDAAW3YsBzwkqAGZxcnYAEte6DAwDeUYhGBxiuKBigBfKAHpLUAPIBpLrwFCR4ySWmIUUBUtXqaNq6+obGAAzmUFY2DkA)
 
-`sumShort` and `sumShorter` have fewer parameters than the `Sum` type, still, they are `Sum` type.  
+`sumShort` and `sumShorter` have fewer parameters than the type `Sum`, but are still of type `Sum`.  
 
 However, the function instance cannot have more parameters than the function type:
 
@@ -203,7 +202,7 @@ const sumAsync: SumAsync = async function (a, b) {
 
 ## 3. TypeScript method type
 
-A [method](/javascript-method/) is a function that exists and is executed in the context of an object. Method types in TypeScript have to exist inside of the object type.  
+A [method](/javascript-method/) is a function that exists and is executed in the context of an object. Method types in TypeScript have to exist within of the object type.  
 
 You can define methods on [interfaces](https://www.typescriptlang.org/docs/handbook/2/objects.html): 
 
@@ -227,7 +226,7 @@ type ObjectWithMethod = {
 ![TypeScript Method Type](./images/typescript-method-type-2.png)
 </ImgShadow>
 
-Remember an important difference. The function type uses the fat arrow `=>` to separate the parameter list from the return type, while the method type uses the colon `:`.  
+Note an important difference. The function type uses the fat arrow `=>` to separate the parameter list from the return type, while the method type uses the colon `:`.  
 
 Let's look at a method type example:
 
@@ -257,9 +256,9 @@ interface ObjectWithMethod {
 
 ## 4. TypeScript function interface
 
-Another interesting way to write a function type is using a TypeScript function interface. It's also named function call signature (too scientific for me). 
+Another interesting way of writing a function type is to use a TypeScript function interface. It's also called function call signature (too scientific for me). 
 
-The function interface looks similar to an object interface with a method. But the function interface *doesn't have the method name written*:  
+The function interface looks a lot like to an object interface with a method. But the function interface *doesn't have the method name written*:  
 
 ```typescript
 interface SumInterface {
@@ -297,7 +296,7 @@ sum.description = 'A function that sums two numbers'
 ```
 [Open the demo.](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgMoFcC2B1YYAWAIhAM4JTAAOYwA9iMgN4BQyyAFHAFzIhYBG0ADTJ+PPpkFQAlOIHRWyACalyVGvR4kwFEAHNmAX2bME9bchJYeGHHiKqK1OgwC8yGOhAINITiP5pJkUoCDB0KAY4ZABqUSNmK0wAOhUyJ19kdwByAEEPLx8XZAI4MEssEhKAd1peeSgSbKA)
 
-`SumWithDescription` on top of being a function, also has a `description` property of type `string`.  
+`SumWithDescription`, in addition to being a function, also has a `description` property of type `string`.  
 
 <ImgShadow>
 ![TypeScript function interface](./images/typescript-function-interface-2.png)
@@ -305,15 +304,15 @@ sum.description = 'A function that sums two numbers'
 
 ## 5. Conclusion
 
-Writing a function type is pretty simple:
+Writing a function type is quite simple:
 
 ```typescript
 type Sum = (a: number, b: number) => number
 ```
 
-Indicate the parameter types in a pair of parentheses, put the fat arrow `=>`, and the return type.  
+Specify the parameter types in a pair of parentheses, put the fat arrow `=>`, and the return type.  
 
-In the case of methods, you have to define the method on an object type:
+For methods, you have to define the method on an object type:
 
 ```typescript
 interface ObjectWithMethod {
@@ -321,10 +320,10 @@ interface ObjectWithMethod {
 }
 ```
 
-Again, put the parameters into a pair of parentheses, then put a colon `:` and finally indicate the return type.  
+Again, put the parameters into a pair of parentheses, then a colon `:` and finally indicate the return type.  
 
-Now you should be ready to type functions in your TypeScript code.  
+Now you should be able to type functions in your TypeScript code.  
 
-How can you type a function that can be invoked in multiple ways? Follow the post [TypeScript Function Overloading](/typescript-function-overloading/) to find more information.  
+How can you type a function that can be invoked in multiple ways? Follow the [TypeScript Function Overloading](/typescript-function-overloading/) post for more information.  
 
-*Have any questions about function types? Write a comment and let's discuss!*
+*Have any questions about function types? Leave a comment and let's discuss!*
