@@ -304,7 +304,7 @@ sum.description = 'A function that sums two numbers'
 
 ## 5. Conclusion
 
-Writing a function type is quite simple:
+Writing a function type is simple:
 
 ```typescript
 type Sum = (a: number, b: number) => number
