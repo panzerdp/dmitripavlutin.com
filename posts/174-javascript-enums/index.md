@@ -177,12 +177,29 @@ The enum is now protected from accidential changes.
 
 ## 4. Enum based on a proxy
 
+You can also use a proxy.
+
 ## 5. Enum based on a class
 
 Another interesting way to create an enum is using a JavaScript class. 
 
 Each enum value is a  a [static field on the class](/javascript-classes-complete-guide/#33-public-static-fields).  
 
+```javascript
+class Sizes {
+  static Small = new Season('small')
+  static Medium = new Season('medium')
+  static Large = new Season('large')
+
+  constructor(value) {
+    this.value = value
+  }
+}
+
+const mySize = Sizes.Small
+
+console.log(mySize === Sizes.Small) // logs true
+```
 
 ## 6. Conclusion
 
