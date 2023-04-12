@@ -34,7 +34,7 @@ export function SubscriptionForm({ embedFormEndpoint }: SubscriptionFormProps) {
     content = (
       <div className={styles.subscriptionMessage}>
         <img className={styles.successIcon} src="/icons/check.svg" />
-        Thank you! Check your inbox and confirm the email address to activate the subscription.
+        Thank you! To activate the subscription, please check your inbox and confirm your email address.
       </div>
     )
   } else if (subscribedStatus === 'subscription_error') {
