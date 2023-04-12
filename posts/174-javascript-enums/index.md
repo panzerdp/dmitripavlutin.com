@@ -132,7 +132,7 @@ In the follo up code examples and implementations I will use strings as values o
 
 If you don't have restrictions on the enum value type, just go with the strings. The strings are more debuggable compared to numbers and symbols.  
 
-## 2. Enum based on Object.freeze()
+## 3. Enum based on Object.freeze()
 
 A good way to protect the enum object from modifications is to freeze it. When an object is frozen you cannot modify or add new properties to the object. In other words, the object becomes readonly.  
 
@@ -175,11 +175,14 @@ TypeError: Cannot assign to read only property 'Medium' of object <Object>
 
 The enum is now protected from accidential changes.  
 
-## 3. Enum based on a class
-
 ## 4. Enum based on a proxy
 
-## 5. Values of enum
+## 5. Enum based on a class
+
+Another interesting way to create an enum is using a JavaScript class. 
+
+Each enum value is a  a [static field on the class](/javascript-classes-complete-guide/#33-public-static-fields).  
+
 
 ## 6. Conclusion
 
