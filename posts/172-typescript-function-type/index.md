@@ -176,7 +176,7 @@ const sumShorter: Sum = function () { return 0 }  // OK
 ```
 [Open the demo.](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrgWygXigCgIYC4oDtEBGEATgDRQE74JHECUKAfHoSQFBsDGA9rgM7AofRDAAW3YsBzwkqAGZxcnYAEte6DAwDeUYhGBxiuKBigBfKAHpLUAPIBpLrwFCR4ySWmIUUBUtXqaNq6+obGAAzmUFY2DkA)
 
-`sumShort` and `sumShorter` have fewer parameters than the type `Sum`, but are still of type `Sum`.  
+`sumShort` and `sumShorter` have fewer parameters than the type `Sum` but are still of type `Sum`.  
 
 However, the function instance cannot have more parameters than the function type:
 
