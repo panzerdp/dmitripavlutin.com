@@ -117,7 +117,17 @@ describe('<SubscriptionForm>', () => {
         emailInput.value = email
         await subscribe()
 
-        expect(await screen.findByText('Subscribed! Check your inbox to confirm the email address.')).toBeInTheDocument()
+        expect(await screen.findByText('Thank you! Visit your inbox and confirm the email address to activate the subscription.')).toBeInTheDocument()
+      })
+
+      describe('when the email address ends @gmail.com', () => {
+        it('should link to gmail.com', async () => {
+          const { emailInput, subscribe } = factory()
+          const email = 'user@mail.com'
+
+          emailInput.value = email
+          await subscribe()
+        })
       })
     })
 
