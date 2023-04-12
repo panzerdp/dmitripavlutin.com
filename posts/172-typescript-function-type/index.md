@@ -258,7 +258,7 @@ interface ObjectWithMethod {
 
 Another interesting way of writing a function type is to use a TypeScript function interface. It's also called function call signature (too scientific for me). 
 
-The function interface looks a lot like to an object interface with a method. But the function interface *doesn't have the method name written*:  
+The function interface looks similar to an object interface with a method. But the function interface *doesn't have the method name written*:  
 
 ```typescript
 interface SumInterface {
