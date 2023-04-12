@@ -43,73 +43,7 @@ console.log(mySize === Sizes.Medium) // logs true
 
 `Sizes` is an enum based on a plain JavaScript object. Accessing an enum value is done using the property accessor: `Sizes.Medium`.  
 
-The value of an enum can be a number:
-
-```javascript
-const Sizes = {
-  Small: 0,
-  Medium: 1,
-  Large: 3
-}
-
-const mySize = Sized.Medium
-
-console.log(mySize === Sizes.Medium) // logs true
-```
-
-Or even a symbol type:
-
-```javascript
-const Sizes = {
-  Small: Symbol('small'),
-  Medium: Symbol('medium'),
-  Large: Symbol('large')
-}
-
-const str = JSON.strigify({ size: Sizes.Small })
-
-console.log(str) // logs true
-```
-
-The benefit of using a symbol is that each symbol is unique. Thus you always have to compare enums using the enum itself:
-
-```javascript
-const Sizes = {
-  Small: Symbol('small'),
-  Medium: Symbol('medium'),
-  Large: Symbol('large')
-}
-
-const mySize = Sized.Medium
-
-console.log(mySize === Sizes.Medium)     // logs true
-console.log(mySize === Symbol('medium')) // logs false
-```
-
-The downside of using symbols is that `JSON.stringify()` stringifies symbols to either `null`, `undefined`, or skips the property having symbol value:
-
-```javascript
-const Sizes = {
-  Small: Symbol('small'),
-  Medium: Symbol('medium'),
-  Large: Symbol('large')
-}
-
-const str1 = JSON.strigify(Sizes.Small)
-console.log(str1) // logs undefined
-
-const str2 = JSON.stringify([Sizes.Small])
-console.log(str2) // logs '[null]'
-
-const str3 = JSON.stringify({ size: Sizes.Small })
-console.log(str3) // logs '{}'
-```
-
-In the following code examples and implementations I will use strings as value. But you are free to use the value type that you need. 
-
-If you don't have restrictions on the enum value type, just go with the strings. The strings are more debuggable compared to numbers or symbols.  
-
-### 1.1 Pros and cons
+A pros of using an plain object enum is its simplicity: just define an object with keys and values, and the enum is ready.  
 
 An issue with the enum implementation based on a plain JavaScript is that the enum can be easily modified. In a large codebase, somebody might accidently modify the enum object, and this will affect the entire runtime of the application.  
 
@@ -128,7 +62,75 @@ console.log(size1 === size2) // logs false
 
 `Sizes.Medium` enum value was changed by accident. The plain object implementation cannot protect these accidental changes.  
 
-Let's look further into how you could freeze the objects to avoid accidental changes.  
+Let's look further into value types exploration, and then how to freeze the enum object to avoid accidental changes.  
+
+## 2. Enum value types
+
+Alongside the string type, the value of an enum can be a number:
+
+```javascript
+const Sizes = {
+  Small: 0,
+  Medium: 1,
+  Large: 3
+}
+
+const mySize = Sized.Medium
+
+console.log(mySize === Sizes.Medium) // logs true
+```
+
+Or even a symbol:
+
+```javascript
+const Sizes = {
+  Small: Symbol('small'),
+  Medium: Symbol('medium'),
+  Large: Symbol('large')
+}
+
+const str = JSON.strigify({ size: Sizes.Small })
+
+console.log(str) // logs true
+```
+
+The benefit of using a symbol is that [each symbol is unique](https://javascript.info/symbol#symbols). Thus you always have to compare enums using the enum itself:
+
+```javascript
+const Sizes = {
+  Small: Symbol('small'),
+  Medium: Symbol('medium'),
+  Large: Symbol('large')
+}
+
+const mySize = Sized.Medium
+
+console.log(mySize === Sizes.Medium)     // logs true
+console.log(mySize === Symbol('medium')) // logs false
+```
+
+The downside of using symbols is that `JSON.stringify()` stringifies symbols to either `null`, `undefined`, or skips the property having a symbol value:
+
+```javascript
+const Sizes = {
+  Small: Symbol('small'),
+  Medium: Symbol('medium'),
+  Large: Symbol('large')
+}
+
+const str1 = JSON.strigify(Sizes.Small)
+console.log(str1) // logs undefined
+
+const str2 = JSON.stringify([Sizes.Small])
+console.log(str2) // logs '[null]'
+
+const str3 = JSON.stringify({ size: Sizes.Small })
+console.log(str3) // logs '{}'
+```
+
+In the follo up code examples and implementations I will use strings as values of enums. But you are free to use the value type that you need. 
+
+If you don't have restrictions on the enum value type, just go with the strings. The strings are more debuggable compared to numbers and symbols.  
 
 ## 2. Enum based on Object.freeze()
 
