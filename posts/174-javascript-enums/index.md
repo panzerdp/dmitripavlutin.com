@@ -175,9 +175,55 @@ TypeError: Cannot assign to read only property 'Medium' of object <Object>
 
 The enum is now protected from accidential changes.  
 
+Still, there's an issue with using the frozen object enum. If you accidently misspelled the enum value the result will be simply `undefined`:
+
+```javascript
+const Sizes = Object.freeze({
+  Small: 'Small',
+  Medium: 'Medium',
+  Large: 'Large',
+})
+
+console.log(Sizes.Smal) // logs undefined
+```
+
+`Sizes.Smal` expression would simply evaluate to `undefined`, rather than throwing an error about the missing enum value.  
+
+Let's see how an enum based on a proxy can solve even this problem.  
+
 ## 4. Enum based on a proxy
 
-You can also use a proxy.
+An interesting, and my favorite implementation, are enums based on [proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy).  
+
+A proxy is a special object that wraps the original object to modify the behavior of operations on the original object. The proxy usually doesn't modify the structure of the original object.  
+
+A proxy can improve the read and write operations on an enum by:
+
+* Throwing an error if an non-existing enum value is read
+* Throwing an error on write operations on enum properties
+
+Here's an implementation of a factory function that accepts an plain object enum, and returns a proxied object:
+
+```javascript {4,10}
+// enum.js
+export function Enum(baseEnum) {  
+  return new Proxy(members, {
+    get(target, name) {
+      if (!baseEnum.hasOwnProperty(name)) {
+        throw new Error(`"${name}" value does not exist in the enum`)
+      }
+      return members[name]
+    },
+    set(target, name, value) {
+      throw new Error('Cannot add a new value to the enum')
+    }
+  })
+}
+```
+
+`get()` method of the proxy intercepts the read operations and throws an error if the property name doesn't exist. 
+
+`set()` method intercepts the write operations and just throws an error right away. It's made to protect the enum object from write operations.  
 
 ## 5. Enum based on a class
 
@@ -202,4 +248,5 @@ console.log(mySize === Sizes.Small) // logs true
 ```
 
 ## 6. Conclusion
+
 
