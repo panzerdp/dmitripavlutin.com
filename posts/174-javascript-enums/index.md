@@ -1,21 +1,21 @@
 ---
-title: "3 Ways to Create a JavaScript Enum"
-description: "Using an enum is convinient if a variable has a value from a finite set. The enum saves you from magic numbers and strings."
-published: "2023-04-12"
-modified: "2023-04-12"
+title: "4 Ways to Create an Enum in JavaScript"
+description: "An enum type represents a set of constants. The plain object, frozen object, proxied object or class-based are the 4 ways to create enums in JavaScript."
+published: "2023-04-14"
+modified: "2023-04-14"
 thumbnail: "./images/cover-2.jpg"
 slug: javascript-enum
 tags: ['javascript', 'enum']
 type: post
 ---
 
-Certain data types like strings have an infinite number of potential values, while others are restricted to a finite set.  
+Strings and numbers have an infinite set of values, while others types like boolean are restricted to a finite set.  
 
 The days of the week (Monday, Tuesday, ..., Sunday), seasons of the year (winter, spring, summer, autumn), and cardinal directions (north, east, south, west) are examples of sets with finite values.  
 
-Using an enum is convenient if a variable has a value from a finite set of pre-defined values. The enum saves you from magic numbers and strings, which are considered an [antipattern](https://stackoverflow.com/questions/47882/what-is-a-magic-number-and-why-is-it-bad).    
+Using an [enum](https://en.wikipedia.org/wiki/Enumerated_type) is convenient if a variable has a value from a finite set of pre-defined constants. The enum saves you from magic numbers and strings (which are considered an [antipattern](https://stackoverflow.com/questions/47882/what-is-a-magic-number-and-why-is-it-bad)).    
 
-Let's see the 3 good ways to create enums in JavaScript (with their pros and cons).  
+Let's see the 4 good ways to create enums in JavaScript (with their pros and cons).  
 
 <Affiliate type="traversyJavaScript" />
 
@@ -23,9 +23,9 @@ Let's see the 3 good ways to create enums in JavaScript (with their pros and con
 
 ## 1. Enum based on a plain object
 
-An enum is a data structure that defines a finite set of values and provides access to a specific value by its name.  
+An enum is a data structure that defines a finite set of constant values and gives access to a specific constant by its name.  
 
-Let's consider the sizes of a T-shirt: `Small`, `Medium`, and `Large`. 
+Let's consider the sizes of a T-shirt: `Small`, `Medium`, and `Large`. A variable containing the sizes enum value can have either small, medium, or large.   
 
 A simple way (yet not the most optimal, see the approaches below) to create an enum in JavaScript is using a [plain JavaScript object](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics).  
 
@@ -43,9 +43,11 @@ console.log(mySize === Sizes.Medium) // logs true
 
 `Sizes` is an enum based on a plain JavaScript object. Accessing an enum value is done using the property accessor: `Sizes.Medium`.  
 
-A pro of using a plain object enum is its simplicity: just define an object with keys and values, and the enum is ready.  
+The plain object enum buys with its simplicity: just define an object with keys and values, and the enum is ready.  
 
-An issue with the enum implementation based on plain objects is that the enum can be overwritten. In a large codebase, somebody might accidentally modify the enum object, and this will affect the entire runtime of the application.  
+An issue with the plain object enum is that enum can be overwritten. 
+
+In a large codebase, somebody might accidentally modify the enum object, and this will affect the entire runtime of the application.  
 
 ```javascript
 const Sizes = {
@@ -57,14 +59,16 @@ const Sizes = {
 const size1 = Sizes.Medium
 const size2 = Sizes.Medium = 'foo' // Changed!
 
-console.log(size1 === size2) // logs false
+console.log(size1 === Sizes.Medium) // logs false
 ```
 
-`Sizes.Medium` enum value was changed by accident. The plain object implementation cannot protect these accidental changes.  
+`Sizes.Medium` enum value was accidently changed. `size1` initialized with `Sizes.Medium`, and accidental overwrite no longer equals `Sized.Medium`!  
+
+The plain object implementation cannot protect from these accidental changes. 
 
 Let's look further into value types exploration, and then how to freeze the enum object to avoid accidental changes.  
 
-## 2. Enum value type
+## 2. Enum value types
 
 Alongside the string type, the value of an enum can be a number:
 
@@ -89,9 +93,9 @@ const Sizes = {
   Large: Symbol('large')
 }
 
-const str = JSON.strigify({ size: Sizes.Small })
+const mySize = Sized.Medium
 
-console.log(str) // logs true
+console.log(mySize === Sizes.Medium) // logs true
 ```
 
 The benefit of using a symbol is that [each symbol is unique](https://javascript.info/symbol#symbols). Thus you always have to compare enums using the enum itself:
@@ -109,7 +113,7 @@ console.log(mySize === Sizes.Medium)     // logs true
 console.log(mySize === Symbol('medium')) // logs false
 ```
 
-The downside of using symbols is that `JSON.stringify()` stringifies symbols to either `null`, `undefined`, or skips the property having a symbol value:
+The downside of using symbols is that `JSON.stringify()` stringifies symbols to either `null`, `undefined`, or skips the property having a symbol:
 
 ```javascript
 const Sizes = {
@@ -128,9 +132,9 @@ const str3 = JSON.stringify({ size: Sizes.Small })
 console.log(str3) // logs '{}'
 ```
 
-In the follow-up code examples and implementations, I will use strings as values of enums. But you are free to use the value type that you need. 
+In the follow-up code examples, I will use strings as values of enums. But you are free to use the value type that you need. 
 
-If you don't have restrictions on the enum value type, just go with the strings. The strings are more debuggable compared to numbers and symbols.  
+If you a free to choose the enum value type, just go with the strings. The strings are more debuggable compared to numbers and symbols.  
 
 ## 3. Enum based on Object.freeze()
 
@@ -152,7 +156,7 @@ console.log(mySize === Sizes.Medium) // logs true
 
 `const Sizes = Object.freeze({ ... })` creates a frozen object. Even being frozen, you can freely access the enum values: `const mySize = Sizes.Medium`.  
 
-In case you accidentally modify a property in a frozen object, JavaScript throws an error.  
+If an enum property is accidentally changed, JavaScript throws an error:  
 
 ```javascript
 const Sizes = Object.freeze({
@@ -184,10 +188,10 @@ const Sizes = Object.freeze({
   Large: 'large',
 })
 
-console.log(Sizes.Smal) // logs undefined
+console.log(Sizes.Med1um) // logs undefined
 ```
 
-`Sizes.Smal` expression would simply evaluate to `undefined`, rather than throwing an error about the missing enum value.  
+`Sizes.Med1um` expression simply evaluates to `undefined`, rather than throwing an error about the non-existing enum value.  
 
 Let's see how an enum based on a proxy can solve even this problem.  
 
