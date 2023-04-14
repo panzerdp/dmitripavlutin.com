@@ -55,9 +55,7 @@ To access the named constant value just use the  [property accessor](/access-obj
 
 The plain object enum buys with its simplicity: just define an object with keys and values, and the enum is ready.  
 
-### Pros and cons
-
-In a large codebase, somebody might accidentally modify the enum object, and this will affect the runtime of the application.    
+But in a large codebase somebody might accidentally modify the enum object, and this will affect the runtime of the application.    
 
 ```javascript
 const Sizes = {
@@ -72,7 +70,9 @@ const size2 = Sizes.Medium = 'foo' // Changed!
 console.log(size1 === Sizes.Medium) // logs false
 ```
 
-`Sizes.Medium` enum value was accidentally changed. `size1` initialized with `Sizes.Medium`, and accidentally overwrite no longer equals `Sizes.Medium`!  
+`Sizes.Medium` enum value was accidentally changed. 
+
+`size1`, while being initialized with `Sizes.Medium`, no longer equals `Sizes.Medium`!  
 
 The plain object implementation is not protect from such accidental changes. 
 
