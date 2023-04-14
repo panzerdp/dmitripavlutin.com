@@ -375,7 +375,7 @@ const MyEnum = {
 }
 ```
 
-The plain object enum fits best for small projects or quick demos.  
+The plain object enum object fits best for small projects or quick demos.  
 
 The second option, if you want to protect the enum object from accidental overwriting, is to use a frozen plain object:
 

@@ -21,7 +21,7 @@ In this post, you'll learn how to use the context concept in React.
 
 Using the context in React requires 3 simple steps: *creating* the context, *providing* the context, and *consuming* the context.  
 
-#### A. Creating the context
+### A. Creating the context
 
 The built-in factory function `createContext(default)` creates a context instance:
 
@@ -34,7 +34,7 @@ export const Context = createContext('Default Value');
 
 The factory function accepts one optional argument: the default value.   
 
-#### B. Providing the context
+### B. Providing the context
 
 `Context.Provider` component available on the context instance is used to provide the context to its child components, no matter how deep they are.  
 
@@ -57,7 +57,7 @@ Again, what's important here is that all the components that'd like later to con
 
 If you want to change the context value, simply update the `value` prop.  
 
-#### C. Consuming the context
+### C. Consuming the context
 
 Consuming the context can be performed in 2 ways.  
 
