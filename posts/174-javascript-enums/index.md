@@ -199,24 +199,24 @@ Let's see how an enum based on a proxy can solve even this problem.
 
 An interesting, and my favorite implementation, are enums based on [proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy).  
 
-A proxy is a special object that wraps the original object to modify the behavior of operations on the original object. The proxy usually doesn't modify the structure of the original object.  
+A proxy is a special object that wraps an object to modify the behavior of operations on the original object. The proxy doesn't alter the structure of the original object.  
 
-A proxy can improve the read and write operations on an enum by:
+The enum proxy improves the read and write operations on an enum object by:
 
-* Throwing an error if a non-existing enum value is read
-* Throwing an error on write operations on enum properties
+* Throwing an error if a non-existing enum value is accessed
+* Throwing an error when changing an enum object property
 
-Here's an implementation of a factory function that accepts a plain object enum, and returns a proxied object:
+Here's an implementation of a factory function that accepts a enum's plain object, and returns a proxied object:
 
 ```javascript {4,10}
 // enum.js
 export function Enum(baseEnum) {  
-  return new Proxy(members, {
+  return new Proxy(baseEnum, {
     get(target, name) {
       if (!baseEnum.hasOwnProperty(name)) {
         throw new Error(`"${name}" value does not exist in the enum`)
       }
-      return members[name]
+      return baseEnum[name]
     },
     set(target, name, value) {
       throw new Error('Cannot add a new value to the enum')
@@ -229,7 +229,7 @@ export function Enum(baseEnum) {
 
 `set()` method intercepts the write operations and just throws an error right away. It's made to protect the enum object from write operations.  
 
-Let's wrap the plain object enum into a proxy:
+Let's wrap the sizes object enum into a proxy:
 
 ```javascript
 import { Enum } from './enum'
@@ -247,7 +247,7 @@ console.log(mySize === Sizes.Medium) // logs true
 
 The proxied enum works exactly like the plain object enum.  
 
-The proxy-based enums are protected from accidental overwriting and accessing of non-existing enum values:
+But the proxy-based enum is protected from accidental overwriting or accessing of non-existing enum values:
 
 ```javascript
 import { Enum } from './enum'
@@ -259,22 +259,22 @@ const Sizes = Enum({
 })
 
 const size1 = Sizes.Med1um         // throws Error: non-existing value
-const size1 = Sizes.Medium = 'foo' // throws Error: changing the enum
+const size2 = Sizes.Medium = 'foo' // throws Error: changing the enum
 ```
 
-`Sizes.medium` throws an error because `medium` property does not exist on the enum. 
+`Sizes.Med1um` throws an error because `Med1um` value does not exist on the enum. 
 
-`Sizes.Medium = 'foo'` throws an error because the enum property is being changed.  
+`Sizes.Medium = 'foo'` throws an error because the enum property is changed.  
 
-But you always have to import the `Enum` function and wrap your enums into it. 
+The downside of proxy enum is that you always have to import the `Enum` factory function and wrap your enum objects into it. 
 
 ## 5. Enum based on a class
 
-Another interesting way to create an enum is using a JavaScript class.  
+Another interesting way to create an enum is using a [JavaScript class](/javascript-classes-complete-guide/).  
 
-Each enum value represents an instance of a class that is stored as a [static field](/javascript-classes-complete-guide/#33-public-static-fields) on the same class.  
+An enum class contains a set of [static field](/javascript-classes-complete-guide/#33-public-static-fields)), where each static field represents an enum value. Each enum value is itself an instance of the class.  
 
-Let's implement the sizes enum using a class:
+Let's implement the sizes enum using a class `Sizes`:
 
 ```javascript
 class Sizes {
@@ -304,7 +304,7 @@ Each instance of the `Sizes` class also has a private field `#value`, which repr
 
 A nice benefit of the class-based enum is the ability to determine at runtime if the value is an enum using `instanceof` operation. For example `mySize instanceof Sizes` evaluates to `true` since `mySize` is an enum value.  
 
-The class-based enum comparison happens based on object instances, compared to plain object or proxy-based enums where the comparison happens based on primitives (usually a string). That's why you always have to use the enum's static field instances during assignment or comparison:
+The class-based enum comparison happens based on object instances: and an object equals only to itself. That's why you always have to use the enum's values during assignment for comparison:
 
 ```javascript
 class Sizes {
@@ -328,8 +328,6 @@ console.log(mySize === new Sizes('small')) // logs false
 ```
 
 `mySize` having `Sizes.Small` enum value, isn't equal to `new Sizes('small')`. `Sizes.Small` and `new Sizes('small')`, even having the same `#value`, are different object instances.  
-
-If classes are your thing, you might use the class-based enums. 
 
 Class-based enums are not protected from overwriting or accessing a non-existing enum value.  
 
@@ -355,7 +353,7 @@ const size2 = Sizes.Medium = 'foo' // enum value can be overwritten accidentally
 
 ## 6. Conclusion
 
-There are 3 good ways to create enums in JavaScript.  
+There are 4 good ways to create enums in JavaScript.  
 
 The simplest way is to use a plain JavaScript object:
 
@@ -381,16 +379,16 @@ const MyEnum = Object.freeze({
 
 The frozen object enum is good for medium or bigger-size projects when you want to make sure the enum isn't accidentally changed.  
 
-The third option, if you want even better protection from overwrites and reading of non-existing enum values, then use the proxy approach:
+The third option is the proxy approach:
 
 ```javascript
 export function Enum(baseEnum) {  
-  return new Proxy(members, {
+  return new Proxy(baseEnum, {
     get(target, name) {
       if (!baseEnum.hasOwnProperty(name)) {
         throw new Error(`"${name}" value does not exist in the enum`)
       }
-      return members[name]
+      return baseEnum[name]
     },
     set(target, name, value) {
       throw new Error('Cannot add a new value to the enum')
@@ -409,9 +407,11 @@ const MyEnum = Enum({
 })
 ```
 
-The proxied enum is good for medium or bigger size projects where you want to protect even more your enums from overwrites or access of non-existing values. The proxied enum is my personal preference.  
+The proxied enum is good for medium or bigger size projects where you want to protect even more your enums from overwrites or access of non-existing values. 
 
-The fourth option, if you prefer classes, is to use the class-based enum where each value is an instance of the class and is stored as a static property on the class:
+The proxied enum is my personal preference.  
+
+The fourth option is to use the class-based enum where each value is an instance of the class and is stored as a static property on the class:
 
 ```javascript
 class MyEnum {
