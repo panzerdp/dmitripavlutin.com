@@ -47,11 +47,11 @@ console.log(mySize === Sizes.Medium) // logs true
 
 `Sizes` is also a string enum because the values of the named constants are strings: `'small'`, `'medium'`, and `'large'`.  
 
+![Sizes Enum](./images/t-shirt-sizes.png)
+
 To access the named constant value use the  [property accessor](/access-object-properties-javascript/#1-dot-property-accessor). For example the value of `Sizes.Medium` is `'medium'`.  
 
 The plain object enum is attractive because of its simplicity: just define an object with keys and values, and the enum is ready.  
-
-### Pros and cons
 
 In a large codebase, someone might accidentally modify the enum object, and this will affect the runtime of the application.    
 
@@ -68,7 +68,9 @@ const size2 = Sizes.Medium = 'foo' // Changed!
 console.log(size1 === Sizes.Medium) // logs false
 ```
 
-`Sizes.Medium` enum value was accidentally changed. `size1` initialized with `Sizes.Medium`, and accidentally overwrite no longer equals `Sizes.Medium`!  
+`Sizes.Medium` enum value was accidentally changed. 
+
+`size1`, while being initialized with `Sizes.Medium`, no longer equals `Sizes.Medium`!  
 
 The plain object implementation is not protected from such accidental changes. 
 
