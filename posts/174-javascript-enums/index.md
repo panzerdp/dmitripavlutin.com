@@ -130,7 +130,7 @@ const Sizes = {
   Large: Symbol('large')
 }
 
-const str1 = JSON.strigify(Sizes.Small)
+const str1 = JSON.stringify(Sizes.Small)
 console.log(str1) // logs undefined
 
 const str2 = JSON.stringify([Sizes.Small])
@@ -216,7 +216,7 @@ The enum proxy intercepts the read and write operations on an enum object and:
 
 Here's an implementation of a factory function that accepts an enum's plain object, and returns a proxied object:
 
-```javascript {4,10}
+```javascript
 // enum.js
 export function Enum(baseEnum) {  
   return new Proxy(baseEnum, {
@@ -255,7 +255,7 @@ console.log(mySize === Sizes.Medium) // logs true
 
 The proxied enum works exactly like the plain object enum.  
 
-But the proxy-based enum is protected from accidental overwriting or accessing of non-existing enum values:
+But the proxy-based enum is protected from accidental overwriting or accessing of non-existing enum constants:
 
 ```javascript
 import { Enum } from './enum'
@@ -266,11 +266,11 @@ const Sizes = Enum({
   Large: 'large',
 })
 
-const size1 = Sizes.Med1um         // throws Error: non-existing value
+const size1 = Sizes.Med1um         // throws Error: non-existing constant
 const size2 = Sizes.Medium = 'foo' // throws Error: changing the enum
 ```
 
-`Sizes.Med1um` throws an error because `Med1um` value does not exist on the enum. 
+`Sizes.Med1um` throws an error because `Med1um` constat name does not exist on the enum. 
 
 `Sizes.Medium = 'foo'` throws an error because the enum property is changed.  
 
@@ -286,9 +286,9 @@ Let's implement the sizes enum using a class `Sizes`:
 
 ```javascript
 class Sizes {
-  static Small = new Season('small')
-  static Medium = new Season('medium')
-  static Large = new Season('large')
+  static Small = new Sizes('small')
+  static Medium = new Sizes('medium')
+  static Large = new Sizes('large')
   #value
 
   constructor(value) {
@@ -316,9 +316,9 @@ The class-based enum comparison is instance-based (rather primitive values in ca
 
 ```javascript
 class Sizes {
-  static Small = new Season('small')
-  static Medium = new Season('medium')
-  static Large = new Season('large')
+  static Small = new Sizes('small')
+  static Medium = new Sizes('medium')
+  static Large = new Sizes('large')
   #value
 
   constructor(value) {
