@@ -47,7 +47,9 @@ console.log(mySize === Sizes.Medium) // logs true
 
 `Sizes` is also a string enum because the values of the named constants are strings: `'small'`, `'medium'`, and `'large'`.  
 
+<ImgShadow>
 ![Sizes Enum](./images/t-shirt-sizes.png)
+</ImgShadow>
 
 To access the named constant value use the  [property accessor](/access-object-properties-javascript/#1-dot-property-accessor). For example the value of `Sizes.Medium` is `'medium'`.  
 
