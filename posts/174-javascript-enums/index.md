@@ -1,6 +1,6 @@
 ---
 title: "4 Ways to Create an Enum in JavaScript"
-description: "An enum type represents a set of constants. The plain object, frozen object, proxied object or class-based are the 4 ways to create enums in JavaScript."
+description: "An enum is a set of named constants. The plain object, frozen object, proxied object or class-based are the 4 ways to create enums in JavaScript."
 published: "2023-04-14"
 modified: "2023-04-14"
 thumbnail: "./images/cover-2.jpg"
@@ -23,9 +23,9 @@ Let's see the 4 good ways to create enums in JavaScript (with their pros and con
 
 ## 1. Enum based on a plain object
 
-An enum is a data structure that defines a finite set of constant values and gives access to a specific constant by its name.  
+An enum is a data structure that defines a finite set of named constants. Each constant can be accessed by its name. 
 
-Let's consider the sizes of a T-shirt: `Small`, `Medium`, and `Large`. A variable containing the sizes enum value can have either small, medium, or large.   
+Let's consider the sizes of a T-shirt: `Small`, `Medium`, and `Large`.  
 
 A simple way (yet not the most optimal, see the approaches below) to create an enum in JavaScript is using a [plain JavaScript object](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics).  
 
@@ -41,13 +41,17 @@ const mySize = Sizes.Medium
 console.log(mySize === Sizes.Medium) // logs true
 ```
 
-`Sizes` is an enum based on a plain JavaScript object. Accessing an enum value is done using the property accessor: `Sizes.Medium`.  
+`Sizes` is an enum based on a plain JavaScript object which has 3 named constants: `Sizes.Small`, `Sizes.Mediun`, and `Sizes.Large`. 
+
+`Sizes` is also a string enum because the values of the named constants are strings: `'small'`, `'medium'`, and `'large'`.  
+
+To access the named constant value just use the  [property accessor](/access-object-properties-javascript/#1-dot-property-accessor). For example the value of `Sizes.Medium` is `'medium'`.  
 
 The plain object enum buys with its simplicity: just define an object with keys and values, and the enum is ready.  
 
-An issue with the plain object enum is that enum can be overwritten. 
+### Pros and cons
 
-In a large codebase, somebody might accidentally modify the enum object, and this will affect the entire runtime of the application.  
+In a large codebase, somebody might accidentally modify the enum object, and this will affect the runtime of the application.    
 
 ```javascript
 const Sizes = {
@@ -64,9 +68,9 @@ console.log(size1 === Sizes.Medium) // logs false
 
 `Sizes.Medium` enum value was accidentally changed. `size1` initialized with `Sizes.Medium`, and accidentally overwrite no longer equals `Sized.Medium`!  
 
-The plain object implementation cannot protect from these accidental changes. 
+The plain object implementation is not protect from such accidental changes. 
 
-Let's look further into value types exploration, and then how to freeze the enum object to avoid accidental changes.  
+Let's look further into string and symbol enums. And then how to freeze the enum object to avoid accidental changes problem.  
 
 ## 2. Enum value types
 
@@ -84,7 +88,9 @@ const mySize = Sized.Medium
 console.log(mySize === Sizes.Medium) // logs true
 ```
 
-Or even a symbol:
+`Sizes` enum in the above example is an numeric enum because the values are numbers: `0`, `1`, `2`.  
+
+You can also create a symbol enum:
 
 ```javascript
 const Sizes = {
@@ -113,7 +119,7 @@ console.log(mySize === Sizes.Medium)     // logs true
 console.log(mySize === Symbol('medium')) // logs false
 ```
 
-The downside of using symbols is that `JSON.stringify()` stringifies symbols to either `null`, `undefined`, or skips the property having a symbol:
+The downside of using symbol enum is that `JSON.stringify()` stringifies symbols to either `null`, `undefined`, or skips the property having a symbol as a value:
 
 ```javascript
 const Sizes = {
@@ -132,15 +138,15 @@ const str3 = JSON.stringify({ size: Sizes.Small })
 console.log(str3) // logs '{}'
 ```
 
-In the follow-up code examples, I will use strings as values of enums. But you are free to use the value type that you need. 
+In the examples that follow, I will use string enums. But you are free to use the value type that you need. 
 
 If you are free to choose the enum value type, just go with the strings. The strings are more debuggable compared to numbers and symbols.  
 
 ## 3. Enum based on Object.freeze()
 
-A good way to protect the enum object from modifications is to freeze it. When an object is frozen you cannot modify or add new properties to the object. In other words, the object becomes read-only.  
+A good way to protect the enum object from modifications is to freeze it. When an object is frozen, you cannot modify or add new properties to the object. In other words, the object becomes read-only.  
 
-In JavaScript, [Object.freeze()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) utility function freezes an object. Let's freeze the sizes enum object:
+In JavaScript, [Object.freeze()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) utility function freezes an object. Let's freeze the sizes enum:
 
 ```javascript
 const Sizes = Object.freeze({
@@ -156,7 +162,7 @@ console.log(mySize === Sizes.Medium) // logs true
 
 `const Sizes = Object.freeze({ ... })` creates a frozen object. Even being frozen, you can freely access the enum values: `const mySize = Sizes.Medium`.  
 
-If an enum property is accidentally changed, JavaScript throws an error:  
+If an enum property is accidentally changed, JavaScript throws an error (in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)):  
 
 ```javascript
 const Sizes = Object.freeze({
@@ -177,9 +183,9 @@ Because `Sizes` is a frozen object, JavaScript throws (in [strict mode](https://
 TypeError: Cannot assign to read only property 'Medium' of object <Object>
 ```
 
-The enum is now protected from accidental changes.  
+The frozen object enum is protected from accidental changes.  
 
-Still, there's an issue with using the frozen object enum. If you accidentally misspelled the enum value the result will be simply `undefined`:
+Still, there's another issue. If you accidentally misspell the enum constant, then the result will be `undefined`:
 
 ```javascript
 const Sizes = Object.freeze({
@@ -191,7 +197,7 @@ const Sizes = Object.freeze({
 console.log(Sizes.Med1um) // logs undefined
 ```
 
-`Sizes.Med1um` expression simply evaluates to `undefined`, rather than throwing an error about the non-existing enum value.  
+`Sizes.Med1um` expression (`Med1um` is a mispelled version of `Medium`) evaluates to `undefined` rather than throwing an error about the non-existing enum constant.  
 
 Let's see how an enum based on a proxy can solve even this problem.  
 
@@ -201,10 +207,10 @@ An interesting, and my favorite implementation, are enums based on [proxies](htt
 
 A proxy is a special object that wraps an object to modify the behavior of operations on the original object. The proxy doesn't alter the structure of the original object.  
 
-The enum proxy intercepts the read and write operations on an enum object by:
+The enum proxy intercepts the read and write operations on an enum object and:
 
-* Throwing an error if a non-existing enum value is accessed
-* Throwing an error when changing an enum object property
+* Throws an error if a non-existing enum value is accessed
+* Throws an error when changing an enum object property
 
 Here's an implementation of a factory function that accepts an enum's plain object, and returns a proxied object:
 
@@ -272,7 +278,7 @@ The downside of proxy enum is that you always have to import the `Enum` factory 
 
 Another interesting way to create an enum is using a [JavaScript class](/javascript-classes-complete-guide/).  
 
-An enum class contains a set of [static field](/javascript-classes-complete-guide/#33-public-static-fields)), where each static field represents an enum value. Each enum value is itself an instance of the class.  
+An class-based enum contains a set of [static field](/javascript-classes-complete-guide/#33-public-static-fields), where each static field represents an enum named constant. Each enum constant's value is itself an instance of the class.  
 
 Let's implement the sizes enum using a class `Sizes`:
 
@@ -298,13 +304,13 @@ console.log(mySize === Sizes.Small)  // logs true
 console.log(mySize instanceof Sizes) // logs true
 ```
 
-`Sizes` is a class that represents the enum. The enum values are static fields on the class, e.g. `static Small = new Season('small')`.
+`Sizes` is a class that represents the enum. The enum constants are static fields on the class, e.g. `static Small = new Season('small')`.
 
 Each instance of the `Sizes` class also has a private field `#value`, which represents the raw value of the enum.  
 
-A nice benefit of the class-based enum is the ability to determine at runtime if the value is an enum using `instanceof` operation. For example `mySize instanceof Sizes` evaluates to `true` since `mySize` is an enum value.  
+A nice benefit of the class-based enum is the ability to determine at runtime if the value is an enum using `instanceof` operation. For example, `mySize instanceof Sizes` evaluates to `true` since `mySize` is an enum value.  
 
-The class-based enum comparison happens based on object instances: and an object equals only to itself. That's why you always have to use the enum's values during assignments or comparisons:
+The class-based enum comparison is instance-based (rather primitive values in case of plain, frozen, or proxied enums):
 
 ```javascript
 class Sizes {
@@ -327,9 +333,11 @@ const mySize = Sizes.Small
 console.log(mySize === new Sizes('small')) // logs false
 ```
 
-`mySize` having `Sizes.Small` enum value, isn't equal to `new Sizes('small')`. `Sizes.Small` and `new Sizes('small')`, even having the same `#value`, are different object instances.  
+`mySize` (that has `Sizes.Small`) isn't equal to `new Sizes('small')`. 
 
-Class-based enums are not protected from overwriting or accessing a non-existing enum value.  
+`Sizes.Small` and `new Sizes('small')`, even having the same `#value`, are different object instances. [See more](how-to-compare-objects-in-javascript/#1-referential-equality) about referential equality.
+
+Class-based enums are not protected from overwriting or accessing a non-existing enum named constant.  
 
 ```javascript
 class Sizes {
@@ -407,11 +415,11 @@ const MyEnum = Enum({
 })
 ```
 
-The proxied enum is good for medium or bigger size projects to protect even more your enums from overwrites or access of non-existing values. 
+The proxied enum is good for medium or bigger size projects to protect even better your enums from overwrites or access of non-existing named constant. 
 
 The proxied enum is my personal preference.  
 
-The fourth option is to use the class-based enum where each value is an instance of the class and is stored as a static property on the class:
+The fourth option is to use the class-based enum where each named constant is an instance of the class and is stored as a static property on the class:
 
 ```javascript
 class MyEnum {
