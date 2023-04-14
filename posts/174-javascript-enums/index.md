@@ -25,6 +25,8 @@ Let's see the 4 good ways to create enums in JavaScript (with their pros and con
 
 An enum is a data structure that defines a finite set of named constants. Each constant can be accessed by its name. 
 
+Enums make the code more readable, more explicit, and removes the use of magic strings or numbers.  
+
 Let's consider the sizes of a T-shirt: `Small`, `Medium`, and `Large`.  
 
 A simple way (yet not the most optimal, see the approaches below) to create an enum in JavaScript is using a [plain JavaScript object](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics).  
