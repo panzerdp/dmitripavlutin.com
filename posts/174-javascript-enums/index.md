@@ -225,28 +225,207 @@ export function Enum(baseEnum) {
 
 `set()` method intercepts the write operations and just throws an error right away. It's made to protect the enum object from write operations.  
 
+Let's wrap the plain object enum into a proxy:
+
+```javascript
+import { Enum } from './enum'
+
+const Sizes = Enum({
+  Small: 'Small',
+  Medium: 'Medium',
+  Large: 'Large',
+})
+
+const mySize = Sizes.Medium
+
+console.log(mySize === Sizes.Medium) // logs true
+```
+
+The proxied enum works exactly like the plain object enum.  
+
+The pros of the proxy based enums is that they are being protected from accidential overwriting and accessing of non-existing enum values:
+
+```javascript
+import { Enum } from './enum'
+
+const Sizes = Enum({
+  Small: 'Small',
+  Medium: 'Medium',
+  Large: 'Large',
+})
+
+const size1 = Sizes.medium         // throws Error: non-existing value
+const size1 = Sizes.Medium = 'foo' // throws Error: changing the enum
+```
+
+`Sizes.medium` throws an error because `medium` property does not exist on the enum. 
+
+`Sizes.Medium = 'foo'` throws an error because the enum property is being changed.  
+
+The cons is that you always have to import the `Enum` function and wrap your enums into it. 
+
 ## 5. Enum based on a class
 
-Another interesting way to create an enum is using a JavaScript class. 
+Another interesting way to create an enum is using a JavaScript class.  
 
-Each enum value is a  a [static field on the class](/javascript-classes-complete-guide/#33-public-static-fields).  
+Each enum value represents an instance of a class that is stored as a [static field](/javascript-classes-complete-guide/#33-public-static-fields) on the same class.  
+
+Let's impement the sizes enum using a class:
 
 ```javascript
 class Sizes {
   static Small = new Season('small')
   static Medium = new Season('medium')
   static Large = new Season('large')
+  #value
 
   constructor(value) {
-    this.value = value
+    this.#value = value
+  }
+
+  toString() {
+    return this.#value
   }
 }
 
 const mySize = Sizes.Small
 
-console.log(mySize === Sizes.Small) // logs true
+console.log(mySize === Sizes.Small)  // logs true
+console.log(mySize instanceof Sizes) // logs true
+```
+
+`Sizes` is a class that represents the enum. The enum values are static fields on the class, e.g. `static Small = new Season('small')`.
+
+Each instance of the `Sizes` class also has a private field `#value`, which represents the raw value of the enum.  
+
+A nice benefit of the class based enum is the ability to determine at runtime if the value is an enum using `instanceof` operation. For example `mySize instanceof Sizes` evaluates to `true` since `mySize` is an enum value.  
+
+The class based enum comparison happens based on object instances, compared to plain object or proxy based enums where the comparison happens based on primitives (usually a string). That's why you always have to use the enum's static field instances during assignment or comparison:
+
+```javascript
+class Sizes {
+  static Small = new Season('small')
+  static Medium = new Season('medium')
+  static Large = new Season('large')
+  #value
+
+  constructor(value) {
+    this.#value = value
+  }
+
+  toString() {
+    return this.#value
+  }
+}
+
+const mySize = Sizes.Small
+
+console.log(mySize === new Sizes('small')) // logs false
+```
+
+`mySize` having `Sizes.Small` enum value, isn't equal to `new Sizes('small')`. `Sizes.Small` and `new Sizes('small')`, even having the same `#value`, are different object instances.  
+
+If classes are you thing, you might use the class based enums. 
+
+Class based enums are not protected from overwriting or accessing of a non-existing enum value.  
+
+```javascript
+class Sizes {
+  static Small = new Season('small')
+  static Medium = new Season('medium')
+  static Large = new Season('large')
+  #value
+
+  constructor(value) {
+    this.#value = value
+  }
+
+  toString() {
+    return this.#value
+  }
+}
+
+const size1 = Sizes.medium         // a non existing enum value can be accessed
+const size2 = Sizes.Medium = 'foo' // enum value can be overwritten accidentally
 ```
 
 ## 6. Conclusion
 
+There are 3 good ways to create enums in JavaScript.  
 
+The simples way is to use a plain JavaScript object:
+
+```javascript
+const MyEnum = {
+  Option1: 'option1',
+  Option2: 'option2',
+  Option3: 'option3'
+}
+```
+
+The plain object enum fits best for small projects or quick demos.  
+
+The second option, if you want to protect the enum object from accidential overwrites, is to use frozen plain object:
+
+```javascript
+const MyEnum = Object.freeze({
+  Option1: 'option1',
+  Option2: 'option2',
+  Option3: 'option3'
+})
+```
+
+The frozen object enum is good for medium or bigger size projects when you want to make sure the enum isn't accidentally changed.  
+
+The third option, if you want an even better protection from overwrites and reading of non-existing enum values, then use the proxy approach:
+
+```javascript
+export function Enum(baseEnum) {  
+  return new Proxy(members, {
+    get(target, name) {
+      if (!baseEnum.hasOwnProperty(name)) {
+        throw new Error(`"${name}" value does not exist in the enum`)
+      }
+      return members[name]
+    },
+    set(target, name, value) {
+      throw new Error('Cannot add a new value to the enum')
+    }
+  })
+}
+```
+
+```javascript
+import { Enum } from './enum'
+
+const MyEnum = Enum({
+  Option1: 'option1',
+  Option2: 'option2',
+  Option3: 'option3'
+})
+```
+
+The proxied enum is good for medium or bigger size projects where you want to protect even more your enum from ovwerites or access of non-existing value. The proxied enum is my personal preference.  
+
+The fourth option, if you prefer classes, is to use the class based enum where each value is an instance of the class and is stored as a static property on the class:
+
+```javascript
+class MyEnum {
+  static Option1 = new Season('option1')
+  static Option2 = new Season('option2')
+  static Option3 = new Season('option3')
+  #value
+
+  constructor(value) {
+    this.#value = value
+  }
+
+  toString() {
+    return this.#value
+  }
+}
+```
+
+The class-based enum works if you like classes. Class-based enums, however, offer less protection than frozen or proxied enums.  
+
+*What other ways to create enums in JavaScript do you know?*
