@@ -47,6 +47,10 @@ console.log(mySize === Sizes.Medium) // logs true
 
 `Sizes` is also a string enum because the values of the named constants are strings: `'small'`, `'medium'`, and `'large'`.  
 
+<ImgShadow>
+![T-Shirt Sizes JavaScript Enum](./images/t-shirt-sizes.png)
+</ImgShadow>
+
 To access the named constant value just use the  [property accessor](/access-object-properties-javascript/#1-dot-property-accessor). For example the value of `Sizes.Medium` is `'medium'`.  
 
 The plain object enum buys with its simplicity: just define an object with keys and values, and the enum is ready.  
