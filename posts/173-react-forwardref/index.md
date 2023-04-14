@@ -82,7 +82,7 @@ Is this code working? Open the [demo](https://codesandbox.io/s/react-ref-dom-chi
 
 `<Parent>` couldn't access the DOM element from the child component. 
 
-![React ref as prop does not work](./diagrams/ref-prop.svg)
+![React ref as prop does not work](./diagrams/no-ref-as-prop.svg)
 
 React also throws a useful warning: `Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?`
 
