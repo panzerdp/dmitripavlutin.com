@@ -68,7 +68,7 @@ const size2 = Sizes.Medium = 'foo' // Changed!
 console.log(size1 === Sizes.Medium) // logs false
 ```
 
-`Sizes.Medium` enum value was accidentally changed. `size1` initialized with `Sizes.Medium`, and accidentally overwrite no longer equals `Sized.Medium`!  
+`Sizes.Medium` enum value was accidentally changed. `size1` initialized with `Sizes.Medium`, and accidentally overwrite no longer equals `Sizes.Medium`!  
 
 The plain object implementation is not protect from such accidental changes. 
 
@@ -85,7 +85,7 @@ const Sizes = {
   Large: 3
 }
 
-const mySize = Sized.Medium
+const mySize = Sizes.Medium
 
 console.log(mySize === Sizes.Medium) // logs true
 ```
@@ -101,7 +101,7 @@ const Sizes = {
   Large: Symbol('large')
 }
 
-const mySize = Sized.Medium
+const mySize = Sizes.Medium
 
 console.log(mySize === Sizes.Medium) // logs true
 ```
@@ -115,7 +115,7 @@ const Sizes = {
   Large: Symbol('large')
 }
 
-const mySize = Sized.Medium
+const mySize = Sizes.Medium
 
 console.log(mySize === Sizes.Medium)     // logs true
 console.log(mySize === Symbol('medium')) // logs false
