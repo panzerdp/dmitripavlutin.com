@@ -9,7 +9,7 @@ tags: ['javascript', 'enum']
 type: post
 ---
 
-Strings and numbers have an infinite set of values, while others types like boolean are restricted to a finite set.  
+Strings and numbers have an infinite set of values, while others types like booleans are restricted to a finite set.  
 
 The days of the week (Monday, Tuesday, ..., Sunday), seasons of the year (winter, spring, summer, autumn), and cardinal directions (north, east, south, west) are examples of sets with finite values.  
 
@@ -62,7 +62,7 @@ const size2 = Sizes.Medium = 'foo' // Changed!
 console.log(size1 === Sizes.Medium) // logs false
 ```
 
-`Sizes.Medium` enum value was accidently changed. `size1` initialized with `Sizes.Medium`, and accidental overwrite no longer equals `Sized.Medium`!  
+`Sizes.Medium` enum value was accidentally changed. `size1` initialized with `Sizes.Medium`, and accidentally overwrite no longer equals `Sized.Medium`!  
 
 The plain object implementation cannot protect from these accidental changes. 
 
@@ -134,7 +134,7 @@ console.log(str3) // logs '{}'
 
 In the follow-up code examples, I will use strings as values of enums. But you are free to use the value type that you need. 
 
-If you a free to choose the enum value type, just go with the strings. The strings are more debuggable compared to numbers and symbols.  
+If you are free to choose the enum value type, just go with the strings. The strings are more debuggable compared to numbers and symbols.  
 
 ## 3. Enum based on Object.freeze()
 
@@ -201,12 +201,12 @@ An interesting, and my favorite implementation, are enums based on [proxies](htt
 
 A proxy is a special object that wraps an object to modify the behavior of operations on the original object. The proxy doesn't alter the structure of the original object.  
 
-The enum proxy improves the read and write operations on an enum object by:
+The enum proxy intercepts the read and write operations on an enum object by:
 
 * Throwing an error if a non-existing enum value is accessed
 * Throwing an error when changing an enum object property
 
-Here's an implementation of a factory function that accepts a enum's plain object, and returns a proxied object:
+Here's an implementation of a factory function that accepts an enum's plain object, and returns a proxied object:
 
 ```javascript {4,10}
 // enum.js
@@ -304,7 +304,7 @@ Each instance of the `Sizes` class also has a private field `#value`, which repr
 
 A nice benefit of the class-based enum is the ability to determine at runtime if the value is an enum using `instanceof` operation. For example `mySize instanceof Sizes` evaluates to `true` since `mySize` is an enum value.  
 
-The class-based enum comparison happens based on object instances: and an object equals only to itself. That's why you always have to use the enum's values during assignment for comparison:
+The class-based enum comparison happens based on object instances: and an object equals only to itself. That's why you always have to use the enum's values during assignments or comparisons:
 
 ```javascript
 class Sizes {
@@ -407,7 +407,7 @@ const MyEnum = Enum({
 })
 ```
 
-The proxied enum is good for medium or bigger size projects where you want to protect even more your enums from overwrites or access of non-existing values. 
+The proxied enum is good for medium or bigger size projects to protect even more your enums from overwrites or access of non-existing values. 
 
 The proxied enum is my personal preference.  
 
