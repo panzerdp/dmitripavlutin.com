@@ -25,8 +25,6 @@ Let's see the 4 good ways to create enums in JavaScript (with their pros and con
 
 An enum is a data structure that defines a finite set of named constants. Each constant can be accessed by its name. 
 
-Enums make the code more readable, more explicit, and removes the use of magic strings or numbers.  
-
 Let's consider the sizes of a T-shirt: `Small`, `Medium`, and `Large`.  
 
 A simple way (though not the most optimal, see the approaches below) to create an enum in JavaScript is to use a [plain JavaScript object](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics).  
@@ -53,9 +51,13 @@ console.log(mySize === Sizes.Medium) // logs true
 
 To access the named constant value use the  [property accessor](/access-object-properties-javascript/#1-dot-property-accessor). For example the value of `Sizes.Medium` is `'medium'`.  
 
+The enum is more readable, more explicit, and removes the use of magic strings or numbers.  
+
+### Pros and cons
+
 The plain object enum is attractive because of its simplicity: just define an object with keys and values, and the enum is ready.  
 
-In a large codebase, someone might accidentally modify the enum object, and this will affect the runtime of the application.    
+But in a large codebase someone might accidentally modify the enum object and this will affect the runtime of the application.    
 
 ```javascript
 const Sizes = {
@@ -168,6 +170,8 @@ console.log(mySize === Sizes.Medium) // logs true
 
 `const Sizes = Object.freeze({ ... })` creates a frozen object. Even being frozen, you can freely access the enum values: `const mySize = Sizes.Medium`.  
 
+### Pros and cons
+
 If an enum property has been accidentally changed, JavaScript throws an error (in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)):  
 
 ```javascript
@@ -259,6 +263,8 @@ console.log(mySize === Sizes.Medium) // logs true
 
 The proxied enum works exactly like the plain object enum.  
 
+### Pros and cons
+
 However, the proxied enum is protected from accidental overwriting or accessing non-existent enum constants:
 
 ```javascript
@@ -343,6 +349,8 @@ console.log(mySize === new Sizes('small')) // logs false
 
 `Sizes.Small` and `new Sizes('small')`, even having the same `#value`, are different object instances. [See more](how-to-compare-objects-in-javascript/#1-referential-equality) about referential equality.
 
+### Pros and cons
+
 Class-based enums are not protected from overwriting or accessing a non-existent enum named constant.  
 
 ```javascript
@@ -364,6 +372,10 @@ class Sizes {
 const size1 = Sizes.medium         // a non-existing enum value can be accessed
 const size2 = Sizes.Medium = 'foo' // enum value can be overwritten accidentally
 ```
+
+But you can control the creation of new instances, for example, by counting how many instances have been created inside the constructor. Then throw an error if more than 3 instances were created.  
+
+Of course, it's better to keep your enum implementation as simple as possible. Enums are meant to be plain data structures.  
 
 ## 6. Conclusion
 
