@@ -88,7 +88,7 @@ Besides the string type, the value of an enum can be a number:
 const Sizes = {
   Small: 0,
   Medium: 1,
-  Large: 3
+  Large: 2
 }
 
 const mySize = Sizes.Medium
