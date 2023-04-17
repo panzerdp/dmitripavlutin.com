@@ -13,7 +13,7 @@ Strings and numbers have an infinite set of values, while others types like bool
 
 The days of the week (Monday, Tuesday, ..., Sunday), seasons of the year (winter, spring, summer, autumn), and cardinal directions (north, east, south, west) are examples of sets with finite values.  
 
-Using an [enum](https://en.wikipedia.org/wiki/Enumerated_type) is convenient when a variable has a value from a finite set of predefined constants. The enum saves you from using magic numbers and strings (which are considered  [antipatterns](https://stackoverflow.com/questions/47882/what-is-a-magic-number-and-why-is-it-bad)).    
+Using an [enum](https://en.wikipedia.org/wiki/Enumerated_type) is convenient when a variable has a value from a finite set of predefined constants. The enum saves you from using magic numbers and strings (which is considered an [antipattern](https://stackoverflow.com/questions/47882/what-is-a-magic-number-and-why-is-it-bad)).    
 
 Let's see the 4 good ways to create enums in JavaScript (with their pros and cons).  
 
