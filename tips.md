@@ -106,3 +106,49 @@ function MyComponent() {
   // ...
 }
 ```
+
+## Tip 6
+
+How to get the parsed JSON from a fetch() response?
+
+#javascript #fetch #http
+
+Sign up to my newsletter to get more useful JavaScript tips: https://dmitripavlutin.com/newsletter/.
+
+```javascript
+// 1. Get the response object
+const response = await fetch('https://mysite.com/users.json')
+
+// 2. Get the parsed JSON from the response
+const usersJson = await response.json()
+```
+
+## Tip 7
+
+// ...
+
+## Tip 8
+
+fetch() API surprised me it doesn't reject even if the response is 4xx or 5xx status. 
+
+`resonse.ok` property is true for `2xx` status, and `false` otherwise.
+
+#javascript #fetch #http
+
+Sign up to my newsletter to get more useful JavaScript tips: https://dmitripavlutin.com/newsletter/.
+
+```javascript
+// 1. Get the response object
+const response = await fetch('https://mysite.com/users.json')
+
+// 2. Get the OK property
+const is4xx = response.ok // true if response is 4xx, and `false` otherwise
+```
+
+## Tip 9
+
+// ...
+
+## Tip 10
+
+// ...
