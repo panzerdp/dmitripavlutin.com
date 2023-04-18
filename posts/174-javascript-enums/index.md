@@ -40,6 +40,7 @@ const mySize = Sizes.Medium
 
 console.log(mySize === Sizes.Medium) // logs true
 ```
+[Open the demo.](https://jsfiddle.net/7e1od2r4/)
 
 `Sizes` is an enum based on a plain JavaScript object which has 3 named constants: `Sizes.Small`, `Sizes.Medium`, and `Sizes.Large`. 
 
@@ -71,6 +72,7 @@ const size2 = Sizes.Medium = 'foo' // Changed!
 
 console.log(size1 === Sizes.Medium) // logs false
 ```
+[Open the demo.](https://jsfiddle.net/r7gyth1p/)
 
 `Sizes.Medium` enum value was accidentally changed. 
 
@@ -95,6 +97,7 @@ const mySize = Sizes.Medium
 
 console.log(mySize === Sizes.Medium) // logs true
 ```
+[Open the demo.](https://jsfiddle.net/se71ygvd/)
 
 `Sizes` enum in the above example is an numeric enum because the values are numbers: `0`, `1`, `2`.  
 
@@ -111,6 +114,7 @@ const mySize = Sizes.Medium
 
 console.log(mySize === Sizes.Medium) // logs true
 ```
+[Open the demo.](https://jsfiddle.net/dzsgrf4c/)
 
 The benefit of using a symbol is that [each symbol is unique](https://javascript.info/symbol#symbols). This means that you will always have to compare enums by using the enum itself:
 
@@ -126,6 +130,7 @@ const mySize = Sizes.Medium
 console.log(mySize === Sizes.Medium)     // logs true
 console.log(mySize === Symbol('medium')) // logs false
 ```
+[Open the demo.](https://jsfiddle.net/pnzyqxms/)
 
 The downside of using symbol enum is that `JSON.stringify()` stringifies symbols to either `null`, `undefined`, or skips the property having a symbol as a value:
 
@@ -145,6 +150,7 @@ console.log(str2) // logs '[null]'
 const str3 = JSON.stringify({ size: Sizes.Small })
 console.log(str3) // logs '{}'
 ```
+[Open the demo.](https://jsfiddle.net/n5w2bkj4/)
 
 In the following examples, I will use string enums. But you are free to use whatever value type you need. 
 
@@ -167,6 +173,7 @@ const mySize = Sizes.Medium
 
 console.log(mySize === Sizes.Medium) // logs true
 ```
+[Open the demo.](https://jsfiddle.net/mbgj3tu0/)
 
 `const Sizes = Object.freeze({ ... })` creates a frozen object. Even being frozen, you can freely access the enum values: `const mySize = Sizes.Medium`.  
 
@@ -184,6 +191,7 @@ const Sizes = Object.freeze({
 const size1 = Sizes.Medium
 const size2 = Sizes.Medium = 'foo' // throws TypeError
 ```
+[Open the demo.](https://jsfiddle.net/svu1go3k/1/)
 
 The statement `const size2 = Sizes.Medium = 'foo'` makes an accidental assignment to `Sizes.Medium` property. 
 
@@ -206,6 +214,7 @@ const Sizes = Object.freeze({
 
 console.log(Sizes.Med1um) // logs undefined
 ```
+[Open the demo.](https://jsfiddle.net/6ywL1xzu/)
 
 `Sizes.Med1um` expression (`Med1um` is a misspelled version of `Medium`) evaluates to `undefined` rather than throwing an error about the non-existent enum constant.  
 
@@ -260,6 +269,7 @@ const mySize = Sizes.Medium
 
 console.log(mySize === Sizes.Medium) // logs true
 ```
+[Open the demo.](https://jsfiddle.net/ygas4z5v/4/)
 
 The proxied enum works exactly like the plain object enum.  
 
@@ -279,6 +289,7 @@ const Sizes = Enum({
 const size1 = Sizes.Med1um         // throws Error: non-existing constant
 const size2 = Sizes.Medium = 'foo' // throws Error: changing the enum
 ```
+[Open the demo.](https://jsfiddle.net/jb1p2rhd/1/)
 
 `Sizes.Med1um` throws an error because `Med1um` constat name does not exist on the enum. 
 
@@ -315,6 +326,7 @@ const mySize = Sizes.Small
 console.log(mySize === Sizes.Small)  // logs true
 console.log(mySize instanceof Sizes) // logs true
 ```
+[Open the demo.](https://jsfiddle.net/vqoj32h6/)
 
 `Sizes` is a class that represents the enum. The enum constants are static fields on the class, e.g. `static Small = new Season('small')`.
 
@@ -344,6 +356,7 @@ const mySize = Sizes.Small
 
 console.log(mySize === new Sizes('small')) // logs false
 ```
+[Open the demo.](https://jsfiddle.net/afev9zLt/)
 
 `mySize` (that has `Sizes.Small`) isn't equal to `new Sizes('small')`. 
 
@@ -355,9 +368,9 @@ Class-based enums are not protected from overwriting or accessing a non-existent
 
 ```javascript
 class Sizes {
-  static Small = new Season('small')
-  static Medium = new Season('medium')
-  static Large = new Season('large')
+  static Small = new Sizes('small')
+  static Medium = new Sizes('medium')
+  static Large = new Sizes('large')
   #value
 
   constructor(value) {
@@ -372,6 +385,7 @@ class Sizes {
 const size1 = Sizes.medium         // a non-existing enum value can be accessed
 const size2 = Sizes.Medium = 'foo' // enum value can be overwritten accidentally
 ```
+[Open the demo.](https://jsfiddle.net/afev9zLt/4/)
 
 But you can control the creation of new instances, for example, by counting how many instances have been created inside the constructor. Then throw an error if more than 3 instances were created.  
 
