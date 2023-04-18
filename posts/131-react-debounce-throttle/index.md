@@ -54,7 +54,7 @@ export function FilterList({ names }) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/no-debouncing-bbd0e?file=/src/FilterList.js)
+[Open the demo.](https://codesandbox.io/s/no-debouncing-bbd0e?file=/src/FilterList.js)
 
 Type the query into the input field, and you'll see the list filtered for every introduced character.  
 
@@ -120,7 +120,7 @@ export function FilterList({ names }) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/use-callback-debouncing-0ch2q?file=/src/FilterList.js)
+[Open the demo.](https://codesandbox.io/s/use-callback-debouncing-0ch2q?file=/src/FilterList.js)
 
 `debounce(changeHandler, 300)` creates a debounced version of the event handler, and `useCallback(debounce(changeHandler, 300), [])` makes sure to return the same instance of the debounced callback between re-renderings.  
 
@@ -174,7 +174,7 @@ export function FilterList({ names }) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/use-memo-debouncing-jwsog?file=/src/FilterList.js)
+[Open the demo.](https://codesandbox.io/s/use-memo-debouncing-jwsog?file=/src/FilterList.js)
 
 `useMemo(() => debounce(changeHandler, 300), [])` memoizes the debounced handler, but also calls `debounce()` only during initial rendering of the component.  
 

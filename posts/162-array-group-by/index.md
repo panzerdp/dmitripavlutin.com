@@ -71,7 +71,7 @@ console.log(groupByCategory);
 //   ]
 // }
 ```
-[Try the demo.](https://codesandbox.io/s/elastic-montalcini-tlgvt?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/elastic-montalcini-tlgvt?file=/src/index.js)
 
 `products.reduce((acc, product) => { ... })` reduces the `products` array to an object of products grouped by category.  
 
@@ -98,7 +98,7 @@ console.log(groupByCategory);
 // }
 ```
 
-[Try the demo.](https://codesandbox.io/s/bold-goodall-r3c4c?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/bold-goodall-r3c4c?file=/src/index.js)
 
 `products.groupBy(product => {...})` returns an object where properties are category names and values are arrays of category products.
 
@@ -140,7 +140,7 @@ console.log(groupByCategory);
 // ])
 ```
 
-[Try the demo.](https://codesandbox.io/s/sparkling-waterfall-kdlpy?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/sparkling-waterfall-kdlpy?file=/src/index.js)
 
 ## 3. Conclusion
 

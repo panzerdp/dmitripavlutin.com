@@ -43,7 +43,7 @@ const all = [...heroes, ...villains];
 console.log(all); // ['Batman', 'Superman', 'Joker', 'Bane']
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/7ktcmnvs/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/7ktcmnvs/)
 
 `const all = [...heroes, ...villains]` creates a new array having `heroes` and `villains` arrays merged.  
 
@@ -59,7 +59,7 @@ const all = [...villains,  ...heroes];
 
 console.log(all); // ['Joker', 'Bane', 'Batman', 'Superman']
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/esqxrctg/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/esqxrctg/)
 
 The spread operator approach lets you merge 2 and even more arrays at once: 
 
@@ -98,7 +98,7 @@ console.log(all1); // ['Batman', 'Superman', 'Joker', 'Bane']
 console.log(all2); // ['Batman', 'Superman', 'Joker', 'Bane']
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/swkpyqug/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/swkpyqug/)
 
 `heroes.concat(villains)` or `[].concat(heroes, villains)` return a new array where `heroes` and `villains` arrays are merged.  
 
@@ -123,7 +123,7 @@ heroes.push('Superman');
 
 console.log(heroes); // ['Batman', 'Superman']
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/w837cxfd/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/w837cxfd/)
 
 `array.push(item1, item2, ..., itemN)` also accepts multiple items to push at once, thus you can push an entire array using the spread operator applied to arguments (in other words, performing a merge into):
 
@@ -142,7 +142,7 @@ heroes.push(...villains);
 
 console.log(heroes); // ['Batman', 'Superman', 'Joker', 'Bane']
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/94nuokzs/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/94nuokzs/)
 
 `heroes.push(...villains)` pushes all the items of `villains` array at the end of `heroes` array &mdash; performing a mutable merge. `heroes` array is mutated.  
 

@@ -50,7 +50,7 @@ const url = new URL('http://example.com/path/index.html');
 
 console.log(url.href); // => 'http://example.com/path/index.html'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/y2qbsptL/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/y2qbsptL/)
 
 or combine relative and absolute URLs:
 
@@ -59,7 +59,7 @@ const url = new URL('/path/index.html', 'http://example.com');
 
 console.log(url.href); // => 'http://example.com/path/index.html'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/gn975bu6/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/gn975bu6/)
 
 The `href` property of the `URL()` instance returns the entire URL string.  
 
@@ -98,7 +98,7 @@ const url = new URL(
 
 console.log(url.search); // => '?message=hello&who=world'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/2p1qh3ua/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/2p1qh3ua/)
 
 If the query string is missing, `url.search` evaluates to an empty string `''`:
 
@@ -109,7 +109,7 @@ const url2 = new URL('http://example.com/path/index.html?');
 console.log(url1.search); // => ''
 console.log(url2.search); // => ''
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/zwa6rn23/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/zwa6rn23/)
 
 ### 3.1 Parsing the query string
 
@@ -129,7 +129,7 @@ const url = new URL(
 console.log(url.searchParams.get('message')); // => 'hello'
 console.log(url.searchParams.get('missing')); // => null
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/msz6jk0t/1/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/msz6jk0t/1/)
 
 `url.searchParams.get('message')` returns the value of `message` query parameter &mdash; `'hello'`.  
 
@@ -144,7 +144,7 @@ const url = new URL('http://example.com/path/index.html');
 
 console.log(url.hostname); // => 'example.com'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/5armb03u/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/5armb03u/)
 
 ## 5. pathname
 
@@ -155,7 +155,7 @@ const url = new URL('http://example.com/path/index.html?param=value');
 
 console.log(url.pathname); // => '/path/index.html'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/842Lez7h/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/842Lez7h/)
 
 If the URL doesn't have a path, the `url.pathname` property returns a slash character `/`:
 
@@ -164,7 +164,7 @@ const url = new URL('http://example.com/');
 
 console.log(url.pathname); // => '/'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/nsqo4xpL/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/nsqo4xpL/)
 
 ## 6. hash
 
@@ -175,7 +175,7 @@ const url = new URL('http://example.com/path/index.html#top');
 
 console.log(url.hash); // => '#top'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/5x19cLba/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/5x19cLba/)
 
 When the hash in the URL is missing, `url.hash` evaluates to an empty string `''`:
 
@@ -184,7 +184,7 @@ const url = new URL('http://example.com/path/index.html');
 
 console.log(url.hash); // => ''
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/r3eL264m/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/r3eL264m/)
 
 ## 7. URL validation
 
@@ -202,7 +202,7 @@ try {
   console.log(error); // => TypeError, "Failed to construct URL: Invalid URL"
 }
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/qw45mhde/1/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/qw45mhde/1/)
 
 Because `'http**://example.com'` is an invalid URL, as expected, `new URL('http**://example.com')` throws a `TypeError`.  
 
@@ -221,7 +221,7 @@ url.hostname = 'blue.io';
 
 console.log(url.href); // => 'http://blue.io/path/index.html'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/3anL24y6/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/3anL24y6/)
 
 Only `origin` and `searchParams` properties of the `URL()` instance are readonly. The other ones are writable and modify the URL when you change them.  
 

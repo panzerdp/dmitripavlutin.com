@@ -35,7 +35,7 @@ If you load `main.mjs` module using a script tag (adding `type="module"` attribu
 ```html
 <script src="main.mjs" type="module"></script>
 ```
-[Try the demo.](https://codesandbox.io/s/interesting-dewdney-r7th5?file=/main.mjs)
+[Open the demo.](https://codesandbox.io/s/interesting-dewdney-r7th5?file=/main.mjs)
 
 Then `import.meta.url` will contain the absolute URL to the script, e.g. `'http://mysite.com/main.mjs'`.  
 

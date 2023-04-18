@@ -44,7 +44,7 @@ function findPerson(who) {
 findPerson('Joker');
 ```
 
-[Try the demo.](https://codesandbox.io/s/ancient-dawn-j6jbq?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/ancient-dawn-j6jbq?file=/src/index.js)
 
 The snippet above is synchronous and blocking. When JavaScript enters into `findPerson()` function, it doesn't get out of there until the function is executed.   
 
@@ -94,7 +94,7 @@ function findPerson(who) {
 findPerson('Joker');
 ```
 
-[Try the demo.](https://codesandbox.io/s/elated-jones-mflcv?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/elated-jones-mflcv?file=/src/index.js)
 
 `getList(callback)` becomes more complex because it needs one more argument: the callback function. 
 
@@ -206,7 +206,7 @@ promise
   });
 ```
 
-[Try the demo.](https://codesandbox.io/s/elastic-monad-rnf9v?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/elastic-monad-rnf9v?file=/src/index.js)
 
 Having the knowledge of how to extract a fulfilled value from a promise, let's transform `findPerson(who)` to extract the list from the promise returned by `getList()`:
 
@@ -230,7 +230,7 @@ function findPerson(who) {
 findPerson('Joker');
 ```
 
-[Try the demo.](https://codesandbox.io/s/focused-euler-87tlx?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/focused-euler-87tlx?file=/src/index.js)
 
 Look closer at `const listPromise = getList()` statement: you get the promise using a synchronous statement, even if behind it runs an asynchronous operation.   
 
@@ -266,7 +266,7 @@ promise
   });
 ```
 
-[Try the demo.](https://codesandbox.io/s/broken-frog-l244c?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/broken-frog-l244c?file=/src/index.js)
 
 This time `promise` is rejected with `new Error('Nobody here!')`. You can access that error in the callback supplied to `promise.catch(errorCallback)`.  
 
@@ -319,7 +319,7 @@ promise
   };
 ```
 
-[Try the demo.](https://codesandbox.io/s/boring-volhard-hsoc3?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/boring-volhard-hsoc3?file=/src/index.js)
 
 However, in case if `promise` rejects, then only `errorCallback` is called:
 
@@ -341,7 +341,7 @@ promise
   });
 ```
 
-[Try the demo.](https://codesandbox.io/s/keen-bartik-o857t?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/keen-bartik-o857t?file=/src/index.js)
 
 ## 3. Chain of promises
 
@@ -378,7 +378,7 @@ delayDouble(5)
   });
 ```
 
-[Try the demo.](https://codesandbox.io/s/eager-sky-fyk0r?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/eager-sky-fyk0r?file=/src/index.js)
 
 Each double operation requires 1 second. The chain performs 3 double operations, and the result of each operation is used by the next operation.  
 
@@ -404,7 +404,7 @@ delayDouble(5)
   });
 ```
 
-[Try the demo.](https://codesandbox.io/s/interesting-gates-dbjj1?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/interesting-gates-dbjj1?file=/src/index.js)
 
 ## 4. async/await
 
@@ -458,7 +458,7 @@ async function findPerson(who) {
 findPerson('Joker');
 ```
 
-[Try the demo.](https://codesandbox.io/s/prod-fire-3cfo3?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/prod-fire-3cfo3?file=/src/index.js)
 
 `async findPerson(who)` pauses its execution for 1 second at the `await getList()` statement, until the promise `getList()` is fulfilled.  
 
@@ -507,7 +507,7 @@ async function findPerson(who) {
 findPerson('Joker');
 ```
 
-[Try the demo.](https://codesandbox.io/s/romantic-buck-csiso?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/romantic-buck-csiso?file=/src/index.js)
 
 This time the promise `await getList()` rejects. Right away the execution jumps into `catch(error)`: where `error` indicates the rejection reason &mdash; `new Error('Nobody here!')`.  
 
@@ -536,7 +536,7 @@ async function run() {
 run();
 ```
 
-[Try the demo.](https://codesandbox.io/s/vigilant-currying-nliu0?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/vigilant-currying-nliu0?file=/src/index.js)
 
 Clearly, `async/await` greatly simplifies handling multiple dependent async operations.  
 

@@ -65,7 +65,7 @@ async function run() {
 run();
 ```
 
-[Try the demo.](https://codesandbox.io/s/with-await-resolved-mdzz5?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/with-await-resolved-mdzz5?file=/src/index.js)
 
 Inside the `run()` function the `await divideWithAwait()` expression evaluates to the division result `3`. All good.  
 
@@ -83,7 +83,7 @@ async function run() {
 run();
 ```
 
-[Try the demo.](https://codesandbox.io/s/without-await-resolved-u06sb)
+[Open the demo.](https://codesandbox.io/s/without-await-resolved-u06sb)
 
 Even without using the `await` keyword inside `divideWithoutAwait()`, the expression `await divideWithoutAwait()` inside the `run()` function still evaluates correctly to the `6 / 2` division as `3`!  
 
@@ -115,7 +115,7 @@ async function run() {
 run();
 ```
 
-[Try the demo.](https://codesandbox.io/s/with-await-rejected-ihxg5?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/with-await-rejected-ihxg5?file=/src/index.js)
 
 Because the division by zero is not possible, `promisedDivision(5, 0)` returns a rejected promise. The `catch(error) { ... }` successfully catches the rejected promise thrown by `promisedDivision(5, 0)`.  
 
@@ -137,7 +137,7 @@ async function run() {
 run(); // Uncaught Error: Cannot divide by 0
 ```
 
-[Try the demo.](https://codesandbox.io/s/without-await-rejected-477nr)
+[Open the demo.](https://codesandbox.io/s/without-await-rejected-477nr)
 
 This time, however, `catch(error) { ... }` doesn't catch the rejected promise.  
 

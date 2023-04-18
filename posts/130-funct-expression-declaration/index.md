@@ -36,7 +36,7 @@ sumA(1, 2); // ???
 sumB(1, 2); // ???
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/8b46yokr/2/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/8b46yokr/2/)
 
 In one case, you define the function as usual (the `sumA` function). In the other case, the function is placed into a pair of parentheses (the `sumB` function).  
 
@@ -118,7 +118,7 @@ function sumArray(array) {
 sumArray([1, [4, 6]]); // => 11
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/n7wcryuo/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/n7wcryuo/)
 
 `function sumArray(array) { ... }` is a function declaration. 
 
@@ -229,7 +229,7 @@ numbers.forEach(function callback(number) {
 console.log(callback); // ReferenceError: callback is not defined
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/sujwmp10/2/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/sujwmp10/2/)
 
 `callback` is a named function expression, thus the `callback` function variable is available only inside the `callback()` function scope, but not outside.  
 
@@ -245,7 +245,7 @@ numbers.forEach(callback);
 console.log(callback); // logs function() { ... }
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/1btmrcu2/1/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/1btmrcu2/1/)
 
 ## 4. Summary
 

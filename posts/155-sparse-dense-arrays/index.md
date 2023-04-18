@@ -31,7 +31,7 @@ console.log(names[2]); // logs 'Bane'
 console.log(names.length); // logs 3
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/e1xkqvLm/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/e1xkqvLm/)
 
 `names[0]` accesses the item of the array at index `0` (the first element).  
 
@@ -55,7 +55,7 @@ const names = ['Batman', 'Joker', 'Bane'];
 console.log(isDense(names)); // logs true
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/bq5tohLk/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/bq5tohLk/)
 
 where `index in array` determines if the `array` has an item at `index` position.   
 
@@ -79,7 +79,7 @@ console.log(names[2]); // logs 'Bane'
 console.log(isDense(names)); // logs false
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/krva0udw/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/krva0udw/)
 
 
 `['Batman', , 'Bane']` array literal creates a sparse array, having a hole at the `1` index. If you access the value of a hole &mdash; `names[1]` &mdash; it evaluates to `undefined`.  
@@ -95,7 +95,7 @@ console.log(0 in names); // logs true
 console.log(1 in names); // logs false
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/hj7dk0tq/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/hj7dk0tq/)
 
 Of course, if you run `isDense()` on a sparse array it will return `false`:
 
@@ -104,7 +104,7 @@ const names = ['Batman', , 'Bane'];
 console.log(isDense(names)); // logs false
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/quLjmoav/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/quLjmoav/)
 
 Now you have a clue about the sparse arrays. But what are the common ways to create sparse arrays?  
 
@@ -124,7 +124,7 @@ const names = ['Batman', , 'Bane'];
 console.log(names); // logs ['Batman', empty, 'Bane']
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/ej3a62f4/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/ej3a62f4/)
 
 ### 3.2 Array() constructor
 
@@ -137,7 +137,7 @@ console.log(isDense(array)); // logs false
 console.log(array);          // logs [empty, empty, empty]
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/zb3mxgLq/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/zb3mxgLq/)
 
 ### 3.3 delete operator
 
@@ -152,7 +152,7 @@ console.log(isDense(names)); // logs false
 console.log(names);          // logs ['Batman', empty, 'Bane']
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/xn5zvosa/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/xn5zvosa/)
 
 Initially, `names` array is dense. 
 
@@ -171,7 +171,7 @@ console.log(isDense(names)); // logs false
 console.log(names); // logs ['Batman', 'Joker', 'Bane', empty, empty]
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/xn5zvosa/2/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/xn5zvosa/2/)
 
 Initially `names` array had 3 items, and it was a dense array.
 
@@ -195,7 +195,7 @@ names.forEach(name => {
 // logs 'Bane'
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/3df4mLn8/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/3df4mLn8/)
 
 Same way `array.map(mapperFunc)`, `array.filter(predicateFunc)`, and more functions do skip the holes.  If you've accidentally created a sparse array, you might find a hard time understanding why an array method doesn't work as expected.  
 

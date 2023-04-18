@@ -487,7 +487,7 @@ function FavoriteMovies() {
 }
 ```
 
-[Try the demo](https://codesandbox.io/s/react-usestate-complex-state-5dplv): add and remove your favorite movies.  
+[Open the demo.](https://codesandbox.io/s/react-usestate-complex-state-5dplv): add and remove your favorite movies.  
 
 ![React app complex state](./images/usestate-complex.gif)
 
@@ -527,7 +527,7 @@ function FavoriteMovies() {
 * `"add"` inserts a new movie into the list
 * `"remove"` removes a movie by index from the list
 
-[Try the demo](https://codesandbox.io/s/react-usestate-complex-state-usereducer-gpw87) and notice that component functionality hasn't changed. But this version of `<FavoriteMovies>` is easier to understand, because the state management's been extracted into the reducer.  
+[Open the demo.](https://codesandbox.io/s/react-usestate-complex-state-usereducer-gpw87) and notice that component functionality hasn't changed. But this version of `<FavoriteMovies>` is easier to understand, because the state management's been extracted into the reducer.  
 
 A nice bonus: you can extract the reducer into a separated module and re-use it in other components. Plus, you can unit test the reducer even without a component!
 

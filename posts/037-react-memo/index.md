@@ -60,7 +60,7 @@ export const MemoizedMovie = React.memo(Movie);
 />
 ```
 
-[Try the demo.](https://codesandbox.io/s/react-memo-demo-c9dx1)
+[Open the demo.](https://codesandbox.io/s/react-memo-demo-c9dx1)
 
 [Open the demo](https://codesandbox.io/s/react-memo-demo-c9dx1), then expand the console. You will see that React renders `<MemoizedMovie>` (memoized) just once, while `<Movie>` (non-memoized) re-renders every time.  
 
@@ -142,7 +142,7 @@ The application regularly polls the server in the background (every second), upd
 // etc
 ```
 
-[Try the demo.](https://codesandbox.io/s/react-memo-no-memoization-06vp1y?file=/src/index.js:152-187)
+[Open the demo.](https://codesandbox.io/s/react-memo-no-memoization-06vp1y?file=/src/index.js:152-187)
 
 Every time `views` prop is updated with a new number, `MovieViewsRealtime` renders. This triggers `Movie` rendering too, even if `title` and `releaseDate` remain the same.  
 
@@ -161,7 +161,7 @@ function MovieViewsRealtime({ title, releaseDate, views }) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/react-memo-memoization-uxhnuv?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/react-memo-memoization-uxhnuv?file=/src/index.js)
 
 As long as `title` and `releaseDate` props remain the same, React skips rendering `MemoizedMovie`. This improves the performance of `MovieViewsRealtime` component.  
 
@@ -207,7 +207,7 @@ console.log(sum1 === sum1); // => true
 console.log(sum2 === sum2); // => true
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/zhL6pf7t/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/zhL6pf7t/)
 
 `sumFactory()` is a factory function. It returns functions that sum 2 numbers.  
 

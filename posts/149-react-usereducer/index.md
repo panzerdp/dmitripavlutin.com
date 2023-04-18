@@ -239,7 +239,7 @@ function Stopwatch() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/use-reducer-stopwatch-d1ocz?file=/src/Stopwatch.js)
+[Open the demo.](https://codesandbox.io/s/use-reducer-stopwatch-d1ocz?file=/src/Stopwatch.js)
 
 The click event handlers of the Start, Stop, and Reset buttons correspondingly use the `dispatch()` function to dispatch the corresponding action object.  
 

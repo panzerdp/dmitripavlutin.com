@@ -31,7 +31,7 @@ const filledArray = Array(length).fill(0);
 filledArray; // [0, 0, 0]
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/ntaLhkzu/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/ntaLhkzu/)
 
 `Array(length)` creates a [sparse array](/power-up-the-array-creation-in-javascript/#21-numeric-argument-creates-sparse-array) with the `length` of `3`.  
 
@@ -55,7 +55,7 @@ const filledArray = Array(length).fill({ value: 0 });
 filledArray; // [{ value: 0 }, { value: 0 }, { value: 0 }]
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/vx4rmkqn/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/vx4rmkqn/)
 
 `Array(length).fill({ value: 0 })` creates an array of length `3`, and assigns to each item the `{ value: 0 }` (note: same object instance).  
 
@@ -73,7 +73,7 @@ filledArray[1].value = 3;
 filledArray; // [{ value: 3 }, { value: 3 }, { value: 3 }]
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/t90gusyo/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/t90gusyo/)
 
 Altering the second item of the array `filledArray[1].value = 3` alters all the items in the array.  
 
@@ -97,7 +97,7 @@ const filledArray = Array.from(Array(length), () => {
 filledArray; // [{ value: 0 }, { value: 0 }, { value: 0 }]
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/6zaoyqk8/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/6zaoyqk8/)
 
 `Array.from()` invokes the mapper function on each empty slot of the array and creates a new array with every value returned from the mapper function.  
 
@@ -119,7 +119,7 @@ filledArray[1].value = 3;
 filledArray; // [{ value: 0 }, { value: 3 }, { value: 0 }]
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/z9g254qf/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/z9g254qf/)
 
 `filledArray[1].value = 3` modifies only the second item of the array.  
 
@@ -151,7 +151,7 @@ const filledArray = Array(length).map(() => {
 filledArray; // [empty × 3]
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/ac5xrL29/2/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/ac5xrL29/2/)
 
 Thus using directly `Array(length).map(mapperFunc)` would create sparse arrays.  
 
@@ -168,7 +168,7 @@ const filledArray = [...Array(length)].map(() => {
 filledArray; // [{ value: 0 }, { value: 0 }, { value: 0 }]
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/yzhe031g/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/yzhe031g/)
 
 The expression `[...Array(length)]` creates an array with items initialized as `undefined`. On such an array, `array.map()` can map to new object instances.  
 

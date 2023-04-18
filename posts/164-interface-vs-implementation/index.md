@@ -64,7 +64,7 @@ renderer.render(['Joker', 'Catwoman', 'Batman']);
 // </ul>
 ```
 
-[Try the demo.](https://codesandbox.io/s/simple-renderer-qld0c?file=/src/index.ts)
+[Open the demo.](https://codesandbox.io/s/simple-renderer-qld0c?file=/src/index.ts)
 
 The above implementation is a good solution if you want to simply render a list of names. But what if you need to change further this code, for example add sorting functionality?  
 
@@ -137,7 +137,7 @@ renderer.render(['Joker', 'Catwoman', 'Batman']);
 // </ul>
 ```
 
-[Try the demo.](https://codesandbox.io/s/sorted-renderer-efuj6?file=/src/index.ts)
+[Open the demo.](https://codesandbox.io/s/sorted-renderer-efuj6?file=/src/index.ts)
 
 Now let's look closer at the sorter instantiation line: 
 
@@ -318,7 +318,7 @@ rendererAscending.render(names);
 //   <li>Joker</li>
 // </ul>
 ```
-[Try the demo.](https://codesandbox.io/s/sorted-renderer-interface-alpha-0nv8v?file=/src/index.ts)
+[Open the demo.](https://codesandbox.io/s/sorted-renderer-interface-alpha-0nv8v?file=/src/index.ts)
 
 In another case you can easily compose the `ListRenderer` to sort the names descending, without modifying the source code of `ListRenderer`:
 
@@ -340,7 +340,7 @@ rendererDescending.render(names);
 //   <li>Batman</li>
 // </ul>
 ```
-[Try the demo.](https://codesandbox.io/s/sorted-renderer-interface-desc-eyuci?file=/src/index.ts)
+[Open the demo.](https://codesandbox.io/s/sorted-renderer-interface-desc-eyuci?file=/src/index.ts)
 
 But you can also choose the concrete sorting depending on a runtime value:
 

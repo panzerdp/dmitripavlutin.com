@@ -41,7 +41,7 @@ const hero = {
 // Dot property accessor
 console.log(hero.name); // => 'Batman'
 ```
-[Try the demo.](https://jsfiddle.net/v41hjdqy/)
+[Open the demo.](https://jsfiddle.net/v41hjdqy/)
 
 `hero.name` is a dot property accessor that reads the property `name` of the object `hero`.  
 
@@ -66,7 +66,7 @@ const weirdObject = {
 weirdObject.prop-3; // => NaN
 weirdObject.3;      // throws SyntaxError: Unexpected number
 ```
-[Try the demo.](https://jsfiddle.net/dnbe7crq/)
+[Open the demo.](https://jsfiddle.net/dnbe7crq/)
 
 Because `prop-3` and `3` are invalid identifiers, the dot property accessor doesn't work:
 
@@ -86,7 +86,7 @@ const weirdObject = {
 console.log(weirdObject['prop-3']); // => 'three'
 console.log(weirdObject['3']);      // => 'three' 
 ```
-[Try the demo.](https://jsfiddle.net/5eqbs3zk/)
+[Open the demo.](https://jsfiddle.net/5eqbs3zk/)
 
 The square brackets syntax accesses without problems the properties that have special names: `weirdObject['prop-3']` and `weirdObject['3']`. 
 
@@ -112,7 +112,7 @@ const hero = {
 console.log(hero['name']);   // => 'Batman'
 console.log(hero[property]); // => 'Batman'
 ```
-[Try the demo.](https://jsfiddle.net/9df5wvou/)
+[Open the demo.](https://jsfiddle.net/9df5wvou/)
 
 `hero['name']` and `hero[property]` both read the property `name` by using the square brackets syntax.  
 
@@ -139,7 +139,7 @@ const hero = {
 const { name } = hero;
 console.log(name); // => 'Batman'
 ```
-[Try the demo.](https://jsfiddle.net/7j5o6hyb/)
+[Open the demo.](https://jsfiddle.net/7j5o6hyb/)
 
 `const { name } = hero` is an object destructuring. The destructuring defines a variable `name` with the value of property `name`.  
 
@@ -175,7 +175,7 @@ const { name: heroName } = hero;
 console.log(heroName); // => 'Batman'
 ```
 
-[Try the demo.](https://jsfiddle.net/rc84nfg6/)
+[Open the demo.](https://jsfiddle.net/rc84nfg6/)
 
 `const { name: heroName } = hero` is an object destructuring. The destucturing defines a new variable `heroName` (instead of `name`, as in the previous example), and assigns to `heroName` the value `hero.name`.  
 
@@ -202,7 +202,7 @@ const { [property]: name } = hero;
 console.log(name); // => 'Batman'
 ```
 
-[Try the demo.](https://jsfiddle.net/ytpeg2a1/1/)
+[Open the demo.](https://jsfiddle.net/ytpeg2a1/1/)
 
 `const { [property]: name } = hero` is an object destructuring that dynamically, at runtime, determines what property to extract. 
 
@@ -221,7 +221,7 @@ const { name } = hero;
 console.log(name);         // => undefined
 ```
 
-[Try the demo.](https://jsfiddle.net/Lfuenohs/)
+[Open the demo.](https://jsfiddle.net/Lfuenohs/)
 
 The property `name` doesn't exist in the object `hero`. Thus the dot property accessor `hero.name`, square brackets property accessor `hero['name']` and the variable `name` after destructuring evaluate to `undefined`.  
 

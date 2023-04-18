@@ -53,7 +53,7 @@ console.log(sumFunc2(1, 2)); // => 3
 console.log(sumFunc1 === sumFunc2); // => false
 console.log(sumFunc1 === sumFunc1); // => true
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/zf8t2kx7/2/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/zf8t2kx7/2/)
 
 `sumFunc1` and `sumFunc2` are functions that sum two numbers. They've been created by the `factory()` function.  
 

@@ -96,7 +96,7 @@ const list = await promise;
 console.log(list); // logs ['potatoes', 'tomatoes']
 ```
 
-[Try the demo.](https://codesandbox.io/s/first-fulfilled-w89h7?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/first-fulfilled-w89h7?file=/src/index.js)
 
 `Promise.any([...])` returns a `promise` that resolves in 1 second to the list of vegetables `['potatoes', 'tomatoes']`. All because vegetables promise has fulfilled first.  
 
@@ -121,7 +121,7 @@ const list = await promise;
 console.log(list); // logs ['oranges', 'apples']
 ```
 
-[Try the demo.](https://codesandbox.io/s/one-rejected-dkxrw?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/one-rejected-dkxrw?file=/src/index.js)
 
 This case is a little trickier.  
 
@@ -149,7 +149,7 @@ try {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/all-rejected-fbwgu?file=/src/index.js:283-297)
+[Open the demo.](https://codesandbox.io/s/all-rejected-fbwgu?file=/src/index.js:283-297)
 
 All input promises are rejected. Thus the promise returned by `Promise.any([...])` also gets rejected with a special kind of error &mdash; [AggregateError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) &mdash; that contains the rejection reasons of input promises. 
 

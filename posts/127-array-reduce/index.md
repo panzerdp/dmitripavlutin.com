@@ -77,7 +77,7 @@ const sum = numbers.reduce(function summarize(sum, number) {
 sum; // 12
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/m65xogaL/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/m65xogaL/)
 
 `numbers.reduce(summarize, 0)` calculates the sum of all elements in the array.  
 
@@ -106,7 +106,7 @@ const sum = numbers.reduce(function summarize(sum, number, index) {
 sum; // 12
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/dh5zyaqv/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/dh5zyaqv/)
 
 The initial value argument is omitted, thus the accumulator is initialized with the value of the first item (the number `2`). The iteration starts from the second item.  
 

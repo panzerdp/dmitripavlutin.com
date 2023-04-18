@@ -282,7 +282,7 @@ const myFunc = () => {
 myFunc();
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/er2vf6a0/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/er2vf6a0/)
 
 **ThisValueOfFunction(myFunc, "regular")**
 
@@ -302,7 +302,7 @@ const object = {
 object.method();
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/yL90q6d4/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/yL90q6d4/)
 
 **ThisValueOfFunction(object.method, "as a method")**
 
@@ -330,7 +330,7 @@ const fluffy = new MyCat('Fluffy');
 fluffy.getName();
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/uL7xk804/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/uL7xk804/)
 
 **ThisValueOfFunction(getName, "as a method")**
 

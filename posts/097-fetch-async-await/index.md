@@ -177,7 +177,7 @@ cancelFetchButton.addEventListener('click', () => {
 });
 ```
 
-[Try the demo.](https://codesandbox.io/p/sandbox/cancel-fetch-request-ggieh?file=%2Fsrc%2Findex.html&selection=%5B%7B%22endColumn%22%3A15%2C%22endLineNumber%22%3A28%2C%22startColumn%22%3A15%2C%22startLineNumber%22%3A28%7D%5D)
+[Open the demo.](https://codesandbox.io/p/sandbox/cancel-fetch-request-ggieh?file=%2Fsrc%2Findex.html&selection=%5B%7B%22endColumn%22%3A15%2C%22endLineNumber%22%3A28%2C%22startColumn%22%3A15%2C%22startLineNumber%22%3A28%7D%5D)
 
 Open [the demo](https://codesandbox.io/p/sandbox/cancel-fetch-request-ggieh?file=%2Fsrc%2Findex.html&selection=%5B%7B%22endColumn%22%3A15%2C%22endLineNumber%22%3A28%2C%22startColumn%22%3A15%2C%22startLineNumber%22%3A28%7D%5D). Click *Fetch movies* to start the request, then right away click *Cancel fetch* to cancel it. This makes the active request cancel: `await fetch()` gets rejected by throwing an abort error. The `catch` block then catches the abort error.  
 

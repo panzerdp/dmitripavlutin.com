@@ -43,7 +43,7 @@ console.log(object.getMessage()); // What is logged?
 <details>
   <summary>Expand answer</summary>
 
-`'Hello, World!'` is logged to console. [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/cmhv85g9/)
+`'Hello, World!'` is logged to console. [Open the demo.](https://jsfiddle.net/dmitri_pavlutin/cmhv85g9/)
 
 `object.getMessage()` is a method invocation, that's why `this` inside the method equals `object`.  
 
@@ -72,7 +72,7 @@ console.log(getName());     // What is logged?
 <details>
   <summary>Expand answer</summary>
 
-`'Fluffy'` and `'Fluffy'` are logged to console. [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/k7em3bho/) 
+`'Fluffy'` and `'Fluffy'` are logged to console. [Open the demo.](https://jsfiddle.net/dmitri_pavlutin/k7em3bho/) 
 
 When a function is invoked as a constructor `new Pet('Fluffy')`, [*this* inside the constructor function](/gentle-explanation-of-this-in-javascript/#41-this-in-a-constructor-invocation) equals the constructed object. 
 
@@ -103,7 +103,7 @@ setTimeout(object.logMessage, 1000);
 <details>
   <summary>Expand answer</summary>
 
-After a delay of 1 second, `undefined` is logged to console. [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/ducwj3e8/) 
+After a delay of 1 second, `undefined` is logged to console. [Open the demo.](https://jsfiddle.net/dmitri_pavlutin/ducwj3e8/) 
 
 While `setTimeout()` function uses the `object.logMessage` as a callback, still, it inovkes `object.logMessage` as a regular function, rather than a method.  
 
@@ -156,7 +156,7 @@ const boundLogMessage = logMessage.bind(object);
 boundLogMessage();
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/0oubpzje/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/0oubpzje/)
 
 </details>
 
@@ -184,7 +184,7 @@ console.log(object.farewell()); // What is logged?
 <details>
   <summary>Expand answer</summary>
 
-`'Hello, World!'` and `'Goodbye, undefined!'` are logged to console. [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/o4gsLyfe/) 
+`'Hello, World!'` and `'Goodbye, undefined!'` are logged to console. [Open the demo.](https://jsfiddle.net/dmitri_pavlutin/o4gsLyfe/) 
 
 When calling `object.greet()`, inside the method `greet()` `this` value equals `object` because `greet` is a regular function. Thus `object.greet()` returns `'Hello, World!'`.  
 
@@ -217,7 +217,7 @@ object.method(callback, 1, 2);
 <details>
   <summary>Expand answer</summary>
 
-`4` is logged to console. [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/Lr618c3s/)
+`4` is logged to console. [Open the demo.](https://jsfiddle.net/dmitri_pavlutin/Lr618c3s/)
 
 `callback()` is called using regular function invocation inside `method()`. Since [*this* value during a regular function invocation](/gentle-explanation-of-this-in-javascript/#21-this-in-a-function-invocation) equals the global object, `this.length` is evaluated as `window.length` inside `callback()` function.   
 
@@ -250,7 +250,7 @@ object.method(callback, 1, 2);
 <details>
   <summary>Expand answer</summary>
 
-`3` is logged to console. [Try the demo.](https://jsfiddle.net/dmitri_pavlutin/ucat9ymL/1/)
+`3` is logged to console. [Open the demo.](https://jsfiddle.net/dmitri_pavlutin/ucat9ymL/1/)
 
 `obj.method(callback, 1, 2)` is invoked with 3 arguments: `callback`, `1` and `2`. As result the `arguments` special variable inside `method()` is an array-like object of the following structure:
 

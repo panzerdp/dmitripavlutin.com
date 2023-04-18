@@ -58,7 +58,7 @@ delete employee.position;
 console.log(employee); // { name: 'John Smith' }
 ```
 
-[Try the demo.](https://codesandbox.io/s/delete-cop3o?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/delete-cop3o?file=/src/index.js)
 
 Initially, `employee` has 2 properties: `name` and `position`. 
 
@@ -80,7 +80,7 @@ delete employee[name];
 console.log(employee); // { name: 'John Smith' }
 ```
 
-[Try the demo.](https://codesandbox.io/s/delete-dynamic-9k03s?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/delete-dynamic-9k03s?file=/src/index.js)
 
 `delete employee[name]` removes the property which name is contained inside `name` variable.  
 
@@ -119,7 +119,7 @@ console.log(employee);
 // { name: 'John Smith',position: 'Sales Manager' }
 ```
 
-[Try the demo.](https://codesandbox.io/s/destructuring-rest-uh68c?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/destructuring-rest-uh68c?file=/src/index.js)
 
 The statement `const { position, ...employeeRest } = employee` destructures the `employee` objects and collects the properties into a rest object `employeeRest` without including the `position` property. 
 
@@ -139,7 +139,7 @@ const { [name]: removedProperty, ...employeeRest } = employee;
 console.log(employeeRest); // { name: 'John Smith' }
 ```
 
-[Try the demo.](https://codesandbox.io/s/destructuring-rest-dynamic-m4jgf)
+[Open the demo.](https://codesandbox.io/s/destructuring-rest-dynamic-m4jgf)
 
 `const { [name]: removedProperty, ...employeeRest } = employee` let's you remove a property with dynamic name by collecting the properties, but removed one, into `employeeRest` object.  
 
@@ -157,7 +157,7 @@ const { position, experience, ...employeeRest } = employee;
 console.log(employeeRest); // { name: 'John Smith' }
 ```
 
-[Try the demo.](https://codesandbox.io/s/destructuring-rest-multiple-i73ki?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/destructuring-rest-multiple-i73ki?file=/src/index.js)
 
 `const { position, experience, ...employeeRest } = employee` has removed 2 properties at once: `position` and `experience`.  
 

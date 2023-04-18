@@ -144,7 +144,7 @@ queue.peek();    // => 2
 queue.length;    // => 3
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/g6pd4hqb/2/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/g6pd4hqb/2/)
 
 `const queue = new Queue()` is how you create an instance of a queue. 
 
@@ -215,7 +215,7 @@ const queue = new Queue();
 queue.dequeue(); // throws error
 ```
 
-[Try the demo.](https://jsfiddle.net/ezhLo6mx/)
+[Open the demo.](https://jsfiddle.net/ezhLo6mx/)
 
 If you call, for example, `queue.dequeue()` on an empty queue, the method throws an error.  
 

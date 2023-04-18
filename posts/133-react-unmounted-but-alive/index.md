@@ -89,7 +89,7 @@ function App() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/side-effect-cleanup-broken-9eofz?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/side-effect-cleanup-broken-9eofz?file=/src/index.js)
 
 Open the [demo](https://codesandbox.io/s/side-effect-cleanup-broken-9eofz?file=/src/index.js) of the application, and before the employees' fetching completes, click the `About Page` link. Then open the console, and notice that React has thrown a warning:
 
@@ -171,7 +171,7 @@ function Employees() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/side-effect-cleanup-fixed-qc20u?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/side-effect-cleanup-fixed-qc20u?file=/src/index.js)
 
 `let controller = new AbortController()` creates an instance of the abort controller. Then `await fetch(..., { signal: controller.signal })` connects the controller with the fetch request.  
 

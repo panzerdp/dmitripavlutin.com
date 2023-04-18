@@ -138,7 +138,7 @@ onMounted(() => objectRef.value = { count: 1 })
 <template>{{ objectRef.count }}</template>
 ```
 
-[Try the demo.](https://codesandbox.io/s/ref-reassign-oi4zjy?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/ref-reassign-oi4zjy?file=/src/App.vue)
 
 Open the demo, and see that replacing entirely the ref value `objectRef.value = { count: 1 }` after mounting is reflected in the output. The reactivity is kept.  
 
@@ -157,7 +157,7 @@ onMounted(() => objectReactive = { count: 1 })
 <template>{{ objectReactive.count }}</template>
 ```
 
-[Try the demo.](https://codesandbox.io/s/reactive-reassign-dpf9yf?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/reactive-reassign-dpf9yf?file=/src/App.vue)
 
 Open the demo, and see that replacing entirely the reactive object value `objectReactive = { count: 1 }` after mounting is not reflected in the output. Doing so breaks the reactivity of `objectReactive`.  
 

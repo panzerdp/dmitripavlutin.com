@@ -44,7 +44,7 @@ const handleClick = () => {
 </template>
 ```
 
-[Try the demo.](https://codesandbox.io/s/vue-data-dom-not-sync-soxfzo?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/vue-data-dom-not-sync-soxfzo?file=/src/App.vue)
 
 Clicking on "Insert/Remove" button changes `show` flag, which toggles the display of `<div id="content">` element using `v-if="show"` directive.  
 
@@ -77,7 +77,7 @@ const handleClick = () => {
 </template>
 ```
 
-[Try the demo.](https://codesandbox.io/s/vue-nexttick-sync-c4ybe7?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/vue-nexttick-sync-c4ybe7?file=/src/App.vue)
 
 Open the demo and click a few times the *Insert/Remove* button. You'd see that `content` (the reference that contains the `<div>` element) is `null` or contains an element in exact correspondence with `show` value.  
 
@@ -115,7 +115,7 @@ const handleClick = async () => {
 </template>
 ```
 
-[Try the demo.](https://codesandbox.io/s/vue-nexttick-asyncawait-bgllq7?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/vue-nexttick-asyncawait-bgllq7?file=/src/App.vue)
 
 `const handleClick = async () => {...}` has been marked as an asynchronous function. 
 

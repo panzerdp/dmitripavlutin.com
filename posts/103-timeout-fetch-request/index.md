@@ -91,7 +91,7 @@ async function loadGames() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/stoic-dust-cctin?file=/src/index.html)
+[Open the demo.](https://codesandbox.io/s/stoic-dust-cctin?file=/src/index.html)
 
 `fetchWithTimeout()` (instead of simple `fetch()`) starts a request that will be canceled at `timeout` time &mdash; 6 seconds.
 

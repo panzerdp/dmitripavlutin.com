@@ -36,7 +36,7 @@ console.log(name);     // => 'Batman',
 console.log(realName); // => 'Bruce Wayne'
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/pr9o2fgx/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/pr9o2fgx/)
 
 The property `hero.name` value is assigned to the variable `name`. Same way `hero.realName` value is assigned to `realName`.  
 
@@ -58,7 +58,7 @@ console.log(name);     // => 'Batman',
 console.log(realName); // => 'Bruce Wayne'
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/6jbehpf4/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/6jbehpf4/)
 
 `const { name, realName } = hero` is an object destructuring assignment. This statement defines the variables `name` and `realName`, then assigns to them the values of properties `hero.name` and `hero.realName` correspondingly. 
 
@@ -106,7 +106,7 @@ const { name } = hero;
 console.log(name); // => 'Batman'
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/Lxs8jk3t/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/Lxs8jk3t/)
 
 The statement `const { name } = hero` defines the variable `name` and initializes it with the value of `hero.name` property.  
 
@@ -143,7 +143,7 @@ console.log(name);     // => 'Batman',
 console.log(realName); // => 'Bruce Wayne'
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/6jbehpf4/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/6jbehpf4/)
 
 `const { name, realName } = hero` creates 2 variables `name` and `realName` assigned with values of corresponding properties `hero.name` and `hero.realName`.   
 
@@ -162,7 +162,7 @@ const { enemies } = hero;
 console.log(enemies);     // => undefined
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/8spL1mkc/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/8spL1mkc/)
 
 After destructuring the variable `enemies` is `undefined` because the property `enemies` doesn't exist in the object `hero`.  
 
@@ -194,7 +194,7 @@ const { enemies = ['Joker'] } = hero;
 console.log(enemies);     // => ['Joker']
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/vt8gcL2d/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/vt8gcL2d/)
 
 Now, instead of being `undefined`, the variable `enemies` defaults to `['Joker']`.  
 
@@ -226,7 +226,7 @@ const { realName: secretName } = hero;
 
 console.log(secretName); // => 'Bruce Wayne'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/pbuehm5t/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/pbuehm5t/)
 
 Looking at `const { realName: secretName } = hero`, the destructuring defines a new variable `secretName` (alias variable) and assigns to it the value of `hero.realName`.  
 
@@ -274,7 +274,7 @@ const { address: { city } } = hero;
 
 console.log(city); // => 'Gotham'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/2hpvoazL/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/2hpvoazL/)
 
 The object destructuring `const { address: { city } } = hero` accesses the property `city` from the nested object and creates a variable `city` having the property value.  
 
@@ -307,7 +307,7 @@ const { [prop]: name } = hero;
 
 console.log(name); // => 'Batman'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/31w04z6p/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/31w04z6p/)
 
 `const { [prop]: name } = hero` is an object destructuring that assigns to variable `name` the value `hero[prop]`, where `prop` is a variable holding the property name.  
 
@@ -334,7 +334,7 @@ const { name, ...rest } = hero;
 
 console.log(rest); // => { realName: 'Bruce Wayne', company: 'WayneCorp' }
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/yuab78Lr/2/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/yuab78Lr/2/)
 
 The destructuring `const { name, ...realHero } = hero` extracts the property `name`. Also, the remaining properties (`realName` and `company`) are collected into `rest`.  
 
@@ -358,7 +358,7 @@ let { name } = hero;
 
 console.log(name); // => 'Batman'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/3pv740e9/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/3pv740e9/)
 
 How to destructure using `var` statement:
 
@@ -372,7 +372,7 @@ var { name } = hero;
 
 console.log(name); // => 'Batman'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/pkoqud4x/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/pkoqud4x/)
 
 And how to destructure to an already declared variable:
 
@@ -388,7 +388,7 @@ const hero = {
 
 console.log(name); // => 'Batman'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/6bc4oL0a/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/6bc4oL0a/)
 
 I find it satisfying to combine `for..of` cycle with object destructuring to extract the property right away:
 
@@ -402,7 +402,7 @@ for (const { name } of heroes) {
   console.log(name); // logs 'Batman', 'Joker'
 }
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/vb9z6qhu/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/vb9z6qhu/)
 
 ### 9.2 Function parameter destructuring
 
@@ -424,7 +424,7 @@ const names = heroes.map(
 
 console.log(names); // => ['Batman', 'Joker']
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/gmtbs5ny/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/gmtbs5ny/)
 
 `function({ name })` destructures the function parameter and creates a variable `name` holding the value of `name` property.  
 

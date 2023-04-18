@@ -166,7 +166,7 @@ Even if the component re-renders with different `name` property, the side-effect
 <Greet name="Butters"/> // Side-effect DOES NOT RUN
 ```
 
-[Try the demo.](https://codesandbox.io/s/sweet-jepsen-r8m6t?file=/src/Greet.js)
+[Open the demo.](https://codesandbox.io/s/sweet-jepsen-r8m6t?file=/src/Greet.js)
 
 ### 3.2 Component did update
 
@@ -222,7 +222,7 @@ function Greet({ name }) {
 <Greet name="Butters"/> // Side-effect RUNS
 ```
 
-[Try the demo.](https://codesandbox.io/s/nifty-yonath-mo2qf?file=/src/Greet.js)
+[Open the demo.](https://codesandbox.io/s/nifty-yonath-mo2qf?file=/src/Greet.js)
 
 ## 4. Side-effect cleanup
 
@@ -268,7 +268,7 @@ function RepeatMessage({ message }) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/restless-wildflower-c0cfw?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/restless-wildflower-c0cfw?file=/src/App.js)
 
 Open the demo and type some messages. The console logs every 2 seconds the messages typed into the input. However, you need to log only the latest message.  
 
@@ -291,7 +291,7 @@ function RepeatMessage({ message }) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/gracious-tdd-gy4zo?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/gracious-tdd-gy4zo?file=/src/App.js)
 
 Open the demo and type some messages. You'll see that every 2 seconds only the latest message logs to the console. Which means that all of the previous timers were cleaned up.  
 

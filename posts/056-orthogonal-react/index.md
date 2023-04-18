@@ -83,7 +83,7 @@ function EmployeesPage() {
 }
 ```
 
-[Try the demo](https://codesandbox.io/s/non-orthogonal-fetch-s6f9e)
+[Open the demo.](https://codesandbox.io/s/non-orthogonal-fetch-s6f9e)
 
 The problem with the current implementation is that `<EmployeesPage>` depends on how data is fetched. The component knows about `axios` library, knows that a `GET` request is performed. 
 
@@ -111,7 +111,7 @@ function EmployeesFetch({ resource }) {
 }
 ```
 
-[Try the demo](https://codesandbox.io/s/orthogonal-fetch-crko3)
+[Open the demo.](https://codesandbox.io/s/orthogonal-fetch-crko3)
 
 `<EmployeesPage>` now suspends when until `<EmployeesFetch>` reads the resource async.  
 
@@ -159,7 +159,7 @@ function ScrollToTop() {
 }
 ```
 
-[Try the demo](https://codesandbox.io/s/non-orthogonal-scroll-detect-si3hf)
+[Open the demo.](https://codesandbox.io/s/non-orthogonal-scroll-detect-si3hf)
 
 `<ScrollToTop>` implements the scroll listener and renders a button that scrolls the page to top. The issue is that these concepts can change at different rates.  
 
@@ -229,7 +229,7 @@ function MyComponent() {
 }
 ```
 
-[Try the demo](https://codesandbox.io/s/orthogonal-scroll-detect-wko57)
+[Open the demo.](https://codesandbox.io/s/orthogonal-scroll-detect-wko57)
 
 What's important is that `<IfScrollCrossed>` isolates the changes of scroll listener. As well as UI elements changes are isolated in `<JumpToTop>` component.  
 

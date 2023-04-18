@@ -73,7 +73,7 @@ What will log to console the following code snippet:
 <details>
   <summary>Expand answer</summary>
 
-`0` is logged to the console. [Try the demo.](https://jsitor.com/_r8I1Do6L)  
+`0` is logged to the console. [Open the demo.](https://jsitor.com/_r8I1Do6L)  
 
 `immediateA` is called with the argument `0`, thus `a` parameter is `0`.  
 
@@ -99,7 +99,7 @@ let count = 0;
 <details>
   <summary>Expand answer</summary>
 
-`1` and `0` is logged to the console. [Try the demo.](https://jsitor.com/3c9T0QMAG)
+`1` and `0` is logged to the console. [Open the demo.](https://jsitor.com/3c9T0QMAG)
 
 The first statement `let count = 0` declares a variable `count`.  
 
@@ -126,7 +126,7 @@ for (var i = 0; i < 3; i++) {
 <details>
   <summary>Expand answer</summary>
 
-`3`, `3`, `3` is logged to console. [Try the demo.](https://jsitor.com/8kit3zMOT)
+`3`, `3`, `3` is logged to console. [Open the demo.](https://jsitor.com/8kit3zMOT)
 
 The code snippet executes in 2 phases.  
 
@@ -175,7 +175,7 @@ log(); // What is logged?
 <details>
   <summary>Expand answer</summary>
 
-`'Count is 0'` is logged to console. [Try the demo.](https://jsitor.com/W9goMvJt7)
+`'Count is 0'` is logged to console. [Open the demo.](https://jsitor.com/W9goMvJt7)
 
 `increment()` function has been called 3 times, effectively incrementing `count` to value `3`.  
 
@@ -258,7 +258,7 @@ stack.pop(); // => 5
 stack.items; // => undefined
 ```
 
-[Try the demo.](https://jsitor.com/Am60z1bCI) 
+[Open the demo.](https://jsitor.com/Am60z1bCI) 
 
 `items` has been moved to a variable inside `createStack()` scope.   
 
@@ -314,7 +314,7 @@ double(5);  // => 10
 double(11); // => 22
 ```
 
-[Try the demo.](https://jsitor.com/k-NwrN59K)
+[Open the demo.](https://jsitor.com/k-NwrN59K)
 
 If `number2` parameter is not `undefined`, then the function simply returns `number1 * number2`.  
 

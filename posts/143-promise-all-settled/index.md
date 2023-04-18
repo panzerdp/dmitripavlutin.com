@@ -97,7 +97,7 @@ console.log(statuses);
 // ]
 ```
 
-[Try the demo.](https://codesandbox.io/s/all-resolved-yyc0l?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/all-resolved-yyc0l?file=/src/index.js)
 
 `Promise.allSettled([...])` returns a promise `statusesPromise` that resolves in 1 second, right after vegetables and fruits were resolved, in parallel.  
 
@@ -129,7 +129,7 @@ console.log(statuses);
 // ]
 ```
 
-[Try the demo.](https://codesandbox.io/s/one-rejected-ij3uo?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/one-rejected-ij3uo?file=/src/index.js)
 
 The promise returned by `Promise.allSettled([...])` resolves to an array of statuses after 1 second:    
 
@@ -159,7 +159,7 @@ console.log(statuses);
 // ]
 ```
 
-[Try the demo.](https://codesandbox.io/s/all-rejected-z4jee?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/all-rejected-z4jee?file=/src/index.js)
 
 In such a case `statusesPromise` still resolves successfully to an array of statuses. However, the array contains the statuses of rejected promises.   
 

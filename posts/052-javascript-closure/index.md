@@ -40,7 +40,7 @@ foo();
 console.log(count); // ReferenceError: count is not defined
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/81nmhury/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/81nmhury/)
 
 `count` is freely accessed within the scope of `foo()`.  
 
@@ -77,7 +77,7 @@ foo();
 bar();
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/weyqczga/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/weyqczga/)
 
 `count` variables from `foo()` and `bar()` function scopes do not collide.  
 
@@ -105,7 +105,7 @@ function outerFunc() {
 outerFunc();
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/x4rzf61c/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/x4rzf61c/)
 
 Indeed, `outerVar` variable is accessible inside `innerFunc()` scope. The variables of the outer scope are accessible inside the inner scope.  
 
@@ -156,7 +156,7 @@ function func() {
 func();
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/sga5jhku/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/sga5jhku/)
 
 The lexical scope of `innerOfInnerOfFunc()` consits of scopes of `innerOfFunc()`, `func()` and global scope (the outermost scope). Within `innerOfInnerOfFunc()` you can access the lexical scope variables `myInnerVar`, `myVar` and `myGlobal`.  
 
@@ -184,7 +184,7 @@ function outerFunc() {
 outerFunc();
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/x4rzf61c/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/x4rzf61c/)
 
 Inside the `innerFunc()` scope, the variable `outerVar` is accessed from the lexical scope. That's known already.  
 
@@ -213,7 +213,7 @@ function exec() {
 exec();
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/Lu0p76x4/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/Lu0p76x4/)
 
 Now `innerFunc()` is executed outside of its lexical scope, but exactly in the scope of `exec()` function. And what's important: 
 
@@ -288,7 +288,7 @@ items.forEach(function iterator(number) {
 countEven; // => 2
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/kxpscLzv/1/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/kxpscLzv/1/)
 
 The `iterator` is a closure because it captures `countEven` variable.  
 
@@ -313,7 +313,7 @@ const triple = multiply(3);
 triple(4); // => 12
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/fqswk8v0/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/fqswk8v0/)
 
 `multiply` is a curried function that returns another function.  
 
@@ -347,7 +347,7 @@ console.log(stack.pop()); // logs 1
 stack.length = 0;         // erases the stack
 console.log(stack.pop()); // logs undefined (broken!)
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/qfonxvL9/3/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/qfonxvL9/3/)
 
 Yes, the push and pop operations are supported. But there's a problem: the entire array object is exported, and you can easily erase the stack using `stack.length = 0`, or do any other operations that are not permitted normally on a stack. 
 
@@ -377,7 +377,7 @@ console.log(stack.pop()); // logs 1
 stack.length = 0; // Does nothing!
 console.log(stack.pop()); // logs 2 (works!)
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/j1hreayw/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/j1hreayw/)
 
 This time `push()` and `pop()` methods are closures that close over `items` array. What's interesting is that `items` variable is now private: it is accessible only inside `Stack` scope, but not outside.  
 

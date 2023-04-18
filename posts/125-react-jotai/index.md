@@ -53,7 +53,7 @@ function Main() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/search-query-no-global-state-ppr2c?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/search-query-no-global-state-ppr2c?file=/src/App.js)
 
 `<App>` is composed of 2 components: `<Header>` and `<Main>`.  
 
@@ -98,7 +98,7 @@ export function CounterButton() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/jotai-atom-2ueh3?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/jotai-atom-2ueh3?file=/src/App.js)
 
 `const [count, setCount] = useAtom(counterAtom)` returns a tuple where the first item is the value of the state, and the second is a state updater function.  
 
@@ -119,7 +119,7 @@ function CurrentCount() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/jotai-atom-shared-iq6td?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/jotai-atom-shared-iq6td?file=/src/App.js)
 
 When the value of `counterAtom` changes (due to counter increment), then both components `<CounterButton>` and `<CurrentCount>` are going to re-render.  
 
@@ -164,7 +164,7 @@ function Main() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/search-query-global-state-rp1lr?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/search-query-global-state-rp1lr?file=/src/App.js)
 
 `const searchAtom = atom('')` creates the atom that's going to hold the search query global state variable.  
 
@@ -218,7 +218,7 @@ function HeroName() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/derived-atoms-eqs7w?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/derived-atoms-eqs7w?file=/src/App.js)
 
 What's even better is that you can create a derived atom from multiple base atoms!
 

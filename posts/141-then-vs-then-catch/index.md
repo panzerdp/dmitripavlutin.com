@@ -59,7 +59,7 @@ Promise.resolve('Hi!')
 // Logs 'Resolved: Hi!'
 ```
 
-[Try the demo.](https://codesandbox.io/s/youthful-satoshi-wh7el?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/youthful-satoshi-wh7el?file=/src/index.js)
 
  Otherwise, in case of rejection, `error` callback is called:
 
@@ -74,7 +74,7 @@ Promise.reject('Oops!')
 // Logs 'Error: Oops!'
 ```
 
-[Try the demo.](https://codesandbox.io/s/priceless-surf-iyj8p?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/priceless-surf-iyj8p?file=/src/index.js)
 
 In the above examples, the behavior of both approaches is the same.  
 
@@ -105,7 +105,7 @@ Promise.resolve('Zzz!')
 // Logs 'Error: Invalid!'
 ```
 
-[Try the demo.](https://codesandbox.io/s/elated-snowflake-y174u?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/elated-snowflake-y174u?file=/src/index.js)
 
 `Promise.resolve('Zzz!').then(rejectSuccess, error)` only calls `rejectSuccess`, even if `rejectSuccess` returns a rejected promise. *`error` callback is not invoked*.  
 
@@ -133,7 +133,7 @@ axios("/list.json")
   });
 ```
 
-[Try the demo.](https://codesandbox.io/s/epic-breeze-m186p?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/epic-breeze-m186p?file=/src/index.js)
 
 In the above example `.catch(error)` would catch the request errors and the empty list error.  
 

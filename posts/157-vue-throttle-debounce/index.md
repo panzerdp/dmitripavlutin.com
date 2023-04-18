@@ -89,7 +89,7 @@ export default {
 </script>
 ```
 
-[Try the demo](https://codesandbox.io/s/vue-input-debounced-4vwex?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/vue-input-debounced-4vwex?file=/src/App.vue)
 
 If you open the demo you'd notice that from the user's perspective little changed: you can still introduce characters as you were in the previous example.  
 
@@ -129,7 +129,7 @@ export default {
 </script>
 ```
 
-[Try the demo.](https://codesandbox.io/s/vue-event-handler-plls4?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/vue-event-handler-plls4?file=/src/App.vue)
 
 Open the demo and type a few characters into the input. Look at the console: you'd notice that the console updates each time you type.  
 
@@ -158,7 +158,7 @@ export default {
 </script>
 ```
 
-[Try the demo.](https://codesandbox.io/s/vue-event-handler-debounced-973vn?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/vue-event-handler-debounced-973vn?file=/src/App.vue)
 
 Open the demo and type a few characters. The component logs to console the new value only if `500ms` has passed since the last typing. Again, debouncing works!
 
@@ -212,11 +212,11 @@ export default {
 </script>
 ```
 
-[Try the demo.](https://codesandbox.io/s/vue-event-handler-debounced-incorrectly-320ci?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/vue-event-handler-debounced-incorrectly-320ci?file=/src/App.vue)
 
 Instead of creating a debounced callback inside the `created()` hook, this time you assigned the debounced callback to the `methods.debouncedHandler`. 
 
-And if you try the demo, it works!
+And if you open the demo, it works!
 
 The problem is that the options object exported from the component using `export default { ... }`, including the methods, are going to be reused by all the instances of the component. 
 

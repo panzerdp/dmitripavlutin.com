@@ -50,7 +50,7 @@ function FetchGame({ id }) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/hooks-order-warning-rdxpg?file=/pages/index.js)
+[Open the demo.](https://codesandbox.io/s/hooks-order-warning-rdxpg?file=/pages/index.js)
 
 The component `FetchGame` accepts a prop `id` &mdash; the id of the game to be fetched. `useEffect()` hook fetches the game information ``await fetch(`/game/${id}`)`` and saves it into the state variable `game`.  
 
@@ -198,7 +198,7 @@ function MyIncreaser() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/stale-variable-fixed-3j0p8?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/stale-variable-fixed-3j0p8?file=/src/index.js)
 
 By using an updater function `count => count + 1`, React gives you the latest *actual* state value.  
 
@@ -241,7 +241,7 @@ function WatchCount() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/stale-closure-tmcpd?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/stale-closure-tmcpd?file=/src/index.js)
 
 Open the [demo](https://codesandbox.io/s/stale-closure-tmcpd?file=/src/index.js) and click *Increase* button. Then check the console &mdash; every 2 seconds appears `Count is: 0`, no matter the actual value of `count` state variable.  
 
@@ -275,7 +275,7 @@ function WatchCount() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/stale-closure-fixed-rrfc2?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/stale-closure-fixed-rrfc2?file=/src/index.js)
 
 With the dependencies properly set, `useEffect()` updates the closure of `setInterval()` as soon as `count` changes.  
 

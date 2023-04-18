@@ -74,7 +74,7 @@ function MyComponent() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/react-context-usecontext-pi5uv?file=/src/Main.js)
+[Open the demo.](https://codesandbox.io/s/react-context-usecontext-pi5uv?file=/src/Main.js)
 
 The hook returns the value of the context: `value = useContext(Context)`. The hook also makes sure to re-render the component when the context value changes.    
 
@@ -92,7 +92,7 @@ function MyComponent() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/react-context-consumer-f413s?file=/src/Main.js)
+[Open the demo.](https://codesandbox.io/s/react-context-consumer-f413s?file=/src/Main.js)
 
 Again, in case the context value changes, `<Context.Consumer>` will re-call its render function.  
 
@@ -181,7 +181,7 @@ function UserInfo({ userName }) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/props-drilling-xhrfd?file=/src/Application.js)
+[Open the demo.](https://codesandbox.io/s/props-drilling-xhrfd?file=/src/Application.js)
 
 You can see the problem: because `<UserInfo />` component renders deep down in the tree, all the parent components (`<Layout />` and `<Header />`) have to pass the `userName` prop.  
 
@@ -236,7 +236,7 @@ function UserInfo() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/react-context-example-gzovv?file=/src/Application.js)
+[Open the demo.](https://codesandbox.io/s/react-context-example-gzovv?file=/src/Application.js)
 
 Let's look into more detail at what has been done.  
 
@@ -280,7 +280,7 @@ function Application() {
 // ...
 ```
 
-[Try the demo.](https://codesandbox.io/s/react-context-example-change-hw32y?file=/src/Application.js)
+[Open the demo.](https://codesandbox.io/s/react-context-example-change-hw32y?file=/src/Application.js)
 
 Open the [demo](https://codesandbox.io/s/react-context-example-change-hw32y?file=/src/Application.js) and you'll see `'John Smith'` (context value) displayed on the screen. After 2 seconds, the context value changes to `'Smith, John Smith'`, and correspondingly the screen is updated with the new value.  
 
@@ -347,7 +347,7 @@ function UserInfo() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/update-context-value-l39t0?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/update-context-value-l39t0?file=/src/App.js)
 
 `<UserNameInput />` consumer reads the context value, from where `userName` and `setUserName` are extracted. The consumer then can update the context value by invoking the update function `setUserName(newContextValue)`.  
 

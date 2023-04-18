@@ -79,7 +79,7 @@ function factorialOf(n) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/factorial-without-memoization-26yp4?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/factorial-without-memoization-26yp4?file=/src/App.js)
 
 Every time you change the input value, the factorial is calculated `factorialOf(n)` and `'factorialOf(n) called!'` is logged to console.  
 
@@ -121,7 +121,7 @@ function factorialOf(n) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/factorial-with-memoization-65mkk?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/factorial-with-memoization-65mkk?file=/src/App.js)
 
 Open the [demo](https://codesandbox.io/s/factorial-with-memoization-65mkk?file=/src/App.js). Every time you change the value of the number, `'factorialOf(n) called!'` is logged to console. That's expected.  
 

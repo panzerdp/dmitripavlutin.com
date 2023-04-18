@@ -66,7 +66,7 @@ const phoneNumber = '\t  555-123\n ';
 phoneNumber.trim(); // => '555-123'
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/8x3n40rh/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/8x3n40rh/)
 
 `name.trim()` removes the spaces from the start and end of the string. `'  Kate '` becomes `'Kate'`.  
 
@@ -79,7 +79,7 @@ const fullName = '  Kate Smith  ';
 fullName.trim(); // => 'Kate Smith'
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/k3jfdvtb/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/k3jfdvtb/)
 
 `fullName.trim()` removes the spaces from both the start and end of the string, however keeps the space between `Kate` and `Smith` words.  
 
@@ -95,7 +95,7 @@ const phoneNumber = '\t  555-123 \n';
 phoneNumber.trimStart(); // => '555-123 \n'
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/4w2p3oxz/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/4w2p3oxz/)
 
 `name.trimStart()` removes the spaces only from the start of the string, and doesn't touch the space at the end. `'  Jane '` becomes `'Jane '`.  
 
@@ -113,7 +113,7 @@ const phoneNumber = '\t  555-123 \n';
 phoneNumber.trimEnd(); // => '\t  555-123'
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/1u8ym5wx/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/1u8ym5wx/)
 
 `name.trimEnd()` removes the one space from the end, and doesn't touch the leading part. `'  Jim '` becomes `'  Jim'`.  
 

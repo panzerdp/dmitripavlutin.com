@@ -70,7 +70,7 @@ function LogButtonClicks() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/logging-button-clicks-reference-ogcnc?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/logging-button-clicks-reference-ogcnc?file=/src/App.js)
 
 `const countRef = useRef(0)` creates a reference `countRef` initialized with `0`.  
 
@@ -102,7 +102,7 @@ function LogButtonClicks() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/logging-button-clicks-state-nzzuk?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/logging-button-clicks-state-nzzuk?file=/src/App.js)
 
 Open the demo and click the button. Each time you click, you will see in the console the message `'I rendered!'` &mdash; meaning that each time the state is updated, the component re-renders.  
 
@@ -152,7 +152,7 @@ function Stopwatch() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/stopwatch-cm7zz?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/stopwatch-cm7zz?file=/src/App.js)
 
 `startHandler()` function, which is invoked when the *Start* button is clicked, starts the timer and saves the timer id in the reference `timerIdRef.current = setInterval(...)`.  
 
@@ -191,7 +191,7 @@ function AccessingElement() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/access-dom-element-hrh78?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/access-dom-element-hrh78?file=/src/App.js)
 
 ### 2.1 Use case: focusing on an input
 
@@ -220,7 +220,7 @@ function InputFocus() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/input-focus-zntci?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/input-focus-zntci?file=/src/App.js)
 
 `const inputRef = useRef()` creates a reference to hold the input element.  
 
@@ -254,7 +254,7 @@ function InputFocus() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/empty-on-initial-rendering-5my4g?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/empty-on-initial-rendering-5my4g?file=/src/App.js)
 
 During initial rendering React still determines the output of the component, so there's no DOM structure created yet. That's why `inputRef.current` evaluates to `undefined` during initial rendering.
 

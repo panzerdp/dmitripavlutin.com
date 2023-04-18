@@ -92,7 +92,7 @@ console.log(lists);
 // [['potatoes', 'tomatoes'], ['oranges', 'apples']]
 ```
 
-[Try the demo.](https://codesandbox.io/s/all-promises-fullfilled-2wte0?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/all-promises-fullfilled-2wte0?file=/src/index.js)
 
 `const allPromise = Promise.all([...])` returns a new promise `allPromise`. 
 
@@ -125,7 +125,7 @@ try {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/one-rejects-w5guk?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/one-rejects-w5guk?file=/src/index.js)
 
 In this scenario `allPromise = Promise.all([...])` returns, as usual, a promise. 
 

@@ -55,7 +55,7 @@ export default {
 </script>
 ```
 
-[Try the demo.](https://codesandbox.io/s/v-if-byie6?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/v-if-byie6?file=/src/App.vue)
 
 When the above component runs, here's what HTML content is inserted into the web page:
 
@@ -114,7 +114,7 @@ export default {
 </script>
 ```
 
-[Try the demo.](https://codesandbox.io/s/v-show-v5ghh?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/v-show-v5ghh?file=/src/App.vue)
 
 When you run the above component *both elements* are rendered into the DOM:
 
@@ -170,7 +170,7 @@ export default {
 </style>
 ```
 
-[Try the demo.](https://codesandbox.io/s/invisible-class-sfvvi?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/invisible-class-sfvvi?file=/src/App.vue)
 
 Open the demo you'd see the elements *I'm visible* and *Dummy text*, and a space in between the two &mdash; the hidden second element.  
 
