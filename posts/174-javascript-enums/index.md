@@ -405,9 +405,9 @@ const MyEnum = {
 }
 ```
 
-The plain object enum object fits best for small projects or quick demos.  
+The plain object enum fits small projects or quick demos.  
 
-The second option, if you want to protect the enum object from accidental overwriting, is to use a frozen plain object:
+The second option, if you want to protect the enum object from accidental overwriting, is a frozen plain object:
 
 ```javascript
 const MyEnum = Object.freeze({
@@ -447,7 +447,7 @@ const MyEnum = Enum({
 })
 ```
 
-The proxied enum is good for medium or large projects to protect even better your enums from overwriting or accessing non-existent named constants. 
+The proxied enum works for medium or large projects to protect even better your enums from overwriting or accessing non-existent named constants. 
 
 The proxied enum is my personal preference.  
 
