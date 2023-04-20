@@ -1,9 +1,9 @@
 ---
 title: "How to Write Comments in React"
-description: "{/* Comment */} is the usual way to write comments in React. But there are 2 more you just have to know."
+description: "{/* Comment */} is the usual way to write comments in React. But there are 2 better ways to comment you just have to know."
 published: "2023-04-21"
 modified: "2023-04-21"
-thumbnail: "./images/board-3.jpg"
+thumbnail: "./images/board-4.jpg"
 slug: react-comments
 tags: ['react']
 type: post
@@ -11,9 +11,9 @@ type: post
 
 I like React because its syntax is JavaScript, except when you write JSX.  
 
-JSX comments syntax is `{/* Comment */}`. To me, this syntax is a bit akward and probably too verbose.    
+JSX comments syntax is `{/* Comment */}`. To me, this syntax is probably too verbose.    
 
-Let's discuss in this post the regular JSX comments syntax, but also 2 more readable ways to write comments in React components.  
+Let's discuss the regular JSX comments syntax, but also 2 more readable and shorter ways to write comments in React components.  
 
 ## 1. Regular JSX comments
 
