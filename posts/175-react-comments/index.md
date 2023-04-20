@@ -1,5 +1,5 @@
 ---
-title: "How to Write Comments in React"
+title: "How to Write Comments in React: The Good, the Bad and the Ugly"
 description: "{/* Comment */} is the usual way to write comments in React. But there are 2 better ways to comment you just have to know."
 published: "2023-04-21"
 modified: "2023-04-21"
