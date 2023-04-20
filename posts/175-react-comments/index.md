@@ -157,7 +157,7 @@ That's my preferred way of commenting in JSX because it is concise and targets s
 
 To resume, you have 3 ways of adding comments in a React component: 
 
-1. using JSX comments syntax `{/* Comment */}`
+1. JSX comments syntax `{/* Comment */}`
 2. JavaScript comments around JSX
 3. JavaScript comments inside a JSX tag
 
