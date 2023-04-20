@@ -11,9 +11,9 @@ type: post
 
 I like React because its syntax is JavaScript, except when you write JSX.  
 
-A particular issue I don't find comfortable when writing JSX is the comments syntax: `{/* Comment */}`. To me, this comments syntax is JSX feels awkward.  
+JSX comments syntax is `{/* Comment */}`. To me, this syntax is a bit akward and probably too verbose.    
 
-Let's discuss in this post the regular JSX comments syntax, but also 2 more useful and more readable ways to write comments.  
+Let's discuss in this post the regular JSX comments syntax, but also 2 more readable ways to write comments in React components.  
 
 ## 1. Regular JSX comments
 
@@ -30,9 +30,9 @@ function MyComponent() {
 }
 ```
 
- `{/* message prop requires a string */ }` is the regular JSX comment. 
+ `{/* message prop requires a string */ }` is a regular JSX comment. 
 
- Note that you can also write multi-line comments:
+You can also write multi-line comments:
 
  ```jsx
 function MyComponent() {
@@ -67,9 +67,9 @@ In the case of `//` comments you have to add a newline after the comment.
 
 ## 2. JavaScript comments around JSX
 
-Again, the good thing about React is that outside the JSX it's the regular JavaScript code.  
+Again, the good thing about React is that outside JSX it's regular JavaScript code.  
 
-You can use that as an advantage and write JavaScript comments exactly just before the JSX tag:
+You can that advantage of that and write JavaScript comments just before the JSX tag:
 
 ```jsx
 function MyComponent() {
@@ -86,7 +86,7 @@ function MyComponent() {
 
 That's my preferred way to comment in JSX because I don't have to use the verbose syntax `{/* message prop requires a string */}`.  
 
-JavaScript's `/* Comment */` also works if you have text split into multiple lines:
+JavaScript's `/* Comment */` also works if you have text to split into multiple lines:
 
 ```jsx
 function MyComponent() {
@@ -121,13 +121,15 @@ function MyComponent() {
 
 ## 3. JavaScript comments inside JSX
 
-What's interesting is that you can write regular JavaScript comments inside of the JSX tag. Just makes sure that a newlines is added after the comment.  
+What's interesting is you can write regular JavaScript comments inside of a JSX tag! Just makes sure to add a newline after the comment.  
+
+You can use it to add comments targeting a specic prop:
 
 ```jsx
 function MyComponent() {
   return (
     <div>
-      <Hello 
+      <Hello
         message="Hello, World!" // message prop requires a string
       /> 
     </div>
@@ -135,7 +137,21 @@ function MyComponent() {
 }
 ```
 
-This way of commenting is useful if you want to add comments to a particular prop.  
+Or add comments about a child component:
+
+```jsx
+function MyComponent() {
+  return (
+    <div>
+      <Hello // Hello accepts message prop
+        message="Hello, World!"
+      /> 
+    </div>
+  )
+}
+```
+
+That's my preferred way of commenting in JSX because it is concise and targets specific elements of the JSX.  
 
 ## 4. Conclusion
 
@@ -151,7 +167,7 @@ function MyComponent() {
     // Comment around JSX
     <div>
       {/* Comment inside JSX */}
-      <Hello
+      <Hello // comment inside JSX tag
         message="Hello, World!" // comment inside JSX tag
       /> 
     </div>
