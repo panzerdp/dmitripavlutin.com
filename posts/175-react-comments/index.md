@@ -9,9 +9,9 @@ tags: ['react']
 type: post
 ---
 
-I like React because its syntax is the same old JavaScript or TypeScript, except when you write JSX.  
+I like React because its syntax is JavaScript, except when you write JSX.  
 
-A particular issue I don't find comfortable when writing JSX is the comments syntax: `{/* Comment */}`. To me this comments syntax is JSX always felt akward.  
+A particular issue I don't find comfortable when writing JSX is the comments syntax: `{/* Comment */}`. To me, this comments syntax is JSX feels awkward.  
 
 Let's discuss in this post the regular JSX comments syntax, but also 2 more useful and more readable ways to write comments.  
 
@@ -32,7 +32,7 @@ function MyComponent() {
 
  `{/* message prop requires a string */ }` is the regular JSX comment. 
 
- Note that you can also write multi-line comments too:
+ Note that you can also write multi-line comments:
 
  ```jsx
 function MyComponent() {
@@ -48,7 +48,7 @@ function MyComponent() {
 }
 ```
 
-If you wanto to get rid of `/* */` symbols and use `//` for comments, then the following syntax worth trying too:
+If you want to get rid of `/* */` symbols and use `//` for comments, then the following syntax is worth trying too:
 
 ```jsx
 function MyComponent() {
@@ -63,7 +63,7 @@ function MyComponent() {
 }
 ```
 
-In case of `//` comments you have to add a newline after the comment.  
+In the case of `//` comments you have to add a newline after the comment.  
 
 ## 2. JavaScript comments around JSX
 
@@ -86,7 +86,7 @@ function MyComponent() {
 
 That's my preferred way to comment in JSX because I don't have to use the verbose syntax `{/* message prop requires a string */}`.  
 
-JavaScript's `/* Comment */` also works if you have text split in multiple lines:
+JavaScript's `/* Comment */` also works if you have text split into multiple lines:
 
 ```jsx
 function MyComponent() {
@@ -159,4 +159,4 @@ function MyComponent() {
 }
 ```
 
-*What is your prefered way to write comments?*
+*What is your preferred way to write comments?*
