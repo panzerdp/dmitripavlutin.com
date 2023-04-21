@@ -115,7 +115,7 @@ One of the nice features of `const` is that *you must assign an initial value* t
 
 Let's check the function that verifies whether a word is a palindrome:
 
-```javascript mark=2:3
+```javascript
 function isPalindrome(word) {
   const length = word.length;
   const half = Math.floor(length / 2);
@@ -194,7 +194,7 @@ For instance, if a variable solely exists to form the logic of block scope, then
 
 One classic example of the unnecessarily extended life of variables is the usage of `for` cycle inside a function:
 
-```javascript mark=2
+```javascript
 function someFunc(array) {
   var index, item, length = array.length;
   // some code...
@@ -212,7 +212,7 @@ Between the declaration at the top and the usage in `for` statement the variable
 
 A better approach is to move these variables as close as possible to their usage place:
 
-```javascript mark=4:6
+```javascript
 function someFunc(array) {
   // some code...
   // some code...
@@ -335,7 +335,7 @@ My recommendation is to use `in` operator. It has a short and readable syntax. `
 
 Let's improve `append(array, toAppend)` function using `in` operator:
 
-```javascript mark=3,6
+```javascript
 function append(array, toAppend) {
   const arrayCopy = array.slice();
   if ('first' in toAppend) {
@@ -570,7 +570,7 @@ Sometimes a function does not require the full set of arguments on invocation. Y
 
 Recalling the previous example, let's make an improvement. If `b` parameter is `undefined`, let default it to `2`:
 
-```javascript mark=2:4
+```javascript
 function multiply(a, b) {
   if (b === undefined) {
     b = 2;
@@ -625,7 +625,7 @@ console.log(square(2)); // => undefined
 
 The same situation happens when `return` statement is present, but without an expression nearby:  
 
-```javascript mark=3
+```javascript
 function square(x) {
   const res = x * x;
   return;

@@ -54,7 +54,7 @@ If you want to catch the moment when DOM has just been updated, then you need to
 
 Let's find the moment when the `<div>` element is inserted or removed from the DOM:
 
-```vue mark=9:11
+```vue
 <script setup>
 import { ref, nextTick } from 'vue'
 
@@ -93,7 +93,7 @@ This helps to take advantage of the more readable `async/await` syntax.
 
 For example, let's make the previous component more readable by catching the DOM update with the `async/await` syntax:
 
-```vue mark=9
+```vue
 <script setup>
 import { ref, nextTick } from 'vue'
 

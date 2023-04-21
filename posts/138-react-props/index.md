@@ -43,7 +43,7 @@ There are 2 steps to add the `who `prop to `<Message>` component:
 
 *1) Make the function of your component read the props from the `props` parameter*:
 
-```jsx mark=1
+```jsx
 function Hello(props) {
   return <div>Hello, {props.who}!</div>;
 }
@@ -302,7 +302,7 @@ function Parent({ children }) {
 
 If you recall the `<HelloPeople persons={persons} />` component:
 
-```jsx mark=5
+```jsx
 function HelloPeople({ persons }) {
   return (
     <div>

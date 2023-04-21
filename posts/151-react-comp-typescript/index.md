@@ -23,7 +23,7 @@ TypeScript is useful if you're coding middle and bigger size web applications. A
 
 For example, let's say I am the author of a component that displays a formatted date on the screen.  
 
-```ts mark=2
+```ts
 interface FormatDateProps {
   date: Date
 }
@@ -47,7 +47,7 @@ Then the user of the `FormatDate` component would have to satisfy the constraint
 
 If the user forgets about the constraint, and for example provides a string `"Sep 28 2021"` to `date` prop:
 
-```tsx mark=4
+```tsx
 // Type error:
 // Type 'string' is not assignable to type 'Date'.
 <FormatDate
@@ -109,7 +109,7 @@ Usually, a bug is caught in one of the following phases &mdash; type checking, u
 
 If the `Message` component renders with an invalid prop value:
 
-```tsx mark=5
+```tsx
 <Message
   text="The form has been submitted!"
   // Type error:
@@ -120,7 +120,7 @@ If the `Message` component renders with an invalid prop value:
 
 or without a prop:
 
-```tsx mark=5
+```tsx
 <Message
   // Type error:
   // Property 'text' is missing in type '{ important: true; }' 
@@ -182,7 +182,7 @@ To make a prop [optional](https://www.typescriptlang.org/docs/handbook/2/objects
 
 For example, let's mark the `important` prop as optional:
 
-```tsx mark=3,6
+```tsx
 interface MessageProps {
   children: JSX.Element | JSX.Element[];
   important?: boolean;
@@ -229,7 +229,7 @@ type MessageReturnType = ReturnType<typeof Message>;
 
 In the case of React functional components the return type is usually `JSX.Element`:
 
-```tsx mark=4
+```tsx
 function Message({ 
     children, 
     important = false 
@@ -268,7 +268,7 @@ My recommendation is to [enforce](https://github.com/typescript-eslint/typescrip
 
 For example, if you have set accidently a newline between `return` and the returned expression, then the explicitly indicated return type would catch this problem:
 
-```tsx mark=4
+```tsx
 function BrokenComponent(): JSX.Element {
   // Type error:
   // Type 'undefined' is not assignable to type 'Element'.

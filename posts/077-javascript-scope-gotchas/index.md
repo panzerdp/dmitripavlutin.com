@@ -11,7 +11,7 @@ type: post
 
 In JavaScript, a code block, a function, or module create scopes for variables. For example, the `if` code block creates a scope for the variable `message`:
 
-```javascript mark=3,5
+```javascript
 if (true) {
   const message = 'Hello';
   console.log(message); // 'Hello'

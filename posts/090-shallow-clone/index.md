@@ -38,7 +38,7 @@ Where `object` is the object you'd like to copy, and `clone` is the shallow copy
 
 For example, let's create a shallow copy of `hero` object:
 
-```javascript mark=6:8
+```javascript
 const hero = {
   name: 'Batman',
   city: 'Gotham'
@@ -63,7 +63,7 @@ An immediate benefit of using object spread is that you can update or add new pr
 
 Let's clone the `hero` object, but update `name` property to a different value and add a new property `realName`:  
 
-```javascript mark=6:10
+```javascript
 const hero = {
   name: 'Batman',
   city: 'Gotham'
@@ -89,7 +89,7 @@ const { ...clone } = object;
 
 Again, let's use the rest operator to make a copy of `hero` object:  
 
-```javascript mark=6
+```javascript
 const hero = {
   name: 'Batman',
   city: 'Gotham'
@@ -110,7 +110,7 @@ A nice bonus when using object rest is the ability to skip certain properties wh
 
 For example, let's create a clone of `hero` object, but skip `city` property in the clone:
 
-```javascript mark=6
+```javascript
 const hero = {
   name: 'Batman',
   city: 'Gotham'
@@ -129,7 +129,7 @@ Can you combine object spread and rest into one statement to inherit all these b
 
 Let's clone the `hero` object, also adding a new property `realName` and skipping the property `city`:
 
-```javascript mark=6:9
+```javascript
 const hero = {
   name: 'Batman',
   city: 'Gotham'

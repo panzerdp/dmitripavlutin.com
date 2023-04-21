@@ -73,7 +73,7 @@ NaN === NaN; // => false
 
 This behavior is useful to detect if a variable is `NaN`:  
 
-```javascript mark=3
+```javascript
 const someNumber = NaN;
 
 if (someNumber !== someNumber) {
@@ -133,7 +133,7 @@ Number('Joker12');       // => NaN
 
 When parsing numbers, it's a good idea to verify if the parsing result is not `NaN`:
 
-```javascript mark=5
+```javascript
 let inputToParse = 'Invalid10';
 let number;
 
@@ -183,7 +183,7 @@ Making sure that `undefined` doesn't reach arithmetical operations is a good app
 
 `NaN` spreads across the arithmetical operations:
 
-```javascript mark=1,4
+```javascript
 let invalidNumber = 1 * undefined;
 
 let result = 1;

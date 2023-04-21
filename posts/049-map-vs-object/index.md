@@ -37,7 +37,7 @@ Contrary, the map accepts keys of any type: strings, numbers, boolean, symbols. 
 
 For example, if you use a number as a key inside a map, it will remain a number:
 
-```javascript mark=6
+```javascript
 const numbersMap = new Map();
 
 numbersMap.set(1, 'one');
@@ -50,7 +50,7 @@ numbersMap.set(2, 'two');
 
 You can also use booleans as keys inside a map:
 
-```javascript mark=6
+```javascript
 const booleansMap = new Map();
 
 booleansMap.set(true, "Yep");
@@ -105,7 +105,7 @@ getByKey(kindOfMap, foo); // => 'Foo related data'
 
 The above code refactored to use `WeakMap` becomes trivial:
 
-```javascript mark=9
+```javascript
 const foo = { name: 'foo' };
 const bar = { name: 'bar' };
 
@@ -129,7 +129,7 @@ The accidentally overwritten property inherited from the prototype is dangerous.
 
 First, let's ovewrite the `toString()` property in an object `actor`:
 
-```javascript mark=3
+```javascript
 const actor = {
   name: 'Harrison Ford',
   toString: 'Actor: Harrison Ford'
@@ -138,7 +138,7 @@ const actor = {
 
 Then, let's define a function `isPlainObject()` that determines if the supplied argument is a plain object. This function uses the method `toString()`:
 
-```javascript mark=11
+```javascript
 function isPlainObject(value) {
   return value.toString() === '[object Object]';
 }
@@ -155,7 +155,7 @@ When the application input is used to [create the keys names](#21-real-world-exa
 
 The map doesn't have any restrictions on the keys names. You can use keys names like `toString`, `constructor`, etc. without consequences:
 
-```javascript mark=11
+```javascript
 function isMap(value) {
   return value.toString() === '[object Map]';
 }
@@ -181,7 +181,7 @@ Imagine a User Interface that manages custom fields. The user can add a custom f
 
 It would be convenient to store the state of the custom fields into a plain object:
 
-```javascript mark=4
+```javascript
 const userCustomFields = {
   'color':    'blue',
   'size':     'medium',
@@ -211,7 +211,7 @@ To iterate plain object's properties are necessary static functions like `Object
 
 For example, let's iterate over the keys and values of `colorsHex` object:
 
-```javascript mark=6
+```javascript
 const colorsHex = {
   'white': '#FFFFFF',
   'black': '#000000'
@@ -230,7 +230,7 @@ Access of keys-values of a map is more comfortable because the map is iterable. 
 
 `colorsHexMap` keys-values are iterated directly by `for()` loop:
 
-```javascript mark=6
+```javascript
 const colorsHexMap = new Map();
 
 colorsHexMap.set('white', '#FFFFFF');

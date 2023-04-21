@@ -193,7 +193,7 @@ Deep equality is similar to shallow equality, but with one difference. During th
 
 Let's look at the implementation of a deep equality check:
 
-```javascript mark=14
+```javascript
 function deepEqual(object1, object2) {
   const keys1 = Object.keys(object1);
   const keys2 = Object.keys(object2);

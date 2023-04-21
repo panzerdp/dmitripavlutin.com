@@ -88,7 +88,7 @@ const movieFull = {
 
 Let's write a function that gets the director's name. Remember that the `director` property might be missing:
 
-```javascript mark=2
+```javascript
 function getDirector(movie) {
   if (movie.director != null) {
     return movie.director.name;
@@ -103,7 +103,7 @@ getDirector(movieFull);  // => 'Ridley Scott'
 
 This is the right place to use the new optional chaining feature, and remove the `movie.director` existence verification. The new version of `getDirector()` looks much shorter:
 
-```javascript mark=2
+```javascript
 function getDirector(movie) {
   return movie.director?.name;
 }
@@ -143,7 +143,7 @@ The next task is to write a function that returns the leading actor name of a mo
 
 Inside the movie object, the `actors` array can be empty or even missing, so you have to add additional conditionals:
 
-```javascript mark=2
+```javascript
 function getLeadingActor(movie) {
   if (movie.actors && movie.actors.length > 0) {
     return movie.actors[0].name;
@@ -158,7 +158,7 @@ getLeadingActor(movieFull);  // => 'Harrison Ford'
 
 With the use of optional chaining, this task is trivial to solve:
 
-```javascript mark=2
+```javascript
 function getLeadingActor(movie) {
   return movie.actors?.[0]?.name;
 }
@@ -187,7 +187,7 @@ Nullish coalescing can improve the optional chaining by defaulting to a value wh
 
 For example, let's change `getLeading()` function to return `"Unknown actor"` when there are no actors in the movie object:  
 
-```javascript mark=2
+```javascript
 function getLeadingActor(movie) {
   return movie.actors?.[0]?.name ?? 'Unknown actor';
 }

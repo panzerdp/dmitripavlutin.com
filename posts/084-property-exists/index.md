@@ -42,7 +42,7 @@ The method name `hasOwnProperty()` suggests that it looks for the [own propertie
 
 This way `hasOwnProperty()` doesn't detect the `toString` &mdash; an inherited method from the prototype object:
 
-```javascript mark=7
+```javascript
 const hero = {
   name: 'Batman'
 };
@@ -79,7 +79,7 @@ The main difference between `hasOwnProperty()` method and `in` operator is that 
 
 That's why, in contrast to `hasOwnProperty()`, the `in` operator detects that `hero` object contains the inherited property `toString`:
 
-```javascript mark=7:8
+```javascript
 const hero = {
   name: 'Batman'
 };
@@ -95,7 +95,7 @@ console.log(hero.hasOwnProperty('toString')); // => false
 
 Accessing a non-existing property from an object results in `undefined`:
 
-```javascript mark=6
+```javascript
 const hero = {
   name: 'Batman'
 };
@@ -109,7 +109,7 @@ console.log(hero.realName); // => undefined
 
 Now you can see the idea: you can compare with `undefined` to determine the existence of the property.  
 
-```javascript mark=6
+```javascript
 const hero = {
   name: 'Batman'
 };

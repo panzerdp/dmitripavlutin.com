@@ -71,7 +71,7 @@ The unit test passes and I'm successfully in the green phase.
 
 Now let's continue with the proper addition testing. Let's update the unit test to verify whether the function returns correctly the sum of 2 numbers: `1` and `2`.
 
-```javascript mark=5
+```javascript
 import { sum } from './sum'
 
 describe('sum()', () => {
@@ -108,7 +108,7 @@ Running the updated test triggers an assertion error because currently the `sum(
 
 Because the green phase has to be passed as soon as possible (with any programming sins you can imagine), let's use a fake implementation and simply return `3`.
 
-```javascript mark=2
+```javascript
 export function sum() {
   return 3
 }
@@ -130,7 +130,7 @@ Now starts the interesting part.
 
 Instead of going to the refactor phase to write the sum implementation, and because I'm unsure that 1 assertion is enough to test my future generic code, let's get back to the red phase and write another assertion:
 
-```javascript mark=6
+```javascript
 import { sum } from './sum'
 
 describe('sum()', () => {
@@ -226,7 +226,7 @@ Let's say I take an alternative approach at step 5. Without using the triangulat
 
 Let's try the following generic solution:
 
-```javascript mark=2
+```javascript
 export function sum(n) {
   return n + 2
 }

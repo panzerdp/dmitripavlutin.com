@@ -21,7 +21,7 @@ Let's log a message to the console when an HTML button is clicked.
 
 To make it work, you need to select the button, then use `addEventListener()` method to attach an event listener:
 
-```html mark=5
+```html
 <button id="buttonId">Click me</button>
 
 <script>
@@ -34,7 +34,7 @@ That's the way to go to listen for events on a single element, particularly a bu
 
 What about listening for events on multiple buttons? Here's a <span id="many-event-listeners">possible implementation</span>:
 
-```html mark=10:13
+```html
 <div id="buttons">
   <button class="buttonClass">Click me</button>
   <button class="buttonClass">Click me</button>
@@ -64,7 +64,7 @@ The event delegation uses specifics of *the event propagation* mechanism. To und
 
 When you click the button in the following HTML:
 
-```html mark=4
+```html
 <html>
   <body>
     <div id="buttons">
@@ -97,7 +97,7 @@ lets you catch events from different phases.
 
 The following event handler listens for click events in the capture phase that occured on `<body>` element:
 
-```javascript mark=3
+```javascript
 document.body.addEventListener('click', () => {
   console.log('Body click event in capture phase');
 }, true);
@@ -154,7 +154,7 @@ In the example above, `<div id="buttons">` is the parent element of the buttons.
 
 When a button is clicked, the handler function is invoked with an argument: the `event` object. The property `event.target` is the element upon which the event has been dispatched, which in the example is a button: 
 
-```javascript mark=3
+```javascript
   // ...
   .addEventListener('click', event => {
     if (event.target.className === 'buttonClass') {

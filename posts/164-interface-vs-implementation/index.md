@@ -82,7 +82,7 @@ where `s1.localCompare(s2)` is a [string method](https://developer.mozilla.org/e
 
 Then integrate `SortAlphabetically` into the `ListRender`, enabling the sorting of the names before rendering:
 
-```ts mark=2,5,9
+```ts
 class ListRenderer {
   sorter: SortAlphabetically;
 
@@ -142,7 +142,7 @@ For example, you might want to sort the names alphabetically in ascending or des
 
 When using programming to implementation you will start bloating your main component with the sorting implementation details. This quickly makes your code hard to reason about and hard to change:
 
-```typescript mark=5:7
+```typescript
 class ListRenderer {
   sorter: SortAlphabetically | SortAlphabeticallyDescending;
 
@@ -205,7 +205,7 @@ interface Sorter {
 
 2) Making the `ListRender` use the `Sorter` interface is easy too. Just remove the references to the concrete implementations and use the `Sorter` interface solely:
 
-```ts mark=2,4:5
+```ts
 class ListRenderer {
   sorter: Sorter;
 

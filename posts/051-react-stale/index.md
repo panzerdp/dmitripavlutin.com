@@ -23,7 +23,7 @@ Let's start with distilling what stale closure is. Then you'll see how a stale c
 
 A factory function `createIncrement(incBy)` returns a tuple of `increment` and `log` functions. When called, `increment()` function increases the internal `value` by `incBy`, while `log()` simply logs a message with the information about the current `value`:  
 
-```javascript mark=22,9:12
+```javascript
 function createIncrement(incBy) {
   let value = 0;
 
@@ -70,7 +70,7 @@ Fixing the stale `log()` requires closing the closure over the changed variable:
 
 Let's move the statement `const message = ...;` into `log()` function body:
 
-```javascript mark=10
+```javascript
 function createIncrement(incBy) {
   let value = 0;
 
@@ -142,7 +142,7 @@ Later, even if `count` increases when the *Increase* button is clicked, the `log
 
 The solution is to let know `useEffect()` that the closure `log()` depends on `count` and properly handle the reset of the interval when `count` changes:  
 
-```jsx mark=11
+```jsx
 function WatchCount() {
   const [count, setCount] = useState(0);
 
@@ -211,7 +211,7 @@ All because the `delay()` closure of the second click has captured the outdated 
 
 To fix the problem, let's use a [functional way](/react-usestate-hook-guide/#updating-the-state-with-a-callback/) `setCount(count => count + 1)` to update `count` state:
 
-```jsx mark=6
+```jsx
 function DelayedCount() {
   const [count, setCount] = useState(0);
 

@@ -126,7 +126,7 @@ ES2015 modules are static: what is imported and exported doesn't change during r
 
 To enable tree shaking include the ES2015 modules build of the utility library into your application. The field `module` in the `package.json` file indicates the ES2015 modules build:
 
-```json mark=4
+```json
 // package.json of the utility library
 {
   "name": "library",
@@ -155,7 +155,7 @@ A small focused modules is easier to reason about, is loaded faster by the packa
 
 For example, let's use `lodash.debounce` and `lodash.throttle` packages:
 
-```json mark=5:6
+```json
 // package.json of your application
 {
   "name": "my-application",

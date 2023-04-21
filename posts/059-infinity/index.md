@@ -141,7 +141,7 @@ The infinity value is handy to initialize computations involving comparisons of 
 
 For example, when searching for a minimum value in an array, you could initialize the `min` variable with `Inifinity`.
 
-```javascript mark=2
+```javascript
 function findMin(array) {
   let min = Infinity;
   for (const item of array) {
@@ -218,7 +218,7 @@ Some functions of `Math` namespace in JavaScript can return infinite numbers.
 
 Here are a few examples:
 
-```javascript mark=5,8
+```javascript
 const numbers = [1, 2];
 const empty = [];
 

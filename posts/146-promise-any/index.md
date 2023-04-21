@@ -83,7 +83,7 @@ Let's use these helper functions to experiment on `Promise.any()`.
 
 Let's try to access the first resolved list from the local grocery store:
 
-```javascript mark=2,3
+```javascript
 const promise = Promise.any([
   resolveTimeout(['potatoes', 'tomatoes'], 1000),
   resolveTimeout(['oranges', 'apples'], 2000)
@@ -108,7 +108,7 @@ Imagine there are no more vegetables at the grocery. In such a case, let's rejec
 
 How would `Promise.any()` would work in such a case?  
 
-```javascript mark=2
+```javascript
 const promise = Promise.any([
   rejectTimeout(new Error("Out of vegetables!"), 1000),
   resolveTimeout(["oranges", "apples"], 2000)
@@ -133,7 +133,7 @@ Finally, after one more second, the fruits promise resolves to a list of fruits 
 
 What if the grocery is out of both vegetables and fruits? In such a case both promises reject:
 
-```javascript mark=2:3
+```javascript
 const promise = Promise.any([
   rejectTimeout(new Error('Out of vegetables!'), 1000),
   rejectTimeout(new Error('Out of fruits!'), 2000)

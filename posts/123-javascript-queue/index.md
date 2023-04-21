@@ -173,7 +173,7 @@ But you can easily make further improvements.
 
 For example, if you want to protect yourself from dequeuing or picking the head of an empty queue, then you can add the verification for emptiness:
 
-```javascript mark=14,22,25:30
+```javascript
 class Queue {
   constructor() {
     this.items = {};

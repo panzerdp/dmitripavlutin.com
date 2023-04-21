@@ -53,7 +53,7 @@ white; // => '#FFFFFF'
 
 Now let's try to access `white` variable before declaration:
 
-```javascript mark=1
+```javascript
 white; // throws `ReferenceError`
 
 const white = '#FFFFFF';
@@ -77,7 +77,7 @@ Let's see the statements affected by TDZ.
 
 As seen already, `const` variable is in TDZ before the declaration and initializtion line:
 
-```javascript mark=2
+```javascript
 // Does not work!
 pi; // throws `ReferenceError`
 
@@ -86,7 +86,7 @@ const pi = 3.14;
 
 You have to use `const` variable after the declaration:
 
-```javascript mark=4
+```javascript
 const pi = 3.14;
 
 // Works!
@@ -97,7 +97,7 @@ pi; // => 3.14
 
 `let` declaration statement is as well affected by TDZ until the declaration line:
 
-```javascript mark=2
+```javascript
 // Does not work!
 count; // throws `ReferenceError`
 
@@ -108,7 +108,7 @@ count = 10;
 
 Again, use `let` variable only after the declaration:
 
-```javascript mark=4,9
+```javascript
 let count;
 
 // Works!
@@ -124,7 +124,7 @@ count; // => 10
 
 As seen in the introduction, you cannot use the `class` before defining it:
 
-```javascript mark=2
+```javascript
 // Does not work!
 const myNissan = new Car('red'); // throws `ReferenceError`
 
@@ -137,7 +137,7 @@ class Car {
 
 To make it work, keep the class usage after its definition:
 
-```javascript mark=8
+```javascript
 class Car {
   constructor(color) {
     this.color = color;
@@ -153,7 +153,7 @@ myNissan.color; // => 'red'
 
 If you extend a parent class, before calling `super()` inside the constructor, `this` binding lays in TDZ:
 
-```javascript mark=3:4,9
+```javascript
 class MuscleCar extends Car {
   constructor(color, power) {
     this.power = power;
@@ -169,7 +169,7 @@ Inside the `constructor()`, `this` cannot be used until `super()` is called.
 
 TDZ suggests calling the parent constructor to initialize the instance. After doing that, the instance is ready, and you can make the adjustments in the child constructor.
 
-```javascript mark=3:4,9
+```javascript
 class MuscleCar extends Car {
   constructor(color, power) {
     super(color);
@@ -186,7 +186,7 @@ myCar.power; // => '300HP'
 
 The default parameters exist within an intermidiate scope, separated from global and function scopes. The default parameters also follow the TDZ restriction:
 
-```javascript mark=6
+```javascript
 const a = 2;
 function square(a = a) {
   return a * a;
@@ -199,7 +199,7 @@ The parameter `a` is used on the right side of the expression `a = a`, before be
 
 Make sure that the default parameter is used after its declaration and initialization. Let's use a special variable `init` that is initialized before usage:
 
-```javascript mark=6
+```javascript
 const init = 2;
 function square(a = init) {
   return a * a;
@@ -214,7 +214,7 @@ Contrary to the statements presented above, `var` and `function` definitions are
 
 If you access `var` variable before the declaration, you simply get an `undefined`:
 
-```javascript mark=2
+```javascript
 // Works, but don't do this!
 value; // => undefined
 
@@ -223,7 +223,7 @@ var value;
 
 However, a function can be used regarding where it is defined:
 
-```javascript mark=2,9
+```javascript
 // Works!
 greet('World'); // => 'Hello, World!'
 
@@ -239,7 +239,7 @@ Often you're not interested much in the function implementation, rather you just
 
 What's interesting that `import` modules are hoisted too:
 
-```javascript mark=2
+```javascript
 // Works!
 myFunction();
 
@@ -262,7 +262,7 @@ Because the variable is not defined, `typeof notDefined` evaluates to `undefined
 
 But `typeof` operator has a different behavior when used with variables in a Temporal Dead Zone. In this case, JavaScript throws an error:
 
-```javascript mark=1
+```javascript
 typeof variable; // throws `ReferenceError`
 
 let variable;
@@ -278,7 +278,7 @@ The Temporal Dead Zone affects the variable within the limits of the scope where
 
 Let's see an example:
 
-```javascript mark=3,6
+```javascript
 function doSomething(someVal) {
   // Function scope
   typeof variable; // => undefined

@@ -34,7 +34,7 @@ Before starting the performance comparisons, let's define two functions.
 
 The first one is `appendToTail()`:
 
-```javascript mark=2
+```javascript
 function appendToTail(item, array) {
   return [...array, item];
 }
@@ -47,7 +47,7 @@ appendToTail(10, numbers); // => [1, 2, 3, 10]
 
 The second one is `appendToHead()`:  
 
-```javascript mark=2
+```javascript
 function appendToHead(item, array) {
   return [item, ...array];
 }

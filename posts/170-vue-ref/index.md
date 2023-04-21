@@ -221,7 +221,7 @@ But other reactivity APIs can create refs implicitly. A common API creating refs
 
 Let's create a computed ref `evenOdd` that changes to `'even'` or `'odd'` depending on the `count` ref value:
 
-```vue mark=5
+```vue
 <script setup>
 import { ref, computed } from 'vue'
 
