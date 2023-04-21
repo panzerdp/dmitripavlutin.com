@@ -11,13 +11,13 @@ type: post
 
 I like React because its syntax is JavaScript, except when you write JSX.  
 
-JSX comments syntax is `{/* Comment */}`. To me, this syntax is probably too verbose.    
+When it comes to writing comments to support your code, React offers the syntax `{/* Comment */}`. To me, this syntax is a bit verbose.    
 
-Let's discuss the regular JSX comments syntax, but also 2 more readable and shorter ways to write comments in React components.  
+In this post you'll read about the regular JSX comments syntax, and, importantly, 2 additional shorter ways to write comments in React components.  
 
 ## 1. Regular JSX comments
 
-The regular way to write comments in JSX, also suggested by React documentation, is using the following syntax:
+The regular way to write comments in JSX is using the following syntax:
 
 ```jsx
 function MyComponent() {
@@ -67,7 +67,7 @@ In the case of `//` comments you have to add a newline after the comment.
 
 ## 2. JavaScript comments around JSX
 
-Again, the good thing about React is that outside JSX it's regular JavaScript code.  
+The good thing about React is that outside JSX it's regular JavaScript code.  
 
 You can that advantage of that and write JavaScript comments just before the JSX tag:
 
@@ -84,9 +84,9 @@ function MyComponent() {
 
 `// message prop requires a string` was added just before the JSX tag as a regular JavaScript comment.  
 
-That's my preferred way to comment in JSX because I don't have to use the verbose syntax `{/* message prop requires a string */}`.  
+That's a shorter way to comment in JSX because you don't have to use the verbose syntax `{/* message prop requires a string */}`.  
 
-JavaScript's `/* Comment */` also works if you have text to split into multiple lines:
+JavaScript's `/* Comment */` also works if you have text to split the comment into multiple lines:
 
 ```jsx
 function MyComponent() {
@@ -137,7 +137,7 @@ function MyComponent() {
 }
 ```
 
-Or add comments about a child component:
+Or add comments targeting a child component:
 
 ```jsx
 function MyComponent() {
@@ -157,9 +157,9 @@ That's my preferred way of commenting in JSX because it is concise and targets s
 
 To resume, you have 3 ways of adding comments in a React component: 
 
-1. JSX comments syntax `{/* Comment */}`
-2. JavaScript comments around JSX
-3. JavaScript comments inside a JSX tag
+1. JSX comments syntax `{/* Comment */}` (the ugly)
+2. JavaScript comments around JSX (the bad)
+3. JavaScript comments inside a JSX tag (the good)
 
 ```javascript
 function MyComponent() {
