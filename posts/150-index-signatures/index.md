@@ -54,8 +54,7 @@ An index signature fits the case of the salary parameter: the function should ac
 Let's annotate the `salaryObject` parameter with an index signature:
 
 
-```ts
-// mark
+```ts mark=1
 function totalSalary(salaryObject: { [key: string]: number }) {
   let total = 0;
   for (const name in salaryObject) {
@@ -124,12 +123,11 @@ const options: Options = {
 
 The key of the index signature can only be a `string`, `number`, or `symbol`. Other types are not allowed:
 
-```ts
+```ts mark=5
 interface OopsDictionary {
   // Type error: 
   // An index signature parameter type must be 'string', 'number', 
   // 'symbol', or a template literal type.  
-  // mark
   [key: boolean]: string;
 }
 ```

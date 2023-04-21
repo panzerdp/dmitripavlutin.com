@@ -46,7 +46,7 @@ function MyComponent() {
 
   const someEventHandler = (event) => {
     startTransition(() => {
-      // Mark updates as transitions
+      // updates as transitions
       setValue(event.target.value);
     });
   }
@@ -166,7 +166,7 @@ After [enabling](https://github.com/reactwg/react-18/discussions/5) the new Reac
 const [isPending, startTransition] = useTransition();
 
 startTransition(() => {
-  // Mark updates as transitions
+  // updates as transitions
   setStateValue(newValue);
 });
 ```

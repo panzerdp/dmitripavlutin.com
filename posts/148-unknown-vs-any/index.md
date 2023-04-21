@@ -57,9 +57,8 @@ An `unknown` type variable, same as `any`, accepts any value. But when trying to
 
 Let's change the type of `callback` param from `any` to `unknown`, and see what happens:
 
-```ts
+```ts mark=2
 function invokeAnything(callback: unknown) {
-  // mark
   callback(); // Type error: 'callback' is of type 'unknown'
 }
 
@@ -70,9 +69,8 @@ Because the `callback` argument is of type `unknown`, the statement `callback()`
 
 You need to perform type checking before using a variable of type `unknown`. In the example, you would simply need to check if `callback` is a function type:
 
-```ts
+```ts mark=2
 function invokeAnything(callback: unknown) {
-  // mark
   if (typeof callback === 'function') { 
     callback();
   }
