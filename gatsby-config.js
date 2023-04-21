@@ -19,7 +19,7 @@ module.exports = {
       options: {
         extensions: ['.md', '.mdx'],
         mdxOptions: {
-          remarkPlugins: [[remarkCodeHike, { theme, autoImport: false }]],
+          remarkPlugins: [[remarkCodeHike, { theme, autoImport: true }]],
         },
         gatsbyRemarkPlugins: [
           {
