@@ -238,7 +238,7 @@ If the forwarded ref is unexpectedly `undefined` or `null`, there are usually 2 
 
 First, you may have *forgotten to assign the forwarded ref to `ref` attribute of the HTML tag*:
 
-```jsx{6,13}
+```jsx mark=7,14
 import { useRef, useEffect, forwardRef } from 'react'
 
 export function Parent() {
@@ -263,7 +263,7 @@ To fix the problem just assign correctly the ref: `<div ref={ref}>Hello, World!<
 
 Second, you may have *conditionally displayed the referenced DOM element*:
 
-```jsx{23}
+```jsx mark=24
 import { useRef, useEffect, forwardRef, useState } from 'react'
 
 export function Parent() {
@@ -304,7 +304,7 @@ But what about using a custom prop, for example, `elementRef`, and passing the r
 
 Let's take a look:
 
-```jsx {10,13}
+```jsx mark=11,14
 import { useRef, useEffect } from "react"
 
 export function Parent() {

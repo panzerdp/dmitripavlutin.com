@@ -21,23 +21,17 @@ To annotate such function TypeScript offers the function overloading feature. Le
 
 Let's consider a function that returns a welcome message using a person's name:
 
-```twoslash include greet
+```ts
 function greet(person: string): string {
   return `Hello, ${person}!`;
 }
-```
-
-```ts twoslash
-// @include: greet
 ```
 
 The function above accepts 1 argument of type `string`: the name of the person.
 
 Invoking the function is pretty simple:
 
-```ts twoslash
-// @include: greet
-// ---cut---
+```ts
 greet('World'); // 'Hello, World!'
 ```
 
@@ -49,7 +43,9 @@ How to annotate such a function? There are 2 approaches.
 
 The first approach is straightforward and involves modifying the function signature directly by updating the parameter and return types:  
 
-```twoslash include greet-signature
+Here's how `greet()` looks after updating the parameter and return types:
+
+```ts
 function greet(person: string | string[]): string | string[] {
   if (typeof person === 'string') {
     return `Hello, ${person}!`;
@@ -60,18 +56,9 @@ function greet(person: string | string[]): string | string[] {
 }
 ```
 
-Here's how `greet()` looks after updating the parameter and return types:
-
-```ts twoslash
-// ---cut---
-// @include: greet-signature
-```
-
 Now you can invoke `greet()` in 2 ways:
 
-```ts twoslash
-// @include: greet-signature
-// ---cut---
+```ts
 greet('World');          // 'Hello, World!'
 greet(['Jane', 'Joe']); // ['Hello, Jane!', 'Hello, Joe!']
 ```
@@ -96,7 +83,7 @@ There can be only *one* implementation signature.
 
 Let's transform the function `greet()` to use the function overloading:
 
-```twoslash include greet-overloading
+```ts
 // Overload signatures
 function greet(person: string): string;
 function greet(persons: string[]): string[];
@@ -112,10 +99,6 @@ function greet(person: unknown): unknown {
 }
 ```
 
-```ts twoslash
-// @include: greet-overloading
-```
-
 The `greet()` function has 2 overload signatures and one implementation signature.  
 
 Each overload signature describes one way the function can be invoked. In the case of `greet()` function, you can call it 2 ways: with a string argument, or with an array of strings as an argument.  
@@ -124,9 +107,7 @@ The implementation signature `function greet(person: unknown): unknown { ... }` 
 
 Now, as before, you can invoke `greet()` with the arguments of type string or array of strings:
 
-```ts twoslash
-// @include: greet-overloading
-// ---cut---
+```ts
 greet('World');          // 'Hello, World!'
 greet(['Jane', 'Joe']);  // ['Hello, Jane!', 'Hello, Joe!']
 ```
@@ -135,14 +116,12 @@ greet(['Jane', 'Joe']);  // ['Hello, Jane!', 'Hello, Joe!']
 
 While the implementation signature implements the function behavior, however, it is *not directly callable*. Only the overload signatures are callable.  
 
-```ts twoslash
-// @errors: 2769
-// @include: greet-overloading
-// ---cut---
+```ts mark=6
 greet('World');         // Overload signature is callable
 greet(['Jane', 'Joe']); // Overload signature is callable
 
 const someValue: unknown = 'Unknown';
+// Type error: No overload matches this call.
 greet(someValue);       // Implementation signature is NOT callable
 ```
 
@@ -156,10 +135,11 @@ Otherwise, TypeScript won't accept the overload signature as being incompatible.
 
 For example, if you modify the implementation signature's return type from `unknown` to `string`:
 
-```ts twoslash
-// @errors: 2394 2322
+```ts mark=5
 // Overload signatures
 function greet(person: string): string;
+// Type error: This overload signature is not 
+// compatible with its implementation signature.
 function greet(persons: string[]): string[];
 
 // Implementation signature
@@ -181,7 +161,7 @@ During method overloading, both the overload signatures and implementation signa
 
 For example, let's implement a `Greeter` class, with an overload method `greet()`:
 
-```twoslash include greeter
+```ts
 class Greeter {
   message: string;
 
@@ -205,17 +185,11 @@ class Greeter {
 }
 ```
 
-```ts twoslash
-// @include: greeter
-```
-
 The `Greeter` class contains  `greet()` overload method: 2 overload signatures describing how the method can be called, and the implementation signature containing the proper implementation.  
 
 Thanks to method overloading you can call `hi.greet()` in 2 ways: using a string or using an array of strings as argument.    
 
-```ts twoslash
-// @include: greeter
-// ---cut---
+```ts
 const hi = new Greeter('Hi');
 
 hi.greet('Angela');       // 'Hi, Angela!'

@@ -13,7 +13,7 @@ Learning covariance and contravariance in TypeScript could be tricky (I know fro
 
 In this post, you'll read an accessible explanation of covariance and contravariance concepts.  
 
-<TableOfContents />
+<TableOfContents maxLevel={1} />
 
 
 ## 1. Subtyping
@@ -24,7 +24,7 @@ The substitutability means that a variable of base type can also accept subtype 
 
 For example, let's define a base class `User` and a class `Admin` that extends `User` class:
 
-```twoslash include user
+```ts
 class User {
   username: string;
 
@@ -32,9 +32,7 @@ class User {
     this.username = username;
   }
 }
-```
 
-```twoslash include admin
 class Admin extends User {
   isSuperAdmin: boolean;
 
@@ -45,22 +43,13 @@ class Admin extends User {
 }
 ```
 
-```ts twoslash
-// @include: user
-
-// @include: admin
-```
-
 Since `Admin` extends `User` (`Admin extends User`), you could say that `Admin` is a *subtype* of the *base type* `User`.  
 
 ![User and Admin Classes](./images/user-admin-3.svg)
 
 The substitutability of `Admin` (subtype) and `User` (base type) consists, for example, in the ability to assign to a variable of type `User` an instance of type `Admin`:
 
-```ts twoslash
-// @include: user
-// @include: admin
-// ---cut---
+```ts
 const user1: User = new User('user1');         // OK
 const user2: User = new Admin('admin1', true); // also OK
 ```
@@ -71,26 +60,15 @@ One of the great benefits is that you can define behavior that doesn't depend on
 
 For example, let's write a function that logs the user name to the console:
 
-```twoslash include log-username
+```ts
 function logUsername(user: User): void {
   console.log(user.username);
 }
 ```
 
-```ts twoslash
-// @include: user
-// @include: admin
-// ---cut---
-// @include: log-username
-```
-
 This function accepts arguments of type `User`, `Admin`, and instances of any other subtypes of `User` you might create later. That makes `logUsername()` more reusable and less bothered with details:
 
-```ts twoslash
-// @include: user
-// @include: admin
-// @include: log-username
-// ---cut---
+```ts
 logUsername(new User('user1'));         // logs "user1"
 logUsername(new Admin('admin1', true)); // logs "admin1"
 ```
@@ -107,41 +85,24 @@ Admin <: User
 
 Let's also define a helper type `IsSubtypeOf<S, P>`, which evaluates to `true` if `S` if a subtype of `P`, and `false` otherwise:
 
-```twoslash include is-subtype
+```ts
 type IsSubtypeOf<S, P> = S extends P ? true : false;
-```
-
-```ts twoslash
-// @include: user
-// @include: admin
-// ---cut---
-// @include: is-subtype
 ```
 
 `IsSubtypeOf<Admin, User>` evaluates to `true` because `Admin` is a subtype of `User`:
 
-```ts twoslash
-// @include: user
-// @include: admin
-// @include: is-subtype
-// ---cut---
-type T11 = IsSubtypeOf<Admin, User>;
-//   ^?
+```ts
+type T11 = IsSubtypeOf<Admin, User>; // true
 ```
 
 Subtyping is possible for many other types, including primitives and built-in JavaScript types. 
 
 For example, the literal string type `'Hello'` is a subtype of `string`, the literal number type `42` is a subtype of `number`, `Map<K, V>` is a subtype of `Object`.    
 
-```ts twoslash
-// @include: is-subtype
-// ---cut---
-type T12 = IsSubtypeOf<'hello', string>;
-//   ^?
-type T13 = IsSubtypeOf<42, number>;
-//   ^?
-type T14 = IsSubtypeOf<Map<string, string>, Object>
-//   ^?
+```ts
+type T12 = IsSubtypeOf<'hello', string>; // true
+type T13 = IsSubtypeOf<42, number>; // true
+type T14 = IsSubtypeOf<Map<string, string>, Object>; // true
 ```
 
 ## 2. Covariance
@@ -152,13 +113,8 @@ Here's an interesting question: having `Admin <: User`, does it mean that `Promi
 
 Let's make the experiment:
 
-```ts twoslash{5}
-// @include: user
-// @include: admin
-// @include: is-subtype
-// ---cut---
-type T21 = IsSubtypeOf<Promise<Admin>, Promise<User>>
-//   ^?
+```ts
+type T21 = IsSubtypeOf<Promise<Admin>, Promise<User>> // true
 ```
 
 Having `Admin <: User`, then `Promise<Admin> <: Promise<User>` indeed holds true. This demonstrates that `Promise` type is *covariant*.  
@@ -177,42 +133,28 @@ A) `Promise<V>` (demonstrated above)
 
 B) `Record<K,V>`:
 
-```ts twoslash
-// @include: user
-// @include: admin
-// @include: is-subtype
-// ---cut---
+```ts
 type RecordOfAdmin = Record<string, Admin>;
 type RecordOfUser  = Record<string, User>;
 
-type T22 = IsSubtypeOf<RecordOfAdmin, RecordOfUser>;
-//   ^?
+type T22 = IsSubtypeOf<RecordOfAdmin, RecordOfUser>; // true
 ```
 
 C) `Map<K,V>`:
 
-```ts twoslash
-// @include: user
-// @include: admin
-// @include: is-subtype
-// ---cut---
+```ts
 type MapOfAdmin = Map<string, Admin>;
 type MapOfUser  = Map<string, User>;
 
-type T23 = IsSubtypeOf<MapOfAdmin, MapOfUser>;
-//   ^?
+type T23 = IsSubtypeOf<MapOfAdmin, MapOfUser>; // true
 ```
 
 ## 3. Contravariance
 
 Now let's consider the following generic type:
 
-```twoslash include param
+```ts
 type Func<Param> = (param: Param) => void;
-```
-
-```ts twoslash
-// @include: param
 ```
 
 `Func<Param>` creates function types with one parameter of type `Param`.  
@@ -224,16 +166,9 @@ Having `Admin <: User`, which of the expressions is true:
 
 Let's take a try:
 
-```ts twoslash{5}
-// @include: user
-// @include: admin
-// @include: is-subtype
-// @include: param
-// ---cut---
-type T31 = IsSubtypeOf<Func<Admin>, Func<User>>
-//   ^?
-type T32 = IsSubtypeOf<Func<User>, Func<Admin>>
-//   ^?
+```ts
+type T31 = IsSubtypeOf<Func<Admin>, Func<User>> // false
+type T32 = IsSubtypeOf<Func<User>, Func<Admin>> // true
 ```
 
 `Func<User> <: Func<Admin>` holds true &mdash; meaning that `Func<User>` is a subtype of `Func<Admin>` . Note that the subtyping direction has *flipped* compared to the original types `Admin <: User`.  
@@ -246,20 +181,13 @@ Such behavior of `Func` type makes it *contravariant*. Speaking generally, *func
 
 The subtyping direction of function types is in the *opposite* direction of the subtyping of the parameter types.  
 
-```ts twoslash
-// @include: user
-// @include: admin
-// @include: is-subtype
-// @include: param
-// ---cut---
+```ts
 type FuncUser = (p: User) => void;
 type FuncAdmin = (p: Admin) => void;
 
-type T31 = IsSubtypeOf<Admin, User>;
-//   ^?
+type T31 = IsSubtypeOf<Admin, User>; // true
 
-type T32 = IsSubtypeOf<FuncUser, FuncAdmin>;
-//   ^?
+type T32 = IsSubtypeOf<FuncUser, FuncAdmin>; // true
 ```
 
 ## 4. Functions subtyping
@@ -276,17 +204,11 @@ In other words, the subtyping for functions requires that the parameter types be
 
 For example:
 
-```ts twoslash
-// @include: user
-// @include: admin
-// @include: is-subtype
-// @include: param
-// ---cut---
+```ts
 type SubtypeFunc = (p: User) => '1' | '2';
 type BaseFunc = (p: Admin) => string;  
 
-type T41 = IsSubtypeOf<SubtypeFunc, BaseFunc>
-//    ^?
+type T41 = IsSubtypeOf<SubtypeFunc, BaseFunc> // true
 ```
 
 `SubtypeFunc <: BaseFunc` because:
@@ -298,7 +220,7 @@ Knowing subtyping greatly helps to understand the substitutability of function t
 
 For example, having a list of `Admin` instances:
 
-```twoslash include admins
+```ts
 const admins: Admin[] = [
   new Admin('john.smith', false),
   new Admin('jane.doe', true),
@@ -306,42 +228,32 @@ const admins: Admin[] = [
 ];
 ```
 
-```ts twoslash
-// @include: user
-// @include: admin
-// ---cut---
-// @include: admins
-```
-
 What types of callbacks does the `admins.filter(...)` accept?
 
 Obviously, it accepts a callback with one parameter of type `Admin`:
 
-```ts twoslash
-// @include: user
-// @include: admin
-// ---cut---
-// @include: admins
+```ts
+const admins: Admin[] = [
+  new Admin('john.smith', false),
+  new Admin('jane.doe', true),
+  new Admin('joker', false)
+];
 
 const superAdmins = admins.filter((admin: Admin): boolean => {
   return admin.isSuperAdmin;
 });
 
-superAdmins; // [ Admin('jane.doe', true) ]
+console.log(superAdmins); // [ Admin('jane.doe', true) ]
 ```
 
 But would `admins.filter(...)` accept a callback which parameter type is `User`?
 
-```ts twoslash
-// @include: user
-// @include: admin
-// @include: admins
-// ---cut---
+```ts
 const jokers = admins.filter((user: User): boolean => {
   return user.username.startsWith('joker');
 });
 
-jokers; // [ Admin('joker', false) ]
+console.log(jokers); // [ Admin('joker', false) ]
 ```
 
 Yes, `admins.filter()` accepts `(admin: Admin) => boolean` base type, but also its subtypes like `(user: User) => boolean`.  

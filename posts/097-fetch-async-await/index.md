@@ -58,7 +58,7 @@ The `response` object, returned by the `await fetch()`, is a generic placeholder
 
 For example, you can extract the JSON object from a fetch response:
 
-```javascript {3}
+```javascript mark=4
 async function fetchMoviesJSON() {
   const response = await fetch('/movies');
   const movies = await response.json();
@@ -112,7 +112,7 @@ In the above example, the `response.ok` property is `false` because the response
 
 To throw an error on a *bad HTTP status* (outside of the range `200-299`), check the value of `response.ok` property and throw an error manually:
 
-```javascript{3-6}
+```javascript mark=4:7
 async function fetchMoviesBadStatus() {
   const response = await fetch('/oops');
 
@@ -155,7 +155,7 @@ C) Finally, if you need to cancel the request, just call `controller.abort()` me
 
 For example, let's implement 2 buttons that control a fetch request. Clicking the button *Fetch movies* starts a `fetch()` request, while clicking *Cancel fetch* aborts the request in progress:
 
-```javascript{3,6,16}
+```javascript mark=4,7,17
 let controller = null;
 
 fetchMoviesButton.addEventListener('click', async () => {
@@ -191,7 +191,7 @@ To perform parallel fetch requests use the [Promise.all()](https://developer.moz
 
 Let's start 2 parallel requests to fetch movies and categories:
 
-```javascript{1-4}
+```javascript mark=2:5
 async function fetchMoviesAndCategories() {
   const [moviesResponse, categoriesResponse] = await Promise.all([
     fetch('/movies'),

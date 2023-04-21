@@ -64,7 +64,7 @@ The placeholder has a special format: `${expressionToEvaluate}`. The expression 
 
 Here's an example:
 
-```javascript{3}
+```javascript mark=4
 const greeting = 'Hello';
 const who = 'World';
 
@@ -78,7 +78,7 @@ During runtime, the first placeholder `${greeting}` is replaced with the value o
 
 You can put any expression inside the placeholder: either an operator, a function call, or even more complex expressions.  
 
-```javascript{3,9}
+```javascript mark=4,10
 const n1 = 2;
 const n2 = 3;
 
@@ -162,7 +162,7 @@ The template strings should be used instead of string concatenation to construct
 
 If for some reason you're still concatenating string literals and expressions using `+` operator:
 
-```javascript{2}
+```javascript mark=3
 const n1 = 2;
 const n2 = 3;
 const message = 'The sum of ' + n1 + ' and ' + n2 + ' is ' + (n1 + n2);
@@ -172,7 +172,7 @@ console.log(message); // => 'The sum of 2 and 3 is 5'
 
 Then switch to template strings and placeholders instead:
 
-```javascript{2}
+```javascript mark=3
 const n1 = 2;
 const n2 = 3;
 const message = `The sum of ${n1} and ${n2} is ${n1 + n2}`;
@@ -200,7 +200,7 @@ console.log(message); // => 'Sum: 5, difference: -1, pow: 8'
 
 The more complex the placeholders are, the more tempting is to add helper variables to store intermediate values. 
 
-```javascript{3-5}
+```javascript mark=4:6
 const n1 = 2;
 const n2 = 3;
 
@@ -221,7 +221,7 @@ I recommended using single quotes `'` rather than backticks `` ` `` in the expre
 
 Let's use the ternary operator. When the placeholder uses backticks `` ` `` it's quite difficult to read the template string because there are too many backticks in the template string:
 
-```javascript{1}
+```javascript mark=2
 function getLoadingMessage(isLoading) {
   return `Data is ${isLoading ? `loading...` : `done!`}`;
 }
@@ -229,7 +229,7 @@ function getLoadingMessage(isLoading) {
 
 Using single quotes inside the placeholder just looks better:
 
-```javascript{1}
+```javascript mark=2
 function getLoadingMessage(isLoading) {
   return `Data is ${isLoading ? 'loading...' : 'done!'}`;
 }
@@ -241,7 +241,7 @@ The string interpolation is helpful in many situations. But when the template st
 
 The following component builds the CSS class based on 2 variables:
 
-```jsx{2}
+```jsx mark=3
 function LoadingMessage({ isLoading, isModal }) {
   const className = 
    `${isLoading ? 'loading' : ''} ${isModal ? 'modal' : ''}`;
@@ -260,7 +260,7 @@ A tool like [classnames](https://github.com/JedWatson/classnames) might be a bet
 
 Let's refactor the component to use `classnames`:
 
-```jsx{3-6}
+```jsx mark=4:7
 import classNames from 'classnames';
 
 function LoadingMessage({ isLoading, isModal }) {
@@ -301,7 +301,7 @@ The string interpolation in React consists of 2 cases:
 
 Here's an example that shows both cases:
 
-```jsx{5,8}
+```jsx mark=6,9
 import React from 'react';
 
 export function BuyProductsButton({ count, buy }) {

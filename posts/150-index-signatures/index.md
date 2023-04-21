@@ -11,7 +11,7 @@ type: post
 
 You have 2 objects that describe the salary of 2 software developers:
 
-```twoslash include salary-objects
+```ts
 const salary1 = {
   baseSalary: 100_000,
   yearlyBonus: 20_000
@@ -22,13 +22,9 @@ const salary2 = {
 };
 ```
 
-```ts twoslash
-// @include: salary-objects
-```
-
 You want to implement a function that returns the total remuneration based on the salary object:
 
-```ts{0}
+```ts mark=1
 function totalSalary(salaryObject: ???) {
   let total = 0;
   for (const name in salaryObject) {
@@ -57,7 +53,9 @@ An index signature fits the case of the salary parameter: the function should ac
 
 Let's annotate the `salaryObject` parameter with an index signature:
 
-```twoslash include total-salary
+
+```ts
+// mark
 function totalSalary(salaryObject: { [key: string]: number }) {
   let total = 0;
   for (const name in salaryObject) {
@@ -65,13 +63,6 @@ function totalSalary(salaryObject: { [key: string]: number }) {
   }
   return total;
 }
-```
-
-
-```ts twoslash{1}
-// @include: salary-objects
-// ---cut---
-// @include: total-salary
 
 console.log(totalSalary(salary1)); // => 120_000
 console.log(totalSalary(salary2)); // => 110_000
@@ -83,14 +74,15 @@ Now the `totalSalary()` accepts as arguments both `salary1` and `salary2` object
 
 However, the function would not accept an object that has, for example, strings as values:
 
-```ts twoslash
-// @errors: 2345
-// @include: total-salary
-// ---cut---
+```ts
 const salary3 = {
   baseSalary: '100 thousands'
 };
 
+// Type error:
+// Argument of type '{ baseSalary: string; }' is not assignable to parameter of type '{ [key: string]: number; }'.
+//   Property 'baseSalary' is incompatible with index signature.
+//     Type 'string' is not assignable to type 'number'.
 totalSalary(salary3);
 ```
 
@@ -102,7 +94,7 @@ Here are a few examples of index signatures.
 
 `string` type is the key and value:
 
-```ts twoslash
+```ts
 interface StringByString {
   [key: string]: string;
 }
@@ -115,7 +107,7 @@ const heroesInBooks: StringByString = {
 
 The `string` type is the key, the value can be a `string`, `number`, or `boolean`:
 
-```ts twoslash
+```ts
 interface Options {
   [key: string]: string | number | boolean;
   timeout: number;
@@ -132,9 +124,12 @@ const options: Options = {
 
 The key of the index signature can only be a `string`, `number`, or `symbol`. Other types are not allowed:
 
-```ts twoslash
-// @errors: 1268
+```ts
 interface OopsDictionary {
+  // Type error: 
+  // An index signature parameter type must be 'string', 'number', 
+  // 'symbol', or a template literal type.  
+  // mark
   [key: boolean]: string;
 }
 ```
@@ -149,7 +144,7 @@ What would happen if you try to access a non-existing property of an object whos
 
 As expected, TypeScript infers the type of the value to `string`. But if you check the runtime value &mdash; it's `undefined`:
 
-```ts twoslash
+```ts
 interface StringByString {
   [key: string]: string;
 }
@@ -158,7 +153,6 @@ const object: StringByString = {};
 
 const value = object['nonExistingProp'];
 console.log(value); // => undefined
-//           ^?
 ```
 
 `value` variable is a `string` type according to TypeScript, however, its runtime value is `undefined`.  
@@ -167,7 +161,7 @@ The index signature maps a key type to a value type &mdash; that's all. If you d
 
 To make typing more accurate, mark the indexed value as `string` or `undefined`. Doing so, TypeScript becomes aware that the properties you access might not exist:
 
-```ts twoslash{2}
+```ts mark=2
 interface StringByString {
   [key: string]: string | undefined;
 }
@@ -176,14 +170,13 @@ const object: StringByString = {};
 
 const value = object['nonExistingProp'];
 console.log(value); // => undefined
-//           ^?
 ```
 
 ### 3.2 String and number key
 
 Let's say you have a dictionary of number names:
 
-```twoslash include loose
+```ts
 interface NumbersNames {
   [key: string]: string
 }
@@ -196,26 +189,16 @@ const names: NumbersNames = {
 };
 ```
 
-```ts twoslash
-// @include: loose
-```
-
 Accessing a value by a string key works as expected:
 
-```ts twoslash
-// @include: loose
-// ---cut---
-const value1 = names['1'];
-//     ^?
+```ts
+const value1 = names['1']; // OK
 ```
 
 Would it be an error if you access a value by a number `1`?
 
-```ts twoslash
-// @include: loose
-// ---cut---
-const value2 = names[1];
-//     ^?
+```ts
+const value2 = names[1]; // OK
 ```
 
 Nope, all good!
@@ -228,7 +211,7 @@ You can think that `[key: string]` is the same as `[key: string | number]`.
 
 TypeScript has a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type) `Record<Keys, Values>` to annotate records, similar to the index signature.  
 
-```ts twoslash
+```ts
 const object1: Record<string, string> = { prop: 'Value' }; // OK
 const object2: { [key: string]: string } = { prop: 'Value' }; // OK
 ```
@@ -237,9 +220,11 @@ The big question is... when to use a `Record<Keys, Values>` and when an index si
 
 As you saw earlier, the index signature accepts only `string`, `number` or `symbol` as key type. If you try to use, for example, a union of string literal types as keys in an index signature, it would be an error:
 
-```ts twoslash
-// @errors: 1337
+```ts mark=5
 interface Salary {
+  // Type error:
+  // An index signature parameter type cannot be a literal type or generic type. 
+  // Consider using a mapped object type instead.
   [key: 'yearlySalary' | 'yearlyBonus']: number
 }
 ```
@@ -248,7 +233,7 @@ This behavior suggests that *the index signature is meant to be generic in regar
 
 But you can use a union of string literals to describe the keys in a `Record<Keys, Values>`:
 
-```ts twoslash
+```ts
 type SpecificSalary = Record<'yearlySalary'|'yearlyBonus', number>
 type GenericSalary = Record<string, number>
 

@@ -1,5 +1,7 @@
 import { GatsbyImage } from 'gatsby-plugin-image'
 
+import './code-hike.scss'
+
 import * as styles from './index.module.scss'
 import { PostPlain, PostDetailed } from 'typings/post'
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData'

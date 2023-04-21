@@ -56,7 +56,7 @@ const moduleVersion2 = await import(getPath('v2.0'));
 
 `import(path)`, returning a promise, works great with the `async/await` syntax. For example, let's load a module inside of an asynchronous function:
 
-```javascript{1}
+```javascript mark=2
 async function loadMyModule() {
   const myModule = await import('./myModule.js');
   // ... use myModule
@@ -82,7 +82,7 @@ export const concat = (paramA, paramB) => paramA + paramB;
 
 To dynamically import `namedConcat.js`, and access the named export `concat`, then destructure the resolved module object by the named export:
 
-```javascript{1}
+```javascript mark=2
 async function loadMyModule() {
   const { concat } = await import('./namedConcat.js');
   concat('b', 'c'); // => 'bc'
@@ -106,7 +106,7 @@ When importing `defaultConcat.js` dynamically, and specifically accessing the `d
 
 But there's a nuance. `default` is a keyword in JavaScript, so it cannot be used as a variable name. What you do is use [destructuring with aliasing](/javascript-object-destructuring/#5-aliases):
 
-```javascript{1}
+```javascript mark=2
 async function loadMyModule() {
   const { default: defaultFunc } = await import('./defaultConcat.js');
   defaultFunc('b', 'c'); // => 'bc'

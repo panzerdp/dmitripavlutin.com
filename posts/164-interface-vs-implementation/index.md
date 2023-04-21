@@ -31,7 +31,7 @@ For example, you have the task of implementing a class `ListRenderer`. The class
 
 Here's how you could implement the `ListRenderer` class:
 
-```twoslash include list-renderer
+```ts
 class ListRenderer {
   render(names: string[]): string {
     let html = '<ul>';
@@ -44,15 +44,9 @@ class ListRenderer {
 }
 ```
 
-```ts twoslash
-// @include: list-renderer
-```
-
 And now let's use the list renderer to render some names:
 
-```ts twoslash
-// @include: list-renderer
-// ---cut---
+```ts
 const renderer = new ListRenderer();
 
 renderer.render(['Joker', 'Catwoman', 'Batman']);
@@ -76,7 +70,7 @@ Let's say there's a new requirement to also *sort alphabetically the rendered na
 
 You can implement this requirement by creating a new sorter class, for example, `SortAlphabetically`:
 
-```twoslash include sort-alphabetically
+```ts
 class SortAlphabetically {
   sort(strings: string[]): string[] {
     return [...strings].sort((s1, s2) => s1.localeCompare(s2))
@@ -84,15 +78,11 @@ class SortAlphabetically {
 }
 ```
 
-```ts twoslash
-// @include: sort-alphabetically
-```
-
 where `s1.localCompare(s2)` is a [string method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare) that compare whether `s1` comes alphabetically before or after `s2`.  
 
 Then integrate `SortAlphabetically` into the `ListRender`, enabling the sorting of the names before rendering:
 
-```twoslash include renderer-implementation
+```ts mark=2,5,9
 class ListRenderer {
   sorter: SortAlphabetically;
 
@@ -114,18 +104,9 @@ class ListRenderer {
 }
 ```
 
-```ts twoslash{2,5,9}
-// @include: sort-alphabetically
-// ---cut---
-// @include: renderer-implementation
-```
-
 Now with the new sorting logic integrated, the list renders the names sorted alphabetically:
 
-```ts twoslash
-// @include: sort-alphabetically
-// @include: renderer-implementation
-// ---cut---
+```ts
 const renderer = new ListRenderer();
 
 renderer.render(['Joker', 'Catwoman', 'Batman']);
@@ -141,9 +122,9 @@ renderer.render(['Joker', 'Catwoman', 'Batman']);
 
 Now let's look closer at the sorter instantiation line: 
 
-```
+```ts
   this.sorter = new SortAlphabetically();
-``` 
+```
 
 This is programming to implementation because `ListRenderer` uses a *concrete* implementation of the sorter, and exactly `SortAlphabetically` implementation.  
 
@@ -161,7 +142,7 @@ For example, you might want to sort the names alphabetically in ascending or des
 
 When using programming to implementation you will start bloating your main component with the sorting implementation details. This quickly makes your code hard to reason about and hard to change:
 
-```typescript{4-6}
+```typescript mark=5:7
 class ListRenderer {
   sorter: SortAlphabetically | SortAlphabeticallyDescending;
 
@@ -214,21 +195,17 @@ Ok, let's see how to put programming to an interface into practice to improve th
 
 1) Defining the interface `Sorter` should be relatively easy:
 
-```twoslash include sorter
+```ts
 interface Sorter {
   sort(strings: string[]): string[]
 }
-```
-
-```ts twoslash
-// @include: sorter
 ```
 
 `Sorter` interface contains just one method `sort()` that sorts an array of strings. The interface isn't concerned about how the `sort()` method works: just that it accepts an array of strings and should return an array of sorted strings.  
 
 2) Making the `ListRender` use the `Sorter` interface is easy too. Just remove the references to the concrete implementations and use the `Sorter` interface solely:
 
-```twoslash include renderer-to-interface
+```ts mark=2,4:5
 class ListRenderer {
   sorter: Sorter;
 
@@ -250,19 +227,13 @@ class ListRenderer {
 }
 ```
 
-```ts twoslash{2,4-5}
-// @include: sorter
-// ---cut---
-// @include: renderer-to-interface
-```
-
 Now `ListRenderer` doesn't depend on a concrete implementation of the sorting. That makes the class easy to reason about and decoupled from sorting logic. It depends on a very stable thing: the `Sorter` interface.  
 
 The presence of `sorter: Sorter` in the `ListRenderer` is what is called *programming to an interface*.  
 
 3) Finally, making the concrete sorting class implement the `Sorter` interface is relatively easy too:
 
-```twoslash include sort-alpha
+```ts
 class SortAlphabetically implements Sorter {
   sort(strings: string[]): string[] {
     return [...strings].sort((s1, s2) => s1.localeCompare(s2))
@@ -270,24 +241,12 @@ class SortAlphabetically implements Sorter {
 }
 ```
 
-```twoslash include sort-alpha-desc
+```ts
 class SortAlphabeticallyDescending implements Sorter {
   sort(strings: string[]): string[] {
     return [...strings].sort((s1, s2) => s2.localeCompare(s1))
   }
 }
-```
-
-```ts twoslash
-// @include: sorter
-// ---cut---
-// @include: sort-alpha
-```
-
-```ts twoslash
-// @include: sorter
-// ---cut---
-// @include: sort-alpha-desc
 ```
 
 ## 4. Benefits vs increased complexity
@@ -300,11 +259,7 @@ As such `ListRenderer` is decoupled from any concrete implementations of sorting
 
 Now you can supply different implementations of sorting. In one case you can use sorting alphabetically ascending:
 
-```ts twoslash
-// @include: sorter
-// @include: renderer-to-interface
-// @include: sort-alpha
-// ---cut---
+```ts
 const names = ['Joker', 'Catwoman', 'Batman'];
 
 const rendererAscending = new ListRenderer(
@@ -322,11 +277,7 @@ rendererAscending.render(names);
 
 In another case you can easily compose the `ListRenderer` to sort the names descending, without modifying the source code of `ListRenderer`:
 
-```ts twoslash
-// @include: sorter
-// @include: renderer-to-interface
-// @include: sort-alpha-desc
-// ---cut---
+```ts
 const names = ['Joker', 'Catwoman', 'Batman'];
 
 const rendererDescending = new ListRenderer(

@@ -23,7 +23,7 @@ TypeScript is useful if you're coding middle and bigger size web applications. A
 
 For example, let's say I am the author of a component that displays a formatted date on the screen.  
 
-```twoslash include format-date-component
+```ts mark=2
 interface FormatDateProps {
   date: Date
 }
@@ -33,19 +33,13 @@ function FormatDate({ date }: FormatDateProps): JSX.Element {
 }
 ```
 
-```tsx twoslash{2}
-// @include: format-date-component
-```
-
 According to the `FormatDateProps` interface, the component `FormatDate` the value of `date` prop can only be an instance of `Date`. That is a *constraint*.  
 
 Why is this constraint important? Because the `FormatDate` component calls the method `date.toLocaleString()` on the date instance, and the `date` prop have to be a date instance. Otherwise, the component wouldn't work.    
 
 Then the user of the `FormatDate` component would have to satisfy the constraint, and provide `date` prop only with `Date` instances:
 
-```tsx twoslash
-// @include: format-date-component
-// ---cut---
+```tsx
 <FormatDate
   date={new Date()}
 />
@@ -53,10 +47,9 @@ Then the user of the `FormatDate` component would have to satisfy the constraint
 
 If the user forgets about the constraint, and for example provides a string `"Sep 28 2021"` to `date` prop:
 
-```tsx twoslash
-// @errors: 2322
-// @include: format-date-component
-// ---cut---
+```tsx mark=4
+// Type error:
+// Type 'string' is not assignable to type 'Date'.
 <FormatDate
   date="Sep 28 2021"
 />
@@ -79,7 +72,7 @@ B) Then use the interface to annotate the props parameter inside the functional 
 
 For example, let's annotate a component `Message` that accepts 2 props: `text` (a string) and `important` (a boolean):
 
-```twoslash include message
+```tsx
 interface MessageProps {
   text: string;
   important: boolean;
@@ -95,17 +88,11 @@ function Message({ text, important }: MessageProps) {
 }
 ```
 
-```tsx twoslash
-// @include: message
-```
-
 `MessageProps` is the interface that describes the props the component accepts: `text` prop as `string`, and `important` as `boolean`.  
 
 Now when rendering the component, you have to set the prop values according to the props type:
 
-```tsx twoslash
-// @include: message
-// ---cut---
+```tsx
 <Message
   text="The form has been submitted!"
   important={false}
@@ -122,23 +109,22 @@ Usually, a bug is caught in one of the following phases &mdash; type checking, u
 
 If the `Message` component renders with an invalid prop value:
 
-```tsx twoslash
-// @errors: 2322
-// @include: message
-// ---cut---
+```tsx mark=5
 <Message
   text="The form has been submitted!"
+  // Type error:
+  // Type 'number' is not assignable to type 'boolean'.
   important={0}
 />
 ```
 
 or without a prop:
 
-```tsx twoslash
-// @errors: 2741
-// @include: message
-// ---cut---
+```tsx mark=5
 <Message
+  // Type error:
+  // Property 'text' is missing in type '{ important: true; }' 
+  // but required in type 'MessageProps'.
   important={true}
 />
 ```
@@ -153,7 +139,7 @@ Mostly the content of the `children` prop is a JSX element, which can be typed u
 
 Let's slightly change the `Message` component to use a `children` prop:
 
-```twoslash include message-children
+```tsx
 interface MessageProps {
   children: JSX.Element | JSX.Element[];
   important: boolean;
@@ -169,17 +155,11 @@ function Message({ children, important }: MessageProps) {
 }
 ```
 
-```tsx twoslash{2}
-// @include: message-children
-```
-
 Take a look at the `children` prop in the interface: it accepts a single element `JSX.Element` or an array of element `JSX.Element[]`.  
 
 Now you can use an element as a child to indicate the message:
 
-```tsx twoslash
-// @include: message-children
-// ---cut---
+```tsx
 <Message important={false}>
   <span>The form has been submitted!</span>
 </Message>
@@ -187,9 +167,7 @@ Now you can use an element as a child to indicate the message:
 
 or multiple children:
 
-```tsx twoslash
-// @include: message-children
-// ---cut---
+```tsx
 <Message important={false}>
   <span>The form has been submitted!</span>
   <span>Your request will be processed.</span>
@@ -204,12 +182,11 @@ To make a prop [optional](https://www.typescriptlang.org/docs/handbook/2/objects
 
 For example, let's mark the `important` prop as optional:
 
-```twoslash include message-optional
+```tsx mark=3,6
 interface MessageProps {
   children: JSX.Element | JSX.Element[];
   important?: boolean;
 }
-// - 1
 
 function Message({ children, important = false }: MessageProps) {
   return (
@@ -219,11 +196,6 @@ function Message({ children, important = false }: MessageProps) {
     </div>
   );
 }
-// - 2
-```
-
-```tsx twoslash{3,6}
-// @include: message-optional
 ```
 
 Inside `MessageProps` interface the `important` prop is marked with an `?` &mdash; `important?: boolean` &mdash; making the prop optional.  
@@ -232,9 +204,7 @@ Inside the `Message` function I have also added a `false` default value to the `
 
 Now TypeScript allows you to skip the `important` prop:
 
-```tsx twoslash
-// @include: message-optional
-// ---cut---
+```tsx
 <Message>
   <span>The form has been submitted!</span>
 </Message>
@@ -242,9 +212,7 @@ Now TypeScript allows you to skip the `important` prop:
 
 Of course, you can still use `important` if you'd like to:
 
-```tsx twoslash
-// @include: message-optional
-// ---cut---
+```tsx
 <Message important={true}>
   <span>The form has been submitted!</span>
 </Message>
@@ -254,21 +222,14 @@ Of course, you can still use `important` if you'd like to:
 
 In the previous examples `Message` function doesn't indicate explicitly its return type. That's because TypeScript is smart and can infer the function's return type &mdash; `JSX.Element`:    
 
-```tsx twoslash{3,6}
-// @include: message-optional-1
-// @include: message-optional-2
-// ---cut---
-
+```tsx
+// MessageReturnType is JSX.Element
 type MessageReturnType = ReturnType<typeof Message>;
-//      ^?
 ```
 
 In the case of React functional components the return type is usually `JSX.Element`:
 
-```tsx twoslash{5}
-// @include: message-optional-1
-// ---cut---
-
+```tsx mark=4
 function Message({ 
     children, 
     important = false 
@@ -285,7 +246,7 @@ function Message({
 There are cases when the component might return nothing in certain conditions. If that's the case, just use
 a union `JSX.Element | null` as the return type:
 
-```tsx twoslash
+```tsx
 interface ShowTextProps {
   show: boolean;
   text: string;
@@ -307,9 +268,10 @@ My recommendation is to [enforce](https://github.com/typescript-eslint/typescrip
 
 For example, if you have set accidently a newline between `return` and the returned expression, then the explicitly indicated return type would catch this problem:
 
-```tsx twoslash
-// @errors: 2322
+```tsx mark=4
 function BrokenComponent(): JSX.Element {
+  // Type error:
+  // Type 'undefined' is not assignable to type 'Element'.
   return
     <div>Hello!</div>;
 }
@@ -319,7 +281,7 @@ function BrokenComponent(): JSX.Element {
 
 However, if there's no return type indicated, the incorrectly used `return` remains unnoticed by TypeScript (and by you!):
 
-```tsx twoslash
+```tsx
 function BrokenComponent() {
   return 
     <div>Hello!</div>;

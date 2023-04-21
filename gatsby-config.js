@@ -1,6 +1,9 @@
 require('dotenv').config({
   path: '.env',
 })
+const theme = require('shiki/themes/one-dark-pro.json')
+const { remarkCodeHike } = require('@code-hike/mdx')
+const codesandbox = require('remark-codesandbox')
 
 module.exports = {
   siteMetadata: require('./gatsby/config/site-metadata'),
@@ -15,6 +18,9 @@ module.exports = {
       resolve: 'gatsby-plugin-mdx',
       options: {
         extensions: ['.md', '.mdx'],
+        mdxOptions: {
+          remarkPlugins: [[codesandbox, { mode: 'button' }], [remarkCodeHike, { theme }]],
+        },
         gatsbyRemarkPlugins: [
           {
             resolve: 'gatsby-plugin-image',
@@ -38,12 +44,6 @@ module.exports = {
             options: {
               wrapperStyle: 'margin-bottom: 1.0725rem',
             },
-          },
-          {
-            resolve: 'gatsby-remark-shiki-twoslash',
-            options: {
-              theme: 'one-dark-pro',
-            }
           },
           'gatsby-remark-copy-linked-files',
           {

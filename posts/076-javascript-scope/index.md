@@ -270,7 +270,7 @@ The global scope is a mechanism that lets the host of JavaScript (browser, Node)
 
 Let's define 2 functions, having the function `innerFunc()` is nested inside `outerFunc()`.  
 
-```javascript{6,13}
+```javascript mark=7,14
 function outerFunc() {
   // the outer scope
   let outerVar = 'I am from outside!';
@@ -311,7 +311,7 @@ You can reuse common variables names (`count`, `index`, `current`, `value`, etc)
 
 `foo()` and `bar()` function scopes have their own, but same named, variables `count`:
 
-```javascript{3,9}
+```javascript mark=4,10
 function foo() {
   // "foo" function scope
   let count = 0;

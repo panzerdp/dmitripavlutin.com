@@ -54,7 +54,7 @@ Synchronous code is straightforward. But you don't always have the luck to acces
 
 For example, let's say that accessing the list of persons from `getList()` is an operation that requires, for example, 1 second.  
 
-```javascript{2,7}
+```javascript mark=3,8
 function getList() {
   setTimeout(() => {
     ['Joker', 'Batman'] // How to return the list?
@@ -191,7 +191,7 @@ promise
 
 Here's how to access the value of the promise returned by `getList()`:
 
-```javascript{9-11}
+```javascript mark=10:12
 function getList() {
   return new Promise(resolve => {
     setTimeout(() => resolve(['Joker', 'Batman']), 1000);
@@ -210,7 +210,7 @@ promise
 
 Having the knowledge of how to extract a fulfilled value from a promise, let's transform `findPerson(who)` to extract the list from the promise returned by `getList()`:
 
-```javascript {11-14}
+```javascript mark=12:15
 function getList() {
   return new Promise(resolve => {
     setTimeout(() => resolve(['Joker', 'Batman']), 1000);
@@ -251,7 +251,7 @@ promise
 
 For example, let's imagine that accessing the list of persons ends in an error (note the use of `reject(error)` function):
 
-```javascript{9-11}
+```javascript mark=10:12
 function getList() {
   return new Promise((resolve, reject) => {
     setTimeout(() => reject(new Error('Nobody here!')), 1000);
@@ -301,7 +301,7 @@ Let's look closer at approach B) since it's used more often.
 
 When using `promise.then(successCallback).catch(errorCallback)` chain, if `promise` resolves successfully then only `successCallback` is called:
 
-```javascript{10}
+```javascript mark=11
 function getList() {
   return new Promise(resolve => {
     setTimeout(() => resolve(['Joker', 'Batman']), 1000);
@@ -323,7 +323,7 @@ promise
 
 However, in case if `promise` rejects, then only `errorCallback` is called:
 
-```javascript{13}
+```javascript mark=14
 function getList() {
   return new Promise((resolve, reject) => {
     setTimeout(() => reject(new Error('Nobody here!')), 1000);
@@ -441,7 +441,7 @@ When JavaScript encounters `await promise`, where `promise` is pending, it's goi
 
 Now let's use `async/await` syntax to access the delayed list:
 
-```javascript{6,7}
+```javascript mark=7,8
 function getList() {
   return new Promise(resolve => {
     setTimeout(() => resolve(['Joker', 'Batman']), 1000);
@@ -486,7 +486,7 @@ async function myFunction() {
 
 For example, let's reject the promise that should return the list of persons:
 
-```javascript{13}
+```javascript mark=14
 function getList() {
   return new Promise((resolve, reject) => {
     setTimeout(() => reject(new Error('Nobody here!')), 1000);

@@ -79,7 +79,7 @@ console.log({ ...person };// => { name: 'Dave', surname: 'Bowman' }
 
 Now let's create a non-enumerable property `.age` on `person` object. Then see how spread behaves:   
 
-```javascript{1}
+```javascript mark=2
 Object.defineProperty(person, 'age', {
   enumerable: false, // Make the property non-enumerable
   value: 25
@@ -179,7 +179,7 @@ const cat = {
 
 Let's play Dr. Frankenstein and transform this cat into a dog. Pay attention to the value of `.sound` property:  
 
-```javascript{3}
+```javascript mark=4
 const dog = {
   ...cat,
   ...{
@@ -193,7 +193,7 @@ The latter value `'woof'` overwrites earlier value `'meow'` (which comes from `c
 
 Same rule applies to regular properties of the object initializer:  
 
-```javascript{2}
+```javascript mark=3
 const anotherDog = {
   ...cat,
   sound: 'woof' // <---- Overwrites cat.sound
@@ -204,7 +204,7 @@ The regular property `sound: 'woof'` wins because it is the latest.
 
 Now if you swap the spread objects relative position, the result is different:
 
-```javascript{2}
+```javascript mark=3
 const stillCat = {
   ...{
     sound: 'woof' // <---- Is overwritten by cat.sound
@@ -321,7 +321,7 @@ Therefore calling `doomClone.getMessage()` throws a `TypeError`, since `doomClon
 
 To fix the missing prototype indicate it manually using `__proto__`:  
 
-```javascript{2}
+```javascript mark=3
 const doomFullClone = {
   ...doom,
   __proto__: Game.prototype
@@ -368,7 +368,7 @@ const book = {
 
 Then a new 6th edition comes out. Object spread let's you program this scenario in an immutable manner:  
 
-```javascript{2-3}
+```javascript mark=3:4
 const newerBook = {
   ...book,
   edition: 6,  // <----- Overwrites book.edition
@@ -422,7 +422,7 @@ Don't forget about the *latter property wins* rule. It gives the reasoning about
 
 Let's change a bit the previous example. Now `part1` and `part3` have a new property `.configuration`:
 
-```javascript{15}
+```javascript mark=16
 const part1 = {
   color: 'white',
   configuration: 'sedan'
@@ -532,7 +532,7 @@ const box = {
 
 To make the box higher by increasing `box.size.height`, just spread properties on the nested object:  
 
-```javascript{3}
+```javascript mark=4
 const biggerBox = {
   ...box,
   size: {

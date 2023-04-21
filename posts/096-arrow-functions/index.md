@@ -67,7 +67,7 @@ In other words, the arrow function doesn't define its own execution context.
 
 In the following example, an arrow function is defined inside a method:  
 
-```javascript{6}
+```javascript mark=7
 const object = {
   items: [1, 2],
 
@@ -88,7 +88,7 @@ object.method();
 
 To compare, if you use a regular function under the same circumstance:
 
-```javascript{6}
+```javascript mark=7
 const object = {
   items: [1, 2],
 

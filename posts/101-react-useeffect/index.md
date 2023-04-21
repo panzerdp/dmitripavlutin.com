@@ -29,7 +29,7 @@ Component rendering and the side-effect logic are *independent*. Performing side
 
 How often the component renders isn't something you can control &mdash; if React wants to render the component, you cannot stop it.    
 
-```jsx{4}
+```jsx mark=5
 function Greet({ name }) {
   const message = `Hello, ${name}!`; // Calculates output
 
@@ -42,7 +42,7 @@ function Greet({ name }) {
 
 How to decouple rendering from the side-effect? Welcome `useEffect()` &mdash; the hook that runs side-effects independently of rendering.    
 
-```jsx{7}
+```jsx mark=8
 import { useEffect } from 'react';
 
 function Greet({ name }) {
@@ -90,7 +90,7 @@ Also, you don't want the document title update to run every time `Greet` compone
 
 A) <u>Not provided</u>: the side-effect runs after *every* rendering.
 
-```jsx{5}
+```jsx mark=6
 import { useEffect } from 'react';
 
 function MyComponent() {
@@ -102,7 +102,7 @@ function MyComponent() {
 
 B) <u>An empty array</u> `[]`: the side-effect runs *once* after the initial rendering.
 
-```jsx{5}
+```jsx mark=6
 import { useEffect } from 'react';
 
 function MyComponent() {
@@ -114,7 +114,7 @@ function MyComponent() {
 
 C) <u>Has props or state values</u> `[prop1, prop2, ..., state1, state2]`: the side-effect runs once after initial rendering and then *only when any dependency value changes*.  
 
-```jsx{7}
+```jsx mark=8
 import { useEffect, useState } from 'react';
 
 function MyComponent({ prop }) {
@@ -136,7 +136,7 @@ The dependencies argument of the `useEffect()` lets you catch certain component 
 
 Use an empty dependencies array to invoke a side-effect once after component mounting:
 
-```jsx{8}
+```jsx mark=9
 import { useEffect } from 'react';
 
 function Greet({ name }) {
@@ -172,7 +172,7 @@ Even if the component re-renders with different `name` property, the side-effect
 
 Each time the side-effect uses props or state values, you must indicate these values as dependencies:
 
-```jsx{7}
+```jsx mark=8
 import { useEffect } from 'react';
 
 function MyComponent({ prop }) {
@@ -192,7 +192,7 @@ By using the dependencies argument of `useEffect()`, you control when the side-e
 
 Let's improve the `Greet` component by using `name` prop in the document title:
 
-```jsx{7}
+```jsx mark=8
 import { useEffect } from 'react';
 
 function Greet({ name }) {
@@ -230,7 +230,7 @@ Some side-effects need cleanup: close a socket, clear timers.
 
 If the `callback` of `useEffect(callback, deps)` returns a function, then `useEffect()` considers that function as an *effect cleanup*:  
 
-```jsx{3-5}
+```jsx mark=4:6
 useEffect(function callback() => {
   // Side-effect...
 
@@ -274,7 +274,7 @@ Open the demo and type some messages. The console logs every 2 seconds the messa
 
 That's the case to clean up the side-effect: cancel the previous timer when starting a new one. Let's return a cleanup function that stops the previous timer before starting a new one:
 
-```jsx {7-9}
+```jsx mark=8:10
 import { useEffect } from 'react';
 
 function RepeatMessage({ message }) {
@@ -333,7 +333,7 @@ When the request completes, `setEmployees(fetchedEmployees)` updates the `employ
 
 Note that the `callback` argument of `useEffect(callback)` cannot be an `async` function. But you can always define and then invoke an `async` function inside the callback itself:  
 
-```jsx{3,7}
+```jsx mark=4,8
 function FetchEmployees() {
   const [employees, setEmployees] = useState([]);
 

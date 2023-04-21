@@ -73,7 +73,7 @@ What is the difference between `v-model` and `:value`? `<input :value="value" />
 
 To understand the difference let's change the previous example's input tag from `v-model="text"` to `:value="text"`:
 
-```vue {6}
+```vue mark=7
 <script setup>
 import { ref } from 'vue'
 
@@ -112,7 +112,7 @@ can be expressed as:
 
 The following code doesn't use `v-model`, but still has two-way data flow working:
 
-```vue {7-8}
+```vue mark=8:9
 <script setup>
 import { ref } from 'vue'
 
@@ -266,7 +266,7 @@ const checked = ref(true)
 
 To customize the checked/unchecked binding to other values that a boolean, then Vue offers 2 Vue-specific attributes on the checkbox:  
 
-```html {2-3}
+```html mark=3:4
 <input 
   v-model="checked" 
   true-value="Yes!" 
@@ -329,7 +329,7 @@ Click on any other T-shirt color, and the `color` ref changes according to the s
 
 `value` attribute of the radio is bindable: you can use `:value`. That is helpful when the list of options comes from an array, for example:
 
-```vue {12}
+```vue mark=13
 <script setup>
 import { ref } from "vue"
 
@@ -414,7 +414,7 @@ What's the main difference between `input` and `change` events?
 
 The following example uses lazy binding:
 
-```vue {6}
+```vue mark=7
 <script setup>
 import { ref } from 'vue'
 

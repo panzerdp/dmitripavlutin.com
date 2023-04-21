@@ -42,7 +42,7 @@ Same way, `ref({ count: 0 })` creates a ref storing a plain JavaScript object.
 
 On the other side, `reactive()` doesn't store primitives, but stores only objects:
 
-```typescript {2}
+```typescript mark=3
 import { reactive } from 'vue'
 
 const numberReactive = reactive(0);           // NOT OK!
@@ -67,7 +67,7 @@ The second difference is how you'd access the data stored inside `ref()` and `re
 
 `ref()` data, either a primitive value or an object, is accessed through a special property `.value`:
 
-```ts {3,6}
+```ts mark=4,7
 import { ref } from 'vue'
 
 const numberRef = ref(0);
@@ -85,7 +85,7 @@ Also, `objectRef.value.count` is how you can access a property of an object in r
 
 Note that inside templates you don't have to use `.value` to access a ref value: they're auto-unwrapped.  
 
-```vue {6}
+```vue mark=7
 <script setup>
 import { ref } from 'vue'
 
@@ -104,7 +104,7 @@ In the interpolation `{{ numberRef }}` the ref is auto-unwrapped.
 
 `reactive()` data, on the other hand, is accessed directly:
 
-```typescript {3}
+```typescript mark=4
 import { reactive } from 'vue'
 
 const objectReactive = reactive({ count: 0})
@@ -127,7 +127,7 @@ In conclusion:
 
 Reassigning the value of a `ref()` entirely to a new value is perfectly valid:
 
-```vue {5}
+```vue mark=6
 <script setup>
 import { ref, onMounted } from "vue"
 
@@ -146,7 +146,7 @@ Open the demo, and see that replacing entirely the ref value `objectRef.value = 
 
 Reassigning entirely a `reactive()` object, however, is not possible:
 
-```vue {5}
+```vue mark=6
 <script setup>
 import { reactive, onMounted } from 'vue'
 
@@ -183,7 +183,7 @@ const numberRef: Ref<number> = ref(0);
 
 If you want to assign a ref as an argument to a composable, for example, then make sure to use the `Ref<V>` type (where `V` is the value's type) to annotate a ref parameter:  
 
-```ts{4}
+```ts mark=5
 import { ref, Ref } from 'vue'
 
 const numberRef: Ref<number> = ref(0)
@@ -228,7 +228,7 @@ In conclusion:
 
  `watch()` determines if `.value` property of the ref is changed:
 
-```ts {4-6}
+```ts mark=5:7
 <script setup>
 import { ref, watch } from 'vue'
 
@@ -251,7 +251,7 @@ Every time you click the "Increase" button, you'll see in the console the messag
 
 But does `watch()` watch deep changes of an object stored in `ref()`? Let's try!
 
-```ts {4-6}
+```ts mark=5:7
 <script setup>
 import { ref, watch } from 'vue'
 
@@ -276,7 +276,7 @@ However, DOM still updates when `countObjectRef.value.count` changes: which mean
 
 Of course, if you ask `watch()` to watch the ref deeply, it's working as full deep watch:
 
-```ts {4}
+```ts mark=5
 // ...
 
 watch(count, () => { 
@@ -291,7 +291,7 @@ watch(count, () => {
 
 In the case of watching a reactive object, `watch()` always performs a deep watch (even if you don't indicate `{ deep: true }`) option.
 
-```ts {3}
+```ts mark=4
 <script setup>
 import { reactive, watch } from 'vue'
 

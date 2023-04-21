@@ -11,7 +11,7 @@ type: post
 
 A reader of my blog reached me on Facebook with an interesting question. He said his teammates, no matter the situation, were wrapping every callback function inside `useCallback()`:
 
-```jsx{3-5}
+```jsx mark=4:6
 import React, { useCallback } from 'react';
 
 function MyComponent() {
@@ -39,7 +39,7 @@ Functions in JavaScript are first-class citizens, meaning that a function is a r
 
 Let's write a function `factory()` that returns functions that sum numbers: 
 
-```javascript{10-11}
+```javascript mark=11:12
 function factory() {
   return (a, b) => a + b;
 }
@@ -65,7 +65,7 @@ That's just how JavaScript objects work. An object (including a function object)
 
 Different function objects sharing the same code are often created inside React components:
 
-```jsx{2-4}
+```jsx mark=3:5
 function MyComponent() {
   // handleClick is re-created on each render
   const handleClick = () => {
@@ -88,7 +88,7 @@ But in some cases you need to maintain a single function instance between render
 
 That's when `useCallback(callbackFun, deps)` is helpful: given the same dependency values `deps`, the hook returns the same function instance between renderings (aka memoization):
 
-```jsx{4-6}
+```jsx mark=5:7
 import { useCallback } from 'react';
 
 function MyComponent() {
@@ -125,7 +125,7 @@ The list could be big, maybe hundreds of items. To prevent useless list re-rende
 
 The parent component of `MyBigList` provides a handler function to know when an item is clicked:  
 
-```jsx{10}
+```jsx mark=11
 import { useCallback } from 'react';
 
 export function MyParent({ term }) {
@@ -152,7 +152,7 @@ That was a good use case of `useCallback()`.
 
 Let's look at another example:
 
-```jsx{4-6}
+```jsx mark=5:7
 import { useCallback } from 'react';
 
 function MyComponent() {
@@ -177,7 +177,7 @@ Does it worth using `useCallback()`? Most likely not because `<MyChild>` compone
 
 Simply *accept* that rendering creates new function objects:
 
-```jsx{3-5}
+```jsx mark=4:6
 import { useCallback } from 'react';
 
 function MyComponent() {

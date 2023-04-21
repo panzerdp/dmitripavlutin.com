@@ -1,5 +1,4 @@
 @import 'styles/variables.scss';
-@import './twoslash.scss';
 
 .postCover {
   margin: 1.5rem 0;
@@ -68,6 +67,19 @@
   a[href^="https://codesandbox.io"] {
     padding-left: 30px;
     background: left center / 25px no-repeat url('/icons/codesandbox.svg');
+  }
+
+  a[href^="https://codesandbox.io/api/v1/sandboxes/define"] {
+    display: block;
+    height: 30px;
+
+    img {
+      display: none;
+    }
+
+    &::after {
+      content: 'Open the demo.';
+    }
   }
 
   a[href^="https://stackblitz.com"] {

@@ -195,7 +195,7 @@ For example, `http**://example.com` is an invalid URL because of the `**` charac
 
 Let's use this invalid URL to initialize the parser:  
 
-```javascript{6}
+```javascript mark=7
 try {
   const url = new URL('http**://example.com');
 } catch (error) {

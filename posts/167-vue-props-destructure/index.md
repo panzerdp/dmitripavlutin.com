@@ -34,7 +34,7 @@ Let's look at an example. The following component `<EvenOdd :count="5">` accepts
 
 The `count` prop is accessed after destructuring of the props object `const { count } = defineProps()`:
 
-```vue{3}
+```vue mark=4
 <script lang="ts" setup>
 import { computed } from 'vue';
 
@@ -59,7 +59,7 @@ The reactivity is lost because on destructuring `count` becomes a variable havin
 
 The first obvious solution is to *not* destructure the `props` object, and access the props directly using a [property accessor](/access-object-properties-javascript/#1-dot-property-accessor): `props.count`.  
 
-```vue {3}
+```vue mark=4
 <script lang="ts" setup>
 import { computed } from 'vue';
 
@@ -85,7 +85,7 @@ Ok, then you can keep the reactivity of the destructured props by deliberately t
 
 Here's how it works:
 
-```vue {4}
+```vue mark=5
 <script lang="ts" setup>
 import { toRefs, computed } from 'vue';
 
