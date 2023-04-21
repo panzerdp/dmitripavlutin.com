@@ -3,7 +3,7 @@ require('dotenv').config({
 })
 const theme = require('shiki/themes/one-dark-pro.json')
 const { remarkCodeHike } = require('@code-hike/mdx')
-const codesandbox = require('remark-codesandbox')
+// const codesandbox = require('remark-codesandbox')
 
 module.exports = {
   siteMetadata: require('./gatsby/config/site-metadata'),
@@ -19,7 +19,7 @@ module.exports = {
       options: {
         extensions: ['.md', '.mdx'],
         mdxOptions: {
-          remarkPlugins: [[codesandbox, { mode: 'button' }], [remarkCodeHike, { theme }]],
+          remarkPlugins: [[remarkCodeHike, { theme, autoImport: false }]],
         },
         gatsbyRemarkPlugins: [
           {
