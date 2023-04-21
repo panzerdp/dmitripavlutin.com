@@ -98,7 +98,7 @@ The built-in plugin [EnvironmentPlugin](https://webpack.js.org/plugins/environme
 
 For example, to expose the `NODE_ENV` env variable, you can use the following configuration:
 
-```javascript
+```javascript mark=8
 // webpack.config.js
 const { EnvironmentPlugin } = require('webpack');
 
@@ -115,7 +115,7 @@ Open the [demo](https://stackblitz.com/edit/webpack-5-react-starter-twfbyv?file=
 
 If `NODE_ENV` variable is not available in the environment, the plugin will throw an error. But you can assign a default value to a variable using a plain JavaScript object as a config (with the value being the default value):
 
-```javascript
+```javascript mark=9
 // webpack.config.js
 const { EnvironmentPlugin } = require('webpack');
 

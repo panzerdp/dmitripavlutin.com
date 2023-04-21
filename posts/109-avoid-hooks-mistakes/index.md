@@ -60,7 +60,7 @@ Open the [demo](https://codesandbox.io/s/hooks-order-warning-rdxpg?file=/pages/i
 
 The problem is in the early exit:  
 
-```javascript
+```javascript mark=2:4
 function FetchGame({ id }) {
   if (!id) {
     return 'Please select a game to fetch';
@@ -78,7 +78,7 @@ That's exactly what suggests [the first rule of hooks](https://reactjs.org/docs/
 
 Solving the incorrect order of hooks means moving the `return` statement after invoking the hooks:
 
-```jsx
+```jsx mark=13:15,18:20
 function FetchGame({ id }) {
   const [game, setGame] = useState({ 
     name: '',
@@ -121,7 +121,7 @@ Here's a good practice that helps to avoid conditional rendering of hooks:
 
 The following component `MyIncreaser` increases the state variable `count` when a button is clicked:
 
-```jsx
+```jsx mark=9:11
 function MyIncreaser() {
   const [count, setCount] = useState(0);
 
@@ -175,7 +175,7 @@ The first invocation of `setCount(count + 1)` correctly updates the counter as `
 
 The stale state is solved by using a functional way to update the state. Instead of  `setCount(count + 1)`, let's better use `setCount(count => count + 1)`:  
 
-```jsx
+```jsx mark=5
 function MyIncreaser() {
   const [count, setCount] = useState(0);
 
@@ -253,7 +253,7 @@ Later, when the button is clicked and `count` increases, `setInterval` still inv
 
 The solution is to let know `useEffect()` that the closure `log` depends on `count` and properly reset the timer:  
 
-```jsx
+```jsx mark=8,9
 function WatchCount() {
   const [count, setCount] = useState(0);
 
@@ -320,7 +320,7 @@ The information on whether this is the first render shouldn't be stored in the s
 
 Let's store the information about the first rendering into a reference `isFirstRef`:
 
-```jsx
+```jsx mark=2
 function MyComponent() {
   const isFirstRef = useRef(true);
   const [count, setCount] = useState(0);
@@ -387,7 +387,7 @@ While having the increase in progress, click the *Unmount Increaser* button to u
 
 Fixing `DelayedIncreaser` is simple: just use a cleanup function from the callback of `useEffect()` to stop the interval timer:
 
-```jsx
+```jsx mark=9
 function DelayedIncreaser() {
   // ...
 

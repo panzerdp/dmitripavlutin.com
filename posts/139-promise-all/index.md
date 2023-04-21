@@ -78,7 +78,7 @@ function rejectTimeout(reason, delay) {
 
 Let's access, at the same time, the lists of vegetables and fruits available at the local grocery store. Accessing each list is an asynchronous operation:  
 
-```javascript
+```javascript mark=1:4
 const allPromise = Promise.all([
   resolveTimeout(['potatoes', 'tomatoes'], 1000),
   resolveTimeout(['oranges', 'apples'], 1000)
@@ -110,7 +110,7 @@ const [resolvedOfPromise1, resolvedOfPromise2] = Promise.all([promise1, promise2
 
 Now imagine the situation the grocery is out of fruits. Let's reject the fruits promise with an error `new Error('Out of fruits!')`:
 
-```javascript
+```javascript mark=3,11
 const allPromise = Promise.all([
   resolveTimeout(['potatoes', 'tomatoes'], 1000),
   rejectTimeout(new Error('Out of fruits!'), 1000)

@@ -94,7 +94,7 @@ Let's consider a component that manages a list of products. The user can add new
 
 The first attempt is to keep the setter of product names list state directly inside the component:
 
-```jsx
+```jsx mark=2,8:11
 function ProductsList() {
   const [names, setNames] = useState([]);
   const [newName, setNewName] = useState('');
@@ -139,7 +139,7 @@ export function useUnique(initial) {
 
 Having the custom state management extracted into a hook, the `ProductsList` component becomes much lighter:
 
-```jsx
+```jsx mark=4,10
 import { useUnique } from './useUnique';
 
 function ProductsList() {
@@ -198,7 +198,7 @@ function uniqueReducer(state, action) {
 
 Then `uniqueReducer()` can be used inside the products list by invoking React's `useReducer()` hook:
 
-```jsx
+```jsx mark=2,7,10
 function ProductsList() {
   const [names, dispatch] = useReducer(uniqueReducer, []);
   const [newName, setNewName] = useState('');

@@ -21,7 +21,7 @@ It's good to know multiple ways to perform the swapping of variables. In this po
 
 Destructuring assignment lets you extract items of an array into variables. For example, the following code destructures an array:
 
-```javascript
+```javascript mark=4
 let a;
 let b;
 
@@ -35,7 +35,7 @@ console.log(b); // => 2
 
 Knowing how to destructure an array, it's easy to use it for swapping variables. Let's swap the variables `a` and `b` using destructuring assignment:
 
-```javascript
+```javascript mark=4
 let a = 1;
 let b = 2;
 
@@ -61,7 +61,7 @@ Swapping variables using a temporary variable is classic. As the name suggests, 
 
 Let's swap the values of variables `a` and `b` using a temporary variable `temp`:
 
-```javascript
+```javascript mark=5:7
 let a = 1;
 let b = 2;
 let temp;
@@ -88,7 +88,7 @@ You can swap variables having integers without the use of additional memory (lik
 
 The following example swaps the variables `a` and `b` using the addition `+` and difference `-` arithmetic operators:
 
-```javascript
+```javascript mark=4:6
 let a = 1;
 let b = 2;
 
@@ -145,7 +145,7 @@ Bitwise XOR has 2 interesting properties:
 
 These XOR properties can be used to swap variables. Let's see how to swap `a` and `b` variables:
 
-```javascript
+```javascript mark=4:6
 let a = 1;
 let b = 2;
 

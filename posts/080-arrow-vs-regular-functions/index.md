@@ -107,7 +107,7 @@ No matter how or where being executed, `this` value inside of an arrow function 
 
 In the following example, `myMethod()` is an outer function of `callback()` arrow function:
 
-```javascript
+```javascript mark=3,5
 const myObject = {
   myMethod(items) {
     console.log(this); // logs myObject
@@ -170,7 +170,7 @@ Inside the body of a regular function, [arguments](https://developer.mozilla.org
 
 Let's invoke `myFunction()` function with 2 arguments:
 
-```javascript
+```javascript mark=2
 function myFunction() {
   console.log(arguments);
 }
@@ -188,7 +188,7 @@ Again (same as with `this` value), the `arguments` object is resolved lexically:
 
 Let's try to access `arguments` inside of an arrow function:
 
-```javascript
+```javascript mark=2:4
 function myRegularFunction() {
   const myArrowFunction = () => {
     console.log(arguments);
@@ -204,7 +204,7 @@ The arrow function `myArrowFunction()` is invoked with the arguments `'c'`, `'d'
 
 If you'd like to access the direct arguments of the arrow function, then you can use [the rest parameters](/javascript-function-parameters/#5-rest-parameters) feature:
 
-```javascript
+```javascript mark=2:4
 function myRegularFunction() {
   const myArrowFunction = (...args) => {
     console.log(args);
@@ -270,7 +270,7 @@ Regular functions are the usual way to define methods on classes or objects.
 
 In the following class `Hero`, the method `logName()` is defined using a regular function:
 
-```javascript
+```javascript mark=6:8
 class Hero {
   constructor(heroName) {
     this.heroName = heroName;
@@ -316,7 +316,7 @@ Now, in contrast with regular functions, the method defined using an arrow binds
 
 Let's use the arrow function as a field:
 
-```javascript
+```javascript mark=6:8
 class Hero {
   constructor(heroName) {
     this.heroName = heroName;

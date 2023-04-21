@@ -24,7 +24,7 @@ const salary2 = {
 
 You want to implement a function that returns the total remuneration based on the salary object:
 
-```ts
+```ts mark=1
 function totalSalary(salaryObject: ???) {
   let total = 0;
   for (const name in salaryObject) {
@@ -54,7 +54,7 @@ An index signature fits the case of the salary parameter: the function should ac
 Let's annotate the `salaryObject` parameter with an index signature:
 
 
-```ts
+```ts mark=1
 function totalSalary(salaryObject: { [key: string]: number }) {
   let total = 0;
   for (const name in salaryObject) {
@@ -123,7 +123,7 @@ const options: Options = {
 
 The key of the index signature can only be a `string`, `number`, or `symbol`. Other types are not allowed:
 
-```ts
+```ts mark=5
 interface OopsDictionary {
   // Type error: 
   // An index signature parameter type must be 'string', 'number', 
@@ -159,7 +159,7 @@ The index signature maps a key type to a value type &mdash; that's all. If you d
 
 To make typing more accurate, mark the indexed value as `string` or `undefined`. Doing so, TypeScript becomes aware that the properties you access might not exist:
 
-```ts
+```ts mark=2
 interface StringByString {
   [key: string]: string | undefined;
 }
@@ -218,7 +218,7 @@ The big question is... when to use a `Record<Keys, Values>` and when an index si
 
 As you saw earlier, the index signature accepts only `string`, `number` or `symbol` as key type. If you try to use, for example, a union of string literal types as keys in an index signature, it would be an error:
 
-```ts
+```ts mark=5
 interface Salary {
   // Type error:
   // An index signature parameter type cannot be a literal type or generic type. 

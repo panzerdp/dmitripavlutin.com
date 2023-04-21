@@ -35,7 +35,7 @@ Before implementing these requirements, recall 2 lifecycle methods of a class co
 
 `<EmployeesPage>` implements the fetching logic using these 2 lifecycle methods:
 
-```jsx
+```jsx mark=10:12,14:18
 import EmployeesList from "./EmployeesList";
 import { fetchEmployees } from "./fake-fetch";
 
@@ -108,7 +108,7 @@ Let's recall `useEffect(callback[, deps])` hook. This hook executes `callback` a
 
 In the following example `<EmployeesPage>` uses `useEffect()` to fetch employees data:
 
-```jsx
+```jsx mark=10
 import React, { useState } from 'react';
 
 import EmployeesList from "./EmployeesList";
@@ -141,7 +141,7 @@ Inside `<EmployeesPage>` functional component `useEffect(fetch, [query])` execut
 
 But there's still room for improvement. Hooks allow you to *extract the employees fetching logic* from `<EmployeesPage>` component. Let's do that:
 
-```jsx
+```jsx mark=6,22
 import React, { useState } from 'react';
 
 import EmployeesList from "./EmployeesList";
@@ -210,7 +210,7 @@ When fetch is in progress, suspense renders `fallback` prop content. Later when 
 
 Let's see how the employees' application works with suspense:
 
-```jsx
+```jsx mark=6:8
 import React, { Suspense } from "react";
 import EmployeesList from "./EmployeesList";
 

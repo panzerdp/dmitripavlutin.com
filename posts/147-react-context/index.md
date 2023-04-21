@@ -25,7 +25,7 @@ Using the context in React requires 3 simple steps: *creating* the context, *pro
 
 The built-in factory function `createContext(default)` creates a context instance:
 
-```javascript
+```javascript mark=4
 // context.js
 import { createContext } from 'react';
 
@@ -40,7 +40,7 @@ The factory function accepts one optional argument: the default value.
 
 To set the value of context use the `value` prop available on the `<Context.Provider value={value} />`:
 
-```javascript
+```javascript mark=6
 import { Context } from './context';
 
 function Main() {
@@ -63,7 +63,7 @@ Consuming the context can be performed in 2 ways.
 
 The first way, the one I recommend, is to use the `useContext(Context)` React hook:
 
-```jsx
+```jsx mark=5
 import { useContext } from 'react';
 import { Context } from './context';
 
@@ -80,7 +80,7 @@ The hook returns the value of the context: `value = useContext(Context)`. The ho
 
 The second way is by using a render function supplied as a child to `Context.Consumer` special component available on the context instance:
 
-```jsx
+```jsx mark=6
 import { Context } from './context';
 
 function MyComponent() {
@@ -195,7 +195,7 @@ As a quick reminder, applying the React context requires 3 actors: the context, 
 
 Here's how the sample application would look when applying the context to it:
 
-```jsx
+```jsx mark=3,8,36
 import { useContext, createContext } from 'react';
 
 const UserContext = createContext('Unknown');
@@ -255,7 +255,7 @@ When the context value is changed by altering `value` prop of the context provid
 
 For example, if I change the user name from `'John Smith'` to `'Smith, John Smith'`, then `<UserInfo />` consumer immediately re-renders to display the latest context value:
 
-```jsx
+```jsx mark=8:10
 import { createContext, useEffect, useState } from 'react';
 
 const UserContext = createContext('Unknown');
@@ -301,7 +301,7 @@ But this can be easily implemented by integrating a state management mechanism (
 
 In the following example, `<Application />` component uses `useState()` hook to manage the context value. 
 
-```jsx
+```jsx mark=10:13,16
 import { createContext, useState, useContext, useMemo } from 'react';
 
 const UserContext = createContext({

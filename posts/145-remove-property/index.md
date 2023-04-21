@@ -47,7 +47,7 @@ delete object[name];
 
 When applying the `delete` operator on a property accessor, the operator removes the corresponding property from the object:
 
-```javascript
+```javascript mark=6
 const employee = {
   name: 'John Smith',
   position: 'Sales Manager'
@@ -68,7 +68,7 @@ The property removal using `delete` operator is mutable because it mutates (aka 
 
 In case if the property name to remove is determined dynamically, then you can use the square brackets syntax:
 
-```javascript
+```javascript mark=7
 const employee = {
   name: 'John Smith',
   position: 'Sales Manager'
@@ -105,7 +105,7 @@ After applying the destructuring and rest syntax, `restObject` is going to conta
 
 For example, let's remove the property `position` from `employee` object:
 
-```javascript
+```javascript mark=6
 const employee = {
   name: 'John Smith',
   position: 'Sales Manager'
@@ -127,7 +127,7 @@ Object destructuring with rest syntax is an immutable way of property removal: t
 
 If the property name to remove is determined dynamically, then you can use use the dynamic property name destructuring syntax:
 
-```javascript
+```javascript mark=7
 const employee = {
   name: 'John Smith',
   position: 'Sales Manager'
@@ -145,7 +145,7 @@ console.log(employeeRest); // { name: 'John Smith' }
 
 What's interesting is that you can remove multiple properties at once using the destructuring and rest syntax:
 
-```javascript
+```javascript mark=7
 const employee = {
   name: 'John Smith',
   position: 'Sales Manager',

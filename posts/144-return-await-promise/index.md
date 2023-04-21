@@ -12,7 +12,7 @@ type: post
 When returning from a promise from an asynchronous function, you can wait for that promise to resolve `return await promise`, or you can return it directly 
 `return promise`:  
 
-```javascript
+```javascript mark=3,10
 async function func1() {
   const promise = asyncOperation();
   return await promise;
@@ -53,7 +53,7 @@ Ok, having the helper function defined, let's divide some numbers.
 
 The following function `divideWithAwait()` uses `return await promisedDivision(6, 2)` expression to return the division of `6` by `2` wrapped in a promise:
 
-```javascript
+```javascript mark=2
 async function divideWithAwait() {
   return await promisedDivision(6, 2);
 }
@@ -71,7 +71,7 @@ Inside the `run()` function the `await divideWithAwait()` expression evaluates t
 
 Now let's try to use the second expression without the `await` keyword, and return directly the promise wrapping the division result `return promisedDivision(6, 2)`:
 
-```javascript
+```javascript mark=2
 async function divideWithoutAwait() {
   return promisedDivision(6, 2);
 }
@@ -99,7 +99,7 @@ Because `promisedDivision(n1, 0)` now would return rejected promises, let's also
 
 Ok, let's use `return await promisedDivision(5, 0)` expression with the `await` keyword:
 
-```javascript
+```javascript mark=3
 async function divideWithAwait() {
   try {
     return await promisedDivision(5, 0);
@@ -121,7 +121,7 @@ Because the division by zero is not possible, `promisedDivision(5, 0)` returns a
 
 What about the second approach, where the `await` is omitted?
 
-```javascript
+```javascript mark=3
 async function divideWithoutAwait() {
   try {
     return promisedDivision(5, 0);

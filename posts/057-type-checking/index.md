@@ -43,7 +43,7 @@ This post describes the pitfalls and remedial workarounds of using `typeof` and 
 
 `typeof myObject === 'object'` would tell you if `myObject` is an object type. Let's try that in an example:
 
-```javascript
+```javascript mark=3
 const person = { name: 'batman' };
 
 typeof person; // => 'object'
@@ -82,7 +82,7 @@ typeof myObject; // => 'object'
 
 A good approach to detect if a variable has an object, and no `null` values, is this:
 
-```javascript
+```javascript mark=2
 function isObject(value) {
   return typeof value === 'object' && value !== null;
 }
@@ -135,7 +135,7 @@ Accessing the uninitialized variable `city` and a non-existing property `hero.ag
 
 To check if a property exists, and `undefined` being falsy, you might have the tempration to use `object[propName]` in a condition:
 
-```javascript
+```javascript mark=3
 function getProp(object, propName, def) {
   // Bad
   if (!object[propName]) {
@@ -204,7 +204,7 @@ hero.villain; // => false
 
 To default when the property does not exists, better options are the new [nullish coalescing operator](/javascript-optional-chaining/#3-default-with-nullish-coalescing):
 
-```javascript
+```javascript mark=6,9
 const hero = { name: 'Batman', villan: false };
 
 // Good
@@ -257,7 +257,7 @@ Because of `NaN`, meaning a failed operation on numbers, the check of numbers va
 
 Let's make sure that `isValidNumber()` function guards against `NaN` too:
 
-```javascript
+```javascript mark=3
 function isValidNumber(value) {
   // Good
   return typeof value === 'number' && !isNaN(value);

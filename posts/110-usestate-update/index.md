@@ -21,7 +21,7 @@ When you update the component's state, does React update the state *immediately*
 
 Consider a functional component `DoubleIncreaser`:
 
-```jsx
+```jsx mark=7:8
 import { useState } from 'react';
 
 function DoubleIncreaser() {
@@ -59,7 +59,7 @@ For instance: if `count` variable is `0`, then calling `setCount(count + 1); set
 
 The state update function also accepts a callback to compute new state using the current state. In case of the `DoubleIncreaser`, you can use `setCount(actualCount => actualCount + 1)`:  
 
-```jsx
+```jsx mark=7:8
 import { useState } from 'react';
 
 function DoubleIncreaser() {
@@ -87,7 +87,7 @@ Open the [demo](https://codesandbox.io/s/usestate-fixed-callback-e4pp3?file=/src
 
 Of course, you can use an intermediate `let` variable:
 
-```jsx
+```jsx mark=7:10
 import { useState } from 'react';
 
 function DoubleIncreaser() {
@@ -119,7 +119,7 @@ Try the [demo](https://codesandbox.io/s/usestate-fixed-interm-variable-xo3n7?fil
 
 If you forget that the state variable updates on the next rendering, you might try to read the state variable right after changing it. Unfortunately, it won't work:  
 
-```jsx
+```jsx mark=10:11
 function FetchUsers() {
   const [users, setUsers] = useState([]);
 
@@ -149,7 +149,7 @@ When fetch is completed, `setUsers(fetchedUsers)` updates the state with the fet
 
 The state variable `users` is readonly and immutable. Only `useState()` hook assigns values to `users`. You're not allowed manually to assign to state variable, neither mutate it:
 
-```jsx
+```jsx mark=9:11
 function FetchUsers() {
   const [users, setUsers] = useState([]);
 
@@ -179,7 +179,7 @@ The same idea of the asynchronous state update is valid for class components too
 
 The following class component has a state `count`, which should increase by `2` when the button *Double Increase* is clicked:
 
-```jsx
+```jsx mark=21:26
 import { Component } from 'react';
 
 class DoubleIncreaser extends Component {

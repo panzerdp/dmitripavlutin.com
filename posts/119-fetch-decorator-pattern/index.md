@@ -93,7 +93,7 @@ class BasicFetcher implements Fetcher {
 
 Let's use the basic fetcher class to fetch the list of movies:
 
-```typescript
+```typescript mark=1,5
 const fetcher = new BasicFetcher();
 const decoratedFetch = fetcher.run.bind(fetcher);
 
@@ -153,7 +153,7 @@ Then `json = await response.json()` extracts the JSON data from the response. Fi
 
 Now let's compose decorate the `BasicFetcher` with the `JsonFetcherDecorator` decorator, and simplify the use of `fetch()`:
 
-```typescript
+```typescript mark=1:3,7
 const fetcher = new JsonFetcherDecorator(
   new BasicFetcher()
 );

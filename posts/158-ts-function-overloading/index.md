@@ -116,7 +116,7 @@ greet(['Jane', 'Joe']);  // ['Hello, Jane!', 'Hello, Joe!']
 
 While the implementation signature implements the function behavior, however, it is *not directly callable*. Only the overload signatures are callable.  
 
-```ts
+```ts mark=6
 greet('World');         // Overload signature is callable
 greet(['Jane', 'Joe']); // Overload signature is callable
 
@@ -135,7 +135,7 @@ Otherwise, TypeScript won't accept the overload signature as being incompatible.
 
 For example, if you modify the implementation signature's return type from `unknown` to `string`:
 
-```ts
+```ts mark=5
 // Overload signatures
 function greet(person: string): string;
 // Type error: This overload signature is not 

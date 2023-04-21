@@ -89,7 +89,7 @@ I recommend using type inference in your code to avoid repetition, e.g. label yo
 
 In case of a [higher-order function](/javascript-higher-order-functions/), you use the function object as an argument or even return it from another function:
 
-```typescript
+```typescript mark=4,10
 type Sum = (a: number, b: number) => number
 
 // Sum as argument

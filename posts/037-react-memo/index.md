@@ -46,7 +46,7 @@ export const MemoizedMovie = React.memo(Movie);
 
 `MemoizedMovie` outputs the same content as the original `Movie` component, but with one difference &mdash; `MemoizedMovie` render is memoized. React reuses the memoized content as long as `title` and `releaseDate` props are the same between renderings:  
 
-```jsx
+```jsx mark=3:4,9:10
 // First render - MemoizedMovie IS INVOKED.
 <MemoizedMovie 
   title="Heat" 
@@ -105,7 +105,7 @@ A common situation that makes a component render with the same props is being fo
 
 Let's reuse `Movie` component defined above. A new parent component `MovieViewsRealtime` displays the number of views of a movie, with real-time updates:  
 
-```jsx
+```jsx mark=4
 function MovieViewsRealtime({ title, releaseDate, views }) {
   return (
     <div>
@@ -117,7 +117,7 @@ function MovieViewsRealtime({ title, releaseDate, views }) {
 ```
 The application regularly polls the server in the background (every second), updating `views` property of `MovieViewsRealtime` component.  
 
-```jsx
+```jsx mark=3,10,17
 // Initial render
 <MovieViewsRealtime 
   views={0} 
@@ -150,7 +150,7 @@ This is the appropriate case for applying memoization to `Movie` component.
 
 Let's use the memoized component `MemoizedMovie` inside `MovieViewsRealtime` to prevent useless re-renderings:
 
-```jsx
+```jsx mark=4
 function MovieViewsRealtime({ title, releaseDate, views }) {
   return (
     <div>
@@ -194,7 +194,7 @@ You gain no performance benefits, have more complex code (than the non-memoized 
 
 The function object equals only to itself. Let's see that by comparing some functions:
 
-```javascript
+```javascript mark=8
 function sumFactory() {
   return (a, b) => a + b;
 }
@@ -231,7 +231,7 @@ const MemoizedLogout = React.memo(Logout);
 
 A component that accepts a callback must be handled with care when applying memoization. The parent component could provide different instances of the callback function on every render:  
 
-```jsx
+```jsx mark=7
 function MyApp({ store, cookies }) {
   return (
     <div className="main">
@@ -252,7 +252,7 @@ Memoization is broken.
 
 To fix memoization, `onLogout` prop must receive the same callback instance. Let's apply [useCallback()](https://reactjs.org/docs/hooks-reference.html#usecallback) to preserve the callback instance between renderings:
 
-```jsx
+```jsx mark=4:7,13
 const MemoizedLogout = React.memo(Logout);
 
 function MyApp({ store, cookies }) {

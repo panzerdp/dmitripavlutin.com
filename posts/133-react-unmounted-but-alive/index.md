@@ -97,7 +97,7 @@ Open the [demo](https://codesandbox.io/s/side-effect-cleanup-broken-9eofz?file=/
 
 The reason for this warning is that `<Employees>` component has already been unmounted, but still, the side-effect that fetches employees completes and updates the state of an unmounted component.  
 
-```jsx
+```jsx mark=8:9
 function Employees() {
   const [list, setList] = useState(null);
 
@@ -123,7 +123,7 @@ What would be the solution to the issue? As the warning suggests, you need to ca
 
 Fortunately, `useEffect(callback, deps)` allows you to easily cleanup side-effects. When the `callback` function returns a function, React will use that as a [cleanup function](/react-useeffect-explanation/#6-the-side-effect-cleanup):
 
-```javascript
+```javascript mark=4:6
 function MyComponent() {
   useEffect(() => {
     // Side-effect logic...
@@ -140,7 +140,7 @@ Also, in order to [cancel](/javascript-fetch-async-await/#4-canceling-a-fetch-re
 
 Let's wire the above ideas and fix the `<Employees>` component to correctly handle the cleanup of the fetch async effect:
 
-```jsx
+```jsx mark=7,11,19
 import { useState, useEffect } from 'react';
 
 function Employees() {
@@ -185,7 +185,7 @@ While in the restaurant application the side-effect cleanup happens when the com
 
 For example, consider the following component `<EmployeeDetails>` that accepts a prop `id`. The component makes a fetch request to load the details of an employee by `id`:
 
-```jsx
+```jsx mark=3,10,20
 import { useState, useEffect } from 'react';
 
 function EmployeeDetails({ id }) {
@@ -231,7 +231,7 @@ There are common asynchronous side-effects that are recommended to cleanup.
 
 As already mentioned, it is recommended to abort the fetch request when the component unmounts or updates. 
 
-```jsx
+```jsx mark=7,11,19
 import { useState, useEffect } from 'react';
 
 function MyComponent() {
@@ -263,7 +263,7 @@ Check the section [Canceling a fetch request](/javascript-fetch-async-await/#4-c
 
 When using `setTimeout(callback, time)` or `setInterval(callback, time)` timer functions, it's usually a good idea to clear them on unmount using the special `clearTimeout(timerId)` function.  
 
-```jsx
+```jsx mark=11
 import { useState, useEffect } from 'react';
 
 function MyComponent() {
@@ -287,7 +287,7 @@ When debouncing or throttling event handlers in React, you may also want to make
 
 Usually the debounce and throttling implementions (e.g. [lodash.debounce](https://lodash.com/docs/4.17.15#debounce), [lodash.throttle](https://lodash.com/docs/4.17.15#throttle)) provide a special method `cancel()` that you can call to stop the scheduled execution:
 
-```jsx
+```jsx mark=14
 import { useState, useEffect } from 'react';
 import throttle from 'lodash.throttle';
 
@@ -313,7 +313,7 @@ function MyComponent () {
 
 Another good candidate requiring cleanup are the [web sockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API):  
 
-```jsx
+```jsx mark=11
 import { useState } from 'react';
 
 function MyComponent() {
@@ -337,7 +337,7 @@ I recommend cleaning async effects when the component unmounts. Also, if the asy
 
 Depending on the type of the side-effect (fetch request, timeout, etc) return a cleanup function from the `useEffect()` callback that is going to clean the side-effect.  
 
-```javascript
+```javascript mark=4:6
 function MyComponent() {
   useEffect(() => {
     // Side-effect logic...

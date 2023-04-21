@@ -47,7 +47,7 @@ All because *functions in JavaScript are first-class citizens*. This means that 
 
 A. Assign functions to variables:
 
-```javascript
+```javascript mark=2
 // Assign to variables
 const hiFunction = function() { 
   return 'Hello!' 
@@ -58,7 +58,7 @@ hiFunction(); // => 'Hello!'
 
 B. Use functions as arguments to other functions:
 
-```javascript
+```javascript mark=2,6
 // Use as arguments
 function iUseFunction(func) {
   return func();
@@ -69,7 +69,7 @@ iUseFunction(function () { return 42 }); // => 42
 
 C. And even return functions from functions:
 
-```javascript
+```javascript mark=3
 // Return function from function
 function iReturnFunction() {
   return function() { return 42 };

@@ -45,7 +45,7 @@ Import the `useState` hook from the `'react'` package, then make a call of `useS
 
 Let's make these change to `<Bulbs>` component:
 
-```jsx
+```jsx mark=2,5
 import React, { useState } from 'react';
 
 function Bulbs() {
@@ -64,7 +64,7 @@ The first argument of `useState(initialState)` is the initial state. Simple as i
 
 In the beginning, the bulb is switched off. Reflected into state it should be initialized with `false`:  
 
-```jsx
+```jsx mark=5
 import React, { useState } from 'react';
 
 function Bulbs() {
@@ -88,7 +88,7 @@ stateArray[0]; // => the state value
 
 Let's read state of `<Bulbs>` component:
 
-```jsx
+```jsx mark=5,8
 import React, { useState } from 'react';
 
 function Bulbs() {
@@ -103,7 +103,7 @@ function Bulbs() {
 
 Let's use array destructuring to extract the state value into a variable `on`:
 
-```jsx
+```jsx mark=4
 import React, { useState } from 'react';
 
 function Bulbs() {
@@ -135,7 +135,7 @@ To update the component's state invoke the updater function `setState(newState)`
 
 Let's update bulb switch state to `true` when the button *On* is clicked, and respectively `false` when *Off* is:  
 
-```jsx
+```jsx mark=7:8,18:19
 import React, { useState } from 'react';
 
 function Bulbs() {
@@ -195,7 +195,7 @@ setItems(items => [...items, 'New Item']);
 
 Let's implement the bulb component to switch on/off with a single button:
 
-```jsx
+```jsx mark=6
 import React, { useState } from 'react';
 
 function Bulbs() {
@@ -251,7 +251,7 @@ Let's add a button *Add bulb* and a new state holding the count of bulbs. When t
 
 The new state `count` holds the number of bulbs, and is initialized with `1`:
 
-```jsx
+```jsx mark=6,9,18
 import React, { useState } from 'react';
 
 function Bulbs() {
@@ -291,7 +291,7 @@ When the initial state requires expensive performance-wise operation, use the *l
 
 Here's an example:
 
-```javascript
+```javascript mark=4
 function MyComponent({ bigJsonData }) {
   const [value, setValue] = useState(function getInitialState() {
     const object = JSON.parse(bigJsonData); // expensive operation
@@ -325,7 +325,7 @@ Let's follow examples of correct and incorrect usage of `useState()`.
 
 `useState()` is *correctly* called at the top level of functional component:
 
-```jsx
+```jsx mark=3
 function Bulbs() {
   // Good
   const [on, setOn] = useState(false);
@@ -335,7 +335,7 @@ function Bulbs() {
 
 Multiple `useState()` calls are *correctly* invoked in the same order:
 
-```jsx
+```jsx mark=3:4
 function Bulbs() {
   // Good
   const [on, setOn] = useState(false);
@@ -345,7 +345,7 @@ function Bulbs() {
 
 `useState()` is *correctly* called at the top level of a custom hook:
 
-```jsx
+```jsx mark=3
 function toggleHook(initial) {
   // Good
   const [on, setOn] = useState(initial);
@@ -362,7 +362,7 @@ function Bulbs() {
 
 `useState()` is *incorrectly* called within a condition:
 
-```jsx
+```jsx mark=4
 function Switch({ isSwitchEnabled }) {
   if (isSwitchEnabled) {
     // Bad
@@ -374,7 +374,7 @@ function Switch({ isSwitchEnabled }) {
 
 `useState()` is *incorrectly* called within a nested function:
 
-```jsx
+```jsx mark=7
 function Switch() {
   let on = false;
   let setOn = () => {};
@@ -404,7 +404,7 @@ Let's see how a stale state manifests itself. A component `<DelayedCount>` shoul
 
 Here's the first naive implementation:  
 
-```jsx
+```jsx mark=6
 function DelayedCount() {
   const [count, setCount] = useState(0);
 
@@ -431,7 +431,7 @@ function DelayedCount() {
 
 To fix the problem, let's use a functional way to update `count` state:
 
-```jsx
+```jsx mark=7
 function DelayedCount() {
   const [count, setCount] = useState(0);
 
@@ -466,7 +466,7 @@ Let's say you need to program a list of favorite movies. The user can add a movi
 
 A possible implementation of favorite movies list:
 
-```jsx
+```jsx mark=7,9:14
 import React, { useState } from 'react';
 
 function FavoriteMovies() {
@@ -495,7 +495,7 @@ The state list requires several operations: adding and removing movies. The stat
 
 A better solution is to extract the complex state management into a reducer:
 
-```jsx
+```jsx mark=4,19
 import React, { useReducer } from 'react';
 
 function reducer(state, action) {
@@ -539,7 +539,7 @@ Consider a scenario when you'd like to count how many times a component renders.
 
 A naive implemenation would be to initialize `countRender` state, and update it on each render (with the help of [useEffect()](https://reactjs.org/docs/hooks-reference.html#useeffect) hook):
 
-```jsx
+```jsx mark=8
 import React, { useState, useEffect } from 'react';
 
 function CountMyRenders() {
@@ -561,7 +561,7 @@ Mutable reference [useRef()](https://reactjs.org/docs/hooks-reference.html#usere
 
 Let's fix `<CountMyRenders>` to use a mutable reference:
 
-```jsx
+```jsx mark=8
 import React, { useRef, useEffect } from 'react';
 
 function CountMyRenders() {

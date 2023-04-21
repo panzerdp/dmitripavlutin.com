@@ -112,7 +112,7 @@ The controlled components approach can help you access the value of any input fi
 
 Let's control "Register Your Cat" form data by a state variable `values`:
 
-```jsx
+```jsx mark=21,24,30,33
 import { useState } from 'react';
 
 const COLORS = ['white', 'red', 'blue', 'black', 'cream'];
@@ -179,7 +179,7 @@ No validation attributes are added to *Habits* textarea because the field is opt
 
 The actual validation happens when the user clicks *Submit* button. If there are validation errors, they are displayed on the form, and the user can make corrections and click *Submit* again.  
 
-```jsx
+```jsx mark=13,19,28
 // ...
 
 function RegisterYourCatForm() {
@@ -236,7 +236,7 @@ To prevent the browser from performing the default action on submit, simply atta
 
 Moreover, inside the `onSubmit` event handler you can perform a POST request by yourself to save the user form:
 
-```jsx
+```jsx mark=19,21,34
 // ...
 
 function RegisterYourCatForm() {
@@ -293,7 +293,7 @@ To edit an existing registration, you would need to fill the form with initial d
 
 Because the input fields values are controlled by `values` state variable, just initialize the form's state using the initial data:
 
-```jsx
+```jsx mark=4
 // ...
 
 function EditRegistrationForm({ registrationId, initialValues }) {

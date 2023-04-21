@@ -23,7 +23,7 @@ Let's say you want to create a component having an input field, and also display
 
 Here's a possible implementation of `<CountInputChanges>` component:
 
-```jsx
+```jsx mark=7
 import { useEffect, useState } from 'react';
 
 function CountInputChanges() {
@@ -57,7 +57,7 @@ The demo shows that `count` state variable increases uncontrollably, even if you
 
 The problem is in the way `useEffect()` is used:
 
-```jsx
+```jsx mark=3
 useEffect(() => setCount(count + 1));
 ```
 
@@ -73,7 +73,7 @@ The infinite loop is fixed with correct management of the `useEffect(callback, d
 
 Because you want `count` to increment when `value` changes, you can simply add `value` as a dependency of the side-effect:
 
-```jsx
+```jsx mark=7
 import { useEffect, useState } from 'react';
 
 function CountInputChanges() {
@@ -107,7 +107,7 @@ The idea is that updating a reference doesn't trigger re-rendering of the compon
 
 Here's a possible implementation:
 
-```jsx
+```jsx mark=9
 import { useState, useRef } from 'react';
 
 function CountInputChanges() {
@@ -140,7 +140,7 @@ For example, the following `CountSecrets` component monitors the words that the 
 
 Here's a possible implementation of the component:
 
-```jsx
+```jsx mark=8,10
 import { useEffect, useState } from "react";
 
 function CountSecrets() {
@@ -187,7 +187,7 @@ which increments the secrets counter `countSecrets`, but also creates *a new obj
 
 Because of the objects creation and referential equality problem, it's wise to avoid objects as deps in `useEffect()`. Stick to primitives when possible:
 
-```javascript
+```javascript mark=5
 let count = 0;
 
 useEffect(() => {
@@ -195,7 +195,7 @@ useEffect(() => {
 }, [count]); // Good!
 ```
 
-```javascript
+```javascript mark=7,11
 let myObject = {
   prop: 'Value'
 };
@@ -213,7 +213,7 @@ Fixing the infinite loop of `<CountSecrets>` component requires changing the dep
 
 Calling the side-effect callback when only `secret.value` changes is sufficient. Here's the fixed version of the component:
 
-```jsx
+```jsx mark=10
 import { useEffect, useState } from "react";
 
 function CountSecrets() {

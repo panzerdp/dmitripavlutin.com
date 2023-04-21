@@ -32,7 +32,7 @@ When logging many variables, sometimes it's difficult to understand what variabl
 
 For example, let's log some variables:
 
-```javascript
+```javascript mark=2
 function sum(a, b) {
   console.log(b);
   return a + b;
@@ -48,7 +48,7 @@ When the above code is executed, you'll see just a series of numbers:
 
 To make an association between the logged value and variable, wrap the variable into a pair of curly braces `{ b }`:
 
-```javascript
+```javascript mark=2
 function sum(a, b) {
   console.log({ b });
   return a + b;

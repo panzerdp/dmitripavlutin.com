@@ -91,7 +91,7 @@ How to update the `increaseSalary()` function to support the slow addition?
 
 The first naive attemtp is to replace the `n1 + n2` expression with a call to `slowAddition(n1, n2)`:
 
-```javascript
+```javascript mark=2
 function increaseSalary(base, increase) {
   const newSalary = slowAddition(base, increase);
   console.log(`New salary: ${newSalary}`);
@@ -110,7 +110,7 @@ First, you need to add the `async` keyword near the function declaration. Then, 
 
 Let's make these changes to `increaseSalary()` function:
 
-```javascript
+```javascript mark=1:2
 async function increaseSalary(base, increase) {
   const newSalary = await slowAddition(base, increase);
   console.log(`New salary: ${newSalary}`);
@@ -207,7 +207,7 @@ That's a good thing because you can nest asynchronous functions!
 
 For example, let's write an async function that increases an array of salaries using the `slowAddition()` function:  
 
-```javascript
+```javascript mark=5
 async function increaseSalaries(baseSalaries, increase) {
   let newSalaries = [];
   for (let baseSalary of baseSalaries) {
@@ -233,7 +233,7 @@ In the previous example of summing an array of salaries, the summing happens in 
 
 But you can make salary increases in parallel! Let's use `Promise.all()` utility function to start all the salary increases simultaniously:
 
-```javascript
+```javascript mark=5,8
 async function increaseSalaries(baseSalaries, increase) {
   let salariesPromises = [];
   for (let baseSalary of baseSalaries) {
@@ -264,7 +264,7 @@ A common situation when you'd want to use `async/await` syntax is to fetch remot
 
 For example, here's how you would fetch a list of movies from a remote server:
 
-```javascript
+```javascript mark=2
 async function fetchMovies() {
   const response = await fetch('https://api.example.com/movies');
   if (!response.ok) {

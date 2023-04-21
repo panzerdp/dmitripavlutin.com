@@ -57,7 +57,7 @@ I use a debounce implementation from `'lodash.debounce'`, but you can use whatev
 
 Let's update the component with debouncing:
 
-```vue
+```vue mark=17,21:23,26
 <template>
   <input v-model="value" type="text" />
   <p>{{ value }}</p>
@@ -137,7 +137,7 @@ Again, that's not always convenient if you want to perform some relatively heavy
 
 Debouncing the event handler can be implemented as follows:
 
-```vue
+```vue mark=2,10:12,15
 <template>
   <input v-on:input="debouncedHandler" type="text" />
 </template>
@@ -193,7 +193,7 @@ That would be an easier approach than creating debounced functions as properties
 
 For example:
 
-```vue
+```vue mark=11:13
 <template>
   <input v-on:input="debouncedHandler" type="text" />
 </template>

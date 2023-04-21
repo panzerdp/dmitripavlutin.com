@@ -35,7 +35,7 @@ const resultingString = pieces.join(replace);
 
 For example, let's replace all spaces `' '` with hyphens `'-'` in `'duck duck go'` string:
 
-```javascript
+```javascript mark=4
 const search = ' ';
 const replaceWith = '-';
 
@@ -93,7 +93,7 @@ The regular expression literal `/\s/g` (note the `g` global flag) matches the sp
 
 You can easily make *case insensitive* replaces by adding `i` flag to the regular expression:
 
-```javascript
+```javascript mark=1
 const searchRegExp = /duck/gi;
 const replaceWith = 'goose';
 
@@ -112,7 +112,7 @@ When the regular expression is created from a string, you have to escape the cha
 
 Because of that, the special characters are a problem when you'd like to make replace all operation. Here's an example:
 
-```javascript
+```javascript mark=3
 const search = '+';
 
 const searchRegExp = new RegExp(search, 'g'); // Throws SyntaxError
@@ -130,7 +130,7 @@ Escaping the character `'\\+'` solves the problem. [Try the fixed demo](https://
 
 If the first argument `search` of `string.replace(search, replaceWith)` is a string, then the method replaces *only the first occurrence* of `search`:  
 
-```javascript
+```javascript mark=1
 const search = ' ';
 const replace = '-';
 

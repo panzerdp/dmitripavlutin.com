@@ -37,7 +37,7 @@ For example, let's create a simple web application that renders the application 
 
 If you try to import `config.json` directly, Node.js will throw an error:
 
-```javascript
+```javascript mark=2
 import http from 'http';
 import config from './config.json';
 
@@ -92,7 +92,7 @@ The import assertion, in this case, indicates a JSON type. However, there's a mo
 
 Now, let's integrate JSON module into the web application:
 
-```javascript
+```javascript mark=2
 import http from 'http';
 import config from './config.json' assert { type: "json" };
 

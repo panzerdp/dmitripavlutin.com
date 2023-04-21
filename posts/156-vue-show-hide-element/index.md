@@ -37,7 +37,7 @@ B) Otherwise, if the value supplied to `v-if` is `false` (or generally a [falsy 
 
 Let's consider the following example:
 
-```vue
+```vue mark=2:3
 <template>
   <div v-if="value1">I'm rendered!</div>
   <div v-if="value2">I'm not rendered!</div>
@@ -96,7 +96,7 @@ B) Otherwise, if the value supplied to `v-show` is `false` (or falsy), then the 
 
 Let's look at the following example:
 
-```vue
+```vue mark=2:3
 <template>
   <div v-show="value1">I'm visible!</div>
   <div v-show="value2">I'm hidden!</div>
@@ -145,7 +145,7 @@ But a viable solution is to use `:class` binding, which is pretty flexible in Vu
 
 Let's create a CSS class `invisible` having the `visibility: hidden` style. Then, using the `:class` binding and an object literal you can apply the `invisible` class to an element:
 
-```vue
+```vue mark=2:3
 <template>
   <div :class="{ invisible: !value1 }">I'm visible!</div>
   <div :class="{ invisible: !value2 }">Only my space is visible!</div>

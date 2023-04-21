@@ -48,7 +48,7 @@ A good practice when choosing the declaration type of variables is to *prefer `c
 
 For example, if you're looking at a function body and see a `const result = ...` declaration:
 
-```javascript
+```javascript mark=4
 function myBigFunction(param1, param2) {
   /* lots of stuff... */
 
@@ -71,7 +71,7 @@ A good practice to increase the readability of variables is to keep them in the 
 
 For example, the following function is an implementation of [binary search algorithm](https://en.wikipedia.org/wiki/Binary_search_algorithm):
 
-```javascript
+```javascript mark=2,3,8,9
 function binarySearch(array, search) {
   let middle;
   let middleItem;
@@ -103,7 +103,7 @@ The `middle` and `middleItem` variables are declared at the beginning of the fun
 
 However, `middle` and `middleItem` variables are used only within the `while` cycle code block. So... why not declaring these variables directly within `while` code block?  
 
-```javascript
+```javascript mark=6,7
 function binarySearch(array, search) {
   let left = 0;
   let right = array.length - 1;
@@ -134,7 +134,7 @@ Try to declare the variable as close as possible to the usage place. This way, y
 
 Let's say you have a function that has lots of statements in its body. You declare and initialize a variable `result` at the beginning of the function, however use `result` only in `return` statement:
 
-```javascript
+```javascript mark=2,9
 function myBigFunction(param1, param2) {
   const result = otherFunction(param1);
   let something;
@@ -153,7 +153,7 @@ To increase the understanding of the function and the role of `result` variable,
 
 Let's improve the function by moving the `result` variable declaration right before the `return` statement:
 
-```javascript
+```javascript mark=8,9
 function myBigFunction(param1, param2) {
   let something;
 
@@ -259,7 +259,7 @@ const sum = multiplication + division;
 
 Also, let's look back to the binary search implementation algorithm:
 
-```javascript
+```javascript mark=7,8,11
 function binarySearch(array, search) {
   let left = 0;
   let right = array.length - 1;
@@ -284,7 +284,7 @@ Here `middleItem` is an intermediate variable holding the middle item. It is eas
 
 Compare with a version of the function where `middleItem` explanatory variable is missing:
 
-```javascript
+```javascript mark=7,10
 function binarySearch(array, search) {
   let left = 0;
   let right = array.length - 1;

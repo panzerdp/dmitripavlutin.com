@@ -113,7 +113,7 @@ The 3rd parameter `array` inside the callback function is the array on which `fo
 
 Let's run the following example in a browser, and pay attention to the value of `this`:
 
-```javascript
+```javascript mark=4
 const letters = ['a', 'b', 'c'];
 
 function iterate(letter) {
@@ -134,7 +134,7 @@ array.forEach(callback, thisArgument)
 
 Let's implement a `Unique` class, which always holds an unique list of items:
 
-```javascript
+```javascript mark=11
 class Unique {
   constructor(items) {
     this.items = items;
@@ -183,7 +183,7 @@ sparseArray.forEach(function(item) {
 
 `forEach()` can iterate over array-like objects using an indirect call:
 
-```javascript
+```javascript mark=12
 const arrayLikeColors = {
   "0": "blue",
   "1": "green",
@@ -206,7 +206,7 @@ Array.prototype.forEach.call(arrayLikeColors, iterate);
 
 Alternatively, you can transform the array-like object into an array using `Array.from()`, then iterate:
 
-```javascript
+```javascript mark=12
 const arrayLikeColors = {
   "0": "blue",
   "1": "green",

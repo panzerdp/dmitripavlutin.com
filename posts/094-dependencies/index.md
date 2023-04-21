@@ -13,7 +13,7 @@ Many components (of libraries like React, Vue, Angular) use the functionality of
 
 Let's consider a React component that displays the number of words in the provided text:
 
-```tsx
+```tsx mark=1,4
 import words from 'lodash.words';
 
 function CountWords({ text }: { text: string }): JSX.Element {
@@ -42,7 +42,7 @@ Designing correctly the dependencies is an important skill to architect Front-en
 
 Let's recall the example component `CountWords` from the introduction:  
 
-```tsx
+```tsx mark=1
 import words from 'lodash.words';
 
 function CountWords({ text }: { text: string }): JSX.Element {
@@ -112,7 +112,7 @@ Your component should not directly import volatile dependencies.
 
 But let's deliberately make this mistake:  
 
-```tsx
+```tsx mark=1:2
 import { cookieClient } from './libs/cookie-client';
 import { cookieServer } from './libs/cookie-server';
 
@@ -171,7 +171,7 @@ export const CookieContext = createContext<Cookie>(null);
 
 `CookieContext` injects the dependency into the `Page` component:
 
-```tsx
+```tsx mark=9
 // Page.tsx
 import { useContext } from 'react';
 
@@ -200,7 +200,7 @@ The necessary implementation of the cookie management library is setup by the bo
 
 Here's how you would compose the cookie management dependency on client-side:
 
-```tsx
+```tsx mark=6,9
 // index.client.tsx
 import ReactDOM from 'react-dom';
 
@@ -218,7 +218,7 @@ ReactDOM.hydrate(
 
 and on the server-side:
 
-```tsx
+```tsx mark=7,13
 // index.server.tsx
 import express from 'express';
 import { renderToString } from 'react-dom/server';
@@ -271,7 +271,7 @@ While in the the previous example React context was injecting the concerete impl
 
 The same way you can inject implementations using props:
 
-```tsx
+```tsx mark=6,9
 // Page.tsx
 import { Cookie }        from './Cookie';
 import { LoginForm }     from './LoginForm';

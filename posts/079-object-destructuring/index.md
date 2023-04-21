@@ -23,7 +23,7 @@ This post will help you understand how to use object destructuring in JavaScript
 
 Imagine you'd like to extract some properties of an object. In a pre-ES2015 environment, you'd need to write the following code:
 
-```javascript
+```javascript mark=6:7
 var hero = {
   name: 'Batman',
   realName: 'Bruce Wayne'
@@ -46,7 +46,7 @@ That's where the object destructuring syntax is useful: you can read a property 
 
 Let's refactor the above script and apply the object destructuring to access the properties `name` and `realName`:
 
-```javascript
+```javascript mark=6
 const hero = {
   name: 'Batman',
   realName: 'Bruce Wayne'
@@ -95,7 +95,7 @@ const identifier = expression.identifier;
 
 Let's try object destructuring in practice:
 
-```javascript
+```javascript mark=6
 const hero = {
   name: 'Batman',
   realName: 'Bruce Wayne'
@@ -131,7 +131,7 @@ const identifierN = expression.identifierN;
 
 Let's take a look again at the example from the first section, where 2 properties are extracted:
 
-```javascript
+```javascript mark=6
 const hero = {
   name: 'Batman',
   realName: 'Bruce Wayne'
@@ -151,7 +151,7 @@ console.log(realName); // => 'Bruce Wayne'
 
 If the destructured object doesn't have the property specified in the destructuring assignment, then the variable is assigned with `undefined`. Let's see how it happens:
 
-```javascript
+```javascript mark=6
 const hero = {
   name: 'Batman',
   realName: 'Bruce Wayne'
@@ -183,7 +183,7 @@ const identifier = expression.identifier === undefined ?
 
 Let's change the previous code sample, and use the default value feature:
 
-```javascript
+```javascript mark=6
 const hero = {
   name: 'Batman',
   realName: 'Bruce Wayne'
@@ -216,7 +216,7 @@ const aliasIdentifier = expression.identifier;
 
 Here's an example of an object destructuring alias feature:
 
-```javascript
+```javascript mark=6
 const hero = {
   name: 'Batman',
   realName: 'Bruce Wayne'
@@ -260,7 +260,7 @@ const { propA: { propB: { propC: { .... } } } } = object;
 
 For example, the object `hero` contains a nested object `{ city: 'Gotham'}`. 
 
-```javascript
+```javascript mark=10
 const hero = {
   name: 'Batman',
   realName: 'Bruce Wayne',
@@ -296,7 +296,7 @@ const identifier = expression[propName];
 
 Let's look at an example where `prop` holds the property name:
 
-```javascript
+```javascript mark=7
 const hero = {
   name: 'Batman',
   realName: 'Bruce Wayne'
@@ -323,7 +323,7 @@ Where `identifier` is the name of the property to access and `expression` should
 
 For example, let's extract the property `name`, but collect the rest of the properties into a variable `rest`:
 
-```javascript
+```javascript mark=6
 const hero = {
   name: 'Batman',
   realName: 'Bruce Wayne',
@@ -348,7 +348,7 @@ The object destructuring can assign values to variables declared using `const`, 
 
 For example, here's how to destructure using `let` statement:
 
-```javascript
+```javascript mark=6
 // let
 const hero = {
   name: 'Batman',
@@ -362,7 +362,7 @@ console.log(name); // => 'Batman'
 
 How to destructure using `var` statement:
 
-```javascript
+```javascript mark=6
 // var
 const hero = {
   name: 'Batman',
@@ -376,7 +376,7 @@ console.log(name); // => 'Batman'
 
 And how to destructure to an already declared variable:
 
-```javascript
+```javascript mark=8
 // existing variable
 let name;
 
@@ -392,7 +392,7 @@ console.log(name); // => 'Batman'
 
 I find it satisfying to combine `for..of` cycle with object destructuring to extract the property right away:
 
-```javascript
+```javascript mark=6
 const heroes = [
   { name: 'Batman' },
   { name: 'Joker' }
@@ -410,7 +410,7 @@ Object destructuring can be placed anywhere where an assignment happens.
 
 For example, you could destruct an object right inside the parameter of a function:
 
-```javascript
+```javascript mark=7
 const heroes = [
   { name: 'Batman' },
   { name: 'Joker' }

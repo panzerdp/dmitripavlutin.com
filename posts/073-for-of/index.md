@@ -27,7 +27,7 @@ additional variables to keep an index.
 
 For example:
 
-```javascript
+```javascript mark=3
 const products = ['oranges', 'apples'];
 
 for (const product of products) {
@@ -43,7 +43,7 @@ The array method [entries()](https://developer.mozilla.org/en-US/docs/Web/JavaSc
 
 Let's access both the index and item at iteration each cycle:
 
-```javascript
+```javascript mark=3
 const products = ['oranges', 'apples'];
 
 for (const [index, product] of products.entries()) {
@@ -75,7 +75,7 @@ So, the syntax of `for...of` enables the destructuring of the iterated item.
 
 Let's iterate over an array of objects, extracting the property `name` of each one:
 
-```javascript
+```javascript mark=6
 const persons = [
   { name: 'John Smith' },
   { name: 'Jane Doe' }
@@ -98,7 +98,7 @@ The cycle `for (const { name } of persons)` iterates the objects of `persons` ar
 
 Let's write a function `sum(num1, num2, ..., numN)` that sums all its arguments:
 
-```javascript
+```javascript mark=3
 function sum() {
   let sum = 0;
   for (const number of arguments) {
@@ -132,7 +132,7 @@ If you'd like to know more, feel free to follow my [explanation of iterables](ht
 
 The string primitive in JavaScript is iterable. Thus, you could easily iterate over the characters of a string.  
 
-```javascript
+```javascript mark=3
 const message = 'hello';
 
 for (const character of message) {
@@ -155,7 +155,7 @@ Fortunately, `Map` is also an iterable (which iterates over the key/value pairs)
 
 Let's try that:
 
-```javascript
+```javascript mark=5
 const names = new Map();
 names.set(1, 'one');
 names.set(2, 'two');
