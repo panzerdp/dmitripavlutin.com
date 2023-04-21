@@ -211,3 +211,20 @@ async function fetchUsers() {
   return response.json()
 }
 ```
+
+## Tip 11
+
+Do you find TypeScript errors difficult to understand? Then you'll love this new VSCode extension!
+
+Just install "Pretty TypeScript Errors" VSCode extension https://marketplace.visualstudio.com/items?itemName=yoavbls.pretty-ts-errors.
+
+The extension makes the TypeScript error reporting much more readable. Also provides a link to a more detailed error explanation and a possible solution.
+
+#typescript #vscode
+
+![Tip 11](./images/tip-11.png)
+
+## Tip 12
+
+// Autojump functionality
+
