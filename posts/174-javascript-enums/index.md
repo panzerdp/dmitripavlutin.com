@@ -327,7 +327,7 @@ console.log(mySize instanceof Sizes) // logs true
 ```
 [Open the demo.](https://jsfiddle.net/vqoj32h6/)
 
-`Sizes` is a class that represents the enum. The enum constants are static fields on the class, e.g. `static Small = new Season('small')`.
+`Sizes` is a class that represents the enum. The enum constants are static fields on the class, e.g. `static Small = new Sizes('small')`.
 
 Each instance of the `Sizes` class also has a private field `#value`, which represents the raw value of the enum.  
 
@@ -454,9 +454,9 @@ The fourth option is to use the class-based enum, where each named constant is a
 
 ```javascript
 class MyEnum {
-  static Option1 = new Season('option1')
-  static Option2 = new Season('option2')
-  static Option3 = new Season('option3')
+  static Option1 = new MyEnum('option1')
+  static Option2 = new MyEnum('option2')
+  static Option3 = new MyEnum('option3')
   #value
 
   constructor(value) {
