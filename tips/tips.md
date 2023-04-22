@@ -228,3 +228,14 @@ The extension makes the TypeScript error reporting much more readable. Also prov
 
 // Autojump functionality
 
+## Tip 13
+
+// Mention about JavaScript comments inside JSX tag
+
+## Tip 14
+
+// Mention about TypeScript helper type jest.Mocked(func)
+
+## Tip 15
+
+// Do you know how to cancel a fetch() request?
