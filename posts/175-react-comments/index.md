@@ -125,7 +125,7 @@ function MyComponent() {
 
 ## 3. JavaScript comments inside JSX
 
-What's interesting is you can write regular JavaScript comments inside of a JSX tag! Just makes sure to add a newline after the comment.  
+What's interesting is you can write regular JavaScript comments inside of a JSX tag! Just make sure to add a newline after the comment.  
 
 You can use it to add comments targeting a specic prop:
 
