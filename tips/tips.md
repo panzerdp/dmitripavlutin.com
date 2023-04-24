@@ -226,16 +226,35 @@ The extension makes the TypeScript error reporting much more readable. Also prov
 
 ## Tip 12
 
-// Autojump functionality
+Are you still manually typing the path to directories? You don't have to!
+
+"autojump" CLI utility helps you navigate much faster between directories: https://github.com/wting/autojump
+
+#cli
+
+![Tip 12](./images/tip-12.png)
 
 ## Tip 13
 
-// Mention about JavaScript comments inside JSX tag
+How to let know TypeScript that a function is mocked?
+
+"jest.mocked(source)" method wraps source with type definitions of Jest mock function.  
+
+Read more: https://jestjs.io/docs/mock-function-api/#jestmockedsource-options
+
+```typescript
+import myFunc from './my-func'
+
+jest.mock('./my-func')
+
+jest.mocked(myFunc).mockReturnValue('Mocked!') // OK
+myFunc.mockReturnedValue('Mocked!')            // TypeError!
+```
+
+![jest.mocked() TypeScript](./images/tip-13.png)
 
 ## Tip 14
 
-// Mention about TypeScript helper type jest.Mocked(func)
+I follow a simple rule: "code without tests means not working code".
 
-## Tip 15
-
-// Do you know how to cancel a fetch() request?
+#tdd #unittesting
