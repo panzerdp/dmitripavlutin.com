@@ -257,4 +257,20 @@ myFunc.mockReturnedValue('Mocked!')            // TypeError!
 
 I follow a simple rule: "code without tests means not working code".
 
-#tdd #unittesting
+What self-discipline rules do you follow?
+
+#tdd #unittesting #discipline
+
+## Tip 15
+
+Be pragmatic not dogmatic.   
+
+// Add examples of pramatic and dogmatic
+
+## Tip 16
+
+Have you wondered how is webpack structuring your bundle?  
+
+Take a look at the Statescope tool.
+
+// Formulate better
