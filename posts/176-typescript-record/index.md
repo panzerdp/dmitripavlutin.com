@@ -20,7 +20,7 @@ interface Salary1 {
 const salary: Salary1 = { annual: 100000, bonus: 1200 } // OK
 ```
 
-or an index signature:
+or an [index signature](/typescript-index-signatures/):
 
 ```ts
 type Salary2 = {
@@ -121,3 +121,10 @@ type Salary5 = {
 ```
 
 ## 4. Conclusion
+
+`Record<K, V>` let's you create object types with `K` as the key type and `V` as the value type.  
+
+Although there are no restrictions on the `V` value type, the `K` key type can be only number, string or symbol, including their literals.  
+
+To restrict the keys to a set of names, you can use an union of string literals `Record<'key1' | 'key2', V>`.  
+
