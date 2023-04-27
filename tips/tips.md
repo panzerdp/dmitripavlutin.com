@@ -274,3 +274,7 @@ Have you wondered how is webpack structuring your bundle?
 Take a look at the Statescope tool.
 
 // Formulate better
+
+## Tip 17
+
+// Idea about IIFE async function in useEffect()

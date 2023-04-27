@@ -13,7 +13,7 @@ I like React because its syntax is JavaScript, except when you write JSX.
 
 When it comes to writing comments, React offers the syntax `{/* Comment */}`. To me, this syntax is a bit verbose.    
 
-Let's see how to use the regular JSX comments syntax and alternative 2 better ways to comment.
+Let's see how to use the regular JSX comments and other 2 better ways to comment.
 
 <Affiliate type="traversyReact" />
 
