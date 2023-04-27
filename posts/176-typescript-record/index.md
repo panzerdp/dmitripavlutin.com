@@ -1,5 +1,5 @@
 ---
-title: "Why I Like the Record Type in TypeScript"
+title: "Record Type in TypeScript"
 description: "Record<K, V> is a utility type that simplifies typing object in TypeScript. Let's see how you can advantage from it."
 published: "2023-04-27"
 modified: "2023-04-27"
@@ -17,7 +17,7 @@ interface Salary1 {
   bonus: number
 }
 
-const salary: Salary1 = { annual: 100000, bonus: 12000 } // OK
+const salary: Salary1 = { annual: 100000, bonus: 1200 } // OK
 ```
 
 or an index signature:
@@ -27,24 +27,22 @@ type Salary2 = {
   [key: string]: number
 }
 
-const salary: Salary2 = { annual: 100000, bonus: 12000 } // OK
+const salary: Salary2 = { annual: 100000, bonus: 1200 } // OK
 ```
 
 `Record<K, V>`, the third approach, has the benefit of being shorter and more readable.  Let's see how to use it in your code.  
 
 ## 1. Record
 
-`Record<K, V>` is a generic type that represents an object type which keys are `K` type and values are `V` type.  
+`Record<K, V>` is a generic type that represents an object type which keys are `K` and values are `V`.  
 
-For example, `Record<string, number>` is a type of an object with strings as keys and numbers as values:
+For example, `Record<string, number>` is an object with string keys and number values:
 
 ```ts
 type Salary3 = Record<string, number>
 
-const salary: Salary3 = { annual: 100000, bonus: 12000 }
+const salary: Salary3 = { annual: 100000, bonus: 1200 }
 ```
-
-If you compare the record type and the index signature type, it's visible that the record type is shorter and more readable. Usually I prefer the record type syntax because of that.  
 
 `Record<string, number>` is permissive in terms of the object structure, as long as the keys are strings and values numbers:
 
@@ -54,47 +52,55 @@ type Salary3 = Record<string, number>
 const salary1: Salary3 = { annual: 100000 } // OK
 const salary2: Salary3 = { monthly: 8000 }  // OK
 const salary3: Salary3 = { }                // OK
+
+const salary4: Salary3 = { annual: '100K' } // Type error!
 ```
 
-The record type has a restriction on what types can be used as a key type. You are allowed to use as key type only number, string, symbol, plus the literals of these type. Plus a union of all these types.  
-
-But there are no restriction on the value type.  
+The key type is restricted to `number`, `string`, `symbol`, including the [literals](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types) of them. There are no restriction on the value type.  
 
 ```ts
-Record<string, string>              // OK
-Record<number, number>              // OK
-Record<string | number, () => void> 
+Record<string, string>           // OK
+Record<number, number>           // OK
+Record<string, () => void>       // OK
+Record<number | 'key1', boolean> // OK
+Record<'key1' | 'key2', boolean> // OK
+```
+
+Types like `boolean`, `object`, `Function`, etc. are not accepted as keys:
+
+```ts
+Record<boolean, string>          // Type error!
+Record<object, number>           // Type error!
 ```
 
 ## 2. Record with union key
 
 The record type accepts a [union type](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) as a key, which is useful to limit keys an object might have.  
 
-For example, `Record<'annual' | 'bonus', number>` represents an object which can have only `annual` or `bonus` keys (or neither of them!):
+For example, `Record<'annual' | 'bonus', number>` represents an object which can have only `annual` or `bonus` keys:
 
 ```ts
 type Salary4 = Record<'annual' | 'bonus', number>
 
-const salary1: Salary4 = { annual: 100000, bonus: 12000 } // OK
-const salary2: Salary4 = { annual: 100000 }               // OK
-const salary3: Salary4 = { bonus: 12000 }                 // OK
-const salary4: Salary4 = { }                              // OK
-const salary5: Salary4 = { monthly: 8000 }                // Type error!
+const salary1: Salary4 = { annual: 100000, bonus: 1200 } // OK
+const salary2: Salary4 = { annual: 100000 }              // OK
+const salary3: Salary4 = { bonus: 1200 }                 // OK
+const salary4: Salary4 = { }                             // OK
 ```
 
-The record with union key is equivalent to an object type where the same properties are optional:
+Using a key that is not present in the union generates a type error:
 
-```typescript
-Record<'annual' | 'bonus', number>
-// is the same as
-{ annual?: number, bonus?: number}
+```ts
+type Salary4 = Record<'annual' | 'bonus', number>
+
+const salary5: Salary4 = { monthly: 8000 } // Type error!
 ```
-
-where `annual?` and `bonus?` are [optional properties](https://www.typescriptlang.org/docs/handbook/2/objects.html#optional-properties).  
 
 ## 3. Record and index signature
 
 I prefer a record type instead of an index signature most of the times. The former is shorter and more readable than the latter.  
+
+For example, I like more the parameter annotated with a record:
 
 ```ts
 function logSalary1(salary: Record<string, number>) {
@@ -106,8 +112,12 @@ function logSalary2(salary: { [key: string]: number }) {
 }
 ```
 
-The parameter annotated with a record is easier to read than the one with the index signature.  
+In addition the index signature doesn't accept literals or an union of literals as key type:
 
-
+```ts
+type Salary5 = {
+  [key: 'annual' | 'bonus']: number // Type error!
+}
+```
 
 ## 4. Conclusion
