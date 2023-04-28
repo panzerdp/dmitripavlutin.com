@@ -251,4 +251,6 @@ The index signature consists of the index name and its type in square brackets, 
 
 To limit the key type to a specific union of strings, then using the `Record<Keys, Values>` utilty type is a better idea. The index signature doesn't support unions of string literal types.  
 
+Check also my post about [record type](/typescript-record/).  
+
 *Do you prefer index signatures or `Record<Keys, Values>` utility type?*
