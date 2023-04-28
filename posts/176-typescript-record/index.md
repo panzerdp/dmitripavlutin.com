@@ -67,12 +67,12 @@ type NumericRecord = Record<string, number>
 const salary2: NumericRecord = { annual: '56K' } // Type error!
 ```
 
-Regarding the allowed types of the keys and values, there are 2 simple rules to remember. In `Record<K, V>`:
+There are 2 simple rules to remember regarding the allowed types of the keys and values. In `Record<K, V>`:
 
 * the key type `K` is restricted to `number`, `string`, `symbol`, including their [literals](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types)
 * but there is no restriction on the value type `V`
 
-All types in the next example is permitted in a record:
+Let's see some valid record types:
 
 ```ts codesandbox=vanilla-ts?entry=src/index.ts
 type T1 = Record<string, string>           // OK
@@ -82,6 +82,7 @@ type T4 = Record<number | 'key1', boolean> // OK
 type T5 = Record<'key1' | 'key2', boolean> // OK
 
 type T6 = Record<string, Record<string, number>> // OK
+type T7 = Record<string, { payment: number }>    // OK
 ```
 
 Types like `boolean`, `object`, `Function`, etc. are not accepted as keys:
@@ -151,7 +152,7 @@ function logSalary2(salary: { [key: string]: number }) {
 
 </CH.Section>
 
-Compared to record type, the index signature doesn't accept literals or a union of literals as key type:
+Compared to record type, the index signature doesn't accept literals or a union as key type:
 
 ```ts codesandbox=vanilla-ts?entry=src/index.ts
 type Salary = {
