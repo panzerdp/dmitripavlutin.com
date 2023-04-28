@@ -278,3 +278,7 @@ Take a look at the Statescope tool.
 ## Tip 17
 
 // Idea about IIFE async function in useEffect()
+
+## Tip 18
+
+// Soft-ware
