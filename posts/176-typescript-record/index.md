@@ -9,7 +9,7 @@ tags: ['typescript', 'object']
 type: post
 ---
 
-The usualy way to define a type of an object in TypeScript is using an object type:
+The usual way to define a type of an object in TypeScript is using an object type:
 
 ```ts
 interface Salary1 {
@@ -56,7 +56,7 @@ const salary2: Salary3 = { monthly: 8000 }  // OK
 const salary3: Salary3 = { }                // OK
 ```
 
-But `Record<string, number>` throws a type error if you use symbol as a key or a string as a value:
+But `Record<string, number>` throws a type error if you use a symbol as a key or a string as a value:
 
 ```ts
 type Salary3 = Record<string, number>
@@ -65,7 +65,7 @@ const salary1: Salary3 = { [Symbol('Salary')]: 56000 } // Type error!
 const salary2: Salary3 = { annual: '56K' }             // Type error!
 ```
 
-In `Record<K, V>` the key type `K` is restricted to `number`, `string`, `symbol`, including the [literals](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types) of them. There are no restriction on the value type `V`.  
+In `Record<K, V>` the key type `K` is restricted to `number`, `string`, `symbol`, including the [literals](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types) of them. There is no restriction on the value type `V`.  
 
 ```ts
 Record<string, string>           // OK
@@ -109,9 +109,9 @@ const salary5: Salary4 = { monthly: 8000 } // Type error!
 
 ## 3. Record and index signature
 
-I prefer a record type instead of an index signature most of the times. The former is shorter and more readable than the latter.  
+I prefer a record type instead of an index signature most of the time. The former is shorter and more readable than the latter.  
 
-For example, I like more the parameter annotated with a record:
+For example, I like the parameter annotated with a record:
 
 ```ts
 function logSalary1(salary: Record<string, number>) {
@@ -123,7 +123,7 @@ function logSalary2(salary: { [key: string]: number }) {
 }
 ```
 
-In addition the index signature doesn't accept literals or a union of literals as key type:
+In addition, the index signature doesn't accept literals or a union of literals as key type:
 
 ```ts
 type Salary5 = {
@@ -135,7 +135,7 @@ type Salary5 = {
 
 `Record<K, V>` creates object types with key type `K` and value type `V`.  
 
-Although there are no restrictions on the `V` value type, the `K` key type can be only number, string or symbol, including their literals.  
+Although there are no restrictions on the `V` value type, the `K` key type can be only a number, string, or symbol, including their literals.  
 
 To restrict the keys to a limited set, you can use a union of string literals `Record<'key1' | 'key2', V>`.  
 
