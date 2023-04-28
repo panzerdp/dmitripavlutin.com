@@ -168,6 +168,6 @@ The key type  `K` can be only `number`, `string`, or `symbol`, including their l
 
 To limit the keys to a specific set, you can use a union of string literals `Record<'key1' | 'key2', V>` as the key type.  
 
-Visit my post on [index signatures](/typescript-index-signatures/) to continue learning how to type objects in TypeScript.
+Check also my post [index signatures](/typescript-index-signatures/) to learning more about object types.
 
 *How often do you use record type?*
