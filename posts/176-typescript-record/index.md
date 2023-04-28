@@ -34,6 +34,8 @@ These are good ways to define object types.
 
 But `Record<K, V>`, the third approach, has the benefit of being shorter and more readable.  Let's see how to use it in your code.  
 
+<TableOfContents />
+
 ## 1. Record
 
 `Record<K, V>` is a [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html) that represents an object type which keys are `K` and values are `V`.  
@@ -46,7 +48,7 @@ type NumericRecord = Record<string, number>
 const salary: NumericRecord = { annual: 56000, bonus: 1200 } // OK
 ```
 
-`Record<string, number>` is permissive regarding the object structure, as long as the keys are strings and values numbers:
+`Record<string, number>` is permissive regarding the object structure, as long as the keys are strings and values are numbers:
 
 ```ts codesandbox=vanilla-ts?entry=src/index.ts
 type NumericRecord = Record<string, number>
@@ -65,10 +67,12 @@ type NumericRecord = Record<string, number>
 const salary2: NumericRecord = { annual: '56K' } // Type error!
 ```
 
-Generally in `Record<K, V>`:
+Regarding the allowed types of the keys and values, there are 2 simple rules to remember. In `Record<K, V>`:
 
 * the key type `K` is restricted to `number`, `string`, `symbol`, including their [literals](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types)
 * but there is no restriction on the value type `V`
+
+All types in the next example is permitted in a record:
 
 ```ts codesandbox=vanilla-ts?entry=src/index.ts
 type T1 = Record<string, string>           // OK
@@ -89,9 +93,9 @@ type T2 = Record<object, number>  // Type error!
 
 ## 2. Record with union key
 
-The record type accepts a [union type](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) as a key, which is useful to limit the keys an object can have.  
+As seen above, `Record<string, number>` permits any key names in the object. But quite often you need to annotate objects with a fixed set of keys.  
 
-A [union of string literals](https://mariusschulz.com/blog/string-literal-types-in-typescript#string-literal-types-and-union-types) is a  common way to define the key type: 
+The record type accepts a [union type](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) as a key, which is useful to limit the keys an object can have. A [union of string literals](https://mariusschulz.com/blog/string-literal-types-in-typescript#string-literal-types-and-union-types) is a  common way to define the key type: 
 
 ```ts
 type Keys = 'key1' | 'key2' | 'keyN'
@@ -105,7 +109,7 @@ type Salary = Record<'annual' | 'bonus', number>
 const salary1: Salary = { annual: 56000, bonus: 1200 } // OK
 ```
 
-Using less than necessary or other keys is prohibited:
+Using less than necessary or other keys than in the union is prohibited:
 
 ```ts codesandbox=vanilla-ts?entry=src/index.ts
 type Salary = Record<'annual' | 'bonus', number>
@@ -116,7 +120,7 @@ const salary3: Salary = { }               // Type error!
 const salary4: Salary = { monthly: 8000 } // Type error!
 ```
 
-Finally, the record with union keys in a way is similar to the regular object type:
+The record type with union keys is equivalent to the regular object type. The record type provides the benefit of not repeating the value type like the regular object does:
 
 ```typescript
 type Salary = Record<'annual' | 'bonus', number>
@@ -127,7 +131,7 @@ type SalaryObj = {
 }
 ```
 
-## 3. Record and index signature
+## 3. Record benefits
 
 I prefer record type instead of index signature most of the time. Record syntax is shorter and more readable.  
 
