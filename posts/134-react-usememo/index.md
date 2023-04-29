@@ -35,7 +35,7 @@ That's the essence of `useMemo()` hook.
 
 If your computation callback uses props or state values, then be sure to indicate these values as dependencies:
 
-```javascript{2}
+```javascript mark=3
 const memoizedResult = useMemo(() => {
   return expensiveFunction(propA, propB);
 }, [propA, propB]);
@@ -49,7 +49,7 @@ A component `<CalculateFactorial />` calculates the factorial of a number introd
 
 Here's a possible implementation of `<CalculateFactorial />` component:
 
-```jsx{6,27}
+```jsx mark=7,28
 import { useState } from 'react';
 
 export function CalculateFactorial() {
@@ -79,7 +79,7 @@ function factorialOf(n) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/factorial-without-memoization-26yp4?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/factorial-without-memoization-26yp4?file=/src/App.js)
 
 Every time you change the input value, the factorial is calculated `factorialOf(n)` and `'factorialOf(n) called!'` is logged to console.  
 
@@ -91,7 +91,7 @@ By using `useMemo(() => factorialOf(number), [number])` instead of simple `facto
 
 Let's improve `<CalculateFactorial />` and memoize the factorial calculation:
 
-```jsx{6,27}
+```jsx mark=7,28
 import { useState, useMemo } from 'react';
 
 export function CalculateFactorial() {
@@ -121,7 +121,7 @@ function factorialOf(n) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/factorial-with-memoization-65mkk?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/factorial-with-memoization-65mkk?file=/src/App.js)
 
 Open the [demo](https://codesandbox.io/s/factorial-with-memoization-65mkk?file=/src/App.js). Every time you change the value of the number, `'factorialOf(n) called!'` is logged to console. That's expected.  
 
@@ -131,7 +131,7 @@ However, if you click *Re-render* button, `'factorialOf(n) called!'` isn't logge
 
 `useCallback()`, compared to `useMemo()`, is a more specialized hook that memoizes callbacks:  
 
-```jsx{6}
+```jsx mark=7
 import { useCallback } from 'react';
 
 function MyComponent({ prop }) {
@@ -148,7 +148,7 @@ In the above example, `useCallback(() => {...}, [prop])` returns the same functi
 
 You can use the same way the `useMemo()` to memoize callbacks:
 
-```jsx{6}
+```jsx mark=7
 import { useMemo } from 'react';
 
 function MyComponent({ prop }) {

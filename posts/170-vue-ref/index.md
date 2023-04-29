@@ -1,9 +1,9 @@
 ---
-title: "How to Use refs and ref() in Vue"
+title: "Mastering Vue refs: From Zero to Hero"
 description: "ref() is a Vue composition API function that creates refs: small reactive values."  
 published: "2023-02-28"
 modified: "2023-03-07"
-thumbnail: "./images/vue-ref-3.png"
+thumbnail: "./images/vue-ref-4.png"
 slug: ref-in-vue 
 tags: ['vue', 'vue composition', 'ref', 'reactivity']
 type: post
@@ -221,7 +221,7 @@ But other reactivity APIs can create refs implicitly. A common API creating refs
 
 Let's create a computed ref `evenOdd` that changes to `'even'` or `'odd'` depending on the `count` ref value:
 
-```vue {4}
+```vue mark=5
 <script setup>
 import { ref, computed } from 'vue'
 

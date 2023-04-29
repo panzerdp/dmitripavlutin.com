@@ -35,7 +35,7 @@ const resultingString = pieces.join(replace);
 
 For example, let's replace all spaces `' '` with hyphens `'-'` in `'duck duck go'` string:
 
-```javascript{3}
+```javascript mark=4
 const search = ' ';
 const replaceWith = '-';
 
@@ -43,7 +43,7 @@ const result = 'duck duck go'.split(search).join(replaceWith);
 
 console.log(result); // => 'duck-duck-go'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/0cbfjwhz/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/0cbfjwhz/)
 
 `'duck duck go'.split(' ')` splits the string into pieces: `['duck', 'duck', 'go']`.  
 
@@ -61,7 +61,7 @@ console.log(replaceAll('go go go!', 'go', 'move')); // => 'move move move!'
 console.log(replaceAll('oops', 'z', 'y'));          // => 'oops'
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/rf3bnz2y/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/rf3bnz2y/)
 
 This approach requires transforming the string into an array, and then back into a string. Let's continue looking for better alternatives.  
 
@@ -85,7 +85,7 @@ const result = 'duck duck go'.replace(searchRegExp, replaceWith);
 console.log(result); // => 'duck-duck-go'
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/479oarmj/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/479oarmj/)
 
 The regular expression literal `/\s/g` (note the `g` global flag) matches the space `' '`.  
 
@@ -93,7 +93,7 @@ The regular expression literal `/\s/g` (note the `g` global flag) matches the sp
 
 You can easily make *case insensitive* replaces by adding `i` flag to the regular expression:
 
-```javascript{0}
+```javascript mark=1
 const searchRegExp = /duck/gi;
 const replaceWith = 'goose';
 
@@ -112,7 +112,7 @@ When the regular expression is created from a string, you have to escape the cha
 
 Because of that, the special characters are a problem when you'd like to make replace all operation. Here's an example:
 
-```javascript{2}
+```javascript mark=3
 const search = '+';
 
 const searchRegExp = new RegExp(search, 'g'); // Throws SyntaxError
@@ -120,7 +120,7 @@ const replaceWith = '-';
 
 const result = '5+2+1'.replace(searchRegExp, replaceWith);
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/32wrdafe/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/32wrdafe/)
 
 The above snippet tries to transform the search string `'+'` into a regular expression. But `'+'` is an invalid regular expression, thus `SyntaxError: Invalid regular expression: /+/` is thrown.  
 
@@ -130,7 +130,7 @@ Escaping the character `'\\+'` solves the problem. [Try the fixed demo](https://
 
 If the first argument `search` of `string.replace(search, replaceWith)` is a string, then the method replaces *only the first occurrence* of `search`:  
 
-```javascript{0}
+```javascript mark=1
 const search = ' ';
 const replace = '-';
 
@@ -138,7 +138,7 @@ const result = 'duck duck go'.replace(search, replace);
 
 console.log(result); // => 'duck-duck go'
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/L7qutvmg/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/L7qutvmg/)
 
 `'duck duck go'.replace(' ', '-')` replaces only the first appearance of a space.  
 
@@ -157,7 +157,7 @@ const result = 'duck duck go'.replaceAll(search, replaceWith);
 console.log(result); // => 'duck-duck-go'
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/m5e603so/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/m5e603so/)
 
 `'duck duck go'.replaceAll(' ', '-')` replaces all occurrences of `' '` string with `'-'`.  
 

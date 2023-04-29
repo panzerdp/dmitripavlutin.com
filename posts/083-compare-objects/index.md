@@ -56,7 +56,7 @@ Object.is(hero1, hero1); // => true
 Object.is(hero1, hero2); // => false
 ```
 
-[Try the demo](https://jsfiddle.net/dmitri_pavlutin/y2g0k4bf/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/y2g0k4bf/)
 
 `hero1 === hero1` evaluates to `true` because both operands point to the same object instance `hero1`.  
 
@@ -93,7 +93,7 @@ console.log(isHeroEqual(hero1, hero2)); // => true
 console.log(isHeroEqual(hero1, hero3)); // => false
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/mu2abpgv/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/mu2abpgv/)
 
 `isHeroEqual()` accesses the property `name` of both objects and compares their values.  
 
@@ -150,7 +150,7 @@ const hero3 = {
 console.log(shallowEqual(hero1, hero2)); // => true
 console.log(shallowEqual(hero1, hero3)); // => false
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/nptcuvk4/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/nptcuvk4/)
 
 `shallowEqual(hero1, hero2)` returns `true` because the objects `hero1` and `hero2` have the same properties (`name` and `realName`) with the same values.  
 
@@ -179,7 +179,7 @@ const hero2 = {
 console.log(shallowEqual(hero1, hero2)); // => false
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/71rozs4h/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/71rozs4h/)
 
 This time, even `hero1` and `hero2` have the same content, `shallowEqual(hero1, hero2)` returns `false`.  
 
@@ -193,7 +193,7 @@ Deep equality is similar to shallow equality, but with one difference. During th
 
 Let's look at the implementation of a deep equality check:
 
-```javascript{13}
+```javascript mark=14
 function deepEqual(object1, object2) {
   const keys1 = Object.keys(object1);
   const keys2 = Object.keys(object2);
@@ -244,7 +244,7 @@ const hero2 = {
 console.log(deepEqual(hero1, hero2)); // => true
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/hfjk38bu/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/hfjk38bu/)
 
 The deep equality function correctly determines that `hero1` and `hero2` have the same properties and values, including the equality of the nested objects `hero1.address` and `hero2.address`.  
 

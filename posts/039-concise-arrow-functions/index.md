@@ -140,7 +140,7 @@ greetConcise('Friends'); // => "Friends, Welcome!"
 
 When using the shortest arrow function syntax, and returning an object literal, you might experience an unexpected result.
 
-Let's see what would happen in such case:
+Let's see what happens in such case:
 
 ```javascript
 const greetObject = who => { message: `${who}, Welcome!` };
@@ -168,7 +168,7 @@ greetObject('Klingons'); // => { message: `Klingons, Welcome!` }
 
 Let's define a class `Greet` containing a fat arrow method:
 
-```javascript{4-6}
+```javascript mark=5:7
 class Greet {
   constructor(what) {
     this.what = what;
@@ -187,7 +187,7 @@ Can you write concise fat arrow methods? Yes, you can!
 
 Let's shorten `getMessage` method:
 
-```javascript{4}
+```javascript mark=5
 class Greet {
   constructor(what) {
     this.what = what;

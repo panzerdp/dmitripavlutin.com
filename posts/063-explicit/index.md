@@ -47,7 +47,7 @@ Variables should clearly indicate the meaning of the content it has.
 
 For example, if you're summing the number of an array:
 
-```javascript{1}
+```javascript mark=2
 // Bad
 let s = 0;
 const items = [1, 2, 3];
@@ -61,7 +61,7 @@ What does `s` variable stand for? Only after looking at the `s += item` expressi
 
 An explicit variable name `sum` clearly increases the readability of the code snippet. Without knowing the details, you can understand that `sum` indicates a variable that holds the sum of some numbers. 
 
-```javascript{1}
+```javascript mark=2
 // Good
 let sum = 0;
 const items = [1, 2, 3];
@@ -118,7 +118,7 @@ An anonymous function is a function that has no name. A function without a name 
 
 Let's use an anonymous function as an event handler: 
 
-```javascript{1}
+```javascript mark=2
 button.addEventListener('click',
   function() {
     const value = document.getElementById('name').value;
@@ -133,7 +133,7 @@ The anonymous function says nothing about what happens in the event handler. You
 
 Let's apply the explicit coding discipline and add a meaningful name to the function:
 
-```javascript{1}
+```javascript mark=2
 button.addEventListener('click',
   function appendInputValueToList() {
     const value = document.getElementById('name').value;
@@ -179,7 +179,7 @@ function getFontSize(style) {
 
 I choose an explicit code that clearly indicates that `fontSize` property might be missing:
 
-```javascript{2}
+```javascript mark=3
 function getFontSize(style) {
   let fontSize = 0;
   if ('fontSize' in style) {
@@ -193,7 +193,7 @@ function getFontSize(style) {
 
 If you're lucky, the programming language can provide short expressions without loosing in meaningness. Here's an another alternative to access the `fontSize` property using destructuring assignment:
 
-```javascript{1}
+```javascript mark=2
 function getFontSize(style) {
   const { fontSize = 0 } = style;
   return fontSize;

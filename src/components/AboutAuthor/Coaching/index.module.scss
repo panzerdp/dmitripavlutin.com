@@ -1,6 +1,6 @@
 @import '~styles/variables';
 
-.contactAuthor {
+.coaching {
   box-shadow: $box-shadow;
   background-color: rgba($border-color, 0.4);
   border-radius: 8px;
@@ -9,6 +9,7 @@
 
   @media (prefers-color-scheme: dark) {
     box-shadow: $box-shadow-dark-mode;
+    background-color: $background-color-dark-mode;
   }
 
   ul {
@@ -35,24 +36,30 @@
   .links {
     display: block;
 
-    .icon {
+    .book {
       background-color: rgba($anchor-color, 0.9);
-      vertical-align: middle;
-      display: inline-block;
-      border-radius: 4px;
-      width: 1.4rem;
-      height: 1.4rem;
-      padding: 0.25rem 0.25rem;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      font-family: $sans-serif-font-family;
+      height: 3rem;
+      border-radius: 3px;
+      font-size: 1.1rem;
+      text-decoration: none;
 
-      img {
-        width: 100%;
+      &:hover {
+        background-color: rgba($anchor-color, 1);
       }
-    }
 
-    .text {
-      font-size: 1.4rem;
-      margin-left: 0.5rem;
-      vertical-align: middle;
+      .calendar-icon {
+        display: none;
+        width: 1.25rem;
+        margin-right: 0.5rem;
+      }
     }
   }
 }

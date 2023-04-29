@@ -32,7 +32,7 @@ console.log(hero.hasOwnProperty('name'));     // => true
 console.log(hero.hasOwnProperty('realName')); // => false
 ```
 
-[Try the demo.](https://jsfiddle.net/u4o85ckr/1/)
+[Open the demo.](https://jsfiddle.net/u4o85ckr/1/)
 
 `hero.hasOwnProperty('name')` returns `true` because the property `name` exists in the object `hero`.  
 
@@ -42,7 +42,7 @@ The method name `hasOwnProperty()` suggests that it looks for the [own propertie
 
 This way `hasOwnProperty()` doesn't detect the `toString` &mdash; an inherited method from the prototype object:
 
-```javascript{6}
+```javascript mark=7
 const hero = {
   name: 'Batman'
 };
@@ -51,7 +51,7 @@ console.log(hero.toString); // => function() {...}
 
 console.log(hero.hasOwnProperty('toString')); // => false
 ```
-[Try the demo.](https://jsfiddle.net/frtdawc4/)
+[Open the demo.](https://jsfiddle.net/frtdawc4/)
 
 ## 2. in operator
 
@@ -67,7 +67,7 @@ const hero = {
 console.log('name' in hero);     // => true
 console.log('realName' in hero); // => false
 ```
-[Try the demo.](https://jsfiddle.net/r9g0nae3/)
+[Open the demo.](https://jsfiddle.net/r9g0nae3/)
 
 `'name' in hero` evaluates to `true` because `hero` has a property `name`. 
 
@@ -79,7 +79,7 @@ The main difference between `hasOwnProperty()` method and `in` operator is that 
 
 That's why, in contrast to `hasOwnProperty()`, the `in` operator detects that `hero` object contains the inherited property `toString`:
 
-```javascript{6-7}
+```javascript mark=7:8
 const hero = {
   name: 'Batman'
 };
@@ -89,13 +89,13 @@ console.log(hero.toString); // => function() {...}
 console.log('toString' in hero);              // => true
 console.log(hero.hasOwnProperty('toString')); // => false
 ```
-[Try the demo.](https://jsfiddle.net/2urp4n0a/)
+[Open the demo.](https://jsfiddle.net/2urp4n0a/)
 
 ## 3. Comparing with undefined
 
 Accessing a non-existing property from an object results in `undefined`:
 
-```javascript{5}
+```javascript mark=6
 const hero = {
   name: 'Batman'
 };
@@ -103,13 +103,13 @@ const hero = {
 console.log(hero.name);     // => 'Batman'
 console.log(hero.realName); // => undefined
 ```
-[Try the demo.](https://jsfiddle.net/cq60uw1f/)
+[Open the demo.](https://jsfiddle.net/cq60uw1f/)
 
 `hero.realName` evaluates to `undefined` because `realName` property is missing.  
 
 Now you can see the idea: you can compare with `undefined` to determine the existence of the property.  
 
-```javascript{5}
+```javascript mark=6
 const hero = {
   name: 'Batman'
 };
@@ -117,7 +117,7 @@ const hero = {
 console.log(hero.name !== undefined);     // => true
 console.log(hero.realName !== undefined); // => false
 ```
-[Try the demo.](https://jsfiddle.net/ouhgvf15/)
+[Open the demo.](https://jsfiddle.net/ouhgvf15/)
 
 `hero.name !== undefined` evaluates to `true`, which shows the existence of property. 
 
@@ -134,7 +134,7 @@ const hero = {
 
 console.log(hero.name !== undefined); // => false
 ```
-[Try the demo.](https://jsfiddle.net/5ukpcxe7/)
+[Open the demo.](https://jsfiddle.net/5ukpcxe7/)
 
 Even if the property `name` exists (but has `undefined` value), `hero.name !== undefined` evaluates to `false`: which incorrectly indicates a missing property.  
 

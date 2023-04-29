@@ -129,7 +129,7 @@ As a reminder, the array method `array.some(callback)` returns `true` if at leas
 
 Now, let's use the shallow equality function in combination with `array.some(callback)` method to find if the array contains an object by content:  
 
-```javascript{4}
+```javascript mark=5
 const greetings = [{ message: 'hi' }, { message: 'hello' }];
 
 const toSearch = { message: 'hi' };

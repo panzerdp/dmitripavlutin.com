@@ -44,7 +44,7 @@ function findPerson(who) {
 findPerson('Joker');
 ```
 
-[Try the demo.](https://codesandbox.io/s/ancient-dawn-j6jbq?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/ancient-dawn-j6jbq?file=/src/index.js)
 
 The snippet above is synchronous and blocking. When JavaScript enters into `findPerson()` function, it doesn't get out of there until the function is executed.   
 
@@ -54,7 +54,7 @@ Synchronous code is straightforward. But you don't always have the luck to acces
 
 For example, let's say that accessing the list of persons from `getList()` is an operation that requires, for example, 1 second.  
 
-```javascript{2,7}
+```javascript mark=3,8
 function getList() {
   setTimeout(() => {
     ['Joker', 'Batman'] // How to return the list?
@@ -94,7 +94,7 @@ function findPerson(who) {
 findPerson('Joker');
 ```
 
-[Try the demo.](https://codesandbox.io/s/elated-jones-mflcv?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/elated-jones-mflcv?file=/src/index.js)
 
 `getList(callback)` becomes more complex because it needs one more argument: the callback function. 
 
@@ -191,7 +191,7 @@ promise
 
 Here's how to access the value of the promise returned by `getList()`:
 
-```javascript{9-11}
+```javascript mark=10:12
 function getList() {
   return new Promise(resolve => {
     setTimeout(() => resolve(['Joker', 'Batman']), 1000);
@@ -206,11 +206,11 @@ promise
   });
 ```
 
-[Try the demo.](https://codesandbox.io/s/elastic-monad-rnf9v?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/elastic-monad-rnf9v?file=/src/index.js)
 
 Having the knowledge of how to extract a fulfilled value from a promise, let's transform `findPerson(who)` to extract the list from the promise returned by `getList()`:
 
-```javascript {11-14}
+```javascript mark=12:15
 function getList() {
   return new Promise(resolve => {
     setTimeout(() => resolve(['Joker', 'Batman']), 1000);
@@ -230,7 +230,7 @@ function findPerson(who) {
 findPerson('Joker');
 ```
 
-[Try the demo.](https://codesandbox.io/s/focused-euler-87tlx?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/focused-euler-87tlx?file=/src/index.js)
 
 Look closer at `const listPromise = getList()` statement: you get the promise using a synchronous statement, even if behind it runs an asynchronous operation.   
 
@@ -251,7 +251,7 @@ promise
 
 For example, let's imagine that accessing the list of persons ends in an error (note the use of `reject(error)` function):
 
-```javascript{9-11}
+```javascript mark=10:12
 function getList() {
   return new Promise((resolve, reject) => {
     setTimeout(() => reject(new Error('Nobody here!')), 1000);
@@ -266,7 +266,7 @@ promise
   });
 ```
 
-[Try the demo.](https://codesandbox.io/s/broken-frog-l244c?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/broken-frog-l244c?file=/src/index.js)
 
 This time `promise` is rejected with `new Error('Nobody here!')`. You can access that error in the callback supplied to `promise.catch(errorCallback)`.  
 
@@ -301,7 +301,7 @@ Let's look closer at approach B) since it's used more often.
 
 When using `promise.then(successCallback).catch(errorCallback)` chain, if `promise` resolves successfully then only `successCallback` is called:
 
-```javascript{10}
+```javascript mark=11
 function getList() {
   return new Promise(resolve => {
     setTimeout(() => resolve(['Joker', 'Batman']), 1000);
@@ -319,11 +319,11 @@ promise
   };
 ```
 
-[Try the demo.](https://codesandbox.io/s/boring-volhard-hsoc3?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/boring-volhard-hsoc3?file=/src/index.js)
 
 However, in case if `promise` rejects, then only `errorCallback` is called:
 
-```javascript{13}
+```javascript mark=14
 function getList() {
   return new Promise((resolve, reject) => {
     setTimeout(() => reject(new Error('Nobody here!')), 1000);
@@ -341,7 +341,7 @@ promise
   });
 ```
 
-[Try the demo.](https://codesandbox.io/s/keen-bartik-o857t?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/keen-bartik-o857t?file=/src/index.js)
 
 ## 3. Chain of promises
 
@@ -378,7 +378,7 @@ delayDouble(5)
   });
 ```
 
-[Try the demo.](https://codesandbox.io/s/eager-sky-fyk0r?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/eager-sky-fyk0r?file=/src/index.js)
 
 Each double operation requires 1 second. The chain performs 3 double operations, and the result of each operation is used by the next operation.  
 
@@ -404,7 +404,7 @@ delayDouble(5)
   });
 ```
 
-[Try the demo.](https://codesandbox.io/s/interesting-gates-dbjj1?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/interesting-gates-dbjj1?file=/src/index.js)
 
 ## 4. async/await
 
@@ -441,7 +441,7 @@ When JavaScript encounters `await promise`, where `promise` is pending, it's goi
 
 Now let's use `async/await` syntax to access the delayed list:
 
-```javascript{6,7}
+```javascript mark=7,8
 function getList() {
   return new Promise(resolve => {
     setTimeout(() => resolve(['Joker', 'Batman']), 1000);
@@ -458,7 +458,7 @@ async function findPerson(who) {
 findPerson('Joker');
 ```
 
-[Try the demo.](https://codesandbox.io/s/prod-fire-3cfo3?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/prod-fire-3cfo3?file=/src/index.js)
 
 `async findPerson(who)` pauses its execution for 1 second at the `await getList()` statement, until the promise `getList()` is fulfilled.  
 
@@ -486,7 +486,7 @@ async function myFunction() {
 
 For example, let's reject the promise that should return the list of persons:
 
-```javascript{13}
+```javascript mark=14
 function getList() {
   return new Promise((resolve, reject) => {
     setTimeout(() => reject(new Error('Nobody here!')), 1000);
@@ -507,7 +507,7 @@ async function findPerson(who) {
 findPerson('Joker');
 ```
 
-[Try the demo.](https://codesandbox.io/s/romantic-buck-csiso?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/romantic-buck-csiso?file=/src/index.js)
 
 This time the promise `await getList()` rejects. Right away the execution jumps into `catch(error)`: where `error` indicates the rejection reason &mdash; `new Error('Nobody here!')`.  
 
@@ -536,7 +536,7 @@ async function run() {
 run();
 ```
 
-[Try the demo.](https://codesandbox.io/s/vigilant-currying-nliu0?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/vigilant-currying-nliu0?file=/src/index.js)
 
 Clearly, `async/await` greatly simplifies handling multiple dependent async operations.  
 

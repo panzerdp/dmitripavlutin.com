@@ -27,7 +27,7 @@ calculate([1, 2, 4]); // => 7
 
 The numbers are the input, and the function `calculate()` returns the sum &mdash; the output.  
 
-What about implementing a more universal function that would support more operations on numbers: addition, multiplication, and more. How would you implement that?  
+What about implementing a more universal function to support more operations on numbers: addition, multiplication, and more. How would you implement that?  
 
 Let's see what the concept of the higher-order functions is, and how it can make `calculate()` function more universal in regards to operations it can support.  
 
@@ -47,7 +47,7 @@ All because *functions in JavaScript are first-class citizens*. This means that 
 
 A. Assign functions to variables:
 
-```javascript{1}
+```javascript mark=2
 // Assign to variables
 const hiFunction = function() { 
   return 'Hello!' 
@@ -58,7 +58,7 @@ hiFunction(); // => 'Hello!'
 
 B. Use functions as arguments to other functions:
 
-```javascript{1,5}
+```javascript mark=2,6
 // Use as arguments
 function iUseFunction(func) {
   return func();
@@ -69,7 +69,7 @@ iUseFunction(function () { return 42 }); // => 42
 
 C. And even return functions from functions:
 
-```javascript{2}
+```javascript mark=3
 // Return function from function
 function iReturnFunction() {
   return function() { return 42 };
@@ -122,7 +122,7 @@ calculate(sum, 0, [1, 2, 4]);      // => 7
 calculate(multiply, 1, [1, 2, 4]); // => 8
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/kj9d8uae/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/kj9d8uae/)
 
 Here's what changed: `calculate(operation, initialValue, numbers)` accepts the first argument a function that describes the operation, the second argument as the initial value, and finally the third argument is the array of numbers.  
 

@@ -1,11 +1,10 @@
-import { useSiteMetadata } from 'hooks/useSiteMetadata'
 import * as styles from './index.module.scss'
 
 export default function Coaching(): JSX.Element {
-  const { author: { info } } = useSiteMetadata()
+  const CALENDLY_BOOKING = 'https://calendly.com/dmitripavlutin/60min'
 
   return (
-    <div className={styles.contactAuthor}>
+    <div className={styles.coaching}>
       <h3>Your JavaScript Coach</h3>
       <div className={styles.description}>
         <p>
@@ -15,16 +14,13 @@ export default function Coaching(): JSX.Element {
         <p>You can have direct access to me through:</p>
         <ul>
           <li>1 hour, one-to-one, video or chat coaching sessions</li>
-          <li>JavaScript, TypeScript, React, Next teaching, workshops, or interview preparation (you choose!)</li>
+          <li>JavaScript, TypeScript, React or Vue teaching, workshops, or interview preparation (you choose!)</li>
           <li>Conversational and friendly format</li>
         </ul>
       </div>
       <div className={styles.links}>
-        <a className={styles.icon} href={`mailto:${info.email}`} title={`Write a message to ${info.name}`}>
-          <img alt="Email address" src="/icons/email.svg" />
-        </a>
-        <a className={styles.text} href={`mailto:${info.email}?subject=Book a JavaScript coaching session`} title={`Write a message to ${info.name}`}>
-          Book a Coaching Session
+        <a className={styles.book} href={CALENDLY_BOOKING} title="Book JavaScript Session" target="_blank" rel="noreferrer">
+          <img className={styles.calendarIcon} alt="Calendar" src="/icons/calendar-check.svg" /> Book a Coaching Session
         </a>
       </div>
     </div>

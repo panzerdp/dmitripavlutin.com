@@ -21,11 +21,11 @@ In this post, you'll learn how to use the context concept in React.
 
 Using the context in React requires 3 simple steps: *creating* the context, *providing* the context, and *consuming* the context.  
 
-#### A. Creating the context
+### A. Creating the context
 
 The built-in factory function `createContext(default)` creates a context instance:
 
-```javascript{3}
+```javascript mark=4
 // context.js
 import { createContext } from 'react';
 
@@ -34,13 +34,13 @@ export const Context = createContext('Default Value');
 
 The factory function accepts one optional argument: the default value.   
 
-#### B. Providing the context
+### B. Providing the context
 
 `Context.Provider` component available on the context instance is used to provide the context to its child components, no matter how deep they are.  
 
 To set the value of context use the `value` prop available on the `<Context.Provider value={value} />`:
 
-```javascript{5}
+```javascript mark=6
 import { Context } from './context';
 
 function Main() {
@@ -57,13 +57,13 @@ Again, what's important here is that all the components that'd like later to con
 
 If you want to change the context value, simply update the `value` prop.  
 
-#### C. Consuming the context
+### C. Consuming the context
 
 Consuming the context can be performed in 2 ways.  
 
 The first way, the one I recommend, is to use the `useContext(Context)` React hook:
 
-```jsx{4}
+```jsx mark=5
 import { useContext } from 'react';
 import { Context } from './context';
 
@@ -74,13 +74,13 @@ function MyComponent() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/react-context-usecontext-pi5uv?file=/src/Main.js)
+[Open the demo.](https://codesandbox.io/s/react-context-usecontext-pi5uv?file=/src/Main.js)
 
 The hook returns the value of the context: `value = useContext(Context)`. The hook also makes sure to re-render the component when the context value changes.    
 
 The second way is by using a render function supplied as a child to `Context.Consumer` special component available on the context instance:
 
-```jsx {5}
+```jsx mark=6
 import { Context } from './context';
 
 function MyComponent() {
@@ -92,7 +92,7 @@ function MyComponent() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/react-context-consumer-f413s?file=/src/Main.js)
+[Open the demo.](https://codesandbox.io/s/react-context-consumer-f413s?file=/src/Main.js)
 
 Again, in case the context value changes, `<Context.Consumer>` will re-call its render function.  
 
@@ -181,7 +181,7 @@ function UserInfo({ userName }) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/props-drilling-xhrfd?file=/src/Application.js)
+[Open the demo.](https://codesandbox.io/s/props-drilling-xhrfd?file=/src/Application.js)
 
 You can see the problem: because `<UserInfo />` component renders deep down in the tree, all the parent components (`<Layout />` and `<Header />`) have to pass the `userName` prop.  
 
@@ -195,7 +195,7 @@ As a quick reminder, applying the React context requires 3 actors: the context, 
 
 Here's how the sample application would look when applying the context to it:
 
-```jsx{2,7,35}
+```jsx mark=3,8,36
 import { useContext, createContext } from 'react';
 
 const UserContext = createContext('Unknown');
@@ -236,7 +236,7 @@ function UserInfo() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/react-context-example-gzovv?file=/src/Application.js)
+[Open the demo.](https://codesandbox.io/s/react-context-example-gzovv?file=/src/Application.js)
 
 Let's look into more detail at what has been done.  
 
@@ -255,7 +255,7 @@ When the context value is changed by altering `value` prop of the context provid
 
 For example, if I change the user name from `'John Smith'` to `'Smith, John Smith'`, then `<UserInfo />` consumer immediately re-renders to display the latest context value:
 
-```jsx{7-9}
+```jsx mark=8:10
 import { createContext, useEffect, useState } from 'react';
 
 const UserContext = createContext('Unknown');
@@ -280,7 +280,7 @@ function Application() {
 // ...
 ```
 
-[Try the demo.](https://codesandbox.io/s/react-context-example-change-hw32y?file=/src/Application.js)
+[Open the demo.](https://codesandbox.io/s/react-context-example-change-hw32y?file=/src/Application.js)
 
 Open the [demo](https://codesandbox.io/s/react-context-example-change-hw32y?file=/src/Application.js) and you'll see `'John Smith'` (context value) displayed on the screen. After 2 seconds, the context value changes to `'Smith, John Smith'`, and correspondingly the screen is updated with the new value.  
 
@@ -301,7 +301,7 @@ But this can be easily implemented by integrating a state management mechanism (
 
 In the following example, `<Application />` component uses `useState()` hook to manage the context value. 
 
-```jsx{9-12,15}
+```jsx mark=10:13,16
 import { createContext, useState, useContext, useMemo } from 'react';
 
 const UserContext = createContext({
@@ -347,7 +347,7 @@ function UserInfo() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/update-context-value-l39t0?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/update-context-value-l39t0?file=/src/App.js)
 
 `<UserNameInput />` consumer reads the context value, from where `userName` and `setUserName` are extracted. The consumer then can update the context value by invoking the update function `setUserName(newContextValue)`.  
 

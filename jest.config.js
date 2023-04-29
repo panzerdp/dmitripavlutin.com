@@ -3,7 +3,7 @@ module.exports = {
     '^.+\\.[jt]sx?$': '<rootDir>/jest/jest-preprocess.js',
   },
   moduleNameMapper: {
-    '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
+    '.+\\.(css|styl|less|sass|scss)$': '<rootDir>/jest/identity-obj-proxy-esm.js',
     '.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/__mocks__/file-mock.js',
   },
   testPathIgnorePatterns: ['node_modules', '\\.cache', '<rootDir>.*/public'],
@@ -17,4 +17,4 @@ module.exports = {
   setupFiles: ['<rootDir>/jest/loadershim.js'],
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/jest/setup-test-env.js'],
-}  
+}

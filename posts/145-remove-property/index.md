@@ -47,7 +47,7 @@ delete object[name];
 
 When applying the `delete` operator on a property accessor, the operator removes the corresponding property from the object:
 
-```javascript{5}
+```javascript mark=6
 const employee = {
   name: 'John Smith',
   position: 'Sales Manager'
@@ -58,7 +58,7 @@ delete employee.position;
 console.log(employee); // { name: 'John Smith' }
 ```
 
-[Try the demo.](https://codesandbox.io/s/delete-cop3o?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/delete-cop3o?file=/src/index.js)
 
 Initially, `employee` has 2 properties: `name` and `position`. 
 
@@ -68,7 +68,7 @@ The property removal using `delete` operator is mutable because it mutates (aka 
 
 In case if the property name to remove is determined dynamically, then you can use the square brackets syntax:
 
-```javascript{6}
+```javascript mark=7
 const employee = {
   name: 'John Smith',
   position: 'Sales Manager'
@@ -80,7 +80,7 @@ delete employee[name];
 console.log(employee); // { name: 'John Smith' }
 ```
 
-[Try the demo.](https://codesandbox.io/s/delete-dynamic-9k03s?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/delete-dynamic-9k03s?file=/src/index.js)
 
 `delete employee[name]` removes the property which name is contained inside `name` variable.  
 
@@ -105,7 +105,7 @@ After applying the destructuring and rest syntax, `restObject` is going to conta
 
 For example, let's remove the property `position` from `employee` object:
 
-```javascript{5}
+```javascript mark=6
 const employee = {
   name: 'John Smith',
   position: 'Sales Manager'
@@ -119,7 +119,7 @@ console.log(employee);
 // { name: 'John Smith',position: 'Sales Manager' }
 ```
 
-[Try the demo.](https://codesandbox.io/s/destructuring-rest-uh68c?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/destructuring-rest-uh68c?file=/src/index.js)
 
 The statement `const { position, ...employeeRest } = employee` destructures the `employee` objects and collects the properties into a rest object `employeeRest` without including the `position` property. 
 
@@ -127,7 +127,7 @@ Object destructuring with rest syntax is an immutable way of property removal: t
 
 If the property name to remove is determined dynamically, then you can use use the dynamic property name destructuring syntax:
 
-```javascript{6}
+```javascript mark=7
 const employee = {
   name: 'John Smith',
   position: 'Sales Manager'
@@ -139,13 +139,13 @@ const { [name]: removedProperty, ...employeeRest } = employee;
 console.log(employeeRest); // { name: 'John Smith' }
 ```
 
-[Try the demo.](https://codesandbox.io/s/destructuring-rest-dynamic-m4jgf)
+[Open the demo.](https://codesandbox.io/s/destructuring-rest-dynamic-m4jgf)
 
 `const { [name]: removedProperty, ...employeeRest } = employee` let's you remove a property with dynamic name by collecting the properties, but removed one, into `employeeRest` object.  
 
 What's interesting is that you can remove multiple properties at once using the destructuring and rest syntax:
 
-```javascript{6}
+```javascript mark=7
 const employee = {
   name: 'John Smith',
   position: 'Sales Manager',
@@ -157,7 +157,7 @@ const { position, experience, ...employeeRest } = employee;
 console.log(employeeRest); // { name: 'John Smith' }
 ```
 
-[Try the demo.](https://codesandbox.io/s/destructuring-rest-multiple-i73ki?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/destructuring-rest-multiple-i73ki?file=/src/index.js)
 
 `const { position, experience, ...employeeRest } = employee` has removed 2 properties at once: `position` and `experience`.  
 

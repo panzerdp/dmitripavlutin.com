@@ -1,6 +1,8 @@
 .horizontalGroup {
-  a {
-    display: inline-block;
+  display: flex;
+  align-items: center;
+
+  > * {
     margin-right: 0.6rem;
 
     &:last-child {

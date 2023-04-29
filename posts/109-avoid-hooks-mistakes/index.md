@@ -50,7 +50,7 @@ function FetchGame({ id }) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/hooks-order-warning-rdxpg?file=/pages/index.js)
+[Open the demo.](https://codesandbox.io/s/hooks-order-warning-rdxpg?file=/pages/index.js)
 
 The component `FetchGame` accepts a prop `id` &mdash; the id of the game to be fetched. `useEffect()` hook fetches the game information ``await fetch(`/game/${id}`)`` and saves it into the state variable `game`.  
 
@@ -60,7 +60,7 @@ Open the [demo](https://codesandbox.io/s/hooks-order-warning-rdxpg?file=/pages/i
 
 The problem is in the early exit:  
 
-```javascript{1-3}
+```javascript mark=2:4
 function FetchGame({ id }) {
   if (!id) {
     return 'Please select a game to fetch';
@@ -78,7 +78,7 @@ That's exactly what suggests [the first rule of hooks](https://reactjs.org/docs/
 
 Solving the incorrect order of hooks means moving the `return` statement after invoking the hooks:
 
-```jsx{12-14,17-19}
+```jsx mark=13:15,18:20
 function FetchGame({ id }) {
   const [game, setGame] = useState({ 
     name: '',
@@ -121,7 +121,7 @@ Here's a good practice that helps to avoid conditional rendering of hooks:
 
 The following component `MyIncreaser` increases the state variable `count` when a button is clicked:
 
-```jsx{8-10}
+```jsx mark=9:11
 function MyIncreaser() {
   const [count, setCount] = useState(0);
 
@@ -175,7 +175,7 @@ The first invocation of `setCount(count + 1)` correctly updates the counter as `
 
 The stale state is solved by using a functional way to update the state. Instead of  `setCount(count + 1)`, let's better use `setCount(count => count + 1)`:  
 
-```jsx{4}
+```jsx mark=5
 function MyIncreaser() {
   const [count, setCount] = useState(0);
 
@@ -198,7 +198,7 @@ function MyIncreaser() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/stale-variable-fixed-3j0p8?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/stale-variable-fixed-3j0p8?file=/src/index.js)
 
 By using an updater function `count => count + 1`, React gives you the latest *actual* state value.  
 
@@ -241,7 +241,7 @@ function WatchCount() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/stale-closure-tmcpd?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/stale-closure-tmcpd?file=/src/index.js)
 
 Open the [demo](https://codesandbox.io/s/stale-closure-tmcpd?file=/src/index.js) and click *Increase* button. Then check the console &mdash; every 2 seconds appears `Count is: 0`, no matter the actual value of `count` state variable.  
 
@@ -253,7 +253,7 @@ Later, when the button is clicked and `count` increases, `setInterval` still inv
 
 The solution is to let know `useEffect()` that the closure `log` depends on `count` and properly reset the timer:  
 
-```jsx{7,8}
+```jsx mark=8,9
 function WatchCount() {
   const [count, setCount] = useState(0);
 
@@ -275,7 +275,7 @@ function WatchCount() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/stale-closure-fixed-rrfc2?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/stale-closure-fixed-rrfc2?file=/src/index.js)
 
 With the dependencies properly set, `useEffect()` updates the closure of `setInterval()` as soon as `count` changes.  
 
@@ -320,7 +320,7 @@ The information on whether this is the first render shouldn't be stored in the s
 
 Let's store the information about the first rendering into a reference `isFirstRef`:
 
-```jsx{1}
+```jsx mark=2
 function MyComponent() {
   const isFirstRef = useRef(true);
   const [count, setCount] = useState(0);
@@ -387,7 +387,7 @@ While having the increase in progress, click the *Unmount Increaser* button to u
 
 Fixing `DelayedIncreaser` is simple: just use a cleanup function from the callback of `useEffect()` to stop the interval timer:
 
-```jsx{8}
+```jsx mark=9
 function DelayedIncreaser() {
   // ...
 

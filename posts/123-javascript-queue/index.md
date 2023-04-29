@@ -144,7 +144,7 @@ queue.peek();    // => 2
 queue.length;    // => 3
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/g6pd4hqb/2/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/g6pd4hqb/2/)
 
 `const queue = new Queue()` is how you create an instance of a queue. 
 
@@ -173,7 +173,7 @@ But you can easily make further improvements.
 
 For example, if you want to protect yourself from dequeuing or picking the head of an empty queue, then you can add the verification for emptiness:
 
-```javascript{13,21,24-29}
+```javascript mark=14,22,25:30
 class Queue {
   constructor() {
     this.items = {};
@@ -215,7 +215,7 @@ const queue = new Queue();
 queue.dequeue(); // throws error
 ```
 
-[Try the demo.](https://jsfiddle.net/ezhLo6mx/)
+[Open the demo.](https://jsfiddle.net/ezhLo6mx/)
 
 If you call, for example, `queue.dequeue()` on an empty queue, the method throws an error.  
 

@@ -35,9 +35,9 @@ If you load `main.mjs` module using a script tag (adding `type="module"` attribu
 ```html
 <script src="main.mjs" type="module"></script>
 ```
-[Try the demo.](https://codesandbox.io/s/interesting-dewdney-r7th5?file=/main.mjs)
+[Open the demo.](https://codesandbox.io/s/interesting-dewdney-r7th5?file=/main.mjs)
 
-Then `import.meta.url` would contain the absolute URL to the script, e.g. `'http://mysite.com/main.mjs'`.  
+Then `import.meta.url` will contain the absolute URL to the script, e.g. `'http://mysite.com/main.mjs'`.  
 
 ## 2. Module's path (Node.js)
 
@@ -47,7 +47,7 @@ But if you run `main.mjs` as a Node.js script:
 node main.mjs
 ```
 
-Then `import.meta.url` would contain the absolute path to the module, e.g. `'file:///absolute-path/main.mjs'`. 
+Then `import.meta.url` will contain the absolute path to the module, e.g. `'file:///absolute-path/main.mjs'`. 
 
 The absolute path inside `import.meta.url` is always prefixed with `file://`.  
 
@@ -78,7 +78,7 @@ const resolvedPath = await import.meta.resolve('./helper.mjs');
 console.log(resolvedPath); // '/home/user/web-app/helper.mjs'
 ```
 
-Executing `await import.meta.resolve('./helper.mjs')` would resolve `'./helper.mjs'` to `'/home/user/web-app/helper.mjs'` absolute path.  
+Executing `await import.meta.resolve('./helper.mjs')` resolves `'./helper.mjs'` to `'/home/user/web-app/helper.mjs'` absolute path.  
 
 If the resolved module doesn't exist, then the function would throw a module not found error.  
 

@@ -52,7 +52,7 @@ However, the parameters that have no argument on invocation are initialized with
 
 For example, let's call the function `sum()` (which has 2 parameters) with just one argument:
 
-```javascript{1}
+```javascript mark=2
 function sum(param1, param2) {
   console.log(param1); // 1
   console.log(param2); // undefined
@@ -68,7 +68,7 @@ The function is called only with one argument: `sum(1)`. While `param1` has the 
 
 If necessary, you can always verify if the parameter is `undefined` and provide a default value. Let's make the `param2` default to `0`:
 
-```javascript{1}
+```javascript mark=2
 function sum(param1, param2) {
   if (param2 === undefined) {
     param2 = 0;
@@ -87,7 +87,7 @@ The ES2015 default parameters feature allows initializing parameters with defaul
 
 Let's make `param2` default to value `0` using ES2015 default parameters feature:
 
-```javascript{0}
+```javascript mark=1
 function sum(param1, param2 = 0) {
   console.log(param2); // => 0
   return param1 + param2;

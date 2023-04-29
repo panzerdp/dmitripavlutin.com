@@ -11,7 +11,7 @@ type: post
 
 A variable of type `any` can be assigned with anything:
 
-```ts twoslash
+```ts
 let myVar: any = 0;
 myVar = '1';
 myVar = false;
@@ -21,7 +21,7 @@ Many TypeScript guides discourage the use of `any` because using it throws away 
 
 TypeScript (version 3.0 and above) also provides a special type `unknown` that is similar to `any`. You can assign any value to an `unknown` type variable as well:
 
-```ts twoslash
+```ts
 let myVar: unknown = 0;
 myVar = '1';
 myVar = false;
@@ -37,7 +37,7 @@ To better understand the difference between `unknown` and `any`, let's start wit
 
 Let's make the only parameter of `invokeAnything()` as `any` type:
 
-```ts twoslash
+```ts
 function invokeAnything(callback: any) {
   callback();
 }
@@ -57,10 +57,9 @@ An `unknown` type variable, same as `any`, accepts any value. But when trying to
 
 Let's change the type of `callback` param from `any` to `unknown`, and see what happens:
 
-```ts twoslash
-// @errors: 18046
+```ts mark=2
 function invokeAnything(callback: unknown) {
-  callback();
+  callback(); // Type error: 'callback' is of type 'unknown'
 }
 
 invokeAnything(1);
@@ -70,11 +69,10 @@ Because the `callback` argument is of type `unknown`, the statement `callback()`
 
 You need to perform type checking before using a variable of type `unknown`. In the example, you would simply need to check if `callback` is a function type:
 
-```ts twoslash
+```ts mark=2
 function invokeAnything(callback: unknown) {
-  if (typeof callback === 'function') {
+  if (typeof callback === 'function') { 
     callback();
-//    ^?
   }
 }
 
@@ -96,7 +94,7 @@ The example above has demonstrated exactly the similarity and difference between
 
 The case of `unknown`:
 
-```ts twoslash
+```ts
 function invokeAnything(callback: unknown) {
   if (typeof callback === 'function') {
     callback();
@@ -110,7 +108,7 @@ The type check here is `typeof callback === 'function'` &mdash; checking whether
 
 The case of `any`:
 
-```ts twoslash
+```ts
 function invokeAnything(callback: any) {
   callback();
 }

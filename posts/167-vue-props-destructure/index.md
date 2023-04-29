@@ -26,7 +26,7 @@ const props = defineProps()
 </script>
 ```
 
-`props` in the above example would be a reactive object containing the props supplied to the component. If the component props changes, `props` reactive object changes accordingly.  
+`props` in the above example is a reactive object containing the props supplied to the component. If the component props changes, `props` reactive object changes accordingly.  
 
 The first thing you might want to do when accessing the `props` object is to destructure it to access the individual props. But to my surprise (when I was learning Vue composition API) the destructured props lose their reactivity!
 
@@ -34,7 +34,7 @@ Let's look at an example. The following component `<EvenOdd :count="5">` accepts
 
 The `count` prop is accessed after destructuring of the props object `const { count } = defineProps()`:
 
-```vue{3}
+```vue mark=4
 <script lang="ts" setup>
 import { computed } from 'vue';
 
@@ -59,7 +59,7 @@ The reactivity is lost because on destructuring `count` becomes a variable havin
 
 The first obvious solution is to *not* destructure the `props` object, and access the props directly using a [property accessor](/access-object-properties-javascript/#1-dot-property-accessor): `props.count`.  
 
-```vue {3}
+```vue mark=4
 <script lang="ts" setup>
 import { computed } from 'vue';
 
@@ -85,7 +85,7 @@ Ok, then you can keep the reactivity of the destructured props by deliberately t
 
 Here's how it works:
 
-```vue {4}
+```vue mark=5
 <script lang="ts" setup>
 import { toRefs, computed } from 'vue';
 

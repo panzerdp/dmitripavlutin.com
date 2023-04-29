@@ -113,7 +113,7 @@ nvm use 0.10
 ![Terminal screenshot](./images/Terminal_008.png)
 
 **4. Setting the node version for new terminal sessions**  
-Some of the changes made by nvm to node version applies only to current terminal session. If you would like to keep the configuration for new sessions, you have the following options:
+Some of the changes made by nvm to node version applies only to current terminal session. If you want to keep the configuration for new sessions, you have the following options:
 a) Create a `.nvmrc` file containing the node version in the home or any other root directories;
 b) Use the command 
 ```bash

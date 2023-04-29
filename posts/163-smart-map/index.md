@@ -28,7 +28,7 @@ const doubled = numbers.map(n => n * 2);
 console.log(doubled); // logs [0, 6, 12]
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/7g5fz93y/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/7g5fz93y/)
 
 `numbers.map(number => 2 * number)` maps `numbers` array to a new array where each number is doubled.  
 
@@ -47,7 +47,7 @@ const doubled = numbers
 console.log(doubled); // logs [6, 12]
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/cvtjyLpo/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/cvtjyLpo/)
 
 `doubled` array now contains items of `numbers` multiplied by 2 and also doesn't contain any zeroes.  
 
@@ -66,7 +66,7 @@ const doubled = numbers.flatMap(number => {
 console.log(doubled); // logs [6, 12]
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/j945qunz/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/j945qunz/)
 
 By using only the `numbers.flatMap()` you can map an array to another array, but also skip certain elements from mapping.  
 
@@ -96,7 +96,7 @@ const flatten = arrays.flatMap(item => item);
 console.log(flatten); // logs [2, 4, 6]
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/5rwvcz17/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/5rwvcz17/)
 
 In the example above `arrays` contains arrays of numbers: `[[2, 4], [6]]`. Calling `arrays.flatMap(item => item)` flattens the array to `[2, 4, 6]`.  
 
@@ -117,11 +117,11 @@ const doubled = numbers.flatMap(number => {
 console.log(doubled); // logs [6, 12]
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/av1w9jd3/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/av1w9jd3/)
 
 Let's look into more detail on how the example above works.  
 
-The callback function returns an empty array `[]` if the current item is `0`. That would mean that when being flattened, the empty array `[]` provides no value at all.  
+The callback function returns an empty array `[]` if the current item is `0`. It means that when being flattened, the empty array `[]` provides no value at all.  
 
 If the current iterated item is non-zero, then `[2 * number]` is returned. When `[2 * number]` array is flattened, only `2 * number` is added into the resulting array.  
 
@@ -139,7 +139,7 @@ console.log(trippled);
 // logs [1, 2, 3, 4, 8, 12]
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/k7p2x1ar/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/k7p2x1ar/)
 
 ## 3. Conclusion
 

@@ -1,48 +1,48 @@
 ---
 title: '4 Ways to Swap Variables in JavaScript'
-description: 'There are 4 good ways to swap variables in JavaScript: using a destructuring assignment, a temporary variable, addition & difference or XOR operator.'
+description: 'There are 4 good ways to swap variables in JavaScript: using a destructuring assignment, a temporary variable, addition & difference, or XOR operator.'
 published: '2020-02-19T09:20Z'
-modified: '2020-02-19T09:20Z'
+modified: '2023-03-23'
 thumbnail: './images/swap-variables-cover-11.png'
 slug: swap-variables-javascript
 tags: ['javascript', 'variable']
 type: post
 ---
 
-A lot of algorithms require swapping 2 variables.  
+A lot of algorithms require swapping 2 variables, for example, [bubble sort](https://en.wikipedia.org/wiki/Bubble_sort).  
 
 During a coding interview, you could be asked *"How to swap 2 variables without a temporary variable?"*.  
 
-It's good to know multiple ways to perform swapping of variables. In this post, you will read about 4 ways to swap (2 that use additional memory and 2 that don't).  
+It's good to know multiple ways to perform the swapping of variables. In this post, you will read about 4 ways: 2 that use additional memory and 2 that don't.  
 
 <Affiliate type="traversyJavaScript" />
 
 ## 1. Destructuring assignment
 
-Destructuring assignment (a feature of [ES2015](https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015)) lets you extract items of an array into variables. For example, the following code destructures an array:
+Destructuring assignment lets you extract items of an array into variables. For example, the following code destructures an array:
 
-```javascript{3}
+```javascript mark=4
 let a;
 let b;
 
 [a, b] = [1, 2, 3];
 
-a; // => 1
-b; // => 2
+console.log(a); // => 1
+console.log(b); // => 2
 ```
 
 `[a, b] = [1, 2, 3]` is a destructuring assignment that destructures `[1, 2, 3]` array. `a` variable is assigned with the first item `1` of `[1, 2, 3]`, correspondingly `b` is assigned with the second item `2`.  
 
 Knowing how to destructure an array, it's easy to use it for swapping variables. Let's swap the variables `a` and `b` using destructuring assignment:
 
-```javascript{3}
+```javascript mark=4
 let a = 1;
 let b = 2;
 
 [a, b] = [b, a];
 
-a; // => 2
-b; // => 1
+console.log(a); // => 2
+console.log(b); // => 1
 ```
 
 `[a, b] = [b, a]` is the destructuring assignment that swaps the variables `a` and `b`.  
@@ -51,7 +51,7 @@ At the first step, on the right side of the destructuring, a *temporary array* `
 
 Then the destructuring of the temporary array occurs: `[a, b] = [2, 1]`. The variable `a` is assigned with `2`, and `b` with `1`. The swapping of `a` and `b` has been performed.  
 
-I like the destructuring approach because it's short and expressive: swapping is performed in just one statement. It works with any data type: numbers, strings, booleans, objects.  
+I like the destructuring approach because it's short and expressive: swapping is performed in just one statement. It works with any data type: numbers, strings, booleans, and objects.  
 
 I recommend swapping variables using a destructuring assignment for most of the cases.  
 
@@ -61,7 +61,7 @@ Swapping variables using a temporary variable is classic. As the name suggests, 
 
 Let's swap the values of variables `a` and `b` using a temporary variable `temp`:
 
-```javascript{4-6}
+```javascript mark=5:7
 let a = 1;
 let b = 2;
 let temp;
@@ -70,25 +70,25 @@ temp = a;
 a = b;
 b = temp;
 
-a; // => 2
-b; // => 1
+console.log(a); // => 2
+console.log(b); // => 1
 ```
 
 `temp` is the *temporary variable*.
 
-At the first step, `temp` is assigned with the value of `a`. Then `a` variable is assigned with the value of `b`. Finally, the variable `b` is assigned with the value of `temp` (having the initial value of `a`).  
+In the first step, `temp` is assigned with the value of `a`. Then `a` variable is assigned with the value of `b`. Finally, the variable `b` is assigned with the value of `temp` (having the initial value of `a`).  
 
-The swapping of variables using a temporary variable works with any value type, like numbers, strings, booleans, objects.  
+The swapping of variables using a temporary variable works with any value type, like numbers, strings, booleans, and objects.  
 
 The downside of this approach is the need for a specialized temporary variable, plus the swapping happens in 3 statements.  
 
 ## 3. Addition and difference
 
-You can swap variables without the use of additional memory (like a temporary array or variable).
+You can swap variables having integers without the use of additional memory (like a temporary array or variable).
 
 The following example swaps the variables `a` and `b` using the addition `+` and difference `-` arithmetic operators:
 
-```javascript{3-5}
+```javascript mark=4:6
 let a = 1;
 let b = 2;
 
@@ -96,8 +96,8 @@ a = a + b;
 b = a - b;
 a = a - b;
 
-a; // => 2
-b; // => 1
+console.log(a); // => 2
+console.log(b); // => 1
 ```
 
 Initially, `a` is `1` and `b` is `2`. Let's see how the 3 statements perform the swapping:
@@ -145,7 +145,7 @@ Bitwise XOR has 2 interesting properties:
 
 These XOR properties can be used to swap variables. Let's see how to swap `a` and `b` variables:
 
-```javascript{3-5}
+```javascript mark=4:6
 let a = 1;
 let b = 2;
 
@@ -153,25 +153,25 @@ a = a ^ b;
 b = a ^ b;
 a = a ^ b;
 
-a; // => 2
-b; // => 1
+console.log(a); // => 2
+console.log(b); // => 1
 ```
 
-Here's an explanation why the swapping works:
+Here's an explanation of why the swapping works:
 
 1. `a = a ^ b`
-2. `b = a ^ b`. Based on 1 `a` is substituted with `a ^ b`. Thus `b = (a ^ b) ^ b = a ^ (b ^ b) = a ^ 0 = a`. Remember than `b` is now `a`.  
+2. `b = a ^ b`. Based on 1 `a` is substituted with `a ^ b`. Thus `b = (a ^ b) ^ b = a ^ (b ^ b) = a ^ 0 = a`. Remember that `b` is now `a`.  
 3. `a = a ^ b`. Based on 1 `a` is substituted with `a ^ b` and based on 2 `b` is substituted with `a`. Thus `a = (a ^ b) ^ a = b ^ (a ^ a) = b ^ 0 = b`. The variable `a` becomes `b`.
 
 If you find the explanation complicated, feel free to skip it. The properties of bitwise XOR (`n ^ n = 0` and `n ^ 0 = n`) composed in 3 assignments lets you swap the values of `a` and `b`.
 
-Swapping variables using bitwise XOR operator has limitations: you can swap only integers.  
+Swapping variables using the bitwise XOR operator has limitations: you can swap only integers.  
 
 ## 5. Conclusion
 
 JavaScript offers a bunch of good ways to swap variables, with and without additional memory.  
 
-The first way, which I recommend for daily use, is swapping variables by applying destructuring assignment `[a, b] = [b, a]`. It's a short and expressive approach.  
+The first way, which I recommend for general use, is swapping variables by applying destructuring assignment `[a, b] = [b, a]`. It's a short and expressive approach.  
 
 The second way uses a temporary variable. It's a good alternative to the destructuring assignment approach.  
 

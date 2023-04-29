@@ -12,7 +12,7 @@ type: post
 When returning from a promise from an asynchronous function, you can wait for that promise to resolve `return await promise`, or you can return it directly 
 `return promise`:  
 
-```javascript{2,9}
+```javascript mark=3,10
 async function func1() {
   const promise = asyncOperation();
   return await promise;
@@ -53,7 +53,7 @@ Ok, having the helper function defined, let's divide some numbers.
 
 The following function `divideWithAwait()` uses `return await promisedDivision(6, 2)` expression to return the division of `6` by `2` wrapped in a promise:
 
-```javascript{1}
+```javascript mark=2
 async function divideWithAwait() {
   return await promisedDivision(6, 2);
 }
@@ -65,13 +65,13 @@ async function run() {
 run();
 ```
 
-[Try the demo.](https://codesandbox.io/s/with-await-resolved-mdzz5?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/with-await-resolved-mdzz5?file=/src/index.js)
 
 Inside the `run()` function the `await divideWithAwait()` expression evaluates to the division result `3`. All good.  
 
 Now let's try to use the second expression without the `await` keyword, and return directly the promise wrapping the division result `return promisedDivision(6, 2)`:
 
-```javascript{1}
+```javascript mark=2
 async function divideWithoutAwait() {
   return promisedDivision(6, 2);
 }
@@ -83,7 +83,7 @@ async function run() {
 run();
 ```
 
-[Try the demo.](https://codesandbox.io/s/without-await-resolved-u06sb)
+[Open the demo.](https://codesandbox.io/s/without-await-resolved-u06sb)
 
 Even without using the `await` keyword inside `divideWithoutAwait()`, the expression `await divideWithoutAwait()` inside the `run()` function still evaluates correctly to the `6 / 2` division as `3`!  
 
@@ -99,7 +99,7 @@ Because `promisedDivision(n1, 0)` now would return rejected promises, let's also
 
 Ok, let's use `return await promisedDivision(5, 0)` expression with the `await` keyword:
 
-```javascript{2}
+```javascript mark=3
 async function divideWithAwait() {
   try {
     return await promisedDivision(5, 0);
@@ -115,13 +115,13 @@ async function run() {
 run();
 ```
 
-[Try the demo.](https://codesandbox.io/s/with-await-rejected-ihxg5?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/with-await-rejected-ihxg5?file=/src/index.js)
 
 Because the division by zero is not possible, `promisedDivision(5, 0)` returns a rejected promise. The `catch(error) { ... }` successfully catches the rejected promise thrown by `promisedDivision(5, 0)`.  
 
 What about the second approach, where the `await` is omitted?
 
-```javascript{2}
+```javascript mark=3
 async function divideWithoutAwait() {
   try {
     return promisedDivision(5, 0);
@@ -137,7 +137,7 @@ async function run() {
 run(); // Uncaught Error: Cannot divide by 0
 ```
 
-[Try the demo.](https://codesandbox.io/s/without-await-rejected-477nr)
+[Open the demo.](https://codesandbox.io/s/without-await-rejected-477nr)
 
 This time, however, `catch(error) { ... }` doesn't catch the rejected promise.  
 

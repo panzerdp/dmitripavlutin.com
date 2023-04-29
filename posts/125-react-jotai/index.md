@@ -53,7 +53,7 @@ function Main() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/search-query-no-global-state-ppr2c?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/search-query-no-global-state-ppr2c?file=/src/App.js)
 
 `<App>` is composed of 2 components: `<Header>` and `<Main>`.  
 
@@ -77,7 +77,7 @@ const counterAtom = atom(0);
 
 But the atom alone doesn't help much. To read and update the atom's state `Jotai` provides a special hook `useAtom()`:
 
-```jsx{2,5}
+```jsx mark=3,6
 import { atom, useAtom } from 'jotai';
 
 export const counterAtom = atom(0);
@@ -98,7 +98,7 @@ export function CounterButton() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/jotai-atom-2ueh3?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/jotai-atom-2ueh3?file=/src/App.js)
 
 `const [count, setCount] = useAtom(counterAtom)` returns a tuple where the first item is the value of the state, and the second is a state updater function.  
 
@@ -108,7 +108,7 @@ The selling point of atoms is that you can access the same atom from multiple co
 
 For example, let's read `counterAtom` value in an another component `<CurrentCount>`:
 
-```jsx{4}
+```jsx mark=5
 import { useAtom } from 'jotai';
 import { counterAtom } from './Button';
 
@@ -119,7 +119,7 @@ function CurrentCount() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/jotai-atom-shared-iq6td?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/jotai-atom-shared-iq6td?file=/src/App.js)
 
 When the value of `counterAtom` changes (due to counter increment), then both components `<CounterButton>` and `<CurrentCount>` are going to re-render.  
 
@@ -133,7 +133,7 @@ Now let's return to the problem of section 1: how to share the search query from
 
 You might already see the solution: let's create an atom `searchAtom` and share it between `<Header>` and `<Main>` components:  
 
-```jsx{12,15,25}
+```jsx mark=13,16,26
 import { useState } from 'react';
 import { atom, useAtom } from 'jotai';
 
@@ -164,7 +164,7 @@ function Main() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/search-query-global-state-rp1lr?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/search-query-global-state-rp1lr?file=/src/App.js)
 
 `const searchAtom = atom('')` creates the atom that's going to hold the search query global state variable.  
 
@@ -182,7 +182,7 @@ If you find yourself calculating data from an atom's value, then you may find us
 
 You can create a derived atom when supplying a callback function to `atom(get => get(myAtom))`: in which case `Jotai` invokes the callback with a getter function `get` from where you can extract the value of the base atom `get(myAtom)`.  
 
-```javascript{3}
+```javascript mark=4
 import { atom } from 'jotai';
 
 const numberAtom = atom(2);
@@ -197,7 +197,7 @@ Of course, as soon as the base atom changes, the derived atom changes too.
 
 For example, let's create `isNameEmptyAtom` derived atom that determines the string stored in `nameAtom` is empty:
 
-```jsx{3,7}
+```jsx mark=4,8
 import { atom, useAtom } from 'jotai';
 
 const nameAtom = atom('Batman');
@@ -218,7 +218,7 @@ function HeroName() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/derived-atoms-eqs7w?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/derived-atoms-eqs7w?file=/src/App.js)
 
 What's even better is that you can create a derived atom from multiple base atoms!
 

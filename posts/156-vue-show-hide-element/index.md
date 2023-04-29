@@ -17,7 +17,7 @@ In this post, you'll learn how to hide elements on a web page using 3 approaches
 * When the element is hidden using `display: none` applied by `v-show`;
 * Applying the `visibility: hidden` using the `:class` binding.
 
-<Affiliate type="vueschoolVue" />
+<Affiliate type="vueschoolCompositionApi" />
 
 <TableOfContents />
 
@@ -37,7 +37,7 @@ B) Otherwise, if the value supplied to `v-if` is `false` (or generally a [falsy 
 
 Let's consider the following example:
 
-```vue{1-2}
+```vue mark=2:3
 <template>
   <div v-if="value1">I'm rendered!</div>
   <div v-if="value2">I'm not rendered!</div>
@@ -55,7 +55,7 @@ export default {
 </script>
 ```
 
-[Try the demo.](https://codesandbox.io/s/v-if-byie6?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/v-if-byie6?file=/src/App.vue)
 
 When the above component runs, here's what HTML content is inserted into the web page:
 
@@ -96,7 +96,7 @@ B) Otherwise, if the value supplied to `v-show` is `false` (or falsy), then the 
 
 Let's look at the following example:
 
-```vue{1-2}
+```vue mark=2:3
 <template>
   <div v-show="value1">I'm visible!</div>
   <div v-show="value2">I'm hidden!</div>
@@ -114,7 +114,7 @@ export default {
 </script>
 ```
 
-[Try the demo.](https://codesandbox.io/s/v-show-v5ghh?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/v-show-v5ghh?file=/src/App.vue)
 
 When you run the above component *both elements* are rendered into the DOM:
 
@@ -141,11 +141,11 @@ What if you need to hide the element's content while keeping the space it occupi
 
 Unfortunately, you cannot use `v-show` directive because it applies only `display: none` style.  
 
-But a viable solution is to use `:class` binding, which is pretty flexible in Vue. When the object literal `{ className: boolValue }` is assigned to the `:class`, Vue would apply the `"className"` as a class to the element if `boolValue` is `true`.  
+But a viable solution is to use `:class` binding, which is pretty flexible in Vue. When the object literal `{ className: boolValue }` is assigned to the `:class`, Vue applies the `"className"` as a class to the element if `boolValue` is `true`.  
 
 Let's create a CSS class `invisible` having the `visibility: hidden` style. Then, using the `:class` binding and an object literal you can apply the `invisible` class to an element:
 
-```vue{1-2}
+```vue mark=2:3
 <template>
   <div :class="{ invisible: !value1 }">I'm visible!</div>
   <div :class="{ invisible: !value2 }">Only my space is visible!</div>
@@ -170,7 +170,7 @@ export default {
 </style>
 ```
 
-[Try the demo.](https://codesandbox.io/s/invisible-class-sfvvi?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/invisible-class-sfvvi?file=/src/App.vue)
 
 Open the demo you'd see the elements *I'm visible* and *Dummy text*, and a space in between the two &mdash; the hidden second element.  
 

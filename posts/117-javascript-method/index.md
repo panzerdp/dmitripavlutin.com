@@ -31,7 +31,7 @@ What if `who` is a property of an object? To easily access the properties of an 
 
 Let's make `greet()` a method on the object `world`:
 
-```javascript{3-5}
+```javascript mark=4:6
 const world = {
   who: 'World',
 
@@ -78,7 +78,7 @@ The methods do not use `this`, and `namespace` serves as a holder of alike metho
 
 As seen in the previous chapter, you can define a method directly in an object literal:
 
-```javascript{3-5}
+```javascript mark=4:6
 const world = {
   who: 'World',
 
@@ -94,7 +94,7 @@ world.greet(); // => 'Hello, World!'
 
 There's also a longer syntax of methods definition:
 
-```javascript{3-5}
+```javascript mark=4:6
 const world = {
   who: 'World',
 
@@ -139,7 +139,7 @@ In JavaScript, the `class` syntax defines a class that's going to serve as a tem
 
 A class can also have methods:
 
-```javascript {6-9}
+```javascript mark=7:10
 class Greeter {
   constructor(who) {
     this.who = who;
@@ -171,7 +171,7 @@ Let me show you why it's important.
 
 Recall the `world` object having the method `greet()` upon it. Let's check what value has `this` when `greet()` is invoked as a method and as a regular function:
 
-```javascript{4,10,14}
+```javascript mark=5,11,15
 const world = {
   who: 'World',
 
@@ -334,9 +334,8 @@ myBoundFunc('Arg 1', 'Arg 2');
 
 Indirect invocation and bounding emulate the method invocation.  
 
-To read about all ways you can define functions in JavaScript follow my post [6 Ways to Declare JavaScript Functions](/6-ways-to-declare-javascript-functions/).  
+To read about all ways you can define functions in JavaScript follow my post [JavaScript Function Declaration: The 6 Ways](/6-ways-to-declare-javascript-functions/).  
 
-Confused about how `this` works in JavaScript? Then I recommend reading my extensive guide [Gentle Explanation of "this" in JavaScript
-](/gentle-explanation-of-this-in-javascript/).  
+Confused about how `this` works in JavaScript? Then I recommend reading my extensive guide [Gentle Explanation of "this" in JavaScript](/gentle-explanation-of-this-in-javascript/).  
 
 *Quizzzzz: can a method in JavaScript be an asynchronous function?*

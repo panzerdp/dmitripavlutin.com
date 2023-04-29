@@ -38,7 +38,7 @@ strNumber = '16';
 console.log(parseInt(strNumber)); // => 16
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/y0e5g9oz/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/y0e5g9oz/)
 
 A function can be *declared* and later *used* (or invoked) in the application. The *initialization* is omitted. For instance:
 
@@ -51,7 +51,7 @@ function sum(a, b) {
 console.log(sum(5, 6)); // => 11
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/85t6kxnz/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/85t6kxnz/)
 
 Everything looks simple and natural when steps are successive: *declare* -> *initialize* -> *use*. If possible, you should apply this pattern when coding in JavaScript.
 
@@ -67,7 +67,7 @@ function double(num) {
   return num * 2;
 }
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/0tysc7nr/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/0tysc7nr/)
 
 It happens because the [function declaration](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/function) in JavaScript is hoisted to the top of the scope. 
 
@@ -93,7 +93,7 @@ var str = 'Hello World!';
 console.log(str); // => 'Hello World!'
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/gcosb6rk/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/gcosb6rk/)
 
 #### Hoisting and var
 
@@ -111,7 +111,7 @@ function double(num) {
 console.log(double(3)); // => 6
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/nks9jmd7/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/nks9jmd7/)
 
 JavaScript moves the declaration `var myVariable` to the top of `double()`  scope and interprets the code this way:
 
@@ -125,7 +125,7 @@ function double(num) {
 console.log(double(3)); // => 6
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/fajdk7ng/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/fajdk7ng/)
 
 The `var` syntax allows not only to declare but right away to assign an initial value: `var str = 'initial value'`. When the variable is hoisted, the declaration is moved to the top, but the initial value assignment **remains** in place:
 
@@ -139,7 +139,7 @@ function sum(a, b) {
 
 console.log(sum(16, 10)); // => 26
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/boywhkxs/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/boywhkxs/)
 
 `var myString` is hoisted to the top of the scope, however the initial value assignment `myString = 'Hello World'` is not affected. The above code is equivalent to the following:
 
@@ -155,7 +155,7 @@ function sum(a, b) {
 console.log(sum(16, 10)); // => 26
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/k34r0fxm/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/k34r0fxm/)
 
 ## 3. Block scope variables: let
 
@@ -176,7 +176,7 @@ if (true) {
 console.log(year); // ReferenceError: year is not defined
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/uzmLwr2h/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/uzmLwr2h/)
 
 ### Hoisting and let
 
@@ -205,7 +205,7 @@ function isTruthy(value) {
 isTruthy(1)
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/e0jqcv2z/2/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/e0jqcv2z/2/)
 
 `myVariable` is in a temporal dead zone from the top of the block `if (value) {...}` until `let myVariable`. If trying to access the variable in this zone, JavaScript throws a [`ReferenceError`](http://www.ecma-international.org/ecma-262/6.0/#sec-native-error-types-used-in-this-standard-referenceerror).  
 
@@ -221,7 +221,7 @@ console.log(ONE);   // => 1
 console.log(HALF);  // => 0.5
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/pvwzsd9f/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/pvwzsd9f/)
 
 When a constant is defined, it must be initialized with a value in the same `const` statement. After declaration and initialization, the value of a constant cannot be modified: 
 
@@ -231,7 +231,7 @@ console.log(PI); // => 3.14
 PI = 2.14; // TypeError: Assignment to constant variable
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/c1rz4n3g/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/c1rz4n3g/)
 
 ### Hoisting and const
 
@@ -255,7 +255,7 @@ function double(number) {
 double(5);
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/816pgvkw/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/816pgvkw/)
 
 If `TWO` is used before the declaration, JavaScript throws an error `ReferenceError: TWO is not defined`. So the constants should be first declared and initialized, and later accessed.
 
@@ -272,7 +272,7 @@ function isOdd(number) {
 console.log(isOdd(5)); // => true
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/c3e597f8/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/c3e597f8/)
 
 The code `function isOdd(number) {...}` is a declaration that defines a function. `isOdd()` verifies if a number is odd.
 
@@ -290,7 +290,7 @@ function equal(value1, value2) {
    return value1 === value2;
 }
 ```
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/18wrxge2/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/18wrxge2/)
 
 The code works nicely because `equal()` is created by a function declaration and hoisted to the top of the scope.
 
@@ -313,7 +313,7 @@ var minus = function (num1, num2) {
 };
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/bgoak5pm/5/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/bgoak5pm/5/)
 
 `addition` is hoisted entirely and can be called before the declaration.  
 
@@ -365,7 +365,7 @@ class Company {
 const microsoft = new Company('Microsoft');
 ```
 
-[Try the demo.](https://jsfiddle.net/dmitri_pavlutin/z64Luqwm/)
+[Open the demo.](https://jsfiddle.net/dmitri_pavlutin/z64Luqwm/)
 
 As expected, executing `new Company('Apple')` before the class definition throws `ReferenceError`. This is nice because JavaScript suggests using a good approach to first declare something and then make use of it.  
 

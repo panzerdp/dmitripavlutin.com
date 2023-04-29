@@ -1,10 +1,10 @@
 ---
-title: 'The Complete Guide to useRef() and Refs in React'
-description: 'How to use React.useRef() hook to create persisted mutable values (also known as references or refs), as well access DOM elements.'
+title: 'React useRef() Hook Explained in 3 Steps'
+description: 'React.useRef() hook creates persisted mutable values (aka references or refs). refs are used to access DOM elements.'
 published: "2021-03-02T12:00Z"
-modified: "2023-01-27"
-thumbnail: "./images/cover-7.png"
-slug: react-useref-guide
+modified: "2023-04-03"
+thumbnail: "./images/cover-9.png"
+slug: react-useref
 tags: ['react', 'useref', 'hook', 'dom', 'element']
 type: post
 ---
@@ -19,7 +19,7 @@ In this post you'll learn how to use `React.useRef()` hook to create persisted m
 
 `useRef(initialValue)` is a built-in React hook that accepts one argument as the initial value and returns a *reference* (aka *ref*). A reference is an object having a special property `current`.
 
-```jsx{3,7,10}
+```jsx mark=4,8,11
 import { useRef } from 'react';
 
 function MyComponent() {
@@ -53,7 +53,7 @@ Now, let's see how to use `useRef()` in practice.
 
 The component `LogButtonClicks` uses a reference to store the number of clicks on a button: 
 
-```jsx{3,6}
+```jsx mark=4,7
 import { useRef } from 'react';
 
 function LogButtonClicks() {
@@ -70,7 +70,7 @@ function LogButtonClicks() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/logging-button-clicks-reference-ogcnc?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/logging-button-clicks-reference-ogcnc?file=/src/App.js)
 
 `const countRef = useRef(0)` creates a reference `countRef` initialized with `0`.  
 
@@ -84,7 +84,7 @@ Now a reasonable question: what's the main difference between reference and stat
 
 Let's reuse the component `LogButtonClicks` from the previous section, but this time use `useState()` hook to count the number of button clicks:  
 
-```jsx{3,8}
+```jsx mark=4,9
 import { useState } from 'react';
 
 function LogButtonClicks() {
@@ -102,7 +102,7 @@ function LogButtonClicks() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/logging-button-clicks-state-nzzuk?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/logging-button-clicks-state-nzzuk?file=/src/App.js)
 
 Open the demo and click the button. Each time you click, you will see in the console the message `'I rendered!'` &mdash; meaning that each time the state is updated, the component re-renders.  
 
@@ -119,7 +119,7 @@ You can store inside a reference infrastructure data of side effects: timer ids,
 
 The component `Stopwatch` uses `setInterval(callback, time)` timer function to increase each second the counter of a stopwatch. The timer id is stored in a reference `timerIdRef`:  
 
-```jsx{3,8}
+```jsx mark=4,9
 import { useRef, useState, useEffect } from 'react';
 
 function Stopwatch() {
@@ -152,7 +152,7 @@ function Stopwatch() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/stopwatch-cm7zz?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/stopwatch-cm7zz?file=/src/App.js)
 
 `startHandler()` function, which is invoked when the *Start* button is clicked, starts the timer and saves the timer id in the reference `timerIdRef.current = setInterval(...)`.  
 
@@ -172,7 +172,7 @@ Another useful application of the `useRef()` hook is to access DOM elements dire
 2. Assign the reference to `ref` attribute of the element: `<div ref={elementRef}></div>`;
 3. After mounting, `elementRef.current` points to the DOM element.  
 
-```jsx{3,6,11}
+```jsx mark=4,7,12
 import { useRef, useEffect } from 'react';
 
 function AccessingElement() {
@@ -191,7 +191,7 @@ function AccessingElement() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/access-dom-element-hrh78?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/access-dom-element-hrh78?file=/src/App.js)
 
 ### 2.1 Use case: focusing on an input
 
@@ -201,7 +201,7 @@ To make it work you'll need to create a reference to the input, assign the refer
 
 Here's a possible implementation of the `<InputFocus>` component:
 
-```jsx{3,6,11}
+```jsx mark=4,7,12
 import { useRef, useEffect } from 'react';
 
 function InputFocus() {
@@ -220,7 +220,7 @@ function InputFocus() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/input-focus-zntci?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/input-focus-zntci?file=/src/App.js)
 
 `const inputRef = useRef()` creates a reference to hold the input element.  
 
@@ -234,7 +234,7 @@ React then, after mounting, sets `inputRef.current` to be the input element. Ins
 
 During initial rendering, the reference supposed to hold the DOM element is empty:  
 
-```jsx {7,13}
+```jsx mark=8,14
 import { useRef, useEffect } from 'react';
 
 function InputFocus() {
@@ -254,7 +254,7 @@ function InputFocus() {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/empty-on-initial-rendering-5my4g?file=/src/App.js)
+[Open the demo.](https://codesandbox.io/s/empty-on-initial-rendering-5my4g?file=/src/App.js)
 
 During initial rendering React still determines the output of the component, so there's no DOM structure created yet. That's why `inputRef.current` evaluates to `undefined` during initial rendering.
 
@@ -270,7 +270,7 @@ That's why updating a reference (as well as updating state) shouldn't be perform
 
 The reference must be updated either inside a `useEffect()` callback or inside handlers (event handlers, timer handlers, etc).  
 
-```jsx{6,9,14,17,20}
+```jsx mark=7,10,15,18,21
 import { useRef, useEffect } from 'react';
 
 function MyComponent({ prop }) {

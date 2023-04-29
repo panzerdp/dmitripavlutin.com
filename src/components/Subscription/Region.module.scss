@@ -1,0 +1,66 @@
+@import '~styles/variables';
+
+.subscriptionRegion {
+  background-color: rgba($border-color, 0.4);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  padding: 1rem;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $background-color-dark-mode;
+  }
+
+  ul {
+    padding-left: 30px;
+
+    li {
+      list-style-image: url('/icons/check.svg');
+    }
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  .message {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+
+    h2 {
+      margin: 0;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .subscribeFormLink {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: rgba($anchor-color, 0.9);
+    color: white;
+    font-weight: bold;
+    font-family: $sans-serif-font-family;
+    font-size: 1.1rem;
+    cursor: pointer;
+    height: 3rem;
+    text-decoration: none;
+    box-sizing: border-box;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: rgba($anchor-color, 1);
+    }
+  }
+
+  .subscribersCount {
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    color: rgba($body-color, 0.8);
+
+    @media (prefers-color-scheme: dark) {
+      color: $body-color-dark-mode;
+    }
+  }
+}

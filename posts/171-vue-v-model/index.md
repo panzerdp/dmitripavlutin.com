@@ -1,9 +1,9 @@
 ---
-title: "How to Use v-model with Form Inputs in Vue"
-description: "Use Vue v-model to bind form input elements like text input, textarea, select, checkbox, radio."
+title: "How to Bind Form Inputs using v-model in Vue"
+description: "How to use v-model to bind form input elements like text input, textarea, select, checkbox, radio in Vue."
 published: "2023-03-17"
 modified: "2023-03-17"
-thumbnail: "./images/v-model-form-input-cover-3.png"
+thumbnail: "./images/v-model-form-input-cover-4.png"
 slug: vue-v-model-form-inputs
 tags: ['vue', 'v-model', 'input', 'form', 'reactivity']
 type: post
@@ -17,6 +17,8 @@ Define a reactive `text` (usually a ref), and then bind this value to an input u
 2) `text` ref changes programmaticaly and the input value changes.  
 
 Let's see how to use `v-model` to bind form inputs in Vue 3.  
+
+<Affiliate type="vueschoolCompositionApi" />
 
 <TableOfContents maxLevel={1} />
 
@@ -71,7 +73,7 @@ What is the difference between `v-model` and `:value`? `<input :value="value" />
 
 To understand the difference let's change the previous example's input tag from `v-model="text"` to `:value="text"`:
 
-```vue {6}
+```vue mark=7
 <script setup>
 import { ref } from 'vue'
 
@@ -110,7 +112,7 @@ can be expressed as:
 
 The following code doesn't use `v-model`, but still has two-way data flow working:
 
-```vue {7-8}
+```vue mark=8:9
 <script setup>
 import { ref } from 'vue'
 
@@ -264,7 +266,7 @@ const checked = ref(true)
 
 To customize the checked/unchecked binding to other values that a boolean, then Vue offers 2 Vue-specific attributes on the checkbox:  
 
-```html {2-3}
+```html mark=3:4
 <input 
   v-model="checked" 
   true-value="Yes!" 
@@ -272,7 +274,7 @@ To customize the checked/unchecked binding to other values that a boolean, then 
 />
 ```
 
-Now `checked` would be assigned to `'Yes!'` (as true value) or `'No'` (as false value) string depending on the checkbox status.  
+Now `checked` is assigned to `'Yes!'` (as true value) or `'No'` (as false value) string depending on the checkbox status.  
 
 Let's modify the previous example to use the custom values `'Yes!'` and `'No'`:
 
@@ -327,7 +329,7 @@ Click on any other T-shirt color, and the `color` ref changes according to the s
 
 `value` attribute of the radio is bindable: you can use `:value`. That is helpful when the list of options comes from an array, for example:
 
-```vue {12}
+```vue mark=13
 <script setup>
 import { ref } from "vue"
 
@@ -412,7 +414,7 @@ What's the main difference between `input` and `change` events?
 
 The following example uses lazy binding:
 
-```vue {6}
+```vue mark=7
 <script setup>
 import { ref } from 'vue'
 

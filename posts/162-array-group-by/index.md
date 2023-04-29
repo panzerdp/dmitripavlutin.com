@@ -71,7 +71,7 @@ console.log(groupByCategory);
 //   ]
 // }
 ```
-[Try the demo.](https://codesandbox.io/s/elastic-montalcini-tlgvt?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/elastic-montalcini-tlgvt?file=/src/index.js)
 
 `products.reduce((acc, product) => { ... })` reduces the `products` array to an object of products grouped by category.  
 
@@ -79,7 +79,7 @@ While I do consider `array.reduce()` method useful and powerful, sometimes its r
 
 Because grouping data is an often occurring task ([recall](https://www.programiz.com/sql/group-by) `GROUP BY` from SQL?) the [array group proposal](https://github.com/tc39/proposal-array-grouping) introduces two useful methods: `array.groupBy()` and `array.groupByToMap()`.  
 
-Here's how you would use `array.groupBy()` to create the same grouping by category:
+Here's how to use `array.groupBy()` to create the same grouping by category:
 
 ```javascript
 const groupByCategory = products.groupBy(product => {
@@ -98,7 +98,7 @@ console.log(groupByCategory);
 // }
 ```
 
-[Try the demo.](https://codesandbox.io/s/bold-goodall-r3c4c?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/bold-goodall-r3c4c?file=/src/index.js)
 
 `products.groupBy(product => {...})` returns an object where properties are category names and values are arrays of category products.
 
@@ -140,7 +140,7 @@ console.log(groupByCategory);
 // ])
 ```
 
-[Try the demo.](https://codesandbox.io/s/sparkling-waterfall-kdlpy?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/sparkling-waterfall-kdlpy?file=/src/index.js)
 
 ## 3. Conclusion
 

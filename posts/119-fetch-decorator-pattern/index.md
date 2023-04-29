@@ -93,7 +93,7 @@ class BasicFetcher implements Fetcher {
 
 Let's use the basic fetcher class to fetch the list of movies:
 
-```typescript{0,4}
+```typescript mark=1,5
 const fetcher = new BasicFetcher();
 const decoratedFetch = fetcher.run.bind(fetcher);
 
@@ -107,7 +107,7 @@ executeRequest();
 // logs [{ name: 'Heat' }, { name: 'Alien' }]
 ```
 
-[Try the demo](https://codesandbox.io/s/basic-fetch-nm7qm?file=/src/index.ts)
+[Open the demo.](https://codesandbox.io/s/basic-fetch-nm7qm?file=/src/index.ts)
 
 `const fetcher = new BasicFetcher()` creates an instance of the fetcher class. `decoratedFetch = fetcher.run.bind(fetcher)` creates a bound method. 
 
@@ -153,7 +153,7 @@ Then `json = await response.json()` extracts the JSON data from the response. Fi
 
 Now let's compose decorate the `BasicFetcher` with the `JsonFetcherDecorator` decorator, and simplify the use of `fetch()`:
 
-```typescript{0-2,6}
+```typescript mark=1:3,7
 const fetcher = new JsonFetcherDecorator(
   new BasicFetcher()
 );
@@ -168,7 +168,7 @@ executeRequest();
 // logs [{ name: 'Heat' }, { name: 'Alien' }]
 ```
 
-[Try the demo](https://codesandbox.io/s/json-extractor-decorator-eyror?file=/src/index.ts)
+[Open the demo.](https://codesandbox.io/s/json-extractor-decorator-eyror?file=/src/index.ts)
 
 Now, instead of extracting manually the JSON data from the response, you can access the extracted data from `data` property of the response object.  
 
@@ -238,7 +238,7 @@ executeRequest();
 // logs "AbortError"
 ```
 
-[Try the demo](https://codesandbox.io/s/timeout-decorator-ibsg7?file=/src/index.ts) 
+[Open the demo.](https://codesandbox.io/s/timeout-decorator-ibsg7?file=/src/index.ts) 
 
 In the demo, the request to `/movies.json` takes more than 8 seconds. 
 

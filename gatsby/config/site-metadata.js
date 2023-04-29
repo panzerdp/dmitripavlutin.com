@@ -1,4 +1,4 @@
-const siteUrl = 'https://dmitripavlutin.com';
+const siteUrl = 'https://dmitripavlutin.com'
 
 module.exports = {
   siteUrl, // ensure compatibility with plugins that require `siteUrl`
@@ -16,7 +16,7 @@ module.exports = {
   authorInfo: {
     name: 'Dmitri Pavlutin',
     description:
-      'Tech writer and coach. My daily routine consists of (but not limited to) drinking coffee, coding, writing, coaching, overcoming boredom 😉.',
+      'Software developer and sometimes writer. My daily routine consists of (but not limited to) drinking coffee, coding, writing, overcoming boredom 😉. Living in the sunny Barcelona. 🇪🇸',
     job: '',
     email: 'dmitripavlutin@gmail.com',
     jobTitle: 'Software Developer',
@@ -32,8 +32,9 @@ module.exports = {
     },
   },
   emailSubscriptionService: {
-    endpoint: 'https://dmitripavlutin.us13.list-manage.com/subscribe/post?u=7cedcb1f5ab74eb7c907e768e&id=75f44f92b9',
-    hiddenFieldName: 'b_7cedcb1f5ab74eb7c907e768e_75f44f92b9',
+    embedFormEndpoint: 'https://assets.mailerlite.com/jsonp/386197/forms/84180324159849472/subscribe',
+    pageFormUrl: 'https://dashboard.mailerlite.com/forms/386197/84180324159849472/share',
+    isFormEmbed: true
   },
   carbonAdsService: {
     scriptSrc: '//cdn.carbonads.com/carbon.js?serve=CE7DT2QI&placement=dmitripavlutincom',
@@ -69,41 +70,38 @@ module.exports = {
         </p>
         <p>
           <em>
-            If you want to significantly improve your React knowledge, take the fantastic <a href="https://www.traversymedia.com/a/2147528895/FqXWyazh" target="_blank" rel="noopener noreferrer">"React Front To Back Course"</a> by Brad Traversy. Use the coupon code "DMITRI" and get 20% discount!
+            If you want to significantly improve your React knowledge, take the wonderful <a href="https://www.traversymedia.com/a/2147528895/FqXWyazh" target="_blank" rel="noopener noreferrer">"React Front To Back Course"</a> by Brad Traversy. Use the coupon code "DMITRI" and get 20% discount!
           </em>
         </p>`,
     }, {
       type: 'traversyJavaScript',
       enabled: true,
       message: `
-        <p>
-          <em>Before I go on, let me recommend something to you.</em>
+       <p>
+          <em>
+            Before I go on, let me recommend something to you.
+          </em>
         </p>
         <p>
           <em>
-            If you want to significantly improve your JavaScript knowledge, take the amazingly useful course <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">"Modern JavaScript From The Beginning 2.0"</a> by Brad Traversy. Use the coupon code "DMITRI" and get 20% discount!
+            If you want to significantly improve your JavaScript knowledge, take the wonderful course <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">"Modern JavaScript From The Beginning 2.0"</a> by Brad Traversy. Use the coupon code "DMITRI" and get 20% discount!
           </em>
         </p>`
     }, {
       type: 'vueschoolCompositionApi',
-      enabled: false,
+      enabled: true,
       message: `
       <p>
+          <em>
+            Before I go on, let me recommend something to you.
+          </em>
+        </p>
+      <p>
         <em>
-        Before I go on, let me recommend something to you. If you want to truly understand how to use Vue composition API, take <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> course on Vueschool.
+          If you want to trully understand Vue composition API and become productive using it, take the <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> course on Vueschool.
         </em>
       </p>`
-    }, {
-      type: 'vueschoolVue',
-      enabled: false,
-      message: `
-      <p>
-        <em>
-        Before I go on, let me recommend something to you. If you want to become proficient in Vue, take ["Vue.js 3 Fundamentals with the Composition API"](https://vueschool.io/courses/vue-js-fundamentals-with-the-composition-api?friend=dmitripavlutin) course on Vueschool.
-        </em>
-      </p>
-      `
     }],
-    showVueschoolTopBanner: true
+    showVueschoolTopBanner: false
   }
-};
+}

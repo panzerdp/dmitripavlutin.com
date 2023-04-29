@@ -59,7 +59,7 @@ Promise.resolve('Hi!')
 // Logs 'Resolved: Hi!'
 ```
 
-[Try the demo.](https://codesandbox.io/s/youthful-satoshi-wh7el?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/youthful-satoshi-wh7el?file=/src/index.js)
 
  Otherwise, in case of rejection, `error` callback is called:
 
@@ -74,7 +74,7 @@ Promise.reject('Oops!')
 // Logs 'Error: Oops!'
 ```
 
-[Try the demo.](https://codesandbox.io/s/priceless-surf-iyj8p?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/priceless-surf-iyj8p?file=/src/index.js)
 
 In the above examples, the behavior of both approaches is the same.  
 
@@ -84,7 +84,7 @@ The difference is seen when the `success()` callback of the resolved promise ret
 
 Let's modify the success callback to return a rejected promise:
 
-```javascript{2}
+```javascript mark=3
 function rejectSuccess(invalidValue) {
   console.log('Invalid success: ', invalidValue);
   return Promise.reject('Invalid!');
@@ -93,7 +93,7 @@ function rejectSuccess(invalidValue) {
 
 Now let's use `rejectSuccess` in both approaches:
 
- ```javascript{8}
+ ```javascript mark=9
 Promise.resolve('Zzz!')
   .then(rejectSuccess, error);
 // Logs 'Invalid success: Zzzzz!'
@@ -105,7 +105,7 @@ Promise.resolve('Zzz!')
 // Logs 'Error: Invalid!'
 ```
 
-[Try the demo.](https://codesandbox.io/s/elated-snowflake-y174u?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/elated-snowflake-y174u?file=/src/index.js)
 
 `Promise.resolve('Zzz!').then(rejectSuccess, error)` only calls `rejectSuccess`, even if `rejectSuccess` returns a rejected promise. *`error` callback is not invoked*.  
 
@@ -117,7 +117,7 @@ That could be useful, for example, when you perform a fetch request to get a lis
 
 So, in case if the list is empty, you could simply reject that list:
 
-```javascript{5-7}
+```javascript mark=6:8
 import axios from "axios";
 
 axios("/list.json")
@@ -133,7 +133,7 @@ axios("/list.json")
   });
 ```
 
-[Try the demo.](https://codesandbox.io/s/epic-breeze-m186p?file=/src/index.js)
+[Open the demo.](https://codesandbox.io/s/epic-breeze-m186p?file=/src/index.js)
 
 In the above example `.catch(error)` would catch the request errors and the empty list error.  
 

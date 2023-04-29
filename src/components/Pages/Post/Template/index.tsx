@@ -1,5 +1,7 @@
 import { GatsbyImage } from 'gatsby-plugin-image'
 
+import './code-hike.scss'
+
 import * as styles from './index.module.scss'
 import { PostPlain, PostDetailed } from 'typings/post'
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData'
@@ -13,7 +15,7 @@ import ShareBottom from 'components/Pages/Post/Share/Bottom'
 import CommentsThread from 'components/Comments/Thread'
 import CommentsInView from 'components/Comments/InView'
 import AboutAuthorConcise from 'components/AboutAuthor/Concise'
-import SubscriptionRegion from 'components/Subscription/Region'
+import { SubscriptionRegion } from 'components/Subscription/Region'
 import CarbonFetch from 'components/Carbon/Fetch'
 import CarbonMetaTags from 'components/Carbon/Meta/Tags'
 import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll'

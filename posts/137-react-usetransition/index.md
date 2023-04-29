@@ -37,7 +37,7 @@ Invoking `const [isPending, startTransition] = useTransitionHook()` returns an a
 * `isPending`: indicates that the transition is pending
 * `startTransition(callback)`: allows you to mark any UI updates inside `callback` as transitions.  
 
-```jsx{3,7-10}
+```jsx mark=4,8:11
 import { useTransition } from 'react';
 
 function MyComponent() {
@@ -46,7 +46,7 @@ function MyComponent() {
 
   const someEventHandler = (event) => {
     startTransition(() => {
-      // Mark updates as transitions
+      // updates as transitions
       setValue(event.target.value);
     });
   }
@@ -100,7 +100,7 @@ function ListItem({ name, highlight }) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/heavy-update-as-urgent-ejwbg?file=/src/FilterList.js)
+[Open the demo.](https://codesandbox.io/s/heavy-update-as-urgent-ejwbg?file=/src/FilterList.js)
 
 `<FilterList names={names} />` accepts a big array of names. Inside of the component, `query` is the state variable that contains the query string. The input field is a [controlled
 component](/controlled-inputs-using-react-hooks/) that updates `query` state variable when the user types.  
@@ -123,7 +123,7 @@ Let's make the necessary adjustments to `<FilterList>` component.
 
 First, let's invoke the `[isPending, startTransition] = useTransition()` hook to get access to `startTransition()` function. Secondly, let's create a state variable to hold the query state value specifically for the transition.  
 
-```jsx{4,6,10}
+```jsx mark=5,7,11
 import { useState, useTransition } from 'react';
 
 export function FilterList({ names }) {
@@ -148,7 +148,7 @@ export function FilterList({ names }) {
 }
 ```
 
-[Try the demo.](https://codesandbox.io/s/heavy-update-as-non-urgent-ifobc?file=/src/FilterList.js)
+[Open the demo.](https://codesandbox.io/s/heavy-update-as-non-urgent-ifobc?file=/src/FilterList.js)
 
 Open the [demo](https://codesandbox.io/s/heavy-update-as-non-urgent-ifobc?file=/src/FilterList.js) using transitions feature. If you type quickly a query into the input field, you would notice a delay in highlighting the query inside the list. 
 
@@ -166,7 +166,7 @@ After [enabling](https://github.com/reactwg/react-18/discussions/5) the new Reac
 const [isPending, startTransition] = useTransition();
 
 startTransition(() => {
-  // Mark updates as transitions
+  // updates as transitions
   setStateValue(newValue);
 });
 ```

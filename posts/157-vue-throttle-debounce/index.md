@@ -17,7 +17,7 @@ What you could do is slow down the execution of the event handlers. Such amortiz
 
 In this post, you'll find how to debounce and throttle watchers and event handlers in Vue components.  
 
-<Affiliate type="vueschoolVue" />
+<Affiliate type="vueschoolCompositionApi" />
 
 ## 1. Debouncing a watcher
 
@@ -49,7 +49,7 @@ export default {
 
 Open the demo and type a few characters into the input. Each time you type, the value is logged to the console.  
 
-Logging is implemented using a watcher on the `value` data property. And if you'd like to perform a fetch request using the `value` as a GET parameter inside the watcher callback, you wouldn't want to start fetch requests so often.  
+Logging is implemented using a watcher on the `value` data property. And if you want to perform a fetch request using the `value` as a GET parameter inside the watcher callback, you wouldn't need to do fetch requests so often.  
 
 Let's debounce the logging to the console of the input value. The idea is to create a debounced function, then invoke that function inside the watcher.  
 
@@ -57,7 +57,7 @@ I use a debounce implementation from `'lodash.debounce'`, but you can use whatev
 
 Let's update the component with debouncing:
 
-```vue{16,20-22,25}
+```vue mark=17,21:23,26
 <template>
   <input v-model="value" type="text" />
   <p>{{ value }}</p>
@@ -89,7 +89,7 @@ export default {
 </script>
 ```
 
-[Try the demo](https://codesandbox.io/s/vue-input-debounced-4vwex?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/vue-input-debounced-4vwex?file=/src/App.vue)
 
 If you open the demo you'd notice that from the user's perspective little changed: you can still introduce characters as you were in the previous example.  
 
@@ -129,7 +129,7 @@ export default {
 </script>
 ```
 
-[Try the demo.](https://codesandbox.io/s/vue-event-handler-plls4?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/vue-event-handler-plls4?file=/src/App.vue)
 
 Open the demo and type a few characters into the input. Look at the console: you'd notice that the console updates each time you type.  
 
@@ -137,7 +137,7 @@ Again, that's not always convenient if you want to perform some relatively heavy
 
 Debouncing the event handler can be implemented as follows:
 
-```vue{1,9-11,14}
+```vue mark=2,10:12,15
 <template>
   <input v-on:input="debouncedHandler" type="text" />
 </template>
@@ -158,7 +158,7 @@ export default {
 </script>
 ```
 
-[Try the demo.](https://codesandbox.io/s/vue-event-handler-debounced-973vn?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/vue-event-handler-debounced-973vn?file=/src/App.vue)
 
 Open the demo and type a few characters. The component logs to console the new value only if `500ms` has passed since the last typing. Again, debouncing works!
 
@@ -193,7 +193,7 @@ That would be an easier approach than creating debounced functions as properties
 
 For example:
 
-```vue{10-12}
+```vue mark=11:13
 <template>
   <input v-on:input="debouncedHandler" type="text" />
 </template>
@@ -212,15 +212,15 @@ export default {
 </script>
 ```
 
-[Try the demo.](https://codesandbox.io/s/vue-event-handler-debounced-incorrectly-320ci?file=/src/App.vue)
+[Open the demo.](https://codesandbox.io/s/vue-event-handler-debounced-incorrectly-320ci?file=/src/App.vue)
 
 Instead of creating a debounced callback inside the `created()` hook, this time you assigned the debounced callback to the `methods.debouncedHandler`. 
 
-And if you try the demo, it works!
+And if you open the demo, it works!
 
 The problem is that the options object exported from the component using `export default { ... }`, including the methods, are going to be reused by all the instances of the component. 
 
-In case if the web page has 2 or more instances of the component, then all the components would use the *same* debounced function `methods.debouncedHandler` &mdash; and the debouncing could glitch.  
+In case if the web page has 2 or more instances of the component, then all the components will use the *same* debounced function `methods.debouncedHandler` &mdash; and the debouncing could glitch.  
 
 ## 4. Conclusion
 
