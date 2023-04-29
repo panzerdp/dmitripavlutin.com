@@ -1,21 +1,15 @@
-import { Affiliate } from './Affiliate'
+import { Affiliate, AffiliatePosition } from './Affiliate'
 
 export const affiliateFixtureJavaScript: Affiliate = {
-  enabled: true,
-  message: {
-    introInSidebar: 'Sidebar JavaScript course',
-    introInText: 'In text JavaScript course',
-    main: 'JavaScript course'
-  },
+  position: AffiliatePosition.InText,
+  text: 'In text JavaScript course',
+  link: 'https://example.com/1/a',
   applyOn: { tags: ['javascript', 'frontend'] }
 }
 
 export const affiliateFixtureReact: Affiliate = {
-  enabled: true,
-  message: {
-    introInSidebar: 'Sidebar React course',
-    introInText: 'In text React course',
-    main: 'React course'
-  },
+  position: AffiliatePosition.InText,
+  text: 'In text React <b>course</b>: __LINK__. Try again: __LINK__',
+  link: 'https://example.com/2/a',
   applyOn: { tags: ['react', 'frontend'] }
 }

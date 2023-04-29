@@ -1,10 +1,12 @@
+export enum AffiliatePosition {
+  InText = 'InText',
+  Sidebar = 'Sidebar'
+}
+
 export interface Affiliate {
-  enabled: boolean
-  message: {
-    introInText: string
-    introInSidebar: string
-    main: string
-  }
+  text: string
+  link: string
+  position: AffiliatePosition
   applyOn: {
     tags: string[]
   }
