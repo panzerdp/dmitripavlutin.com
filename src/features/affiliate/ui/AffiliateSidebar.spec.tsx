@@ -1,10 +1,10 @@
-import { AffiliateSidebar } from './AffiliateSidebar'
 import { render } from '@testing-library/react'
+import { AffiliateSidebar } from './AffiliateSidebar'
 
 describe('<AffiliateSidebar>', () => {
-  it('should render a div undefined', () => {
+  it('should render text', () => {
     const { queryByText } = render(<AffiliateSidebar />)
 
-    expect(queryByText('Test')).toBeInTheDocument()
+    expect(queryByText('text')).toBeInTheDocument()
   })
 })

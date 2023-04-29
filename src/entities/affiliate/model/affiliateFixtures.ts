@@ -2,7 +2,7 @@ import { Affiliate, AffiliatePosition } from './Affiliate'
 
 export const affiliateFixtureJavaScript: Affiliate = {
   position: AffiliatePosition.InText,
-  text: 'In text JavaScript course',
+  text: 'In text <a href="__LINK__">JavaScript course</a>',
   link: 'https://example.com/1/a',
   applyOn: { tags: ['javascript', 'frontend'] }
 }
