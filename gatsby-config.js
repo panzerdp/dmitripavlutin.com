@@ -45,7 +45,6 @@ module.exports = {
               wrapperStyle: 'margin-bottom: 1.0725rem',
             },
           },
-          'gatsby-remark-copy-linked-files',
           {
             resolve: 'gatsby-remark-autolink-headers',
             options: {
