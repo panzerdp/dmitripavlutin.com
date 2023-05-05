@@ -26,7 +26,7 @@ export function Footer({ authorInfo: { profiles, name, email } }: FooterProps) {
         <div className={styles.links}>
           <div className={styles.footerNavigation}>
             <a href={TO_INDEX()}>Home</a>
-            <a href={TO_NEWSLETTER()}>Newsletter</a>
+            {/* <a href={TO_NEWSLETTER()}>Newsletter</a> */}
             <a href={TO_RSS()}>RSS</a>
             <a href={TO_ALL_POSTS()}>All posts</a>
             <a href={TO_SEARCH()}>Search</a>

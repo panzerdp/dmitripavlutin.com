@@ -15,7 +15,7 @@ import ShareBottom from 'components/Pages/Post/Share/Bottom'
 import CommentsThread from 'components/Comments/Thread'
 import CommentsInView from 'components/Comments/InView'
 import AboutAuthorConcise from 'components/AboutAuthor/Concise'
-import { SubscriptionRegion } from 'components/Subscription/Region'
+// import { SubscriptionRegion } from 'components/Subscription/Region'
 import CarbonFetch from 'components/Carbon/Fetch'
 import CarbonMetaTags from 'components/Carbon/Meta/Tags'
 import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll'
@@ -75,9 +75,9 @@ export default function PostTemplate({
             <Edit postRelativePath={postRelativePath} />
           </div>
         </div>
-        <div className={styles.bottomSubscriptionForm}>
+        {/* <div className={styles.bottomSubscriptionForm}>
           <SubscriptionRegion />
-        </div>
+        </div> */}
         <div className={`${styles.delimiter} ${styles.authorInfoContainer}`}>
           <AboutAuthorConcise />
         </div>
