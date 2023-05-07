@@ -108,8 +108,12 @@
     }
   }
 
-  details summary {
-    outline: none;
+  details {
+    margin: 1rem 0;
+
+    summary {
+      outline: none;
+    }
   }
 }
 
