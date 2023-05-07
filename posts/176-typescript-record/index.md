@@ -1,5 +1,5 @@
 ---
-title: "Record Type in TypeScript: How and When to Use It"
+title: "A Quick intro to Record Type in TypeScript"
 description: "Record type simplifies typing objects in TypeScript. Let's see how you can benefit from it."
 published: "2023-04-28"
 modified: "2023-05-07"
