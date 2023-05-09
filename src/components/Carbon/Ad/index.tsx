@@ -10,13 +10,9 @@ interface CarbonAdProps {
 }
 
 export default function CarbonAd(props: CarbonAdProps): JSX.Element {
-  const { isEnabled, isProductionMode, scriptSrc } = props.carbonAdsService
+  const { isProductionMode, scriptSrc } = props.carbonAdsService
   const container = useRef()
   const { pathname } = useLocation()
-
-  if (!isEnabled) {
-    return null
-  }
 
   const carbonElement = isProductionMode ?
     <CarbonBannerLive ref={container} scriptSrc={scriptSrc} />
