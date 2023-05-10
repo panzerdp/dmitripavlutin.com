@@ -16,7 +16,6 @@ export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.E
       <meta name="robots" content="index, follow" />
       <html lang="en" />
       <meta name="google-site-verification" content="A3lH-k4h-4bEnJ4lt6BsPuTh5iUck5ElEV5xeyvkCxo" />
-      <script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
     </Helmet>
   )
 }
