@@ -38,16 +38,6 @@ jobs:
         env:
           MAILERLITE_KEY: ${{ secrets.MAILERLITE_KEY }}
           NODE_OPTIONS: "--max-old-space-size=2048"
-      # - name: Deploy to Netlify
-      #   uses: jsmrcaga/action-netlify-deploy@v2.0.0
-      #   with:
-      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      #     NETLIFY_DEPLOY_MESSAGE: "Deployed from GitHub action"
-      #     NETLIFY_DEPLOY_TO_PROD: true
-      #     build_directory: 'public'
-      #     install_command: "echo 'Skipping installing the dependencies'"
-      #     build_command: "echo 'Skipping building the web files'"
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
@@ -55,5 +45,4 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: dmitripavlutin
           directory: 'public'
-          environment: 'production'
-          branch: 'main'
+          branch: 'main' # Mark the branch as 'main' to create a production deployment in Cloudflare
