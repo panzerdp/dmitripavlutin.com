@@ -55,4 +55,5 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: dmitripavlutin
           directory: 'public'
-          environment: production
+          environment: 'production'
+          branch: 'main'
