@@ -1,7 +1,8 @@
-/rss/                                       /rss.xml                      301
-/dont-overuse-react-usecallback/            /react-usecallback/           301
-/simple-explanation-of-javascript-closures/ /javascript-closure/          301
-/simple-explanation-of-javascript-closures/ /javascript-closure/          301
-/string-interpolation-in-javascript/        /javascript-template-strings/ 301
-/react-useref-guide/                        /react-useref/                301
-/:slug/cover.png                            /:slug/cover/                 301
+www.dmitripavlutin.com/*                    https://dmitripavlutin.com/:splat    301 
+/rss/                                       /rss.xml                             301
+/dont-overuse-react-usecallback/            /react-usecallback/                  301
+/simple-explanation-of-javascript-closures/ /javascript-closure/                 301
+/simple-explanation-of-javascript-closures/ /javascript-closure/                 301
+/string-interpolation-in-javascript/        /javascript-template-strings/        301
+/react-useref-guide/                        /react-useref/                       301
+/:slug/cover.png                            /:slug/cover/                        301
