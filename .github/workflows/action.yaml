@@ -43,6 +43,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: dmitripavlutin
+          projectName: dmitripavlutin-blog
           directory: 'public'
           branch: 'main' # Mark the branch as 'main' to create a production deployment in Cloudflare
