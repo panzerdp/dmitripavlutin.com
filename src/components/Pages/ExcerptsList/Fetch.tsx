@@ -62,7 +62,7 @@ export const pageQuery = graphql`
             ...Post
             thumbnail {	
               childImageSharp {	
-                gatsbyImageData(width: 180, height: 100, quality: 60, layout: FIXED, formats: [AUTO, WEBP])
+                gatsbyImageData(width: 180, height: 100, quality: 60, layout: FIXED, formats: [AUTO, WEBP, AVIF])
               }	
             }
           }

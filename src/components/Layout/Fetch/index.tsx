@@ -20,7 +20,7 @@ export default function LayoutFetchQuery(props: LayoutFetchQueryProps) {
         query Layout {
           file(relativePath: { eq: "face.jpg" }) {
             childImageSharp {
-              gatsbyImageData(width: 64, height: 64, quality: 100, layout: FIXED, formats: [AUTO, WEBP])
+              gatsbyImageData(width: 64, height: 64, quality: 100, layout: FIXED, formats: [AUTO, WEBP, AVIF])
             }
           }
           site {

@@ -26,7 +26,7 @@ module.exports = {
             resolve: 'gatsby-plugin-image',
             options: {
               defaults: {
-                formats: ['webp'],
+                formats: ['webp', 'avif'],
                 quality: 60
               }
             }
