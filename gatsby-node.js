@@ -10,7 +10,7 @@ const query = `
 fragment PostThumbnail on MdxFrontmatter {
   thumbnail {
     childImageSharp {
-      gatsbyImageData(aspectRatio: 1.8, quality: 60, width: 708, formats: [AUTO, WEBP, AVIF], layout: CONSTRAINED, placeholder: NONE)
+      gatsbyImageData(aspectRatio: 1.8, quality: 60, width: 708, formats: [AUTO, WEBP], layout: CONSTRAINED, placeholder: NONE)
     }
   }
 }
