@@ -3,7 +3,7 @@ title: "What is a Pure Function in JavaScript"
 description: "A pure function always returns the same value given the same arguments and produces no side-effects."
 published: "2023-05-13"
 modified: "2023-05-13"
-thumbnail: "./images/cover-4.jpg"
+thumbnail: "./images/cover-5.jpg"
 slug: javascript-pure-function
 tags: ['javascript', 'function']
 type: post
@@ -38,6 +38,12 @@ For example, `sum(1, 2)` always returns `3`, no matter how many times or where t
 Let's see some more examples of pure functions.
 
 ```javascript
+// max of arguments
+Math.max(1, 2, 3)
+
+// nearest lowest integer
+Math.floor(1.23)
+
 // The multiplication of two numbers
 function multiply(a, b) {
   return a * b
@@ -137,7 +143,7 @@ function sumOfArray(array) {
 console.log(sumOfArray([2, 3])) // logs 5
 ```
 
-Pure functions are at the base of [functional programming in JavaScript](https://www.freecodecamp.org/news/functional-programming-in-javascript/). I encourage you to explore the popular functional programming library [Ramda](https://ramdajs.com/) that uses extensively the composition of pure functions.  
+Pure functions are at the base of [functional programming](https://www.freecodecamp.org/news/functional-programming-in-javascript/) in JavaScript. I encourage you to explore the popular functional programming library [Ramda](https://ramdajs.com/) that uses extensively the composition of pure functions.  
 
 ## 3. Impure functions
 
@@ -170,6 +176,38 @@ console.log(increase(2)) // logs 4
 
 `add()` function is impure because it produces a side-effect: modifies `value` variable accessed from the outer scope. The function also returns different values given the same arguments.  
 
+Other examples of impure functions:
 
+```javascript
+async function fetchEmployees() {
+  const response = await fetch('https://example.com/employees/')
+  return response.json()
+}
+
+function screenSmallerThan(pixels) {
+  const { matches } = window.matchMedia(`(max-width: ${pixels})px`)
+  return matches
+}
+
+function deleteById(id) {
+  document.getElementById(id).remove()
+}
+```
+
+These functions are impure because their access some global variables outside of the function: the network, the screen information and DOM.  
+
+Impure functions are more difficult to understant than pure functions because of increased level of complexity. The complexity is added by the side-effect or by the fact that the function access or modifies global state.  
+
+Either way, there's nothing wrong about the impure functions: they are necessary evil for the application to communicate with the external world.  
+
+An approach I have found efficient is to separate the pure from impure functions. Then make the impure functions call the pure functions. 
+
+This gives the benefit of extracting the logic that is understandable and predictable into pure functions. And also it makes the impure function, which is more complex, has less responsibilties to reduce the complexity.  
 
 ## 4. Conclusion
+
+A function is pure when given the same arguments it always returns the same value and makes no side-effects.  
+
+Pure functions have nice benefits like being easy to understand, can be composed and memoized.  
+
+*What benefits of pure functions do you know?*
