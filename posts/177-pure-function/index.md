@@ -1,9 +1,9 @@
 ---
 title: "Pure Functions in JavaScript: A Beginner's Guide"
 description: "A pure function always returns the same value for the same arguments and produces no side-effects."
-published: "2023-05-13"
-modified: "2023-05-13"
-thumbnail: "./images/cover-5.jpg"
+published: "2023-05-15"
+modified: "2023-05-15"
+thumbnail: "./images/cover-8.jpg"
 slug: javascript-pure-function
 tags: ['javascript', 'function']
 type: post
@@ -14,6 +14,10 @@ A function is a reusable block of code that accepts arguments and returns a comp
 A *pure function* always returns the same value given the same arguments and produces no side-effects.   
 
 Let's see in more detail what are pure functions and why they are useful.  
+
+<Affiliate type="traversyJavaScript" />
+
+<TableOfContents />
 
 ## 1. Pure functions
 
@@ -134,7 +138,7 @@ Pure functions are easy to *compose*. Simple pure functions can be composed to c
 
 For example, you can use reuse the pure `sum()` function to calculate the sum of an array:
 
-```js mark=6[21:24]
+```js mark=6[23:25]
 function sum(a, b) {
   return a + b
 }
@@ -150,9 +154,9 @@ Pure functions are the base of [functional programming](https://www.freecodecamp
 
 ## 3. Impure functions
 
-A function that can return different values given the same arguments or makes a side-effect is named *impure function*.  
+A function that can return different values given the same arguments or makes side-effects is named *impure function*.  
 
-In other words, a function that is not pure is impure.  
+In practice, a function becomes impure when it reads or modifies global state. Also, a function becomes impure when it uses another impure function.  
 
 A good example of an impure function is the built-in JavaScript random generator [Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random):
 
@@ -184,41 +188,78 @@ console.log(increase(2)) // logs 4
 Other examples of impure functions:
 
 ```javascript
-const object = { a: 0 }
-Object.assign(object, { b: 1 })
+function addProperty(object) {
+  // Mutates the parameter object (side-effect)
+  Object.assign(object, { b: 1 })
+}
+
+function deleteById(id) {
+  // Modifies DOM (side-effect)
+  document.getElementById(id).remove()
+}
 
 async function fetchEmployees() {
+  // Accesses the networks (global state)
   const response = await fetch('https://example.com/employees/')
   return response.json()
 }
 
 function screenSmallerThan(pixels) {
+  // Accesses the browser page (global state)
   const { matches } = window.matchMedia(`(max-width: ${pixels})px`)
   return matches
 }
-
-function deleteById(id) {
-  document.getElementById(id).remove()
-}
 ```
 
-These functions are impure because they access some global variables outside of the function: the network, the screen information and DOM.  
+These functions are impure because they make side-effects like mutating the parameter or DOM, and access global state like the network and the screen information.  
 
 ## 4. Dealing with impure functions
 
-Impure functions have a higher [complexity](https://en.wikipedia.org/wiki/Programming_complexity) compared to pure functions. Complexity is added by the side-effect or by the access or modification of the global state.  
+Impure functions have a higher [complexity](https://en.wikipedia.org/wiki/Programming_complexity) compared to pure functions. Complexity is added by accessing / modifying global state or by side-effects.  
 
 Either way, there's nothing wrong about the impure functions. They are necessary evil for the application to communicate with the external world.  
 
-If you are lucky, some impure functions can be transformed from into pure by refactoring mutable operations to immutable.  
+If you are lucky, some impure functions can be transformed into pure by refactoring mutable operations to [immutable](https://medium.com/@nitish15p/immutable-object-and-array-operations-in-javascript-86047609532).  
 
-// Example
+The following function adds default properties to an object. The function is impure because the parameter `original` is mutated:
 
-Another approach I have found efficient is to separate the pure from impure functions. Then make the impure functions call the pure functions. 
+```javascript
+function addDefaultsImpure(original, defaults) {
+  return Object.assign(original, defaults)
+}
 
-// Example
+const original = { a: 1 }
+const result   = addDefaultsImpure(original, { b: 2 })
 
-This gives the benefit of extracting the logic that is understandable and predictable into pure functions. And also decrease the complexity of the impure function since it would have less responsibility.  
+console.log(object) // logs { a: 1, b: 2 }
+console.log(result) // logs { a: 1, b: 2 }
+```
+
+`Object.assign(object, defaults)` mutates `original` paramter by inserting all the properties of `defaults` object into it.
+
+The problem with `addDefaultsImpure()` is the great deal of complexity that it adds: you have to *remember* that the argument object is mutated.  
+
+Let's make the function pure by using making the fill with defaults operation immutable:
+
+```javascript
+function addDefaultsPure(original, defaults) {
+  return Object.assign({}, original, defaults)
+}
+
+const original = { a: 1 }
+const result   = addDefaultsPure(original, { b: 2 })
+
+console.log(original) // logs { a: 1 }
+console.log(result)   // logs { a: 1, b: 2 }
+```
+
+`Object.assign({}, object, defaults)` doesn't alter neither `object` nor `defaults` object. It just creates a new object.  
+
+`addDefaultsPure()` is now pure and has no side-effects. 
+
+Another approach I have found efficient is to extract big chunks of pure code from impure functions. Then make the impure functions call the pure functions.  
+
+This gives the benefit of extracting the logic that is understandable and predictable into pure functions. The complexity of the impure function also decreases since it has less code.  
 
 ## 5. Conclusion
 
