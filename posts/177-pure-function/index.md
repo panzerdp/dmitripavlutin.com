@@ -1,6 +1,6 @@
 ---
-title: "Pure Function in JavaScript: A Beginner's Guide"
-description: "A pure function always returns the same value given the same arguments and produces no side-effects."
+title: "Pure Functions in JavaScript: A Beginner's Guide"
+description: "A pure function always returns the same value for the same arguments and produces no side-effects."
 published: "2023-05-13"
 modified: "2023-05-13"
 thumbnail: "./images/cover-5.jpg"
@@ -34,6 +34,8 @@ console.log(sum(5, 2)) // logs 7
 `sum()` is a pure function because given the same numbers it always returns the same sum. 
 
 For example, `sum(1, 2)` always returns `3`, no matter how many times or where the function is called.  
+
+![Pure function JavaScript](./diagrams/pure-8.svg)
 
 Let's see some more examples of pure functions:
 
@@ -160,6 +162,8 @@ console.log(Math.random()) // logs 0.9590062769956789
 ```
 
 `Math.random()`, given the same arguments (in this case no arguments at all), returns different numbers smaller than 1. This makes the function impure.  
+
+![Impure function in JavaScript](./diagrams/impure-2.svg)
 
 Here's another example of an impure function:
 
