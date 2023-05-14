@@ -73,7 +73,7 @@ function noop() {
 
 Now let's look at the second requirement of a pure function: do not produce a side-effect.  
 
-A side-effect is an access or change to some global state or environment outside of the [function scope](/javascript-scope/#3-function-scope). Examples of side-effects are:
+A side-effect is an access or change to some external state or environment outside of the [function scope](/javascript-scope/#3-function-scope). Examples of side-effects are:
 
 * changing variables and objects defined outside the function scope
 * logging to console
@@ -156,7 +156,7 @@ Pure functions are the base of [functional programming](https://www.freecodecamp
 
 A function that can return different values given the same arguments or makes side-effects is named *impure function*.  
 
-In practice, a function becomes impure when it reads or modifies global state. Also, a function becomes impure when it uses another impure function.  
+In practice, a function becomes impure when it reads or modifies external state. Also, a function becomes impure when it uses another impure function.  
 
 A good example of an impure function is the built-in JavaScript random generator [Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random):
 
@@ -167,7 +167,7 @@ console.log(Math.random()) // logs 0.9590062769956789
 
 `Math.random()`, given the same arguments (in this case no arguments at all), returns different numbers smaller than 1. This makes the function impure.  
 
-![Impure function in JavaScript](./diagrams/impure-2.svg)
+![Impure function in JavaScript](./diagrams/impure-3.svg)
 
 Here's another example of an impure function:
 
@@ -199,23 +199,23 @@ function deleteById(id) {
 }
 
 async function fetchEmployees() {
-  // Accesses the networks (global state)
+  // Accesses the networks (external state)
   const response = await fetch('https://example.com/employees/')
   return response.json()
 }
 
 function screenSmallerThan(pixels) {
-  // Accesses the browser page (global state)
+  // Accesses the browser page (external state)
   const { matches } = window.matchMedia(`(max-width: ${pixels})px`)
   return matches
 }
 ```
 
-These functions are impure because they make side-effects like mutating the parameter or DOM, and access global state like the network and the screen information.  
+These functions are impure because they make side-effects like mutating the parameter or DOM, and access external state like the network and the screen information.  
 
 ## 4. Dealing with impure functions
 
-Impure functions have a higher [complexity](https://en.wikipedia.org/wiki/Programming_complexity) compared to pure functions. Complexity is added by accessing / modifying global state or by side-effects.  
+Impure functions have a higher [complexity](https://en.wikipedia.org/wiki/Programming_complexity) compared to pure functions. Complexity is added by accessing / modifying external state or by side-effects.  
 
 Either way, there's nothing wrong about the impure functions. They are necessary evil for the application to communicate with the external world.  
 
