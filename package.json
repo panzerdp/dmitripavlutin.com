@@ -37,6 +37,7 @@
     "gatsby-plugin-sitemap": "6.9.0",
     "gatsby-plugin-typescript": "5.9.0",
     "gatsby-remark-autolink-headers": "6.9.0",
+    "gatsby-remark-copy-linked-files": "6.9.0",
     "gatsby-remark-external-links": "0.0.4",
     "gatsby-remark-images": "7.9.0",
     "gatsby-remark-responsive-iframe": "6.9.0",
