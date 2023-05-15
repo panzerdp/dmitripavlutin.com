@@ -11,7 +11,7 @@ type: post
 
 A function is a reusable block of code that accepts arguments and returns a computed value. 
 
-A *pure function* always returns the same value given the same arguments and produces no side-effects.   
+A *pure function* always returns the same value given the same arguments and produces no side effects.   
 
 Let's see in more detail what are pure functions and why they are useful.  
 
@@ -35,7 +35,7 @@ console.log(sum(5, 2)) // logs 7
 console.log(sum(5, 2)) // logs 7
 ```
 
-`sum()` is a pure function because given the same numbers it always returns the same sum. 
+`sum()` is a pure function because, given the same numbers, it always returns the same sum. 
 
 For example, `sum(1, 2)` always returns `3`, no matter how many times or where the function is called.  
 
@@ -73,7 +73,7 @@ function noop() {
 
 Now let's look at the second requirement of a pure function: do not produce a side-effect.  
 
-A side-effect is an access or change to some external state or environment outside of the [function scope](/javascript-scope/#3-function-scope). Examples of side-effects are:
+A side-effect is access or change to some external state or environment outside of the [function scope](/javascript-scope/#3-function-scope). Examples of side effects are:
 
 * changing variables and objects defined outside the function scope
 * logging to console
@@ -81,7 +81,7 @@ A side-effect is an access or change to some external state or environment outsi
 * DOM manipulations
 * making HTTP requests
 
-If the `sum()` function logs to console, then the function is not pure because it produces a side-effect:
+If the `sum()` function logs to the console, then the function is not pure because it produces a side effect:
 
 ```javascript mark=3
 function sumSideEffect(a, b) {
@@ -111,9 +111,9 @@ describe('sum()', () => {
 })
 ```
 
-Because the pure function doesn't create side-effects, the test doesn't have to arreange and clean up the side-effect.  
+Because the pure function doesn't create side effects, the test doesn't have to arrange and clean up the side effect.  
 
-The pure function that makes computationally expensive calculations can be easily *memoized*. That is possible because the single source of truth of a pure function is its arguments, thus arguments can be used as cache keys during memoization.
+The pure function that makes computationally expensive calculations can be *memoized*. That is possible because the single source of truth of a pure function is its arguments, thus arguments can be used as cache keys during memoization.
 
 `factorial()` function is a pure function. Because factorial computation is expensive, you can improve the performance of the function by wrapping factorial into a `memoize()` wrapper:
 
@@ -154,9 +154,9 @@ Pure functions are the base of [functional programming](https://www.freecodecamp
 
 ## 3. Impure functions
 
-A function that can return different values given the same arguments or makes side-effects is named *impure function*.  
+A function that can return different values given the same arguments or makes side effects is named *impure function*.  
 
-In practice, a function becomes impure when it reads or modifies external state. Also, a function becomes impure when it uses another impure function.  
+In practice, a function becomes impure when it reads or modifies an external state. 
 
 A good example of an impure function is the built-in JavaScript random generator [Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random):
 
@@ -211,13 +211,13 @@ function screenSmallerThan(pixels) {
 }
 ```
 
-These functions are impure because they make side-effects like mutating the parameter or DOM, and access external state like the network and the screen information.  
+These functions are impure because they make side effects like mutating the parameter or DOM and accessing external states like the network and the screen information.  
 
 ## 4. Dealing with impure functions
 
-Impure functions have a higher [complexity](https://en.wikipedia.org/wiki/Programming_complexity) compared to pure functions. Complexity is added by accessing / modifying external state or by side-effects.  
+Impure functions have a higher [complexity](https://en.wikipedia.org/wiki/Programming_complexity) compared to pure functions. Complexity is added by accessing/modifying external states or by side effects.  
 
-Either way, there's nothing wrong about the impure functions. They are necessary evil for the application to communicate with the external world.  
+Either way, there's nothing wrong with the impure functions. They are a necessary evil for the application to communicate with the external world.  
 
 If you are lucky, some impure functions can be transformed into pure by refactoring mutable operations to [immutable](https://medium.com/@nitish15p/immutable-object-and-array-operations-in-javascript-86047609532).  
 
@@ -235,7 +235,7 @@ console.log(object) // logs { a: 1, b: 2 }
 console.log(result) // logs { a: 1, b: 2 }
 ```
 
-`Object.assign(object, defaults)` mutates `original` paramter by inserting all the properties of `defaults` object into it.
+`Object.assign(object, defaults)` mutates `original` parameter by inserting all the properties of `defaults` object into it.
 
 The problem with `addDefaultsImpure()` is the great deal of complexity that it adds: you have to *remember* that the argument object is mutated.  
 
@@ -255,16 +255,16 @@ console.log(result)   // logs { a: 1, b: 2 }
 
 `Object.assign({}, object, defaults)` doesn't alter neither `object` nor `defaults` object. It just creates a new object.  
 
-`addDefaultsPure()` is now pure and has no side-effects. 
+`addDefaultsPure()` is now pure and has no side effects. 
 
 Another approach I have found efficient is to extract big chunks of pure code from impure functions. Then make the impure functions call the pure functions.  
 
-This gives the benefit of extracting the logic that is understandable and predictable into pure functions. The complexity of the impure function also decreases since it has less code.  
+This gives the benefit of extracting logic that is understandable and predictable into pure functions. The complexity of the impure function also decreases since it has less code.  
 
 ## 5. Conclusion
 
-A function is pure when given the same arguments it always returns the same value and makes no side-effects.  
+A function is pure when given the same arguments it always returns the same value and makes no side effects.  
 
-Pure functions are easy to understand, easy to test, can be composed and memoized.  
+Pure functions are easy to understand, easy to test, and can be composed and memoized.  
 
 *What other benefits of pure functions do you know?*
