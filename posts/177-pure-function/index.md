@@ -73,7 +73,7 @@ function noop() {
 
 Now let's look at the second requirement of a pure function: do not produce a side effect.  
 
-A side effect is access or change to external state or environment outside of the [function scope](/javascript-scope/#3-function-scope). Examples of side effects are:
+A side effect is change to external state or environment outside of the [function scope](/javascript-scope/#3-function-scope). Examples of side effects are:
 
 * changing variables and objects defined outside the function scope
 * logging to console
@@ -160,7 +160,7 @@ Pure functions are the base of [functional programming](https://www.freecodecamp
 
 A function that can return different values given the same arguments or makes side effects is named *impure function*.  
 
-In practice, a function becomes impure when it reads or modifies an external state. 
+In practice, a function becomes impure when it reads or modifies an external state.  
 
 A good example of an impure function is the built-in JavaScript random generator [Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random):
 
@@ -221,7 +221,9 @@ These functions are impure because they make side effects like mutating the para
 
 ## 4. Dealing with impure functions
 
-Impure functions have a higher [complexity](https://en.wikipedia.org/wiki/Programming_complexity) compared to pure functions. Complexity is added by accessing/modifying external states or by side effects.  
+Impure functions have a higher [complexity](https://en.wikipedia.org/wiki/Programming_complexity) compared to pure functions. Complexity is added by accessing external states or by side effects. 
+
+Because of their higher comlexity impure functions are harder to test. You have to mock the external state or the side-effect to understand if the function works correctly.  
 
 Either way, there's nothing wrong with the impure functions. They are a necessary evil for the application to communicate with the external world.  
 
@@ -243,9 +245,9 @@ console.log(result) // logs { a: 1, b: 2 }
 
 `Object.assign(object, defaults)` mutates `original` parameter by merging the properties of `defaults` object into it.
 
-The problem with `addDefaultsImpure()` is the great deal of complexity that it adds: you have to *remember* that the argument object is mutated.  
+The problem with `addDefaultsImpure()` is the cognitive load: you have to *remember* that the argument object is mutated.  
 
-Let's make the function pure by making the merge operation immutable:
+Let's make the function pure by using an immutable merge operation:
 
 ```javascript
 function addDefaultsPure(original, defaults) {
@@ -271,8 +273,8 @@ This gives the benefit of extracting logic that is understandable and predictabl
 
 A function is pure when given the same arguments it always returns the same value and makes no side effects.  
 
-Pure functions are easy to understand, easy to test, and can be composed and memoized.  
+Pure functions are easy to understand, easy to test, and can be composed and memoized. Whenever possible, strive to create pure functions.  
 
-Impure functions, on the other side, are functions that access/modify external state or produce side-effects. They are necessary because your application needs a way to communicate with the external world.  
+Impure functions, on the other side, are functions that access external state or produce side effects. Impure functions let your application communicate with the external world.  
 
 *What other benefits of pure functions do you know?*
