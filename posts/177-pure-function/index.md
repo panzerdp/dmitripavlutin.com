@@ -117,7 +117,7 @@ The pure function that makes computationally expensive calculations can be *memo
 
 `factorial()` function is a pure function. Because factorial computation is expensive, you can improve the performance of the function by wrapping factorial into a `memoize()` wrapper (see the [npm package](https://www.npmjs.com/package/lodash.memoize)):
 
-```javascript codesandbox=vanilla?previewwindow=console
+```javascript
 import memoize from 'lodash.memoize'
 
 function factorial(n) {
