@@ -39,7 +39,7 @@ console.log(sum(5, 2)) // logs 7
 
 For example, `sum(1, 2)` always returns `3`, no matter how many times or where the function is called.  
 
-![Pure function JavaScript](./diagrams/pure-8.svg)
+![Pure function JavaScript](./diagrams/pure-9.svg)
 
 Let's see some more examples of pure functions:
 
@@ -134,6 +134,8 @@ console.log(memoizedFactorial(10)) // logs 120
 
 When calling the memoized factorial with argument `10`, the factorial function itself is going to be invoked and the result is memoized. Calling again the memoized factorial with the same `10` arguments returns the memoized value right away.  
 
+![Pure Function are Memoized](./diagrams/pure-memoize-6.svg)
+
 Pure functions are easy to *compose*. Simple pure functions can be composed to create more complex functions.  
 
 For example, you can use reuse the pure `sum()` function to calculate the sum of an array:
@@ -212,6 +214,8 @@ function screenSmallerThan(pixels) {
 ```
 
 These functions are impure because they make side effects like mutating the parameter or DOM and accessing external states like the network and the screen information.  
+
+![Impure Function with Side Effect](./diagrams/impure-side-effect-3.svg)
 
 ## 4. Dealing with impure functions
 
