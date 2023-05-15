@@ -23,7 +23,7 @@ Let's see in more detail what are pure functions and why they are useful.
 
 A function that returns the sum of 2 numbers is pure:  
 
-```js
+```javascript codesandbox=vanilla?previewwindow=console
 function sum(a, b) {
   return a + b
 }
@@ -83,7 +83,7 @@ A side effect is change to external state or environment outside of the [functio
 
 If the `sum()` function logs to the console, then the function is not pure because it produces a side effect:
 
-```javascript mark=3
+```javascript mark=3 codesandbox=vanilla?previewwindow=console
 function sumSideEffect(a, b) {
   const s = a + b
   console.log(s) // Side-effect!
@@ -117,7 +117,7 @@ The pure function that makes computationally expensive calculations can be *memo
 
 `factorial()` function is a pure function. Because factorial computation is expensive, you can improve the performance of the function by wrapping factorial into a `memoize()` wrapper (see the [npm package](https://www.npmjs.com/package/lodash.memoize)):
 
-```javascript
+```javascript codesandbox=vanilla?previewwindow=console
 import memoize from 'lodash.memoize'
 
 function factorial(n) {
@@ -128,13 +128,14 @@ function factorial(n) {
 }
 const memoizedFactorial = memoize(factorial)
 
-console.log(memoizedFactorial(10)) // logs 120
-console.log(memoizedFactorial(10)) // logs 120
+console.log(memoizedFactorial(5)) // logs 120
+console.log(memoizedFactorial(5)) // logs 120
 ```
+[Open the demo.](https://codesandbox.io/s/pure-function-memoization-m3o9s3?file=/src/index.js)
 
-When calling `memoizedFactorial(10)` the memoized factorial with argument `10`, the factorial function itself is going to be invoked and the result is memoized. 
+When calling `memoizedFactorial(10)` the memoized factorial with argument `5`, the factorial function itself is going to be invoked and the result is memoized. 
 
-Calling again the memoized factorial with the same `10` arguments returns the memoized value right away.  
+Calling again the memoized factorial with the same `5` arguments returns the memoized value right away.  
 
 ![Pure Function are Memoized](./diagrams/pure-memoize-6.svg)
 
@@ -142,7 +143,7 @@ Pure functions are easy to *compose*. Simple pure functions can be composed to c
 
 For example, you can use reuse the pure `sum()` function to calculate the sum of an array:
 
-```js mark=6[23:25]
+```js mark=6[23:25] codesandbox=vanilla?previewwindow=console
 function sum(a, b) {
   return a + b
 }
@@ -164,7 +165,7 @@ In practice, a function becomes impure when it reads or modifies an external sta
 
 A good example of an impure function is the built-in JavaScript random generator [Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random):
 
-```javascript
+```javascript codesandbox=vanilla?previewwindow=console
 console.log(Math.random()) // logs 0.8891108266488603
 console.log(Math.random()) // logs 0.9590062769956789
 ```
@@ -175,7 +176,7 @@ console.log(Math.random()) // logs 0.9590062769956789
 
 Here's another example of an impure function:
 
-```javascript
+```javascript codesandbox=vanilla?previewwindow=console
 let value = 0
 
 function add(increase) {
@@ -183,11 +184,13 @@ function add(increase) {
   return value
 }
 
-console.log(increase(2)) // logs 2
-console.log(increase(2)) // logs 4
+console.log(add(2)) // logs 2
+console.log(add(2)) // logs 4
 ```
 
 `add()` function is impure because it produces a side-effect: modifies `value` variable accessed from the outer scope. The function also returns different values for the same arguments.  
+
+![Impure Function with Side Effect](./diagrams/impure-side-effect-3.svg)
 
 Other examples of impure functions:
 
@@ -217,8 +220,6 @@ function screenSmallerThan(pixels) {
 
 These functions are impure because they make side effects like mutating the parameter or DOM and accessing external states like the network and the screen information.  
 
-![Impure Function with Side Effect](./diagrams/impure-side-effect-3.svg)
-
 ## 4. Dealing with impure functions
 
 Impure functions have a higher [complexity](https://en.wikipedia.org/wiki/Programming_complexity) compared to pure functions. Complexity is added by accessing external states or by side effects. 
@@ -231,7 +232,7 @@ If you are lucky, some impure functions can be transformed into pure by refactor
 
 The following function adds default properties to an object. The function is impure because the parameter `original` is mutated:
 
-```javascript
+```javascript codesandbox=vanilla?previewwindow=console
 function addDefaultsImpure(original, defaults) {
   return Object.assign(original, defaults)
 }
@@ -239,7 +240,7 @@ function addDefaultsImpure(original, defaults) {
 const original = { a: 1 }
 const result   = addDefaultsImpure(original, { b: 2 })
 
-console.log(object) // logs { a: 1, b: 2 }
+console.log(original) // logs { a: 1, b: 2 }
 console.log(result) // logs { a: 1, b: 2 }
 ```
 
@@ -249,7 +250,7 @@ The problem with `addDefaultsImpure()` is the cognitive load: you have to *remem
 
 Let's make the function pure by using an immutable merge operation:
 
-```javascript
+```javascript codesandbox=vanilla?previewwindow=console
 function addDefaultsPure(original, defaults) {
   return Object.assign({}, original, defaults)
 }
