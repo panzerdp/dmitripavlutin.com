@@ -71,9 +71,9 @@ function noop() {
 }
 ```
 
-Now let's look at the second requirement of a pure function: do not produce a side-effect.  
+Now let's look at the second requirement of a pure function: do not produce a side effect.  
 
-A side-effect is access or change to some external state or environment outside of the [function scope](/javascript-scope/#3-function-scope). Examples of side effects are:
+A side effect is access or change to external state or environment outside of the [function scope](/javascript-scope/#3-function-scope). Examples of side effects are:
 
 * changing variables and objects defined outside the function scope
 * logging to console
@@ -113,9 +113,9 @@ describe('sum()', () => {
 
 Because the pure function doesn't create side effects, the test doesn't have to arrange and clean up the side effect.  
 
-The pure function that makes computationally expensive calculations can be *memoized*. That is possible because the single source of truth of a pure function is its arguments, thus arguments can be used as cache keys during memoization.
+The pure function that makes computationally expensive calculations can be *memoized*. Because the single source of truth of a pure function is its arguments they can be used as cache keys during [memoization](https://www.freecodecamp.org/news/memoization-in-javascript-and-react/#what-is-memoization).
 
-`factorial()` function is a pure function. Because factorial computation is expensive, you can improve the performance of the function by wrapping factorial into a `memoize()` wrapper:
+`factorial()` function is a pure function. Because factorial computation is expensive, you can improve the performance of the function by wrapping factorial into a `memoize()` wrapper (see the [npm package](https://www.npmjs.com/package/lodash.memoize)):
 
 ```javascript
 import memoize from 'lodash.memoize'
@@ -132,7 +132,9 @@ console.log(memoizedFactorial(10)) // logs 120
 console.log(memoizedFactorial(10)) // logs 120
 ```
 
-When calling the memoized factorial with argument `10`, the factorial function itself is going to be invoked and the result is memoized. Calling again the memoized factorial with the same `10` arguments returns the memoized value right away.  
+When calling `memoizedFactorial(10)` the memoized factorial with argument `10`, the factorial function itself is going to be invoked and the result is memoized. 
+
+Calling again the memoized factorial with the same `10` arguments returns the memoized value right away.  
 
 ![Pure Function are Memoized](./diagrams/pure-memoize-6.svg)
 
@@ -152,7 +154,7 @@ function sumOfArray(array) {
 console.log(sumOfArray([2, 3])) // logs 5
 ```
 
-Pure functions are the base of [functional programming](https://www.freecodecamp.org/news/functional-programming-in-javascript/) in JavaScript. I encourage you to explore the popular functional programming library [Ramda](https://ramdajs.com/), which uses extensively the composition of pure functions.  
+Pure functions are the base of [functional programming](https://www.freecodecamp.org/news/functional-programming-in-javascript/). I encourage you to explore the popular functional programming library [Ramda](https://ramdajs.com/), which uses extensively the composition of pure functions.  
 
 ## 3. Impure functions
 
@@ -185,7 +187,7 @@ console.log(increase(2)) // logs 2
 console.log(increase(2)) // logs 4
 ```
 
-`add()` function is impure because it produces a side-effect: modifies `value` variable accessed from the outer scope. The function also returns different values given the same arguments.  
+`add()` function is impure because it produces a side-effect: modifies `value` variable accessed from the outer scope. The function also returns different values for the same arguments.  
 
 Other examples of impure functions:
 
@@ -239,11 +241,11 @@ console.log(object) // logs { a: 1, b: 2 }
 console.log(result) // logs { a: 1, b: 2 }
 ```
 
-`Object.assign(object, defaults)` mutates `original` parameter by inserting all the properties of `defaults` object into it.
+`Object.assign(object, defaults)` mutates `original` parameter by merging the properties of `defaults` object into it.
 
 The problem with `addDefaultsImpure()` is the great deal of complexity that it adds: you have to *remember* that the argument object is mutated.  
 
-Let's make the function pure by using making the fill with defaults operation immutable:
+Let's make the function pure by making the merge operation immutable:
 
 ```javascript
 function addDefaultsPure(original, defaults) {
@@ -261,14 +263,16 @@ console.log(result)   // logs { a: 1, b: 2 }
 
 `addDefaultsPure()` is now pure and has no side effects. 
 
-Another approach I have found efficient is to extract big chunks of pure code from impure functions. Then make the impure functions call the pure functions.  
+Another approach I have found efficient is the extraction of big chunks of pure code from an impure function. Then make the impure function call the pure code.  
 
-This gives the benefit of extracting logic that is understandable and predictable into pure functions. The complexity of the impure function also decreases since it has less code.  
+This gives the benefit of extracting logic that is understandable and predictable into a pure function. The complexity of the impure function also decreases since it has less code.  
 
 ## 5. Conclusion
 
 A function is pure when given the same arguments it always returns the same value and makes no side effects.  
 
 Pure functions are easy to understand, easy to test, and can be composed and memoized.  
+
+Impure functions, on the other side, are functions that access/modify external state or produce side-effects. They are necessary because your application needs a way to communicate with the external world.  
 
 *What other benefits of pure functions do you know?*
