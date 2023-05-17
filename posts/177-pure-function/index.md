@@ -266,7 +266,7 @@ console.log(result)   // logs { a: 1, b: 2 }
 
 `addDefaultsPure()` is now pure and has no side effects. 
 
-Another approach I have found efficient is the extraction of big chunks of pure code from an impure function. Then make the impure function call the pure code.  
+Another approach I have found efficient is the extraction of big chunks of pure code from an impure function. Then make the impure function call the extracted pure function.  
 
 This gives the benefit of isolating the logic that is understandable and predictable into a pure function. The complexity of the impure function also decreases since it has less code.  
 
