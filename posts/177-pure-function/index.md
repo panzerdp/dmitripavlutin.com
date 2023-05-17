@@ -1,6 +1,6 @@
 ---
 title: "Pure Functions in JavaScript: A Beginner's Guide"
-description: "A pure function always returns the same value for the same arguments and produces no side-effects."
+description: "A pure function always returns the same value for the same arguments and produces no side effects."
 published: "2023-05-15"
 modified: "2023-05-15"
 thumbnail: "./images/cover-8.jpg"
@@ -86,14 +86,14 @@ If the `sum()` function logs to the console, then the function is not pure becau
 ```javascript mark=3 codesandbox=vanilla?previewwindow=console
 function sumSideEffect(a, b) {
   const s = a + b
-  console.log(s) // Side-effect!
+  console.log(s) // Side effect!
   return s
 }
 
 console.log(sumSideEffect(1, 2)) 
 ```
 
-`sumSideEffect()` produces a side-effect. It is not a pure function.  
+`sumSideEffect()` produces a side effect. It is not a pure function.  
 
 Functions that are not pure are called *impure*. Before looking at the impure functions, let's see what are the benefits of pure functions.  
 
@@ -188,7 +188,7 @@ console.log(add(2)) // logs 2
 console.log(add(2)) // logs 4
 ```
 
-`add()` function is impure because it produces a side-effect: modifies `value` variable accessed from the outer scope. The function also returns different values for the same arguments.  
+`add()` function is impure because it produces a side effect: modifies `value` variable accessed from the outer scope. The function also returns different values for the same arguments.  
 
 ![Impure Function with Side Effect](./diagrams/impure-side-effect-3.svg)
 
@@ -196,12 +196,12 @@ Other examples of impure functions:
 
 ```javascript
 function addProperty(object) {
-  // Mutates the parameter object (side-effect)
+  // Mutates the parameter object (side effect)
   Object.assign(object, { b: 1 })
 }
 
 function deleteById(id) {
-  // Modifies DOM (side-effect)
+  // Modifies DOM (side effect)
   document.getElementById(id).remove()
 }
 
@@ -224,7 +224,7 @@ These functions are impure because they make side effects like mutating the para
 
 Impure functions have a higher [complexity](https://en.wikipedia.org/wiki/Programming_complexity) compared to pure functions. Complexity is added by accessing external states or by side effects. 
 
-Because of their higher comlexity impure functions are harder to test. You have to mock the external state or the side-effect to understand if the function works correctly.  
+Because of their higher comlexity impure functions are harder to test. You have to mock the external state or the side effect to understand if the function works correctly.  
 
 Either way, there's nothing wrong with the impure functions. They are a necessary evil for the application to communicate with the external world.  
 
@@ -262,7 +262,7 @@ console.log(original) // logs { a: 1 }
 console.log(result)   // logs { a: 1, b: 2 }
 ```
 
-`Object.assign({}, object, defaults)` doesn't alter neither `object` nor `defaults` object. It just creates a new object.  
+`Object.assign({}, object, defaults)` doesn't alter neither `original` nor `defaults` objects. It just creates a new object.  
 
 `addDefaultsPure()` is now pure and has no side effects. 
 
