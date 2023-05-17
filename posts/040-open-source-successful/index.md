@@ -15,7 +15,7 @@ After a few weeks, the interest in the project is still low. You've worked a lot
 
 How could that happen? And more importantly, what to do to make your open source project successful?  
 
-I've built an open source library [vocajs.com](https://vocajs.com) that [managed](/announcing-voca-the-ultimate-javascript-string-library/) to rise to the top trending repositories on GitHub. Along the way, I learned some important principles of how to make a quality open source project. I want to share these ideas.  
+I've built an open source library [vocajs.pages.dev](https://vocajs.pages.dev) that [managed](/announcing-voca-the-ultimate-javascript-string-library/) to rise to the top trending repositories on GitHub. Along the way, I learned some important principles of how to make a quality open source project. I want to share these ideas.  
 
 ## 1. No one cares about your project
 
@@ -141,7 +141,7 @@ Examples of detailed documentation: [lodash](https://lodash.com/docs/), [ant.des
 
 The documentation explains concisely and to the point all the usage aspects. For example: enumerate the function's parameters, state what data types are accepted, give appropriate examples.  
 
-Here's how I documented the [v.kebabCase()](https://vocajs.com/#kebabCase) function of my library:  
+Here's how I documented the [v.kebabCase()](https://vocajs.pages.dev/#kebabCase) function of my library:  
 
 ![kebabCase() function documentation](./images/kebab.png)
 
