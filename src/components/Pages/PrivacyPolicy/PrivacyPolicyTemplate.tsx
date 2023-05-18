@@ -46,6 +46,7 @@ export function PrivacyPolicyTemplate() {
         </p>
         <ul>
           <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Analytics</a></li>
+          <li><a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub</a></li>
         </ul>
       </div>
       <h3>Security</h3>
