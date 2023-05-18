@@ -68,11 +68,7 @@ footer {
     }
 
     .links {
-      .footerNavigation {
-        text-align: center;
-      }
-
-      .footerAuthorLinks {
+      .footerNavigation, .footerAuthorLinks {
         justify-content: center;
       }
     }

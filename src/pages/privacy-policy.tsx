@@ -15,7 +15,7 @@ export default function PrivacyPolicyPage() {
    the author provides this privacy policy notice explaining the way your personal information
    is collected and used.
       </p>
-      <h3>Collection of Routine Information</h3>
+      <h2>Collection of Routine Information</h2>
       <p>
    This website tracks basic information about its visitors.
    This information includes, but is not limited to, browser details,
@@ -23,13 +23,13 @@ export default function PrivacyPolicyPage() {
    visitors to this website. The information is tracked for routine
    administration and maintenance purposes.
       </p>
-      <h3>Cookies</h3>
+      <h2>Cookies</h2>
       <p>
    Where necessary, this website uses cookies to store information about a visitor’s
    preferences and history to better serve the visitor and/or present the
    visitor with customized content.
       </p>
-      <h3>Advertisement and Other Third Parties</h3>
+      <h2>Advertisement and Other Third Parties</h2>
       <p>
    Advertising partners and other third parties may use cookies, scripts and/or web beacons to track
    visitor activities on this website to display advertisements
@@ -52,21 +52,21 @@ export default function PrivacyPolicyPage() {
           <li><a href="https://www.buysellads.com/privacy" target="_blank" rel="noopener noreferrer">BuySellAds</a></li>
         </ul>
       </div>
-      <h3>Security</h3>
+      <h2>Security</h2>
       <p>
    The security of your personal information is important to the author, but remember that no
    method of transmission over the Internet, or method of electronic storage, is 100% secure.
    While the author strives to use commercially acceptable means to protect your personal information,
    the author cannot guarantee its absolute security.
       </p>
-      <h3>Privacy Policy Modifications</h3>
+      <h2>Privacy Policy Modifications</h2>
       <p>
    This Privacy Policy is effective as of 2023-05-18 and will remain in effect except concerning
    any changes in its provisions in the future, which will be in effect immediately after being posted on this
    page. The author reserves the right to update or change this Privacy Policy at any time and
    you should check this Privacy Policy periodically.
       </p>
-      <h3>Contact Information</h3>
+      <h2>Contact Information</h2>
       <p>
    For any questions or concerns regarding the privacy policy, please send the author an email at <a href="mailto:dmitripavlutin@gmail.com">dmitripavlutin@gmail.com</a>.
       </p>
