@@ -36,6 +36,13 @@ export default function TermsOfUsePage() {
       Use of any such linked site is at your own risk.
       </p>
 
+      <h2>Affiliate Links</h2>
+
+      <p>
+        The author may, from time to time, post affiliate links to third party sites on the website. The author is a member of several affiliate purchasing programs, including, without limitation, Traversy Media and Vueschool.
+        The author earns a commission on qualifying purchases through these affiliate links.
+      </p>
+
       <h2>Limitations</h2>
 
       <p>
