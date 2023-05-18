@@ -7,14 +7,14 @@ export function PrivacyPolicyTemplate() {
       <PrivacyPolicyTags />
       <h1>Privacy Policy</h1>
       <p>
-   Dmitri Pavlutin operates the website &quot;Dmitri Pavlutin Blog&quot; at https://dmitripavlutin.com.
+   Dmitri Pavlutin operates the website &quot;Dmitri Pavlutin Blog&quot; at dmitripavlutin.com.
    I take your privacy seriously. To better protect your privacy,
    I provide this privacy policy notice explaining the way your personal information
    is collected and used.
       </p>
       <h3>Collection of Routine Information</h3>
       <p>
-   This website track basic information about its visitors.
+   This website tracks basic information about its visitors.
    This information includes, but is not limited to, IP addresses, browser details,
    timestamps and referring pages. None of this information can personally identify specific
    visitors to this website. The information is tracked for routine

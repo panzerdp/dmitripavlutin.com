@@ -28,8 +28,8 @@ export function Footer({ authorInfo: { profiles, name, email } }: FooterProps) {
             <a href={TO_INDEX()}>Home</a>
             {/* <a href={TO_NEWSLETTER()}>Newsletter</a> */}
             <a href={TO_RSS()}>RSS</a>
-            <a href={TO_ALL_POSTS()}>All posts</a>
             <a href={TO_SEARCH()}>Search</a>
+            <a href={TO_ALL_POSTS()}>All posts</a>
             <a href={TO_PRIVACY_POLICY()}>Privacy Policy</a>
             <a href={TO_ABOUT_ME()}>About</a>
           </div>
