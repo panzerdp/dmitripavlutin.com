@@ -78,22 +78,32 @@ a {
 
 .container {
   min-height: 100vh;
-  width: 740px;
-  max-width: 100%;
-  padding: 0 1rem;
+  width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
-  position: relative;
-  overflow: visible;
+  display: flex;
+  flex-flow: column;
 
-  @media (max-width: $small-device-width) {
-    padding: 0 0.5rem;
+  .main {
+    flex: 1 0 auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    width: 740px;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+    overflow: visible;
+
+    @media (max-width: $small-device-width) {
+      padding: 0 0.5rem;
+    }
   }
 
   .left {
     position: absolute;
     top: 0;
     right: 100%;
+    padding-top: 1.5rem;
 
     @media (max-width: $medium-device-width) {
       display: none;
@@ -105,6 +115,7 @@ a {
     left: 100%;
     top: 0;
     width: 320px;
+    padding-top: 1.5rem;
 
     @media (max-width: $large-device-width) {
       display: none;

@@ -30,13 +30,15 @@ export default function LayoutContainer({
       <LayoutMetaFontTags />
       <LayoutMetaTags siteInfo={siteInfo} />
       {preHeader}
-      <LayoutHeader authorProfilePicture={authorProfilePicture} siteInfo={siteInfo} />
       <div className={styles.container}>
-        <div className={styles.left}>{leftSidebar}</div>
-        <main className={styles.main}>{children}</main>
-        <div className={styles.right}>{rightSidebar}</div>
+        <LayoutHeader authorProfilePicture={authorProfilePicture} siteInfo={siteInfo} />
+        <main className={styles.main}>
+          <div className={styles.left}>{leftSidebar}</div>
+          {children}
+          <div className={styles.right}>{rightSidebar}</div>
+        </main>
+        <Footer authorInfo={authorInfo} />
       </div>
-      <Footer authorInfo={authorInfo} />
     </>
   )
 }
