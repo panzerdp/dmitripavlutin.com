@@ -1,7 +1,7 @@
 // import { Link } from 'gatsby-link'
 import { memo } from 'react'
 
-import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_RSS, TO_SEARCH, TO_PRIVACY_POLICY } from 'routes/path'
+import { TO_ABOUT_ME, TO_TERMS, TO_PRIVACY_POLICY, TO_CONTACT } from 'routes/path'
 import AuthorLinks from 'components/AboutAuthor/Links'
 import * as styles from './index.module.scss'
 
@@ -25,15 +25,12 @@ export function Footer({ authorInfo: { profiles, name, email } }: FooterProps) {
         </div>
         <div className={styles.links}>
           <div className={styles.footerNavigation}>
-            <a href={TO_INDEX()}>Home</a>
-            {/* <a href={TO_NEWSLETTER()}>Newsletter</a> */}
-            <a href={TO_RSS()}>RSS</a>
-            <a href={TO_SEARCH()}>Search</a>
-            <a href={TO_ALL_POSTS()}>All posts</a>
-            <a href={TO_PRIVACY_POLICY()}>Privacy Policy</a>
+            <a href={TO_TERMS()}>Terms</a>
+            <a href={TO_PRIVACY_POLICY()}>Privacy</a>
+            <a href={TO_CONTACT()}>Contact</a>
             <a href={TO_ABOUT_ME()}>About</a>
           </div>
-          <AuthorLinks className={styles.footerAuthorLinks}>
+          {/* <AuthorLinks className={styles.footerAuthorLinks}>
             <a href={`mailto:${email}`} title={`Send an email to ${name}`}>
               <img width="20" height="20" alt="Email address" src="/icons/email.svg" />
             </a>
@@ -52,7 +49,7 @@ export function Footer({ authorInfo: { profiles, name, email } }: FooterProps) {
             <a href={profiles.github} title={`${name}'s Github profile`}>
               <img width="20" height="20" alt="Github profile" src="/icons/github.svg" />
             </a>
-          </AuthorLinks>
+          </AuthorLinks> */}
         </div>
       </div>
     </footer>

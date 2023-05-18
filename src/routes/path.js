@@ -31,6 +31,12 @@ const TO_RSS = compile(PATH_RSS)
 const PATH_PRIVACY_POLICY = '/privacy-policy/'
 const TO_PRIVACY_POLICY = compile(PATH_PRIVACY_POLICY)
 
+const PATH_CONTACT = '/contact/'
+const TO_CONTACT = compile(PATH_CONTACT)
+
+const PATH_TERMS = '/terms/'
+const TO_TERMS = compile(PATH_TERMS)
+
 module.exports = {
   PATH_INDEX: '/',
   TO_INDEX,
@@ -60,5 +66,11 @@ module.exports = {
   TO_RSS,
 
   PATH_PRIVACY_POLICY,
-  TO_PRIVACY_POLICY
+  TO_PRIVACY_POLICY,
+
+  PATH_CONTACT,
+  TO_CONTACT,
+
+  PATH_TERMS,
+  TO_TERMS
 }
