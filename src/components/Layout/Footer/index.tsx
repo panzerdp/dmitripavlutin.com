@@ -1,7 +1,7 @@
 // import { Link } from 'gatsby-link'
 import { memo } from 'react'
 
-import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_RSS, TO_SEARCH } from 'routes/path'
+import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_NEWSLETTER, TO_RSS, TO_SEARCH, TO_PRIVACY_POLICY } from 'routes/path'
 import AuthorLinks from 'components/AboutAuthor/Links'
 import * as styles from './index.module.scss'
 
@@ -30,6 +30,7 @@ export function Footer({ authorInfo: { profiles, name, email } }: FooterProps) {
             <a href={TO_RSS()}>RSS</a>
             <a href={TO_ALL_POSTS()}>All posts</a>
             <a href={TO_SEARCH()}>Search</a>
+            <a href={TO_PRIVACY_POLICY()}>Privacy Policy</a>
             <a href={TO_ABOUT_ME()}>About</a>
           </div>
           <AuthorLinks className={styles.footerAuthorLinks}>
