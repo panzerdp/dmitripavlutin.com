@@ -59,11 +59,11 @@ export default function PrivacyPolicyPage() {
    While the author strives to use commercially acceptable means to protect your personal information,
    the author cannot guarantee its absolute security.
       </p>
-      <h3>Changes To This Privacy Policy</h3>
+      <h3>Privacy Policy Modifications</h3>
       <p>
    This Privacy Policy is effective as of 2023-05-18 and will remain in effect except concerning
    any changes in its provisions in the future, which will be in effect immediately after being posted on this
-   page. The author reserves the right to update or change my Privacy Policy at any time and
+   page. The author reserves the right to update or change this Privacy Policy at any time and
    you should check this Privacy Policy periodically.
       </p>
       <h3>Contact Information</h3>
