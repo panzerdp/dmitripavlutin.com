@@ -8,7 +8,7 @@ interface LayoutFetchQueryProps {
   children: React.ReactNode;
   leftSidebar?: React.ReactNode;
   rightSidebar?: React.ReactNode;
-  preHeader?: JSX.Element;
+  postHeader?: JSX.Element;
 }
 
 /* istanbul ignore next */
@@ -50,7 +50,7 @@ export function LayoutFetch({
   children,
   leftSidebar,
   rightSidebar,
-  preHeader
+  postHeader
 }: LayoutFetchProps) {
   return (
     <LayoutContainer
@@ -59,7 +59,7 @@ export function LayoutFetch({
       authorProfilePicture={file.childImageSharp.gatsbyImageData}
       leftSidebar={leftSidebar}
       rightSidebar={rightSidebar}
-      preHeader={preHeader}
+      postHeader={postHeader}
     >
       {children}
     </LayoutContainer>

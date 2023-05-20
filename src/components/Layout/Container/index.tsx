@@ -13,7 +13,7 @@ interface LayoutContainerProps {
   authorProfilePicture: FixedImage;
   leftSidebar?: React.ReactNode;
   rightSidebar?: React.ReactNode;
-  preHeader?: JSX.Element;
+  postHeader?: JSX.Element;
 }
 
 export default function LayoutContainer({
@@ -23,15 +23,15 @@ export default function LayoutContainer({
   authorProfilePicture,
   leftSidebar = null,
   rightSidebar = null,
-  preHeader = null
+  postHeader = null
 }: LayoutContainerProps) {
   return (
     <>
       <LayoutMetaFontTags />
       <LayoutMetaTags siteInfo={siteInfo} />
-      {preHeader}
       <div className={styles.container}>
         <LayoutHeader authorProfilePicture={authorProfilePicture} siteInfo={siteInfo} />
+        {postHeader}
         <main className={styles.main}>
           <div className={styles.left}>{leftSidebar}</div>
           {children}

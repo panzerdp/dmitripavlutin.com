@@ -1,0 +1,1 @@
+export const PUB_ID = 'ca-pub-5428678507937314'
