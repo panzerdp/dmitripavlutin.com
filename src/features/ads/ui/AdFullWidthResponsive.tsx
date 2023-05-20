@@ -15,7 +15,7 @@ export function AdFullWidthResponsive({ slot}: AdFullWidthResponsiveProps): JSX.
       <ins className="adsbygoogle"
         data-ad-client={PUB_ID}
         data-ad-slot={slot}
-        data-ad-format="horizontal"
+        // data-ad-format="horizontal"
         data-full-width-responsive="true"
       ></ins>
     </div>
