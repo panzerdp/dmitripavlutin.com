@@ -6,8 +6,6 @@ interface AdFullWidthResponsiveProps {
   slot: string
 }
 export function AdFullWidthResponsive({ slot}: AdFullWidthResponsiveProps): JSX.Element {
-  return null
-
   useEffect(() => {
     (window.adsbygoogle = window.adsbygoogle || []).push({})
   }, [])
