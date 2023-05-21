@@ -9,7 +9,7 @@ tags: ['vue', 'v-model', 'input', 'form', 'reactivity']
 type: post
 ---
 
-The idea of `v-model` in Vue is simple. You can apply it to a form input `<input v-model="myRef" />` and enable two-way binding to the input. When user types into the input then `myRef.value` changes, and vice-versa when `myRef.value` is changed programmatically then the input value changes on the screen.  
+The idea of `v-model` in Vue is simple. You can apply it to a form input `<input v-model="myRef" />` and enable two-way binding. When user types into the input then `myRef.value` changes, and vice-versa when `myRef.value` is changed programmatically then the input value changes.  
 
 Let's see how to use `v-model` to bind form inputs in Vue 3.  
 
