@@ -5,7 +5,7 @@ published: "2023-03-17"
 modified: "2023-05-22"
 thumbnail: "./images/cover-2.jpg"
 slug: vue-v-model-form-inputs
-tags: ['vue', 'v-model', 'input', 'form', 'reactivity']
+tags: ['vue', 'v-model', 'input']
 type: post
 ---
 

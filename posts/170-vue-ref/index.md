@@ -5,7 +5,7 @@ published: "2023-02-28"
 modified: "2023-03-07"
 thumbnail: "./images/vue-ref-4.png"
 slug: ref-in-vue 
-tags: ['vue', 'vue composition', 'ref', 'reactivity']
+tags: ['vue', 'ref', 'reactivity']
 type: post
 ---
 
