@@ -2,7 +2,7 @@
 title: "Mastering Vue refs: From Zero to Hero"
 description: "ref() is a Vue composition API function that creates refs: small reactive values."  
 published: "2023-02-28"
-modified: "2023-03-07"
+modified: "2023-05-23"
 thumbnail: "./images/vue-ref-4.png"
 slug: ref-in-vue 
 tags: ['vue', 'ref', 'reactivity']
@@ -17,13 +17,11 @@ Let's see how refs and `ref()` API work in Vue.
 
 <Affiliate type="vueschoolCompositionApi" />
 
-## 1. ref()
+<TableOfContents />
 
-A component renders a value on the screen. When the value changes (for examle in an event handler), Vue re-renders the component to reflect the new value on the screen. *That's the idea of reactivity in Vue.*  
+## 1. How to create refs
 
-[ref()](https://vuejs.org/api/reactivity-core.html#ref) reactivity API lets you create simple reactive values. 
-
-`ref()` works inside the [`<script setup>`](https://vuejs.org/api/sfc-script-setup.html), [setup()](https://vuejs.org/api/composition-api-setup.html#basic-usage) method, or inside of a [composable](https://vuejs.org/guide/reusability/composables.html) function.  
+[ref()](https://vuejs.org/api/reactivity-core.html#ref) reactivity API lets you create simple reactive values. The *ref* is reactive because changing its value re-renders the component to show the update value in the output.  
 
 `ref(initialValue)` is called as a regular function and accepts an optional argument as the initial value. `ref()` returns a special object called *ref* (which is the reactive value).
 
@@ -43,11 +41,23 @@ console.log(count.value); // 2) reading ref
 
 `ref(0)` creates and returns a ref initialized with `0`. The ref is stored in the variable `count` for later use.  
 
+![Vue ref](./diagrams/ref.svg)
+
 The value of the ref is accessed by reading the special property `count.value` that is available on all the refs. `count.value` is currently `0` because that's the initial value of the ref.  
+
+![Vue ref value](./diagrams/ref-value.svg)
 
 You can omit `.value` property inside the template `<div>{{ count }}</div>` because in the template the ref value is automatically unwrapped.  
 
-## 2. Updating refs
+A ref can be created inside:
+
+* [`<script setup>`](https://vuejs.org/api/sfc-script-setup.html)
+* [setup()](https://vuejs.org/api/composition-api-setup.html#basic-usage) method
+* or inside of a [composable](https://vuejs.org/guide/reusability/composables.html) function
+
+but accessed anywhere, including the template.  
+
+## 2. How to update refs
 
 The true benefit of refs shows when you update them and see how Vue magically re-renders the component to reflect the changes.  
 
@@ -78,9 +88,11 @@ Open the demo. You'll see that count is `0`.
 
 Click *Increase* button and count increases. Importantly, the most actual value of the count is rendered on the screen. *That's reactivity in action.*
 
+![Vue ref update](./diagrams/ref-update-2.svg)
+
 `count` is a ref and also a *reactive* value. When `count.value` changes, Vue updates the component and shows the new count value on the screen. Pure magic! 
 
-## 3. ref() in setup()
+## 3. Refs in setup()
 
 The composition API can be used inside [\<script setup\>](https://vuejs.org/api/sfc-script-setup.html) (see the previous examples), but also inside the [setup()](https://vuejs.org/api/composition-api-setup.html) method of options API.  
 
@@ -120,7 +132,7 @@ Second, you have to access the ref using `this` keyword. For example, `this.coun
 
 Third, the refs are automatically unwrapped when accessed inside the options API methods. Access and update the value of a ref using `this.count` (not using `this.count.value`).  
 
-## 4. Values of refs
+## 4. Objects in refs
 
 In the examples above I've created the count ref that operated on numbers. In general, refs can store any primitive value: numbers, strings, booleans, `undefined`, or `null`.  
  
@@ -141,7 +153,9 @@ console.log(hero.value.name) // logs 'Batman'
 
 `ref({ name: 'Batman' })` creates a ref that stores an object. You can access the object from the ref using `hero.value`. And also access any properties of that object using regular property accessors: `hero.value.name`.  
 
-Moreover, the object stored in a ref automagically *becomes reactive*! Plus the reactivity is applied deeply on nested objects or arrays.    
+Moreover, the object stored in a ref automagically *becomes reactive*! Plus the reactivity is applied deeply on nested objects or arrays.  
+
+![Vue ref object](./diagrams/ref-object.svg)
 
 Let's update the hero name from `'Batman'` to `'Joker'` when a button is clicked:
 
@@ -166,7 +180,7 @@ Changes to an object in ref are deeply reactive.
 
 *Side note: if you don't want deeply reactive refs, consider using [shallowRef()](https://vuejs.org/api/reactivity-advanced.html#shallowref) API.*
 
-## 5. Template refs
+## 5. Access DOM elements
 
 Usually, you don't have to access and manipulate DOM elements directly. Just let Vue take care of everything regarding DOM. 
 
@@ -179,6 +193,8 @@ There are only 3 steps to make a ref access a DOM element:
 1. Define the ref supposed to hold the element: `const element = ref()`
 2. Inside the template, use the special attribute `ref` and assign the ref to it: `<div ref={element}>...</div>`
 3. After mounting, you can access the element by reading `element.value`
+
+![Vue ref DOM element](./diagrams/ref-dom-2.svg)
 
 Let's continue with a simple example.  
 
@@ -211,7 +227,7 @@ The moment when the component mounts is captured using the [onMounted()](https:/
 
 If you accidentally access `input` before mounting, then `input.value` is `undefined`.  
 
-## 6. Implicit refs
+## 6. computed() and refs
 
 In the examples presented until now, I've created refs explicitly: using `ref()` factory function provided by Vue.  
 
@@ -271,7 +287,7 @@ const sum = computed(() => {
 
 When any reactive value used inside `computed()` callback changes, the value of `sum` ref recalculates reactively.  
 
-## 7. Watching refs
+## 7. How to watch refs
 
 [watch()](https://vuejs.org/api/reactivity-core.html#watch) API provided by Vue watches ref value change.  
 
@@ -279,7 +295,7 @@ When any reactive value used inside `computed()` callback changes, the value of 
 
 Let's log to console a message `'myRef changed'` when `myRef` value changes:
 
-``` vue {5-8}
+```vue
 <script setup>
 import { ref, watch } from 'vue'
 
@@ -306,7 +322,7 @@ By default `watch(myRef, callback)` watches only the changes of `myRef.value`.
 
 If you want to watch deep changes of a ref (e.g. when a ref contains object or arrays), then set the third argument as `{deep: true}`: 
 
-```vue
+```javascript
 watch(myRef, () => {
   //...
 }, { deep: true }) // deep watch of ref
