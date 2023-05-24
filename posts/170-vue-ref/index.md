@@ -88,7 +88,7 @@ Open the demo. You'll see that count is `0`.
 
 Click *Increase* button and count increases. Importantly, the most actual value of the count is rendered on the screen. *That's reactivity in action.*
 
-![Vue ref update](./diagrams/ref-update-2.svg)
+![Vue ref update](./diagrams/ref-update-3.svg)
 
 `count` is a ref and also a *reactive* value. When `count.value` changes, Vue updates the component and shows the new count value on the screen. Pure magic! 
 
@@ -227,7 +227,50 @@ The moment when the component mounts is captured using the [onMounted()](https:/
 
 If you accidentally access `input` before mounting, then `input.value` is `undefined`.  
 
-## 6. computed() and refs
+## 6. How to watch refs
+
+[watch()](https://vuejs.org/api/reactivity-core.html#watch) API watches ref value change.  
+
+`watch(myRef, callback)`: set the ref as the first argument `myRef` and the second argument as the callback `callback` to be invoked when the ref changes.
+
+Let's log to console a message `'myRef changed'` when `myRef` value changes:
+
+```vue
+<script setup>
+import { ref, watch } from 'vue'
+
+const myRef = ref(0)
+
+watch(myRef, () => {
+  // this callback is invoked when myRef changes
+  console.log('myRef changed')
+})
+const change = () => myRef.value = 10 // change ref value
+</script>
+<template>
+  <button @click="change">Change ref</button>
+</template>
+```
+
+[Open the demo.](https://codesandbox.io/s/ref-watched-vdodt3?file=/src/App.vue)
+
+Clicking *Change ref* button changes `myRef` value to `10`. As result `watch()` invokes the callback and logs to console `'myRef changed'` message.  
+
+![Vue ref change](./diagrams/ref-watch-6.svg)
+
+You can invoke inside of the watcher different kinds of side effects &mdash; for example, initiate fetch requests.  
+
+By default `watch(myRef, callback)` watches only the direct change of `value` property of `myRef`.  
+
+If you want to watch deep changes of a ref (e.g. when an object or arrays contents is changed), then set the third argument as `{ deep: true }`:
+
+```javascript
+watch(myRef, () => {
+  //...
+}, { deep: true }) // deep watch of ref
+```
+
+## 7. computed() and refs
 
 In the examples presented until now, I've created refs explicitly: using `ref()` factory function provided by Vue.  
 
@@ -286,47 +329,6 @@ const sum = computed(() => {
 `sum` is a computed ref which is a sum of 2 refs and one reactive object property (created using [reactive()](https://vuejs.org/api/reactivity-core.html#reactive) API: an alternative to refs). 
 
 When any reactive value used inside `computed()` callback changes, the value of `sum` ref recalculates reactively.  
-
-## 7. How to watch refs
-
-[watch()](https://vuejs.org/api/reactivity-core.html#watch) API provided by Vue watches ref value change.  
-
-`watch(myRef, callback)`: set the ref as the first argument `myRef` and the second argument as the callback `callback` to be invoked when the ref changes.
-
-Let's log to console a message `'myRef changed'` when `myRef` value changes:
-
-```vue
-<script setup>
-import { ref, watch } from 'vue'
-
-const myRef = ref(0)
-
-watch(myRef, () => {
-  // this callback is invoked when myRef changes
-  console.log('myRef changed')
-})
-const change = () => myRef.value = 10 // change ref value
-</script>
-<template>
-  <button @click="change">Change ref</button>
-</template>
-```
-
-[Open the demo.](https://codesandbox.io/s/ref-watched-vdodt3?file=/src/App.vue)
-
-Clicking *Change ref* button changes `myRef` value to `10`. As result `watch()` invokes the callback and logs to console `'myRef changed'` message.  
-
-You can invoke inside of the watcher different kinds of side effects &mdash; for example, initiate fetch requests.  
-
-By default `watch(myRef, callback)` watches only the changes of `myRef.value`. 
-
-If you want to watch deep changes of a ref (e.g. when a ref contains object or arrays), then set the third argument as `{deep: true}`: 
-
-```javascript
-watch(myRef, () => {
-  //...
-}, { deep: true }) // deep watch of ref
-```
 
 ## 8. Conclusion
 
