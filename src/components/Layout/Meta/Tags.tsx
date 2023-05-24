@@ -1,13 +1,22 @@
 import { Helmet } from 'react-helmet'
+import { useEffect } from 'react'
 
 interface LayoutMetaTagsProps {
   siteInfo: SiteInfo;
 }
 
 export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.Element {
-  const isProduction = process.env.NODE_ENV === 'production'
-
-  const timestampAsVersion = Date.now() - Date.now() % 600000
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'production') {
+      return
+    }
+    const baseOptimize = document.createElement('script')
+    baseOptimize.type = 'text/javascript'
+    baseOptimize.async = true
+    const timestampAsVersion = Date.now() - Date.now() % 600000
+    baseOptimize.src = 'https://cdn4.buysellads.net/pub/dmitripavlutin.js?' + timestampAsVersion
+    document.head.appendChild(baseOptimize)
+  }, [])
 
   return (
     <Helmet>
@@ -20,7 +29,6 @@ export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.E
       <meta name="robots" content="index, follow" />
       <html lang="en" />
       <meta name="google-site-verification" content="A3lH-k4h-4bEnJ4lt6BsPuTh5iUck5ElEV5xeyvkCxo" />
-      {isProduction && <script async src={'https://cdn4.buysellads.net/pub/dmitripavlutin.js?'+ timestampAsVersion} crossOrigin="anonymous" /> }
     </Helmet>
   )
 }
