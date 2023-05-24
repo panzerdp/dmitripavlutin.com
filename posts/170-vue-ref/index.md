@@ -88,7 +88,7 @@ Open the demo. You'll see that count is `0`.
 
 Click *Increase* button and count increases. Importantly, the most actual value of the count is rendered on the screen. *That's reactivity in action.*
 
-![Vue ref update](./diagrams/ref-update-3.svg)
+![Vue ref update](./diagrams/ref-update-5.svg)
 
 `count` is a ref and also a *reactive* value. When `count.value` changes, Vue updates the component and shows the new count value on the screen. Pure magic! 
 
