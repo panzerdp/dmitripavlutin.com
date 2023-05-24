@@ -43,7 +43,7 @@ Open the demo and type into the input field. `value` state variable contains the
 
 The input field is *controlled* because React sets its value from the state `<input value={value} ... />`. When the user types into the input field, the `onChange` handler updates the state with the input’s value accessed from the event object: `event.target.value`.  
 
-![React Controlled Form Input Data Flow](./diagrams/controlled-2.svg)
+![React Controlled Form Input Data Flow](./diagrams/controlled-3.svg)
 
 `value` state variable is the source of truth. Each time you need to access the input value &mdash; just read `value` state variable.  
 
