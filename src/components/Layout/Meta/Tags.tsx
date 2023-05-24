@@ -1,23 +1,10 @@
 import { Helmet } from 'react-helmet'
-import { useEffect } from 'react'
 
 interface LayoutMetaTagsProps {
   siteInfo: SiteInfo;
 }
 
 export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.Element {
-  useEffect(() => {
-    if (process.env.NODE_ENV !== 'production') {
-      return
-    }
-    const baseOptimize = document.createElement('script')
-    baseOptimize.type = 'text/javascript'
-    baseOptimize.async = true
-    const timestampAsVersion = Date.now() - Date.now() % 600000
-    baseOptimize.src = 'https://cdn4.buysellads.net/pub/dmitripavlutin.js?' + timestampAsVersion
-    document.head.appendChild(baseOptimize)
-  }, [])
-
   return (
     <Helmet>
       <title>{siteInfo.metaTitle}</title>
