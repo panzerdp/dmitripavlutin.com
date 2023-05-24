@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e" pages="3" scale="1.8" border="20">
     <diagram name="ref" id="c43kUqYo8mJNwIjrIjis">
-        <mxGraphModel dx="1552" dy="1077" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="621" dy="431" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="QeJD9LiCJEf478nftj-k-0"/>
                 <mxCell id="QeJD9LiCJEf478nftj-k-1" parent="QeJD9LiCJEf478nftj-k-0"/>
@@ -16,7 +16,7 @@
                         <mxPoint x="366" y="426" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="ZZ7vmdWEoq0ikBOHPdt8-3" value="&lt;b&gt;Initial&lt;/b&gt; value" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="QeJD9LiCJEf478nftj-k-1" vertex="1">
+                <mxCell id="ZZ7vmdWEoq0ikBOHPdt8-3" value="&lt;b&gt;initial&lt;/b&gt; value" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="QeJD9LiCJEf478nftj-k-1" vertex="1">
                     <mxGeometry x="273" y="467" width="80" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="ZZ7vmdWEoq0ikBOHPdt8-4" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;" parent="QeJD9LiCJEf478nftj-k-1" edge="1">
@@ -115,7 +115,7 @@
                 <mxCell id="LjDo263KUzth5F66sx0G-3" value="const hero = ref({ name: 'Batman' })" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontFamily=Helvetica;" parent="LjDo263KUzth5F66sx0G-1" vertex="1">
                     <mxGeometry x="220" y="400" width="210" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="LjDo263KUzth5F66sx0G-5" value="&lt;b&gt;Reactive&lt;/b&gt; object" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="LjDo263KUzth5F66sx0G-1" vertex="1">
+                <mxCell id="LjDo263KUzth5F66sx0G-5" value="&lt;b&gt;reactive&lt;/b&gt; object" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="LjDo263KUzth5F66sx0G-1" vertex="1">
                     <mxGeometry x="440" y="470" width="107" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="G_iIrlSN6b8uXRAzbESn-0" value="hero.value" style="rounded=0;whiteSpace=wrap;html=1;" parent="LjDo263KUzth5F66sx0G-1" vertex="1">

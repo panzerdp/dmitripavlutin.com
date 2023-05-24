@@ -41,7 +41,7 @@ console.log(count.value); // 2) reading ref
 
 `ref(0)` creates and returns a ref initialized with `0`. The ref is stored in the variable `count` for later use.  
 
-![Vue ref](./diagrams/ref.svg)
+![Vue ref](./diagrams/ref-2.svg)
 
 The value of the ref is accessed by reading the special property `count.value` that is available on all the refs. `count.value` is currently `0` because that's the initial value of the ref.  
 
@@ -155,7 +155,7 @@ console.log(hero.value.name) // logs 'Batman'
 
 Moreover, the object stored in a ref automagically *becomes reactive*! Plus the reactivity is applied deeply on nested objects or arrays.  
 
-![Vue ref object](./diagrams/ref-object.svg)
+![Vue ref object](./diagrams/ref-object-2.svg)
 
 Let's update the hero name from `'Batman'` to `'Joker'` when a button is clicked:
 
