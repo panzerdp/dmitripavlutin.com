@@ -1,0 +1,2 @@
+export type BsaAdSlotId = string
+
