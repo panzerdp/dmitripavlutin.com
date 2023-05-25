@@ -1,0 +1,76 @@
+@import '~styles/variables';
+
+footer {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: rgba($border-color, 0.2);
+  padding: 0.8rem;
+  font-size: 1.3rem;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $background-color-dark-mode;
+  }
+}
+
+.footerContent {
+  min-height: 5.5rem;
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+
+  .footerNavigation {
+    text-align: right;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    a {
+      margin: 0 0.3rem;
+      font-size: 1.25rem;
+    }
+
+    a:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .copyright {
+    font-size: 1.2rem;
+
+    .license {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+  }
+
+  .footerAuthorLinks {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: $small-device-width) {
+  .footerContent {
+    flex-wrap: wrap-reverse;
+
+    .links,
+    .copyright {
+      width: 100%;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .links {
+      .footerNavigation, .footerAuthorLinks {
+        justify-content: center;
+      }
+    }
+  }
+}

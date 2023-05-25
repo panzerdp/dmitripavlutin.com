@@ -15,19 +15,11 @@ describe('<BsaAdsMetaTags /', () => {
       ['bsa-prebid', BSA_ADS_PREBID_SCRIPT_URL]
     ]
 
-    it('should preload bsa script', () => {
+    it.each(cases)('should preload %s script', (testId, url) => {
       const { getByTestId } = render(<BsaAdsMetaTags />)
 
-      const preload = getByTestId('bsa-preload')
-      expect(preload).toHaveAttribute('href', BSA_ADS_SCRIPT_URL)
-      expect(preload).toHaveAttribute('rel', 'preload')
-    })
-
-    it('should preload prebid script', () => {
-      const { getByTestId } = render(<BsaAdsMetaTags />)
-
-      const preload = getByTestId('bsa-prebid')
-      expect(preload).toHaveAttribute('href', BSA_ADS_PREBID_SCRIPT_URL)
+      const preload = getByTestId(testId)
+      expect(preload).toHaveAttribute('href', url)
       expect(preload).toHaveAttribute('rel', 'preload')
     })
   })

@@ -1,0 +1,11 @@
+@import '~styles/variables';
+
+.rightSidebar {
+  > * {
+    margin-top: 1.5rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
