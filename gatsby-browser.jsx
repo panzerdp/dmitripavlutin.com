@@ -1,4 +1,5 @@
 exports.onInitialClientRender = () => {
+  return
   if (process.env.NODE_ENV !== 'production') {
     return
   }
