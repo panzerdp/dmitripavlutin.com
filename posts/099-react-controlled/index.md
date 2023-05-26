@@ -49,12 +49,16 @@ The input field is *controlled* because React sets its value from the state `<in
 
 To resume, the controlled input technique requires 3 steps:
 
-1) Define the state to hold the input value: `const [value, setValue] = useState('')`.  
+1) Define the state to hold the input value: 
+
+```javascript
+const [value, setValue] = useState('')
+```
 
 2) Create the event handler that updates the state when the input value changes:
 
 ```javascript
-const onChange = event => setValue(event.target.value);
+const onChange = event => setValue(event.target.value)
 ```
 
 3) Assign the input field with the state value and attach the event handler: 
