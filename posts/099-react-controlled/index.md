@@ -2,7 +2,7 @@
 title: "How to Use React Controlled Inputs"
 description: "How to implement controlled inputs using hooks in React."
 published: "2020-09-29T07:20Z"
-modified: "2023-05-24"
+modified: "2023-05-26"
 thumbnail: "./images/cover.png"
 slug: controlled-inputs-using-react-hooks
 tags: ['react', 'input']
@@ -15,14 +15,16 @@ In this post, you'll read how to implement controlled inputs using React hooks.
 
 <Affiliate type="traversyReact" />
 
-## 1. The controlled inputs
+<TableOfContents />
+
+## 1. The controlled input
 
 Let's say you have a simple text input field, and you'd like to access its value:
 
 ```jsx
 import { useState } from 'react';
 
-function MyControlledInput({ }) {
+function MyControlledInput() {
   const [value, setValue] = useState('');
 
   const onChange = (event) => {
@@ -43,7 +45,7 @@ Open the demo and type into the input field. `value` state variable contains the
 
 The input field is *controlled* because React sets its value from the state `<input value={value} ... />`. When the user types into the input field, the `onChange` handler updates the state with the input’s value accessed from the event object: `event.target.value`.  
 
-![React Controlled Form Input Data Flow](./diagrams/controlled-3.svg)
+![React Controlled Form Input Data Flow](./diagrams/controlled-4.svg)
 
 `value` state variable is the source of truth. Each time you need to access the input value &mdash; just read `value` state variable.  
 
@@ -75,13 +77,47 @@ In case of a checkbox, however, you have to use `checked` prop instead of `value
 <input checked={value} onChange={onChange} type="checkbox" />
 ```
 
-## 2. The state as the source of truth
+## 2. Controlling multiple inputs
+
+Often you have to deal with forms that contain multiple input fields. In such a case, instead of creating many state variables for each input field, I find it useful to use a single object to keep the state of the input fields.  
+
+Each input field has a corresponding property in the state object.  
+
+For example, let's use an object `values` having the properties `first` and `last` to hold the information of first and last name input fields.  
+
+```jsx codesandbox=react?entry=/src/App.js
+import { useState } from 'react';
+
+export default function MyControlledInputs() {
+  const [values, setValues] = useState({ first: '', last: '' });
+
+  const getHandler = (name) => {
+    return (event) => {
+      setValues({ ...values, [name]: event.target.value });
+    };
+  };
+
+  return (
+    <>
+      <div>Name: {values.first} {values.last}</div>
+      <input value={values.first} onChange={getHandler('first')} />
+      <input value={values.last} onChange={getHandler('last')} />
+    </>
+  );
+}
+```
+
+The state of the component is now an object `values`. That's usually shorter than creating state variables for each input field.  
+
+`getHandler` is a factory function that returns event handlers for the corresponding property. The returned event handler updates the state object property.  
+
+## 3. The state as the source of truth
 
 Let's see a more complex example. A web page consists of a list of employees' names. You need to add an input field, and when the user types into this field, the employees' list is filtered by name.  
 
 That's a good scenario to use a controlled input. Here's a possible implementation:
 
-```jsx mark=2,4,15:16
+```jsx
 function FilteredEmployeesList({ employees }) {
   const [query, setQuery] = useState('');
   
@@ -113,7 +149,7 @@ Open the demo and enter a query into the input field. The list of employees is f
 
 What's important is that `query` state variable is the source of truth for the value entered in the input field. You use it inside `employees.filter()` to filter the list of employees: `name.toLowerCase().includes(query)`.  
 
-## 3. Debouncing the controlled input
+## 4. Debouncing the controlled input
 
 In the previous implementation, as soon as you type a character into the input field, the list gets filtered instantly. That's not always convenient because it distracts the user when typing the query. 
 
@@ -121,7 +157,7 @@ Let's improve the user experience with [debouncing](https://css-tricks.com/debou
 
 Let's see a possible implementation of a debounced controlled input:
 
-```jsx mark=1,5,10
+```jsx
 import { useDebouncedValue } from './useDebouncedValue';
 
 function FilteredEmployeesList({ employees }) {
@@ -176,7 +212,7 @@ First, the `useDebouncedValue()` hook creates a new state derived from the main 
 
 Then, `useEffect()` updates after `wait` delay the `debouncedValue` state when the main `value` state changes.  
 
-## 4. Summary
+## 5. Summary
 
 The controlled input is a convenient technique to access values of input fields in React.  
 
