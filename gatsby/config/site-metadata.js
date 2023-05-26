@@ -67,17 +67,17 @@ module.exports = {
           The path to becoming proficient in React isn't easy... but fortunately, with a good teacher, you can shortcut.
         </p>
         <p>
-          To greatly improve your React knowledge take the wonderful <a href="https://www.traversymedia.com/a/2147528895/FqXWyazh" target="_blank" rel="noopener noreferrer">"React Front To Back Course"</a> by Brad Traversy. Use the coupon code DMITRI and get 20% discount!
+          To improve your React skills take the wonderful course <a href="https://www.traversymedia.com/a/2147528895/FqXWyazh" target="_blank" rel="noopener noreferrer">React Front To Back Course</a> by Brad Traversy. Use the coupon code DMITRI and get 20% discount!
         </p>`,
     }, {
       type: 'traversyJavaScript',
       enabled: true,
       message: `
         <p>
-          If you want to become a good Frontend developer quality JavaScript knowledge is a must.
+          If you want to become a good Frontend developer then quality JavaScript knowledge is a must.
         </p>
         <p>
-          To become proficient in JavaScript take the wonderful course <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">"Modern JavaScript From The Beginning 2.0"</a> by Brad Traversy. Use the coupon code DMITRI and get 20% discount!
+          The course <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">Modern JavaScript From The Beginning 2.0</a> by Brad Traversy has everything you need to become versed in JavaScript. Use the coupon code DMITRI and get 20% discount!
         </p>`
     }, {
       type: 'vueschoolCompositionApi',
@@ -87,7 +87,7 @@ module.exports = {
         Using Vue composition API is fun... but sometimes challenging.
       </p>
       <p>
-        To become proficient in Vue composition and reactivity take the wonderful course <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> on Vueschool (hurry up since they offer a 40% discount).
+        To become proficient in Vue composition take the wonderful course <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> on Vueschool (hurry up since they offer a 40% discount).
       </p>`
     }],
     showVueschoolTopBanner: false
