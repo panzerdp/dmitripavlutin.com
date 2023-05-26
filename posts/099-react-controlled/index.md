@@ -57,7 +57,11 @@ To resume, the controlled input technique requires 3 steps:
 const onChange = event => setValue(event.target.value);
 ```
 
-3) Assign the input field with the state value and attach the event handler: `<input type="text" value={value} onChange={onChange} />`.  
+3) Assign the input field with the state value and attach the event handler: 
+
+```jsx
+<input type="text" value={value} onChange={onChange} />
+```
 
 The controlled components approach can help you access the value of any input type: textual inputs, textareas, select fields.  
 
