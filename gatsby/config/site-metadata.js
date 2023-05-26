@@ -87,7 +87,7 @@ module.exports = {
         Using Vue composition API is fun... but sometimes challenging.
       </p>
       <p>
-        To become proficient in Vue composition API take the wonderful course <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> on Vueschool (tip: hurry up because they offer a 40% discount).
+        To become proficient in Vue composition and reactivity take the wonderful course <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> on Vueschool (hurry up since they offer a 40% discount).
       </p>`
     }],
     showVueschoolTopBanner: false
