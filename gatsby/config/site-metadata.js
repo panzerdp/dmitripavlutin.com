@@ -64,42 +64,30 @@ module.exports = {
       enabled: true,
       message: `
         <p>
-          <em>
-            Before I go on, let me recommend something to you.
-          </em>
+          The path to becoming proficient in React isn't easy... but fortunately, with a good teacher, you can shortcut.
         </p>
         <p>
-          <em>
-            If you want to significantly improve your React knowledge, take the wonderful <a href="https://www.traversymedia.com/a/2147528895/FqXWyazh" target="_blank" rel="noopener noreferrer">"React Front To Back Course"</a> by Brad Traversy. Use the coupon code "DMITRI" and get 20% discount!
-          </em>
+          To greatly improve your React knowledge take the wonderful <a href="https://www.traversymedia.com/a/2147528895/FqXWyazh" target="_blank" rel="noopener noreferrer">"React Front To Back Course"</a> by Brad Traversy. Use the coupon code DMITRI and get 20% discount!
         </p>`,
     }, {
       type: 'traversyJavaScript',
       enabled: true,
       message: `
-       <p>
-          <em>
-            Before I go on, let me recommend something to you.
-          </em>
+        <p>
+          Good JavaScript knowledge is a must to become a good Frontend developer.   
         </p>
         <p>
-          <em>
-            If you want to significantly improve your JavaScript knowledge, take the wonderful course <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">"Modern JavaScript From The Beginning 2.0"</a> by Brad Traversy. Use the coupon code "DMITRI" and get 20% discount!
-          </em>
+          To become proficient in JavaScript take the wonderful course <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">"Modern JavaScript From The Beginning 2.0"</a> by Brad Traversy. Use the coupon code DMITRI and get 20% discount!
         </p>`
     }, {
       type: 'vueschoolCompositionApi',
       enabled: true,
       message: `
       <p>
-          <em>
-            Before I go on, let me recommend something to you.
-          </em>
-        </p>
+        Using Vue composition API is fun... but sometimes challenging.
+      </p>
       <p>
-        <em>
-          If you want to trully understand Vue composition API and become productive using it, take the <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> course on Vueschool.
-        </em>
+        To become proficient in Vue composition API take the wonderful course <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> on Vueschool (tip: hurry up because they offer a 40% discount).
       </p>`
     }],
     showVueschoolTopBanner: false

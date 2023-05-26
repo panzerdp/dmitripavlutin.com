@@ -1,11 +1,11 @@
 import { useSiteMetadata } from 'hooks/useSiteMetadata'
+import * as styles from './AffiliateText.module.scss'
 
 interface Props {
   type: string;
 }
 
 export function AffiliateText({ type }: Props) {
-
   const { affiliates: { inText } } = useSiteMetadata()
   const affiliate = inText.find((affiliate) => affiliate.type === type)
 
@@ -17,5 +17,5 @@ export function AffiliateText({ type }: Props) {
     return null
   }
 
-  return <div dangerouslySetInnerHTML={{ __html: affiliate.message }} />
+  return <div className={styles.affiliateText} dangerouslySetInnerHTML={{ __html: affiliate.message }} />
 }
