@@ -109,7 +109,9 @@ export default function MyControlledInputs() {
 
 The state of the component is now an object `values`. That's usually shorter than creating state variables for each input field.  
 
-`getHandler` is a factory function that returns event handlers for the corresponding property. The returned event handler updates the state object property.  
+`getHandler` is a factory function that returns event handlers to update the property supplied as an argument. The returned event handler is assigned to `onChange` prop of the input field.  
+
+The benefit of such a design is that you can handle a lot of input fields without adding too much boilerplate code.  
 
 ## 3. The state as the source of truth
 
