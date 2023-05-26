@@ -74,7 +74,7 @@ module.exports = {
       enabled: true,
       message: `
         <p>
-          Quality JavaScript knowledge is a must to become a good Frontend developer.   
+          If you want to become a good Frontend developer quality JavaScript knowledge is a must.
         </p>
         <p>
           To become proficient in JavaScript take the wonderful course <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">"Modern JavaScript From The Beginning 2.0"</a> by Brad Traversy. Use the coupon code DMITRI and get 20% discount!
