@@ -61,6 +61,12 @@ const onChange = event => setValue(event.target.value);
 
 The controlled components approach can help you access the value of any input type: textual inputs, textareas, select fields.  
 
+In case of a checkbox, however, you have to use `checked` prop instead of `value`:
+
+```jsx
+<input checked={value} onChange={onChange} type="checkbox" />
+```
+
 ## 2. The state as the source of truth
 
 Let's see a more complex example. A web page consists of a list of employees' names. You need to add an input field, and when the user types into this field, the employees' list is filtered by name.  
