@@ -5,7 +5,7 @@ published: "2020-07-07T06:30Z"
 modified: "2023-01-29"
 thumbnail: "./images/cover-8.png"
 slug: parse-url-javascript
-tags: ['url', 'hostname', 'pathname', 'query string', 'hash']
+tags: ['javascript', 'url']
 type: post
 ---
 

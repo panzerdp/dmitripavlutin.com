@@ -5,7 +5,7 @@ published: "2020-09-15T08:40Z"
 modified: "2023-01-25"
 thumbnail: "./images/cover-4.png"
 slug: javascript-fetch-async-await
-tags: ['fetch', 'async await']
+tags: ['fetch', 'async await', 'javascript']
 type: post
 ---
 

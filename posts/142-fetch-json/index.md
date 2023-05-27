@@ -5,7 +5,7 @@ published: "2021-07-28T08:20Z"
 modified: "2023-01-23"
 thumbnail: "./images/cover-3.png"
 slug: fetch-with-json
-tags: ['fetch', 'json']
+tags: ['fetch', 'json', 'javascript']
 type: post
 ---
 
