@@ -1,13 +1,12 @@
-import { Affiliate, AffiliatePosition } from './Affiliate'
+import { Affiliate } from './Affiliate'
 
 export interface SelectQuery {
   tags: string[]
-  position: AffiliatePosition
 }
 
-export function useSelectAffiliate(affiliates: Affiliate[], { tags, position }: SelectQuery): Affiliate | undefined {
+export function useSelectAffiliate(affiliates: Affiliate[], { tags }: SelectQuery): Affiliate | undefined {
   return affiliates.find(affiliate => {
-    return position === affiliate.position && intersects(affiliate.applyOn.tags, tags)
+    return intersects(affiliate.tags, tags)
   })
 }
 

@@ -90,6 +90,5 @@ module.exports = {
         <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> course by Vueschool gives you an easy but deep understanding of Vue composition and reactivity. Hurry up since they offer a 40% discount!
       </p>`
     }],
-    showVueschoolTopBanner: false
   }
 }
