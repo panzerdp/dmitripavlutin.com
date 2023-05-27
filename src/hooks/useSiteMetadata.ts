@@ -46,12 +46,9 @@ export const useSiteMetadata = () => {
               ...SiteInfoAll
             }
             affiliates {
-              inText {
-                type
-                enabled
-                message
-              }
-              showVueschoolTopBanner
+              text
+              tags
+              link
             }
           }
         }

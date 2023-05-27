@@ -1,21 +1,24 @@
 import { MDXProvider } from '@mdx-js/react'
 import { TableOfContents } from 'features/tableOfContents'
-import { AffiliateText } from 'features/affiliate'
+import { AffiliateInPost } from 'features/affiliate'
 import { ImgShadow } from 'shared/ui/ImgShadow'
 
 interface Props {
   children: JSX.Element,
-  tableOfContents: any
+  tableOfContents: any,
+  tags: string[]
 }
 
 type ContentProps = Record<string, unknown>
 
-export function MdxPostProvider({ children, tableOfContents }: Props) {
+export function MdxPostProvider({ children, tableOfContents, tags }: Props) {
   const components = {
     TableOfContents(props: ContentProps) {
       return <TableOfContents {...props} tableOfContents={tableOfContents} />
     },
-    Affiliate: AffiliateText,
+    Affiliate(props: ContentProps) {
+      return <AffiliateInPost {...props} tags={tags} />
+    },
     ImgShadow
   }
 

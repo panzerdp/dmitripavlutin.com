@@ -62,7 +62,7 @@ export default function PostTemplate({
             <CarbonSection />
           </Media>
         </div>
-        <MdxPostProvider tableOfContents={post.tableOfContents}>
+        <MdxPostProvider tableOfContents={post.tableOfContents} tags={post.tags}>
           <div className={styles.postContent}>{post.children}</div>
         </MdxPostProvider>
         <div className={styles.shareGroup}>
