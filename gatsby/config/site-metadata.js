@@ -67,7 +67,7 @@ module.exports = {
           The path to becoming proficient in React isn't easy... but fortunately, with a good teacher, you can shortcut.
         </p>
         <p>
-          Take the course <a href="https://www.traversymedia.com/a/2147528895/FqXWyazh" target="_blank" rel="noopener noreferrer">React Front To Back Course</a> by Brad Traversy to improve your React skills in a fun and practical way. Use the coupon code DMITRI and get 20% discount!
+          Take the course <a href="https://www.traversymedia.com/a/2147528895/FqXWyazh" target="_blank" rel="noopener noreferrer">"React Front To Back Course"</a> by Brad Traversy to improve your React skills in a fun and practical way. Use the coupon code DMITRI and get 20% discount!
         </p>`,
     }, {
       type: 'traversyJavaScript',
@@ -77,7 +77,7 @@ module.exports = {
           JavaScript knowledge is a must if you want to become a good Frontend developer.
         </p>
         <p>
-          <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">Modern JavaScript From The Beginning 2.0</a> course by Brad Traversy has everything you need to become proficient in JavaScript. Use the coupon code DMITRI and get 20% discount!
+          <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">"Modern JavaScript From The Beginning 2.0"</a> course by Brad Traversy has everything you need to become proficient in JavaScript. Use the coupon code DMITRI and get 20% discount!
         </p>`
     }, {
       type: 'vueschoolCompositionApi',
