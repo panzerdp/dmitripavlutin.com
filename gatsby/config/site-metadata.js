@@ -74,7 +74,7 @@ module.exports = {
       enabled: true,
       message: `
         <p>
-          JavaScript knowledge is a must if you want to become a good Frontend developer.
+          Good JavaScript knowledge is a must if you want to become a productive Frontend developer.
         </p>
         <p>
           <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">"Modern JavaScript From The Beginning 2.0"</a> course by Brad Traversy has everything you need to become proficient in JavaScript. Use the coupon code DMITRI and get 20% discount!
