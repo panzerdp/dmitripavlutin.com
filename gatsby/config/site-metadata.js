@@ -74,10 +74,10 @@ module.exports = {
       enabled: true,
       message: `
         <p>
-          Quality JavaScript knowledge if a must if you want to become a good Frontend developer.
+          JavaScript knowledge is a must if you want to become a good Frontend developer.
         </p>
         <p>
-          The course <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">Modern JavaScript From The Beginning 2.0</a> by Brad Traversy has everything you need to become proficient in JavaScript. Use the coupon code DMITRI and get 20% discount!
+          <a href="https://www.traversymedia.com/a/2147528886/FqXWyazh" target="_blank" rel="noopener noreferrer">Modern JavaScript From The Beginning 2.0</a> course by Brad Traversy has everything you need to become proficient in JavaScript. Use the coupon code DMITRI and get 20% discount!
         </p>`
     }, {
       type: 'vueschoolCompositionApi',
@@ -87,7 +87,7 @@ module.exports = {
         Using Vue composition API is fun... but sometimes challenging.
       </p>
       <p>
-        <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> course by Vueschool gives you an easy but deep understanding of Vue composition and reactivity. Hurry up since they offer a 40% discount.
+        <a href="https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin" target="_blank" rel="noopener noreferrer">"Vue 3 Composition API"</a> course by Vueschool gives you an easy but deep understanding of Vue composition and reactivity. Hurry up since they offer a 40% discount!
       </p>`
     }],
     showVueschoolTopBanner: false
