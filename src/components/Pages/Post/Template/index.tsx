@@ -6,7 +6,7 @@ import * as styles from './index.module.scss'
 import { PostPlain, PostDetailed } from 'typings/post'
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData'
 import MetaTags from 'components/Pages/Post/Meta/Tags'
-import Layout from 'components/Layout/Fetch'
+import { App } from 'app'
 import Subheader from 'components/Subheader/WithComments'
 import Edit from 'components/Pages/Post/Edit'
 import LeftSidebar from 'components/Pages/Post/Sidebar/Left'
@@ -23,7 +23,6 @@ import CommentsCount from 'components/Comments/Count'
 import Media from 'react-media'
 import CarbonSection from 'components/Carbon/Section'
 import { MdxPostProvider } from 'components/Pages/Post/MdxPostProvider'
-import { AdFullWidthResponsive } from 'features/ads'
 
 const SHOW_SHARE_AFTER_Y = 500
 
@@ -45,9 +44,8 @@ export default function PostTemplate({
   const showShareButtons = relativePosition === RelativePosition.Below
   const leftSidebar = <LeftSidebar post={post} showShareButtons={showShareButtons} />
   const rightSidebar = <RightSidebar popularPostsByCategory={popularPostsByCategory} />
-  const postHeader = <AdFullWidthResponsive slot="8320004141" />
   return (
-    <Layout leftSidebar={leftSidebar} rightSidebar={rightSidebar} postHeader={postHeader}>
+    <App leftSidebar={leftSidebar} rightSidebar={rightSidebar}>
       <MetaTags post={post} />
       <MetaStructuredData post={post} />
       <CarbonFetch render={(service) => <CarbonMetaTags carbonAdsService={service} />} />
@@ -87,6 +85,6 @@ export default function PostTemplate({
           </CommentsInView>
         </div>
       </article>
-    </Layout>
+    </App>
   )
 }

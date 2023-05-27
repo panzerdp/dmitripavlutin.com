@@ -1,4 +1,4 @@
-import * as styles from './index.module.scss'
+import * as styles from './RightSidebar.module.scss'
 
 interface RightSidebar {
   children: JSX.Element | JSX.Element[]

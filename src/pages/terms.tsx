@@ -1,9 +1,9 @@
-import Layout from 'components/Layout/Fetch'
+import { App } from 'app'
 import { Helmet } from 'react-helmet'
 
 export default function TermsOfUsePage() {
   return (
-    <Layout>
+    <App>
       <Helmet>
         <title>Terms of Service</title>
         <meta name="description" content="Terms of Service" />
@@ -72,6 +72,6 @@ export default function TermsOfUsePage() {
         For any questions or concerns regarding the terms of service,
         please send the author an email at <a href="mailto:dmitripavlutin@gmail.com">dmitripavlutin@gmail.com</a>.
       </p>
-    </Layout>
+    </App>
   )
 }

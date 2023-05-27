@@ -1,9 +1,9 @@
-import Layout from 'components/Layout/Fetch'
+import { App } from 'app'
 import { Helmet } from 'react-helmet'
 
 export default function PrivacyPolicyPage() {
   return (
-    <Layout>
+    <App>
       <Helmet>
         <title>Contact</title>
         <meta name="description" content="Contact" />
@@ -17,6 +17,6 @@ export default function PrivacyPolicyPage() {
         For any questions or concerns regarding the blog,
         please send me an email at <a href="mailto:dmitripavlutin@gmail.com">dmitripavlutin@gmail.com</a>.
       </p>
-    </Layout>
+    </App>
   )
 }

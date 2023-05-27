@@ -1,10 +1,10 @@
-import Layout from 'components/Layout/Fetch'
+import { App } from 'app'
 import AboutMetaTags from 'components/Pages/About/Meta/Tags'
 import AboutMetaStructuredData from 'components/Pages/About/Meta/StructuredData'
 
 export default function AboutTemplate() {
   return (
-    <Layout>
+    <App>
       <AboutMetaTags />
       <AboutMetaStructuredData />
       <h1>About me</h1>
@@ -20,6 +20,6 @@ export default function AboutTemplate() {
       <p>On this blog, I publish regularly posts about Frontend development, mainly about JavaScript, TypeScript, Vue.js, and React.js. Writing helps me sharpen my writing skills and learn a lot along the way.</p>
 
       <p>For any questions or concerns regarding this blog, please send me an email at <a href="mailto:dmitripavlutin@gmail.com">dmitripavlutin@gmail.com</a>.</p>
-    </Layout>
+    </App>
   )
 }

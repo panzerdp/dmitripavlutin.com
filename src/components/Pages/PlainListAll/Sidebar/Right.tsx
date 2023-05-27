@@ -1,6 +1,6 @@
 import PopularTagsFetch from 'components/Popular/Tags/Fetch'
 import PopularTagsList from 'components/Popular/Tags/List'
-import { RightSidebar } from 'components/Layout/RightSidebar'
+import { RightSidebar } from 'shared/ui/RightSidebar'
 
 export default function PlainListAllRightSidebar() {
   return (

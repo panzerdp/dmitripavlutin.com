@@ -1,4 +1,4 @@
-import Layout from 'components/Layout/Fetch'
+import { App } from 'app'
 import SimpleList from 'components/Simple/List'
 import MetaTags from '../Meta/Tags'
 import PlainListAllRightSidebar from 'components/Pages/PlainListAll/Sidebar/Right'
@@ -14,13 +14,13 @@ interface PlainListAllTemplateProps {
 
 export default function PlainListAllTemplate({ posts }: PlainListAllTemplateProps) {
   return (
-    <Layout rightSidebar={<PlainListAllRightSidebar />}>
+    <App rightSidebar={<PlainListAllRightSidebar />}>
       <MetaTags />
       <div className={styles.plainList}>
         <h1>All posts</h1>
         <SimpleList posts={posts} beforeEachPost={beforeEachPost.bind(undefined, [])} />
       </div>
-    </Layout>
+    </App>
   )
 }
 

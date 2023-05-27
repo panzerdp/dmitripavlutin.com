@@ -1,9 +1,8 @@
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
-// import { Link } from 'gatsby-link'
 import { memo } from 'react'
 
 import { TO_ABOUT_ME, TO_ALL_POSTS, TO_INDEX, TO_SEARCH } from 'routes/path'
-import * as styles from './index.module.scss'
+import * as styles from './Header.module.scss'
 import { TO_RSS } from 'routes/path'
 
 interface HeaderProps {
