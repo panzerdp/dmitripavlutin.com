@@ -4,7 +4,7 @@ interface LayoutMetaTagsProps {
   siteInfo: SiteInfo;
 }
 
-export default function LayoutMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.Element {
+export function AppMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.Element {
   return (
     <Helmet>
       <title>{siteInfo.metaTitle}</title>
