@@ -30,7 +30,7 @@ sum; // 12
 
 In this post, you'll learn about the reduce operation, and how to use `array.reduce(callback, initialValue)` method to perform the reduce operation on arrays.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Reduce operation
 

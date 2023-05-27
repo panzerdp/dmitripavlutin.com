@@ -15,7 +15,7 @@ Without knowing the properties of `Infinity` in advance, you might be surprised 
 
 Let's look at the properties of `Infinity` number in JavaScript, understand the use cases and be aware of common pitfalls.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. The definition of Infinity
 

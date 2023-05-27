@@ -15,7 +15,7 @@ Every JavaScript object links to another object named prototype, from which the 
 
 In this post, I'll describe the difference between own and inherited properties. It's a good way to understand the *slightly unusual* inheritance mechanism of JavaScript.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Own properties
 

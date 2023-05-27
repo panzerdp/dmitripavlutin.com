@@ -13,7 +13,7 @@ What's the usual thing you do with an array? Iterate through its items! This is 
 
 This post describes how to use `forEach()` array method to iterate items of an array in JavaScript. Plus, you'll will read about `forEach()` best practices like correct handling of `this` and how to iterate array-like objects.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Basic forEach example
 

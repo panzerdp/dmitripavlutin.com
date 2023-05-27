@@ -13,7 +13,7 @@ The arrow function deserves the popularity. Its syntax is concise, binds `this` 
 
 In this post, you'll read 5 best practices to get even more benefits from the arrow functions. 
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Arrow function name inference
 

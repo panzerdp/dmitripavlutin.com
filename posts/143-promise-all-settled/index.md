@@ -13,7 +13,7 @@ type: post
 
 Let's see how `Promise.allSettled()` works.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ### 1. Promise.allSettled()
 

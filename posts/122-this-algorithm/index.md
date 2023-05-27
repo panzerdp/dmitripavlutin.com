@@ -21,7 +21,7 @@ Also, I'll show you a step-by-step evaluation of the algorithm for example situa
 
 Ready? Let's begin!  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. this algorithm
 

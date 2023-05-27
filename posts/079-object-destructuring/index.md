@@ -15,7 +15,7 @@ Even better, object destructuring can extract multiple properties in a single st
 
 This post will help you understand how to use object destructuring in JavaScript.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents maxLevel={2} />
 

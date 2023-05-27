@@ -15,7 +15,7 @@ During a coding interview, you could be asked *"How to swap 2 variables without 
 
 It's good to know multiple ways to perform the swapping of variables. In this post, you will read about 4 ways: 2 that use additional memory and 2 that don't.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Destructuring assignment
 

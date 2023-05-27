@@ -26,7 +26,7 @@ Ok, that was a short intro to scopes. If you'd like to learn more, I recommend r
 
 What follows are 5 interesting cases when the JavaScript scope behaves differently than you expect. You might study these cases to improve your knowledge of scopes, or just to prepare for a fancy coding interview.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. var variables inside for cycle
 

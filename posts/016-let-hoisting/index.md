@@ -17,7 +17,7 @@ ES2015 provides a different and improved mechanism for `let`. It demands stricte
 
 Let's dive into more details about this process.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Error prone var hoisting
 Sometimes I see a weird practice of variables `var varname` and functions `function funName() {...}` declaration in any place in the scope:  

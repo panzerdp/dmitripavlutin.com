@@ -15,7 +15,7 @@ One such function in JavaScript is the `Array.from()`: a workhorse allowing lots
 
 In this post, I will describe 5 use cases of `Array.from()` that are both useful and interesting. 
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Quick introduction
 

@@ -13,7 +13,7 @@ To start using React you don't have to learn a lot. Learn the concept of compone
 
 In this post, you'll read a simple but pragmatic guide on how to use props on React components.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 ## 1. The component props
 

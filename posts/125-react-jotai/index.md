@@ -15,7 +15,7 @@ But the simple UI state like side-menu expand, theme, dark-mode, etc. require se
 
 In this post, you will learn how to use `Jotai`.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 <TableOfContents />
 

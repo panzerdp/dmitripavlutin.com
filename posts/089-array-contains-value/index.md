@@ -15,7 +15,7 @@ While searching for primitive value like number or string is relatively easy, se
 
 In this post, you will read about how to determine if an array contains a particular value, being a primitive or object.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Array contains a primitive value
 

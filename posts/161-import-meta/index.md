@@ -15,7 +15,7 @@ type: post
 
 Let's see what useful information about the module you can access using `import.meta`.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Module's URL (the browser)
 

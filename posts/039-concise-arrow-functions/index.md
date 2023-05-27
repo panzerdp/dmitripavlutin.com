@@ -17,7 +17,7 @@ With fat arrow syntax you can define functions shorter than a [function expressi
 
 Let's explore how to make arrow functions concise and straightforward to read. Plus you'll find some tricky shortening cases to be aware of.   
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Basic syntax
 

@@ -14,7 +14,7 @@ When a programming task required Unicode knowledge, I was searching for a hackab
 
 My avoidance continued until I faced a problem that required detailed Unicode knowledge. There was no way to apply situational solutions.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 After putting in some effort, reading a bunch of articles &mdash; surprisingly it wasn't hard to understand it. Well... some articles have required reading at least 3 times.  
 

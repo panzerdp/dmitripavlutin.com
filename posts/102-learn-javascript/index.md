@@ -17,7 +17,7 @@ In this post I share my experience and principles on how to learn JavaScript fun
 
 Note: JavaScript fundamentals I consider the  keywords, data types, operators, variables, expressions, functions, closures, objects, prototypal inheritance, classes, `this`, promises, `async/await`.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Step by step
 

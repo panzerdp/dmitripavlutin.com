@@ -15,7 +15,7 @@ However, like me, you might be asking yourself the eternal question: what are th
 
 Let's find the answer together.
 
-<Affiliate type="vueschoolCompositionApi" />
+<Affiliate />
 
 <TableOfContents maxLevel={1} />
 

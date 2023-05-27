@@ -29,7 +29,7 @@ This reasoning is far from the truth. Such usage of `useCallback()` without prof
 
 In this post, I'm going to explain how to use correctly `useCallback()`.
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 ## 1. Understanding functions equality check
 

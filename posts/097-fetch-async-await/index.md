@@ -13,7 +13,7 @@ The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is t
 
 In this post, you'll find the common scenarios of how to use `fetch()` with `async/await` syntax. You'll understand how to fetch data, handle fetch errors, cancel a fetch request, and more. 
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

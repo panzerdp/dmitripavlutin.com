@@ -31,7 +31,7 @@ What about implementing a more universal function to support more operations on 
 
 Let's see what the concept of the higher-order functions is, and how it can make `calculate()` function more universal in regards to operations it can support.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Higher-order functions
 

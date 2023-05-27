@@ -15,7 +15,7 @@ In such cases, with care, you can try to improve the performance of your compone
 
 In this post, I'm going to describe how and when to use the `useMemo()` React hook.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 ## 1. useMemo() hook
 

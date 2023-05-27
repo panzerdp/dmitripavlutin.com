@@ -30,7 +30,7 @@ In this post, you will find 7 at first sight simple, but tricky JavaScript inter
 
 While at first the questions might seem random, they try to hook into important concepts of JavaScript. So you better practice them before your next interview!
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Accidental global variable
 

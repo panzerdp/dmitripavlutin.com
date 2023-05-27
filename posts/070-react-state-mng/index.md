@@ -19,7 +19,7 @@ I like that `useState()` indeed makes the work with state quite easy. But often 
 
 This post describes 3 easy rules that answer the above questions and help you design the component's state.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 ## 1. One concern
 

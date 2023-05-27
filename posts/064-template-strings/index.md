@@ -22,7 +22,7 @@ console.log(message); // => 'The number is 42'
 
 Let's see in more detail, with examples and best practices, how to use template strings.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

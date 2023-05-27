@@ -13,7 +13,7 @@ ES2015 had introduced a new way to define functions in JavaScript: the arrow fun
 
 I'm going to explain in a few easy steps how to use arrow functions in JavaScript.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents maxLevel={2} />
 

@@ -25,7 +25,7 @@ The `function` keyword followed by its name, params, and body: `function greet(w
 
 `greet('World')` is the *regular function invocation*. The function `greet('World')` accepts data from the argument. 
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 What if `who` is a property of an object? To easily access the properties of an object you can attach the function to that object, in other words, create a method.  
 

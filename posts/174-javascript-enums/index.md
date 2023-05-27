@@ -17,7 +17,7 @@ Using an [enum](https://en.wikipedia.org/wiki/Enumerated_type) is convenient whe
 
 Let's see the 4 good ways to create enums in JavaScript (with their pros and cons).  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents maxLevel={1} />
 

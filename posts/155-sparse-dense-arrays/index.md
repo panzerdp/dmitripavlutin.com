@@ -13,7 +13,7 @@ Arrays in JavaScript are pretty easy to use. However, there's a nuance you shoul
 
 In this post, I'm going to describe the difference between sparse and dense arrays in JavaScript. Also, you'll find the common ways to create sparse arrays, just to be aware of.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Dense arrays
 

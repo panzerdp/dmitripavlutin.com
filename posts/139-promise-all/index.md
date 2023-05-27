@@ -13,7 +13,7 @@ A [promise](/what-is-javascript-promise/) is a placeholder for a value that's go
 
 JavaScript provides a helper function `Promise.all(promisesArrayOrIterable)` to handle multiple promises at once, in parallel, and get the results in a single aggregate array. Let's see how it works.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Promise.all()
 

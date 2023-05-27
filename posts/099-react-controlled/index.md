@@ -13,7 +13,7 @@ React offers 2 approaches to access the value of an input field: using a control
 
 In this post, you'll read how to implement controlled inputs using React hooks.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 <TableOfContents />
 

@@ -15,7 +15,7 @@ In this post, I'm going to describe what is a whitespace and a line terminator c
 
 Plus, you'll read how to trim strings, aka remove whitespaces and line terminator characters from the start and/or end of the string.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. The whitespaces and line terminators
 

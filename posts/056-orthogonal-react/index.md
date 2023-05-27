@@ -27,7 +27,7 @@ But these weren't the main problem. Without realizing it, I was fighting tightly
 
 Don't make my mistake: learn design principles. One particularly influential is the orthogonality principle, which says to isolate things that change for different reasons.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 ## 2. Orthogonal components
 

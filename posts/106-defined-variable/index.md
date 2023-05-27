@@ -13,7 +13,7 @@ From time to time you have to check whether a variable is defined in JavaScript.
 
 How to check if a variable is defined in JavaScript? The answer is not straightforward, so let's find out!
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. The states of a variable
 

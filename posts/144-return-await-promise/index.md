@@ -30,7 +30,7 @@ You'll see shortly that *both* expressions do work.
 
 However, are there cases when these expressions behave differently? Let's find out!
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Same behavior
 

@@ -18,7 +18,7 @@ UI updates as high or interruptible-low priority.
 
 In this post, you'll learn how to use `useTransition()` hook to mark UI updates as low priority, which is especially useful for heavy non-urgent updates.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 ## 1. useTransition() hook
 

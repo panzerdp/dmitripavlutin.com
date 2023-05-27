@@ -38,7 +38,7 @@ Before starting, let's familiarize with a couple of terms:
 * **Context** of an invocation is the value of `this` within function body.  
 * **Scope** of a function is the set of variables and functions accessible within a function body.
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

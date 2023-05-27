@@ -30,7 +30,7 @@ The keys of `hero` are `['name', 'city']`. The values are `['Batman', 'Gotham']`
 
 Let's see what utility functions provide JavaScript to extract the keys, values, and entries from an object.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Object.keys() returns keys
 

@@ -17,7 +17,7 @@ For example, having two arrays `[1, 2]` and `[5, 6]`, then merging these arrays 
 
 In this post, you'll find 3 ways to merge arrays in JavaScript: 2 immutable (a new array is created after the merge) and 1 mutable (items are merged into an array).  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

@@ -11,7 +11,7 @@ type: post
 
 In this post, you'll learn how to replace all string occurrences in JavaScript by splitting and joining a string, `string.replace()` combined with a global regular expression, and `string.replaceAll()`.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents maxLevel={2} />
 

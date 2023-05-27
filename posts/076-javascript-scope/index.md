@@ -15,7 +15,7 @@ If you'd like to code in JavaScript, understanding the scope of variables is a m
 
 In this post, I will explain step by step, in-depth, how the scope works in JavaScript.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

@@ -21,7 +21,7 @@ Users are OK to wait up to 8 seconds for simple requests to complete. That's why
 
 I'll show you how to use `setTimeout()`, the abort controller, and `fetch()` to implement configurable request timeouts.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Default fetch() timeout
 

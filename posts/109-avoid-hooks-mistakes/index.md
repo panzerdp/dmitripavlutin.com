@@ -13,7 +13,7 @@ You've read many posts on how to use React hooks. But *knowing how Not to use*, 
 
 In this post, I will describe the React hooks usage mistakes, and how to fix them.    
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 <TableOfContents />
 

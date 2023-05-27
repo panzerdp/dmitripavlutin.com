@@ -28,7 +28,7 @@ promise
 
 Is there any difference between the 2 approaches? Let's find out!
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. What's the same
 

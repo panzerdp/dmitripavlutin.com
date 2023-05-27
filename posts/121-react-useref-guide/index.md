@@ -11,7 +11,7 @@ type: post
 
 In this post you'll learn how to use `React.useRef()` hook to create persisted mutable values (also known as references or refs), as well as access DOM elements.   
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 <TableOfContents maxLevel={2} />
 

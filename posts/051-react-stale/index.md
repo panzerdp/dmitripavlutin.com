@@ -17,7 +17,7 @@ One issue you can encounter when using hooks is *stale closure*. And it might be
 
 Let's start with distilling what stale closure is. Then you'll see how a stale closure affects React hooks, and how to solve that.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 ## 1. The stale closure
 

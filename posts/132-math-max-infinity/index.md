@@ -35,7 +35,7 @@ Math.max(); // => -Infinity
 
 While it might be unexpected at first, but calling `Math.max()` without arguments returns `-Infinity`. Let's find out why it happens, and why it's important to happen this way.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Max of one array
 

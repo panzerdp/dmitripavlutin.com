@@ -14,7 +14,7 @@ but it could be a plain object or even a primitive.
 
 In this post, you'll find 3 good ways to detect an array instance in JavaScript.
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Array.isArray(value)
 

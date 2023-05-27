@@ -23,7 +23,7 @@ The exponentiation operator `**` has edge cases when it comes to `NaN`.
 
 The current article covers the details about ES2016 features with informative examples. Also it makes a comparison with older approaches in terms of compatibility, so you could migrate JavaScript code without surprises.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. The array method includes()
 

@@ -27,7 +27,7 @@ Implicit conversion of keys is tricky because you lose the consistency of the ty
 
 A lot of plain object's issues (keys to string conversion, impossibility to use objects like keys, etc) are solved by [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) object. This post describes the use cases when it's better to use maps instead of plain objects.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. The map accepts any key type
 

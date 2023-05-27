@@ -19,7 +19,7 @@ These are the signs of bad coding habits.
 
 In this post, I describe 5 common bad coding habits in JavaScript. And importantly I will present my actionable recommendations on how to get rid of these habits.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Don't use implicit type conversion
 

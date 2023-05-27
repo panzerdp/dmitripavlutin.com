@@ -17,7 +17,7 @@ You can access the properties of an object in JavaScript in 3 ways:
 
 Let's see how each way works. And understand when it's reasonable, depending on the situation, to use one way or another.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

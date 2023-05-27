@@ -15,7 +15,7 @@ Optional chaining, as a part of ES2020, changes the way properties are accessed 
 
 Let's see how optional chaining makes your code simpler when accessing potentially `null` or `undefined` properties.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. The problem
 

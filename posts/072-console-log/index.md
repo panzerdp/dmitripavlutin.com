@@ -22,7 +22,7 @@ console.log(myVar);
 
 This post presents 5 useful tips to help you become more productive when using `console.log()`.
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

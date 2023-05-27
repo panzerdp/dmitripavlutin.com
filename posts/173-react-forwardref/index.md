@@ -17,7 +17,7 @@ Also, `useImperativeHandle()` is a hook that extends the capabilities of `forwar
 
 Let's see how it works.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 <TableOfContents maxLevel={2} />
 

@@ -45,7 +45,7 @@ Finally, the third attempt is the `async/await` syntax (starting ES2017). It let
 
 In this post I'm going to explain, step by step, how to use `async/await` in JavaScript.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

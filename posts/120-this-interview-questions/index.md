@@ -19,7 +19,7 @@ If you're not familiar with `this` keyword, I recommend reading the post [Gentle
 
 Note: JavaScript snippets below run in non-strict mode, also known as sloppy mode.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

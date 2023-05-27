@@ -13,7 +13,7 @@ React context provides data to components no matter how deep they are in the com
 
 In this post, you'll learn how to use the context concept in React.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 <TableOfContents maxLevel={3} />
 

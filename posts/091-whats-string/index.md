@@ -30,7 +30,7 @@ message.length; // => 6
 
 The approach to model the strings by visible characters (glyphs) works well if the characters are from [Basic Latin](https://en.wikipedia.org/wiki/Basic_Latin_(Unicode_block)) block of characters, also known as [the 127 ASCII characters](https://theasciicode.com.ar/).  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 But as soon as you deal with more complex characters, for example [the emoticons](https://en.wikipedia.org/wiki/Emoticons_(Unicode_block)) (😀, 😁, 😈), modeling the strings by visible characters becomes inaccurate.    
 

@@ -15,7 +15,7 @@ Mostly using state in React is straightforward. However, there's an important nu
 
 When you update the component's state, does React update the state *immediately* (synchronously) or rather *schedules a state update* (asynchronously)? This post answers this question.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 ## 1. State update using useState()
 

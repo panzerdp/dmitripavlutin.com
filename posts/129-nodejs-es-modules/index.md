@@ -29,7 +29,7 @@ Starting version 13.2.0, Node.js has stable support of ES modules.
 
 In this post, you'll learn how to enable and use ES modules in Node.js.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

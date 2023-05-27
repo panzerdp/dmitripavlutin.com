@@ -13,7 +13,7 @@ Event delegation is a useful pattern because it allows listening for events on *
 
 Let's see how event delegation works.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Why event delegation?
 

@@ -13,7 +13,7 @@ I don't like `arguments` keyword when I access the arguments of a function call.
 
 Even worse `arguments` is an array-like object. You cannot use array methods like `.map()` or `.forEach()` directly on it.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 To access `arguments` from the enclosing function, you have to use workarounds by storing it into a separated variable. And to walk through this array-like object, you have to use *duck typing* and make indirect invocations. See the following example:
 

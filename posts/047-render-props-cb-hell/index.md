@@ -31,7 +31,7 @@ When using this pattern, sooner or later you'll face a problem of nesting compon
 
 In this post, I will describe 3 simple and efficient approaches on how to solve this problem: using class component, function composition or `react-adopt` tool.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 ## 1. Render props callback hell
 

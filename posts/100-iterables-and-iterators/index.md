@@ -21,7 +21,7 @@ To easily access elements of collections of different structure, JavaScript impl
 
 In this post, as a part of the iterator pattern, you'll learn what are *iterables* and *iterators*. You'll also learn about iterables consumers: how to iterate over a collection using `for...of` cycle, transform any iterable to an array using the spread operator `[...iterable]`, and more.   
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

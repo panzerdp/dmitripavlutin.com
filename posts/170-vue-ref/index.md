@@ -15,7 +15,7 @@ refs, created by `ref()` composition API, are the primary tool of Vue reactivity
 
 Let's see how refs and `ref()` API work in Vue.  
 
-<Affiliate type="vueschoolCompositionApi" />
+<Affiliate />
 
 <TableOfContents />
 

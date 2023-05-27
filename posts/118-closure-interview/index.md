@@ -19,7 +19,7 @@ Have fun!
 
 If you need a refresh on closures, I recommend checking the post [A Simple Explanation of JavaScript Closures](/javascript-closure/).  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

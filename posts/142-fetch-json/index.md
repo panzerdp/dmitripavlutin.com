@@ -22,7 +22,7 @@ type: post
 
 In this post, you'll learn how to use `fetch()` to load or post JSON data.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Recalling fetch()
 

@@ -35,7 +35,7 @@ But some behavior of `typeof` and `instanceof` can be confusing. The edge cases 
 
 This post describes the pitfalls and remedial workarounds of using `typeof` and `instanceof`.
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. The type of null
 

@@ -21,7 +21,7 @@ Warning: Can't perform a React state update on an unmounted component.
 
 In this post, I'll show you when the above warning appears and how to correctly clean side-effects in React.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 ## 1. State update after unmounting
 

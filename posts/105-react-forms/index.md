@@ -17,7 +17,7 @@ In this tutorial, I'm going to show you how to access the form input values, how
 
 Let's get started!
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 <TableOfContents />
 

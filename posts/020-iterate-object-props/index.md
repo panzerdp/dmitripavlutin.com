@@ -31,7 +31,7 @@ This article is focused on how to improve the iteration over object properties:
 At first sight, these static functions don't seem to add significant value. But when they're combined with destructuring assignments and `for..of` loops, you get a short and sweet way to iterate over object's properties.  
 Let's dive in.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Own and enumerable properties
 

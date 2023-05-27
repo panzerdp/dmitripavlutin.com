@@ -25,7 +25,7 @@ This post explains in detail how `&&` and `||` operators work in JavaScript.
 
 Before jumping into how the operators work, let's start with the basic concepts of *truthy* and *falsy*.
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Falsy value
 

@@ -28,7 +28,7 @@ Now it's the right time, especially that ECMAScript 2015 and beyond standards ar
 
 So, let's continue with another series of improvements!  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. String literal as template
 

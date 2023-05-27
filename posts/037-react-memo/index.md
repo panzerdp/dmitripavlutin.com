@@ -17,7 +17,7 @@ This post describes the situations where `React.memo()` improves the performance
 
 In addition, I'll describe some useful memoization tips you should be aware of.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 ## 1. React.memo()
 

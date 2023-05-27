@@ -17,7 +17,7 @@ However, on top of knowing the programming language, you also have to understand
 
 In this post, I'm going to describe the queue data structure, what operations it has, as well as present you with a queue implementation in JavaScript.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. The queue data structure
 

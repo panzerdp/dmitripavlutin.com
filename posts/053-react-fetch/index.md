@@ -17,7 +17,7 @@ Lifecycle methods, hooks, and suspense are approaches to fetch data in React. I'
 
 Knowing the ins and outs of each approach makes will make you better at coding async operations.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 ## 1. Data fetching using lifecycle methods
 

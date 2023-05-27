@@ -14,7 +14,7 @@ For simple scripts [ES5](http://www.ecma-international.org/ecma-262/5.1/) code w
 
 Because you have to implement the application requirements, you can't jump over the parts of code that are troublesome to implement in ES5 style. The possible solution, yet not reasonable, is [to start using hacks](https://blog.jscrambler.com/12-extremely-useful-hacks-for-javascript/).  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 In the long term code with hacks and workarounds creates a lot of problems. Especially it becomes harder to read and maintain, not even talking about the aesthetic pleasure.  
 

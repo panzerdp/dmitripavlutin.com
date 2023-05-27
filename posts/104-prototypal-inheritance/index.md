@@ -15,7 +15,7 @@ This concept is also asked often during JavaScript interviews.
 
 In this post, I'll help you understand prototypal inheritance.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Introduction
 

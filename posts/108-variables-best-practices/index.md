@@ -15,7 +15,7 @@ Writing quality variables brings increased readability and easier maintainabilit
 
 In this post, you'll read 5 best practices of how to declare and use variables in JavaScript.
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

@@ -26,7 +26,7 @@ You can import ES modules dynamically if you use `import` as a function &mdash; 
 
 Let's see how ES modules' dynamic import works, and when it's useful.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Dynamic importing
 

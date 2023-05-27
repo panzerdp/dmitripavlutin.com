@@ -15,7 +15,7 @@ When it comes to writing comments, React offers the syntax `{/* Comment */}`. To
 
 Let's see how to use the regular JSX comments and other 2 better ways to comment.
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 <TableOfContents maxLevel={2} />
 

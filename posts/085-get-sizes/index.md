@@ -15,7 +15,7 @@ But from my experience it's easy to get confused in the bunch of sizes: screen, 
 
 How are these sizes defined, and, importantly, how to access them is what I'm going to discuss in this post. 
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

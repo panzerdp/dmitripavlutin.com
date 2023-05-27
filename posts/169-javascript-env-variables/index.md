@@ -25,7 +25,7 @@ In terms of the JavaScript and Node.js ecosystem, the following variables are co
 
 Let's see how you can access these environment variables (either OS or Node.js specific) in a JavaScript file.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. process.env object
 

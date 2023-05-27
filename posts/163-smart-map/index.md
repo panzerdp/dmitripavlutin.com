@@ -13,7 +13,7 @@ type: post
 
 However, there's an alternative to `array.map()`: the `array.flatMap()` (available starting ES2019). This method gives you the ability to map, but also to remove or even add new items in the resulting mapped array.    
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Smarter mapper
 

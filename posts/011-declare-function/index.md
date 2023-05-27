@@ -24,7 +24,7 @@ In JavaScript a function is composed of many parts:
 
 This post shows you six approaches to declare (aka define) JavaScript functions: the syntax, examples, and common pitfalls. Moreover, you will understand when to use a specific function type in certain circumstances.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

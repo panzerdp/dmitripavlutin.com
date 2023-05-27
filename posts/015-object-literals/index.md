@@ -14,7 +14,7 @@ Before [ECMAScript 2015](http://www.ecma-international.org/ecma-262/6.0/) object
 - Pairs of property names and related values `{ name1: value1 }`
 - [Getters](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/get) `{ get name(){..} }` and [setters](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/set) `{ set name(val){..} }` for computed property values
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 Sadly, the object literal possibilities match into a single example:
 

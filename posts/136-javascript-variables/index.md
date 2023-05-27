@@ -17,7 +17,7 @@ This post will help you solidify your knowledge of JavaScript variables.
 
 Let's get started.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Variable identifier
 

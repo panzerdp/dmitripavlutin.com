@@ -41,7 +41,7 @@ While both the regular and arrow syntaxes define functions, when would you use o
 
 In this post, I'll show you the difference between the two, so you could choose the right syntax for your needs.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

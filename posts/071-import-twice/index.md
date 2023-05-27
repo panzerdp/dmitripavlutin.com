@@ -36,7 +36,7 @@ The question is: when the `consumer` module runs, what is the content of variabl
 
 To answer the question, first, you need to understand how JavaScript evaluates and imports modules.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Module evaluation
 

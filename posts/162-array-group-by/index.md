@@ -18,7 +18,7 @@ Today's hero is the new [array group proposal](https://github.com/tc39/proposal-
 
 Let's see how you may benefit from the grouping methods.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. array.groupBy()
 

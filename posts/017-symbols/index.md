@@ -24,7 +24,7 @@ Often for simplicity a well-known `Symbol.<name>` is abbreviated to *@@&lt;name&
 It's possible to say that an object has an *@@iterator* method. It indicates that the object has a property named `Symbol.iterator` that holds a function:  
 `{ [Symbol.iterator]: function(){...} }`.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. A short introduction to Symbol
 

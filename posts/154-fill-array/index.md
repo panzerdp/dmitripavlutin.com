@@ -11,7 +11,7 @@ type: post
 
 JavaScript provides many ways to initialize arrays with initial data. Let's see in this post which ways are the most simple and popular.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

@@ -15,7 +15,7 @@ The main difference between the two is that passing by value happens when assign
 
 Let's discuss values and references in more detail in this post.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Understanding primitive and objects
 

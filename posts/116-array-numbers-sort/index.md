@@ -21,7 +21,7 @@ Hm... `numbers.sort()` returns `[10, 11, 5]` &mdash; which doesn't look like a s
 
 Why does `array.sort()` method, when invoked without arguments, doesn't sort the numbers as expected? Let's find the answer.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. array.sort() without arguments
 

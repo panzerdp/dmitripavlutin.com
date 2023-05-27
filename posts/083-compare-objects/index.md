@@ -20,7 +20,7 @@ Objects, however, are more difficult to compare because they are structured data
 
 In this post, you will learn how to compare objects correctly in JavaScript.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

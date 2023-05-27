@@ -13,7 +13,7 @@ In this post, I'm going to discuss why and how to use TypeScript to type React c
 
 You'll find how to annotate component props, mark a prop optional, and indicate the return type.
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 <TableOfContents />
 

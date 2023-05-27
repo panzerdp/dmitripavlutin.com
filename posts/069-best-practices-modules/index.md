@@ -15,7 +15,7 @@ That's all good, but how do you structure modules? How many functions, classes a
 
 This post presents 4 best practices on how to organize better your JavaScript modules.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Prefer named exports
 

@@ -41,7 +41,7 @@ execute(function() { return 10 }); // => 10
 
 Now, let's continue with understanding the essence of mistakes around `this`: method separation.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Method separation problem
 

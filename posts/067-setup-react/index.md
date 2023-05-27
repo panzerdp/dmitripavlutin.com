@@ -15,7 +15,7 @@ The same approach is useful in programming. If you'd like to try new React featu
 
 In this post, I will show you how to setup a React playground with almost zero configuration in 3 easy steps (using [parcel](https://parceljs.org/) bundler).  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 ## 1. Step 1: install parcel
 

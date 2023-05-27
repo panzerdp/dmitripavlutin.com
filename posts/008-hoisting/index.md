@@ -13,7 +13,7 @@ Variables in a program are everywhere. They are small pieces of data and logic t
 
 In JavaScript, an important aspect of working with variables is hoisting, which defines when a variable is accessible. If you're looking for a detailed description of this aspect, then you're in the right place. Let's begin.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents maxLevel={2} />
 

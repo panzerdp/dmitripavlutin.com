@@ -15,7 +15,7 @@ To write concise and efficient JavaScript code, you have to master the function 
 
 In this post, I will explain with interesting examples of all the features that JavaScript has to efficiently work with function parameters.
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Function parameters
 

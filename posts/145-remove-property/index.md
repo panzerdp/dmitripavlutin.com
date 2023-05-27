@@ -26,7 +26,7 @@ Sometimes, however, you need to remove properties from an object. For example, h
 
 Let's see 2 common ways on how to remove properties from an object in JavaScript &mdash; using the `delete` operator (mutable way) and object destructuring combined with object rest (immutable way).  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. delete operator
 

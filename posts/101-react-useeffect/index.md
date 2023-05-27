@@ -15,7 +15,7 @@ But the brevity of hooks comes at a price &mdash; they're relatively difficult t
 
 I'll help you understand `useEffect()` in an accessible way. Let's get started.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 <TableOfContents />
 

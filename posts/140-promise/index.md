@@ -16,7 +16,7 @@ them as long as they make coding easier!
 
 What follows is the post that I had wanted to read to understand promises myself. The post describes why promises make coding asynchronous logic easier, then explains how to use promises properly, including with the `async/await` syntax.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

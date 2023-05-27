@@ -15,7 +15,7 @@ Although the [useEffect()](/react-useeffect-explanation/) is one of the most use
 
 A pitfall you might experience when working with `useEffect()` is the infinite loop of component renderings. In this post, I'll describe the common scenarios that generate infinite loops and how to avoid them.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 ## 1. The infinite loop and side-effect updating state
 

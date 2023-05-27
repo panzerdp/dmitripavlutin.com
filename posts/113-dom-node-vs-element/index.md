@@ -13,7 +13,7 @@ The Document Object Model (DOM) is an interface that treats HTML or XML document
 
 DOM also uses the term *element*: which is quite similar to a node. So, what's the difference between a DOM node and an element? Let's find out!  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. DOM Node
 

@@ -27,7 +27,7 @@ Object.is(1, true); // => false
 
 The main question is: when would you use Object.is() instead of a strict equality check? Let's find out.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Strick equality check operator
 

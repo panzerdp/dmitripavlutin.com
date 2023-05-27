@@ -19,7 +19,7 @@ But every medal has two sides. Often new features introduce some confusion, one 
 
 This article guides through scenarios where you should bypass the arrow function in favor of good old [function expressions](https://developer.mozilla.org/en/docs/web/JavaScript/Reference/Operators/function) or newer [shorthand method syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions). And take precautions with shortening, because it can affect the code readability.
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Defining methods on an object
 

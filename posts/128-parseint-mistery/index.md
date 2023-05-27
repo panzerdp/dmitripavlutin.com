@@ -32,7 +32,7 @@ number; // 4
 
 That's pretty much a short introduction to `parseInt()`.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. A mystery behavior of parseInt()
 

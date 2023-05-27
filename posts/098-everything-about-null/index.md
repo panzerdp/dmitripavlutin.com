@@ -27,7 +27,7 @@ let myObject = null;
 
 In this post, you'll learn everything about `null` in JavaScript: its meaning, how to detect it, the difference between  `null` and `undefined`, and why using `null` extensively creates code maintenance difficulties.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

@@ -15,7 +15,7 @@ type: post
 
 Let's see how to use `v-model` to bind form inputs in Vue 3.  
 
-<Affiliate type="vueschoolCompositionApi" />
+<Affiliate />
 
 <TableOfContents />
 

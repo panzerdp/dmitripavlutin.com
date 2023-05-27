@@ -15,7 +15,7 @@ A *pure function* always returns the same value given the same arguments and pro
 
 Let's see in more detail what are pure functions and why they are useful.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

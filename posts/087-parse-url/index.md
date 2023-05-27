@@ -23,7 +23,7 @@ A convenient parser to access components of an URL is the `URL()` constructor.
 
 In this post, I'm going to show you the structure of an URL and its main components. Then, I'm going to describe how to use the `URL()` constructor to easily pick components of an URL like hostname, pathname, query, or hash. 
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

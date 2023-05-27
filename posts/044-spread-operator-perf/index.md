@@ -26,7 +26,7 @@ const numbers = [1, 2, 3];
 
 Now comes the interesting question. Is there a position of the spread operator inside the array literal that could increase performance? Let's find out.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Append to head and to tail functions
 

@@ -39,7 +39,7 @@ If your answer is different than the above, or you made a guess without knowing 
 
 TDZ manages the availability of `let`, `const`, and `class` statements. It is important to how variables work in JavaScript.
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. What is _Temporal Dead Zone_
 

@@ -13,7 +13,7 @@ In JavaScript, the `function` keyword does a simple job: creates a function. How
 
 In this post, you'll find how using the `function` keyword you can write function declarations and function expressions, and what are the differences between the 2 types of functions.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 <TableOfContents />
 

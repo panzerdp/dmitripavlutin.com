@@ -18,7 +18,7 @@ On top of that, `for...of` has a short syntax.
 
 In this post, I will demonstrate the useful possibilities of `for...of`.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. Array iteration
 

@@ -18,7 +18,7 @@ To help you separate the concerns (rendering and state management) React provide
 
 Let's see how the `useReducer()` hook works with accessible real-world examples.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 <TableOfContents maxLevel={1} />
 

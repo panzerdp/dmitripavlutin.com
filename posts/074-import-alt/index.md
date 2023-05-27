@@ -24,7 +24,7 @@ This is a module `stringUtils`. The module has a named export `equalsIgnoreCase`
 
 Everything looks good so far.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 Now, let's try to import `equalsIgnoreCase` function from `stringUtils` module inside of another JavaScript module `app`:
 

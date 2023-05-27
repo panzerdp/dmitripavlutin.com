@@ -38,7 +38,7 @@ That's why, sometimes, you need to check the variable's type in JavaScript &mdas
 
 Let's see in more detail how to use `typeof` and `instanceof` operators in JavaScript.  
 
-<Affiliate type="traversyJavaScript" />
+<Affiliate />
 
 ## 1. typeof operator
 

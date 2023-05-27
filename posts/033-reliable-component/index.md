@@ -27,7 +27,7 @@ When writing a React application, I regularly ask myself:
  
 Luckily, reliable components have common characteristics. Let's study these 7 useful criterias, and detail into case studies.  
 
-<Affiliate type="traversyReact" />
+<Affiliate />
 
 <TableOfContents />
 
