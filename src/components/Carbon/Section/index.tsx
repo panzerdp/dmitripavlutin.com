@@ -4,13 +4,16 @@ import CarbonFetch from 'components/Carbon/Fetch'
 import CarbonAd from 'components/Carbon/Ad'
 
 export default function CarbonSection(): JSX.Element {
-  return (
-    <div className={styles.carbonSection}>
-      <CarbonFetch render={renderCarbon} />
-    </div>
-  )
+  return <CarbonFetch render={renderCarbon} />
 }
 
 function renderCarbon(service: CarbonAdsService): JSX.Element {
-  return <CarbonAd carbonAdsService={service} />
+  if (!service.isEnabled) {
+    return null
+  }
+  return (
+    <div className={styles.carbonSection}>
+      <CarbonAd carbonAdsService={service} />
+    </div>
+  )
 }

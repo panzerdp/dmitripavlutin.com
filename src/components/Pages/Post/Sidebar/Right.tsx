@@ -1,4 +1,4 @@
-import { RightSidebar } from 'components/Layout/RightSidebar'
+import { RightSidebar } from 'shared/ui/RightSidebar'
 import PopularPosts from 'components/Popular/Posts'
 import SidebarItemsCommon from 'components/SidebarItems/Common'
 import { PostPlain } from 'typings/post'

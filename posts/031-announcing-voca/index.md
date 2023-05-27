@@ -41,7 +41,7 @@ The Voca library offers helpful functions to make string manipulations comfortab
 
 Check more details on:
 
-* The official documentation site: [https://vocajs.com](https://vocajs.com)
+* The official documentation site: [https://vocajs.pages.dev](https://vocajs.pages.dev)
 * The Github repository: [https://github.com/panzerdp/voca](https://github.com/panzerdp/voca)
 
 The library is published on npm, so you can install it already:

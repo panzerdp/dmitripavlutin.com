@@ -1,26 +1,23 @@
 ---
-title: "How to Bind Form Inputs using v-model in Vue"
+title: "How to Use v-model to Access Input Values in Vue"
 description: "How to use v-model to bind form input elements like text input, textarea, select, checkbox, radio in Vue."
 published: "2023-03-17"
-modified: "2023-03-17"
-thumbnail: "./images/v-model-form-input-cover-4.png"
+modified: "2023-05-22"
+thumbnail: "./images/cover-2.jpg"
 slug: vue-v-model-form-inputs
-tags: ['vue', 'v-model', 'input', 'form', 'reactivity']
+tags: ['vue', 'v-model', 'input']
 type: post
 ---
 
-The idea of `v-model` in Vue is simple.  
+`v-model` is handy to access and modify input fields values.
 
-Define a reactive `text` (usually a ref), and then bind this value to an input using `v-model="text"`. This creates a two-way data flow:
-
-1) User types into the input and `text` ref changes.  
-2) `text` ref changes programmaticaly and the input value changes.  
+`<input v-model="myRef" />` enables the two-way binding. When user types into the input then the ref changes, and vice-versa when the ref is changed programmatically then the input value changes.  
 
 Let's see how to use `v-model` to bind form inputs in Vue 3.  
 
 <Affiliate type="vueschoolCompositionApi" />
 
-<TableOfContents maxLevel={1} />
+<TableOfContents />
 
 ## 1. Binding a form input
 
@@ -49,11 +46,11 @@ Open the demo. The input field contains initially `'Unknown'`. Type something in
 
 `v-model="text"` is *two-way data binding* in Vue.  
 
+![Vue two way binding](./diagrams/two-way-binding.svg)
+
 The first direction of flow happens during the initialization. The input value is initialized with `'Unknown'` &mdash; `text`'s initial value.  
 
 The second direction of flow occurs when you type into the input field. `v-model` takes the value of the input and updates `text` ref with it.  
-
-![Vue v-model binding](./diagrams/vue-v-model-3.svg)
 
 ## 2. v-model vs v-bind
 
@@ -92,7 +89,7 @@ Type some characters into the input field... and the text rendered on the screen
 
 `:value="text"` makes data flow in one direction only: from the `text` ref to the input field. Changing the input field value, however, doesn't change `text` ref.  
 
-![Vue v-bind binding](./diagrams/vue-v-bind-3.svg)
+![Vue one-way binding](./diagrams/one-way-binding.svg)
 
 In conclusion, `v-model` enables a *two-way* data flow, while `:value` enables a *one-way* data flow.  
 
@@ -164,6 +161,8 @@ const person = reactive({ firstName: 'John', lastName: 'Smith' })
 `v-model="person.firstName"` binds with the first name property, as well as `v-model="person.lastName"` binds to the last name property.  
 
 Open the demo. Type into the first or last name inputs, and you'll see that the rendered text changes according to the name you type.  
+
+![Vue two-way binding reactive](./diagrams/two-way-binding-reactive.svg)
 
 Pretty nice! Properties of a reactive object can serve as data buses for `v-model`. Use this approach to bind many input fields.  
 
@@ -362,6 +361,8 @@ By default Vue offers 3 modifies: trim, number, and lazy.
 
 Trimming a string means removing whitespaces from the beginning and the end of the string. For example, trim applied to `' Wow!  '` results in `'Wow!'`.   
 
+![Vue v-model.trim](./diagrams/v-model-trim.svg)
+
 `v-model.trim` modifier trims the input field value before assinging the value to the bound ref.  
 
 ```vue
@@ -381,9 +382,11 @@ Open the demo. Type a value that starts or ends with spaces, e.g. `'  Hi!  '`. Y
 
 ### 5.2 number
 
-`v-mode.number` modifier applies a number parser on the input field value.  
+`v-model.number` modifier applies a number parser on the input field value.  
 
 `v-model.number="number"` assigns to `number` a real number if the user introduced a value that can be parsed to a number. In other cases, if the introduced value is not numeric, `number` ref is just assigned to the original string.  
+
+![Vue v-model.number](./diagrams/v-model-number.svg)
 
 ```vue
 <script setup>
@@ -410,7 +413,9 @@ What's the main difference between `input` and `change` events?
 
 `input` is triggered every time you keypress in the input field. 
 
-`change`, however, is triggered *only* when you take the focus from the input field. Typing into the input field does not trigger `change`.  
+`change`, however, is triggered *only* when the input field looses focus. Typing into the input field does not trigger `change`.  
+
+![Vue v-model.lazy](./diagrams/two-way-binding-lazy.svg)
 
 The following example uses lazy binding:
 

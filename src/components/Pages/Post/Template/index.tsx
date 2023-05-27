@@ -6,7 +6,7 @@ import * as styles from './index.module.scss'
 import { PostPlain, PostDetailed } from 'typings/post'
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData'
 import MetaTags from 'components/Pages/Post/Meta/Tags'
-import Layout from 'components/Layout/Fetch'
+import { App } from 'app'
 import Subheader from 'components/Subheader/WithComments'
 import Edit from 'components/Pages/Post/Edit'
 import LeftSidebar from 'components/Pages/Post/Sidebar/Left'
@@ -15,7 +15,7 @@ import ShareBottom from 'components/Pages/Post/Share/Bottom'
 import CommentsThread from 'components/Comments/Thread'
 import CommentsInView from 'components/Comments/InView'
 import AboutAuthorConcise from 'components/AboutAuthor/Concise'
-import { SubscriptionRegion } from 'components/Subscription/Region'
+// import { SubscriptionRegion } from 'components/Subscription/Region'
 import CarbonFetch from 'components/Carbon/Fetch'
 import CarbonMetaTags from 'components/Carbon/Meta/Tags'
 import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll'
@@ -23,7 +23,6 @@ import CommentsCount from 'components/Comments/Count'
 import Media from 'react-media'
 import CarbonSection from 'components/Carbon/Section'
 import { MdxPostProvider } from 'components/Pages/Post/MdxPostProvider'
-import { AffiliateBannerVueschool } from 'features/affiliate'
 
 const SHOW_SHARE_AFTER_Y = 500
 
@@ -45,9 +44,8 @@ export default function PostTemplate({
   const showShareButtons = relativePosition === RelativePosition.Below
   const leftSidebar = <LeftSidebar post={post} showShareButtons={showShareButtons} />
   const rightSidebar = <RightSidebar popularPostsByCategory={popularPostsByCategory} />
-  const preHeader = <AffiliateBannerVueschool tags={post.tags} />
   return (
-    <Layout leftSidebar={leftSidebar} rightSidebar={rightSidebar} preHeader={preHeader}>
+    <App leftSidebar={leftSidebar} rightSidebar={rightSidebar}>
       <MetaTags post={post} />
       <MetaStructuredData post={post} />
       <CarbonFetch render={(service) => <CarbonMetaTags carbonAdsService={service} />} />
@@ -75,9 +73,9 @@ export default function PostTemplate({
             <Edit postRelativePath={postRelativePath} />
           </div>
         </div>
-        <div className={styles.bottomSubscriptionForm}>
+        {/* <div className={styles.bottomSubscriptionForm}>
           <SubscriptionRegion />
-        </div>
+        </div> */}
         <div className={`${styles.delimiter} ${styles.authorInfoContainer}`}>
           <AboutAuthorConcise />
         </div>
@@ -87,6 +85,6 @@ export default function PostTemplate({
           </CommentsInView>
         </div>
       </article>
-    </Layout>
+    </App>
   )
 }

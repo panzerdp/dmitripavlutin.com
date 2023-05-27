@@ -159,11 +159,12 @@ That's my preferred way of commenting in JSX because it is concise and targets s
 
 ## 4. Conclusion
 
+<CH.Section>
 To resume, you have 3 ways of adding comments in a React component: 
 
-1. JSX comments syntax `{/* Comment */}` (the ugly)
-2. JavaScript comments around JSX (the bad)
-3. JavaScript comments inside a JSX tag (the good)
+1. [JSX comments syntax](focus://5[6:32]) (the ugly)
+2. [JavaScript comments around JSX](focus://3[5:25]) (the bad)
+3. [JavaScript comments inside a JSX tag](focus://6[14:38],7[33:57]) (the good)
 
 ```javascript
 function MyComponent() {
@@ -178,5 +179,6 @@ function MyComponent() {
   )
 }
 ```
+</CH.Section>
 
 *What is your preferred way to write comments?*

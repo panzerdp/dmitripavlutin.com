@@ -1,8 +1,8 @@
 ---
-title: "Record Type in TypeScript"
+title: "Record Type in TypeScript: A Quick Intro"
 description: "Record type simplifies typing objects in TypeScript. Let's see how you can benefit from it."
 published: "2023-04-28"
-modified: "2023-04-28"
+modified: "2023-05-07"
 thumbnail: "./images/cover.jpg"
 slug: typescript-record
 tags: ['typescript', 'object']

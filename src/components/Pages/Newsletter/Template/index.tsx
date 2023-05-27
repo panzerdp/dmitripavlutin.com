@@ -1,12 +1,12 @@
 import * as styles from './index.module.scss'
-import Layout from 'components/Layout/Fetch'
+import { App } from 'app'
 import { SubscriptionRegion } from 'components/Subscription/Region'
 import MetaTags from 'components/Pages/Newsletter/Meta/Tags'
 import { NewsletterRightSidebar } from '../RightSidebar'
 
 export default function NewsletterTemplate() {
   return (
-    <Layout rightSidebar={<NewsletterRightSidebar />}>
+    <App rightSidebar={<NewsletterRightSidebar />}>
       <MetaTags />
       <div className={styles.newsletter}>
         <h1>Newsletter</h1>
@@ -14,6 +14,6 @@ export default function NewsletterTemplate() {
           <SubscriptionRegion />
         </div>
       </div>
-    </Layout>
+    </App>
   )
 }

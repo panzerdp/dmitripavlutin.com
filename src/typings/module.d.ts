@@ -27,6 +27,15 @@ declare module 'routes/path' {
 
   export const PATH_RSS: string
   export const TO_RSS: () => string
+
+  export const PATH_PRIVACY_POLICY: string
+  export const TO_PRIVACY_POLICY: () => string
+
+  export const PATH_CONTACT: string
+  export const TO_CONTACT: () => string
+
+  export const PATH_TERMS: string
+  export const TO_TERMS: () => string
 }
 
 declare module 'react-twitter-embed' {
