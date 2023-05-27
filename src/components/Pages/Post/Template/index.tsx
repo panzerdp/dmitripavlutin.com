@@ -6,7 +6,7 @@ import * as styles from './index.module.scss'
 import { PostPlain, PostDetailed } from 'typings/post'
 import MetaStructuredData from 'components/Pages/Post/Meta/StructuredData'
 import MetaTags from 'components/Pages/Post/Meta/Tags'
-import Layout from 'components/Layout/Fetch'
+import { App } from 'app'
 import Subheader from 'components/Subheader/WithComments'
 import Edit from 'components/Pages/Post/Edit'
 import LeftSidebar from 'components/Pages/Post/Sidebar/Left'
@@ -47,7 +47,7 @@ export default function PostTemplate({
   const rightSidebar = <RightSidebar popularPostsByCategory={popularPostsByCategory} />
   const postHeader = <AdFullWidthResponsive slot="8320004141" />
   return (
-    <Layout leftSidebar={leftSidebar} rightSidebar={rightSidebar} postHeader={postHeader}>
+    <App leftSidebar={leftSidebar} rightSidebar={rightSidebar} postHeader={postHeader}>
       <MetaTags post={post} />
       <MetaStructuredData post={post} />
       <CarbonFetch render={(service) => <CarbonMetaTags carbonAdsService={service} />} />
@@ -87,6 +87,6 @@ export default function PostTemplate({
           </CommentsInView>
         </div>
       </article>
-    </Layout>
+    </App>
   )
 }

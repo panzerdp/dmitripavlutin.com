@@ -1,5 +1,5 @@
 import 'normalize.css/normalize.css'
-import * as styles from './index.module.scss'
+import * as styles from './App.module.scss'
 
 import { Footer } from './Footer'
 import { Header } from './Header'
@@ -9,8 +9,6 @@ import type { AppQuery } from 'graphql-types'
 
 interface AppProps {
   children: React.ReactNode;
-  authorInfo: AuthorInfo;
-  authorProfilePicture: FixedImage;
   leftSidebar?: React.ReactNode;
   rightSidebar?: React.ReactNode;
   postHeader?: JSX.Element;

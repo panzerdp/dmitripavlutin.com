@@ -1,4 +1,4 @@
-import Layout from 'components/Layout/Fetch'
+import { App } from 'app'
 import SearchMetaTags from 'components/Pages/Search/SearchMetaTags'
 import ClientOnly from '../ClientOnly'
 
@@ -6,7 +6,7 @@ import * as styles from './index.module.scss'
 
 export default function SearchTemplate() {
   return (
-    <Layout>
+    <App>
       <div className={styles.search}>
         <h1>
           Search blog posts
@@ -17,6 +17,6 @@ export default function SearchTemplate() {
         </ClientOnly>
       </div>
       <SearchMetaTags />
-    </Layout>
+    </App>
   )
 }

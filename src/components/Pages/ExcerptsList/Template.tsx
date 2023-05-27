@@ -1,4 +1,4 @@
-import Layout from 'components/Layout/Fetch'
+import { App } from 'app'
 import Excerpt from 'components/Pages/ExcerptsList/Excerpt'
 import { ExcerptsListMetaPaginator } from 'components/Pages/ExcerptsList/Meta/Paginator'
 import { ExcerptsListMetaStructuredData } from 'components/Pages/ExcerptsList/Meta/StructuredData'
@@ -26,13 +26,13 @@ export default function ExcerptsListTemplate({
   popularPostsByCategory
 }: ExcerptsTemplateProps) {
   return (
-    <Layout rightSidebar={<RightSidebar />} leftSidebar={<LeftSidebar />}>
+    <App rightSidebar={<RightSidebar />} leftSidebar={<LeftSidebar />}>
       <ExcerptsListMetaTags currentPage={currentPage} />
       <ExcerptsListMetaStructuredData />
       <ExcerptsListMetaPaginator currentPage={currentPage} pagesSum={pagesSum} />
       <PopularPostsPinned popularPostsByCategory={popularPostsByCategory} />
       {posts.map(post => <Excerpt post={post} key={post.slug} />)}
       <Paginator currentPage={currentPage} pagesSum={pagesSum} />
-    </Layout>
+    </App>
   )
 }
