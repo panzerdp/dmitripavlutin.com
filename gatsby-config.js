@@ -6,7 +6,7 @@ const { remarkCodeHike } = require('@code-hike/mdx')
 const codesandbox = require('remark-codesandbox')
 
 module.exports = {
-  siteMetadata: require('./gatsby/config/site-metadata'),
+  siteMetadata: require('./site-metadata'),
   pathPrefix: '/',
   flags: {
     DEV_SSR: false
