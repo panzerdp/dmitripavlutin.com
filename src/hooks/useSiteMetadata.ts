@@ -48,7 +48,7 @@ export const useSiteMetadata = () => {
             affiliates {
               text
               tags
-              link
+              url
             }
           }
         }

@@ -65,9 +65,9 @@ module.exports = {
           The path to becoming proficient in React isn't easy... but fortunately, with a good teacher, you can shortcut.
         </p>
         <p>
-          Take the course <a href="__LINK__" target="_blank" rel="noopener">"React Front To Back Course"</a> by Brad Traversy to improve your React skills in a fun and practical way. Use the coupon code DMITRI and get your 20% discount!
+          Take the course <a href="__URL___" target="_blank" rel="noopener">"React Front To Back Course"</a> by Brad Traversy to improve your React skills in a fun and practical way. Use the coupon code DMITRI and get your 20% discount!
         </p>`,
-    link: 'https://www.traversymedia.com/a/2147528895/FqXWyazh'
+    url: 'https://www.traversymedia.com/a/2147528895/FqXWyazh'
   }, {
     tags: ['javascript'],
     text: `
@@ -75,9 +75,9 @@ module.exports = {
         Are you tired of cherry-picking information about JavaScript around the web? There's a better way.
         </p>
         <p>
-        Take <a href="__LINK__" target="_blank" rel="noopener">"Modern JavaScript From The Beginning 2.0"</a> course by Brad Traversy today to become proficient in JavaScript. Use the coupon code DMITRI and get your 20% discount!
+        Take <a href="__URL___" target="_blank" rel="noopener">"Modern JavaScript From The Beginning 2.0"</a> course by Brad Traversy today to become proficient in JavaScript. Use the coupon code DMITRI and get your 20% discount!
         </p>`,
-    link: 'https://www.traversymedia.com/a/2147528886/FqXWyazh'
+    url: 'https://www.traversymedia.com/a/2147528886/FqXWyazh'
   }, {
     tags: ['vue'],
     text: `
@@ -85,8 +85,8 @@ module.exports = {
         Using Vue composition API is fun... but sometimes challenging.
       </p>
       <p>
-        Take the course <a href="__LINK__" target="_blank" rel="noopener">"Vue 3 Composition API"</a> by Vueschool to easily become proficient in Vue composition and reactivity. Hurry up since they offer a 40% discount!
+        Take the course <a href="__URL___" target="_blank" rel="noopener">"Vue 3 Composition API"</a> by Vueschool to easily become proficient in Vue composition and reactivity. Hurry up since they offer a 40% discount!
       </p>`,
-    link: 'https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin'
+    url: 'https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin'
   }]
 }

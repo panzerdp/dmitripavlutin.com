@@ -1,5 +1,5 @@
 export interface Affiliate {
   text: string
-  link: string
+  url: string
   tags: string[]
 }

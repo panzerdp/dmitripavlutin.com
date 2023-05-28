@@ -1,1 +1,1 @@
-export { AffiliateInPost } from './ui/AffiliateInPost'
+export { AffiliateBannerInPost } from './ui/AffiliateBannerInPost'
