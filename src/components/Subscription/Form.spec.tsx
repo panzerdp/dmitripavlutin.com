@@ -33,7 +33,7 @@ describe('<SubscriptionForm>', () => {
   it('should render the subscribe button as enabled', () => {
     factory()
 
-    expect(screen.queryByRole('button')).not.toBeDisabled()
+    expect(screen.findByRole('button')).not.toBeDisabled()
   })
 
   describe('when subscribe button is clicked', () => {

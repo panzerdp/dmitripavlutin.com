@@ -12,21 +12,21 @@ describe('<AffiliateBanner />', () => {
   }
 
   it('should render affiliate text as html', () => {
-    const { queryByTestId } = factory()
+    const { findByTestId } = factory()
 
-    expect(queryByTestId('affiliate-text')).toHaveTextContent('In text React course')
+    expect(findByTestId('affiliate-text')).toHaveTextContent('In text React course')
   })
 
   it('should replace __LINK__ placeholder with the link', () => {
-    const { queryByTestId } = factory()
+    const { findByTestId } = factory()
 
-    expect(queryByTestId('affiliate-text')).toHaveTextContent('In text React course: https://example.com/2/a. Try again: https://example.com/2/a')
+    expect(findByTestId('affiliate-text')).toHaveTextContent('In text React course: https://example.com/2/a. Try again: https://example.com/2/a')
   })
 
   it('should render an action link', () => {
-    const { queryByTitle } = factory()
+    const { findByTitle } = factory()
 
-    expect(queryByTitle('Start Learning')).toHaveAttribute('href', affiliateFixtureReact.url)
+    expect(findByTitle('Start Learning')).toHaveAttribute('href', affiliateFixtureReact.url)
   })
 
   describe('when no affiliate has the searched tags', () => {

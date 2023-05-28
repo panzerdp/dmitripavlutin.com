@@ -3,7 +3,7 @@ import * as styles from './Form.module.scss'
 import fetchJsonp from 'fetch-jsonp'
 
 interface SubscriptionFormProps {
-  embedFormEndpoint: 'not';
+  embedFormEndpoint: string;
 }
 
 type SubscriptionStatus = 'not_subscribed' | 'subscribed' | 'subscribing' | 'subscription_error'
