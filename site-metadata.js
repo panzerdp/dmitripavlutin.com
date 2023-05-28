@@ -75,7 +75,7 @@ module.exports = {
         Are you tired of cherry-picking information about JavaScript around the web? There's a better way.
         </p>
         <p>
-        Take <a href="__URL___" target="_blank" rel="noopener">"Modern JavaScript From The Beginning 2.0"</a> course by Brad Traversy today to become proficient in JavaScript. Use the coupon code DMITRI and get your 20% discount!
+        Take <a href="__URL___" target="_blank" rel="noopener">"Modern JavaScript From The Beginning 2.0"</a> course by Brad Traversy to become proficient in JavaScript. Use the coupon code DMITRI and get your 20% discount!
         </p>`,
     url: 'https://www.traversymedia.com/a/2147528886/FqXWyazh'
   }, {
