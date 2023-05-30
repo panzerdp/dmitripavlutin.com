@@ -72,7 +72,7 @@ module.exports = {
     tags: ['javascript'],
     text: `
         <p>
-        Are you tired of cherry-picking information about JavaScript? There's a better way.
+        Are you tired of cherry-picking information about JavaScript? There's an easier way.
         </p>
         <p>
         Take <a href="__URL__" target="_blank" rel="noopener">"Modern JavaScript From The Beginning 2.0"</a> course by Brad Traversy to become proficient in JavaScript in just a few weeks. Use the coupon code DMITRI and get your 20% discount!
