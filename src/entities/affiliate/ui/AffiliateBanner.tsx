@@ -24,7 +24,7 @@ export function AffiliateBanner({ affiliates, tags }: AffiliateBannerProps) {
     <div className={styles.affiliateBanner}>
       <div className={styles.affiliateBanner__text} data-testid="affiliate-text" dangerouslySetInnerHTML={html} />
       <a className={styles.affiliateBanner__action} href={affiliate.url} title="Start Learning" target="_blank" rel="noreferrer">
-        Start Learning
+        Visit Course
       </a>
     </div>
   )
