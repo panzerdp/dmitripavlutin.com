@@ -1,0 +1,15 @@
+.postRightSidebar {
+  &__affiliateBanner {
+    position: fixed;
+    top: 0;
+    width: 320px;
+    transition: opacity 0.3s ease-in;
+    overflow-wrap: break-word;
+    hyphens: manual;
+
+    &--hidden {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+}

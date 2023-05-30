@@ -43,7 +43,7 @@ export default function PostTemplate({
   const relativePosition = useVerticalScroll(SHOW_SHARE_AFTER_Y)
   const showShareButtons = relativePosition === RelativePosition.Below
   const leftSidebar = <LeftSidebar post={post} showShareButtons={showShareButtons} />
-  const rightSidebar = <RightSidebar popularPostsByCategory={popularPostsByCategory} />
+  const rightSidebar = <RightSidebar popularPostsByCategory={popularPostsByCategory} tags={post.tags} />
   return (
     <App leftSidebar={leftSidebar} rightSidebar={rightSidebar}>
       <MetaTags post={post} />
