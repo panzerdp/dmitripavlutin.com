@@ -7,7 +7,7 @@ interface Props {
 }
 
 export function AffiliateBannerInPost({ tags }: Props) {
-  const value = useFeatureValue('affiliateversion', 'default')
+  const value = useFeatureValue('affiliate-version', 'default')
 
   const { affiliates } = useSiteMetadata()
 
