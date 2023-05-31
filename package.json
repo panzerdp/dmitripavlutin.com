@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@code-hike/mdx": "0.8.2",
+    "@growthbook/growthbook-react": "0.17.0",
     "@mailerlite/mailerlite-nodejs": "^1.0.1",
     "@mdx-js/react": "2.3.0",
     "@types/classnames": "2.3.1",

@@ -6,6 +6,7 @@ import { Header } from './Header'
 import { AppMetaTags } from '../meta/AppMetaTags'
 import { graphql, useStaticQuery } from 'gatsby'
 import type { AppQuery } from 'graphql-types'
+import { GrowthBookProvider } from '../api/growthbook/GrowthBookProvider'
 
 interface AppProps {
   children: React.ReactNode;
@@ -40,7 +41,7 @@ export function App({
     }`
   )
   return (
-    <>
+    <GrowthBookProvider>
       <AppMetaTags siteInfo={siteInfo} />
       <div className={styles.container}>
         <Header authorProfilePicture={file.childImageSharp.gatsbyImageData} siteInfo={siteInfo} />
@@ -52,6 +53,6 @@ export function App({
         </main>
         <Footer authorInfo={authorInfo} />
       </div>
-    </>
+    </GrowthBookProvider>
   )
 }
