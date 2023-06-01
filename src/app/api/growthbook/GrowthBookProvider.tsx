@@ -5,7 +5,7 @@ const growthbook = new GrowthBook({
   apiHost: 'https://cdn.growthbook.io',
   clientKey: 'sdk-fTmCC3E7JLBmqBOH',
   enableDevMode: true,
-  trackingCallback: (experiment, result) => {
+  trackingCallback(experiment, result) {
     // TODO: Use your real analytics tracking system
     console.log('Viewed Experiment', {
       experimentId: experiment.key,
