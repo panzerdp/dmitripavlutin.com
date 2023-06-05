@@ -20,12 +20,5 @@ export function AffiliateBanner({ affiliates, tags }: AffiliateBannerProps) {
     __html: affiliate.text.replaceAll(URL_PLACEHOLDER, affiliate.url)
   }
 
-  return (
-    <div className={styles.affiliateBanner}>
-      <div className={styles.affiliateBanner__text} data-testid="affiliate-text" dangerouslySetInnerHTML={html} />
-      <a className={styles.affiliateBanner__action} href={affiliate.url} title="Start Learning" target="_blank" rel="noreferrer">
-        Visit Course
-      </a>
-    </div>
-  )
+  return <div className={styles.affiliateBanner} data-testid="affiliate-text" dangerouslySetInnerHTML={html} />
 }

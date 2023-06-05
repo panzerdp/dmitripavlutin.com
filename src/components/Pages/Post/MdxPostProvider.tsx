@@ -2,7 +2,6 @@ import { MDXProvider } from '@mdx-js/react'
 import { TableOfContents } from 'features/tableOfContents'
 import { AffiliateBannerInPost } from 'features/affiliate'
 import { ImgShadow } from 'shared/ui/ImgShadow'
-import * as styles from './MdxPostProvider.module.scss'
 
 interface Props {
   children: JSX.Element,
@@ -18,11 +17,7 @@ export function MdxPostProvider({ children, tableOfContents, tags }: Props) {
       return <TableOfContents {...props} tableOfContents={tableOfContents} />
     },
     Affiliate(props: ContentProps) {
-      return (
-        <div className={styles.mdxPostProvider__affiliateBanner}>
-          <AffiliateBannerInPost {...props} tags={tags}  />
-        </div>
-      )
+      return <AffiliateBannerInPost {...props} tags={tags}  />
     },
     ImgShadow
   }
