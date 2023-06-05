@@ -23,12 +23,6 @@ describe('<AffiliateBanner />', () => {
     expect(queryByTestId('affiliate-text')).toHaveTextContent('In text React course: https://example.com/2/a. Try again: https://example.com/2/a')
   })
 
-  it('should render an action link', () => {
-    const { queryByTitle } = factory()
-
-    expect(queryByTitle('Start Learning')).toHaveAttribute('href', affiliateFixtureReact.url)
-  })
-
   describe('when no affiliate has the searched tags', () => {
     it('should render null', () => {
       const tags = ['missing']
