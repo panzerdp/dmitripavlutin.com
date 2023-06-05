@@ -38,7 +38,7 @@ module.exports = {
   },
   carbonAdsService: {
     scriptSrc: '//cdn.carbonads.com/carbon.js?serve=CE7DT2QI&placement=dmitripavlutincom',
-    isEnabled: false,
+    isEnabled: true,
     isProductionMode: process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod',
   },
   featured: {
