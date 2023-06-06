@@ -40,12 +40,6 @@ export default function PostTemplateFetch({ data, children }: PostTemplateFetchP
 }
 
 export const pageQuery = graphql`
-  fragment CarbonAdsServiceAll on SiteSiteMetadataCarbonAdsService {
-    isEnabled
-    isProductionMode
-    scriptSrc
-  }
-
   fragment Post on MdxFrontmatter {
     title
     description

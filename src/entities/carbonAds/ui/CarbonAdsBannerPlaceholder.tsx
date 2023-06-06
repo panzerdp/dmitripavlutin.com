@@ -1,7 +1,10 @@
-import * as React from 'react'
+import { useEffect, useRef } from 'react'
+import './CarbonAdsBanner.module.scss'
 
-function CarbonBannerDemo(_: unknown, ref: React.RefObject<HTMLDivElement>): null {
-  React.useEffect(() => {
+export function CarbonAdsBannerPlaceholder(): JSX.Element {
+  const ref = useRef<HTMLDivElement>()
+
+  useEffect(() => {
     const div = document.createElement('div')
     div.id = 'carbonads'
     div.innerHTML = `
@@ -19,14 +22,19 @@ function CarbonBannerDemo(_: unknown, ref: React.RefObject<HTMLDivElement>): nul
       </a>
       <img src="#" border="0" height="1" width="1" alt="ads via Carbon" style="display: none;">
     </span>`
-    setTimeout(() => {
+
+    let timeoutId = setTimeout(() => {
       ref.current.appendChild(div)
+      timeoutId = null
     }, 500)
+
     return () => {
       div.parentElement.removeChild(div)
+      if (timeoutId) {
+        clearTimeout(timeoutId)
+      }
     }
   }, [])
-  return null
-}
 
-export default React.forwardRef(CarbonBannerDemo)
+  return <div ref={ref} />
+}

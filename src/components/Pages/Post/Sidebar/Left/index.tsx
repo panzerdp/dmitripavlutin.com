@@ -3,7 +3,7 @@ import Media from 'react-media'
 import * as styles from './index.module.scss'
 
 import ShareGroupVertical from 'components/Pages/Post/Share/Group/Vertical'
-import CarbonSection from 'components/Carbon/Section'
+import { CarbonAdsSection } from 'features/carbonAds'
 import { PostPlain } from 'typings/post'
 
 interface PostLeftSidebarProps {
@@ -15,7 +15,7 @@ export default function PostLeftSidebar({ post, showShareButtons }: PostLeftSide
   return (
     <div className={styles.leftSidebar}>
       <Media query="(min-width: 1251px)" defaultMatches={false}>
-        <CarbonSection />
+        <CarbonAdsSection />
       </Media>
       <ShareGroupVertical post={post} show={showShareButtons} />
     </div>

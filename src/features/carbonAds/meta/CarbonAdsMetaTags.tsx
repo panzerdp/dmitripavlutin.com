@@ -1,12 +1,9 @@
 import Helmet from 'react-helmet'
+import { useCarbonAdsMetadata } from '../model/useCarbonAdsMetadata'
 
-interface LayoutCarbonAdsMetaTagsProps {
-  carbonAdsService: CarbonAdsService;
-}
+export function CarbonAdsMetaTags() {
+  const { isEnabled, isProductionMode, scriptSrc } = useCarbonAdsMetadata()
 
-export default function LayoutCarbonAdsMetaTags({
-  carbonAdsService: { isEnabled, isProductionMode, scriptSrc },
-}: LayoutCarbonAdsMetaTagsProps) {
   if (isEnabled && isProductionMode) {
     return (
       <Helmet>
