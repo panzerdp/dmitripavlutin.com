@@ -1,5 +1,7 @@
 const siteUrl = 'https://dmitripavlutin.com'
 
+const IS_PRODUCTION_MODE = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod'
+
 module.exports = {
   siteUrl, // ensure compatibility with plugins that require `siteUrl`
   siteInfo: {
@@ -36,10 +38,10 @@ module.exports = {
     pageFormUrl: 'https://dashboard.mailerlite.com/forms/386197/84180324159849472/share',
     isFormEmbed: true
   },
-  carbonAdsService: {
+  carbonAds: {
     scriptSrc: '//cdn.carbonads.com/carbon.js?serve=CE7DT2QI&placement=dmitripavlutincom',
     isEnabled: true,
-    isProductionMode: process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod',
+    isProductionMode: IS_PRODUCTION_MODE
   },
   featured: {
     popularPostsByCategory: [{

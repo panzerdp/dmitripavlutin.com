@@ -4,7 +4,7 @@ import { CarbonAdsQuery } from 'graphql-types'
 export function useCarbonAdsMetadata() {
   const data = useStaticQuery<CarbonAdsQuery>(
     graphql`
-    fragment CarbonAdsServiceAll on SiteSiteMetadataCarbonAdsService {
+    fragment CarbonAdsAll on SiteSiteMetadataCarbonAds {
       isEnabled
       isProductionMode
       scriptSrc
@@ -13,8 +13,8 @@ export function useCarbonAdsMetadata() {
     query CarbonAds {
       site {
         siteMetadata {
-          carbonAdsService {
-            ...CarbonAdsServiceAll
+          carbonAds {
+            ...CarbonAdsAll
           }
         }
       }
@@ -22,5 +22,5 @@ export function useCarbonAdsMetadata() {
     `
   )
 
-  return data.site.siteMetadata.carbonAdsService
+  return data.site.siteMetadata.carbonAds
 }
