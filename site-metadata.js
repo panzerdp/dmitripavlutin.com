@@ -43,6 +43,10 @@ module.exports = {
     isEnabled: true,
     isProductionMode: IS_PRODUCTION_MODE
   },
+  // bsaAds: {
+  //   isEnabled: true,
+  //   isProductionMode: IS_PRODUCTION_MODE
+  // },
   featured: {
     popularPostsByCategory: [{
       category: 'JavaScript',

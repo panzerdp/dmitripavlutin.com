@@ -21,6 +21,8 @@ import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll'
 import CommentsCount from 'components/Comments/Count'
 import { CarbonAdsMetaTags, CarbonAdsSection } from 'features/carbonAds'
 import { MdxPostProvider } from 'components/Pages/Post/MdxPostProvider'
+import { BsaAdsMetaTags } from 'features/bsaAds'
+import { BsaAdsStickyBanner } from 'entities/bsaAds'
 
 const SHOW_SHARE_AFTER_Y = 500
 
@@ -47,6 +49,7 @@ export default function PostTemplate({
       <MetaTags post={post} />
       <MetaStructuredData post={post} />
       <CarbonAdsMetaTags />
+      <BsaAdsMetaTags />
       <article>
         <div className={styles.postCover}>
           <GatsbyImage image={post.thumbnail} alt="Post cover" />
@@ -83,6 +86,7 @@ export default function PostTemplate({
           </CommentsInView>
         </div>
       </article>
+      <BsaAdsStickyBanner />
     </App>
   )
 }
