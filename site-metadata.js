@@ -43,10 +43,6 @@ module.exports = {
     isEnabled: true,
     isProductionMode: IS_PRODUCTION_MODE
   },
-  // bsaAds: {
-  //   isEnabled: true,
-  //   isProductionMode: IS_PRODUCTION_MODE
-  // },
   featured: {
     popularPostsByCategory: [{
       category: 'JavaScript',
@@ -100,7 +96,7 @@ module.exports = {
         Using Vue composition API is fun... but sometimes challenging.
       </p>
       <p>
-        Take <a href="__URL__" target="_blank" rel="noopener">"Vue 3 Composition API"</a> course by Vueschool to become proficient in Vue composition and reactivity in just a weekend. Hurry up since they offer a 40% discount!
+        Take <a href="__URL__" target="_blank" rel="noopener">"Vue 3 Composition API"</a> course by Vueschool to become proficient in Vue composition and reactivity in just a weekend.
       </p>`,
     url: 'https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin'
   }]
