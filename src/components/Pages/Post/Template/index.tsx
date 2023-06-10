@@ -1,5 +1,4 @@
 import { GatsbyImage } from 'gatsby-plugin-image'
-import Media from 'react-media'
 
 import './code-hike.scss'
 
@@ -16,7 +15,6 @@ import ShareBottom from 'components/Pages/Post/Share/Bottom'
 import CommentsThread from 'components/Comments/Thread'
 import CommentsInView from 'components/Comments/InView'
 import AboutAuthorConcise from 'components/AboutAuthor/Concise'
-// import { SubscriptionRegion } from 'components/Subscription/Region'
 import useVerticalScroll, { RelativePosition } from 'hooks/useVerticalScroll'
 import CommentsCount from 'components/Comments/Count'
 import { CarbonAdsMetaTags, CarbonAdsSection } from 'features/carbonAds'
@@ -59,9 +57,7 @@ export default function PostTemplate({
           <CommentsCount post={post} />
         </Subheader>
         <div className={styles.carbonSection}>
-          <Media query="(max-width: 1250px)" defaultMatches={false}>
-            <CarbonAdsSection />
-          </Media>
+          <CarbonAdsSection />
         </div>
         <MdxPostProvider tableOfContents={post.tableOfContents} tags={post.tags}>
           <div className={styles.postContent}>{post.children}</div>
@@ -74,9 +70,6 @@ export default function PostTemplate({
             <Edit postRelativePath={postRelativePath} />
           </div>
         </div>
-        {/* <div className={styles.bottomSubscriptionForm}>
-          <SubscriptionRegion />
-        </div> */}
         <div className={`${styles.delimiter} ${styles.authorInfoContainer}`}>
           <AboutAuthorConcise />
         </div>
