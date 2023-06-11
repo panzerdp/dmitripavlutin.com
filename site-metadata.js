@@ -70,7 +70,7 @@ module.exports = {
           The path to becoming good at JavaScript isn't easy... but fortunately with a good course you can shortcut.
         </p>
         <p>
-        Take <a href="__URL__" target="_blank" rel="noopener">"Modern JavaScript: ES6 and beyond!"</a> course by Vueschool to become proficient in JavaScript in just a few weeks. Use the coupon code DMITRI and get your 20% discount!
+        Take <a href="__URL__" target="_blank" rel="noopener">"Modern JavaScript: ES6 and beyond!"</a> course by Vueschool to become proficient in JavaScript in just a few weeks.
         </p>`,
     url: 'https://vueschool.io/courses/modern-javascript-es6-and-beyond?friend=dmitripavlutin'
   }, {
