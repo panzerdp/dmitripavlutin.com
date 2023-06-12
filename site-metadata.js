@@ -61,6 +61,19 @@ module.exports = {
     }]
   },
   affiliates: [{
+    tags: ['react'],
+    text: `
+        <p>
+          Before I go on, let me recommend something to you.
+        </p>
+        <p>
+          The path to becoming proficient in React isn't easy... but fortunately with a good teacher you can shortcut.
+        </p>
+        <p>
+          Take the course <a href="__URL__" target="_blank" rel="noopener">"React Front To Back Course"</a> by Brad Traversy to improve your React skills in a fun and practical way. Use the coupon code DMITRI and get your 20% discount!
+        </p>`,
+    url: 'https://www.traversymedia.com/a/2147528895/FqXWyazh'
+  }, {
     tags: ['javascript'],
     text: `
         <p>
