@@ -30,14 +30,19 @@
 }
 
 .carbonSection {
+  display: none;
   float: right;
   width: 250px;
-  margin: 1rem 0 0.5rem 0.5rem;
+  margin: 6px;
 
   @media (max-width: 600px) {
     float: none;
     margin: 6px auto;
     width: 100%;
+  }
+
+  @media (max-width: 1250px) {
+    display: block;
   }
 }
 
