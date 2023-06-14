@@ -80,9 +80,12 @@ module.exports = {
           Before I go on, let me recommend something to you.
         </p>
         <p>
-          The path to becoming good at JavaScript isn't easy... but fortunately with a good course you can shortcut. Take <a href="__URL__" target="_blank" rel="noopener">"Modern JavaScript: ES6 and beyond!"</a> course by Vueschool to become proficient in JavaScript in just a few weeks.
+          The path to becoming good at JavaScript isn't easy... but fortunately with a good teacher you can shortcut.
+        </p>
+        <p>
+        Take <a href="__URL__" target="_blank" rel="noopener">"Modern JavaScript From The Beginning 2.0"</a> course by Brad Traversy to become proficient in JavaScript in just a few weeks. Use the coupon code DMITRI and get your 20% discount!
         </p>`,
-    url: 'https://vueschool.io/courses/modern-javascript-es6-and-beyond?friend=dmitripavlutin'
+    url: 'https://www.traversymedia.com/a/2147528886/FqXWyazh'
   }, {
     tags: ['vue'],
     text: `
