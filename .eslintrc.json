@@ -36,7 +36,8 @@
     "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
     "react/jsx-curly-spacing": ["error", "never"],
     "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "testing-library/prefer-presence-queries": "error"
   },
   "settings": {
     "react": {
