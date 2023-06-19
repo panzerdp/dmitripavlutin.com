@@ -4,6 +4,7 @@ import { useLocation } from '@reach/router'
 declare let _bsa: any
 
 export function BsaAdsStickyBanner(): JSX.Element {
+  return null
   const { pathname } = useLocation()
 
   useEffect(() => {
