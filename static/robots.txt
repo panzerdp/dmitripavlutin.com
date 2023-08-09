@@ -1,3 +1,6 @@
+User-agent: GPTBot
+Disallow: /
+
 User-agent: *
 Sitemap: https://dmitripavlutin.com/sitemap-index.xml
 Disallow:
