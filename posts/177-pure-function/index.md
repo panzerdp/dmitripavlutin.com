@@ -23,7 +23,7 @@ Let's see in more detail what are pure functions and why they are useful.
 
 A function that returns the sum of 2 numbers is pure:  
 
-```javascript codesandbox=vanilla?previewwindow=console
+```javascript
 function sum(a, b) {
   return a + b
 }
@@ -83,7 +83,7 @@ A side effect is change to external state or environment outside of the [functio
 
 If the `sum()` function logs to the console, then the function is not pure because it produces a side effect:
 
-```javascript mark=3 codesandbox=vanilla?previewwindow=console
+```javascript mark=3
 function sumSideEffect(a, b) {
   const s = a + b
   console.log(s) // Side effect!
@@ -143,7 +143,7 @@ Pure functions are easy to *compose*. Simple pure functions can be composed to c
 
 For example, you can use reuse the pure `sum()` function to calculate the sum of an array:
 
-```js mark=6[23:25] codesandbox=vanilla?previewwindow=console
+```js mark=6[23:25]
 function sum(a, b) {
   return a + b
 }
@@ -165,7 +165,7 @@ In practice, a function becomes impure when it reads or modifies an external sta
 
 A good example of an impure function is the built-in JavaScript random generator [Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random):
 
-```javascript codesandbox=vanilla?previewwindow=console
+```javascript
 console.log(Math.random()) // logs 0.8891108266488603
 console.log(Math.random()) // logs 0.9590062769956789
 ```
@@ -176,7 +176,7 @@ console.log(Math.random()) // logs 0.9590062769956789
 
 Here's another example of an impure function:
 
-```javascript codesandbox=vanilla?previewwindow=console
+```javascript
 let value = 0
 
 function add(increase) {
@@ -232,7 +232,7 @@ If you are lucky, some impure functions can be transformed into pure by refactor
 
 The following function adds default properties to an object. The function is impure because the parameter `original` is mutated:
 
-```javascript codesandbox=vanilla?previewwindow=console
+```javascript
 function addDefaultsImpure(original, defaults) {
   return Object.assign(original, defaults)
 }
@@ -250,7 +250,7 @@ The problem with `addDefaultsImpure()` is the cognitive load: you have to *remem
 
 Let's make the function pure by using an immutable merge operation:
 
-```javascript codesandbox=vanilla?previewwindow=console
+```javascript
 function addDefaultsPure(original, defaults) {
   return Object.assign({}, original, defaults)
 }

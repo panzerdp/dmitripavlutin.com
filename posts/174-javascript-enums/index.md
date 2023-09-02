@@ -29,7 +29,7 @@ Let's consider the sizes of a T-shirt: `Small`, `Medium`, and `Large`.
 
 A simple way (though not the most optimal, see the approaches below) to create an enum in JavaScript is to use a [plain JavaScript object](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics).  
 
-```javascript codesandbox=vanilla?previewwindow=console
+```javascript
 const Sizes = {
   Small: 'small',
   Medium: 'medium',
