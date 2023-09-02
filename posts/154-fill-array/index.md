@@ -183,7 +183,7 @@ If you'd like to create an array initialized with primitive values, then the bes
 To create an array initialized with object instances, and you don't care that each item would have the same object instance,
 then `Array(length).fill(initialObject)` is the way to go.  
 
-Otherwise, to fill an array with different object instances you could use `Array.from(Array.length, mapper)` or `[...Array(length)].map(mapper)`, where `mapper` is a function
+Otherwise, to fill an array with different object instances you could use `Array.from(Array(length), mapper)` or `[...Array(length)].map(mapper)`, where `mapper` is a function
 that returns a new object instance on each call.  
 
 *What other ways to fill an array in JavaScript do you know?*
