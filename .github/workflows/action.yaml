@@ -37,7 +37,7 @@ jobs:
         run: npm run build
         env:
           MAILERLITE_KEY: ${{ secrets.MAILERLITE_KEY }}
-          NODE_OPTIONS: "--max-old-space-size=3072"
+          NODE_OPTIONS: "--max-old-space-size=4096"
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
