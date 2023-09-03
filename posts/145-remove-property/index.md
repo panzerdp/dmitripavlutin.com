@@ -97,8 +97,8 @@ const { property, ...restObject } = object;
 
 B) The property name is dynamic:
 ```javascript
-const name = 'property';
-const { [name]: removedProperty, ...restObject } = object;
+const propNameToRemove = 'property';
+const { [propNameToRemove]: removedProperty, ...restObject } = object;
 ```
 
 After applying the destructuring and rest syntax, `restObject` is going to contain the same properties as `object`, only without the removed property.  
@@ -125,7 +125,7 @@ The statement `const { position, ...employeeRest } = employee` destructures the 
 
 Object destructuring with rest syntax is an immutable way of property removal: the original `employee` object isn't mutated. Rather a new object `employeeRest` is created which contains all the properties of `employee` but without the removed `position`.  
 
-If the property name to remove is determined dynamically, then you can use use the dynamic property name destructuring syntax:
+If the property name to remove is determined dynamically, then you can use the dynamic property name destructuring syntax:
 
 ```javascript mark=7
 const employee = {
@@ -133,15 +133,15 @@ const employee = {
   position: 'Sales Manager'
 };
 
-const name = 'position';
-const { [name]: removedProperty, ...employeeRest } = employee;
+const propNameToRemove = 'position';
+const { [propNameToRemove]: removedProperty, ...employeeRest } = employee;
 
 console.log(employeeRest); // { name: 'John Smith' }
 ```
 
 [Open the demo.](https://codesandbox.io/s/destructuring-rest-dynamic-m4jgf)
 
-`const { [name]: removedProperty, ...employeeRest } = employee` let's you remove a property with dynamic name by collecting the properties, but removed one, into `employeeRest` object.  
+`const { [propNameToRemove]: removedProperty, ...employeeRest } = employee` let's you remove a property with dynamic property name by collecting the properties, but removed one, into `employeeRest` object.  
 
 What's interesting is that you can remove multiple properties at once using the destructuring and rest syntax:
 
