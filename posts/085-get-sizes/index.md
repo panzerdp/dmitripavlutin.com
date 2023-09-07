@@ -79,7 +79,7 @@ If you'd like to access the window inner size *without the scrollbars*, you can 
 
 ```javascript
 const windowInnerWidth  = document.documentElement.clientWidth;
-const windowInnerHeight = document.documentElement.clientHeigh;
+const windowInnerHeight = document.documentElement.clientHeight;
 ```
 
 ## 3. The web page size
