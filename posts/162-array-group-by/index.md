@@ -3,7 +3,7 @@ title: "Array Grouping in JavaScript: Object.groupBy()"
 description: "Object.groupBy() and Object.groupByToMap() methods let you group an array by certain criteria."  
 published: "2021-12-20"
 modified: "2023-01-28"
-thumbnail: "./images/cover.png"
+thumbnail: "./images/cover2.jpg"
 slug: javascript-array-group
 tags: ['javascript', 'array']
 type: post
