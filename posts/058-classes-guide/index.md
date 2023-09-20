@@ -682,7 +682,7 @@ class User {
   }
 }
 
-const user = new User('John');
+const user = new User('John Snow');
 
 user.getName();       // => 'John Snow'
 user instanceof User; // => true
@@ -699,7 +699,7 @@ User.prototype.getName = function() {
   return this.name;
 }
 
-const user = new User('John');
+const user = new User('John Snow');
 
 user.getName();       // => 'John Snow'
 user instanceof User; // => true
