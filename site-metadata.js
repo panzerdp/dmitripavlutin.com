@@ -61,6 +61,13 @@ module.exports = {
     }]
   },
   affiliates: [{
+    tags: ['react', 'javascript', 'vue'],
+    text: `
+    <p> I believe in the power of community, and that's why I'm reaching out to you, my awesome readers since I am seeking a Frontend developer position.</p> 
+    
+    <p>If you or your company is on the lookout for a good React and JavaScript developer, please write me a <a href="mailto:dmitripavlutin@gmail.com">message</a> or just forward my email <code>dmitripavlutin@gmail.com</code> to HR. Thanks!</p>
+    `
+  },{
     tags: ['react'],
     text: `
         <p>
