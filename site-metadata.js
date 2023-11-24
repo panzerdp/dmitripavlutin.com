@@ -60,16 +60,16 @@ module.exports = {
       ]
     }]
   },
-  affiliates: [{
+  affiliates: [/*{
     tags: ['react', 'javascript', 'vue'],
     text: `
-    <p> I believe in the power of community, and that's why I'm reaching out to you, my awesome readers since I am seeking a Frontend developer position.</p> 
-    
+    <p> I believe in the power of community, and that's why I'm reaching out to you, my awesome readers since I am seeking a Frontend developer position.</p>
+
     <p>If you or your company is on the lookout for a good React and JavaScript developer, please write me a <a href="mailto:dmitripavlutin@gmail.com">message</a> or just forward my email <code>dmitripavlutin@gmail.com</code> to HR. Thanks!</p>
     `
-  },{
-    tags: ['react'],
-    text: `
+  },*/{
+      tags: ['react'],
+      text: `
         <p>
           Before I go on, let me recommend something to you.
         </p>
@@ -79,10 +79,10 @@ module.exports = {
         <p>
           Take the course <a href="__URL__" target="_blank" rel="noopener">"React Front To Back Course"</a> by Brad Traversy to improve your React skills in a fun and practical way. Use the coupon code DMITRI and get your 20% discount!
         </p>`,
-    url: 'https://www.traversymedia.com/a/2147528895/FqXWyazh'
-  }, {
-    tags: ['javascript'],
-    text: `
+      url: 'https://www.traversymedia.com/a/2147528895/FqXWyazh'
+    }, {
+      tags: ['javascript'],
+      text: `
         <p>
           Before I go on, let me recommend something to you.
         </p>
@@ -92,16 +92,16 @@ module.exports = {
         <p>
         Take <a href="__URL__" target="_blank" rel="noopener">"Modern JavaScript From The Beginning 2.0"</a> course by Brad Traversy to become proficient in JavaScript in just a few weeks. Use the coupon code DMITRI and get your 20% discount!
         </p>`,
-    url: 'https://www.traversymedia.com/a/2147528886/FqXWyazh'
-  }, {
-    tags: ['vue'],
-    text: `
+      url: 'https://www.traversymedia.com/a/2147528886/FqXWyazh'
+    }, {
+      tags: ['vue'],
+      text: `
       <p>
         Before I go on, let me recommend something to you.
       </p>
       <p>
         Using Vue composition API is fun... but sometimes challenging. Take <a href="__URL__" target="_blank" rel="noopener">"Vue 3 Composition API"</a> course by Vueschool to become proficient in Vue composition and reactivity in just a few weekends!
       </p>`,
-    url: 'https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin'
-  }]
+      url: 'https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin'
+    }]
 }
