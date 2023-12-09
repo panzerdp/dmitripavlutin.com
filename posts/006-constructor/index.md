@@ -153,7 +153,7 @@ var correctTigerClone = tigerInstance.clone();
 
 // Notice that correctTigerClone is correctly a Tiger instance
 correctTigerClone instanceof Tiger  // => true
-correctTigerClone instanceof Cat    // => false
+correctTigerClone instanceof Cat    // => true
 ```
 
 [Check this demo](http://jsbin.com/yevape/1/edit?js,console) for a complete example.
