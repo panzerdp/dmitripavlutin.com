@@ -101,7 +101,27 @@ You can use the expression `error.name === 'AbortError'` inside the `catch` bloc
 
 Open the [demo](https://codesandbox.io/s/stoic-dust-cctin?file=/src/index.html) and click *Load games* button. The request to `/games` timeouts because it takes longer than 6 seconds.  
 
-## 3. Summary
+## 3. AbortSignal.timeout()
+
+Current browsers support a simpler approach using [AbortSignal.timeout()](https://caniuse.com/mdn-api_abortsignal_timeout_static):
+
+```javascript
+async function loadGames() {
+  try {
+    const response = await fetch('/games', {
+      signal: AbortSignal.timeout(5000)
+    });
+    const games = await response.json();
+    return games;
+  } catch (error) {
+    // Timeouts if the request takes
+    // longer than 6 seconds
+    console.log(error.name === 'AbortError');
+  }
+}
+```
+
+## 4. Summary
 
 By default a `fetch()` request timeouts at the time set up by the browser. In Chrome, for example, this setting is 300 seconds. That's way longer than a user would expect for a network request to complete.  
 
