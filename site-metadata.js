@@ -40,7 +40,7 @@ module.exports = {
   },
   carbonAds: {
     scriptSrc: '//cdn.carbonads.com/carbon.js?serve=CE7DT2QI&placement=dmitripavlutincom',
-    isEnabled: true,
+    isEnabled: false,
     isProductionMode: IS_PRODUCTION_MODE
   },
   featured: {

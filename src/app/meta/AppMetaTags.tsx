@@ -4,6 +4,8 @@ interface LayoutMetaTagsProps {
   siteInfo: SiteInfo;
 }
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 export function AppMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.Element {
   return (
     <Helmet>
@@ -19,6 +21,7 @@ export function AppMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.Element {
       <link rel="preload" href="/fonts/open-sans-v29-latin-700.woff2" as="font" type="font/woff2" crossOrigin="" />
       <link rel="preload" href="/fonts/roboto-mono-v22-latin-regular.woff2" as="font" type="font/woff2" crossOrigin="" />
       <meta name="google-adsense-account" content="ca-pub-5428678507937314" />
+      {isProduction && <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5428678507937314" crossOrigin="anonymous" /> }
     </Helmet>
   )
 }
