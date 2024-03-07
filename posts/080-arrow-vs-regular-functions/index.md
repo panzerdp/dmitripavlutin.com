@@ -288,7 +288,7 @@ Usually, regular functions as methods are the way to go.
 
 Sometimes you'd need to supply the method as a callback, for example to `setTimeout()` or an event listener. In such cases, you might encounter difficulties accessing `this` value.  
 
-For example, let's use use `logName()` method as a callback to `setTimeout()`:
+For example, let's use `logName()` method as a callback to `setTimeout()`:
 
 ```javascript
 setTimeout(batman.logName, 1000);
