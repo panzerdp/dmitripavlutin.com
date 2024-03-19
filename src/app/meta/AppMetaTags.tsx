@@ -22,6 +22,10 @@ export function AppMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.Element {
       <link rel="preload" href="/fonts/roboto-mono-v22-latin-regular.woff2" as="font" type="font/woff2" crossOrigin="" />
       <meta name="google-adsense-account" content="ca-pub-5428678507937314" />
       {isProduction && <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5428678507937314" crossOrigin="anonymous" /> }
+      <link rel="preconnect" href="https://www.googletagmanager.com" />
+      <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+      <link rel="preconnect" href="https://www.googleadservices.com" />
+      <link rel="preconnect" href="https://tpc.googlesyndication.com" />
     </Helmet>
   )
 }
