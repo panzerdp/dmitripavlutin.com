@@ -68,7 +68,7 @@ module.exports = {
     <p>If you or your company is on the lookout for a good React and JavaScript developer, please write me a <a href="mailto:dmitripavlutin@gmail.com">message</a> or just forward my email <code>dmitripavlutin@gmail.com</code> to HR. Thanks!</p>
     `
   },*/{
-      tags: ['react'],
+      tags: [],
       text: `
         <p>
           Before I go on, let me recommend something to you.
@@ -81,7 +81,7 @@ module.exports = {
         </p>`,
       url: 'https://www.traversymedia.com/a/2147528895/FqXWyazh'
     }, {
-      tags: ['javascript'],
+      tags: [],
       text: `
         <p>
           Before I go on, let me recommend something to you.
