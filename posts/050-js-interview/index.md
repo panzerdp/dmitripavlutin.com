@@ -304,6 +304,6 @@ You can think that some of the questions are useless for interviewing. I have th
 
 Anyways, many of these questions can truly assess if you are seasoned in JavaScript, like [the tricky closure](#5-the-classic-question-tricky-closure). If you have had difficulties to answer some while reading the post, it's a good indicator of what you must study next!
 
-Ready for a new challenge? Try to answer [7 Interview Questions on "this" keyword](javascript-this-interview-questions).
+Ready for a new challenge? Try to answer [7 Interview Questions on "this" keyword](/javascript-this-interview-questions).
 
 *Is it fair to ask tricky questions during the interview? Let me know your opinion.*
