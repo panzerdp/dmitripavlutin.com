@@ -15,7 +15,7 @@ export default function AboutAuthorDetailed() {
         <GatsbyImage image={profilePicture} alt={name} />
         <h3>About {name}</h3>
         <div className={styles.description}>
-          {description}
+          <span dangerouslySetInnerHTML={{ __html: description }} />
           {jobElement}
         </div>
       </div>

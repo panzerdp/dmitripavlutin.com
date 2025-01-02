@@ -7,6 +7,8 @@ import { useSiteMetadata } from 'hooks/useSiteMetadata'
 export default function AboutAuthorConcise() {
   const { author: { info: { name, description, job, email, profiles }, profilePicture } } = useSiteMetadata()
 
+  console.log(description)
+
   const jobElement = job ? <p dangerouslySetInnerHTML={{ __html: job }} /> : null
   return (
     <div className={styles.aboutAuthor}>
@@ -16,7 +18,7 @@ export default function AboutAuthorConcise() {
       <div className={styles.authorInfo}>
         <h4>About {name}</h4>
         <div className={styles.description}>
-          {description}
+          <span dangerouslySetInnerHTML={{ __html: description }} />
           {jobElement}
         </div>
         <div className={styles.links}>
