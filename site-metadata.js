@@ -18,7 +18,7 @@ module.exports = {
   authorInfo: {
     name: 'Dmitri Pavlutin',
     description:
-      'Software developer and sometimes writer. My daily routine consists of (but not limited to) drinking coffee, coding, writing, overcoming boredom 😉, <a target="_blank" href="https://myecommerce.guide/?utm_source=dmitripavlutin&utm_medium=referral">writing guides about Shopify</a> , and developing <a target="_blank" href="https://apps.shopify.com/boxi?utm_source=dmitripavlutin&utm_medium=referral">a Shopify app for building gift boxes</a>. Living in the sunny Barcelona. 🇪🇸',
+      'Software developer and sometimes writer. My daily routine consists of (but not limited to) drinking coffee, coding, writing, overcoming boredom 😉, developing <a target="_blank" href="https://apps.shopify.com/boxi?utm_source=dmitripavlutin&utm_medium=referral">a Shopify app for building gift boxes</a>. Living in the sunny Barcelona. 🇪🇸',
     job: '',
     email: 'dmitripavlutin@gmail.com',
     jobTitle: 'Software Developer',
