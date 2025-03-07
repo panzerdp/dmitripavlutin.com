@@ -20,7 +20,7 @@ module.exports = {
     description:
       `Software developer and sometimes writer. My daily routine consists of (but not limited to) drinking coffee, coding, writing, overcoming boredom 😉, developing
       <a target="_blank" href="https://apps.shopify.com/boxi?utm_source=dmitripavlutin&utm_medium=referral">a gift boxes Shopify app</a>,
-      and <a target="_blank" href="https://boxiapps.com/boxi?utm_source=dmitripavlutin&utm_medium=referral">blogging about Shopify</a>. Living in the sunny Barcelona. 🇪🇸`,
+      and <a target="_blank" href="https://boxiapps.com/blog?utm_source=dmitripavlutin&utm_medium=referral">blogging about Shopify</a>. Living in the sunny Barcelona. 🇪🇸`,
     job: '',
     email: 'dmitripavlutin@gmail.com',
     jobTitle: 'Software Developer',
