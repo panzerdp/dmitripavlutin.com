@@ -27,6 +27,7 @@ export function AppMetaTags({ siteInfo }: LayoutMetaTagsProps): JSX.Element {
       <link rel="preconnect" href="https://www.googleadservices.com" />
       <link rel="preconnect" href="https://tpc.googlesyndication.com" />
       <script async src="https://vueschool.io/banner.js?affiliate=DMITRI&type=top"></script>
+      <html style={{'marginTop': '72px'}} />
     </Helmet>
   )
 }
