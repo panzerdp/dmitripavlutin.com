@@ -83,18 +83,15 @@ module.exports = {
         </p>`,
       url: 'https://www.traversymedia.com/a/2147528895/FqXWyazh'
     }, {
-      tags: [],
+      tags: ['javascript', 'typescript', 'react'],
       text: `
         <p>
-          Before I go on, let me recommend something to you.
+          Before I go on, let me recommend something to you because I know that the path to becoming a professional JavaScript developer it isn't easy...
         </p>
         <p>
-          The path to becoming good at JavaScript isn't easy... but fortunately with a good teacher you can shortcut.
-        </p>
-        <p>
-        Take <a href="__URL__" target="_blank" rel="noopener">"Modern JavaScript From The Beginning 2.0"</a> course by Brad Traversy to become proficient in JavaScript in just a few weeks. Use the coupon code DMITRI and get your 20% discount!
+          I recommend certificates.dev’s <a href='__URL__' target='_blank' rel='noopener'>Official JavaScript Certification</a> — a practical, expert-led program (created in collaboration with experts like Evan You) perfect for mastering JavaScript. Earning a professional certificate sets you apart, potentially opening doors to better job opportunities, higher salaries, and career advancement.
         </p>`,
-      url: 'https://www.traversymedia.com/a/2147528886/FqXWyazh'
+      url: 'https://certificates.dev/javascript?friend=DMITRI'
     }, {
       tags: ['vue'],
       text: `
