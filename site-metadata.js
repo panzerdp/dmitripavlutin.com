@@ -89,7 +89,7 @@ module.exports = {
           Before I go on, let me recommend something to you because I know that the path to becoming a professional JavaScript developer it isn't easy...
         </p>
         <p>
-          I recommend certificates.dev’s <a href='__URL__' target='_blank' rel='noopener'>Official JavaScript Certification</a> — a practical, expert-led program (created in collaboration with experts like Evan You) perfect for mastering JavaScript. Earning a professional certificate sets you apart, potentially opening doors to better job opportunities, higher salaries, and career advancement.
+          I recommend certificates.dev’s <a href='__URL__' target='_blank' rel='noopener sponsored'>Official JavaScript Certification</a> — a practical, expert-led program (created in collaboration with experts like Evan You) perfect for mastering JavaScript. Earning a professional certificate sets you apart, potentially opening doors to better job opportunities, higher salaries, and career advancement.
         </p>`,
       url: 'https://certificates.dev/javascript?friend=DMITRI'
     }, {
@@ -99,7 +99,7 @@ module.exports = {
         Before I go on, let me recommend something to you.
       </p>
       <p>
-        Using Vue composition API is fun... but sometimes challenging. Take <a href="__URL__" target="_blank" rel="noopener">"Vue 3 Composition API"</a> course by Vueschool to become proficient in Vue composition and reactivity in just a few weekends!
+        Using Vue composition API is fun... but sometimes challenging. Take <a href="__URL__" target="_blank" rel="noopener sponsored">"Vue 3 Composition API"</a> course by Vueschool to become proficient in Vue composition and reactivity in just a few weekends!
       </p>`,
       url: 'https://vueschool.io/courses/vue-3-composition-api?friend=dmitripavlutin'
     }]
