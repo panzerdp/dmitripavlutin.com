@@ -83,7 +83,7 @@ module.exports = {
         </p>`,
       url: 'https://www.traversymedia.com/a/2147528895/FqXWyazh'
     }, {
-      tags: ['javascript', 'typescript', 'react'],
+      tags: [],
       text: `
         <p>
           Before I go on, let me recommend something to you because I know that the path to becoming a professional JavaScript developer isn't easy...
